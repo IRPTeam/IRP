@@ -2254,6 +2254,7 @@ Function CalculationsOptions() Export
 	AmountOptions.Insert("DontCalculateRow", False);
 	AmountOptions.Insert("NetAmount"       , 0);
 	AmountOptions.Insert("OffersAmount"    , 0);
+	AmountOptions.Insert("OffersBonus"    , 0);
 	AmountOptions.Insert("TaxAmount"       , 0);
 	AmountOptions.Insert("TotalAmount"     , 0);
 	Options.Insert("AmountOptions", AmountOptions);
@@ -2361,7 +2362,7 @@ Function CalculationsExecute(Options) Export
 						EndDo;
 					EndDo;
 					Result.OffersAmount = TotalOffers;
-					Result.TotalBonus = TotalBonus;
+					Result.OffersBonus = TotalBonus;
 				EndIf; // Offers
 				
 				// Taxes

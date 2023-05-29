@@ -486,6 +486,8 @@ Function OffersInfo()
 		   |	RetailSalesReceiptItemList.Ref.Currency,
 		   |	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
 		   |	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
+		   |	RetailSalesReceiptSpecialOffers.Bonus AS OffersBonus,
+		   |	RetailSalesReceiptSpecialOffers.AddInfo AS OffersAddInfo,
 		   |	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
 		   |	RetailSalesReceiptItemList.NetAmount AS NetAmount,
 		   |	RetailSalesReceiptItemList.Ref.Branch AS Branch

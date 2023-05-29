@@ -433,6 +433,8 @@ Function OffersInfo()
 		|	SalesInvoiceItemList.Ref.Currency,
 		|	SalesInvoiceSpecialOffers.Offer AS SpecialOffer,
 		|	SalesInvoiceSpecialOffers.Amount AS OffersAmount,
+		|	SalesInvoiceSpecialOffers.Bonus AS OffersBonus,
+		|	SalesInvoiceSpecialOffers.AddInfo AS OffersAddInfo,
 		|	SalesInvoiceItemList.TotalAmount AS SalesAmount,
 		|	SalesInvoiceItemList.NetAmount,
 		|	SalesInvoiceItemList.Ref.Branch AS Branch

@@ -719,7 +719,9 @@ Function OffersInfo()
 		   |	RetailReturnReceiptItemList.Ref.Company AS Company,
 		   |	RetailReturnReceiptItemList.Ref.Currency,
 		   |	RetailReturnReceiptSpecialOffers.Offer AS SpecialOffer,
+		   |	RetailReturnReceiptSpecialOffers.AddInfo AS OffersAddInfo,
 		   |	- RetailReturnReceiptSpecialOffers.Amount AS OffersAmount,
+		   |	- RetailReturnReceiptSpecialOffers.Bonus AS OffersBonus,
 		   |	- RetailReturnReceiptItemList.TotalAmount AS SalesAmount,
 		   |	- RetailReturnReceiptItemList.NetAmount AS NetAmount,
 		   |	RetailReturnReceiptItemList.Ref.Branch AS Branch

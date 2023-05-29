@@ -1379,6 +1379,10 @@ Scenario: _1037 create document Production based on production planning
 		Then the number of "Materials" table lines is "равно" "10"		
 	And I close all client application windows
 
+
+
+
+
 Scenario: _1040 refilling document Production when change specification
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I click the button named "FormCreate"
@@ -1594,3 +1598,160 @@ Scenario: _1040 refilling document Production when change specification
 			| ''                                                           | '$$DateProduction1040$$' | '21'        | '40'           | 'Main Company' | 'Склад производства 05' | 'Стремянка номер 8 (основная)' | 'First month'     | 'Заклепка 6х47 полупустотелая'            | 'Заклепка 6х47 полупустотелая'            |
 			| ''                                                           | '$$DateProduction1040$$' | '40'        | '40'           | 'Main Company' | 'Склад производства 05' | 'Стремянка номер 8 (основная)' | 'First month'     | 'Скобы 3515 (Упаковочные)'                | 'Скобы 3515 (Упаковочные)'                |
 		And I close all client application windows
+
+Scenario: _10341 create Production (Repacking)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Production"
+	And I click the button named "FormCreate"
+	And I select "Repacking" exact value from "Transaction type" drop-down list	
+	* Filling in header info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Склад производства 05'     |
+		And I select current line in "List" table 
+		And I click Select button of "Store production" field
+		And I go to line in "List" table
+			| 'Company'                  | 'Description' | 'Reference' |
+			| 'Shared for all companies' | 'Store 02'    | 'Store 02'  |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I click Choice button of the field named "Item"
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+	* Filling materials
+		And I move to "Materials" tab
+		And in the table "Materials" I click the button named "MaterialsAdd"
+		And I activate field named "MaterialsItem" in "Materials" table
+		And I select current line in "Materials" table
+		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
+		And I go to line in "List" table
+			| 'Description'       | 'Reference'         |
+			| 'Стремянка номер 8' | 'Стремянка номер 8' |
+		And I select current line in "List" table
+		And I activate "Material type" field in "Materials" table
+		And I select "Material" exact value from "Material type" drop-down list in "Materials" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I input "2,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+		And I activate "Writeoff store" field in "Materials" table
+		And I select current line in "Materials" table
+		And I click choice button of "Writeoff store" attribute in "Materials" table
+		And I go to line in "List" table
+			| 'Company'                  | 'Description' | 'Reference' |
+			| 'Shared for all companies' | 'Store 03'    | 'Store 03'  |
+		And I select current line in "List" table
+		And I finish line editing in "Materials" table
+		And I click "Post" button
+	* Check creation
+		And I delete "$$DateProduction1041$$" variable
+		And I delete "$$Production1041$$" variable
+		And I delete "$$NumberProduction1041$$" variable
+		And I save the value of the field named "Date" as "$$DateProduction1041$$"
+		And I save the window as "$$Production1041$$"
+		And I save the value of the field named "Number" as "$$NumberProduction1041$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.Production"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberProduction1041$$' |
+		And I close all client application windows
+		
+
+Scenario: _10342 check movements Production (Repacking)
+	And I close all client application windows
+	* Select Production (Repacking)
+		Given I open hyperlink "e1cib/list/Document.Production"
+		And I go to line in "List" table
+			| 'Number'                |
+			| '$$NumberProduction1041$$' |
+		And I select current line in "List" table
+	* R4010 Actual stocks
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$Production1041$$'              | ''            | ''                       | ''          | ''           | ''                              | ''                  |
+			| 'Document registrations records'  | ''            | ''                       | ''          | ''           | ''                              | ''                  |
+			| 'Register  "R4010 Actual stocks"' | ''            | ''                       | ''          | ''           | ''                              | ''                  |
+			| ''                                | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions' | ''                              | ''                  |
+			| ''                                | ''            | ''                       | 'Quantity'  | 'Store'      | 'Item key'                      | 'Serial lot number' |
+			| ''                                | 'Receipt'     | '$$DateProduction1041$$' | '2'         | 'Store 02'   | 'Стремянка номер 5 ступенчатая' | ''                  |
+			| ''                                | 'Expense'     | '$$DateProduction1041$$' | '2'         | 'Store 03'   | 'Стремянка номер 8'             | ''                  |
+	* R4011 Free stocks
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$Production1041$$'             | ''            | ''                       | ''          | ''           | ''                              |
+			| 'Document registrations records' | ''            | ''                       | ''          | ''           | ''                              |
+			| 'Register  "R4011 Free stocks"'  | ''            | ''                       | ''          | ''           | ''                              |
+			| ''                               | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions' | ''                              |
+			| ''                               | ''            | ''                       | 'Quantity'  | 'Store'      | 'Item key'                      |
+			| ''                               | 'Receipt'     | '$$DateProduction1041$$' | '2'         | 'Store 02'   | 'Стремянка номер 5 ступенчатая' |
+			| ''                               | 'Expense'     | '$$DateProduction1041$$' | '2'         | 'Store 03'   | 'Стремянка номер 8'             |
+	* R4050 Stock inventory
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| '$$Production1041$$'                | ''            | ''                       | ''          | ''             | ''         | ''                              |
+			| 'Document registrations records'    | ''            | ''                       | ''          | ''             | ''         | ''                              |
+			| 'Register  "R4050 Stock inventory"' | ''            | ''                       | ''          | ''             | ''         | ''                              |
+			| ''                                  | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions'   | ''         | ''                              |
+			| ''                                  | ''            | ''                       | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'                      |
+			| ''                                  | 'Receipt'     | '$$DateProduction1041$$' | '2'         | 'Main Company' | 'Store 02' | 'Стремянка номер 5 ступенчатая' |
+			| ''                                  | 'Expense'     | '$$DateProduction1041$$' | '2'         | 'Main Company' | 'Store 03' | 'Стремянка номер 8'             |
+	* T6010 Batches info
+		And I select "T6010 Batches info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| '$$Production1041$$'             | ''                       | ''             | ''                   |
+			| 'Document registrations records' | ''                       | ''             | ''                   |
+			| 'Register  "T6010 Batches info"' | ''                       | ''             | ''                   |
+			| ''                               | 'Period'                 | 'Dimensions'   | ''                   |
+			| ''                               | ''                       | 'Company'      | 'Document'           |
+			| ''                               | '$$DateProduction1041$$' | 'Main Company' | '$$Production1041$$' |
+	* T6020 Batch keys info
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| '$$Production1041$$'                | ''                       | ''          | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | ''             | ''         | ''                              | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+			| 'Document registrations records'    | ''                       | ''          | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | ''             | ''         | ''                              | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+			| 'Register  "T6020 Batch keys info"' | ''                       | ''          | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | ''             | ''         | ''                              | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+			| ''                                  | 'Period'                 | 'Resources' | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | 'Dimensions'   | ''         | ''                              | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+			| ''                                  | ''                       | 'Quantity'  | 'Amount' | 'Amount tax' | 'Amount cost ratio' | 'Not direct costs' | 'Amount cost' | 'Amount cost tax' | 'Amount revenue' | 'Amount revenue tax' | 'Company'      | 'Store'    | 'Item key'                      | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Branch' | 'Work' | 'Work sheet' | 'Batch consignor' | 'Serial lot number' | 'Source of origin' | 'Production document' | 'Purchase invoice document' |
+			| ''                                  | '$$DateProduction1041$$' | '2'         | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | 'Main Company' | 'Store 02' | 'Стремянка номер 5 ступенчатая' | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+			| ''                                  | '$$DateProduction1041$$' | '2'         | ''       | ''           | ''                  | ''                 | ''            | ''                | ''               | ''                   | 'Main Company' | 'Store 03' | 'Стремянка номер 8'             | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                | ''                  | ''                 | ''                    | ''                          |
+	* R7030 Production planning
+		And I select "R7030 Production planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R7030 Production planning"'             |
+	* R7040 Manual materials corretion in production
+		And I select "R7040 Manual materials corretion in production" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R7040 Manual materials corretion in production"'             |
+	* R7020 Material planning	
+		And I select "R7020 Material planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R7020 Material planning"'             |
+	* R7010 Detailing supplies
+		And I select "R7010 Detailing supplies" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R7010 Detailing supplies"'             |
+		And I close all client application windows
+		
+					
+							
+			
+						
+
+				

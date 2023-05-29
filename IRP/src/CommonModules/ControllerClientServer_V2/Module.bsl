@@ -1580,6 +1580,7 @@ Function BindTransactionType(Parameters)
 	DataPath.Insert("ShipmentConfirmation", "TransactionType");
 	DataPath.Insert("RetailShipmentConfirmation", "TransactionType");
 	DataPath.Insert("RetailGoodsReceipt",         "TransactionType");
+	DataPath.Insert("Production", "TransactionType");
 		
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
@@ -1667,6 +1668,10 @@ Function BindTransactionType(Parameters)
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("Production", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepChangeBillOfMaterialsByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTransactionType");
 EndFunction
@@ -4662,6 +4667,7 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 	Options.ItemKey = GetItemKey(Parameters);
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
 EndProcedure
@@ -4773,6 +4779,7 @@ Procedure StepChangeProductionPlanningByPlanningPeriod(Parameters, Chain) Export
 	Options.BusinessUnit   = GetBusinessUnit(Parameters);
 	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
 	Options.CurrentProductionPlanning = GetProductionPlanning(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.DontExecuteIfExecutedBefore = True;
 	Options.StepName = "StepChangeProductionPlanningByPlanningPeriod";
 	Chain.ChangeProductionPlanningByPlanningPeriod.Options.Add(Options);
@@ -4829,6 +4836,7 @@ Procedure StepChangePlanningPeriodByDateAndBusinessUnit(Parameters, Chain) Expor
 	Options = ModelClientServer_V2.ChangePlanningPeriodByDateAndBusinessUnitOptions();
 	Options.Date = GetDate(Parameters);
 	Options.BusinessUnit = GetBusinessUnit(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangePlanningPeriodByDateAndBusinessUnit";
 	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Options.Add(Options);
 EndProcedure
@@ -8005,6 +8013,7 @@ Procedure StepMaterialsChangeIsManualChangedByQuantity(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.ChangeIsManualChangedByQuantityOptions();		
 		Options.Quantity   = GetMaterialsQuantity(Parameters, Row.Key);
 		Options.QuantityBOM = GetMaterialsQuantityBOM(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeIsManualChangedByQuantity";
 		Chain.ChangeIsManualChangedByQuantity.Options.Add(Options);
@@ -8304,6 +8313,7 @@ Procedure StepMaterialsCalculations(Parameters, Chain) Export
 	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
 	Options.Materials = ArrayOfMaterialsRows;
 	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
 	Options.ItemKey          = GetItemKey(Parameters);
 	Options.Unit             = GetUnit(Parameters);

@@ -1390,10 +1390,14 @@ EndFunction
 #Region CHANGE_IS_MANUAL_CHANGED_BY_QUANTITY
 
 Function ChangeIsManualChangedByQuantityOptions() Export
-	Return GetChainLinkOptions("Quantity, QuantityBOM");
+	Return GetChainLinkOptions("Quantity, QuantityBOM, TransactionType");
 EndFunction
 
 Function ChangeIsManualChangedByQuantityExecute(Options) Export	
+	If Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return False;
+	EndIf;
+	
 	If Options.Quantity = Options.QuantityBOM Then
 		Return False;
 	Else
@@ -1474,10 +1478,15 @@ EndFunction
 #Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
 
 Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
-	Return GetChainLinkOptions("Date, BusinessUnit");
+	Return GetChainLinkOptions("Date, BusinessUnit, TransactionType");
 EndFunction
 
 Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
 	Return PlanningPeriod;
@@ -1488,10 +1497,15 @@ EndFunction
 #Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
 
 Function ChangeProductionPlanningByPlanningPeriodOptions() Export
-	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning");
+	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning, TransactionType");
 EndFunction
 
 Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentProductionPlanning) Then
 		Return Options.CurrentProductionPlanning;
 	EndIf;
@@ -1503,10 +1517,15 @@ EndFunction
 #Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 
 Function ChangeBillOfMaterialsByItemKeyOptions() Export
-	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials");
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials, TransactionType");
 EndFunction
 
 Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
@@ -2200,12 +2219,24 @@ EndProcedure
 
 Function MaterialsCalculationsOptions() Export
 	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
-		|ItemKey, Unit, Quantity, KeyOwner");
+		|ItemKey, Unit, Quantity, KeyOwner, TransactionType");
 EndFunction
 
 Function MaterialsCalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Materials", Options.Materials);
+	
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+			For Each Row In Result.Materials Do
+				Row.ItemBOM         = Undefined;
+				Row.ItemKeyBOM      = Undefined;
+				Row.UnitBOM         = Undefined;
+				Row.QuantityBOM     = Undefined;
+				Row.IsManualChanged = Undefined;
+			EndDo;
+		Return Result;
+	EndIf;
 	
 	CalculationParameters = New Structure();
 	CalculationParameters.Insert("Materials"        , Options.Materials);

@@ -942,6 +942,7 @@
   <enums>Enum.PayrollTypes</enums>
   <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
+  <enums>Enum.ProductionTransactionTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

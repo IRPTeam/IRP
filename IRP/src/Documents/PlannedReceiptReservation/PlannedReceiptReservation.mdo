@@ -294,6 +294,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="35b3a766-0880-4431-901b-601d9be1d305">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="7d5e56cd-57a6-4e68-8c71-46b5433f87c2">
     <producedTypes>

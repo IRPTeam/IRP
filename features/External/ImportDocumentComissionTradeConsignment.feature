@@ -153,6 +153,13 @@ Scenario: Create document SalesReportFromTradeAgent objects (movements)
 		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642060' | '893e35ad-5a64-4039-bd9e-9b987e6f8fca' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 2          |
 		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642060' | 'c8bc1fbd-3764-4658-b8ed-d200b9e40e0e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | 1          |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                                | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642060' | '893e35ad-5a64-4039-bd9e-9b987e6f8fca' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | ''               | 2          |
+		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642060' | 'c8bc1fbd-3764-4658-b8ed-d200b9e40e0e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | ''               | 1          |
+		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642060' | '00f17e8c-56fc-4dfa-a313-36d9337c11b6' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.SalesReportFromTradeAgent?ref=b788b483d858e32911ed5a8bbe642074' | '7cbd39e5-170b-49c7-896e-459afa461066' | ''                                                                         | ''               | 1          |
+
 
 Scenario: Create document SalesReportFromTradeAgent objects (comission trade, consignment)
 
@@ -289,6 +296,22 @@ Scenario: Create document PurchaseInvoice objects (comission trade, consignment)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bbe642064' | '04cafb6f-f1ba-42f7-88d8-ca1d35c93bca' | '04cafb6f-f1ba-42f7-88d8-ca1d35c93bca' | 1          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5a8bbe642062' | '                                    ' |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bbe642064' | '42d5f48c-6c3e-4501-820c-0655583df93f' | '42d5f48c-6c3e-4501-820c-0655583df93f' | 1          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5a8bbe642063' | '                                    ' |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '69638ca3-3c16-4647-b31f-392699139c3d' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '0229f1fc-d9bb-4401-92aa-2f0d79609d29' | ''                                                                         | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '1bd7147e-293b-4979-bcb4-235f25e18dc1' | ''                                                                         | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | 'b8d542ba-765a-45bd-afca-0ddfed1a1138' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '26814a42-b4be-429d-8fe3-f32a05dcd5bf' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '353dc82f-d185-4023-b76e-dc564dd0e985' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '7dd80c21-94a4-4479-b942-34d9ebe13c20' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '7dd80c21-94a4-4479-b942-34d9ebe13c20' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bb08507ad' | 'c975260d-3319-4e18-9dc8-4c8b5abdb243' | ''                                                                         | ''               | 25         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bb08507ad' | '34e36cbf-1ef1-4d59-beec-12418092145b' | ''                                                                         | ''               | 25         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bbe642064' | '42d5f48c-6c3e-4501-820c-0655583df93f' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed5a8bbe642064' | '04cafb6f-f1ba-42f7-88d8-ca1d35c93bca' | ''                                                                         | ''               | 1          |
+
+
 	And I check or create document "PurchaseReturn" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DateOfShipment'     | 'LegalName'                                                         | 'ManagerSegment' | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                                    | 'Author'                                                        | 'Branch' | 'Description' | 'DocumentAmount' |
 		| 'e1cib/data/Document.PurchaseReturn?ref=b79996ebf0bd544411edd906c28b2f57' | 'False'        | 193      | '02.11.2022 20:00:00' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'True'            | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            | 200              |
@@ -359,6 +382,18 @@ Scenario: Data preparation (comission stock)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | 'b8d542ba-765a-45bd-afca-0ddfed1a1138' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 10         |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '26814a42-b4be-429d-8fe3-f32a05dcd5bf' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | 2          |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '353dc82f-d185-4023-b76e-dc564dd0e985' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | 2          |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '69638ca3-3c16-4647-b31f-392699139c3d' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '0229f1fc-d9bb-4401-92aa-2f0d79609d29' | ''                                                                         | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '1bd7147e-293b-4979-bcb4-235f25e18dc1' | ''                                                                         | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | 'b8d542ba-765a-45bd-afca-0ddfed1a1138' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '26814a42-b4be-429d-8fe3-f32a05dcd5bf' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '353dc82f-d185-4023-b76e-dc564dd0e985' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '7dd80c21-94a4-4479-b942-34d9ebe13c20' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b788b483d858e32911ed590d875d7584' | '7dd80c21-94a4-4479-b942-34d9ebe13c20' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | ''               | 10         |
+
 
 	And I check or create document "PurchaseInvoice" objects:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                                    | 'Author'                                                        | 'Branch' | 'Description' | 'DocumentAmount' |

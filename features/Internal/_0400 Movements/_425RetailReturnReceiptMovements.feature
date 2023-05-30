@@ -102,9 +102,11 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 	* Load RetailReturnReceipt
 		When Create document RetailReturnReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailReturnReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
 		And I execute 1C:Enterprise script at server
@@ -113,6 +115,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RSR and RRR (payment by POS)
 		And I execute 1C:Enterprise script at server

@@ -121,8 +121,10 @@ Scenario: _043000 preparation (Debit note)
 			| '104' |
 			When Create document SalesReturn objects (check movements)
 			And I execute 1C:Enterprise script at server
+					| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);" |
 					| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Write);" |
 					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document DebitNote objects (check movements)
 		And I execute 1C:Enterprise script at server

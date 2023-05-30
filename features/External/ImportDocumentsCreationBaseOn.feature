@@ -840,6 +840,10 @@ Scenario: Create document SalesInvoice objects (with aging, Post-shipment credit
 		| 'Ref'                                                                   | 'Date'               | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'                          |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | '15.06.2021 0:00:00' | 100                   | 14          | 400      | 'Enum.CalculationTypes.PostShipmentCredit' |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'd839cd0f-ca23-4337-9c0a-efc63aa49899' | ''                | ''               | 1          |
+
 
 
 Scenario: Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)

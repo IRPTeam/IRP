@@ -134,31 +134,44 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 		And Delay 5
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(193).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(193).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check query for sales invoice movements
 		// Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"

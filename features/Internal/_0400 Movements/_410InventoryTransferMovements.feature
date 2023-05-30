@@ -108,6 +108,7 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+		
 	* Load documents (comission trade)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document InventoryTransfer objects (comission trade)

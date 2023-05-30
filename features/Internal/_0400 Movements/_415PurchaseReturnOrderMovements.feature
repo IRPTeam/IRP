@@ -108,7 +108,8 @@ Scenario: _041500 preparation (Purchase return order)
 			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create document PurchaseReturnOrder objects (check movements)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseReturnOrder.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |	
+		| "Documents.PurchaseReturnOrder.FindByNumber(231).GetObject().Write(DocumentWriteMode.Write);" |
+		| "Documents.PurchaseReturnOrder.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |	
 	// * Check query for Purchase return order movements
 	// 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	// 	And in the table "Info" I click "Fill movements" button

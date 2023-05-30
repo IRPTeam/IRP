@@ -1382,5 +1382,13 @@ Scenario: Create document SalesReportToConsignor objects (comission trade)
 		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | '138982c0-62e2-4029-982e-1e9eb9ac475e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | 4          |
 		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | '138982c0-62e2-4029-982e-1e9eb9ac475e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 1          |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                             | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | 'aadc5bc7-4805-4d48-9b0e-5b19c3ce616f' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | 'f9f4606b-2b2e-4988-bda9-7464b569f39e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5f' | ''               | 1          |
+		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | '138982c0-62e2-4029-982e-1e9eb9ac475e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | ''               | 4          |
+		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | '138982c0-62e2-4029-982e-1e9eb9ac475e' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 1          |
+		| 'e1cib/data/Document.SalesReportToConsignor?ref=b78db8d3fd6dff8b11ed79ee0e5e0c6b' | '35fa848e-aa6e-4c8c-bd08-db6705201285' | ''                                                                         | ''               | 2          |
+
 
 

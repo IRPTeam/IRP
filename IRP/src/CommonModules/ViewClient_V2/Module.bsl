@@ -1945,6 +1945,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	EndIf;
 	
 	UpdateTotalAmounts(Parameters);
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
@@ -2338,26 +2339,14 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_QUANTITY
+//#1798
+#Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
 
-// ItemList.Quantity
-Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+// ItemList.QuantityInBaseUnit
+Procedure ItemListQuantityInBaseUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
-EndProcedure
-
-// ItemList.Quantity.Set
-Procedure SetItemListQuantity(Object, Form, Row, Value) Export
-	Row.Quantity = Value;
-	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgramChange", True);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
-EndProcedure
-
-Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Return;
+	ControllerClientServer_V2.ItemListQuantityInBaseUnitOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export	
@@ -2414,6 +2403,46 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+//#1798
+#Region QUANTITY_IS_FIXED
+
+// ItemList.QuantityIsFixed
+Procedure ItemListQuantityIsFixedOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityIsFixedOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListQuantityIsFixedNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_QUANTITY
+
+// ItemList.Quantity
+Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+// ItemList.Quantity.Set
+Procedure SetItemListQuantity(Object, Form, Row, Value) Export
+	Row.Quantity = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListQuantityNotify(Parameters) Export
+	Return;
 EndProcedure
 
 #EndRegion

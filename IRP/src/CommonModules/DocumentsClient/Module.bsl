@@ -1040,7 +1040,8 @@ Function GetFormItemNames()
 				|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 				|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 				|LinkedBasises,
-				|ItemListQuantityInBaseUnit, QuantityInBaseUnit,
+				//|ItemListQuantityInBaseUnit, #1798
+				|QuantityInBaseUnit,
 				|CostList, RevenueList, AllocationList, CostRowsRowID, RevenueRowsRowID, 
 				|AllocationRowsBasisRowID, AllocationRowsRowID, 
 				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,

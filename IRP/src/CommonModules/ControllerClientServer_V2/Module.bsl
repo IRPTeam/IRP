@@ -10284,14 +10284,6 @@ Function BindItemListQuantity(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged,
 		|StepItemListCalculateQuantityInBaseUnit");
-
-//#1798		
-//	Binding.Insert("SalesOrder", 
-//		"StepItemListCalculateQuantityInBaseUnit,
-//		|StepItemListCalculations_IsQuantityInBaseUnitChanged");	
-	
-//	Binding.Insert("SalesOrder", 
-//		"StepItemListCalculateQuantityInBaseUnit");	
 		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantity");
 EndFunction
@@ -10403,7 +10395,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region ITEM_LIST_QUANTITY_IS_FIXED
 
 // ItemList.QuantityIsFixed.OnChange
@@ -10431,28 +10422,10 @@ Function BindItemListQuantityIsFixed(Parameters)
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
 EndFunction
 
-//// ItemList.QuantityIsFixed.ChangeQuantityIsFixed.Step
-//Procedure StepItemListChangeQuantityIsFixed(Parameters, Chain) Export
-//	StepName = "StepItemListChangeQuantityIsFixed";
-//	Chain.Calculations.Enable = True;
-//	If Chain.Idle Then
-//		Return;
-//	EndIf;
-//	Chain.Calculations.Setter = "SetItemListQuantityIsFixed";
-//	For Each Row In GetRows(Parameters, "ItemList") Do
-//		Options = ModelClientServer_V2.ChangeQuantityIsFixedOptions();
-//		Options.IsUserChange = IsUserChange(Parameters, StepName);
-//		Options.Key = Row.Key;
-//		Options.StepName = StepName;
-//		Chain.ChangeQuantityIsFixed.Options.Add(Options);
-//	EndDo;	
-//EndProcedure
-
 #EndRegion
 
 #Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
 
-//#1798
 // ItemList.QuantityInBaseUnit.OnChange
 Procedure ItemListQuantityInBaseUnitOnChange(Parameters) Export
 	AddViewNotify("OnSetItemListQuantityInBaseUnitNotify", Parameters);
@@ -10529,7 +10502,6 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListQuantityInBaseUnit");
 EndFunction
 
-//#1798
 // ItemList.QuantityInBaseUnit.CalculateQuantityInBaseUnit.Step
 Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 	StepName = "StepItemListCalculateQuantityInBaseUnit";
@@ -10546,7 +10518,7 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Options.QuantityOptions.Unit    = GetItemListUnit(Parameters, Row.Key);
 		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key); //#1798
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = StepName;
 		Chain.Calculations.Options.Add(Options);

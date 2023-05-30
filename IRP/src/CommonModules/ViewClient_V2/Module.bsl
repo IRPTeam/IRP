@@ -2339,7 +2339,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
 
 // ItemList.QuantityInBaseUnit
@@ -2407,7 +2406,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region QUANTITY_IS_FIXED
 
 // ItemList.QuantityIsFixed

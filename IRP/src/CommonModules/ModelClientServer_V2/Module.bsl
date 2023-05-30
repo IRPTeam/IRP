@@ -365,9 +365,6 @@ Function GetChain()
 	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
-	//#1798
-//	Chain.Insert("ChangeQuantityIsFixed", GetChainLink("ChangeQuantityIsFixedExecute"));
-	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2279,22 +2276,6 @@ EndFunction
 
 #EndRegion
 
-//#1798
-//#Region CHANGE_QUANTITY_IS_FIXED
-//
-//Function ChangeQuantityIsFixedOptions() Export
-//	Return GetChainLinkOptions("IsUserChange")
-//EndFunction
-//
-//Function ChangeQuantityIsFixedExecute(Options) Export
-//	If Options.IsUserChange = True Then
-//		Return True;
-//	EndIf;
-//	Return False;
-//EndFunction
-//
-//#EndRegion
- 
 #Region CALCULATIONS
 
 Function CalculationsOptions() Export
@@ -2373,7 +2354,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
-	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed); //#1798
+	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
@@ -2469,7 +2450,7 @@ Function CalculationsExecute(Options) Export
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit
-	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then //#1798
+	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then
 		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
 			UnitFactor = 0;
 		Else

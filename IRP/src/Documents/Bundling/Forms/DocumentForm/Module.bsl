@@ -168,6 +168,24 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY_IN_BASE_UNIT
+
+&AtClient
+Procedure ItemListQuantityInBaseUnitOnChange(Item)
+	DocBundlingClient.ItemListQuantityInBaseUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+&AtClient
+Procedure ItemListQuantityIsFixedOnChange(Item)
+	DocBundlingClient.ItemListQuantityIsFixedOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
 #Region UNIT
 
 &AtClient
@@ -329,6 +347,12 @@ Procedure ShowRowKey(Command)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure EditQuantityInBaseUnit(Command)
+	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
+	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
+EndProcedure
 
 &AtClient
 Procedure ShowHiddenTables(Command)

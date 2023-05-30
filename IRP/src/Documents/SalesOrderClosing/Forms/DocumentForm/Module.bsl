@@ -153,6 +153,12 @@ Procedure ShowRowKey(Command)
 EndProcedure
 
 &AtClient
+Procedure EditQuantityInBaseUnit(Command)
+	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
+	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
+EndProcedure
+
+&AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure

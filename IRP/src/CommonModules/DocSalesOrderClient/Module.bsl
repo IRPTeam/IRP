@@ -274,7 +274,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region QUANTITY_IN_BASE_UNIT
 
 Procedure ItemListQuantityInBaseUnitOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -283,7 +282,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region QUANTITY_IS_FIXED
 
 Procedure ItemListQuantityIsFixedOnChange(Object, Form, Item, CurrentData = Undefined) Export

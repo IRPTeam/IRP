@@ -104,7 +104,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 	
-	//#1798
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
 		If Row.QuantityIsFixed Then
@@ -381,7 +380,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region QUANTITY_IN_BASE_UNIT
 
 &AtClient
@@ -391,7 +389,6 @@ EndProcedure
 
 #EndRegion
 
-//#1798
 #Region QUANTITY_IS_FIXED
 
 &AtClient
@@ -789,7 +786,6 @@ Procedure EditCurrencies(Command)
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-//#1798
 &AtClient
 Procedure EditQuantityInBaseUnit(Command)
 	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;

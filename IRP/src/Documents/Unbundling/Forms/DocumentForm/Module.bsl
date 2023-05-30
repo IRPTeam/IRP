@@ -191,6 +191,24 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY_IN_BASE_UNIT
+
+&AtClient
+Procedure ItemListQuantityInBaseUnitOnChange(Item)
+	DocUnbundlingClient.ItemListQuantityInBaseUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+&AtClient
+Procedure ItemListQuantityIsFixedOnChange(Item)
+	DocUnbundlingClient.ItemListQuantityIsFixedOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
 #Region UNIT
 
 &AtClient
@@ -384,6 +402,12 @@ Procedure FillItemListByBundleContentAtServer()
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure EditQuantityInBaseUnit(Command)
+	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
+	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
+EndProcedure
 
 &AtClient
 Procedure ShowHiddenTables(Command)

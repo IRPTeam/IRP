@@ -127,13 +127,17 @@ Scenario: _041600 preparation (Purchase return)
 		| "Documents.ShipmentConfirmation.FindByNumber(233).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create document PurchaseReturn objects (check movements)
 	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(231).GetObject().Write(DocumentWriteMode.Write);" |
 		| "Documents.PurchaseReturn.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server	
+		| "Documents.PurchaseReturn.FindByNumber(232).GetObject().Write(DocumentWriteMode.Write);" |
 		| "Documents.PurchaseReturn.FindByNumber(232).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(233).GetObject().Write(DocumentWriteMode.Write);" |
 		| "Documents.PurchaseReturn.FindByNumber(233).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PurchaseReturn objects (advance)
 	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Write);" |
 		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
 	* Load PI and PR comission trade 

@@ -116,7 +116,8 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |	
-		And I execute 1C:Enterprise script at server	
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Write);" |		
 			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server	
 			| "Documents.InventoryTransfer.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |

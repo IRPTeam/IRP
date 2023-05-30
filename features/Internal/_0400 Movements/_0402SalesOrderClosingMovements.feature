@@ -78,6 +78,7 @@ Scenario: _040158 preparation (Sales order closing)
 				| "1" |
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales order closing document
 		When Create document SalesOrderClosing objects (check movements)

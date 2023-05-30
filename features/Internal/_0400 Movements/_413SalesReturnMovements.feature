@@ -151,14 +151,19 @@ Scenario: _041300 preparation (Sales return)
 		When Create document SalesReturn objects (check movements)
 		When Create document SalesReturn objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
@@ -167,12 +172,16 @@ Scenario: _041300 preparation (Sales return)
 		And in the table "List" I click the button named "ListContextMenuPost"
 		When Create document SalesReturn objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(106).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.SalesReturn.FindByNumber(106).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(107).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(108).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(108).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(109).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(109).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	* Load document commission trade

@@ -10436,8 +10436,10 @@ EndProcedure
 // ItemList.QuantityInBaseUnit.Set
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
 	_IsChanged = False;
-	If Results.Count() Then 
+	If Results.Count() = 1 Then
+		If Results[0].Options.Property("QuantityOptions") And Results[0].Options.QuantityOptions.Property("QuantityIsFixed") Then  
 		_IsChanged = Results[0].Options.QuantityOptions.QuantityIsFixed;
+		EndIf;
 	EndIf;
 	
 	Binding = BindItemListQuantityInBaseUnit(Parameters);

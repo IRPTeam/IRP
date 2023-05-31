@@ -75,15 +75,19 @@ Scenario: _045100 preparation (Incoming payment order)
 	* Load documents
 		When Create document SalesOrder objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrder objects (with aging, post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (with aging, Post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document IncomingPaymentOrder objects (Cash planning)
 		And I execute 1C:Enterprise script at server

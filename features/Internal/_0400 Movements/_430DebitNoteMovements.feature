@@ -82,8 +82,10 @@ Scenario: _043000 preparation (Debit note)
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -103,8 +105,10 @@ Scenario: _043000 preparation (Debit note)
 			| '3' |	
 			When Create document SalesInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		If "List" table does not contain lines Then
@@ -112,6 +116,7 @@ Scenario: _043000 preparation (Debit note)
 			| '102' |
 			When Create document SalesReturnOrder objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"

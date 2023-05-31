@@ -80,6 +80,7 @@ Scenario: _043100 preparation (Credit note)
 			| '115' |
 			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
@@ -88,8 +89,10 @@ Scenario: _043100 preparation (Credit note)
 			| '116' |
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
@@ -98,8 +101,10 @@ Scenario: _043100 preparation (Credit note)
 			| '116' |
 			When Create document GoodsReceipt objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CreditNote objects (check movements)
 		And I execute 1C:Enterprise script at server

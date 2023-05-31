@@ -91,27 +91,35 @@ Scenario: _045400 preparation (CashStatement)
 	* Load RetailSalesReceipt
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load RetailReturnReceipt
 		When Create document RetailReturnReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailReturnReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankReceipt objects (POS)
 		And I execute 1C:Enterprise script at server

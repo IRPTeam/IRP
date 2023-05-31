@@ -81,9 +81,11 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| '115' |
 			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PurchaseInvoice objects
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
@@ -92,8 +94,10 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| '116' |
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
@@ -102,8 +106,10 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| '116' |
 			When Create document GoodsReceipt objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CashTransferOrder objects
 		When Create document CashTransferOrder objects (check movements)
@@ -117,13 +123,17 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load OutgoingPaymentOrder
 		When Create document OutgoingPaymentOrder objects (Cash planning)

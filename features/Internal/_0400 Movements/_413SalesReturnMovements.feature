@@ -95,40 +95,55 @@ Scenario: _041300 preparation (Sales return)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 		When Create document SalesOrder objects (SI more than SO)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server	
+			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales invoice document
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Goods
 		When Create document GoodsReceipt objects (check movements, transaction type - return from customers)
 		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Write);" |
  			| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales return order
 		When Create document SalesReturnOrder objects (check movements)
@@ -141,8 +156,10 @@ Scenario: _041300 preparation (Sales return)
 		And I close all client application windows
 		When Create document SalesInvoice objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankReceipt objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
@@ -190,18 +207,25 @@ Scenario: _041300 preparation (Sales return)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document SalesReturn objects (comission trade, consignment)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(193).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(193).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(192).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(193).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesReturn.FindByNumber(193).GetObject().Write(DocumentWriteMode.Posting);" |
 	// * Check query for sales return movements
 	// 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"

@@ -76,8 +76,10 @@ Scenario: _045501 preparation (work sheet movements)
 	* Load documents
 		When Create document SO-WO-WS-SI
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |

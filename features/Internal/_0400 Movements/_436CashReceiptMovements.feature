@@ -85,8 +85,10 @@ Scenario: _043600 preparation (Cash receipt)
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -96,8 +98,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| '3' |	
 			When Create document ShipmentConfirmation objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
@@ -106,8 +110,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| '3' |	
 			When Create document SalesInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		If "List" table does not contain lines Then
@@ -115,6 +121,7 @@ Scenario: _043600 preparation (Cash receipt)
 			| '102' |
 			When Create document SalesReturnOrder objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -124,8 +131,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| '104' |
 			When Create document SalesReturn objects (check movements)
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
+				| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Write);" |
 				| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash receipt
 		When Create document CashReceipt objects (check movements)
@@ -146,20 +155,26 @@ Scenario: _043600 preparation (Cash receipt)
 	* Load SO, SI, IPO
 		When create RetailSalesOrder objects
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document SalesOrder objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrder objects (with aging, post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (with aging, Post-shipment credit)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document IncomingPaymentOrder objects (Cash planning)
 		And I execute 1C:Enterprise script at server
@@ -180,7 +195,8 @@ Scenario: _043600 preparation (Cash receipt)
 	* Load PR
 		When Create document PurchaseReturn objects (advance)
 		And I execute 1C:Enterprise script at server
-		| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Write);" |
+			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash receipt (cash planning)
 		When Create document CashReceipt objects (cash planning)
 		And I execute 1C:Enterprise script at server

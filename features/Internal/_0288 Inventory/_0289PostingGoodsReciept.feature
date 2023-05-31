@@ -237,7 +237,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 			And I click "Show row key" button				
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
+				| 'Store'    | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
 				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |

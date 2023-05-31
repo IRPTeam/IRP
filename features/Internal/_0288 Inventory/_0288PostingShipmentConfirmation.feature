@@ -404,7 +404,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 			And I click "Show row key" button				
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
+				| 'Store'    | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
 				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |
@@ -492,7 +492,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 			And I click "Show row key" button				
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Shipment basis'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
+				| 'Store'    | 'Shipment basis'                               | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
 				| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'                 | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                                        | 'Next step' | 'Quantity'     | 'Current step' |
@@ -513,7 +513,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Shipment basis'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
+			| 'Store'    | 'Shipment basis'                               | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
 			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'                 | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'            | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '2' | '24,000'                | 'Boots' | ''                   | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 		And I go to line in "ItemList" table

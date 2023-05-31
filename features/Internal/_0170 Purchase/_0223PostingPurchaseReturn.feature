@@ -444,7 +444,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 			And I save the current field value as "$$Rov1PurchaseReturn22310$$"			
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Purchase invoice'          | '#' | 'Quantity in base unit' | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Purchase return order'         |
+				| 'Store'    | 'Purchase invoice'          | '#' | 'Stock quantity' | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Purchase return order'         |
 				| 'Store 01' | '$$PurchaseInvoice018001$$' | '1' | '3,000'                 | 'Trousers' | '36/Yellow' | '3,000' | 'pcs'  | '$$PurchaseReturnOrder022006$$' |
 			And "RowIDInfo" table contains lines
 				| '#' | 'Key'                         | 'Basis'                         | 'Row ID' | 'Next step' | 'Quantity'     | 'Basis key'                         | 'Current step' | 'Row ref' |
@@ -479,7 +479,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 			And I finish line editing in "ItemList" table			
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Purchase invoice'          | '#' | 'Quantity in base unit' | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Purchase return order'         |
+			| 'Store'    | 'Purchase invoice'          | '#' | 'Stock quantity' | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Purchase return order'         |
 			| 'Store 01' | '$$PurchaseInvoice018001$$' | '1' | '2,000'                 | 'Trousers' | '36/Yellow' | '2,000' | 'pcs'  | '$$PurchaseReturnOrder022006$$' |
 		And I go to line in "ItemList" table
 			| '#' |

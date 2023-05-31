@@ -347,7 +347,7 @@ Scenario: _020014 create ITO based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Internal supply request'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
+				| 'Internal supply request'                               | '#' | 'Stock quantity' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '2' | '50,000'                | 'Dress' | 'XS/Blue'  | '50,000'   | 'pcs'  | ''               |
 			And "RowIDInfo" table contains lines
@@ -385,7 +385,7 @@ Scenario: _020014 create ITO based on Internal supply request
 		And I select current line in "List" table
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Internal supply request'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
+			| 'Internal supply request'                               | '#' | 'Stock quantity' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
 			| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |
 			| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '2' | '50,000'                | 'Dress' | 'XS/Blue'  | '50,000'   | 'pcs'  | ''               |
 		And I go to line in "ItemList" table

@@ -2370,27 +2370,6 @@
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
-  <formCommands>
-    <name>EditQuantityInBaseUnit</name>
-    <title>
-      <key>en</key>
-      <value>Edit quantity in base unit</value>
-    </title>
-    <id>12</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Calculator</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>EditQuantityInBaseUnit</name>
-      </handler>
-    </action>
-    <representation>Picture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
   <parameters>
     <name>SalesOrder</name>
     <valueType>

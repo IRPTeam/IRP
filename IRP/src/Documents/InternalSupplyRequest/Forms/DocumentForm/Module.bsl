@@ -3,11 +3,15 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocInternalSupplyRequestServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocInternalSupplyRequestServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -23,6 +27,7 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocInternalSupplyRequestServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -50,6 +55,25 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 			LockLinkedRows();
 		EndIf;
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	_QuantityIsFixed = False;
+	For Each Row In Object.ItemList Do
+		If Row.QuantityIsFixed Then
+			_QuantityIsFixed = True;
+			Break;
+		EndIf;
+	EndDo;
+	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
+	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
+	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
 #EndRegion

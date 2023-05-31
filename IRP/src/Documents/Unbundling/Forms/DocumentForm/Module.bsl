@@ -4,6 +4,7 @@
 Procedure OnReadAtServer(CurrentObject)
 	SetEnableWaysToFillItemListByBundle();
 	DocUnbundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -11,6 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocUnbundlingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetEnableWaysToFillItemListByBundle();
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -28,6 +30,7 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetEnableWaysToFillItemListByBundle();
 	DocUnbundlingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -52,6 +55,25 @@ Procedure SetEnableWaysToFillItemListByBundle()
 
 	Items.FillItemListBySpecification.Enabled = WaysToFilling.BySpecification;
 	Items.FillItemListByBundling.Enabled = WaysToFilling.ByBundling;
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	_QuantityIsFixed = False;
+	For Each Row In Object.ItemList Do
+		If Row.QuantityIsFixed Then
+			_QuantityIsFixed = True;
+			Break;
+		EndIf;
+	EndDo;
+	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
+	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
+	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
 #EndRegion

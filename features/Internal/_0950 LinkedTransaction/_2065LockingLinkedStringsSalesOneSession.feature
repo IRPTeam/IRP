@@ -136,9 +136,10 @@ Scenario: _20650011 Info linked documents row
 			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |	
 	* Show row key
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ResultsTable" table became equal
-			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Quantity in base unit' | 'Basis key' | 'Unit' |
-			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI'           | '*'       | ''             | '*'      | '10,000'                | '*'         | ''     |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Stock quantity' | 'Basis key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI'           | '*'       | ''             | '*'      | '10,000'         | '*'         | ''     |
 	* Try Delete row
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' |
@@ -146,7 +147,7 @@ Scenario: _20650011 Info linked documents row
 		And I activate current test client window
 		And I press keyboard shortcut "Delete"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
+			| 'Row presentation'                                   | 'Stock quantity'        | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
@@ -157,7 +158,7 @@ Scenario: _20650011 Info linked documents row
 		And I activate current test client window
 		And I press keyboard shortcut "F9"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
+			| 'Row presentation'                                   | 'Stock quantity'        | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |

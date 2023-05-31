@@ -139,6 +139,18 @@ Function R3010B_CashOnHand()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
+		|	PaymentList.IsOtherCompanyExpense
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.OtherCompany,
+		|	PaymentList.TotalAmount,
+		|	*
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
 		|	PaymentList.IsOtherCompanyExpense";
 EndFunction
 

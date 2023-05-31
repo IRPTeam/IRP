@@ -1607,12 +1607,12 @@ Function BindTransactionType(Parameters)
 		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashExpense", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashExpense,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
 	Binding.Insert("CashRevenue", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashRevenue,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
@@ -1760,8 +1760,17 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.CashExpenseRevenue.MultiSet
-Procedure MultiSetTransactionType_CashExpenseRevenue(Parameters, Results) Export
+// TransactionType.CashExpense.MultiSet
+Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
+	ResourceToBinding.Insert("Employee"      , BindPaymentListEmployee(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.CashRevenue.MultiSet
+Procedure MultiSetTransactionType_CashRevenue(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
@@ -1903,21 +1912,40 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 	EndDo;
 EndProcedure
 
-// TransactionType.ClearByTransactionTypeCashExpenseRevenue.Step
-Procedure StepClearByTransactionTypeCashExpenseRevenue(Parameters, Chain) Export
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Enable = True;
+// TransactionType.ClearByTransactionTypeCashExpense.Step
+Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashExpense.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Setter = "MultiSetTransactionType_CashExpenseRevenue";
+	Chain.ClearByTransactionTypeCashExpense.Setter = "MultiSetTransactionType_CashExpense";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseRevenueOptions();
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseOptions();
+		Options.TransactionType          = GetTransactionType(Parameters);
+		Options.OtherCompany             = GetOtherCompany(Parameters);
+		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepClearByTransactionTypeCashExpense";
+		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeCashRevenue.Step
+Procedure StepClearByTransactionTypeCashRevenue(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashRevenue.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ClearByTransactionTypeCashRevenue.Setter = "MultiSetTransactionType_CashRevenue";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashRevenueOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.OtherCompany             = GetOtherCompany(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepClearByTransactionTypeCashExpenseRevenue";
-		Chain.ClearByTransactionTypeCashExpenseRevenue.Options.Add(Options);
+		Options.StepName = "StepClearByTransactionTypeCashRevenue";
+		Chain.ClearByTransactionTypeCashRevenue.Options.Add(Options);
 	EndDo;
 EndProcedure
 

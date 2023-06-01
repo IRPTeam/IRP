@@ -27,7 +27,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	//Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -103,15 +102,12 @@ Function PaymentList()
 		|	PaymentList.Ref.Company AS Company,
 		|	PaymentList.Ref.Partner AS Partner,
 		|	PaymentList.Currency AS Currency,
-		|	PaymentList.Account AS Account,
-		|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.NetAmount AS NetAmount,
 		|	PaymentList.TaxAmount AS TaxAmount,
 		|	PaymentList.TotalAmount AS TotalAmount,
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
-		|	PaymentList.FinancialMovementType,
 		|	PaymentList.AdditionalAnalytic,
 		|	PaymentList.Ref.Branch AS Branch,
 		|	NOT PaymentList.Invoice.Ref IS NULL AS IsPurchase,
@@ -142,9 +138,6 @@ Function R3027B_EmployeeCashAdvance()
 		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Currency,
-		|	PaymentList.Account,
-		|	PaymentList.PlaningTransactionBasis,
-		|	PaymentList.FinancialMovementType,
 		|	PaymentList.TotalAmount AS Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM

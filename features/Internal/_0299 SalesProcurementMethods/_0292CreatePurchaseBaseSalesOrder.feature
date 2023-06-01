@@ -552,6 +552,7 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 			| 'Dress' | 'M/White'  |
 		And I delete a line in "ItemList" table
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -577,9 +578,10 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I set "Use shipment confirmation" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		* Check ItemList tab
 			And "ItemList" table contains lines
-				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Stock quantity'        | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 				| '$$Rov1SalesInvoice029203$$' | 'Store 01' | ''                    | '2,000'                 | '1' | ''                   | 'en description is empty' | 'Service'  | 'Internet'  | 'No'                 | ''                   | '2,000'    | 'pcs'  | '30,51'      | '100,00' | '18%' | ''              | '169,49'     | '200,00'       | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov2SalesInvoice029203$$' | 'Store 01' | ''                    | '8,000'                 | '2' | ''                   | 'Basic Price Types'       | 'Trousers' | '38/Yellow' | 'No'                 | ''                   | '8,000'    | 'pcs'  | '488,14'     | '400,00' | '18%' | ''              | '2 711,86'   | '3 200,00'     | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov3SalesInvoice029203$$' | 'Store 01' | ''                    | '11,000'                | '3' | ''                   | 'Basic Price Types'       | 'Shirt'    | '38/Black'  | 'No'                 | ''                   | '11,000'   | 'pcs'  | '587,29'     | '350,00' | '18%' | ''              | '3 262,71'   | '3 850,00'     | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
@@ -599,6 +601,7 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"
 		And I click "Ok" button
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -606,8 +609,8 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I delete "$$Rov1ShipmentConfirmation029203$$" variable
 		And I save the current field value as "$$Rov1ShipmentConfirmation029203$$"
 		And "ItemList" table contains lines
-			| 'Key'                                | 'Store'    | 'Shipment basis'         | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'          | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '$$Rov1ShipmentConfirmation029203$$' | 'Store 01' | '$$SalesInvoice029203$$' | '1' | '11,000'                | 'Shirt' | ''                   | '38/Black' | '11,000'   | '$$SalesInvoice029203$$' | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
+			| 'Key'                                | 'Store'    | 'Shipment basis'         | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'          | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '$$Rov1ShipmentConfirmation029203$$' | 'Store 01' | '$$SalesInvoice029203$$' | '1' | '11,000'         | 'Shirt' | ''                   | '38/Black' | '11,000'   | '$$SalesInvoice029203$$' | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "1"	
 		And "RowIDInfo" table became equal
 			| '#' | 'Key'                                | 'Basis'                  | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                  | 'Current step' | 'Row ref'                              |
@@ -632,6 +635,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"
 		And I click "Ok" button	
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -646,8 +650,9 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Key'                                | 'Store'    | 'Shipment basis'                            | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| 'Key'                                | 'Store'    | 'Shipment basis'                            | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
 			| '$$Rov1ShipmentConfirmation029204$$' | 'Store 01' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1' | '5,000'                 | 'Dress' | ''                   | 'M/White'  | '5,000'    | ''              | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And "RowIDInfo" table contains lines
@@ -662,6 +667,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button	
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -669,9 +675,10 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I delete "$$Rov1SalesInvoice029204$$" variable
 		And I save the current field value as "$$Rov1SalesInvoice029204$$"	
 		And I click the button named "FormPost"	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
-			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''                   | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000'    | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
+			| 'Key'                        | 'Store'    | 'Additional analytic' | 'Stock quantity' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'          | '1' | ''                   | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000'    | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And in the table "ItemList" I click "Shipment confirmations" button
 		And "DocumentsTree" table became equal

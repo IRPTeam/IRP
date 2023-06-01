@@ -26,4 +26,11 @@
       <value>Other company expense</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="793ce70b-95ea-467d-8fd3-041b24f3c73d">
+    <name>SalaryPayment</name>
+    <synonym>
+      <key>en</key>
+      <value>Salary payment</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

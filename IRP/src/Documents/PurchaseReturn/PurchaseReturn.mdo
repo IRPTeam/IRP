@@ -601,7 +601,7 @@
       <name>QuantityInBaseUnit</name>
       <synonym>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
@@ -712,6 +712,20 @@
       <synonym>
         <key>en</key>
         <value>Is service</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="78152b3e-0c1d-4007-9e70-3e12235e0007">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
       </synonym>
       <type>
         <types>Boolean</types>

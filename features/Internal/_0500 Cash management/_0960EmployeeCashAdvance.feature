@@ -282,8 +282,8 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| '#' | 'Account'           | 'Currency' | 'Dont calculate row' | 'Financial movement type' | 'Planing transaction basis'                           | 'Total amount' |
-			| '2' | 'Bank account, TRY' | 'TRY'      | 'No'                 | 'Movement type 1'         | 'Outgoing payment order 16 dated 12.01.2023 16:34:39' | '1 000,00'     |
+			| '#' | 'Currency' | 'Dont calculate row' | 'Total amount' |
+			| '2' | 'TRY'      | 'No'                 | '1 000,00'     |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Expense type" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -292,8 +292,8 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| '#' | 'Account'      | 'Currency' | 'Dont calculate row' | 'Expense type' | 'Financial movement type' | 'Planing transaction basis'                           | 'Total amount' |
-			| '1' | 'Cash desk №1' | 'TRY'      | 'No'                 | 'Expense'      | 'Movement type 1'         | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' | '1 000,00'     |
+			| '#' | 'Currency' | 'Dont calculate row' | 'Expense type' | 'Total amount' |
+			| '1' | 'TRY'      | 'No'                 | 'Expense'      | '1 000,00'     |
 		And I activate "Profit loss center" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
@@ -304,8 +304,8 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| '#' | 'Account'           | 'Currency' | 'Dont calculate row' | 'Expense type' | 'Financial movement type' | 'Planing transaction basis'                           | 'Total amount' |
-			| '2' | 'Bank account, TRY' | 'TRY'      | 'No'                 | 'Expense'      | 'Movement type 1'         | 'Outgoing payment order 16 dated 12.01.2023 16:34:39' | '1 000,00'     |
+			| '#' | 'Currency' | 'Dont calculate row' | 'Expense type' | 'Total amount' |
+			| '2' | 'TRY'      | 'No'                 | 'Expense'      | '1 000,00'     |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
 		And I go to line in "List" table

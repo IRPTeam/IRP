@@ -4685,7 +4685,7 @@
       <name>QuantityInBaseUnit</name>
       <title>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </title>
       <id>47</id>
       <valueType>
@@ -5119,7 +5119,7 @@
       <name>QuantityInBaseUnit</name>
       <title>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </title>
       <id>63</id>
       <valueType>
@@ -5572,7 +5572,7 @@
       <name>QuantityInBaseUnit</name>
       <title>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </title>
       <id>63</id>
       <valueType>

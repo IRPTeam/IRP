@@ -2300,7 +2300,7 @@ Function CalculationsOptions() Export
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
-	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
+	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit, QuantityIsFixed");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
 	// SpecialOffers columns: Key, Offer, Amount, Percent, Bonus, AddInfo
@@ -2356,6 +2356,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
+	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
@@ -2366,9 +2367,7 @@ Function CalculationsExecute(Options) Export
 	
 	UserManualAmountsFromBasisDocument = New Array();
 	
-	//IsLinkedRow = False;
 	OffersFromBaseDocument = False;
-//	IsUserChangeTaxAmount = False;
 	If Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable Or Options.CalculateTaxAmount.Enable Then
 		For Each Row In Options.RowIDInfo Do
 			Scaling = New Structure();
@@ -2377,8 +2376,6 @@ Function CalculationsExecute(Options) Export
 			Scaling.Insert("Unit"    , Options.Unit);
 			DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep, Scaling);
 			If DataFromBasis <> Undefined And DataFromBasis.Count() Then 
-				//IsLinkedRow = True;
-				
 				// Offers
 				If (Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable) And DataFromBasis[0].SpecialOffers.Count() Then
 					OffersFromBaseDocument = True;
@@ -2408,7 +2405,6 @@ Function CalculationsExecute(Options) Export
 							
 							If  RowTaxList.Tax = BasisRow.Tax 
 								And RowTaxList.Analytics = BasisRow.Analytics Then
-//								And RowTaxList.TaxRate = BasisRow.TaxRate Then
 								NewTaxRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
 								FillPropertyValues(NewTaxRow, BasisRow);
 								NewTaxRow.Key = RowTaxList.Key;
@@ -2456,7 +2452,7 @@ Function CalculationsExecute(Options) Export
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit
-	If Options.CalculateQuantityInBaseUnit.Enable Then
+	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then
 		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
 			UnitFactor = 0;
 		Else

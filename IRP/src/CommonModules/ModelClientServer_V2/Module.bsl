@@ -230,7 +230,8 @@ Function GetChain()
 	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
 	Chain.Insert("ClearByTransactionTypeOutgoingPaymentOrder", GetChainLink("ClearByTransactionTypeOutgoingPaymentOrderExecute"));
-	Chain.Insert("ClearByTransactionTypeCashExpenseRevenue"  , GetChainLink("ClearByTransactionTypeCashExpenseRevenueExecute"));
+	Chain.Insert("ClearByTransactionTypeCashExpense"  , GetChainLink("ClearByTransactionTypeCashExpenseExecute"));
+	Chain.Insert("ClearByTransactionTypeCashRevenue"  , GetChainLink("ClearByTransactionTypeCashRevenueExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -2298,7 +2299,7 @@ Function CalculationsOptions() Export
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
-	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
+	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit, QuantityIsFixed");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
 	// SpecialOffers columns: Key, Offer, Amount, Percent, Bonus, AddInfo
@@ -2354,6 +2355,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
+	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
@@ -2364,9 +2366,7 @@ Function CalculationsExecute(Options) Export
 	
 	UserManualAmountsFromBasisDocument = New Array();
 	
-	//IsLinkedRow = False;
 	OffersFromBaseDocument = False;
-//	IsUserChangeTaxAmount = False;
 	If Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable Or Options.CalculateTaxAmount.Enable Then
 		For Each Row In Options.RowIDInfo Do
 			Scaling = New Structure();
@@ -2375,8 +2375,6 @@ Function CalculationsExecute(Options) Export
 			Scaling.Insert("Unit"    , Options.Unit);
 			DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep, Scaling);
 			If DataFromBasis <> Undefined And DataFromBasis.Count() Then 
-				//IsLinkedRow = True;
-				
 				// Offers
 				If (Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable) And DataFromBasis[0].SpecialOffers.Count() Then
 					OffersFromBaseDocument = True;
@@ -2406,7 +2404,6 @@ Function CalculationsExecute(Options) Export
 							
 							If  RowTaxList.Tax = BasisRow.Tax 
 								And RowTaxList.Analytics = BasisRow.Analytics Then
-//								And RowTaxList.TaxRate = BasisRow.TaxRate Then
 								NewTaxRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
 								FillPropertyValues(NewTaxRow, BasisRow);
 								NewTaxRow.Key = RowTaxList.Key;
@@ -2454,7 +2451,7 @@ Function CalculationsExecute(Options) Export
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit
-	If Options.CalculateQuantityInBaseUnit.Enable Then
+	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then
 		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
 			UnitFactor = 0;
 		Else
@@ -3461,22 +3458,66 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 	Return Result;
 EndFunction
 
-// Cash Expense-Revenue
-Function ClearByTransactionTypeCashExpenseRevenueOptions() Export
+// Cash Expense
+Function ClearByTransactionTypeCashExpenseOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|Employee,
+		|OtherCompany");
+EndFunction
+
+Function ClearByTransactionTypeCashExpenseExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"      , Options.Partner);
+	Result.Insert("Employee"     , Options.Employee);
+	Result.Insert("OtherCompany" , Options.OtherCompany);
+
+	OtherCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	SalaryPayment    = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
+	
+	If Options.TransactionType = OtherCashExpense Then
+		StrByType = "
+		|Partner,
+		|OtherCompany";
+	ElsIf Options.TransactionType = SalaryPayment Then
+		StrByType = "
+		|Partner,
+		|Employee,
+		|OtherCompany";
+	EndIf;
+		
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Revenue
+Function ClearByTransactionTypeCashRevenueOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|OtherCompany");
 EndFunction
 
-Function ClearByTransactionTypeCashExpenseRevenueExecute(Options) Export
+Function ClearByTransactionTypeCashRevenueExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Partner"      , Options.Partner);
 	Result.Insert("OtherCompany" , Options.OtherCompany);
 
-	Other_CashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
-	Other_CashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
+	OtherCashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
 
-	If Options.TransactionType = Other_CashExpense Or Options.TransactionType = Other_CashRevenue Then
+	If Options.TransactionType = OtherCashRevenue Then
 		StrByType = "
 		|Partner,
 		|OtherCompany";

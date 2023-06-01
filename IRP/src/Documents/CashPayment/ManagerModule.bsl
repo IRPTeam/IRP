@@ -343,9 +343,6 @@ Function R3027B_EmployeeCashAdvance()
 		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Currency,
-		|	PaymentList.CashAccount AS Account,
-		|	PaymentList.PlaningTransactionBasis,
-		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM

@@ -60,10 +60,7 @@ Function GetAdvances(QueryParameters) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R3027B_EmployeeCashAdvanceBalance.Account,
 	|	R3027B_EmployeeCashAdvanceBalance.Currency,
-	|	R3027B_EmployeeCashAdvanceBalance.FinancialMovementType,
-	|	R3027B_EmployeeCashAdvanceBalance.PlaningTransactionBasis,
 	|	R3027B_EmployeeCashAdvanceBalance.AmountBalance AS TotalAmount
 	|FROM
 	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&BalancePeriod, Company = &Company

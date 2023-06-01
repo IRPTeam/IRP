@@ -60,9 +60,6 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.Text = 
 	"SELECT
 	|	R3027B.Partner AS Employee,
-	|	R3027B.FinancialMovementType,
-	|	R3027B.Account,
-	|	R3027B.PlaningTransactionBasis,
 	|	R3027B.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
@@ -74,15 +71,14 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.SetParameter("Branch", Parameters.Branch);
 	Query.SetParameter("Currency", Parameters.Currency);
 	If ValueIsFilled(Parameters.Ref) Then
-		Query.SetParameter("Boundary", New Boundary(
-			New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
+		Query.SetParameter("Boundary", New Boundary(New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
 	Else
 		Query.SetParameter("Boundary", Parameters.EndDate);
 	EndIf;
 	
 	ResultTable = Query.Execute().Unload();
 	
-	GroupColumn = "Employee, FinancialMovementType, Account, PlaningTransactionBasis";
+	GroupColumn = "Employee";
 	SumColumn = "Amount";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);

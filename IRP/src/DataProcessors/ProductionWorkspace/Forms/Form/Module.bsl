@@ -391,8 +391,9 @@ Function GetParametersForDocInventoryTransfer(PlanningCurrentData)
 		CommonFunctionsServer.GetRefAttribute(PlanningCurrentData.ProductionPlanning, "BusinessUnit"));
 	
 	Result.Insert("ItemList", New Array());
-	Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity, ProductionPlanning", 
-		ThisObject.Item, ThisObject.ItemKey, ThisObject.Unit, ThisObject.Quantity, PlanningCurrentData.ProductionPlanning));
+	Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity, ProductionPlanning, InventoryOrigin", 
+		ThisObject.Item, ThisObject.ItemKey, ThisObject.Unit, ThisObject.Quantity, PlanningCurrentData.ProductionPlanning,
+		PredefinedValue("Enum.InventoryOriginTypes.OwnStocks")));
 	
 	Return Result;
 EndFunction
@@ -420,6 +421,7 @@ Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_Inventor
 		NewInventoryTransfer = Documents.InventoryTransfer.CreateDocument();
 		NewInventoryTransfer.Date = CreationDate +1;
 		NewInventoryTransfer.Fill(Parameters_InventoryTransfer);
+		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewInventoryTransfer);
 		NewInventoryTransfer.Write(DocumentWriteMode.Posting);
 		InventoryTransfer_IsCreated = True;
 	EndIf;

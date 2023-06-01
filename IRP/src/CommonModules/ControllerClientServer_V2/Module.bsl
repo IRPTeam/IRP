@@ -11696,16 +11696,51 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsGetPercent");
+		"StepPaymentsGetPercent,
+		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsGetPercent");
+		"StepPaymentsGetPercent,
+		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
 		"StepPaymentsGetPercent");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_FINANCIAL_MOVEMENT_TYPE
+
+// Payments.FinancialMovementType.Set
+Procedure SetPaymentsFinancialMovementType(Parameters, Results) Export
+	Binding = BindPaymentsFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.FinancialMovementType.Bind
+Function BindPaymentsFinancialMovementType(Parameters)
+	DataPath = "Payments.FinancialMovementType";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsFinancialMovementType");
+EndFunction
+
+// ItemList.ChangeFinancialMovementTypeByPaymentType.Step
+Procedure StepChangeFinancialMovementTypeByPaymentType(Parameters, Chain) Export
+	Chain.ChangeFinancialMovementTypeByPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeFinancialMovementTypeByPaymentType.Setter = "SetPaymentsFinancialMovementType";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeFinancialMovementTypeByPaymentTypeOptions();
+		Options.PaymentType	= GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeFinancialMovementTypeByPaymentType";
+		Chain.ChangeFinancialMovementTypeByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 

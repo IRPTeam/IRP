@@ -1135,8 +1135,6 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	Return Result;
 EndFunction
 
-#Region NewRegistersPosting
-
 Function UseRegister(Name) Export
 	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
 EndFunction
@@ -1232,5 +1230,3 @@ Function Exists_R2001T_Sales() Export
 		|WHERE
 		|	R2001T_Sales.Recorder = &Ref";
 EndFunction
-
-#EndRegion

@@ -28,6 +28,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -90,6 +91,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -214,6 +216,40 @@ Function R3010B_CashOnHand()
 	|	MoneyReceiver AS MoneyReceiver
 	|WHERE
 	|	NOT MoneyReceiver.UseCashInTransit";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return 
+		"SELECT
+		|	MoneySender.Period,
+		|	MoneySender.Company,
+		|	MoneySender.Branch,
+		|	MoneySender.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	MoneySender.FinancialMovementType,
+		|	MoneySender.Amount,
+		|	MoneySender.Currency,
+		|	MoneySender.Key
+		|INTO R3011T_CashFlow
+		|FROM
+		|	MoneySender AS MoneySender
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	MoneyReceiver.Period,
+		|	MoneyReceiver.Company,
+		|	MoneyReceiver.Branch,
+		|	MoneyReceiver.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming),
+		|	MoneyReceiver.FinancialMovementType,
+		|	MoneyReceiver.Amount,
+		|	MoneyReceiver.Currency,
+		|	MoneyReceiver.Key
+		|FROM
+		|	MoneyReceiver AS MoneyReceiver
+		|WHERE
+		|	NOT MoneyReceiver.UseCashInTransit";
 EndFunction
 
 Function R3035T_CashPlanning()

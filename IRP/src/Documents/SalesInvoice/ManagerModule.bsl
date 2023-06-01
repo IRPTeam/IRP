@@ -225,8 +225,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -1643,5 +1641,3 @@ Function R8014T_ConsignorSales()
 		|WHERE
 		|	TRUE";
 EndFunction
-
-#EndRegion

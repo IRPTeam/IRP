@@ -28,6 +28,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -89,6 +91,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -106,6 +109,7 @@ Function PaymentList()
 		|	PaymentList.TotalAmount AS TotalAmount,
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Partner,
 		|	PaymentList.Employee,
 		|	PaymentList.AdditionalAnalytic,
@@ -158,6 +162,65 @@ Function R3010B_CashOnHand()
 		|WHERE
 		|	PaymentList.IsOtherCompanyExpense
 		|	OR PaymentList.IsSalaryPayment";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.OtherCompany,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming),
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.OtherCompany,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing),
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment";
+	
 EndFunction
 
 Function R5022T_Expenses()
@@ -223,4 +286,3 @@ Function R9510B_SalaryPayment()
 		|WHERE
 		|	PaymentList.IsSalaryPayment";
 EndFunction
-

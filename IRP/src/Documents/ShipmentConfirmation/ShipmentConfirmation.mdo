@@ -360,7 +360,7 @@
       <name>QuantityInBaseUnit</name>
       <synonym>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
@@ -458,6 +458,20 @@
       <synonym>
         <key>en</key>
         <value>Use serial lot number</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="74470b8a-c4ad-41ba-927b-035e5be2f7a7">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
       </synonym>
       <type>
         <types>Boolean</types>

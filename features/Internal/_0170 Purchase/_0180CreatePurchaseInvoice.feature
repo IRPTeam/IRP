@@ -404,6 +404,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
+			And in the table "ItemList" I click "Edit quantity in base unit" button
 			* Set Use GR checkbox
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' |
@@ -417,14 +418,15 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 				And I finish line editing in "ItemList" table					
 			And I click "Save" button							
 		* Check Item tab and RowID tab
+			And in the table "ItemList" I click "Edit quantity in base unit" button	
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+				| 'Store'    | 'Internal supply request'                               | 'Stock quantity'        | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '10,000' | 'ITO&PO&PI'    |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '50,000' | 'ITO&PO&PI'    |
+				| 'Basis'                                                 | 'Next step'   | 'Quantity' | 'Current step' |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '10,000'   | 'ITO&PO&PI'    |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '50,000'   | 'ITO&PO&PI'    |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
 		And I close all client application windows
 	* Create PI based on ISR (Create button)
@@ -450,10 +452,11 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I click "Show row key" button	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			| 'Store'    | 'Internal supply request'                               | 'Stock quantity' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'         | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'         | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |

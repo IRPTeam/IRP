@@ -274,6 +274,22 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY_IN_BASE_UNIT
+
+Procedure ItemListQuantityInBaseUnitOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListQuantityInBaseUnitOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+Procedure ItemListQuantityIsFixedOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListQuantityIsFixedOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #Region PRICE_TYPE
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export

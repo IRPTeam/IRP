@@ -137,8 +137,8 @@ Scenario: _20650011 Info linked documents row
 	* Show row key
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
-			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Quantity in base unit' | 'Basis key' | 'Unit' |
-			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI'           | '*'       | ''             | '*'      | '10,000'                | '*'         | ''     |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI'           | '*'       | ''             | '*'      | '*'         | ''     |
 	* Try Delete row
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' |

@@ -156,9 +156,6 @@ Function CashAdvanceDeductionList()
 		|	CashAdvanceDeductionList.Ref.Branch AS Branch,
 		|	CashAdvanceDeductionList.Ref.Currency AS Currency,
 		|	CashAdvanceDeductionList.Employee,
-		|	CashAdvanceDeductionList.FinancialMovementType,
-		|	CashAdvanceDeductionList.PlaningTransactionBasis,
-		|	CashAdvanceDeductionList.Account,
 		|	CashAdvanceDeductionList.Amount
 		|INTO CashAdvanceDeductionList
 		|FROM
@@ -279,9 +276,6 @@ Function R3027B_EmployeeCashAdvance()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.Employee AS Partner,
-		|	CashAdvanceDeductionList.FinancialMovementType,
-		|	CashAdvanceDeductionList.PlaningTransactionBasis,
-		|	CashAdvanceDeductionList.Account,
 		|	CashAdvanceDeductionList.Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM

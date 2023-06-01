@@ -230,7 +230,8 @@ Function GetChain()
 	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
 	Chain.Insert("ClearByTransactionTypeOutgoingPaymentOrder", GetChainLink("ClearByTransactionTypeOutgoingPaymentOrderExecute"));
-	Chain.Insert("ClearByTransactionTypeCashExpenseRevenue"  , GetChainLink("ClearByTransactionTypeCashExpenseRevenueExecute"));
+	Chain.Insert("ClearByTransactionTypeCashExpense"  , GetChainLink("ClearByTransactionTypeCashExpenseExecute"));
+	Chain.Insert("ClearByTransactionTypeCashRevenue"  , GetChainLink("ClearByTransactionTypeCashRevenueExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -3457,22 +3458,66 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 	Return Result;
 EndFunction
 
-// Cash Expense-Revenue
-Function ClearByTransactionTypeCashExpenseRevenueOptions() Export
+// Cash Expense
+Function ClearByTransactionTypeCashExpenseOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|Employee,
+		|OtherCompany");
+EndFunction
+
+Function ClearByTransactionTypeCashExpenseExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"      , Options.Partner);
+	Result.Insert("Employee"     , Options.Employee);
+	Result.Insert("OtherCompany" , Options.OtherCompany);
+
+	OtherCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	SalaryPayment    = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
+	
+	If Options.TransactionType = OtherCashExpense Then
+		StrByType = "
+		|Partner,
+		|OtherCompany";
+	ElsIf Options.TransactionType = SalaryPayment Then
+		StrByType = "
+		|Partner,
+		|Employee,
+		|OtherCompany";
+	EndIf;
+		
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Revenue
+Function ClearByTransactionTypeCashRevenueOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|OtherCompany");
 EndFunction
 
-Function ClearByTransactionTypeCashExpenseRevenueExecute(Options) Export
+Function ClearByTransactionTypeCashRevenueExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Partner"      , Options.Partner);
 	Result.Insert("OtherCompany" , Options.OtherCompany);
 
-	Other_CashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
-	Other_CashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
+	OtherCashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
 
-	If Options.TransactionType = Other_CashExpense Or Options.TransactionType = Other_CashRevenue Then
+	If Options.TransactionType = OtherCashRevenue Then
 		StrByType = "
 		|Partner,
 		|OtherCompany";

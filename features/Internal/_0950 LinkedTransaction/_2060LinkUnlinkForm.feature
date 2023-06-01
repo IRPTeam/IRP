@@ -2355,9 +2355,9 @@ Scenario: _2060022 check button	Show row key in the Add linked documents rows
 	* Check button Show row key	
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
-			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Stock quantity' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
-			| 'Boots' | '37/18SD'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '1,000'          | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
-			| 'Dress' | 'M/White'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '2,000'          | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+			| 'Boots' | '37/18SD'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+			| 'Dress' | 'M/White'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
 		And I click "Cancel" button
 		Then user message window does not contain messages
 		

@@ -578,6 +578,7 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I set "Use shipment confirmation" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		* Check ItemList tab
 			And "ItemList" table contains lines
 				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Stock quantity'        | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
@@ -649,6 +650,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Key'                                | 'Store'    | 'Shipment basis'                            | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
 			| '$$Rov1ShipmentConfirmation029204$$' | 'Store 01' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1' | '5,000'                 | 'Dress' | ''                   | 'M/White'  | '5,000'    | ''              | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
@@ -673,6 +675,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I delete "$$Rov1SalesInvoice029204$$" variable
 		And I save the current field value as "$$Rov1SalesInvoice029204$$"	
 		And I click the button named "FormPost"	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Key'                        | 'Store'    | 'Additional analytic' | 'Stock quantity' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'          | '1' | ''                   | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000'    | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |

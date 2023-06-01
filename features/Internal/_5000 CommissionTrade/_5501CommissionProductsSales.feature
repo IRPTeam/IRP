@@ -1366,6 +1366,7 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 		And I select current line in "List" table
 		And I finish line editing in "Payments" table
 		And I click "Post" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table became equal
 			| 'Store'    | 'Stock quantity' | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'              | 'Item'                         | 'Consignor'   | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
 			| 'Store 02' | '1,000'                 | 'Yes'                   | '1' | 'Consignor stocks' | 'Basic Price without VAT' | 'Product 7 with SLN (new row)' | 'Consignor 1' | '18,00'      | '09999900989900'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | '18%'         | '100,00'     | '118,00'       |
@@ -1434,6 +1435,7 @@ Scenario: _050054 check filling consignor from serial lot number in the SalesInv
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table became equal
 			| 'Store'    | 'Stock quantity'        | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'              | 'Item'                         | 'Consignor'   | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
 			| 'Store 02' | '1,000'                 | 'Yes'                   | '1' | 'Consignor stocks' | 'Basic Price without VAT' | 'Product 7 with SLN (new row)' | 'Consignor 1' | '18,00'      | '09999900989900'     | 'pcs'  | 'ODS'      | 'No'         | '1,000'    | '100,00' | '18%'         | '100,00'     | '118,00'       |

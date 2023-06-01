@@ -598,7 +598,6 @@ Scenario: _20600031 check Link unlink basis documents form
 			And I wait that in "ItemListRows" table number of lines will be "equal" "1" for "10" seconds
 		* Show row key
 			And I click "Show row key" button
-			And in the table "ItemList" I click "Edit quantity in base unit" button	
 			Then the number of "ResultsTable" table lines is "равно" 0
 			And I activate current test client window
 			And I go to line in "BasisesTree" table
@@ -608,7 +607,7 @@ Scenario: _20600031 check Link unlink basis documents form
 			And Delay 5
 			And I select current line in "BasisesTree" table
 			And "ResultsTable" table became equal
-				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Stock quantity' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
 				| 'Dress' | 'XS/Blue'  | 'Store 02' | '*'   | 'Sales order 3 dated 27.01.2021 19:50:45' | 'pcs'  | 'pcs'        | '2,000'                 | 'SI&SC'        | '*'       | ''             | '*'      | '*'         |
 		* Delete Quantity and check Link unlink basis documents
 			And I close "Link / unlink document row" window
@@ -787,11 +786,12 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Stock quantity' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '1,000'          | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '4,000'          | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
+			| 'Store 01' | '24,000'         | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 		
@@ -948,6 +948,7 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Stock quantity'        | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
 			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
@@ -1288,6 +1289,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Stock quantity'        | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000'   | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
@@ -1447,6 +1449,7 @@ Scenario: _2060008 check link/unlink form in the PR
 			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Stock quantity'        | '#' | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
@@ -2351,9 +2354,8 @@ Scenario: _2060022 check button	Show row key in the Add linked documents rows
 			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No'  |		
 	* Check button Show row key	
 		And I click "Show row key" button
-		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ResultsTable" table became equal
-			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Stock quantity'        | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
 			| 'Boots' | '37/18SD'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '1,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
 			| 'Dress' | 'M/White'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '2,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
 		And I click "Cancel" button

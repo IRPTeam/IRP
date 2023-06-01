@@ -414,9 +414,9 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
-			And in the table "ItemList" I click "Edit quantity in base unit" button
 			And I click "Save" button							
 		* Check Item tab and RowID tab
+			And in the table "ItemList" I click "Edit quantity in base unit" button
 			And "ItemList" table contains lines
 				| 'Store'    | 'Internal supply request'                               | 'Stock quantity' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'         | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |

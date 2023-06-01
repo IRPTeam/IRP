@@ -343,10 +343,10 @@ Scenario: _020014 create ITO based on Internal supply request
 				| '10,000'    | 'Dress (S/Yellow)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
-			And I click "Show row key" button	
-			And in the table "ItemList" I click "Edit quantity in base unit" button			
+			And I click "Show row key" button			
 			And I click "Save" button							
 		* Check Item tab and RowID tab
+			And in the table "ItemList" I click "Edit quantity in base unit" button	
 			And "ItemList" table contains lines
 				| 'Internal supply request'                               | '#' | 'Stock quantity' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |

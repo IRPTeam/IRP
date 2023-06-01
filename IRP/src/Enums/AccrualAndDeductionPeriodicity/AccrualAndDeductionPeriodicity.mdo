@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Периодичность начислений и удержаний</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accrual and deduction periodicity</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2e629677-1166-4c65-aa1c-a4b227e8cecb">
@@ -26,6 +30,10 @@
    <key>ru</key>
    <value>По дням</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>By day</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="0b1a7c6f-4f07-4805-b7f5-df97941eaee0">
   <name>ByPeriod</name>
@@ -36,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>По периоду</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>By period</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

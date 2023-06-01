@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Документ приемка от розничной продажи клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc retail goods receipt client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

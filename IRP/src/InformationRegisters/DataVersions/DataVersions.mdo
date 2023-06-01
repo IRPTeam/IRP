@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>Версии данных</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Data versions</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -101,6 +105,10 @@
    <key>ru</key>
    <value>Данные ссылка</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Data ref</value>
+  </synonym>
   <type>
    <types>AnyRef</types>
   </type>
@@ -120,6 +128,10 @@
   <synonym>
    <key>ru</key>
    <value>ID Короба</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Package ID</value>
   </synonym>
   <type>
    <types>UUID</types>

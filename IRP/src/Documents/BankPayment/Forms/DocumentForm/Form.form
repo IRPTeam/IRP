@@ -3912,6 +3912,10 @@
    <key>ru</key>
    <value>Вернуть на карту</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Return to card</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>
@@ -3936,6 +3940,10 @@
   <title>
    <key>ru</key>
    <value>Выбор по начислению</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Choice by accrual</value>
   </title>
   <id>6</id>
   <use>

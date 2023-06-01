@@ -196,6 +196,10 @@
    <key>ru</key>
    <value>Скопировать количество как...</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Copy quantity as</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>String</types>
@@ -217,6 +221,10 @@
   <title>
    <key>ru</key>
    <value>Скопировать выбранные строки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Copy selected rows</value>
   </title>
   <id>2</id>
   <valueType>

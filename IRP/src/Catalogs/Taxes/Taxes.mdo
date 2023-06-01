@@ -343,6 +343,10 @@
    <key>ru</key>
    <value>Тип транзакции</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction types</value>
+  </synonym>
   <attributes uuid="1ef75181-7070-40d7-bc96-216189698656">
    <name>DocumentName</name>
    <synonym>
@@ -451,6 +455,10 @@
   <synonym>
    <key>ru</key>
    <value>Выбрать тип транзации</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Choice transaction types</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

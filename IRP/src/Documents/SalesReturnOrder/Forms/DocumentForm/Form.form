@@ -1543,8 +1543,57 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListQuantityIsFixed</name>
+     <id>583</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.QuantityIsFixed</segments>
+     </dataPath>
+     <titleLocation>None</titleLocation>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListQuantityIsFixedOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>ItemListQuantityIsFixedExtendedTooltip</name>
+      <id>585</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListQuantityIsFixedContextMenu</name>
+      <id>584</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListQuantityInBaseUnit</name>
      <id>407</id>
+     <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
@@ -1552,6 +1601,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.ItemList.QuantityInBaseUnit</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListQuantityInBaseUnitOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>ItemListQuantityInBaseUnitExtendedTooltip</name>
       <id>409</id>
@@ -2577,6 +2630,36 @@
        </extInfo>
       </extendedTooltip>
       <commandName>Form.Command.EditCurrencies</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>EditQuantityInBaseUnit</name>
+      <id>581</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditQuantityInBaseUnitExtendedTooltip</name>
+       <id>582</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditQuantityInBaseUnit</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -6031,6 +6114,35 @@
    </handler>
   </action>
   <modifiesStoredData>true</modifiesStoredData>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditQuantityInBaseUnit</name>
+  <title>
+   <key>en</key>
+   <value>Edit quantity in base unit</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить количество в осн. ед. изм.</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit quantity in base unit</value>
+  </title>
+  <id>14</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Calculator</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditQuantityInBaseUnit</name>
+   </handler>
+  </action>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

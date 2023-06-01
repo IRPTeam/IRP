@@ -2981,6 +2981,10 @@
    <key>ru</key>
    <value>Авансы розничных покупателей</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Advance from retail customers</value>
+  </synonym>
   <attributes uuid="ecd696cc-4931-40e1-bb27-dea0270c2760">
    <name>Key</name>
    <synonym>
@@ -3084,6 +3088,10 @@
   <synonym>
    <key>ru</key>
    <value>Выплата зарплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Salary payment</value>
   </synonym>
   <attributes uuid="6ecb84ef-eb5f-4c58-a81e-294fe8e59fbe">
    <name>Key</name>

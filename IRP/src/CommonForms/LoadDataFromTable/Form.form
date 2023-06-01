@@ -125,6 +125,10 @@
       <key>ru</key>
       <value>Дополнительные поля</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Additional fields</value>
+     </title>
      <extendedTooltip>
       <name>GroupAdditionalFieldsExtendedTooltip</name>
       <id>64</id>
@@ -1069,6 +1073,10 @@
    <key>ru</key>
    <value>Итоговый табличный документ</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Result spreadsheet</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>SpreadsheetDocument</types>
@@ -1144,6 +1152,10 @@
   <title>
    <key>ru</key>
    <value>Показать картинки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Show image</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1374,6 +1386,10 @@
   <title>
    <key>ru</key>
    <value>Дополнительные поля</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Additional fields</value>
   </title>
   <id>21</id>
   <valueType/>

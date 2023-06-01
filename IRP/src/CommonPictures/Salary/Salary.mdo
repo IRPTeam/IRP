@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Зарплата</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Salary</value>
+ </synonym>
 </mdclass:CommonPicture>

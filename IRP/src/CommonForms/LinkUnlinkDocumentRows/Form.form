@@ -4949,15 +4949,15 @@
    <name>QuantityInBaseUnit</name>
    <title>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </title>
    <id>47</id>
    <valueType>
@@ -5583,15 +5583,15 @@
    <name>QuantityInBaseUnit</name>
    <title>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </title>
    <id>63</id>
    <valueType>
@@ -6244,15 +6244,15 @@
    <name>QuantityInBaseUnit</name>
    <title>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </title>
    <id>63</id>
    <valueType>

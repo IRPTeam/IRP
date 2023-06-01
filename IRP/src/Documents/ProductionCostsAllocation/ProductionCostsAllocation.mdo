@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Распределение производственных затрат</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Production costs allocation</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ProductionCostsAllocation.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -55,6 +59,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Распределения производственных затрат</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Production costs allocations</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -211,6 +219,10 @@
    <key>ru</key>
    <value>Список себестоимости производства</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Production costs list</value>
+  </synonym>
   <attributes uuid="c34e7aca-0893-4443-be05-fef01fe4abc3">
    <name>Key</name>
    <synonym>
@@ -347,6 +359,10 @@
    <key>ru</key>
    <value>Список тайминга производства</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Production durations list</value>
+  </synonym>
   <attributes uuid="5cbaacfa-b40a-4319-b53a-880052050497">
    <name>Key</name>
    <synonym>
@@ -457,6 +473,10 @@
    <synonym>
     <key>ru</key>
     <value>Время</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Duration</value>
    </synonym>
    <type>
     <types>Number</types>

@@ -135,6 +135,10 @@
    <key>ru</key>
    <value>Группа код</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Group code</value>
+  </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
    <id>8</id>
@@ -263,6 +267,10 @@
    <key>ru</key>
    <value>Номер телефона</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Phone number</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>String</types>
@@ -287,6 +295,10 @@
    <key>ru</key>
    <value>Отправленный код</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Sended code</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>Number</types>
@@ -310,6 +322,10 @@
   <title>
    <key>ru</key>
    <value>Дата отправки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sended date</value>
   </title>
   <id>4</id>
   <valueType>
@@ -386,6 +402,10 @@
    <key>ru</key>
    <value>Предопределенный текст</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Predefined text</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>String</types>
@@ -407,6 +427,10 @@
   <title>
    <key>ru</key>
    <value>Повторить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Retry</value>
   </title>
   <id>1</id>
   <use>

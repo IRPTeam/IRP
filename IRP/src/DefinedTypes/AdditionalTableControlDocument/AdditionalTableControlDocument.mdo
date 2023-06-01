@@ -12,6 +12,10 @@
   <key>ru</key>
   <value>Дополнительный контроль таблиц документ</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Additional table control document</value>
+ </synonym>
  <type>
   <types>DocumentRef.RetailSalesReceipt</types>
   <types>DocumentRef.GoodsReceipt</types>

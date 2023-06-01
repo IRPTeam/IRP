@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Выбрать основание для розничного возврата</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Selection retail basis for return</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -414,6 +414,10 @@
    <key>ru</key>
    <value>Часовой пояс</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Time zone</value>
+  </title>
   <extendedTooltip>
    <name>GroupTimeZoneExtendedTooltip</name>
    <id>32</id>
@@ -669,6 +673,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <key>ru</key>
    <value>Часовой пояс базы данных</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Info base time zone</value>
+  </title>
   <id>4</id>
   <valueType>
    <types>String</types>
@@ -690,6 +698,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   <title>
    <key>ru</key>
    <value>Часовой пояс текущей базы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Current database time zone</value>
   </title>
   <id>5</id>
   <valueType>
@@ -713,6 +725,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <key>ru</key>
    <value>Часовой пояс текущего сеанса</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Current session time zone</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>String</types>
@@ -734,6 +750,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   <title>
    <key>ru</key>
    <value>Время текущей базы данных</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Current database time</value>
   </title>
   <id>7</id>
   <valueType>
@@ -757,6 +777,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <key>ru</key>
    <value>Время текущего сеанса</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Current session time</value>
+  </title>
   <id>8</id>
   <valueType>
    <types>Date</types>
@@ -778,6 +802,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   <title>
    <key>ru</key>
    <value>Время компьютера текущего пользователя</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Current user PC time</value>
   </title>
   <id>9</id>
   <valueType>
@@ -801,6 +829,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <key>ru</key>
    <value>Часовой пояс сеанса</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Session time zone</value>
+  </title>
   <id>10</id>
   <valueType>
    <types>String</types>
@@ -822,6 +854,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   <title>
    <key>ru</key>
    <value>Обновить данные по времени</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Update time info</value>
   </title>
   <id>1</id>
   <use>

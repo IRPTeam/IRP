@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Адреса</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Addresses</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Addresses.StandardAttribute.Code</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>

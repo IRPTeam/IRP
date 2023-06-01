@@ -983,15 +983,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1148,6 +1148,32 @@
     <key>ru</key>
     <value>Есть котроль кодов</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Is control code string</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ae18e96a-f9af-4023-88f8-c41e77dcd156">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
    <type>
     <types>Boolean</types>
    </type>
@@ -1268,6 +1294,10 @@
    <synonym>
     <key>ru</key>
     <value>Бонус</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Bonus</value>
    </synonym>
    <type>
     <types>DefinedType.typeSpecialOfferBonus</types>
@@ -1958,6 +1988,10 @@
     <key>ru</key>
     <value>RRN Код</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>RRN Code</value>
+   </synonym>
    <type>
     <types>String</types>
     <stringQualifiers>
@@ -1978,6 +2012,10 @@
    <synonym>
     <key>ru</key>
     <value>Информация по оплате</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Payment info</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2876,6 +2914,10 @@
    <key>ru</key>
    <value>Контрольные коды</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Control code strings</value>
+  </synonym>
   <attributes uuid="130f37c6-6f58-4912-8e04-c5fabf6cf4cf">
    <name>Key</name>
    <synonym>
@@ -2931,6 +2973,10 @@
    <synonym>
     <key>ru</key>
     <value>Код подтвержден</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Code is approved</value>
    </synonym>
    <type>
     <types>Boolean</types>

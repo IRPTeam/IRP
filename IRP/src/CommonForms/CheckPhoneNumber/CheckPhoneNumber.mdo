@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Проверка номера телефона</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Check phone number</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

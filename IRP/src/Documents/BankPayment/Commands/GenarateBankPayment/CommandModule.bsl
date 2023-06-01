@@ -226,11 +226,8 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	"SELECT
 	|	TableBasisDocument.Company,
 	|	TableBasisDocument.Branch,
-	|	TableBasisDocument.Account,
 	|	TableBasisDocument.Currency,
 	|	TableBasisDocument.Partner,
-	|	TableBasisDocument.FinancialMovementType,
-	|	TableBasisDocument.PlaningTransactionBasis,
 	|	TableBasisDocument.BasisDocument
 	|INTO TableBasisDocument
 	|FROM
@@ -243,36 +240,26 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS TransactionType,
 	|	R3027B_EmployeeCashAdvanceBalance.Company,
 	|	R3027B_EmployeeCashAdvanceBalance.Branch,
-	|	R3027B_EmployeeCashAdvanceBalance.Account,
 	|	R3027B_EmployeeCashAdvanceBalance.Currency,
 	|	R3027B_EmployeeCashAdvanceBalance.Partner,
-	|	R3027B_EmployeeCashAdvanceBalance.FinancialMovementType,
-	|	R3027B_EmployeeCashAdvanceBalance.PlaningTransactionBasis,
 	|	-R3027B_EmployeeCashAdvanceBalance.AmountBalance AS Amount,
 	|	TableBasisDocument.BasisDocument
 	|FROM
-	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Account, Currency, Partner,
-	|		FinancialMovementType, PlaningTransactionBasis) IN
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Currency, Partner) IN
 	|		(SELECT
 	|			TableBasisDocument.Company,
 	|			TableBasisDocument.Branch,
-	|			TableBasisDocument.Account,
 	|			TableBasisDocument.Currency,
-	|			TableBasisDocument.Partner,
-	|			TableBasisDocument.FinancialMovementType,
-	|			TableBasisDocument.PlaningTransactionBasis
+	|			TableBasisDocument.Partner
 	|		FROM
 	|			TableBasisDocument AS TableBasisDocument)
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND Account.Type = VALUE(Enum.CashAccountTypes.Bank)) AS R3027B_EmployeeCashAdvanceBalance
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		R3027B_EmployeeCashAdvanceBalance
 	|		INNER JOIN TableBasisDocument AS TableBasisDocument
 	|		ON TableBasisDocument.Company = R3027B_EmployeeCashAdvanceBalance.Company
 	|		AND TableBasisDocument.Branch = R3027B_EmployeeCashAdvanceBalance.Branch
-	|		AND TableBasisDocument.Account = R3027B_EmployeeCashAdvanceBalance.Account
 	|		AND TableBasisDocument.Currency = R3027B_EmployeeCashAdvanceBalance.Currency
 	|		AND TableBasisDocument.Partner = R3027B_EmployeeCashAdvanceBalance.Partner
-	|		AND TableBasisDocument.FinancialMovementType = R3027B_EmployeeCashAdvanceBalance.FinancialMovementType
-	|		AND TableBasisDocument.PlaningTransactionBasis = R3027B_EmployeeCashAdvanceBalance.PlaningTransactionBasis
 	|WHERE
 	|	R3027B_EmployeeCashAdvanceBalance.AmountBalance < 0";
 	
@@ -280,11 +267,8 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	TableBasisDocument = New ValueTable();
 	TableBasisDocument.Columns.Add("Company"  , AccReg.Company.Type);
 	TableBasisDocument.Columns.Add("Branch"   , AccReg.Branch.Type);
-	TableBasisDocument.Columns.Add("Account"  , AccReg.Account.Type);
 	TableBasisDocument.Columns.Add("Currency" , AccReg.Currency.Type);
 	TableBasisDocument.Columns.Add("Partner"  , AccReg.Partner.Type);
-	TableBasisDocument.Columns.Add("FinancialMovementType"  , AccReg.FinancialMovementType.Type);
-	TableBasisDocument.Columns.Add("PlaningTransactionBasis", AccReg.PlaningTransactionBasis.Type);
 	TableBasisDocument.Columns.Add("BasisDocument"          , New TypeDescription("DocumentRef.EmployeeCashAdvance"));
 		
 	For Each Basis In ArrayOfBasisDocuments Do
@@ -292,11 +276,8 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 			NewRow = TableBasisDocument.Add();
 			NewRow.Company  = Basis.Company;
 			NewRow.Branch   = Basis.Branch;
-			NewRow.Account  = Row.Account;
 			NewRow.Currency = Row.Currency;
 			NewRow.Partner  = Basis.Partner;
-			NewRow.FinancialMovementType   = Row.FinancialMovementType;
-			NewRow.PlaningTransactionBasis = Row.PlaningTransactionBasis;
 			NewRow.BasisDocument = Basis;
 		EndDo;
 	EndDo;

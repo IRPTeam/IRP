@@ -100,6 +100,10 @@
    <key>ru</key>
    <value>Транзакция отменена</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Transaction was canceled</value>
+  </title>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
@@ -439,6 +443,10 @@
    <key>ru</key>
    <value>RNN Код</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>RRNCode</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>String</types>
@@ -536,6 +544,10 @@
    <key>ru</key>
    <value>Интерактивно</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Interactive</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>Boolean</types>
@@ -586,6 +598,10 @@
    <key>ru</key>
    <value>Сторно</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Revers</value>
+  </title>
   <id>2</id>
   <use>
    <common>true</common>
@@ -610,6 +626,10 @@
   <title>
    <key>ru</key>
    <value>Оплатить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Pay</value>
   </title>
   <id>3</id>
   <use>

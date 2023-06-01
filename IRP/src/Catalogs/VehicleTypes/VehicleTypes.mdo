@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Виды транспортных средств</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vehicle types</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.VehicleTypes.StandardAttribute.Code</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -54,6 +58,10 @@
   <key>ru</key>
   <value>Вид транспортного средства</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Vehicle type</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Vehicle types</value>
@@ -61,6 +69,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Виды транспортных средств</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Vehicle types</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>

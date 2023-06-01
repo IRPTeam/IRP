@@ -1505,8 +1505,57 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListQuantityIsFixed</name>
+     <id>446</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.QuantityIsFixed</segments>
+     </dataPath>
+     <titleLocation>None</titleLocation>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListQuantityIsFixedOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>ItemListQuantityIsFixedExtendedTooltip</name>
+      <id>448</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListQuantityIsFixedContextMenu</name>
+      <id>447</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListQuantityInBaseUnit</name>
      <id>224</id>
+     <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
@@ -1514,6 +1563,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.ItemList.QuantityInBaseUnit</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListQuantityInBaseUnitOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>ItemListQuantityInBaseUnitExtendedTooltip</name>
       <id>226</id>
@@ -1858,6 +1911,36 @@
       <commandName>Form.Command.LinkUnlinkBasisDocuments</commandName>
       <representation>Auto</representation>
       <width>3</width>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>EditQuantityInBaseUnit</name>
+      <id>444</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditQuantityInBaseUnitExtendedTooltip</name>
+       <id>445</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditQuantityInBaseUnit</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
@@ -4073,6 +4156,10 @@
       <key>ru</key>
       <value>Группа верх лево</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Group top left</value>
+     </title>
      <extendedTooltip>
       <name>GroupTopLeftExtendedTooltip</name>
       <id>430</id>
@@ -4214,6 +4301,10 @@
       <key>ru</key>
       <value>Группа центр</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Group to middle</value>
+     </title>
      <extendedTooltip>
       <name>GroupTopMiddleExtendedTooltip</name>
       <id>434</id>
@@ -4354,6 +4445,10 @@
      <title>
       <key>ru</key>
       <value>Группа верх право</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Group top right</value>
      </title>
      <extendedTooltip>
       <name>GroupTopRightExtendedTooltip</name>
@@ -4644,6 +4739,10 @@
        <key>ru</key>
        <value>Группа доставка лево</value>
       </title>
+      <title>
+       <key>tr</key>
+       <value>Group shipment left</value>
+      </title>
       <extendedTooltip>
        <name>GroupShipmentLeftExtendedTooltip</name>
        <id>436</id>
@@ -4682,6 +4781,10 @@
        <title>
         <key>ru</key>
         <value>Адрес грузоотправителя</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Ship from address</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -4740,6 +4843,10 @@
        <title>
         <key>ru</key>
         <value>Адрес получателя</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Ship to address</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -4851,6 +4958,10 @@
        <key>ru</key>
        <value>Группа доставка право</value>
       </title>
+      <title>
+       <key>tr</key>
+       <value>Group shipment right</value>
+      </title>
       <extendedTooltip>
        <name>GroupShipmentRightExtendedTooltip</name>
        <id>438</id>
@@ -4889,6 +5000,10 @@
       <key>ru</key>
       <value>Группа поставка верх</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Group shipment top</value>
+     </title>
      <extendedTooltip>
       <name>GroupShipmentTopExtendedTooltip</name>
       <id>440</id>
@@ -4926,6 +5041,10 @@
     <title>
      <key>ru</key>
      <value>Транспортировка</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Shipment</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -5708,6 +5827,35 @@
     <name>ShowHiddenTables</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditQuantityInBaseUnit</name>
+  <title>
+   <key>en</key>
+   <value>Edit quantity in base unit</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить количество в осн. ед. изм.</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit quantity in base unit</value>
+  </title>
+  <id>9</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Calculator</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditQuantityInBaseUnit</name>
+   </handler>
+  </action>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

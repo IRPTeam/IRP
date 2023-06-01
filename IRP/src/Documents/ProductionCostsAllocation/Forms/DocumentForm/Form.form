@@ -1279,6 +1279,10 @@
     <key>ru</key>
     <value>Себестоимость</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Costs</value>
+   </title>
    <extendedTooltip>
     <name>GroupCostsExtendedTooltip</name>
     <id>429</id>
@@ -2003,6 +2007,10 @@
     <key>ru</key>
     <value>Тайминг</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Durations</value>
+   </title>
    <extendedTooltip>
     <name>GroupDurationsExtendedTooltip</name>
     <id>431</id>
@@ -2533,6 +2541,10 @@
    <key>ru</key>
    <value>Заполнить тайминг</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fill durations</value>
+  </title>
   <id>9</id>
   <use>
    <common>true</common>
@@ -2558,6 +2570,10 @@
    <key>ru</key>
    <value>Заполнить себестоимость</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fill costs</value>
+  </title>
   <id>10</id>
   <use>
    <common>true</common>
@@ -2582,6 +2598,10 @@
   <title>
    <key>ru</key>
    <value>Распределить суммы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Allocate amounts</value>
   </title>
   <id>11</id>
   <use>

@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Типы транзакций производства</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Production transaction types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7fa684b5-c180-48e9-9a36-8d0480e50a71">
@@ -40,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Перепроизводство</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Repacking</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

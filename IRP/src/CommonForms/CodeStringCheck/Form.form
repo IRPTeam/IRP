@@ -210,6 +210,10 @@
    <key>ru</key>
    <value>Просканируйте контрольные коды</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Scan control code</value>
+  </title>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -294,6 +298,10 @@
    <title>
     <key>ru</key>
     <value>Просканированые коды</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Scanned codes</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -762,6 +770,10 @@
    <key>ru</key>
    <value>Номер строки в документе</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Line in document</value>
+  </title>
   <id>5</id>
   <valueType>
    <types>Number</types>
@@ -786,6 +798,10 @@
    <key>ru</key>
    <value>Текущие коды</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Current codes</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>ValueTable</types>
@@ -805,6 +821,10 @@
    <title>
     <key>ru</key>
     <value>Просканированые коды</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Scanned codes</value>
    </title>
    <id>8</id>
    <valueType>
@@ -827,6 +847,10 @@
    <title>
     <key>ru</key>
     <value>Код подтвержден</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Code is approved</value>
    </title>
    <id>9</id>
    <valueType>
@@ -904,6 +928,10 @@
   <title>
    <key>ru</key>
    <value>Проверить коды</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Check KM</value>
   </title>
   <id>3</id>
   <use>

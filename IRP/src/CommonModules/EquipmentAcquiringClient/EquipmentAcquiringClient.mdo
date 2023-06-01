@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Торговое оборудование эквайринг клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Equipment acquiring client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

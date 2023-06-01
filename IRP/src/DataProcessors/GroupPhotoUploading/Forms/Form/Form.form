@@ -297,6 +297,10 @@
    <key>ru</key>
    <value>Группа Путь</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Group of path</value>
+  </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>GroupPathExtendedTooltip</name>
@@ -452,6 +456,10 @@
      <key>ru</key>
      <value>С</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>S</value>
+    </title>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -511,6 +519,10 @@
     <title>
      <key>ru</key>
      <value>Ф</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>F</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -984,6 +996,10 @@
    <key>ru</key>
    <value>Группа Файл область</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Group of File Area</value>
+  </title>
   <extendedTooltip>
    <name>GroupFileAreaExtendedTooltip</name>
    <id>46</id>
@@ -1059,6 +1075,10 @@
    <key>ru</key>
    <value>Путь к каталогу</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Folder path</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>String</types>
@@ -1081,6 +1101,10 @@
    <key>ru</key>
    <value>Таблица файлов</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Files table</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>ValueTable</types>
@@ -1100,6 +1124,10 @@
    <title>
     <key>ru</key>
     <value>Путь к файлу</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>File path</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1176,6 +1204,10 @@
     <key>ru</key>
     <value>Размер (Мб)</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Size (Mb)</value>
+   </title>
    <id>8</id>
    <valueType>
     <types>Number</types>
@@ -1228,6 +1260,10 @@
    <title>
     <key>ru</key>
     <value>Ссылка файла</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>File ref</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1304,6 +1340,10 @@
     <key>ru</key>
     <value>Сохранен</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Is saved</value>
+   </title>
    <id>17</id>
    <valueType>
     <types>Boolean</types>
@@ -1324,6 +1364,10 @@
    <title>
     <key>ru</key>
     <value>Файл создан</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Is file create</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1372,6 +1416,10 @@
   <title>
    <key>ru</key>
    <value>Настройки интеграции изображений</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Picture integration settings</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -1443,6 +1491,10 @@
    <key>ru</key>
    <value>Включить загрузку</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Enable to load</value>
+  </title>
   <id>11</id>
   <valueType>
    <types>Boolean</types>
@@ -1463,6 +1515,10 @@
   <title>
    <key>ru</key>
    <value>Настройки подключения изображений</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Picture connection setting</value>
   </title>
   <id>15</id>
   <valueType/>
@@ -1535,6 +1591,10 @@
    <key>ru</key>
    <value>Размер превью</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Preview scale size</value>
+  </title>
   <id>22</id>
   <valueType>
    <types>Number</types>
@@ -1559,6 +1619,10 @@
   <title>
    <key>ru</key>
    <value>Выбрать путь</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Select path</value>
   </title>
   <id>1</id>
   <use>
@@ -1585,6 +1649,10 @@
    <key>ru</key>
    <value>Анализировать каталог</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Analize folder</value>
+  </title>
   <id>2</id>
   <use>
    <common>true</common>
@@ -1610,6 +1678,10 @@
    <key>ru</key>
    <value>Найти владельца</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Find owner</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -1634,6 +1706,10 @@
   <title>
    <key>ru</key>
    <value>Загрузить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Load</value>
   </title>
   <id>4</id>
   <use>

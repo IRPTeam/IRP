@@ -434,6 +434,10 @@
    <key>ru</key>
    <value>Вид отгрузки</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Shipment mode</value>
+  </synonym>
   <type>
    <types>EnumRef.RetailShipmentConfirmationTransactionTypes</types>
   </type>
@@ -945,15 +949,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1081,6 +1085,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="ce989150-7dda-4486-b818-8420c3ea632b">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="46bdc8b0-f18a-4783-ad94-9d5dfcc5f136">
   <producedTypes>
@@ -1193,6 +1219,10 @@
    <synonym>
     <key>ru</key>
     <value>Бонус</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Bonus</value>
    </synonym>
    <type>
     <types>DefinedType.typeSpecialOfferBonus</types>

@@ -334,6 +334,10 @@
      <key>ru</key>
      <value>Помеченные объекты будут обработаны</value>
     </toolTip>
+    <toolTip>
+     <key>tr</key>
+     <value>Marked objects will be processed by group operations</value>
+    </toolTip>
     <extendedTooltip>
      <name>PropertiesTableMarkedExtendedTooltip</name>
      <id>77</id>
@@ -491,6 +495,10 @@
      <key>ru</key>
      <value>Помеченные объекты будут записаны в базу данных</value>
     </toolTip>
+    <toolTip>
+     <key>tr</key>
+     <value>Marked objects will be written to the database</value>
+    </toolTip>
     <extendedTooltip>
      <name>PropertiesTableisModifiedExtendedTooltip</name>
      <id>19</id>
@@ -539,6 +547,10 @@
    <title>
     <key>ru</key>
     <value>Таблица настроек левая группа</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Properties table left group</value>
    </title>
    <extendedTooltip>
     <name>PropertiesTableLeftGroupExtendedTooltip</name>
@@ -1460,6 +1472,10 @@
    <key>ru</key>
    <value>Это режим таблицы</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Is table mode</value>
+  </title>
   <id>11</id>
   <valueType>
    <types>Boolean</types>
@@ -1770,6 +1786,10 @@
   <title>
    <key>ru</key>
    <value>Отработать код для выбранных строк</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Run a code for marked rows</value>
   </title>
   <id>17</id>
   <use>

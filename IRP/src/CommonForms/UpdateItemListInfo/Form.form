@@ -76,6 +76,10 @@
    <key>ru</key>
    <value>Командная панель</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Command bar</value>
+  </title>
   <extendedTooltip>
    <name>GroupCommandBarExtendedTooltip</name>
    <id>84</id>

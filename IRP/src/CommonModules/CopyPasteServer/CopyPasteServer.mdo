@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Скопировать вставить сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Copy paste server</value>
+ </synonym>
  <server>true</server>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
  <serverCall>true</serverCall>

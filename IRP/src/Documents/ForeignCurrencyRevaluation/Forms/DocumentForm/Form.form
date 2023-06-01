@@ -516,6 +516,10 @@
     <key>ru</key>
     <value>Доход</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Revenue</value>
+   </title>
    <extendedTooltip>
     <name>GroupRevenueExtendedTooltip</name>
     <id>15</id>

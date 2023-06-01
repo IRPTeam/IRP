@@ -266,6 +266,10 @@
    <key>ru</key>
    <value>Грузоотправитель</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship from</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -284,6 +288,10 @@
   <synonym>
    <key>ru</key>
    <value>Адрес грузоотправителя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship from address</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -304,6 +312,10 @@
    <key>ru</key>
    <value>Грузополучатель</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship to</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -323,6 +335,10 @@
    <key>ru</key>
    <value>Адрес получателя</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship to address</value>
+  </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
   </type>
@@ -341,6 +357,10 @@
   <synonym>
    <key>ru</key>
    <value>Перевозчик</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Carrier</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -383,6 +403,10 @@
   <synonym>
    <key>ru</key>
    <value>Транспорт</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vehicle</value>
   </synonym>
   <type>
    <types>CatalogRef.Vehicles</types>
@@ -602,15 +626,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -702,6 +726,28 @@
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="500778be-7f54-4e2b-b513-c2aef334608d">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

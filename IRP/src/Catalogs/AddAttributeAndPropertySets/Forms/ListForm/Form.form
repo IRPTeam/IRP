@@ -566,6 +566,10 @@ FROM
    <key>ru</key>
    <value>Заполнить наименования по умолчанию</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fill default descriptions</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>

@@ -232,6 +232,10 @@
    <key>ru</key>
    <value>Группа Серии номенклатуры</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Group of SerialLot Number</value>
+  </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>GroupSerialLotNumberExtendedTooltip</name>
@@ -938,6 +942,10 @@
   <title>
    <key>ru</key>
    <value>Необходима серия номенклатуры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Need serial lot number</value>
   </title>
   <id>11</id>
   <valueType>

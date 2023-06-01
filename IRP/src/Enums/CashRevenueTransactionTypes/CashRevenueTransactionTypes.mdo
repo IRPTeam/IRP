@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Виды операций прочих доходов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cash revenue transaction types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="fb3a9311-4137-456e-ab8a-c2b30ba76555">
@@ -26,6 +30,10 @@
    <key>ru</key>
    <value>Приход текущей компании</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Current company revenue</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="b37f8a54-8d3c-487d-a756-41c2056ebe59">
   <name>OtherCompanyRevenue</name>
@@ -36,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Приход другой компании</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Other company revenue</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

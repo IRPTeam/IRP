@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>T9510 Штатное расписание</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9510 Staffing</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <defaultRecordForm>InformationRegister.T9510S_Staffing.Form.RecordForm</defaultRecordForm>
@@ -32,6 +36,10 @@
   <synonym>
    <key>ru</key>
    <value>Уволен</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fired</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -105,6 +113,10 @@
   <synonym>
    <key>ru</key>
    <value>Должность</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Position</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>

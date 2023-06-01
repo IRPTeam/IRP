@@ -234,6 +234,10 @@
    <key>ru</key>
    <value>Замена прав</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Change right</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

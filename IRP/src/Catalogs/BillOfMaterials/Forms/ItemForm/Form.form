@@ -2500,6 +2500,10 @@
    <key>ru</key>
    <value>Разблокировать форму</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Unlock form</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>

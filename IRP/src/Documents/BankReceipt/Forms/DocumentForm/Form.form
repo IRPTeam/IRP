@@ -3923,6 +3923,10 @@
    <key>ru</key>
    <value>Оплата по карте</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Pay by card</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>

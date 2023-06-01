@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>T7051 Детализация производственного тайминга</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T7051 Production duration details</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
@@ -32,6 +36,10 @@
   <synonym>
    <key>ru</key>
    <value>Время</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Duration</value>
   </synonym>
   <type>
    <types>Number</types>

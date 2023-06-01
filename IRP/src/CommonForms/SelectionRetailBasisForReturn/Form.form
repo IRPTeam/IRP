@@ -875,6 +875,10 @@ HAVING
        <key>ru</key>
        <value>Фискальные данные</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Fiscal data</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -893,6 +897,10 @@ HAVING
        </content>
        <content>
         <key>ru</key>
+        <value>ND=15; NFD=2; NZ=</value>
+       </content>
+       <content>
+        <key>tr</key>
         <value>ND=15; NFD=2; NZ=</value>
        </content>
       </values>
@@ -958,6 +966,10 @@ HAVING
    <key>ru</key>
    <value>Фискальный номер</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fiscal number</value>
+  </title>
   <id>4</id>
   <valueType>
    <types>String</types>
@@ -979,6 +991,10 @@ HAVING
   <title>
    <key>ru</key>
    <value>Выбрать</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Choose</value>
   </title>
   <id>1</id>
   <use>

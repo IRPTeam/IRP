@@ -294,28 +294,6 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="214a28d8-ea8d-4f99-86a9-580b68eb7e26">
-   <name>Account</name>
-   <synonym>
-    <key>en</key>
-    <value>Account</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Касса/банк</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Hesap</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.CashAccounts</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <attributes uuid="a2516870-e1c0-4993-aebe-5d1e9d9615d5">
    <name>NetAmount</name>
    <synonym>
@@ -425,28 +403,6 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e0695542-a09b-4adc-a7f9-6d4fa82a9e5a">
-   <name>FinancialMovementType</name>
-   <synonym>
-    <key>en</key>
-    <value>Financial movement type</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Статья движений денежных средств</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Finans hareket tipi</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.ExpenseAndRevenueTypes</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <attributes uuid="191761d7-4c8f-42a9-9fa3-b746e3c9a020">
    <name>DontCalculateRow</name>
    <synonym>
@@ -463,28 +419,6 @@
    </synonym>
    <type>
     <types>Boolean</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="f9aae02c-e1ce-4ce8-9374-9027c3b3960a">
-   <name>PlaningTransactionBasis</name>
-   <synonym>
-    <key>en</key>
-    <value>Planing transaction basis</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Плановый документ-основания</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Planlama evrakı</value>
-   </synonym>
-   <type>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

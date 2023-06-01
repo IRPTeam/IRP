@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Виды транзакций приемки розничной продажи</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Retail goods receipt transaction types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="f748c2c1-9dc5-4519-a21e-2f7054ec55b2">
@@ -25,6 +29,10 @@
   <synonym>
    <key>ru</key>
    <value>Курьер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Courier delivery</value>
   </synonym>
  </enumValues>
  <enumValues uuid="be987c52-cbaa-4092-8f5d-f4ac35c41c35">

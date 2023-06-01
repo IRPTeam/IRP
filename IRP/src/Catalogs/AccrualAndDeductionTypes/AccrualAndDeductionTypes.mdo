@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Виды начислений и удержаний</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accrual and deduction types</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <standardAttributes>
@@ -170,6 +174,10 @@
   <synonym>
    <key>ru</key>
    <value>ID Алгоритма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Algorithm ID</value>
   </synonym>
   <type>
    <types>String</types>

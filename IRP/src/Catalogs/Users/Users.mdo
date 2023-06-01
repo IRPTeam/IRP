@@ -321,6 +321,10 @@
    <key>ru</key>
    <value>Часовой пояс</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Time zone</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -342,6 +346,10 @@
   <synonym>
    <key>ru</key>
    <value>ID пользователя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>User ID</value>
   </synonym>
   <type>
    <types>DefinedType.typeBarcode</types>

@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Статьи затрат</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Expense types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="82328a39-43fb-4cca-a102-baebcadbd26c">
@@ -26,6 +30,10 @@
    <key>ru</key>
    <value>Основные расходы</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>General expenses</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="c3aa5289-b0c8-4584-b739-9f53f360d4d3">
   <name>ProductionCosts</name>
@@ -36,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Производственная себестоимость</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Production costs</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

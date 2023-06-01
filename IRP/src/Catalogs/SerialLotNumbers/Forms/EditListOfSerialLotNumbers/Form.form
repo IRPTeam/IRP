@@ -1705,6 +1705,10 @@
     <key>ru</key>
     <value>Код подтвержден</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Code is approved</value>
+   </title>
    <id>19</id>
    <valueType>
     <types>Boolean</types>

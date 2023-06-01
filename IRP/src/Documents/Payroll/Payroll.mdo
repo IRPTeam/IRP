@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Расчет зарплаты</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Payroll</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.Payroll.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -55,6 +59,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Расчеты зарплаты</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Payrolls</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -244,6 +252,10 @@
    <key>ru</key>
    <value>Выбор по форме начисления</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Choice by accrual form</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -260,6 +272,10 @@
   <synonym>
    <key>ru</key>
    <value>Список начислений</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Accrual list</value>
   </synonym>
   <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
    <name>Key</name>
@@ -322,6 +338,10 @@
     <key>ru</key>
     <value>Должность</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Position</value>
+   </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
    </type>
@@ -340,6 +360,10 @@
    <synonym>
     <key>ru</key>
     <value>Тип начислений</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Accrual type</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -439,6 +463,10 @@
    <key>ru</key>
    <value>Список удержаний</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Deduction list</value>
+  </synonym>
   <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
    <name>Key</name>
    <synonym>
@@ -500,6 +528,10 @@
     <key>ru</key>
     <value>Должность</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Position</value>
+   </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
    </type>
@@ -518,6 +550,10 @@
    <synonym>
     <key>ru</key>
     <value>Тип удержания</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Deduction type</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -639,6 +675,10 @@
    <key>ru</key>
    <value>Удержание аванса наличными список</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cash advance deduction list</value>
+  </synonym>
   <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
    <name>Key</name>
    <synonym>
@@ -688,75 +728,6 @@
     </value>
    </choiceParameters>
    <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="1f95c5ed-9663-49ec-b9cf-0715eb552152">
-   <name>FinancialMovementType</name>
-   <synonym>
-    <key>en</key>
-    <value>Financial movement type</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Статья движений денежных средств</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Finans hareket tipi</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.ExpenseAndRevenueTypes</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameters>
-    <name>Filter.IsFinancialMovementType</name>
-    <value xsi:type="core:BooleanValue">
-     <value>true</value>
-    </value>
-   </choiceParameters>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="687f0846-7389-42ca-80f0-e4df90643bfa">
-   <name>Account</name>
-   <synonym>
-    <key>en</key>
-    <value>Account</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Касса/банк</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Hesap</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.CashAccounts</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="a4e39745-c3f6-4c78-8e7f-a614f2d74605">
-   <name>PlaningTransactionBasis</name>
-   <synonym>
-    <key>en</key>
-    <value>Planing transaction basis</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Плановый документ-основания</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Planlama evrakı</value>
-   </synonym>
-   <type>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="6ad7ab39-7411-4cd6-8d68-28e2d561b8fc">

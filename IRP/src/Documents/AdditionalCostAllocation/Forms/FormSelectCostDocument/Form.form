@@ -644,6 +644,10 @@ GROUP BY
        <key>ru</key>
        <value>Сумма налогов</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>TaxAmount</value>
+      </content>
      </localValue>
     </title>
    </fields>

@@ -383,9 +383,6 @@ Function R3027B_EmployeeCashAdvance()
 		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Currency,
-		|	PaymentList.Account,
-		|	PaymentList.PlaningTransactionBasis,
-		|	PaymentList.FinancialMovementType,
 		|	PaymentList.TotalAmount - PaymentList.Commission AS Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM

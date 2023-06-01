@@ -822,6 +822,10 @@
        <key>ru</key>
        <value>Выполнять дополнительный контроль кодов в РМК</value>
       </toolTip>
+      <toolTip>
+       <key>tr</key>
+       <value>Do additional check by control string in POS</value>
+      </toolTip>
       <toolTipRepresentation>Button</toolTipRepresentation>
       <extendedTooltip>
        <name>ControlCodeStringExtendedTooltip</name>
@@ -870,6 +874,10 @@
       <key>ru</key>
       <value>Настройки учета</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Accounting settings</value>
+     </title>
      <extendedTooltip>
       <name>GroupAccountingSettingsExtendedTooltip</name>
       <id>171</id>
@@ -896,6 +904,10 @@
       <collapsedRepresentationTitle>
        <key>ru</key>
        <value>Настройки учета</value>
+      </collapsedRepresentationTitle>
+      <collapsedRepresentationTitle>
+       <key>tr</key>
+       <value>Accounting settings</value>
       </collapsedRepresentationTitle>
       <collapsed>true</collapsed>
       <representation>WeakSeparation</representation>

@@ -120,5 +120,9 @@
    <key>ru</key>
    <value>Провайдер SMS</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>SMS provider</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

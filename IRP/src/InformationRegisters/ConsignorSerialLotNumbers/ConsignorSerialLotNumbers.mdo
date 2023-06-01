@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>Серийные номера комитента</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Consignor serial lot numbers</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>

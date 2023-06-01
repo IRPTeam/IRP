@@ -210,6 +210,10 @@
    <key>ru</key>
    <value>Авто расчет скидок</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Auto calculate discount</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -228,6 +232,10 @@
   <synonym>
    <key>ru</key>
    <value>Игнорировать контроль кодов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ignore code string control</value>
   </synonym>
   <type>
    <types>Boolean</types>

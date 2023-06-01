@@ -176,6 +176,10 @@
      <key>ru</key>
      <value>Шапка группа</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Top Group</value>
+    </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
      <id>146</id>
@@ -576,6 +580,10 @@
       <title>
        <key>ru</key>
        <value>Третяя линия группа Товаров</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>The third line of the ItemList group</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -1955,6 +1963,10 @@ WHERE
    <key>ru</key>
    <value>Спрятать картинку</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Hide decoration</value>
+  </title>
   <id>5</id>
   <valueType>
    <types>Boolean</types>
@@ -2066,6 +2078,10 @@ WHERE
   </title>
   <title>
    <key>ru</key>
+   <value> +1 </value>
+  </title>
+  <title>
+   <key>tr</key>
    <value> +1 </value>
   </title>
   <id>4</id>

@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Проверка контролируемых кодов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Code string check</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

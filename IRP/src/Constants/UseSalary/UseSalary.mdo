@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Использовать - Расчет зарплаты</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Use salary</value>
+ </synonym>
  <type>
   <types>Boolean</types>
  </type>

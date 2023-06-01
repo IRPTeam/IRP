@@ -165,6 +165,10 @@
    <key>ru</key>
    <value>Номер релиза</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Revision number</value>
+  </synonym>
   <type>
    <types>Number</types>
    <numberQualifiers>

@@ -151,6 +151,10 @@
    <key>ru</key>
    <value>Вставить количество как...</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Paste quantity as</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>String</types>

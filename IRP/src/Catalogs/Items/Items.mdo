@@ -247,6 +247,10 @@
    <key>ru</key>
    <value>Контролировать коды</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Control code string</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -257,6 +261,10 @@
   <toolTip>
    <key>ru</key>
    <value>Контроль кодов при продаже</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Conrol code string before sale on POS</value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

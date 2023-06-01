@@ -385,6 +385,10 @@
       <key>ru</key>
       <value>Сериализовано</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Serialized</value>
+     </title>
      <extendedTooltip>
       <name>PageSerializedInfoExtendedTooltip</name>
       <id>34</id>
@@ -471,6 +475,10 @@
      <title>
       <key>ru</key>
       <value>В архиве</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Archived</value>
      </title>
      <extendedTooltip>
       <name>PageArchivedInfoExtendedTooltip</name>
@@ -717,6 +725,10 @@
     <key>ru</key>
     <value>Импорт</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Import</value>
+   </title>
    <extendedTooltip>
     <name>PageImportExtendedTooltip</name>
     <id>41</id>
@@ -837,6 +849,10 @@
     <title>
      <key>ru</key>
      <value>Группа найденных ссылок</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Group Find Ref</value>
     </title>
     <extendedTooltip>
      <name>GroupFindRefExtendedTooltip</name>
@@ -1299,6 +1315,10 @@
     <key>ru</key>
     <value>Найти ссылки</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Find refs</value>
+   </title>
    <extendedTooltip>
     <name>PageFindRefExtendedTooltip</name>
     <id>56</id>
@@ -1484,6 +1504,10 @@
    <key>ru</key>
    <value>Форма элементов</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Form items</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>ValueTable</types>
@@ -1530,6 +1554,10 @@
     <key>ru</key>
     <value>URL</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>URL</value>
+   </title>
    <id>4</id>
    <valueType>
     <types>String</types>
@@ -1553,6 +1581,10 @@
    <key>ru</key>
    <value>Логи</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Logs</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>String</types>
@@ -1575,6 +1607,10 @@
    <key>ru</key>
    <value>Разрежить импорт в рабочую базу</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Import data to product data base is granted</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>Boolean</types>
@@ -1596,6 +1632,10 @@
    <key>ru</key>
    <value>Ссылка для поиска</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Search ref</value>
+  </title>
   <id>8</id>
   <valueType>
    <types>AnyRef</types>
@@ -1616,6 +1656,10 @@
   <title>
    <key>ru</key>
    <value>Найденные ссылки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Found ref list</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1662,6 +1706,10 @@
     <key>ru</key>
     <value>Имя метаданных</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Metadata name</value>
+   </title>
    <id>11</id>
    <valueType>
     <types>String</types>
@@ -1683,6 +1731,10 @@
    <title>
     <key>ru</key>
     <value>Отбор</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Filter</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1735,6 +1787,10 @@
    <key>ru</key>
    <value>Сериализовать</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Serialize</value>
+  </title>
   <id>2</id>
   <toolTip>
    <key>en</key>
@@ -1743,6 +1799,10 @@
   <toolTip>
    <key>ru</key>
    <value>Сериализовать все выделенные строки в выбранной форме</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Serialize all selected rows in selected form</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1764,6 +1824,10 @@
    <key>ru</key>
    <value>Импорт</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Import</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -1784,6 +1848,10 @@
   <title>
    <key>ru</key>
    <value>Поиск ссылок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Find ref</value>
   </title>
   <id>4</id>
   <use>

@@ -432,15 +432,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -448,6 +448,28 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a0894ecd-eab8-44ac-9d55-1890af354491">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
  <tabularSections uuid="99202154-ddde-48d9-a457-7fc2b5eec6d9">

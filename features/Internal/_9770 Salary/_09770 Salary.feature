@@ -355,17 +355,13 @@ Scenario: _097712 check payroll
 		And in the table "CashAdvanceDeductionList" I click "Add" button
 		And I activate "Employee" field in "CashAdvanceDeductionList" table
 		And I select "david" from "Employee" drop-down list by string in "CashAdvanceDeductionList" table
-		And I activate "Financial movement type" field in "CashAdvanceDeductionList" table
-		And I select "1" from "Financial movement type" drop-down list by string in "CashAdvanceDeductionList" table
-		And I activate "Account" field in "CashAdvanceDeductionList" table
-		And I select "Cash desk №4" from "Account" drop-down list by string in "CashAdvanceDeductionList" table
 		And I activate "Amount" field in "CashAdvanceDeductionList" table
 		And I input "70,00" text in "Amount" field of "CashAdvanceDeductionList" table
 		And I finish line editing in "CashAdvanceDeductionList" table
 	* Check
 		And "CashAdvanceDeductionList" table became equal
-			| '#' | 'Amount' | 'Employee'      | 'Financial movement type' | 'Planing transaction basis' | 'Account'      |
-			| '1' | '70,00'  | 'David Romanov' | 'Movement type 1'         | ''                          | 'Cash desk №4' |
+			| '#' | 'Amount' | 'Employee'      |
+			| '1' | '70,00'  | 'David Romanov' |
 	* Check totals
 		And the editing text of form attribute named "TotalAccrualAmount" became equal to "2 300,00"
 		And the editing text of form attribute named "TotalDeductionAmount" became equal to "80,00"

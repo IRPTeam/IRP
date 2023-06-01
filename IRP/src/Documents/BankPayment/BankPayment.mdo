@@ -291,6 +291,10 @@
    <key>ru</key>
    <value>RRN Код</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>RRN Code</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -311,6 +315,10 @@
   <synonym>
    <key>ru</key>
    <value>Информация по оплате</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Payment info</value>
   </synonym>
   <type>
    <types>String</types>

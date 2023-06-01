@@ -75,5 +75,9 @@
    <key>ru</key>
    <value>Эквайринг</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Acquiring</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

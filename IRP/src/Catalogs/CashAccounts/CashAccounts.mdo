@@ -381,6 +381,10 @@
    <key>ru</key>
    <value>Эквайринг</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Acquiring</value>
+  </synonym>
   <type>
    <types>CatalogRef.Hardware</types>
   </type>

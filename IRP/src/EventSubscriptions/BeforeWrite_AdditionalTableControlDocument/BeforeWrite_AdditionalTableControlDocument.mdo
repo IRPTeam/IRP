@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Перед записью дополнительный контроль документов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Before write additional table control document</value>
+ </synonym>
  <source>
   <types>DefinedType.AdditionalTableControlDocumentObject</types>
  </source>

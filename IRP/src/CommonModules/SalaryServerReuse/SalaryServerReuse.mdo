@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Зарплата сервер переиспользование</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Salary server reuse</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <returnValuesReuse>DuringSession</returnValuesReuse>

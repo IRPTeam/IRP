@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Документ приемка от розничной продажи сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc retail goods receipt server</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

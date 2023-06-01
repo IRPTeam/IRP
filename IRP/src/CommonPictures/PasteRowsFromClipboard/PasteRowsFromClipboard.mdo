@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Вставить строки из буфера</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Paste rows from clipboard</value>
+ </synonym>
 </mdclass:CommonPicture>

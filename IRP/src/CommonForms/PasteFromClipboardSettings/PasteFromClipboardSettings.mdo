@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Вставить из буфера</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Paste from clipboard settings</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

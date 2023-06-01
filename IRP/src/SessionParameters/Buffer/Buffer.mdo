@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Буфер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Buffer</value>
+ </synonym>
  <type>
   <types>ValueStorage</types>
  </type>

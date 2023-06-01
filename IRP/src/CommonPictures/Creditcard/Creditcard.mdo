@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Кредитная карта</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Creditcard</value>
+ </synonym>
 </mdclass:CommonPicture>

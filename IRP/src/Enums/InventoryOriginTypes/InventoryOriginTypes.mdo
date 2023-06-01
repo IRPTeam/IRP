@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Типы источников происхождения</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Inventory origin types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8b770027-4040-430b-bd60-a033ee4ee9fe">

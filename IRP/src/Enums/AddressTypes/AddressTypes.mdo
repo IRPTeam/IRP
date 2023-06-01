@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Типы адресов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Address types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a960cfb0-07be-4eba-9f46-1684987974b1">
@@ -41,6 +45,10 @@
    <key>ru</key>
    <value>Физический</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Phisical</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
   <name>Shipment</name>
@@ -51,6 +59,10 @@
   <synonym>
    <key>ru</key>
    <value>Транспортировка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Shipment</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">

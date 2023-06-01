@@ -72,6 +72,10 @@
      <key>ru</key>
      <value>Группа отбор документов</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Group filter documents</value>
+    </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
      <id>23</id>
@@ -499,6 +503,10 @@
    <title>
     <key>ru</key>
     <value>Отбор</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Filter</value>
    </title>
    <extendedTooltip>
     <name>PageFilterExtendedTooltip</name>
@@ -1210,6 +1218,10 @@
    <key>ru</key>
    <value>Список документов</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Document list</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>ValueTable</types>
@@ -1339,6 +1351,10 @@
    <key>ru</key>
    <value>Список проверки</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Check list</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>ValueTree</types>
@@ -1386,6 +1402,10 @@
    <title>
     <key>ru</key>
     <value>ID Ошибки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Error ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1487,6 +1507,10 @@
     <key>ru</key>
     <value>Проблемы при быстром исправлении</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Problem while quick fix</value>
+   </title>
    <id>15</id>
    <valueType>
     <types>String</types>
@@ -1536,6 +1560,10 @@
    <key>ru</key>
    <value>Заполнить документы</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fill documents</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -1557,6 +1585,10 @@
    <key>ru</key>
    <value>Проверить документы</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Check documents</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>
@@ -1577,6 +1609,10 @@
   <title>
    <key>ru</key>
    <value>Исправить (выбранные строки)</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Quick fix (selected rows)</value>
   </title>
   <id>5</id>
   <use>

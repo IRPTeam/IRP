@@ -27,6 +27,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -87,6 +88,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R9510B_SalaryPayment());
 	Return QueryArray;
 EndFunction
 
@@ -105,10 +107,12 @@ Function PaymentList()
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
 		|	PaymentList.Partner,
+		|	PaymentList.Employee,
 		|	PaymentList.AdditionalAnalytic,
 		|	PaymentList.Ref.Branch AS Branch,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS
-		|		IsOtherCompanyExpense
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment
 		|INTO PaymentList
 		|FROM
 		|	Document.CashExpense.PaymentList AS PaymentList
@@ -139,7 +143,21 @@ Function R3010B_CashOnHand()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherCompanyExpense";
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.OtherCompany,
+		|	PaymentList.TotalAmount,
+		|	*
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment";
 EndFunction
 
 Function R5022T_Expenses()
@@ -157,7 +175,8 @@ Function R5022T_Expenses()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	TRUE";
+		|	PaymentList.IsCurrentCompanyExpense 
+		|	OR PaymentList.IsOtherCompanyExpense";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()
@@ -172,6 +191,7 @@ Function R3027B_EmployeeCashAdvance()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment
 		|
 		|UNION ALL
 		|
@@ -183,5 +203,25 @@ Function R3027B_EmployeeCashAdvance()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherCompanyExpense";
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment";
 EndFunction
+
+Function R9510B_SalaryPayment()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.OtherCompany AS Company,
+		|	PaymentList.Currency,
+		|	PaymentList.TotalAmount AS Amount,
+		|	PaymentList.Key,
+		|	PaymentList.Employee,
+		|	PaymentList.Branch
+		|INTO R9510B_SalaryPayment
+		|FROM
+		|	PaymentList AS PaymentLIst
+		|WHERE
+		|	PaymentList.IsSalaryPayment";
+EndFunction
+

@@ -161,6 +161,10 @@
    <key>ru</key>
    <value>Заказано сумма без налогов</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ordered net amount</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -177,6 +181,10 @@
   <synonym>
    <key>ru</key>
    <value>Заказано сумма итого</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ordered total amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -195,6 +203,10 @@
    <key>ru</key>
    <value>Перезаказано сумма без налогов</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Re ordered net amount</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -211,6 +223,10 @@
   <synonym>
    <key>ru</key>
    <value>Перезаказано сумма итого</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Re ordered total amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -229,6 +245,10 @@
    <key>ru</key>
    <value>Куплено сумма без налогов</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Purchase net amount</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -245,6 +265,10 @@
   <synonym>
    <key>ru</key>
    <value>Куплено сумма итого</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Purchase total amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -263,6 +287,10 @@
    <key>ru</key>
    <value>Продано сумма без налогов</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sales net amount</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -279,6 +307,10 @@
   <synonym>
    <key>ru</key>
    <value>Продано сумма итого</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sales total amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

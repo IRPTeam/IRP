@@ -374,6 +374,10 @@
          <key>ru</key>
          <value>Права применены</value>
         </title>
+        <title>
+         <key>tr</key>
+         <value>Rights applied</value>
+        </title>
         <titleTextColor xsi:type="core:ColorRef">
          <color>Style.SpecialTextColor</color>
         </titleTextColor>
@@ -949,6 +953,10 @@
            <title>
             <key>ru</key>
             <value>Группа количество</value>
+           </title>
+           <title>
+            <key>tr</key>
+            <value>Item list group quantity</value>
            </title>
            <extendedTooltip>
             <name>ItemListGroupQuantityExtendedTooltip</name>
@@ -4534,6 +4542,10 @@
           <key>ru</key>
           <value>Группа специальные предложения предложение</value>
          </title>
+         <title>
+          <key>tr</key>
+          <value>Special offers group Offer</value>
+         </title>
          <extendedTooltip>
           <name>SpecialOffersGroupOfferExtendedTooltip</name>
           <id>1312</id>
@@ -4670,6 +4682,10 @@
          <title>
           <key>ru</key>
           <value>Специальные предложения Бонус</value>
+         </title>
+         <title>
+          <key>tr</key>
+          <value>Special offers group Bonus</value>
          </title>
          <extendedTooltip>
           <name>SpecialOffersGroupBonusExtendedTooltip</name>
@@ -6967,6 +6983,10 @@ End</presentationExpression>
      <key>ru</key>
      <value>Розничное основание</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Retail basis</value>
+    </title>
     <id>190</id>
     <valueType>
      <types>DocumentRef.RetailSalesReceipt</types>
@@ -6988,6 +7008,10 @@ End</presentationExpression>
      <key>ru</key>
      <value>Розничное основание количество</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Retail basis quantity</value>
+    </title>
     <id>195</id>
     <valueType>
      <types>DefinedType.typeQuantity</types>
@@ -7008,6 +7032,10 @@ End</presentationExpression>
     <title>
      <key>ru</key>
      <value>Состояние контролируемых строк</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Control code string state</value>
     </title>
     <id>209</id>
     <valueType>
@@ -7764,6 +7792,10 @@ End</presentationExpression>
    <key>ru</key>
    <value>Розничный чек - Продажа (основание)</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Retail sales receipt (basis)</value>
+  </title>
   <id>191</id>
   <valueType>
    <types>DocumentRef.RetailSalesReceipt</types>
@@ -7784,6 +7816,10 @@ End</presentationExpression>
   <title>
    <key>ru</key>
    <value>Документы основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Basis payments</value>
   </title>
   <id>192</id>
   <valueType>
@@ -7855,6 +7891,10 @@ End</presentationExpression>
   <title>
    <key>ru</key>
    <value>Розничное основание скидки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Retail basis special offers</value>
   </title>
   <id>198</id>
   <valueType>
@@ -7976,6 +8016,10 @@ End</presentationExpression>
     <key>ru</key>
     <value>Бонус</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Bonus</value>
+   </title>
    <id>211</id>
    <valueType>
     <types>DefinedType.typeSpecialOfferBonus</types>
@@ -8023,6 +8067,10 @@ End</presentationExpression>
    <key>ru</key>
    <value>Пользователь администратор</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>User admin</value>
+  </title>
   <id>203</id>
   <valueType>
    <types>CatalogRef.Users</types>
@@ -8044,6 +8092,10 @@ End</presentationExpression>
    <key>ru</key>
    <value>Оставить права</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Keep rights</value>
+  </title>
   <id>204</id>
   <valueType>
    <types>Boolean</types>
@@ -8064,6 +8116,10 @@ End</presentationExpression>
   <title>
    <key>ru</key>
    <value>Пользователь администратор по умолчанию</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>User admin by default</value>
   </title>
   <id>205</id>
   <valueType>
@@ -8087,6 +8143,10 @@ End</presentationExpression>
    <key>ru</key>
    <value>Авто рассчет скидок</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Auto calculate offers</value>
+  </title>
   <id>206</id>
   <valueType>
    <types>Boolean</types>
@@ -8107,6 +8167,10 @@ End</presentationExpression>
   <title>
    <key>ru</key>
    <value>Текущий элемент список ID</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Current item list ID</value>
   </title>
   <id>210</id>
   <valueType>
@@ -8876,6 +8940,10 @@ elemanı seç</value>
    <key>ru</key>
    <value>Заменить/Вернуть права</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Change / Rollback right</value>
+  </title>
   <id>32</id>
   <use>
    <common>true</common>
@@ -8896,6 +8964,10 @@ elemanı seç</value>
   <title>
    <key>ru</key>
    <value>Создать и провести</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Create and post</value>
   </title>
   <id>33</id>
   <use>

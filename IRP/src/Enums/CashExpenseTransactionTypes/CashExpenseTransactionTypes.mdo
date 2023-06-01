@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Виды операций прочих расходов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cash expense transaction types</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="972704be-82ea-44ad-8d32-1142c14c479c">
@@ -26,6 +30,10 @@
    <key>ru</key>
    <value>Расход текущей компании</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Current company expense</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="2a4e70ad-5d9c-48e7-ad79-d4a22f380a2a">
   <name>OtherCompanyExpense</name>
@@ -36,6 +44,25 @@
   <synonym>
    <key>ru</key>
    <value>Расход другой компании</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Other company expense</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="793ce70b-95ea-467d-8fd3-041b24f3c73d">
+  <name>SalaryPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>Salary payment</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выплата зарплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Salary payment</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

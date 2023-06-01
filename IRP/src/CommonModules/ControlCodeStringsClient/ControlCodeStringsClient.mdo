@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Контроль кодов клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Control code strings client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

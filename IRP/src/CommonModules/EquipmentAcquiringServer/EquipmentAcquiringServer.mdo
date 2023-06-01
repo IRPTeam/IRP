@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Торговое оборудование эквайринг сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Equipment acquiring server</value>
+ </synonym>
  <server>true</server>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
  <serverCall>true</serverCall>

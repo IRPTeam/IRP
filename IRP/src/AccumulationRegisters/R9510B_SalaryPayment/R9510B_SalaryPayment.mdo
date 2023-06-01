@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R9510 Оплата зарплаты</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R9510 Salary payment</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -138,6 +142,10 @@
   <synonym>
    <key>ru</key>
    <value>Валюта транзакции</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

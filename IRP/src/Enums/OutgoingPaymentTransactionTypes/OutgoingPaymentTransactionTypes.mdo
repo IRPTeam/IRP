@@ -150,5 +150,9 @@
    <key>ru</key>
    <value>Выплата зарплаты</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Salary payment</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

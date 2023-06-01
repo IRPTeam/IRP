@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Оплата анулировать транзакцию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Payment emergency reversal</value>
+ </synonym>
 </mdclass:CommonPicture>

@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Сервер переиспользование</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Server reuse</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <returnValuesReuse>DuringRequest</returnValuesReuse>

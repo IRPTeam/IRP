@@ -197,6 +197,10 @@
    <key>ru</key>
    <value>Сохранять просканированные штрихкоды</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Save scanned barcode</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -216,6 +220,10 @@
    <key>ru</key>
    <value>Это короб</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Is package</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -234,6 +242,10 @@
   <synonym>
    <key>ru</key>
    <value>ID Пакета</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Package ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -256,6 +268,10 @@
   <synonym>
    <key>ru</key>
    <value>Внешний ID короба</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External package ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -512,15 +528,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -674,6 +690,28 @@
    <synonym>
     <key>tr</key>
     <value>Seri/lot numaraları kullan</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="74470b8a-c4ad-41ba-927b-035e5be2f7a7">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
    </synonym>
    <type>
     <types>Boolean</types>

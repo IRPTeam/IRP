@@ -164,6 +164,10 @@
    <key>ru</key>
    <value>Валюта транзакции</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction currency</value>
+  </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
   </type>

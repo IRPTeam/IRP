@@ -166,6 +166,10 @@
    <key>ru</key>
    <value>Другая компания</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Other company</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>

@@ -1,4 +1,56 @@
 
+#Region FunctionForOffersCaluclate
+
+// Calculate current row offers.
+// 
+// Parameters:
+//  StrOffers - See CreateOffersTree
+//  Row - FormDataCollectionItem Of See DocumentRef.RetailSalesReceipt.SpecialOffers
+// 
+// Returns:
+//  Number
+Function Calculate_OffersAmountInRow(StrOffers, Row) Export
+	CurrentRowOffers = 0;
+	If Not StrOffers.Parent = Undefined Then
+		For Each OfferRow In StrOffers.Parent.Rows.FindRows(New Structure("Key, isFolder", Row.Key, False), True) Do
+			CurrentRowOffers = CurrentRowOffers + OfferRow.Amount; 
+		EndDo;
+	EndIf;
+	Return CurrentRowOffers;
+EndFunction
+
+// Calculate current offers amount spent on all rows.
+// 
+// Parameters:
+//  StrOffers - ValueTreeRow Of See CreateOffersTree
+//  Offer - CatalogRef.SpecialOffers
+// 
+// Returns:
+//  Number
+Function Calculate_OffersUsedAmountInDocument(StrOffers, Offer) Export
+	CurrentOffers = 0;
+	If Not StrOffers.Parent = Undefined Then
+		For Each OfferRow In StrOffers.Parent.Rows.FindRows(New Structure("Offer, isFolder", Offer, False), True) Do
+			CurrentOffers = CurrentOffers + OfferRow.Amount; 
+		EndDo;
+	EndIf;
+	Return CurrentOffers;
+EndFunction
+
+// Calculate current row total amount without offers.
+// 
+// Parameters:
+//  StrOffers - See CreateOffersTree
+//  Row - LineOfATabularSection: See Document.RetailSalesReceipt.SpecialOffers
+// 
+// Returns:
+//  Number
+Function Calculate_TotalAmountWhithoutOffersInRow(StrOffers, Row) Export
+	Return Row.Quantity * Row.Price;
+EndFunction
+
+#EndRegion
+
 #Region API
 
 Function RecalculateOffers(Object, Form, AddInfo = Undefined) Export
@@ -193,6 +245,30 @@ Function CreateOffersTreeAndPutToTmpStorage(Val Object, Val ItemList, Val Specia
 	Return PutToTempStorage(OffersTree);
 EndFunction
 
+// Create offers tree.
+// 
+// Parameters:
+//  Object- DocumentObject.RetailSalesReceipt - Object
+//  ItemList - See Document.RetailSalesReceipt.ItemList
+//  SpecialOffers - CatalogRef.SpecialOffers -  Special offers
+//  ArrayOfOffers - Array Of CatalogRef.SpecialOffers
+//  ItemListRowKey - Undefined, String - Item list row key
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  ValueTree - Create offers tree:
+//  * Offer - CatalogRef.SpecialOffers -
+//  * isFolder - Boolean - 
+//  * isSelect - Boolean - Offer is selected
+//  * Auto - Boolean - is offer calculate automatic
+//  * Priority  - Number - 
+//  * isSequential - Boolean - is group sequenetial calculate each row
+//  * TotalPercent - Number -
+//  * TotalAmount - Number -
+//  * Rule - Undefined -
+//  * Presentation - Undefined -
+//  * RuleStatus - Number - Rule status: 1 - Not success; 2 - success; 3 - all rules is success
+//  * ManualInputValue - Boolean -
 Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOffers, ItemListRowKey = Undefined,
 	AddInfo = Undefined) Export
 	Query = New Query();

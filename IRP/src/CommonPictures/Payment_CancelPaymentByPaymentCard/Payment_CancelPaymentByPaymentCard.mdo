@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Оптала отменить оплату по платежной карте</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Payment cancel payment by payment card</value>
+ </synonym>
 </mdclass:CommonPicture>

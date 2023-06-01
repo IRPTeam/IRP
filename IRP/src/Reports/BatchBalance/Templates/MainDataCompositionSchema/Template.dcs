@@ -941,6 +941,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Косвенные расходы</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Not-direct costs</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
@@ -979,6 +983,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Косвенные расходы</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Not-direct costs</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1012,6 +1020,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Косвенные расходы</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Not-direct costs</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1044,6 +1056,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Косвенные расходы</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Not-direct costs</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1083,6 +1099,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Стоимость (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (tax)</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
@@ -1121,6 +1141,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Стоимость (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (tax)</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1154,6 +1178,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Стоимость (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (tax)</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1186,6 +1214,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Стоимость (Налог)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (tax)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1225,6 +1257,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Доход</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
@@ -1263,6 +1299,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Доход</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1296,6 +1336,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Доход</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1328,6 +1372,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Доход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1367,6 +1415,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Прибыль (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue (tax)</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
@@ -1405,6 +1457,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Прибыль (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue (tax)</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1438,6 +1494,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Прибыль (Налог)</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue (tax)</v8:content>
+				</v8:item>
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -1470,6 +1530,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Прибыль (Налог)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Revenue (tax)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1525,6 +1589,10 @@
 					<v8:lang>ru</v8:lang>
 					<v8:content>Ресурсы.Приход</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Resources.Receipt</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldFolder">
@@ -1537,6 +1605,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Ресурсы.Расход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Resources.Expense</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1567,6 +1639,10 @@
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Ресурсы</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Resources</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -2544,6 +2620,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2574,6 +2654,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2587,6 +2671,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Доход</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2599,6 +2687,10 @@ WHERE
 							<v8:item>
 								<v8:lang>ru</v8:lang>
 								<v8:content>Прибыль (Налог)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue (tax)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -2698,6 +2790,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2728,6 +2824,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2741,6 +2841,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Доход</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2753,6 +2857,10 @@ WHERE
 							<v8:item>
 								<v8:lang>ru</v8:lang>
 								<v8:content>Прибыль (Налог)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue (tax)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -2852,6 +2960,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2882,6 +2994,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2895,6 +3011,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Доход</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2907,6 +3027,10 @@ WHERE
 							<v8:item>
 								<v8:lang>ru</v8:lang>
 								<v8:content>Прибыль (Налог)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue (tax)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -3006,6 +3130,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3036,6 +3164,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3049,6 +3181,10 @@ WHERE
 								<v8:lang>ru</v8:lang>
 								<v8:content>Доход</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3061,6 +3197,10 @@ WHERE
 							<v8:item>
 								<v8:lang>ru</v8:lang>
 								<v8:content>Прибыль (Налог)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Revenue (tax)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

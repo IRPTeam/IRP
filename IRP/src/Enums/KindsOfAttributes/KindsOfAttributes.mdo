@@ -135,5 +135,9 @@
    <key>ru</key>
    <value>Дополнительные настройки</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Additional setting</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

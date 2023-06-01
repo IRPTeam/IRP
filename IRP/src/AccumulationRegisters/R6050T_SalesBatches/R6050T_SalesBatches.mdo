@@ -140,6 +140,10 @@
    <key>ru</key>
    <value>Косвенная себестоимость</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Not direct costs</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -156,6 +160,10 @@
   <synonym>
    <key>ru</key>
    <value>Стоимость - Налоги</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount cost tax</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -174,6 +182,10 @@
    <key>ru</key>
    <value>Сумма доход</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount revenue</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -190,6 +202,10 @@
   <synonym>
    <key>ru</key>
    <value>Сумма доход налог</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount revenue tax</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

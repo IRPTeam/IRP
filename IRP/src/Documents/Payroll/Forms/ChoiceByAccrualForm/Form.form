@@ -464,6 +464,10 @@ FROM
        <key>ru</key>
        <value>Граница</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Boundary</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -575,6 +579,10 @@ FROM
       <content>
        <key>ru</key>
        <value>Массив сотрудников</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Array of employee</value>
       </content>
      </localValue>
     </title>

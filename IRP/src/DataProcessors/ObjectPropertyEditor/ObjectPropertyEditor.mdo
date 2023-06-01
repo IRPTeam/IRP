@@ -114,6 +114,10 @@
    <key>ru</key>
    <value>Форма исполнения кода</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Run code form</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

@@ -302,6 +302,10 @@
    <key>ru</key>
    <value>Удалено из источника</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Deleted from source</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

@@ -225,6 +225,10 @@
      <key>ru</key>
      <value>Записывать лог в регистр логов оборудования</value>
     </toolTip>
+    <toolTip>
+     <key>tr</key>
+     <value>Write log to Hardware log registr</value>
+    </toolTip>
     <extendedTooltip>
      <name>LogExtendedTooltip</name>
      <id>135</id>
@@ -271,6 +275,10 @@
    <title>
     <key>ru</key>
     <value>Группа верх лево</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Group top left</value>
    </title>
    <extendedTooltip>
     <name>GroupTopLeftExtendedTooltip</name>
@@ -493,6 +501,10 @@
      <key>ru</key>
      <value>Группа команда оборудований</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Group device command</value>
+    </title>
     <extendedTooltip>
      <name>GroupDeviceCommandExtendedTooltip</name>
      <id>129</id>
@@ -530,6 +542,10 @@
    <title>
     <key>ru</key>
     <value>Группа верх право</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Group top right</value>
    </title>
    <extendedTooltip>
     <name>GroupTopRightExtendedTooltip</name>
@@ -1988,6 +2004,10 @@
    <key>ru</key>
    <value>Результат команды</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Command result</value>
+  </title>
   <id>13</id>
   <valueType>
    <types>String</types>
@@ -2114,6 +2134,10 @@
    <key>ru</key>
    <value>Подключить</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Connect</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>
@@ -2138,6 +2162,10 @@
   <title>
    <key>ru</key>
    <value>Отключить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Disconnect</value>
   </title>
   <id>6</id>
   <use>

@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Контролировать коды</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Control code string</value>
+ </synonym>
 </mdclass:CommonPicture>

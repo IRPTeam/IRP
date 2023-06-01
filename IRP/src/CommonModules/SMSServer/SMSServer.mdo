@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>SMS сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>SMSServer</value>
+ </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

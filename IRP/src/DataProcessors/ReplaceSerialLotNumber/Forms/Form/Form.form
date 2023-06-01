@@ -175,6 +175,10 @@
     <key>ru</key>
     <value>Текущий владелец</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Current owner</value>
+   </title>
    <extendedTooltip>
     <name>Group5ExtendedTooltip</name>
     <id>142</id>
@@ -323,6 +327,10 @@
     <key>ru</key>
     <value>Новый владелец</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>New owner</value>
+   </title>
    <extendedTooltip>
     <name>Group6ExtendedTooltip</name>
     <id>144</id>
@@ -361,6 +369,10 @@
   <title>
    <key>ru</key>
    <value>Группа 4</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Group4</value>
   </title>
   <extendedTooltip>
    <name>Group4ExtendedTooltip</name>
@@ -2756,6 +2768,10 @@
       <key>ru</key>
       <value>Ресурсы</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Resources</value>
+     </title>
      <extendedTooltip>
       <name>Group8ExtendedTooltip</name>
       <id>174</id>
@@ -2827,6 +2843,10 @@
    <title>
     <key>ru</key>
     <value>Группа3</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Group3</value>
    </title>
    <extendedTooltip>
     <name>Group3ExtendedTooltip</name>
@@ -3153,6 +3173,10 @@
     <key>ru</key>
     <value>Док табличная часть</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Dep tabular section</value>
+   </title>
    <id>9</id>
    <valueType>
     <types>String</types>
@@ -3174,6 +3198,10 @@
    <title>
     <key>ru</key>
     <value>Номер строки документа</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Dep line number</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3223,6 +3251,10 @@
    <title>
     <key>ru</key>
     <value>Все ок</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Is ok</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3321,6 +3353,10 @@
     <key>ru</key>
     <value>Повторяющиеся строки</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Repeating lines</value>
+   </title>
    <id>27</id>
    <valueType>
     <types>Number</types>
@@ -3370,6 +3406,10 @@
     <key>ru</key>
     <value>Текущая цена</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Current price</value>
+   </title>
    <id>33</id>
    <valueType>
     <types>DefinedType.typePrice</types>
@@ -3390,6 +3430,10 @@
    <title>
     <key>ru</key>
     <value>Новая цена</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>New price</value>
    </title>
    <id>34</id>
    <valueType>
@@ -3412,6 +3456,10 @@
     <key>ru</key>
     <value>Итоговый тип цен</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Result price type</value>
+   </title>
    <id>35</id>
    <valueType>
     <types>CatalogRef.PriceTypes</types>
@@ -3432,6 +3480,10 @@
    <title>
     <key>ru</key>
     <value>Итоговая цена</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Result price</value>
    </title>
    <id>36</id>
    <valueType>
@@ -3454,6 +3506,10 @@
     <key>ru</key>
     <value>Изменить цену</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Change price</value>
+   </title>
    <id>37</id>
    <valueType>
     <types>Boolean</types>
@@ -3474,6 +3530,10 @@
    <title>
     <key>ru</key>
     <value>С ценой</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>With price</value>
    </title>
    <id>40</id>
    <valueType>
@@ -3496,6 +3556,10 @@
   <title>
    <key>ru</key>
    <value>Регистры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Registers</value>
   </title>
   <id>16</id>
   <valueType>
@@ -3542,6 +3606,10 @@
    <title>
     <key>ru</key>
     <value>UUID записи</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Record UUID</value>
    </title>
    <id>18</id>
    <valueType>
@@ -3590,6 +3658,10 @@
    <title>
     <key>ru</key>
     <value>Ресурсы</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Resources</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3664,6 +3736,10 @@
     <key>ru</key>
     <value>UUID записи</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Record UUID</value>
+   </title>
    <id>23</id>
    <valueType>
     <types>String</types>
@@ -3708,6 +3784,10 @@
    <title>
     <key>ru</key>
     <value>Новое значение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>New value</value>
    </title>
    <id>38</id>
    <valueType/>
@@ -3779,6 +3859,10 @@
     <key>ru</key>
     <value>UUID записи</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Record UUID</value>
+   </title>
    <id>23</id>
    <valueType>
     <types>String</types>
@@ -3824,6 +3908,10 @@
     <key>ru</key>
     <value>Новое значение</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>New value</value>
+   </title>
    <id>39</id>
    <valueType/>
    <view>
@@ -3843,6 +3931,10 @@
   <title>
    <key>ru</key>
    <value>Новая характеристика</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>New item key</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3916,6 +4008,10 @@
    <key>ru</key>
    <value>Новая номенклатура</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>New item</value>
+  </title>
   <id>31</id>
   <valueType>
    <types>CatalogRef.Items</types>
@@ -3938,6 +4034,10 @@
    <key>ru</key>
    <value>Найти ссылки</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Find refs</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -3958,6 +4058,10 @@
   <title>
    <key>ru</key>
    <value>Заменить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Replace</value>
   </title>
   <id>2</id>
   <use>

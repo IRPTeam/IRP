@@ -962,15 +962,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной единице измерения</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1162,6 +1162,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="e37ea497-8dc1-4a64-af27-a21f51ad30f9">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="eca9e13b-9cae-4ae4-bdea-a85980615377">
   <producedTypes>
@@ -1274,6 +1296,10 @@
    <synonym>
     <key>ru</key>
     <value>Бонус</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Bonus</value>
    </synonym>
    <type>
     <types>DefinedType.typeSpecialOfferBonus</types>

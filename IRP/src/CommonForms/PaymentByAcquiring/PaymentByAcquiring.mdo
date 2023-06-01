@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Оплата пос терминалом</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Payment by acquiring</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

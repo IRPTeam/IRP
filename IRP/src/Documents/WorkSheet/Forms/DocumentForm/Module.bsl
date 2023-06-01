@@ -80,6 +80,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	
+	_QuantityIsFixed = False;
+	For Each Row In Object.ItemList Do
+		If Row.QuantityIsFixed Then
+			_QuantityIsFixed = True;
+			Break;
+		EndIf;
+	EndDo;
+	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
+	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
+	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
 &AtClient
@@ -335,6 +346,24 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY_IN_BASE_UNIT
+
+&AtClient
+Procedure ItemListQuantityInBaseUnitOnChange(Item)
+	DocWorkSheetClient.ItemListQuantityInBaseUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+&AtClient
+Procedure ItemListQuantityIsFixedOnChange(Item)
+	DocWorkSheetClient.ItemListQuantityIsFixedOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion
@@ -518,6 +547,12 @@ Procedure EditCurrencies(Command)
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditQuantityInBaseUnit(Command)
+	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
+	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
 EndProcedure
 
 &AtClient

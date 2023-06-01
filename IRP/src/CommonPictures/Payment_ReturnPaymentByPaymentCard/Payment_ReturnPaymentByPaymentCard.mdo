@@ -9,4 +9,8 @@
   <key>ru</key>
   <value>Оплата вернуть оплату по платежной карте</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Payment return payment by payment card</value>
+ </synonym>
 </mdclass:CommonPicture>

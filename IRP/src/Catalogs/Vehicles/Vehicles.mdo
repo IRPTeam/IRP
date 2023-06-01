@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Транспортные средства</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vehicles</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Vehicles.StandardAttribute.Code</inputByString>
  <inputByString>Catalog.Vehicles.StandardAttribute.Description</inputByString>
@@ -55,6 +59,10 @@
   <key>ru</key>
   <value>Транспорт</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Vehicle</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Vehicles</value>
@@ -62,6 +70,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Транспортные средства</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Vehicles</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -83,6 +95,10 @@
   <synonym>
    <key>ru</key>
    <value>ID (номер машины)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>ID (plate)</value>
   </synonym>
   <type>
    <types>String</types>

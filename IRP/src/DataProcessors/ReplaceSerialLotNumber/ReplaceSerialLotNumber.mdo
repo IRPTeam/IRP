@@ -13,6 +13,10 @@
   <key>ru</key>
   <value>Заменить серийный номер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Replace serial lot number</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ReplaceSerialLotNumber.Form.Form</defaultForm>
  <forms uuid="d016ff4c-c04d-4767-b212-296e3df2ee78">

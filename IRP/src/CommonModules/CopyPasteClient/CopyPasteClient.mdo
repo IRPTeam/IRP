@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Скопировать вставить клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Copy paste client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

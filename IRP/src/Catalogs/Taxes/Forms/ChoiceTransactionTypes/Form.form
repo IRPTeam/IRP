@@ -375,6 +375,10 @@
    <key>ru</key>
    <value>Тип транзакции</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Transaction types</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>

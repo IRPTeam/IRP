@@ -12,6 +12,10 @@
   <key>ru</key>
   <value>Тип скидки бонусом</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Type special offer bonus</value>
+ </synonym>
  <type>
   <types>Number</types>
   <numberQualifiers>

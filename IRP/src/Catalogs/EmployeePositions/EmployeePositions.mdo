@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Должности сотрудников</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Employee positions</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <standardAttributes>

@@ -12,6 +12,10 @@
   <key>ru</key>
   <value>Тип специальные предложения доп инфо</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Type special offer add info</value>
+ </synonym>
  <type>
   <types>Date</types>
   <types>String</types>

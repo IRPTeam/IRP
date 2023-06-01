@@ -3146,6 +3146,10 @@
    <key>ru</key>
    <value>Выбор по начислению</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Choice by accrual</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>

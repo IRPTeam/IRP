@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Дополнительный контроль таблиц документа</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Additional document table control</value>
+ </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

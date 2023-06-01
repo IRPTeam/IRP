@@ -1607,12 +1607,12 @@ Function BindTransactionType(Parameters)
 		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashExpense", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashExpense,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
 	Binding.Insert("CashRevenue", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashRevenue,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
@@ -1760,8 +1760,17 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.CashExpenseRevenue.MultiSet
-Procedure MultiSetTransactionType_CashExpenseRevenue(Parameters, Results) Export
+// TransactionType.CashExpense.MultiSet
+Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
+	ResourceToBinding.Insert("Employee"      , BindPaymentListEmployee(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.CashRevenue.MultiSet
+Procedure MultiSetTransactionType_CashRevenue(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
@@ -1903,21 +1912,40 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 	EndDo;
 EndProcedure
 
-// TransactionType.ClearByTransactionTypeCashExpenseRevenue.Step
-Procedure StepClearByTransactionTypeCashExpenseRevenue(Parameters, Chain) Export
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Enable = True;
+// TransactionType.ClearByTransactionTypeCashExpense.Step
+Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashExpense.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Setter = "MultiSetTransactionType_CashExpenseRevenue";
+	Chain.ClearByTransactionTypeCashExpense.Setter = "MultiSetTransactionType_CashExpense";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseRevenueOptions();
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseOptions();
+		Options.TransactionType          = GetTransactionType(Parameters);
+		Options.OtherCompany             = GetOtherCompany(Parameters);
+		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepClearByTransactionTypeCashExpense";
+		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeCashRevenue.Step
+Procedure StepClearByTransactionTypeCashRevenue(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashRevenue.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ClearByTransactionTypeCashRevenue.Setter = "MultiSetTransactionType_CashRevenue";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashRevenueOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.OtherCompany             = GetOtherCompany(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepClearByTransactionTypeCashExpenseRevenue";
-		Chain.ClearByTransactionTypeCashExpenseRevenue.Options.Add(Options);
+		Options.StepName = "StepClearByTransactionTypeCashRevenue";
+		Chain.ClearByTransactionTypeCashRevenue.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -10284,6 +10312,7 @@ Function BindItemListQuantity(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged,
 		|StepItemListCalculateQuantityInBaseUnit");
+		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantity");
 EndFunction
 
@@ -10394,13 +10423,56 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_QUANTITY_IS_FIXED
+
+// ItemList.QuantityIsFixed.OnChange
+Procedure ItemListQuantityIsFixedOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityIsFixedNotify", Parameters);
+	Binding = BindItemListQuantityIsFixed(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.QuantityIsFixed.Set
+Procedure SetItemListQuantityIsFixed(Parameters, Results) Export
+	Binding = BindItemListQuantityIsFixed(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListQuantityIsFixedNotify");
+EndProcedure
+
+// ItemList.QuantityIsFixed.Get
+Function GetItemListQuantityIsFixed(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListQuantityIsFixed(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.QuantityIsFixed.Bind
+Function BindItemListQuantityIsFixed(Parameters)
+	DataPath = "ItemList.QuantityIsFixed";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
+
+// ItemList.QuantityInBaseUnit.OnChange
+Procedure ItemListQuantityInBaseUnitOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityInBaseUnitNotify", Parameters);
+	Binding = BindItemListQuantityInBaseUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
 
 // ItemList.QuantityInBaseUnit.Set
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
+	_IsChanged = False;
+	If Results.Count() = 1 Then
+		If Results[0].Options.Property("QuantityOptions") And Results[0].Options.QuantityOptions.Property("QuantityIsFixed") Then  
+		_IsChanged = Results[0].Options.QuantityOptions.QuantityIsFixed;
+		EndIf;
+	EndIf;
+	
 	Binding = BindItemListQuantityInBaseUnit(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results,
-		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit");
+		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit",,, _IsChanged);
 EndProcedure
 
 Function GetItemListQuantityInBaseUnit(Parameters, _Key)
@@ -10462,6 +10534,7 @@ EndFunction
 
 // ItemList.QuantityInBaseUnit.CalculateQuantityInBaseUnit.Step
 Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
+	StepName = "StepItemListCalculateQuantityInBaseUnit";
 	Chain.Calculations.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -10475,8 +10548,9 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Options.QuantityOptions.Unit    = GetItemListUnit(Parameters, Row.Key);
 		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepItemListCalculateQuantityInBaseUnit";
+		Options.StepName = StepName;
 		Chain.Calculations.Options.Add(Options);
 	EndDo;	
 EndProcedure
@@ -13229,6 +13303,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetItemListNetAmountNotify"          Then ViewClient_V2.OnSetItemListNetAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListTaxAmountNotify"          Then ViewClient_V2.OnSetItemListTaxAmountNotify(Parameters);	
 	ElsIf ViewNotify = "OnSetItemListQuantityNotify"           Then ViewClient_V2.OnSetItemListQuantityNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListQuantityIsFixedNotify"    Then ViewClient_V2.OnSetItemListQuantityIsFixedNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListQuantityInBaseUnitNotify" Then ViewClient_V2.OnSetItemListQuantityInBaseUnitNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListPhysCountNotify"          Then ViewClient_V2.OnSetItemListPhysCountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListManualFixedCountNotify"   Then ViewClient_V2.OnSetItemListManualFixedCountNotify(Parameters);
@@ -13451,8 +13526,8 @@ Function GetRows(Parameters, TableName)
 EndFunction
 
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
+	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged);
 EndProcedure
 
 Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify = Undefined)
@@ -13476,11 +13551,11 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify =
 EndProcedure
 
 Procedure SetterObject(StepNames, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
+	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged);
 EndProcedure
 
-Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
+Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged)
 	IsChanged = False;
 	DisableNextSteps = False;
 	For Each Result In Results Do
@@ -13493,10 +13568,10 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 		If Result.Options.Property("DisableNextSteps") And Result.Options.DisableNextSteps = True Then
 			DisableNextSteps = True;
 		EndIf;
-		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
+		If Source = "Object" And (SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Or _IsChanged) Then
 			IsChanged = True;
 		EndIf;
-		If Source = "Form" And SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
+		If Source = "Form" And (SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Or _IsChanged) Then
 			IsChanged = True;
 		EndIf;
 	EndDo;

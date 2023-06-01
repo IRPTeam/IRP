@@ -213,6 +213,10 @@
     <key>ru</key>
     <value>Просканированный серийный номер</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Scanned serial lot number</value>
+   </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
    </type>

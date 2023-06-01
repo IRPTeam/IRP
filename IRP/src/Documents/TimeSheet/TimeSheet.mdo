@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Зарплатный табель</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Time sheet</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.TimeSheet.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -55,6 +59,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Зарплатные табеля</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Time sheets</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -211,6 +219,10 @@
    <key>ru</key>
    <value>Список зарплатных табелей</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Time sheet list</value>
+  </synonym>
   <attributes uuid="ef268511-a3cb-401c-8592-286ec850cf62">
    <name>Key</name>
    <synonym>
@@ -298,6 +310,10 @@
     <key>ru</key>
     <value>Должность</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Position</value>
+   </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
    </type>
@@ -316,6 +332,10 @@
    <synonym>
     <key>ru</key>
     <value>Вид начисления или удержания</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Accrual and deduction type</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>

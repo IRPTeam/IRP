@@ -69,6 +69,10 @@
       <key>ru</key>
       <value>Обычная запись</value>
      </presentation>
+     <presentation>
+      <key>tr</key>
+      <value>Normal writing</value>
+     </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
      </value>
@@ -82,6 +86,10 @@
       <key>ru</key>
       <value>Обновить связанные поля</value>
      </presentation>
+     <presentation>
+      <key>tr</key>
+      <value>Update related fields</value>
+     </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
      </value>
@@ -94,6 +102,10 @@
      <presentation>
       <key>ru</key>
       <value>Непосредственная запись (опасно)</value>
+     </presentation>
+     <presentation>
+      <key>tr</key>
+      <value>Forced writing (dangerous)</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -205,6 +217,10 @@
     <key>ru</key>
     <value>Группа показа технических данных</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Group of showing service data</value>
+   </title>
    <extendedTooltip>
     <name>ShowServiceDataExtendedTooltip</name>
     <id>63</id>
@@ -242,6 +258,10 @@
   <title>
    <key>ru</key>
    <value>Группа дополнительных настроек</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Group of additional settings</value>
   </title>
   <extendedTooltip>
    <name>AdditionalSettingsExtendedTooltip</name>
@@ -901,6 +921,10 @@
     <key>ru</key>
     <value>Это технический реквизит</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Is service attribute</value>
+   </title>
    <id>7</id>
    <valueType>
     <types>Boolean</types>
@@ -923,6 +947,10 @@
    <key>ru</key>
    <value>Показать технические реквизиты</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Show service attributes</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>Boolean</types>
@@ -944,6 +972,10 @@
    <key>ru</key>
    <value>Показать технические таблицы</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Show service tables</value>
+  </title>
   <id>10</id>
   <valueType>
    <types>Boolean</types>
@@ -964,6 +996,10 @@
   <title>
    <key>ru</key>
    <value>Режим записи объекта = Истина</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Writing mode</value>
   </title>
   <id>11</id>
   <valueType>

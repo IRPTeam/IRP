@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>Оборудование лог</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Hardware log</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <defaultRecordForm>InformationRegister.HardwareLog.Form.RecordForm</defaultRecordForm>
@@ -32,6 +36,10 @@
   <key>ru</key>
   <value>Оборудование лог</value>
  </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Hardware log</value>
+ </recordPresentation>
  <listPresentation>
   <key>en</key>
   <value>Hardware logs</value>
@@ -39,6 +47,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Оборудование логи</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Hardware logs</value>
  </listPresentation>
  <resources uuid="e69f1b2a-96ba-43d6-a86b-9bead233c059">
   <name>Method</name>

@@ -1138,6 +1138,10 @@
    <key>ru</key>
    <value>Логи</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Logs</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>String</types>

@@ -1224,6 +1224,10 @@
      <key>ru</key>
      <value>Зарплатный табель лево</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Time sheet left</value>
+    </title>
     <extendedTooltip>
      <name>GroupTimeSheetLeftExtendedTooltip</name>
      <id>1321</id>
@@ -1883,6 +1887,10 @@
      <key>ru</key>
      <value>Зарплатный табель право</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Time sheet right</value>
+    </title>
     <extendedTooltip>
      <name>GroupTimeSheetRightExtendedTooltip</name>
      <id>1323</id>
@@ -1920,6 +1928,10 @@
    <title>
     <key>ru</key>
     <value>Зарплатный табель</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Time sheet</value>
    </title>
    <extendedTooltip>
     <name>GroupTimeSheetExtendedTooltip</name>
@@ -2717,6 +2729,10 @@
     <key>ru</key>
     <value>Должность</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Position</value>
+   </title>
    <id>15</id>
    <valueType>
     <types>CatalogRef.EmployeePositions</types>
@@ -2847,6 +2863,10 @@
   <title>
    <key>ru</key>
    <value>Заполнить табель</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Fill time sheet</value>
   </title>
   <id>16</id>
   <use>

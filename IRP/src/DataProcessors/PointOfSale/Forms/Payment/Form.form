@@ -395,6 +395,10 @@
     <key>ru</key>
     <value>Группа список типов банков</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Group bank type list</value>
+   </title>
    <width>20</width>
    <extendedTooltip>
     <name>GroupBankTypeListExtendedTooltip</name>
@@ -660,6 +664,10 @@
        <key>ru</key>
        <value>Группа оплата по эквайрингу</value>
       </title>
+      <title>
+       <key>tr</key>
+       <value>Group payment by acquiring</value>
+      </title>
       <horizontalStretch>true</horizontalStretch>
       <groupHorizontalAlign>Left</groupHorizontalAlign>
       <extendedTooltip>
@@ -743,6 +751,10 @@
      <title>
       <key>ru</key>
       <value>Группа оплата по терминалу верх</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Group payment by acquiring top</value>
      </title>
      <extendedTooltip>
       <name>GroupPaymentByAcquiringTopExtendedTooltip</name>
@@ -1095,6 +1107,10 @@
        <key>ru</key>
        <value>RRN Код</value>
       </toolTip>
+      <toolTip>
+       <key>tr</key>
+       <value>RRN code</value>
+      </toolTip>
       <extendedTooltip>
        <name>PaymentsRRNCodeExtendedTooltip</name>
        <id>243</id>
@@ -1143,6 +1159,10 @@
        <inputHint>
         <key>ru</key>
         <value>RRN Код</value>
+       </inputHint>
+       <inputHint>
+        <key>tr</key>
+        <value>RRN Code</value>
        </inputHint>
       </extInfo>
      </items>
@@ -1624,6 +1644,10 @@
       <title>
        <key>ru</key>
        <value>Картинка ожидание</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Decoration wait</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2352,6 +2376,10 @@
         </title>
         <title>
          <key>ru</key>
+         <value>•</value>
+        </title>
+        <title>
+         <key>tr</key>
          <value>•</value>
         </title>
         <visible>true</visible>
@@ -3394,6 +3422,10 @@
     <key>ru</key>
     <value>Информация по оплате</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Payment info</value>
+   </title>
    <id>35</id>
    <valueType>
     <types>String</types>
@@ -3441,6 +3473,10 @@
     <key>ru</key>
     <value>RNN Код</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>RRNCode</value>
+   </title>
    <id>40</id>
    <valueType>
     <types>String</types>
@@ -3464,6 +3500,10 @@
    <title>
     <key>ru</key>
     <value>Оплата произведена</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Payment done</value>
    </title>
    <id>44</id>
    <valueType>
@@ -3962,6 +4002,10 @@
    <key>ru</key>
    <value>Розничное основание</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Retail basis</value>
+  </title>
   <id>42</id>
   <valueType>
    <types>DocumentRef.RetailSalesReceipt</types>
@@ -4007,6 +4051,10 @@
   <title>
    <key>ru</key>
    <value>Список вида оплат по банку</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bank payment type list</value>
   </title>
   <id>48</id>
   <valueType>
@@ -4185,6 +4233,10 @@ FROM
   <title>
    <key>ru</key>
    <value>Возврат в том же ОоРП</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Return in the same consolidate sales</value>
   </title>
   <id>50</id>
   <valueType>
@@ -4708,6 +4760,10 @@ FROM
    <key>ru</key>
    <value>Оплатить</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Pay</value>
+  </title>
   <id>27</id>
   <use>
    <common>true</common>
@@ -4791,6 +4847,10 @@ FROM
    <key>ru</key>
    <value>Установить признак оплаты</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Set payment check</value>
+  </title>
   <id>31</id>
   <use>
    <common>true</common>
@@ -4811,6 +4871,10 @@ FROM
   <title>
    <key>ru</key>
    <value>Снять признак оплаты</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Set payment uncheck</value>
   </title>
   <id>32</id>
   <use>

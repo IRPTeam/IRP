@@ -292,6 +292,10 @@
       <key>ru</key>
       <value>Месячный оклад</value>
      </presentation>
+     <presentation>
+      <key>tr</key>
+      <value>Monthly salary</value>
+     </presentation>
      <value xsi:type="core:StringValue">
       <value>_MonthlySalary</value>
      </value>
@@ -360,6 +364,10 @@
   <title>
    <key>ru</key>
    <value>Алгоритм</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Algorithm</value>
   </title>
   <extendedTooltip>
    <name>GroupAlgorithmExtendedTooltip</name>

@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Отгрузка розничной продажи</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Retail shipment confirmation</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailShipmentConfirmation.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -55,6 +59,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Отгрузки розничной продажи</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Retail shipment confirmations</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -132,6 +140,10 @@
   <synonym>
    <key>ru</key>
    <value>Курьер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Courier</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -385,15 +397,15 @@
    <name>QuantityInBaseUnit</name>
    <synonym>
     <key>en</key>
-    <value>Quantity in base unit</value>
+    <value>Stock quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество в основной ед. изм.</value>
+    <value>Количество остатков</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <value>Stock quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -440,6 +452,28 @@
    </synonym>
    <type>
     <types>DocumentRef.SalesOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b73b144b-1989-4921-85ba-1b77706d0c48">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -806,6 +840,10 @@
   <synonym>
    <key>ru</key>
    <value>Отгрузка розничной продажи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Retail shipment confirmation</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

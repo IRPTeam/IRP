@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Source of origin client server</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Source of origin client server</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>
  <externalConnection>true</externalConnection>

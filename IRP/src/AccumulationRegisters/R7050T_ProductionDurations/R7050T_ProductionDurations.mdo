@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R7050 Производственное время</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R7050 Production durations</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -30,6 +34,10 @@
   <synonym>
    <key>ru</key>
    <value>Время</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Duration</value>
   </synonym>
   <type>
    <types>Number</types>

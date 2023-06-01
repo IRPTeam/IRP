@@ -2171,6 +2171,10 @@
    <key>ru</key>
    <value>Количество сканируемых штрихкодов на один товар</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Count scan the same item</value>
+  </title>
   <id>10</id>
   <valueType>
    <types>Number</types>
@@ -2199,6 +2203,10 @@
    <key>ru</key>
    <value>Количество просканированных</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Already scan count</value>
+  </title>
   <id>12</id>
   <valueType>
    <types>Number</types>
@@ -2224,6 +2232,10 @@
    <key>ru</key>
    <value>Скрыть кнопку сканирования штрихкода</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Hide scan button</value>
+  </title>
   <id>13</id>
   <valueType>
    <types>Boolean</types>
@@ -2247,6 +2259,10 @@
   <title>
    <key>ru</key>
    <value>Скрыть кнопку статуса</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Hide status button</value>
   </title>
   <id>14</id>
   <valueType>

@@ -535,6 +535,10 @@
    <key>ru</key>
    <value>Настройки РМК</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>POS settings</value>
+  </title>
   <extendedTooltip>
    <name>GroupPOSSettingsExtendedTooltip</name>
    <id>60</id>

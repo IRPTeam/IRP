@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Загрузить данные из таблицы клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Load data from table client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

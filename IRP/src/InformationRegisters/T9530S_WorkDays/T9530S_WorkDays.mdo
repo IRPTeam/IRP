@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>T9530 Рабочие дни</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9530 Work days</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -30,6 +34,10 @@
   <synonym>
    <key>ru</key>
    <value>Количество дней</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Count days</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -106,6 +114,10 @@
   <synonym>
    <key>ru</key>
    <value>Вид начисления или удержания</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Accrual and deduction type</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

@@ -13,6 +13,10 @@
   <key>ru</key>
   <value>Загрузка и выгрузка данных</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Load and unload data</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
  <attributes uuid="9886e7f4-2eb0-4e75-a0f5-fd103bbcf3e0">
@@ -24,6 +28,10 @@
   <synonym>
    <key>ru</key>
    <value>Сериализовано инфо</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Serialized info</value>
   </synonym>
   <type>
    <types>String</types>
@@ -42,6 +50,10 @@
    <key>ru</key>
    <value>Информация об архиве</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Archived info</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers/>
@@ -58,6 +70,10 @@
   <synonym>
    <key>ru</key>
    <value>Сериализован</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Deserialized info</value>
   </synonym>
   <type>
    <types>String</types>

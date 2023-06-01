@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Загрузить данные из таблицы сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Load data from table server</value>
+ </synonym>
  <server>true</server>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
  <serverCall>true</serverCall>

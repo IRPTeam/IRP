@@ -1385,6 +1385,10 @@
     <key>ru</key>
     <value>Начисление</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Accrual</value>
+   </title>
    <extendedTooltip>
     <name>GroupAccrualExtendedTooltip</name>
     <id>1283</id>
@@ -2128,6 +2132,10 @@
     <key>ru</key>
     <value>Удержания</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Deduction</value>
+   </title>
    <extendedTooltip>
     <name>GroupDeductionExtendedTooltip</name>
     <id>1327</id>
@@ -2292,156 +2300,6 @@
      <contextMenu>
       <name>CashAdvanceDeductionListEmployeeContextMenu</name>
       <id>1424</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-     <name>CashAdvanceDeductionListFinancialMovementType</name>
-     <id>1426</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.CashAdvanceDeductionList.FinancialMovementType</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>CashAdvanceDeductionListFinancialMovementTypeExtendedTooltip</name>
-      <id>1428</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>CashAdvanceDeductionListFinancialMovementTypeContextMenu</name>
-      <id>1427</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-     <name>CashAdvanceDeductionListPlaningTransactionBasis</name>
-     <id>1514</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.CashAdvanceDeductionList.PlaningTransactionBasis</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>CashAdvanceDeductionListPlaningTransactionBasisExtendedTooltip</name>
-      <id>1516</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>CashAdvanceDeductionListPlaningTransactionBasisContextMenu</name>
-      <id>1515</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-     <name>CashAdvanceDeductionListAccount</name>
-     <id>1429</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.CashAdvanceDeductionList.Account</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>CashAdvanceDeductionListAccountExtendedTooltip</name>
-      <id>1431</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>CashAdvanceDeductionListAccountContextMenu</name>
-      <id>1430</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -2773,6 +2631,10 @@
    <title>
     <key>ru</key>
     <value>Удержание аванса наличными</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Cash advance deduction</value>
    </title>
    <extendedTooltip>
     <name>GroupCashAdvanceDeductionExtendedTooltip</name>
@@ -3240,6 +3102,10 @@
       <key>ru</key>
       <value>Начисление</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Accrual</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -3302,6 +3168,10 @@
      <key>ru</key>
      <value>Группа Итог Начисления</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Group total accrual amount</value>
+    </title>
     <extendedTooltip>
      <name>GroupTotalAccrualAmountExtendedTooltip</name>
      <id>1477</id>
@@ -3339,6 +3209,10 @@
      <title>
       <key>ru</key>
       <value>Удержания</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Deduction</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3402,6 +3276,10 @@
      <key>ru</key>
      <value>Группа Сумма удержания</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Group deduction amount</value>
+    </title>
     <extendedTooltip>
      <name>GroupDeductionAmountExtendedTooltip</name>
      <id>1482</id>
@@ -3439,6 +3317,10 @@
      <title>
       <key>ru</key>
       <value>Удержание аванса наличными</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>C/A Deduction</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3501,6 +3383,10 @@
     <title>
      <key>ru</key>
      <value>Группа Сумма удержания аванса</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Group cash advance deduction amoun</value>
     </title>
     <extendedTooltip>
      <name>GroupCashAdvanceDeductionAmounExtendedTooltip</name>
@@ -3652,6 +3538,10 @@
     <title>
      <key>ru</key>
      <value>Группа Сумма платежа</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Group payment amount</value>
     </title>
     <extendedTooltip>
      <name>GroupPaymentAmountExtendedTooltip</name>
@@ -3917,6 +3807,10 @@
    <key>ru</key>
    <value>Основная таблица</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Main tables</value>
+  </title>
   <id>11</id>
   <valueType>
    <types>String</types>
@@ -3938,6 +3832,10 @@
   <title>
    <key>ru</key>
    <value>Итого к оплате</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Total payment amount</value>
   </title>
   <id>12</id>
   <valueType>
@@ -4016,6 +3914,10 @@
    <key>ru</key>
    <value>Редактировать валюты начисления</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Edit currencies accrual</value>
+  </title>
   <id>17</id>
   <use>
    <common>true</common>
@@ -4039,6 +3941,10 @@
   <title>
    <key>ru</key>
    <value>Изменить валюту вычета аванса наличными</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit currencies cash advance deduction</value>
   </title>
   <id>18</id>
   <use>
@@ -4064,6 +3970,10 @@
    <key>ru</key>
    <value>Изменить валютный вычет</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Edit currencies deduction</value>
+  </title>
   <id>19</id>
   <use>
    <common>true</common>
@@ -4087,6 +3997,10 @@
   <title>
    <key>ru</key>
    <value>Заполнить начисление</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Fill accrual</value>
   </title>
   <id>20</id>
   <use>
@@ -4113,6 +4027,10 @@
    <key>ru</key>
    <value>Заполнить удержания</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Fill deduction</value>
+  </title>
   <id>21</id>
   <use>
    <common>true</common>
@@ -4137,6 +4055,10 @@
   <title>
    <key>ru</key>
    <value>Заполнить вычет наличными авансом</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Fill cash advance deduction</value>
   </title>
   <id>22</id>
   <use>

@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Использовать дополнительный контроль табличных частей добкументов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Use additional table control document</value>
+ </synonym>
  <location>Constant.UseAdditionalTableControlDocument</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>DataProcessor.FixDocumentProblems</content>

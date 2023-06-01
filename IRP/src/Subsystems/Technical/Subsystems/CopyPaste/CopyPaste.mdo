@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Скопировать вставить</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Copy paste</value>
+ </synonym>
  <content>SessionParameter.Buffer</content>
  <content>CommonForm.CopyToClipboardSettings</content>
  <content>CommonForm.PasteFromClipboardSettings</content>

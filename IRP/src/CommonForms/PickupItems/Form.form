@@ -2248,6 +2248,10 @@
     <key>ru</key>
     <value>Контролировать коды</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Control code string</value>
+   </title>
    <id>45</id>
    <valueType>
     <types>Boolean</types>
@@ -2583,6 +2587,10 @@
     <key>ru</key>
     <value>Контролировать коды</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Control code string</value>
+   </title>
    <id>44</id>
    <valueType>
     <types>Boolean</types>
@@ -2905,6 +2913,10 @@
    <title>
     <key>ru</key>
     <value>Контролировать коды</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Control code string</value>
    </title>
    <id>43</id>
    <valueType>

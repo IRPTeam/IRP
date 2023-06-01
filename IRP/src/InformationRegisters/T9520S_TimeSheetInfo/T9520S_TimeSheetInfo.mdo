@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>T9520 Информация по зарплатным табелям</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9520 Time sheet info</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <writeMode>RecorderSubordinate</writeMode>
@@ -131,6 +135,10 @@
    <key>ru</key>
    <value>Должность</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Position</value>
+  </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
   </type>
@@ -150,6 +158,10 @@
   <synonym>
    <key>ru</key>
    <value>Вид начисления или удержания</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Accrual and deduction type</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Версионирование данных сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Data versioning server</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <privileged>true</privileged>

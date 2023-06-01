@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Серийные номера клиент сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Serial lot number client server</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>
  <externalConnection>true</externalConnection>

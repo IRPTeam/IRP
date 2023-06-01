@@ -13,6 +13,10 @@
   <key>ru</key>
   <value>Группа отправки фото</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Group photo uploading</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>
  <forms uuid="ae5f8cd1-ebdc-4a49-88ac-280762cac97e">

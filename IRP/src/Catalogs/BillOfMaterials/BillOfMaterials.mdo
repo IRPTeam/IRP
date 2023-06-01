@@ -281,6 +281,10 @@
    <key>ru</key>
    <value>Тайминг производства</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Duration of production</value>
+  </synonym>
   <type>
    <types>Number</types>
    <numberQualifiers>

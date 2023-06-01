@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Документ распределение производственных затрат клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc production costs allocation client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

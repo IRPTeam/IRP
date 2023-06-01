@@ -714,6 +714,10 @@
      <key>ru</key>
      <value>Тип фильтра</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Type filter</value>
+    </title>
     <extendedTooltip>
      <name>GroupTypeFilterExtendedTooltip</name>
      <id>183</id>
@@ -2812,6 +2816,10 @@
    <key>ru</key>
    <value>Тип фильтра</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Type filter</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>String</types>
@@ -2833,6 +2841,10 @@
   <title>
    <key>ru</key>
    <value>Форма добавить данные</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Form add data</value>
   </title>
   <id>4</id>
   <valueType/>

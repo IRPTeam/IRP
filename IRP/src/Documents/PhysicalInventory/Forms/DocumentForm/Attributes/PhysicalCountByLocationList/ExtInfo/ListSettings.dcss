@@ -62,6 +62,10 @@
 							<v8:lang>ru</v8:lang>
 							<v8:content>Удален</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Deleted</v8:content>
+						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>

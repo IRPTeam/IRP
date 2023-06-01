@@ -13,6 +13,10 @@
   <key>ru</key>
   <value>Исправить проблемы документов</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fix document problems</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>
  <forms uuid="f3078997-4eff-466c-98bf-d2f3b0ad823f">

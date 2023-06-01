@@ -941,6 +941,10 @@
    <key>ru</key>
    <value>Вид операции (приходная товарная накладная - возврат)</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction type GR Return</value>
+  </synonym>
   <type>
    <types>EnumRef.GoodsReceiptTransactionTypes</types>
   </type>
@@ -961,6 +965,10 @@
    <key>ru</key>
    <value>Вид операции (расходная товарная накладная - возврат)</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction type SC Return</value>
+  </synonym>
   <type>
    <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
   </type>
@@ -980,6 +988,10 @@
   <synonym>
    <key>ru</key>
    <value>Тип транзакции РО Розница</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transaction type SC Retail</value>
   </synonym>
   <type>
    <types>EnumRef.RetailShipmentConfirmationTransactionTypes</types>

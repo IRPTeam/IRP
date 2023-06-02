@@ -359,6 +359,7 @@ Function GetChain()
 	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
 
 	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
+	Chain.Insert("ChangeFinancialMovementTypeByPaymentType" , GetChainLink("ChangeFinancialMovementTypeByPaymentTypeExecute"));
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
@@ -3650,6 +3651,21 @@ Function ChangeisControlCodeStringByItemExecute(Options) Export
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_FINANCIAL_MOVEMENT_TYPE_BY_PAYMENT_TYPE
+
+Function ChangeFinancialMovementTypeByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType");
+EndFunction
+
+Function ChangeFinancialMovementTypeByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PaymentType, "FinancialMovementType");
 EndFunction
 
 #EndRegion

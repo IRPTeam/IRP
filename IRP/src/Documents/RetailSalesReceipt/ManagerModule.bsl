@@ -208,7 +208,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -268,6 +267,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -377,6 +377,7 @@ Function Payments()
 		|	Payments.Ref.Currency AS Currency,
 		|	Payments.Amount AS Amount,
 		|	Payments.PaymentType AS PaymentType,
+		|	Payments.FinancialMovementType AS FinancialMovementType,
 		|	Payments.PaymentTerminal AS PaymentTerminal,
 		|	Payments.BankTerm AS BankTerm,
 		|	Payments.Percent AS Percent,
@@ -657,8 +658,32 @@ Function R3010B_CashOnHand()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	Payments.Currency,
+		|	Payments.Amount
 		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsAdvance
+		|	OR Payments.IsPaymentAgent)";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return 
+		"SELECT
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
+		|	Payments.FinancialMovementType,
+		|	Payments.Currency,
+		|	Payments.Amount
+		|INTO R3011T_CashFlow
 		|FROM
 		|	Payments AS Payments
 		|WHERE
@@ -1444,8 +1469,6 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|WHERE
 		|	ItemList.SalesOrderExists";
 EndFunction
-
-#EndRegion
 
 #Region Accounting
 

@@ -478,12 +478,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -493,9 +491,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordType, RecordSet",
 		AccumulationRecordType.Expense, Parameters.DocumentDataTables.CashInTransit));
 	
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
 
 	Return PostingDataTables;
 EndFunction
@@ -518,10 +514,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -605,6 +599,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -692,6 +687,7 @@ Function Payments()
 		|	Payments.Amount AS Amount,
 		|	Payments.Ref.Branch AS Branch,
 		|	Payments.PaymentType AS PaymentType,
+		|	Payments.FinancialMovementType AS FinancialMovementType,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
@@ -960,8 +956,32 @@ Function R3010B_CashOnHand()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	Payments.Currency,
+		|	Payments.Amount
 		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsPostponedPayment
+		|	OR Payments.IsPaymentAgent)";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return 
+		"SELECT
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	Payments.FinancialMovementType,
+		|	Payments.Currency,
+		|	Payments.Amount
+		|INTO R3011T_CashFlow
 		|FROM
 		|	Payments AS Payments
 		|WHERE

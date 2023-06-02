@@ -1072,7 +1072,7 @@
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3010B_CashOnHand</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3011T_CashMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3011T_CashFlow</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3015B_CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>

@@ -39,7 +39,7 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|FROM
 	|	Catalog.PlanningPeriods AS PlanningPeriods
 	|WHERE
-	|	PlanningPeriods.Type = VALUE(Enum.PlanningPeriodTypes.Manufacturing)
+	|	PlanningPeriods.IsManufacturing
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

@@ -103,6 +103,7 @@ Function PaymentList()
 		|	PaymentList.Ref.OtherCompany AS OtherCompany,
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.Currency AS Currency,
+		|	PaymentList.PaymentPeriod AS PaymentPeriod,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.NetAmount AS NetAmount,
 		|	PaymentList.TaxAmount AS TaxAmount,
@@ -279,6 +280,7 @@ Function R9510B_SalaryPayment()
 		|	PaymentList.TotalAmount AS Amount,
 		|	PaymentList.Key,
 		|	PaymentList.Employee,
+		|	PaymentList.PaymentPeriod,
 		|	PaymentList.Branch
 		|INTO R9510B_SalaryPayment
 		|FROM

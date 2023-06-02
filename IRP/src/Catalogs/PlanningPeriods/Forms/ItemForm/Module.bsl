@@ -46,7 +46,7 @@ EndProcedure
 
 &AtClient
 Procedure TypeOnChange(Item)
-	If Object.Type = PredefinedValue("Enum.PlanningPeriodTypes.Financial") Then
+	If Not Object.IsManufacturing Then
 		Object.BusinessUnits.Clear();
 	EndIf;	
 	SetVisibilityAvailability(Object, ThisObject);
@@ -70,7 +70,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.ReadOnly = IsFilled_ProductionPlanningExists;
 	Form.Items.ProductionPlanningExists.Visible = IsFilled_ProductionPlanningExists;
-	Form.Items.BusinessUnits.Visible = Object.Type = PredefinedValue("Enum.PlanningPeriodTypes.Manufacturing");
+	Form.Items.BusinessUnits.Visible = Object.IsManufacturing;
 EndProcedure
 
 &AtClient

@@ -1692,6 +1692,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1729,6 +1730,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1766,6 +1768,7 @@ Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
 	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
 	ResourceToBinding.Insert("Employee"      , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod" , BindPaymentListPaymentPeriod(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1800,6 +1803,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1857,6 +1861,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -1925,6 +1930,7 @@ Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
 		Options.OtherCompany             = GetOtherCompany(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashExpense";
 		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
@@ -3349,6 +3355,19 @@ Function BindBeginDate(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBeginDate");
 EndFunction
 
+// BeginDate.ChangeEndDateByPlanningPeriod.Step
+Procedure StepChangeBeginDateByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeBeginDateByPlanningPeriod.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBeginDateByPlanningPeriod.Setter = "SetBeginDate";
+	Options = ModelClientServer_V2.ChangeBeginDateByPlanningPeriodOptions();
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.StepName = "StepChangeBeginDateByPlanningPeriod";
+	Chain.ChangeBeginDateByPlanningPeriod.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region END_DATE
@@ -3372,6 +3391,19 @@ Function BindEndDate(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEndDate");
 EndFunction
+
+// EndDate.ChangeEndDateByPlanningPeriod.Step
+Procedure StepChangeEndDateByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeEndDateByPlanningPeriod.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeEndDateByPlanningPeriod.Setter = "SetEndDate";
+	Options = ModelClientServer_V2.ChangeEndDateByPlanningPeriodOptions();
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.StepName = "StepChangeEndDateByPlanningPeriod";
+	Chain.ChangeEndDateByPlanningPeriod.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -4837,7 +4869,16 @@ EndFunction
 
 // PlanningPeriod.Bind
 Function BindPlanningPeriod(Parameters)
-	DataPath = "PlanningPeriod";
+	DataPath = New Map();
+	DataPath.Insert("ChequeBondTransactionItem",    "PlanningPeriod");
+	DataPath.Insert("IncomingPaymentOrder",         "PlanningPeriod");
+	DataPath.Insert("OutgoingPaymentOrder",         "PlanningPeriod");
+	DataPath.Insert("Production",                   "PlanningPeriod");
+	DataPath.Insert("ProductionPlanning",           "PlanningPeriod");
+	DataPath.Insert("ProductionPlanningCorrection", "PlanningPeriod");
+	
+	DataPath.Insert("Payroll" , "PaymentPeriod");
+	
 	Binding = New Structure();
 	
 	Binding.Insert("ProductionPlanning",
@@ -4851,6 +4892,9 @@ Function BindPlanningPeriod(Parameters)
 	Binding.Insert("Production",
 		"StepChangeProductionPlanningByPlanningPeriod");
 		
+	Binding.Insert("Payroll", 
+		"StepChangeBeginDateByPlanningPeriod,
+		|StepChangeEndDateByPlanningPeriod");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPlanningPeriod");
 EndFunction
 
@@ -5490,6 +5534,28 @@ Function BindPaymentListEmployee(Parameters)
 	DataPath = "PaymentList.Employee";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListEmployee");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_PAYMENT_PERIOD
+
+// PaymentList.PaymentPeriod.Set
+Procedure SetPaymentListPaymentPeriod(Parameters, Results) Export
+	Binding = BindPaymentListPaymentPeriod(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentPeriod.Get
+Function GetPaymentListPaymentPeriod(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentPeriod(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.PaymentPeriod.Bind
+Function BindPaymentListPaymentPeriod(Parameters)
+	DataPath = "PaymentList.PaymentPeriod";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentPeriod");
 EndFunction
 
 #EndRegion

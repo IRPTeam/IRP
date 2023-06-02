@@ -66,6 +66,9 @@ EndProcedure
 
 &AtServer
 Function CreateMoneyTransferAtServer()
+	If Not ValueIsFilled(ThisObject.SendAmount) Then
+		Return Undefined;
+	EndIf;
 	
 	FillingData.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	FillingData.Receiver = ThisObject.Receiver;

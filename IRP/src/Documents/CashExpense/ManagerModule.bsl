@@ -267,7 +267,8 @@ Function R3027B_EmployeeCashAdvance()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherCompanyExpense";
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment";
 EndFunction
 
 Function R9510B_SalaryPayment()
@@ -275,7 +276,7 @@ Function R9510B_SalaryPayment()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
-		|	PaymentList.Company,
+		|	PaymentList.OtherCompany AS Company,
 		|	PaymentList.Currency,
 		|	PaymentList.TotalAmount AS Amount,
 		|	PaymentList.Key,

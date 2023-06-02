@@ -52,8 +52,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsOtherCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense"));
 	IsSalaryPayment = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment"));
 	
-	Form.Items.OtherCompany.Visible        = IsOtherCompanyExpense;
-	Form.Items.PaymentListPartner.Visible  = IsOtherCompanyExpense Or IsSalaryPayment;
+	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense Or IsSalaryPayment;
+	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense Or IsSalaryPayment;
+
 	Form.Items.PaymentListEmployee.Visible = IsSalaryPayment;
 	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
 	

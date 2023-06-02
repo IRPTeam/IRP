@@ -1,18 +1,20 @@
+// @strict-types
 
 #Region FunctionForOffersCaluclate
 
 // Calculate current row offers.
 // 
 // Parameters:
-//  StrOffers - See CreateOffersTree
-//  Row - FormDataCollectionItem Of See DocumentRef.RetailSalesReceipt.SpecialOffers
+//  StrOffers - ValueTreeRow: See GetSelectedOffersTree
+//  Row - DocumentTabularSectionRow.RetailSalesReceipt.SpecialOffers
 // 
 // Returns:
 //  Number
 Function Calculate_OffersAmountInRow(StrOffers, Row) Export
 	CurrentRowOffers = 0;
 	If Not StrOffers.Parent = Undefined Then
-		For Each OfferRow In StrOffers.Parent.Rows.FindRows(New Structure("Key, isFolder", Row.Key, False), True) Do
+		CurrentLvlArray = StrOffers.Parent.Rows.FindRows(New Structure("Key, isFolder", Row.Key, False), True);
+		For Each OfferRow In CurrentLvlArray Do // ValueTreeRow: See GetSelectedOffersTree
 			CurrentRowOffers = CurrentRowOffers + OfferRow.Amount; 
 		EndDo;
 	EndIf;
@@ -22,15 +24,16 @@ EndFunction
 // Calculate current offers amount spent on all rows.
 // 
 // Parameters:
-//  StrOffers - ValueTreeRow Of See CreateOffersTree
-//  Offer - CatalogRef.SpecialOffers
+//  StrOffers - ValueTreeRow: See GetSelectedOffersTree
+//  Offer - CatalogRef.SpecialOffers -
 // 
 // Returns:
 //  Number
 Function Calculate_OffersUsedAmountInDocument(StrOffers, Offer) Export
 	CurrentOffers = 0;
 	If Not StrOffers.Parent = Undefined Then
-		For Each OfferRow In StrOffers.Parent.Rows.FindRows(New Structure("Offer, isFolder", Offer, False), True) Do
+		CurrentLvlArray = StrOffers.Parent.Rows.FindRows(New Structure("Offer, isFolder", Offer, False), True);
+		For Each OfferRow In CurrentLvlArray Do // ValueTreeRow: See GetSelectedOffersTree
 			CurrentOffers = CurrentOffers + OfferRow.Amount; 
 		EndDo;
 	EndIf;
@@ -40,8 +43,8 @@ EndFunction
 // Calculate current row total amount without offers.
 // 
 // Parameters:
-//  StrOffers - See CreateOffersTree
-//  Row - LineOfATabularSection: See Document.RetailSalesReceipt.SpecialOffers
+//  StrOffers - ValueTreeRow: See GetSelectedOffersTree
+//  Row - DocumentTabularSectionRow.RetailSalesReceipt.ItemList
 // 
 // Returns:
 //  Number
@@ -53,6 +56,17 @@ EndFunction
 
 #Region API
 
+// Recalculate offers.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers
+//  Form - ClientApplicationForm -
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Recalculate offers:
+// * OffersAddress - String -
+// * ItemListRowKey - Undefined -
 Function RecalculateOffers(Object, Form, AddInfo = Undefined) Export
 	OpenFormArgs = OffersClientServer.GetOpenFormArgsPickupSpecialOffers_ForDocument(Object);
 	
@@ -104,18 +118,26 @@ EndFunction
 
 #Region Offers_for_document
 
+// Get all active offers for document.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers -
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array - Get all active offers for document
 Function GetAllActiveOffers_ForDocument(Val Object, AddInfo = Undefined) Export
+	OffersDocumentTypesArray = New Array(); // Array Of EnumRef.OffersDocumentTypes
 	If isSaleDoc(Object.Ref) Then
-		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	ElsIf isPurchaseDoc(Object.Ref) Then
-		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Purchases);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	Else
+		//@skip-check property-return-type, invocation-parameter-type-intersect
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
@@ -150,18 +172,26 @@ EndFunction
 
 #Region Offers_for_row
 
+// Get all active offers for row.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array - Get all active offers for row
 Function GetAllActiveOffers_ForRow(Val Object, AddInfo = Undefined) Export
+	OffersDocumentTypesArray = New Array(); // Array Of EnumRef.OffersDocumentTypes
 	If isSaleDoc(Object.Ref) Then
-		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	ElsIf isPurchaseDoc(Object.Ref) Then
-		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Purchases);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	Else
+		//@skip-check invocation-parameter-type-intersect, property-return-type
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
@@ -196,20 +226,30 @@ EndFunction
 
 #Region AppliedOffers
 
+// Get all applied offers.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - 
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array - Get all applied offers
 Function GetAllAppliedOffers(Val Object, AddInfo = Undefined) Export
 	CanGetAllAppliedOffers = isSaleDoc(Object.Ref) Or isPurchaseDoc(Object.Ref);
 	If CanGetAllAppliedOffers Then
 		Return GetAllAppliedOffers_Documents(Object, AddInfo);
 	Else
+		//@skip-check property-return-type, invocation-parameter-type-intersect
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
 
 Function GetAllAppliedOffers_Documents(Object, AddInfo)
 	TableOfOffers = New ValueTable();
-	TableOfOffers.Columns.Add("Offer");
+	TableOfOffers.Columns.Add("Offer", New TypeDescription("CatalogRef.SpecialOffers"));
 	For Each Row In Object.SpecialOffers Do
-		TableOfOffers.Add().Offer = Row.Offer;
+		NewRow = TableOfOffers.Add();
+		NewRow.Offer = Row.Offer;
 	EndDo;
 	TableOfOffers.GroupBy("Offer");
 	Return TableOfOffers.UnloadColumn("Offer");
@@ -217,6 +257,46 @@ EndFunction
 
 #EndRegion
 
+// Get selected offers tree.
+// 
+// Parameters:
+//  Form - See CommonForm.PickupSpecialOffers
+// 
+// Returns:
+//  ValueTree:
+// * AddInfo - DefinedType.typeSpecialOfferAddInfo -
+// * AllRuleIsOk - Boolean -
+// * Amount - DefinedType.typeAmount -
+// * Auto - Boolean -
+// * Bonus - DefinedType.typeSpecialOfferBonus -
+// * isFolder - Boolean -
+// * isSelect - Boolean -
+// * isSequential - Boolean -
+// * Key - DefinedType.typeRowID -
+// * Manual - Boolean -
+// * ManualInputValue - Boolean -
+// * Offer - CatalogRef.SpecialOffers, CatalogRef.SpecialOfferRules -
+// * Percent - Number -
+// * Presentation - String -
+// * Priority - Number -
+// * ReadyOffer - Boolean -
+// * Rule - CatalogRef.SpecialOfferRules -
+// * RuleStatus - Number -
+// * TotalAmount - DefinedType.typeAmount -
+// * TotalInGroupOffers - DefinedType.typeAmount -
+// * TotalPercent - DefinedType.typePercent -
+Function GetSelectedOffersTree(Form) Export
+	//@skip-check constructor-function-return-section
+	Return Form.FormAttributeToValue("Offers");
+EndFunction
+
+// Offer have manual input value.
+// 
+// Parameters:
+//  OfferRef - CatalogRef.SpecialOffers -
+// 
+// Returns:
+//  Boolean - Offer have manual input value
 Function OfferHaveManualInputValue(OfferRef) Export
 	If OfferRef.IsFolder Then
 		Return False;
@@ -225,18 +305,18 @@ Function OfferHaveManualInputValue(OfferRef) Export
 	EndIf;
 EndFunction
 
-Function SetIsSelectForAppliedOffers(OffersTreeAddress, ArrayOfAppliedOffers) Export
-	OffersTree = GetFromTempStorage(OffersTreeAddress);
-	For Each Row In ArrayOfAppliedOffers Do
-		Filter = New Structure("Offer", Row);
-		ArrayOfRows = OffersTree.Rows.FindRows(Filter, True);
-		If ArrayOfRows.Count() Then
-			ArrayOfRows[0].IsSelect = True;
-		EndIf;
-	EndDo;
-	Return PutToTempStorage(OffersTree);
-EndFunction
-
+// Create offers tree and put to tmp storage.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
+//  ItemList - See Document.RetailSalesReceipt.ItemList
+//  SpecialOffers - See Document.RetailSalesReceipt.SpecialOffers
+//  ArrayOfOffers - Array - Array of offers
+//  ItemListRowKey - Undefined - Item list row key
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  String Of See CreateOffersTree - Create offers tree and put to tmp storage
 Function CreateOffersTreeAndPutToTmpStorage(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOffers,
 	ItemListRowKey = Undefined, AddInfo = Undefined) Export
 
@@ -248,12 +328,13 @@ EndFunction
 // Create offers tree.
 // 
 // Parameters:
-//  Object- DocumentObject.RetailSalesReceipt - Object
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
 //  ItemList - See Document.RetailSalesReceipt.ItemList
-//  SpecialOffers - CatalogRef.SpecialOffers -  Special offers
+//  SpecialOffers - See Document.RetailSalesReceipt.SpecialOffers
 //  ArrayOfOffers - Array Of CatalogRef.SpecialOffers
 //  ItemListRowKey - Undefined, String - Item list row key
-//  AddInfo - Undefined - Add info
+//  AddInfo - Structure - Add info:
+//  	* Call_CalculateOfferAmount - Boolean -
 // 
 // Returns:
 //  ValueTree - Create offers tree:
@@ -305,7 +386,7 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 
 	Query.SetParameter("ArrayOfOffers", ArrayOfOffers);
 	QueryResult = Query.Execute();
-	OffersTree = QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy);
+	OffersTree = QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy); // See CreateOffersTree
 	DeleteDoublesGroups(OffersTree);
 
 	Call_CalculateOfferAmount = True;
@@ -324,6 +405,7 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 		EndDo;
 	EndDo;
 	
+	//@skip-check constructor-function-return-section
 	Return OffersTree;
 EndFunction
 
@@ -334,10 +416,17 @@ Procedure FillOffersTreeStatuses(Val Object, OffersTree, FormType, ItemListRowKe
 		RowWithRules = False;
 		For Each RowOfferRules In ItemArrayOfOffers.Offer.Rules Do
 			RuleIsOk = False;
+			
+			CalculateOfferParam = GetCalculateOfferParam();
+			CalculateOfferParam.Object = Object;
+			CalculateOfferParam.Rule = RowOfferRules.Rule;
+			CalculateOfferParam.ItemListRowKey = ItemListRowKey;
+			CalculateOfferParam.StrOffers = ItemArrayOfOffers;
+			
 			If FormType = "Offers_ForDocument" Then
-				RuleIsOk = CheckOfferRule_ForDocument(Object, ItemArrayOfOffers, RowOfferRules.Rule);
+				RuleIsOk = CheckOfferRule_ForDocument(CalculateOfferParam);
 			ElsIf FormType = "Offers_ForRow" Then
-				RuleIsOk = CheckOfferRule_ForRow(Object, ItemArrayOfOffers,	RowOfferRules.Rule, ItemListRowKey);
+				RuleIsOk = CheckOfferRule_ForRow(CalculateOfferParam);
 			EndIf;
 			If Not RuleIsOk Then
 				AllRuleIsOk = False;
@@ -415,6 +504,8 @@ Function CalculateOffersTree_ForDocument(Val Object, OffersInfo, AddInfo = Undef
 	If isTaxDocRef Then
 		OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
+		//@skip-check invocation-parameter-type-intersect
+		//@skip-check property-return-type
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 	Return OffersTree;
@@ -429,22 +520,16 @@ Function CalculateOffersTree_ForRow(Val Object, OffersInfo, AddInfo = Undefined)
 	If isTaxDocRef Then
 		OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
+		//@skip-check invocation-parameter-type-intersect
+		//@skip-check property-return-type
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 	Return OffersTree;
 EndFunction
 
 Function CalculateOffersTree_Documents(Object, OffersInfo, AddInfo = Undefined)
-	OffersTree = GetFromTempStorage(OffersInfo.OffersAddress);
+	OffersTree = GetFromTempStorage(OffersInfo.OffersAddress); // See GetSelectedOffersTree
 	DeleteFromTempStorage(OffersInfo.OffersAddress);
-	OffersTree.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	OffersTree.Columns.Add("Amount", New TypeDescription("Number"));
-	OffersTree.Columns.Add("TotalInGroupOffers", New TypeDescription("Number"));
-	OffersTree.Columns.Add("AllRuleIsOk", New TypeDescription("Boolean"));
-	OffersTree.Columns.Add("Manual", New TypeDescription("Boolean"));
-	OffersTree.Columns.Add("ReadyOffer", New TypeDescription("Boolean"));
-	OffersTree.Columns.Add("Bonus", New TypeDescription("Number"));
-	OffersTree.Columns.Add("AddInfo");
 
 	CalculateOffersRecursion(Object, OffersTree, OffersInfo);
 	
@@ -459,77 +544,152 @@ EndFunction
 
 #Region ExternalDataProcExecutors
 
-Function CheckOfferRule_ForDocument(Object, StrOffers, Rule) Export
-	Info = AddDataProcServer.AddDataProcInfo(Rule);
+// Check offer rule for document.
+// 
+// Parameters:
+//  CalculateOfferParam - See GetCalculateOfferParam
+// 
+// Returns:
+//  Boolean - Check offer rule for document
+Function CheckOfferRule_ForDocument(CalculateOfferParam) Export
+	Info = AddDataProcServer.AddDataProcInfo(CalculateOfferParam.Rule);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info); // DataProcessorObjectDataProcessorName
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
-		Return AddDataProc.CheckOfferRule(Object, StrOffers, Rule);
+		//@skip-check dynamic-access-method-not-found
+		Return AddDataProc.CheckOfferRule(CalculateOfferParam);
 	EndIf;
 
 EndFunction
 
-Function CheckOfferRule_ForRow(Object, StrOffers, Rule, ItemListRowKey) Export
-	Info = AddDataProcServer.AddDataProcInfo(Rule);
+// Check offer rule for row.
+// 
+// Parameters:
+//  CalculateOfferParam - See GetCalculateOfferParam
+// 
+// Returns:
+//  Boolean - Check offer rule for row
+Function CheckOfferRule_ForRow(CalculateOfferParam) Export
+	Info = AddDataProcServer.AddDataProcInfo(CalculateOfferParam.Rule);
 	Info.Create = True;
 	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
-		Return AddDataProc.CheckOfferRule(Object, StrOffers, Rule, ItemListRowKey);
+		//@skip-check dynamic-access-method-not-found
+		Return AddDataProc.CheckOfferRule(CalculateOfferParam);
 	EndIf;
 EndFunction
 
-Function CalculateOffer_ForDocument(Object, StrOffers, OfferType) Export
-	Info = AddDataProcServer.AddDataProcInfo(OfferType);
+// Calculate offer for document.
+// 
+// Parameters:
+//  CalculateOfferParam - See GetCalculateOfferParam
+// 
+// Returns:
+//  Boolean - Calculate offer for document
+Function CalculateOffer_ForDocument(CalculateOfferParam) Export
+	Info = AddDataProcServer.AddDataProcInfo(CalculateOfferParam.OfferType);
 	Info.Create = True;
 	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
-		Return AddDataProc.CalculateOffer(Object, StrOffers, OfferType);
+		//@skip-check dynamic-access-method-not-found
+		Return AddDataProc.CalculateOffer(CalculateOfferParam);
 	EndIf;
 EndFunction
 
-Function CalculateOffer_ForRow(Object, StrOffers, OfferType, ItemListRowKey) Export
-	Info = AddDataProcServer.AddDataProcInfo(OfferType);
+// Calculate offer for row.
+// 
+// Parameters:
+//  CalculateOfferParam - See GetCalculateOfferParam
+// 
+// Returns:
+//  Boolean - Calculate offer for row
+Function CalculateOffer_ForRow(CalculateOfferParam) Export
+	Info = AddDataProcServer.AddDataProcInfo(CalculateOfferParam.OfferType);
 	Info.Create = True;
 	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
-		Return AddDataProc.CalculateOffer(Object, StrOffers, OfferType, ItemListRowKey);
+		//@skip-check dynamic-access-method-not-found
+		Return AddDataProc.CalculateOffer(CalculateOfferParam);
 	EndIf;
 EndFunction
 
-Function CalculateOfferGroup(Object, StrOffers, OfferType) Export
-	Info = AddDataProcServer.AddDataProcInfo(OfferType);
+// Calculate offer group.
+// 
+// Parameters:
+//  CalculateOfferParam - See GetCalculateOfferParam
+// 
+// Returns:
+//  Boolean - Calculate offer group
+Function CalculateOfferGroup(CalculateOfferParam) Export
+	Info = AddDataProcServer.AddDataProcInfo(CalculateOfferParam.OfferType);
 	Info.Create = True;
 	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
-		Return AddDataProc.CalculateOfferGroup(Object, StrOffers, OfferType);
+		//@skip-check dynamic-access-method-not-found
+		Return AddDataProc.CalculateOfferGroup(CalculateOfferParam);
 	EndIf;
+EndFunction
+
+// Get calculate offer param.
+// 
+// Returns:
+//  Structure - Get calculate offer param:
+// * Object - DefinedType.typeObjectWithSpecialOffers -
+// * StrOffers - See OffersServer.CreateOffersTree
+// * Rule - CatalogRef.SpecialOfferRules -
+// * OfferType - CatalogRef.SpecialOfferTypes -
+// * ItemListRowKey - Undefined, String -
+Function GetCalculateOfferParam() Export
+	Str = New Structure;
+	Str.Insert("Object", Undefined);
+	Str.Insert("StrOffers", Undefined);
+	Str.Insert("OfferType", Catalogs.SpecialOfferTypes.EmptyRef());
+	Str.Insert("Rule", Catalogs.SpecialOfferRules.EmptyRef());
+	Str.Insert("ItemListRowKey", "");
+	//@skip-check constructor-function-return-section
+	Return Str;
 EndFunction
 
 #EndRegion
 
+// Calculate offers recursion.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - 
+//  OffersTree - See GetSelectedOffersTree
+//  OffersInfo - Structure - Offers info:
+// * ItemListRowKey - String
+//  StrOffersIndexParent - Number - Str offers index parent
 Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersIndexParent = 0)
 	Step = OffersTree.Rows.Count() - 1;
 	StrOffersIndex = 0;
 	While StrOffersIndex <= Step Do
-		StrOffers = OffersTree.Rows[StrOffersIndex];
+		StrOffers = OffersTree.Rows[StrOffersIndex]; // See GetSelectedOffersTree
 		If Not StrOffers.isFolder And StrOffers.isSelect Then
 			AllRuleIsOk = True;
 
 			For Each StrOfferRule In StrOffers.Offer.Rules Do
+				
+				CalculateOfferParam = GetCalculateOfferParam();
+				CalculateOfferParam.Object = Object;
+				CalculateOfferParam.Rule = StrOfferRule.Rule;
+				CalculateOfferParam.ItemListRowKey = OffersInfo.ItemListRowKey;
+				CalculateOfferParam.StrOffers = StrOffers;
+				
 				If OffersInfo.Property("ItemListRowKey") Then
-					AllRuleIsOk = CheckOfferRule_ForRow(Object, StrOffers, StrOfferRule.Rule, OffersInfo.ItemListRowKey);
+					AllRuleIsOk = CheckOfferRule_ForRow(CalculateOfferParam);
 				Else
-					AllRuleIsOk = CheckOfferRule_ForDocument(Object, StrOffers, StrOfferRule.Rule);
+					AllRuleIsOk = CheckOfferRule_ForDocument(CalculateOfferParam);
 				EndIf;
 				If Not AllRuleIsOk Then
 					Break;
@@ -540,15 +700,24 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 			If StrOffers.AllRuleIsOk Then
 
 				If Not StrOffers.Offer.Parent.isEmpty() Then
-					CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.Parent.SpecialOfferType);
+					CalculateOfferParam = GetCalculateOfferParam();
+					CalculateOfferParam.Object = Object;
+					CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+					CalculateOfferParam.ItemListRowKey = OffersInfo.ItemListRowKey;
+					CalculateOfferParam.StrOffers = StrOffers;
+					CalculateOfferGroup(CalculateOfferParam);
 				EndIf;
 				
+				CalculateOfferParam = GetCalculateOfferParam();
+				CalculateOfferParam.Object = Object;
+				CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+				CalculateOfferParam.ItemListRowKey = OffersInfo.ItemListRowKey;
+				CalculateOfferParam.StrOffers = StrOffers;
 				OfferCalculateIsOk = True;
 				If OffersInfo.Property("ItemListRowKey") Then
-					OfferCalculateIsOk = CalculateOffer_ForRow(Object, StrOffers, StrOffers.Offer.SpecialOfferType,
-						OffersInfo.ItemListRowKey);
+					OfferCalculateIsOk = CalculateOffer_ForRow(CalculateOfferParam);
 				Else
-					OfferCalculateIsOk = CalculateOffer_ForDocument(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+					OfferCalculateIsOk = CalculateOffer_ForDocument(CalculateOfferParam);
 				EndIf;
 
 				If OfferCalculateIsOk Then
@@ -575,7 +744,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 			If StrOffers.isSequential And Not OffersInfo.Property("ItemListRowKey") And Object.ItemList.Count() > 0 Then
 				
 				RowOffersInfo = New Structure;
-				RowOffersInfo.Insert("ItemListRowKey");
+				RowOffersInfo.Insert("ItemListRowKey", "");
 				For Each InfoKeyValue In OffersInfo Do
 					RowOffersInfo.Insert(InfoKeyValue.Key, InfoKeyValue.Value);
 				EndDo;
@@ -587,10 +756,14 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 					StrOffers.Amount = StrOffers.Rows.Total("Amount");
 					StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
-					StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
+					StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk") > 1;
 
 					If StrOffers.AllRuleIsOk Then
-						CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+						CalculateOfferParam = GetCalculateOfferParam();
+						CalculateOfferParam.Object = Object;
+						CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+						CalculateOfferParam.StrOffers = StrOffers;
+						CalculateOfferGroup(CalculateOfferParam);
 					EndIf;
 					
 					ClearAmountInRows(StrOffers);
@@ -604,10 +777,14 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 				StrOffers.Amount = StrOffers.Rows.Total("Amount");
 				StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
-				StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
+				StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk") > 1;
 
 				If StrOffers.AllRuleIsOk Then
-					CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+					CalculateOfferParam = GetCalculateOfferParam();
+					CalculateOfferParam.Object = Object;
+					CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+					CalculateOfferParam.StrOffers = StrOffers;
+					CalculateOfferGroup(CalculateOfferParam);
 				EndIf;
 				
 			EndIf;
@@ -619,12 +796,12 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 EndProcedure
 
 Function GetArrayOfAllOffers_ForDocument(Val Object, OffersAddress) Export
-	OffersTree = GetFromTempStorage(OffersAddress);
+	OffersTree = GetFromTempStorage(OffersAddress); // See GetSelectedOffersTree
 	OffersTable = Object.SpecialOffers.Unload();
 	NewOffersTable = WriteOffersInObject_ForDocument(OffersTable, OffersTree);
-	ArrayOfRows = New Array();
+	ArrayOfRows = New Array(); // Array Of See GetOffersTableRow 
 	For Each Row In NewOffersTable Do
-		RowForArrayItem = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
+		RowForArrayItem = GetOffersTableRow();
 		FillPropertyValues(RowForArrayItem, Row);
 		ArrayOfRows.Add(RowForArrayItem);
 	EndDo;
@@ -672,8 +849,15 @@ Function WriteOffersInObject_ForRow(OffersTable, OffersTree, ItemListRowKey, Add
 	Return OffersTableCopy;
 EndFunction
 
+// Get all offers in tree as array.
+// 
+// Parameters:
+//  OffersTree - See CreateOffersTree
+// 
+// Returns:
+//  Array Of ValueTreeRow: See CreateOffersTree - Get all offers in tree as array
 Function GetAllOffersInTreeAsArray(OffersTree, IncludeFolders = False) Export
-	ArrayOfResults = New Array();
+	ArrayOfResults = New Array(); // Array Of ValueTreeRow: See CreateOffersTree
 	SearchFilter = New Structure();
 	SearchFilter.Insert("isFolder", False);
 
@@ -697,23 +881,23 @@ Function IsOfferForRow(OfferRef) Export
 	Return OfferRef.Type = Enums.SpecialOfferTypes.ForRow;
 EndFunction
 
-Function IsOfferForDocument(OfferRef) Export
-	Return OfferRef.Type = Enums.SpecialOfferTypes.ForDocument;
-EndFunction
-
 Function GetArrayOfAllOffers_ForRow(Val Object, OffersAddress, ItemListRowKey) Export
-	OffersTree = GetFromTempStorage(OffersAddress);
+	OffersTree = GetFromTempStorage(OffersAddress); // See GetSelectedOffersTree
 	OffersTable = Object.SpecialOffers.Unload();
 	NewOffersTable = WriteOffersInObject_ForRow(OffersTable, OffersTree, ItemListRowKey);
-	ArrayOfRows = New Array();
+	ArrayOfRows = New Array(); // Array Of See GetOffersTableRow
 	For Each Row In NewOffersTable Do
-		RowForArrayItem = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
+		RowForArrayItem = GetOffersTableRow();
 		FillPropertyValues(RowForArrayItem, Row);
 		ArrayOfRows.Add(RowForArrayItem);
 	EndDo;
 	Return ArrayOfRows;
 EndFunction
 
+// Clear amount in rows.
+// 
+// Parameters:
+//  Row - ValueTreeRow: See CreateOffersTree
 Procedure ClearAmountInRows(Row)
 
 	Row.Amount = 0;
@@ -727,21 +911,35 @@ Procedure ClearAmountInRows(Row)
 
 EndProcedure
 
-Procedure RestoreAmountInRows(Row, Object)
+// Restore amount in rows.
+// 
+// Parameters:
+//  StrOffers - ValueTreeRow: See CreateOffersTree
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
+Procedure RestoreAmountInRows(StrOffers, Object)
 
-	If Row.isFolder Then
-		For Each ChildRow In Row.Rows Do
+	If StrOffers.isFolder Then
+		For Each ChildRow In StrOffers.Rows Do
 			RestoreAmountInRows(ChildRow, Object);
 		EndDo;
 	EndIf;
 	
-	Row.Amount = Row.Rows.Total("Amount");
-	If Row.isFolder And Row.AllRuleIsOk Then
-		CalculateOfferGroup(Object, Row, Row.Offer.SpecialOfferType);
+	StrOffers.Amount = StrOffers.Rows.Total("Amount");
+	If StrOffers.isFolder And StrOffers.AllRuleIsOk Then
+		CalculateOfferParam = GetCalculateOfferParam();
+		CalculateOfferParam.Object = Object;
+		CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+		CalculateOfferParam.StrOffers = StrOffers;
+		CalculateOfferGroup(CalculateOfferParam);
 	EndIf;
 
 EndProcedure // RestoreAmountInRows()
 
+// Recalculate applied offers for row.
+// 
+// Parameters:
+//  Object  - DefinedType.typeObjectWithSpecialOffers - Object
+//  AddInfo - Undefined - Add info
 Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
 	For Each Row In Object.SpecialOffers Do
 		
@@ -752,7 +950,7 @@ Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
 			
 		If isOfferRow Then
 
-			ArrayOfOffers = New Array();
+			ArrayOfOffers = New Array(); // Array Of CatalogRef.SpecialOffers
 			ArrayOfOffers.Add(Row.Offer);
 
 			TreeByOneOfferAddress = CreateOffersTreeAndPutToTmpStorage(
@@ -784,6 +982,11 @@ Procedure CalculateAndLoadOffers_ForRow(Object, OffersAddress, ItemListRowKey) E
 	EndDo;
 EndProcedure
 
+// Calculate and load offers for document.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
+//  OffersAddress - String - Offers address
 Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
 	OffersInfo = New Structure();
 	OffersInfo.Insert("OffersAddress", OffersAddress);
@@ -798,8 +1001,12 @@ Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
 	EndDo;
 EndProcedure
 
+// Clear auto calculated offers.
+// 
+// Parameters:
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
 Procedure ClearAutoCalculatedOffers(Object) Export
-	ArrayForDelete = New Array();
+	ArrayForDelete = New Array(); // Array Of DocumentTabularSectionRow.RetailSalesReceipt.SpecialOffers
 	For Each Row In Object.SpecialOffers Do
 		If ValueIsFilled(Row.Offer) And OfferHaveManualInputValue(Row.Offer)
 			And Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
@@ -812,9 +1019,48 @@ Procedure ClearAutoCalculatedOffers(Object) Export
 	EndDo;
 EndProcedure
 
+// Calculate offers after set.
+// 
+// Parameters:
+//  OffersInfo - See GetOffersInfoParam 
+//  Object - DefinedType.typeObjectWithSpecialOffers - Object
 Procedure CalculateOffersAfterSet(OffersInfo, Object) Export
 	ClearAutoCalculatedOffers(Object);
 	CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
 	RecalculateAppliedOffers_ForRow(Object);
 EndProcedure
 
+// Get offers info param.
+// 
+// Returns:
+//  Structure - Get offers info param:
+// * OffersAddress - String Of See CommonForm.PickupSpecialOffers.Offers -
+// * ItemListRowKey - String -
+Function GetOffersInfoParam() Export
+	Str = New Structure;
+	Str.Insert("OffersAddress", "");
+	Str.Insert("ItemListRowKey", "");
+	Return Str;
+EndFunction
+
+// Get offers table row.
+// 
+// Returns:
+//  Structure - Get offers table row:
+// * Key - See Document.RetailSalesReceipt.SpecialOffers.Key
+// * Offer - See Document.RetailSalesReceipt.SpecialOffers.Offer
+// * Amount - See Document.RetailSalesReceipt.SpecialOffers.Amount
+// * Percent - See Document.RetailSalesReceipt.SpecialOffers.Percent
+// * Bonus - See Document.RetailSalesReceipt.SpecialOffers.Bonus
+// * AddInfo - See Document.RetailSalesReceipt.SpecialOffers.AddInfo
+Function GetOffersTableRow() Export
+	Str = New Structure;
+	Str.Insert("Key", "");
+	Str.Insert("Offer", Catalogs.SpecialOffers.EmptyRef());
+	Str.Insert("Amount", 0);
+	Str.Insert("Percent", 0);
+	Str.Insert("Bonus", 0);
+	Str.Insert("AddInfo", Undefined);
+	//@skip-check constructor-function-return-section
+	Return Str;
+EndFunction

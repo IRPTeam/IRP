@@ -2360,7 +2360,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
+		NewOfferRow = OffersServer.GetOffersTableRow();
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;

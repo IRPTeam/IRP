@@ -280,6 +280,7 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <defaultItem>true</defaultItem>
             <extendedTooltip>
               <name>FormOKExtendedTooltip</name>
               <id>24</id>
@@ -297,6 +298,7 @@
             </extendedTooltip>
             <commandName>Form.Command.OK</commandName>
             <representation>Auto</representation>
+            <defaultButton>true</defaultButton>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
@@ -578,6 +580,9 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>Offers.Auto</segments>
+    </notDefaultUseAlwaysAttributes>
     <columns>
       <name>Offer</name>
       <title>
@@ -782,6 +787,142 @@
       <id>22</id>
       <valueType>
         <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>23</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Amount</name>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
+      <id>24</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TotalInGroupOffers</name>
+      <title>
+        <key>en</key>
+        <value>Total in group offers</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AllRuleIsOk</name>
+      <title>
+        <key>en</key>
+        <value>All rule is ok</value>
+      </title>
+      <id>26</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Manual</name>
+      <title>
+        <key>en</key>
+        <value>Manual</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ReadyOffer</name>
+      <title>
+        <key>en</key>
+        <value>Ready offer</value>
+      </title>
+      <id>28</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Bonus</name>
+      <title>
+        <key>en</key>
+        <value>Bonus</value>
+      </title>
+      <id>29</id>
+      <valueType>
+        <types>DefinedType.typeSpecialOfferBonus</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AddInfo</name>
+      <title>
+        <key>en</key>
+        <value>Add info</value>
+      </title>
+      <id>30</id>
+      <valueType>
+        <types>DefinedType.typeSpecialOfferAddInfo</types>
       </valueType>
       <view>
         <common>true</common>

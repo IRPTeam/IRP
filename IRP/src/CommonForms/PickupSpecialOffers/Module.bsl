@@ -217,10 +217,9 @@ EndFunction
 
 &AtServer
 Function PutOffersTreeToTempStorage()
-	Result = New Structure();
-	Result.Insert("OffersAddress", PutToTempStorage(FormAttributeToValue("Offers"), ThisObject.UUID));
-	If ValueIsFilled(ThisObject.ItemListRowKey) Then
-		Result.Insert("ItemListRowKey", ThisObject.ItemListRowKey);
-	EndIf;
+	Result = OffersServer.GetOffersInfoParam();
+	Result.OffersAddress = PutToTempStorage(OffersServer.GetSelectedOffersTree(ThisObject), ThisObject.UUID);
+	Result.ItemListRowKey = ThisObject.ItemListRowKey;
 	Return Result;
 EndFunction
+

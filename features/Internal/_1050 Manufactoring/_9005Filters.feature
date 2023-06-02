@@ -28,7 +28,7 @@ Scenario: _9001 preparation
 		* Current day
 			And I click the button named "FormCreate"
 			And I input "Current day" text in "Description" field
-			And I change the radio button named "Type" value to "Manufacturing"		
+			And I set checkbox "Is manufacturing"	
 			And I input current date in "Begin date" field
 			And I input current date in "End date" field
 			And I save the value of "Begin date" field as "$$StartDateCurrentDay$$"
@@ -46,7 +46,7 @@ Scenario: _9001 preparation
 			And I save "Format((EndOfDay(CurrentDate()) + 1), \"DF=dd.MM.yyyy\")" in "$$$$DateNextDay$$$$" variable
 			And I input "$$$$DateNextDay$$$$" variable value in "Begin date" field
 			And I input "$$$$DateNextDay$$$$" variable value in "End date" field
-			And I change the radio button named "Type" value to "Manufacturing"	
+			And I set checkbox "Is manufacturing"
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table
@@ -61,7 +61,7 @@ Scenario: _9001 preparation
 			And I input begin of the current month date in "Begin date" field
 			And I save the value of "Begin date" field as "$$StartDateCurrentMonth$$"
 			And I save the value of "End date" field as "$$EndDateCurrentMonth$$"
-			And I change the radio button named "Type" value to "Manufacturing"	
+			And I set checkbox "Is manufacturing"
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table

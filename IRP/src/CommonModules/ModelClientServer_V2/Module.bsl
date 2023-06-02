@@ -3474,7 +3474,9 @@ Function ClearByTransactionTypeCashExpenseOptions() Export
 		|Partner,
 		|Employee,
 		|OtherCompany,
-		|PaymentPeriod");
+		|PaymentPeriod,
+		|ProfitLossCenter,
+		|ExpenseType");
 EndFunction
 
 Function ClearByTransactionTypeCashExpenseExecute(Options) Export
@@ -3483,14 +3485,23 @@ Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 	Result.Insert("Employee"      , Options.Employee);
 	Result.Insert("OtherCompany"  , Options.OtherCompany);
 	Result.Insert("PaymentPeriod" , Options.PaymentPeriod);
+	Result.Insert("ProfitLossCenter" , Options.ProfitLossCenter);
+	Result.Insert("ExpenseType"      , Options.ExpenseType);
 
-	OtherCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
-	SalaryPayment    = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
+	CurrentCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.CurrentCompanyExpense");
+	OtherCashExpense   = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	SalaryPayment      = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
 	
-	If Options.TransactionType = OtherCashExpense Then
+	If Options.TransactionType = CurrentCashExpense Then
+		StrByType = "
+		|ProfitLossCenter,
+		|ExpenseType";
+	ElsIf Options.TransactionType = OtherCashExpense Then
 		StrByType = "
 		|Partner,
-		|OtherCompany";
+		|OtherCompany,
+		|ProfitLossCenter,
+		|ExpenseType";
 	ElsIf Options.TransactionType = SalaryPayment Then
 		StrByType = "
 		|Partner,

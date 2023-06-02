@@ -1765,10 +1765,12 @@ EndProcedure
 // TransactionType.CashExpense.MultiSet
 Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
 	ResourceToBinding = New Map();
-	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
-	ResourceToBinding.Insert("Employee"      , BindPaymentListEmployee(Parameters));
-	ResourceToBinding.Insert("PaymentPeriod" , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("Partner"          , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("OtherCompany"     , BindOtherCompany(Parameters));
+	ResourceToBinding.Insert("Employee"         , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"    , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter" , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("ExpenseType"      , BindPaymentListExpenseType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1931,6 +1933,8 @@ Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashExpense";
 		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
@@ -5556,6 +5560,50 @@ Function BindPaymentListPaymentPeriod(Parameters)
 	DataPath = "PaymentList.PaymentPeriod";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentPeriod");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_PROFIT_LOSS_CENTER
+
+// PaymentList.ProfitLossCenter.Set
+Procedure SetPaymentListProfitLossCenter(Parameters, Results) Export
+	Binding = BindPaymentListProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ProfitLossCenter.Get
+Function GetPaymentListProfitLossCenter(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListProfitLossCenter(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.ProfitLossCenter.Bind
+Function BindPaymentListProfitLossCenter(Parameters)
+	DataPath = "PaymentList.ProfitLossCenter";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListProfitLossCenter");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_EXPENSE_TYPE
+
+// PaymentList.ExpenseType.Set
+Procedure SetPaymentListExpenseType(Parameters, Results) Export
+	Binding = BindPaymentListExpenseType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ExpenseType.Get
+Function GetPaymentListExpenseType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListExpenseType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.ExpenseType.Bind
+Function BindPaymentListExpenseType(Parameters)
+	DataPath = "PaymentList.ExpenseType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListExpenseType");
 EndFunction
 
 #EndRegion

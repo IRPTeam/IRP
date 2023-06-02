@@ -223,6 +223,66 @@ Scenario: _044107 check Cash revenue movements by the Register "R3027 Employee c
 			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'en description is empty'      | 'No'                   |
 	And I close all client application windows
 
+Scenario: _044108 check Cash revenue movements by the Register "R3011 Cash flow" (Other company revenue)
+		And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 14 dated 04.03.2023 11:03:03' | ''                    | ''          | ''               | ''       | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'            | ''                    | ''          | ''               | ''       | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'               | ''                    | ''          | ''               | ''       | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                          | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                          | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | '04.03.2023 11:03:03' | '85,6'      | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '85,6'      | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '85,6'      | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '171,2'     | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+
+Scenario: _044109 check Cash revenue movements by the Register "R3011 Cash flow" (Current company revenue)
+		And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'           | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'              | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                         | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                         | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                         | '07.09.2020 19:24:49' | '20,2'      | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |			
+	And I close all client application windows
+
 Scenario: _044130 Cash revenue clear posting/mark for deletion
 	And I close all client application windows
 	* Select Cash revenue

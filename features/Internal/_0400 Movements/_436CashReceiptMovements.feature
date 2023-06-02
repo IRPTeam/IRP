@@ -772,3 +772,28 @@ Scenario: _043630 Cash receipt clear posting/mark for deletion
 			| 'R3010 Cash on hand' |
 		And I close all client application windows		
 
+
+Scenario: _043635 check Cash receipt movements by the Register  "R3011 Cash flow"
+	And I close all client application windows
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '513' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 513 dated 04.06.2021 12:50:14' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 12:50:14' | '77,04'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '154,08'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '900'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '900'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows

@@ -569,3 +569,27 @@ Scenario: _043530 Cash payment clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3010 Cash on hand' |
 		And I close all client application windows		
+
+Scenario: _043528 check Cash payment movements by the Register  "R3011 Cash flow"
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '324'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 324 dated 04.06.2021 11:30:02' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 11:30:02' | '164,35'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows

@@ -760,6 +760,35 @@ Scenario: _0433296 check Bank payment movements by the Register  "R9510 Salary p
 			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'en description is empty'      |
 		And I close all client application windows
 
+
+Scenario: _0433297 check Bank payment movements by the Register  "R3011 Cash flow" (return retail customer advance)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '323'   |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                  | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'           | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '03.06.2021 17:01:44' | '68,48'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '171,2'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '256,8'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '400'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '400'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '1 500'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.06.2021 17:01:44' | '1 500'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows
 	* Select Bank payment

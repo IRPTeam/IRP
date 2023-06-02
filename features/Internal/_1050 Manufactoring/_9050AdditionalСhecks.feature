@@ -70,7 +70,7 @@ Scenario: _9050 preparation
 	And I execute 1C:Enterprise script at server
 		| "Documents.InternalSupplyRequest.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |	
 
-
+		
 Scenario: _9051 checking duplicate materials in one BillOfMaterials
 	Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
 	And I click the button named "FormCreate"
@@ -203,7 +203,7 @@ Scenario: _9055 checking that planning periods do not overlap for one Business U
 	And I input "Current month (Manufactory 06)" text in "Description" field
 	And I input end of the current month date in "End date" field
 	And I input begin of the current month date in "Begin date" field
-	And I change the radio button named "Type" value to "Manufacturing"
+	And I set checkbox "Is manufacturing"
 	And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 	And I click choice button of "Business unit" attribute in "BusinessUnits" table
 	And I go to line in "List" table
@@ -218,7 +218,7 @@ Scenario: _9055 checking that planning periods do not overlap for one Business U
 	And I input "Current day (Manufactory 07)" text in "Description" field
 	And I input current date in "Begin date" field
 	And I input current date in "End date" field
-	And I change the radio button named "Type" value to "Manufacturing"
+	And I set checkbox "Is manufacturing"
 	And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 	And I click choice button of "Business unit" attribute in "BusinessUnits" table
 	And I go to line in "List" table

@@ -3824,7 +3824,7 @@ Procedure PlanningPeriodOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "PlanningPeriodOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.PlanningPeriodOnChange(Parameters);
 	EndDo;

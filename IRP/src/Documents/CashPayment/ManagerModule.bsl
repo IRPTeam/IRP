@@ -292,6 +292,7 @@ Function PaymentList()
 		|	END AS IsAdvance,
 		|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
+		|	PaymentList.PaymentPeriod AS PaymentPeriod,
 		|	PaymentList.Partner.Employee AS IsEmployee,
 		|	PaymentList.TotalAmount AS Amount,
 		|	PaymentList.FinancialMovementType AS FinancialMovementType,
@@ -326,6 +327,7 @@ Function R9510B_SalaryPayment()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Employee,
+		|	PaymentList.PaymentPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Amount
 		|INTO R9510B_SalaryPayment

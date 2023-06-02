@@ -61,7 +61,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
 	|PaymentList.RetailCustomer,
-	|PaymentList.Employee";
+	|PaymentList.Employee,
+	|PaymentList.PaymentPeriod";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -122,7 +123,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = SalaryPayment Then
 		StrByType = "
-		|PaymentList.Employee";
+		|PaymentList.Employee,
+		|PaymentList.PaymentPeriod";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -145,6 +147,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	IsPaymentByCheque     = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	IsSalaryPayment       = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	
 	ArrayTypes = New Array();
 	
@@ -177,8 +180,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
-	Form.Items.ChoiceByAccrual.Visible = 
-		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	Form.Items.PaymentListChoiceByAccrual.Enabled = Not Form.ReadOnly;
+	
+	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
 EndProcedure
 
 #EndRegion

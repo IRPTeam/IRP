@@ -26,7 +26,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	OffersServer.FillOffersTreeStatuses(
 		Parameters.Info.Object, 
 		OffersTree,
-		ThisObject.FormType, 
 		ThisObject.ItemListRowKey
 	);
 	
@@ -38,9 +37,8 @@ EndProcedure
 &AtServerNoContext
 Procedure FillOffersTreePresentation(OffersTreeRows)
 	For Each Row In OffersTreeRows Do
-		Row.Presentation = String(Row.Offer);
-		If ValueIsFilled(Row.Rule) Then
-			Row.Presentation = Row.Presentation + " " + String(Row.Rule);
+		If Not Row.isRule Then 
+			Row.Presentation = String(Row.Offer);
 		EndIf;
 		FillOffersTreePresentation(Row.Rows);
 	EndDo;
@@ -84,7 +82,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 
 	thisString = Offers.FindByID(SelectedRow);
 
-	If Not ValueIsFilled(thisString.Offer) Then
+	If Not ValueIsFilled(thisString.Offer) Or thisString.isRule Then
 		Return;
 	EndIf;
 

@@ -324,8 +324,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <use>ForFolder</use>
+    <use>ForFolderAndItem</use>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="20fc2b4b-9b9b-4391-8e0c-85a97819a22a">
+    <name>OfferGroupType</name>
+    <synonym>
+      <key>en</key>
+      <value>Offer group type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.OfferGroupType</types>
+    </type>
+    <use>ForFolderAndItem</use>
   </attributes>
   <tabularSections uuid="0f4c534b-e7a5-4315-af0f-02d495968dc0">
     <producedTypes>

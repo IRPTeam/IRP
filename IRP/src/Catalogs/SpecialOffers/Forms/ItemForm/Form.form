@@ -243,10 +243,6 @@
     <items xsi:type="form:FormField">
       <name>EndOf</name>
       <id>34</id>
-      <title>
-        <key>en</key>
-        <value> </value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -255,6 +251,7 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.EndOf</segments>
       </dataPath>
+      <titleLocation>None</titleLocation>
       <extendedTooltip>
         <name>EndOfExtendedTooltip</name>
         <id>36</id>

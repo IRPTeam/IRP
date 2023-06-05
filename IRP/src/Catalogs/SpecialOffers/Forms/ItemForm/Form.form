@@ -484,24 +484,6 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
-        <choiceList>
-          <presentation>
-            <key>en</key>
-            <value>For document</value>
-          </presentation>
-          <value xsi:type="core:ReferenceValue">
-            <value>Enum.SpecialOfferTypes.EnumValue.ForDocument</value>
-          </value>
-        </choiceList>
-        <choiceList>
-          <presentation>
-            <key>en</key>
-            <value>For row</value>
-          </presentation>
-          <value xsi:type="core:ReferenceValue">
-            <value>Enum.SpecialOfferTypes.EnumValue.ForRow</value>
-          </value>
-        </choiceList>
       </extInfo>
     </items>
     <visible>true</visible>

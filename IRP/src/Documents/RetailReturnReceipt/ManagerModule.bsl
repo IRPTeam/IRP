@@ -17,7 +17,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	"SELECT
 	|	Payments.Ref.Date AS Period,
 	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref.Branch AS Branch,
 	|	Payments.Ref.Currency AS Currency,
 	|	Payments.Account AS FromAccount,
 	|	Payments.Ref AS BasisDocument,

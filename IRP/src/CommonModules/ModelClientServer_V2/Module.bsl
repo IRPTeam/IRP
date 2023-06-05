@@ -3107,7 +3107,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
-		|TransitAccount"; 
+		|TransitAccount";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor 
 		Or Options.TransactionType = Outgoing_ReturnToCustomer
 		Or Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
@@ -3305,7 +3305,10 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
 		StrByType = "";
-	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Or Options.TransactionType = Outgoing_EmployeeCashAdvance Then
+	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then 
+		StrByType = "
+		|Partner";
+	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
 	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then

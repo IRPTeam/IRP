@@ -112,7 +112,7 @@ EndFunction
 Function MoneyReceiver()
 	Return "SELECT
 		   |	CashTransferOrder.Company AS Company,
-		   |	CashTransferOrder.Ref.Branch AS Branch,
+		   |	CashTransferOrder.Ref.ReceiveBranch AS ReceiveBranch,
 		   |	CashTransferOrder.Ref AS Ref,
 		   |	CashTransferOrder.Receiver AS Account,
 		   |	CashTransferOrder.ReceiveAmount AS Amount,
@@ -152,7 +152,7 @@ Function R3035T_CashPlanning()
 		   |	MoneyReceiver.Period,
 		   |	MoneyReceiver.ReceivePeriod,
 		   |	MoneyReceiver.Company,
-		   |	MoneyReceiver.Branch,
+		   |	MoneyReceiver.ReceiveBranch,
 		   |	MoneyReceiver.Account,
 		   |	MoneyReceiver.Amount,
 		   |	MoneyReceiver.Currency,

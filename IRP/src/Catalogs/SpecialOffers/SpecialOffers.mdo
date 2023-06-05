@@ -146,6 +146,7 @@
   <defaultFolderForm>Catalog.SpecialOffers.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.SpecialOffers.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.SpecialOffers.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.SpecialOffers.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="fab4eaec-2a2f-40c0-ba87-06946e527260">
     <name>Settings</name>
@@ -173,7 +174,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <createOnInput>Use</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
     <use>ForFolderAndItem</use>
@@ -438,6 +438,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="424ed3da-99fd-471d-bf4e-821f5346eb38">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

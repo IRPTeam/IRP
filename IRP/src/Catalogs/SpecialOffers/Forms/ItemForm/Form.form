@@ -387,7 +387,7 @@
       <id>50</id>
       <title>
         <key>en</key>
-        <value>Type</value>
+        <value>Document type</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>

@@ -106,6 +106,15 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_PERIOD
+
+&AtClient
+Procedure PaymentPeriodOnChange(Item)
+	DocPayrollClient.PaymentPeriodOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region COMPANY
 
 &AtClient

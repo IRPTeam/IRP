@@ -230,6 +230,28 @@ Scenario: _045405 check absence CashStatement movements by the Register "R3050 P
 	And I close all client application windows
 
 
+Scenario: _045406 check CashStatement movements by the Register  "R3011 Cash flow"
+		And I close all client application windows
+	* Select CashStatement
+		Given I open hyperlink "e1cib/list/Document.CashStatement"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '11' |
+	* Check movements by the Register  "R3011 Cash flow"
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'              | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                 | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
 Scenario: _045430 Cash statement clear posting/mark for deletion
 	And I close all client application windows
 	* Select CashStatement

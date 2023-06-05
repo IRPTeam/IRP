@@ -322,6 +322,7 @@ Function PaymentList()
 	|	PaymentList.PlaningTransactionBasis.Sender AS FromAccount,
 	|	PaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 	|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
+	|	PaymentList.PaymentPeriod AS PaymentPeriod,
 	|	PaymentList.Ref AS Basis,
 	|	PaymentList.Key AS Key,
 	|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
@@ -361,6 +362,7 @@ Function R9510B_SalaryPayment()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Employee,
+		|	PaymentList.PaymentPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.TotalAmount - PaymentList.Commission AS Amount
 		|INTO R9510B_SalaryPayment

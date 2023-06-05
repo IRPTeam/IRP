@@ -580,6 +580,7 @@ Function SalaryPayment()
 		|	SalaryPayment.Ref.Branch AS Branch,
 		|	SalaryPayment.Currency,
 		|	SalaryPayment.Employee,
+		|	SalaryPayment.PaymentPeriod,
 		|	SalaryPayment.Amount AS Amount,
 		|	SalaryPayment.Ref.Date AS Period,
 		|	SalaryPayment.Key

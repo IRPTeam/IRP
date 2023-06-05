@@ -239,9 +239,9 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.PlanningPeriodTypes.EnumValue.Financial</value>
+      <name>Filter.IsFinancial</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>

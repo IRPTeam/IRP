@@ -299,9 +299,9 @@
       <field>Document.Production.Attribute.BusinessUnit</field>
     </choiceParameterLinks>
     <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.PlanningPeriodTypes.EnumValue.Manufacturing</value>
+      <name>Filter.IsManufacturing</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>

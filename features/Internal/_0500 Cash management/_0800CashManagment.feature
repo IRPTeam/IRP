@@ -57,8 +57,10 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		And I click the button named "FormCreate"
 		And I input "Begin of the next month" text in "Description" field
 		And I input begin of the next month date in "Begin date" field
+		Then "Planning period (create) *" window is opened
+		And I set checkbox "Is financial"
 		And I input begin of the next month date in "End date" field
-		And I change the radio button named "Type" value to "Financial"
+		And I set checkbox "Is financial"
 		And I click the button named "FormWriteAndClose"
 		And "List" table contains lines
 			| 'Description'             |

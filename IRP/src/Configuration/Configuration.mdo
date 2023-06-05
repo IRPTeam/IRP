@@ -915,7 +915,6 @@
   <enums>Enum.OffersDocumentTypes</enums>
   <enums>Enum.OutgoingPaymentTransactionTypes</enums>
   <enums>Enum.PaymentTypes</enums>
-  <enums>Enum.PlanningPeriodTypes</enums>
   <enums>Enum.PriceAssignment</enums>
   <enums>Enum.PriceListTypes</enums>
   <enums>Enum.PrintTemplateTypes</enums>

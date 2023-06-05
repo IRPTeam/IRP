@@ -28,6 +28,7 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
+	AttributesArray.Add("PaymentPeriod");
 	AttributesArray.Add("BeginDate");
 	AttributesArray.Add("EndDate");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
@@ -178,6 +179,7 @@ EndFunction
 Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Employee");
+	ValueTable.Columns.Add("PaymentPeriod");
 	ValueTable.Columns.Add("NetAmount");
 	ValueTable.Columns.Add("TotalAmount");
 	
@@ -187,7 +189,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 		NewRow.NetAmount  = Row.Amount;
 		NewRow.TotalAmount = Row.Amount;
 	EndDo;
-	GroupColumn = "Employee";
+	GroupColumn = "Employee, PaymentPeriod";
 	SumColumn = "NetAmount, TotalAmount";
 	ValueTable.GroupBy(GroupColumn, SumColumn);
 	Address = PutToTempStorage(ValueTable, FormUUID);

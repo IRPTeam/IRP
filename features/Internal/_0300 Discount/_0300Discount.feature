@@ -1302,6 +1302,7 @@ Scenario: _030030 create Discount coupon
 		And I go to line in "List" table
 			| Description      |
 			| DocumentDiscount |
+		And I click the button named "FormChoose"
 		And I click "Save" button
 		And I click "Set settings" button
 		And I input "10,00" text in "Default percent" field

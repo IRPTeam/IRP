@@ -601,44 +601,35 @@ Procedure DeleteDoublesGroups(OffersTree)
 EndProcedure
 
 Procedure CalculateOfferAmount(OffersTree, ItemList, SpecialOffers, ItemListRowKey)
-	For Each Row In OffersTree.Rows Do
-		If ValueIsFilled(Row.Offer) And Not Row.isFolder Then
-			SearchFilter = New Structure();
-			SearchFilter.Insert("Offer", Row.Offer);
+    For Each Row In OffersTree.Rows Do
+        If ValueIsFilled(Row.Offer) And Not Row.isFolder Then
+            SearchFilter = New Structure();
+            SearchFilter.Insert("Offer", Row.Offer);
 
-			If ValueIsFilled(ItemListRowKey) Then
-				SearchFilter.Insert("Key", ItemListRowKey);
-			EndIf;
+            If ValueIsFilled(ItemListRowKey) Then
+                SearchFilter.Insert("Key", ItemListRowKey);
+            EndIf;
 
-			SpecialOffersCopy = SpecialOffers.Copy(SearchFilter);
-			Row.TotalAmount = SpecialOffersCopy.Total("Amount");
-			sum = 0;
-			For Each i In SpecialOffersCopy Do
-				SearchFilter = New Structure();
-				SearchFilter.Insert("Key", i.Key);
-				ItemListCopy = ItemList.Copy(SearchFilter);
-				For Each j In ItemListCopy Do
-					If ValueIsFilled(j.Unit) And j.Unit.Quantity > 0 Then
-						sum = sum + (j.Price * j.Quantity * j.Unit.Quantity);
-					Else
-						sum = sum + (j.Price * j.Quantity);
-					EndIf;
-				EndDo;
-			EndDo;
-			If sum <> 0 Then
-				Row.TotalPercent = Row.TotalAmount / (sum / 100);
-			Else
-				Row.TotalPercent = 0;
-			EndIf;
+            SpecialOffersCopy = SpecialOffers.Copy(SearchFilter);
 
-			If ValueIsFilled(Row.TotalPercent) And IsOfferForRow(Row.Offer) And Row.Offer.Manually Then
-				Row.IsSelect = True;
-			EndIf;
+            If SpecialOffersCopy.Count() = 0 Then
+                Continue;
+            EndIf;
 
-		EndIf;
+            Row.TotalPercent = SpecialOffersCopy.Total("Percent") / SpecialOffersCopy.Count();
 
-		CalculateOfferAmount(Row, ItemList, SpecialOffers, ItemListRowKey);
-	EndDo;
+            If Row.TotalPercent = 0 Then
+                 Row.TotalAmount = SpecialOffersCopy.Total("Amount");
+            EndIf;
+
+            If ValueIsFilled(Row.TotalPercent) And IsOfferForRow(Row.Offer) And Row.Offer.Manually Then
+                Row.IsSelect = True;
+            EndIf;
+
+        EndIf;
+
+        CalculateOfferAmount(Row, ItemList, SpecialOffers, ItemListRowKey);
+    EndDo;
 
 EndProcedure
 
@@ -836,7 +827,8 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 				CalculateOfferParam.Rule = StrOfferRule.Rule;
 				CalculateOfferParam.ItemListRowKey = OffersInfo.ItemListRowKey;
 				CalculateOfferParam.StrOffers = StrOffers;
-				If Not CheckRule(CalculateOfferParam) Then
+				AllRuleIsOk = CheckRule(CalculateOfferParam);
+				If Not AllRuleIsOk Then
 					Break;
 				EndIf;
 			EndDo;
@@ -859,14 +851,14 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 				CalculateOfferParam.ItemListRowKey = OffersInfo.ItemListRowKey;
 				CalculateOfferParam.StrOffers = StrOffers;
 				OfferCalculateIsOk = True;
-				If OffersInfo.Property("ItemListRowKey") Then
+				If Not IsBlankString(OffersInfo.ItemListRowKey) Then
 					OfferCalculateIsOk = CalculateOffer_ForRow(CalculateOfferParam);
 				Else
 					OfferCalculateIsOk = CalculateOffer_ForDocument(CalculateOfferParam);
 				EndIf;
 
 				If OfferCalculateIsOk Then
-					If OffersInfo.Property("ItemListRowKey") Then
+					If Not IsBlankString(OffersInfo.ItemListRowKey) Then
 						StrOffers.Amount = 0;
 						KeyRows = StrOffers.Rows.FindRows(New Structure("Key", OffersInfo.ItemListRowKey));
 						For Each KeyRow In KeyRows Do
@@ -886,7 +878,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 		ElsIf StrOffers.isFolder Then
 			
-			If StrOffers.isSequential And Not OffersInfo.Property("ItemListRowKey") And Object.ItemList.Count() > 0 Then
+			If StrOffers.isSequential And Object.ItemList.Count() > 0 Then
 				
 				RowOffersInfo = New Structure;
 				RowOffersInfo.Insert("ItemListRowKey", "");
@@ -901,7 +893,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 					StrOffers.Amount = StrOffers.Rows.Total("Amount");
 					StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
-					StrOffers.AllRuleIsOk = StrOffers.Rows.FindRows(New Structure("AllRuleIsOk", False)).Count() = 0;
+					StrOffers.AllRuleIsOk = StrOffers.Rows.FindRows(New Structure("AllRuleIsOk", True)).Count() > 0;
 
 					If StrOffers.AllRuleIsOk Then
 						CalculateOfferParam = GetCalculateOfferParam();
@@ -922,15 +914,13 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 				StrOffers.Amount = StrOffers.Rows.Total("Amount");
 				StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
-				StrOffers.AllRuleIsOk = StrOffers.Rows.FindRows(New Structure("AllRuleIsOk", False)).Count() = 0;
+				StrOffers.AllRuleIsOk = StrOffers.Rows.FindRows(New Structure("AllRuleIsOk", True)).Count() > 0;
 
-				If StrOffers.AllRuleIsOk Then
-					CalculateOfferParam = GetCalculateOfferParam();
-					CalculateOfferParam.Object = Object;
-					CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
-					CalculateOfferParam.StrOffers = StrOffers;
-					CalculateOfferGroup(CalculateOfferParam);
-				EndIf;
+				CalculateOfferParam = GetCalculateOfferParam();
+				CalculateOfferParam.Object = Object;
+				CalculateOfferParam.OfferType = StrOffers.Offer.SpecialOfferType;
+				CalculateOfferParam.StrOffers = StrOffers;
+				CalculateOfferGroup(CalculateOfferParam);
 				
 			EndIf;
 

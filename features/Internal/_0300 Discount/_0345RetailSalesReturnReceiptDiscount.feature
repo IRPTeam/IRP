@@ -192,9 +192,9 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 			And I select current line in "Offers" table
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
-				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
+				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'   | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "8 870,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "41 211,87"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 418,13"

@@ -87,8 +87,8 @@ Scenario: _034501 check discount in Retail sales receipt
 			And in the table "ItemList" I click "% Offers" button
 			Then "Pickup special offers" window is opened
 			And I go to line in "Offers" table
-				| '%'    | 'Is select' | 'Presentation'     | 'Amount'        |
-				| '5,00' | '✔'         | 'Discount Price 1' | '2 875,00' |
+				| 'Presentation'     |
+				| 'Discount Price 1' |
 			And I activate "Is select" field in "Offers" table
 			And I select current line in "Offers" table
 			And I go to line in "Offers" table

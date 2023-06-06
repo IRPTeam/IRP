@@ -95,11 +95,11 @@ Scenario: move the Discount 2 without Vat special offer from Maximum to Minimum
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '2'        | 'Minimum'            |
+		| 'Priority' | 'Description' |
+		| '4'        | 'Min'         |
 	And I click the button named "FormChoose"
 
 Scenario: move Discount 2 without Vat and Discount 1 without Vat discounts from the group Minimum to the group Maximum
@@ -111,11 +111,11 @@ Scenario: move Discount 2 without Vat and Discount 1 without Vat discounts from 
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '3'        | 'Maximum'            |
+		| 'Priority' | 'Description' |
+		| '2'        | 'Maximum'     |
 	And I click the button named "FormChoose"
 	Then "Special offers" window is opened
 	And I go to line in "List" table
@@ -124,8 +124,8 @@ Scenario: move Discount 2 without Vat and Discount 1 without Vat discounts from 
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '3'        | 'Maximum'            |
+		| 'Priority' | 'Description' |
+		| '2'        | 'Maximum'     |
 	And I click the button named "FormChoose"
 
 Scenario: transfer Discount 2 without Vat and Discount 1 without Vat discounts from Maximum to Minimum
@@ -137,11 +137,11 @@ Scenario: transfer Discount 2 without Vat and Discount 1 without Vat discounts f
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
-		| 'Minimum'            |
+		| 'Description' |
+		| 'Min'            |
 	And I click the button named "FormChoose"
 	Then "Special offers" window is opened
 	And I go to line in "List" table
@@ -150,8 +150,8 @@ Scenario: transfer Discount 2 without Vat and Discount 1 without Vat discounts f
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I go to line in "List" table
-		| 'Special offer type' |
-		| 'Minimum'            |
+		| 'Description' |
+		| 'Min'            |
 	And I click the button named "FormChoose"
 
 Scenario: transfer the Discount Price 2 discount to the Minimum group
@@ -163,11 +163,11 @@ Scenario: transfer the Discount Price 2 discount to the Minimum group
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
-		| 'Minimum'            |
+		| 'Description' |
+		| 'Min'            |
 	And I click the button named "FormChoose"
 
 Scenario: change the Discount Price 2 manual
@@ -237,11 +237,11 @@ Scenario:  move the Discount Price 1 to Minimum
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
-		| 'Minimum'            |
+		| 'Description' |
+		| 'Min'            |
 	And I click the button named "FormChoose"
 
 Scenario:  move the Discount Price 1 to Maximum
@@ -269,10 +269,10 @@ Scenario:  move the Discount Price 2 special offer to Maximum
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
+		| 'Description' |
 		| 'Maximum'            |
 	And I click the button named "FormChoose"
 
@@ -285,11 +285,11 @@ Scenario: move the special offer Discount Price 2 to Minimum (for test)
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
-		| 'Minimum'            |
+		| 'Description' |
+		| 'Min'            |
 	And I click the button named "FormChoose"
 
 Scenario: move the Discount Price 1 to Sum
@@ -301,10 +301,10 @@ Scenario: move the Discount Price 1 to Sum
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
+		| 'Description' |
 		| 'Sum'            |
 	And I click the button named "FormChoose"
 
@@ -317,10 +317,10 @@ Scenario: move the Discount Price 2 special offer to Sum
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I expand a line in "List" table
-		| 'Priority' | 'Special offer type' |
+		| 'Priority' | 'Description' |
 		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
-		| 'Special offer type' |
+		| 'Description' |
 		| 'Sum'            |
 	And I click the button named "FormChoose"
 
@@ -419,7 +419,7 @@ Scenario: move the Discount 1 without Vat discount to the Sum in Minimum group
 		| 'Priority' | 'Description'    |
 		| '1'        | 'Special Offers' |
 	And I go to line in "List" table
-		| 'Special offer type' |
+		| 'Description' |
 		| 'Min'            |
 	And I move one level down in "List" table
 	And I go to line in "List" table

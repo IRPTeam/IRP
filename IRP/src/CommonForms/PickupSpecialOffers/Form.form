@@ -19,20 +19,120 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <excludedCommands>Choose</excludedCommands>
-        <items xsi:type="form:FormField">
-          <name>OffersPresentation</name>
-          <id>66</id>
+        <items xsi:type="form:FormGroup">
+          <name>OffersGroupPresentation</name>
+          <id>69</id>
+          <items xsi:type="form:FormField">
+            <name>OffersPresentation</name>
+            <id>66</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Offers.Presentation</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>OffersPresentationExtendedTooltip</name>
+              <id>68</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>OffersPresentationContextMenu</name>
+              <id>67</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <readOnly>true</readOnly>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>OffersOfferGroupType</name>
+            <id>71</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Offers.OfferGroupType</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>OffersOfferGroupTypeExtendedTooltip</name>
+              <id>73</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>OffersOfferGroupTypeContextMenu</name>
+              <id>72</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Offers.Presentation</segments>
-          </dataPath>
+          <title>
+            <key>en</key>
+            <value>Presentetion</value>
+          </title>
           <extendedTooltip>
-            <name>OffersPresentationExtendedTooltip</name>
-            <id>68</id>
+            <name>OffersGroupPresentationExtendedTooltip</name>
+            <id>70</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -45,29 +145,10 @@
               <horizontalAlign>Left</horizontalAlign>
             </extInfo>
           </extendedTooltip>
-          <contextMenu>
-            <name>OffersPresentationContextMenu</name>
-            <id>67</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <readOnly>true</readOnly>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
+          <type>ColumnGroup</type>
+          <extInfo xsi:type="form:ColumnGroupExtInfo">
+            <group>InCell</group>
+            <showTitle>true</showTitle>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -280,6 +361,7 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <defaultItem>true</defaultItem>
             <extendedTooltip>
               <name>FormOKExtendedTooltip</name>
               <id>24</id>
@@ -297,6 +379,7 @@
             </extendedTooltip>
             <commandName>Form.Command.OK</commandName>
             <representation>Auto</representation>
+            <defaultButton>true</defaultButton>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
@@ -780,6 +863,197 @@
         <value>Manual input value</value>
       </title>
       <id>22</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>23</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Amount</name>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
+      <id>24</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TotalInGroupOffers</name>
+      <title>
+        <key>en</key>
+        <value>Total in group offers</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AllRuleIsOk</name>
+      <title>
+        <key>en</key>
+        <value>All rule is ok</value>
+      </title>
+      <id>26</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Manual</name>
+      <title>
+        <key>en</key>
+        <value>Manual</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ReadyOffer</name>
+      <title>
+        <key>en</key>
+        <value>Ready offer</value>
+      </title>
+      <id>28</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Bonus</name>
+      <title>
+        <key>en</key>
+        <value>Bonus</value>
+      </title>
+      <id>29</id>
+      <valueType>
+        <types>DefinedType.typeSpecialOfferBonus</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>AddInfo</name>
+      <title>
+        <key>en</key>
+        <value>Add info</value>
+      </title>
+      <id>30</id>
+      <valueType>
+        <types>DefinedType.typeSpecialOfferAddInfo</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>31</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <scale>2</scale>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>OfferGroupType</name>
+      <title>
+        <key>en</key>
+        <value>Offer group type</value>
+      </title>
+      <id>32</id>
+      <valueType>
+        <types>EnumRef.OfferGroupType</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>isRule</name>
+      <title>
+        <key>en</key>
+        <value>Is rule</value>
+      </title>
+      <id>33</id>
       <valueType>
         <types>Boolean</types>
       </valueType>

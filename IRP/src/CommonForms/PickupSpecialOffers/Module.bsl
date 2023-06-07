@@ -2,46 +2,9 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.FormParametersInfo = Parameters.Info;
 	ThisObject.FormType = Parameters.Info.Type;
-
-	If ThisObject.FormType = "Offers_ForDocument" Then
-		OffersTree = OffersServer.CreateOffersTree(
-			Parameters.Info.Object, 
-			Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers, 
-			Parameters.Info.ArrayOfOffers
-		);
-
-	ElsIf ThisObject.FormType = "Offers_ForRow" Then
-
-		ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
-
-		OffersTree = OffersServer.CreateOffersTree(
-			Parameters.Info.Object,
-			Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers,
-			Parameters.Info.ArrayOfOffers,
-			ThisObject.ItemListRowKey
-		);
-	EndIf;
-	OffersServer.FillOffersTreeStatuses(
-		Parameters.Info.Object, 
-		OffersTree,
-		ThisObject.ItemListRowKey
-	);
-	
-	FillOffersTreePresentation(OffersTree.Rows);
+	ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
+	OffersTree = OffersServer.FillOffersTree(Parameters.Info);
 	ValueToFormAttribute(OffersTree, "Offers");
-
-EndProcedure
-
-&AtServerNoContext
-Procedure FillOffersTreePresentation(OffersTreeRows)
-	For Each Row In OffersTreeRows Do
-		If Not Row.isRule Then 
-			Row.Presentation = String(Row.Offer);
-		EndIf;
-		FillOffersTreePresentation(Row.Rows);
-	EndDo;
 EndProcedure
 
 &AtClient

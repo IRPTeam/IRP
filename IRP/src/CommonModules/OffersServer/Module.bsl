@@ -64,33 +64,16 @@ EndFunction
 //  AddInfo - Undefined - Add info
 // 
 // Returns:
-//  Structure - Recalculate offers:
-// * OffersAddress - String -
-// * ItemListRowKey - Undefined -
+//  See GetOffersInfoParam
 Function RecalculateOffers(Object, Form, AddInfo = Undefined) Export
 	OpenFormArgs = OffersClientServer.GetOpenFormArgsPickupSpecialOffers_ForDocument(Object);
 	
-	OffersTree = CreateOffersTree(
-			OpenFormArgs.Object, 
-			OpenFormArgs.Object.ItemList,
-			OpenFormArgs.Object.SpecialOffers, 
-			OpenFormArgs.ArrayOfOffers
-	);
-
-	FillOffersTreeStatuses(
-		OpenFormArgs.Object, 
-		OffersTree,
-		OpenFormArgs.ItemListRowKey
-	);
+	OffersTree = FillOffersTree(OpenFormArgs);
 	
-	Result = New Structure();
-	Result.Insert("OffersAddress", PutToTempStorage(OffersTree));
-	If ValueIsFilled(OpenFormArgs.ItemListRowKey) Then
-		Result.Insert("ItemListRowKey", OpenFormArgs.ItemListRowKey);
-	EndIf;
-	
+	Result = GetOffersInfoParam();
+	Result.OffersAddress = PutToTempStorage(OffersTree);
+	Result.ItemListRowKey = OpenFormArgs.ItemListRowKey;
 	Return Result;
-	
 EndFunction
 
 #EndRegion
@@ -374,6 +357,46 @@ EndFunction
 
 #EndRegion
 
+#Region PickupOffersForm
+
+Procedure FillOffersTreePresentation(OffersTreeRows)
+	For Each Row In OffersTreeRows Do
+		If Not Row.isRule Then 
+			Row.Presentation = String(Row.Offer);
+		EndIf;
+		FillOffersTreePresentation(Row.Rows);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+// Fill offers tree.
+// 
+// Parameters:
+//  Parameters - See OffersClientServer.GetOpenFormArgsPickupSpecialOffers_ForDocument
+// 
+// Returns:
+//  See CreateOffersTree
+Function FillOffersTree(Parameters) Export
+
+	OffersTree = CreateOffersTree(
+			Parameters.Object,
+			Parameters.Object.ItemList,
+			Parameters.Object.SpecialOffers,
+			Parameters.ArrayOfOffers,
+			Parameters.ItemListRowKey
+		);
+	FillOffersTreeStatuses(
+		Parameters.Object, 
+		OffersTree,
+		Parameters.ItemListRowKey
+	);
+	
+	FillOffersTreePresentation(OffersTree.Rows);
+	//@skip-check constructor-function-return-section
+	Return OffersTree;
+EndFunction
+
 // Get selected offers tree.
 // 
 // Parameters:
@@ -467,13 +490,13 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 	|	SpecialOffers.IsFolder AS isFolder,
 	|	CASE
 	|		WHEN SpecialOffers.Manually
-	|			THEN 0
-	|		ELSE 1
+	|			THEN False
+	|		ELSE True
 	|	END AS isSelect,
 	|	NOT SpecialOffers.Manually AS Auto,
 	|	SpecialOffers.Priority AS Priority,
 	|	SpecialOffers.SequentialCalculationForEachRow AS isSequential,
-	|	ISNULL(SpecialOffers.ManualInputValue, False) AS ManualInputValue
+	|	SpecialOffers.ManualInputValue AS ManualInputValue
 	|FROM
 	|	Catalog.SpecialOffers AS SpecialOffers
 	|WHERE
@@ -487,32 +510,42 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 
 	Query.SetParameter("ArrayOfOffers", ArrayOfOffers);
 	QueryResult = Query.Execute();
-	OffersTree = QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy); // See CreateOffersTree
-	DeleteDoublesGroups(OffersTree);
+	OffersTreeResult = QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy); // See CreateOffersTree
 	
-	OffersTree.Columns.Add("AddInfo", Metadata.DefinedTypes.typeSpecialOfferAddInfo.Type);
+	OffersTree = New ValueTree();
+	OffersTree.Columns.Add("Offer", New TypeDescription("CatalogRef.SpecialOffers"));
+	OffersTree.Columns.Add("OfferGroupType", New TypeDescription("EnumRef.OfferGroupType"));
+	OffersTree.Columns.Add("isFolder", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("isSelect", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("Auto", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("isSequential", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("ManualInputValue", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("Priority", New TypeDescription("Number", , , New NumberQualifiers(3, 0)));
+	
 	OffersTree.Columns.Add("Presentation", New TypeDescription("String", , , , New StringQualifiers(1024)));
 	OffersTree.Columns.Add("Key", New TypeDescription("String", , , , New StringQualifiers(36)));
+
 	OffersTree.Columns.Add("TotalPercent", New TypeDescription("Number", , , New NumberQualifiers(6, 3)));
 	OffersTree.Columns.Add("Percent", New TypeDescription("Number", , , New NumberQualifiers(6, 3)));
-	OffersTree.Columns.Add("RuleStatus", New TypeDescription("Number", , , New NumberQualifiers(1, 0)));
+
 	OffersTree.Columns.Add("TotalAmount", Metadata.DefinedTypes.typeAmount.Type);
 	OffersTree.Columns.Add("Amount", Metadata.DefinedTypes.typeAmount.Type);
 	OffersTree.Columns.Add("TotalInGroupOffers", Metadata.DefinedTypes.typeAmount.Type);
-	OffersTree.Columns.Add("Bonus", Metadata.DefinedTypes.typeSpecialOfferBonus.Type);
-	OffersTree.Columns.Add("Rule", New TypeDescription("CatalogRef.SpecialOfferRules"));
+
 	OffersTree.Columns.Add("AllRuleIsOk", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("Manual", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("ReadyOffer", New TypeDescription("Boolean"));
-	OffersTree.Columns.Add("isRule", New TypeDescription("Boolean"));
 
-	Call_CalculateOfferAmount = True;
-	If AddInfo <> Undefined And AddInfo.Property("Call_CalculateOfferAmount") Then
-		Call_CalculateOfferAmount = AddInfo.Call_CalculateOfferAmount;
-	EndIf;
-	If Call_CalculateOfferAmount Then
-		CalculateOfferAmount(OffersTree, ItemList.Unload(), SpecialOffers.Unload(), ItemListRowKey);
-	EndIf;
+	OffersTree.Columns.Add("isRule", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("Rule", New TypeDescription("CatalogRef.SpecialOfferRules"));
+	OffersTree.Columns.Add("RuleStatus", New TypeDescription("Number", , , New NumberQualifiers(1, 0)));
+
+	OffersTree.Columns.Add("Bonus", Metadata.DefinedTypes.typeSpecialOfferBonus.Type);
+	OffersTree.Columns.Add("AddInfo", Metadata.DefinedTypes.typeSpecialOfferAddInfo.Type);
+
+	DeleteDoublesGroups(OffersTree, OffersTreeResult);
+
+	CalculateOfferAmount(OffersTree, ItemList.Unload(), SpecialOffers.Unload(), ItemListRowKey);
 
 	For Each Row In SpecialOffers Do
 		SearchFilter = New Structure("Offer", Row.Offer);
@@ -585,17 +618,14 @@ Function CheckRule(CalculateOfferParam)
 	Return Result.Success;
 EndFunction
 
-Procedure DeleteDoublesGroups(OffersTree)
-	For Each Str In OffersTree.Rows Do
-		
-		If Str.isFolder Then
-			
-		EndIf;
-		
+Procedure DeleteDoublesGroups(OffersTree, OffersTreeResult)
+	For Each Str In OffersTreeResult.Rows Do
 		If Str.Rows.Count() Then
-			DeleteDoublesGroups(Str);
+			NewStr = OffersTree.Rows.Add();
+			FillPropertyValues(NewStr, Str);
+			DeleteDoublesGroups(NewStr, Str);
 		Else
-			OffersTree.Rows.Delete(Str);
+			OffersTreeResult.Rows.Delete(Str);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -622,7 +652,7 @@ Procedure CalculateOfferAmount(OffersTree, ItemList, SpecialOffers, ItemListRowK
                  Row.TotalAmount = SpecialOffersCopy.Total("Amount");
             EndIf;
 
-            If ValueIsFilled(Row.TotalPercent) And IsOfferForRow(Row.Offer) And Row.Offer.Manually Then
+            If (ValueIsFilled(Row.TotalPercent) OR ValueIsFilled(Row.TotalAmount)) And IsOfferForRow(Row.Offer) And Row.Offer.Manually Then
                 Row.IsSelect = True;
             EndIf;
 
@@ -1103,9 +1133,9 @@ Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure CalculateAndLoadOffers_ForRow(Object, OffersAddress, ItemListRowKey) Export
-	OffersInfo = New Structure();
-	OffersInfo.Insert("OffersAddress"  , OffersAddress);
-	OffersInfo.Insert("ItemListRowKey" , ItemListRowKey);
+	OffersInfo = GetOffersInfoParam();
+	OffersInfo.OffersAddress = OffersAddress;
+	OffersInfo.ItemListRowKey = ItemListRowKey;
 	
 	TreeByOneOfferAddress = CalculateOffersTreeAndPutToTmpStorage_ForRow(Object, OffersInfo);
 	
@@ -1123,9 +1153,9 @@ EndProcedure
 //  Object - DefinedType.typeObjectWithSpecialOffers - Object
 //  OffersAddress - String - Offers address
 Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
-	OffersInfo = New Structure();
-	OffersInfo.Insert("OffersAddress", OffersAddress);
-	OffersInfo.Insert("ItemListRowKey", "");
+	OffersInfo = GetOffersInfoParam();
+	OffersInfo.OffersAddress = OffersAddress;
+	OffersInfo.ItemListRowKey = "";
 	
 	OffersAddress = CalculateOffersTreeAndPutToTmpStorage_ForDocument(Object, OffersInfo);
 	

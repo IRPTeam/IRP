@@ -46,7 +46,7 @@ Scenario: _034901 preparation (discounts in POS)
 		And I click "List" button
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Сonsistently'       |
+			| 'Consequentially'       |
 		And I click the button named "FormChoose"
 	* Workstation
 		When Create catalog Workstations objects

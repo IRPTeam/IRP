@@ -45,7 +45,7 @@ Scenario: _034901 preparation (discounts in POS)
 		Then "Special offers" window is opened
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Special offer type' |
+			| 'Description' |
 			| 'Сonsistently'       |
 		And I click the button named "FormChoose"
 	* Workstation

@@ -143,6 +143,27 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="730b4cfd-31e1-466c-8de4-675dc88ae02f">
+    <name>PaymentPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment period</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PlanningPeriods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IsSalary</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="c312c302-5825-4231-84ed-c654c3d208be">
     <name>DocumentForm</name>
     <synonym>

@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.22.2281</version>
+  <version>2023.23.2320</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -614,6 +614,7 @@
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
   <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
+  <definedTypes>DefinedType.typeObjectWithSpecialOffers</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -914,7 +915,6 @@
   <enums>Enum.OffersDocumentTypes</enums>
   <enums>Enum.OutgoingPaymentTransactionTypes</enums>
   <enums>Enum.PaymentTypes</enums>
-  <enums>Enum.PlanningPeriodTypes</enums>
   <enums>Enum.PriceAssignment</enums>
   <enums>Enum.PriceListTypes</enums>
   <enums>Enum.PrintTemplateTypes</enums>
@@ -943,6 +943,7 @@
   <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
   <enums>Enum.ProductionTransactionTypes</enums>
+  <enums>Enum.OfferGroupType</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1072,7 +1073,7 @@
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3010B_CashOnHand</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3011T_CashMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3011T_CashFlow</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3015B_CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>

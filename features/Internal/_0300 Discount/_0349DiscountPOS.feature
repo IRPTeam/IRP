@@ -45,8 +45,8 @@ Scenario: _034901 preparation (discounts in POS)
 		Then "Special offers" window is opened
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Special offer type' |
-			| 'Сonsistently'       |
+			| 'Description' |
+			| 'Consequentially'       |
 		And I click the button named "FormChoose"
 	* Workstation
 		When Create catalog Workstations objects
@@ -414,8 +414,8 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 			| 'Document discount' |
 		And in the table "List" I click the button named "ListContextMenuMoveItem"
 		And I go to line in "List" table
-			| 'Special offer type' |
-			| 'Сonsistently'       |
+			| 'Description'     |
+			| 'Consequentially' |
 		And I click the button named "FormChoose"
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"

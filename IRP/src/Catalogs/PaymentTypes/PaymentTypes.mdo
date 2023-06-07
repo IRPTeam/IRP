@@ -198,6 +198,27 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="431569fd-dde1-4e61-95e5-ed98f09988c9">
+    <name>FinancialMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Financial movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IsFinancialMovementType</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a5dcefe8-e456-4d84-8df3-c135d0762863">
     <producedTypes>
       <objectType typeId="b0f43e36-7c8a-4ed3-994d-30250d4960dc" valueTypeId="c4c4958d-f3f1-4fbb-8562-3481507c86a9"/>

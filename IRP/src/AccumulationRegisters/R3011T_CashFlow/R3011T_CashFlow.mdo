@@ -8,10 +8,10 @@
     <recordKeyType typeId="dd975bdc-96fe-4fab-ba4b-4289f1e0cfa1" valueTypeId="f42f6827-b40c-45c2-a03c-8642c532ee02"/>
     <recordType typeId="541d9496-8f6d-4578-99d3-38ef9e7c8cd1" valueTypeId="c629d0ba-18ba-46c4-af44-ef57b3d4db54"/>
   </producedTypes>
-  <name>R3011T_CashMovements</name>
+  <name>R3011T_CashFlow</name>
   <synonym>
     <key>en</key>
-    <value>R3011 Cash movements</value>
+    <value>R3011 Cash flow</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>
@@ -79,6 +79,48 @@
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="96060067-6049-4580-9108-bcaf63e7d1cc">
+    <name>Direction</name>
+    <synonym>
+      <key>en</key>
+      <value>Direction</value>
+    </synonym>
+    <type>
+      <types>EnumRef.CashFlowDirections</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="2c62c29c-b447-494d-b741-9e239dbe2d92">
+    <name>FinancialMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Financial movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ac5f5d10-6d1f-42d2-ae3c-e913e217f4fb">
+    <name>PlanningPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>Planning period</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PlanningPeriods</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

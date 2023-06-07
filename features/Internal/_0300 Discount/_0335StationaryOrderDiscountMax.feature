@@ -29,15 +29,8 @@ Scenario: _033501 change in the main group Special offers rule Minimum to Maximu
 		| 'Description'      |
 		| 'Special Offers' |
 	And in the table "List" I click the button named "ListContextMenuChange"
-	And I click Open button of "Special offer type" field
-	And I click "Set settings" button
-	Then "Special offer rules" window is opened
-	And I select "Maximum by row" exact value from "Type joining" drop-down list
-	And I click "Save settings" button
+	And I select "Max by row" exact value from "Offer group type" drop-down list
 	And I click "Save and close" button
-	And Delay 10
-	And I click "Save and close" button
-	And Delay 10
 	And I close all client application windows
 
 
@@ -530,8 +523,8 @@ Scenario: _033509 check the discount order in group Sum (auto discount by price 
 	And I click "List" button
 	And Delay 2
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '1'        | 'Sum'                |
+		| 'Description' |
+		| 'Sum'                |
 	And I click the button named "FormChoose"
 	And I go to line in "List" table
 		| 'Description'                 |

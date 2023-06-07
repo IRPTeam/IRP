@@ -303,8 +303,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -688,5 +686,3 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		|	END
 		|	";
 EndFunction
-
-#EndRegion

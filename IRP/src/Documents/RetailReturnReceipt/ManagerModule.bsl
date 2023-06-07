@@ -152,7 +152,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.RetailReturnReceipt.SourceOfOrigins AS SourceOfOrigins
 	|WHERE
 	|	SourceOfOrigins.Ref = &Ref
-	|
 	|GROUP BY
 	|	SourceOfOrigins.Key,
 	|	CASE
@@ -165,8 +164,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN SourceOfOrigins.SourceOfOrigin
 	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 	|	END,
-	|   SourceOfOrigins.SourceOfOrigin,
-	|   SourceOfOrigins.SerialLotNumber
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.SerialLotNumber
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -184,6 +183,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN RetailReturnReceiptItemList.LandedCost
 	|		ELSE RetailReturnReceiptItemList.TotalAmount
 	|	END) AS Amount,
+	|	SUM(CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.LandedCostTax
+	|		ELSE RetailReturnReceiptItemList.TaxAmount
+	|	END) AS LandedCostTax,
 	|	CASE
 	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt <> VALUE(Document.RetailSalesReceipt.EmptyRef)
 	|			THEN TRUE
@@ -212,9 +216,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	RetailReturnReceiptItemList.RetailSalesReceipt,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company,
 	|	VALUE(Enum.BatchDirection.Receipt)
-	|
 	|;
 	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT // --[0]
 	|	RetailReturnReceipt.Ref AS Document,
 	|	RetailReturnReceipt.Company AS Company,
@@ -224,7 +228,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|WHERE
 	|	RetailReturnReceipt.Ref = &Ref
 	|;
-	
+	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
@@ -247,17 +252,25 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	CASE
 	|		WHEN tmpItemList.Quantity <> 0
 	|			THEN CASE
-	|					WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|						THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|					ELSE tmpItemList.Amount
-	|				END
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.Amount
+	|			END
 	|		ELSE 0
 	|	END AS Amount,
+	|	CASE
+	|		WHEN tmpItemList.Quantity <> 0
+	|			THEN CASE
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.LandedCostTax / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.LandedCostTax
+	|			END
+	|		ELSE 0
+	|	END AS LandedCostTax,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
-	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock	
-	|
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
@@ -288,41 +301,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	TaxList.Key,
-	|	TaxList.Ref.Company,
-	|	TaxList.Tax,
-	|	TaxList.ManualAmount AS AmountTax
-	|INTO TaxList
-	|FROM
-	|	Document.RetailReturnReceipt.TaxList AS TaxList
-	|WHERE
-	|	TaxList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	SUM(TaxList.AmountTax) AS AmountTax
-	|INTO TaxListAmounts
-	|FROM
-	|	TaxList AS TaxList
-	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
-	|			(SELECT
-	|				TaxList.Company,
-	|				TaxList.Tax
-	|			FROM
-	|				TaxList AS TaxList)) AS TaxesSliceLast
-	|		ON TaxesSliceLast.Company = TaxList.Company
-	|		AND TaxesSliceLast.Tax = TaxList.Tax
-	|WHERE
-	|	TaxesSliceLast.Use
-	|	AND TaxesSliceLast.IncludeToLandedCost
-	|GROUP BY
-	|	TaxList.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	BatchKeysInfo.Key,
 	|	BatchKeysInfo.TotalQuantity,
 	|	BatchKeysInfo.Quantity,
@@ -335,16 +313,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	case
-	|		when BatchKeysInfo.TotalQuantity <> 0
-	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
-	|		else 0
-	|	end as AmountTax,
+	|	CASE WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled THEN BatchKeysInfo.LandedCostTax ELSE 0 END AS AmountTax,
+	|
 	|	BatchKeysInfo.*
 	|FROM
-	|	BatchKeysInfo AS BatchKeysInfo
-	|		LEFT JOIN TaxListAmounts AS TaxListAmounts
-	|		ON BatchKeysInfo.Key = TaxListAmounts.Key AND NOT BatchKeysInfo.SalesInvoiceIsFilled";
+	|	BatchKeysInfo AS BatchKeysInfo";
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
 	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
@@ -478,12 +451,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -493,9 +464,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordType, RecordSet",
 		AccumulationRecordType.Expense, Parameters.DocumentDataTables.CashInTransit));
 	
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
 
 	Return PostingDataTables;
 EndFunction
@@ -518,10 +487,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -605,6 +572,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -692,6 +660,7 @@ Function Payments()
 		|	Payments.Amount AS Amount,
 		|	Payments.Ref.Branch AS Branch,
 		|	Payments.PaymentType AS PaymentType,
+		|	Payments.FinancialMovementType AS FinancialMovementType,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
 		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
@@ -960,8 +929,32 @@ Function R3010B_CashOnHand()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	Payments.Currency,
+		|	Payments.Amount
 		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsPostponedPayment
+		|	OR Payments.IsPaymentAgent)";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return 
+		"SELECT
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	Payments.FinancialMovementType,
+		|	Payments.Currency,
+		|	Payments.Amount
+		|INTO R3011T_CashFlow
 		|FROM
 		|	Payments AS Payments
 		|WHERE

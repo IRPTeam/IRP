@@ -53,7 +53,8 @@ Procedure BeforeStart(Cancel)
 	EndIf;
 
 	globalEquipments = HardwareClient.NewEquipments();
-
+	
+	R(); // Init langs
 EndProcedure
 
 #Region Hardware

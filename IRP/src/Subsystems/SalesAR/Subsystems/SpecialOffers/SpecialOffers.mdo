@@ -15,5 +15,17 @@
   <content>Catalog.SpecialOffers</content>
   <content>Catalog.ExternalDataProc</content>
   <content>CommonModule.OffersServer</content>
+  <content>Enum.OfferGroupType</content>
+  <content>Enum.SpecialOfferTypes</content>
+  <content>Enum.OffersDocumentTypes</content>
+  <content>CommonForm.PickupSpecialOffers</content>
+  <content>CommonPicture.SpecialOffer</content>
+  <content>DefinedType.typeObjectWithSpecialOffers</content>
+  <content>DefinedType.typeSpecialOfferAddInfo</content>
+  <content>DefinedType.typeSpecialOfferBonus</content>
+  <content>FunctionalOption.UseSpecialOffers</content>
+  <content>CommonModule.OffersClientServer</content>
+  <content>CommonModule.OffersClient</content>
+  <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

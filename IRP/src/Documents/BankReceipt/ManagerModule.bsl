@@ -28,10 +28,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.CashInTransit              = QueryResults[1].Unload();
 	Tables.CashInTransit_POS          = QueryResults[2].Unload();
 
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 
 	Return Tables;
 EndFunction
@@ -209,6 +207,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -232,9 +231,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction", PostingServer.JoinTables(ArrayOfTables,
 		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"),
 		Parameters.IsReposting));
-#Region NewRegistersPosting
+
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
 
 	Return PostingDataTables;
 EndFunction
@@ -264,8 +262,6 @@ Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefine
 EndProcedure
 
 #EndRegion
-
-#Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
@@ -306,6 +302,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -375,6 +372,7 @@ Function PaymentList()
 	|	PaymentList.POSAccount AS FromAccount_POS,
 	|	PaymentList.PlaningTransactionBasis.Sender AS FromAccount,
 	|	PaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
+	|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 	|	PaymentList.Ref AS Basis,
 	|	PaymentList.Key,
 	|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
@@ -667,6 +665,46 @@ Function R3010B_CashOnHand()
 	|	OR (PaymentList.IsPaymentFromCustomerByPOS)";
 EndFunction
 
+Function R3011T_CashFlow()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.Commission
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	(PaymentList.IsTransferFromPOS
+		|	AND NOT PaymentList.CommissionIsSeparate)
+		|	OR (PaymentList.IsPaymentFromCustomerByPOS)";
+EndFunction
+
 Function R3035T_CashPlanning()
 	Return "SELECT
 		   |	PaymentList.Period,
@@ -889,4 +927,3 @@ Function R3021B_CashInTransitIncoming()
 	|	PaymentList.IsTransferFromPOS";
 EndFunction
 
-#EndRegion

@@ -714,7 +714,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R3011T_CashMovements</name>
+		<name>AccumulationRegister.R3011T_CashFlow</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

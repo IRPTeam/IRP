@@ -63,6 +63,56 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
+   <name>ListPaymentPeriod</name>
+   <id>47</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.PaymentPeriod</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>ListPaymentPeriodExtendedTooltip</name>
+    <id>49</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ListPaymentPeriodContextMenu</name>
+    <id>48</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>ListAmount</name>
    <id>41</id>
    <visible>true</visible>
@@ -376,11 +426,15 @@
   <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
    <segments>List.Employee</segments>
   </notDefaultUseAlwaysAttributes>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>List.PaymentPeriod</segments>
+  </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
 	R9510B_SalaryPaymentBalance.Employee AS Employee,
-	R9510B_SalaryPaymentBalance.AmountBalance AS Amount
+	R9510B_SalaryPaymentBalance.AmountBalance AS Amount,
+	R9510B_SalaryPaymentBalance.PaymentPeriod AS PaymentPeriod
 FROM
 	AccumulationRegister.R9510B_SalaryPayment.Balance(&amp;Boundary, Company = &amp;Company
 	AND Branch = &amp;Branch
@@ -388,29 +442,70 @@ FROM
 	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	AND Employee NOT IN (&amp;ArrayOfEmployee)) AS R9510B_SalaryPaymentBalance</queryText>
    <mainTable>AccumulationRegister.R9510B_SalaryPayment.Balance</mainTable>
+   <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currency</dataPath>
+    <field>Currency</field>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TransactionCurrency</dataPath>
+    <field>TransactionCurrency</field>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CurrencyMovementType</dataPath>
+    <field>CurrencyMovementType</field>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Employee</dataPath>
     <field>Employee</field>
-    <title>
-     <localValue>
-      <content>
-       <key>en</key>
-       <value>Employee</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Сотрудник</value>
-      </content>
-      <content>
-       <key>tr</key>
-       <value>Personel</value>
-      </content>
-     </localValue>
-    </title>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Amount</dataPath>
@@ -431,26 +526,16 @@ FROM
       </content>
      </localValue>
     </title>
+    <useRestriction>
+     <condition>true</condition>
+    </useRestriction>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Company</dataPath>
-    <field>Company</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Branch</dataPath>
-    <field>Branch</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Currency</dataPath>
-    <field>Currency</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>TransactionCurrency</dataPath>
-    <field>TransactionCurrency</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>CurrencyMovementType</dataPath>
-    <field>CurrencyMovementType</field>
+    <dataPath>PaymentPeriod</dataPath>
+    <field>PaymentPeriod</field>
+    <attributeUseRestriction>
+     <condition>true</condition>
+    </attributeUseRestriction>
    </fields>
    <parameters>
     <name>Boundary</name>
@@ -475,6 +560,7 @@ FROM
      <dateQualifiers/>
     </valueType>
     <useRestriction>true</useRestriction>
+    <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
     <name>Period</name>
@@ -498,6 +584,7 @@ FROM
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
     <name>Company</name>
@@ -521,6 +608,7 @@ FROM
      <types>CatalogRef.Companies</types>
     </valueType>
     <useRestriction>true</useRestriction>
+    <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
     <name>Currency</name>
@@ -544,6 +632,7 @@ FROM
      <types>CatalogRef.Currencies</types>
     </valueType>
     <useRestriction>true</useRestriction>
+    <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
     <name>Branch</name>
@@ -567,6 +656,7 @@ FROM
      <types>CatalogRef.BusinessUnits</types>
     </valueType>
     <useRestriction>true</useRestriction>
+    <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
     <name>ArrayOfEmployee</name>
@@ -589,6 +679,7 @@ FROM
     <valueType/>
     <useRestriction>true</useRestriction>
     <valueListAllowed>true</valueListAllowed>
+    <availableAsField>false</availableAsField>
    </parameters>
   </extInfo>
  </attributes>

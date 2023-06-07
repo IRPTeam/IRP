@@ -790,6 +790,29 @@ Scenario: _042533 check Retail return receipt movements absence by the Register 
 			| Register  "R3050 Pos cash balances" |
 		And I close all client application windows
 
+Scenario: _042534 check Retail return receipt movements by the Register  "R3011 Cash flow"
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '201'   |
+	* Check movements by the Register  "R3011 Cash flow"
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'                      | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                         | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                                    | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                                    | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                    | '15.03.2021 16:01:25' | '1 664,06'  | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Outgoing'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                    | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                    | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                                    | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
 Scenario: _042530 Retail return receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Retail return receipt

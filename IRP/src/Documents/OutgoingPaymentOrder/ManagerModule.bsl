@@ -16,21 +16,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
-#Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
 		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 		Return Tables;
-	EndIf
-	;
+	EndIf;
 
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
 	Return Tables;
 EndFunction
 
@@ -40,7 +34,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -48,16 +41,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -87,7 +75,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -178,5 +165,3 @@ Function R3035T_CashPlanning()
 		   |FROM
 		   |	PaymentList AS PaymentList";
 EndFunction
-
-#EndRegion

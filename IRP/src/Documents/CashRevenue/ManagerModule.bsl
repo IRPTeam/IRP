@@ -27,6 +27,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -87,6 +89,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -104,6 +107,7 @@ Function PaymentList()
 		|	PaymentList.TotalAmount AS TotalAmount,
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Partner,
 		|	PaymentList.AdditionalAnalytic,
 		|	PaymentList.Ref.Branch AS Branch,
@@ -152,6 +156,62 @@ Function R3010B_CashOnHand()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsOtherCompanyRevenue";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.OtherCompany,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing),
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherCompanyRevenue
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.OtherCompany,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming),
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherCompanyRevenue";	
 EndFunction
 
 Function R5021T_Revenues()

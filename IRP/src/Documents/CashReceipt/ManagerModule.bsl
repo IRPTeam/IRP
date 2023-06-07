@@ -179,6 +179,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -258,6 +259,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -295,6 +297,7 @@ Function PaymentList()
 	|		END
 	|	END AS IsAdvance,
 	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.TotalAmount AS Amount,
 	|	PaymentList.FinancialMovementType AS FinancialMovementType,
@@ -383,6 +386,26 @@ Function R3010B_CashOnHand()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.CashAccount AS Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";	
 EndFunction
 
 Function R3015B_CashAdvance()

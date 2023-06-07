@@ -877,17 +877,17 @@ Scenario: _042932 check Opening entry movements by the Register  "R9510 Salary p
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 312 dated 03.03.2023 11:46:31' | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
-			| 'Register  "R9510 Salary payment"'            | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                | ''         | ''                     | ''                             |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Employee'        | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '17,12'     | 'Main Company' | ''       | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '34,24'     | 'Main Company' | ''       | 'Anna Petrova'    | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'en description is empty'      |	
+			| 'Opening entry 312 dated 03.03.2023 11:46:31' | ''            | ''                    | ''          | ''             | ''       | ''                | ''               | ''         | ''                     | ''                             |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''       | ''                | ''               | ''         | ''                     | ''                             |
+			| 'Register  "R9510 Salary payment"'            | ''            | ''                    | ''          | ''             | ''       | ''                | ''               | ''         | ''                     | ''                             |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                | ''               | ''         | ''                     | ''                             |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '17,12'     | 'Main Company' | ''       | 'Alexander Orlov' | ''               | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '34,24'     | 'Main Company' | ''       | 'Anna Petrova'    | ''               | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | ''               | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | ''               | 'TRY'      | 'TRY'                  | 'en description is empty'      |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | ''               | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | ''               | 'TRY'      | 'TRY'                  | 'en description is empty'      |	
 		And I close all client application windows
 
 Scenario: _042933 check Opening entry movements by the Register  "R3027 Employee cash advance"

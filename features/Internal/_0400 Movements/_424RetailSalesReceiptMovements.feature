@@ -641,6 +641,52 @@ Scenario: _042427 check Retail sales receipt movements by the Register  "R2012 I
 			| ''                                                   | 'Expense'     | '09.01.2023 13:34:51' | '2'         | '1 400'  | '1 186,44'   | 'Main Company' | 'Shop 01' | 'Sales order 314 dated 09.01.2023 12:49:08' | 'TRY'      | '37/18SD'  | '5bdde23c-effa-4551-9989-3e2d76766c28' |	
 		And I close all client application windows
 
+Scenario: _042427 check Retail sales receipt movements by the Register  "R3011 Cash flow" (with advance) 
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '314' |
+	* Check movements by the Register  "R3011 Cash flow"
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 314 dated 09.01.2023 13:34:51' | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                        | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                                   | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | '09.01.2023 13:34:51' | '157,5'     | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
+Scenario: _042428 check Retail sales receipt movements by the Register  "R3011 Cash flow" (without advance)
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R3011 Cash flow"
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                        | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                                   | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Retail sales receipt

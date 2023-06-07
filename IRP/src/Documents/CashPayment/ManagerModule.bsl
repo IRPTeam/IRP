@@ -175,6 +175,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -253,6 +254,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
 
@@ -289,6 +291,8 @@ Function PaymentList()
 		|		END
 		|	END AS IsAdvance,
 		|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
+		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
+		|	PaymentList.PaymentPeriod AS PaymentPeriod,
 		|	PaymentList.Partner.Employee AS IsEmployee,
 		|	PaymentList.TotalAmount AS Amount,
 		|	PaymentList.FinancialMovementType AS FinancialMovementType,
@@ -306,8 +310,7 @@ Function PaymentList()
 		|	PaymentList.Partner,
 		|	PaymentList.Ref.Branch AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
-		|	PaymentList.Order,
-		|	PaymentList.FinancialMovementType
+		|	PaymentList.Order
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -324,6 +327,7 @@ Function R9510B_SalaryPayment()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Employee,
+		|	PaymentList.PaymentPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Amount
 		|INTO R9510B_SalaryPayment
@@ -555,6 +559,26 @@ Function R3010B_CashOnHand()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function R3011T_CashFlow()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.CashAccount AS Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R3015B_CashAdvance()

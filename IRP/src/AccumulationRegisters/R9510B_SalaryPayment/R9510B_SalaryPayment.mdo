@@ -111,6 +111,28 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="39bf295f-abea-4476-b5d5-5a700cb6b78a">
+  <name>PaymentPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>Payment period</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Период оплат</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Payment period</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PlanningPeriods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
  <dimensions uuid="c8d75a4f-73b9-4bb0-8d74-20db10518d9a">
   <name>Currency</name>
   <synonym>

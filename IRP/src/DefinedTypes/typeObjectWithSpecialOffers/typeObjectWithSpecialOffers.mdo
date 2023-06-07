@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc91c809-9f04-4d28-9d62-59dd1cea8aed">
+ <producedTypes>
+  <containerType typeId="de184652-d15d-4ef2-b887-ba1abd51da85" valueTypeId="e608e16a-c733-4ab9-bd12-289d56eb38c2"/>
+ </producedTypes>
+ <name>typeObjectWithSpecialOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>Type object with special offers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Тип объектов со скидками</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Type object with special offers</value>
+ </synonym>
+ <type>
+  <types>DocumentObject.PurchaseInvoice</types>
+  <types>DocumentObject.PurchaseOrder</types>
+  <types>DocumentObject.PurchaseReturn</types>
+  <types>DocumentObject.PurchaseReturnOrder</types>
+  <types>DocumentObject.RetailReturnReceipt</types>
+  <types>DocumentObject.RetailSalesReceipt</types>
+  <types>DocumentObject.SalesInvoice</types>
+  <types>DocumentObject.SalesOrder</types>
+  <types>DocumentObject.SalesReturn</types>
+  <types>DocumentObject.SalesReturnOrder</types>
+  <types>DocumentObject.WorkOrder</types>
+ </type>
+</mdclass:DefinedType>

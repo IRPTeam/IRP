@@ -53,7 +53,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -79,5 +78,3 @@ Function GetQueryTextsMasterTables()
 
 	Return QueryArray;
 EndFunction
-
-#EndRegion

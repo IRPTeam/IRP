@@ -60,8 +60,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -170,5 +168,3 @@ Function PricesByProperties()
 	|		ON tmp.PriceList = DocPriceList.Ref
 	|		AND DocPriceList.Ref = &Ref";
 EndFunction
-
-#EndRegion

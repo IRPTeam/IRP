@@ -4005,7 +4005,7 @@
 				<field>Branch</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
-			<query>SELECT "R3011T_CashMovements" AS RegisterName, * FROM AccumulationRegister.R3011T_CashMovements</query>
+			<query>SELECT "R3011T_CashMovements" AS RegisterName, * FROM AccumulationRegister.R3011T_CashFlow</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R3015B_CashAdvance</name>

@@ -439,6 +439,164 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="959556f6-4ac1-491a-8ee7-15187a92763c">
+  <name>ShipFrom</name>
+  <synonym>
+   <key>en</key>
+   <value>Ship from</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Грузоотправитель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship from</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="784d00cd-3d2f-4659-a9bb-58cdec354ee5">
+  <name>ShipFromAddress</name>
+  <synonym>
+   <key>en</key>
+   <value>Ship from address</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Адрес грузоотправителя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship from address</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Addresses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="74febadb-d6c4-4884-a156-5628fab2f0ed">
+  <name>ShipTo</name>
+  <synonym>
+   <key>en</key>
+   <value>Ship to</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Грузополучатель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship to</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1024f3e1-ac6e-41dd-9986-abe6b75e5ecd">
+  <name>ShipToAddress</name>
+  <synonym>
+   <key>en</key>
+   <value>Ship to address</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Адрес получателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ship to address</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Addresses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="bc18f3dd-676e-45a4-8ca9-395a265abee0">
+  <name>Carrier</name>
+  <synonym>
+   <key>en</key>
+   <value>Carrier</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Перевозчик</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Carrier</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8a79e20b-7de0-4f2a-b072-148fec109f00">
+  <name>VehicleDriver</name>
+  <synonym>
+   <key>en</key>
+   <value>Driver</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Водитель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sürücü</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9b8be357-03c4-4c31-89ab-11da25f315a0">
+  <name>Vehicle</name>
+  <synonym>
+   <key>en</key>
+   <value>Vehicle</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Транспорт</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vehicle</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Vehicles</types>
+  </type>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
  <forms uuid="e96a316f-c149-4648-b0a6-9650523e0e47">
   <name>DocumentForm</name>
   <synonym>

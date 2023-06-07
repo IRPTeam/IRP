@@ -1193,6 +1193,11 @@ Function WriteTransaction(Result)
 		ObjectValue = FormAttributeToValue("Object");
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Payments.Load(Payments);
+		For Each Row In ObjectValue.Payments Do
+			If ValueIsFilled(Row.PaymentType) Then
+				Row.FinancialMovementType = Row.PaymentType.FinancialMovementType;
+			EndIf;
+		EndDo;
 		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	

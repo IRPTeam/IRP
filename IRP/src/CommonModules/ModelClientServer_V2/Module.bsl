@@ -348,6 +348,9 @@ Function GetChain()
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
 	Chain.Insert("ChangeCurrentQuantityInProductions"        , GetChainLink("ChangeCurrentQuantityInProductionsExecute"));
 	
+	Chain.Insert("ChangeBeginDateByPlanningPeriod"  , GetChainLink("ChangeBeginDateByPlanningPeriodExecute"));
+	Chain.Insert("ChangeEndDateByPlanningPeriod"    , GetChainLink("ChangeEndDateByPlanningPeriodExecute"));
+	
 	Chain.Insert("BillOfMaterialsListCalculations"           , GetChainLink("BillOfMaterialsListCalculationsExecute"));
 	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
 	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
@@ -359,6 +362,7 @@ Function GetChain()
 	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
 
 	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
+	Chain.Insert("ChangeFinancialMovementTypeByPaymentType" , GetChainLink("ChangeFinancialMovementTypeByPaymentTypeExecute"));
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
@@ -2359,7 +2363,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
+		NewOfferRow = OffersServer.GetOffersTableRow();
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
@@ -3064,7 +3068,8 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|PaymentTerminal,
 		|BankTerm,
 		|RetailCustomer,
-		|Employee");
+		|Employee,
+		|PaymentPeriod");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3082,6 +3087,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("BankTerm"                 , Options.BankTerm);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3129,7 +3135,8 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		|Partner"; 	
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
-		|Employee"; 				
+		|Employee,
+		|PaymentPeriod"; 				
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3269,7 +3276,8 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Payee,
 		|Order,
 		|RetailCustomer,
-		|Employee");
+		|Employee,
+		|PaymentPeriod");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3283,6 +3291,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3310,7 +3319,8 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|LegalNameContract";
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
-		|Employee";
+		|Employee,
+		|PaymentPeriod";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3463,27 +3473,41 @@ Function ClearByTransactionTypeCashExpenseOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|Employee,
-		|OtherCompany");
+		|OtherCompany,
+		|PaymentPeriod,
+		|ProfitLossCenter,
+		|ExpenseType");
 EndFunction
 
 Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 	Result = New Structure();
-	Result.Insert("Partner"      , Options.Partner);
-	Result.Insert("Employee"     , Options.Employee);
-	Result.Insert("OtherCompany" , Options.OtherCompany);
+	Result.Insert("Partner"       , Options.Partner);
+	Result.Insert("Employee"      , Options.Employee);
+	Result.Insert("OtherCompany"  , Options.OtherCompany);
+	Result.Insert("PaymentPeriod" , Options.PaymentPeriod);
+	Result.Insert("ProfitLossCenter" , Options.ProfitLossCenter);
+	Result.Insert("ExpenseType"      , Options.ExpenseType);
 
-	OtherCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
-	SalaryPayment    = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
+	CurrentCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.CurrentCompanyExpense");
+	OtherCashExpense   = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	SalaryPayment      = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
 	
-	If Options.TransactionType = OtherCashExpense Then
+	If Options.TransactionType = CurrentCashExpense Then
+		StrByType = "
+		|ProfitLossCenter,
+		|ExpenseType";
+	ElsIf Options.TransactionType = OtherCashExpense Then
 		StrByType = "
 		|Partner,
-		|OtherCompany";
+		|OtherCompany,
+		|ProfitLossCenter,
+		|ExpenseType";
 	ElsIf Options.TransactionType = SalaryPayment Then
 		StrByType = "
 		|Partner,
 		|Employee,
-		|OtherCompany";
+		|OtherCompany,
+		|PaymentPeriod";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();
@@ -3650,6 +3674,51 @@ Function ChangeisControlCodeStringByItemExecute(Options) Export
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_FINANCIAL_MOVEMENT_TYPE_BY_PAYMENT_TYPE
+
+Function ChangeFinancialMovementTypeByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType");
+EndFunction
+
+Function ChangeFinancialMovementTypeByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PaymentType, "FinancialMovementType");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BEGIN_DATE_BY_PLANNING_PERIOD
+
+Function ChangeBeginDateByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("PlanningPeriod");
+EndFunction
+
+Function ChangeBeginDateByPlanningPeriodExecute(Options) Export
+	If Not ValueIsFilled(Options.PlanningPeriod) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "BeginDate");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_END_DATE_BY_PLANNING_PERIOD
+
+Function ChangeEndDateByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("PlanningPeriod");
+EndFunction
+
+Function ChangeEndDateByPlanningPeriodExecute(Options) Export
+	If Not ValueIsFilled(Options.PlanningPeriod) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "EndDate");
 EndFunction
 
 #EndRegion

@@ -966,6 +966,56 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>PaymentListPaymentPeriod</name>
+     <id>300</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.PaymentList.PaymentPeriod</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>PaymentListPaymentPeriodExtendedTooltip</name>
+      <id>302</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>PaymentListPaymentPeriodContextMenu</name>
+      <id>301</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>PaymentListRetailCustomer</name>
      <id>271</id>
      <visible>true</visible>
@@ -1676,16 +1726,16 @@
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
      <items xsi:type="form:Button">
-      <name>ChoiceByAccrual</name>
-      <id>280</id>
+      <name>PaymentListChoiceByAccrual</name>
+      <id>303</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
       <extendedTooltip>
-       <name>ChoiceByAccrualExtendedTooltip</name>
-       <id>281</id>
+       <name>PaymentListChoiceByAccrualExtendedTooltip</name>
+       <id>304</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>

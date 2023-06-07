@@ -39,6 +39,8 @@ Scenario: _045300 preparation (Cash transfer order)
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
+		When Create catalog BusinessUnits objects
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -280,14 +282,14 @@ Scenario: _045307 check Money transfer movements by the Register "R3021 Cash in 
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 11 dated 25.08.2022 16:45:16'  | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
-			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
-			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
-			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| 'Money transfer 11 dated 25.08.2022 16:45:16'  | ''            | ''                    | ''          | ''           | ''             | ''             | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''             | ''                   | ''                                            | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '171,2'     | ''           | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |		
 		And I close all client application windows
 
 

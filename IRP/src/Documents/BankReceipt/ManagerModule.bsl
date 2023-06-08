@@ -409,7 +409,8 @@ Function PaymentList()
 	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 	|			then PaymentList.PlaningTransactionBasis.Ref
 	|		else NULL
-	|	end as CashTransferOrder
+	|	end as CashTransferOrder,
+	|	PaymentList.RevenueType AS RevenueType
 	|INTO PaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS PaymentList

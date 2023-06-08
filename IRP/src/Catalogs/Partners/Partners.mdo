@@ -241,6 +241,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e0f45607-522c-48fa-90e4-6e1f296e57c7">
+    <name>Other</name>
+    <synonym>
+      <key>en</key>
+      <value>Other</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="f8cf4d21-0e13-49e9-bd80-0146820323e2">
     <name>ManagerSegment</name>
     <synonym>

@@ -207,6 +207,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -303,6 +304,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -409,7 +411,8 @@ Function PaymentList()
 	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 	|			then PaymentList.PlaningTransactionBasis.Ref
 	|		else NULL
-	|	end as CashTransferOrder
+	|	end as CashTransferOrder,
+	|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 	|INTO PaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS PaymentList
@@ -517,6 +520,26 @@ Function R1021B_VendorsTransactions()
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+		Return 
+			"SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.Partner,
+		   |	PaymentList.Payer AS LegalName,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Agreement,
+		   |	PaymentList.Key,
+		   |	PaymentList.Amount AS Amount
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherPartner";	
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -630,7 +653,7 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
-		   |	OR PaymentList.IsReturnFromVendor
+		   |	OR PaymentList.IsReturnFromVendor OR PaymentList.IsOtherPartner
 		   |GROUP BY
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,

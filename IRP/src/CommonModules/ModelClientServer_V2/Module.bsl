@@ -261,6 +261,8 @@ Function GetChain()
 	Chain.Insert("ChangeCashAccountByPartner"         , GetChainLink("ChangeCashAccountByPartnerExecute"));
 	Chain.Insert("ChangeCashAccountByTransactionType" , GetChainLink("ChangeCashAccountByTransactionTypeExecute"));
 	
+	Chain.Insert("ChangeReceiveBranchByAccount" , GetChainLink("ChangeReceiveBranchByAccountExecute"));
+	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
 	Chain.Insert("FillByPTBBankPayment" , GetChainLink("FillByPTBBankPaymentExecute"));
@@ -1642,6 +1644,22 @@ Function ChangeShipmentModeByTransactionTypeExecute(Options) Export
 		Return Options.CurrentShipmentMode
 	EndIf;
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECEIVE_BRANCH_BY_ACCOUNT
+
+Function ChangeReceiveBranchByAccountOptions() Export
+	Return GetChainLinkOptions("Account, ReceiveBranch");
+EndFunction
+
+Function ChangeReceiveBranchByAccountExecute(Options) Export
+	ReceiveBranch = CommonFunctionsServer.GetRefAttribute(Options.Account, "Branch");
+	If ValueIsFilled(ReceiveBranch) Then
+		Return ReceiveBranch;
+	EndIf;
+	Return Options.ReceiveBranch;
 EndFunction
 
 #EndRegion

@@ -1359,7 +1359,8 @@ EndFunction
 Function BindAccountReceiver(Parameters)
 	DataPath = "Receiver";
 	Binding = New Structure();
-	Return BindSteps("StepChangeReceiveCurrencyByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
+	Return BindSteps("StepChangeReceiveCurrencyByAccount,
+	|StepChangeReceiveBranchByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
 EndFunction
 
 // AccountReceiver.ChangeAccountReceiverByCompany.Step
@@ -2797,6 +2798,43 @@ Function BindBranch(Parameters)
 	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
+
+#EndRegion
+
+#Region RECEIVE_BRANCH
+
+// ReceiveBranch.Set
+Procedure SetReceiveBranch(Parameters, Results) Export
+	Binding = BindReceiveBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveBranch.Get
+Function GetReceiveBranch(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveBranch(Parameters).DataPath);
+EndFunction
+
+// ReceiveBranch.Bind
+Function BindReceiveBranch(Parameters)
+	DataPath = "ReceiveBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveBranch");
+EndFunction
+
+// ReceiveBranch.ChangeReceiveBranchByAccount.Step
+Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
+	Chain.ChangeReceiveBranchByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	
+	Chain.ChangeReceiveBranchByAccount.Setter = "SetReceiveBranch";
+	Options = ModelClientServer_V2.ChangeReceiveBranchByAccountOptions();
+	Options.Account = GetAccountReceiver(Parameters);
+	Options.ReceiveBranch = GetReceiveBranch(Parameters);
+	Options.StepName = "StepChangeReceiveBranchByAccount";
+	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 

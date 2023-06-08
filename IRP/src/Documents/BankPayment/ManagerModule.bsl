@@ -179,6 +179,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -261,6 +262,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -340,6 +342,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS
 	|		IsEmployeeCashAdvance,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherExpense) AS IsOtherExpense,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
@@ -363,7 +366,8 @@ Function PaymentList()
 	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 	|			then PaymentList.PlaningTransactionBasis.Ref
 	|		else NULL
-	|	end as CashTransferOrder
+	|	end as CashTransferOrder,
+	|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 	|INTO PaymentList
 	|FROM
 	|	Document.BankPayment.PaymentList AS PaymentList
@@ -516,6 +520,26 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+		Return 
+			"SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.Partner,
+		   |	PaymentList.Payee AS LegalName,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Agreement,
+		   |	PaymentList.Key,
+		   |	PaymentList.Amount AS Amount
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherPartner";
+EndFunction
+
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -613,29 +637,32 @@ Function R5012B_VendorsAging()
 EndFunction
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Payee AS LegalName,
-		   |	PaymentList.LegalNameContract AS LegalNameContract,
-		   |	PaymentList.Currency,
-		   |	SUM(PaymentList.Amount) AS Amount,
-		   |	PaymentList.Period
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	OR PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS
-		   |GROUP BY
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Payee,
-		   |	PaymentList.LegalNameContract,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Payee AS LegalName,
+		|	PaymentList.LegalNameContract AS LegalNameContract,
+		|	PaymentList.Currency,
+		|	SUM(PaymentList.Amount) AS Amount,
+		|	PaymentList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	OR PaymentList.IsReturnToCustomer
+		|	OR PaymentList.IsReturnToCustomerByPOS
+		|	OR PaymentList.IsOtherPartner
+		|GROUP BY
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Payee,
+		|	PaymentList.LegalNameContract,
+		|	PaymentList.Currency,
+		|	PaymentList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -712,15 +739,41 @@ EndFunction
 
 Function R5022T_Expenses()
 	Return 
-	"SELECT
-	|	PaymentList.Commission AS Amount,
-	|	PaymentList.Commission AS AmountWithTaxes,
-	|	*
-	|INTO R5022T_Expenses
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsReturnToCustomerByPOS";
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.ExpenseType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Commission AS Amount,
+		|	PaymentList.Commission AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Commission <> 0
+		|	AND NOT PaymentList.IsReturnToCustomerByPOS
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.ExpenseType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Amount,
+		|	PaymentList.Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherExpense";
 EndFunction
 
 Function R3025B_PurchaseOrdersToBePaid()

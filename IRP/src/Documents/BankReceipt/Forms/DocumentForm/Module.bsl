@@ -63,6 +63,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
 	|PaymentList.CommissionIsSeparate,
+	|PaymentList.RevenueType,
 	|PaymentList.RetailCustomer";
 	
 	ArrayOfAllAttributes = New Array();
@@ -79,6 +80,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
+	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -108,6 +111,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			|PaymentList.PaymentTerminal,
 			|PaymentList.BankTerm";
 		EndIf;
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payer,
+		|PaymentList.LegalNameContract";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
@@ -128,6 +137,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.BasisDocument";
+	ElsIf TransactionType = OtherIncome Then
+		StrByType = "
+		|PaymentList.RevenueType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -151,7 +163,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
-	
+
 	ArrayTypes = New Array();
 	
 	If IsCurrencyExchange Or IsCashTransferOrder Or IsTransferFromPOS Then

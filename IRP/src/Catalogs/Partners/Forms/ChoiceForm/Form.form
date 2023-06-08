@@ -243,6 +243,54 @@
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
+  <items xsi:type="form:FormField">
+   <name>FilterOther</name>
+   <id>50</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>FilterOther</segments>
+   </dataPath>
+   <titleLocation>Right</titleLocation>
+   <handlers>
+    <event>OnChange</event>
+    <name>FilterOtherOnChange</name>
+   </handlers>
+   <extendedTooltip>
+    <name>FilterOtherExtendedTooltip</name>
+    <id>52</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>FilterOtherContextMenu</name>
+    <id>51</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -923,6 +971,31 @@ WHERE
    <value>Ödeme aracı kurum</value>
   </title>
   <id>8</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>FilterOther</name>
+  <title>
+   <key>en</key>
+   <value>Other</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Дополнительно</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Diğer</value>
+  </title>
+  <id>9</id>
   <valueType>
    <types>Boolean</types>
   </valueType>

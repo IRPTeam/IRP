@@ -1359,7 +1359,8 @@ EndFunction
 Function BindAccountReceiver(Parameters)
 	DataPath = "Receiver";
 	Binding = New Structure();
-	Return BindSteps("StepChangeReceiveCurrencyByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
+	Return BindSteps("StepChangeReceiveCurrencyByAccount,
+	|StepChangeReceiveBranchByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
 EndFunction
 
 // AccountReceiver.ChangeAccountReceiverByCompany.Step
@@ -1715,6 +1716,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1838,6 +1840,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -2797,6 +2800,43 @@ Function BindBranch(Parameters)
 	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
+
+#EndRegion
+
+#Region RECEIVE_BRANCH
+
+// ReceiveBranch.Set
+Procedure SetReceiveBranch(Parameters, Results) Export
+	Binding = BindReceiveBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveBranch.Get
+Function GetReceiveBranch(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveBranch(Parameters).DataPath);
+EndFunction
+
+// ReceiveBranch.Bind
+Function BindReceiveBranch(Parameters)
+	DataPath = "ReceiveBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveBranch");
+EndFunction
+
+// ReceiveBranch.ChangeReceiveBranchByAccount.Step
+Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
+	Chain.ChangeReceiveBranchByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	
+	Chain.ChangeReceiveBranchByAccount.Setter = "SetReceiveBranch";
+	Options = ModelClientServer_V2.ChangeReceiveBranchByAccountOptions();
+	Options.Account = GetAccountReceiver(Parameters);
+	Options.ReceiveBranch = GetReceiveBranch(Parameters);
+	Options.StepName = "StepChangeReceiveBranchByAccount";
+	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -5604,6 +5644,28 @@ Function BindPaymentListExpenseType(Parameters)
 	DataPath = "PaymentList.ExpenseType";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListExpenseType");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_REVENUE_TYPE
+
+// PaymentList.RevenueType.Set
+Procedure SetPaymentListRevenueType(Parameters, Results) Export
+	Binding = BindPaymentListRevenueType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.RevenueType.Get
+Function GetPaymentListRevenueType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListRevenueType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.RevenueType.Bind
+Function BindPaymentListRevenueType(Parameters)
+	DataPath = "PaymentList.RevenueType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListRevenueType");
 EndFunction
 
 #EndRegion

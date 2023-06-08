@@ -206,6 +206,23 @@
         <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
        </value>
       </choiceList>
+      <choiceList>
+       <presentation>
+        <key>en</key>
+        <value>Other</value>
+       </presentation>
+       <presentation>
+        <key>ru</key>
+        <value>Дополнительно</value>
+       </presentation>
+       <presentation>
+        <key>tr</key>
+        <value>Diğer</value>
+       </presentation>
+       <value xsi:type="core:ReferenceValue">
+        <value>Enum.AgreementTypes.EnumValue.Other</value>
+       </value>
+      </choiceList>
      </extInfo>
     </items>
     <items xsi:type="form:FormField">

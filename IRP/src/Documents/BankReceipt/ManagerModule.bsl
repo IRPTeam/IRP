@@ -206,6 +206,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -301,6 +303,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -383,6 +387,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS) AS
 	|		IsPaymentFromCustomerByPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.OtherIncome) AS IsOtherIncome,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
@@ -406,7 +411,9 @@ Function PaymentList()
 	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 	|			then PaymentList.PlaningTransactionBasis.Ref
 	|		else NULL
-	|	end as CashTransferOrder
+	|	end as CashTransferOrder,
+	|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner,
+	|	PaymentList.RevenueType AS RevenueType
 	|INTO PaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS PaymentList
@@ -514,6 +521,26 @@ Function R1021B_VendorsTransactions()
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+		Return 
+			"SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.Partner,
+		   |	PaymentList.Payer AS LegalName,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Agreement,
+		   |	PaymentList.Key,
+		   |	PaymentList.Amount AS Amount
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherPartner";	
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -627,7 +654,7 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
-		   |	OR PaymentList.IsReturnFromVendor
+		   |	OR PaymentList.IsReturnFromVendor OR PaymentList.IsOtherPartner
 		   |GROUP BY
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
@@ -745,6 +772,25 @@ Function R3035T_CashPlanning()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
+EndFunction
+
+Function R5021T_Revenues()
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.RevenueType,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	PaymentList.Amount AS AmountWithTaxes
+		|INTO R5021T_Revenues
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherIncome";
 EndFunction
 
 Function R5022T_Expenses()

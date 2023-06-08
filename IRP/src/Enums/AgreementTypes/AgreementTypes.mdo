@@ -80,4 +80,19 @@
    <value>Ödeme aracı kurum</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="863030c4-f313-4613-8f13-f466e1a238d8">
+  <name>Other</name>
+  <synonym>
+   <key>en</key>
+   <value>Other</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительно</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Diğer</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

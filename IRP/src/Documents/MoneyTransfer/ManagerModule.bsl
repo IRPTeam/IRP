@@ -125,7 +125,7 @@ Function MoneyReceiver()
 	"SELECT
 	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
-	|	MoneyTransfer.Ref.Branch AS Branch,
+	|	MoneyTransfer.Ref.ReceiveBranch AS Branch,
 	|	MoneyTransfer.Ref.ReceiveBranch AS ReceiveBranch,
 	|	MoneyTransfer.Ref AS Ref,
 	|	MoneyTransfer.Receiver AS Account,

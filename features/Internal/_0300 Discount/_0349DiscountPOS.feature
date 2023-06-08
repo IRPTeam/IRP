@@ -46,7 +46,7 @@ Scenario: _034901 preparation (discounts in POS)
 		And I click "List" button
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Consequentially'       |
+			| 'Сonsistently'       |
 		And I click the button named "FormChoose"
 	* Workstation
 		When Create catalog Workstations objects
@@ -252,8 +252,8 @@ Scenario: _034905 check price type discount + discount coupon in POS
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I go to line in "Offers" table
-			| '%'     | 'Is select' | 'Presentation'        |
-			| '10,00' | '☐'         | 'Discount coupon 10%' |
+			| '%'     | 'Presentation'        |
+			| '10,00' | 'Discount coupon 10%' |
 		And I select current line in "Offers" table
 		And in the table "Offers" I click "OK" button
 		And "ItemList" table became equal

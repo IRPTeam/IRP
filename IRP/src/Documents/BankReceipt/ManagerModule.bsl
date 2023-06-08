@@ -206,6 +206,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -301,6 +302,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R5021T_Revenues());
 	Return QueryArray;
 EndFunction
 
@@ -383,6 +385,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS) AS
 	|		IsPaymentFromCustomerByPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.OtherIncome) AS IsOtherIncome,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
@@ -745,6 +748,25 @@ Function R3035T_CashPlanning()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
+EndFunction
+
+Function R5021T_Revenues()
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.RevenueType,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	PaymentList.Amount AS AmountWithTaxes
+		|INTO R5021T_Revenues
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherIncome";
 EndFunction
 
 Function R5022T_Expenses()

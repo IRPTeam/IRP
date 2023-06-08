@@ -63,6 +63,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
 	|PaymentList.CommissionIsSeparate,
+	|PaymentList.RevenueType,
 	|PaymentList.RetailCustomer";
 	
 	ArrayOfAllAttributes = New Array();
@@ -79,6 +80,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -128,6 +130,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.BasisDocument";
+	ElsIf TransactionType = OtherIncome Then
+		StrByType = "
+		|PaymentList.RevenueType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

@@ -28,6 +28,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If IsBankPayment Then
 		ChoiceData.Add(ReturnToCustomerByPOS);
 		ChoiceData.Add(PaymentByCheque);
+		ChoiceData.Add(OtherExpense);
 	EndIf;
 			
 	If IsOutgoingPaymentOrder Then

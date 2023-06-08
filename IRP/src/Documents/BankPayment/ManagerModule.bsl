@@ -340,6 +340,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS
 	|		IsEmployeeCashAdvance,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherExpense) AS IsOtherExpense,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
@@ -712,15 +713,41 @@ EndFunction
 
 Function R5022T_Expenses()
 	Return 
-	"SELECT
-	|	PaymentList.Commission AS Amount,
-	|	PaymentList.Commission AS AmountWithTaxes,
-	|	*
-	|INTO R5022T_Expenses
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsReturnToCustomerByPOS";
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.ExpenseType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Commission AS Amount,
+		|	PaymentList.Commission AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Commission <> 0
+		|	AND NOT PaymentList.IsReturnToCustomerByPOS
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.ExpenseType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Amount,
+		|	PaymentList.Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherExpense";
 EndFunction
 
 Function R3025B_PurchaseOrdersToBePaid()

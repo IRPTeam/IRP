@@ -3174,7 +3174,8 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PaymentTerminal,
 		|BankTerm,
 		|CommissionIsSeparate,
-		|RetailCustomer");
+		|RetailCustomer,
+		|RevenueType");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3195,6 +3196,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("BankTerm"                 , Options.BankTerm);
 	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
+	Result.Insert("RevenueType"              , Options.RevenueType);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3205,6 +3207,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3246,6 +3249,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
+	ElsIf Options.TransactionType = Incoming_OtherIncome Then
+		StrByType = "
+		|RevenueType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

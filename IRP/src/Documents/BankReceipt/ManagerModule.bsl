@@ -412,7 +412,8 @@ Function PaymentList()
 	|			then PaymentList.PlaningTransactionBasis.Ref
 	|		else NULL
 	|	end as CashTransferOrder,
-	|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
+	|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner,
+	|	PaymentList.RevenueType AS RevenueType
 	|INTO PaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS PaymentList

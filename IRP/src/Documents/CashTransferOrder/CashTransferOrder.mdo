@@ -446,6 +446,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="cf268d3a-6cdf-4555-bf21-f84fb630e8d8">
+  <name>ReceiveBranch</name>
+  <synonym>
+   <key>en</key>
+   <value>Receive branch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подразделение получатель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Receive branch</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="ad6991b2-8b4d-4542-ab3d-232ab7c6fec8">
   <name>DocumentForm</name>
   <synonym>

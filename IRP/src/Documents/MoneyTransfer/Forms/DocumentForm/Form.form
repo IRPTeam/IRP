@@ -880,6 +880,68 @@
        <textEdit>true</textEdit>
       </extInfo>
      </items>
+     <items xsi:type="form:FormField">
+      <name>Branch</name>
+      <id>202</id>
+      <title>
+       <key>en</key>
+       <value>Send branch</value>
+      </title>
+      <title>
+       <key>ru</key>
+       <value>Подразделение отправитель</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Send branch</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.Branch</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>BranchExtendedTooltip</name>
+       <id>204</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>BranchContextMenu</name>
+       <id>203</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1234,6 +1296,56 @@
        <textEdit>true</textEdit>
       </extInfo>
      </items>
+     <items xsi:type="form:FormField">
+      <name>ReceiveBranch</name>
+      <id>282</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.ReceiveBranch</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>ReceiveBranchExtendedTooltip</name>
+       <id>284</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>ReceiveBranchContextMenu</name>
+       <id>283</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1480,56 +1592,6 @@
     <contextMenu>
      <name>AuthorContextMenu</name>
      <id>198</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <autoFill>true</autoFill>
-    </contextMenu>
-    <type>InputField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <wrap>true</wrap>
-     <chooseType>true</chooseType>
-     <typeDomainEnabled>true</typeDomainEnabled>
-     <textEdit>true</textEdit>
-    </extInfo>
-   </items>
-   <items xsi:type="form:FormField">
-    <name>Branch</name>
-    <id>202</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-     <segments>Object.Branch</segments>
-    </dataPath>
-    <extendedTooltip>
-     <name>BranchExtendedTooltip</name>
-     <id>204</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <type>Label</type>
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <extInfo xsi:type="form:LabelDecorationExtInfo">
-      <horizontalAlign>Left</horizontalAlign>
-     </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-     <name>BranchContextMenu</name>
-     <id>203</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>

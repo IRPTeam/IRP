@@ -73,6 +73,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.BasedOn,
 	|	tmp.Company,
 	|	tmp.Branch,
+	|	tmp.ReceiveBranch,
 	|	tmp.CashTransferOrder,
 	|	tmp.Sender,
 	|	tmp.SendCurrency,
@@ -145,7 +146,8 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|SELECT
 	|	ISNULL(tmp_Outgoing.BasedOn, tmp_Incoming.BasedOn) AS BasedOn,
 	|	ISNULL(tmp_Outgoing.Company, tmp_Incoming.Company) AS Company,
-	|	ISNULL(tmp_Outgoing.Branch, tmp_Incoming.Branch) AS Branch,
+	|	tmp_Outgoing.Branch AS Branch,
+	|	tmp_Incoming.Branch AS ReceiveBranch,
 	|	ISNULL(tmp_Outgoing.CashTransferOrder, tmp_Incoming.CashTransferOrder) AS CashTransferOrder,
 	|	tmp_Outgoing.Sender AS Sender,
 	|	tmp_Outgoing.SendCurrency AS SendCurrency,

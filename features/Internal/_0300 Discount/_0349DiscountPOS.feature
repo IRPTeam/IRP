@@ -35,7 +35,7 @@ Scenario: _034901 preparation (discounts in POS)
 		And I select current line in "List" table
 		And I set checkbox "Launch"
 		And I click "Save and close" button
-	* Remove Discount Price 1 to the group Сonsistently
+	* Remove Discount Price 1 to the group Consequentially
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
@@ -46,7 +46,7 @@ Scenario: _034901 preparation (discounts in POS)
 		And I click "List" button
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Сonsistently'       |
+			| 'Consequentially'       |
 		And I click the button named "FormChoose"
 	* Workstation
 		When Create catalog Workstations objects

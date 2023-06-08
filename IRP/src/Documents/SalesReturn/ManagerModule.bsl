@@ -128,7 +128,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.SalesReturn.SourceOfOrigins AS SourceOfOrigins
 	|WHERE
 	|	SourceOfOrigins.Ref = &Ref
-	|
 	|GROUP BY
 	|	SourceOfOrigins.Key,
 	|	CASE
@@ -141,8 +140,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN SourceOfOrigins.SourceOfOrigin
 	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 	|	END,
-	|   SourceOfOrigins.SourceOfOrigin,
-	|   SourceOfOrigins.SerialLotNumber
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.SerialLotNumber
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +160,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN SalesReturnItemList.TotalAmount
 	|		ELSE SalesReturnItemList.LandedCost
 	|	END) AS Amount,
+	|	SUM(CASE
+	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
+	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
+	|			THEN SalesReturnItemList.TaxAmount
+	|		ELSE SalesReturnItemList.LandedCostTax
+	|	END) AS LandedCostTax,
 	|	CASE
 	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
 	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
@@ -192,6 +197,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	END,
 	|	VALUE(Enum.BatchDirection.Receipt)
 	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	SalesReturn.Ref AS Document,
 	|	SalesReturn.Company AS Company,
@@ -201,7 +208,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|WHERE
 	|	SalesReturn.Ref = &Ref
 	|;
-	
+	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
@@ -224,16 +232,25 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	CASE
 	|		WHEN tmpItemList.Quantity <> 0
 	|			THEN CASE
-	|					WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|						THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|					ELSE tmpItemList.Amount
-	|				END
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.Amount
+	|			END
 	|		ELSE 0
 	|	END AS Amount,
+	|	CASE
+	|		WHEN tmpItemList.Quantity <> 0
+	|			THEN CASE
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.LandedCostTax / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.LandedCostTax
+	|			END
+	|		ELSE 0
+	|	END AS LandedCostTax,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
-	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock	
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
@@ -264,41 +281,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	TaxList.Key,
-	|	TaxList.Ref.Company,
-	|	TaxList.Tax,
-	|	TaxList.ManualAmount AS AmountTax
-	|INTO TaxList
-	|FROM
-	|	Document.SalesReturn.TaxList AS TaxList
-	|WHERE
-	|	TaxList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	SUM(TaxList.AmountTax) AS AmountTax
-	|INTO TaxListAmounts
-	|FROM
-	|	TaxList AS TaxList
-	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
-	|			(SELECT
-	|				TaxList.Company,
-	|				TaxList.Tax
-	|			FROM
-	|				TaxList AS TaxList)) AS TaxesSliceLast
-	|		ON TaxesSliceLast.Company = TaxList.Company
-	|		AND TaxesSliceLast.Tax = TaxList.Tax
-	|WHERE
-	|	TaxesSliceLast.Use
-	|	AND TaxesSliceLast.IncludeToLandedCost
-	|GROUP BY
-	|	TaxList.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	BatchKeysInfo.Key,
 	|	BatchKeysInfo.TotalQuantity,
 	|	BatchKeysInfo.Quantity,
@@ -311,16 +293,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	case
-	|		when BatchKeysInfo.TotalQuantity <> 0
-	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
-	|		else 0
-	|	end as AmountTax,
+	|	CASE WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled THEN BatchKeysInfo.LandedCostTax ELSE 0 END AS AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
-	|	BatchKeysInfo AS BatchKeysInfo
-	|		LEFT JOIN TaxListAmounts AS TaxListAmounts
-	|		ON BatchKeysInfo.Key = TaxListAmounts.Key AND NOT BatchKeysInfo.SalesInvoiceIsFilled";
+	|	BatchKeysInfo AS BatchKeysInfo";
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
 	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);

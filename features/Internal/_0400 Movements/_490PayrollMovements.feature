@@ -28,6 +28,7 @@ Scenario: _040990 preparation (payroll movements)
 		When Create catalog ItemTypes objects
 		When Create PaymentType (advance)
 		When Create catalog PaymentTypes objects
+		When Create catalog PlanningPeriods objects
 		When Create catalog BankTerms objects
 		When Create catalog Units objects
 		When Create catalog Items objects

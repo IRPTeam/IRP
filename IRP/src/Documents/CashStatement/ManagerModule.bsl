@@ -38,8 +38,7 @@ Function GetQueryText_CashStatement_CashInTransit()
 	|	Table.Currency AS Currency,
 	|	Table.Amount AS Amount,
 	|	Table.Ref.Date AS Period,
-	|	Table.Key,
-	|	Table.Ref.Branch AS Branch
+	|	Table.Key
 	|FROM
 	|	Document.CashStatement.PaymentList AS Table
 	|WHERE

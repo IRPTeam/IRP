@@ -150,8 +150,7 @@ Function GetQueryTextQueryTable()
 		   |	tmp.Currency AS Currency,
 		   |	tmp.Amount AS Amount,
 		   |	tmp.Period,
-		   |	tmp.Key,
-		   |	tmp.Branch
+		   |	tmp.Key
 		   |FROM
 		   |	tmp AS tmp
 		   |WHERE
@@ -179,6 +178,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -260,6 +260,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	Return QueryArray;
 EndFunction
 
@@ -301,10 +302,8 @@ Function PaymentList()
 	|	PaymentList.Partner AS Partner,
 	|	PaymentList.Payee AS Payee,
 	|	PaymentList.Ref.Date AS Period,
-	|
 	|	PaymentList.TotalAmount AS Amount,
 	|	PaymentList.TotalAmount AS TotalAmount,
-	|
 	|	CASE
 	|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
 	|		AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
@@ -335,9 +334,11 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
-	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS IsReturnToCustomerByPOS,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS
+	|		IsReturnToCustomerByPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CustomerAdvance) AS IsCustomerAdvance,
-	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS IsEmployeeCashAdvance,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS
+	|		IsEmployeeCashAdvance,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
@@ -345,12 +346,51 @@ Function PaymentList()
 	|	PaymentList.Order,
 	|	PaymentList.PaymentType,
 	|	PaymentList.PaymentTerminal,
-	|	PaymentList.Employee
+	|	PaymentList.Employee,
+	|	case
+	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+	|			then PaymentList.PlaningTransactionBasis.ReceiveBranch
+	|	end as BranchReceiver,
+	|	case
+	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+	|			then PaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|	end as CurrencyReceiver,
+	|	case
+	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+	|			then PaymentList.PlaningTransactionBasis.Receiver
+	|	end as AccountReceiver,
+	|	case
+	|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+	|			then PaymentList.PlaningTransactionBasis.Ref
+	|		else NULL
+	|	end as CashTransferOrder
 	|INTO PaymentList
 	|FROM
 	|	Document.BankPayment.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.BranchReceiver AS Branch,
+		|	PaymentList.CurrencyReceiver AS Currency,
+		|	PaymentList.Account AS Account,
+		|	PaymentList.AccountReceiver AS ReceiptingAccount,
+		|	PaymentList.CashTransferOrder AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	(PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsCurrencyExchange)
+		|	AND NOT PaymentList.CashTransferOrder IS NULL";
 EndFunction
 
 Function R9510B_SalaryPayment()

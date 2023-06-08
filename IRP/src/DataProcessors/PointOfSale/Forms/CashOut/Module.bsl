@@ -77,6 +77,10 @@ Function CreateMoneyTransferAtServer()
 	FillingData.SendAmount = ThisObject.SendAmount;
 	FillingData.ReceiveAmount = ThisObject.SendAmount;
 	
+	If ValueIsFilled(FillingData.Receiver) Then
+		FillingData.Insert("ReceiveBranch", FillingData.Receiver.Branch);
+	EndIf;
+	
 	NewDocument = Documents.MoneyTransfer.CreateDocument();
 	NewDocument.Fill(FillingData);
 	NewDocument.Description = ThisObject.Description;

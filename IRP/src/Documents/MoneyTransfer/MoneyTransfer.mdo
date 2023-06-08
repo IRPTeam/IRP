@@ -309,6 +309,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="0469cf2d-a61f-4739-b449-f154f05be733">
+    <name>ReceiveBranch</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
     <name>DocumentForm</name>
     <synonym>

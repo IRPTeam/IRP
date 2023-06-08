@@ -314,6 +314,28 @@ Scenario: _043516 check Cash payment movements by the Register "R3035 Cash plann
 	And I close all client application windows
 
 
+Scenario: _043517 check Cash payment movements by the Register "R3021 Cash in transit (incoming)" (Cash transfer order, with planning transaction basis)
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 326 dated 04.06.2021 12:44:31'   | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '450'       | ''           | 'Main Company' | 'Accountants office' | 'Reporting currency'           | 'USD'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '450'       | ''           | 'Main Company' | 'Accountants office' | 'en description is empty'      | 'USD'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '2 532,38'  | ''           | 'Main Company' | 'Accountants office' | 'Local currency'               | 'TRY'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |	
+	And I close all client application windows
+
 Scenario: _043518 check absence Cash payment movements by the Register "R3035 Cash planning" (payment to vendor, without planning transaction basis)
 	* Select Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -383,6 +405,29 @@ Scenario: _043522 check absence Cash payment movements by the Register "R5010 Re
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R5010 Reconciliation statement'   | 
+	And I close all client application windows
+
+Scenario: _043528 check Cash payment movements by the Register "R3021 Cash in transit (incoming)" (Currency exchange)
+		And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '325' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 325 dated 04.06.2021 12:43:40'   | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '171,2'     | ''           | 'Main Company' | 'Accountants office' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '1 000'     | ''           | 'Main Company' | 'Accountants office' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '1 000'     | ''           | 'Main Company' | 'Accountants office' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |	
 	And I close all client application windows
 
 Scenario: _043523 check Cash payment movements by the Register "R1020 Advances to vendors" (with partner term by document, without basis)

@@ -26,6 +26,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If IsBankReceipt Then
 		ChoiceData.Add(PaymentFromCustomerByPOS);
 		ChoiceData.Add(ReceiptByCheque);
+		ChoiceData.Add(OtherIncome);
 	EndIf;
 	
 	If IsCashReceipt Then

@@ -1715,6 +1715,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1838,6 +1839,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -5604,6 +5606,28 @@ Function BindPaymentListExpenseType(Parameters)
 	DataPath = "PaymentList.ExpenseType";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListExpenseType");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_REVENUE_TYPE
+
+// PaymentList.RevenueType.Set
+Procedure SetPaymentListRevenueType(Parameters, Results) Export
+	Binding = BindPaymentListRevenueType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.RevenueType.Get
+Function GetPaymentListRevenueType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListRevenueType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.RevenueType.Bind
+Function BindPaymentListRevenueType(Parameters)
+	DataPath = "PaymentList.RevenueType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListRevenueType");
 EndFunction
 
 #EndRegion

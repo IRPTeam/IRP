@@ -1779,10 +1779,15 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'TRY'  |
 		And I select current line in "List" table
 		And I input "11,00" text in "Receive amount" field	
-		And I click Select button of "Branch" field
+		And I click Select button of "Send branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 02'     |
+		And I select current line in "List" table
+		And I click Select button of "Receive branch" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Front office'     |
 		And I select current line in "List" table
 		And I click Select button of "Consolidated retail sales" field
 		And I go to line in "List" table

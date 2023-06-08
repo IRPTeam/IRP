@@ -125,7 +125,8 @@ Function MoneyReceiver()
 	"SELECT
 	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
-	|	MoneyTransfer.Ref.Branch AS Branch,
+	|	MoneyTransfer.Ref.ReceiveBranch AS Branch,
+	|	MoneyTransfer.Ref.ReceiveBranch AS ReceiveBranch,
 	|	MoneyTransfer.Ref AS Ref,
 	|	MoneyTransfer.Receiver AS Account,
 	|	MoneyTransfer.Sender AS AccountFrom,
@@ -154,7 +155,7 @@ Function R3021B_CashInTransitIncoming()
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	MoneyReceiver.Period,
 	|	MoneyReceiver.Company,
-	|	MoneyReceiver.Branch,
+	|	MoneyReceiver.ReceiveBranch AS Branch,
 	|	MoneyReceiver.Ref AS Basis,
 	|	MoneyReceiver.AccountFrom AS Account,
 	|	MoneyReceiver.AccountTo AS ReceiptingAccount,

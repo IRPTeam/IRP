@@ -75,4 +75,18 @@
       <value>Salary payment</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="749c6dd9-b795-4f52-82dd-467c8cc2e4b8">
+    <name>OtherExpense</name>
+    <synonym>
+      <key>en</key>
+      <value>Other expense</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="a4c3d1f9-c8f9-4734-9cde-409178642eca">
+    <name>OtherPartner</name>
+    <synonym>
+      <key>en</key>
+      <value>Other partner</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

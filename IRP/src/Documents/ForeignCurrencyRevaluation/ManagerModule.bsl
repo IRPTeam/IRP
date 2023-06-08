@@ -159,7 +159,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
-	|
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R5015B_OtherPartnersTransactions
+	|FROM
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Reg.TransactionCurrency AS CurrencyFrom,
@@ -276,6 +286,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Source
 	|FROM
 	|	_R6080T_OtherPeriodsRevenues AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency,
+	|	Reg.Currency,
+	|	Reg.Source
+	|FROM
+	|	_R5015B_OtherPartnersTransactions AS Reg
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -363,6 +382,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R3021B_CashInTransitIncoming");
 	ArrayOfActives.Add("R3022B_CashInTransitOutgoing");
 	ArrayOfActives.Add("R3027B_EmployeeCashAdvance");
+	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
 	
 	ArrayOfPassives = New Array();
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
@@ -665,6 +685,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3016B_ChequeAndBonds());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -818,3 +839,12 @@ Function R6080T_OtherPeriodsRevenues()
 		|	TRUE";	
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT *
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM 
+		|	Revaluated_R5015B_OtherPartnersTransactions
+		|WHERE
+		|	TRUE";	
+EndFunction

@@ -24,7 +24,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.CashInTransit            = QueryResults[1].Unload();
+	Tables.CashInTransit = QueryResults[1].Unload();
 
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -139,8 +139,7 @@ Function GetQueryTextQueryTable()
 		   |	tmp.Currency AS Currency,
 		   |	SUM(tmp.Amount) AS Amount,
 		   |	tmp.Period,
-		   |	tmp.Key,
-		   |	tmp.Branch
+		   |	tmp.Key
 		   |FROM
 		   |	tmp AS tmp
 		   |WHERE
@@ -152,8 +151,7 @@ Function GetQueryTextQueryTable()
 		   |	tmp.ToAccount,
 		   |	tmp.Currency,
 		   |	tmp.Period,
-		   |	tmp.Key,
-		   |	tmp.Branch";
+		   |	tmp.Key";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -176,6 +174,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -255,6 +255,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -310,12 +312,52 @@ Function PaymentList()
 		|	PaymentList.Partner,
 		|	PaymentList.Ref.Branch AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
-		|	PaymentList.Order
+		|	PaymentList.Order,
+		|	case
+		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		|			then PaymentList.PlaningTransactionBasis.ReceiveBranch
+		|	end as BranchReceiver,
+		|	case
+		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		|			then PaymentList.PlaningTransactionBasis.ReceiveCurrency
+		|	end as CurrencyReceiver,
+		|	case
+		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		|			then PaymentList.PlaningTransactionBasis.Receiver
+		|	end as AccountReceiver,
+		|	case
+		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		|			then PaymentList.PlaningTransactionBasis.Ref
+		|		else NULL
+		|	end as CashTransferOrder,
+		|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.BranchReceiver AS Branch,
+		|	PaymentList.CurrencyReceiver AS Currency,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.AccountReceiver AS ReceiptingAccount,
+		|	PaymentList.CashTransferOrder AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	(PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsCurrencyExchange)
+		|	AND NOT PaymentList.CashTransferOrder IS NULL";
 EndFunction
 
 Function R9510B_SalaryPayment()
@@ -441,6 +483,26 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+		Return 
+			"SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.Partner,
+		   |	PaymentList.LegalName,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Agreement,
+		   |	PaymentList.Key,
+		   |	PaymentList.Amount AS Amount
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherPartner";	
+EndFunction
+
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -546,7 +608,8 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsPaymentToVendor
-		   |	OR PaymentList.IsReturnToCustomer";
+		   |	OR PaymentList.IsReturnToCustomer
+		   |	OR PaymentList.IsOtherPartner";
 EndFunction
 
 Function R3010B_CashOnHand()

@@ -117,11 +117,15 @@ Scenario: _054101 filling Money transfer (same currency and account type)
 			| 'Movement type 1' |
 		And I select current line in "List" table
 	* Filling in Branch
-		And I move to "Other" tab
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "ReceiveBranch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Accountants office' |
 		And I select current line in "List" table
 	* Post
 		And I click "Post" button
@@ -193,6 +197,11 @@ Scenario: _054102 filling Money transfer (different currency and account type)
 			| 'Description'             |
 			| 'Distribution department' |
 		And I select current line in "List" table
+		And I click Choice button of the field named "ReceiveBranch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Accountants office' |
+		And I select current line in "List" table
 	* Post
 		And I click "Post" button
 	* Check filling in
@@ -234,6 +243,7 @@ Scenario: _054103 create Money transfer based on Cash transfer order (same curre
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And the editing text of form attribute named "ReceiveAmount" became equal to "500,00"
 		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ReceiveBranch" became equal to "Accountants office"
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 2 dated 05.04.2021 12:09:54"
 	* Try to change Sender, Reveiver
 		And the attribute named "Sender" is read-only
@@ -283,6 +293,7 @@ Scenario: _054105 create two Money transfer based on Cash transfer order (differ
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And the editing text of form attribute named "ReceiveAmount" became equal to "180,00"
 		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ReceiveBranch" became equal to "Accountants office"
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 3 dated 05.04.2021 12:23:49"
 	* Change amount
 		And I input "900,00" text in "Send amount" field
@@ -315,6 +326,7 @@ Scenario: _054105 create two Money transfer based on Cash transfer order (differ
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And the editing text of form attribute named "ReceiveAmount" became equal to "10,00"
 		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ReceiveBranch" became equal to "Accountants office"
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 3 dated 05.04.2021 12:23:49"
 	* Change amount
 		And I input "50,00" text in "Send amount" field
@@ -361,6 +373,7 @@ Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And the editing text of form attribute named "ReceiveAmount" became equal to "180,00"
 		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ReceiveBranch" became equal to "Accountants office"
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 4 dated 05.04.2021 12:24:12"
 	*Select CTO and cancel refilling
 		And I move to "Other" tab
@@ -382,6 +395,7 @@ Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And the editing text of form attribute named "ReceiveAmount" became equal to "180,00"
 		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ReceiveBranch" became equal to "Accountants office"
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 4 dated 05.04.2021 12:24:12"
 		And I close all client application windows
 		

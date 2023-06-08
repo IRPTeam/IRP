@@ -69,20 +69,15 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If ThisObject.ApArPostingDetail <> Enums.ApArPostingDetail.ByStandardAgreement Then
-		Index = CheckedAttributes.Find("StandardAgreement");
-		If Index <> Undefined Then
-			CheckedAttributes.Delete(Index);
-		EndIf;
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "StandardAgreement");
 	EndIf;
 
 	If ThisObject.Kind <> Enums.AgreementKinds.Regular Then
-		Index = CheckedAttributes.Find("PriceType");
-		If Index <> Undefined Then
-			CheckedAttributes.Delete(Index);
-		EndIf;
-		Index = CheckedAttributes.Find("Type");
-		If Index <> Undefined Then
-			CheckedAttributes.Delete(Index);
-		EndIf;
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "PriceType");
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "Type");
+	EndIf;
+	
+	If ThisObject.Type = Enums.AgreementTypes.Other Then
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "PriceType");
 	EndIf;
 EndProcedure

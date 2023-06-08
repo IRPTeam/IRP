@@ -21,6 +21,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(ReturnFromVendor);
 		ChoiceData.Add(CustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
+		ChoiceData.Add(OtherPartner);
 	EndIf;
 		
 	If IsBankReceipt Then

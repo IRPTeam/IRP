@@ -81,6 +81,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
+	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -110,6 +111,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			|PaymentList.PaymentTerminal,
 			|PaymentList.BankTerm";
 		EndIf;
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payer,
+		|PaymentList.LegalNameContract";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
@@ -156,7 +163,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
-	
+
 	ArrayTypes = New Array();
 	
 	If IsCurrencyExchange Or IsCashTransferOrder Or IsTransferFromPOS Then

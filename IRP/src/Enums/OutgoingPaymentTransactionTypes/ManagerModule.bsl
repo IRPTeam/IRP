@@ -18,7 +18,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(ReturnToCustomer);
 		ChoiceData.Add(CustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
-			
+		ChoiceData.Add(OtherPartner);	
 		If FOServer.IsUseCashTransaction() Then
 			ChoiceData.Add(CurrencyExchange);
 			ChoiceData.Add(CashTransferOrder);

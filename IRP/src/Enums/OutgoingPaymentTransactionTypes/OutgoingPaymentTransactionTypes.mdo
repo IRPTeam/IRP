@@ -82,4 +82,11 @@
       <value>Other expense</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="a4c3d1f9-c8f9-4734-9cde-409178642eca">
+    <name>OtherPartner</name>
+    <synonym>
+      <key>en</key>
+      <value>Other partner</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

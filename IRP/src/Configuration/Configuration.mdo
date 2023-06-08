@@ -1138,6 +1138,7 @@
   <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9510B_SalaryPayment</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5015B_OtherPartnersTransactions</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

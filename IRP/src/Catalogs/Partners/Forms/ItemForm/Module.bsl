@@ -82,6 +82,11 @@ Procedure TradeAgentOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure OtherOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure

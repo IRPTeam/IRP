@@ -21,11 +21,13 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(ReturnFromVendor);
 		ChoiceData.Add(CustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
+		ChoiceData.Add(OtherPartner);
 	EndIf;
 		
 	If IsBankReceipt Then
 		ChoiceData.Add(PaymentFromCustomerByPOS);
 		ChoiceData.Add(ReceiptByCheque);
+		ChoiceData.Add(OtherIncome);
 	EndIf;
 	
 	If IsCashReceipt Then

@@ -175,6 +175,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -255,6 +256,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -327,7 +329,8 @@ Function PaymentList()
 		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		|			then PaymentList.PlaningTransactionBasis.Ref
 		|		else NULL
-		|	end as CashTransferOrder
+		|	end as CashTransferOrder,
+		|	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -480,6 +483,26 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+		Return 
+			"SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.Partner,
+		   |	PaymentList.LegalName,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Agreement,
+		   |	PaymentList.Key,
+		   |	PaymentList.Amount AS Amount
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherPartner";	
+EndFunction
+
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -585,7 +608,8 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsPaymentToVendor
-		   |	OR PaymentList.IsReturnToCustomer";
+		   |	OR PaymentList.IsReturnToCustomer
+		   |	OR PaymentList.IsOtherPartner";
 EndFunction
 
 Function R3010B_CashOnHand()

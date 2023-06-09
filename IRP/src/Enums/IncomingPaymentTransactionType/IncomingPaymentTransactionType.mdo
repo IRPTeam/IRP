@@ -82,4 +82,18 @@
       <value>Employee cash advance</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="74518525-e17a-4209-9f01-600c4e9ad8f7">
+    <name>OtherIncome</name>
+    <synonym>
+      <key>en</key>
+      <value>Other income</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="3612b47d-85e9-41e6-83cf-0cd84c7eb486">
+    <name>OtherPartner</name>
+    <synonym>
+      <key>en</key>
+      <value>Other partner</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

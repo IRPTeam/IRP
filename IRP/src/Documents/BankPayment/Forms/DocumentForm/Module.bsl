@@ -79,6 +79,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -106,6 +107,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			|PaymentList.PaymentTerminal,
 			|PaymentList.BankTerm";
 		EndIf;	
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payee,
+		|PaymentList.LegalNameContract";
 	ElsIf TransactionType = PaymentByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";

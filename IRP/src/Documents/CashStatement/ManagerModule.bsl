@@ -148,7 +148,8 @@ Function PaymentList()
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.PaymentType,
 	|	PaymentList.PaymentTerminal,
-	|	PaymentList.ReceiptingAccount
+	|	PaymentList.ReceiptingAccount,
+	|	PaymentList.UseBasisDocument
 	|INTO PaymentList
 	|FROM
 	|	Document.CashStatement.PaymentList AS PaymentList
@@ -223,7 +224,11 @@ Function R3021B_CashInTransitIncoming()
 	|	PaymentList.Currency,
 	|	PaymentList.Account,
 	|	PaymentList.ReceiptingAccount,
-	|	PaymentList.Ref AS Basis,
+	|	CASE
+	|		WHEN PaymentList.UseBasisDocument
+	|			THEN PaymentList.Ref
+	|		ELSE UNDEFINED
+	|	END AS Basis,
 	|	PaymentList.Amount,
 	|	PaymentList.Commission
 	|INTO R3021B_CashInTransitIncoming

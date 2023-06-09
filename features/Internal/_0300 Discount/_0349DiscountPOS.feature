@@ -35,7 +35,7 @@ Scenario: _034901 preparation (discounts in POS)
 		And I select current line in "List" table
 		And I set checkbox "Launch"
 		And I click "Save and close" button
-	* Remove Discount Price 1 to the group Сonsistently
+	* Remove Discount Price 1 to the group Consequentially
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
@@ -247,13 +247,13 @@ Scenario: _034905 check price type discount + discount coupon in POS
 		And I click "Discount document" button
 		Then "Pickup special offers" window is opened
 		And I go to line in "Offers" table
-			| 'Is select' | 'Presentation'     |
-			| '☐'         | 'Discount Price 1' |
+			| 'Presentation'     |
+			| 'Discount Price 1' |
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I go to line in "Offers" table
-			| '%'     | 'Is select' | 'Presentation'        |
-			| '10,00' | '☐'         | 'Discount coupon 10%' |
+			| 'Presentation'        |
+			| 'Discount coupon 10%' |
 		And I select current line in "Offers" table
 		And in the table "Offers" I click "OK" button
 		And "ItemList" table became equal
@@ -322,8 +322,8 @@ Scenario: _034906 check price type discount + discount coupon in POS
 		And I move to the tab named "ButtonPage"
 		And I click "Discount document" button
 		And I go to line in "Offers" table
-			| 'Is select'  | 'Presentation'     |
-			| '☐'         | 'Discount Price 1' |
+			| 'Presentation'     |
+			| 'Discount Price 1' |
 		And I select current line in "Offers" table
 		And in the table "Offers" I click "OK" button
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -443,13 +443,13 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 		And I click "Discount document" button
 		Then "Pickup special offers" window is opened
 		And I go to line in "Offers" table
-			| 'Is select' | 'Presentation'     |
-			| '☐'         | 'Discount Price 1' |
+			| 'Presentation'     |
+			| 'Discount Price 1' |
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I go to line in "Offers" table
-			| 'Is select' | 'Presentation'        |
-			| '☐'         | 'Document discount' |
+			| 'Presentation'      |
+			| 'Document discount' |
 		And I activate "%" field in "Offers" table
 		And I select current line in "Offers" table
 		And I change the radio button named "Type" value to "Amount"

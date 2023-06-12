@@ -186,10 +186,12 @@
   <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
   <commonPictures>CommonPicture.ControlCodeString</commonPictures>
+  <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
+  <sessionParameters>SessionParameter.CurrentUserAccessProfiles</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUserPartner</sessionParameters>
   <sessionParameters>SessionParameter.IDUse</sessionParameters>
   <sessionParameters>SessionParameter.IDValue</sessionParameters>
@@ -200,7 +202,6 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
-  <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.FilterForUserSettings</roles>
@@ -218,6 +219,7 @@
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.Template</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -488,6 +490,7 @@
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.Log</commonModules>
   <commonModules>CommonModule.SMSServer</commonModules>
+  <commonModules>CommonModule.ObjectAccessFullAccess</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -529,6 +532,7 @@
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UndoPosting_RowID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_ObjectAccess</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -538,6 +542,7 @@
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <functionalOptions>FunctionalOption.UseAddAttributesAndProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseAdditionalSettings</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdditionalTableControlDocument</functionalOptions>
   <functionalOptions>FunctionalOption.UseAging</functionalOptions>
   <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
   <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
@@ -545,6 +550,7 @@
   <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
   <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
   <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
@@ -559,6 +565,7 @@
   <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
   <functionalOptions>FunctionalOption.UseManufacturing</functionalOptions>
   <functionalOptions>FunctionalOption.UseMobile</functionalOptions>
+  <functionalOptions>FunctionalOption.UseObjectAccess</functionalOptions>
   <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
@@ -566,16 +573,17 @@
   <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
+  <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
   <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
   <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
-  <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
-  <functionalOptions>FunctionalOption.UseAdditionalTableControlDocument</functionalOptions>
+  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
+  <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
+  <definedTypes>DefinedType.typeAccessToObject</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -592,6 +600,7 @@
   <definedTypes>DefinedType.typeIDInfoOwners</definedTypes>
   <definedTypes>DefinedType.typeItem</definedTypes>
   <definedTypes>DefinedType.typeObjectWithItemList</definedTypes>
+  <definedTypes>DefinedType.typeObjectWithSpecialOffers</definedTypes>
   <definedTypes>DefinedType.typeObjectWithStatuses</definedTypes>
   <definedTypes>DefinedType.typeObjectWithTaxes</definedTypes>
   <definedTypes>DefinedType.typeOrders</definedTypes>
@@ -607,14 +616,11 @@
   <definedTypes>DefinedType.typeReconciliationStatementDocuments</definedTypes>
   <definedTypes>DefinedType.typeRowID</definedTypes>
   <definedTypes>DefinedType.typeShipmentBasis</definedTypes>
+  <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
+  <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
-  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
-  <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
-  <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
-  <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
-  <definedTypes>DefinedType.typeObjectWithSpecialOffers</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -630,12 +636,14 @@
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
+  <constants>Constant.DefaultSMSProvider</constants>
   <constants>Constant.EnableLinkedRowsIntegrity</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.UseAccounting</constants>
   <constants>Constant.UseAddAttributesAndProperties</constants>
   <constants>Constant.UseAdditionalSettings</constants>
+  <constants>Constant.UseAdditionalTableControlDocument</constants>
   <constants>Constant.UseAging</constants>
   <constants>Constant.UseAllFunctional</constants>
   <constants>Constant.UseBankDocuments</constants>
@@ -643,6 +651,7 @@
   <constants>Constant.UseBusinessUnits</constants>
   <constants>Constant.UseCashTransaction</constants>
   <constants>Constant.UseChequeBonds</constants>
+  <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseConsolidatedRetailSales</constants>
   <constants>Constant.UseContactInformation</constants>
@@ -657,6 +666,7 @@
   <constants>Constant.UseManagersAndSalesPersons</constants>
   <constants>Constant.UseManufacturing</constants>
   <constants>Constant.UseMobile</constants>
+  <constants>Constant.UseObjectAccess</constants>
   <constants>Constant.UseOrders</constants>
   <constants>Constant.UsePartnerItems</constants>
   <constants>Constant.UsePartnersHierarchy</constants>
@@ -664,6 +674,8 @@
   <constants>Constant.UsePlannedReceiptReservation</constants>
   <constants>Constant.UsePriceByProperties</constants>
   <constants>Constant.UseRetail</constants>
+  <constants>Constant.UseRetailOrders</constants>
+  <constants>Constant.UseSalary</constants>
   <constants>Constant.UseSerialLotNumbers</constants>
   <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
   <constants>Constant.UseSimpleMode</constants>
@@ -671,11 +683,6 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
-  <constants>Constant.UseCommissionTrading</constants>
-  <constants>Constant.UseRetailOrders</constants>
-  <constants>Constant.UseSalary</constants>
-  <constants>Constant.DefaultSMSProvider</constants>
-  <constants>Constant.UseAdditionalTableControlDocument</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -764,6 +771,7 @@
   <catalogs>Catalog.LegalNameContracts</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
+  <catalogs>Catalog.ObjectAccessKeys</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
   <catalogs>Catalog.PartnerItems</catalogs>
   <catalogs>Catalog.Partners</catalogs>
@@ -847,8 +855,10 @@
   <documents>Document.PurchaseReturn</documents>
   <documents>Document.PurchaseReturnOrder</documents>
   <documents>Document.ReconciliationStatement</documents>
+  <documents>Document.RetailGoodsReceipt</documents>
   <documents>Document.RetailReturnReceipt</documents>
   <documents>Document.RetailSalesReceipt</documents>
+  <documents>Document.RetailShipmentConfirmation</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesOrder</documents>
   <documents>Document.SalesOrderClosing</documents>
@@ -865,8 +875,6 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
-  <documents>Document.RetailShipmentConfirmation</documents>
-  <documents>Document.RetailGoodsReceipt</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1045,6 +1053,7 @@
   <informationRegisters>InformationRegister.DataVersions</informationRegisters>
   <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
   <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
+  <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

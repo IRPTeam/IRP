@@ -11,14 +11,15 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region Access
+	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en = 'SMS sent successfully'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en = 'Error while SMS send'", Lang));
 	Strings.Insert("SMS_WaitUntilNextSend", NStr("en = 'Wait until next send. %1 second'", Lang));
 	Strings.Insert("SMS_SMSCodeWrong", NStr("en = 'Not valid SMS code. Try again.'", Lang));
-
-
-
 #EndRegion
 
 #Region AdditionalTableControl

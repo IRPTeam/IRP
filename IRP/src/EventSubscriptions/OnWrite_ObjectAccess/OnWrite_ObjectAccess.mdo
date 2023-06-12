@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0fb6c35-214d-4713-96fa-4ecedbd5c7b4">
+  <name>OnWrite_ObjectAccess</name>
+  <synonym>
+    <key>en</key>
+    <value>On write object access</value>
+  </synonym>
+  <source>
+    <types>DefinedType.typeAccessToObject</types>
+  </source>
+  <event>OnWrite</event>
+  <handler>CommonModule.ObjectAccessFullAccess.OnWrite_ObjectAccessOnWrite</handler>
+</mdclass:EventSubscription>

@@ -159,6 +159,25 @@ Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo =
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure();
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParameters(Ref)
+	StrParams = New Structure();
+	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
+	Return StrParams;
+EndFunction
+
 #EndRegion
 
 #Region Undoposting
@@ -208,39 +227,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
-	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
-	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
-	Return Str;
-EndFunction
-
-Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
-	StrParams.Insert("Ref", Ref);
-	If ValueIsFilled(Ref) Then
-		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		StrParams.Insert("BalancePeriod", Undefined);
-	EndIf;
-	Return StrParams;
-EndFunction
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-	QueryArray.Add(ItemList());
-	QueryArray.Add(Payments());
-	QueryArray.Add(RetailSales());
-	QueryArray.Add(OffersInfo());
-	QueryArray.Add(SerialLotNumbers());
-	QueryArray.Add(SourceOfOrigins());
-	QueryArray.Add(PaymentAgent());
-	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
-	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
-	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
-	Return QueryArray;
-EndFunction
+#Region Posting_MasterTables
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
@@ -271,323 +258,6 @@ Function GetQueryTextsMasterTables()
 	Return QueryArray;
 EndFunction
 
-Function ItemList()
-	Return 
-		"SELECT
-		|	RowIDInfo.Ref AS Ref,
-		|	RowIDInfo.Key AS Key,
-		|	MAX(RowIDInfo.RowID) AS RowID
-		|INTO TableRowIDInfo
-		|FROM
-		|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
-		|WHERE
-		|	RowIDInfo.Ref = &Ref
-		|GROUP BY
-		|	RowIDInfo.Ref,
-		|	RowIDInfo.Key
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ShipmentConfirmations.Key AS Key
-		|INTO ShipmentConfirmations
-		|FROM
-		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
-		|WHERE
-		|	ShipmentConfirmations.Ref = &Ref
-		|GROUP BY
-		|	ShipmentConfirmations.Key
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Store AS Store,
-		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.QuantityInBaseUnit AS Quantity,
-		|	ItemList.TotalAmount AS TotalAmount,
-		|	ItemList.Ref.Partner AS Partner,
-		|	ItemList.Ref.LegalName AS LegalName,
-		|	CASE
-		|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN ItemList.Ref.Agreement.StandardAgreement
-		|		ELSE ItemList.Ref.Agreement
-		|	END AS Agreement,
-		|	ItemList.Ref.Currency AS Currency,
-		|	ItemList.Ref.Date AS Period,
-		|	ItemList.Ref AS RetailSalesReceipt,
-		|	ItemList.IsService AS IsService,
-		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		|	ItemList.RevenueType AS RevenueType,
-		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	CASE
-		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN ItemList.Ref
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	ItemList.NetAmount AS NetAmount,
-		|	ItemList.OffersAmount AS OffersAmount,
-		|	ItemList.Ref AS Invoice,
-		|	ItemList.SalesOrder AS SalesOrder,
-		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-		|	ItemList.Key AS RowKey,
-		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
-		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
-		|	ItemList.SalesPerson,
-		|	ItemList.Key,
-		|	ItemList.Unit,
-		|	ItemList.Price,
-		|	ItemList.PriceType,
-		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-		|	TableRowIDInfo.RowID AS RowID
-		|INTO ItemList
-		|FROM
-		|	Document.RetailSalesReceipt.ItemList AS ItemList
-		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-		|		ON ItemList.Key = ShipmentConfirmations.Key 
-		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-		|		ON ItemList.Key = TableRowIDInfo.Key
-		|WHERE
-		|	ItemList.Ref = &Ref
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity
-		|INTO ShipmentConfirmationsInfo
-		|FROM
-		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
-		|WHERE
-		|	ShipmentConfirmations.Ref = &Ref";
-EndFunction
-
-Function Payments()
-	Return 
-		"SELECT
-		|	Payments.Ref.Date AS Period,
-		|	Payments.Ref.Company AS Company,
-		|	Payments.Ref.Branch AS Branch,
-		|	Payments.Ref.RetailCustomer AS RetailCustomer,
-		|	Payments.Account AS Account,
-		|	Payments.Ref.Currency AS Currency,
-		|	Payments.Amount AS Amount,
-		|	Payments.PaymentType AS PaymentType,
-		|	Payments.FinancialMovementType AS FinancialMovementType,
-		|	Payments.PaymentTerminal AS PaymentTerminal,
-		|	Payments.BankTerm AS BankTerm,
-		|	Payments.Percent AS Percent,
-		|	Payments.Commission AS Commission,
-		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance,
-		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent
-		|INTO Payments
-		|FROM
-		|	Document.RetailSalesReceipt.Payments AS Payments
-		|WHERE
-		|	Payments.Ref = &Ref";
-EndFunction
-
-Function RetailSales()
-	Return "SELECT
-	|	RetailSalesReceiptItemList.Ref.Company AS Company,
-	|	RetailSalesReceiptItemList.Ref.Branch AS Branch,
-	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
-	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
-	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
-	|	RetailSalesReceiptItemList.Ref.Date AS Period,
-	|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
-	|	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
-	|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
-	|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
-	|	RetailSalesReceiptItemList.Key AS RowKey,
-	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
-	|	RetailSalesReceiptItemList.Store,
-	|	RetailSalesReceiptItemList.SalesPerson
-	|INTO tmpRetailSales
-	|FROM
-	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-	|		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
-	|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
-	|		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
-	|		AND RetailSalesReceiptItemList.Ref = &Ref
-	|		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
-	|WHERE
-	|	RetailSalesReceiptItemList.Ref = &Ref
-	|GROUP BY
-	|	RetailSalesReceiptItemList.Ref.Company,
-	|	RetailSalesReceiptItemList.Ref.Branch,
-	|	RetailSalesReceiptItemList.ItemKey,
-	|	RetailSalesReceiptItemList.Ref.Date,
-	|	RetailSalesReceiptItemList.Ref,
-	|	RetailSalesReceiptItemList.Key,
-	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
-	|	RetailSalesReceiptItemList.Store,
-	|	RetailSalesReceiptItemList.SalesPerson
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpRetailSales.Company AS Company,
-	|	tmpRetailSales.Branch AS Branch,
-	|	tmpRetailSales.ItemKey AS ItemKey,
-	|	CASE
-	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
-	|			THEN tmpRetailSales.Quantity
-	|		ELSE tmpRetailSales.QuantityBySerialLtNumbers
-	|	END AS Quantity,
-	|	tmpRetailSales.Period AS Period,
-	|	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
-	|	tmpRetailSales.RowKey AS RowKey,
-	|	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
-	|	CASE
-	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmpRetailSales.Quantity = 0
-	|					THEN 0
-	|				ELSE tmpRetailSales.Amount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmpRetailSales.Amount
-	|	END AS Amount,
-	|	CASE
-	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmpRetailSales.Quantity = 0
-	|					THEN 0
-	|				ELSE tmpRetailSales.NetAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmpRetailSales.NetAmount
-	|	END AS NetAmount,
-	|	CASE
-	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmpRetailSales.Quantity = 0
-	|					THEN 0
-	|				ELSE tmpRetailSales.OffersAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmpRetailSales.OffersAmount
-	|	END AS OffersAmount,
-	|	tmpRetailSales.Store,
-	|	tmpRetailSales.SalesPerson
-	|INTO RetailSales
-	|FROM
-	|	tmpRetailSales AS tmpRetailSales";
-EndFunction
-
-Function OffersInfo()
-	Return "SELECT
-		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
-		   |	RetailSalesReceiptItemList.Ref AS Invoice,
-		   |	TableRowIDInfo.RowID AS RowKey,
-		   |	RetailSalesReceiptItemList.ItemKey,
-		   |	RetailSalesReceiptItemList.Ref.Company AS Company,
-		   |	RetailSalesReceiptItemList.Ref.Currency,
-		   |	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
-		   |	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
-		   |	RetailSalesReceiptSpecialOffers.Bonus AS OffersBonus,
-		   |	RetailSalesReceiptSpecialOffers.AddInfo AS OffersAddInfo,
-		   |	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
-		   |	RetailSalesReceiptItemList.NetAmount AS NetAmount,
-		   |	RetailSalesReceiptItemList.Ref.Branch AS Branch
-		   |INTO OffersInfo
-		   |FROM
-		   |	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-		   |		INNER JOIN Document.RetailSalesReceipt.SpecialOffers AS RetailSalesReceiptSpecialOffers
-		   |		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSpecialOffers.Key
-		   |		AND RetailSalesReceiptItemList.Ref = &Ref
-		   |		AND RetailSalesReceiptSpecialOffers.Ref = &Ref
-		   |		INNER JOIN TableRowIDInfo AS TableRowIDInfo
-		   |		ON RetailSalesReceiptItemList.Key = TableRowIDInfo.Key";
-EndFunction
-
-Function SerialLotNumbers()
-	Return 
-	"SELECT
-	|	SerialLotNumbers.Ref.Date AS Period,
-	|	SerialLotNumbers.Ref.Company AS Company,
-	|	SerialLotNumbers.Ref.Branch AS Branch,
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-	|	SerialLotNumbers.Quantity,
-	|	ItemList.ItemKey AS ItemKey
-	|INTO SerialLotNumbers
-	|FROM
-	|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
-	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
-	|		ON SerialLotNumbers.Key = ItemList.Key
-	|		AND ItemList.Ref = &Ref
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
-EndFunction
-
-Function SourceOfOrigins()
-	Return
-		"SELECT
-		|	SourceOfOrigins.Key AS Key,
-		|	CASE
-		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		|			THEN SourceOfOrigins.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END AS SerialLotNumber,
-		|	CASE
-		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		|			THEN SourceOfOrigins.SourceOfOrigin
-		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		|	END AS SourceOfOrigin,
-		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
-		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
-		|	SUM(SourceOfOrigins.Quantity) AS Quantity
-		|INTO SourceOfOrigins
-		|FROM
-		|	Document.RetailSalesReceipt.SourceOfOrigins AS SourceOfOrigins
-		|WHERE
-		|	SourceOfOrigins.Ref = &Ref
-		|GROUP BY
-		|	SourceOfOrigins.Key,
-		|	CASE
-		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		|			THEN SourceOfOrigins.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END,
-		|	CASE
-		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		|			THEN SourceOfOrigins.SourceOfOrigin
-		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		|	END,
-		|	SourceOfOrigins.SourceOfOrigin,
-		|	SourceOfOrigins.SerialLotNumber";
-EndFunction
-
-Function PaymentAgent()
-	Return
-		"SELECT
-		|	Payments.Ref.Date AS Period,
-		|	Payments.Ref.Company AS Company,
-		|	Payments.Ref.Branch AS Branch,
-		|	Payments.Ref.Currency AS Currency,
-		|	Payments.PaymentType.LegalName AS LegalName,
-		|	Payments.PaymentType.Partner AS Partner,
-		|	Payments.PaymentType.Agreement AS Agreement,
-		|	CASE
-		|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN Payments.Ref
-		|		ELSE UNDEFINED
-		|	END AS Basis,
-		|	UNDEFINED AS Order,
-		|	Payments.Amount AS Amount,
-		|	UNDEFINED AS CustomersAdvancesClosing,
-		|	Payments.PaymentType.LegalNameContract AS LegalNameContract
-		|INTO PaymentAgent
-		|FROM
-		|	Document.RetailSalesReceipt.Payments AS Payments
-		|WHERE
-		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
-		|	AND Payments.Ref = &Ref";
-EndFunction
 
 Function R2023B_AdvancesFromRetailCustomers()
 	Return 
@@ -1470,6 +1140,346 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|	ItemList.SalesOrderExists";
 EndFunction
 
+#EndRegion
+
+#Region Posting_SecondTables
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array();
+	QueryArray.Add(ItemList());
+	QueryArray.Add(Payments());
+	QueryArray.Add(RetailSales());
+	QueryArray.Add(OffersInfo());
+	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(SourceOfOrigins());
+	QueryArray.Add(PaymentAgent());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	Return QueryArray;
+EndFunction
+
+
+Function ItemList()
+	Return 
+		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.TotalAmount AS TotalAmount,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN ItemList.Ref.Agreement.StandardAgreement
+		|		ELSE ItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref AS RetailSalesReceipt,
+		|	ItemList.IsService AS IsService,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN ItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.Ref AS Invoice,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.SalesPerson,
+		|	ItemList.Key,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		|	TableRowIDInfo.RowID AS RowID
+		|INTO ItemList
+		|FROM
+		|	Document.RetailSalesReceipt.ItemList AS ItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key 
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity
+		|INTO ShipmentConfirmationsInfo
+		|FROM
+		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref";
+EndFunction
+
+Function Payments()
+	Return 
+		"SELECT
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.Ref.RetailCustomer AS RetailCustomer,
+		|	Payments.Account AS Account,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.Amount AS Amount,
+		|	Payments.PaymentType AS PaymentType,
+		|	Payments.FinancialMovementType AS FinancialMovementType,
+		|	Payments.PaymentTerminal AS PaymentTerminal,
+		|	Payments.BankTerm AS BankTerm,
+		|	Payments.Percent AS Percent,
+		|	Payments.Commission AS Commission,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent
+		|INTO Payments
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|WHERE
+		|	Payments.Ref = &Ref";
+EndFunction
+
+Function RetailSales()
+	Return "SELECT
+	|	RetailSalesReceiptItemList.Ref.Company AS Company,
+	|	RetailSalesReceiptItemList.Ref.Branch AS Branch,
+	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
+	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
+	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	RetailSalesReceiptItemList.Ref.Date AS Period,
+	|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
+	|	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
+	|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
+	|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
+	|	RetailSalesReceiptItemList.Key AS RowKey,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
+	|	RetailSalesReceiptItemList.Store,
+	|	RetailSalesReceiptItemList.SalesPerson
+	|INTO tmpRetailSales
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+	|		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
+	|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
+	|		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
+	|		AND RetailSalesReceiptItemList.Ref = &Ref
+	|		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	RetailSalesReceiptItemList.Ref = &Ref
+	|GROUP BY
+	|	RetailSalesReceiptItemList.Ref.Company,
+	|	RetailSalesReceiptItemList.Ref.Branch,
+	|	RetailSalesReceiptItemList.ItemKey,
+	|	RetailSalesReceiptItemList.Ref.Date,
+	|	RetailSalesReceiptItemList.Ref,
+	|	RetailSalesReceiptItemList.Key,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
+	|	RetailSalesReceiptItemList.Store,
+	|	RetailSalesReceiptItemList.SalesPerson
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRetailSales.Company AS Company,
+	|	tmpRetailSales.Branch AS Branch,
+	|	tmpRetailSales.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
+	|			THEN tmpRetailSales.Quantity
+	|		ELSE tmpRetailSales.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmpRetailSales.Period AS Period,
+	|	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
+	|	tmpRetailSales.RowKey AS RowKey,
+	|	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.Amount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.NetAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.OffersAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.OffersAmount
+	|	END AS OffersAmount,
+	|	tmpRetailSales.Store,
+	|	tmpRetailSales.SalesPerson
+	|INTO RetailSales
+	|FROM
+	|	tmpRetailSales AS tmpRetailSales";
+EndFunction
+
+Function OffersInfo()
+	Return "SELECT
+		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref AS Invoice,
+		   |	TableRowIDInfo.RowID AS RowKey,
+		   |	RetailSalesReceiptItemList.ItemKey,
+		   |	RetailSalesReceiptItemList.Ref.Company AS Company,
+		   |	RetailSalesReceiptItemList.Ref.Currency,
+		   |	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
+		   |	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
+		   |	RetailSalesReceiptSpecialOffers.Bonus AS OffersBonus,
+		   |	RetailSalesReceiptSpecialOffers.AddInfo AS OffersAddInfo,
+		   |	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
+		   |	RetailSalesReceiptItemList.NetAmount AS NetAmount,
+		   |	RetailSalesReceiptItemList.Ref.Branch AS Branch
+		   |INTO OffersInfo
+		   |FROM
+		   |	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+		   |		INNER JOIN Document.RetailSalesReceipt.SpecialOffers AS RetailSalesReceiptSpecialOffers
+		   |		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSpecialOffers.Key
+		   |		AND RetailSalesReceiptItemList.Ref = &Ref
+		   |		AND RetailSalesReceiptSpecialOffers.Ref = &Ref
+		   |		INNER JOIN TableRowIDInfo AS TableRowIDInfo
+		   |		ON RetailSalesReceiptItemList.Key = TableRowIDInfo.Key";
+EndFunction
+
+Function SerialLotNumbers()
+	Return 
+	"SELECT
+	|	SerialLotNumbers.Ref.Date AS Period,
+	|	SerialLotNumbers.Ref.Company AS Company,
+	|	SerialLotNumbers.Ref.Branch AS Branch,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+	|	SerialLotNumbers.Quantity,
+	|	ItemList.ItemKey AS ItemKey
+	|INTO SerialLotNumbers
+	|FROM
+	|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
+	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
+	|		ON SerialLotNumbers.Key = ItemList.Key
+	|		AND ItemList.Ref = &Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function SourceOfOrigins()
+	Return
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.RetailSalesReceipt.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
+Function PaymentAgent()
+	Return
+		"SELECT
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.PaymentType.LegalName AS LegalName,
+		|	Payments.PaymentType.Partner AS Partner,
+		|	Payments.PaymentType.Agreement AS Agreement,
+		|	CASE
+		|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN Payments.Ref
+		|		ELSE UNDEFINED
+		|	END AS Basis,
+		|	UNDEFINED AS Order,
+		|	Payments.Amount AS Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing,
+		|	Payments.PaymentType.LegalNameContract AS LegalNameContract
+		|INTO PaymentAgent
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|WHERE
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
+		|	AND Payments.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
 #Region Accounting
 
 Function T1050T_AccountingQuantities()
@@ -1541,5 +1551,26 @@ Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 #EndRegion
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Ref - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Structure
+Function GetAccessKey(Ref) Export
+	Str = New Structure;
+	Str.Insert("Company", Ref.Company);
+	Str.Insert("Branch", Ref.Branch);
+	Stores = Ref.ItemList.Unload();
+	Stores.GroupBy("Store");
+	Str.Insert("Store", Stores.UnloadColumn("Store"));
+	Return Str;
+EndFunction
 
 #EndRegion

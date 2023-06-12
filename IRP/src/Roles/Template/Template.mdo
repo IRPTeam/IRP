@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e79915f5-ef55-4161-a0b9-d18d5263e2a2">
+  <name>Template</name>
+  <synonym>
+    <key>en</key>
+    <value>Template</value>
+  </synonym>
+</mdclass:Role>

@@ -151,6 +151,81 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="35b4e85d-51ee-4984-9e81-6fbe25f74dd6">
+    <producedTypes>
+      <objectType typeId="e914505a-7960-4b6a-a7f4-ba16b74e7e49" valueTypeId="2ada832c-dd13-4037-be64-ddb7bba1b498"/>
+      <rowType typeId="77c87544-93e5-475c-8898-9f2179c30725" valueTypeId="5487441c-cca8-4496-9002-ad715c8a757d"/>
+    </producedTypes>
+    <name>ObjectAccess</name>
+    <synonym>
+      <key>en</key>
+      <value>Object access</value>
+    </synonym>
+    <attributes uuid="bb460864-1d03-4241-81a7-6556eff8c154">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>200</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6a4a9eb9-7298-48a0-9563-11762df385dc">
+      <name>ValueSimpleType</name>
+      <synonym>
+        <key>en</key>
+        <value>Value simple type</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>15</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="45648dfb-74f4-4993-9e41-d3c938abdf22">
+      <name>ValueRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Value ref</value>
+      </synonym>
+      <type>
+        <types>AnyRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4a9469d7-7eec-4122-8375-bcaedf3994f1">
+      <name>Modify</name>
+      <synonym>
+        <key>en</key>
+        <value>Modify</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4d529441-1543-47ab-85c3-3005a7f0ac76">
     <name>ItemForm</name>
     <synonym>

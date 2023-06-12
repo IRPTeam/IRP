@@ -61,6 +61,8 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog PaymentTypes objects
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog CashStatementStatuses objects (Test)
+		When Create catalog BusinessUnits objects
+		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -122,8 +124,8 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'             | 'Total amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
-			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
+			| 'Partner'   | 'Partner term'             | 'Total amount' | 'Payer'             | 'Basis document'         | 'Planning transaction basis' |
+			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00'     | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                           |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |

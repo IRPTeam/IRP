@@ -8,6 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		ThisObject.Finished = False;
 	EndIf;
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
 
 Procedure OnWrite(Cancel)

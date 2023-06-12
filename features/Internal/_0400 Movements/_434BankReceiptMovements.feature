@@ -240,6 +240,9 @@ Scenario: _043400 preparation (Bank receipt)
 		When create BankReceipt (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create BankReceipt (Other income)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1525).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _0434001 check preparation
@@ -1104,4 +1107,70 @@ Scenario: _0434299 check Bank receipt movements by the Register  "R3011 Cash flo
 			| ''                                           | '04.06.2021 12:27:04' | '400'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '600'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '600'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _0434303 check Bank receipt movements by the Register  "R3010 Cash on hand" (Other income)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 525'   |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 525 dated 12.06.2023 17:31:38' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '12.06.2023 17:31:38' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Receipt'     | '12.06.2023 17:31:38' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Receipt'     | '12.06.2023 17:31:38' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _0434304 check Bank receipt movements by the Register  "R3011 Cash flow" (Other income)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 525'   |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 525 dated 12.06.2023 17:31:38' | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | '12.06.2023 17:31:38' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _0434305 check Bank receipt movements by the Register  "R5021 Revenues" (Other income)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 525'   |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 525 dated 12.06.2023 17:31:38' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'               | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                   | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                             | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                             | '12.06.2023 17:31:38' | '17,12'     | '17,12'             | 'Main Company' | 'Front office' | ''                   | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | ''                   | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | ''                   | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |	
 	And I close all client application windows

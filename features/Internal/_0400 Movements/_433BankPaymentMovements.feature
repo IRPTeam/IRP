@@ -180,6 +180,9 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create BankPayment (Other expense)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1332).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _0433001 check preparation
@@ -940,3 +943,69 @@ Scenario: _043330 Bank payment clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3010 Cash on hand' |
 		And I close all client application windows	
+	
+Scenario: _0433302 check Bank payment movements by the Register  "R3010 Cash on hand" (Other expense)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 332' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 332 dated 12.06.2023 17:34:39' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '12.06.2023 17:34:39' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '12.06.2023 17:34:39' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '12.06.2023 17:34:39' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
+Scenario: _0433303 check Bank payment movements by the Register  "R3011 Cash flow" (Other expense)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 332' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 332 dated 12.06.2023 17:34:39' | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | '12.06.2023 17:34:39' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '12.06.2023 17:34:39' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '12.06.2023 17:34:39' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+		And I close all client application windows
+
+Scenario: _0433304 check Bank payment movements by the Register  "R5022 Expenses" (Other expense)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 332' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 332 dated 12.06.2023 17:34:39' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'               | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'                   | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                             | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                             | '12.06.2023 17:34:39' | '17,12'     | '17,12'             | ''            | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                             | '12.06.2023 17:34:39' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                             | '12.06.2023 17:34:39' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |	
+		And I close all client application windows

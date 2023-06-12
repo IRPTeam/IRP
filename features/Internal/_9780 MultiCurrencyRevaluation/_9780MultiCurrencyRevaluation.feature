@@ -106,6 +106,8 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		| "Documents.BankReceipt.FindByNumber(812).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.BankReceipt.FindByNumber(813).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.BankReceipt.FindByNumber(814).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document CashReceipt objects (multicurrency revaluation)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);" |

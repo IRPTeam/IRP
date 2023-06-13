@@ -1559,15 +1559,15 @@ EndFunction
 // Get access key.
 // 
 // Parameters:
-//  Ref - DocumentObjectDocumentName -
+//  Obj - DocumentObjectDocumentName -
 // 
 // Returns:
-//  Structure
-Function GetAccessKey(Ref) Export
-	Str = New Structure;
-	Str.Insert("Company", Ref.Company);
-	Str.Insert("Branch", Ref.Branch);
-	Stores = Ref.ItemList.Unload();
+//  Map
+Function GetAccessKey(Obj) Export
+	Str = New Map;
+	Str.Insert("Company", Obj.Company);
+	Str.Insert("Branch", Obj.Branch);
+	Stores = Obj.ItemList.Unload();
 	Stores.GroupBy("Store");
 	Str.Insert("Store", Stores.UnloadColumn("Store"));
 	Return Str;

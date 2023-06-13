@@ -12,7 +12,8 @@
   <content>EventSubscription.OnWrite_ObjectAccess</content>
   <content>Constant.UseObjectAccess</content>
   <content>FunctionalOption.UseObjectAccess</content>
-  <content>Role.Template</content>
+  <content>Role.TemplateDocument</content>
   <content>SessionParameter.CurrentUserAccessProfiles</content>
+  <content>Role.TemplateBasicAccess</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

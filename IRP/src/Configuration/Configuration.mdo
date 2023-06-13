@@ -219,7 +219,8 @@
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.Template</roles>
+  <roles>Role.TemplateDocument</roles>
+  <roles>Role.TemplateBasicAccess</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>

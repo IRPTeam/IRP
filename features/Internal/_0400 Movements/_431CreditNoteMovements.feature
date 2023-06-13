@@ -286,7 +286,7 @@ Scenario: _043109 check Credit note movements by the Register "R5015 Other partn
 			| '3' |
 	* Check movements by the Register  "R5015 Other partners transactions" 
 		And I click "Registrations report" button
-		And I select "R5015 Other partners transactionss" exact value from "Register" drop-down list
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Credit note 3 dated 12.06.2023 14:56:54'       | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |

@@ -1791,6 +1791,10 @@ Scenario: _1043 verification of zero quantities by materials
 			And I activate "Material type" field in "Materials" table
 			And I select current line in "Materials" table
 			And I select "Material" exact value from "Material type" drop-down list in "Materials" table
+	* Try post
+		And I click "Post and close" button
+	
+				
 						
 
 		

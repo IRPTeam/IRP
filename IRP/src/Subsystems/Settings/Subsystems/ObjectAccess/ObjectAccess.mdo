@@ -8,8 +8,8 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.ObjectAccessKeys</content>
-  <content>DefinedType.typeAccessToObject</content>
-  <content>EventSubscription.OnWrite_ObjectAccess</content>
+  <content>DefinedType.typeAccessDocument</content>
+  <content>EventSubscription.BeforeWrite_ObjectAccessDocument</content>
   <content>Constant.UseObjectAccess</content>
   <content>FunctionalOption.UseObjectAccess</content>
   <content>Role.TemplateDocument</content>

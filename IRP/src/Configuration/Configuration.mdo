@@ -264,6 +264,7 @@
   <commonModules>CommonModule.CommonFunctionsClient</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
@@ -324,6 +325,7 @@
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
   <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
+  <commonModules>CommonModule.DocOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderServer</commonModules>
   <commonModules>CommonModule.DocPayrollClient</commonModules>
@@ -355,14 +357,17 @@
   <commonModules>CommonModule.DocPurchaseReturnServer</commonModules>
   <commonModules>CommonModule.DocReconciliationStatementClient</commonModules>
   <commonModules>CommonModule.DocReconciliationStatementServer</commonModules>
+  <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
+  <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
   <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailSalesReceiptServer</commonModules>
+  <commonModules>CommonModule.DocRetailShipmentConfirmationClient</commonModules>
+  <commonModules>CommonModule.DocRetailShipmentConfirmationServer</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceClient</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderClient</commonModules>
-  <commonModules>CommonModule.DocOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderServer</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
@@ -430,6 +435,7 @@
   <commonModules>CommonModule.LocalizationServer</commonModules>
   <commonModules>CommonModule.LockDataModificationPrivileged</commonModules>
   <commonModules>CommonModule.LockDataModificationReuse</commonModules>
+  <commonModules>CommonModule.Log</commonModules>
   <commonModules>CommonModule.ManufacturingClient</commonModules>
   <commonModules>CommonModule.ManufacturingServer</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
@@ -438,6 +444,7 @@
   <commonModules>CommonModule.ModelClientServer_V2</commonModules>
   <commonModules>CommonModule.ModelServer_V2</commonModules>
   <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
+  <commonModules>CommonModule.ObjectAccessFullAccess</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
@@ -459,11 +466,15 @@
   <commonModules>CommonModule.SalaryServerReuse</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
+  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
+  <commonModules>CommonModule.ServerReuse</commonModules>
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
   <commonModules>CommonModule.SessionParametersServer</commonModules>
+  <commonModules>CommonModule.SMSServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginClient</commonModules>
+  <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginServer</commonModules>
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
@@ -481,17 +492,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.ServerReuse</commonModules>
-  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
-  <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
-  <commonModules>CommonModule.DocRetailShipmentConfirmationClient</commonModules>
-  <commonModules>CommonModule.DocRetailShipmentConfirmationServer</commonModules>
-  <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
-  <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
-  <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
-  <commonModules>CommonModule.Log</commonModules>
-  <commonModules>CommonModule.SMSServer</commonModules>
-  <commonModules>CommonModule.ObjectAccessFullAccess</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -533,7 +533,7 @@
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UndoPosting_RowID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnWrite_ObjectAccess</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -584,7 +584,7 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
-  <definedTypes>DefinedType.typeAccessToObject</definedTypes>
+  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>

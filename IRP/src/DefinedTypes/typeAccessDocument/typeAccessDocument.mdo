@@ -3,10 +3,10 @@
   <producedTypes>
     <containerType typeId="b2798e31-61d8-448f-83cf-f6b5c08e4465" valueTypeId="5496f136-e71d-4cea-9a27-f050d50e3ec7"/>
   </producedTypes>
-  <name>typeAccessToObject</name>
+  <name>typeAccessDocument</name>
   <synonym>
     <key>en</key>
-    <value>Type access to object</value>
+    <value>Type access document</value>
   </synonym>
   <type>
     <types>DocumentObject.AdditionalCostAllocation</types>
@@ -79,19 +79,5 @@
     <types>DocumentObject.WorkOrder</types>
     <types>DocumentObject.WorkOrderClosing</types>
     <types>DocumentObject.WorkSheet</types>
-    <types>CatalogObject.Agreements</types>
-    <types>CatalogObject.BankTerms</types>
-    <types>CatalogObject.BusinessUnits</types>
-    <types>CatalogObject.CashAccounts</types>
-    <types>CatalogObject.Companies</types>
-    <types>CatalogObject.Partners</types>
-    <types>CatalogObject.PartnersBankAccounts</types>
-    <types>CatalogObject.Stores</types>
-    <types>ChartOfCharacteristicTypesObject.AccountingExtraDimensionTypes</types>
-    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
-    <types>ChartOfCharacteristicTypesObject.CurrencyMovementType</types>
-    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
-    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
-    <types>ChartOfAccountsObject.Basic</types>
   </type>
 </mdclass:DefinedType>

@@ -3,9 +3,11 @@
 // On write object access on write.
 // 
 // Parameters:
-//  Source - DefinedType.typeAccessToObject -
+//  Source - DefinedType.typeAccessDocument -
 //  Cancel - Boolean - Cancel
-Procedure OnWrite_ObjectAccessOnWrite(Source, Cancel) Export
+//  WriteMode - DocumentWriteMode -
+//  PostingMode - DocumentPostingMode -
+Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode) Export
 	If Cancel Then
 		Return;
 	EndIf;
@@ -60,9 +62,17 @@ Procedure OnWrite_ObjectAccessOnWrite(Source, Cancel) Export
 		AccessKeyRef = NewKey.Ref;
 	EndIf;
 
+	// If not set ref, then can not use RLS on create or update mode
+	If Source.IsNew() Then
+		Ref = Documents[Source.Metadata().Name].GetRef();
+		Source.SetNewObjectRef(Ref);
+	Else
+		Ref = Source.Ref;
+	EndIf;
+
 	Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();
 	Reg.ObjectAccessKeys = AccessKeyRef;
-	Reg.ObjectRef = Source.Ref;
+	Reg.ObjectRef = Ref;
 	Reg.Write();
 	
 EndProcedure

@@ -225,6 +225,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="1a49509c-1244-435f-9ba4-221e720a05cf">
+      <name>DoNotControl</name>
+      <synonym>
+        <key>en</key>
+        <value>Do not control</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <forms uuid="4d529441-1543-47ab-85c3-3005a7f0ac76">
     <name>ItemForm</name>

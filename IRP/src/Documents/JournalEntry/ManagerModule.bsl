@@ -1,12 +1,10 @@
-Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
-	StandardProcessing = False;
-	Fields.Add("Basis");
-EndProcedure
+#Region PrintForm
 
-Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
-	StandardProcessing = False;
-	Presentation = Data.Basis;
-EndProcedure
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
 
 #Region Posting_Info
 
@@ -59,5 +57,19 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Presentation
+
+Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
+	StandardProcessing = False;
+	Fields.Add("Basis");
+EndProcedure
+
+Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
+	StandardProcessing = False;
+	Presentation = Data.Basis;
+EndProcedure
 
 #EndRegion

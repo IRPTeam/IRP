@@ -187,8 +187,8 @@ EndFunction
 //  Map
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
-	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("PriceType", Obj.PriceType);
 	Return AccessKeyMap;
 EndFunction
 

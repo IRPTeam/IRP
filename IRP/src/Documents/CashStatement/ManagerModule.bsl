@@ -128,27 +128,29 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function PaymentList()
-	Return "SELECT
-		   |	PaymentList.Ref.Date AS Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Ref AS Ref,
-		   |	PaymentList.Ref.Company AS Company,
-		   |	PaymentList.Ref.CashAccount AS CashAccount,
-		   |	PaymentList.Account,
-		   |	PaymentList.Currency,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Commission,
-		   |	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
-		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.PaymentType,
-		   |	PaymentList.PaymentTerminal,
-		   |	PaymentList.ReceiptingAccount
-		   |INTO PaymentList
-		   |FROM
-		   |	Document.CashStatement.PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Ref = &Ref"
+	Return 
+	"SELECT
+	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Key,
+	|	PaymentList.Ref AS Ref,
+	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.FinancialMovementType,
+	|	PaymentList.Amount,
+	|	PaymentList.Commission,
+	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.PaymentType,
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.ReceiptingAccount,
+	|	PaymentList.UseBasisDocument
+	|INTO PaymentList
+	|FROM
+	|	Document.CashStatement.PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Ref = &Ref"
 EndFunction
 
 #EndRegion
@@ -219,23 +221,28 @@ Function R3035T_CashPlanning()
 EndFunction
 
 Function R3021B_CashInTransitIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Account,
-		   |	PaymentList.ReceiptingAccount,
-		   |	PaymentList.Ref AS Basis,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
-		   |INTO R3021B_CashInTransitIncoming
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsAccountPOS";
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Key,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Account,
+	|	PaymentList.ReceiptingAccount,
+	|	CASE
+	|		WHEN PaymentList.UseBasisDocument
+	|			THEN PaymentList.Ref
+	|		ELSE UNDEFINED
+	|	END AS Basis,
+	|	PaymentList.Amount,
+	|	PaymentList.Commission
+	|INTO R3021B_CashInTransitIncoming
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsAccountPOS";
 EndFunction
 
 #EndRegion

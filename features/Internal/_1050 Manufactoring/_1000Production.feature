@@ -1795,6 +1795,7 @@ Scenario: _1043 verification of zero quantities by materials
 		And I click "Post and close" button
 		Then there are lines in TestClient message log
 			|'Quantity must be more than 0'|
+		Then "Production (create) *" window is opened	
 		And I close all client application windows
 		
 				

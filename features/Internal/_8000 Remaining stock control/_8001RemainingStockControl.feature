@@ -2803,6 +2803,7 @@ Scenario:_800070 check stock control in the Stock adjustment as surplus
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79ea93fec1998ed11ee0a86b6ab2dc2"
+		And I click "Decoration group title collapsed picture" hyperlink
 		And I click Open button of the field named "Store"
 		And I change checkbox "Negative stock control"
 		And I click "Save and close" button

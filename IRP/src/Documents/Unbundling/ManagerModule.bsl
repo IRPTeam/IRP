@@ -12,11 +12,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
-	Return New Structure();
+	Return New Structure;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -28,7 +28,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
@@ -46,7 +46,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -80,8 +80,10 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ErrorQuantityField", "Object.Quantity");
 		Parameters.Insert("RecordType", Filter.RecordType);
@@ -90,15 +92,17 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Unbundling.ItemList", AddInfo);
 	Else
 		// is unposting
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Unbundling.ItemList", AddInfo);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -114,43 +118,17 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
-
-#EndRegion
-
 #Region Posting_SourceTable
 
-
-#EndRegion
-
-#Region AccessObject
-
-// Get access key.
-// 
-// Parameters:
-//  Obj - DocumentObjectDocumentName -
-// 
-// Returns:
-//  Map
-Function GetAccessKey(Obj) Export
-	AccessKeyMap = New Map;
-	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
-	Return AccessKeyMap;
-EndFunction
-
-#EndRegion
-
-
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Header());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -158,32 +136,21 @@ Function GetQueryTextsSecondaryTables()
 	Return QueryArray;
 EndFunction
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(T6050S_ManualBundleAmountValues());
-	Return QueryArray;
-EndFunction
-
 Function ItemList()
-	Return 
-	"SELECT
-	|	UnbundlingItemList.Ref.Date AS Period,
-	|	UnbundlingItemList.Ref.Company AS Company,
-	|	UnbundlingItemList.Ref.Store AS Store,
-	|	UnbundlingItemList.ItemKey AS ItemKey,
-	|	UnbundlingItemList.Ref.ItemKeyBundle AS Bundle,
-	|	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
-	|	UnbundlingItemList.Ref,
-	|	UnbundlingItemList.AmountValue
-	|INTO ItemList
-	|FROM
-	|	Document.Unbundling.ItemList AS UnbundlingItemList
-	|WHERE
-	|	UnbundlingItemList.Ref = &Ref";
+	Return "SELECT
+		   |	UnbundlingItemList.Ref.Date AS Period,
+		   |	UnbundlingItemList.Ref.Company AS Company,
+		   |	UnbundlingItemList.Ref.Store AS Store,
+		   |	UnbundlingItemList.ItemKey AS ItemKey,
+		   |	UnbundlingItemList.Ref.ItemKeyBundle AS Bundle,
+		   |	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
+		   |	UnbundlingItemList.Ref,
+		   |	UnbundlingItemList.AmountValue
+		   |INTO ItemList
+		   |FROM
+		   |	Document.Unbundling.ItemList AS UnbundlingItemList
+		   |WHERE
+		   |	UnbundlingItemList.Ref = &Ref";
 EndFunction
 
 Function Header()
@@ -199,6 +166,20 @@ Function Header()
 		   |	Document.Unbundling AS Unbundling
 		   |WHERE
 		   |	Unbundling.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(T6050S_ManualBundleAmountValues());
+	Return QueryArray;
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -256,60 +237,77 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function T6010S_BatchesInfo()
-	Return	
-	"SELECT
-	|	Header.Period,
-	|	Header.Ref AS Document,
-	|	Header.Company
-	|INTO T6010S_BatchesInfo
-	|FROM
-	|	Header AS Header
-	|WHERE
-	|	TRUE";
+	Return "SELECT
+		   |	Header.Period,
+		   |	Header.Ref AS Document,
+		   |	Header.Company
+		   |INTO T6010S_BatchesInfo
+		   |FROM
+		   |	Header AS Header
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return
-	"SELECT
-	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
-	|	Header.Period,
-	|	Header.Company,
-	|	Header.Store,
-	|	Header.ItemKey,
-	|	Header.Quantity
-	|INTO T6020S_BatchKeysInfo
-	|FROM
-	|	Header AS Header
-	|WHERE
-	|	TRUE
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(Enum.BatchDirection.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	ItemList.Quantity
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE";
-EndFunction	
+	Return "SELECT
+		   |	VALUE(Enum.BatchDirection.Expense) AS Direction,
+		   |	Header.Period,
+		   |	Header.Company,
+		   |	Header.Store,
+		   |	Header.ItemKey,
+		   |	Header.Quantity
+		   |INTO T6020S_BatchKeysInfo
+		   |FROM
+		   |	Header AS Header
+		   |WHERE
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(Enum.BatchDirection.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE";
+EndFunction
 
 Function T6050S_ManualBundleAmountValues()
-	Return
-	"SELECT
-	|	ItemList.Period,
-	|	ItemList.ItemKey,
-	|	ItemList.Bundle,
-	|	ItemList.Store,
-	|	ItemList.Company,
-	|	ItemList.AmountValue
-	|INTO T6050S_ManualBundleAmountValues
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE";
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Bundle,
+		   |	ItemList.Store,
+		   |	ItemList.Company,
+		   |	ItemList.AmountValue
+		   |INTO T6050S_ManualBundleAmountValues
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion

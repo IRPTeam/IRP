@@ -82,7 +82,6 @@ EndFunction
 
 #EndRegion
 
-
 #Region Posting_SourceTable
 
 Function GetQueryTextsSecondaryTables()

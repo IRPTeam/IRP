@@ -10,11 +10,11 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
-	Return New Structure();
+	Return New Structure;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -23,7 +23,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	Return PostingDataTables;
 EndFunction
 
@@ -64,19 +64,28 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
 
 #EndRegion
 
-#Region Posting_SourceTable
+#Region Posting_MainTables
 
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
 
 #EndRegion
 
@@ -97,16 +106,3 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
-
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction

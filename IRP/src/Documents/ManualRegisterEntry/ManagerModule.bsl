@@ -17,19 +17,30 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+
+	Return QueryArray;
+EndFunction
 
 #EndRegion
 
-#Region Posting_SourceTable
+#Region Posting_MainTables
 
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+
+	Return QueryArray;
+EndFunction
 
 #EndRegion
 
@@ -50,16 +61,3 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
-
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction

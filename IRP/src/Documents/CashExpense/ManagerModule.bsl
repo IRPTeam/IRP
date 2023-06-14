@@ -83,6 +83,45 @@ EndFunction
 
 #EndRegion
 
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(PaymentList());
+	Return QueryArray;
+EndFunction
+
+Function PaymentList()
+	Return "SELECT
+		   |	PaymentList.Ref.Date AS Period,
+		   |	PaymentList.Ref.Company AS Company,
+		   |	PaymentList.Ref.OtherCompany AS OtherCompany,
+		   |	PaymentList.Ref.Account AS Account,
+		   |	PaymentList.Currency AS Currency,
+		   |	PaymentList.PaymentPeriod AS PaymentPeriod,
+		   |	PaymentList.ExpenseType AS ExpenseType,
+		   |	PaymentList.NetAmount AS NetAmount,
+		   |	PaymentList.TaxAmount AS TaxAmount,
+		   |	PaymentList.TotalAmount AS TotalAmount,
+		   |	PaymentList.Key,
+		   |	PaymentList.ProfitLossCenter,
+		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.Partner,
+		   |	PaymentList.Employee,
+		   |	PaymentList.AdditionalAnalytic,
+		   |	PaymentList.Ref.Branch AS Branch,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment
+		   |INTO PaymentList
+		   |FROM
+		   |	Document.CashExpense.PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
 #Region Posting_MainTables
 
 Function GetQueryTextsMasterTables()
@@ -253,45 +292,6 @@ Function R9510B_SalaryPayment()
 		   |	PaymentList AS PaymentLIst
 		   |WHERE
 		   |	PaymentList.IsSalaryPayment";
-EndFunction
-
-#EndRegion
-
-#Region Posting_SourceTable
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
-	QueryArray.Add(PaymentList());
-	Return QueryArray;
-EndFunction
-
-Function PaymentList()
-	Return "SELECT
-		   |	PaymentList.Ref.Date AS Period,
-		   |	PaymentList.Ref.Company AS Company,
-		   |	PaymentList.Ref.OtherCompany AS OtherCompany,
-		   |	PaymentList.Ref.Account AS Account,
-		   |	PaymentList.Currency AS Currency,
-		   |	PaymentList.PaymentPeriod AS PaymentPeriod,
-		   |	PaymentList.ExpenseType AS ExpenseType,
-		   |	PaymentList.NetAmount AS NetAmount,
-		   |	PaymentList.TaxAmount AS TaxAmount,
-		   |	PaymentList.TotalAmount AS TotalAmount,
-		   |	PaymentList.Key,
-		   |	PaymentList.ProfitLossCenter,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.Partner,
-		   |	PaymentList.Employee,
-		   |	PaymentList.AdditionalAnalytic,
-		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment
-		   |INTO PaymentList
-		   |FROM
-		   |	Document.CashExpense.PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Ref = &Ref";
 EndFunction
 
 #EndRegion

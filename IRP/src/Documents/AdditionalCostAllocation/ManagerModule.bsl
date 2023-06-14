@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -177,63 +185,6 @@ EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R6070T_OtherPeriodsExpenses());
-	QueryArray.Add(T6060S_BatchCostAllocationInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	Return QueryArray;
-EndFunction
-
-Function R6070T_OtherPeriodsExpenses()
-	Return "SELECT
-		   |	*,
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType
-		   |INTO R6070T_OtherPeriodsExpenses
-		   |FROM
-		   |	CostList AS CostList
-		   |WHERE
-		   |	TRUE";
-EndFunction
-
-Function T6060S_BatchCostAllocationInfo()
-	Return "SELECT
-		   |	*
-		   |INTO T6060S_BatchCostAllocationInfo
-		   |FROM
-		   |	AllocationList AS AllocationList
-		   |WHERE
-		   |	TRUE";
-EndFunction
-
-Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	AllocationList.Period,
-		   |	AllocationList.Company,
-		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
-		   |	AllocationList.Store AS Store,
-		   |	AllocationList.ItemKey AS ItemKey,
-		   |	AllocationList.Document AS PurchaseInvoiceDocument,
-		   |	SUM(AllocationList.Amount) AS AmountCost,
-		   |	SUM(AllocationList.AmountTax) AS AmountCostTax
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	AllocationList AS AllocationList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	AllocationList.Period,
-		   |	AllocationList.Company,
-		   |	VALUE(Enum.BatchDirection.Receipt),
-		   |	AllocationList.Store,
-		   |	AllocationList.ItemKey,
-		   |	AllocationList.Document";
-EndFunction
-
-#EndRegion
-
 #Region Posting_SourceTable
 
 Function GetQueryTextsSecondaryTables()
@@ -311,6 +262,63 @@ Function AllocationList()
 		   |	AllocationList.Store,
 		   |	AllocationList.RowID,
 		   |	AllocationList.BasisRowID";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R6070T_OtherPeriodsExpenses());
+	QueryArray.Add(T6060S_BatchCostAllocationInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	Return QueryArray;
+EndFunction
+
+Function R6070T_OtherPeriodsExpenses()
+	Return "SELECT
+		   |	*,
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType
+		   |INTO R6070T_OtherPeriodsExpenses
+		   |FROM
+		   |	CostList AS CostList
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function T6060S_BatchCostAllocationInfo()
+	Return "SELECT
+		   |	*
+		   |INTO T6060S_BatchCostAllocationInfo
+		   |FROM
+		   |	AllocationList AS AllocationList
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return "SELECT
+		   |	AllocationList.Period,
+		   |	AllocationList.Company,
+		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		   |	AllocationList.Store AS Store,
+		   |	AllocationList.ItemKey AS ItemKey,
+		   |	AllocationList.Document AS PurchaseInvoiceDocument,
+		   |	SUM(AllocationList.Amount) AS AmountCost,
+		   |	SUM(AllocationList.AmountTax) AS AmountCostTax
+		   |INTO T6020S_BatchKeysInfo
+		   |FROM
+		   |	AllocationList AS AllocationList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	AllocationList.Period,
+		   |	AllocationList.Company,
+		   |	VALUE(Enum.BatchDirection.Receipt),
+		   |	AllocationList.Store,
+		   |	AllocationList.ItemKey,
+		   |	AllocationList.Document";
 EndFunction
 
 #EndRegion

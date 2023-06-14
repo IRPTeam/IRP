@@ -9,7 +9,7 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -17,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -29,7 +29,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -47,7 +47,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -82,19 +82,62 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(TimeSheet());
+	Return QueryArray;
+EndFunction
+
+Function TimeSheet()
+	Return "SELECT
+		   |	TimeSheetTimeSheetList.Ref.Company AS Company,
+		   |	TimeSheetTimeSheetList.Ref.Branch AS Branch,
+		   |	TimeSheetTimeSheetList.Date,
+		   |	TimeSheetTimeSheetList.Employee,
+		   |	TimeSheetTimeSheetList.Position,
+		   |	TimeSheetTimeSheetList.AccrualAndDeductionType,
+		   |	TimeSheetTimeSheetList.ProfitLossCenter
+		   |INTO TimeSheet
+		   |FROM
+		   |	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
+		   |WHERE
+		   |	TimeSheetTimeSheetList.Ref = &Ref";
+EndFunction
 
 #EndRegion
 
-#Region Posting_SourceTable
+#Region Posting_MainTables
 
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(T9520S_TimeSheetInfo());
+	Return QueryArray;
+EndFunction
+
+Function T9520S_TimeSheetInfo()
+	Return "SELECT
+		   |	TimeSheet.Company,
+		   |	TimeSheet.Branch,
+		   |	TimeSheet.Date,
+		   |	TimeSheet.Employee,
+		   |	TimeSheet.Position,
+		   |	TimeSheet.AccrualAndDeductionType,
+		   |	TimeSheet.ProfitLossCenter
+		   |INTO T9520S_TimeSheetInfo
+		   |FROM
+		   |	TimeSheet AS TimeSheet
+		   |WHERE
+		   |	TRUE";
+EndFunction
 
 #EndRegion
 
@@ -115,52 +158,3 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
-
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-	QueryArray.Add(TimeSheet());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(T9520S_TimeSheetInfo());
-	Return QueryArray;
-EndFunction
-
-Function TimeSheet()
-	Return
-		"SELECT
-		|	TimeSheetTimeSheetList.Ref.Company AS Company,
-		|	TimeSheetTimeSheetList.Ref.Branch AS Branch,
-		|	TimeSheetTimeSheetList.Date,
-		|	TimeSheetTimeSheetList.Employee,
-		|	TimeSheetTimeSheetList.Position,
-		|	TimeSheetTimeSheetList.AccrualAndDeductionType,
-		|	TimeSheetTimeSheetList.ProfitLossCenter
-		|INTO TimeSheet
-		|FROM
-		|	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
-		|WHERE
-		|	TimeSheetTimeSheetList.Ref = &Ref";
-//		|	AND NOT TimeSheetTimeSheetList.AccrualAndDeductionType.Ref IS NULL";
-EndFunction
-
-Function T9520S_TimeSheetInfo()
-	Return
-		"SELECT
-		|	TimeSheet.Company,
-		|	TimeSheet.Branch,
-		|	TimeSheet.Date,
-		|	TimeSheet.Employee,
-		|	TimeSheet.Position,
-		|	TimeSheet.AccrualAndDeductionType,
-		|	TimeSheet.ProfitLossCenter
-		|INTO T9520S_TimeSheetInfo
-		|FROM
-		|	TimeSheet AS TimeSheet
-		|WHERE
-		|	TRUE";
-EndFunction
-

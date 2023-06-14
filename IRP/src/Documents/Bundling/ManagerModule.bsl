@@ -109,53 +109,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Specifications
-
-Function FindOrCreateSpecificationByProperties(Ref, AddInfo = Undefined) Export
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	BundlingItemList.Key,
-	|	BundlingItemList.ItemKey.Item AS Item,
-	|	ItemKeysAddAttributes.Property AS Attribute,
-	|	ItemKeysAddAttributes.Value
-	|FROM
-	|	Catalog.ItemKeys.AddAttributes AS ItemKeysAddAttributes
-	|		INNER JOIN Document.Bundling.ItemList AS BundlingItemList
-	|		ON BundlingItemList.ItemKey = ItemKeysAddAttributes.Ref
-	|		AND BundlingItemList.Ref = &Ref
-	|GROUP BY
-	|	BundlingItemList.ItemKey.Item,
-	|	ItemKeysAddAttributes.Property,
-	|	ItemKeysAddAttributes.Value,
-	|	BundlingItemList.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	BundlingItemList.Key,
-	|	BundlingItemList.ItemKey.Item AS Item,
-	|	SUM(BundlingItemList.Quantity) AS Quantity
-	|FROM
-	|	Document.Bundling.ItemList AS BundlingItemList
-	|WHERE
-	|	BundlingItemList.Ref = &Ref
-	|GROUP BY
-	|	BundlingItemList.ItemKey.Item,
-	|	BundlingItemList.Key";
-	Query.SetParameter("Ref", Ref);
-	ArrayOfQueryResults = Query.ExecuteBatch();
-
-	ArrayOfSpecifications = Catalogs.Specifications.FindOrCreateRefByProperties(ArrayOfQueryResults[0].Unload(), ArrayOfQueryResults[1].Unload(), Ref.ItemBundle, AddInfo);
-	If ArrayOfSpecifications.Count() Then
-		Return ArrayOfSpecifications[0];
-	Else
-		Return Catalogs.Specifications.EmptyRef();
-	EndIf;
-EndFunction
-
-#EndRegion
-
 #Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
@@ -171,6 +124,48 @@ Function GetAdditionalQueryParameters(Ref, ItemKey = Undefined)
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("ItemKey", ItemKey);
 	Return StrParams;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	QueryArray.Add(Header());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return "SELECT
+		   |	BundlingItemList.Ref.Date AS Period,
+		   |	BundlingItemList.Ref.Company AS Company,
+		   |	BundlingItemList.Ref.Store AS Store,
+		   |	BundlingItemList.ItemKey AS ItemKey,
+		   |	BundlingItemList.QuantityInBaseUnit * BundlingItemList.Ref.QuantityInBaseUnit AS Quantity
+		   |INTO ItemList
+		   |FROM
+		   |	Document.Bundling.ItemList AS BundlingItemList
+		   |WHERE
+		   |	BundlingItemList.Ref = &Ref";
+EndFunction
+
+Function Header()
+	Return "SELECT
+		   |	Bundling.Date AS Period,
+		   |	Bundling.Company,
+		   |	Bundling.Store,
+		   |	&ItemKey,
+		   |	Bundling.QuantityInBaseUnit AS Quantity,
+		   |	Bundling.Ref
+		   |INTO Header	
+		   |FROM
+		   |	Document.Bundling AS Bundling
+		   |WHERE
+		   |	Bundling.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -315,48 +310,6 @@ EndFunction
 
 #EndRegion
 
-#Region Posting_SourceTable
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
-	QueryArray.Add(ItemList());
-	QueryArray.Add(Header());
-	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
-	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
-	Return QueryArray;
-EndFunction
-
-Function ItemList()
-	Return "SELECT
-		   |	BundlingItemList.Ref.Date AS Period,
-		   |	BundlingItemList.Ref.Company AS Company,
-		   |	BundlingItemList.Ref.Store AS Store,
-		   |	BundlingItemList.ItemKey AS ItemKey,
-		   |	BundlingItemList.QuantityInBaseUnit * BundlingItemList.Ref.QuantityInBaseUnit AS Quantity
-		   |INTO ItemList
-		   |FROM
-		   |	Document.Bundling.ItemList AS BundlingItemList
-		   |WHERE
-		   |	BundlingItemList.Ref = &Ref";
-EndFunction
-
-Function Header()
-	Return "SELECT
-		   |	Bundling.Date AS Period,
-		   |	Bundling.Company,
-		   |	Bundling.Store,
-		   |	&ItemKey,
-		   |	Bundling.QuantityInBaseUnit AS Quantity,
-		   |	Bundling.Ref
-		   |INTO Header	
-		   |FROM
-		   |	Document.Bundling AS Bundling
-		   |WHERE
-		   |	Bundling.Ref = &Ref";
-EndFunction
-
-#EndRegion
-
 #Region AccessObject
 
 // Get access key.
@@ -372,5 +325,56 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Service
+
+#Region Specifications
+
+Function FindOrCreateSpecificationByProperties(Ref, AddInfo = Undefined) Export
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	BundlingItemList.Key,
+	|	BundlingItemList.ItemKey.Item AS Item,
+	|	ItemKeysAddAttributes.Property AS Attribute,
+	|	ItemKeysAddAttributes.Value
+	|FROM
+	|	Catalog.ItemKeys.AddAttributes AS ItemKeysAddAttributes
+	|		INNER JOIN Document.Bundling.ItemList AS BundlingItemList
+	|		ON BundlingItemList.ItemKey = ItemKeysAddAttributes.Ref
+	|		AND BundlingItemList.Ref = &Ref
+	|GROUP BY
+	|	BundlingItemList.ItemKey.Item,
+	|	ItemKeysAddAttributes.Property,
+	|	ItemKeysAddAttributes.Value,
+	|	BundlingItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BundlingItemList.Key,
+	|	BundlingItemList.ItemKey.Item AS Item,
+	|	SUM(BundlingItemList.Quantity) AS Quantity
+	|FROM
+	|	Document.Bundling.ItemList AS BundlingItemList
+	|WHERE
+	|	BundlingItemList.Ref = &Ref
+	|GROUP BY
+	|	BundlingItemList.ItemKey.Item,
+	|	BundlingItemList.Key";
+	Query.SetParameter("Ref", Ref);
+	ArrayOfQueryResults = Query.ExecuteBatch();
+
+	ArrayOfSpecifications = Catalogs.Specifications.FindOrCreateRefByProperties(ArrayOfQueryResults[0].Unload(), ArrayOfQueryResults[1].Unload(), Ref.ItemBundle, AddInfo);
+	If ArrayOfSpecifications.Count() Then
+		Return ArrayOfSpecifications[0];
+	Else
+		Return Catalogs.Specifications.EmptyRef();
+	EndIf;
+EndFunction
+
+#EndRegion
 
 #EndRegion

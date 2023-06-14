@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
@@ -16,11 +24,12 @@ EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
+#Region Posting_SourceTable
 
 #EndRegion
 
-#Region Posting_SourceTable
+#Region Posting_MainTables
+
 #EndRegion
 
 #Region AccessObject

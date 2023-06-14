@@ -9,14 +9,14 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -31,12 +31,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	
+
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -78,95 +78,73 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
-
-#EndRegion
-
 #Region Posting_SourceTable
 
-
-#EndRegion
-
-#Region AccessObject
-
-// Get access key.
-// 
-// Parameters:
-//  Obj - DocumentObjectDocumentName -
-// 
-// Returns:
-//  Map
-Function GetAccessKey(Obj) Export
-	AccessKeyMap = New Map;
-	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
-	Return AccessKeyMap;
-EndFunction
-
-#EndRegion
-
-
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(Transactions());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R2022B_CustomersPaymentPlanning());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(T2014S_AdvancesInfo());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
 Function Transactions()
 	Return "SELECT
-	|	Transactions.Ref.Date AS Period,
-	|	Transactions.Ref.Company AS Company,
-	|	Transactions.Partner,
-	|	Transactions.LegalName,
-	|	Transactions.Agreement,
-	|	CASE
-	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN Transactions.Ref
-	|		ELSE UNDEFINED
-	|	END AS BasisDocument,
-	|	Transactions.Ref AS AdvancesOrTransactionDocument,
-	|	Transactions.Ref AS Ref,
-	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
-	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
-	|	Transactions.Currency,
-	|	Transactions.Key,
-	|	Transactions.Amount,
-	|	Transactions.Ref.Branch AS Branch,
-	|	Transactions.LegalNameContract AS LegalNameContract,
-	|	Transactions.ProfitLossCenter,
-	|	Transactions.RevenueType,
-	|	Transactions.AdditionalAnalytic
-	|INTO Transactions
-	|FROM
-	|	Document.DebitNote.Transactions AS Transactions
-	|WHERE
-	|	Transactions.Ref = &Ref";
+		   |	Transactions.Ref.Date AS Period,
+		   |	Transactions.Ref.Company AS Company,
+		   |	Transactions.Partner,
+		   |	Transactions.LegalName,
+		   |	Transactions.Agreement,
+		   |	CASE
+		   |		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		   |			THEN Transactions.Ref
+		   |		ELSE UNDEFINED
+		   |	END AS BasisDocument,
+		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
+		   |	Transactions.Ref AS Ref,
+		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		   |	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
+		   |	Transactions.Currency,
+		   |	Transactions.Key,
+		   |	Transactions.Amount,
+		   |	Transactions.Ref.Branch AS Branch,
+		   |	Transactions.LegalNameContract AS LegalNameContract,
+		   |	Transactions.ProfitLossCenter,
+		   |	Transactions.RevenueType,
+		   |	Transactions.AdditionalAnalytic
+		   |INTO Transactions
+		   |FROM
+		   |	Document.DebitNote.Transactions AS Transactions
+		   |WHERE
+		   |	Transactions.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	Return QueryArray;
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -244,23 +222,22 @@ Function R2021B_CustomersTransactions()
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	Transactions.Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.LegalName,
-		|	Transactions.Partner,
-		|	Transactions.Agreement,
-		|	Transactions.Amount AS Amount,
-		|	Transactions.Key AS Key
-		|INTO R5015B_OtherPartnersTransactions
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsOther";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	Transactions.Period,
+		   |	Transactions.Company,
+		   |	Transactions.Branch,
+		   |	Transactions.Currency,
+		   |	Transactions.LegalName,
+		   |	Transactions.Partner,
+		   |	Transactions.Agreement,
+		   |	Transactions.Amount AS Amount,
+		   |	Transactions.Key AS Key
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	Transactions AS Transactions
+		   |WHERE
+		   |	Transactions.IsOther";
 EndFunction
 
 Function R5011B_CustomersAging()
@@ -422,52 +399,70 @@ Function R5012B_VendorsAging()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return 
-	"SELECT
-	|	Transactions.Period AS Date,
-	|	Transactions.Company,
-	|	Transactions.Branch,
-	|	Transactions.Partner,
-	|	Transactions.LegalName,
-	|	Transactions.Currency,
-	|	Transactions.Key,
-	|	Transactions.Amount,
-	|	TRUE AS IsVendorAdvance
-	|INTO T2014S_AdvancesInfo
-	|FROM
-	|	Transactions AS Transactions
-	|WHERE
-	|	Transactions.IsVendor";
+	Return "SELECT
+		   |	Transactions.Period AS Date,
+		   |	Transactions.Company,
+		   |	Transactions.Branch,
+		   |	Transactions.Partner,
+		   |	Transactions.LegalName,
+		   |	Transactions.Currency,
+		   |	Transactions.Key,
+		   |	Transactions.Amount,
+		   |	TRUE AS IsVendorAdvance
+		   |INTO T2014S_AdvancesInfo
+		   |FROM
+		   |	Transactions AS Transactions
+		   |WHERE
+		   |	Transactions.IsVendor";
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	Return 
-	"SELECT
-	|	Transactions.Period AS Date,
-	|	Transactions.Company,
-	|	Transactions.Branch,
-	|	Transactions.Currency,
-	|	Transactions.Partner,
-	|	Transactions.LegalName,
-	|	Transactions.Agreement,
-	|	Transactions.BasisDocument AS TransactionBasis,
-	|	Transactions.Key,
-	|	TRUE AS IsCustomerTransaction,
-	|	TRUE AS IsDue,
-	|	SUM(Transactions.Amount) AS Amount
-	|INTO T2015S_TransactionsInfo
-	|FROM
-	|	Transactions AS Transactions
-	|WHERE
-	|	Transactions.IsCustomer
-	|GROUP BY
-	|	Transactions.Period,
-	|	Transactions.Company,
-	|	Transactions.Branch,
-	|	Transactions.Currency,
-	|	Transactions.Partner,
-	|	Transactions.LegalName,
-	|	Transactions.Agreement,
-	|	Transactions.BasisDocument,
-	|	Transactions.Key";
+	Return "SELECT
+		   |	Transactions.Period AS Date,
+		   |	Transactions.Company,
+		   |	Transactions.Branch,
+		   |	Transactions.Currency,
+		   |	Transactions.Partner,
+		   |	Transactions.LegalName,
+		   |	Transactions.Agreement,
+		   |	Transactions.BasisDocument AS TransactionBasis,
+		   |	Transactions.Key,
+		   |	TRUE AS IsCustomerTransaction,
+		   |	TRUE AS IsDue,
+		   |	SUM(Transactions.Amount) AS Amount
+		   |INTO T2015S_TransactionsInfo
+		   |FROM
+		   |	Transactions AS Transactions
+		   |WHERE
+		   |	Transactions.IsCustomer
+		   |GROUP BY
+		   |	Transactions.Period,
+		   |	Transactions.Company,
+		   |	Transactions.Branch,
+		   |	Transactions.Currency,
+		   |	Transactions.Partner,
+		   |	Transactions.LegalName,
+		   |	Transactions.Agreement,
+		   |	Transactions.BasisDocument,
+		   |	Transactions.Key";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion

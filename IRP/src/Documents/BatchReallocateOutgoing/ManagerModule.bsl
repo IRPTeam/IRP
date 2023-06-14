@@ -1,4 +1,12 @@
-#Region POSTING
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
@@ -31,7 +39,7 @@ EndProcedure
 
 #EndRegion
 
-#Region UNDOPOSTING
+#Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Return Undefined;
@@ -65,6 +73,37 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return "SELECT
+		   |	ItemList.Ref,
+		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.Company,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Store,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO ItemList
+		   |FROM
+		   |	Document.BatchReallocateOutgoing.ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.Ref = &Ref
+		   |GROUP BY
+		   |	ItemList.Ref.Date,
+		   |	ItemList.Ref.Company,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Store,
+		   |	ItemList.Ref";
 EndFunction
 
 #EndRegion
@@ -119,37 +158,6 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Company,
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Expense)";
-EndFunction
-
-#EndRegion
-
-#Region Posting_SourceTable
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
-	QueryArray.Add(ItemList());
-	Return QueryArray;
-EndFunction
-
-Function ItemList()
-	Return "SELECT
-		   |	ItemList.Ref,
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO ItemList
-		   |FROM
-		   |	Document.BatchReallocateOutgoing.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref
-		   |GROUP BY
-		   |	ItemList.Ref.Date,
-		   |	ItemList.Ref.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store,
-		   |	ItemList.Ref";
 EndFunction
 
 #EndRegion

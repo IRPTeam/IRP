@@ -2,27 +2,27 @@
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg  = Metadata.AccumulationRegisters;
-	Tables = New Structure();
-	
+	Tables = New Structure;
+
 	BillOfMaterialsTable       = GetBillOfMaterials(Ref);
 	MaterialPlanningEmptyTable = PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning);
-	MaterialPlanningEmptyTable.Columns.Add("IsProduct"     , New TypeDescription("Boolean"));
-	MaterialPlanningEmptyTable.Columns.Add("IsSemiproduct" , New TypeDescription("Boolean"));
-	MaterialPlanningEmptyTable.Columns.Add("IsMaterial"    , New TypeDescription("Boolean"));
-	MaterialPlanningEmptyTable.Columns.Add("IsService"     , New TypeDescription("Boolean"));
-	
+	MaterialPlanningEmptyTable.Columns.Add("IsProduct", New TypeDescription("Boolean"));
+	MaterialPlanningEmptyTable.Columns.Add("IsSemiproduct", New TypeDescription("Boolean"));
+	MaterialPlanningEmptyTable.Columns.Add("IsMaterial", New TypeDescription("Boolean"));
+	MaterialPlanningEmptyTable.Columns.Add("IsService", New TypeDescription("Boolean"));
+
 	MaterialPlanningTable      = GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningEmptyTable);
 	ProductionPlanningTable    = GetProductionPlanning(BillOfMaterialsTable);
 	DetailingSuppliesTable     = GetDetailingSupplies(MaterialPlanningTable);
-	
-	Query = New Query();
+
+	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.SetParameter("ProductionPlanningTable" , ProductionPlanningTable);
-	Query.SetParameter("BillOfMaterialsTable"    , BillOfMaterialsTable);
-	Query.SetParameter("ProductionPlanningTable" , ProductionPlanningTable);
-	Query.SetParameter("MaterialPlanningTable"   , MaterialPlanningTable);
-	Query.SetParameter("DetailingSuppliesTable"  , DetailingSuppliesTable);
-	Query.Text = 
+	Query.SetParameter("ProductionPlanningTable", ProductionPlanningTable);
+	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
+	Query.SetParameter("ProductionPlanningTable", ProductionPlanningTable);
+	Query.SetParameter("MaterialPlanningTable", MaterialPlanningTable);
+	Query.SetParameter("DetailingSuppliesTable", DetailingSuppliesTable);
+	Query.Text =
 	"SELECT
 	|	*
 	|INTO IncomingStocks
@@ -61,7 +61,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|FROM
 	|	&DetailingSuppliesTable AS DetailingSupplies";
 	Query.Execute();
-	
+
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
@@ -71,7 +71,7 @@ EndFunction
 #Region CreatingTables
 
 Function GetDetailingSupplies(MaterialPlanningTable)
-	Query = New Query();
+	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	MaterialPlanningTable.Period,
@@ -114,17 +114,17 @@ Function GetDetailingSupplies(MaterialPlanningTable)
 	|	tmp_material.PlanningPeriod,
 	|	tmp_material.Store,
 	|	tmp_material.ItemKey";
-	
+
 	Query.SetParameter("MaterialPlanningTable", MaterialPlanningTable);
-	
+
 	QueryResult = Query.Execute();
 	QueryTable =QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 
 Function GetProductionPlanning(BillOfMaterialsTable)
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT
 	|	BillOfMaterialsTable.ProductionPlanning,
 	|	BillOfMaterialsTable.BusinessUnit,
@@ -163,7 +163,7 @@ Function GetProductionPlanning(BillOfMaterialsTable)
 	|	tmp AS tmp
 	|WHERE
 	|	tmp.IsProduct = TRUE OR tmp.IsSemiproduct = TRUE";
-	
+
 	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
 	QueryResult = Query.Execute();
 	PlanningTable = QueryResult.Unload();
@@ -171,10 +171,10 @@ Function GetProductionPlanning(BillOfMaterialsTable)
 EndFunction
 
 Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
-	TmpManager = New TempTablesManager();
-	Query = New Query();
+	TmpManager = New TempTablesManager;
+	Query = New Query;
 	Query.TempTablesManager = TmpManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	BillOfMaterialsTable.ProductionPlanning,
 	|	BillOfMaterialsTable.BusinessUnit,
@@ -219,7 +219,7 @@ Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
 	|WHERE
 	|	tmp.IsProduct = TRUE
 	|	OR tmp.IsSemiproduct = TRUE";
-	
+
 	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -241,7 +241,7 @@ Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
 EndFunction
 
 Function GetMaterialByProduct(TmpManager, OutputID, UniqueID)
-	Query = New Query();
+	Query = New Query;
 	Query.TempTablesManager = TmpManager;
 	Query.Text =
 	"SELECT
@@ -267,8 +267,8 @@ Function GetMaterialByProduct(TmpManager, OutputID, UniqueID)
 EndFunction
 
 Function GetBillOfMaterials(Ref)
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT
 	|	DocBillOfMaterials.Ref AS ProductionPlanning,
 	|	DocBillOfMaterials.Ref AS PlanningDocument,
@@ -306,30 +306,30 @@ Function GetBillOfMaterials(Ref)
 	|	Document.ProductionPlanning.BillOfMaterialsList AS DocBillOfMaterials
 	|WHERE
 	|	DocBillOfMaterials.Ref = &Ref";
-	
+
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	
+
 	Return QueryTable;
 EndFunction
 
 #EndRegion
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -369,12 +369,12 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-		
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ProductionPlanning.Productions");
+
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.ProductionPlanning.Productions");
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
-	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
+		"R4035B_IncomingStocks_Exists", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -392,19 +392,86 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4035B_IncomingStocks_Exists());
+	Return QueryArray;
+EndFunction
+
+Function R4035B_IncomingStocks_Exists()
+	Return "SELECT *
+		   |	INTO R4035B_IncomingStocks_Exists
+		   |FROM
+		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		   |WHERE
+		   |	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
 
 #EndRegion
 
-#Region Posting_SourceTable
+#Region Posting_MainTables
 
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R7010T_DetailingSupplies());
+	QueryArray.Add(R7020T_MaterialPlanning());
+	QueryArray.Add(R7030T_ProductionPlanning());
+	QueryArray.Add(T7010S_BillOfMaterials());
+	Return QueryArray;
+EndFunction
+
+Function R4035B_IncomingStocks()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	*
+		   |INTO R4035B_IncomingStocks
+		   |FROM
+		   |	IncomingStocks AS IncomingStocks
+		   |WHERE
+		   |	IncomingStocks.ItemKey.UseIncomingStockReservation";
+EndFunction
+
+Function T7010S_BillOfMaterials()
+	Return "SELECT *
+		   |	INTO T7010S_BillOfMaterials
+		   |FROM BillOfMaterials AS BillOfMaterialsTable
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function R7030T_ProductionPlanning()
+	Return "SELECT *
+		   |	INTO R7030T_ProductionPlanning
+		   |FROM ProductionPlanning AS ProductionPlanning
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function R7020T_MaterialPlanning()
+	Return "SELECT *
+		   |	INTO R7020T_MaterialPlanning
+		   |FROM MaterialPlanning AS MaterialPlanning
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function R7010T_DetailingSupplies()
+	Return "SELECT *
+		   |	INTO R7010T_DetailingSupplies
+		   |FROM DetailingSupplies AS DetailingSupplies
+		   |WHERE
+		   |	TRUE";
+EndFunction
 
 #EndRegion
 
@@ -425,78 +492,3 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
-
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4035B_IncomingStocks_Exists());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(T7010S_BillOfMaterials());
-	QueryArray.Add(R7030T_ProductionPlanning());
-	QueryArray.Add(R7020T_MaterialPlanning());
-	QueryArray.Add(R7010T_DetailingSupplies());
-	Return QueryArray;	
-EndFunction	
-
-Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	IncomingStocks AS IncomingStocks
-		|WHERE
-		|	IncomingStocks.ItemKey.UseIncomingStockReservation";
-EndFunction
-
-Function R4035B_IncomingStocks_Exists()
-	Return
-		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		|WHERE
-		|	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-
-Function T7010S_BillOfMaterials()
-	Return 
-		"SELECT *
-		|	INTO T7010S_BillOfMaterials
-		|FROM BillOfMaterials AS BillOfMaterialsTable
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function R7030T_ProductionPlanning()
-	Return 
-		"SELECT *
-		|	INTO R7030T_ProductionPlanning
-		|FROM ProductionPlanning AS ProductionPlanning
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function R7020T_MaterialPlanning()
-	Return 
-		"SELECT *
-		|	INTO R7020T_MaterialPlanning
-		|FROM MaterialPlanning AS MaterialPlanning
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function R7010T_DetailingSupplies()
-	Return 
-		"SELECT *
-		|	INTO R7010T_DetailingSupplies
-		|FROM DetailingSupplies AS DetailingSupplies
-		|WHERE
-		|	TRUE";
-EndFunction

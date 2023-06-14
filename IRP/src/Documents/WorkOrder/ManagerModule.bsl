@@ -108,34 +108,7 @@ EndFunction
 
 #EndRegion
 
-#Region Posting_MainTables
-
-#EndRegion
-
 #Region Posting_SourceTable
-
-
-#EndRegion
-
-#Region AccessObject
-
-// Get access key.
-// 
-// Parameters:
-//  Obj - DocumentObjectDocumentName -
-// 
-// Returns:
-//  Map
-Function GetAccessKey(Obj) Export
-	AccessKeyMap = New Map;
-	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
-	Return AccessKeyMap;
-EndFunction
-
-#EndRegion
-
-
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
@@ -161,6 +134,10 @@ Function Materials()
 	|	WorkOrderMaterials.Ref = &Ref
 	|	AND &StatusInfoPosting";
 EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
@@ -214,3 +191,26 @@ Function T3010S_RowIDInfo()
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+
+

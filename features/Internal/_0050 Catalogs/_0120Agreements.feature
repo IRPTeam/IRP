@@ -540,3 +540,33 @@ Scenario: _012011 create Partner term without price type (negative test)
 		When I Check the steps for Exception
 			|'Then I check for the "Agreements" catalog element with the "Description_en" 'Price Type, TRY''|
 
+
+Scenario: _012012 create Partner term for other partners
+		And I close all client application windows
+	* Opening an Partner term catalog
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+	* Creating and checking customer Partner term Basic Partner terms, TRY
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Other"
+		Then the form attribute named "ApArPostingDetail" became equal to "By agreements"
+		And I input "30" text in "Number" field
+		And I input "01.11.2022" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
+			| 'Description' | 'Type'         |
+			| 'TRY'         | 'Partner term' |
+		And I select current line in "List" table
+		And I input "01.11.2022" text in "Start using" field
+		And Delay 3
+		And I click Open button of the field named "Description_en"
+		And I input "Other" text in the field named "Description_en"
+		And I input "Other" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" "Other"

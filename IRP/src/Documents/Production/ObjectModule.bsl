@@ -31,6 +31,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndDo;
 
 	If MaterialQuantity = 0 Then
+		Cancel = True;
 		MessageText = R().Error_127;
 		If ThisObject.Materials.Count() > 0 Then
 			CommonFunctionsClientServer.ShowUsersMessage(MessageText, 

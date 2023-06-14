@@ -163,6 +163,7 @@ Scenario:_800000 preparation (remaining stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create information register UserSettings records (Retail document)
+		When create SalesInvoice and StockAdjustmentAsSurplus (stock control)
 	When create payment terminal
 	When create PaymentTypes
 	When create bank terms
@@ -2795,7 +2796,41 @@ Scenario:_800062 checkmark removal control Stock balance detail in the Serial lo
 	And I close all client application windows
 	
 
-
+Scenario:_800070 check stock control in the Stock adjustment as surplus
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79ea93fec1998ed11ee0a86b6ab2dc2"
+		And I click Open button of the field named "Store"
+		And I change checkbox "Negative stock control"
+		And I click "Save and close" button
+		And I click "Post" button
+		And I click Open button of the field named "Store"
+		And I change checkbox "Negative stock control"
+		And I click "Save and close" button
+	* Check stock control in the Stock adjustment as surplus
+		Given I open hyperlink "e1cib/data/Document.StockAdjustmentAsSurplus?ref=b79ea93fec1998ed11ee0a86b6ab2dba"
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I select current line in "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Chewing gum Mint/Mango] R4011B_FreeStocks remaining: 3 . Required: 2 . Lacking: 1 .'|
+		And I close all client application windows
+				
 
 Scenario:_800080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)
 	* Remove checkbox

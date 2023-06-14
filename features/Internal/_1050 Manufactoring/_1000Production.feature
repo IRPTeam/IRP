@@ -1750,8 +1750,60 @@ Scenario: _10342 check movements Production (Repacking)
 		And I close all client application windows
 		
 					
-							
-			
+Scenario: _1043 verification of zero quantities by materials
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Production"
+	And I click the button named "FormCreate"
+	* Filling in header info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Склад производства 05'     |
+		And I select current line in "List" table		
+	* Filling in production tab
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка номер 8' |
+		And I select current line in "List" table
+		Then the form attribute named "ItemKey" became equal to "Стремянка номер 8"
+	* Select Bill of materials and Store production
+		And I click Select button of "Bill of materials" field
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Стремянка номер 8 (премиум)' |
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		Then the form attribute named "BusinessUnit" became equal to "Склад производства 05"	
+		And I click Select button of "Store production" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Store 01' |
+		And I select current line in "List" table	
+	* Change material quantity
+		And for each line of "Materials" table I do
+			And I input "0,000" text in the field named "MaterialsQuantity" of "Materials" table
+			And I activate "Material type" field in "Materials" table
+			And I select current line in "Materials" table
+			And I select "Material" exact value from "Material type" drop-down list in "Materials" table
+	* Try post
+		And I click "Post and close" button
+		Then there are lines in TestClient message log
+			|'Quantity must be more than 0'|
+		Then "Production (create) *" window is opened	
+		And I close all client application windows
+		
+				
+	
+				
+						
+
+		
 						
 
 				

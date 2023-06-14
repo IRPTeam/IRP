@@ -2288,7 +2288,12 @@ Scenario:  _0154149 create Cash statement
 			And I go to line in "List" table
 				| 'Description'     |
 				| 'Movement type 1' |
-			And I select current line in "List" table				
+			And I select current line in "List" table		
+			And I set "Use basis document" checkbox in "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I go to the last line in "PaymentList" table
+			And I set "Use basis document" checkbox in "PaymentList" table
+			And I finish line editing in "PaymentList" table			
 		And I delete "$$NumberCashStatement01541491$$" variable
 		And I delete "$$CashStatement01541491$$" variable
 		And I delete "$$DateCashStatement01541491$$" variable

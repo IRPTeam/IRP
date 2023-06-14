@@ -159,25 +159,6 @@ Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo =
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
-Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
-	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
-	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
-	Return Str;
-EndFunction
-
-Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
-	StrParams.Insert("Ref", Ref);
-	If ValueIsFilled(Ref) Then
-		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		StrParams.Insert("BalancePeriod", Undefined);
-	EndIf;
-	Return StrParams;
-EndFunction
-
 #EndRegion
 
 #Region Undoposting
@@ -227,6 +208,56 @@ EndProcedure
 
 #EndRegion
 
+#Region Posting_Info
+
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParameters(Ref)
+	StrParams = New Structure();
+	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
+	Return StrParams;
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+#EndRegion
+
+#Region Posting_SourceTable
+
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
 #Region Posting_MasterTables
 
 Function GetQueryTextsMasterTables()
@@ -257,7 +288,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3011T_CashFlow());
 	Return QueryArray;
 EndFunction
-
 
 Function R2023B_AdvancesFromRetailCustomers()
 	Return 
@@ -1159,7 +1189,6 @@ Function GetQueryTextsSecondaryTables()
 	Return QueryArray;
 EndFunction
 
-
 Function ItemList()
 	Return 
 		"SELECT
@@ -1551,26 +1580,5 @@ Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 #EndRegion
-
-#EndRegion
-
-#Region AccessObject
-
-// Get access key.
-// 
-// Parameters:
-//  Obj - DocumentObjectDocumentName -
-// 
-// Returns:
-//  Map
-Function GetAccessKey(Obj) Export
-	Str = New Map;
-	Str.Insert("Company", Obj.Company);
-	Str.Insert("Branch", Obj.Branch);
-	Stores = Obj.ItemList.Unload();
-	Stores.GroupBy("Store");
-	Str.Insert("Store", Stores.UnloadColumn("Store"));
-	Return Str;
-EndFunction
 
 #EndRegion

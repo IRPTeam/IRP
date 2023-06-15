@@ -117,6 +117,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	EndDo;
 	
 	Parameters.Insert("IsFullRefill_Materials", False);
+	Parameters.Insert("IsFullRefill_SpecialOffers", False);
 	
 	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
@@ -5103,6 +5104,29 @@ Procedure SetSpecialOffers(Parameters, Results) Export
 	UpdateTableCacheRemovable(Parameters, TableName, Results);	
 EndProcedure
 
+// Offers.Clear
+Procedure ClearSpecialOffers(Parameters, Results) Export
+	TableName = "SpecialOffers";
+	If Not Parameters.Cache.Property(TableName) Then
+		AddTableToCacheRemovable(Parameters, TableName);
+	EndIf;
+	Parameters.IsFullRefill_SpecialOffers = True;
+	Parameters.UseRowsForRecalculate = True;
+	AllTableRows = New Array();
+	For Each Row In Parameters.Object[Parameters.TableName] Do
+		For Each RowOffer In Parameters.Object[TableName] Do
+			If Row.Key = RowOffer.Key Then
+				AllTableRows.Add(Row);
+			EndIf;
+		EndDo;
+	EndDo;
+	AllTableRowsWrapped = WrapRows(Parameters, AllTableRows);
+	For Each Row In AllTableRowsWrapped Do
+		Row.SpecialOffers.Clear();
+		Parameters.RowsForRecalculate.Add(Row);
+	EndDo;
+EndProcedure
+
 // Offers.Bind
 Function BindOffers(Parameters)
 	DataPath = "Offers";
@@ -5116,7 +5140,8 @@ Procedure StepOffersClear(Parameters, Chain) Export
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.OffersClear.Setter = "SetSpecialOffers";
+	
+	Chain.OffersClear.Setter = "ClearSpecialOffers";
 	Options = ModelClientServer_V2.OffersClearOptions();
 	Options.StepName = "StepOffersClear";
 	Chain.OffersClear.Options.Add(Options);
@@ -9170,7 +9195,9 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("SalesOrder"                , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkOrder"                 , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkSheet"                 , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("SalesInvoice"              , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("SalesInvoice",
+		"StepOffersClear, StepItemListCalculations_IsOffersClear,
+		|StepItemListChangeItemKeyByItem");
 	Binding.Insert("RetailSalesReceipt"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Binding.Insert("PurchaseOrder"             , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PurchaseInvoice"           , "StepItemListChangeItemKeyByItem");
@@ -9298,7 +9325,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeBillOfMaterialsByItemKey");
 	
 	Binding.Insert("SalesInvoice",
-		"StepOffersClear,
+		"StepOffersClear, StepItemListCalculations_IsOffersClear,
 		|StepItemListChangeUseShipmentConfirmationByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
@@ -10098,6 +10125,9 @@ EndFunction
 Function BindItemListPriceType(Parameters)
 	DataPath = "ItemList.PriceType";
 	Binding = New Structure();
+	Binding.Insert("SalesInvoice",
+		"StepOffersClear, StepItemListCalculations_IsOffersClear,
+		|StepItemListChangePriceByPriceType");
 	Return BindSteps("StepItemListChangePriceByPriceType", DataPath, Binding, Parameters, "BindItemListPriceType");
 EndFunction
 
@@ -10337,7 +10367,9 @@ Function BindItemListPrice(Parameters)
 	If Parameters.StepEnableFlags.PriceChanged_AfterQuestionToUser Then
 		Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("WorkOrder"            , "StepItemListCalculations_IsPriceChanged");
-		Binding.Insert("SalesInvoice"         , "StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesInvoice"         , 
+			"StepItemListCalculations_IsPriceChanged,
+			|StepOffersClear, StepItemListCalculations_IsOffersClear");
 		Binding.Insert("RetailSalesReceipt"   , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsPriceChanged");
@@ -10359,7 +10391,8 @@ Function BindItemListPrice(Parameters)
 			|StepItemListCalculations_IsPriceChanged");
 	
 		Binding.Insert("SalesInvoice",
-			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			"StepOffersClear, StepItemListCalculations_IsOffersClear,
+			|StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
 
 		Binding.Insert("RetailSalesReceipt",
@@ -10501,6 +10534,10 @@ Function BindItemListQuantity(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged,
 		|StepItemListCalculateQuantityInBaseUnit");
+		
+	Binding.Insert("SalesInvoice",
+		"StepOffersClear, StepItemListCalculations_IsOffersClear,
+		|StepItemListCalculateQuantityInBaseUnit");	
 		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantity");
 EndFunction
@@ -11529,6 +11566,11 @@ Procedure StepItemListCalculations_IsRecalculationWhenBasedOn(Parameters, Chain)
 	StepItemListCalculations(Parameters, Chain, "IsRecalculationWhenBasedOn");
 EndProcedure
 
+// ItemList.Calculations.[IsOffersClear].Step
+Procedure StepItemListCalculations_IsOffersClear(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsOffersClear");
+EndProcedure
+
 Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
 	If Chain.Idle Then
@@ -11541,7 +11583,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	TableRows = GetRows(Parameters, Parameters.TableName);
 	
 	If Parameters.UseRowsForRecalculate Then
-		// Calculations when changed consignor batches
+		// Calculations when changed consignor batches or offers clear
 		TableRows = Parameters.RowsForRecalculate;
 	Else
 		TableRows = GetRows(Parameters, Parameters.TableName);
@@ -11564,6 +11606,11 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmount.Enable       = True;
 			Options.CalculateSpecialOffers.Enable   = True;
 			Options.RecalculateSpecialOffers.Enable = True;
+		ElsIf WhoIsChanged = "IsOffersClear" Then
+			Options.CalculateNetAmount.Enable       = True;
+			Options.CalculateTotalAmount.Enable     = True;
+			Options.CalculateTaxAmount.Enable       = True;
+			Options.CalculateSpecialOffers.Enable   = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			
@@ -13624,9 +13671,14 @@ Function IsFullTransferTabularSection(Parameters, PropertyName)
 	_PropertyName = Upper(PropertyName);
 	If _PropertyName = Upper("TaxList") 
 		Or _PropertyName = Upper("SerialLotNumbers") 
-		Or _PropertyName = Upper("SpecialOffers")
 		Or _PropertyName = Upper("BillOfMaterialsList") Then
 		Return True;
+	ElsIf _PropertyName = Upper("SpecialOffers") Then
+		If Parameters.IsFullRefill_SpecialOffers = True Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
 	ElsIf _PropertyName = Upper("Materials") Then
 		If Parameters.IsFullRefill_Materials = True Then
 			Return True;
@@ -13642,6 +13694,12 @@ Function IsFullLoadTabularSection(Parameters, PropertyName)
 	If _PropertyName = Upper("ConsignorBatches")
 		Or _PropertyName = Upper("SourceOfOrigins") Then
 		Return True;
+	ElsIf _PropertyName = Upper("SpecialOffers") Then
+		If Parameters.IsFullRefill_SpecialOffers = True Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
 	EndIf;
 	Return False;
 EndFunction

@@ -13,6 +13,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
 
 Procedure OnWrite(Cancel)

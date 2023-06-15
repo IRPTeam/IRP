@@ -821,13 +821,13 @@ FROM
 		ON R3021B_CashInTransitIncomingBalance.Basis = CashStatement.Ref
 		AND
 			R3021B_CashInTransitIncomingBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		LEFT JOIN Document.CashStatement.PaymentList AS CashStatementPaymentList
+		INNER JOIN Document.CashStatement.PaymentList AS CashStatementPaymentList
 		ON CashStatementPaymentList.Ref = CashStatement.Ref
 		AND CashStatementPaymentList.PaymentType.Type = VALUE(Enum.PaymentTypes.Card)
+		AND CashStatementPaymentList.Account = &amp;Account
 WHERE
 	CashStatement.Company = &amp;Company
 	AND CashStatement.Branch = &amp;Branch
-	AND CashStatement.CashAccount = &amp;Account
 GROUP BY
 	CashStatement.Ref,
 	CashStatement.Company,
@@ -928,6 +928,10 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Basis</dataPath>
         <field>Basis</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>TransactionCurrency</dataPath>
+        <field>TransactionCurrency</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>BasisDocument</dataPath>

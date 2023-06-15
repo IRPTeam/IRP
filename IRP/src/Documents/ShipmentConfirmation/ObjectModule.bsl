@@ -8,6 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		LegalName = Undefined;
 	EndIf;
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	
 	If isPackage And IsBlankString(PackageID) Then
 		SetPackageID();

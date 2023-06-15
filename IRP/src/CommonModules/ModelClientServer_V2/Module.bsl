@@ -378,7 +378,9 @@ Function GetChain()
 	
 	// Loaders
 	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
-
+	
+	// Cleaners
+	Chain.Insert("OffersClear", GetChainLink("OffersClearExecute"));
 	
 	Return Chain;
 EndFunction
@@ -1660,6 +1662,18 @@ Function ChangeReceiveBranchByAccountExecute(Options) Export
 		Return ReceiveBranch;
 	EndIf;
 	Return Options.ReceiveBranch;
+EndFunction
+
+#EndRegion
+
+#Region OFFERS_CLEAR
+
+Function OffersClearOptions() Export
+	Return GetChainLinkOptions("");
+EndFunction
+
+Function OffersClearExecute(Options) Export
+	Return New Structure("SpecialOffers", New Array());
 EndFunction
 
 #EndRegion

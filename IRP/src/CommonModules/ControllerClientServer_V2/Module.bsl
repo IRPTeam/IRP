@@ -5094,7 +5094,7 @@ Procedure OffersOnChange(Parameters) Export
 EndProcedure
 
 // Offers.Set
-Procedure SetSpecialOffers(Parameters, Results)
+Procedure SetSpecialOffers(Parameters, Results) Export
 	TableName = "SpecialOffers";
 	If Not Parameters.Cache.Property(TableName) Then
 		AddTableToCacheRemovable(Parameters, TableName);
@@ -5109,6 +5109,18 @@ Function BindOffers(Parameters)
 	Binding = New Structure();
 	Return BindSteps("StepItemListCalculations_IsOffersChanged", DataPath, Binding, Parameters, "BindOffers");
 EndFunction
+
+// Offers.Clear.Step
+Procedure StepOffersClear(Parameters, Chain) Export
+	Chain.OffersClear.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.OffersClear.Setter = "SetSpecialOffers";
+	Options = ModelClientServer_V2.OffersClearOptions();
+	Options.StepName = "StepOffersClear";
+	Chain.OffersClear.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -9286,7 +9298,8 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeBillOfMaterialsByItemKey");
 	
 	Binding.Insert("SalesInvoice",
-		"StepItemListChangeUseShipmentConfirmationByStore,
+		"StepOffersClear,
+		|StepItemListChangeUseShipmentConfirmationByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,

@@ -129,6 +129,29 @@ Function GetUserRoles(User)
 	Return Roles;
 EndFunction
 
+Function GetUserProfiles(User) Export
+
+	Query = New Query();
+	Query.Text =
+	"SELECT DISTINCT
+	|	AccessGroupsProfiles.Profile
+	|FROM
+	|	Catalog.AccessGroups.Profiles AS AccessGroupsProfiles
+	|WHERE
+	|	AccessGroupsProfiles.Ref IN
+	|		(SELECT DISTINCT
+	|			AccessGroupsUsers.Ref AS AccessGroup
+	|		FROM
+	|			Catalog.AccessGroups.Users AS AccessGroupsUsers
+	|		WHERE
+	|			AccessGroupsUsers.User = &User)";
+
+	Query.SetParameter("User", User);
+
+	Profiles = Query.Execute().Unload().UnloadColumn("Profile");
+	Return Profiles;
+EndFunction
+
 Procedure AddRoles(Roles, User)
 	For Each Role In Roles Do
 		MetadataRole = Metadata.Roles.Find(Role);

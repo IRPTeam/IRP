@@ -9,7 +9,7 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -17,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -29,7 +29,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
@@ -60,8 +60,10 @@ EndProcedure
 
 #EndRegion
 
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -69,17 +71,17 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
-	
-	PricesByProperties = New ValueTable();
-	PricesByProperties.Columns.Add("PriceList"  , New TypeDescription("DocumentRef.PriceList"));
-	PricesByProperties.Columns.Add("PriceKey"   , New TypeDescription("CatalogRef.PriceKeys"));
-	PricesByProperties.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
-	PricesByProperties.Columns.Add("Unit"       , New TypeDescription("CatalogRef.Units"));
-	PricesByProperties.Columns.Add("InputUnit"  , New TypeDescription("CatalogRef.Units"));
-	PricesByProperties.Columns.Add("InputPrice" , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
-	PricesByProperties.Columns.Add("Price"      , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+
+	PricesByProperties = New ValueTable;
+	PricesByProperties.Columns.Add("PriceList", New TypeDescription("DocumentRef.PriceList"));
+	PricesByProperties.Columns.Add("PriceKey", New TypeDescription("CatalogRef.PriceKeys"));
+	PricesByProperties.Columns.Add("Item", New TypeDescription("CatalogRef.Items"));
+	PricesByProperties.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	PricesByProperties.Columns.Add("InputUnit", New TypeDescription("CatalogRef.Units"));
+	PricesByProperties.Columns.Add("InputPrice", New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	PricesByProperties.Columns.Add("Price", New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 
 	If Ref.PriceListType = Enums.PriceListTypes.PriceByProperties Then
 		PricesByProperties = Catalogs.PriceKeys.GetTableByPriceList(Ref);
@@ -88,14 +90,20 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+#EndRegion
 
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
 	Return QueryArray;
 EndFunction
 
+#EndRegion
+
+#Region Posting_MainTables
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(PricesByItems());
 	QueryArray.Add(PricesByItemKeys());
 	QueryArray.Add(PricesByProperties());
@@ -103,68 +111,85 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function PricesByItemKeys()
-	Return
-	"SELECT
-	|	PriceListItemKeyList.Ref.Date AS Period,
-	|	PriceListItemKeyList.Ref.PriceType AS PriceType,
-	|	PriceListItemKeyList.ItemKey,
-	|	PriceListItemKeyList.Unit,
-	|	PriceListItemKeyList.InputUnit,
-	|	PriceListItemKeyList.InputPrice,
-	|	PriceListItemKeyList.Price
-	|INTO PricesByItemKeys
-	|FROM
-	|	Document.PriceList.ItemKeyList AS PriceListItemKeyList
-	|WHERE
-	|	PriceListItemKeyList.Ref = &Ref";
+	Return "SELECT
+		   |	PriceListItemKeyList.Ref.Date AS Period,
+		   |	PriceListItemKeyList.Ref.PriceType AS PriceType,
+		   |	PriceListItemKeyList.ItemKey,
+		   |	PriceListItemKeyList.Unit,
+		   |	PriceListItemKeyList.InputUnit,
+		   |	PriceListItemKeyList.InputPrice,
+		   |	PriceListItemKeyList.Price
+		   |INTO PricesByItemKeys
+		   |FROM
+		   |	Document.PriceList.ItemKeyList AS PriceListItemKeyList
+		   |WHERE
+		   |	PriceListItemKeyList.Ref = &Ref";
 EndFunction
 
 Function PricesByItems()
-	Return
-	"SELECT
-	|	PriceListItemList.Ref.Date AS Period,
-	|	PriceListItemList.Ref.PriceType AS PriceType,
-	|	PriceListItemList.Item,
-	|	PriceListItemList.Unit,
-	|	PriceListItemList.InputUnit,
-	|	PriceListItemList.InputPrice,
-	|	PriceListItemList.Price
-	|INTO PricesByItems
-	|FROM
-	|	Document.PriceList.ItemList AS PriceListItemList
-	|WHERE
-	|	PriceListItemList.Ref = &Ref";
+	Return "SELECT
+		   |	PriceListItemList.Ref.Date AS Period,
+		   |	PriceListItemList.Ref.PriceType AS PriceType,
+		   |	PriceListItemList.Item,
+		   |	PriceListItemList.Unit,
+		   |	PriceListItemList.InputUnit,
+		   |	PriceListItemList.InputPrice,
+		   |	PriceListItemList.Price
+		   |INTO PricesByItems
+		   |FROM
+		   |	Document.PriceList.ItemList AS PriceListItemList
+		   |WHERE
+		   |	PriceListItemList.Ref = &Ref";
 EndFunction
 
 Function PricesByProperties()
-	Return
-	"SELECT
-	|	PricesByProperties.PriceList,
-	|	PricesByProperties.PriceKey,
-	|	PricesByProperties.Item,
-	|	PricesByProperties.Unit,
-	|	PricesByProperties.InputUnit,
-	|	PricesByProperties.InputPrice,
-	|	PricesByProperties.Price
-	|INTO tmp
-	|FROM
-	|	&PricesByProperties AS PricesByProperties
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.PriceList,
-	|	tmp.PriceKey,
-	|	tmp.Item,
-	|	tmp.Unit,
-	|	tmp.InputUnit,
-	|	tmp.InputPrice,
-	|	tmp.Price,
-	|	DocPriceList.Date AS Period,
-	|	DocPriceList.PriceType
-	|INTO PricesByProperties
-	|FROM
-	|	Document.PriceList AS DocPriceList
-	|		INNER JOIN tmp AS tmp
-	|		ON tmp.PriceList = DocPriceList.Ref
-	|		AND DocPriceList.Ref = &Ref";
+	Return "SELECT
+		   |	PricesByProperties.PriceList,
+		   |	PricesByProperties.PriceKey,
+		   |	PricesByProperties.Item,
+		   |	PricesByProperties.Unit,
+		   |	PricesByProperties.InputUnit,
+		   |	PricesByProperties.InputPrice,
+		   |	PricesByProperties.Price
+		   |INTO tmp
+		   |FROM
+		   |	&PricesByProperties AS PricesByProperties
+		   |;
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
+		   |	tmp.PriceList,
+		   |	tmp.PriceKey,
+		   |	tmp.Item,
+		   |	tmp.Unit,
+		   |	tmp.InputUnit,
+		   |	tmp.InputPrice,
+		   |	tmp.Price,
+		   |	DocPriceList.Date AS Period,
+		   |	DocPriceList.PriceType
+		   |INTO PricesByProperties
+		   |FROM
+		   |	Document.PriceList AS DocPriceList
+		   |		INNER JOIN tmp AS tmp
+		   |		ON tmp.PriceList = DocPriceList.Ref
+		   |		AND DocPriceList.Ref = &Ref";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("PriceType", Obj.PriceType);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion

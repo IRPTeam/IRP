@@ -1669,11 +1669,17 @@ EndFunction
 #Region OFFERS_CLEAR
 
 Function OffersClearOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("TableSpecialOffers");
 EndFunction
 
 Function OffersClearExecute(Options) Export
-	Return New Structure("SpecialOffers", New Array());
+	SpecialOffers = New Array();
+	For Each Row In Options.TableSpecialOffers Do
+		If CommonFunctionsServer.GetRefAttribute(Row.Offer, "AutoClear") <> True Then
+			SpecialOffers.Add(Row);
+		EndIf;
+	EndDo;
+	Return New Structure("SpecialOffers", SpecialOffers);
 EndFunction
 
 #EndRegion

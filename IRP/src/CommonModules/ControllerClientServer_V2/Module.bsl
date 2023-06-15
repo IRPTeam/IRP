@@ -5110,19 +5110,27 @@ Procedure ClearSpecialOffers(Parameters, Results) Export
 	If Not Parameters.Cache.Property(TableName) Then
 		AddTableToCacheRemovable(Parameters, TableName);
 	EndIf;
+	UpdateTableCacheRemovable(Parameters, TableName, Results);
+	
 	Parameters.IsFullRefill_SpecialOffers = True;
 	Parameters.UseRowsForRecalculate = True;
 	AllTableRows = New Array();
 	For Each Row In Parameters.Object[Parameters.TableName] Do
-		For Each RowOffer In Parameters.Object[TableName] Do
-			If Row.Key = RowOffer.Key Then
-				AllTableRows.Add(Row);
-			EndIf;
-		EndDo;
+		AllTableRows.Add(Row);
 	EndDo;
 	AllTableRowsWrapped = WrapRows(Parameters, AllTableRows);
 	For Each Row In AllTableRowsWrapped Do
-		Row.SpecialOffers.Clear();
+		ArrayOfOffers = New Array();
+		For Each OfferRow In Row.SpecialOffers Do
+			For Each CacheOfferRow In Parameters.Cache[TableName] Do
+				If OfferRow.Key = CacheOfferRow.Key
+					And OfferRow.Offer = CacheOfferRow.Offer Then
+					ArrayOfOffers.Add(OfferRow);
+					Break;
+				EndIf;
+			EndDo;
+		EndDo;
+		Row.SpecialOffers = ArrayOfOffers;
 		Parameters.RowsForRecalculate.Add(Row);
 	EndDo;
 EndProcedure
@@ -5143,9 +5151,20 @@ Procedure StepOffersClear(Parameters, Chain) Export
 	
 	Chain.OffersClear.Setter = "ClearSpecialOffers";
 	Options = ModelClientServer_V2.OffersClearOptions();
+	Options.TableSpecialOffers = GetOption_Table_SpecialOffers(Parameters);
 	Options.StepName = "StepOffersClear";
 	Chain.OffersClear.Options.Add(Options);
 EndProcedure
+
+Function GetOption_Table_SpecialOffers(Parameters)
+	Table = New Array();
+	For Each Row In Parameters.Object.SpecialOffers Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+		FillPropertyValues(NewRow, Row);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
 
 #EndRegion
 

@@ -10554,10 +10554,6 @@ Function BindItemListQuantity(Parameters)
 		"StepItemListSimpleCalculations_IsQuantityChanged,
 		|StepItemListCalculateQuantityInBaseUnit");
 		
-	Binding.Insert("SalesInvoice",
-		"StepOffersClear, StepItemListCalculations_IsOffersClear,
-		|StepItemListCalculateQuantityInBaseUnit");	
-		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantity");
 EndFunction
 
@@ -10738,8 +10734,9 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	Binding.Insert("WorkSheet", 
 		"StepMaterialsRecalculateQuantityWithKeyOwner");
 		
-	Binding.Insert("SalesInvoice",
-		"StepItemListCalculations_IsQuantityInBaseUnitChanged,
+	Binding.Insert("SalesInvoice", 
+		"StepOffersClear, StepItemListCalculations_IsOffersClear,
+		|StepItemListCalculations_IsQuantityInBaseUnitChanged,
 		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("InventoryTransfer", "StepConsignorBatchesFillBatches_StoreSender");
@@ -11600,6 +11597,13 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	PriceIncludeTax = GetPriceIncludeTax(Parameters);
 	
 	TableRows = GetRows(Parameters, Parameters.TableName);
+	
+	If Parameters.IsFullRefill_SpecialOffers = True And Parameters.UseRowsForRecalculate = True Then
+		If Parameters.RowsForRecalculate.Count() = 0 Then  
+			Parameters.IsFullRefill_SpecialOffers = False;
+			Parameters.UseRowsForRecalculate = False;
+		EndIf;
+	EndIf;
 	
 	If Parameters.UseRowsForRecalculate Then
 		// Calculations when changed consignor batches or offers clear

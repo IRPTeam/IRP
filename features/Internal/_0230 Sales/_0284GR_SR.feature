@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Sales
@@ -46,8 +46,8 @@ Scenario: _028400 preparation (GR-SR)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -56,13 +56,13 @@ Scenario: _028400 preparation (GR-SR)
 		When filling in Tax settings for company
 	When Create document SalesInvoice objects
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document GoodsReceipt objects (check movements, transaction type - return from customers)
 	When Create document GoodsReceipt objects (creation based on, without PO and PI)
 	And I execute 1C:Enterprise script at server
-		| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"  |
+		| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: _0284001 check preparation
 	When check preparation
@@ -76,36 +76,36 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 	* Filling in main info
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'|
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'     |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 	* Filling in items info
 		And I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -113,13 +113,13 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -127,8 +127,8 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I move to "Other" tab
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table		
 		And I click "Post" button
 		And I delete "$$GoodsReceipt028401$$" variable
@@ -140,28 +140,28 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 	* Check RowID tab
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1GoodsReceipt028401$$" variable
 		And I save the current field value as "$$Rov1GoodsReceipt028401$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov2GoodsReceipt028401$$" variable
 		And I save the current field value as "$$Rov2GoodsReceipt028401$$"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                    |
-			| '1' | '$$Rov1GoodsReceipt028401$$' | ''      | '$$Rov1GoodsReceipt028401$$' | 'SR'        | '1,000' | ''          | ''             | '$$Rov1GoodsReceipt028401$$' |
-			| '2' | '$$Rov2GoodsReceipt028401$$' | ''      | '$$Rov2GoodsReceipt028401$$' | 'SR'        | '1,000' | ''          | ''             | '$$Rov2GoodsReceipt028401$$' |
+			| '#'   | 'Key'                          | 'Basis'   | 'Row ID'                       | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                       |
+			| '1'   | '$$Rov1GoodsReceipt028401$$'   | ''        | '$$Rov1GoodsReceipt028401$$'   | 'SR'          | '1,000'      | ''            | ''               | '$$Rov1GoodsReceipt028401$$'    |
+			| '2'   | '$$Rov2GoodsReceipt028401$$'   | ''        | '$$Rov2GoodsReceipt028401$$'   | 'SR'          | '1,000'      | ''            | ''               | '$$Rov2GoodsReceipt028401$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I close current window
 	* Create SR
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number'             |
-			| '$$NumberGoodsReceipt028401$$' |
+			| 'Number'                          |
+			| '$$NumberGoodsReceipt028401$$'    |
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
@@ -171,12 +171,12 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' |
-			| 'Trousers' | '38/Yellow' | '2,000' | 'pcs'  |
+			| 'Item'       | 'Item key'    | 'Quantity'   | 'Unit'    |
+			| 'Trousers'   | '38/Yellow'   | '2,000'      | 'pcs'     |
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                      |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
@@ -184,26 +184,26 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 			And I select current line in "ItemList" table
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I go to line in "" table
-				| ''              |
-				| 'Sales invoice' |
+				| ''                  |
+				| 'Sales invoice'     |
 			And I select current line in "" table
 			And I go to line in "List" table
-				| 'Amount' | 'Company'      | 'Currency' | 'Date'                | 'Legal name'      | 'Partner' |
-				| '800,00' | 'Main Company' | 'TRY'      | '07.10.2020 01:19:02' | 'Company Kalipso' | 'Kalipso' |
+				| 'Amount'    | 'Company'         | 'Currency'    | 'Date'                   | 'Legal name'         | 'Partner'     |
+				| '800,00'    | 'Main Company'    | 'TRY'         | '07.10.2020 01:19:02'    | 'Company Kalipso'    | 'Kalipso'     |
 			And I select current line in "List" table			
 		And I click "Post" button
 		* Check Row ID tab
 			And I click "Show row key" button
 			And I go to line in "ItemList" table
-				| '#' |
-				| '1' |
+				| '#'     |
+				| '1'     |
 			And I activate "Key" field in "ItemList" table
 			And I delete "$$Rov1SalesReturn028401$$" variable
 			And I save the current field value as "$$Rov1SalesReturn028401$$"
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                       | 'Basis'                  | 'Row ID'                     | 'Next step' | 'Quantity'     | 'Basis key'                  | 'Current step' | 'Row ref'                    |
-				| '1' | '$$Rov1SalesReturn028401$$' | '$$GoodsReceipt028401$$' | '$$Rov1GoodsReceipt028401$$' | ''          | '1,000' | '$$Rov1GoodsReceipt028401$$' | 'SR'           | '$$Rov1GoodsReceipt028401$$' |
-				| '2' | '$$Rov1SalesReturn028401$$' | '$$GoodsReceipt028401$$' | '$$Rov2GoodsReceipt028401$$' | ''          | '1,000' | '$$Rov2GoodsReceipt028401$$' | 'SR'           | '$$Rov2GoodsReceipt028401$$' |
+				| '#'    | 'Key'                          | 'Basis'                     | 'Row ID'                        | 'Next step'    | 'Quantity'    | 'Basis key'                     | 'Current step'    | 'Row ref'                        |
+				| '1'    | '$$Rov1SalesReturn028401$$'    | '$$GoodsReceipt028401$$'    | '$$Rov1GoodsReceipt028401$$'    | ''             | '1,000'       | '$$Rov1GoodsReceipt028401$$'    | 'SR'              | '$$Rov1GoodsReceipt028401$$'     |
+				| '2'    | '$$Rov1SalesReturn028401$$'    | '$$GoodsReceipt028401$$'    | '$$Rov2GoodsReceipt028401$$'    | ''             | '1,000'       | '$$Rov2GoodsReceipt028401$$'    | 'SR'              | '$$Rov2GoodsReceipt028401$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I delete "$$SalesReturn028401$$" variable
 		And I delete "$$NumberSalesReturn028401$$" variable
@@ -218,13 +218,13 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 	* Save GR Row key 
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '125'|
+			| 'Number'    |
+			| '125'       |
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1GoodsReceipt28402$$" variable
 		And I save the current field value as "$$Rov1GoodsReceipt28402$$"
@@ -235,71 +235,71 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 	* Filling in main info
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'|
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'     |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'     |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, without VAT'     |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table	
 	* Add items
 		And I click the button named "AddBasisDocuments"
 		And "BasisesTree" table does not contain lines
-			| 'Row presentation'                           | 'Use'                                        |
-			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Goods receipt 12 dated 02.03.2021 12:16:02' |
+			| 'Row presentation'                             | 'Use'                                           |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02'   | 'Goods receipt 12 dated 02.03.2021 12:16:02'    |
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                            | 'Use' |
-			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | 'No'  |
+			| 'Row presentation'                              | 'Use'    |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32'   | 'No'     |
 		And I go to line in "BasisesTree" table
-			| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
+			| 'Quantity'   | 'Row presentation'   | 'Unit'   | 'Use'    |
+			| '2,000'      | 'Dress (XS/Blue)'    | 'pcs'    | 'No'     |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Save" button		
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | '2,000' | 'pcs'  | 'Store 02' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'       |
+			| 'Dress'   | 'XS/Blue'    | '2,000'      | 'pcs'    | 'Store 02'    |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1SalesReturn28402$$" variable
 		And I save the current field value as "$$Rov1SalesReturn28402$$"
 		And in the table "ItemList" I click "Goods receipts" button
 		And "DocumentsTree" table became equal
-			| 'Presentation'                                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-			| 'Dress (XS/Blue)'                             | '2,000'   | '2,000'              | '2,000'    |
-			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000'              | '2,000'    |
+			| 'Presentation'                                  | 'Invoice'   | 'QuantityInDocument'   | 'Quantity'    |
+			| 'Dress (XS/Blue)'                               | '2,000'     | '2,000'                | '2,000'       |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32'   | ''          | '2,000'                | '2,000'       |
 		And I close current window
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
-			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |
+			| '#'   | 'Key'                        | 'Basis'                                         | 'Row ID'                      | 'Next step'   | 'Quantity'   | 'Basis key'                   | 'Current step'   | 'Row ref'                      |
+			| '1'   | '$$Rov1SalesReturn28402$$'   | 'Goods receipt 125 dated 12.03.2021 08:56:32'   | '$$Rov1GoodsReceipt28402$$'   | ''            | '2,000'      | '$$Rov1GoodsReceipt28402$$'   | 'SR'             | '$$Rov1GoodsReceipt28402$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Unlink line and check RowId tab
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I set checkbox "Linked documents"
 		And I go to line in "ResultsTree" table
-			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
+			| 'Quantity'   | 'Row presentation'   | 'Unit'    |
+			| '2,000'      | 'Dress (XS/Blue)'    | 'pcs'     |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Goods receipts" button
@@ -307,26 +307,26 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I close current window
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
-			| '1' | '$$Rov1SalesReturn28402$$' | ''      | '$$Rov1SalesReturn28402$$' | 'GR'        | '2,000' | ''          | ''             | '$$Rov1SalesReturn28402$$' |
+			| '#'   | 'Key'                        | 'Basis'   | 'Row ID'                     | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                     |
+			| '1'   | '$$Rov1SalesReturn28402$$'   | ''        | '$$Rov1SalesReturn28402$$'   | 'GR'          | '2,000'      | ''            | ''               | '$$Rov1SalesReturn28402$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Link line and check RowId tab
 		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "BasisesTree" table
-			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
+			| 'Quantity'   | 'Row presentation'   | 'Unit'    |
+			| '2,000'      | 'Dress (XS/Blue)'    | 'pcs'     |
 		And I click "Link" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Goods receipts" button
 		And "DocumentsTree" table became equal
-			| 'Presentation'                                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-			| 'Dress (XS/Blue)'                             | '2,000'   | '2,000'              | '2,000'    |
-			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000'              | '2,000'    |
+			| 'Presentation'                                  | 'Invoice'   | 'QuantityInDocument'   | 'Quantity'    |
+			| 'Dress (XS/Blue)'                               | '2,000'     | '2,000'                | '2,000'       |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32'   | ''          | '2,000'                | '2,000'       |
 		And I close current window
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
-			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |
+			| '#'   | 'Key'                        | 'Basis'                                         | 'Row ID'                      | 'Next step'   | 'Quantity'   | 'Basis key'                   | 'Current step'   | 'Row ref'                      |
+			| '1'   | '$$Rov1SalesReturn28402$$'   | 'Goods receipt 125 dated 12.03.2021 08:56:32'   | '$$Rov1GoodsReceipt28402$$'   | ''            | '2,000'      | '$$Rov1GoodsReceipt28402$$'   | 'SR'             | '$$Rov1GoodsReceipt28402$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 		

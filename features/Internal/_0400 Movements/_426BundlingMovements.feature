@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements2
@@ -56,15 +56,15 @@ Scenario: _042600 preparation (Bundling)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
 		When Create document Bundling objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.Bundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Bundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0426001 check preparation
 	When check preparation	
@@ -73,42 +73,42 @@ Scenario: _042601 check Bundling movements by the Register  "R4010 Actual stocks
 	* Select Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              | ''                              |
-			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              | ''                              |
-			| 'Register  "R4010 Actual stocks"'      | ''            | ''                    | ''          | ''           | ''                              | ''                              |
-			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              | ''                              |
-			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      | 'Serial lot number'                      |
-			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' | '' |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       | ''                       |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        | ''                        |
+			| 'Bundling 1 dated 07.09.2020 18:20:57'   | ''              | ''                      | ''            | ''             | ''                                | ''                     |
+			| 'Document registrations records'         | ''              | ''                      | ''            | ''             | ''                                | ''                     |
+			| 'Register  "R4010 Actual stocks"'        | ''              | ''                      | ''            | ''             | ''                                | ''                     |
+			| ''                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                | ''                     |
+			| ''                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'                        | 'Serial lot number'    |
+			| ''                                       | 'Receipt'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | 'Bound Dress+Shirt/Dress+Shirt'   | ''                     |
+			| ''                                       | 'Expense'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | 'XS/Blue'                         | ''                     |
+			| ''                                       | 'Expense'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | '36/Red'                          | ''                     |
 		And I close all client application windows
 
 Scenario: _042602 check Bundling movements by the Register  "R4011 Free stocks"
 	* Select Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              |
-			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              |
-			| 'Register  "R4011 Free stocks"'        | ''            | ''                    | ''          | ''           | ''                              |
-			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              |
-			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      |
-			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        |		
+			| 'Bundling 1 dated 07.09.2020 18:20:57'   | ''              | ''                      | ''            | ''             | ''                                 |
+			| 'Document registrations records'         | ''              | ''                      | ''            | ''             | ''                                 |
+			| 'Register  "R4011 Free stocks"'          | ''              | ''                      | ''            | ''             | ''                                 |
+			| ''                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                 |
+			| ''                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'                         |
+			| ''                                       | 'Receipt'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | 'Bound Dress+Shirt/Dress+Shirt'    |
+			| ''                                       | 'Expense'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | 'XS/Blue'                          |
+			| ''                                       | 'Expense'       | '07.09.2020 18:20:57'   | '10'          | 'Store 01'     | '36/Red'                           |
 		And I close all client application windows
 
 
@@ -117,35 +117,35 @@ Scenario: _042630 Bundling clear posting/mark for deletion
 	* Select Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bundling 1 dated 07.09.2020 18:20:57' |
-			| 'Document registrations records'                    |
+			| 'Bundling 1 dated 07.09.2020 18:20:57'    |
+			| 'Document registrations records'          |
 		And I close current window
 	* Post Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -153,14 +153,14 @@ Scenario: _042630 Bundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bundling 1 dated 07.09.2020 18:20:57' |
-			| 'Document registrations records'                    |
+			| 'Bundling 1 dated 07.09.2020 18:20:57'    |
+			| 'Document registrations records'          |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -170,6 +170,6 @@ Scenario: _042630 Bundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows

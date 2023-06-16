@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements3
@@ -76,14 +76,14 @@ Scenario: _045400 preparation (CashStatement)
 		* Add plugin for discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
-					| "Description" |
-					| "DocumentDiscount" |
+					| "Description"           |
+					| "DocumentDiscount"      |
 				When add Plugin for document discount
 		* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
-					| "Description" |
-					| "TaxCalculateVAT_TR" |
+					| "Description"             |
+					| "TaxCalculateVAT_TR"      |
 				When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -91,44 +91,44 @@ Scenario: _045400 preparation (CashStatement)
 	* Load RetailSalesReceipt
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document RetailSalesReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load RetailReturnReceipt
 		When Create document RetailReturnReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document RetailReturnReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailReturnReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document BankReceipt objects (POS)
 		And I execute 1C:Enterprise script at server
-			| "Documents.BankReceipt.FindByNumber(1519).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(1519).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.BankReceipt.FindByNumber(1520).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(1520).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashStatement (payment by POS)
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashStatement.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashStatement.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 		
 Scenario: _0454001 check preparation
@@ -139,21 +139,21 @@ Scenario: _045401 check CashStatement movements by the Register  "R3010 Cash on 
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "R3010 Cash on hand"
 		And I click "Registrations report" button
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                     | ''                             | ''                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                     | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                     | ''                             | ''                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''         | ''                     | ''                             | 'Attributes'           |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | 'Expense'     | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
-			| ''                                            | 'Expense'     | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
-			| ''                                            | 'Expense'     | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |		
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'   | ''              | ''                      | ''            | ''               | ''                          | ''                                       | ''           | ''                       | ''                               | ''                        |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''               | ''                          | ''                                       | ''           | ''                       | ''                               | ''                        |
+			| 'Register  "R3010 Cash on hand"'                | ''              | ''                      | ''            | ''               | ''                          | ''                                       | ''           | ''                       | ''                               | ''                        |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                       | ''           | ''                       | ''                               | 'Attributes'              |
+			| ''                                              | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Account'                                | 'Currency'   | 'Transaction currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
+			| ''                                              | 'Expense'       | '23.06.2022 22:53:32'   | '34,24'       | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'USD'        | 'TRY'                    | 'Reporting currency'             | 'No'                      |
+			| ''                                              | 'Expense'       | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'TRY'        | 'TRY'                    | 'Local currency'                 | 'No'                      |
+			| ''                                              | 'Expense'       | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'TRY'        | 'TRY'                    | 'en description is empty'        | 'No'                      |
 		And I close all client application windows
 
 Scenario: _045402 check CashStatement movements by the Register  "Cash in transit"
@@ -161,21 +161,21 @@ Scenario: _045402 check CashStatement movements by the Register  "Cash in transi
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "Cash in transit"
 		And I click "Registrations report" button
 		And I select "Cash in transit" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''            | ''                    | ''          | ''             | ''                                            | ''                                     | ''                  | ''         | ''                             | ''                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                                            | ''                                     | ''                  | ''         | ''                             | ''                     |
-			| 'Register  "Cash in transit"'                 | ''            | ''                    | ''          | ''             | ''                                            | ''                                     | ''                  | ''         | ''                             | ''                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                            | ''                                     | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis document'                              | 'From account'                         | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | 'Receipt'     | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'POS account, Comission separate, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                            | 'Receipt'     | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'POS account, Comission separate, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                            | 'Receipt'     | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'POS account, Comission separate, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'   | ''              | ''                      | ''            | ''               | ''                                              | ''                                       | ''                    | ''           | ''                               | ''                        |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''               | ''                                              | ''                                       | ''                    | ''           | ''                               | ''                        |
+			| 'Register  "Cash in transit"'                   | ''              | ''                      | ''            | ''               | ''                                              | ''                                       | ''                    | ''           | ''                               | ''                        |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                              | ''                                       | ''                    | ''           | ''                               | 'Attributes'              |
+			| ''                                              | ''              | ''                      | 'Amount'      | 'Company'        | 'Basis document'                                | 'From account'                           | 'To account'          | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
+			| ''                                              | 'Receipt'       | '23.06.2022 22:53:32'   | '34,24'       | 'Main Company'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'   | 'USD'        | 'Reporting currency'             | 'No'                      |
+			| ''                                              | 'Receipt'       | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'   | 'TRY'        | 'Local currency'                 | 'No'                      |
+			| ''                                              | 'Receipt'       | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'   | 'TRY'        | 'en description is empty'        | 'No'                      |
 		And I close all client application windows
 
 Scenario: _045403 check CashStatement movements by the Register  "R3021 Cash in transit (incoming)"
@@ -183,21 +183,21 @@ Scenario: _045403 check CashStatement movements by the Register  "R3021 Cash in 
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "R3021 Cash in transit (incoming)"
 		And I click "Registrations report" button
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32'  | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                                     | ''                   | ''      | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                                     | ''                   | ''      | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                                     | ''                   | ''      | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''                             | ''         | ''                     | ''                                     | ''                   | ''      | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'                              | 'Receipting account' | 'Basis' | 'Deferred calculation' |
-			| ''                                             | 'Receipt'     | '23.06.2022 22:53:32' | '34,24'     | '3,42'       | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'POS account, Comission separate, TRY' | 'Bank account, TRY'  | ''      | 'No'                   |
-			| ''                                             | 'Receipt'     | '23.06.2022 22:53:32' | '200'       | '20'         | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'POS account, Comission separate, TRY' | 'Bank account, TRY'  | ''      | 'No'                   |
-			| ''                                             | 'Receipt'     | '23.06.2022 22:53:32' | '200'       | '20'         | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'POS account, Comission separate, TRY' | 'Bank account, TRY'  | ''      | 'No'                   |
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'    | ''              | ''                      | ''            | ''             | ''               | ''                          | ''                               | ''           | ''                       | ''                                       | ''                     | ''        | ''                        |
+			| 'Document registrations records'                 | ''              | ''                      | ''            | ''             | ''               | ''                          | ''                               | ''           | ''                       | ''                                       | ''                     | ''        | ''                        |
+			| 'Register  "R3021 Cash in transit (incoming)"'   | ''              | ''                      | ''            | ''             | ''               | ''                          | ''                               | ''           | ''                       | ''                                       | ''                     | ''        | ''                        |
+			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | ''             | 'Dimensions'     | ''                          | ''                               | ''           | ''                       | ''                                       | ''                     | ''        | 'Attributes'              |
+			| ''                                               | ''              | ''                      | 'Amount'      | 'Commission'   | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Account'                                | 'Receipting account'   | 'Basis'   | 'Deferred calculation'    |
+			| ''                                               | 'Receipt'       | '23.06.2022 22:53:32'   | '34,24'       | '3,42'         | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'    | ''        | 'No'                      |
+			| ''                                               | 'Receipt'       | '23.06.2022 22:53:32'   | '200'         | '20'           | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'    | ''        | 'No'                      |
+			| ''                                               | 'Receipt'       | '23.06.2022 22:53:32'   | '200'         | '20'           | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'POS account, Comission separate, TRY'   | 'Bank account, TRY'    | ''        | 'No'                      |
 		And I close all client application windows
 
 Scenario: _045404 check CashStatement movements by the Register  "R3035 Cash planning"
@@ -205,21 +205,21 @@ Scenario: _045404 check CashStatement movements by the Register  "R3035 Cash pla
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "R3035 Cash planning"
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                    | ''          | ''             | ''                        | ''                                            | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
-			| 'Document registrations records'              | ''                    | ''          | ''             | ''                        | ''                                            | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
-			| 'Register  "R3035 Cash planning"'             | ''                    | ''          | ''             | ''                        | ''                                            | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
-			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                            | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | 'Attributes'           |
-			| ''                                            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Basis document'                              | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
-			| ''                                            | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Distribution department' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'Cash desk №1' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | ''                        | ''                | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'Cash desk №1' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | ''                        | ''                | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'Cash statement 11 dated 23.06.2022 22:53:32' | 'Cash desk №1' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | ''                        | ''                | 'No'                   |		
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'   | ''                      | ''            | ''               | ''                          | ''                                              | ''               | ''           | ''                      | ''          | ''             | ''                               | ''                          | ''                  | ''                        |
+			| 'Document registrations records'                | ''                      | ''            | ''               | ''                          | ''                                              | ''               | ''           | ''                      | ''          | ''             | ''                               | ''                          | ''                  | ''                        |
+			| 'Register  "R3035 Cash planning"'               | ''                      | ''            | ''               | ''                          | ''                                              | ''               | ''           | ''                      | ''          | ''             | ''                               | ''                          | ''                  | ''                        |
+			| ''                                              | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                              | ''               | ''           | ''                      | ''          | ''             | ''                               | ''                          | ''                  | 'Attributes'              |
+			| ''                                              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Basis document'                                | 'Account'        | 'Currency'   | 'Cash flow direction'   | 'Partner'   | 'Legal name'   | 'Multi currency movement type'   | 'Financial movement type'   | 'Planning period'   | 'Deferred calculation'    |
+			| ''                                              | '23.06.2022 22:53:32'   | '34,24'       | 'Main Company'   | 'Distribution department'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'Cash desk №1'   | 'USD'        | 'Incoming'              | ''          | ''             | 'Reporting currency'             | ''                          | ''                  | 'No'                      |
+			| ''                                              | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'Cash desk №1'   | 'TRY'        | 'Incoming'              | ''          | ''             | 'Local currency'                 | ''                          | ''                  | 'No'                      |
+			| ''                                              | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'Cash statement 11 dated 23.06.2022 22:53:32'   | 'Cash desk №1'   | 'TRY'        | 'Incoming'              | ''          | ''             | 'en description is empty'        | ''                          | ''                  | 'No'                      |
 		And I close all client application windows
 
 Scenario: _045405 check absence CashStatement movements by the Register "R3050 Pos cash balances"
@@ -227,14 +227,14 @@ Scenario: _045405 check absence CashStatement movements by the Register "R3050 P
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "R3050 Pos cash balances" 
 		And I click "Registrations report" button
 		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
-			| 'R3050 Pos cash balances'   | 
+			| 'R3050 Pos cash balances'    |
 	And I close all client application windows
 
 
@@ -243,21 +243,21 @@ Scenario: _045406 check CashStatement movements by the Register  "R3011 Cash flo
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Check movements by the Register  "R3011 Cash flow"
 		And I click "Registrations report" button
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| 'Document registrations records'              | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| 'Register  "R3011 Cash flow"'                 | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
-			| ''                                            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'Outgoing'  | ''                        | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'   | ''                      | ''            | ''               | ''                          | ''                                       | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
+			| 'Document registrations records'                | ''                      | ''            | ''               | ''                          | ''                                       | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
+			| 'Register  "R3011 Cash flow"'                   | ''                      | ''            | ''               | ''                          | ''                                       | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
+			| ''                                              | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                       | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
+			| ''                                              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Account'                                | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
+			| ''                                              | '23.06.2022 22:53:32'   | '34,24'       | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'Outgoing'    | ''                          | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
+			| ''                                              | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'Outgoing'    | ''                          | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
+			| ''                                              | '23.06.2022 22:53:32'   | '200'         | 'Main Company'   | 'Distribution department'   | 'POS account, Comission separate, TRY'   | 'Outgoing'    | ''                          | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
 		And I close all client application windows
 
 Scenario: _045430 Cash statement clear posting/mark for deletion
@@ -265,35 +265,35 @@ Scenario: _045430 Cash statement clear posting/mark for deletion
 	* Select CashStatement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' |
-			| 'Document registrations records'              |
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'    |
+			| 'Document registrations records'                 |
 		And I close current window
 	* Post Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R3010 Cash on hand' |
-			| 'R3021 Cash in transit (incoming)' |
+			| 'R3010 Cash on hand'                  |
+			| 'R3021 Cash in transit (incoming)'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -301,14 +301,14 @@ Scenario: _045430 Cash statement clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' |
-			| 'Document registrations records'                    |
+			| 'Cash statement 11 dated 23.06.2022 22:53:32'    |
+			| 'Document registrations records'                 |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '11' |
+			| 'Number'    |
+			| '11'        |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -318,6 +318,6 @@ Scenario: _045430 Cash statement clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R3010 Cash on hand' |
-			| 'R3021 Cash in transit (incoming)' |
+			| 'R3010 Cash on hand'                  |
+			| 'R3021 Cash in transit (incoming)'    |
 		And I close all client application windows

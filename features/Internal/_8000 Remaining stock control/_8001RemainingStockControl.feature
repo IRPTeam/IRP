@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @StockControl
@@ -66,8 +66,8 @@ Scenario:_800000 preparation (remaining stock control)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)	
 	* Tax settings
@@ -76,19 +76,19 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create information register UserSettings records (remaining stock control)
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice31004$$"|
+				| "Number"                             |
+				| "$$NumberPurchaseInvoice31004$$"     |
 				When create purchase invoice without order (Vendor Ferron, USD, store 01)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "1"|
+				| "Number"     |
+				| "1"          |
 			When Create document OpeningEntry objects (stock)
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 			And I click "Refresh" button
 			And I go to line in "List" table
-				| 'Number' |
-				| '1'   |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click "Post" button
 	* Load documents
 		When Create document OpeningEntry objects (stock control serial lot numbers)
@@ -110,58 +110,58 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document PurchaseInvoice objects (stock control serial lot numbers)
 		When Create document PurchaseInvoice objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.PurchaseInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document GoodsReceipt objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.GoodsReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.GoodsReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document InventoryTransfer objects (stock control)
 		When Create document InventoryTransfer objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransfer.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document ItemStockAdjustment objects (stock control)
 		When Create document ItemStockAdjustment objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.ItemStockAdjustment.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.ItemStockAdjustment.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ItemStockAdjustment.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.ItemStockAdjustment.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document PhysicalInventory objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PhysicalInventory.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PhysicalInventory.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document RetailReturnReceipt objects (stock control)
 		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesOrder objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(252).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(252).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesOrderClosing objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrderClosing.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrderClosing.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesReturn objects (stock control)
 		When Create document SalesReturn objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document StockAdjustmentAsSurplus objects (stock control)
 		And I execute 1C:Enterprise script at server
-			| "Documents.StockAdjustmentAsSurplus.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesInvoiceobjects (stock control serial lot numbers)
 		When Create document SalesInvoice objects (stock control)
 		And I close all client application windows
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document PurchaseInvoice objects (for materials)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create information register UserSettings records (Retail document)
 		When create SalesInvoice and StockAdjustmentAsSurplus (stock control)
 	When create payment terminal
@@ -181,40 +181,40 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -223,15 +223,15 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -240,15 +240,15 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Check remaining stock control (store does not use SC and GR)
@@ -260,8 +260,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -273,8 +273,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -286,8 +286,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
+				| 'Description'     |
+				| 'Store 07'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -298,15 +298,15 @@ Scenario:_800005 check remaining stock control in the Sales order
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change procurement (purchase and cancel) and check remaining stock control
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Procurement method" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I click the button named "FormPost"
@@ -314,15 +314,15 @@ Scenario:_800005 check remaining stock control in the Sales order
 			Then user message window does not contain messages
 		* Change procurement back and set checkbox SC before SI
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Procurement method" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to "Other" tab	
@@ -342,40 +342,40 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -384,15 +384,15 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -401,15 +401,15 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Check remaining stock control (store does not use SC and GR)
@@ -421,8 +421,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -436,8 +436,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
+				| 'Description'     |
+				| 'Store 07'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -448,15 +448,15 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice1$$"
@@ -474,28 +474,28 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -503,8 +503,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 1 with SLN' |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
@@ -512,8 +512,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I activate field named "ItemKey" in "List" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -521,8 +521,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner' | 'Reference'  | 'Serial number' |
-			| 'PZU'   | '8908899879' | '8908899879'    |
+			| 'Owner'   | 'Reference'    | 'Serial number'    |
+			| 'PZU'     | '8908899879'   | '8908899879'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "25,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -531,8 +531,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '13'   | 'PZU'   | '8908899877' | '8908899877'    |
+			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
+			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -589,40 +589,40 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -631,15 +631,15 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -648,15 +648,15 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Filling in payments tab
@@ -664,8 +664,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Account" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Transit Main' |
+				| 'Description'      |
+				| 'Transit Main'     |
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "335 600,00" text in "Amount" field of "Payments" table
@@ -679,8 +679,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -692,8 +692,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -705,8 +705,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
+				| 'Description'     |
+				| 'Store 07'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
@@ -717,15 +717,15 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -748,28 +748,28 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -777,8 +777,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 1 with SLN' |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
@@ -786,8 +786,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I activate field named "ItemKey" in "List" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -795,8 +795,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner' | 'Reference'  | 'Serial number' |
-			| 'PZU'   | '8908899879' | '8908899879'    |
+			| 'Owner'   | 'Reference'    | 'Serial number'    |
+			| 'PZU'     | '8908899879'   | '8908899879'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -805,8 +805,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '13'   | 'PZU'   | '8908899877' | '8908899877'    |
+			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
+			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -844,8 +844,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I go to line in "SerialLotNumbers" table
-			| 'Quantity' | 'Serial lot number' |
-			| '4,000'    | '8908899877'        |
+			| 'Quantity'   | 'Serial lot number'    |
+			| '4,000'      | '8908899877'           |
 		And I select current line in "SerialLotNumbers" table
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
@@ -865,36 +865,36 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And I click the button named "FormCreate"
 			And I click Select button of "Item bundle" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf + Dress'   |
+				| 'Description'       |
+				| 'Scarf + Dress'     |
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'pcs' |
+				| 'Description'     |
+				| 'pcs'             |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I input "1,000" text in the field named "Quantity"			
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -902,15 +902,15 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -919,15 +919,15 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -941,8 +941,8 @@ Scenario:_800014 check remaining stock control in the Bundling
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -953,8 +953,8 @@ Scenario:_800014 check remaining stock control in the Bundling
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -965,8 +965,8 @@ Scenario:_800014 check remaining stock control in the Bundling
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
+				| 'Description'     |
+				| 'Store 07'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -976,15 +976,15 @@ Scenario:_800014 check remaining stock control in the Bundling
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberBundling1$$"
@@ -1001,52 +1001,52 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormCreate"	
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shop 01'     |
+				| 'Description'     |
+				| 'Shop 01'         |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table		
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1054,46 +1054,46 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I finish line editing in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shop 01'     |
+				| 'Description'     |
+				| 'Shop 01'         |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table	
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shop 01'     |
+				| 'Description'     |
+				| 'Shop 01'         |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table	
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Turkish lira' |
+				| 'Description'      |
+				| 'Turkish lira'     |
 			And I select current line in "List" table			
 		* Check remaining stock control (store does not use SC and GR)
 			And I click the button named "FormPost"
@@ -1104,8 +1104,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -1116,8 +1116,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -1128,8 +1128,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
+				| 'Description'     |
+				| 'Store 07'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click the button named "FormPost"
@@ -1139,15 +1139,15 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff1$$"
@@ -1164,28 +1164,28 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And I click the button named "FormCreate"	
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table	
 		* Add items
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			Then "Items" window is opened
 			And I go to line in "List" table
-				| 'Description'        | 'Reference'          |
-				| 'Product 1 with SLN' | 'Product 1 with SLN' |
+				| 'Description'           | 'Reference'              |
+				| 'Product 1 with SLN'    | 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1194,8 +1194,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'  | 'Serial number' |
-				| 'PZU'   | '8908899879' | '8908899879'    |
+				| 'Owner'    | 'Reference'     | 'Serial number'     |
+				| 'PZU'      | '8908899879'    | '8908899879'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1203,8 +1203,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'  | 'Serial number' |
-				| 'PZU'   | '8908899877' | '8908899877'    |
+				| 'Owner'    | 'Reference'     | 'Serial number'     |
+				| 'PZU'      | '8908899877'    | '8908899877'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1215,21 +1215,21 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And I activate "Profit loss center" field in "ItemList" table
 			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'          |
-				| 'Logistics department' |
+				| 'Description'              |
+				| 'Logistics department'     |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' | 'Is expense' | 'Is financial movement type' | 'Is revenue' |
-				| 'Expense'     | 'Yes'        | 'No'                         | 'No'         |
+				| 'Description'    | 'Is expense'    | 'Is financial movement type'    | 'Is revenue'     |
+				| 'Expense'        | 'Yes'           | 'No'                            | 'No'             |
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Turkish lira' |
+				| 'Description'      |
+				| 'Turkish lira'     |
 			And I select current line in "List" table	
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
@@ -1252,8 +1252,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I go to line in "SerialLotNumbers" table
-			| 'Quantity' | 'Serial lot number' |
-			| '4,000'    | '8908899877'        |
+			| 'Quantity'   | 'Serial lot number'    |
+			| '4,000'      | '8908899877'           |
 		And I select current line in "SerialLotNumbers" table
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
@@ -1273,40 +1273,40 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'   |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'DFC' |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Partner term vendor DFC' |
+				| 'Description'                 |
+				| 'Partner term vendor DFC'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'    |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1315,15 +1315,15 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1332,15 +1332,15 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table		
 		* Check remaining stock control (store does not use SC and GR)
@@ -1351,15 +1351,15 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseReturn1$$"
@@ -1376,28 +1376,28 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'   |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'DFC' |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Partner term vendor DFC' |
+			| 'Description'                |
+			| 'Partner term vendor DFC'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table								
 	* Add items
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1405,8 +1405,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 1 with SLN' |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
@@ -1414,8 +1414,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I activate field named "ItemKey" in "List" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1423,8 +1423,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner' | 'Reference'  | 'Serial number' |
-			| 'PZU'   | '8908899879' | '8908899879'    |
+			| 'Owner'   | 'Reference'    | 'Serial number'    |
+			| 'PZU'     | '8908899879'   | '8908899879'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1433,8 +1433,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '13'   | 'PZU'   | '8908899877' | '8908899877'    |
+			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
+			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1463,8 +1463,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I go to line in "SerialLotNumbers" table
-			| 'Quantity' | 'Serial lot number' |
-			| '4,000'    | '8908899877'        |
+			| 'Quantity'   | 'Serial lot number'    |
+			| '4,000'      | '8908899877'           |
 		And I select current line in "SerialLotNumbers" table
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
@@ -1485,35 +1485,35 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And I select "Sales" exact value from "Transaction type" drop-down list
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table		
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1522,15 +1522,15 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1539,15 +1539,15 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -1561,8 +1561,8 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I select current line in "List" table
 			And I click "Yes" button			
 			And I click the button named "FormPost"
@@ -1572,15 +1572,15 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'Dress/A-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Dress'    | 'Dress/A-8'     |
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation1$$"
@@ -1599,23 +1599,23 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I select "Sales" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table		
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 	* Add items
@@ -1623,8 +1623,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 1 with SLN' |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
@@ -1632,8 +1632,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I activate field named "ItemKey" in "List" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1641,8 +1641,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner' | 'Reference'  | 'Serial number' |
-			| 'PZU'   | '8908899879' | '8908899879'    |
+			| 'Owner'   | 'Reference'    | 'Serial number'    |
+			| 'PZU'     | '8908899879'   | '8908899879'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1651,8 +1651,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '13'   | 'PZU'   | '8908899877' | '8908899877'    |
+			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
+			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1677,8 +1677,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I go to line in "SerialLotNumbers" table
-			| 'Quantity' | 'Serial lot number' |
-			| '4,000'    | '8908899877'        |
+			| 'Quantity'   | 'Serial lot number'    |
+			| '4,000'      | '8908899877'           |
 		And I select current line in "SerialLotNumbers" table
 		And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
@@ -1699,8 +1699,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 	* Post Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I input current date and time in "Date" field
 		And I click the button named "FormPost"
@@ -1726,40 +1726,40 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'M/Brown'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/Brown'     |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
@@ -1772,8 +1772,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click "Cancel posting" button
 		Then "1C:Enterprise" window is opened
@@ -1781,8 +1781,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		Then I wait that in user messages the "Line No. [3] [Dress M/Brown] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 	* Change quantity in the Unbundling
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity' |
-			| 'Dress' | 'M/Brown'  | '2,000'    |
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Dress'   | 'M/Brown'    | '2,000'       |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -1791,8 +1791,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [3] [Dress M/Brown] R4011B_FreeStocks remaining: 20 . Required: 10 . Lacking: 10 ." substring will appear in 10 seconds
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'M/Brown'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/Brown'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
@@ -1803,40 +1803,40 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'M/Brown'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/Brown'     |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
@@ -1854,8 +1854,8 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -1864,8 +1864,8 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011B_FreeStocks remaining: 40 . Required: 0 . Lacking: 40 ." substring will appear in 10 seconds
 	* Try change quantity (less than in the SI)
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
@@ -1876,8 +1876,8 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 160 . Required: 128 . Lacking: 32 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1887,19 +1887,19 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -1913,8 +1913,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 	* Try unpost Stock adjustment as surplus (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Cancel posting" button
 		Then "1C:Enterprise" window is opened
@@ -1923,8 +1923,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 	* Try change quantity in StockAdjustmentAsSurplus (less than in the SI)
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1936,8 +1936,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string from StockAdjustmentAsSurplus and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1947,36 +1947,36 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I select current line in "List" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
+			| 'Description'    |
+			| 'Revenue'        |
 		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -1988,8 +1988,8 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 	* Try to post Physical inventory (no balance to write off)
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I input current date and time in "Date" field	
 		And I click the button named "FormPost"
@@ -2002,19 +2002,19 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 	* Post PI and GR for Store 05
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '25'   |
+			| 'Number'    |
+			| '25'        |
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '4'   |
+			| 'Number'    |
+			| '4'         |
 		And I click the button named "FormPost"
 	* Try to post Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPhysicalInventory1$$'   |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory1$$'    |
 		And I select current line in "List" table
 		And I input current date and time in "Date" field	
 		And I click the button named "FormPost"
@@ -2026,8 +2026,8 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 	* Try unpost Physical inventory (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2036,8 +2036,8 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 		Then I wait that in user messages the "Line No. [1] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 	* Try change quantity (less than in the SI)
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I activate "Phys. count" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Phys. count" field of "ItemList" table
@@ -2048,8 +2048,8 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -2059,19 +2059,19 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Phys. count" field in "ItemList" table
 		And I input "1,000" text in "Phys. count" field of "ItemList" table
@@ -2087,8 +2087,8 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2097,8 +2097,8 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 	* Try change quantity (less than in the SI)
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
@@ -2117,8 +2117,8 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
@@ -2134,19 +2134,19 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -2166,8 +2166,8 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 	* Try to post Inventory transfer order (no balance to write off), status Approved
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '200'   |
+			| 'Number'    |
+			| '200'       |
 		And I select current line in "List" table
 		And I input current date and time in "Date" field	
 		And I click the button named "FormPost"
@@ -2186,13 +2186,13 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 	* Change store and post Inventory transfer order with status Approved
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
@@ -2201,8 +2201,8 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		And I move to "Item list" tab
 		And I activate "Quantity" field in "ItemList" table
 		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key' |
-		| 'Shirt' | '36/Red' |
+		| 'Item'   | 'Item key'   |
+		| 'Shirt'  | '36/Red'     |
 		And I select current line in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -2213,38 +2213,38 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                      |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
@@ -2262,8 +2262,8 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		When in opened panel I select "Inventory transfer order 200*"
 		Then "Inventory transfer order * dated *" window is opened
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "ItemList" table
 		And I input "15,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -2277,8 +2277,8 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2287,8 +2287,8 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		Then I wait that in user messages the "Line No. [1] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 	* Try change quantity (less than in the SI)
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
@@ -2299,8 +2299,8 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 80 . Required: 48 . Lacking: 32 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -2310,19 +2310,19 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -2339,8 +2339,8 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 	* Trying to unpost Opening entry 
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2350,8 +2350,8 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 	* Trying to change quantity in the Opening entry (less than is posted SI)
 		And I move to "Inventory" tab
 		And I go to line in "Inventory" table
-			| 'Item' | 'Item key' | 'Quantity' | 'Store'    |
-			| 'Bag'  | 'ODS'      | '20,000'   | 'Store 03' |
+			| 'Item'   | 'Item key'   | 'Quantity'   | 'Store'       |
+			| 'Bag'    | 'ODS'        | '20,000'     | 'Store 03'    |
 		And I select current line in "Inventory" table
 		And I input "8,000" text in "Quantity" field of "Inventory" table
 		And I finish line editing in "Inventory" table
@@ -2363,13 +2363,13 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 	* Trying to delete string in the Opening entry (less than is posted SI)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I move to "Inventory" tab
 		And I go to line in "Inventory" table
-			| 'Item' | 'Item key' | 'Quantity' | 'Store'    |
-			| 'Bag'  | 'ODS'      | '20,000'   | 'Store 03' |
+			| 'Item'   | 'Item key'   | 'Quantity'   | 'Store'       |
+			| 'Bag'    | 'ODS'        | '20,000'     | 'Store 03'    |
 		And I select current line in "Inventory" table
 		And in the table "Inventory" I click the button named "InventoryContextMenuDelete"
 		And I click the button named "FormPost"
@@ -2380,28 +2380,28 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'   |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I move to "Inventory" tab
 		And I click "Add" button
 		And I select current line in "Inventory" table
 		And I click choice button of "Item" attribute in "Inventory" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "Inventory" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "Inventory" table
 		And I input "1,000" text in "Quantity" field of "Inventory" table
 		And I click choice button of "Store" attribute in "Inventory" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Store 04' |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -2414,15 +2414,15 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I click "Create" button
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Add first work
 		And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -2432,20 +2432,20 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Installation' |
+			| 'Description'     |
+			| 'Installation'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Furniture installation' |
+			| 'Description'               |
+			| 'Furniture installation'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
-			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+			| 'Item'         | 'Item (BOM)'   | 'Item key'     | 'Item key (BOM)'   | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | 'Material 1'   | 'Material 1'       | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I finish line editing in "Materials" table
@@ -2455,20 +2455,20 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
-			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+			| 'Item'         | 'Item (BOM)'   | 'Item key'     | 'Item key (BOM)'   | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | 'Material 1'   | 'Material 1'       | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I finish line editing in "Materials" table
@@ -2481,15 +2481,15 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I click "Create" button
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Add first work
 		And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -2499,20 +2499,20 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Installation' |
+			| 'Description'     |
+			| 'Installation'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Furniture installation' |
+			| 'Description'               |
+			| 'Furniture installation'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
-			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+			| 'Item'         | 'Item (BOM)'   | 'Item key'     | 'Item key (BOM)'   | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | 'Material 1'   | 'Material 1'       | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I finish line editing in "Materials" table
@@ -2522,34 +2522,34 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
-			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+			| 'Item'         | 'Item (BOM)'   | 'Item key'     | 'Item key (BOM)'   | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | 'Material 1'   | 'Material 1'       | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I move to "Other" tab
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code' |
-			| 'TRY'  |
+			| 'Code'    |
+			| 'TRY'     |
 		And I select current line in "List" table		
 	* Check stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Material 1 Material 1] R4010B_ActualStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
+			| 'Line No. [1] [Material 1 Material 1] R4010B_ActualStocks remaining: 10 . Required: 42 . Lacking: 32 .'    |
 		And I close all client application windows
 				
 
@@ -2560,20 +2560,20 @@ Scenario:_800052 check remaining stock control in the Work Order
 		And I click "Create" button
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I activate field named "MaterialsLineNumber" in "Materials" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                      |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table			
 	* Add first work
 		And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -2583,14 +2583,14 @@ Scenario:_800052 check remaining stock control in the Work Order
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Installation' |
+			| 'Description'     |
+			| 'Installation'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Furniture installation' |
+			| 'Description'               |
+			| 'Furniture installation'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
@@ -2599,8 +2599,8 @@ Scenario:_800052 check remaining stock control in the Work Order
 		And I finish line editing in "ItemList" table	
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item key'   | 'Quantity' |
-			| 'Material 1' | 'Material 1' | '2,000'    |
+			| 'Item'         | 'Item key'     | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I finish line editing in "Materials" table
@@ -2610,21 +2610,21 @@ Scenario:_800052 check remaining stock control in the Work Order
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
 		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Assembly' |
+			| 'Description'    |
+			| 'Assembly'       |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I activate field named "MaterialsQuantity" in "Materials" table
 		And I go to line in "Materials" table
-			| 'Item'       | 'Item key'   | 'Quantity' |
-			| 'Material 1' | 'Material 1' | '2,000'    |
+			| 'Item'         | 'Item key'     | 'Quantity'    |
+			| 'Material 1'   | 'Material 1'   | '2,000'       |
 		And I select current line in "Materials" table
 		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I select "Approved" exact value from the drop-down list named "Status"		
@@ -2633,7 +2633,7 @@ Scenario:_800052 check remaining stock control in the Work Order
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Material 1 Material 1] R4011B_FreeStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
+			| 'Line No. [1] [Material 1 Material 1] R4011B_FreeStocks remaining: 10 . Required: 42 . Lacking: 32 .'    |
 		And I close all client application windows
 
 
@@ -2642,8 +2642,8 @@ Scenario:_800055 check remaining stock control when unpost/change Sales order cl
 	* Trying to unpost 
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2656,8 +2656,8 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Cancel posting" button
 		Then "1C:Enterprise" window is opened
@@ -2674,8 +2674,8 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -2685,19 +2685,19 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'   |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table	
@@ -2708,12 +2708,12 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 Scenario:_800060 check remaining stock control serial lot number when unpost incoming documents
 	* Preparation
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Try unpost Opening entry 
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2724,8 +2724,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Try unpost Purchase invoice 
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2736,8 +2736,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Try unpost Stock Adjustment as surplus 
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2748,8 +2748,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Try unpost Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2760,8 +2760,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Try unpost Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2772,8 +2772,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Try unpost Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
+			| 'Number'    |
+			| '1 112'     |
 		And I select current line in "List" table
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
@@ -2787,8 +2787,8 @@ Scenario:_800062 checkmark removal control Stock balance detail in the Serial lo
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 	And I go to line in "List" table
-		| 'Serial number' |
-		| '8908899877'   |
+		| 'Serial number'   |
+		| '8908899877'      |
 	And I select current line in "List" table
 	And I remove checkbox "Stock balance detail"
 	And I click "Save and close" button
@@ -2800,8 +2800,8 @@ Scenario:_800070 check stock control in the Stock adjustment as surplus
 	And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
-			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"    |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79ea93fec1998ed11ee0a86b6ab2dc2"
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I click Open button of the field named "Store"
@@ -2829,7 +2829,7 @@ Scenario:_800070 check stock control in the Stock adjustment as surplus
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Chewing gum Mint/Mango] R4011B_FreeStocks remaining: 3 . Required: 2 . Lacking: 1 .'|
+			| 'Line No. [1] [Chewing gum Mint/Mango] R4011B_FreeStocks remaining: 3 . Required: 2 . Lacking: 1 .'    |
 		And I close all client application windows
 				
 
@@ -2837,8 +2837,8 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 	* Remove checkbox
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I remove checkbox "Negative stock control"
 		And I click "Save and close" button
@@ -2847,40 +2847,40 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
@@ -2893,8 +2893,8 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 	* Set checkbox and try to post SI
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I set checkbox "Negative stock control"
 		And I click "Save and close" button

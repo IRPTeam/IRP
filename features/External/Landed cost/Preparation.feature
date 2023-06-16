@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -43,15 +43,15 @@ Scenario: set True value to the constant (LC)
 Scenario: update tax settings (LC)
 	Given I open hyperlink "e1cib/list/Catalog.Taxes"
 	And I go to line in "List" table
-		| 'Description' |
-		| 'VAT' |
+		| 'Description'   |
+		| 'VAT'           |
 	And I select current line in "List" table
 	And I click "Settings" button
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I go to line in "List" table
-		| 'Description'      |
-		| 'SalesTax' |
+		| 'Description'   |
+		| 'SalesTax'      |
 	And I select current line in "List" table
 	And I click "Settings" button
 	And I click "Ok" button
@@ -65,8 +65,8 @@ Scenario: add Plugin for tax calculation (LC)
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 		And I go to line in "List" table
-			| 'Description' |
-			| 'TaxCalculateVAT_TR'         |
+			| 'Description'           |
+			| 'TaxCalculateVAT_TR'    |
 		And I select current line in "List" table
 		And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 		And I click the button named "FormAddExtDataProc"
@@ -82,13 +82,13 @@ Scenario: add Plugin for tax calculation (LC)
 		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'VAT'         |
+			| 'Description'    |
+			| 'VAT'            |
 		And I select current line in "List" table
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'TaxCalculateVAT_TR'         |
+			| 'Description'           |
+			| 'TaxCalculateVAT_TR'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	And I close all client application windows

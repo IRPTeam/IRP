@@ -1,4 +1,4 @@
-﻿
+
 #language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
@@ -32,8 +32,8 @@ Scenario: create setting to download the course (Forex Seling)
 		And I select "Currency rates" exact value from "Integration type" drop-down list
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'ExternalTCMBGovTr' |
+			| 'Description'          |
+			| 'ExternalTCMBGovTr'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 10

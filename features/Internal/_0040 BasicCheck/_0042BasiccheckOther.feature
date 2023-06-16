@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Test
@@ -19,8 +19,8 @@ Scenario: preparation
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "VAExtension" |
+				| "Description"     |
+				| "VAExtension"     |
 			When add VAExtension
 
 Scenario: Open information register form "AddProperties" 
@@ -297,14 +297,14 @@ Scenario: Open object form "DataHistory"
 	If the warning is displayed then
 		Then I raise "Failed to open data processor form Data history" exception
 	And "MetadataTree" table became equal
-		| 'Use' | 'Name'                        |
-		| 'No'  | 'Catalogs'                    |
-		| 'No'  | 'ChartsOfAccounts'            |
-		| 'No'  | 'ChartsOfCharacteristicTypes' |
-		| 'No'  | 'Constants'                   |
-		| 'No'  | 'Documents'                   |
-		| 'No'  | 'ExchangePlans'               |
-		| 'No'  | 'InformationRegisters'        |
+		| 'Use'  | 'Name'                          |
+		| 'No'   | 'Catalogs'                      |
+		| 'No'   | 'ChartsOfAccounts'              |
+		| 'No'   | 'ChartsOfCharacteristicTypes'   |
+		| 'No'   | 'Constants'                     |
+		| 'No'   | 'Documents'                     |
+		| 'No'   | 'ExchangePlans'                 |
+		| 'No'   | 'InformationRegisters'          |
 	And I close current window
 
 
@@ -761,10 +761,10 @@ Scenario: Open object form "Analise document movements"
 	And in the table "Info" I click "Fill movements" button
 	Then system warning window does not appear
 	And "Info" table contains lines
-		| 'Document'    | 'Register'                       | 
-		| 'BankPayment' | 'R1021B_VendorsTransactions'     | 
-		| 'BankPayment' | 'R5010B_ReconciliationStatement' | 
-		| 'BankPayment' | 'R1020B_AdvancesToVendors'       | 
+		| 'Document'     | 'Register'                         |
+		| 'BankPayment'  | 'R1021B_VendorsTransactions'       |
+		| 'BankPayment'  | 'R5010B_ReconciliationStatement'   |
+		| 'BankPayment'  | 'R1020B_AdvancesToVendors'         |
 	And I close all client application windows
 
 Scenario: Open object form "All registers movement"
@@ -779,7 +779,7 @@ Scenario: Open object form "All registers movement"
 Scenario: Open choise form "CustomUserSettings"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("ChartOfCharacteristicTypes.CustomUserSettings.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("ChartOfCharacteristicTypes.CustomUserSettings.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open ChartsOfCharacteristicTypes choise form CustomUserSettings" exception
 	And I close current window

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CompanyCatalogs
@@ -30,18 +30,18 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		And I input "TRY" text in the field named "Description_en"
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
+			| 'Code'   | 'Description'     |
+			| 'TRY'    | 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Forex Seling' |
+			| 'Description'     |
+			| 'Forex Seling'    |
 		And I select current line in "List" table
 		And I select "Partner term" exact value from "Type" drop-down list
 		And I click "Save and close" button
 	* Check data save
 		And "List" table contains lines
-		| 'Description'           | 'Type'         | 'Currency' | 'Reference'                | 'Source'       | 'Deferred calculation' |
-		| 'TRY'                   | 'Partner term' | 'TRY'      | 'TRY'                      | 'Forex Seling' | 'No'                   |
+		| 'Description'  | 'Type'          | 'Currency'  | 'Reference'  | 'Source'        | 'Deferred calculation'   |
+		| 'TRY'          | 'Partner term'  | 'TRY'       | 'TRY'        | 'Forex Seling'  | 'No'                     |
 		

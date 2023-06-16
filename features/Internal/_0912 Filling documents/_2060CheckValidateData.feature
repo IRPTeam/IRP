@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -68,8 +68,8 @@ Scenario: _0206000 preparation (checks data)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
@@ -77,8 +77,8 @@ Scenario: _0206000 preparation (checks data)
 		When Create Document discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
@@ -86,7 +86,7 @@ Scenario: _0206000 preparation (checks data)
 		When Create catalog Users objects
 		When Create document RetailSalesReceipt objects (wrong data)
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(8811).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailSalesReceipt.FindByNumber(8811).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document GoodsReceipt objects (wrong data)
 		When Create document InventoryTransfer (wrong data)
 		When Create document InventoryTransferOrder objects (wrong data)
@@ -104,8 +104,8 @@ Scenario: _0206002 сheck data verification in Retail sales receipt
 		And I click "Change option..." button
 		And I move to the tab named "FilterPage"
 		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
+			| 'Available fields'    |
+			| 'Document type'       |
 		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
 		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
 		And I select current line in "SettingsComposerSettingsFilter" table
@@ -115,13 +115,13 @@ Scenario: _0206002 сheck data verification in Retail sales receipt
 		And I click "Generate" button
 	* Check report
 		Then "Result" spreadsheet document is equal
-			| 'Data parameters:'                                     | 'Error list: '                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-			| 'Filter:'                                              | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Retail sales receipt"'                                                                                                                                                                                                                                                                                                                                             |
-			| ''                                                     | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-			| 'Document type'                                        | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-			| 'Reference'                                            | 'Status'                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-			| 'Retail sales receipt'                                 | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-			| 'Retail sales receipt 8 811 dated 07.03.2023 16:47:01' | 'Row: 1. Total amount minus net amount is not equal to tax amount\nRow: 1. Offers amount in item list is not equal to offers amount in offers list\nRow: 1. Not filled quantity in source of origins\nRow: 2. Tax amount in item list is not equal to tax amount in tax list\nRow: 2. Total amount minus net amount is not equal to tax amount\nRow: 2. Not filled quantity in source of origins\nRow: 3. Not filled quantity in source of origins' |	
+			| 'Data parameters:'                                       | 'Error list: '                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+			| 'Filter:'                                                | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Retail sales receipt"'                                                                                                                                                                                                                                                                                                                                                |
+			| ''                                                       | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+			| 'Document type'                                          | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+			| 'Reference'                                              | 'Status'                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+			| 'Retail sales receipt'                                   | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+			| 'Retail sales receipt 8 811 dated 07.03.2023 16:47:01'   | 'Row: 1. Total amount minus net amount is not equal to tax amount\nRow: 1. Offers amount in item list is not equal to offers amount in offers list\nRow: 1. Not filled quantity in source of origins\nRow: 2. Tax amount in item list is not equal to tax amount in tax list\nRow: 2. Total amount minus net amount is not equal to tax amount\nRow: 2. Not filled quantity in source of origins\nRow: 3. Not filled quantity in source of origins'    |
 		And I close all client application windows
 
 Scenario: _0206003 сheck data verification in Goods receipt
@@ -137,11 +137,11 @@ Scenario: _0206003 сheck data verification in Goods receipt
 	* Check report
 		Then "Fix document problems" window is opened
 		And I expand a line in "CheckList" table
-			| 'Date'                | 'Fixed' | 'Line number' | 'Ref'                                           |
-			| '10.03.2023 15:43:56' | 'No'    | '1'           | 'Goods receipt 8 811 dated 10.03.2023 15:43:56' |
+			| 'Date'                  | 'Fixed'   | 'Line number'   | 'Ref'                                              |
+			| '10.03.2023 15:43:56'   | 'No'      | '1'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |
 		And I go to line in "CheckList" table
-			| 'Date'                | 'Error ID'                                | 'Fixed' | 'Line number' | 'Ref'                                           |
-			| '10.03.2023 15:43:56' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | 'No'    | '1'           | 'Goods receipt 8 811 dated 10.03.2023 15:43:56' |
+			| 'Date'                  | 'Error ID'                                  | 'Fixed'   | 'Line number'   | 'Ref'                                              |
+			| '10.03.2023 15:43:56'   | 'ErrorQuantityNotEqualQuantityInBaseUnit'   | 'No'      | '1'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |
 		And I activate "Error ID" field in "CheckList" table	
 	And I close all client application windows	
 
@@ -158,19 +158,19 @@ Scenario: _0206004 сheck data verification in Inventory transfer
 	* Check report
 		Then "Fix document problems" window is opened
 		And I expand a line in "CheckList" table
-			| 'Ref'                                           |
-			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' |
+			| 'Ref'                                                   |
+			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'    |
 		And "CheckList" table contains lines
-			| 'Fixed' | 'Date'                | 'Ref'                                                | 'Error ID'                                              | 'Line number' | 'Problem while quick fix' |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | ''                                                      | '8'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorQuantityIsZero'                                   | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorQuantityNotEqualQuantityInBaseUnit'               | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorItemNotEqualItemInItemKey'                        | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorUseSerialButSerialNotSet'                         | '2'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotTheSameQuantityInSerialListTableAndInItemList' | '2'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '2'           | ''                        |
-			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '3'           | ''                        |
+			| 'Fixed'   | 'Date'                  | 'Ref'                                                  | 'Error ID'                                                | 'Line number'   | 'Problem while quick fix'    |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | ''                                                        | '8'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorQuantityIsZero'                                     | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorQuantityNotEqualQuantityInBaseUnit'                 | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorItemNotEqualItemInItemKey'                          | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorNotFilledQuantityInSourceOfOrigins'                 | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorUseSerialButSerialNotSet'                           | '2'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorNotTheSameQuantityInSerialListTableAndInItemList'   | '2'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorNotFilledQuantityInSourceOfOrigins'                 | '2'             | ''                           |
+			| 'No'      | '10.03.2023 17:06:48'   | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'   | 'ErrorNotFilledQuantityInSourceOfOrigins'                 | '3'             | ''                           |
 	And I close all client application windows	
 				
 Scenario: _0206005 сheck data verification in Inventory transfer order
@@ -185,16 +185,16 @@ Scenario: _0206005 сheck data verification in Inventory transfer order
 	* Check report
 		Then "Fix document problems" window is opened
 		And I expand a line in "CheckList" table
-			| 'Ref'                                           |
-			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' |
+			| 'Ref'                                                         |
+			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'    |
 	* Check report
 		And "CheckList" table contains lines
-			| 'Fixed' | 'Date'                | 'Ref'                                                      | 'Error ID'                                | 'Line number' | 'Problem while quick fix' |
-			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | ''                                        | '4'           | ''                        |
-			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityInBaseUnitIsZero'           | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityInBaseUnitIsZero'           | '2'           | ''                        |
-			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | '2'           | ''                        |	
+			| 'Fixed'   | 'Date'                  | 'Ref'                                                        | 'Error ID'                                  | 'Line number'   | 'Problem while quick fix'    |
+			| 'No'      | '10.03.2023 17:20:12'   | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'   | ''                                          | '4'             | ''                           |
+			| 'No'      | '10.03.2023 17:20:12'   | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'   | 'ErrorQuantityInBaseUnitIsZero'             | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:20:12'   | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'   | 'ErrorQuantityNotEqualQuantityInBaseUnit'   | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:20:12'   | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'   | 'ErrorQuantityInBaseUnitIsZero'             | '2'             | ''                           |
+			| 'No'      | '10.03.2023 17:20:12'   | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'   | 'ErrorQuantityNotEqualQuantityInBaseUnit'   | '2'             | ''                           |
 	And I close all client application windows	
 
 Scenario: _0206006 сheck data verification in Internal supply request
@@ -210,14 +210,14 @@ Scenario: _0206006 сheck data verification in Internal supply request
 	* Check report
 		Then "Fix document problems" window is opened
 		And I expand a line in "CheckList" table
-			| 'Ref'                                                     |
-			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' |
+			| 'Ref'                                                        |
+			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29'    |
 	* Check report
 		And "CheckList" table contains lines
-			| 'Fixed' | 'Date'                | 'Ref'                                                     | 'Error ID'                      | 'Line number' | 'Problem while quick fix' |
-			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | ''                              | '2'           | ''                        |
-			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'ErrorQuantityIsZero'           | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'ErrorQuantityInBaseUnitIsZero' | '1'           | ''                        |	
+			| 'Fixed'   | 'Date'                  | 'Ref'                                                       | 'Error ID'                        | 'Line number'   | 'Problem while quick fix'    |
+			| 'No'      | '10.03.2023 17:24:29'   | 'Internal supply request 8 811 dated 10.03.2023 17:24:29'   | ''                                | '2'             | ''                           |
+			| 'No'      | '10.03.2023 17:24:29'   | 'Internal supply request 8 811 dated 10.03.2023 17:24:29'   | 'ErrorQuantityIsZero'             | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:24:29'   | 'Internal supply request 8 811 dated 10.03.2023 17:24:29'   | 'ErrorQuantityInBaseUnitIsZero'   | '1'             | ''                           |
 	And I close all client application windows
 
 
@@ -234,15 +234,15 @@ Scenario: _0206007 сheck data verification in Sales order
 	* Check report
 		Then "Fix document problems" window is opened
 		And I expand a line in "CheckList" table
-			| 'Ref'                                         |
-			| 'Sales order 8 811 dated 10.03.2023 17:32:00' |
+			| 'Ref'                                            |
+			| 'Sales order 8 811 dated 10.03.2023 17:32:00'    |
 	* Check report
 		And "CheckList" table contains lines
-			| 'Fixed' | 'Date'                | 'Ref'                                         | 'Error ID'                                        | 'Line number' | 'Problem while quick fix' |
-			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | ''                                                | '4'           | ''                        |
-			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorQuantityInItemListNotEqualQuantityInRowID'  | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorNetAmountGreaterTotalAmount'                | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorTotalAmountMinusNetAmountNotEqualTaxAmount' | '1'           | ''                        |
-			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorQuantityInItemListNotEqualQuantityInRowID'  | '2'           | ''                        |	
+			| 'Fixed'   | 'Date'                  | 'Ref'                                           | 'Error ID'                                          | 'Line number'   | 'Problem while quick fix'    |
+			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | ''                                                  | '4'             | ''                           |
+			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorQuantityInItemListNotEqualQuantityInRowID'    | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorNetAmountGreaterTotalAmount'                  | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorTotalAmountMinusNetAmountNotEqualTaxAmount'   | '1'             | ''                           |
+			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorQuantityInItemListNotEqualQuantityInRowID'    | '2'             | ''                           |
 	And I close all client application windows	
 

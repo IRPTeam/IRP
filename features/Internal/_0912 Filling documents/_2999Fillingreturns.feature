@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -55,8 +55,8 @@ Scenario: _0299900 preparation (check filling in and refilling returns)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -77,23 +77,23 @@ Scenario: _299901 check filling in and refilling Sales return order
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Nicoletta'         |
+			| 'Description'    |
+			| 'Nicoletta'      |
 		And I select current line in "List" table
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
 		* Change company in Sales return order
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
+				| 'Description'        |
+				| 'Second Company'     |
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
@@ -106,8 +106,8 @@ Scenario: _299901 check filling in and refilling Sales return order
 		* Re-select partner
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 		* Check clearing fields
 			Then the form attribute named "Agreement" became equal to ""
@@ -116,8 +116,8 @@ Scenario: _299901 check filling in and refilling Sales return order
 		* Select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
+				| 'Description'                          |
+				| 'Basic Partner terms, without VAT'     |
 			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -126,64 +126,64 @@ Scenario: _299901 check filling in and refilling Sales return order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
+			| 'Description'    |
+			| 'Router'         |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
-			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
+			| 'Item'     | 'Item key'   | 'Unit'   | 'Store'       |
+			| 'Router'   | 'Router'     | 'pcs'    | 'Store 02'    |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 02' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Unit'    | 'Store'        |
+				| 'Trousers'    | '500,00'    | '38/Yellow'    | '1,000'       | 'pcs'     | 'Store 02'     |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 02' |
+			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '500,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 02'    |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I delete a line in "ItemList" table
 		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 	* Add line
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -197,23 +197,23 @@ Scenario: _299902 check filling in and refilling Sales return
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Nicoletta'         |
+			| 'Description'    |
+			| 'Nicoletta'      |
 		And I select current line in "List" table
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
 		* Change company in Sales return order
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
+				| 'Description'        |
+				| 'Second Company'     |
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
@@ -226,8 +226,8 @@ Scenario: _299902 check filling in and refilling Sales return
 		* Re-select partner
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 		* Check clearing fields
 			Then the form attribute named "Agreement" became equal to ""
@@ -236,8 +236,8 @@ Scenario: _299902 check filling in and refilling Sales return
 		* Select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
+				| 'Description'                          |
+				| 'Basic Partner terms, without VAT'     |
 			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -246,25 +246,25 @@ Scenario: _299902 check filling in and refilling Sales return
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
+			| 'Description'    |
+			| 'Router'         |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
-			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
+			| 'Item'     | 'Item key'   | 'Unit'   | 'Store'       |
+			| 'Router'   | 'Router'     | 'pcs'    | 'Store 02'    |
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -273,45 +273,45 @@ Scenario: _299902 check filling in and refilling Sales return
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Unit'    | 'Store'        |
+				| 'Trousers'    | '400,00'    | '38/Yellow'    | '1,000'       | 'pcs'     | 'Store 01'     |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
+			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 01'    |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I delete a line in "ItemList" table
 		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 	* Add line
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -324,23 +324,23 @@ Scenario: _299903 check filling in and refilling Purchase return order
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas'         |
+			| 'Description'    |
+			| 'Veritas'        |
 		And I select current line in "List" table
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
 		* Change company in Purchase return order
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
+				| 'Description'        |
+				| 'Second Company'     |
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
@@ -354,7 +354,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 			And I click Select button of "Partner" field
 			And I click "List" button			
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Partner Kalipso'     |
 			And I select current line in "List" table
 		* Check clearing fields
@@ -364,8 +364,8 @@ Scenario: _299903 check filling in and refilling Purchase return order
 		* Select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Partner Kalipso Vendor' |
+				| 'Description'                |
+				| 'Partner Kalipso Vendor'     |
 			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -374,25 +374,25 @@ Scenario: _299903 check filling in and refilling Purchase return order
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
+			| 'Description'    |
+			| 'Router'         |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
-			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
+			| 'Item'     | 'Item key'   | 'Unit'   | 'Store'       |
+			| 'Router'   | 'Router'     | 'pcs'    | 'Store 02'    |
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -401,45 +401,45 @@ Scenario: _299903 check filling in and refilling Purchase return order
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Partner term vendor Partner Kalipso' |
+				| 'Description'                             |
+				| 'Partner term vendor Partner Kalipso'     |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Unit'    | 'Store'        |
+				| 'Trousers'    | '400,00'    | '38/Yellow'    | '1,000'       | 'pcs'     | 'Store 03'     |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
+			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 03'    |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I delete a line in "ItemList" table
 		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 	* Add line
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -452,23 +452,23 @@ Scenario: _299904 check filling in and refilling Purchase return
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas'         |
+			| 'Description'    |
+			| 'Veritas'        |
 		And I select current line in "List" table
 		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
 		* Change company in Purchase return
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
+				| 'Description'        |
+				| 'Second Company'     |
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
@@ -481,7 +481,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 		* Re-select partner
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Partner Kalipso'     |
 			And I select current line in "List" table
 		* Check clearing fields
@@ -491,8 +491,8 @@ Scenario: _299904 check filling in and refilling Purchase return
 		* Select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Partner Kalipso Vendor' |
+				| 'Description'                |
+				| 'Partner Kalipso Vendor'     |
 			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -501,25 +501,25 @@ Scenario: _299904 check filling in and refilling Purchase return
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
+			| 'Description'    |
+			| 'Router'         |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
-			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
+			| 'Item'     | 'Item key'   | 'Unit'   | 'Store'       |
+			| 'Router'   | 'Router'     | 'pcs'    | 'Store 02'    |
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -528,45 +528,45 @@ Scenario: _299904 check filling in and refilling Purchase return
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Partner term vendor Partner Kalipso' |
+				| 'Description'                             |
+				| 'Partner term vendor Partner Kalipso'     |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Unit'    | 'Store'        |
+				| 'Trousers'    | '400,00'    | '38/Yellow'    | '1,000'       | 'pcs'     | 'Store 03'     |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
+			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '400,00'   | 'Trousers'   | '*'     | '38/Yellow'   | '*'            | '1,000'      | 'pcs'    | '*'            | '*'              | 'Store 03'    |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		If "ItemList" table does not contain "VAT" column Then
 	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I delete a line in "ItemList" table
 		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 	* Add line
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table

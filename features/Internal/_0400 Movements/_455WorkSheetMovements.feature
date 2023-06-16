@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements3
@@ -59,8 +59,8 @@ Scenario: _045501 preparation (work sheet movements)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -69,27 +69,27 @@ Scenario: _045501 preparation (work sheet movements)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 		When Create catalog CancelReturnReasons objects
 	* Load documents
 		When Create document SO-WO-WS-SI
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);" |
-			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create WO and WS (with no reserve)
 		And I execute 1C:Enterprise script at server
-			| "Documents.WorkOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.WorkOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.WorkSheet.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.WorkSheet.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _045502 check preparation
 	When check preparation
@@ -98,111 +98,111 @@ Scenario: _045503 check WorkSheet movements by the Register  "R4010 Actual stock
 	* Select Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 	* Check movements by the Register  "R4010 Actual stocks" 
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''            | ''                    | ''          | ''           | ''           | ''                  |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''           | ''                  |
-			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''           | ''                  |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           | ''                  |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   | 'Serial lot number' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '1,521'     | 'Store 01'   | 'Material 3' | ''                  |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 1' | ''                  |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 1' | ''                  |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 2' | ''                  |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '4'         | 'Store 01'   | 'Material 2' | ''                  |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''             | ''             | ''                     |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             | ''                     |
+			| 'Register  "R4010 Actual stocks"'          | ''              | ''                      | ''            | ''             | ''             | ''                     |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                     |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Serial lot number'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Store 01'     | 'Material 3'   | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 2'   | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Store 01'     | 'Material 2'   | ''                     |
 		And I close all client application windows
 		
 Scenario: _045504 check WorkOrder movements by the Register  "R4011 Free stocks" (stock)
 	* Select Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 31 dated 22.09.2022 12:41:21' | ''            | ''                    | ''          | ''           | ''           |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''           |
-			| 'Register  "R4011 Free stocks"'           | ''            | ''                    | ''          | ''           | ''           |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
-			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '1,521'     | 'Store 01'   | 'Material 3' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 2' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '4'         | 'Store 01'   | 'Material 2' |	
+			| 'Work order 31 dated 22.09.2022 12:41:21'   | ''              | ''                      | ''            | ''             | ''              |
+			| 'Document registrations records'            | ''              | ''                      | ''            | ''             | ''              |
+			| 'Register  "R4011 Free stocks"'             | ''              | ''                      | ''            | ''             | ''              |
+			| ''                                          | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''              |
+			| ''                                          | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'      |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '1,521'       | 'Store 01'     | 'Material 3'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '2'           | 'Store 01'     | 'Material 1'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '2'           | 'Store 01'     | 'Material 1'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '2'           | 'Store 01'     | 'Material 2'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '4'           | 'Store 01'     | 'Material 2'    |
 		And I close all client application windows				
 
 Scenario: _045505 check WorkSheet movements by the Register  "R4050 Stock inventory"
 	* Select Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 	* Check movements by the Register  "R4050 Stock inventory" 
 		And I click "Registrations report" button
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''            | ''                    | ''          | ''             | ''         | ''           |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''             | ''         | ''           |
-			| 'Register  "R4050 Stock inventory"'      | ''            | ''                    | ''          | ''             | ''         | ''           |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''           |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'   |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '1,521'     | 'Main Company' | 'Store 01' | 'Material 3' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Main Company' | 'Store 01' | 'Material 1' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Main Company' | 'Store 01' | 'Material 1' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Main Company' | 'Store 01' | 'Material 2' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '4'         | 'Main Company' | 'Store 01' | 'Material 2' |		
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''               | ''           | ''              |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''               | ''           | ''              |
+			| 'Register  "R4050 Stock inventory"'        | ''              | ''                      | ''            | ''               | ''           | ''              |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''              |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'      |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Main Company'   | 'Store 01'   | 'Material 3'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 1'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 1'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 2'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Main Company'   | 'Store 01'   | 'Material 2'    |
 		And I close all client application windows
 
 Scenario: _045506 check WorkSheet movements by the Register  "T3010S Row ID info"
 	* Select Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 	* Check movements by the Register  "T3010S Row ID info" 
 		And I click "Registrations report" button
 		And I select "T3010S Row ID info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                        | ''                                     |
-			| 'Document registrations records'         | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                        | ''                                     |
-			| 'Register  "T3010S Row ID info"'         | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                        | ''                                     |
-			| ''                                       | 'Resources'                            | ''      | ''         | ''     | 'Dimensions'                           | ''                                     | ''          | ''                                        | ''                                     |
-			| ''                                       | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis'                                   | 'Basis key'                            |
-			| ''                                       | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | ''      | ''         | 'pcs'  | '8eb2727f-a1ed-4b08-86fe-c827c2a16a58' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | '*'         | 'Work order 31 dated 22.09.2022 12:41:21' | 'fc41e496-14e3-4646-b488-c33a97dfe6dd' |
-			| ''                                       | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | ''      | ''         | 'pcs'  | '400f5011-7637-4e38-a8cb-37b2e5a5025e' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | '*'         | 'Work order 31 dated 22.09.2022 12:41:21' | '008ffbc8-93f9-4022-9276-ae3f150c1736' |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                          | ''                                        |
+			| 'Document registrations records'           | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                          | ''                                        |
+			| 'Register  "T3010S Row ID info"'           | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                          | ''                                        |
+			| ''                                         | 'Resources'                              | ''        | ''           | ''       | 'Dimensions'                             | ''                                       | ''            | ''                                          | ''                                        |
+			| ''                                         | 'Row ref'                                | 'Price'   | 'Currency'   | 'Unit'   | 'Key'                                    | 'Row ID'                                 | 'Unique ID'   | 'Basis'                                     | 'Basis key'                               |
+			| ''                                         | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | ''        | ''           | 'pcs'    | '8eb2727f-a1ed-4b08-86fe-c827c2a16a58'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | '*'           | 'Work order 31 dated 22.09.2022 12:41:21'   | 'fc41e496-14e3-4646-b488-c33a97dfe6dd'    |
+			| ''                                         | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | ''        | ''           | 'pcs'    | '400f5011-7637-4e38-a8cb-37b2e5a5025e'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | '*'           | 'Work order 31 dated 22.09.2022 12:41:21'   | '008ffbc8-93f9-4022-9276-ae3f150c1736'    |
 		And I close all client application windows
 
 Scenario: _045507 check WorkOrder movements by the Register  "R4011 Free stocks" (no reserve)
 	* Select Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '32' |
+			| 'Number'    |
+			| '32'        |
 	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 32 dated 28.09.2022 19:53:33' | ''            | ''                    | ''          | ''           | ''           |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''           |
-			| 'Register  "R4011 Free stocks"'           | ''            | ''                    | ''          | ''           | ''           |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
-			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
-			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '1,521'     | 'Store 01'   | 'Material 3' |
-			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 2' |				
+			| 'Work order 32 dated 28.09.2022 19:53:33'   | ''              | ''                      | ''            | ''             | ''              |
+			| 'Document registrations records'            | ''              | ''                      | ''            | ''             | ''              |
+			| 'Register  "R4011 Free stocks"'             | ''              | ''                      | ''            | ''             | ''              |
+			| ''                                          | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''              |
+			| ''                                          | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'      |
+			| ''                                          | 'Expense'       | '28.09.2022 19:53:33'   | '1,521'       | 'Store 01'     | 'Material 3'    |
+			| ''                                          | 'Expense'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 1'    |
+			| ''                                          | 'Expense'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 1'    |
+			| ''                                          | 'Expense'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 2'    |
 		And I close all client application windows
 
 Scenario: _045508 check WorkSheet movements by the Register  "R4011 Free stocks" (no reserve)
@@ -210,61 +210,61 @@ Scenario: _045508 check WorkSheet movements by the Register  "R4011 Free stocks"
 	* Select Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 4 dated 29.09.2022 19:07:21' | ''            | ''                    | ''          | ''           | ''           |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''           |
-			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''           |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
-			| ''                                       | 'Expense'     | '29.09.2022 19:07:21' | '4'         | 'Store 01'   | 'Material 2' |		
+			| 'Work sheet 4 dated 29.09.2022 19:07:21'   | ''              | ''                      | ''            | ''             | ''              |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''              |
+			| 'Register  "R4011 Free stocks"'            | ''              | ''                      | ''            | ''             | ''              |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''              |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'      |
+			| ''                                         | 'Expense'       | '29.09.2022 19:07:21'   | '4'           | 'Store 01'     | 'Material 2'    |
 		And I close all client application windows
 
 Scenario: _045510 check WorkOrder movements by the Register  "T3010S Row ID info"
 	* Select Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 	* Check movements by the Register  "T3010S Row ID info" 
 		And I click "Registrations report" button
 		And I select "T3010S Row ID info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 31 dated 22.09.2022 12:41:21' | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                          | ''                                     |
-			| 'Document registrations records'          | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                          | ''                                     |
-			| 'Register  "T3010S Row ID info"'          | ''                                     | ''      | ''         | ''     | ''                                     | ''                                     | ''          | ''                                          | ''                                     |
-			| ''                                        | 'Resources'                            | ''      | ''         | ''     | 'Dimensions'                           | ''                                     | ''          | ''                                          | ''                                     |
-			| ''                                        | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis'                                     | 'Basis key'                            |
-			| ''                                        | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | '100'   | 'TRY'      | 'pcs'  | 'fc41e496-14e3-4646-b488-c33a97dfe6dd' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | '*'         | 'Sales order 182 dated 22.09.2022 11:13:46' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' |
-			| ''                                        | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | '100'   | 'TRY'      | 'pcs'  | '008ffbc8-93f9-4022-9276-ae3f150c1736' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | '*'         | 'Sales order 182 dated 22.09.2022 11:13:46' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' |
+			| 'Work order 31 dated 22.09.2022 12:41:21'   | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                            | ''                                        |
+			| 'Document registrations records'            | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                            | ''                                        |
+			| 'Register  "T3010S Row ID info"'            | ''                                       | ''        | ''           | ''       | ''                                       | ''                                       | ''            | ''                                            | ''                                        |
+			| ''                                          | 'Resources'                              | ''        | ''           | ''       | 'Dimensions'                             | ''                                       | ''            | ''                                            | ''                                        |
+			| ''                                          | 'Row ref'                                | 'Price'   | 'Currency'   | 'Unit'   | 'Key'                                    | 'Row ID'                                 | 'Unique ID'   | 'Basis'                                       | 'Basis key'                               |
+			| ''                                          | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | '100'     | 'TRY'        | 'pcs'    | 'fc41e496-14e3-4646-b488-c33a97dfe6dd'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | '*'           | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'    |
+			| ''                                          | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | '100'     | 'TRY'        | 'pcs'    | '008ffbc8-93f9-4022-9276-ae3f150c1736'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | '*'           | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'    |
 		And I close all client application windows
 
 Scenario: _045511 check WorkOrder movements by the Register  "TM1010B Row ID movements"
 	* Select Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 	* Check movements by the Register  "TM1010B Row ID movements" 
 		And I click "Registrations report" button
 		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 31 dated 22.09.2022 12:41:21' | ''            | ''                    | ''          | ''                                     | ''                                     | ''         | ''                                          | ''                                     |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''                                     | ''                                     | ''         | ''                                          | ''                                     |
-			| 'Register  "TM1010B Row ID movements"'    | ''            | ''                    | ''          | ''                                     | ''                                     | ''         | ''                                          | ''                                     |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'                           | ''                                     | ''         | ''                                          | ''                                     |
-			| ''                                        | ''            | ''                    | 'Quantity'  | 'Row ref'                              | 'Row ID'                               | 'Step'     | 'Basis'                                     | 'Basis key'                            |
-			| ''                                        | 'Receipt'     | '22.09.2022 12:41:21' | '1'         | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | 'SI&WS'    | 'Work order 31 dated 22.09.2022 12:41:21'   | 'fc41e496-14e3-4646-b488-c33a97dfe6dd' |
-			| ''                                        | 'Receipt'     | '22.09.2022 12:41:21' | '1'         | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | 'SI&WS'    | 'Work order 31 dated 22.09.2022 12:41:21'   | '008ffbc8-93f9-4022-9276-ae3f150c1736' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '1'         | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | 'SI&WO&WS' | 'Sales order 182 dated 22.09.2022 11:13:46' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' |
-			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '1'         | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | 'SI&WO&WS' | 'Sales order 182 dated 22.09.2022 11:13:46' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' |	
+			| 'Work order 31 dated 22.09.2022 12:41:21'   | ''              | ''                      | ''            | ''                                       | ''                                       | ''           | ''                                            | ''                                        |
+			| 'Document registrations records'            | ''              | ''                      | ''            | ''                                       | ''                                       | ''           | ''                                            | ''                                        |
+			| 'Register  "TM1010B Row ID movements"'      | ''              | ''                      | ''            | ''                                       | ''                                       | ''           | ''                                            | ''                                        |
+			| ''                                          | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'                             | ''                                       | ''           | ''                                            | ''                                        |
+			| ''                                          | ''              | ''                      | 'Quantity'    | 'Row ref'                                | 'Row ID'                                 | 'Step'       | 'Basis'                                       | 'Basis key'                               |
+			| ''                                          | 'Receipt'       | '22.09.2022 12:41:21'   | '1'           | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | 'SI&WS'      | 'Work order 31 dated 22.09.2022 12:41:21'     | 'fc41e496-14e3-4646-b488-c33a97dfe6dd'    |
+			| ''                                          | 'Receipt'       | '22.09.2022 12:41:21'   | '1'           | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | 'SI&WS'      | 'Work order 31 dated 22.09.2022 12:41:21'     | '008ffbc8-93f9-4022-9276-ae3f150c1736'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '1'           | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'   | 'SI&WO&WS'   | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb'    |
+			| ''                                          | 'Expense'       | '22.09.2022 12:41:21'   | '1'           | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'   | 'SI&WO&WS'   | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'c4929c56-c974-4162-b7b9-debfcbba6b3b'    |
 		And I close all client application windows
 
 
@@ -272,22 +272,22 @@ Scenario: _045512 check WorkOrder movements by the Register  "R4012 Stock Reserv
 	* Select Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '32' |
+			| 'Number'    |
+			| '32'        |
 	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 32 dated 28.09.2022 19:53:33' | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| 'Register  "R4012 Stock Reservation"'     | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           | ''                                        |
-			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   | 'Order'                                   |
-			| ''                                        | 'Receipt'     | '28.09.2022 19:53:33' | '1,521'     | 'Store 01'   | 'Material 3' | 'Work order 32 dated 28.09.2022 19:53:33' |
-			| ''                                        | 'Receipt'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' | 'Work order 32 dated 28.09.2022 19:53:33' |
-			| ''                                        | 'Receipt'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' | 'Work order 32 dated 28.09.2022 19:53:33' |
-			| ''                                        | 'Receipt'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 2' | 'Work order 32 dated 28.09.2022 19:53:33' |	
+			| 'Work order 32 dated 28.09.2022 19:53:33'   | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| 'Document registrations records'            | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| 'Register  "R4012 Stock Reservation"'       | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| ''                                          | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                                           |
+			| ''                                          | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Order'                                      |
+			| ''                                          | 'Receipt'       | '28.09.2022 19:53:33'   | '1,521'       | 'Store 01'     | 'Material 3'   | 'Work order 32 dated 28.09.2022 19:53:33'    |
+			| ''                                          | 'Receipt'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 1'   | 'Work order 32 dated 28.09.2022 19:53:33'    |
+			| ''                                          | 'Receipt'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 1'   | 'Work order 32 dated 28.09.2022 19:53:33'    |
+			| ''                                          | 'Receipt'       | '28.09.2022 19:53:33'   | '2'           | 'Store 01'     | 'Material 2'   | 'Work order 32 dated 28.09.2022 19:53:33'    |
 		And I close all client application windows
 
 Scenario: _045513 check WorkSheet movements by the Register  "R4012 Stock Reservation"
@@ -295,56 +295,56 @@ Scenario: _045513 check WorkSheet movements by the Register  "R4012 Stock Reserv
 	* Select Work Sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| 'Register  "R4012 Stock Reservation"'    | ''            | ''                    | ''          | ''           | ''           | ''                                        |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           | ''                                        |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   | 'Order'                                   |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '1,521'     | 'Store 01'   | 'Material 3' | 'Work order 31 dated 22.09.2022 12:41:21' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '4'         | 'Store 01'   | 'Material 1' | 'Work order 31 dated 22.09.2022 12:41:21' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '6'         | 'Store 01'   | 'Material 2' | 'Work order 31 dated 22.09.2022 12:41:21' |			
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| 'Register  "R4012 Stock Reservation"'      | ''              | ''                      | ''            | ''             | ''             | ''                                           |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                                           |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Order'                                      |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Store 01'     | 'Material 3'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Store 01'     | 'Material 1'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '6'           | 'Store 01'     | 'Material 2'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
 		And I close all client application windows
 
 Scenario: _045520 Work sheet clear posting/mark for deletion
 	* Select Work sheet closing
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' |
-			| 'Document registrations records'                    |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'    |
+			| 'Document registrations records'            |
 		And I close current window
 	* Post Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'Register  "R4010 Actual stocks"' |
-			| 'R4050 Stock inventory' |
+			| 'Register  "R4010 Actual stocks"'    |
+			| 'R4050 Stock inventory'              |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -352,14 +352,14 @@ Scenario: _045520 Work sheet clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' |
-			| 'Document registrations records'                    |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'    |
+			| 'Document registrations records'            |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3' |
+			| 'Number'    |
+			| '3'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -369,8 +369,8 @@ Scenario: _045520 Work sheet clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'Register  "R4010 Actual stocks"' |
-			| 'R4050 Stock inventory' |
+			| 'Register  "R4010 Actual stocks"'    |
+			| 'R4050 Stock inventory'              |
 		And I close all client application windows
 
 
@@ -379,35 +379,35 @@ Scenario: _045521 Work order clear posting/mark for deletion
 	* Select Work order closing
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 31 dated 22.09.2022 12:41:21' |
-			| 'Document registrations records'                    |
+			| 'Work order 31 dated 22.09.2022 12:41:21'    |
+			| 'Document registrations records'             |
 		And I close current window
 	* Post Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'TM1010B Row ID movements' |
-			| 'T3010S Row ID info' |
+			| 'TM1010B Row ID movements'    |
+			| 'T3010S Row ID info'          |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -415,14 +415,14 @@ Scenario: _045521 Work order clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 31 dated 22.09.2022 12:41:21' |
-			| 'Document registrations records'                    |
+			| 'Work order 31 dated 22.09.2022 12:41:21'    |
+			| 'Document registrations records'             |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '31' |
+			| 'Number'    |
+			| '31'        |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -432,6 +432,6 @@ Scenario: _045521 Work order clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'TM1010B Row ID movements' |
-			| 'T3010S Row ID info' |
+			| 'TM1010B Row ID movements'    |
+			| 'T3010S Row ID info'          |
 		And I close all client application windows

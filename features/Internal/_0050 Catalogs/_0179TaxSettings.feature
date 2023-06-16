@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @TaxSettings
@@ -52,35 +52,35 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I input "VAT" text in the field named "Description_en"
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'TaxCalculateVAT_TR' |
+			| 'Description'           |
+			| 'TaxCalculateVAT_TR'    |
 		And I select current line in "List" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description' |
-			| '8%'          |
-		And I select current line in "List" table
-		And I finish line editing in "TaxRates" table
-		And in the table "TaxRates" I click the button named "TaxRatesAdd"
-		And I click choice button of "Tax rate" attribute in "TaxRates" table
-		And I go to line in "List" table
-			| 'Description' | 'Reference' |
-			| '18%'         | '18%'       |
+			| 'Description'    |
+			| '8%'             |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description' | 'Reference' |
-			| '0%'          | '0%'        |
+			| 'Description'   | 'Reference'    |
+			| '18%'           | '18%'          |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Without VAT' |
+			| 'Description'   | 'Reference'    |
+			| '0%'            | '0%'           |
+		And I select current line in "List" table
+		And I finish line editing in "TaxRates" table
+		And in the table "TaxRates" I click the button named "TaxRatesAdd"
+		And I click choice button of "Tax rate" attribute in "TaxRates" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Without VAT'    |
 		And I select current line in "List" table
 		And I move to "Use documents" tab
 		And I finish line editing in "TaxRates" table
@@ -133,8 +133,8 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I input "01.10.2019" text in "Period" field
 		And I select "18%" exact value from "Tax rate" drop-down list
@@ -147,14 +147,14 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I input "SalesTax" text in the field named "Description_en"
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'TaxCalculateVAT_TR' |
+			| 'Description'           |
+			| 'TaxCalculateVAT_TR'    |
 		And I select current line in "List" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description' | 'Reference' |
-			| '1%'          | '1%'        |
+			| 'Description'   | 'Reference'    |
+			| '1%'            | '1%'           |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And I click "Save" button
@@ -165,8 +165,8 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I input "01.10.2019" text in "Period" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "1%" exact value from "Tax rate" drop-down list
 		And I click "Save and close" button
@@ -181,8 +181,8 @@ Scenario: _017903 company tax compliance
 	* Opening the form of your own company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in Sales Tax rate settings
 		And I move to "Tax types" tab
@@ -191,8 +191,8 @@ Scenario: _017903 company tax compliance
 		And I select current line in "List" table
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'SalesTax'    |
+			| 'Description'    |
+			| 'SalesTax'       |
 		And I select current line in "List" table
 		And I input "01.10.2019" text in "Period" field
 		And I set checkbox "Use"
@@ -202,8 +202,8 @@ Scenario: _017903 company tax compliance
 		And I input "01.10.2019" text in "Period" field
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description' | 'Reference' |
-			| 'VAT'         | 'VAT'       |
+			| 'Description'   | 'Reference'    |
+			| 'VAT'           | 'VAT'          |
 		And I select current line in "List" table
 		And I set checkbox "Use"
 		And I input "1" text in "Priority" field

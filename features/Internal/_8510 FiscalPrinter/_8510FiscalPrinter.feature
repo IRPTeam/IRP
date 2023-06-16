@@ -1779,10 +1779,15 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'TRY'  |
 		And I select current line in "List" table
 		And I input "11,00" text in "Receive amount" field	
-		And I click Select button of "Branch" field
+		And I click Select button of "Send branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 02'     |
+		And I select current line in "List" table
+		And I click Select button of "Receive branch" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Front office'     |
 		And I select current line in "List" table
 		And I click Select button of "Consolidated retail sales" field
 		And I go to line in "List" table
@@ -1836,8 +1841,9 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 			| '520,00' |
 		And I select current line in "List" table	
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table became equal
-			| 'Store'    | 'Stock quantity' | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
+			| 'Store'    | 'Stock quantity'        | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
 			| 'Store 01' | '1,000'                 | 'Yes'                   | '1' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 1' | 'No'                 | '15,25'      | '09999900989900'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       |
 			| 'Store 01' | '1,000'                 | 'Yes'                   | '2' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '09999900989901'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | 'Without VAT' | '100,00'     | '100,00'       |
 			| 'Store 01' | '1,000'                 | 'Yes'                   | '3' | 'Consignor stocks' | 'Basic Price Types' | 'Product 8 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '090998897898979998' | 'pcs'  | 'Shop 02'            | 'UNIQ'     | 'No'         | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |

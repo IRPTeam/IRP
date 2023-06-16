@@ -5,6 +5,60 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 EndFunction
 
 #EndRegion
+#Region Posting_Info
+
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParameters(Ref)
+	StrParams = New Structure;
+	StrParams.Insert("Ref", Ref);
+	Return StrParams;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+#Region Service
 
 Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Export
 
@@ -54,7 +108,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 EndProcedure
 
 Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefined) Export
-	Query = New Query();
+	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	Doc.Ref,
@@ -68,7 +122,7 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Array();
+	Result = New Array;
 	While QuerySelection.Next() Do
 		Row = New Structure("Ref, Number, Date");
 		FillPropertyValues(Row, QuerySelection);
@@ -84,7 +138,7 @@ EndFunction
 //	Ref - Arbitrary - contains a reference to the object for which the print command was executed.
 Procedure PrintQR(Spreadsheet, Ref) Export
 	Template = GetTemplate("PrintQR");
-	Query = New Query();
+	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	PhysicalCountByLocation.Number AS Number
@@ -98,7 +152,7 @@ Procedure PrintQR(Spreadsheet, Ref) Export
 	VT = Query.Execute().Unload();
 
 	Spreadsheet.Clear();
-	SpreadsheetRight = New SpreadsheetDocument();
+	SpreadsheetRight = New SpreadsheetDocument;
 
 	For IndexRow = -1 To VT.Count() - 1 Do
 		For Index = 0 To 4 Do
@@ -121,35 +175,8 @@ Procedure PrintQR(Spreadsheet, Ref) Export
 			SpreadsheetRight.Join(Header);
 		EndDo;
 		Spreadsheet.Put(SpreadsheetRight);
-		SpreadsheetRight = New SpreadsheetDocument();
+		SpreadsheetRight = New SpreadsheetDocument;
 	EndDo;
 EndProcedure
-
-#Region NewRegistersPosting
-Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
-	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
-	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
-	Return Str;
-EndFunction
-
-Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
-	StrParams.Insert("Ref", Ref);
-	Return StrParams;
-EndFunction
-
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-
-	Return QueryArray;
-EndFunction
 
 #EndRegion

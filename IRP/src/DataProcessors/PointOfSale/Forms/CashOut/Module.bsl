@@ -66,6 +66,9 @@ EndProcedure
 
 &AtServer
 Function CreateMoneyTransferAtServer()
+	If Not ValueIsFilled(ThisObject.SendAmount) Then
+		Return Undefined;
+	EndIf;
 	
 	FillingData.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	FillingData.Receiver = ThisObject.Receiver;
@@ -73,6 +76,10 @@ Function CreateMoneyTransferAtServer()
 	FillingData.ReceiveFinancialMovementType = ThisObject.ReceiveFinancialMovementType;
 	FillingData.SendAmount = ThisObject.SendAmount;
 	FillingData.ReceiveAmount = ThisObject.SendAmount;
+	
+	If ValueIsFilled(FillingData.Receiver) Then
+		FillingData.Insert("ReceiveBranch", FillingData.Receiver.Branch);
+	EndIf;
 	
 	NewDocument = Documents.MoneyTransfer.CreateDocument();
 	NewDocument.Fill(FillingData);

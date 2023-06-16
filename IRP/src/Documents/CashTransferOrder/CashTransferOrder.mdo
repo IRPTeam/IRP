@@ -159,9 +159,9 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.PlanningPeriodTypes.EnumValue.Financial</value>
+      <name>Filter.IsFinancial</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -245,9 +245,9 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.PlanningPeriodTypes.EnumValue.Financial</value>
+      <name>Filter.IsFinancial</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -314,6 +314,21 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cf268d3a-6cdf-4555-bf21-f84fb630e8d8">
+    <name>ReceiveBranch</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

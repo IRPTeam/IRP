@@ -230,7 +230,8 @@ Function GetChain()
 	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
 	Chain.Insert("ClearByTransactionTypeOutgoingPaymentOrder", GetChainLink("ClearByTransactionTypeOutgoingPaymentOrderExecute"));
-	Chain.Insert("ClearByTransactionTypeCashExpenseRevenue"  , GetChainLink("ClearByTransactionTypeCashExpenseRevenueExecute"));
+	Chain.Insert("ClearByTransactionTypeCashExpense"  , GetChainLink("ClearByTransactionTypeCashExpenseExecute"));
+	Chain.Insert("ClearByTransactionTypeCashRevenue"  , GetChainLink("ClearByTransactionTypeCashRevenueExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -259,6 +260,8 @@ Function GetChain()
 	Chain.Insert("ChangeCashAccountByCurrency"        , GetChainLink("ChangeCashAccountByCurrencyExecute"));
 	Chain.Insert("ChangeCashAccountByPartner"         , GetChainLink("ChangeCashAccountByPartnerExecute"));
 	Chain.Insert("ChangeCashAccountByTransactionType" , GetChainLink("ChangeCashAccountByTransactionTypeExecute"));
+	
+	Chain.Insert("ChangeReceiveBranchByAccount" , GetChainLink("ChangeReceiveBranchByAccountExecute"));
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
@@ -347,6 +350,9 @@ Function GetChain()
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
 	Chain.Insert("ChangeCurrentQuantityInProductions"        , GetChainLink("ChangeCurrentQuantityInProductionsExecute"));
 	
+	Chain.Insert("ChangeBeginDateByPlanningPeriod"  , GetChainLink("ChangeBeginDateByPlanningPeriodExecute"));
+	Chain.Insert("ChangeEndDateByPlanningPeriod"    , GetChainLink("ChangeEndDateByPlanningPeriodExecute"));
+	
 	Chain.Insert("BillOfMaterialsListCalculations"           , GetChainLink("BillOfMaterialsListCalculationsExecute"));
 	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
 	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
@@ -358,6 +364,7 @@ Function GetChain()
 	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
 
 	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
+	Chain.Insert("ChangeFinancialMovementTypeByPaymentType" , GetChainLink("ChangeFinancialMovementTypeByPaymentTypeExecute"));
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
@@ -1390,10 +1397,14 @@ EndFunction
 #Region CHANGE_IS_MANUAL_CHANGED_BY_QUANTITY
 
 Function ChangeIsManualChangedByQuantityOptions() Export
-	Return GetChainLinkOptions("Quantity, QuantityBOM");
+	Return GetChainLinkOptions("Quantity, QuantityBOM, TransactionType");
 EndFunction
 
 Function ChangeIsManualChangedByQuantityExecute(Options) Export	
+	If Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return False;
+	EndIf;
+	
 	If Options.Quantity = Options.QuantityBOM Then
 		Return False;
 	Else
@@ -1474,10 +1485,15 @@ EndFunction
 #Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
 
 Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
-	Return GetChainLinkOptions("Date, BusinessUnit");
+	Return GetChainLinkOptions("Date, BusinessUnit, TransactionType");
 EndFunction
 
 Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
 	Return PlanningPeriod;
@@ -1488,10 +1504,15 @@ EndFunction
 #Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
 
 Function ChangeProductionPlanningByPlanningPeriodOptions() Export
-	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning");
+	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning, TransactionType");
 EndFunction
 
 Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentProductionPlanning) Then
 		Return Options.CurrentProductionPlanning;
 	EndIf;
@@ -1503,10 +1524,15 @@ EndFunction
 #Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 
 Function ChangeBillOfMaterialsByItemKeyOptions() Export
-	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials");
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials, TransactionType");
 EndFunction
 
 Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
@@ -1618,6 +1644,22 @@ Function ChangeShipmentModeByTransactionTypeExecute(Options) Export
 		Return Options.CurrentShipmentMode
 	EndIf;
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECEIVE_BRANCH_BY_ACCOUNT
+
+Function ChangeReceiveBranchByAccountOptions() Export
+	Return GetChainLinkOptions("Account, ReceiveBranch");
+EndFunction
+
+Function ChangeReceiveBranchByAccountExecute(Options) Export
+	ReceiveBranch = CommonFunctionsServer.GetRefAttribute(Options.Account, "Branch");
+	If ValueIsFilled(ReceiveBranch) Then
+		Return ReceiveBranch;
+	EndIf;
+	Return Options.ReceiveBranch;
 EndFunction
 
 #EndRegion
@@ -2200,12 +2242,24 @@ EndProcedure
 
 Function MaterialsCalculationsOptions() Export
 	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
-		|ItemKey, Unit, Quantity, KeyOwner");
+		|ItemKey, Unit, Quantity, KeyOwner, TransactionType");
 EndFunction
 
 Function MaterialsCalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Materials", Options.Materials);
+	
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+			For Each Row In Result.Materials Do
+				Row.ItemBOM         = Undefined;
+				Row.ItemKeyBOM      = Undefined;
+				Row.UnitBOM         = Undefined;
+				Row.QuantityBOM     = Undefined;
+				Row.IsManualChanged = Undefined;
+			EndDo;
+		Return Result;
+	EndIf;
 	
 	CalculationParameters = New Structure();
 	CalculationParameters.Insert("Materials"        , Options.Materials);
@@ -2254,6 +2308,7 @@ Function CalculationsOptions() Export
 	AmountOptions.Insert("DontCalculateRow", False);
 	AmountOptions.Insert("NetAmount"       , 0);
 	AmountOptions.Insert("OffersAmount"    , 0);
+	AmountOptions.Insert("OffersBonus"    , 0);
 	AmountOptions.Insert("TaxAmount"       , 0);
 	AmountOptions.Insert("TotalAmount"     , 0);
 	Options.Insert("AmountOptions", AmountOptions);
@@ -2266,7 +2321,7 @@ Function CalculationsOptions() Export
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
-	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
+	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit, QuantityIsFixed");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
 	// SpecialOffers columns: Key, Offer, Amount, Percent, Bonus, AddInfo
@@ -2315,25 +2370,25 @@ Function CalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
+	Result.Insert("OffersBonus"  , Options.AmountOptions.OffersBonus);
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
 	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
+	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo, Bonus, AddInfo");
+		NewOfferRow = OffersServer.GetOffersTableRow();
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
 	
 	UserManualAmountsFromBasisDocument = New Array();
 	
-	//IsLinkedRow = False;
 	OffersFromBaseDocument = False;
-//	IsUserChangeTaxAmount = False;
 	If Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable Or Options.CalculateTaxAmount.Enable Then
 		For Each Row In Options.RowIDInfo Do
 			Scaling = New Structure();
@@ -2342,21 +2397,23 @@ Function CalculationsExecute(Options) Export
 			Scaling.Insert("Unit"    , Options.Unit);
 			DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep, Scaling);
 			If DataFromBasis <> Undefined And DataFromBasis.Count() Then 
-				//IsLinkedRow = True;
-				
 				// Offers
 				If (Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable) And DataFromBasis[0].SpecialOffers.Count() Then
 					OffersFromBaseDocument = True;
 					TotalOffers = 0;
+					TotalBonus = 0;
 					For Each OfferRow In Result.SpecialOffers Do
 						For Each BasisRow In DataFromBasis[0].SpecialOffers Do
 							If OfferRow.Offer = BasisRow.Offer Then 
 								TotalOffers = TotalOffers + BasisRow.Amount;
+								TotalBonus = TotalBonus + BasisRow.Bonus;
 								OfferRow.Amount = BasisRow.Amount;
+								OfferRow.Bonus = BasisRow.Bonus;
 							EndIf;
 						EndDo;
 					EndDo;
 					Result.OffersAmount = TotalOffers;
+					Result.OffersBonus = TotalBonus;
 				EndIf; // Offers
 				
 				// Taxes
@@ -2369,7 +2426,6 @@ Function CalculationsExecute(Options) Export
 							
 							If  RowTaxList.Tax = BasisRow.Tax 
 								And RowTaxList.Analytics = BasisRow.Analytics Then
-//								And RowTaxList.TaxRate = BasisRow.TaxRate Then
 								NewTaxRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
 								FillPropertyValues(NewTaxRow, BasisRow);
 								NewTaxRow.Key = RowTaxList.Key;
@@ -2387,14 +2443,18 @@ Function CalculationsExecute(Options) Export
 	If Options.RecalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		For Each OfferRow In Options.OffersOptions.SpecialOffersCache Do
 			Amount = 0;
+			Bonus = 0;
 			If Options.PriceOptions.Quantity = OfferRow.Quantity Then
 				Amount = OfferRow.Amount;
+				Bonus = OfferRow.Bonus;
 			Else
 				Amount = (OfferRow.Amount / OfferRow.Quantity) * Options.PriceOptions.Quantity;
+				Bonus = (OfferRow.Bonus / OfferRow.Quantity) * Options.PriceOptions.Quantity;
 			EndIf;
 			For Each ResultOfferRow In Result.SpecialOffers Do
 				If OfferRow.Key = ResultOfferRow.Key And OfferRow.Offer = ResultOfferRow.Offer Then
 					ResultOfferRow.Amount = Amount;
+					ResultOfferRow.Bonus = Bonus;
 				EndIf;
 			EndDo;
 		EndDo;
@@ -2403,14 +2463,17 @@ Function CalculationsExecute(Options) Export
 	// CalculateSpecialOffers
 	If Options.CalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		TotalOffers = 0;
+		TotalBonus = 0;
 		For Each OfferRow In Result.SpecialOffers Do
 			TotalOffers = TotalOffers + OfferRow.Amount;
+			TotalBonus = TotalBonus + OfferRow.Bonus;
 		EndDo;
 		Result.OffersAmount = TotalOffers;
+		Result.OffersBonus = TotalBonus;
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit
-	If Options.CalculateQuantityInBaseUnit.Enable Then
+	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then
 		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
 			UnitFactor = 0;
 		Else
@@ -3023,7 +3086,8 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|PaymentTerminal,
 		|BankTerm,
 		|RetailCustomer,
-		|Employee");
+		|Employee,
+		|PaymentPeriod");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3041,6 +3105,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("BankTerm"                 , Options.BankTerm);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3051,6 +3116,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3060,7 +3126,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
-		|TransitAccount"; 
+		|TransitAccount";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor 
 		Or Options.TransactionType = Outgoing_ReturnToCustomer
 		Or Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
@@ -3077,6 +3143,12 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payee,
+		|LegalNameContract";		
 	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
@@ -3088,7 +3160,8 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		|Partner"; 	
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
-		|Employee"; 				
+		|Employee,
+		|PaymentPeriod"; 				
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3126,7 +3199,8 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PaymentTerminal,
 		|BankTerm,
 		|CommissionIsSeparate,
-		|RetailCustomer");
+		|RetailCustomer,
+		|RevenueType");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3147,6 +3221,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("BankTerm"                 , Options.BankTerm);
 	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
+	Result.Insert("RevenueType"              , Options.RevenueType);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3157,6 +3232,8 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
+	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3185,6 +3262,12 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+	ElsIf Options.TransactionType = Incoming_OtherPartner Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payer,
+		|LegalNameContract";	
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
 		|POSAccount,
@@ -3198,6 +3281,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
+	ElsIf Options.TransactionType = Incoming_OtherIncome Then
+		StrByType = "
+		|RevenueType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3228,7 +3314,8 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Payee,
 		|Order,
 		|RetailCustomer,
-		|Employee");
+		|Employee,
+		|PaymentPeriod");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3242,6 +3329,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3250,12 +3338,16 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
 
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
 		StrByType = "";
-	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Or Options.TransactionType = Outgoing_EmployeeCashAdvance Then
+	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then 
+		StrByType = "
+		|Partner";
+	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
 	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
@@ -3267,9 +3359,16 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payee,
+		|LegalNameContract";
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
-		|Employee";
+		|Employee,
+		|PaymentPeriod";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3326,6 +3425,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
@@ -3344,6 +3444,12 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|Agreement,
 		|Payer,
 		|LegalNameContract";
+	ElsIf Options.TransactionType = Incoming_OtherPartner Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payer,
+		|LegalNameContract";			
 	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
@@ -3417,22 +3523,80 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 	Return Result;
 EndFunction
 
-// Cash Expense-Revenue
-Function ClearByTransactionTypeCashExpenseRevenueOptions() Export
+// Cash Expense
+Function ClearByTransactionTypeCashExpenseOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|Employee,
+		|OtherCompany,
+		|PaymentPeriod,
+		|ProfitLossCenter,
+		|ExpenseType");
+EndFunction
+
+Function ClearByTransactionTypeCashExpenseExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"       , Options.Partner);
+	Result.Insert("Employee"      , Options.Employee);
+	Result.Insert("OtherCompany"  , Options.OtherCompany);
+	Result.Insert("PaymentPeriod" , Options.PaymentPeriod);
+	Result.Insert("ProfitLossCenter" , Options.ProfitLossCenter);
+	Result.Insert("ExpenseType"      , Options.ExpenseType);
+
+	CurrentCashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.CurrentCompanyExpense");
+	OtherCashExpense   = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	SalaryPayment      = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment");
+	
+	If Options.TransactionType = CurrentCashExpense Then
+		StrByType = "
+		|ProfitLossCenter,
+		|ExpenseType";
+	ElsIf Options.TransactionType = OtherCashExpense Then
+		StrByType = "
+		|Partner,
+		|OtherCompany,
+		|ProfitLossCenter,
+		|ExpenseType";
+	ElsIf Options.TransactionType = SalaryPayment Then
+		StrByType = "
+		|Partner,
+		|Employee,
+		|OtherCompany,
+		|PaymentPeriod";
+	EndIf;
+		
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Revenue
+Function ClearByTransactionTypeCashRevenueOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|OtherCompany");
 EndFunction
 
-Function ClearByTransactionTypeCashExpenseRevenueExecute(Options) Export
+Function ClearByTransactionTypeCashRevenueExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Partner"      , Options.Partner);
 	Result.Insert("OtherCompany" , Options.OtherCompany);
 
-	Other_CashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
-	Other_CashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
+	OtherCashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
 
-	If Options.TransactionType = Other_CashExpense Or Options.TransactionType = Other_CashRevenue Then
+	If Options.TransactionType = OtherCashRevenue Then
 		StrByType = "
 		|Partner,
 		|OtherCompany";
@@ -3565,6 +3729,51 @@ Function ChangeisControlCodeStringByItemExecute(Options) Export
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_FINANCIAL_MOVEMENT_TYPE_BY_PAYMENT_TYPE
+
+Function ChangeFinancialMovementTypeByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType");
+EndFunction
+
+Function ChangeFinancialMovementTypeByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PaymentType, "FinancialMovementType");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BEGIN_DATE_BY_PLANNING_PERIOD
+
+Function ChangeBeginDateByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("PlanningPeriod");
+EndFunction
+
+Function ChangeBeginDateByPlanningPeriodExecute(Options) Export
+	If Not ValueIsFilled(Options.PlanningPeriod) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "BeginDate");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_END_DATE_BY_PLANNING_PERIOD
+
+Function ChangeEndDateByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("PlanningPeriod");
+EndFunction
+
+Function ChangeEndDateByPlanningPeriodExecute(Options) Export
+	If Not ValueIsFilled(Options.PlanningPeriod) Then
+		Return Undefined;
+	EndIf;
+	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "EndDate");
 EndFunction
 
 #EndRegion

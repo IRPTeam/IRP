@@ -95,6 +95,7 @@ Scenario: _300706 barcode check in Purchase invoice
 	And I move to the next attribute
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Stock quantity' |
 			| 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '1,000'                 |

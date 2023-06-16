@@ -71,7 +71,7 @@
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R3011T_CashMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>

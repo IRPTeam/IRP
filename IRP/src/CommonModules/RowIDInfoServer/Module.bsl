@@ -2455,6 +2455,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.SalesOrder.SpecialOffers AS SpecialOffers
@@ -2616,6 +2618,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
@@ -3274,6 +3278,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
@@ -3397,6 +3403,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.PurchaseInvoice.SpecialOffers AS SpecialOffers
@@ -4018,6 +4026,8 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.PurchaseReturn.SpecialOffers AS SpecialOffers
@@ -4117,6 +4127,8 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.PurchaseReturnOrder.SpecialOffers AS SpecialOffers
@@ -4227,6 +4239,8 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.SalesReturn.SpecialOffers AS SpecialOffers
@@ -4327,6 +4341,8 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.SalesReturnOrder.SpecialOffers AS SpecialOffers
@@ -4457,6 +4473,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.PaymentType,
 	|	Payments.PaymentTerminal,
 	|	Payments.Account,
+	|	Payments.FinancialMovementType,
 	|	Payments.Amount,
 	|	Payments.Percent,
 	|	Payments.Commission,
@@ -4471,6 +4488,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|GROUP BY
 	|	Payments.Key,
 	|	Payments.Account,
+	|	Payments.FinancialMovementType,
 	|	Payments.Amount,
 	|	Payments.BankTerm,
 	|	Payments.Commission,
@@ -4603,6 +4621,8 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.WorkOrder.SpecialOffers AS SpecialOffers
@@ -4934,8 +4954,11 @@ Procedure RecalculateAmounts(Tables)
 			For Each RowSpecialOffers In Tables.SpecialOffers.FindRows(Filter) Do
 				If RowItemList.OriginalQuantity = 0 Then
 					RowSpecialOffers.Amount = 0;
+					RowSpecialOffers.Bonus = 0;
 				Else
 					RowSpecialOffers.Amount = RowSpecialOffers.Amount / RowItemList.OriginalQuantity
+						* RowItemList.QuantityInBaseUnit;
+					RowSpecialOffers.Bonus = RowSpecialOffers.Bonus / RowItemList.OriginalQuantity
 						* RowItemList.QuantityInBaseUnit;
 				EndIf;
 			EndDo;
@@ -10780,7 +10803,7 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Key, Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm, RRNCode, PaymentInfo";
+	Return "Key, Ref, PaymentType, PaymentTerminal, Account, FinancialMovementType, Percent, BankTerm, RRNCode, PaymentInfo";
 EndFunction
 
 Function GetColumnNamesSum_Payments()

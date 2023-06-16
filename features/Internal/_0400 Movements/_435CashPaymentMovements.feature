@@ -56,6 +56,7 @@ Scenario: _043500 preparation (Cash payment)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
+		When Create OtherPartners objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -166,6 +167,9 @@ Scenario: _043500 preparation (Cash payment)
 		When Create document CashPayment objects (salary payment)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create CashPayment (OtherPartnersTransactions)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(801).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 Scenario: _0435001 check preparation
@@ -323,6 +327,28 @@ Scenario: _043516 check Cash payment movements by the Register "R3035 Cash plann
 	And I close all client application windows
 
 
+Scenario: _043517 check Cash payment movements by the Register "R3021 Cash in transit (incoming)" (Cash transfer order, with planning transaction basis)
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 326 dated 04.06.2021 12:44:31'   | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '450'       | ''           | 'Main Company' | 'Accountants office' | 'Reporting currency'           | 'USD'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '450'       | ''           | 'Main Company' | 'Accountants office' | 'en description is empty'      | 'USD'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:44:31' | '2 532,38'  | ''           | 'Main Company' | 'Accountants office' | 'Local currency'               | 'TRY'      | 'USD'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |	
+	And I close all client application windows
+
 Scenario: _043518 check absence Cash payment movements by the Register "R3035 Cash planning" (payment to vendor, without planning transaction basis)
 	* Select Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -392,6 +418,29 @@ Scenario: _043522 check absence Cash payment movements by the Register "R5010 Re
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R5010 Reconciliation statement'   | 
+	And I close all client application windows
+
+Scenario: _043528 check Cash payment movements by the Register "R3021 Cash in transit (incoming)" (Currency exchange)
+		And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '325' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 325 dated 04.06.2021 12:43:40'   | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                             | ''         | ''                     | ''             | ''                   | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Account'      | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '171,2'     | ''           | 'Main Company' | 'Accountants office' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '1 000'     | ''           | 'Main Company' | 'Accountants office' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Receipt'     | '04.06.2021 12:43:40' | '1 000'     | ''           | 'Main Company' | 'Accountants office' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash desk №1' | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |	
 	And I close all client application windows
 
 Scenario: _043523 check Cash payment movements by the Register "R1020 Advances to vendors" (with partner term by document, without basis)
@@ -506,17 +555,17 @@ Scenario: _043527 check Cash payment movements by the Register  "R9510 Salary pa
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| 'Register  "R9510 Salary payment"'           | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''         | ''                     | ''                             |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'en description is empty'      |
+			| 'Cash payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             |
+			| 'Register  "R9510 Salary payment"'           | ''            | ''                    | ''          | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''               | ''         | ''                     | ''                             |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | ''               | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | ''               | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | ''               | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | ''               | 'TRY'      | 'TRY'                  | 'en description is empty'      |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | ''               | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | ''               | 'TRY'      | 'TRY'                  | 'en description is empty'      |	
 	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
@@ -578,3 +627,123 @@ Scenario: _043530 Cash payment clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3010 Cash on hand' |
 		And I close all client application windows		
+
+Scenario: _043528 check Cash payment movements by the Register  "R3011 Cash flow"
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '324'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 324 dated 04.06.2021 11:30:02' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 11:30:02' | '164,35'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043531 check Cash payment movements by the Register  "R3011 Cash flow" (Other partner)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '801'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 801 dated 12.06.2023 15:24:47' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '12.06.2023 15:24:47' | '8,56'      | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043531 check Cash payment movements by the Register  "R5010 Reconciliation statement" (Other partner)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '801'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 801 dated 12.06.2023 15:24:47' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 2' | ''                    |	
+	And I close all client application windows
+
+Scenario: _043533 check Cash payment movements by the Register  "R3010 Cash on hand" (Other partner)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '801'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 801 dated 12.06.2023 15:24:47' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '12.06.2023 15:24:47' | '8,56'      | 'Main Company' | 'Front office' | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043534 check Cash payment movements by the Register  "R5015 Other partners transactions" (Other partner)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '801'    |
+		And I select current line in "List" table
+	* Check movements by the Register  "R5015 Other partners transactions" 
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 801 dated 12.06.2023 15:24:47'    | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | 'Attributes'           |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Deferred calculation' |
+			| ''                                              | 'Receipt'     | '12.06.2023 15:24:47' | '8,56'      | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |	
+	And I close all client application windows

@@ -9,7 +9,7 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -18,7 +18,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -31,7 +31,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
@@ -46,15 +46,13 @@ EndProcedure
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 	Return Tables;
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -99,10 +97,10 @@ EndProcedure
 
 #EndRegion
 
-#Region PostingInfo
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -110,26 +108,21 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	QueryArray.Add(R4036B_IncomingStocksRequested_Exists());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests_Exists());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
-	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -149,22 +142,6 @@ Function ItemList()
 		   |	PlannedReceiptReservationItemList.Ref = &Ref"
 EndFunction
 
-Function R4035B_IncomingStocks()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.IncomingStore AS Store,
-		|	ItemList.ItemKey,
-		|	ItemList.IncomingDocument AS Order,
-		|	ItemList.Quantity
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE";
-EndFunction
-
 Function R4035B_IncomingStocks_Exists()
 	Return "SELECT *
 		   |	INTO R4035B_IncomingStocks_Exists
@@ -172,40 +149,6 @@ Function R4035B_IncomingStocks_Exists()
 		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
 		   |WHERE
 		   |	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-
-Function R4036B_IncomingStocksRequested()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.RequesterStore AS IncomingStore,
-		|	ItemList.RequesterStore,
-		|	ItemList.ItemKey,
-		|	ItemList.IncomingDocument AS Order,
-		|	ItemList.Requester,
-		|	ItemList.Quantity
-		|INTO R4036B_IncomingStocksRequested
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.IncomingStore,
-		|	ItemList.IncomingStore,
-		|	ItemList.ItemKey,
-		|	ItemList.IncomingDocument,
-		|	ItemList.Requester,
-		|	ItemList.Quantity
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.RequesterStore <> ItemList.IncomingStore";
 EndFunction
 
 Function R4036B_IncomingStocksRequested_Exists()
@@ -216,6 +159,76 @@ Function R4036B_IncomingStocksRequested_Exists()
 		   |	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
 		   |WHERE
 		   |	R4036B_IncomingStocksRequested.Recorder = &Ref";
+EndFunction
+
+Function R4037B_PlannedReceiptReservationRequests_Exists()
+	Return "SELECT *
+		   |	INTO R4037B_PlannedReceiptReservationRequests_Exists
+		   |FROM
+		   |	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
+		   |WHERE
+		   |	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
+EndFunction
+
+Function R4035B_IncomingStocks()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.IncomingStore AS Store,
+		   |	ItemList.ItemKey,
+		   |	ItemList.IncomingDocument AS Order,
+		   |	ItemList.Quantity
+		   |INTO R4035B_IncomingStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+Function R4036B_IncomingStocksRequested()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.RequesterStore AS IncomingStore,
+		   |	ItemList.RequesterStore,
+		   |	ItemList.ItemKey,
+		   |	ItemList.IncomingDocument AS Order,
+		   |	ItemList.Requester,
+		   |	ItemList.Quantity
+		   |INTO R4036B_IncomingStocksRequested
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.IncomingStore,
+		   |	ItemList.IncomingStore,
+		   |	ItemList.ItemKey,
+		   |	ItemList.IncomingDocument,
+		   |	ItemList.Requester,
+		   |	ItemList.Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.RequesterStore <> ItemList.IncomingStore";
 EndFunction
 
 Function R4037B_PlannedReceiptReservationRequests()
@@ -231,34 +244,42 @@ Function R4037B_PlannedReceiptReservationRequests()
 		   |	TRUE";
 EndFunction
 
-Function R4037B_PlannedReceiptReservationRequests_Exists()
-	Return "SELECT *
-		   |	INTO R4037B_PlannedReceiptReservationRequests_Exists
+Function T3010S_RowIDInfo()
+	Return "SELECT
+		   |	RowIDInfo.RowRef AS RowRef,
+		   |	RowIDInfo.BasisKey AS BasisKey,
+		   |	RowIDInfo.RowID AS RowID,
+		   |	RowIDInfo.Basis AS Basis,
+		   |	ItemList.Key AS Key,
+		   |	0 AS Price,
+		   |	UNDEFINED AS Currency,
+		   |	ItemList.Unit AS Unit
+		   |INTO T3010S_RowIDInfo
 		   |FROM
-		   |	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
-		   |WHERE
-		   |	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
+		   |	Document.PlannedReceiptReservation.ItemList AS ItemList
+		   |		INNER JOIN Document.PlannedReceiptReservation.RowIDInfo AS RowIDInfo
+		   |		ON RowIDInfo.Ref = &Ref
+		   |		AND ItemList.Ref = &Ref
+		   |		AND RowIDInfo.Key = ItemList.Key
+		   |		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
-Function T3010S_RowIDInfo()
-	Return
-		"SELECT
-		|	RowIDInfo.RowRef AS RowRef,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Basis AS Basis,
-		|	ItemList.Key AS Key,
-		|	0 AS Price,
-		|	UNDEFINED AS Currency,
-		|	ItemList.Unit AS Unit
-		|INTO T3010S_RowIDInfo
-		|FROM
-		|	Document.PlannedReceiptReservation.ItemList AS ItemList
-		|		INNER JOIN Document.PlannedReceiptReservation.RowIDInfo AS RowIDInfo
-		|		ON RowIDInfo.Ref = &Ref
-		|		AND ItemList.Ref = &Ref
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND RowIDInfo.Ref = ItemList.Ref";
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

@@ -56,6 +56,7 @@ Scenario: _043000 preparation (Debit note)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
+		When Create OtherPartners objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -136,6 +137,9 @@ Scenario: _043000 preparation (Debit note)
 			| "Documents.DebitNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create DebitNote (OtherPartnersTransactions)
+		And I execute 1C:Enterprise script at server
+			| "Documents.DebitNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _043000 check preparation
@@ -278,7 +282,71 @@ Scenario: _043007 check Debit note movements by the Register "R5021 Revenues" (w
 			| ''                                       | '05.04.2021 09:31:09' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      |
 	And I close all client application windows
 
+Scenario: _043008 check Debit note movements by the Register "R5021 Revenues" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 3 dated 12.06.2023 14:52:33' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'         | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'             | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                       | '12.06.2023 14:52:33' | '17,12'     | '17,12'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                       | '12.06.2023 14:52:33' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                       | '12.06.2023 14:52:33' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Revenue'      | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                       | '12.06.2023 14:52:33' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |	
+	And I close all client application windows
 
+Scenario: _043009 check Debit note movements by the Register "R5015 Other partners transactions" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5015 Other partners transactions" 
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 3 dated 12.06.2023 14:52:33'        | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | 'Attributes'           |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Deferred calculation' |
+			| ''                                              | 'Receipt'     | '12.06.2023 14:52:33' | '17,12'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 14:52:33' | '100'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 14:52:33' | '100'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |
+			| ''                                              | 'Receipt'     | '12.06.2023 14:52:33' | '100'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043010 check Debit note movements by the Register "R5010 Reconciliation statement" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 3 dated 12.06.2023 14:52:33'     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '12.06.2023 14:52:33' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 1' | ''                    |	
+	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows

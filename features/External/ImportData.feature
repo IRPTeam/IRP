@@ -2629,9 +2629,10 @@ Scenario: Create catalog PaymentSchedules objects
 Scenario: Create catalog PlanningPeriods objects
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'          | 'EndDate'            | 'Type'                               |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'                   | '01.08.2021 0:00:00' | '10.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'                  | '11.08.2021 0:00:00' | '20.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'         | 'BeginDate'          | 'EndDate'            | 'IsFinancial' | 'IsManufacturing' | 'IsSalary' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'               | '01.08.2021 0:00:00' | '10.08.2021 0:00:00' | 'True'        | 'False'           | 'True'     |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'              | '11.08.2021 0:00:00' | '20.08.2021 0:00:00' | 'True'        | 'False'           | 'True'     |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b79dc4a595d82c4911ee0130a1296aa2' | 'False'        | 4      | 'Third (only salary)' | '01.02.2023 0:00:00' | '28.02.2023 0:00:00' | 'False'       | 'False'           | 'True'     |
 
 	
 Scenario: Create catalog Agreements objects (Customer)
@@ -3005,3 +3006,30 @@ Scenario: Create catalog BillOfMaterials objects (LC)
 		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39a5560fdf75' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf68' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6b' | 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 1.521      | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
 		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf65' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf66' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
 		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6c' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
+
+
+Scenario: Create OtherPartners objects
+
+	// Catalog.Partners
+
+	And I check or create catalog "Partners" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Consignor' | 'TradeAgent' | 'Other' | 'ManagerSegment' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba0' | 'False'        | ''       | 80     | 'False'    | 'False'  | 'False'    | 'False'     | 'False'      | 'True'  | ''               | 'Other partner 1' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | 'False'        | ''       | 81     | 'False'    | 'False'  | 'False'    | 'False'     | 'False'      | 'True'  | ''               | 'Other partner 2' | ''                 | ''               | ''               |
+
+	// Catalog.Companies
+
+	And I check or create catalog "Companies" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code'  | 'Country' | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'LandedCostCurrencyMovementType' | 'LandedCostExpenseType' | 'LandedCostFillEmptyAmount' | 'LandedCostPriceTypeForEmptyAmount' | 'TradeAgentStore' | 'TaxID' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba1' | 'False'        | 120     | ''        | ''            | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba0' | 'Enum.CompanyLegalType.Company' | 'False'      | ''                               | ''                      | 'False'                     | ''                                  | ''                | ''      | 'Other partner 1' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | 'False'        | 121     | ''        | ''            | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | 'Enum.CompanyLegalType.Company' | 'False'      | ''                               | ''                      | 'False'                     | ''                                  | ''                | ''      | 'Other partner 2' | ''                 | ''               | ''               |
+
+	// Catalog.Agreements
+
+	And I check or create catalog "Agreements" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Code'  | 'Number' | 'Date'                | 'PartnerSegment' | 'Partner'                                                          | 'Company' | 'PriceType' | 'ItemSegment' | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store' | 'Type'                      | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                   | 'StandardAgreement' | 'Kind'                        | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'TradeAgentFeeType' | 'TradeAgentFeePercent' | 'TradeAgentFeeItem' | 'TradeAgentFeeItemKey' | 'TradeAgentFeeProfitLossCenter' | 'TradeAgentFeeExpenseRevenueType' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba2' | 'False'        | 130     | '1'      | '01.01.2023 00:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba0' | ''        | ''          | ''            | '01.01.2023 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           |                      | ''      | 'Enum.AgreementTypes.Other' | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba1' | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByAgreements' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          |                     | ''            | ''                  |                        | ''                  | ''                     | ''                              | ''                                | 'Other partner 1' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba5' | 'False'        | 131     | ''       | '01.01.2023 00:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | ''        | ''          | ''            | '01.01.2023 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           |                      | ''      | 'Enum.AgreementTypes.Other' | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByAgreements' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          |                     | ''            | ''                  |                        | ''                  | ''                     | ''                              | ''                                | 'Other partner 2' | ''                 | ''               | ''               |
+
+	
+

@@ -32,6 +32,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("BasedOn"           , New TypeDescription("String"));
 	ValueTable.Columns.Add("Company"           , New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("Branch"            , New TypeDescription("CatalogRef.BusinessUnits"));
+	ValueTable.Columns.Add("ReceiveBranch"     , New TypeDescription("CatalogRef.BusinessUnits"));
 	ValueTable.Columns.Add("CashTransferOrder" , New TypeDescription("DocumentRef.CashTransferOrder"));
 	
 	ValueTable.Columns.Add("Sender"       , New TypeDescription("CatalogRef.CashAccounts"));
@@ -51,7 +52,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	EndDo;
 
 	ValueTableCopy = ValueTable.Copy();
-	ValueTableCopy.GroupBy("BasedOn, Company, Branch, CashTransferOrder,
+	ValueTableCopy.GroupBy("BasedOn, Company, Branch, ReceiveBranch, CashTransferOrder,
 		|Sender, SendCurrency, SendFinancialMovementType, SendAmount,
 		|Receiver, ReceiveCurrency, ReceiveFinancialMovementType, ReceiveAmount");
 
@@ -62,6 +63,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		Result.Insert("BasedOn"                      , Row.BasedOn);
 		Result.Insert("Company"                      , Row.Company);
 		Result.Insert("Branch"                       , Row.Branch);
+		Result.Insert("ReceiveBranch"                , Row.ReceiveBranch);
 		Result.Insert("CashTransferOrder"            , Row.CashTransferOrder);
 		Result.Insert("Sender"                       , Row.Sender);
 		Result.Insert("SendCurrency"                 , Row.SendCurrency);

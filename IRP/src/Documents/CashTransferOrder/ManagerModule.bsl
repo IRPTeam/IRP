@@ -9,23 +9,18 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
-
-#Region NewRegistersPosting
+	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -33,16 +28,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
-
-#Region NewRegistersPosting
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -72,9 +62,10 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -82,21 +73,19 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(MoneySender());
 	QueryArray.Add(MoneyReceiver());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R3035T_CashPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -123,7 +112,7 @@ EndFunction
 Function MoneyReceiver()
 	Return "SELECT
 		   |	CashTransferOrder.Company AS Company,
-		   |	CashTransferOrder.Ref.Branch AS Branch,
+		   |	CashTransferOrder.Ref.ReceiveBranch AS ReceiveBranch,
 		   |	CashTransferOrder.Ref AS Ref,
 		   |	CashTransferOrder.Receiver AS Account,
 		   |	CashTransferOrder.ReceiveAmount AS Amount,
@@ -138,6 +127,16 @@ Function MoneyReceiver()
 		   |	Document.CashTransferOrder AS CashTransferOrder
 		   |WHERE
 		   |	CashTransferOrder.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R3035T_CashPlanning());
+	Return QueryArray;
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -163,7 +162,7 @@ Function R3035T_CashPlanning()
 		   |	MoneyReceiver.Period,
 		   |	MoneyReceiver.ReceivePeriod,
 		   |	MoneyReceiver.Company,
-		   |	MoneyReceiver.Branch,
+		   |	MoneyReceiver.ReceiveBranch,
 		   |	MoneyReceiver.Account,
 		   |	MoneyReceiver.Amount,
 		   |	MoneyReceiver.Currency,
@@ -173,6 +172,24 @@ Function R3035T_CashPlanning()
 		   |	MoneyReceiver.Key
 		   |FROM
 		   |	MoneyReceiver AS MoneyReceiver";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

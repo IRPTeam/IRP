@@ -572,8 +572,8 @@ Scenario: Create catalog PaymentTypes objects (test data base)
 Scenario: Create catalog PlanningPeriods objects (test data base)
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'        | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebcce0365effff' | 'False'        | '4'    | 'Planning period 01' | '01.03.2021 00:00:00' | '10.03.2021 00:00:00' |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'        | 'BeginDate'           | 'EndDate'             |'IsFinancial' | 'IsManufacturing' | 'IsSalary' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebcce0365effff' | 'False'        | '4'    | 'Planning period 01' | '01.03.2021 00:00:00' | '10.03.2021 00:00:00' | 'True'       | 'True'            | 'True'     |
 
 Scenario: Create catalog ExternalDataProc objects (test data base)
 

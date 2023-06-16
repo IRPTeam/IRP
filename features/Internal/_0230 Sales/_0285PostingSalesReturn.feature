@@ -690,6 +690,7 @@ Scenario: _028515 create document Sales return based on SRO
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
+			And in the table "ItemList" I click "Edit quantity in base unit" button
 			And I go to line in "ItemList" table
 				| '#' |
 				| '1' |
@@ -705,8 +706,8 @@ Scenario: _028515 create document Sales return based on SRO
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
 				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Stock quantity' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
-				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
-				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
+				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'          | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'         | '2' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
 			And "RowIDInfo" table contains lines
 				| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 				| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
@@ -741,10 +742,11 @@ Scenario: _028515 create document Sales return based on SRO
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"		
 		And I click "Show row key" button	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Additional analytic' | 'Stock quantity' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
-			| 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
-			| 'Store 02' | ''                    | '36,000'                | '2' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+			| 'Store 02' | ''                    | '1,000'          | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+			| 'Store 02' | ''                    | '36,000'         | '2' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |

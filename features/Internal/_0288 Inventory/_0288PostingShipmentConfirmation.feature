@@ -401,10 +401,11 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
-			And I click "Show row key" button				
+			And I click "Show row key" button
+			And in the table "ItemList" I click "Edit quantity in base unit" button				
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
+				| 'Store'    | '#' | 'Stock quantity'        | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'              |
 				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |
@@ -489,11 +490,12 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
-			And I click "Show row key" button				
+			And I click "Show row key" button
+			And in the table "ItemList" I click "Edit quantity in base unit" button				
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
 				| 'Store'    | 'Shipment basis'                               | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
-				| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'                 | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
+				| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'          | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                                        | 'Next step' | 'Quantity'     | 'Current step' |
 				| 'Purchase return 32 dated 24.03.2021 15:15:22' | ''          | '1,000' | 'SC'           |
@@ -512,10 +514,11 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And I click "Show row key" button	
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
 			| 'Store'    | 'Shipment basis'                               | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
-			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'                 | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'            | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
-			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '2' | '24,000'                | 'Boots' | ''                   | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
+			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'          | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'            | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
+			| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '2' | '24,000'         | 'Boots' | ''                   | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -530,9 +533,9 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		And I save the current field value as "$$Rov2ShipmentConfirmation028815$$"		
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                | 'Basis'                                        | 'Row ID' | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref' |
-			| '1' | '$$Rov1ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '1,000'  | '*'         | 'SC'           | '*'       |
-			| '2' | '$$Rov2ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '24,000' | '*'         | 'SC'           | '*'       |
+			| '#' | 'Key'                                | 'Basis'                                        | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '1,000'    | '*'         | 'SC'           | '*'       |
+			| '2' | '$$Rov2ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '24,000'   | '*'         | 'SC'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click the button named "FormPost"
 		And I delete "$$NumberShipmentConfirmation028810$$" variable

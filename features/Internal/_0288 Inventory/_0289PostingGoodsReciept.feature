@@ -234,11 +234,12 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
-			And I click "Show row key" button				
+			And I click "Show row key" button	
+			And in the table "ItemList" I click "Edit quantity in base unit" button			
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
-				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
+				| 'Store'    | '#' | 'Stock quantity' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'               | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
+				| 'Store 03' | '1' | '3,000'          | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'GR' |
@@ -265,8 +266,8 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 		And I save the current field value as "$$Rov1GoodsReceipt028905$$"	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                       | 'Row ID' | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref' |
-			| '1' | '$$Rov1GoodsReceipt028905$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'GR'           | '*'       |
+			| '#' | 'Key'                        | 'Basis'                       | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1GoodsReceipt028905$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000'    | '*'         | 'GR'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I click the button named "FormPost"
 		And I delete "$$NumberGoodsReceipt028905$$" variable

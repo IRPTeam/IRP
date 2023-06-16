@@ -58,7 +58,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Payee,
 	|PaymentList.Order,
 	|PaymentList.RetailCustomer,
-	|PaymentList.Employee";
+	|PaymentList.Employee,
+	|PaymentList.PaymentPeriod";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -72,6 +73,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
 
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -91,6 +93,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		If TransactionType = PaymentToVendor Then
 			StrByType = StrByType + ", PaymentList.Order";
 		EndIf;
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payee,
+		|PaymentList.LegalNameContract";		
 	ElsIf TransactionType = CustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,
@@ -102,7 +110,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = SalaryPayment Then
 		StrByType = "
-		|PaymentList.Employee";
+		|PaymentList.Employee,
+		|PaymentList.PaymentPeriod";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();
@@ -124,6 +133,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	IsSalaryPayment       = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	
 	ArrayTypes = New Array();
 	
@@ -152,8 +162,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.ChoiceByAccrual.Visible = 
-		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	Form.Items.PaymentListChoiceByAccrual.Enabled = Not Form.ReadOnly;
+	
+	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
 EndProcedure
 
 #EndRegion

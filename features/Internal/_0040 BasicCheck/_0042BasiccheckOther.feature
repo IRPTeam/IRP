@@ -525,11 +525,11 @@ Scenario: Open object form "R3010B_CashOnHand"
 	And I close current window
 
 
-Scenario: Open object form "R3011T_CashMovements"
+Scenario: Open object form "R3011T_CashFlow"
 
-	Given I open "R3011T_CashMovements" accumulation register default form
+	Given I open "R3011T_CashFlow" accumulation register default form
 	If the warning is displayed then
-		Then I raise "Failed to open information register form R3011T_CashMovements" exception
+		Then I raise "Failed to open information register form R3011T_CashFlow" exception
 	And I close current window
 
 Scenario: Open object form "R3015B_CashAdvance"

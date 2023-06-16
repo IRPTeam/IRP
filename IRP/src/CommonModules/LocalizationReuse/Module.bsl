@@ -114,5 +114,6 @@ Function MetadataLanguages() Export
 		EndIf;
 		Result.Insert(It.LanguageCode, It.Name);
 	EndDo;
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction

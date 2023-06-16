@@ -431,6 +431,8 @@ Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Unde
 	|	tmpItemList.Key,
 	|	BasisDocumentSpecialOffers.Offer,
 	|	BasisDocumentSpecialOffers.Amount,
+	|	BasisDocumentSpecialOffers.Bonus,
+	|	BasisDocumentSpecialOffers.AddInfo,
 	|	BasisDocumentItemList.Quantity
 	|FROM
 	|	tmpItemList AS tmpItemList

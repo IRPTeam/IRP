@@ -1193,6 +1193,11 @@ Function WriteTransaction(Result)
 		ObjectValue = FormAttributeToValue("Object");
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Payments.Load(Payments);
+		For Each Row In ObjectValue.Payments Do
+			If ValueIsFilled(Row.PaymentType) Then
+				Row.FinancialMovementType = Row.PaymentType.FinancialMovementType;
+			EndIf;
+		EndDo;
 		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
@@ -1889,12 +1894,15 @@ Procedure RecalculateOffer(ListItem)
 	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
 	For Each OfferRow In OfferRows Do
 		RetailBasisAmount = 0;
+		RetailBasisBonus = 0;
 		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
 			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
 		For Each BasisOffer In BasisOffers Do
 			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount; 
+			RetailBasisBonus = RetailBasisBonus + BasisOffer.Bonus; 
 		EndDo;
 		OfferRow.Amount = RetailBasisAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+		OfferRow.Bonus = RetailBasisBonus * ListItem.Quantity / ListItem.RetailBasisQuantity;
 		ListItem.OffersAmount = ListItem.OffersAmount + OfferRow.Amount; 
 	EndDo;
 EndProcedure

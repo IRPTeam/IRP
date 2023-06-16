@@ -82,6 +82,24 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Row.Picture = -1;
 		EndIf;
 	EndDo;
+	
+	isProduce = (Object.TransactionType = PredefinedValue("Enum.ProductionTransactionTypes.Produce"));
+	
+	Form.Items.PlanningPeriod.Visible = isProduce;
+	Form.Items.PlanningPeriodStartDate.Visible = isProduce;
+	Form.Items.PlanningPeriodEndDate.Visible = isProduce;
+	Form.Items.ProductionPlanning.Visible = isProduce;
+
+	Form.Items.BillOfMaterials.Visible = isProduce;
+	Form.Items.DurationOfProduction.Visible = isProduce;
+	Form.Items.CostMultiplierRatio.Visible = isProduce;
+
+	Form.Items.MaterialsItemBOM.Visible = isProduce;
+	Form.Items.MaterialsItemKeyBOM.Visible = isProduce;
+	Form.Items.MaterialsUnitBOM.Visible = isProduce;
+	Form.Items.MaterialsQuantityBOM.Visible = isProduce;
+	
+	Form.Items.MaterialsUpdateByBillOfMaterials.Visible = isProduce;
 EndProcedure
 
 #EndRegion
@@ -110,6 +128,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocProductionClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocProductionClient.TransactionTypeOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion

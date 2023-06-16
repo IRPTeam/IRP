@@ -9,24 +9,19 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 	Parameters.IsReposting = False;
-
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
@@ -34,15 +29,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
-#Region NewRegistersPosting
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -59,17 +50,15 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -103,9 +92,8 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters),
-		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters),
-		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
+		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
@@ -117,10 +105,10 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -128,13 +116,17 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
@@ -143,26 +135,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
-	QueryArray.Add(R1031B_ReceiptInvoicing());
-	QueryArray.Add(R2031B_ShipmentInvoicing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
-	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -230,52 +202,93 @@ Function ItemList()
 EndFunction
 
 Function IncomingStocksReal()
-	Return
-		"SELECT
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	CASE
-		|		WHEN ItemList.ProductionPlanning.Ref IS NULL
-		|			THEN ItemList.PurchaseOrder
-		|		ELSE ItemList.ProductionPlanning
-		|	END AS Order,
-		|	SUM(ItemList.Quantity) AS Quantity
-		|INTO IncomingStocksReal
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE
-		|GROUP BY
-		|	ItemList.ItemKey,
-		|	ItemList.Period,
-		|	CASE
-		|		WHEN ItemList.ProductionPlanning.Ref IS NULL
-		|			THEN ItemList.PurchaseOrder
-		|		ELSE ItemList.ProductionPlanning
-		|	END,
-		|	ItemList.Store";
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	CASE
+		   |		WHEN ItemList.ProductionPlanning.Ref IS NULL
+		   |			THEN ItemList.PurchaseOrder
+		   |		ELSE ItemList.ProductionPlanning
+		   |	END AS Order,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO IncomingStocksReal
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	ItemList.ItemKey,
+		   |	ItemList.Period,
+		   |	CASE
+		   |		WHEN ItemList.ProductionPlanning.Ref IS NULL
+		   |			THEN ItemList.PurchaseOrder
+		   |		ELSE ItemList.ProductionPlanning
+		   |	END,
+		   |	ItemList.Store";
 EndFunction
 
 Function SerialLotNumbers()
-	Return 
-	"SELECT
-	|	SerialLotNumbers.Ref.Date AS Period,
-	|	SerialLotNumbers.Ref.Company AS Company,
-	|	SerialLotNumbers.Ref.Branch AS Branch,
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-	|	SerialLotNumbers.Quantity,
-	|	ItemList.ItemKey AS ItemKey
-	|INTO SerialLotNumbers
-	|FROM
-	|	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
-	|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-	|		ON SerialLotNumbers.Key = ItemList.Key
-	|		AND ItemList.Ref = &Ref
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+	Return "SELECT
+		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.Company AS Company,
+		   |	SerialLotNumbers.Ref.Branch AS Branch,
+		   |	SerialLotNumbers.Key,
+		   |	SerialLotNumbers.SerialLotNumber,
+		   |	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+		   |	SerialLotNumbers.Quantity,
+		   |	ItemList.ItemKey AS ItemKey
+		   |INTO SerialLotNumbers
+		   |FROM
+		   |	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+		   |		ON SerialLotNumbers.Key = ItemList.Key
+		   |		AND ItemList.Ref = &Ref
+		   |WHERE
+		   |	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function Exists_R4035B_IncomingStocks()
+	Return "SELECT *
+		   |	INTO Exists_R4035B_IncomingStocks
+		   |FROM
+		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		   |WHERE
+		   |	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+
+Function Exists_R4036B_IncomingStocksRequested()
+	Return "SELECT
+		   |	*
+		   |INTO Exists_R4036B_IncomingStocksRequested
+		   |FROM
+		   |	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
+		   |WHERE
+		   |	R4036B_IncomingStocksRequested.Recorder = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2031B_ShipmentInvoicing());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
 EndFunction
 
 Function R1011B_PurchaseOrdersReceipt()
@@ -371,73 +384,72 @@ Function R2013T_SalesOrdersProcurement()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	CASE
-		|		WHEN SerialLotNumbers.StockBalanceDetail
-		|			THEN SerialLotNumbers.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END AS SerialLotNumber,
-		|	SUM(CASE
-		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		|			THEN ItemList.Quantity
-		|		ELSE SerialLotNumbers.Quantity
-		|	END) AS Quantity
-		|INTO R4010B_ActualStocks
-		|FROM
-		|	ItemList AS ItemList
-		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		|		ON ItemList.Key = SerialLotNumbers.Key
-		|WHERE
-		|	TRUE
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	CASE
-		|		WHEN SerialLotNumbers.StockBalanceDetail
-		|			THEN SerialLotNumbers.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.TradeAgentStore,
-		|	ItemList.ItemKey,
-		|	CASE
-		|		WHEN SerialLotNumbers.StockBalanceDetail
-		|			THEN SerialLotNumbers.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END AS SerialLotNumber,
-		|	SUM(CASE
-		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		|			THEN ItemList.Quantity
-		|		ELSE SerialLotNumbers.Quantity
-		|	END) AS Quantity
-		|FROM
-		|	ItemList AS ItemList
-		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		|		ON ItemList.Key = SerialLotNumbers.Key
-		|WHERE
-		|	ItemList.IsTransaction_ReturnFromTradeAgent
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemList.Period,
-		|	ItemList.TradeAgentStore,
-		|	ItemList.ItemKey,
-		|	CASE
-		|		WHEN SerialLotNumbers.StockBalanceDetail
-		|			THEN SerialLotNumbers.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	CASE
+		   |		WHEN SerialLotNumbers.StockBalanceDetail
+		   |			THEN SerialLotNumbers.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END AS SerialLotNumber,
+		   |	SUM(CASE
+		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		   |			THEN ItemList.Quantity
+		   |		ELSE SerialLotNumbers.Quantity
+		   |	END) AS Quantity
+		   |INTO R4010B_ActualStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		   |		ON ItemList.Key = SerialLotNumbers.Key
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	CASE
+		   |		WHEN SerialLotNumbers.StockBalanceDetail
+		   |			THEN SerialLotNumbers.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.TradeAgentStore,
+		   |	ItemList.ItemKey,
+		   |	CASE
+		   |		WHEN SerialLotNumbers.StockBalanceDetail
+		   |			THEN SerialLotNumbers.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END AS SerialLotNumber,
+		   |	SUM(CASE
+		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		   |			THEN ItemList.Quantity
+		   |		ELSE SerialLotNumbers.Quantity
+		   |	END) AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		   |		ON ItemList.Key = SerialLotNumbers.Key
+		   |WHERE
+		   |	ItemList.IsTransaction_ReturnFromTradeAgent
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.TradeAgentStore,
+		   |	ItemList.ItemKey,
+		   |	CASE
+		   |		WHEN SerialLotNumbers.StockBalanceDetail
+		   |			THEN SerialLotNumbers.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -547,15 +559,6 @@ Function R4035B_IncomingStocks()
 		   |	TRUE";
 EndFunction
 
-Function Exists_R4035B_IncomingStocks()
-	Return "SELECT *
-		   |	INTO Exists_R4035B_IncomingStocks
-		   |FROM
-		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		   |WHERE
-		   |	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-
 Function R4036B_IncomingStocksRequested()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -565,16 +568,6 @@ Function R4036B_IncomingStocksRequested()
 		   |	IncomingStocksRequested AS IncomingStocksRequested
 		   |WHERE
 		   |	TRUE";
-EndFunction
-
-Function Exists_R4036B_IncomingStocksRequested()
-	Return "SELECT
-		   |	*
-		   |INTO Exists_R4036B_IncomingStocksRequested
-		   |FROM
-		   |	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
-		   |WHERE
-		   |	R4036B_IncomingStocksRequested.Recorder = &Ref";
 EndFunction
 
 Function R4012B_StockReservation()
@@ -593,24 +586,41 @@ Function R4012B_StockReservation()
 EndFunction
 
 Function T3010S_RowIDInfo()
-	Return
-		"SELECT
-		|	RowIDInfo.RowRef AS RowRef,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Basis AS Basis,
-		|	ItemList.Key AS Key,
-		|	0 AS Price,
-		|	UNDEFINED AS Currency,
-		|	ItemList.Unit AS Unit
-		|INTO T3010S_RowIDInfo
-		|FROM
-		|	Document.GoodsReceipt.ItemList AS ItemList
-		|		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
-		|		ON RowIDInfo.Ref = &Ref
-		|		AND ItemList.Ref = &Ref
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND RowIDInfo.Ref = ItemList.Ref";
+	Return "SELECT
+		   |	RowIDInfo.RowRef AS RowRef,
+		   |	RowIDInfo.BasisKey AS BasisKey,
+		   |	RowIDInfo.RowID AS RowID,
+		   |	RowIDInfo.Basis AS Basis,
+		   |	ItemList.Key AS Key,
+		   |	0 AS Price,
+		   |	UNDEFINED AS Currency,
+		   |	ItemList.Unit AS Unit
+		   |INTO T3010S_RowIDInfo
+		   |FROM
+		   |	Document.GoodsReceipt.ItemList AS ItemList
+		   |		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+		   |		ON RowIDInfo.Ref = &Ref
+		   |		AND ItemList.Ref = &Ref
+		   |		AND RowIDInfo.Key = ItemList.Key
+		   |		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

@@ -49,13 +49,21 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsOtherCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense"));
+	IsCurrentCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.CurrentCompanyExpense"));
+	IsOtherCompanyExpense   = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense"));
+	IsSalaryPayment         = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment"));
 	
-	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense;
-	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense;
+	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense Or IsSalaryPayment;
+	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense Or IsSalaryPayment;
+
+	Form.Items.PaymentListProfitLossCenter.Visible = IsCurrentCompanyExpense Or IsOtherCompanyExpense;
+	Form.Items.PaymentListExpenseType.Visible      = IsCurrentCompanyExpense Or IsOtherCompanyExpense;
+
+	Form.Items.PaymentListEmployee.Visible      = IsSalaryPayment;
+	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
 	
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled       = Not Form.ReadOnly;
 EndProcedure
 
 #Region TRANSACTION_TYPE

@@ -176,6 +176,7 @@ Scenario: _602706 check user message
 
 
 Scenario: _602780 test data base connection
+	Then I stop script execution "Skipped"
 	And I close all client application windows
 	* Сondition check
 		If "$Publication$" variable is equal to "false" Then

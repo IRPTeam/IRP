@@ -51,6 +51,7 @@ Scenario: _043100 preparation (Credit note)
 		When Create catalog BusinessUnits objects
 		When Create catalog LegalNameContracts objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create OtherPartners objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
@@ -111,6 +112,9 @@ Scenario: _043100 preparation (Credit note)
 				| "Documents.CreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 				| "Documents.CreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create CreditNote (OtherPartnersTransactions)
+		And I execute 1C:Enterprise script at server
+				| "Documents.CreditNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _0431001 check preparation
@@ -253,6 +257,95 @@ Scenario: _043107 check Credit note movements by the Register "R5022 Expenses" (
 			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
 			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          | ''                          |
 			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
+	And I close all client application windows
+
+Scenario: _043108 check Credit note movements by the Register "R5022 Expenses" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 3 dated 12.06.2023 14:56:54' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'          | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'              | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                        | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                        | '12.06.2023 14:56:54' | '17,12'     | '17,12'             | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'TRY'                          | ''                          |
+			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |	
+	And I close all client application windows
+
+Scenario: _043109 check Credit note movements by the Register "R5015 Other partners transactions" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5015 Other partners transactions" 
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 3 dated 12.06.2023 14:56:54'       | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | 'Attributes'           |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Deferred calculation' |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '17,12'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043109 check Credit note movements by the Register "R5015 Other partners transactions" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5015 Other partners transactions" 
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 3 dated 12.06.2023 14:56:54'       | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                | ''                | ''                | 'Attributes'           |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Deferred calculation' |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '17,12'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043110 check Credit note movements by the Register "R5010 Reconciliation statement" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 3 dated 12.06.2023 14:56:54'    | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' |
+			| ''                                           | 'Expense'     | '12.06.2023 14:56:54' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 2' | ''                    |	
 	And I close all client application windows
 
 Scenario: _043130 Credit note clear posting/mark for deletion

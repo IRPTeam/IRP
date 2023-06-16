@@ -146,6 +146,7 @@
   <defaultFolderForm>Catalog.SpecialOffers.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.SpecialOffers.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.SpecialOffers.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.SpecialOffers.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="fab4eaec-2a2f-40c0-ba87-06946e527260">
     <name>Settings</name>
@@ -173,7 +174,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <createOnInput>Use</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
     <use>ForFolderAndItem</use>
@@ -324,8 +324,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <use>ForFolder</use>
+    <use>ForFolderAndItem</use>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="20fc2b4b-9b9b-4391-8e0c-85a97819a22a">
+    <name>OfferGroupType</name>
+    <synonym>
+      <key>en</key>
+      <value>Offer group type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.OfferGroupType</types>
+    </type>
+    <use>ForFolderAndItem</use>
   </attributes>
   <tabularSections uuid="0f4c534b-e7a5-4315-af0f-02d495968dc0">
     <producedTypes>
@@ -427,6 +438,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="424ed3da-99fd-471d-bf4e-821f5346eb38">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

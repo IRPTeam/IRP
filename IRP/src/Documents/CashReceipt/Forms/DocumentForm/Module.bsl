@@ -74,6 +74,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	// visible columns
 	If TransactionType = CashTransferOrder Then
@@ -98,6 +99,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		If TransactionType = PaymentFromCustomer Then
 			StrByType = StrByType + ", PaymentList.Order";
 		EndIf;
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payer,
+		|PaymentList.LegalNameContract";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";

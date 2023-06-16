@@ -105,14 +105,46 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c10de959-bc44-4981-aed6-5a7f6ee7d405">
-    <name>Type</name>
+  <attributes uuid="092a4abc-ad4e-45b6-9fc8-4dfd2c40f2f6">
+    <name>IsFinancial</name>
     <synonym>
       <key>en</key>
-      <value>Type</value>
+      <value>Is financial</value>
     </synonym>
     <type>
-      <types>EnumRef.PlanningPeriodTypes</types>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7cc75b98-af62-4284-a095-10a25d6aa741">
+    <name>IsManufacturing</name>
+    <synonym>
+      <key>en</key>
+      <value>Is manufacturing</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a8447cce-d4db-4f12-99c1-fbe5115a62be">
+    <name>IsSalary</name>
+    <synonym>
+      <key>en</key>
+      <value>Is salary</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

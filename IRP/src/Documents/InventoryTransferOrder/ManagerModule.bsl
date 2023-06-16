@@ -9,52 +9,41 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
-#Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
 		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 		Return Tables;
 	EndIf;
 
 	Parameters.IsReposting = False;
 
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
-
-#Region NewRegistersPosting
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -71,15 +60,13 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -96,7 +83,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	AccReg = AccumulationRegisters;
 
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
-	
+
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.InventoryTransferOrder.ItemList");
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
@@ -125,10 +112,10 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -136,7 +123,7 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("Period", StatusInfo.Period);
 	StrParams.Insert("Ref", Ref);
@@ -151,26 +138,16 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
-	QueryArray.Add(R4020T_StockTransferOrders());
-	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
-	QueryArray.Add(R4022B_StockTransferOrdersShipment());
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -213,6 +190,43 @@ Function ItemList()
 		   |WHERE
 		   |	InventoryTransferOrderItemList.Ref = &Ref
 		   |	AND &StatusInfoPosting";
+EndFunction
+
+Function Exists_R4035B_IncomingStocks()
+	Return "SELECT *
+		   |	INTO Exists_R4035B_IncomingStocks
+		   |FROM
+		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		   |WHERE
+		   |	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+
+Function Exists_R4036B_IncomingStocksRequested()
+	Return "SELECT
+		   |	*
+		   |INTO Exists_R4036B_IncomingStocksRequested
+		   |FROM
+		   |	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
+		   |WHERE
+		   |	R4036B_IncomingStocksRequested.Recorder = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
+	QueryArray.Add(R4020T_StockTransferOrders());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4022B_StockTransferOrdersShipment());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -319,15 +333,6 @@ Function R4035B_IncomingStocks()
 		   |	ItemList.PurchaseOrder";
 EndFunction
 
-Function Exists_R4035B_IncomingStocks()
-	Return "SELECT *
-		   |	INTO Exists_R4035B_IncomingStocks
-		   |FROM
-		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		   |WHERE
-		   |	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-
 Function R4036B_IncomingStocksRequested()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -352,35 +357,42 @@ Function R4036B_IncomingStocksRequested()
 		   |	ItemList.Order";
 EndFunction
 
-Function Exists_R4036B_IncomingStocksRequested()
+Function T3010S_RowIDInfo()
 	Return "SELECT
-		   |	*
-		   |INTO Exists_R4036B_IncomingStocksRequested
+		   |	RowIDInfo.RowRef AS RowRef,
+		   |	RowIDInfo.BasisKey AS BasisKey,
+		   |	RowIDInfo.RowID AS RowID,
+		   |	RowIDInfo.Basis AS Basis,
+		   |	ItemList.Key AS Key,
+		   |	0 AS Price,
+		   |	UNDEFINED AS Currency,
+		   |	ItemList.Unit AS Unit
+		   |INTO T3010S_RowIDInfo
 		   |FROM
-		   |	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
-		   |WHERE
-		   |	R4036B_IncomingStocksRequested.Recorder = &Ref";
+		   |	Document.InventoryTransferOrder.ItemList AS ItemList
+		   |		INNER JOIN Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
+		   |		ON RowIDInfo.Ref = &Ref
+		   |		AND ItemList.Ref = &Ref
+		   |		AND RowIDInfo.Key = ItemList.Key
+		   |		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
-Function T3010S_RowIDInfo()
-	Return
-		"SELECT
-		|	RowIDInfo.RowRef AS RowRef,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Basis AS Basis,
-		|	ItemList.Key AS Key,
-		|	0 AS Price,
-		|	UNDEFINED AS Currency,
-		|	ItemList.Unit AS Unit
-		|INTO T3010S_RowIDInfo
-		|FROM
-		|	Document.InventoryTransferOrder.ItemList AS ItemList
-		|		INNER JOIN Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
-		|		ON RowIDInfo.Ref = &Ref
-		|		AND ItemList.Ref = &Ref
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND RowIDInfo.Ref = ItemList.Ref";
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

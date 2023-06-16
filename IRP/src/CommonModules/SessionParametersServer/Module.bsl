@@ -41,6 +41,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 			If RequiredParameters.Find("InterfaceLocalizationCode") <> Undefined Then
 				SessionParameters.InterfaceLocalizationCode = CurrentUser.InterfaceLocalizationCode;
 			EndIf;
+			If RequiredParameters.Find("CurrentUserAccessProfiles") <> Undefined Then
+				SessionParameters.CurrentUserAccessProfiles = New FixedArray(UsersEvent.GetUserProfiles(CurrentUser));
+			EndIf;			
 		EndIf;
 	Else
 		If RequiredParameters.Find("CurrentUser") <> Undefined Then

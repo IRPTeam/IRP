@@ -48,6 +48,7 @@ Scenario: _095001 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create OtherPartners objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -601,6 +602,128 @@ Scenario: _095007 check the legal name filling if the partner has only one
 		And "Transactions" table contains lines
 			| 'Partner' | 'Legal name'    |
 			| 'DFC'     | 'DFC' |
+		And I close all client application windows
+
+Scenario: _095008 create DebitNote (OtherPartnersTransactions)
+	And I close all client application windows
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Filling in document
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Other partner 1'       |
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I activate "Revenue type" field in "Transactions" table
+		And I click choice button of "Revenue type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Revenue'    |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+	* Check creation
+		And I click the button named "FormPost"
+		And "Transactions" table became equal
+			| '#' | 'Partner'         | 'Amount' | 'Revenue type' | 'Legal name'      | 'Partner term'    | 'Legal name contract' | 'Currency' | 'Profit loss center'      | 'Additional analytic' |
+			| '1' | 'Other partner 1' | '100,00' | 'Revenue'      | 'Other partner 1' | 'Other partner 1' | ''                    | 'TRY'      | 'Distribution department' | ''                    |
+		Then the form attribute named "Branch" became equal to "Front office"
+		And I delete "$$DeditNote095008$$" variable
+		And I delete "$$DeditNoteDate095008$$" variable
+		And I delete "$$DeditNoteDate095008$$" variable
+		And I save the window as "$$DeditNote095008$$"
+		And I save the value of the field named "Date" as  "$$DeditNoteDate095008$$"
+		And I save the value of "Number" field as "$$DeditNoteNumber095008$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And "List" table contains lines
+			| 'Number'                    | 'Date'                    |
+			| '$$DeditNoteNumber095008$$' | '$$DeditNoteDate095008$$' |
+		And I close all client application windows
+
+
+Scenario: _095009 create CreditNote (OtherPartnersTransactions)
+	And I close all client application windows
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Filling in document
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Other partner 2'       |
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'    |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+	* Check creation
+		And I click the button named "FormPost"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And "Transactions" table became equal
+			| '#' | 'Partner'         | 'Amount' | 'Legal name'      | 'Partner term'    | 'Legal name contract' | 'Currency' | 'Profit loss center'      | 'Expense type' | 'Additional analytic' |
+			| '1' | 'Other partner 2' | '100,00' | 'Other partner 2' | 'Other partner 2' | ''                    | 'TRY'      | 'Distribution department' | 'Expense'      | ''                    |
+		Then the form attribute named "Branch" became equal to "Front office"	
+		And I delete "$$CreditNote095009$$" variable
+		And I delete "$$CreditNoteDate095009$$" variable
+		And I delete "$$CreditNoteDate095009$$" variable
+		And I save the window as "$$CreditNote095009$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate095009$$"
+		And I save the value of "Number" field as "$$CreditNoteNumber095009$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And "List" table contains lines
+			| 'Number'                     | 'Date'                     |
+			| '$$CreditNoteNumber095009$$' | '$$CreditNoteDate095009$$' |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

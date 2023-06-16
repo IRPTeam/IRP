@@ -4,12 +4,48 @@
 Function Tests() Export
 	TestList = New Array;
 	TestList.Add("CatalogCodeIsNumber12");	
+	TestList.Add("DocumentCodeIsNumber12");	
 	Return TestList;
 EndFunction
 
 #EndRegion
 
-#Region Test
+#Region Document
+
+Function DocumentCodeIsNumber12() Export
+	ArrayOfErrors = New Array();
+	
+	ArrayOfExclude = GetExclude_Documents();
+	
+	For Each Doc In Metadata.Documents Do
+		If ArrayOfExclude.Find(Doc.FullName()) <> Undefined Then
+			Continue;
+		EndIf;
+			
+		If Doc.NumberType <> Metadata.ObjectProperties.DocumentNumberType.Number Then
+			ArrayOfErrors.Add("Wrong type, should be Number: " + Doc.FullName());
+			Continue;
+		EndIf;
+		If Doc.NumberLength <> 12 Then
+			ArrayOfErrors.Add("Wrong lenght, should be 12: " + Doc.FullName());
+		EndIf;
+	EndDo;		
+		
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse("Wrong document code: " + Chars.LF +
+			StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+	Return "";
+EndFunction
+
+Function GetExclude_Documents()
+	ArrayOfExcluded = New Array();
+	Return ArrayOfExcluded;
+EndFunction
+
+#EndRegion
+
+#Region Catalogs
 
 Function CatalogCodeIsNumber12() Export
 	ArrayOfErrors = New Array();
@@ -44,6 +80,7 @@ Function GetExclude_Catalogs()
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RetailCustomers");
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
+	ArrayOfExcluded.Add("Catalog.ObjectAccessKeys");
 	Return ArrayOfExcluded;
 EndFunction
 

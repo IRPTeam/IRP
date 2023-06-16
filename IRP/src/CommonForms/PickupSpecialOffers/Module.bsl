@@ -2,48 +2,9 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.FormParametersInfo = Parameters.Info;
 	ThisObject.FormType = Parameters.Info.Type;
-
-	If ThisObject.FormType = "Offers_ForDocument" Then
-		OffersTree = OffersServer.CreateOffersTree(
-			Parameters.Info.Object, 
-			Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers, 
-			Parameters.Info.ArrayOfOffers
-		);
-
-	ElsIf ThisObject.FormType = "Offers_ForRow" Then
-
-		ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
-
-		OffersTree = OffersServer.CreateOffersTree(
-			Parameters.Info.Object,
-			Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers,
-			Parameters.Info.ArrayOfOffers,
-			ThisObject.ItemListRowKey
-		);
-	EndIf;
-	OffersServer.FillOffersTreeStatuses(
-		Parameters.Info.Object, 
-		OffersTree,
-		ThisObject.FormType, 
-		ThisObject.ItemListRowKey
-	);
-	
-	FillOffersTreePresentation(OffersTree.Rows);
+	ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
+	OffersTree = OffersServer.FillOffersTree(Parameters.Info);
 	ValueToFormAttribute(OffersTree, "Offers");
-
-EndProcedure
-
-&AtServerNoContext
-Procedure FillOffersTreePresentation(OffersTreeRows)
-	For Each Row In OffersTreeRows Do
-		Row.Presentation = String(Row.Offer);
-		If ValueIsFilled(Row.Rule) Then
-			Row.Presentation = Row.Presentation + " " + String(Row.Rule);
-		EndIf;
-		FillOffersTreePresentation(Row.Rows);
-	EndDo;
 EndProcedure
 
 &AtClient
@@ -84,7 +45,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 
 	thisString = Offers.FindByID(SelectedRow);
 
-	If Not ValueIsFilled(thisString.Offer) Then
+	If Not ValueIsFilled(thisString.Offer) Or thisString.isRule Then
 		Return;
 	EndIf;
 
@@ -217,10 +178,9 @@ EndFunction
 
 &AtServer
 Function PutOffersTreeToTempStorage()
-	Result = New Structure();
-	Result.Insert("OffersAddress", PutToTempStorage(FormAttributeToValue("Offers"), ThisObject.UUID));
-	If ValueIsFilled(ThisObject.ItemListRowKey) Then
-		Result.Insert("ItemListRowKey", ThisObject.ItemListRowKey);
-	EndIf;
+	Result = OffersServer.GetOffersInfoParam();
+	Result.OffersAddress = PutToTempStorage(OffersServer.GetSelectedOffersTree(ThisObject), ThisObject.UUID);
+	Result.ItemListRowKey = ThisObject.ItemListRowKey;
 	Return Result;
 EndFunction
+

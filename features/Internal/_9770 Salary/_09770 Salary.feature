@@ -288,9 +288,18 @@ Scenario: _097712 check payroll
 			| 'Code' |
 			| 'TRY'  |
 		And I select current line in "List" table
+		And I click Choice button of the field named "PaymentPeriod"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Third (only salary)'  |
+		And I select current line in "List" table
+		And the editing text of form attribute named "BeginDate" became equal to "01.02.2023"
+		And the editing text of form attribute named "EndDate" became equal to "28.02.2023"
+		And in the table "AccrualList" I click "Fill accrual" button
+		Then the number of "AccrualList" table lines is "равно" "0"
 		And I input "01.01.2023" text in the field named "BeginDate"
 		And I input "04.01.2023" text in the field named "EndDate"
-		And in the table "AccrualList" I click "Fill accrual" button	
+		And in the table "AccrualList" I click "Fill accrual" button
 	* Check filling
 		And "AccrualList" table became equal
 			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
@@ -355,17 +364,13 @@ Scenario: _097712 check payroll
 		And in the table "CashAdvanceDeductionList" I click "Add" button
 		And I activate "Employee" field in "CashAdvanceDeductionList" table
 		And I select "david" from "Employee" drop-down list by string in "CashAdvanceDeductionList" table
-		And I activate "Financial movement type" field in "CashAdvanceDeductionList" table
-		And I select "1" from "Financial movement type" drop-down list by string in "CashAdvanceDeductionList" table
-		And I activate "Account" field in "CashAdvanceDeductionList" table
-		And I select "Cash desk №4" from "Account" drop-down list by string in "CashAdvanceDeductionList" table
 		And I activate "Amount" field in "CashAdvanceDeductionList" table
 		And I input "70,00" text in "Amount" field of "CashAdvanceDeductionList" table
 		And I finish line editing in "CashAdvanceDeductionList" table
 	* Check
 		And "CashAdvanceDeductionList" table became equal
-			| '#' | 'Amount' | 'Employee'      | 'Financial movement type' | 'Planing transaction basis' | 'Account'      |
-			| '1' | '70,00'  | 'David Romanov' | 'Movement type 1'         | ''                          | 'Cash desk №4' |
+			| '#' | 'Amount' | 'Employee'      |
+			| '1' | '70,00'  | 'David Romanov' |
 	* Check totals
 		And the editing text of form attribute named "TotalAccrualAmount" became equal to "2 300,00"
 		And the editing text of form attribute named "TotalDeductionAmount" became equal to "80,00"

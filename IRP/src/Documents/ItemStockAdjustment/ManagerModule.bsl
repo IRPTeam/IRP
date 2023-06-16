@@ -9,7 +9,7 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -18,7 +18,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -31,7 +31,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
@@ -49,7 +49,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -70,25 +70,26 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ItemStockAdjustment.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.ItemStockAdjustment.ItemList");
 
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
-	
+
 	Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
-	
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
-		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter),
-		Filter.RecordType, Unposting, AddInfo) Then
+
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter),
+		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter), Filter.RecordType,
+		Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-	
+
 	Filter = New Structure("RecordType", AccumulationRecordType.Expense);
-	
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
-		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter),
-		Filter.RecordType, Unposting, AddInfo) Then
+
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter),
+		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter), Filter.RecordType,
+		Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -105,8 +106,10 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
@@ -114,22 +117,25 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
 	Else
 		// is unposting
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 #EndRegion
 
-#Region PostingInfo
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -137,30 +143,21 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -186,72 +183,87 @@ Function ItemList()
 		   |	ItemStockAdjustmentItemList.Ref = &Ref";
 EndFunction
 
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
+	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	Return QueryArray;
+EndFunction
+
 Function R4010B_ActualStocks()
-	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.ItemKey AS ItemKey,
-	|	CASE
-	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
-	|			THEN ItemList.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END SerialLotNumber,
-	|	*
-	|INTO R4010B_ActualStocks
-	|FROM
-	|	ItemList AS ItemList
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.ItemKeyWriteOff AS ItemKey,
-	|	CASE
-	|		WHEN ItemList.SerialLotNumberWriteOff.StockBalanceDetail
-	|			THEN ItemList.SerialLotNumberWriteOff
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END SerialLotNumber,
-	|	*
-	|FROM
-	|	ItemList AS ItemList";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	CASE
+		   |		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+		   |			THEN ItemList.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END SerialLotNumber,
+		   |	*
+		   |INTO R4010B_ActualStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.ItemKeyWriteOff AS ItemKey,
+		   |	CASE
+		   |		WHEN ItemList.SerialLotNumberWriteOff.StockBalanceDetail
+		   |			THEN ItemList.SerialLotNumberWriteOff
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END SerialLotNumber,
+		   |	*
+		   |FROM
+		   |	ItemList AS ItemList";
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey AS ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO R4011B_FreeStocks
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKeyWriteOff AS ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKeyWriteOff";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO R4011B_FreeStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKeyWriteOff AS ItemKey,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKeyWriteOff";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -281,45 +293,44 @@ Function R4014B_SerialLotNumber()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKey AS ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO R4050B_StockInventory
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKey
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKeyWriteOff AS ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKeyWriteOff";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO R4050B_StockInventory
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKeyWriteOff AS ItemKey,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKeyWriteOff";
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()
@@ -344,66 +355,82 @@ Function R4052T_StockAdjustmentAsSurplus()
 EndFunction
 
 Function T6010S_BatchesInfo()
-	Return
-		"SELECT
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Ref AS Document
-		|INTO T6010S_BatchesInfo
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE
-		|GROUP BY
-		|	ItemList.Company,
-		|	ItemList.Period,
-		|	ItemList.Ref";
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Ref AS Document
+		   |INTO T6010S_BatchesInfo
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	ItemList.Company,
+		   |	ItemList.Period,
+		   |	ItemList.Ref";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return
-		"SELECT
-		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
-		|	ItemList.Company,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	ItemList.Key AS RowID,
-		|	SUM(ItemList.Quantity) AS Quantity
-		|INTO T6020S_BatchKeysInfo
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE
-		|GROUP BY
-		|	ItemList.Company,
-		|	ItemList.ItemKey,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.Key,
-		|	VALUE(Enum.BatchDirection.Receipt)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense),
-		|	ItemList.Company,
-		|	ItemList.Store,
-		|	ItemList.ItemKeyWriteOff,
-		|	ItemList.Key,
-		|	SUM(ItemList.Quantity) AS Quantity
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE
-		|GROUP BY
-		|	ItemList.Company,
-		|	ItemList.ItemKeyWriteOff,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.Key,
-		|	VALUE(Enum.BatchDirection.Expense)";
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Key AS RowID,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO T6020S_BatchKeysInfo
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	ItemList.Company,
+		   |	ItemList.ItemKey,
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.Key,
+		   |	VALUE(Enum.BatchDirection.Receipt)
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	ItemList.Period,
+		   |	VALUE(Enum.BatchDirection.Expense),
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKeyWriteOff,
+		   |	ItemList.Key,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	ItemList.Company,
+		   |	ItemList.ItemKeyWriteOff,
+		   |	ItemList.Period,
+		   |	ItemList.Store,
+		   |	ItemList.Key,
+		   |	VALUE(Enum.BatchDirection.Expense)";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

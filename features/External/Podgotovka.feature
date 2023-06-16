@@ -35,7 +35,7 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And I wait "DialogBox2 (Special offer types) *" window closing in 20 seconds
 	And I click the button named "FormChoose"
 	And I input "8" text in "Priority" field
-	And I input "01.01.2019  0:00:00" text in "Start of" field
+	And I input "01.01.2019  0:00:00" text in "Period" field
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
@@ -60,8 +60,8 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And I click "List" button
 	And I go to line in "List" table
-			| 'Priority' | 'Special offer type' |
-			| '1'        | 'Sum'                |
+			| 'Description' |
+			| 'Sum'         |
 	And I click the button named "FormChoose"
 
 Scenario: transfer the discount Discount 1 without Vat from Sum to Maximum
@@ -159,8 +159,8 @@ Scenario: transfer the Discount 1 without Vat discount from Maximum to Minimum.
 	And Delay 2
 	And I click "List" button
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '2'        | 'Minimum'            |
+		| 'Description' |
+		| 'Min'         |
 	And I click the button named "FormChoose"
 
 
@@ -1520,11 +1520,15 @@ Scenario: set True value to the constant
 			| 'Use salary' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
-		// And I go to line in "FunctionalOptions" table
-		// 	| 'Option'                                | 'Use' |
-		// 	| 'Use additional table control document' | 'Yes' |
-		// And I remove "Use" checkbox in "FunctionalOptions" table
-		// And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                | 'Use' |
+			| 'Use additional table control document' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use object access' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 		
@@ -1944,7 +1948,7 @@ Scenario: create Document discount2
 	Then "Special offer types" window is opened
 	And I click the button named "FormChoose"
 	And I input "12" text in "Priority" field
-	And I input current date in "Start of" field
+	And I input current date in "Period" field
 	And I change checkbox "Manually"
 	And I change checkbox "Manual input value"
 	And I set checkbox "Launch"

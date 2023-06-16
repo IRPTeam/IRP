@@ -26,6 +26,14 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_PERIOD
+
+Procedure PaymentPeriodOnChange(Object, Form, Item) Export
+	ViewClient_V2.PlanningPeriodOnChange(Object, Form, Form.MainTables);
+EndProcedure
+
+#EndRegion
+
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export

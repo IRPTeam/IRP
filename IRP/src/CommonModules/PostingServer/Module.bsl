@@ -715,6 +715,7 @@ Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
 EndFunction
 
 Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys, AddInfo = Undefined) Export
+	
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
@@ -841,6 +842,10 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 		If CheckResult.IsOk Then
+			IsPostingNewDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsPostingNewDocument", False);
+			If IsPostingNewDocument Then
+				Return CheckResult.IsOk;
+			EndIf;
 			ExpensesCheckResult = CheckAllExpenses(Parameters, AddInfo);
 			Return ExpensesCheckResult.IsOk;
 		EndIf;
@@ -887,8 +892,23 @@ EndFunction
 Function CheckAllExpenses(Parameters, AddInfo = Undefined)
 	Result = New Structure("IsOk", True);
 	TableOfExpenseRecorders = GetExpenseRecorders(Parameters, AddInfo);
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Records_All_Grouped.ItemKey AS ItemKey,
+	|	Records_All_Grouped.Store AS Store
+	|FROM
+	|	Records_All_Grouped AS Records_All_Grouped
+	|GROUP BY
+	|	Records_All_Grouped.ItemKey,
+	|	Records_All_Grouped.Store";
+	QueryResult = Query.Execute();
+	CheckExpenseFilterTable = QueryResult.Unload();
+	
 	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
-		CheckAddInfo = New Structure("CheckExpenseRecorders", True);
+		CheckAddInfo = New Structure("CheckExpenseRecorders, CheckExpenseFilterTable", True, CheckExpenseFilterTable);
 		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
 		Cancel = False;
 		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
@@ -1101,6 +1121,13 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 		Tables.Records_InDocument.FillValues(Catalogs.SerialLotNumbers.EmptyRef(), "SerialLotNumber");
 	EndIf;
 	
+	CheckExpenseFilterTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseFilterTable", Undefined);
+	If CheckExpenseFilterTable <> Undefined Then
+		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.ItemList_InDocument);
+		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.Records_Exists);
+		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.Records_InDocument);
+	EndIf;
+	
 	Query.SetParameter("Period"              , Parameters.BalancePeriod);
 	Query.SetParameter("ItemList_InDocument" , Tables.ItemList_InDocument);
 	Query.SetParameter("Records_Exists"      , Tables.Records_Exists);
@@ -1135,7 +1162,25 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	Return Result;
 EndFunction
 
-#Region NewRegistersPosting
+Procedure DeleteRowsByFilterTable(FilterTable, SourceTable)
+	ArrayForDelete = New Array();
+	For Each Row In SourceTable Do
+		Filter = New Structure();
+		If ValueIsFilled(Row.ItemKey) Then
+			Filter.Insert("ItemKey", Row.ItemKey);
+		EndIf;
+		If ValueIsFilled(Row.Store) Then
+			Filter.Insert("Store", Row.Store);
+		EndIf;		
+		If FilterTable.FindRows(Filter).Count() = 0 Then
+			ArrayForDelete.Add(Row);
+		EndIf;		
+	EndDo;
+		
+	For Each ItemForDelete In ArrayForDelete Do
+		SourceTable.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
 
 Function UseRegister(Name) Export
 	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
@@ -1232,5 +1277,3 @@ Function Exists_R2001T_Sales() Export
 		|WHERE
 		|	R2001T_Sales.Recorder = &Ref";
 EndFunction
-
-#EndRegion

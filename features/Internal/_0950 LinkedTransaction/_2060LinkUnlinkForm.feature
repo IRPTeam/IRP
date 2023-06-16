@@ -76,9 +76,11 @@ Scenario: _2060001 preparation
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table

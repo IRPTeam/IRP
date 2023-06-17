@@ -7570,36 +7570,25 @@
 	// Access restiction not using. Set UseObjectAccess functional option TRUE
 	WHERE TRUE
 #Else
-	Table 
-WHERE TRUE IN 
-(        
-SELECT
-	COUNT(0) &gt; 0 AND COUNT(0) IN
-		(
-		SELECT
-			COUNT(0)
-		FROM
-			Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
-				INNER JOIN Catalog.AccessProfiles.ObjectAccess AS AccessProfilesObjectAccess
-				ON
-					AccessProfilesObjectAccess.Key = ObjectAccessKeysFilterDataList.Key
-						AND AccessProfilesObjectAccess.ValueSimpleType = ObjectAccessKeysFilterDataList.ValueSimpleType
-						AND AccessProfilesObjectAccess.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
-						AND AccessProfilesObjectAccess.Ref IN (&amp;CurrentUserAccessProfiles)
-						#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
-						AND (AccessProfilesObjectAccess.Modify)
-						#EndIf
-				INNER JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
-				ON
-					ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
-						AND T9100A_ObjectAccessMap.ObjectRef = Table.Ref
-		)
-	FROM
-		Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
-			INNER JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
-			ON (ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys)
-				AND (T9100A_ObjectAccessMap.ObjectRef = Table.Ref)    
-)
-#EndIf</condition>
+Table
+WHERE NOT (FALSE) IN (
+	SELECT
+		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AccessProfilesObjectAccess.Key IS NULL))
+		
+	FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
+			LEFT JOIN Catalog.AccessProfiles.ObjectAccess AS AccessProfilesObjectAccess
+				ON AccessProfilesObjectAccess.Ref IN (&amp;CurrentUserAccessProfiles)
+					AND AccessProfilesObjectAccess.Key = ObjectAccessKeysFilterDataList.Key
+					AND AccessProfilesObjectAccess.ValueSimpleType = ObjectAccessKeysFilterDataList.ValueSimpleType
+					AND AccessProfilesObjectAccess.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
+					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
+					AND (AccessProfilesObjectAccess.Modify)
+					#EndIf
+			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
+		
+	WHERE
+		T9100A_ObjectAccessMap.ObjectRef = Table.Ref
+)#EndIf</condition>
 	</restrictionTemplate>
 </Rights>

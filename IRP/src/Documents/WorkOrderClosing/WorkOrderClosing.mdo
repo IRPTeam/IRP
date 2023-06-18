@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb038f52-83c9-401e-a4f2-d822f634ce0a">
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bb038f52-83c9-401e-a4f2-d822f634ce0a">
  <producedTypes>
   <objectType typeId="8e279eec-43d6-4a77-add2-a607a91da4e6" valueTypeId="ce70dd8b-b34d-4e3f-9eda-1c0ee3d13492"/>
   <refType typeId="250afa8e-74f2-4d04-bf71-f71fd4a85f00" valueTypeId="c241d31b-557d-4444-806f-8a4c7ab02c37"/>
@@ -32,4 +32,28 @@
  <autonumbering>true</autonumbering>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
 </mdclass:Document>

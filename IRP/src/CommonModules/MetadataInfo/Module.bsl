@@ -1,4 +1,3 @@
-#Region Internal
 
 Function hasAttributes(MetaName) Export
 	Array = New Array();
@@ -108,4 +107,8 @@ Function hasRef(MetadataFullName) Export
 	EndDo;
 	Return isRef;
 EndFunction
-#EndRegion
+
+Function GetManager(MetadataFullName) Export
+	SetSafeMode(True);
+	Return Eval(StrReplace(MetadataFullName, ".", "s."));
+EndFunction

@@ -11,6 +11,12 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region Access
+	Strings.Insert("ACS_UnknownValueType", NStr("en='Can not create Access Key. Unknows value type.';
+		|ru='Не удалось создать Ключ Доступа. Неизвестный тип значения';
+		|tr='Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en='SMS sent successfully';
 		|ru='SMS удачно отправлена';
@@ -24,9 +30,6 @@ Function Strings(Lang) Export
 	Strings.Insert("SMS_SMSCodeWrong", NStr("en='Not valid SMS code. Try again.';
 		|ru='Не корректный SMS код. Повторите еще раз.';
 		|tr='Not valid SMS code. Try again.'", Lang));
-
-
-
 #EndRegion
 
 #Region AdditionalTableControl
@@ -954,6 +957,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_126", NStr("en='Document does not have transaction types';
 		|ru='В документе не указан тип транзакции';
 		|tr='Document does not have transaction types'", Lang));
+	Strings.Insert("Error_127", NStr("en='Quantity must be more than 0';
+		|ru='Количество должно быть больше 0';
+		|tr='Quantity must be more than 0'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';

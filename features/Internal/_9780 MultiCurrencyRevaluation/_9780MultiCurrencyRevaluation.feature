@@ -59,6 +59,7 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
+		When Create OtherPartners objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -105,6 +106,8 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		| "Documents.BankReceipt.FindByNumber(812).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.BankReceipt.FindByNumber(813).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.BankReceipt.FindByNumber(814).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document CashReceipt objects (multicurrency revaluation)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -243,11 +246,210 @@ Scenario: _0978003 check foreign currency revaluation
 		And I click the button named "FormPost"
 		And I delete "$$Number3$$" variable
 		And I save the value of "Number" field as "$$Number3$$"
+		And I delete "$$ForeignCurrencyRevaluation3$$" variable
+		And I save the window as "$$ForeignCurrencyRevaluation3$$"
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
 		And "List" table contains lines
-			| 'Number'  |
+			| 'Number'      |
 			| '$$Number3$$' |
 		And I close all client application windows
-						
+					
+Scenario: _0978006 check ForeignCurrencyRevaluation by the Register  "R5015 Other partners transactions"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R5015 Other partners transactions" 
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'               | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | 'Attributes'           |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Deferred calculation' |
+			| ''                                              | 'Receipt'     | '08.02.2023 23:59:59' | '-2,78'     | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Receipt'     | '08.02.2023 23:59:59' | '-2,78'     | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'USD'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | 'No'                   |
+			| ''                                              | 'Receipt'     | '08.02.2023 23:59:59' | '-1,39'     | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |
+			| ''                                              | 'Receipt'     | '08.02.2023 23:59:59' | '-1,39'     | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'USD'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | 'No'                   |
+	And I close all client application windows
+
+Scenario: _0978007 check ForeignCurrencyRevaluation by the Register  "R1020 Advances to vendors"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'       | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''           | ''        | ''      | ''                     | ''                         |
+			| 'Document registrations records'        | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''           | ''        | ''      | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''           | ''        | ''      | ''                     | ''                         |
+			| ''                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''           | ''        | ''      | 'Attributes'           | ''                         |
+			| ''                                      | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                      | 'Receipt'     | '08.02.2023 23:59:59' | '1,91'      | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'DFC'        | 'DFC'     | ''      | 'No'                   | ''                         |
+			| ''                                      | 'Receipt'     | '08.02.2023 23:59:59' | '5 750,07'  | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'DFC'        | 'DFC'     | ''      | 'No'                   | ''                         |
+			| ''                                      | 'Expense'     | '08.02.2023 23:59:59' | '55,56'     | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'EUR'                  | 'DFC'        | 'DFC'     | ''      | 'No'                   | ''                         |
+	And I close all client application windows
+
+Scenario: _0978008 check ForeignCurrencyRevaluation by the Register  "R2020 Advances from customer"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'          | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                     | ''                           |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | 'Attributes'           | ''                           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                         | 'Receipt'     | '08.02.2023 23:59:59' | '1,74'      | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Company Lomaniti'  | 'Lomaniti'  | ''      | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '08.02.2023 23:59:59' | '3,82'      | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Big foot'          | 'Big foot'  | ''      | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '08.02.2023 23:59:59' | '7,64'      | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Big foot'          | 'Big foot'  | ''      | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '08.02.2023 23:59:59' | '9,55'      | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Company Kalipso'   | 'Kalipso'   | ''      | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '08.02.2023 23:59:59' | '12,52'     | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+	And I close all client application windows
+
+Scenario: _0978009 check ForeignCurrencyRevaluation by the Register  "R2021 Customer transactions"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'         | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''        | ''                         | ''                                            | ''      | ''                     | ''                           |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''        | ''                         | ''                                            | ''      | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''        | ''                         | ''                                            | ''      | ''                     | ''                           |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                | ''        | ''                         | ''                                            | ''      | 'Attributes'           | ''                           |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner' | 'Agreement'                | 'Basis'                                       | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '08.02.2023 23:59:59' | '38,2'      | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, TRY' | 'Sales invoice 811 dated 01.02.2023 12:00:00' | ''      | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '08.02.2023 23:59:59' | '38,2'      | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'USD'                  | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, TRY' | 'Sales invoice 811 dated 01.02.2023 12:00:00' | ''      | 'No'                   | ''                           |
+	And I close all client application windows
+
+Scenario: _0978010 check ForeignCurrencyRevaluation by the Register  "R3010 Cash on hand"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$' | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'  | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'  | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                | 'Receipt'     | '08.02.2023 23:59:59' | '-4 791,73' | 'Main Company' | ''       | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                | 'Receipt'     | '08.02.2023 23:59:59' | '1,91'      | 'Main Company' | ''       | 'Cash desk №3'      | 'TRY'      | 'USD'                  | 'Local currency'               | 'No'                   |
+			| ''                                | 'Receipt'     | '08.02.2023 23:59:59' | '2,29'      | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                | 'Receipt'     | '08.02.2023 23:59:59' | '26,07'     | 'Main Company' | ''       | 'Bank account, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | 'No'                   |
+			| ''                                | 'Receipt'     | '08.02.2023 23:59:59' | '2 875,04'  | 'Main Company' | ''       | 'Cash desk №2'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                | 'Expense'     | '08.02.2023 23:59:59' | '-35,53'    | 'Main Company' | ''       | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |
+			| ''                                | 'Expense'     | '08.02.2023 23:59:59' | '17,01'     | 'Main Company' | ''       | 'Cash desk №2'      | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |
+			| ''                                | 'Expense'     | '08.02.2023 23:59:59' | '71,26'     | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+	And I close all client application windows
+
+Scenario: _0978011 check ForeignCurrencyRevaluation by the Register  "R3027 Employee cash advance"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R3027 Employee cash advance" 
+		And I click "Registrations report" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'         | ''            | ''                    | ''          | ''             | ''       | ''         | ''                     | ''              | ''                             | ''                     |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''       | ''         | ''                     | ''              | ''                             | ''                     |
+			| 'Register  "R3027 Employee cash advance"' | ''            | ''                    | ''          | ''             | ''       | ''         | ''                     | ''              | ''                             | ''                     |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''         | ''                     | ''              | ''                             | 'Attributes'           |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Transaction currency' | 'Partner'       | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                        | 'Expense'     | '08.02.2023 23:59:59' | '-71,26'    | 'Main Company' | ''       | 'USD'      | 'EUR'                  | 'David Romanov' | 'Reporting currency'           | 'No'                   |
+	And I close all client application windows
+
+Scenario: _0978011 check ForeignCurrencyRevaluation by the Register  "R5021 Revenues"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'  | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'      | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                | '08.02.2023 23:59:59' | '-4 791,73' | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                | '08.02.2023 23:59:59' | '-2,78'     | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '-2,78'     | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                | '08.02.2023 23:59:59' | '-1,39'     | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '-1,39'     | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                | '08.02.2023 23:59:59' | '1,91'      | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '1,91'      | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '2,29'      | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                | '08.02.2023 23:59:59' | '26,07'     | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '38,2'      | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                | '08.02.2023 23:59:59' | '38,2'      | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                | '08.02.2023 23:59:59' | '2 875,04'  | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                | '08.02.2023 23:59:59' | '5 750,07'  | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+	And I close all client application windows
+
+Scenario: _0978011 check ForeignCurrencyRevaluation by the Register  "R5022 Expenses"
+		And  I close all client application windows
+	* Select ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$$Number3$$' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'  | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'      | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                | '08.02.2023 23:59:59' | '-71,26'    | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '-35,53'    | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '1,74'      | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '3,82'      | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '7,64'      | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '9,55'      | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '12,52'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '17,01'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '55,56'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                | '08.02.2023 23:59:59' | '71,26'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+	And I close all client application windows

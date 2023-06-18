@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="95305867-8833-4b03-a7f7-0b730beaa42c">
+ <name>TemplateBasicAccess</name>
+ <synonym>
+  <key>en</key>
+  <value>Template basic access</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Шаблон стандартный доступ</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Template basic access</value>
+ </synonym>
+ <comment>If user has to work with document (not only read, but update and create to)</comment>
+</mdclass:Role>

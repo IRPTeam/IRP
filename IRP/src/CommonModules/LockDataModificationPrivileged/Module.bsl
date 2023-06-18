@@ -258,9 +258,9 @@ EndFunction
 // Returns:
 //  Boolean - Data is locked by ref simple mode
 Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefined)
-	Filter = New Array;
-	Fields = New Array;
-	TotalFields = New Array;
+	Filter = New Array; // Array Of String
+	Fields = New Array; // Array Of String
+	TotalFields = New Array; // Array Of String
 	Query = New Query();
 	
 	FindSimpleRules = False;
@@ -346,7 +346,8 @@ EndFunction
 
 Function CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced)
 	If ArrayOfLockedReasonsBySimple.Count() OR ArrayOfLockedReasonsByAdvanced.Count() Then
-		ArrayOfLockedReasons = New Array;
+		ArrayOfLockedReasons = New Array; // Array of String
+		//@skip-check invocation-parameter-type-intersect, property-return-type
 		ArrayOfLockedReasons.Add(R().InfoMessage_019);		
 		If ArrayOfLockedReasonsBySimple.Count() Then
 			ArrayOfLockedReasons.Add(StrConcat(ArrayOfLockedReasonsBySimple, Chars.LF));
@@ -373,8 +374,8 @@ EndFunction
 // Returns:
 //  Boolean - Data is locked by ref simple mode
 Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, AddInfo = Undefined)
-	Filter = New Array();
-	Fields = New Array();
+	Filter = New Array(); // Array of String
+	Fields = New Array(); // Array of String
 	Query = New Query();
 	
 	FindSimpleRules = False;
@@ -430,8 +431,8 @@ EndFunction
 Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, AddInfo = Undefined)
 	
 	Query = New Query;
-	TotalFields = New Array;
-	Fields = New Array;
+	TotalFields = New Array; // Array of String
+	Fields = New Array; // Array of String
 	For Index = 0 To Rules.Count() - 1 Do
 		Rule = Rules[Index].LockDataModificationReasons;
 		If Not Rule.AdvancedMode Then
@@ -505,7 +506,7 @@ Function SetQueryParameters(MetadataName, Rule)
 EndFunction
 
 Function GetResultLockCheck(Query)
-	ArrayOfLockedReasons = New Array;
+	ArrayOfLockedReasons = New Array; // Array of CatalogRef.LockDataModificationReasons, String
 	
 	QueryResult = Query.Execute();
 	If Not QueryResult.IsEmpty() Then
@@ -514,10 +515,12 @@ Function GetResultLockCheck(Query)
 			If Not ValueIsFilled(ResultTable[0][Column.Name]) Then
 				Continue;
 			EndIf;
+			//@skip-check invocation-parameter-type-intersect
 			If ArrayOfLockedReasons.Find(ResultTable[0][Column.Name]) = Undefined Then
 				//@skip-check invocation-parameter-type-intersect
 				Rule = ResultTable[0][Column.Name]; // CatalogRef.LockDataModificationReasons
 				If Rule.AdvancedMode Then
+					//@skip-check property-return-type
 					Text = String(Rule) + ":" + Chars.LF +
 						String(Rule.DCS.Get().Filter);
 					ArrayOfLockedReasons.Add(Text);

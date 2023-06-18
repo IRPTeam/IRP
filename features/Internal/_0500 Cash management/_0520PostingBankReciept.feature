@@ -61,6 +61,8 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog PaymentTypes objects
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog CashStatementStatuses objects (Test)
+		When Create catalog BusinessUnits objects
+		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -122,8 +124,8 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'             | 'Total amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
-			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
+			| 'Partner'   | 'Partner term'             | 'Total amount' | 'Payer'             | 'Basis document'         | 'Planning transaction basis' |
+			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00'     | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                           |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
@@ -655,7 +657,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'  |
-			| 'Transit Main' |
+			| 'POS account, Comission separate, TRY' |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
@@ -724,8 +726,8 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I activate "POS account" field in "PaymentList" table
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
+			| 'Description'                          |
+			| 'POS account, Comission separate, TRY' |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
@@ -764,8 +766,8 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#' | 'Commission' | 'Commission is separate' | 'POS account'  | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Planning transaction basis'                   | 'Commission percent' | 'Additional analytic' | 'Expense type' |
-			| '1' | '2,00'       | 'No'                     | 'Transit Main' | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Cash statement 104 dated 07.07.2022 16:33:55' | '2,00'               | ''                    | 'Expense'      |
+			| '#' | 'Commission' | 'Commission is separate' | 'POS account'                          | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Planning transaction basis'                   | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | '2,00'       | 'No'                     | 'POS account, Comission separate, TRY' | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Cash statement 104 dated 07.07.2022 16:33:55' | '2,00'               | ''                    | 'Expense'      |
 	* Check creation
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt0520015$$" variable

@@ -8,6 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		ThisObject.Finished = False;
 	EndIf;
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -24,6 +25,23 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
+	MaterialQuantity = 0;
+	For Each Row In ThisObject.Materials Do
+		MaterialQuantity = MaterialQuantity + Row.Quantity;
+	EndDo;
+
+	If MaterialQuantity = 0 Then
+		Cancel = True;
+		MessageText = R().Error_127;
+		If ThisObject.Materials.Count() > 0 Then
+			CommonFunctionsClientServer.ShowUsersMessage(MessageText, 
+					"Object.Materials[0].Quantity", 
+					"Object.Materials");
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+		EndIf;
+	EndIf;
+		
 	If ThisObject.TransactionType <> Enums.ProductionTransactionTypes.Produce Then
 		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "BillOfMaterials");
 	EndIf;

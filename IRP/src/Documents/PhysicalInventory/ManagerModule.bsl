@@ -13,11 +13,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	Return New Structure();
+	Return New Structure;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -29,7 +29,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -47,7 +47,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -75,7 +75,7 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod",
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
-	
+
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "QuantityColumnName", "Difference");
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		// is posting
@@ -88,8 +88,10 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PhysicalInventory.ItemList", AddInfo);
@@ -97,23 +99,25 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
+			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
+			Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PhysicalInventory.ItemList", AddInfo);
 	Else
 		// is unposting
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PhysicalInventory.ItemList", AddInfo);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 #EndRegion
 
-#Region PostingService
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -121,61 +125,68 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	Return QueryArray;
 EndFunction
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(T3010S_RowIDInfo());
-	Return QueryArray;
+Function ItemList()
+	Return "SELECT
+		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.Ref AS Basis,
+		   |	CASE
+		   |		WHEN ItemList.Difference > 0
+		   |			THEN ItemList.Difference
+		   |		ELSE 0
+		   |	END AS SurplusQuantity,
+		   |	CASE
+		   |		WHEN ItemList.Difference < 0
+		   |			THEN -ItemList.Difference
+		   |		ELSE 0
+		   |	END AS WriteOffQuantity,
+		   |	CASE
+		   |		WHEN ItemList.Ref.UseSerialLot
+		   |			THEN ItemList.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END AS SerialLotNumber,
+		   |	&StatusInfoPosting AS StatusInfoPosting
+		   |INTO ItemList
+		   |FROM
+		   |	Document.PhysicalInventory.ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.Ref = &Ref
+		   |	AND ItemList.Difference <> 0
+		   |	AND &StatusInfoPosting";
 EndFunction
 
-Function ItemList()
-	Return 
-	"SELECT
-	|	ItemList.Ref.Date AS Period,
-	|	ItemList.Ref.Store AS Store,
-	|	ItemList.ItemKey AS ItemKey,
-	|	ItemList.Ref AS Basis,
-	|	CASE
-	|		WHEN ItemList.Difference > 0
-	|			THEN ItemList.Difference
-	|		ELSE 0
-	|	END AS SurplusQuantity,
-	|	CASE
-	|		WHEN ItemList.Difference < 0
-	|			THEN -ItemList.Difference
-	|		ELSE 0
-	|	END AS WriteOffQuantity,
-	|	CASE
-	|		WHEN ItemList.Ref.UseSerialLot
-	|			THEN ItemList.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END AS SerialLotNumber,
-	|	&StatusInfoPosting AS StatusInfoPosting
-	|INTO ItemList
-	|FROM
-	|	Document.PhysicalInventory.ItemList AS ItemList
-	|WHERE
-	|	ItemList.Ref = &Ref
-	|	AND ItemList.Difference <> 0
-	|	AND &StatusInfoPosting";
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
+	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -202,37 +213,36 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.SurplusQuantity AS Quantity,
-	|	CASE
-	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
-	|			THEN ItemList.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END SerialLotNumber,
-	|	*
-	|INTO R4010B_ActualStocks
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	ItemList.SurplusQuantity <> 0
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	ItemList.WriteOffQuantity AS Quantity,
-	|	CASE
-	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
-	|			THEN ItemList.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END SerialLotNumber,
-	|	*
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	ItemList.WriteOffQuantity <> 0";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.SurplusQuantity AS Quantity,
+		   |	CASE
+		   |		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+		   |			THEN ItemList.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END SerialLotNumber,
+		   |	*
+		   |INTO R4010B_ActualStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.SurplusQuantity <> 0
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.WriteOffQuantity AS Quantity,
+		   |	CASE
+		   |		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+		   |			THEN ItemList.SerialLotNumber
+		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		   |	END SerialLotNumber,
+		   |	*
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
 Function R4052T_StockAdjustmentAsSurplus()
@@ -258,24 +268,40 @@ Function R4051T_StockAdjustmentAsWriteOff()
 EndFunction
 
 Function T3010S_RowIDInfo()
-	Return
-		"SELECT
-		|	RowIDInfo.RowRef AS RowRef,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Basis AS Basis,
-		|	ItemList.Key AS Key,
-		|	0 AS Price,
-		|	UNDEFINED AS Currency,
-		|	ItemList.Unit AS Unit
-		|INTO T3010S_RowIDInfo
-		|FROM
-		|	Document.PhysicalInventory.ItemList AS ItemList
-		|		INNER JOIN Document.PhysicalInventory.RowIDInfo AS RowIDInfo
-		|		ON RowIDInfo.Ref = &Ref
-		|		AND ItemList.Ref = &Ref
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND RowIDInfo.Ref = ItemList.Ref";
+	Return "SELECT
+		   |	RowIDInfo.RowRef AS RowRef,
+		   |	RowIDInfo.BasisKey AS BasisKey,
+		   |	RowIDInfo.RowID AS RowID,
+		   |	RowIDInfo.Basis AS Basis,
+		   |	ItemList.Key AS Key,
+		   |	0 AS Price,
+		   |	UNDEFINED AS Currency,
+		   |	ItemList.Unit AS Unit
+		   |INTO T3010S_RowIDInfo
+		   |FROM
+		   |	Document.PhysicalInventory.ItemList AS ItemList
+		   |		INNER JOIN Document.PhysicalInventory.RowIDInfo AS RowIDInfo
+		   |		ON RowIDInfo.Ref = &Ref
+		   |		AND ItemList.Ref = &Ref
+		   |		AND RowIDInfo.Key = ItemList.Key
+		   |		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

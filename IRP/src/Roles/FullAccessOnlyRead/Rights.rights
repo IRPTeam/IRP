@@ -6310,17 +6310,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.EnableLinkedRowsIntegrity</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.EditDescriptions</name>
 		<right>
 			<name>View</name>
@@ -7822,6 +7811,17 @@
 		<name>CommonForm.CodeStringCheck</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.DisableLinkedRowsIntegrity</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -638,7 +638,6 @@
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.DefaultSMSProvider</constants>
-  <constants>Constant.EnableLinkedRowsIntegrity</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.UseAccounting</constants>
@@ -684,6 +683,7 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

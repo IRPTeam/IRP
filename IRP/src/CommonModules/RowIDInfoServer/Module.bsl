@@ -11130,6 +11130,9 @@ Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
 	If QuerySelection.Next() Then
 		FillPropertyValues(BasisInfo, QuerySelection); 
+	Else
+		Log.Write(R().Error_128, New Structure("Basis, BasisKey, RowID", String(Basis), BasisKey, RowID));
+		Raise R().Error_128;
 	EndIf;
 	Return BasisInfo;
 EndFunction

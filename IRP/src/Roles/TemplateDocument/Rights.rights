@@ -7580,7 +7580,6 @@ WHERE NOT (FALSE) IN (
 			LEFT JOIN Catalog.AccessProfiles.ObjectAccess AS AccessProfilesObjectAccess
 				ON AccessProfilesObjectAccess.Ref IN (&amp;CurrentUserAccessProfiles)
 					AND AccessProfilesObjectAccess.Key = ObjectAccessKeysFilterDataList.Key
-					AND AccessProfilesObjectAccess.ValueSimpleType = ObjectAccessKeysFilterDataList.ValueSimpleType
 					AND AccessProfilesObjectAccess.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
 					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
 					AND (AccessProfilesObjectAccess.Modify)

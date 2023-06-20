@@ -15,5 +15,7 @@
   <content>Role.TemplateDocument</content>
   <content>SessionParameter.CurrentUserAccessProfiles</content>
   <content>Role.TemplateBasicAccess</content>
+  <content>Role.TemplateRegisters</content>
+  <content>InformationRegister.T9101A_ObjectAccessRegisters</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

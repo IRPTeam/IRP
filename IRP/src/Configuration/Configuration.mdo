@@ -221,6 +221,7 @@
   <roles>Role.UseOutput</roles>
   <roles>Role.TemplateDocument</roles>
   <roles>Role.TemplateBasicAccess</roles>
+  <roles>Role.TemplateRegisters</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1055,6 +1056,7 @@
   <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
   <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
+  <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

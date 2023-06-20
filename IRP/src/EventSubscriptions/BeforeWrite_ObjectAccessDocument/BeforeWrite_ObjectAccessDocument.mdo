@@ -6,8 +6,8 @@
     <value>Before write object access document</value>
   </synonym>
   <source>
-    <types>DefinedType.typeAccessDocument</types>
+    <types>DocumentObject</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.ObjectAccessFullAccess.BeforeWrite_ObjectAccessOnWrite</handler>
+  <handler>CommonModule.ObjectAccessFullAccess.BeforeWrite_ObjectAccessDocument</handler>
 </mdclass:EventSubscription>

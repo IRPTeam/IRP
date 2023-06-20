@@ -178,25 +178,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="6a4a9eb9-7298-48a0-9563-11762df385dc">
-      <name>ValueSimpleType</name>
-      <synonym>
-        <key>en</key>
-        <value>Value simple type</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>15</precision>
-          <scale>5</scale>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="45648dfb-74f4-4993-9e41-d3c938abdf22">
       <name>ValueRef</name>
       <synonym>

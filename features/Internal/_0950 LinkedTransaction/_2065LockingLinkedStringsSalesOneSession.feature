@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 
 @tree
 @Positive
@@ -59,6 +59,14 @@ Scenario: _2065001 preparation (locking linked strings)
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+	* Add Document discount
+		When Create Document discount
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax
@@ -69,41 +77,57 @@ Scenario: _2065001 preparation (locking linked strings)
 	When Create Item with SerialLotNumbers (Phone)
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create SO,SI,SC,SRO,SR (locking linked strings)
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(35).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesOrder.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(35).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesInvoice.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);" |
+		| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesReturn.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesReturn.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.ShipmentConfirmation.FindByNumber(35).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.ShipmentConfirmation.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.ShipmentConfirmation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.ShipmentConfirmation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(36).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesInvoice.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.GoodsReceipt.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.GoodsReceipt.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create Planned receipt reservation, SO, PO (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.PurchaseOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.PlannedReceiptReservation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.PlannedReceiptReservation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document SO-WO-WS-SI
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 

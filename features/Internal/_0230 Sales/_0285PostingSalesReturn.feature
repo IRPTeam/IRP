@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Sales
@@ -88,10 +88,13 @@ Scenario: _028500 preparation (create document Sales return)
 			| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesReturnOrder objects (creation based on, without SI)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturnOrder.FindByNumber(105).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesReturnOrder.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturnOrder.FindByNumber(106).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesReturnOrder.FindByNumber(106).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturnOrder.FindByNumber(107).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesReturnOrder.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0285001 check preparation

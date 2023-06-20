@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -59,7 +59,8 @@ Scenario: _0224000 preparation (Purchase order closing)
 	* Create test PO
 		When Create document PurchaseOrder objects (for check closing)
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
+			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 
 Scenario: _02240001 check preparation
 	When check preparation

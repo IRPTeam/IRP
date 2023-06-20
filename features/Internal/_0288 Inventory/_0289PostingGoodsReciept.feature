@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Inventory
@@ -58,6 +58,14 @@ Scenario: _028900 preparation (Goods receipt)
 				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+	* Document Discount 
+		When Create Document discount (for row)
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 	When Create document PurchaseOrder objects (creation based on)

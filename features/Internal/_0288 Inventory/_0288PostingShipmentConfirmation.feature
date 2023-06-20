@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Inventory
@@ -192,6 +192,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		| "Documents.PurchaseInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document PurchaseReturnOrder objects (creation based on 32)
 	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.PurchaseReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document PurchaseReturn objects (creation based on 32)
 	And I execute 1C:Enterprise script at server

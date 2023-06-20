@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -61,20 +61,25 @@ Scenario: _018000 preparation
 	* Load documents
 		When Create document PurchaseOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(217).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.PurchaseOrder.FindByNumber(217).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document GoodsReceipt objects (creation based on, without PO and PI)
 		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesOrder objects (SC before SI, creation based on)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create PO, GR with two same items
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.PurchaseOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.GoodsReceipt.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0180001 check preparation

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Services
@@ -88,6 +88,7 @@ Scenario: _029200 preparation (work order)
 	* SO
 		When Create document SalesOrder objects (with works)
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(183).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(183).GetObject().Write(DocumentWriteMode.Posting);"    |
 	
 

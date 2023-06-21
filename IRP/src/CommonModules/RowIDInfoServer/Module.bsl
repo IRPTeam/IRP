@@ -74,6 +74,9 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	
+	SetPrivilegedMode(True);
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT

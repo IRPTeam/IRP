@@ -215,16 +215,15 @@
   <roles>Role.SaveUserData</roles>
   <roles>Role.SystemAdministrator</roles>
   <roles>Role.TemplateAccumulationRegisters</roles>
-  <roles>Role.TemplateBasicAccess</roles>
   <roles>Role.TemplateCatalogs</roles>
   <roles>Role.TemplateDocument</roles>
+  <roles>Role.TemplateInformationRegisters</roles>
   <roles>Role.TemplateInformationRegistersCommon</roles>
   <roles>Role.UseAllFunctionsMode</roles>
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.TemplateInformationRegisters</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -586,6 +585,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>

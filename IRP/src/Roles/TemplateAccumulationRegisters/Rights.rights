@@ -13,7 +13,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Branch", "Store")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -27,18 +27,21 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "FromAccount", "ToAccount", "", "")</condition>
+				<condition>#AccessRegisters(
+	"Company", "FromAccount &amp; ToAccount", "", "", "",
+	"OAR.Value1 = Table.Company AND (OAR.Value2 = Table.FromAccount OR OAR.Value2 = Table.ToAccount)"
+)</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
 	<restrictionTemplate>
-		<name>AccessRegisters(D1, D2, D3, D4, D5)</name>
+		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
 		<condition>
 #If Not &amp;UseObjectAccess #Then
 	// Access restiction not using. Set UseObjectAccess functional option TRUE
 	WHERE TRUE
 	
-#ElseIf  "#D1" = "" AND "#D2" = "" AND "#D3" = "" AND "#D4" = "" AND "#D5" = "" #Then
+#ElseIf  "#D1" = "" AND "#D2" = "" AND "#D3" = "" AND "#D4" = "" AND "#D5" = "" AND "#CompareRule" = "" #Then
 	WHERE TRUE
 #Else
 Table
@@ -50,11 +53,16 @@ WHERE TRUE IN
 			 InformationRegister.T9101A_ObjectAccessRegisters AS OAR
 	WHERE OAR.AccessProfile IN (&amp;CurrentUserAccessProfiles)
 		AND #CurrentTableName = OAR.TableName
-		#If Not "#D1" = "" #Then AND OAR.Value1 = Table.#D1 #EndIf
-		#If Not "#D2" = "" #Then AND OAR.Value2 = Table.#D2 #EndIf
-		#If Not "#D3" = "" #Then AND OAR.Value3 = Table.#D3 #EndIf
-		#If Not "#D4" = "" #Then AND OAR.Value4 = Table.#D4 #EndIf
-		#If Not "#D5" = "" #Then AND OAR.Value5 = Table.#D5 #EndIf
+		
+		#If "#CompareRule" = "" #Then
+			#If Not "#D1" = "" #Then AND OAR.Value1 = Table.#D1 #EndIf
+			#If Not "#D2" = "" #Then AND OAR.Value2 = Table.#D2 #EndIf
+			#If Not "#D3" = "" #Then AND OAR.Value3 = Table.#D3 #EndIf
+			#If Not "#D4" = "" #Then AND OAR.Value4 = Table.#D4 #EndIf
+			#If Not "#D5" = "" #Then AND OAR.Value5 = Table.#D5 #EndIf
+		#Else
+			AND (#CompareRule)
+		#EndIf
 )
 #EndIf</condition>
 	</restrictionTemplate>

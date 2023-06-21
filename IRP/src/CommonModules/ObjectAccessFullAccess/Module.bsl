@@ -16,6 +16,15 @@ Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode
 		Return;
 	EndIf;
 	
+	CalculateAndUpdateAccessKey(Source);
+	
+EndProcedure
+
+// Calculate and update access key.
+// 
+// Parameters:
+//  Source - DocumentRefDocumentName, DocumentObjectDocumentName -
+Procedure CalculateAndUpdateAccessKey(Source)
 	Module = MetadataInfo.GetManager(Source.Metadata().FullName()); // DocumentManager.RetailSalesReceipt
 	
 	AccessKeys = Module.GetAccessKey(Source);
@@ -63,7 +72,7 @@ Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode
 	EndIf;
 
 	// If not set ref, then can not use RLS on create or update mode
-	If Source.IsNew() Then
+	If Source.Ref.IsEmpty() Then
 		Ref = Documents[Source.Metadata().Name].GetRef();
 		Source.SetNewObjectRef(Ref);
 	Else
@@ -74,7 +83,6 @@ Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode
 	Reg.ObjectAccessKeys = AccessKeyRef;
 	Reg.ObjectRef = Ref;
 	Reg.Write();
-	
 EndProcedure
 
 Procedure FillKeysTables(Keys, PathKey, Value)
@@ -90,4 +98,50 @@ Procedure FillKeysTables(Keys, PathKey, Value)
 		//@skip-check property-return-type
 		Raise R().ACS_UnknownValueType;
 	EndIf;
+EndProcedure
+
+Procedure UpdateAccessKeys(UpdateAll = False, DocumentMetadata = Undefined) Export
+	If UpdateAll Then
+		Text = 
+		"SELECT
+		|	Doc.Ref
+		|FROM
+		|	Document.%1 AS Doc
+		|
+		|ORDER BY
+		|	Doc.Date";
+	Else
+		Text = 
+		"SELECT
+		|	Doc.Ref,
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys
+		|FROM
+		|	Document.%1 AS Doc
+		|		LEFT JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		|		ON Doc.Ref = T9100A_ObjectAccessMap.ObjectRef
+		|WHERE
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys IS NULL
+		|
+		|ORDER BY
+		|	Doc.Date";
+	EndIf;             
+	
+	If DocumentMetadata = Undefined Then 
+		For Each Doc In Metadata.Documents Do
+			Query = New Query(StrTemplate(Text, Doc.Name));
+			DocSelect = Query.Execute().Select();
+			While DocSelect.Next() Do
+				//@skip-check invocation-parameter-type-intersect, property-return-type
+				CalculateAndUpdateAccessKey(DocSelect.Ref);
+			EndDo;
+		EndDo;   
+	Else
+	    Query = New Query(StrTemplate(Text, DocumentMetadata.Name));
+		DocSelect = Query.Execute().Select();
+		While DocSelect.Next() Do
+			//@skip-check invocation-parameter-type-intersect, property-return-type
+			CalculateAndUpdateAccessKey(DocSelect.Ref);
+		EndDo;
+	EndIf;
+	
 EndProcedure

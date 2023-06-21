@@ -2741,6 +2741,14 @@ Scenario: Create document PurchaseInvoice objects (for materials LC)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 1900      | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 325.28    | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2' | '7f2cc45a-c0fd-4b8b-92d7-c657d57d5fec' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2' | 'ecc74985-21b2-45ad-8916-603d6c138f44' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2' | '319f4562-1e89-4163-83cd-f275cbba333c' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3b170c84fba2' | 'c073be81-f457-4704-a9f4-d0852b676fbf' | ''                | ''               | 20         |
+
+
 	// Document.PurchaseInvoice
 
 	And I check or create document "PurchaseInvoice" objects:
@@ -2761,7 +2769,11 @@ Scenario: Create document PurchaseInvoice objects (for materials LC)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3d8a23da454a'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 200       | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3d8a23da454a'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 34.24     | 'False'     |
 
-	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b785989306affb7a11ed3d8a23da454a' | '87ab23dc-35cf-4e56-bd60-28b7ed236138' | ''                | ''               | 1          |
+
+
 	And I check or create document "AdditionalCostAllocation" objects:
 		| 'Ref'                                                                                | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'Company'                                                            | 'AllocationMode'                   | 'AllocationMethod'                | 'Author'                                                         | 'Branch'  | 'Description'   |
 		| 'e1cib/data/Document.AdditionalCostAllocation?ref=b785989306affb7a11ed3d8a23da454b'  | 'False'         | 1         | '26.09.2022 14:17:31'  | 'False'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c'  | 'Enum.AllocationMode.ByDocuments'  | 'Enum.AllocationMethod.ByAmount'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |

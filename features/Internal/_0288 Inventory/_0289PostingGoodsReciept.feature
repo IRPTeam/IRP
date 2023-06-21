@@ -10,7 +10,8 @@ I want to create a Goods receipt
 To take products to the store
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -49,6 +50,7 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create information register PricesByItemKeys records
 		When Create information register CurrencyRates records
 		When Create catalog TaxRates objects
+		When Create catalog Partners objects
 		When Create catalog Taxes objects
 		When update ItemKeys
 	* Add plugin for taxes calculation

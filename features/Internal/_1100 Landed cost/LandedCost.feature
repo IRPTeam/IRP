@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @LandedCost
 
@@ -136,7 +136,6 @@ Scenario: _001 test data
 		When Create document StockAdjustmentAsSurplus objects (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
-		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document RetailReturnReceipt objects (LC)
 		When Create document ItemStockAdjustment objects (LC)

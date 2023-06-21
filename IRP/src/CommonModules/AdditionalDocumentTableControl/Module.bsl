@@ -166,7 +166,7 @@ EndFunction
 //  PostingMode - DocumentPostingMode - Posting mode
 Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
 	If WriteMode = DocumentWriteMode.Posting Then
-		If Not GetFunctionalOption("UseAdditionalTableControlDocument") Then
+		If Not FOServer.isUseAdditionalTableControlDocument() Then
 			Return;
 		EndIf;
 		

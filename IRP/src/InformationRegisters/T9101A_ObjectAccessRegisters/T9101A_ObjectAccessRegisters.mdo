@@ -93,17 +93,20 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="386855bf-3c8f-4ea7-8070-1a2c3fc224bc">
-    <name>AccessProfile</name>
+    <name>AccessGroup</name>
     <synonym>
       <key>en</key>
-      <value>User access profiles</value>
+      <value>User access group</value>
     </synonym>
     <type>
-      <types>CatalogRef.AccessProfiles</types>
+      <types>CatalogRef.AccessGroups</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>DontUse</createOnInput>
     <denyIncompleteValues>true</denyIncompleteValues>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
     <master>true</master>
     <mainFilter>true</mainFilter>

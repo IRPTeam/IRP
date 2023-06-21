@@ -7573,16 +7573,16 @@
 Table
 WHERE NOT (FALSE) IN (
 	SELECT
-		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AccessProfilesObjectAccess.Key IS NULL))
+		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AG.Key IS NULL))
 		
 	FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
 		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
-			LEFT JOIN Catalog.AccessProfiles.ObjectAccess AS AccessProfilesObjectAccess
-				ON AccessProfilesObjectAccess.Ref IN (&amp;CurrentUserAccessProfiles)
-					AND AccessProfilesObjectAccess.Key = ObjectAccessKeysFilterDataList.Key
-					AND AccessProfilesObjectAccess.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
+			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
+				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
+					AND AG.Key = ObjectAccessKeysFilterDataList.Key
+					AND AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
 					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
-					AND (AccessProfilesObjectAccess.Modify)
+					AND (AG.Modify)
 					#EndIf
 			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
 		

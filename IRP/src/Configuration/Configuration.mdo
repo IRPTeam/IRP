@@ -191,7 +191,7 @@
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
-  <sessionParameters>SessionParameter.CurrentUserAccessProfiles</sessionParameters>
+  <sessionParameters>SessionParameter.CurrentUserAccessGroupList</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUserPartner</sessionParameters>
   <sessionParameters>SessionParameter.IDUse</sessionParameters>
   <sessionParameters>SessionParameter.IDValue</sessionParameters>

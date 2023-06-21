@@ -74,7 +74,7 @@ EndProcedure
 Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Export
 	If Cancel OR Source.DataExchange.Load 
 		OR SessionParameters.IgnoreLockModificationData 
-		OR Not GetFunctionalOption("UseLockDataModification") Then
+		OR Not FOServer.isUseLockDataModification() Then
 			
 		Return False;
 	EndIf;

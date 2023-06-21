@@ -13,7 +13,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store")</condition>
+				<condition>#AccessRegisters("Company", "Branch", "Store", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -51,7 +51,7 @@ WHERE TRUE IN
 		TRUE
 	FROM		
 			 InformationRegister.T9101A_ObjectAccessRegisters AS OAR
-	WHERE OAR.AccessProfile IN (&amp;CurrentUserAccessProfiles)
+	WHERE OAR.AccessGroup IN (&amp;CurrentUserAccessGroupList)
 		AND #CurrentTableName = OAR.TableName
 		
 		#If "#CompareRule" = "" #Then

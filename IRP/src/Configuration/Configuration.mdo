@@ -218,12 +218,13 @@
   <roles>Role.TemplateBasicAccess</roles>
   <roles>Role.TemplateCatalogs</roles>
   <roles>Role.TemplateDocument</roles>
-  <roles>Role.TemplateInformationRegistersWithoutRecorders</roles>
+  <roles>Role.TemplateInformationRegistersCommon</roles>
   <roles>Role.UseAllFunctionsMode</roles>
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.TemplateInformationRegisters</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>

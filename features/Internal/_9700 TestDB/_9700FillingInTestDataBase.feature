@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @TestDataBase
@@ -59,7 +59,7 @@ When Create catalog BusinessUnits objects (test data base)
 When Create catalog CancelReturnReasons objects (test data base)
 When Create catalog CashStatementStatuses objects (test data base)
 When Create catalog CashAccounts objects (test data base)
-When Create catalog Bill of materials objects (test data base)
+When Create catalog BillOfMaterials objects (test data base)
 When Create catalog Companies objects (test data base)
 When Create catalog ConfigurationMetadata objects (test data base)
 When Create catalog IDInfoSets objects (test data base)

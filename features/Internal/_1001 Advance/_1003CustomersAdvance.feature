@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Advance
@@ -141,7 +141,7 @@ Scenario: _1003000 preparation (customers advances closing)
 			| "Documents.CreditNote.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesInvoice objects (advance, customers)
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesInvoice.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.SalesInvoice.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server

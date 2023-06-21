@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -175,6 +175,13 @@ Scenario: Create document SalesInvoice objects (MF)
 		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4636'  | 'c53c996f-e2e0-4e53-87e4-1c72fe4be80e'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'  | '0,177'  | '5,6497'       | 'No'               | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | '22 598,87'   |
 		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4636'  | 'c53c996f-e2e0-4e53-87e4-1c72fe4be80e'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'  | '1'      | '1'            | 'No'               | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '4 000'       |
 	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4635' | 'd431dc99-69b8-4d57-aa17-1a341fe6021f' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4635' | 'b3c2d576-bb29-4f2c-b270-c470df50760a' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4636' | '209cb5b9-6e94-41ae-83ea-7c40b8a8a0b5' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b75bf64d81d7e38811eb29aaadfd4636' | 'b98d2c45-aad7-4316-bd90-26da9c10c28d' | ''                | ''               | 10         |
+
 
 Scenario: Create information register UserSettings records (MF)
 
@@ -676,18 +683,35 @@ Scenario: Create document PurchaseInvoice objects (production landed cost) (MF)
 
 	
 	And I refill object tabular section "SourceOfOrigins":
-		| 'Ref'                                                                       | 'Key'                                   | 'SerialLotNumber'  | 'SourceOfOrigin'  | 'Quantity'   |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '91433a32-aa72-4877-898c-b0984bcde439'  | ''                 | ''                | 170          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | 'f0ea309c-ecef-4d8b-a13b-257ebd3d7868'  | ''                 | ''                | 100          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '44a95e94-75ee-49ed-b6a0-84a2665df97e'  | ''                 | ''                | 420          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '0bc06017-41f9-4fbd-9888-c31ca612563e'  | ''                 | ''                | 90           |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | 'f4274461-48ea-4ad9-a7e7-1fc3af0cc8b2'  | ''                 | ''                | 167          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '17cdd34c-691b-4d37-89e5-7ed173e75150'  | ''                 | ''                | 80           |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '98e56168-b620-487d-a611-f6b485a12331'  | ''                 | ''                | 168          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '71f0f6db-4378-4174-b6ba-eccc40d04556'  | ''                 | ''                | 940          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '49026d93-c085-4f20-a230-e3ad837bcdc6'  | ''                 | ''                | 1051         |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | '4a78a102-fa73-4a93-bf07-f659be07888c'  | ''                 | ''                | 30           |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61'  | 'be307c66-6e08-4097-b820-4604595fd933'  | ''                 | ''                | 8            |
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '91433a32-aa72-4877-898c-b0984bcde439' | ''                | ''               | 170        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | 'f0ea309c-ecef-4d8b-a13b-257ebd3d7868' | ''                | ''               | 100        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '44a95e94-75ee-49ed-b6a0-84a2665df97e' | ''                | ''               | 420        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '0bc06017-41f9-4fbd-9888-c31ca612563e' | ''                | ''               | 90         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | 'f4274461-48ea-4ad9-a7e7-1fc3af0cc8b2' | ''                | ''               | 167        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '17cdd34c-691b-4d37-89e5-7ed173e75150' | ''                | ''               | 80         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '98e56168-b620-487d-a611-f6b485a12331' | ''                | ''               | 168        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '71f0f6db-4378-4174-b6ba-eccc40d04556' | ''                | ''               | 940        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '49026d93-c085-4f20-a230-e3ad837bcdc6' | ''                | ''               | 1051       |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | '4a78a102-fa73-4a93-bf07-f659be07888c' | ''                | ''               | 30         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda61' | 'be307c66-6e08-4097-b820-4604595fd933' | ''                | ''               | 8          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | 'a353e761-53b3-4e80-bc5d-25961a5bf8df' | ''                | ''               | 100        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '16260397-c0b0-48b4-988e-afd8c4cd505a' | ''                | ''               | 50         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | 'ec6a5a82-4f69-415f-aaf7-36615d16d77e' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | 'd7a94fda-a1cb-4c81-813e-d196425dfcd7' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '4f2c378a-51bd-4a3b-98f6-ff846501d81a' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '01bd4d6f-37db-4112-add4-60919dd46891' | ''                | ''               | 30         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '8e9e82a2-c22a-4b11-ab09-2274374c66a8' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '6ed6f25c-440b-43da-935d-24a8bd581d45' | ''                | ''               | 188        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '5ce33c3a-7a0a-40ac-9170-aec501a15f8d' | ''                | ''               | 50         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '530b8035-7e11-4495-9040-5e4cbf51310e' | ''                | ''               | 100        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0be328dda4c' | '34f601ff-faee-4d9f-8c18-8693f40cf5f6' | ''                | ''               | 100        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0c6cf162c90' | 'a1fc6a12-949b-4b1b-9c20-4b071569fb05' | ''                | ''               | 138        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece0c6cf162c90' | 'f06c957b-15ae-4609-a47f-c0ca5e85aea0' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece1a396319f1f' | '36fc53d5-5a10-4927-80c9-a581a88a6c9d' | ''                | ''               | 50         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece1a396319f1f' | '8b47430b-43a7-4e26-a107-f638c2231798' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece1a396319f1f' | '9d980b77-c68b-4a6c-916e-60ec95930527' | ''                | ''               | 50         |
+
 
 Scenario: Create document PurchaseInvoice and AdditionalCostAllocation objects (production landed cost) (MF)
 

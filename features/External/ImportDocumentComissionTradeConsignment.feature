@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -1067,6 +1067,15 @@ Scenario: Create document SalesInvoice (trade, own Companies)
 		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae74'  | 'b09eab94-2776-479e-a8db-90b580ddd2ee'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60'  | 2            |
 		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae78'  | '31202932-d3fd-40bf-8f86-27313dd49943'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60'  | 1            |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae74' | 'fc0161c8-3aca-408a-a3ef-ebd58758881d' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae74' | 'ef7b8d49-33b3-4793-864a-aa98ce28f2b1' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae74' | 'b09eab94-2776-479e-a8db-90b580ddd2ee' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae78' | 'b821d468-dded-4e57-a80c-b2f7020f6e24' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae78' | 'bbaf3eb6-0de9-4fdf-94ab-2a89a571c8db' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78bf3a601f806a711ed64ba446bae78' | '31202932-d3fd-40bf-8f86-27313dd49943' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | ''               | 1          |
+
 
 
 Scenario: Create document PurchaseInvoice (comission trade, own Companies)
@@ -1183,6 +1192,9 @@ Scenario: Create document PurchaseInvoice (comission trade, own Companies)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b78bf3a601f806a711ed658bf05145a7'  | 'b96dbd9c-a17f-4c81-89d5-7f0aeaf099d3'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a'  | ''                | 5            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b78bf3a601f806a711ed658bf05145a7'  | '86583c86-2bb9-47f9-bb15-69a61711df43'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164'  | ''                | 2            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b78bf3a601f806a711ed658bf05145a7'  | '96fbecf2-7ed1-4083-a0e6-1234194ac78b'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d165'  | ''                | 2            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b78bf3a601f806a711ed67173ae40b7a'  | '2b5197a6-dc28-4cdb-8fa2-61987605355d'  | ''                                                                          | ''                | 4            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b78bf3a601f806a711ed67173ae40b7a'  | 'b3eb3bd6-f80e-4d14-b6a5-7413cb6f2568'  | ''                                                                          | ''                | 4            |
+
 
 
 

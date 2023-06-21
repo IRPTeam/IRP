@@ -60,10 +60,8 @@ Scenario: _0242000 preparation (planned receipt reservation)
 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);"    |
 	When Create document SalesOrder objects (check reservation)
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1081).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesOrder.FindByNumber(1081).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1082).GetObject().Write(DocumentWriteMode.Write);"    |
 			| "Documents.SalesOrder.FindByNumber(1082).GetObject().Write(DocumentWriteMode.Posting);"    |
 	When Create document PlannedReceiptReservation objects (check reservation)
 	And I execute 1C:Enterprise script at server

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -2608,7 +2608,12 @@ Scenario: Create documents Batch relocation (LC)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece013b8c1b7aa'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 15100     | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece013b8c1b7aa'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 2585.12   | 'False'     |
 
-	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece013b8c1b7aa' | '2c6c413e-4fe2-4dd3-8fbf-18c11a62b222' | ''                | ''               | 50         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece013b8c1b7aa' | 'faf28f93-4d78-4c83-988e-d4a68e248332' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b781cf3f5e36b25611ece013b8c1b7aa' | 'e10348a6-de33-4dcb-a287-907ea42cd3fb' | ''                | ''               | 100        |
+
 	// Document.SalesInvoice
 
 	And I check or create catalog "RowIDs" objects:
@@ -2642,6 +2647,17 @@ Scenario: Create documents Batch relocation (LC)
 		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  |         |                | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f97a27c2ac2'  |           | 'False'     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  |         |                | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f97aa568142'  |           | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece013b8c1b7ad' | 'fdfdc08d-a0b6-4959-a9b2-37eabbb1a4df' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece013b8c1b7ad' | 'acf2b10a-24ce-4bad-a551-1ae5d1718b62' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece013b8c1b7ad' | '68c59ef1-07ba-4dfb-a6e5-fc3789b7c0bb' | ''                | ''               | 5          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece013b8c1b7ad' | '89112891-7237-492c-a7be-9758a5a36824' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd' | 'f95f08f6-3ed4-48a0-ae4d-9119743eb8f2' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd' | '140872ab-a128-4ead-8348-52b446a703a5' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd' | '2a160cfa-6771-4730-832b-34e5892dd1e6' | ''                | ''               | 2          |
+
+
 	// Document.ItemStockAdjustment
 
 	And I check or create document "ItemStockAdjustment" objects:
@@ -2673,6 +2689,11 @@ Scenario: Create documents Batch relocation (LC)
 		| 'e1cib/data/Document.SalesReturn?ref=b781cf3f5e36b25611ece013b8c1b7b6'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  | 5.6497  | 0.177          | 'False'            | 1               | '                                    '  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 33898.2   | 'False'     |
 		| 'e1cib/data/Document.SalesReturn?ref=b781cf3f5e36b25611ece013b8c1b7b6'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  | 1       | 1              | 'False'            | 1               | '                                    '  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 6000      | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b781cf3f5e36b25611ece013b8c1b7b6' | '230bf5f0-939c-47f7-b582-7d45677482d2' | ''                | ''               | 10         |
+		
+
 // Document.SalesReturn
 
 	And I check or create document "SalesReturn" objects:
@@ -2697,7 +2718,11 @@ Scenario: Create documents Batch relocation (LC)
 		| 'Ref'                                                                   | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'                                                                  | 'CurrentStep'                                      | 'NextStep'                                     | 'RowRef'                                                          | 'BasisKey'                               |
 		| 'e1cib/data/Document.SalesReturn?ref=b78386a1ced23f4711ed0999a4fc67dc'  | '193e10f5-46dd-4135-a08a-031be96b233f'  | 'f95f08f6-3ed4-48a0-ae4d-9119743eb8f2'  | 1           | 'e1cib/data/Document.SalesInvoice?ref=b781cf3f5e36b25611ece01b4d8c92bd'  | 'e1cib/data/Catalog.MovementRules?refName=SRO_SR'  | 'e1cib/data/Catalog.MovementRules?refName=GR'  | 'e1cib/data/Catalog.RowIDs?ref=b78386a1ced23f4711ed0999c144d80f'  | 'f95f08f6-3ed4-48a0-ae4d-9119743eb8f2'   |
 
-	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b78386a1ced23f4711ed0999a4fc67dc' | '193e10f5-46dd-4135-a08a-031be96b233f' | ''                | ''               | 1          |
+
+
 // Document.RetailSalesReceipt
 
 	And I check or create catalog "RowIDs" objects:
@@ -2730,7 +2755,10 @@ Scenario: Create documents Batch relocation (LC)
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                          | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'  | 'CurrentStep'  | 'NextStep'  | 'RowRef'                                                          | 'BasisKey'                               |
 		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78386a1ced23f4711ed08c30cb2f965'  | '60dd48a9-3870-4341-8931-1fe83db63c46'  | '60dd48a9-3870-4341-8931-1fe83db63c46'  | 15          | ''       | ''             | ''          | 'e1cib/data/Catalog.RowIDs?ref=b78386a1ced23f4711ed08c30cb2f964'  | '                                    '   |
-
+	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                         | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78386a1ced23f4711ed08c30cb2f965' | '60dd48a9-3870-4341-8931-1fe83db63c46' | ''                | ''               | 15         |
 
 
 // Document.RetailReturnReceipt
@@ -2759,7 +2787,11 @@ Scenario: Create documents Batch relocation (LC)
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b78386a1ced23f4711ed08c30cb2f967'  | '0f4a7ba9-50b3-429e-8393-5b68a44725c3'  | '60dd48a9-3870-4341-8931-1fe83db63c46'  | 15          | 'e1cib/data/Document.RetailSalesReceipt?ref=b78386a1ced23f4711ed08c30cb2f965'  | 'e1cib/data/Catalog.MovementRules?refName=RRR'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b78386a1ced23f4711ed08c30cb2f964'  | '60dd48a9-3870-4341-8931-1fe83db63c46'   |
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b78386a1ced23f4711ed08c30cb2f967'  | '472cf435-b0f1-4450-bfc4-16d50bae9b03'  | '472cf435-b0f1-4450-bfc4-16d50bae9b03'  | 1           | ''                                                                             | ''                                              | ''          | 'e1cib/data/Catalog.RowIDs?ref=b78386a1ced23f4711ed08c30cb2f966'  | '                                    '   |
 
-	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                          | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b78386a1ced23f4711ed08c30cb2f967' | '0f4a7ba9-50b3-429e-8393-5b68a44725c3' | ''                | ''               | 15         |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b78386a1ced23f4711ed08c30cb2f967' | '472cf435-b0f1-4450-bfc4-16d50bae9b03' | ''                | ''               | 1          |
+
 
 Scenario: Create document SO-WO-WS-SI (LC)
 
@@ -2999,7 +3031,7 @@ Scenario: Create document AdditionalCostAllocation, PurchaseInvoice (additional 
 
 	And I refill object tabular section "TaxList":
 		| 'Ref'                                                                       | 'Key'                                   | 'Tax'                                                            | 'Analytics'  | 'TaxRate'                                                           | 'Amount'  | 'IncludeToTotalAmount'  | 'ManualAmount'   |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b79996ebf0bd544411edd91be78c50c7'  | '22693d75-ccc7-4a18-bc21-d703acd29a1c'  | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f651fcdcb98'  | 15.25     | 'True'                  | 15.25            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79996ebf0bd544411edd91be78c50c7'  | '22693d75-ccc7-4a18-bc21-d703acd29a1c'  | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f651fcdcb98'  | 100.00    | 'True'                  | 100.00           |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b79996ebf0bd544411edd91be78c50c7'  | 'a4c23b98-4982-45f7-82dc-84fe102e8949'  | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f651fcdcb98'  |           | 'True'                  |                  |
 
 	And I refill object tabular section "Currencies":

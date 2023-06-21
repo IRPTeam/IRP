@@ -594,6 +594,12 @@ Scenario: Create document PurchaseReturn objects (creation based on 32)
 		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8c9c498f98b7'  | '32e452b4-1dcb-44a2-9226-834f44384a8b'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | 5710      | 'False'     |
 		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8c9c498f98b7'  | '32e452b4-1dcb-44a2-9226-834f44384a8b'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | 977.55    | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                     | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8c9c498f98b7' | 'e03c881f-2ff8-4419-a630-01af16652b38' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8c9c498f98b7' | '2ace2486-271d-4646-94ad-8e63b3ea8304' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8c9c498f98b7' | '83214201-06d7-4433-8db2-2df2d308891a' | ''                | ''               | 1          |
+
 
 Scenario: Create document PurchaseReturnOrder objects (creation based on 32)
 
@@ -671,6 +677,9 @@ Scenario: Create document PurchaseReturn objects (creation based on)
 		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9ff' | '4df8ac66-80ea-4251-a98b-3f467ab21f19' | ''                | ''               | 2          |
 		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9ff' | '5485d4c6-eca4-4623-838f-69b1ec11689a' | ''                | ''               | 1          |
 		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9ff' | 'c6c5b55a-e3bf-4cd5-9bdb-05139de04cdd' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9fb' | '4042eb2c-49f5-4b0b-89cd-3ddec8aa7948' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9fb' | '0b058f8d-4574-4eda-a447-aeb4f2a9f57b' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b762b13668d0905011eb8ca6efe1f9fb' | 'd4674f83-3ca5-4dcb-80aa-39bcff3ac619' | ''                | ''               | 1          |
 
 
 Scenario: Create document SalesReturnOrder objects (creation based on, without SI)

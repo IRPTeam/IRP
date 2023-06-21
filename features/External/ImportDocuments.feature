@@ -2676,6 +2676,10 @@ Scenario: Create document InventoryTransfer objects (stock control)
 		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2'  | '170de7a2-ac61-4b5b-831a-f7848d7a9dba'  | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf1277d18ed8b'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 20          | ''                        | 20                    | 'False'                |
 		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2'  | '5a2da38d-5730-4c82-b224-f46bc3a0c4d7'  | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f7'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c608'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60a'  | 10          | ''                        | 80                    | 'False'                |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                         | 'Key'                                   | 'SerialLotNumber'  | 'SourceOfOrigin'  | 'Quantity'   |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2'  | '170de7a2-ac61-4b5b-831a-f7848d7a9dba'  | ''                 | ''                | 20           |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2'  | '5a2da38d-5730-4c82-b224-f46bc3a0c4d7'  | ''                 | ''                | 80           |
 
 Scenario: Create document PurchaseInvoice objects (for materials)
 
@@ -3062,6 +3066,13 @@ Scenario: Create document SalesReturn objects (stock control)
 		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 1       | 1              | 'False'            | 1               | '                                    '  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f'  | 88000     | 'False'     |
 		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 1       | 1              | 'False'            | 1               | '                                    '  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | 88000     | 'False'     |
 		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 0.1712  | 5.8411         | 'False'            | 1               | '                                    '  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | 15065.6   | 'False'     |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea' | 'd63f1734-70a6-4b68-b86d-d7b7b2bec96f' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea' | '15200708-4bff-4a7d-9281-769f3fdca72a' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea' | 'a829b197-11ae-4413-a47e-64daf338c3a4' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.SalesReturn?ref=b762b13668d0905011eb832c02e0c9ea' | 'bb49181f-c474-455b-9f47-2e9982253276' | ''                | ''               | 10         |
 
 
 Scenario: Create document StockAdjustmentAsSurplus objects (stock control)
@@ -3990,6 +4001,21 @@ Scenario: Create document PurchaseInvoice objects (advance)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eee6'  | '06b4455d-1634-46ae-8686-4413199b608d'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '1'       | '1'            | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | '100'      |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eee6'  | '06b4455d-1634-46ae-8686-4413199b608d'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '0,1712'  | '5,8411'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '17,12'    |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bede0' | 'c15c1eee-d29a-4821-bd09-464fe62bbaa8' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bede0' | '9f511478-bf4c-4e6b-9d5d-16d016bdcc4e' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bede5' | '4c3a88d9-a855-4efd-89f7-acbc572b0b50' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bede8' | 'dd3b3905-bb75-4595-824f-94fe32c6f174' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bede8' | '7af7a593-ae07-46af-899c-9cf2eded7237' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bedeb' | 'e489a96d-2dd6-41cb-b4ea-ea2e5dca9ee5' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0b6bedeb' | '75b8829c-908c-4e6d-b646-89a7eb0fbd1f' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eede' | 'f2a4c5df-ad06-4ca0-b1bd-44345a60d112' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eee2' | '63fb829f-4596-4698-a17f-3300ef47c5dd' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eee4' | '07965481-4978-4c3e-8081-840d41159dd7' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76790ebcbe4b2b311ebb3cc0f45eee6' | 'b5c5c069-8418-4ead-b639-093a401e5960' | ''                | ''               | 1          |
+
+
 Scenario: Create document PurchaseReturn objects (advance)
 
 	And I check or create document "PurchaseReturn" objects:
@@ -4276,6 +4302,17 @@ Scenario: Create document SalesInvoice objects (advance, customers)
 		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb4811530940b'  | '1ef6c1ad-f28d-4d9d-8aca-7d23eff136de'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '1'       | '1'            | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f'  | '20 000'     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb4811530940b'  | '1ef6c1ad-f28d-4d9d-8aca-7d23eff136de'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '1'       | '1'            | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | '20 000'     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb4811530940b'  | '1ef6c1ad-f28d-4d9d-8aca-7d23eff136de'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '0,1712'  | '5,8411'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '3 424'      |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb481153093fe' | 'ffbc5480-51cf-4180-9a4d-dfa59087bfd3' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb481153093fe' | 'c375afc0-9aa3-4ba0-8216-b148ead467ea' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb48115309400' | 'bbccd54d-5424-4495-a91c-0c7b2fffdcba' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb48115309402' | '791149c1-c363-4be0-b790-e9aa2c7b8851' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb48115309405' | '26b30efa-4e86-4712-9ab0-de22d31b848a' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb48115309409' | '2ae47ebf-b3fa-4ebd-8074-80a9c471e761' | ''                | ''               | 31         |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76790ebcbe4b2b311ebb4811530940b' | '38d439e9-4c11-4486-95e6-52cbdd96fb30' | ''                | ''               | 50         |
+
 
 Scenario: Create document OpeningEntry objects (aging)
 
@@ -5355,6 +5392,14 @@ Scenario: Create document PurchaseInvoice objects (serial lot numbers)
 		| 'Ref'                                                                       | 'Key'                                   | 'SerialLotNumber'                                                           | 'Quantity'   |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b780c87413d4c65f11ecd51f85b86301'  | '4fcdb1e6-8172-4bfa-a64f-9f4ba77c8d42'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072'  | 120          |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b780c87413d4c65f11ecd51f85b86301' | '68fb7255-3a61-4ed0-bc7e-ac1b245f798d' | ''                                                                         | ''               | 500        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b780c87413d4c65f11ecd51f85b86301' | '76fb79a0-8856-4026-b73a-61e94141d7ea' | ''                                                                         | ''               | 150        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b780c87413d4c65f11ecd51f85b86301' | '6387cdf8-ee83-4347-8507-896ebb2ac494' | ''                                                                         | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b780c87413d4c65f11ecd51f85b86301' | '4fcdb1e6-8172-4bfa-a64f-9f4ba77c8d42' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | ''               | 120        |
+
+
 
 Scenario: Create document PurchaseInvoice objects (stock control serial lot numbers)
 
@@ -6192,13 +6237,20 @@ Scenario: Create document RSR, RRR with ConsolidatedRetailSales
 
 
 	And I refill object tabular section "SourceOfOrigins":
-		| 'Ref'                                                                          | 'Key'                                   | 'SerialLotNumber'                                                           | 'SourceOfOrigin'  | 'Quantity'   |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a'  | 'cfd7e886-6ed1-42d6-8b9b-8dd2bdfa80bc'  | ''                                                                          | ''                | 2            |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a'  | 'afec09e9-dc5d-427e-94f8-3cff755ae17a'  | ''                                                                          | ''                | 1            |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a'  | 'dcbf8f6f-4204-4425-9c9e-c5405e205b4c'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11'  | ''                | 2            |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45'  | '7bf3a333-0365-4fdc-b791-2ddaebbe1157'  | ''                                                                          | ''                | 1            |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45'  | '331753c3-4d6e-4849-a842-3e83422ebbe7'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11'  | ''                | 2            |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45'  | 'b232a99d-b244-44b9-bef6-08fb523ad09a'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60'  | ''                | 1            |
+		| 'Ref'                                                                         | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b784ae4f9cb08e5e11ed224e1ee0a824' | '6c338a28-eaed-4826-8993-0b26e26c2e90' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a' | 'cfd7e886-6ed1-42d6-8b9b-8dd2bdfa80bc' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a' | 'afec09e9-dc5d-427e-94f8-3cff755ae17a' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3a' | 'dcbf8f6f-4204-4425-9c9e-c5405e205b4c' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11' | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3d' | '96553b84-3358-49a9-8352-1cfe264a539d' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11' | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c3d' | 'ec3f3509-c938-46ce-8c54-107af66fe9ed' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c40' | '49a0d418-cfe2-40fb-8a53-f3e58d317bd7' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11' | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c40' | 'cd1ef9c9-e4ab-40ec-858f-0a72ce77e91b' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45' | '7bf3a333-0365-4fdc-b791-2ddaebbe1157' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45' | '331753c3-4d6e-4849-a842-3e83422ebbe7' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11' | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c45' | 'b232a99d-b244-44b9-bef6-08fb523ad09a' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c48' | 'bed24804-3027-4328-abbf-3a3fa342e072' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f756a377c11' | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b79392df2896a84411ed9c8fec329c48' | '46f8d26e-a398-420d-848b-efc21a95007b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | ''               | 1          |
 
 
 Scenario: Create document MoneyTransfer objects (for cash in)

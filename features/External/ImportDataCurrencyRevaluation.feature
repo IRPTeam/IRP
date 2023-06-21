@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -201,7 +201,9 @@ Scenario: Create document SalesInvoice objects (multicurrency revaluation)
 
 	
 	And I refill object tabular section "SourceOfOrigins":
-		| 'Ref'                                                                    | 'Key'                                   | 'SerialLotNumber'  | 'SourceOfOrigin'  | 'Quantity'   |
-		| 'e1cib/data/Document.SalesInvoice?ref=b796bc391ccbc40411edb8f814fc525a'  | '77ecede5-5ead-4d0c-aaca-e50dd6ec911a'  | ''                 | ''                | 1            |
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b796bc391ccbc40411edb8f814fc525a' | '77ecede5-5ead-4d0c-aaca-e50dd6ec911a' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b796bc391ccbc40411edb8f814fc525a' | '45448867-2cd2-48ac-89d4-50e4c93b7b14' | ''                | ''               | 1          |
+
 
 

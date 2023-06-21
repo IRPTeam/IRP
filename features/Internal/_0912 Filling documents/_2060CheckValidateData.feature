@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -85,8 +85,6 @@ Scenario: _0206000 preparation (checks data)
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Users objects
 		When Create document RetailSalesReceipt objects (wrong data)
-		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(8811).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document GoodsReceipt objects (wrong data)
 		When Create document InventoryTransfer (wrong data)
 		When Create document InventoryTransferOrder objects (wrong data)

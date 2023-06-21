@@ -17,6 +17,20 @@
 			</restrictionByCondition>
 		</right>
 	</object>
+	<object>
+		<name>AccumulationRegister.CashInTransit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "FromAccount", "ToAccount", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>AccessRegisters(D1, D2, D3, D4, D5)</name>
 		<condition>
@@ -25,7 +39,7 @@
 	WHERE TRUE
 	
 #ElseIf  "#D1" = "" AND "#D2" = "" AND "#D3" = "" AND "#D4" = "" AND "#D5" = "" #Then
-	
+	WHERE TRUE
 #Else
 Table
 WHERE TRUE IN 
@@ -41,7 +55,6 @@ WHERE TRUE IN
 		#If Not "#D3" = "" #Then AND OAR.Value3 = Table.#D3 #EndIf
 		#If Not "#D4" = "" #Then AND OAR.Value4 = Table.#D4 #EndIf
 		#If Not "#D5" = "" #Then AND OAR.Value5 = Table.#D5 #EndIf
-		
 )
 #EndIf</condition>
 	</restrictionTemplate>

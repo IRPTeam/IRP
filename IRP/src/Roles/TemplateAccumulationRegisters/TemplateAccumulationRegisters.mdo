@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7becb2c-cfa3-478f-a806-30883464f365">
-  <name>TemplateRegisters</name>
+  <name>TemplateAccumulationRegisters</name>
   <synonym>
     <key>en</key>
-    <value>Template registers</value>
+    <value>Template accumulation registers</value>
   </synonym>
 </mdclass:Role>

@@ -1849,6 +1849,7 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	NewDoc.Fill(FillingData);
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
 	NewDoc.Write(DocumentWriteMode.Posting);
 	
 	DocRef = NewDoc.Ref;

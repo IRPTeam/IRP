@@ -7,7 +7,7 @@
 Functionality: locking linked strings (PO,PI,GR,PRO,PR)
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
 Scenario: _2066001 preparation (locking linked strings)
 	When set True value to the constant
@@ -56,6 +56,14 @@ Scenario: _2066001 preparation (locking linked strings)
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+	* Document Discount 
+		When Create Document discount (for row)
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax

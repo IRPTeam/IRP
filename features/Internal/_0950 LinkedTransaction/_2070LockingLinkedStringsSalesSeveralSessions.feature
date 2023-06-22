@@ -65,6 +65,14 @@ Scenario: _2070001 preparation (locking linked strings)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 	When Create Item with SerialLotNumbers (Phone)
+	* Document Discount 
+		When Create Document discount (for row)
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 	When create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking linked strings several sessions
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);"   |

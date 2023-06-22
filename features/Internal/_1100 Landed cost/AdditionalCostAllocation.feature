@@ -135,7 +135,6 @@ Scenario: _041 test data
 		When Create document StockAdjustmentAsSurplus objects (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
-		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document AdditionalCostAllocation objects (by rows, amount) (LC)

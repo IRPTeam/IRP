@@ -1509,6 +1509,13 @@ Scenario: Create PO,PI,GR,PRO,PR (locking linked strings)
 		| 'e1cib/data/Document.PurchaseReturn?ref=b76fba77ffd4077e11ec24f287c94302'  | '78a61d07-41eb-4294-81c1-fb386057a83d'  | 'ce7276e5-98a6-42ac-9a49-7988dd986215'  | 4           | 'e1cib/data/Document.PurchaseReturnOrder?ref=b76fba77ffd4077e11ec24f287c94300'  | 'e1cib/data/Catalog.MovementRules?refName=PR'  | ''                                             | 'e1cib/data/Catalog.RowIDs?ref=b76fba77ffd4077e11ec24f287c942fa'  | 'e538ee86-77cc-4941-9bbe-1473a29e9a2b'   |
 		| 'e1cib/data/Document.PurchaseReturn?ref=b76fba77ffd4077e11ec24f287c94302'  | 'a3aa7fb9-30ad-4fe4-9086-f68f60362e28'  | 'a3aa7fb9-30ad-4fe4-9086-f68f60362e28'  | 2           | ''                                                                              | ''                                             | ''                                             | 'e1cib/data/Catalog.RowIDs?ref=b76fba77ffd4077e11ec25d93b8ee34c'  | '                                    '   |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                     | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b76fba77ffd4077e11ec24f287c94302' | '78a61d07-41eb-4294-81c1-fb386057a83d' | ''                | ''               | 4          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b76fba77ffd4077e11ec24f287c94302' | 'a3aa7fb9-30ad-4fe4-9086-f68f60362e28' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseReturn?ref=b76fba77ffd4077e11ec24f287c94302' | '773d948f-22c6-445b-b667-59b4e3b75280' | ''                | ''               | 7          |
+
+
 	// Document.PurchaseReturnOrder
 
 	And I check or create document "PurchaseReturnOrder" objects:
@@ -1994,6 +2001,17 @@ Scenario: create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking 
 		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6'  | 'c5c3ffa2-9192-4d5b-8b69-83f795881532'  | '13efd679-d057-4050-88a2-7118c4301492'  | 1           | 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5'  | 'e1cib/data/Catalog.MovementRules?refName=SI_SC'  | 'e1cib/data/Catalog.MovementRules?refName=SC'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9b1'  | '13efd679-d057-4050-88a2-7118c4301492'   |
 		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6'  | 'b475cdf2-08a0-4a93-9f2d-3d2fbaa0889f'  | '23841f11-a715-487c-b0af-716d73b04e2d'  | 24          | 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5'  | 'e1cib/data/Catalog.MovementRules?refName=SI_SC'  | 'e1cib/data/Catalog.MovementRules?refName=SC'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9b3'  | '23841f11-a715-487c-b0af-716d73b04e2d'   |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6' | 'b475cdf2-08a0-4a93-9f2d-3d2fbaa0889f' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6' | 'c5c3ffa2-9192-4d5b-8b69-83f795881532' | ''                | ''               | 1          |
+
+	And I refill object tabular section "SpecialOffers":
+		| 'Ref'                                                                   | 'Key'                                  | 'Offer'                                                                 | 'Amount' | 'Percent' | 'Bonus' | 'AddInfo' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6' | 'b475cdf2-08a0-4a93-9f2d-3d2fbaa0889f' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 840      | 5         |         | ''        |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2770c4c3c9b6' | 'c5c3ffa2-9192-4d5b-8b69-83f795881532' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 26       | 5         |         | ''        |
+
+
 	// Document.SalesOrder
 
 	And I check or create document "SalesOrder" objects:
@@ -2034,6 +2052,14 @@ Scenario: create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking 
 		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5'  | '14e0f7e7-0df0-46fc-82a1-e39e509bb0cd'  | '14e0f7e7-0df0-46fc-82a1-e39e509bb0cd'  | 1           | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=SI'     | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9b4'  | '                                    '   |
 		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5'  | '6032fc56-7844-472d-bca3-71a19725ccdf'  | '6032fc56-7844-472d-bca3-71a19725ccdf'  | 10          | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=SI_SC'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9bc'  | '                                    '   |
 		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5'  | '6032fc56-7844-472d-bca3-71a19725ccdf'  | '6032fc56-7844-472d-bca3-71a19725ccdf'  | 10          | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=PRR'    | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9bc'  | '                                    '   |
+
+	And I refill object tabular section "SpecialOffers":
+		| 'Ref'                                                                 | 'Key'                                  | 'Offer'                                                                 | 'Amount' | 'Percent' | 'Bonus' | 'AddInfo' |
+		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5' | '13efd679-d057-4050-88a2-7118c4301492' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 26       |           |         | ''        |
+		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5' | '46b5adbf-3496-45c9-9eed-6a410340ff60' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 100      |           |         | ''        |
+		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5' | '23841f11-a715-487c-b0af-716d73b04e2d' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 840      |           |         | ''        |
+		| 'e1cib/data/Document.SalesOrder?ref=b770ee02d8e5dc6711ec2770c4c3c9b5' | '14e0f7e7-0df0-46fc-82a1-e39e509bb0cd' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 5        |           |         | ''        |
+
 
 	// Document.ShipmentConfirmation
 
@@ -2082,6 +2108,16 @@ Scenario: create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking 
 		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b'  | '172def2a-09ad-4376-b62f-f2da6d6d833f'  | '172def2a-09ad-4376-b62f-f2da6d6d833f'  | 1           | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=SC'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2805d722b529'  | '                                    '   |
 		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b'  | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905'  | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905'  | 24          | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=SC'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2805d722b52a'  | '                                    '   |
 
+	And I refill object tabular section "SpecialOffers":
+		| 'Ref'                                                                   | 'Key'                                  | 'Offer'                                                                 | 'Amount' | 'Percent' | 'Bonus' | 'AddInfo' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b' | '172def2a-09ad-4376-b62f-f2da6d6d833f' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 26       |           |         | ''        |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b' | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 840      |           |         | ''        |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b' | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b' | '172def2a-09ad-4376-b62f-f2da6d6d833f' | ''                | ''               | 1          |
+
 	// Document.ShipmentConfirmation
 
 	And I check or create document "ShipmentConfirmation" objects:
@@ -2124,6 +2160,16 @@ Scenario: create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking 
 		| 'Ref'                                                                   | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'                                                                  | 'CurrentStep'                                      | 'NextStep'  | 'RowRef'                                                          | 'BasisKey'                               |
 		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9be'  | '1e83edcd-479d-43a2-a01c-655a5b662800'  | '172def2a-09ad-4376-b62f-f2da6d6d833f'  | 1           | 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b'  | 'e1cib/data/Catalog.MovementRules?refName=SRO_SR'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2805d722b529'  | '172def2a-09ad-4376-b62f-f2da6d6d833f'   |
 		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9be'  | '008b5a17-d1f2-4970-ad6f-b12977d8a2df'  | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905'  | 12          | 'e1cib/data/Document.SalesInvoice?ref=b770ee02d8e5dc6711ec2805d722b52b'  | 'e1cib/data/Catalog.MovementRules?refName=SRO_SR'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2805d722b52a'  | '7b8a2f3a-fce9-43a9-abb7-3a2c71c07905'   |
+	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9be' | '008b5a17-d1f2-4970-ad6f-b12977d8a2df' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9be' | '1e83edcd-479d-43a2-a01c-655a5b662800' | ''                | ''               | 1          |
+
+	And I refill object tabular section "SpecialOffers":
+		| 'Ref'                                                                  | 'Key'                                  | 'Offer'                                                                 | 'Amount' | 'Percent' | 'Bonus' | 'AddInfo' |
+		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9be' | '1e83edcd-479d-43a2-a01c-655a5b662800' | 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 26       |           |         | ''        |
+
 
 	// Document.SalesReturnOrder
 
@@ -2196,6 +2242,12 @@ Scenario: create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking 
 		| 'Ref'                                                                   | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'  | 'CurrentStep'  | 'NextStep'                                     | 'RowRef'                                                          | 'BasisKey'                               |
 		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9c2'  | '2db05304-fe84-49e8-9e44-39275ded4617'  | '2db05304-fe84-49e8-9e44-39275ded4617'  | 2           | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=GR'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9c0'  | '                                    '   |
 		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9c2'  | 'db82d330-6b7a-42a5-a245-cbf6fb1b3908'  | 'db82d330-6b7a-42a5-a245-cbf6fb1b3908'  | 36          | ''       | ''             | 'e1cib/data/Catalog.MovementRules?refName=GR'  | 'e1cib/data/Catalog.RowIDs?ref=b770ee02d8e5dc6711ec2770c4c3c9c1'  | '                                    '   |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9c2' | 'db82d330-6b7a-42a5-a245-cbf6fb1b3908' | ''                | ''               | 3          |
+		| 'e1cib/data/Document.SalesReturn?ref=b770ee02d8e5dc6711ec2770c4c3c9c2' | '2db05304-fe84-49e8-9e44-39275ded4617' | ''                | ''               | 2          |
+
 
 Scenario: create SO, SC with two same items
 

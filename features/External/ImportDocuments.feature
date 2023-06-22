@@ -946,12 +946,13 @@ Scenario: Create document OpeningEntry objects (stock)
 Scenario: Create document GoodsReceipt objects (for stock remaining control)
 
 	And I check or create document "GoodsReceipt" objects:
-		| 'Ref'                                                                    | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'Company'                                                            | 'LegalName'                                                          | 'Partner'                                                           | 'TransactionType'                             | 'Author'                                                         | 'Description'  | 'Branch'   |
-		| 'e1cib/data/Document.GoodsReceipt?ref=b75dad46e66c4c2c11eb41477b470652'  | 'False'         | '4'       | '02.12.2020 00:00:00'  | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf124a9ba086b'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf124a9ba086a'  | 'Enum.GoodsReceiptTransactionTypes.Purchase'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''             | ''         |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Number' | 'Date'               | 'Posted' | 'Company'                                                           | 'LegalName'                                                         | 'Partner'                                                          | 'TransactionType'                            | 'Author'                                                        | 'Branch' | 'Description' |
+		| 'e1cib/data/Document.GoodsReceipt?ref=b75dad46e66c4c2c11eb41477b470652' | 'False'        | 4        | '02.12.2020 0:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf124a9ba086b' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf124a9ba086a' | 'Enum.GoodsReceiptTransactionTypes.Purchase' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                    | 'Key'                                   | 'Item'                                                           | 'ItemKey'                                                           | 'Store'                                                           | 'Unit'                                                           | 'Quantity'  | 'ReceiptBasis'                                                              | 'SalesOrder'  | 'QuantityInBaseUnit'  | 'PurchaseInvoice'  | 'PurchaseOrder'  | 'InternalSupplyRequest'  | 'InventoryTransferOrder'  | 'SalesReturn'  | 'SalesReturnOrder'  | 'InventoryTransfer'  | 'SalesInvoice'  | 'UseSerialLotNumber'   |
-		| 'e1cib/data/Document.GoodsReceipt?ref=b75dad46e66c4c2c11eb41477b470652'  | 'ea4ce857-e3ff-4174-bb93-035370edd92c'  | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 200         | 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651'  | ''            |                       | ''                 | ''               | ''                       | ''                        | ''             | ''                  | ''                   | ''              | 'False'                |
+		| 'Ref'                                                                   | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'Unit'                                                          | 'Quantity' | 'ReceiptBasis'                                                             | 'SalesOrder' | 'QuantityInBaseUnit' | 'PurchaseInvoice' | 'PurchaseOrder' | 'InternalSupplyRequest' | 'InventoryTransferOrder' | 'SalesReturn' | 'SalesReturnOrder' | 'InventoryTransfer' | 'SalesInvoice' | 'UseSerialLotNumber' | 'ProductionPlanning' | 'QuantityIsFixed' |
+		| 'e1cib/data/Document.GoodsReceipt?ref=b75dad46e66c4c2c11eb41477b470652' | 'ea4ce857-e3ff-4174-bb93-035370edd92c' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 200        | 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651' | ''           | 200                  | ''                | ''              | ''                      | ''                       | ''            | ''                 | ''                  | ''             | 'False'              | ''                   | 'False'           |
+
 
 
 Scenario: Create document PurchaseInvoice objects (for stock remaining control)
@@ -985,6 +986,15 @@ Scenario: Create document PurchaseInvoice objects (for stock remaining control)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651'  | 'b2678444-8eeb-44a0-a93b-1f3b680022f2'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '1'       | '1'            | 'No'               | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f'  | '122 720'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651'  | 'b2678444-8eeb-44a0-a93b-1f3b680022f2'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '1'       | '1'            | 'No'               | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | '122 720'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651'  | 'b2678444-8eeb-44a0-a93b-1f3b680022f2'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '0,1712'  | '5,8411'       | 'No'               | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '21 009,66'   |
+	 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651' | 'ea4ce857-e3ff-4174-bb93-035370edd92c' | ''                | ''               | 200        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3351' | '6e54d2e6-4440-4527-9027-7ff02ec46766' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3351' | 'dc98c5f6-7553-4ccc-a01b-1a8bd3a30e50' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3351' | 'c3c31dbc-e925-4f61-89e9-d4d7807f5f6d' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3351' | 'eb41bdae-025b-4701-90af-b0dcbc9f4075' | ''                | ''               | 3          |
+
 
 
 Scenario: Data preparation (double return, landed cost)
@@ -1161,6 +1171,12 @@ Scenario: Create document PurchaseInvoice objects (use serial lot number)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3352'  | 'eb41bdae-025b-4701-90af-b0dcbc9f4075'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015'  | 1            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3352'  | 'eb41bdae-025b-4701-90af-b0dcbc9f4075'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016'  | 2            |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3352' | '6e54d2e6-4440-4527-9027-7ff02ec46766' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3352' | 'eb41bdae-025b-4701-90af-b0dcbc9f4075' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b760b47469bcb0d711eb5ef54c1e3352' | 'eb41bdae-025b-4701-90af-b0dcbc9f4075' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | ''               | 2          |
+
 
 Scenario: Create document SalesInvoice objects (use serial lot number)	
 	
@@ -1188,7 +1204,12 @@ Scenario: Create document SalesInvoice objects (use serial lot number)
 		| 'e1cib/data/Document.SalesInvoice?ref=b77989a3e884cab211ec8f14ec3693c8'  | 'f04659d1-79ea-4741-a95c-0cf623f6fd3a'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015'  | 1            |
 		| 'e1cib/data/Document.SalesInvoice?ref=b77989a3e884cab211ec8f14ec3693c8'  | 'f04659d1-79ea-4741-a95c-0cf623f6fd3a'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016'  | 2            |
 
-	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b77989a3e884cab211ec8f14ec3693c8' | 'f04659d1-79ea-4741-a95c-0cf623f6fd3a' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b77989a3e884cab211ec8f14ec3693c8' | 'f04659d1-79ea-4741-a95c-0cf623f6fd3a' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | ''               | 2          |
+
+
 Scenario: Create document GoodsReceipt objects (use serial lot number)	
 
 	And I check or create document "GoodsReceipt" objects:
@@ -1238,7 +1259,10 @@ Scenario: Create document InventoryTransfer objects (use serial lot number)
 		| 'e1cib/data/Document.InventoryTransfer?ref=b77989a3e884cab211ec8f1f925d0ad3'  | 'e91a701e-04b7-45c5-bae6-c3a1b2f29dd5'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015'  | 2            |
 		| 'e1cib/data/Document.InventoryTransfer?ref=b77989a3e884cab211ec8f1f925d0ad3'  | 'e91a701e-04b7-45c5-bae6-c3a1b2f29dd5'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016'  | 1            |
 
-
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                        | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b77989a3e884cab211ec8f1f925d0ad3' | 'e91a701e-04b7-45c5-bae6-c3a1b2f29dd5' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | ''               | 2          |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b77989a3e884cab211ec8f1f925d0ad3' | 'e91a701e-04b7-45c5-bae6-c3a1b2f29dd5' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | ''               | 1          |
 
 
 
@@ -1814,11 +1838,9 @@ Scenario: Create document SalesInvoice objects (for check SO closing)
 
 	And I refill object tabular section "SourceOfOrigins":
 		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
-		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7cf55d661732' | '3f40a72c-599e-4778-bfe8-56e6f33d5d8d' | ''                | ''               | 12         |
-		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7cf55d661732' | 'edddfff5-6850-4f96-a93a-abed1c5e6c84' | ''                | ''               | 2          |
-		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7cf55d661732' | 'bf6f97cd-24b5-4b3b-bf09-c0ab7676f1f9' | ''                | ''               | 1          |
-		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7cf55d661732' | '5fca1039-4b80-4493-bbd6-44e8d01b9a59' | ''                | ''               | 2          |
-		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7cf55d661732' | '4f22f6a9-2f81-47bb-a8b8-f6089fb7ba21' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76197e183b782dc11eb6ac29932117e' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''                | ''               | 9          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76197e183b782dc11eb6ac29932117e' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''                | ''               | 1          |
+
 
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                    | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'                                                                | 'CurrentStep'                                     | 'NextStep'                                     | 'RowRef'                                                          | 'BasisKey'                               |
@@ -2494,6 +2516,10 @@ Scenario: Create document PurchaseInvoice objects (for check closing)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b762b13668d0905011eb80d8d3c1d6ec'  | 'd0caac59-75aa-4bb6-b924-3b6c089aa701'  | 'b5d168e5-e60d-44c9-9168-b13a2695077f'  | 3           | 'e1cib/data/Document.GoodsReceipt?ref=b762b13668d0905011eb80d8d3c1d6eb'  | 'e1cib/data/Catalog.MovementRules?refName=PI'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76ac729f215fa6f11ebc3a8766f2e04'  | 'e2359711-72f9-4806-b9a6-754dc6cb79f6'   |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b762b13668d0905011eb80d8d3c1d6ec'  | '9c3aae23-65f5-40c0-9b32-22febb068377'  | '0e65d648-bd28-47a2-84dc-e260219c1395'  | 88          | 'e1cib/data/Document.GoodsReceipt?ref=b762b13668d0905011eb80d8d3c1d6eb'  | 'e1cib/data/Catalog.MovementRules?refName=PI'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76ac729f215fa6f11ebc3a8766f2e17'  | '8fd36ffd-499b-4573-b23e-b338dfd150f4'   |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b762b13668d0905011eb80d8d3c1d6ec' | '9c3aae23-65f5-40c0-9b32-22febb068377' | ''                | ''               | 11         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b762b13668d0905011eb80d8d3c1d6ec' | 'd0caac59-75aa-4bb6-b924-3b6c089aa701' | ''                | ''               | 3          |
 
 
 
@@ -5048,9 +5074,9 @@ Scenario: Create document Purchase invoice objects (with SerialLotNumber)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b76fba77ffd4077e11ec1562692295b3'  | 'False'         | 1252      | '14.09.2021 16:51:38'  | 'False'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fba'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '01.01.0001 00:00:00'  | ''           | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf124a9ba086b'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf124a9ba086a'  | 'False'            | ''                   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''             |                   | 'Enum.PurchaseTransactionTypes.Purchase'   |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                       | 'Key'                                   | 'Item'  | 'ItemKey'                                                           | 'Store'                                                           | 'PurchaseOrder'  | 'Unit'                                                           | 'Quantity'  | 'Price'  | 'PriceType'                                                           | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'        | 'SalesOrder'  | 'Detail'  | 'AdditionalAnalytic'  | 'DontCalculateRow'  | 'QuantityInBaseUnit'  | 'UseGoodsReceipt'  | 'InternalSupplyRequest'  | 'IsAdditionalItemCost'  | 'UseSerialLotNumber'  | 'IsService'   | 'Item'                                                          |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b76fba77ffd4077e11ec1562692295b3'  | 'e522e34e-1f5f-4216-a0e3-8618759de883'  | ''      | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 12          | 100      | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  |              |                |              |                 | ''                  | ''             | '01.01.0001 0:00:00'  | ''            | ''        | ''                    | 'False'             | 12                    | 'False'            | ''                       | 'False'                 | 'False'               | 'False'       | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b76fba77ffd4077e11ec1562692295b3'  | '9127c163-5bc9-4474-b1f8-048f204ace93'  | ''      | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 15          | 100      | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  |              |                |              |                 | ''                  | ''             | '01.01.0001 0:00:00'  | ''            | ''        | ''                    | 'False'             | 15                    | 'False'            | ''                       | 'False'                 | 'False'               | 'False'       | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' |
+		| 'Ref'                                                                       | 'Key'                                   | 'ItemKey'                                                           | 'Store'                                                           | 'PurchaseOrder'  | 'Unit'                                                           | 'Quantity'  | 'Price'  | 'PriceType'                                                           | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'        | 'SalesOrder'  | 'Detail'  | 'AdditionalAnalytic'  | 'DontCalculateRow'  | 'QuantityInBaseUnit'  | 'UseGoodsReceipt'  | 'InternalSupplyRequest'  | 'IsAdditionalItemCost'  | 'UseSerialLotNumber'  | 'IsService'   | 'Item'                                                          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76fba77ffd4077e11ec1562692295b3'  | 'e522e34e-1f5f-4216-a0e3-8618759de883'  | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 12          | 100      | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  |              |                |              |                 | ''                  | ''             | '01.01.0001 0:00:00'  | ''            | ''        | ''                    | 'False'             | 12                    | 'False'            | ''                       | 'False'                 | 'False'               | 'False'       | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76fba77ffd4077e11ec1562692295b3'  | '9127c163-5bc9-4474-b1f8-048f204ace93'  | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 15          | 100      | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  |              |                |              |                 | ''                  | ''             | '01.01.0001 0:00:00'  | ''            | ''        | ''                    | 'False'             | 15                    | 'False'            | ''                       | 'False'                 | 'False'               | 'False'       | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' |
 
 	And I refill object tabular section "TaxList":
 		| 'Ref'                                                                       | 'Key'                                   | 'Tax'                                                            | 'Analytics'  | 'TaxRate'                                                           | 'Amount'  | 'IncludeToTotalAmount'  | 'ManualAmount'   |

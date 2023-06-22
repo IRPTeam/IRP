@@ -1545,6 +1545,12 @@ Scenario: Create document StockAdjustmentAsWriteOff objects (LC)
 		| 'e1cib/data/Document.StockAdjustmentAsWriteOff?ref=b76e892a86cabee011ebfe98af57d4b5'  | '3c9892fe-9bcb-4b0d-93d3-17be85b19475'  | '3c9892fe-9bcb-4b0d-93d3-17be85b19475'  | 5           | ''       | ''             | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76e892a86cabee011ebfe98af57d4b6'  | '                                    '   |
 		| 'e1cib/data/Document.StockAdjustmentAsWriteOff?ref=b76e892a86cabee011ec00be81c3c111'  | '2cd22a60-bfa8-42fd-82c5-6adf93ecdc51'  | '2cd22a60-bfa8-42fd-82c5-6adf93ecdc51'  | 5           | ''       | ''             | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76e892a86cabee011ec00f0b14630a7'  | '                                    '   |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                                | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.StockAdjustmentAsWriteOff?ref=b76e892a86cabee011ebfe98af57d4b5' | '3c9892fe-9bcb-4b0d-93d3-17be85b19475' | ''                | ''               | 5          |
+		| 'e1cib/data/Document.StockAdjustmentAsWriteOff?ref=b76e892a86cabee011ebfe98af57d4b5' | '048fc191-976f-4bcc-b82b-0e0ca881dece' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.StockAdjustmentAsWriteOff?ref=b76e892a86cabee011ec00be81c3c111' | '2cd22a60-bfa8-42fd-82c5-6adf93ecdc51' | ''                | ''               | 5          |
+
 
 Scenario: Create document Unbundling objects (LC)
 
@@ -2082,6 +2088,27 @@ Scenario: Create document PurchaseInvoice objects (for AdditionalCostAllocation)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6249'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1         | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63bb72626a'  | 767        |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6249'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1         | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 767        |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6249'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712    | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 131.31     |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76e892a86cabee011ec01789a144229' | 'f45d35cc-ff76-49a5-b310-4e72c8e06636' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76e892a86cabee011ec01789a144229' | '70c79051-970f-4ca0-872b-1c82197f2c51' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76e892a86cabee011ec01789a144229' | '0e097d13-d2a8-4ff1-8e7f-2c4b71a87dd8' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76e892a86cabee011ec0179c53b9a2c' | '9f6b638b-7304-4efb-a551-77b904130802' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b76e892a86cabee011ec01789a14422c' | '8a19c208-303d-4f87-b69c-6a7258428485' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf623a' | '7a655bbb-c7ab-4060-b430-b45faddc7997' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf623a' | '5a8d0c9f-51b2-457e-9213-b5b48243d8db' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf623d' | 'edf2040b-6d8c-42ae-b420-44439496f495' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf623d' | '5ae23813-3de6-4de1-abbb-c0b9105016eb' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dc70f8e439' | '1f6b6f1b-5497-496e-aac1-7c5eca0a4037' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dc70f8e439' | '5bb7193b-ff5f-470a-9223-00f30961e8f1' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6243' | '7127aea9-b91a-462d-ac88-29d71c87149e' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6243' | '4783c09a-1ddf-4aed-bdac-983b8e1d697f' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6246' | '8a535020-f7e0-4281-91b3-c3810a4e40cb' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6246' | '8d0ff548-4c6a-449a-ae04-6987cc2128a8' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6249' | 'f24d6970-5895-414d-9ae4-d73846a6d45e' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b782df363ef64fb511ece7dcc3cf6249' | '5a0ee1d3-7f24-48a2-9779-ea8f5ed643a9' | ''                | ''               | 1          |
+
 
 
 Scenario: Create document AdditionalCostAllocation objects (by documents, amount, quantity, weight) (LC)

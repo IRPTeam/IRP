@@ -3090,7 +3090,9 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet") Then
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff") Then
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		

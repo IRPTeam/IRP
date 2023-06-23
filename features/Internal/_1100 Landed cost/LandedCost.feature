@@ -158,6 +158,11 @@ Scenario: _001 test data
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "10"
+	* Posting Price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "10"
 	* Posting Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		Then "Sales return orders" window is opened

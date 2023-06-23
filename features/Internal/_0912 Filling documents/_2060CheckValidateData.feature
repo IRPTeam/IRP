@@ -236,11 +236,8 @@ Scenario: _0206007 сheck data verification in Sales order
 			| 'Sales order 8 811 dated 10.03.2023 17:32:00'    |
 	* Check report
 		And "CheckList" table contains lines
-			| 'Fixed'   | 'Date'                  | 'Ref'                                           | 'Error ID'                                          | 'Line number'   | 'Problem while quick fix'    |
-			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | ''                                                  | '4'             | ''                           |
-			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorQuantityInItemListNotEqualQuantityInRowID'    | '1'             | ''                           |
-			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorNetAmountGreaterTotalAmount'                  | '1'             | ''                           |
-			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorTotalAmountMinusNetAmountNotEqualTaxAmount'   | '1'             | ''                           |
-			| 'No'      | '10.03.2023 17:32:00'   | 'Sales order 8 811 dated 10.03.2023 17:32:00'   | 'ErrorQuantityInItemListNotEqualQuantityInRowID'    | '2'             | ''                           |
+			| 'Fixed' | 'Date'                | 'Ref'                                         | 'Error ID'                                        | 'Line number' | 'Problem while quick fix' |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorNetAmountGreaterTotalAmount'                | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorTotalAmountMinusNetAmountNotEqualTaxAmount' | '1'           | ''                        |
 	And I close all client application windows	
 

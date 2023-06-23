@@ -9,7 +9,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -52,7 +52,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -182,7 +182,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -322,7 +322,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -382,7 +382,10 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+				<condition>#AccessRegisters(
+	"Store Incoming OR Requested", "", "", "", "",
+	"OAR.Value1 = Table.IncomingStore OR OAR.Value1 = Table.RequesterStore"
+)</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -462,7 +465,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -762,7 +765,10 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+				<condition>#AccessRegisters(
+	"Store Sender &amp; Receiver", "", "", "", "",
+	"OAR.Value1 = Table.StoreSender OR OAR.Value1 = Table.StoreReceiver"
+)</condition>
 			</restrictionByCondition>
 		</right>
 	</object>
@@ -852,7 +858,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 	</object>

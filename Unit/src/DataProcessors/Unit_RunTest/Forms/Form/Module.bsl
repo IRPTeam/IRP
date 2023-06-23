@@ -31,7 +31,7 @@ EndProcedure
 &AtServer
 Procedure RunTestAtServer()
 	
-	For Each RowID In Items.TestList.SelectedRows Do
+	For Each RowID In Items.TestList.SelectedRows Do // Number
 		Row = TestList.FindByID(RowID);
 		RunTestByRow(Row);
 	EndDo;

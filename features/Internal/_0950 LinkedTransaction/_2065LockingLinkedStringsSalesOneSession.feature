@@ -8,8 +8,12 @@
 Functionality: locking linked strings (SO,SI,SC,SRO,SR)
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
+	
 Scenario: _2065001 preparation (locking linked strings)
 	When set True value to the constant
 	When set True value to the constant EnableLinkedRowsIntegrity

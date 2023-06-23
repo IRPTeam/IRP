@@ -3103,6 +3103,7 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		EndIf;
 			
 		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+			SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
 			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 		EndIf;
 		

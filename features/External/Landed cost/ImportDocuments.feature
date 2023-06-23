@@ -1516,6 +1516,15 @@ Scenario: Create document StockAdjustmentAsSurplus objects without amount (LC)
 		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a65018'  | '3ec158b5-1b70-4a88-b641-cb54a9537711'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  |           | 'False'     |
 		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a65018'  | '3ec158b5-1b70-4a88-b641-cb54a9537711'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  |           | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                               | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a6501e' | 'c49c0125-ed9a-4575-ae77-adf9e2f6315c' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a6501e' | '50cf0bed-c293-4b84-814f-2a4b17982af0' | ''                | ''               | 5          |
+		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a6501e' | '67f7543c-19fa-4235-b1bf-293633a7b62b' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a65018' | '3ec158b5-1b70-4a88-b641-cb54a9537711' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.StockAdjustmentAsSurplus?ref=b785989306affb7a11ed38b244a65018' | 'f1e4141b-bb17-4478-8c97-24ef9405ab71' | ''                | ''               | 10         |
+
+
 
 Scenario: Create document StockAdjustmentAsWriteOff objects (LC)
 
@@ -2355,6 +2364,11 @@ Scenario: allocation of the additional cost (tax) (item is already sold)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc76'  | '9680b246-fb0c-4243-8ca0-5ce44e275325'  | ''                 | ''                | 1            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc76'  | 'faadb7cb-7cb7-4b4f-8cfa-ba8f9b9a6842'  | ''                 | ''                | 1            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc7c'  | 'd906ecbf-d85d-40c2-b27e-575bf9dd6b72'  | ''                 | ''                | 1            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc7a'  | 'c0ca3432-48c6-4e81-af18-0667f6d6111e'  | ''                 | ''                | 20           |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc7a'  | '1d7c5953-7690-4ed9-88d7-86cea8a87776'  | ''                 | ''                | 10           |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc80'  | '85cb660f-4c36-4921-9d97-41c342f74a2a'  | ''                 | ''                | 20           |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edd1f17d50cc80'  | '743450d0-ed64-4b9d-90c5-4ec9fdfc606c'  | ''                 | ''                | 10           |
+
 
 
 	// Document.PurchaseReturn
@@ -2602,6 +2616,12 @@ Scenario: allocation of the additional cost to the invoice of the previous perio
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b78fce76f9d4bbc311ed820153da2239'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 118       | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b78fce76f9d4bbc311ed820153da2239'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 20.2      | 'False'     |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b78fce76f9d4bbc311ed820153da2234' | '0849dd9f-694c-4eb6-ad54-a8fddcd62d0b' | ''                | ''               | 3          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b78fce76f9d4bbc311ed820153da2234' | 'e19a0ccc-4d7a-48cb-a46a-31dfdf62ac5e' | ''                | ''               | 3          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b78fce76f9d4bbc311ed820153da2239' | 'b2d96e5e-2a26-4bda-be1d-cb581d1218b5' | ''                | ''               | 1          |
+
 
 	// Document.SalesInvoice
 
@@ -2636,6 +2656,14 @@ Scenario: allocation of the additional cost to the invoice of the previous perio
 		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2242'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63bb72626c'  | 6         | 'False'     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2242'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  | 5.6497  | 0.177          | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 33.9      | 'False'     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2242'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef589'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 6         | 'False'     |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2237' | 'f3c22cd2-1109-43f4-9c28-40f7a0032bac' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2237' | '85663e2f-48ee-4020-8110-ea9a71105f43' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2242' | '91490616-fa95-4f70-b559-749c59550927' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b78fce76f9d4bbc311ed820153da2242' | 'e78abaf8-4c53-4bec-bc0a-0a881b020a8a' | ''                | ''               | 1          |
+
 
 Scenario: allocation of the additional cost to the invoice of the previous period (item is already sold)
 
@@ -2682,6 +2710,17 @@ Scenario: allocation of the additional cost to the invoice of the previous perio
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edc7208a78c216'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63bb72626a'  | 708       | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edc7208a78c216'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 1       | 1              | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e'  | 708       | 'False'     |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edc7208a78c216'  | '                                    '  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | 0.1712  | 5.8411         | 'False'            | 1               | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | 121.21    | 'False'     |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b797a0d6c37f8d9211edc4959a6c4936' | '9feb428e-70e6-430b-b540-4686c43d46ef' | ''                | ''               | 10         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b797a0d6c37f8d9211edc4959a6c4936' | 'd5d6483b-b30e-403d-abbb-8e92dbc95f4d' | ''                | ''               | 20         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b797a0d6c37f8d9211edc4959a6c4938' | '76896c30-32c2-45f2-a4ea-315b3aa6a240' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b797a0d6c37f8d9211edc4959a6c493b' | 'b5622a03-c9b4-4e9c-8c55-f9504853d014' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b797a0d6c37f8d9211edc4959a6c493b' | '38c9139a-df25-4cda-9095-f677c38756ae' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edc7208a78c216' | 'c9208ee3-759c-4459-bea1-0748dcd7c3ce' | ''                | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b798d684e43e460511edc7208a78c216' | 'dc724a5c-0d09-4bea-9e83-6e64cfceff37' | ''                | ''               | 1          |
+
 
 	// Document.SalesInvoice
 

@@ -78,24 +78,12 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
-		When Create document PurchaseInvoice objects (use serial lot number)
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(29).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document SalesInvoice objects (use serial lot number)	
-		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document GoodsReceipt objects (use serial lot number)	
-		When Create document ShipmentConfirmation objects (use serial lot number)
-		And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document InventoryTransfer objects (use serial lot number)
-		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Load documents
 		When Create Physical inventory and Stock adjustment as write-off for link
 		And I execute 1C:Enterprise script at server
-				| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When create Sales invoice and Sales order object (sln, autolink)
 		And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);"     |
@@ -113,6 +101,29 @@ Scenario: _092000 preparation (SerialLotNumbers)
 				| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);"     |
+	* Checkbox Use serial lot number in the Item type
+		When checkbox Use serial lot number in the Item type Clothes
+		* Check saving
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Clothes'        |
+			And I select current line in "List" table
+			Then the form attribute named "Parent" became equal to ""
+			Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
+		And I close all client application windows
+		When Create document PurchaseInvoice objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(29).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesInvoice objects (use serial lot number)	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document GoodsReceipt objects (use serial lot number)	
+		When Create document ShipmentConfirmation objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document InventoryTransfer objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -125,16 +136,6 @@ Scenario: _092000 preparation (SerialLotNumbers)
 Scenario: _0920001 check preparation
 	When check preparation
 
-Scenario: _092001 checkbox Use serial lot number in the Item type
-	When checkbox Use serial lot number in the Item type Clothes
-	* Check saving
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Clothes'        |
-		And I select current line in "List" table
-		Then the form attribute named "Parent" became equal to ""
-		Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
-	And I close all client application windows
 	
 Scenario: _092002 check serial lot number in the Retail sales receipt
 	* Preparation

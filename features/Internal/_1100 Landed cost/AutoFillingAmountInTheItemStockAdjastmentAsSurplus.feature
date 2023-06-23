@@ -139,7 +139,6 @@ Scenario: _061 test data
 		When Create document StockAdjustmentAsSurplus objects without amount (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
-		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document AdditionalCostAllocation objects (by rows, amount) (LC)
@@ -174,6 +173,11 @@ Scenario: _061 test data
 	* Posting Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		Then "Sales returns" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+	* Posting Price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"

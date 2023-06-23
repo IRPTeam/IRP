@@ -9,7 +9,12 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		Return;
 	EndIf;
 
+	If WriteMode <> DocumentWriteMode.Posting Then
+		Return;
+	EndIf;
+	
 	BeginTransaction();
+	
 	Is = Is(Source);
 	If Is.SO Then
 		FillRowID_SO(Source, Cancel);
@@ -72,6 +77,10 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	EndIf;
 
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not Source.Posted Then
 		Return;
 	EndIf;
 	

@@ -1,6 +1,11 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	
+	If Form.Parameters.Key.IsEmpty() Then
+		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
+	EndIf;
+	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined 
 		And Not Form.Items.Find("GroupOther") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");

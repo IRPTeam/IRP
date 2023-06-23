@@ -16,6 +16,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
+	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -36,6 +37,7 @@ Procedure OnWrite(Cancel)
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_116, ThisObject.ConsolidatedRetailSales));
 		EndIf;
 	EndIf;
+	RowIDInfoPrivileged.OnWrite_RowID(ThisObject, Cancel);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -46,10 +48,12 @@ EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
 EndProcedure
 
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+	RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)

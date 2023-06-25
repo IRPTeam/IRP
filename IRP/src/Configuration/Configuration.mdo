@@ -598,7 +598,6 @@
  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
- <eventSubscriptions>EventSubscription.BeforeWrite_RowID</eventSubscriptions>
  <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
  <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
  <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
@@ -607,12 +606,9 @@
  <eventSubscriptions>EventSubscription.OnCopy_ClearDocumentBasises</eventSubscriptions>
  <eventSubscriptions>EventSubscription.OnCopy_DocumentProcessing</eventSubscriptions>
  <eventSubscriptions>EventSubscription.OnCopy_RemoveUniqueID</eventSubscriptions>
- <eventSubscriptions>EventSubscription.OnWrite_RowID</eventSubscriptions>
  <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
- <eventSubscriptions>EventSubscription.Posting_RowID</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
- <eventSubscriptions>EventSubscription.UndoPosting_RowID</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
  <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
  <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>

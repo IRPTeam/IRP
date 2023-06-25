@@ -1927,6 +1927,7 @@ Procedure ItemListOnAddRowFormNotify(Parameters) Export
 EndProcedure
 
 Procedure ItemListOnCopyRowFormNotify(Parameters) Export
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
 	Parameters.Form.Modified = True;
 EndProcedure
 

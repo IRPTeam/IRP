@@ -146,30 +146,109 @@ Function GenerateDocuments() Export
 		Table = GetAllCase(Data, Keys);
 		
 		For Each Row In Table Do
-			
-			NewDoc = Documents[MetaObj.Name].CreateDocument();
-			NewDoc.Date = CurrentDate();
-			NewDoc.DataExchange.Load = True;
-			NewDoc.SetNewNumber();
-			FillPropertyValues(NewDoc, Row);
-			NewDoc.DeletionMark = True;
-			NewDoc.Write();
-			
 			Descr = "";
 			For Each Column In Table.Columns Do
 				Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
 			EndDo;
+			Descr = MetaObj.FullName() + " " + Descr;
+			NewDoc = CreateDoc(Row, MetaObj);
+			NewDoc.Description = Descr;
+			NewDoc.Write();
+			AllDoc.Add(NewDoc.Description);
 			
-			AllDoc.Add(MetaObj.FullName() + " " + Descr);
-			
+			StrTables = New Structure;
+			StrTables.Insert("AllocationList", "Store");
+			StrTables.Insert("ItemList", "Store");
+			For Each TableCheck In StrTables Do
+				CreateDocumentsWithTable(Data, MetaObj, TableCheck.Key, TableCheck.Value, Descr, Row, AllDoc);
+			EndDo;
 		EndDo;
-		
 	EndDo;
 	
 	CommonFunctionsClientServer.ShowUsersMessage("Total documents: " + AllDoc.Count());
 	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(AllDoc, Chars.LF));
 	
 	Return "";
+EndFunction
+
+Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, Row, AllDoc)
+	TabSectionMeta = MetaObj.TabularSections.Find(TabSection);
+	If TabSectionMeta = Undefined Then
+		Return;
+	EndIf;
+	
+	If TabSectionMeta.Attributes.Find(AttrName) = Undefined Then
+		Return;
+	EndIf;
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][0];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][1];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][2];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][2];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][0];
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][1];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][1];
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][2];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][0];
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][2];
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+	
+	NewDoc = CreateDoc(Row, MetaObj);
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][0];
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][1];
+	NewRow = NewDoc[TabSection].Add();
+	NewRow[AttrName] = Data[AttrName][2];	
+	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
+	NewDoc.Write();
+	AllDoc.Add(NewDoc.Description);
+EndProcedure
+
+Function CreateDoc(Row, MetaObj)
+	NewDoc = Documents[MetaObj.Name].CreateDocument();
+	NewDoc.Date = CurrentDate();
+	NewDoc.DataExchange.Load = True;
+	NewDoc.SetNewNumber();
+	FillPropertyValues(NewDoc, Row);
+	NewDoc.DeletionMark = True;
+	Return NewDoc;
 EndFunction
 
 Function GenerateAccumulationRegisters() Export

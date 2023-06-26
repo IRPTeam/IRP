@@ -22,7 +22,7 @@ EndProcedure
 
 &AtClient
 Procedure RunTest(Command)
-	
+	ClearMessages();
 	RunTestAtServer();
 	UpdateLog();
 	
@@ -53,7 +53,7 @@ EndProcedure
 
 &AtClient
 Procedure RunAllTest(Command)
-	
+	ClearMessages();
 	RunAllTestAtServer();
 	UpdateLog(); 
 	
@@ -86,3 +86,9 @@ Procedure UpdateLog()
 	
 EndProcedure
 
+
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	FillTestsAtServer();  
+EndProcedure

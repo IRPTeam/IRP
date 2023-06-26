@@ -3103,12 +3103,7 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
-			
-		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-			SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
-			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
-		EndIf;
-		
+					
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();

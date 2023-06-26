@@ -1526,6 +1526,11 @@ Scenario: set True value to the constant
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use simple mode' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
 			| 'Option'            | 'Use' |
 			| 'Use object access' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table

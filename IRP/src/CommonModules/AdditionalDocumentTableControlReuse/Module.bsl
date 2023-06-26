@@ -108,10 +108,12 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	
 	Exceptions = New Structure();
 	Exceptions.Insert("SalesReportToConsignor", 
-		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount");
+		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
+		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
 		
 	Exceptions.Insert("SalesReportFromTradeAgent", 
-		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount");
+		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
+		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
 	
 	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do

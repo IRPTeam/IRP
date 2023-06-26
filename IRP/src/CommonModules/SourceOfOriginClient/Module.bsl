@@ -108,6 +108,10 @@ Procedure RecalculateConsignorBatches(Object, Form)
 EndProcedure
 
 Procedure UpdateSourceOfOriginsPresentation(Object) Export
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+		Return;
+	EndIf;
+	
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSourceOfOrigins = Object.SourceOfOrigins.FindRows(New Structure("Key", RowItemList.Key));
 		RowItemList.SourceOfOriginsPresentation.Clear();		

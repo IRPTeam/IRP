@@ -115,6 +115,12 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
 		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
 	
+	Exceptions.Insert("SalesReturnOrder"    , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	Exceptions.Insert("SalesReturn"         , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	Exceptions.Insert("RetailSalesReceipt"  , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	Exceptions.Insert("PurchaseReturnOrder" , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	Exceptions.Insert("PurchaseReturn"      , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	
 	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do
 		For Each Filter In Row Do

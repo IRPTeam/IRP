@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements2
@@ -56,15 +56,15 @@ Scenario: _042700 preparation (Unbundling)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
 		When Create document Unbundling objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0427001 check preparation
 	When check preparation	
@@ -73,46 +73,46 @@ Scenario: _042701 check Unbundling movements by the Register  "R4010 Actual stoc
 	* Select Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  | ''  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   | ''   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   | ''   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   | ''   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' | '' |	
+			| 'Unbundling 1 dated 07.09.2020 18:23:12'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Register  "R4010 Actual stocks"'          | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'S/Yellow'    | ''                     |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'XS/Blue'     | ''                     |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'L/Green'     | ''                     |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'M/Brown'     | ''                     |
+			| ''                                         | 'Expense'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'Dress/A-8'   | ''                     |
 		And I close all client application windows
 
 Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks"
 	* Select Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |
+			| 'Unbundling 1 dated 07.09.2020 18:23:12'   | ''              | ''                      | ''            | ''             | ''             |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             |
+			| 'Register  "R4011 Free stocks"'            | ''              | ''                      | ''            | ''             | ''             |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'S/Yellow'     |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'XS/Blue'      |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'L/Green'      |
+			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'M/Brown'      |
+			| ''                                         | 'Expense'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'Dress/A-8'    |
 		And I close all client application windows
 			
 Scenario: _042730 Unbundling clear posting/mark for deletion
@@ -120,35 +120,35 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 	* Select Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
-			| 'Document registrations records'                    |
+			| 'Unbundling 1 dated 07.09.2020 18:23:12'    |
+			| 'Document registrations records'            |
 		And I close current window
 	* Post UnBundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -156,14 +156,14 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
-			| 'Document registrations records'                    |
+			| 'Unbundling 1 dated 07.09.2020 18:23:12'    |
+			| 'Document registrations records'            |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -173,6 +173,6 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows

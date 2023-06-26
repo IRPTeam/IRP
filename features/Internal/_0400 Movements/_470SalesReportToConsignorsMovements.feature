@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements3
@@ -62,8 +62,8 @@ Scenario: _047000 preparation (sales report to consignors movements)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -76,7 +76,7 @@ Scenario: _047000 preparation (sales report to consignors movements)
 	* Post document
 		* Posting SalesReportToConsignor
 			And I execute 1C:Enterprise script at server
-				| "Documents.SalesReportToConsignor.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.SalesReportToConsignor.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"     |
 	And I close all client application windows
 
 Scenario: _047001 check preparation
@@ -88,22 +88,22 @@ Scenario: _047002 check Sales report to consignor movements by the Register  "R1
 	* Select Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '15' |
+			| 'Number'    |
+			| '15'        |
 	* Check movements by the Register  "R1021 Vendors transactions"
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''            | ''            | ''                         | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'                         | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''            | ''            | ''                         | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"'                 | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''            | ''            | ''                         | ''      | ''      | ''                     | ''                         |
-			| ''                                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                     | ''            | ''            | ''                         | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'  | 'Partner'     | 'Agreement'                | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                                       | 'Receipt'     | '12.12.2022 09:53:54' | '2 044,13'  | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Consignor 1' | 'Consignor 1' | 'Consignor partner term 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                                       | 'Receipt'     | '12.12.2022 09:53:54' | '11 940'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Consignor 1' | 'Consignor 1' | 'Consignor partner term 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                                       | 'Receipt'     | '12.12.2022 09:53:54' | '11 940'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Consignor 1' | 'Consignor 1' | 'Consignor partner term 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                                       | 'Receipt'     | '12.12.2022 09:53:54' | '11 940'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Consignor 1' | 'Consignor 1' | 'Consignor partner term 1' | ''      | ''      | 'No'                   | ''                         |			
+			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54'   | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''              | ''              | ''                           | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'                           | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''              | ''              | ''                           | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'                   | ''              | ''                      | ''            | ''               | ''                          | ''                               | ''           | ''                       | ''              | ''              | ''                           | ''        | ''        | ''                       | ''                            |
+			| ''                                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                               | ''           | ''                       | ''              | ''              | ''                           | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                                         | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'    | 'Partner'       | 'Agreement'                  | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                                         | 'Receipt'       | '12.12.2022 09:53:54'   | '2 044,13'    | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Consignor 1'   | 'Consignor 1'   | 'Consignor partner term 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                                         | 'Receipt'       | '12.12.2022 09:53:54'   | '11 940'      | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Consignor 1'   | 'Consignor 1'   | 'Consignor partner term 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                                         | 'Receipt'       | '12.12.2022 09:53:54'   | '11 940'      | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Consignor 1'   | 'Consignor 1'   | 'Consignor partner term 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                                         | 'Receipt'       | '12.12.2022 09:53:54'   | '11 940'      | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Consignor 1'   | 'Consignor 1'   | 'Consignor partner term 1'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 
 Scenario: _047003 check Sales report to consignor movements by the Register  "R5010 Reconciliation statement"
@@ -111,19 +111,19 @@ Scenario: _047003 check Sales report to consignor movements by the Register  "R5
 	* Select Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '15' |
+			| 'Number'    |
+			| '15'        |
 	* Check movements by the Register  "R5010 Reconciliation statement"
 		And I click "Registrations report" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''            | ''                    |
-			| 'Document registrations records'                         | ''            | ''                    | ''          | ''             | ''                        | ''         | ''            | ''                    |
-			| 'Register  "R5010 Reconciliation statement"'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''            | ''                    |
-			| ''                                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''            | ''                    |
-			| ''                                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'  | 'Legal name contract' |
-			| ''                                                       | 'Expense'     | '12.12.2022 09:53:54' | '11 940'    | 'Main Company' | 'Distribution department' | 'TRY'      | 'Consignor 1' | ''                    |		
+			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54'   | ''              | ''                      | ''            | ''               | ''                          | ''           | ''              | ''                       |
+			| 'Document registrations records'                           | ''              | ''                      | ''            | ''               | ''                          | ''           | ''              | ''                       |
+			| 'Register  "R5010 Reconciliation statement"'               | ''              | ''                      | ''            | ''               | ''                          | ''           | ''              | ''                       |
+			| ''                                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''           | ''              | ''                       |
+			| ''                                                         | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Currency'   | 'Legal name'    | 'Legal name contract'    |
+			| ''                                                         | 'Expense'       | '12.12.2022 09:53:54'   | '11 940'      | 'Main Company'   | 'Distribution department'   | 'TRY'        | 'Consignor 1'   | ''                       |
 		And I close all client application windows
 
 Scenario: _047004 check Sales report to consignor movements by the Register  "T2015 Transactions info"
@@ -131,17 +131,17 @@ Scenario: _047004 check Sales report to consignor movements by the Register  "T2
 	* Select Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '15' |
+			| 'Number'    |
+			| '15'        |
 	* Check movements by the Register  "T2015 Transactions info"
 		And I click "Registrations report" button
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54' | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''            | ''            | ''                         | ''      | ''                      | ''                        | ''                  | ''          |
-			| 'Document registrations records'                         | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''            | ''            | ''                         | ''      | ''                      | ''                        | ''                  | ''          |
-			| 'Register  "T2015 Transactions info"'                    | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''            | ''            | ''                         | ''      | ''                      | ''                        | ''                  | ''          |
-			| ''                                                       | 'Resources' | ''       | ''        | 'Dimensions'          | ''                                     | ''             | ''                        | ''         | ''            | ''            | ''                         | ''      | ''                      | ''                        | ''                  | ''          |
-			| ''                                                       | 'Amount'    | 'Is due' | 'Is paid' | 'Date'                | 'Key'                                  | 'Company'      | 'Branch'                  | 'Currency' | 'Partner'     | 'Legal name'  | 'Agreement'                | 'Order' | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' |
-			| ''                                                       | '11 940'    | 'Yes'    | 'No'      | '12.12.2022 09:53:54' | '                                    ' | 'Main Company' | 'Distribution department' | 'TRY'      | 'Consignor 1' | 'Consignor 1' | 'Consignor partner term 1' | ''      | 'Yes'                   | 'No'                      | ''                  | '*'         |
+			| 'Sales report to consignor 15 dated 12.12.2022 09:53:54'   | ''            | ''         | ''          | ''                      | ''                                       | ''               | ''                          | ''           | ''              | ''              | ''                           | ''        | ''                        | ''                          | ''                    | ''             |
+			| 'Document registrations records'                           | ''            | ''         | ''          | ''                      | ''                                       | ''               | ''                          | ''           | ''              | ''              | ''                           | ''        | ''                        | ''                          | ''                    | ''             |
+			| 'Register  "T2015 Transactions info"'                      | ''            | ''         | ''          | ''                      | ''                                       | ''               | ''                          | ''           | ''              | ''              | ''                           | ''        | ''                        | ''                          | ''                    | ''             |
+			| ''                                                         | 'Resources'   | ''         | ''          | 'Dimensions'            | ''                                       | ''               | ''                          | ''           | ''              | ''              | ''                           | ''        | ''                        | ''                          | ''                    | ''             |
+			| ''                                                         | 'Amount'      | 'Is due'   | 'Is paid'   | 'Date'                  | 'Key'                                    | 'Company'        | 'Branch'                    | 'Currency'   | 'Partner'       | 'Legal name'    | 'Agreement'                  | 'Order'   | 'Is vendor transaction'   | 'Is customer transaction'   | 'Transaction basis'   | 'Unique ID'    |
+			| ''                                                         | '11 940'      | 'Yes'      | 'No'        | '12.12.2022 09:53:54'   | '                                    '   | 'Main Company'   | 'Distribution department'   | 'TRY'        | 'Consignor 1'   | 'Consignor 1'   | 'Consignor partner term 1'   | ''        | 'Yes'                     | 'No'                        | ''                    | '*'            |
 		And I close all client application windows

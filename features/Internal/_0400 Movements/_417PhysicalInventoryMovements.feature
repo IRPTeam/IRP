@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements2
@@ -64,8 +64,8 @@ Scenario: _041700 preparation (Physical inventory)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -74,9 +74,9 @@ Scenario: _041700 preparation (Physical inventory)
 		When Create document PhysicalInventory objects (check movements)
 		When Create document PhysicalInventory objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 	
 Scenario: _0417001 check preparation
 	When check preparation
@@ -85,62 +85,62 @@ Scenario: _041701 check Physical inventory movements by the Register  "R4010 Act
 	* Select Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' | '' |
-			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   | ''   |
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Document registrations records'                     | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Register  "R4010 Actual stocks"'                    | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
+			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
+			| ''                                                   | 'Receipt'       | '15.03.2021 15:29:31'   | '5'           | 'Store 06'     | '36/Yellow'   | ''                     |
+			| ''                                                   | 'Expense'       | '15.03.2021 15:29:31'   | '2'           | 'Store 06'     | 'XS/Blue'     | ''                     |
 		And I close all client application windows
 
 Scenario: _041702 check Physical inventory movements by the Register  "R4011 Free stocks"
 	* Select Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'                    | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' |
-			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   |	
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31'   | ''              | ''                      | ''            | ''             | ''             |
+			| 'Document registrations records'                     | ''              | ''                      | ''            | ''             | ''             |
+			| 'Register  "R4011 Free stocks"'                      | ''              | ''                      | ''            | ''             | ''             |
+			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             |
+			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     |
+			| ''                                                   | 'Receipt'       | '15.03.2021 15:29:31'   | '5'           | 'Store 06'     | '36/Yellow'    |
+			| ''                                                   | 'Expense'       | '15.03.2021 15:29:31'   | '2'           | 'Store 06'     | 'XS/Blue'      |
 		And I close all client application windows
 
 Scenario: _041703 check Physical inventory movements by the Register  "R4010 Actual stocks"
 	* Select Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1 112' |
+			| 'Number'    |
+			| '1 112'     |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 1 112 dated 20.05.2022 17:28:13' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                    | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
-			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
-			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |
-			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '20'        | 'Store 02'   | 'UNIQ'     | ''                  |	
+			| 'Physical inventory 1 112 dated 20.05.2022 17:28:13'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
+			| ''                                                     | 'Receipt'       | '20.05.2022 17:28:13'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           |
+			| ''                                                     | 'Receipt'       | '20.05.2022 17:28:13'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           |
+			| ''                                                     | 'Receipt'       | '20.05.2022 17:28:13'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     |
+			| ''                                                     | 'Receipt'       | '20.05.2022 17:28:13'   | '20'          | 'Store 02'     | 'UNIQ'       | ''                     |
 		And I close all client application windows
 
 
@@ -149,35 +149,35 @@ Scenario: _041730 Physical inventory clear posting/mark for deletion
 	* Select Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' |
-			| 'Document registrations records'                    |
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31'    |
+			| 'Document registrations records'                      |
 		And I close current window
 	* Post Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -185,14 +185,14 @@ Scenario: _041730 Physical inventory clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' |
-			| 'Document registrations records'                    |
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31'    |
+			| 'Document registrations records'                      |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -202,6 +202,6 @@ Scenario: _041730 Physical inventory clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -62,8 +62,8 @@ Scenario: _604700 preparation (Object property editor)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -75,8 +75,8 @@ Scenario: _604700 preparation (Object property editor)
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "AdditionalFunctionality" |
+				| "Description"                 |
+				| "AdditionalFunctionality"     |
 			When add Additional Functionality extension
 	And I close all client application windows
 
@@ -91,51 +91,51 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 	* Check filling additional attribute
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
-			| 'No'     | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 |
-			| 'No'     | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       |
+			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
+			| 'No'       | 'No'            | 'Dress'                    | 'Rose'    | 'UNIQ'       | ''          | 'Poland'                    |
+			| 'No'       | 'No'            | 'Scarf + Dress'            | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Skittles + Chewing gum'   | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Trousers'                 | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Shirt'                    | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Boots'                    | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'High shoes'               | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Box'                      | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Bound Dress+Shirt'        | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Bound Dress+Trousers'     | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Service'                  | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Router'                   | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Bag'                      | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Scarf'                    | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Chewing gum'              | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Skittles'                 | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Socks'                    | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Jacket J22001'            | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'Fee'                      | ''        | ''           | ''          | ''                          |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
 		And I go to line in "FilterAvailableFields" table
-			| 'Available fields' |
-			| 'Item type'        |
+			| 'Available fields'    |
+			| 'Item type'           |
 		And I select current line in "FilterAvailableFields" table
 		And I click choice button of the attribute named "DataRightValue" in "Data" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 		And I finish line editing in "Data" table
 		And I click the button named "OK"
 		And I click the button named "Refresh"
 	* Check filter
 		And "PropertiesTable" table does not contain lines
-			| 'Marked' | 'Is modified' | 'Object'     | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
-			| 'No'     | 'No'          | 'Boots'      | ''      | ''         | ''        | ''                       |
-			| 'No'     | 'No'          | 'High shoes' | ''      | ''         | ''        | ''                       |
+			| 'Marked'   | 'Is modified'   | 'Object'       | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
+			| 'No'       | 'No'            | 'Boots'        | ''        | ''           | ''          | ''                          |
+			| 'No'       | 'No'            | 'High shoes'   | ''        | ''           | ''          | ''                          |
 	* Select fields
 		And I click "Settings" button
 		And I go to line in "FieldsTable" table
-			| 'Field name' | 'Is visible' | 'Type'                       |
-			| 'Article'    | 'Yes'        | 'Additional attribute value' |
+			| 'Field name'   | 'Is visible'   | 'Type'                          |
+			| 'Article'      | 'Yes'          | 'Additional attribute value'    |
 		And I remove "Is visible" checkbox in "FieldsTable" table
 		And I finish line editing in "FieldsTable" table
 		And I click "Apply setting" button
@@ -152,16 +152,16 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
-			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
-			| 'No'     | 'No'          | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'  | ''      | ''         |
-			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
-			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
+			| 'Marked'   | 'Is modified'   | 'Object'                                                   | 'Brand'   | 'Producer'    |
+			| 'No'       | 'No'            | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'    | ''        | ''            |
+			| 'No'       | 'No'            | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'   | ''        | ''            |
+			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
 		And I go to line in "FilterAvailableFields" table
-			| 'Available fields' |
-			| 'Number'           |
+			| 'Available fields'    |
+			| 'Number'              |
 		And I select current line in "FilterAvailableFields" table
 		And I select "Greater than" exact value from "Comparison type" drop-down list in "Data" table
 		And I input "200" text in the field named "DataRightValue" of "Data" table
@@ -169,9 +169,9 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "OK"
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
-			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
-			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
-			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
+			| 'Marked'   | 'Is modified'   | 'Object'                                                   | 'Brand'   | 'Producer'    |
+			| 'No'       | 'No'            | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'   | ''        | ''            |
+			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
 		And I close all client application windows
 
 
@@ -186,27 +186,27 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 		And I click the button named "Refresh"	
 	* Edit selected elements
 		And I go to line in "PropertiesTable" table
-			| 'Object'   |
-			| 'Trousers' |
+			| 'Object'      |
+			| 'Trousers'    |
 		And I activate "Marked" field in "PropertiesTable" table
 		And I set "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| 'Object' |
-			| 'Shirt'  |
+			| 'Object'    |
+			| 'Shirt'     |
 		And I set "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I activate "Brand" field in "PropertiesTable" table
 		Then "Object property editor" window is opened
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Brand'                | 'Montel'                      |
+			| 'Additional attribute'   | 'Additional attribute values'    |
+			| 'Brand'                  | 'Montel'                         |
 		And I select current line in "List" table
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand'  |
-			| 'Yes'    | 'Yes'         | 'Trousers'               | 'Montel' |
-			| 'Yes'    | 'Yes'         | 'Shirt'                  | 'Montel' |
+			| 'Marked'   | 'Is modified'   | 'Object'     | 'Brand'     |
+			| 'Yes'      | 'Yes'           | 'Trousers'   | 'Montel'    |
+			| 'Yes'      | 'Yes'           | 'Shirt'      | 'Montel'    |
 		And I activate "Marked" field in "PropertiesTable" table
 		And I set "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
@@ -214,66 +214,66 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Producer'             | 'PZU'                         |
+			| 'Additional attribute'   | 'Additional attribute values'    |
+			| 'Producer'               | 'PZU'                            |
 		And I click the button named "FormChoose"
 		And I activate "Brand" field in "PropertiesTable" table
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Brand'                | 'Rose'                        |
+			| 'Additional attribute'   | 'Additional attribute values'    |
+			| 'Brand'                  | 'Rose'                           |
 		And I click the button named "FormChoose"
 	* Copy attribute
 		And I activate "Producer" field in "PropertiesTable" table
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueToEmptyCells"
 		And I go to line in "List" table
-			| 'Additional attribute values' |
-			| 'ODS'                         |
+			| 'Additional attribute values'    |
+			| 'ODS'                            |
 		And I click the button named "FormChoose"
 		And "PropertiesTable" table became equal
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
-			| 'Yes'    | 'Yes'         | 'Dress'                  | 'Rose'  | 'PZU'      | ''        | 'Poland'                 |
-			| 'No'     | 'Yes'         | 'Scarf + Dress'          | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Skittles + Chewing gum' | ''      | 'ODS'      | ''        | ''                       |
-			| 'Yes'    | 'Yes'         | 'Trousers'               | 'Rose'  | 'PZU'      | ''        | ''                       |
-			| 'Yes'    | 'Yes'         | 'Shirt'                  | 'Rose'  | 'PZU'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Boots'                  | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'High shoes'             | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Box'                    | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Bound Dress+Shirt'      | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Bound Dress+Trousers'   | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Service'                | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Router'                 | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Bag'                    | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Scarf'                  | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Chewing gum'            | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Skittles'               | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Socks'                  | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Jacket J22001'          | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Fee'                    | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Candy Fruit'            | ''      | 'ODS'      | ''        | ''                       |
-			| 'No'     | 'Yes'         | 'Stockings'              | ''      | 'ODS'      | ''        | ''                       |
+			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
+			| 'Yes'      | 'Yes'           | 'Dress'                    | 'Rose'    | 'PZU'        | ''          | 'Poland'                    |
+			| 'No'       | 'Yes'           | 'Scarf + Dress'            | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Skittles + Chewing gum'   | ''        | 'ODS'        | ''          | ''                          |
+			| 'Yes'      | 'Yes'           | 'Trousers'                 | 'Rose'    | 'PZU'        | ''          | ''                          |
+			| 'Yes'      | 'Yes'           | 'Shirt'                    | 'Rose'    | 'PZU'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Boots'                    | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'High shoes'               | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Box'                      | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Bound Dress+Shirt'        | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Bound Dress+Trousers'     | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Service'                  | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Router'                   | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Bag'                      | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Scarf'                    | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Chewing gum'              | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Skittles'                 | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Socks'                    | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Jacket J22001'            | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Fee'                      | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Candy Fruit'              | ''        | 'ODS'        | ''          | ''                          |
+			| 'No'       | 'Yes'           | 'Stockings'                | ''        | 'ODS'        | ''          | ''                          |
 		And I click the button named "Save"
 		And I go to line in "PropertiesTable" table
-			| 'Object' |
-			| 'Shirt'  |
+			| 'Object'    |
+			| 'Shirt'     |
 		And I activate "Object" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		Then "Producer" form attribute became equal to "PZU"
 		Then "Brand" form attribute became equal to "Rose"
 		And I close current window
 		And I go to line in "PropertiesTable" table
-			| 'Object' |
-			| 'Bag'  |
+			| 'Object'    |
+			| 'Bag'       |
 		And I activate "Object" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table	
 		Then "Producer" form attribute became equal to "ODS"
 		Then "Brand" form attribute became equal to ""	
 		And I close current window
 		And I go to line in "PropertiesTable" table
-			| 'Object' |
-			| 'Dress'  |
+			| 'Object'    |
+			| 'Dress'     |
 		And I activate "Object" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table	
 		Then "Producer" form attribute became equal to "PZU"
@@ -312,27 +312,27 @@ Scenario: _604714 copy value to marked row (ObjectPropertyEditor)
 		And I click the button named "Refresh"
 	* Select row
 		And I go to line in "PropertiesTable" table
-			| 'Marked' | 'Object' | 'Producer' |
-			| 'No'     | 'Box'    | 'ODS'      |
+			| 'Marked'   | 'Object'   | 'Producer'    |
+			| 'No'       | 'Box'      | 'ODS'         |
 		And I activate "Marked" field in "PropertiesTable" table
 		And I set "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| 'Object' | 'Producer' |
-			| 'Bag'    | 'ODS'      |
+			| 'Object'   | 'Producer'    |
+			| 'Bag'      | 'ODS'         |
 		And I set "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| 'Brand' | 'Object' | 'Producer' |
-			| 'Rose'  | 'Shirt'  | 'PZU'      |
+			| 'Brand'   | 'Object'   | 'Producer'    |
+			| 'Rose'    | 'Shirt'    | 'PZU'         |
 		And I activate "Brand" field in "PropertiesTable" table
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuCopyThisRowValueToMarkedRows"
 		And I click "Set values" button
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Brand' | 'Object' | 'Producer' |
-			| 'Rose'  | 'Bag'    | 'PZU'      |
-			| 'Rose'  | 'Box'    | 'PZU'      |
+			| 'Brand'   | 'Object'   | 'Producer'    |
+			| 'Rose'    | 'Bag'      | 'PZU'         |
+			| 'Rose'    | 'Box'      | 'PZU'         |
 		And I close all client application windows
 		
 
@@ -346,39 +346,39 @@ Scenario: _604717 change main attributes (ObjectPropertyEditor)
 		And I click the button named "Refresh"
 	* Change unit and Vendor
 		And I go to line in "PropertiesTable" table
-			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object'   | 'Unit' |
-			| 'No'          | '10002'   | 'Clothes'   | 'No'     | 'Trousers' | 'pcs'  |
+			| 'Is modified'   | 'Item ID'   | 'Item type'   | 'Marked'   | 'Object'     | 'Unit'    |
+			| 'No'            | '10002'     | 'Clothes'     | 'No'       | 'Trousers'   | 'pcs'     |
 		And I activate "Unit" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Unit" attribute in "PropertiesTable" table
 		And I go to line in "List" table
-			| 'Code' | 'Description' | 'Reference'   |
-			| '4'    | 'box (8 pcs)' | 'box (8 pcs)' |
+			| 'Code'   | 'Description'   | 'Reference'      |
+			| '4'      | 'box (8 pcs)'   | 'box (8 pcs)'    |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object' | 'Unit' |
-			| 'No'          | '10003'   | 'Clothes'   | 'No'     | 'Shirt'  | 'pcs'  |
+			| 'Is modified'   | 'Item ID'   | 'Item type'   | 'Marked'   | 'Object'   | 'Unit'    |
+			| 'No'            | '10003'     | 'Clothes'     | 'No'       | 'Shirt'    | 'pcs'     |
 		And I activate "Vendor" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Vendor" attribute in "PropertiesTable" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		Then the form attribute named "Vendor" became equal to "Kalipso"
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Trousers'     |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table	
 		Then the form attribute named "Unit" became equal to "box (8 pcs)"
 	And I close all client application windows
@@ -401,47 +401,47 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		And I click the button named "Refresh"
 	* Change partner and check change legal name
 		And I go to line in "PropertiesTable" table
-			| 'Company'      | 'Currency' | 'Is modified' | 'Legal name'        | 'Marked' | 'Object'                                       | 'Partner'   | 'Partner term'       | 'Price includes tax' | 'Status'   | 'Transaction type' | 'Use items receipt scheduling' |
-			| 'Main Company' | 'TRY'      | 'No'          | 'Company Ferron BP' | 'No'     | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                | 'Approved' | 'Purchase'         | 'Yes'                          |
+			| 'Company'        | 'Currency'   | 'Is modified'   | 'Legal name'          | 'Marked'   | 'Object'                                         | 'Partner'     | 'Partner term'         | 'Price includes tax'   | 'Status'     | 'Transaction type'   | 'Use items receipt scheduling'    |
+			| 'Main Company'   | 'TRY'        | 'No'            | 'Company Ferron BP'   | 'No'       | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Yes'                  | 'Approved'   | 'Purchase'           | 'Yes'                             |
 		And I activate "Partner" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Partner" attribute in "PropertiesTable" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas'    |
+			| 'Description'    |
+			| 'Veritas'        |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Currency' | 'Object'                                       | 'Partner term'                               | 'Legal name'        | 'Partner bank account'          | 'Company'      | 'Partner'   | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' | 'Transaction type' |
-			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas '  | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas'   | 'Yes'                | 'Approved' | 'Yes'                          | 'Purchase'         |
-			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'Vendor Ferron, TRY'                         | 'Company Ferron BP' | 'Partner bank account (Ferron)' | 'Main Company' | 'Ferron BP' | 'Yes'                | 'Approved' | 'No'                           | 'Purchase'         |	
+			| 'Marked'   | 'Is modified'   | 'Currency'   | 'Object'                                         | 'Partner term'                                 | 'Legal name'          | 'Partner bank account'            | 'Company'        | 'Partner'     | 'Price includes tax'   | 'Status'     | 'Use items receipt scheduling'   | 'Transaction type'    |
+			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas '    | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'     | 'Yes'                  | 'Approved'   | 'Yes'                            | 'Purchase'            |
+			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'Vendor Ferron, TRY'                           | 'Company Ferron BP'   | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Ferron BP'   | 'Yes'                  | 'Approved'   | 'No'                             | 'Purchase'            |
 	* Change quantity
 		And I select "* Item list" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 		And I activate "Quantity" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| '#' | 'Cancel' | 'Delivery date' | 'Dont calculate row' | 'Is modified' | 'Is service' | 'Item'  | 'Item key' | 'Key'                                  | 'Marked' | 'Net amount' | 'Object'                                       | 'Price' | 'Price type'              | 'Quantity' | 'Stock quantity' | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' |
-			| '1' | 'No'     | '12.02.2021'    | 'No'                 | 'No'          | 'No'         | 'Dress' | 'S/Yellow' | 'baf60337-67a7-4627-8518-6881217d1593' | 'No'     | '847,46'     | 'Purchase order 116 dated 12.02.2021 12:44:59' | '100'   | 'en description is empty' | '10'       | '10'                    | 'Store 02' | '152,54'     | '1 000'        | 'pcs'  |
+			| '#'   | 'Cancel'   | 'Delivery date'   | 'Dont calculate row'   | 'Is modified'   | 'Is service'   | 'Item'    | 'Item key'   | 'Key'                                    | 'Marked'   | 'Net amount'   | 'Object'                                         | 'Price'   | 'Price type'                | 'Quantity'   | 'Stock quantity'   | 'Store'      | 'Tax amount'   | 'Total amount'   | 'Unit'    |
+			| '1'   | 'No'       | '12.02.2021'      | 'No'                   | 'No'            | 'No'           | 'Dress'   | 'S/Yellow'   | 'baf60337-67a7-4627-8518-6881217d1593'   | 'No'       | '847,46'       | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '100'     | 'en description is empty'   | '10'         | '10'               | 'Store 02'   | '152,54'       | '1 000'          | 'pcs'     |
 		And I input "2" text in "Quantity" field of "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Detail' | 'Sales order' | 'Is modified' | 'Item'     | 'Object'                                       | 'Price type'              | '#' | 'Stock quantity'        | 'Store'    | 'Key'                                  | 'Internal supply request' | 'Price' | 'Total amount' | 'Net amount' | 'Offers amount' | 'Quantity' | 'Expense type' | 'Unit' | 'Tax amount' | 'Dont calculate row' | 'Item key'  | 'Profit loss center' | 'Partner item' | 'Cancel' | 'Delivery date' | 'Purchase basis' | 'Is service' |
-			| 'No'     | ''       | ''            | 'No'          | 'Dress'    | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Vendor price, TRY'       | '1' | '10'                    | 'Store 02' | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | ''                        | ''      | ''             | ''           | ''              | '10'       | ''             | 'pcs'  | ''           | 'No'                 | 'S/Yellow'  | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'No'         |
-			| 'No'     | ''       | ''            | 'No'          | 'Service'  | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Vendor price, TRY'       | '2' | '2'                     | ''         | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | ''                        | ''      | ''             | ''           | ''              | '2'        | ''             | 'pcs'  | ''           | 'No'                 | 'Internet'  | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'Yes'        |
-			| 'No'     | ''       | ''            | 'No'          | 'Boots'    | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Vendor price, TRY'       | '3' | '8'                     | 'Store 02' | '62d24ced-315a-473c-b47a-5bc9c4a824e0' | ''                        | ''      | ''             | ''           | ''              | '8'        | ''             | 'pcs'  | ''           | 'No'                 | '36/18SD'   | 'Front office'       | ''             | 'Yes'    | '12.02.2021'    | ''               | 'No'         |
-			| 'No'     | ''       | ''            | 'No'          | 'Trousers' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Vendor price, TRY'       | '4' | '5'                     | 'Store 02' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | ''                        | ''      | ''             | ''           | ''              | '5'        | ''             | 'pcs'  | ''           | 'No'                 | '36/Yellow' | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'No'         |
-			| 'No'     | ''       | ''            | 'No'          | 'Dress'    | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'en description is empty' | '1' | '2'                     | 'Store 02' | 'baf60337-67a7-4627-8518-6881217d1593' | ''                        | '100'   | '200'          | '169,49'     | ''              | '2'        | ''             | 'pcs'  | '30,51'      | 'No'                 | 'S/Yellow'  | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'No'         |
-			| 'No'     | ''       | ''            | 'No'          | 'Service'  | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'en description is empty' | '2' | '2'                     | 'Store 02' | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | ''                        | '150'   | '300'          | '254,24'     | ''              | '2'        | ''             | 'pcs'  | '45,76'      | 'No'                 | 'Internet'  | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'Yes'        |
-			| 'No'     | ''       | ''            | 'No'          | 'Boots'    | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'en description is empty' | '3' | '8'                     | 'Store 02' | '7b9432c6-b2fa-4763-b4ae-8cfaecd6fc7c' | ''                        | '120'   | '960'          | '813,56'     | ''              | '8'        | ''             | 'pcs'  | '146,44'     | 'No'                 | '36/18SD'   | 'Front office'       | ''             | 'Yes'    | '12.02.2021'    | ''               | 'No'         |
-			| 'No'     | ''       | ''            | 'No'          | 'Trousers' | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'en description is empty' | '4' | '5'                     | 'Store 02' | '2f854b37-44db-469e-a5cb-6478adca5001' | ''                        | '200'   | '1 000'        | '847,46'     | ''              | '5'        | ''             | 'pcs'  | '152,54'     | 'No'                 | '36/Yellow' | 'Front office'       | ''             | 'No'     | '12.02.2021'    | ''               | 'No'         |
+			| 'Marked'   | 'Detail'   | 'Sales order'   | 'Is modified'   | 'Item'       | 'Object'                                         | 'Price type'                | '#'   | 'Stock quantity'   | 'Store'      | 'Key'                                    | 'Internal supply request'   | 'Price'   | 'Total amount'   | 'Net amount'   | 'Offers amount'   | 'Quantity'   | 'Expense type'   | 'Unit'   | 'Tax amount'   | 'Dont calculate row'   | 'Item key'    | 'Profit loss center'   | 'Partner item'   | 'Cancel'   | 'Delivery date'   | 'Purchase basis'   | 'Is service'    |
+			| 'No'       | ''         | ''              | 'No'            | 'Dress'      | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Vendor price, TRY'         | '1'   | '10'               | 'Store 02'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''                          | ''        | ''               | ''             | ''                | '10'         | ''               | 'pcs'    | ''             | 'No'                   | 'S/Yellow'    | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'No'            |
+			| 'No'       | ''         | ''              | 'No'            | 'Service'    | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Vendor price, TRY'         | '2'   | '2'                | ''           | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | ''                          | ''        | ''               | ''             | ''                | '2'          | ''               | 'pcs'    | ''             | 'No'                   | 'Internet'    | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'Yes'           |
+			| 'No'       | ''         | ''              | 'No'            | 'Boots'      | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Vendor price, TRY'         | '3'   | '8'                | 'Store 02'   | '62d24ced-315a-473c-b47a-5bc9c4a824e0'   | ''                          | ''        | ''               | ''             | ''                | '8'          | ''               | 'pcs'    | ''             | 'No'                   | '36/18SD'     | 'Front office'         | ''               | 'Yes'      | '12.02.2021'      | ''                 | 'No'            |
+			| 'No'       | ''         | ''              | 'No'            | 'Trousers'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Vendor price, TRY'         | '4'   | '5'                | 'Store 02'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | ''                          | ''        | ''               | ''             | ''                | '5'          | ''               | 'pcs'    | ''             | 'No'                   | '36/Yellow'   | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'No'            |
+			| 'No'       | ''         | ''              | 'No'            | 'Dress'      | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'en description is empty'   | '1'   | '2'                | 'Store 02'   | 'baf60337-67a7-4627-8518-6881217d1593'   | ''                          | '100'     | '200'            | '169,49'       | ''                | '2'          | ''               | 'pcs'    | '30,51'        | 'No'                   | 'S/Yellow'    | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'No'            |
+			| 'No'       | ''         | ''              | 'No'            | 'Service'    | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'en description is empty'   | '2'   | '2'                | 'Store 02'   | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | ''                          | '150'     | '300'            | '254,24'       | ''                | '2'          | ''               | 'pcs'    | '45,76'        | 'No'                   | 'Internet'    | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'Yes'           |
+			| 'No'       | ''         | ''              | 'No'            | 'Boots'      | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'en description is empty'   | '3'   | '8'                | 'Store 02'   | '7b9432c6-b2fa-4763-b4ae-8cfaecd6fc7c'   | ''                          | '120'     | '960'            | '813,56'       | ''                | '8'          | ''               | 'pcs'    | '146,44'       | 'No'                   | '36/18SD'     | 'Front office'         | ''               | 'Yes'      | '12.02.2021'      | ''                 | 'No'            |
+			| 'No'       | ''         | ''              | 'No'            | 'Trousers'   | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'en description is empty'   | '4'   | '5'                | 'Store 02'   | '2f854b37-44db-469e-a5cb-6478adca5001'   | ''                          | '200'     | '1 000'          | '847,46'       | ''                | '5'          | ''               | 'pcs'    | '152,54'       | 'No'                   | '36/Yellow'   | 'Front office'         | ''               | 'No'       | '12.02.2021'      | ''                 | 'No'            |
 	* Check
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '115'    |
+			| 'Number'    |
+			| '115'       |
 		And I select current line in "List" table
 		Then the form attribute named "Partner" became equal to "Veritas"
 		Then the form attribute named "LegalName" became equal to "Company Veritas "
@@ -450,12 +450,12 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		Then the form attribute named "Store" became equal to "Store 02"
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '116'    |
+			| 'Number'    |
+			| '116'       |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Cancel' | 'Item key' | 'Profit loss center' | 'Price type'              | 'Item'  | 'Quantity' | 'Dont calculate row' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase basis' | 'Delivery date' |
-			| 'No'     | 'S/Yellow' | 'Front office'       | 'en description is empty' | 'Dress' | '2,000'    | 'No'                 | 'pcs'  | '30,51'      | '100,00' | '18%' | ''              | '169,49'     | '200,00'       | 'Store 02' | ''             | ''       | ''            | ''               | '12.02.2021'    |
+			| 'Cancel'   | 'Item key'   | 'Profit loss center'   | 'Price type'                | 'Item'    | 'Quantity'   | 'Dont calculate row'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Expense type'   | 'Detail'   | 'Sales order'   | 'Purchase basis'   | 'Delivery date'    |
+			| 'No'       | 'S/Yellow'   | 'Front office'         | 'en description is empty'   | 'Dress'   | '2,000'      | 'No'                   | 'pcs'    | '30,51'        | '100,00'   | '18%'   | ''                | '169,49'       | '200,00'         | 'Store 02'   | ''               | ''         | ''              | ''                 | '12.02.2021'       |
 		And I close all client application windows
 		
 
@@ -475,52 +475,52 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I click the button named "Refresh"
 	* Change partner
 		And I go to line in "PropertiesTable" table
-			| 'Object'                                  |
-			| 'Purchase order 116 dated 12.02.2021 12:44:59' |
+			| 'Object'                                          |
+			| 'Purchase order 116 dated 12.02.2021 12:44:59'    |
 		And I activate "Partner" field in "PropertiesTable" table
 		And I click choice button of "Partner" attribute in "PropertiesTable" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas'    |
+			| 'Description'    |
+			| 'Veritas'        |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Currency' | 'Object'                                       | 'Partner term'                               | 'Legal name'        | 'Partner bank account'          | 'Company'      | 'Partner' | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' | 'Transaction type' |
-			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas '  | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas' | 'Yes'                | 'Approved' | 'Yes'                          | 'Purchase'         |
-			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'Vendor Ferron, TRY'                         | 'Company Ferron BP' | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas' | 'Yes'                | 'Approved' | 'No'                           | 'Purchase'         |							
+			| 'Marked'   | 'Is modified'   | 'Currency'   | 'Object'                                         | 'Partner term'                                 | 'Legal name'          | 'Partner bank account'            | 'Company'        | 'Partner'   | 'Price includes tax'   | 'Status'     | 'Use items receipt scheduling'   | 'Transaction type'    |
+			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas '    | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'   | 'Yes'                  | 'Approved'   | 'Yes'                            | 'Purchase'            |
+			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'Vendor Ferron, TRY'                           | 'Company Ferron BP'   | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'   | 'Yes'                  | 'Approved'   | 'No'                             | 'Purchase'            |
 	* Change Row ID tab
 		And I select "* Row IDInfo" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 		And I go to line in "PropertiesTable" table
-			| '#' | 'Is modified' | 'Key'                                  | 'Marked' | 'Next step' | 'Object'                                       | 'Quantity' | 'Row ID'                               | 'Row ref'                              |
-			| '1' | 'No'          | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | 'No'     | 'PI&GR'     | 'Purchase order 115 dated 12.02.2021 12:44:43' | '10'       | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |			
+			| '#'   | 'Is modified'   | 'Key'                                    | 'Marked'   | 'Next step'   | 'Object'                                         | 'Quantity'   | 'Row ID'                                 | 'Row ref'                                 |
+			| '1'   | 'No'            | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'       | 'PI&GR'       | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '10'         | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'    |
 		And I activate "Next step" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Next step" attribute in "PropertiesTable" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'GR'          |
+			| 'Description'    |
+			| 'GR'             |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Object'                                       | '#' | 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Current step' | 'Row ref'                              | 'Basis key'                            |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '1' | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | ''      | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | 'GR'        | '10'       | ''             | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '2' | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | ''      | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | 'PI'        | '2'        | ''             | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '3' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | ''      | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | 'PI&GR'     | '5'        | ''             | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '1' | 'baf60337-67a7-4627-8518-6881217d1593' | ''      | 'baf60337-67a7-4627-8518-6881217d1593' | 'PI&GR'     | '2'        | ''             | 'baf60337-67a7-4627-8518-6881217d1593' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '2' | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | ''      | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | 'PI'        | '2'        | ''             | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '3' | '2f854b37-44db-469e-a5cb-6478adca5001' | ''      | '2f854b37-44db-469e-a5cb-6478adca5001' | 'PI&GR'     | '5'        | ''             | '2f854b37-44db-469e-a5cb-6478adca5001' | '                                    ' |
+			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '2'   | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | ''        | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'PI'          | '2'          | ''               | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '3'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | ''        | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'PI&GR'       | '5'          | ''               | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '1'   | 'baf60337-67a7-4627-8518-6881217d1593'   | ''        | 'baf60337-67a7-4627-8518-6881217d1593'   | 'PI&GR'       | '2'          | ''               | 'baf60337-67a7-4627-8518-6881217d1593'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '2'   | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | ''        | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | 'PI'          | '2'          | ''               | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '3'   | '2f854b37-44db-469e-a5cb-6478adca5001'   | ''        | '2f854b37-44db-469e-a5cb-6478adca5001'   | 'PI&GR'       | '5'          | ''               | '2f854b37-44db-469e-a5cb-6478adca5001'   | '                                    '    |
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Object'                                       | '#' | 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Current step' | 'Row ref'                              | 'Basis key'                            |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '1' | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | ''      | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | 'GR'        | '10'       | ''             | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '2' | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | ''      | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | 'PI'        | '2'        | ''             | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 115 dated 12.02.2021 12:44:43' | '3' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | ''      | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | 'PI&GR'     | '5'        | ''             | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '1' | 'baf60337-67a7-4627-8518-6881217d1593' | ''      | 'baf60337-67a7-4627-8518-6881217d1593' | 'PI&GR'     | '2'        | ''             | 'baf60337-67a7-4627-8518-6881217d1593' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '2' | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | ''      | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | 'PI'        | '2'        | ''             | '59a126c2-0ca4-4dad-b39b-606e75973f8e' | '                                    ' |
-			| 'No'     | 'No'          | 'Purchase order 116 dated 12.02.2021 12:44:59' | '3' | '2f854b37-44db-469e-a5cb-6478adca5001' | ''      | '2f854b37-44db-469e-a5cb-6478adca5001' | 'PI&GR'     | '5'        | ''             | '2f854b37-44db-469e-a5cb-6478adca5001' | '                                    ' |
+			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '2'   | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | ''        | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'PI'          | '2'          | ''               | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '3'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | ''        | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'PI&GR'       | '5'          | ''               | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '1'   | 'baf60337-67a7-4627-8518-6881217d1593'   | ''        | 'baf60337-67a7-4627-8518-6881217d1593'   | 'PI&GR'       | '2'          | ''               | 'baf60337-67a7-4627-8518-6881217d1593'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '2'   | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | ''        | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | 'PI'          | '2'          | ''               | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | '                                    '    |
+			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '3'   | '2f854b37-44db-469e-a5cb-6478adca5001'   | ''        | '2f854b37-44db-469e-a5cb-6478adca5001'   | 'PI&GR'       | '5'          | ''               | '2f854b37-44db-469e-a5cb-6478adca5001'   | '                                    '    |
 		And I close all client application windows
 		
 				
@@ -535,8 +535,8 @@ Scenario: _604720 execute code (ObjectPropertyEditor)
 	* Check execute code
 		Then "Object property editor" window is opened
 		And I go to line in "PropertiesTable" table
-			| 'Object'                                       |
-			| 'Inventory transfer order 21 dated 16.02.2021 16:14:02' |
+			| 'Object'                                                   |
+			| 'Inventory transfer order 21 dated 16.02.2021 16:14:02'    |
 		And I change "Marked" checkbox in "PropertiesTable" table
 		And I finish line editing in "PropertiesTable" table
 		And I activate "Company" field in "PropertiesTable" table
@@ -544,7 +544,7 @@ Scenario: _604720 execute code (ObjectPropertyEditor)
 		Then "Run code form" window is opened
 		And I click "Run code" button
 		Then there are lines in TestClient message log
-			|'Inventory transfer order 21 dated 16.02.2021 16:14:02'|
+			| 'Inventory transfer order 21 dated 16.02.2021 16:14:02'    |
 		And I close all client application windows
 				
 				

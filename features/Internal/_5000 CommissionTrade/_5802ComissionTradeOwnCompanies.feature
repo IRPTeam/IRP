@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CommissionTrade
@@ -73,8 +73,8 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Workstation 01' |
+			| 'Description'       |
+			| 'Workstation 01'    |
 		And I click "Set current workstation" button		
 		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
@@ -83,8 +83,8 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description"        |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -97,23 +97,23 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 		When Create document SalesInvoice (trade, own Companies)
 	* Post document
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"     |
 		
 	And I close all client application windows
 
@@ -130,19 +130,19 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company partner' |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04' |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 	* Add items
 		* Product 1 with SLN
@@ -151,14 +151,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -166,8 +166,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'PZU'   | '8908899880'    |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899880'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -180,13 +180,13 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 3 with SLN' |
+				| 'Description'            |
+				| 'Product 3 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 3 with SLN' | 'UNIQ'     |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 3 with SLN'    | 'UNIQ'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -194,8 +194,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number'  |
-				| 'UNIQ'  | '09987897977891' |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977891'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -209,8 +209,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "100,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -221,25 +221,25 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 	* Check filling
 		And "ItemList" table contains lines
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    |
-			| 'Own stocks'       | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '8908899880'         | '1,000'    | '500,00' | 'Without VAT' | '500,00'     | '500,00'       | 'No'             | 'No'                         | 'Store 04' |
-			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'No'                 | ''           | 'pcs'  | '09987897977891'     | '5,000'    | '520,00' | 'Without VAT' | '2 600,00'   | '2 600,00'     | 'No'             | 'No'                         | 'Store 04' |
-			| 'Own stocks'       | 'en description is empty' | 'Scarf'              | 'XS/Red'   | 'No'                 | ''           | 'pcs'  | ''                   | '5,000'    | '100,00' | 'Without VAT' | '500,00'     | '500,00'       | 'No'             | 'No'                         | 'Store 04' |
-			| 'Own stocks'       | 'en description is empty' | 'Dress'              | 'M/Brown'  | 'No'                 | ''           | 'pcs'  | ''                   | '5,000'    | '200,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     | 'No'             | 'No'                         | 'Store 04' |
+			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'   | 'Use work sheet'   | 'Is additional item revenue'   | 'Store'       |
+			| 'Own stocks'         | 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '8908899880'           | '1,000'      | '500,00'   | 'Without VAT'   | '500,00'       | '500,00'         | 'No'               | 'No'                           | 'Store 04'    |
+			| 'Own stocks'         | 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | 'No'                   | ''             | 'pcs'    | '09987897977891'       | '5,000'      | '520,00'   | 'Without VAT'   | '2 600,00'     | '2 600,00'       | 'No'               | 'No'                           | 'Store 04'    |
+			| 'Own stocks'         | 'en description is empty'   | 'Scarf'                | 'XS/Red'     | 'No'                   | ''             | 'pcs'    | ''                     | '5,000'      | '100,00'   | 'Without VAT'   | '500,00'       | '500,00'         | 'No'               | 'No'                           | 'Store 04'    |
+			| 'Own stocks'         | 'en description is empty'   | 'Dress'                | 'M/Brown'    | 'No'                   | ''             | 'pcs'    | ''                     | '5,000'      | '200,00'   | 'Without VAT'   | '1 000,00'     | '1 000,00'       | 'No'               | 'No'                           | 'Store 04'    |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberSI5$$" variable
@@ -251,8 +251,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberSI5$$' |
+			| 'Number'           |
+			| '$$NumberSI5$$'    |
 		And I close all client application windows
 	* Open PI form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -262,19 +262,19 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Add items
 		* Product 1 with SLN
@@ -283,14 +283,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -298,8 +298,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'PZU'   | '8908899880'    |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899880'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -313,13 +313,13 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 3 with SLN' |
+				| 'Description'            |
+				| 'Product 3 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 3 with SLN' | 'UNIQ'     |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 3 with SLN'    | 'UNIQ'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -327,8 +327,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number'  |
-				| 'UNIQ'  | '09987897977891' |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977891'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "5,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -343,8 +343,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "100,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -356,14 +356,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -371,11 +371,11 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I finish line editing in "ItemList" table
 	* Check filling
 		And "ItemList" table became equal
-			| 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Price'  | 'VAT'         | 'Total amount' | 'Store'    | 'Delivery date' | 'Quantity' | 'Is additional item cost' | 'Net amount' |
-			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '8908899880'         | '500,00' | 'Without VAT' | '500,00'       | 'Store 01' | ''              | '1,000'    | 'No'                      | '500,00'     |
-			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'No'                 | ''           | 'pcs'  | '09987897977891'     | '520,00' | 'Without VAT' | '2 600,00'     | 'Store 01' | ''              | '5,000'    | 'No'                      | '2 600,00'   |
-			| 'en description is empty' | 'Scarf'              | 'XS/Red'   | 'No'                 | ''           | 'pcs'  | ''                   | '100,00' | 'Without VAT' | '500,00'       | 'Store 01' | ''              | '5,000'    | 'No'                      | '500,00'     |
-			| 'en description is empty' | 'Dress'              | 'M/Brown'  | 'No'                 | ''           | 'pcs'  | ''                   | '200,00' | 'Without VAT' | '1 000,00'     | 'Store 01' | ''              | '5,000'    | 'No'                      | '1 000,00'   |
+			| 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Price'    | 'VAT'           | 'Total amount'   | 'Store'      | 'Delivery date'   | 'Quantity'   | 'Is additional item cost'   | 'Net amount'    |
+			| 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '8908899880'           | '500,00'   | 'Without VAT'   | '500,00'         | 'Store 01'   | ''                | '1,000'      | 'No'                        | '500,00'        |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | 'No'                   | ''             | 'pcs'    | '09987897977891'       | '520,00'   | 'Without VAT'   | '2 600,00'       | 'Store 01'   | ''                | '5,000'      | 'No'                        | '2 600,00'      |
+			| 'en description is empty'   | 'Scarf'                | 'XS/Red'     | 'No'                   | ''             | 'pcs'    | ''                     | '100,00'   | 'Without VAT'   | '500,00'         | 'Store 01'   | ''                | '5,000'      | 'No'                        | '500,00'        |
+			| 'en description is empty'   | 'Dress'                | 'M/Brown'    | 'No'                   | ''             | 'pcs'    | ''                     | '200,00'   | 'Without VAT'   | '1 000,00'       | 'Store 01'   | ''                | '5,000'      | 'No'                        | '1 000,00'      |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberPI5$$" variable
@@ -387,8 +387,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberPI5$$' |
+			| 'Number'           |
+			| '$$NumberPI5$$'    |
 		And I close all client application windows
 	* Open SI form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -398,19 +398,19 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company partner' |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04' |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 	* Add items
 		* Product 1 with SLN
@@ -419,14 +419,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -434,8 +434,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'PZU'   | '8908899881'    |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899881'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -448,13 +448,13 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 3 with SLN' |
+				| 'Description'            |
+				| 'Product 3 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 3 with SLN' | 'UNIQ'     |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 3 with SLN'    | 'UNIQ'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -462,8 +462,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number'  |
-				| 'UNIQ'  | '09987897977891' |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977891'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -477,8 +477,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "100,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -489,14 +489,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -512,8 +512,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberSI6$$' |
+			| 'Number'           |
+			| '$$NumberSI6$$'    |
 		And I close all client application windows
 	* Open PI form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -523,19 +523,19 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Add items
 		* Product 1 with SLN
@@ -544,14 +544,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -559,8 +559,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'PZU'   | '8908899881'    |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899881'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -574,13 +574,13 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 3 with SLN' |
+				| 'Description'            |
+				| 'Product 3 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 3 with SLN' | 'UNIQ'     |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 3 with SLN'    | 'UNIQ'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -588,8 +588,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number'  |
-				| 'UNIQ'  | '09987897977891' |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977891'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -604,8 +604,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "100,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -617,14 +617,14 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
@@ -641,8 +641,8 @@ Scenario: _05805 transfer of goods on commission from Second company to the Main
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberPI6$$' |
+			| 'Number'           |
+			| '$$NumberPI6$$'    |
 		And I close all client application windows
 
 Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
@@ -654,24 +654,24 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Check tax rate
 		* Item with unique serial lot number
@@ -682,8 +682,8 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'VAT'         |
-				| 'Consignor stocks' | 'Product 1 with SLN' | 'PZU'      | '8908899881'         | 'Without VAT' |	
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Serial lot numbers'    | 'VAT'             |
+				| 'Consignor stocks'    | 'Product 1 with SLN'    | 'PZU'         | '8908899881'            | 'Without VAT'     |
 		* Item without unique serial lot number
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "09987897977891" text in the field named "Barcode"
@@ -700,22 +700,22 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'VAT'         | 'Quantity'     |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977891'     | 'Without VAT' | '6,000'        |
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Serial lot numbers'    | 'VAT'            | 'Quantity'     |
+				| 'Consignor stocks'    | 'Product 3 with SLN'    | 'UNIQ'        | '09987897977891'        | 'Without VAT'    | '6,000'        |
 		* Item without serial lot number (different tax rate)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "6,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -724,50 +724,50 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899881'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 3 with SLN'    | 'UNIQ'        | ''              | 'pcs'     | '09987897977891'        | '6,000'       | '200,00'    | 'Without VAT'    | ''                 | '1 200,00'      | '1 200,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | '457,63'        | 'pcs'     | ''                      | '6,000'       | '500,00'    | '18%'            | ''                 | '2 542,37'      | '3 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
 		* Change inventory origin and check tax rate
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT'         |
-				| '4' | 'Dress' | 'M/Brown'  | 'Without VAT' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'             |
+				| '4'    | 'Dress'    | 'M/Brown'     | 'Without VAT'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Own stocks" exact value from "Inventory origin" drop-down list in "ItemList" table
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
-				| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899881'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 3 with SLN'    | 'UNIQ'        | ''              | 'pcs'     | '09987897977891'        | '6,000'       | '200,00'    | 'Without VAT'    | ''                 | '1 200,00'      | '1 200,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | '457,63'        | 'pcs'     | ''                      | '6,000'       | '500,00'    | '18%'            | ''                 | '2 542,37'      | '3 000,00'        | 'Store 01'     |
+				| 'Own stocks'          | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | '152,54'        | 'pcs'     | ''                      | '2,000'       | '500,00'    | '18%'            | ''                 | '847,46'        | '1 000,00'        | 'Store 01'     |
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT' |
-				| '4' | 'Dress' | 'M/Brown'  | '18%' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'     |
+				| '4'    | 'Dress'    | 'M/Brown'     | '18%'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table			
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899881'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 3 with SLN'    | 'UNIQ'        | ''              | 'pcs'     | '09987897977891'        | '6,000'       | '200,00'    | 'Without VAT'    | ''                 | '1 200,00'      | '1 200,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | '457,63'        | 'pcs'     | ''                      | '6,000'       | '500,00'    | '18%'            | ''                 | '2 542,37'      | '3 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'          | 'Dress'                 | 'M/Brown'     | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberSI7$$" variable
@@ -779,8 +779,8 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberSI7$$' |
+			| 'Number'           |
+			| '$$NumberSI7$$'    |
 		And I close all client application windows	
 	* Create second SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -789,24 +789,24 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Add items
 		* First item
@@ -815,14 +815,14 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -833,14 +833,14 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Scarf' | 'XS/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Scarf'    | 'XS/Red'       |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -848,9 +848,9 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 			And I finish line editing in "ItemList" table
 	* Check tax rate
 		And "ItemList" table contains lines
-			| '#' | 'Inventory origin' | 'Price type'              | 'Item'  | 'Item key' | 'Tax amount' | 'Unit' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '1' | 'Consignor stocks' | 'Basic Price Types'       | 'Dress' | 'M/Brown'  | ''           | 'pcs'  | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-			| '2' | 'Consignor stocks' | 'en description is empty' | 'Scarf' | 'XS/Red'   | '15,25'      | 'pcs'  | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | 'Store 01' |
+			| '#'   | 'Inventory origin'   | 'Price type'                | 'Item'    | 'Item key'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '1'   | 'Consignor stocks'   | 'Basic Price Types'         | 'Dress'   | 'M/Brown'    | ''             | 'pcs'    | '2,000'      | '500,00'   | 'Without VAT'   | ''                | '1 000,00'     | '1 000,00'       | 'Store 01'    |
+			| '2'   | 'Consignor stocks'   | 'en description is empty'   | 'Scarf'   | 'XS/Red'     | '15,25'        | 'pcs'    | '1,000'      | '100,00'   | '18%'           | ''                | '84,75'        | '100,00'         | 'Store 01'    |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberSI8$$" variable
@@ -862,8 +862,8 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberSI8$$' |
+			| 'Number'           |
+			| '$$NumberSI8$$'    |
 		And I close all client application windows			
 
 Scenario: _05807 create sales report to consignor (Second Company partner) and sales report from trade agent
@@ -874,15 +874,15 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 	* Create Sales report co consignor for Second Company partner
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Second Company"
 		Then the form attribute named "Agreement" became equal to "Consignor Second Company"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		Then the form attribute named "TradeAgentFeeType" became equal to "Percent"		
 		And I input current date in "Start date" field
@@ -892,12 +892,12 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 		And in the table "Sales" I click "Fill sales" button
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| 'Price type'              | 'Item'               | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Sales invoice' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT'         | 'Purchase invoice' | 'Net amount' | 'Total amount' |
-			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | '500,00'          | '8908899881'         | 'pcs'  | '$$SI7$$'       | '1,000'    | '10,00'                   | '20,00'                  | '200,00' | 'Without VAT' | '$$PI6$$'          | '200,00'     | '200,00'       |
-			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | '520,00'          | '09987897977891'     | 'pcs'  | '$$SI7$$'       | '5,000'    | '10,00'                   | '100,00'                 | '200,00' | 'Without VAT' | '$$PI5$$'          | '1 000,00'   | '1 000,00'     |
-			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | '520,00'          | '09987897977891'     | 'pcs'  | '$$SI7$$'       | '1,000'    | '10,00'                   | '20,00'                  | '200,00' | 'Without VAT' | '$$PI6$$'          | '200,00'     | '200,00'       |
-			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '$$SI7$$'       | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '$$PI5$$'          | '1 000,00'   | '1 000,00'     |
-			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '$$SI8$$'       | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '$$PI5$$'          | '1 000,00'   | '1 000,00'     |
+			| 'Price type'                | 'Item'                 | 'Item key'   | 'Consignor price'   | 'Serial lot numbers'   | 'Unit'   | 'Sales invoice'   | 'Quantity'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'    | 'VAT'           | 'Purchase invoice'   | 'Net amount'   | 'Total amount'    |
+			| 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | '500,00'            | '8908899881'           | 'pcs'    | '$$SI7$$'         | '1,000'      | '10,00'                     | '20,00'                    | '200,00'   | 'Without VAT'   | '$$PI6$$'            | '200,00'       | '200,00'          |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | '520,00'            | '09987897977891'       | 'pcs'    | '$$SI7$$'         | '5,000'      | '10,00'                     | '100,00'                   | '200,00'   | 'Without VAT'   | '$$PI5$$'            | '1 000,00'     | '1 000,00'        |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | '520,00'            | '09987897977891'       | 'pcs'    | '$$SI7$$'         | '1,000'      | '10,00'                     | '20,00'                    | '200,00'   | 'Without VAT'   | '$$PI6$$'            | '200,00'       | '200,00'          |
+			| 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | '200,00'            | ''                     | 'pcs'    | '$$SI7$$'         | '2,000'      | '10,00'                     | '100,00'                   | '500,00'   | 'Without VAT'   | '$$PI5$$'            | '1 000,00'     | '1 000,00'        |
+			| 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | '200,00'            | ''                     | 'pcs'    | '$$SI8$$'         | '2,000'      | '10,00'                     | '100,00'                   | '500,00'   | 'Without VAT'   | '$$PI5$$'            | '1 000,00'     | '1 000,00'        |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberSRC3$$" variable
@@ -911,20 +911,20 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I click "Create by sales report" button
 		And I go to line in "SalesReportList" table
-			| 'Number'         |
-			| '$$NumberSRC3$$' |
+			| 'Number'            |
+			| '$$NumberSRC3$$'    |
 		And I set "Use" checkbox in "SalesReportList" table
 		And I finish line editing in "SalesReportList" table
 		And I click "Ok" button
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Trade agent Main Company' |
+			| 'Description'                 |
+			| 'Trade agent Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 	* Check
 		Then the form attribute named "Partner" became equal to "Main Company partner"
@@ -933,21 +933,21 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 		Then the form attribute named "Company" became equal to "Second Company"
 		Then the form attribute named "TradeAgentFeeType" became equal to "Percent"
 		And "ItemList" table became equal
-			| 'Price type'              | 'Item'               | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
-			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | '500,00'          | '8908899881'         | 'pcs'  | '1,000'    | '10,00'                   | '20,00'                  | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |
-			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | '520,00'          | '09987897977891'     | 'pcs'  | '5,000'    | '10,00'                   | '100,00'                 | '200,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     |
-			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | '520,00'          | '09987897977891'     | 'pcs'  | '1,000'    | '10,00'                   | '20,00'                  | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |
-			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     |
-			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     |
+			| 'Price type'                | 'Item'                 | 'Item key'   | 'Consignor price'   | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
+			| 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | '500,00'            | '8908899881'           | 'pcs'    | '1,000'      | '10,00'                     | '20,00'                    | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | '520,00'            | '09987897977891'       | 'pcs'    | '5,000'      | '10,00'                     | '100,00'                   | '200,00'   | 'Without VAT'   | '1 000,00'     | '1 000,00'        |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | '520,00'            | '09987897977891'       | 'pcs'    | '1,000'      | '10,00'                     | '20,00'                    | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
+			| 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | '200,00'            | ''                     | 'pcs'    | '2,000'      | '10,00'                     | '100,00'                   | '500,00'   | 'Without VAT'   | '1 000,00'     | '1 000,00'        |
+			| 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | '200,00'            | ''                     | 'pcs'    | '2,000'      | '10,00'                     | '100,00'                   | '500,00'   | 'Without VAT'   | '1 000,00'     | '1 000,00'        |
 		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | ''                  | '1,000'             | '1,000'    |
-			| ''                   | ''         | '8908899881'        | ''                  | '1,000'    |
-			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '5,000'             | '5,000'    |
-			| ''                   | ''         | '09987897977891'    | ''                  | '5,000'    |
-			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '1,000'             | '1,000'    |
-			| ''                   | ''         | '09987897977891'    | ''                  | '1,000'    |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Item key quantity'   | 'Quantity'    |
+			| 'Product 1 with SLN'   | 'PZU'        | ''                    | '1,000'               | '1,000'       |
+			| ''                     | ''           | '8908899881'          | ''                    | '1,000'       |
+			| 'Product 3 with SLN'   | 'UNIQ'       | ''                    | '5,000'               | '5,000'       |
+			| ''                     | ''           | '09987897977891'      | ''                    | '5,000'       |
+			| 'Product 3 with SLN'   | 'UNIQ'       | ''                    | '1,000'               | '1,000'       |
+			| ''                     | ''           | '09987897977891'      | ''                    | '1,000'       |
 		And I close "Serial lot numbers tree" window
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 400,00"
@@ -965,8 +965,8 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 		And I click "Post and close" button	
 	* Check creation
 		And "List" table contains lines
-			| 'Number'                      |
-			| '$$NumberSRFromTradeAgent3$$' |
+			| 'Number'                         |
+			| '$$NumberSRFromTradeAgent3$$'    |
 		And I close all client application windows		
 						
 		
@@ -975,14 +975,14 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 	* Select Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to line in "List" table
-			| 'Number'         |
-			| '$$NumberSRC3$$' |
+			| 'Number'            |
+			| '$$NumberSRC3$$'    |
 	* Create Bank payment
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Bank account, TRY'   |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Check
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -990,8 +990,8 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'                | 'Commission' | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Second Company partner' | ''           | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '3 400,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                  | 'Commission'   | 'Payee'            | 'Partner term'               | 'Legal name contract'   | 'Basis document'   | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Second Company partner'   | ''             | 'Second Company'   | 'Consignor Second Company'   | ''                      | '$$SRC3$$'         | ''        | '3 400,00'       | ''                          | ''                              |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "3 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank payment manually
@@ -1001,13 +1001,13 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Consignor Second Company' |
+			| 'Description'                 |
+			| 'Consignor Second Company'    |
 		And I select current line in "List" table
 		# temporarily
 		And I finish line editing in "PaymentList" table
@@ -1015,15 +1015,15 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 		And I select current line in "PaymentList" table
 		# temporarily
 		And I go to line in "List" table
-			| 'Document'            |
-			| '$$SRC3$$' |
+			| 'Document'    |
+			| '$$SRC3$$'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "2 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner'                | 'Commission' | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Second Company partner' | ''           | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '2 000,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                  | 'Commission'   | 'Payee'            | 'Partner term'               | 'Legal name contract'   | 'Basis document'   | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Second Company partner'   | ''             | 'Second Company'   | 'Consignor Second Company'   | ''                      | '$$SRC3$$'         | ''        | '2 000,00'       | ''                          | ''                              |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberBP1$$" variable
@@ -1036,8 +1036,8 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.BankPayment"		
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberBP1$$' |
+			| 'Number'           |
+			| '$$NumberBP1$$'    |
 		And I close all client application windows	
 
 
@@ -1046,14 +1046,14 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 	* Select Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to line in "List" table
-			| 'Number'         |
-			| '$$NumberSRC3$$' |
+			| 'Number'            |
+			| '$$NumberSRC3$$'    |
 	* Create Bank payment
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"	
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Cash desk №2'   |
+			| 'Description'     |
+			| 'Cash desk №2'    |
 		And I select current line in "List" table
 	* Check
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1061,8 +1061,8 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'                | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Second Company partner' | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '1 400,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                  | 'Payee'            | 'Partner term'               | 'Legal name contract'   | 'Basis document'   | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Second Company partner'   | 'Second Company'   | 'Consignor Second Company'   | ''                      | '$$SRC3$$'         | ''        | '1 400,00'       | ''                          | ''                              |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash payment manually
@@ -1072,13 +1072,13 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Consignor Second Company' |
+			| 'Description'                 |
+			| 'Consignor Second Company'    |
 		And I select current line in "List" table
 		# temporarily
 		And I finish line editing in "PaymentList" table
@@ -1086,15 +1086,15 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 		And I select current line in "PaymentList" table
 		# temporarily
 		And I go to line in "List" table
-			| 'Document'            |
-			| '$$SRC3$$' |
+			| 'Document'    |
+			| '$$SRC3$$'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner'                | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Second Company partner' | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '1 000,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                  | 'Payee'            | 'Partner term'               | 'Legal name contract'   | 'Basis document'   | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Second Company partner'   | 'Second Company'   | 'Consignor Second Company'   | ''                      | '$$SRC3$$'         | ''        | '1 000,00'       | ''                          | ''                              |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberCP1$$" variable
@@ -1107,8 +1107,8 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"		
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCP1$$' |
+			| 'Number'           |
+			| '$$NumberCP1$$'    |
 		And I close all client application windows				
 		
 
@@ -1118,14 +1118,14 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 	* Select Sales report from trade agent
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I go to line in "List" table
-			| 'Number'                      |
-			| '$$NumberSRFromTradeAgent3$$' |
+			| 'Number'                         |
+			| '$$NumberSRFromTradeAgent3$$'    |
 	* Create Bank payment
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Description'                        |
-			| 'Bank account, TRY (Second Company)' |
+			| 'Description'                           |
+			| 'Bank account, TRY (Second Company)'    |
 		And I select current line in "List" table
 	* Check
 		Then the form attribute named "Company" became equal to "Second Company"
@@ -1133,8 +1133,8 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'              | 'Commission' | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Main Company partner' | ''           | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '3 400,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                | 'Commission'   | 'Payer'          | 'Partner term'               | 'Legal name contract'   | 'Basis document'          | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Main Company partner'   | ''             | 'Main Company'   | 'Trade agent Main Company'   | ''                      | '$$SRFromTradeAgent3$$'   | ''        | '3 400,00'       | ''                          | ''                              |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "3 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank receipt manually
@@ -1144,13 +1144,13 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Main Company partner'   |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Trade agent Main Company' |
+			| 'Description'                 |
+			| 'Trade agent Main Company'    |
 		And I select current line in "List" table
 		# temporarily
 		And I finish line editing in "PaymentList" table
@@ -1158,15 +1158,15 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 		And I select current line in "PaymentList" table
 		# temporarily
 		And I go to line in "List" table
-			| 'Document'                    |
-			| '$$SRFromTradeAgent3$$' |
+			| 'Document'                 |
+			| '$$SRFromTradeAgent3$$'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "2 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner'              | 'Commission' | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Main Company partner' | ''           | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '2 000,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                | 'Commission'   | 'Payer'          | 'Partner term'               | 'Legal name contract'   | 'Basis document'          | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Main Company partner'   | ''             | 'Main Company'   | 'Trade agent Main Company'   | ''                      | '$$SRFromTradeAgent3$$'   | ''        | '2 000,00'       | ''                          | ''                              |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberBR1$$" variable
@@ -1179,8 +1179,8 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"		
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberBR1$$' |
+			| 'Number'           |
+			| '$$NumberBR1$$'    |
 		And I close all client application windows			
 
 
@@ -1190,14 +1190,14 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 	* Select Sales report from trade agent
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I go to line in "List" table
-			| 'Number'                      |
-			| '$$NumberSRFromTradeAgent3$$' |
+			| 'Number'                         |
+			| '$$NumberSRFromTradeAgent3$$'    |
 	* Create Bank payment
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
-			| 'Description'                   |
-			| 'Cash desk №1 (Second Company)' |
+			| 'Description'                      |
+			| 'Cash desk №1 (Second Company)'    |
 		And I select current line in "List" table
 	* Check
 		Then the form attribute named "Company" became equal to "Second Company"
@@ -1205,8 +1205,8 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'              | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Main Company partner' | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '1 400,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                | 'Payer'          | 'Partner term'               | 'Legal name contract'   | 'Basis document'          | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Main Company partner'   | 'Main Company'   | 'Trade agent Main Company'   | ''                      | '$$SRFromTradeAgent3$$'   | ''        | '1 400,00'       | ''                          | ''                              |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash receipt manually
@@ -1216,13 +1216,13 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Main Company partner'   |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Trade agent Main Company' |
+			| 'Description'                 |
+			| 'Trade agent Main Company'    |
 		And I select current line in "List" table
 		# temporarily
 		And I finish line editing in "PaymentList" table
@@ -1230,15 +1230,15 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 		And I select current line in "PaymentList" table
 		# temporarily
 		And I go to line in "List" table
-			| 'Document'                    |
-			| '$$SRFromTradeAgent3$$' |
+			| 'Document'                 |
+			| '$$SRFromTradeAgent3$$'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner'              | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Main Company partner' | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '1 000,00'     | ''                        | ''                           |
+			| '#'   | 'Partner'                | 'Payer'          | 'Partner term'               | 'Legal name contract'   | 'Basis document'          | 'Order'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Main Company partner'   | 'Main Company'   | 'Trade agent Main Company'   | ''                      | '$$SRFromTradeAgent3$$'   | ''        | '1 000,00'       | ''                          | ''                              |
 	* Post
 		And I click "Post" button
 		And I delete "$$NumberBR1$$" variable
@@ -1251,8 +1251,8 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"		
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberBR1$$' |
+			| 'Number'           |
+			| '$$NumberBR1$$'    |
 		And I close all client application windows			
 				
 Scenario: _05824 sale of commission goods from the Main Company (Sales invoice)
@@ -1264,24 +1264,24 @@ Scenario: _05824 sale of commission goods from the Main Company (Sales invoice)
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Check tax rate
 		* Item with unique serial lot number
@@ -1292,22 +1292,22 @@ Scenario: _05824 sale of commission goods from the Main Company (Sales invoice)
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'VAT'         |
-				| 'Consignor stocks' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'Without VAT' |	
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Serial lot numbers'    | 'VAT'             |
+				| 'Consignor stocks'    | 'Product 1 with SLN'    | 'PZU'         | '8908899880'            | 'Without VAT'     |
 		* Item without serial lot number
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Scarf' | 'XS/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Scarf'    | 'XS/Red'       |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1317,14 +1317,14 @@ Scenario: _05824 sale of commission goods from the Main Company (Sales invoice)
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Scarf' | 'XS/Red'   |
+				| 'Item'     | 'Item key'     |
+				| 'Scarf'    | 'XS/Red'       |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1332,55 +1332,55 @@ Scenario: _05824 sale of commission goods from the Main Company (Sales invoice)
 			And I finish line editing in "ItemList" table
 		* Check
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899880'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | '76,27'         | 'pcs'     | ''                      | '5,000'       | '100,00'    | '18%'            | ''                 | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | ''              | 'pcs'     | ''                      | '2,000'       | '100,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
 		* Change inventory origin and check tax rate
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT'         |
-				| '3' | 'Scarf' | 'XS/Red'   | 'Without VAT' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'             |
+				| '3'    | 'Scarf'    | 'XS/Red'      | 'Without VAT'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Own stocks" exact value from "Inventory origin" drop-down list in "ItemList" table
 			And "ItemList" table became equal
-				| 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '76,27'      | '5,000'    | '100,00' | '18%'         | '423,73'     | '500,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Own stocks'       | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |		
+				| 'Price type'                 | 'Item'                  | 'Inventory origin'    | 'Item key'    | 'Serial lot numbers'    | 'Unit'    | 'Tax amount'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'en description is empty'    | 'Product 1 with SLN'    | 'Consignor stocks'    | 'PZU'         | '8908899880'            | 'pcs'     | ''              | '1,000'       | '200,00'    | 'Without VAT'    | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'en description is empty'    | 'Scarf'                 | 'Consignor stocks'    | 'XS/Red'      | ''                      | 'pcs'     | '76,27'         | '5,000'       | '100,00'    | '18%'            | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'en description is empty'    | 'Scarf'                 | 'Own stocks'          | 'XS/Red'      | ''                      | 'pcs'     | '30,51'         | '2,000'       | '100,00'    | '18%'            | '169,49'        | '200,00'          | 'Store 01'     |
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT' |
-				| '3' | 'Scarf' | 'XS/Red'   | '18%' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'     |
+				| '3'    | 'Scarf'    | 'XS/Red'      | '18%'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table			
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899880'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | '76,27'         | 'pcs'     | ''                      | '5,000'       | '100,00'    | '18%'            | ''                 | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | ''              | 'pcs'     | ''                      | '2,000'       | '100,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
 	* Change quantity and check tax
 		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Tax amount' | 'VAT' |
-			| 'Consignor stocks' | 'Scarf' | 'XS/Red'   | '423,73'     | '100,00' | '5,000'    | '76,27'      | '18%' |
+			| 'Inventory origin'   | 'Item'    | 'Item key'   | 'Net amount'   | 'Price'    | 'Quantity'   | 'Tax amount'   | 'VAT'    |
+			| 'Consignor stocks'   | 'Scarf'   | 'XS/Red'     | '423,73'       | '100,00'   | '5,000'      | '76,27'        | '18%'    |
 		And I select current line in "ItemList" table
 		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
-			| '1' | 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
-			| '2' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '61,02'      | '4,000'    | '100,00' | '18%'         | '338,98'     | '400,00'       | 'Store 01' |
-			| '3' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |
+			| '#'   | 'Price type'                | 'Item'                 | 'Inventory origin'   | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '1'   | 'en description is empty'   | 'Product 1 with SLN'   | 'Consignor stocks'   | 'PZU'        | '8908899880'           | 'pcs'    | ''             | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'         | 'Store 01'    |
+			| '2'   | 'en description is empty'   | 'Scarf'                | 'Consignor stocks'   | 'XS/Red'     | ''                     | 'pcs'    | '61,02'        | '4,000'      | '100,00'   | '18%'           | '338,98'       | '400,00'         | 'Store 01'    |
+			| '3'   | 'en description is empty'   | 'Scarf'                | 'Consignor stocks'   | 'XS/Red'     | ''                     | 'pcs'    | '30,51'        | '2,000'      | '100,00'   | '18%'           | '169,49'       | '200,00'         | 'Store 01'    |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity' |
-			| 'Scarf' | 'XS/Red'   | '4,000'    |
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Scarf'   | 'XS/Red'     | '4,000'       |
 		And I select current line in "ItemList" table
 		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table	
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |		
+			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | ''             | 'pcs'    | '8908899880'           | '1,000'      | '200,00'   | 'Without VAT'   | ''                | '200,00'       | '200,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Scarf'                | 'XS/Red'     | '76,27'        | 'pcs'    | ''                     | '5,000'      | '100,00'   | '18%'           | ''                | '423,73'       | '500,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Scarf'                | 'XS/Red'     | ''             | 'pcs'    | ''                     | '2,000'      | '100,00'   | 'Without VAT'   | ''                | '200,00'       | '200,00'         | 'Store 01'    |
 	And I close all client application windows
 	
 
@@ -1394,24 +1394,24 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Retail customer' |
+			| 'Description'        |
+			| 'Retail customer'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Retail partner term' |
+			| 'Description'            |
+			| 'Retail partner term'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Check tax rate
 		* Item with unique serial lot number
@@ -1422,22 +1422,22 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And I input "200,000" text in the field named "ItemListPrice" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'VAT'         |
-				| 'Consignor stocks' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'Without VAT' |	
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Serial lot numbers'    | 'VAT'             |
+				| 'Consignor stocks'    | 'Product 1 with SLN'    | 'PZU'         | '8908899880'            | 'Without VAT'     |
 		* Item without serial lot number
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Scarf' | 'XS/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Scarf'    | 'XS/Red'       |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1447,14 +1447,14 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Scarf'       |
+				| 'Description'     |
+				| 'Scarf'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Scarf' | 'XS/Red'   |
+				| 'Item'     | 'Item key'     |
+				| 'Scarf'    | 'XS/Red'       |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
 			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1462,55 +1462,55 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And I finish line editing in "ItemList" table
 		* Check
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899880'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | '76,27'         | 'pcs'     | ''                      | '5,000'       | '100,00'    | '18%'            | ''                 | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | ''              | 'pcs'     | ''                      | '2,000'       | '100,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
 		* Change inventory origin and check tax rate
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT'         |
-				| '3' | 'Scarf' | 'XS/Red'   | 'Without VAT' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'             |
+				| '3'    | 'Scarf'    | 'XS/Red'      | 'Without VAT'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Own stocks" exact value from "Inventory origin" drop-down list in "ItemList" table
 			And "ItemList" table became equal
-				| 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '76,27'      | '5,000'    | '100,00' | '18%'         | '423,73'     | '500,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Own stocks'       | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |		
+				| 'Price type'                 | 'Item'                  | 'Inventory origin'    | 'Item key'    | 'Serial lot numbers'    | 'Unit'    | 'Tax amount'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'en description is empty'    | 'Product 1 with SLN'    | 'Consignor stocks'    | 'PZU'         | '8908899880'            | 'pcs'     | ''              | '1,000'       | '200,00'    | 'Without VAT'    | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'en description is empty'    | 'Scarf'                 | 'Consignor stocks'    | 'XS/Red'      | ''                      | 'pcs'     | '76,27'         | '5,000'       | '100,00'    | '18%'            | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'en description is empty'    | 'Scarf'                 | 'Own stocks'          | 'XS/Red'      | ''                      | 'pcs'     | '30,51'         | '2,000'       | '100,00'    | '18%'            | '169,49'        | '200,00'          | 'Store 01'     |
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'VAT' |
-				| '3' | 'Scarf' | 'XS/Red'   | '18%' |
+				| '#'    | 'Item'     | 'Item key'    | 'VAT'     |
+				| '3'    | 'Scarf'    | 'XS/Red'      | '18%'     |
 			And I activate "Inventory origin" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table			
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'                 | 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Product 1 with SLN'    | 'PZU'         | ''              | 'pcs'     | '8908899880'            | '1,000'       | '200,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | '76,27'         | 'pcs'     | ''                      | '5,000'       | '100,00'    | '18%'            | ''                 | '423,73'        | '500,00'          | 'Store 01'     |
+				| 'Consignor stocks'    | 'en description is empty'    | 'Scarf'                 | 'XS/Red'      | ''              | 'pcs'     | ''                      | '2,000'       | '100,00'    | 'Without VAT'    | ''                 | '200,00'        | '200,00'          | 'Store 01'     |
 	* Change quantity and check tax
 		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Tax amount' | 'VAT' |
-			| 'Consignor stocks' | 'Scarf' | 'XS/Red'   | '423,73'     | '100,00' | '5,000'    | '76,27'      | '18%' |
+			| 'Inventory origin'   | 'Item'    | 'Item key'   | 'Net amount'   | 'Price'    | 'Quantity'   | 'Tax amount'   | 'VAT'    |
+			| 'Consignor stocks'   | 'Scarf'   | 'XS/Red'     | '423,73'       | '100,00'   | '5,000'      | '76,27'        | '18%'    |
 		And I select current line in "ItemList" table
 		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
-			| '1' | 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
-			| '2' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '61,02'      | '4,000'    | '100,00' | '18%'         | '338,98'     | '400,00'       | 'Store 01' |
-			| '3' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |
+			| '#'   | 'Price type'                | 'Item'                 | 'Inventory origin'   | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '1'   | 'en description is empty'   | 'Product 1 with SLN'   | 'Consignor stocks'   | 'PZU'        | '8908899880'           | 'pcs'    | ''             | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'         | 'Store 01'    |
+			| '2'   | 'en description is empty'   | 'Scarf'                | 'Consignor stocks'   | 'XS/Red'     | ''                     | 'pcs'    | '61,02'        | '4,000'      | '100,00'   | '18%'           | '338,98'       | '400,00'         | 'Store 01'    |
+			| '3'   | 'en description is empty'   | 'Scarf'                | 'Consignor stocks'   | 'XS/Red'     | ''                     | 'pcs'    | '30,51'        | '2,000'      | '100,00'   | '18%'           | '169,49'       | '200,00'         | 'Store 01'    |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity' |
-			| 'Scarf' | 'XS/Red'   | '4,000'    |
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Scarf'   | 'XS/Red'     | '4,000'       |
 		And I select current line in "ItemList" table
 		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table	
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |		
+			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Product 1 with SLN'   | 'PZU'        | ''             | 'pcs'    | '8908899880'           | '1,000'      | '200,00'   | 'Without VAT'   | ''                | '200,00'       | '200,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Scarf'                | 'XS/Red'     | '76,27'        | 'pcs'    | ''                     | '5,000'      | '100,00'   | '18%'           | ''                | '423,73'       | '500,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Scarf'                | 'XS/Red'     | ''             | 'pcs'    | ''                     | '2,000'      | '100,00'   | 'Without VAT'   | ''                | '200,00'       | '200,00'         | 'Store 01'    |
 	* Payment
 		And I move to "Payments" tab
 		And in the table "Payments" I click the button named "PaymentsAdd"
@@ -1518,8 +1518,8 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 		And I select current line in "Payments" table
 		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash'        |
+			| 'Description'    |
+			| 'Cash'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "900,00" text in the field named "PaymentsAmount" of "Payments" table
@@ -1536,8 +1536,8 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 		And I click "Post and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberRSR1$$' |
+			| 'Number'            |
+			| '$$NumberRSR1$$'    |
 		And I close all client application windows	
 
 Scenario: _05830 сheck recognition of own and commission goods when scanning a barcode in the SI
@@ -1545,11 +1545,11 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
 		If "List" table contains lines Then
-			| 'Number'         |
-			| '$$NumberSI10$$' |
+			| 'Number'            |
+			| '$$NumberSI10$$'    |
 			And I go to line in "List" table
-			| 'Number'         |
-			| '$$NumberSI10$$' |
+			| 'Number'            |
+			| '$$NumberSI10$$'    |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Open SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1558,24 +1558,24 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Scan item (Dress M/Brown)
 		* Own stock
@@ -1586,8 +1586,8 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| '#' | 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| '#'    | 'Inventory origin'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '1'    | 'Own stocks'          | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | '152,54'        | 'pcs'     | ''                      | '2,000'       | '500,00'    | '18%'    | ''                 | '847,46'        | '1 000,00'        | 'Store 01'     |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
@@ -1596,17 +1596,17 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    |
-				| 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'No'             | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'No'             | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Use work sheet'    | 'Store'        |
+				| 'Own stocks'          | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | '152,54'        | 'pcs'     | ''                      | '2,000'       | '500,00'    | '18%'            | ''                 | '847,46'        | '1 000,00'        | 'No'                | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'No'                | 'Store 01'     |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1616,10 +1616,10 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'S/Yellow'    | ''                      | 'No'                    | '167,80'        | 'pcs'     | ''                      | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1640,12 +1640,12 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893'     | '3,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893'     | '2,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | ''                      | 'No'                    | '167,80'        | 'pcs'     | ''                      | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893'        | '3,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893'        | '2,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1659,12 +1659,12 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'                | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | '228,81'        | 'pcs'     | ''                                  | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                                  | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | ''                      | 'No'                    | '167,80'        | 'pcs'     | ''                                  | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1678,23 +1678,23 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | ''                    | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'                                | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Additional analytic'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | '228,81'        | 'pcs'     | ''                                                  | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | ''                      | 'No'                    | ''              | 'pcs'     | ''                                                  | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | ''                      | 'No'                    | '167,80'        | 'pcs'     | ''                                                  | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | ''                       | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894; 09987897977895'    | '7,000'       | ''          | '18%'            | ''                 | ''              | ''                | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | ''                      | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'                    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | ''                       | 'Store 01'     |
 	* Post document
 		And I go to line in "ItemList" table
-			| '#' | 'Dont calculate row' | 'Inventory origin' | 'Is additional item revenue' | 'Item'               | 'Item key' |
-			| '4' | 'No'                 | 'Own stocks'       | 'No'                         | 'Product 3 with SLN' | 'UNIQ'     |
+			| '#'   | 'Dont calculate row'   | 'Inventory origin'   | 'Is additional item revenue'   | 'Item'                 | 'Item key'    |
+			| '4'   | 'No'                   | 'Own stocks'         | 'No'                           | 'Product 3 with SLN'   | 'UNIQ'        |
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "110,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Inventory origin' | 'Item'               | 'Item key' |
-			| '5' | 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     |
+			| '#'   | 'Inventory origin'   | 'Item'                 | 'Item key'    |
+			| '5'   | 'Consignor stocks'   | 'Product 3 with SLN'   | 'UNIQ'        |
 		And I select current line in "ItemList" table
 		And I input "110,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -1705,16 +1705,16 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"		
 		And I go to line in "List" table
-			| 'Number'         |
-			| '$$NumberSI10$$' |
+			| 'Number'            |
+			| '$$NumberSI10$$'    |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '117,46'     | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    | '110,00' | '18%'         | ''              | '652,54'     | '770,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '67,12'      | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    | '110,00' | '18%'         | ''              | '372,88'     | '440,00'       | 'Store 01' |
+			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'                               | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| 'Own stocks'         | 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | ''                     | 'No'                   | '228,81'       | 'pcs'    | ''                                                 | '3,000'      | '500,00'   | '18%'           | ''                | '1 271,19'     | '1 500,00'       | 'Store 01'    |
+			| 'Consignor stocks'   | 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | ''                     | 'No'                   | ''             | 'pcs'    | ''                                                 | '2,000'      | '500,00'   | 'Without VAT'   | ''                | '1 000,00'     | '1 000,00'       | 'Store 01'    |
+			| 'Consignor stocks'   | 'Basic Price Types'         | 'Dress'                | 'S/Yellow'   | ''                     | 'No'                   | '167,80'       | 'pcs'    | ''                                                 | '2,000'      | '550,00'   | '18%'           | ''                | '932,20'       | '1 100,00'       | 'Store 01'    |
+			| 'Own stocks'         | 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | ''                     | 'No'                   | '117,46'       | 'pcs'    | '09987897977893; 09987897977894; 09987897977895'   | '7,000'      | '110,00'   | '18%'           | ''                | '652,54'       | '770,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | ''                     | 'No'                   | '67,12'        | 'pcs'    | '09987897977893; 09987897977894'                   | '4,000'      | '110,00'   | '18%'           | ''                | '372,88'       | '440,00'         | 'Store 01'    |
 		And I close all client application windows
 
 
@@ -1723,11 +1723,11 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
 		If "List" table contains lines Then
-			| 'Number'         |
-			| '$$NumberSI10$$' |
+			| 'Number'            |
+			| '$$NumberSI10$$'    |
 			And I go to line in "List" table
-				| 'Number'         |
-				| '$$NumberSI10$$' |
+				| 'Number'             |
+				| '$$NumberSI10$$'     |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 	* Open IT
@@ -1736,18 +1736,18 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Filling in the details
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "StoreSender"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "StoreReceiver"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02' |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 	* Scan item (Dress M/Brown)
 		* Own stock
@@ -1758,8 +1758,8 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Inventory origin'    | 'Item'     | 'Item key'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
@@ -1768,17 +1768,17 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' |'Quantity' |
-				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
-				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Inventory origin'    | 'Item'     | 'Item key'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
+				| 'Consignor stocks'    | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
-				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Inventory origin'    | 'Item'     | 'Item key'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '3,000'        |
+				| 'Consignor stocks'    | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1788,10 +1788,10 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
-				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
-				| 'Consignor stocks' | 'Dress' | 'S/Yellow' | 'pcs'  | ''                   | '2,000'    |
+				| 'Inventory origin'    | 'Item'     | 'Item key'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '3,000'        |
+				| 'Consignor stocks'    | 'Dress'    | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
+				| 'Consignor stocks'    | 'Dress'    | 'S/Yellow'    | 'pcs'     | ''                      | '2,000'        |
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1812,12 +1812,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                   | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893'     | '3,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893'     | '2,000'    |
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                      | '3,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                      | '2,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'S/Yellow'    | 'pcs'     | ''                      | '2,000'        |
+				| 'Own stocks'          | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893'        | '3,000'        |
+				| 'Consignor stocks'    | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893'        | '2,000'        |
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1831,12 +1831,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'             | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                               | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                               | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                               | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    |
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Unit'    | 'Serial lot numbers'                | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                                  | '3,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                                  | '2,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'S/Yellow'    | 'pcs'     | ''                                  | '2,000'        |
+				| 'Own stocks'          | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'        |
+				| 'Consignor stocks'    | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'        |
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1850,12 +1850,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                               | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    |
+				| 'Inventory origin'    | 'Item'                  | 'Item key'    | 'Unit'    | 'Serial lot numbers'                                | 'Quantity'     |
+				| 'Own stocks'          | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                                                  | '3,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'M/Brown'     | 'pcs'     | ''                                                  | '2,000'        |
+				| 'Consignor stocks'    | 'Dress'                 | 'S/Yellow'    | 'pcs'     | ''                                                  | '2,000'        |
+				| 'Own stocks'          | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893; 09987897977894; 09987897977895'    | '7,000'        |
+				| 'Consignor stocks'    | 'Product 3 with SLN'    | 'UNIQ'        | 'pcs'     | '09987897977893; 09987897977894'                    | '4,000'        |
 			And I close all client application windows
 
 
@@ -1864,11 +1864,11 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
 		If "List" table contains lines Then
-			| 'Number'         |
-			| '$$NumberSI10$$' |
+			| 'Number'            |
+			| '$$NumberSI10$$'    |
 			And I go to line in "List" table
-				| 'Number'         |
-				| '$$NumberSI10$$' |
+				| 'Number'             |
+				| '$$NumberSI10$$'     |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Open RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -1877,24 +1877,24 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Agreement"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01' |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Scan item (Dress M/Brown)
 		* Own stock
@@ -1905,8 +1905,8 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| '#' | 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| '#'    | 'Inventory origin'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '1'    | 'Own stocks'          | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | '152,54'        | 'pcs'     | ''                      | '2,000'       | '500,00'    | '18%'    | ''                 | '847,46'        | '1 000,00'        | 'Store 01'     |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
@@ -1915,17 +1915,17 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | '152,54'        | 'pcs'     | ''                      | '2,000'       | '500,00'    | '18%'            | ''                 | '847,46'        | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1935,10 +1935,10 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'     | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'    | 'S/Yellow'    | 'Shop 02'               | 'No'                    | '167,80'        | 'pcs'     | ''                      | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1959,12 +1959,12 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893'     | '3,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893'     | '2,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | '228,81'        | 'pcs'     | ''                      | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                      | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | 'Shop 02'               | 'No'                    | '167,80'        | 'pcs'     | ''                      | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893'        | '3,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893'        | '2,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1978,12 +1978,12 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'                | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | '228,81'        | 'pcs'     | ''                                  | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                                  | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | 'Shop 02'               | 'No'                    | '167,80'        | 'pcs'     | ''                                  | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | 'Store 01'     |
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1997,23 +1997,23 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | ''                    | 'Store 01' |
-				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
-				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+				| 'Inventory origin'    | 'Sales person'    | 'Price type'           | 'Item'                  | 'Item key'    | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'                                | 'Quantity'    | 'Price'     | 'VAT'            | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Additional analytic'    | 'Store'        |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | '228,81'        | 'pcs'     | ''                                                  | '3,000'       | '500,00'    | '18%'            | ''                 | '1 271,19'      | '1 500,00'        | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'M/Brown'     | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | ''                                                  | '2,000'       | '500,00'    | 'Without VAT'    | ''                 | '1 000,00'      | '1 000,00'        | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Dress'                 | 'S/Yellow'    | 'Shop 02'               | 'No'                    | '167,80'        | 'pcs'     | ''                                                  | '2,000'       | '550,00'    | '18%'            | ''                 | '932,20'        | '1 100,00'        | ''                       | 'Store 01'     |
+				| 'Own stocks'          | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894; 09987897977895'    | '7,000'       | ''          | '18%'            | ''                 | ''              | ''                | ''                       | 'Store 01'     |
+				| 'Consignor stocks'    | ''                | 'Basic Price Types'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Shop 02'               | 'No'                    | ''              | 'pcs'     | '09987897977893; 09987897977894'                    | '4,000'       | ''          | '18%'            | ''                 | ''              | ''                | ''                       | 'Store 01'     |
 	* Post document
 		And I go to line in "ItemList" table
-			| '#' | 'Dont calculate row' | 'Inventory origin' | 'Item'               | 'Item key' |
-			| '4' | 'No'                 | 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     |
+			| '#'   | 'Dont calculate row'   | 'Inventory origin'   | 'Item'                 | 'Item key'    |
+			| '4'   | 'No'                   | 'Own stocks'         | 'Product 3 with SLN'   | 'UNIQ'        |
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "110,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Inventory origin' | 'Item'               | 'Item key' |
-			| '5' | 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     |
+			| '#'   | 'Inventory origin'   | 'Item'                 | 'Item key'    |
+			| '5'   | 'Consignor stocks'   | 'Product 3 with SLN'   | 'UNIQ'        |
 		And I select current line in "ItemList" table
 		And I input "110,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -2023,8 +2023,8 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 		And I select current line in "Payments" table
 		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash'        |
+			| 'Description'    |
+			| 'Cash'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "4 810,00" text in the field named "PaymentsAmount" of "Payments" table
@@ -2036,16 +2036,16 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"		
 		And I go to line in "List" table
-			| 'Number'         |
-			| '$$NumberRSR10$$' |
+			| 'Number'             |
+			| '$$NumberRSR10$$'    |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '117,46'     | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    | '110,00' | '18%'         | ''              | '652,54'     | '770,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '67,12'      | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    | '110,00' | '18%'         | ''              | '372,88'     | '440,00'       | 'Store 01' |
+			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'                               | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| 'Own stocks'         | 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | 'Shop 02'              | 'No'                   | '228,81'       | 'pcs'    | ''                                                 | '3,000'      | '500,00'   | '18%'           | ''                | '1 271,19'     | '1 500,00'       | 'Store 01'    |
+			| 'Consignor stocks'   | 'Basic Price Types'         | 'Dress'                | 'M/Brown'    | 'Shop 02'              | 'No'                   | ''             | 'pcs'    | ''                                                 | '2,000'      | '500,00'   | 'Without VAT'   | ''                | '1 000,00'     | '1 000,00'       | 'Store 01'    |
+			| 'Consignor stocks'   | 'Basic Price Types'         | 'Dress'                | 'S/Yellow'   | 'Shop 02'              | 'No'                   | '167,80'       | 'pcs'    | ''                                                 | '2,000'      | '550,00'   | '18%'           | ''                | '932,20'       | '1 100,00'       | 'Store 01'    |
+			| 'Own stocks'         | 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | 'Shop 02'              | 'No'                   | '117,46'       | 'pcs'    | '09987897977893; 09987897977894; 09987897977895'   | '7,000'      | '110,00'   | '18%'           | ''                | '652,54'       | '770,00'         | 'Store 01'    |
+			| 'Consignor stocks'   | 'en description is empty'   | 'Product 3 with SLN'   | 'UNIQ'       | 'Shop 02'              | 'No'                   | '67,12'        | 'pcs'    | '09987897977893; 09987897977894'                   | '4,000'      | '110,00'   | '18%'           | ''                | '372,88'       | '440,00'         | 'Store 01'    |
 		And I close all client application windows
 				
 
@@ -2055,11 +2055,11 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 		If "List" table contains lines Then
-			| 'Number'          |
-			| '$$NumberRSR10$$' |
+			| 'Number'             |
+			| '$$NumberRSR10$$'    |
 			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberRSR10$$' |
+				| 'Number'              |
+				| '$$NumberRSR10$$'     |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"	
 		And I close all client application windows
 	* Open POS
@@ -2137,26 +2137,26 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 			And I move to the next attribute
 	* Price
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                                                                                                        |
-			| 'Product 3 with SLN' | 'UNIQ'     | '7,000'    | '09987897977893; 09987897977894; 09987897977895' |
+			| 'Item'                 | 'Item key'   | 'Quantity'   | 'Serials'                                           |
+			| 'Product 3 with SLN'   | 'UNIQ'       | '7,000'      | '09987897977893; 09987897977894; 09987897977895'    |
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                        |
-			| 'Product 3 with SLN' | 'UNIQ'     | '4,000'    | '09987897977893; 09987897977894' |
+			| 'Item'                 | 'Item key'   | 'Quantity'   | 'Serials'                           |
+			| 'Product 3 with SLN'   | 'UNIQ'       | '4,000'      | '09987897977893; 09987897977894'    |
 		And I select current line in "ItemList" table
 		And I input "300,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check filling
 		And "ItemList" table became equal
-			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'                                        | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
-			| 'Dress'              | ''             | 'M/Brown'  | ''                                               | '500,00' | '3,000'    | ''       | '1 500,00' |
-			| 'Dress'              | ''             | 'M/Brown'  | ''                                               | '500,00' | '2,000'    | ''       | '1 000,00' |
-			| 'Dress'              | ''             | 'S/Yellow' | ''                                               | '550,00' | '2,000'    | ''       | '1 100,00' |
-			| 'Product 3 with SLN' | ''             | 'UNIQ'     | '09987897977893; 09987897977894; 09987897977895' | '200,00' | '7,000'    | ''       | '1 400,00' |
-			| 'Product 3 with SLN' | ''             | 'UNIQ'     | '09987897977893; 09987897977894'                 | '300,00' | '4,000'    | ''       | '1 200,00' |
+			| 'Item'                 | 'Sales person'   | 'Item key'   | 'Serials'                                          | 'Price'    | 'Quantity'   | 'Offers'   | 'Total'       |
+			| 'Dress'                | ''               | 'M/Brown'    | ''                                                 | '500,00'   | '3,000'      | ''         | '1 500,00'    |
+			| 'Dress'                | ''               | 'M/Brown'    | ''                                                 | '500,00'   | '2,000'      | ''         | '1 000,00'    |
+			| 'Dress'                | ''               | 'S/Yellow'   | ''                                                 | '550,00'   | '2,000'      | ''         | '1 100,00'    |
+			| 'Product 3 with SLN'   | ''               | 'UNIQ'       | '09987897977893; 09987897977894; 09987897977895'   | '200,00'   | '7,000'      | ''         | '1 400,00'    |
+			| 'Product 3 with SLN'   | ''               | 'UNIQ'       | '09987897977893; 09987897977894'                   | '300,00'   | '4,000'      | ''         | '1 200,00'    |
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
@@ -2165,16 +2165,16 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 	* Check filling Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 		And I go to line in "List" table
-			| 'Σ'        |
-			| '6 200,00' |
+			| 'Σ'           |
+			| '6 200,00'    |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Price type'              | 'Item'               | 'Inventory origin' | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers'                             | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Basic Price Types'       | 'Dress'              | 'Own stocks'       | 'Shop 02'            | 'M/Brown'  | 'No'                 | ''                                               | 'pcs'  | '228,81'     | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
-			| 'Basic Price Types'       | 'Dress'              | 'Consignor stocks' | 'Shop 02'            | 'M/Brown'  | 'No'                 | ''                                               | 'pcs'  | ''           | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
-			| 'Basic Price Types'       | 'Dress'              | 'Consignor stocks' | 'Shop 02'            | 'S/Yellow' | 'No'                 | ''                                               | 'pcs'  | '167,80'     | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
-			| 'en description is empty' | 'Product 3 with SLN' | 'Own stocks'       | 'Shop 02'            | 'UNIQ'     | 'No'                 | '09987897977893; 09987897977894; 09987897977895' | 'pcs'  | '213,56'     | '7,000'    | '200,00' | '18%'         | ''              | '1 186,44'   | '1 400,00'     | 'Store 01' |
-			| 'en description is empty' | 'Product 3 with SLN' | 'Consignor stocks' | 'Shop 02'            | 'UNIQ'     | 'No'                 | '09987897977893; 09987897977894'                 | 'pcs'  | '183,05'     | '4,000'    | '300,00' | '18%'         | ''              | '1 016,95'   | '1 200,00'     | 'Store 01' |
+			| 'Price type'                | 'Item'                 | 'Inventory origin'   | 'Profit loss center'   | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'                               | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| 'Basic Price Types'         | 'Dress'                | 'Own stocks'         | 'Shop 02'              | 'M/Brown'    | 'No'                   | ''                                                 | 'pcs'    | '228,81'       | '3,000'      | '500,00'   | '18%'           | ''                | '1 271,19'     | '1 500,00'       | 'Store 01'    |
+			| 'Basic Price Types'         | 'Dress'                | 'Consignor stocks'   | 'Shop 02'              | 'M/Brown'    | 'No'                   | ''                                                 | 'pcs'    | ''             | '2,000'      | '500,00'   | 'Without VAT'   | ''                | '1 000,00'     | '1 000,00'       | 'Store 01'    |
+			| 'Basic Price Types'         | 'Dress'                | 'Consignor stocks'   | 'Shop 02'              | 'S/Yellow'   | 'No'                   | ''                                                 | 'pcs'    | '167,80'       | '2,000'      | '550,00'   | '18%'           | ''                | '932,20'       | '1 100,00'       | 'Store 01'    |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'Own stocks'         | 'Shop 02'              | 'UNIQ'       | 'No'                   | '09987897977893; 09987897977894; 09987897977895'   | 'pcs'    | '213,56'       | '7,000'      | '200,00'   | '18%'           | ''                | '1 186,44'     | '1 400,00'       | 'Store 01'    |
+			| 'en description is empty'   | 'Product 3 with SLN'   | 'Consignor stocks'   | 'Shop 02'              | 'UNIQ'       | 'No'                   | '09987897977893; 09987897977894'                   | 'pcs'    | '183,05'       | '4,000'      | '300,00'   | '18%'           | ''                | '1 016,95'     | '1 200,00'       | 'Store 01'    |
 		And I close all client application windows
 		
 				

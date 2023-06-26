@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 
@@ -81,8 +81,8 @@ Scenario: _0154000 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -104,16 +104,16 @@ Scenario: _0154050 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 	
@@ -130,16 +130,16 @@ Scenario: _0154051 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table	
 		And in "ItemList" table drop-down list "Item" is equal to:
-			|" (J22001) Jacket J22001 "|
+			| " (J22001) Jacket J22001 "    |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154052 check item and item key input by search in line in a document Sales return order (in english)
@@ -154,16 +154,16 @@ Scenario: _0154052 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154053 check item and item key input by search in line in a document Sales return (in english)
@@ -178,16 +178,16 @@ Scenario: _0154053 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |		
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
@@ -202,16 +202,16 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And in "ItemList" table drop-down list "Item" is equal to:
-			|" (J22001) Jacket J22001 "|
+			| " (J22001) Jacket J22001 "    |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154055 check item and item key input by search in line in a document Purchase order (in english)
@@ -226,16 +226,16 @@ Scenario: _0154055 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
@@ -250,16 +250,16 @@ Scenario: _0154056 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |			
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
@@ -274,16 +274,16 @@ Scenario: _0154057 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
@@ -298,16 +298,16 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 		And Delay 10
 
@@ -323,16 +323,16 @@ Scenario: _0154059 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
@@ -347,16 +347,16 @@ Scenario: _0154060 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154061 check item and item key input by search in line in a document Bundling (in english)
@@ -371,16 +371,16 @@ Scenario: _0154061 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _0154062 check item and item key input by search in line in a document UnBundling (in english)
@@ -395,16 +395,16 @@ Scenario: _0154062 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 
@@ -420,16 +420,16 @@ Scenario: _015406401 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| '(J22001) Jacket J22001' |
+		| '(J22001) Jacket J22001'   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
@@ -444,16 +444,16 @@ Scenario: _015406402 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
@@ -468,16 +468,16 @@ Scenario: _015406403 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
@@ -492,16 +492,16 @@ Scenario: _015406404 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406405 check item and item key input by search in line in a document ItemStockAdjustment (in english)
@@ -517,16 +517,16 @@ Scenario: _015406405 check item and item key input by search in line in a docume
 		And I select "36" from "Item key (surplus)" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key (surplus)'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key (surplus)'   |
+		| 'Boots'  | '36/18SD'              |
 		And in the table "ItemList" I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406406 check item and item key input by search in line in a document SalesReportFromTradeAgent (in english)
@@ -541,16 +541,16 @@ Scenario: _015406406 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table	
 		And in "ItemList" table drop-down list "Item" is equal to:
-			|" (J22001) Jacket J22001 "|
+			| " (J22001) Jacket J22001 "    |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 Scenario: _015406407 check item and item key input by search in line in a document SalesReportToConsignor (in english)
@@ -565,16 +565,16 @@ Scenario: _015406407 check item and item key input by search in line in a docume
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table	
 		And in "ItemList" table drop-down list "Item" is equal to:
-			|" (J22001) Jacket J22001 "|
+			| " (J22001) Jacket J22001 "    |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 
@@ -591,8 +591,8 @@ Scenario: _0154065 check item, item key and properties input by search in line i
 		And I select "36" from "Item key" drop-down list by string in "ItemKeyList" table
 	* Check entered values
 		And "ItemKeyList" table contains lines
-		| 'Item'        | 'Item key'  |
-		| 'Trousers'    | '36/Yellow' |
+		| 'Item'      | 'Item key'    |
+		| 'Trousers'  | '36/Yellow'   |
 
 
 	
@@ -734,18 +734,18 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
+			| 'Description'    |
+			| 'Service'        |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Expense type' |
+			| 'Expense type'    |
 			| 'Expense'         |
 		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Expense type' |
-			| 'Software'         |
+			| 'Expense type'    |
+			| 'Software'        |
 	And I close all client application windows
 
 Scenario: _0154071 check partner, legal name, Partner term, company and store input by search in line in a document Purchase invoice (in english)
@@ -773,18 +773,18 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
+			| 'Description'    |
+			| 'Service'        |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Expense type' |
+			| 'Expense type'    |
 			| 'Expense'         |
 		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Expense type' |
-			| 'Software'         |
+			| 'Expense type'    |
+			| 'Software'        |
 	And I close all client application windows
 
 Scenario: _0154072 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return (in english)
@@ -936,8 +936,8 @@ Scenario: _0154079 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I close all client application windows
 
 Scenario: _0154080 check partner, legal name, Partner term, company and store input by search in line in a document Retail sales receipt (in english)
@@ -1027,8 +1027,8 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payee'             | 'Partner term'             |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' |
+		| 'Partner'    | 'Payee'              | 'Partner term'               |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Basic Partner terms, TRY'   |
 	And I close all client application windows
 
 
@@ -1061,8 +1061,8 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payee'             | 'Partner term'             |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' |
+		| 'Partner'    | 'Payee'              | 'Partner term'               |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Basic Partner terms, TRY'   |
 	And I close all client application windows
 
 Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
@@ -1094,8 +1094,8 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payer'              | 'Partner term' |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
+		| 'Partner'    | 'Payer'              | 'Partner term'   |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Ferron, USD'    |
 	And I close all client application windows
 
 Scenario: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
@@ -1127,8 +1127,8 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payer'              | 'Partner term' |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
+		| 'Partner'    | 'Payer'              | 'Partner term'   |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Ferron, USD'    |
 	And I close all client application windows
 
 
@@ -1183,8 +1183,8 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Expense type' |
-		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
+		| 'Legal name'         | 'Partner'    | 'Partner term'                      | 'Profit loss center'    | 'Currency'  | 'Expense type'   |
+		| 'Company Ferron BP'  | 'Ferron BP'  | 'Basic Partner terms, without VAT'  | 'Logistics department'  | 'TRY'       | 'Fuel'           |
 		And I close all client application windows
 
 
@@ -1232,18 +1232,18 @@ Scenario: _0154090 check partner, legal name, Partner term and company input by 
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Revenue type' |
+			| 'Revenue type'    |
 			| 'Revenue'         |
 		And I select "sof" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Revenue type' |
-			| 'Software'         |
+			| 'Revenue type'    |
+			| 'Software'        |
 	And I close all client application windows
 
 
@@ -1311,8 +1311,8 @@ Scenario: _0154100 check company, operation type, partner, legal name, Partner t
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Revenue type' |
-		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
+		| 'Legal name'         | 'Partner'    | 'Partner term'                      | 'Profit loss center'    | 'Currency'  | 'Revenue type'   |
+		| 'Company Ferron BP'  | 'Ferron BP'  | 'Basic Partner terms, without VAT'  | 'Logistics department'  | 'TRY'       | 'Fuel'           |
 		And I close all client application windows
 
 
@@ -1338,8 +1338,8 @@ Scenario: _0154089 check company, account, currency input by search in line in I
 		Then the form attribute named "Account" became equal to "Cash desk №2"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payer'                    |
-		| 'Ferron BP' | 'Second Company Ferron BP' |
+		| 'Partner'    | 'Payer'                      |
+		| 'Ferron BP'  | 'Second Company Ferron BP'   |
 		And I close all client application windows
 
 Scenario: _0154090 check company, account, currency input by search in line in Outgoing payment order (in english)
@@ -1363,8 +1363,8 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 		Then the form attribute named "Account" became equal to "Cash desk №2"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'   | 'Payee'                    |
-		| 'Ferron BP' | 'Second Company Ferron BP' |
+		| 'Partner'    | 'Payee'                      |
+		| 'Ferron BP'  | 'Second Company Ferron BP'   |
 		And I close all client application windows
 
 
@@ -1406,13 +1406,13 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 		And I select "fu" from "Expense type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Profit loss center'        | 'Expense type' |
-		| 'Logistics department' | 'Fuel'         |
+		| 'Profit loss center'    | 'Expense type'   |
+		| 'Logistics department'  | 'Fuel'           |
 	* Change expense type
 		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Profit loss center'        | 'Expense type' |
-			| 'Logistics department' | 'Expense'         |
+			| 'Profit loss center'     | 'Expense type'    |
+			| 'Logistics department'   | 'Expense'         |
 		And I close all client application windows
 
 
@@ -1437,13 +1437,13 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 		And I select "fu" from "Revenue type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Profit loss center'        | 'Revenue type' |
-		| 'Logistics department' | 'Fuel'         |
+		| 'Profit loss center'    | 'Revenue type'   |
+		| 'Logistics department'  | 'Fuel'           |
 	* Change revenue type
 		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Profit loss center'        | 'Revenue type' |
-			| 'Logistics department' | 'Revenue'         |
+			| 'Profit loss center'     | 'Revenue type'    |
+			| 'Logistics department'   | 'Revenue'         |
 		And I close all client application windows
 
 
@@ -1522,29 +1522,29 @@ Scenario: _0154096 check company, account, currency input by search in line in O
 	* Filling check
 		And Delay 2
 		And "Inventory" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    |
-		| 'Dress' | '2,000'    | 'L/Green' | 'Store 01' |
+		| 'Item'   | 'Quantity'  | 'Item key'  | 'Store'      |
+		| 'Dress'  | '2,000'     | 'L/Green'   | 'Store 01'   |
 		And "AccountBalance" table contains lines
-			| 'Account'      | 'Currency' |
-			| 'Cash desk №1' | 'TRY'      |
+			| 'Account'        | 'Currency'    |
+			| 'Cash desk №1'   | 'TRY'         |
 		And "AdvanceFromCustomers" table contains lines
-			| 'Partner'   | 'Legal name'               |
-			| 'Ferron BP' | 'Second Company Ferron BP' |
+			| 'Partner'     | 'Legal name'                  |
+			| 'Ferron BP'   | 'Second Company Ferron BP'    |
 		And "AdvanceToSuppliers" table contains lines
-			| 'Partner'   | 'Legal name'               |
-			| 'Ferron BP' | 'Second Company Ferron BP' |
+			| 'Partner'     | 'Legal name'                  |
+			| 'Ferron BP'   | 'Second Company Ferron BP'    |
 		And "AccountPayableByAgreements" table contains lines
-			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
-			| 'Ferron BP' | 'Vendor Ferron, USD' | 'Second Company Ferron BP' | 'TRY'      |
+			| 'Partner'     | 'Partner term'         | 'Legal name'                 | 'Currency'    |
+			| 'Ferron BP'   | 'Vendor Ferron, USD'   | 'Second Company Ferron BP'   | 'TRY'         |
 		And "AccountPayableByDocuments" table contains lines
-			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
-			| 'Ferron BP' | 'Vendor Ferron, TRY' | 'Second Company Ferron BP' | 'TRY'      |
+			| 'Partner'     | 'Partner term'         | 'Legal name'                 | 'Currency'    |
+			| 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Second Company Ferron BP'   | 'TRY'         |
 		And "AccountReceivableByAgreements" table contains lines
-			| 'Partner' | 'Legal name' | 'Currency' |
-			| 'DFC'     | 'DFC'        | 'TRY'      |
+			| 'Partner'   | 'Legal name'   | 'Currency'    |
+			| 'DFC'       | 'DFC'          | 'TRY'         |
 		And "AccountReceivableByDocuments" table contains lines
-			| 'Partner' | 'Legal name' | 'Currency' |
-			| 'DFC'     | 'DFC'        | 'TRY'      |
+			| 'Partner'   | 'Legal name'   | 'Currency'    |
+			| 'DFC'       | 'DFC'          | 'TRY'         |
 	And I close all client application windows
 
 Scenario: _0154097 check company and account (in english) input by search in line in Cash revenue
@@ -1624,8 +1624,8 @@ Scenario: _01540105 check item and item key input by search in line in a documen
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I close all client application windows
 
 Scenario: _01540106 check partner, legal name, Partner term, company and store input by search in line in a document Retail return receipt (in english)
@@ -1677,16 +1677,16 @@ Scenario: _01540108 check item and item key input by search in line in a documen
 		And I select "02" from "Store (requester)" drop-down list by string in "ItemList" table			
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Store (requester)'| 'Unit'|
-		| 'Boots'    | '36/18SD'   | 'Store 01'         | 'pcs' |
+		| 'Item'   | 'Item key'  | 'Store (requester)'  | 'Unit'   |
+		| 'Boots'  | '36/18SD'   | 'Store 01'           | 'pcs'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table	
 		And in "ItemList" table drop-down list "Item" is equal to:
-			|" (J22001) Jacket J22001 "|
+			| " (J22001) Jacket J22001 "    |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 
@@ -1730,49 +1730,49 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "1 111 111., " text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| [1 111 111] Jacket J22001 |
+		| [1 111 111] Jacket J22001   |
 		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 	* Item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "4" from "Item" drop-down list by string in "ItemList" table
 		And I select "15" from "Item key" drop-down list by string in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
-			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+			| '#'   | 'Partner item'   | 'Cancel'   | 'Procurement method'   | 'Item key'   | 'Profit loss center'   | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Price'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'   | 'Reservation date'   | 'Revenue type'   | 'Detail'   | 'Delivery date'   | 'Cancel reason'   | 'Item'    | 'Price type'   | 'Sales person'    |
+			| '1'   | ''               | 'No'       | 'Stock'                | '37/18SD'    | ''                     | '1,000'      | 'pcs'    | 'No'                   | ''        | ''                | ''             | ''               | ''        | ''                   | ''               | ''         | ''                | ''                | 'Boots'   | 'Price USD'    | ''                |
 	* Unit
 		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
-			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+			| '#'   | 'Partner item'   | 'Cancel'   | 'Procurement method'   | 'Item key'   | 'Profit loss center'   | 'Quantity'   | 'Unit'             | 'Dont calculate row'   | 'Price'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'   | 'Reservation date'   | 'Revenue type'   | 'Detail'   | 'Delivery date'   | 'Cancel reason'   | 'Item'    | 'Price type'   | 'Sales person'    |
+			| '1'   | ''               | 'No'       | 'Stock'                | '37/18SD'    | ''                     | '1,000'      | 'Boots (12 pcs)'   | 'No'                   | ''        | ''                | ''             | ''               | ''        | ''                   | ''               | ''         | ''                | ''                | 'Boots'   | 'Price USD'    | ''                |
 	* Revenue type
 		And I select "8" from "Revenue type" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Revenue type' |
-			| 'Revenue'      |
+			| 'Revenue type'    |
+			| 'Revenue'         |
 	* Price type
 		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Price type'        |
-			| 'Basic Price Types' |
+			| 'Price type'           |
+			| 'Basic Price Types'    |
 	* Profit loss center
 		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Profit loss center'   |
-			| 'Logistics department' |
+			| 'Profit loss center'      |
+			| 'Logistics department'    |
 	* Cancel reason
 		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Cancel reason' |
-			| 'rejects'       |
+			| 'Cancel reason'    |
+			| 'rejects'          |
 	* Sales person
 		And I select "54" from "Sales person" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Sales person'    |
-			| 'Alexander Orlov' |
+			| 'Sales person'       |
+			| 'Alexander Orlov'    |
 		And I close all client application windows
 
 Scenario: _01540114 check item input by search in line by code in a document Bank payment
@@ -1790,28 +1790,28 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		And in the table "PaymentList" I click the button named "PaymentListAdd"		
 		And I select "50" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   |
-			| 'Ferron BP' |
+			| 'Partner'      |
+			| 'Ferron BP'    |
 	* Payee
 		And I select "46" from "Payee" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Payee'             |
-			| 'Company Ferron BP' |
+			| 'Payee'                |
+			| 'Company Ferron BP'    |
 	* Partner term
 		And I select "46" from "Partner term" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner term'                     |
-			| 'Basic Partner terms, without VAT' |
+			| 'Partner term'                        |
+			| 'Basic Partner terms, without VAT'    |
 	* Financial movement type
 		And I select "10" from "Financial movement type" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Financial movement type' |
-			| 'Movement type 1'         |
+			| 'Financial movement type'    |
+			| 'Movement type 1'            |
 	* Expense type
 		And I select "9" from "Expense type" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Expense type' |
-			| 'Expense'      |
+			| 'Expense type'    |
+			| 'Expense'         |
 	* Branch
 		And I select from the drop-down list named "Branch" by "3" string
 		Then the form attribute named "Branch" became equal to "Distribution department"
@@ -1858,39 +1858,39 @@ Scenario: _01540115 check item input by search in line by code in a document Pur
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "1 111 111., " text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
-		| [1 111 111] Jacket J22001 |
+		| [1 111 111] Jacket J22001   |
 		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 	* Item key
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "4" from "Item" drop-down list by string in "ItemList" table
 		And I select "15" from "Item key" drop-down list by string in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
-			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
+			| '#'   | 'Partner item'   | 'Cancel'   | 'Item key'   | 'Profit loss center'   | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Price'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'   | 'Detail'   | 'Delivery date'   | 'Cancel reason'   | 'Item'    | 'Price type'           |
+			| '1'   | ''               | 'No'       | '37/18SD'    | ''                     | '1,000'      | 'pcs'    | 'No'                   | ''        | ''                | ''             | ''               | ''        | ''         | ''                | ''                | 'Boots'   | 'Vendor price, USD'    |
 	* Unit
 		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
-			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
+			| '#'   | 'Partner item'   | 'Cancel'   | 'Item key'   | 'Profit loss center'   | 'Quantity'   | 'Unit'             | 'Dont calculate row'   | 'Price'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'   | 'Detail'   | 'Delivery date'   | 'Cancel reason'   | 'Item'    | 'Price type'           |
+			| '1'   | ''               | 'No'       | '37/18SD'    | ''                     | '1,000'      | 'Boots (12 pcs)'   | 'No'                   | ''        | ''                | ''             | ''               | ''        | ''         | ''                | ''                | 'Boots'   | 'Vendor price, USD'    |
 	* Price type
 		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Price type'        |
-			| 'Basic Price Types' |
+			| 'Price type'           |
+			| 'Basic Price Types'    |
 	* Profit loss center
 		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Profit loss center'   |
-			| 'Logistics department' |
+			| 'Profit loss center'      |
+			| 'Logistics department'    |
 	* Cancel reason
 		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
-			| 'Cancel reason' |
-			| 'rejects'       |
+			| 'Cancel reason'    |
+			| 'rejects'          |
 		And I close all client application windows		
 				
 
@@ -1912,8 +1912,8 @@ Scenario: _0154091 check company, account, currency input by search in line in C
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "ChequeBonds" table contains lines
-		| 'Legal name'               | 'Partner'   |
-		| 'Second Company Ferron BP' | 'Ferron BP' |
+		| 'Legal name'                | 'Partner'     |
+		| 'Second Company Ferron BP'  | 'Ferron BP'   |
 		And I close all client application windows
 
 Scenario: _0154092 check company, employee, currency, position, branch input by search in line in Payroll (in english)
@@ -1942,8 +1942,8 @@ Scenario: _0154092 check company, employee, currency, position, branch input by 
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Branch" became equal to "Front office"
 		And "AccrualList" table contains lines
-			| 'Employee'    | 'Position' | 'Accrual type' |
-			| 'Arina Brown' | 'Manager'  | 'Salary'       |
+			| 'Employee'      | 'Position'   | 'Accrual type'    |
+			| 'Arina Brown'   | 'Manager'    | 'Salary'          |
 		And I close all client application windows
 
 Scenario: _0154092 check company, branch input by search in line in TimeSheet (in english)
@@ -2016,16 +2016,16 @@ Scenario: _0154094 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 
@@ -2063,16 +2063,16 @@ Scenario: _0154096 check item and item key input by search in line in a document
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'   | 'Item key'   |
+		| 'Boots'  | '36/18SD'    |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list named "ItemListItem" is equal to:
-		| (J22001) Jacket J22001 |
+		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
+		| 'Item'            |
+		| 'Jacket J22001'   |
 		And I close all client application windows
 
 

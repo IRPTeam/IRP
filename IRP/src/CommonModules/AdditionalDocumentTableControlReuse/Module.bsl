@@ -105,11 +105,35 @@ EndFunction
 Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	ArrayOfFilter = New Array; // Array Of String
 	ArrayOfFields = New Array; // Array Of String
+	
+	Exceptions = New Structure();
+	Exceptions.Insert("SalesReportToConsignor", 
+		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
+		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
+		
+	Exceptions.Insert("SalesReportFromTradeAgent", 
+		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
+		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
+	
+	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do
 		For Each Filter In Row Do
 			
 			If Not Filter.Value.QueryNumber = QueryNumber Then
 				Continue;
+			EndIf;
+			
+			If Exceptions.Property(DocName) Then
+				ArrayOfExceptions = StrSplit(Exceptions[DocName], ",");
+				IsException = False;
+				For Each ItemOfException In ArrayOfExceptions Do
+					If Upper(TrimAll(Filter.Key)) = Upper(TrimAll(ItemOfException)) Then
+						IsException = True;
+					EndIf;
+				EndDo;
+				If IsException Then
+					Continue;
+				EndIf;
 			EndIf;
 			
 			Skip = False;
@@ -180,11 +204,11 @@ Function ErrorItemList()
 		0
 	));
 	
-	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-		"Not ItemList.QuantityInBaseUnit <= isNull(RowIDInfo.Quantity, 0)",
-		"Quantity",
-		0
-	));
+//	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
+//		"Not ItemList.QuantityInBaseUnit <= isNull(RowIDInfo.Quantity, 0)",
+//		"Quantity",
+//		0
+//	));
 	
 //	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
 //		"Not Cancel AND Not ItemList.QuantityInBaseUnit = isNull(RowIDInfo.Quantity, 0)",

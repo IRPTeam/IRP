@@ -6,7 +6,8 @@
 Feature: link unlink form
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -39,6 +40,12 @@ Scenario: _2060001 preparation
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create Document discount
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -76,9 +83,11 @@ Scenario: _2060001 preparation
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -101,33 +110,45 @@ Scenario: _2060001 preparation
 		And I close all client application windows
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Sales invoice and Sales order object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Inventory transfer and Inventory transfer object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create SalesOrder and ShipmentConfirmation object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -162,37 +183,51 @@ Scenario: _2060001 preparation
 	When Create catalog RetailCustomers objects (check POS)
 	When create GoodsReceipt and PurchaseOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create ShipmentConfirmation and SalesOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create SO and SC for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document RetailSalesReceipt objects (with retail customer)
 	And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"|
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);" |	
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create Physical inventory and Stock adjustment as write-off for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
 		
@@ -2201,11 +2236,11 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 		And I click "Ok" button
 	* Check tab
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
-			| '1' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778; 12345678' | '2,000'    | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
-			| '2' | 'en description is empty' | 'Phone A' | 'White'    | ''                   | 'No'                 | '100,80'     | 'pcs'  | '12345670'           | '1,000'    | '560,00' | '18%' | ''              | '660,80'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '560,00'     | 'Yes'               |
-			| '3' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778'           | '2,000'    | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
-			| '4' | 'en description is empty' | 'Router'  | 'Router'   | ''                   | 'No'                 | '18,00'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | ''              | '118,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '100,00'     | 'Yes'               |
+			| '#' | 'Item'    | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Store'    | 'Quantity' | 'Purchase order'                                 | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Phone A' | 'Brown'    | '180,00'     | 'pcs'  | '13456778; 12345678' | '500,00' | '18%' | ''              | '1 180,00'     | 'Store 03' | '2,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '1 000,00'   | 'Yes'               |
+			| '2' | 'Phone A' | 'White'    | '100,80'     | 'pcs'  | '12345670'           | '560,00' | '18%' | ''              | '660,80'       | 'Store 03' | '1,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '560,00'     | 'Yes'               |
+			| '3' | 'Phone A' | 'Brown'    | '39,60'      | 'pcs'  | '13456778'           | '110,00' | '18%' | ''              | '259,60'       | 'Store 03' | '2,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '220,00'     | 'Yes'               |
+			| '4' | 'Router'  | 'Router'   | '18,00'      | 'pcs'  | ''                   | '100,00' | '18%' | ''              | '118,00'       | 'Store 03' | '1,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '100,00'     | 'Yes'               |
 		And I close all client application windows
 
 

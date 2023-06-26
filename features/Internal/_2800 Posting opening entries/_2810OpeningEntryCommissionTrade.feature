@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @OpeningEntries
@@ -65,8 +65,8 @@ Scenario: _410010 preparation (Opening entries)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -79,14 +79,14 @@ Scenario: _410010 preparation (Opening entries)
 	* Company settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"	
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Trade agent store' |
+			| 'Description'          |
+			| 'Trade agent store'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I close all client application windows				
@@ -103,8 +103,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 		* Filling in company info
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the tabular part Inventory
 			* First item (without serial lot number)
@@ -112,18 +112,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And in the table "Inventory" I click the button named "InventoryAdd"
 				And I click choice button of "Item" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Dress'       |
+					| 'Description'      |
+					| 'Dress'            |
 				And I select current line in "List" table
 				And I click choice button of "Item key" attribute in "Inventory" table
 				And I go to line in "List" table
-					| Item  | Item key |
-					| Dress | XS/Blue  |
+					| Item      | Item key      |
+					| Dress     | XS/Blue       |
 				And I select current line in "List" table
 				And I click choice button of "Store" attribute in "Inventory" table
 				And I go to line in "List" table
-					| Description |
-					| Store 05    |
+					| Description      |
+					| Store 05         |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "Inventory" table
 				And I input "100,000" text in "Quantity" field of "Inventory" table
@@ -135,18 +135,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And in the table "Inventory" I click the button named "InventoryAdd"
 				And I click choice button of "Item" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Description'        |
-					| 'Product 1 with SLN' |
+					| 'Description'             |
+					| 'Product 1 with SLN'      |
 				And I select current line in "List" table
 				And I click choice button of "Item key" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Item'               | 'Item key' |
-					| 'Product 1 with SLN' | 'PZU'      |
+					| 'Item'                   | 'Item key'      |
+					| 'Product 1 with SLN'     | 'PZU'           |
 				And I select current line in "List" table
 				And I click choice button of "Store" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Description'       |
-					| 'Store 05' |
+					| 'Description'      |
+					| 'Store 05'         |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "Inventory" table
 				And I input "100,000" text in "Quantity" field of "Inventory" table
@@ -158,8 +158,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And I click choice button of the attribute named "InventorySerialLotNumber" in "Inventory" table
 				And I activate field named "Owner" in "List" table
 				And I go to line in "List" table
-					| 'Owner' | 'Reference'  | 'Serial number' |
-					| 'PZU'   | '8908899879' | '8908899879'    |
+					| 'Owner'     | 'Reference'      | 'Serial number'      |
+					| 'PZU'       | '8908899879'     | '8908899879'         |
 				And I select current line in "List" table
 				And I finish line editing in "Inventory" table
 			* Third item (with serial lot number)
@@ -167,18 +167,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And in the table "Inventory" I click the button named "InventoryAdd"
 				And I click choice button of "Item" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Description'        |
-					| 'Product 3 with SLN' |
+					| 'Description'             |
+					| 'Product 3 with SLN'      |
 				And I select current line in "List" table
 				And I click choice button of "Item key" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Item'               | 'Item key'  |
-					| 'Product 3 with SLN' | 'UNIQ'      |
+					| 'Item'                   | 'Item key'      |
+					| 'Product 3 with SLN'     | 'UNIQ'          |
 				And I select current line in "List" table
 				And I click choice button of "Store" attribute in "Inventory" table
 				And I go to line in "List" table
-					| 'Description'       |
-					| 'Store 05' |
+					| 'Description'      |
+					| 'Store 05'         |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "Inventory" table
 				And I input "100,000" text in "Quantity" field of "Inventory" table
@@ -190,8 +190,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And I click choice button of the attribute named "InventorySerialLotNumber" in "Inventory" table
 				And I activate field named "Owner" in "List" table
 				And I go to line in "List" table
-					| 'Owner' | 'Reference'      | 'Serial number'  |
-					| 'UNIQ'  | '09987897977889' | '09987897977889' |
+					| 'Owner'     | 'Reference'          | 'Serial number'       |
+					| 'UNIQ'      | '09987897977889'     | '09987897977889'      |
 				And I select current line in "List" table
 				And I finish line editing in "Inventory" table
 		* Post document
@@ -204,8 +204,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And Delay 5
 		* Check creation
 			And "List" table contains lines
-				| 'Number' |
-				|  '$$NumberOpeningEntry410010$$'    |
+				| 'Number'                           |
+				| '$$NumberOpeningEntry410010$$'     |
 	* Create OP (shipment to trade agent 1)
 			And I close all client application windows
 		* Open document form opening entry
@@ -214,46 +214,46 @@ Scenario: _410012 create Opening entry shipment to trade agent
 		* Filling in company info
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I move to "Shipment to trade agent" tab			
 			And I click Select button of "Trade agent" field
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'Trade agent 2' |
+				| 'Description'       |
+				| 'Trade agent 2'     |
 			And I select current line in "List" table
 			Then the form attribute named "LegalNameTradeAgent" became equal to "Trade agent 2"
 			Then the form attribute named "AgreementTradeAgent" became equal to "Trade agent 2"
 			And I click Choice button of the field named "LegalNameTradeAgent"
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'Trade agent 2' |
+				| 'Description'       |
+				| 'Trade agent 2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "LegalNameTradeAgent"
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'Trade agent 2' |
+				| 'Description'       |
+				| 'Trade agent 2'     |
 			And I select current line in "List" table
 		* First item (without serial lot number)
 			And I move to "Shipment to trade agent" tab
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"		
 			And I click choice button of "Item" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| Item  | Item key |
-				| Dress | XS/Blue  |
+				| Item     | Item key     |
+				| Dress    | XS/Blue      |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| Description |
-				| Store 05    |
+				| Description     |
+				| Store 05        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ShipmentToTradeAgent" table
 			And I input "50,000" text in "Quantity" field of "ShipmentToTradeAgent" table
@@ -262,18 +262,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"
 			And I click choice button of "Item" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Store 05' |
+				| 'Description'     |
+				| 'Store 05'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ShipmentToTradeAgent" table
 			And I input "70,000" text in "Quantity" field of "ShipmentToTradeAgent" table
@@ -283,8 +283,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'  | 'Serial number' |
-				| 'PZU'   | '8908899879' | '8908899879'    |
+				| 'Owner'    | 'Reference'     | 'Serial number'     |
+				| 'PZU'      | '8908899879'    | '8908899879'        |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table	
 		* Post document
@@ -297,8 +297,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And Delay 5
 		* Check creation
 			And "List" table contains lines
-				| 'Number' |
-				|  '$$NumberOpeningEntry4100101$$'    |	
+				| 'Number'                            |
+				| '$$NumberOpeningEntry4100101$$'     |
 	* Create OP (shipment to trade agent 2)
 			And I close all client application windows
 		* Open document form opening entry
@@ -307,15 +307,15 @@ Scenario: _410012 create Opening entry shipment to trade agent
 		* Filling in company info
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I move to "Shipment to trade agent" tab
 		* Filling in trade agent info 
 			And I click Select button of "Trade agent" field
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'Trade agent 1' |
+				| 'Description'       |
+				| 'Trade agent 1'     |
 			And I select current line in "List" table
 			Then the form attribute named "LegalNameTradeAgent" became equal to "Trade agent 1"
 			Then the form attribute named "AgreementTradeAgent" became equal to "Trade agent partner term 1"
@@ -324,18 +324,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"
 			And I click choice button of "Item" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| Item  | Item key |
-				| Dress | XS/Blue  |
+				| Item     | Item key     |
+				| Dress    | XS/Blue      |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| Description |
-				| Store 05    |
+				| Description     |
+				| Store 05        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ShipmentToTradeAgent" table
 			And I input "30,000" text in "Quantity" field of "ShipmentToTradeAgent" table
@@ -345,18 +345,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"
 			And I click choice button of "Item" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Store 05' |
+				| 'Description'     |
+				| 'Store 05'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ShipmentToTradeAgent" table
 			And I input "20,000" text in "Quantity" field of "ShipmentToTradeAgent" table
@@ -366,8 +366,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'  | 'Serial number' |
-				| 'PZU'   | '8908899879' | '8908899879'    |
+				| 'Owner'    | 'Reference'     | 'Serial number'     |
+				| 'PZU'      | '8908899879'    | '8908899879'        |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table
 		* Third item (with serial lot number)
@@ -375,18 +375,18 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"
 			And I click choice button of "Item" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 3 with SLN' |
+				| 'Description'            |
+				| 'Product 3 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key'  |
-				| 'Product 3 with SLN' | 'UNIQ'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 3 with SLN'    | 'UNIQ'         |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ShipmentToTradeAgent" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Store 05' |
+				| 'Description'     |
+				| 'Store 05'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ShipmentToTradeAgent" table
 			And I input "100,000" text in "Quantity" field of "ShipmentToTradeAgent" table
@@ -396,8 +396,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'      | 'Serial number'  |
-				| 'UNIQ'  | '09987897977889' | '09987897977889' |
+				| 'Owner'    | 'Reference'         | 'Serial number'      |
+				| 'UNIQ'     | '09987897977889'    | '09987897977889'     |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table	
 		* Post document
@@ -410,14 +410,14 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And Delay 5
 		* Check creation
 			And I go to line in "List" table
-				| 'Number' |
-				|  '$$NumberOpeningEntry41001012$$'    |
+				| 'Number'                             |
+				| '$$NumberOpeningEntry41001012$$'     |
 			And I select current line in "List" table
 			And "ShipmentToTradeAgent" table became equal
-				| '#' | 'Item'               | 'Item key' | 'Store'    | 'Quantity' | 'Item serial/lot number' |
-				| '1' | 'Dress'              | 'XS/Blue'  | 'Store 05' | '30,000'   | ''                       |
-				| '2' | 'Product 1 with SLN' | 'PZU'      | 'Store 05' | '20,000'   | '8908899879'             |
-				| '3' | 'Product 3 with SLN' | 'UNIQ'     | 'Store 05' | '100,000'  | '09987897977889'         |
+				| '#'    | 'Item'                  | 'Item key'    | 'Store'       | 'Quantity'    | 'Item serial/lot number'     |
+				| '1'    | 'Dress'                 | 'XS/Blue'     | 'Store 05'    | '30,000'      | ''                           |
+				| '2'    | 'Product 1 with SLN'    | 'PZU'         | 'Store 05'    | '20,000'      | '8908899879'                 |
+				| '3'    | 'Product 3 with SLN'    | 'UNIQ'        | 'Store 05'    | '100,000'     | '09987897977889'             |
 			Then the form attribute named "LegalNameTradeAgent" became equal to "Trade agent 1"
 			Then the form attribute named "AgreementTradeAgent" became equal to "Trade agent partner term 1"			
 		
@@ -431,52 +431,52 @@ Scenario: _410013 create Opening entry receipt from consignor
 		* Filling in company info
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in trade agent info 
 			And I move to "Receipt from consignor" tab			
 			And I click Select button of "Consignor" field
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'Consignor 1'   |
+				| 'Description'     |
+				| 'Consignor 1'     |
 			And I select current line in "List" table
 			Then the form attribute named "LegalNameConsignor" became equal to "Consignor 1"
 			Then the form attribute named "AgreementConsignor" became equal to "Consignor partner term 1"
 			And I click Choice button of the field named "AgreementConsignor"
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Consignor partner term 1' |
+				| 'Description'                  |
+				| 'Consignor partner term 1'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "LegalNameConsignor"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Consignor 1' |
+				| 'Description'     |
+				| 'Consignor 1'     |
 			And I select current line in "List" table
 		* First item (without serial lot number)
 			And I move to "Receipt from consignor" tab
 			And in the table "ReceiptFromConsignor" I click the button named "ReceiptFromConsignorAdd"
 			And I click choice button of "Item" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| Item  | Item key |
-				| Dress | M/White  |
+				| Item     | Item key     |
+				| Dress    | M/White      |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| Description |
-				| Store 08    |
+				| Description     |
+				| Store 08        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Quantity" field of "ReceiptFromConsignor" table
 			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Code' | 'Description'  | 'Reference' |
-				| 'TRY'  | 'Turkish lira' | 'TRY'       |
+				| 'Code'    | 'Description'     | 'Reference'     |
+				| 'TRY'     | 'Turkish lira'    | 'TRY'           |
 			And I select current line in "List" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,00" text in "Quantity" field of "ReceiptFromConsignor" table	
@@ -487,18 +487,18 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And in the table "ReceiptFromConsignor" I click the button named "ReceiptFromConsignorAdd"
 			And I click choice button of "Item" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Product 1 with SLN' |
+				| 'Description'            |
+				| 'Product 1 with SLN'     |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Item'               | 'Item key' |
-				| 'Product 1 with SLN' | 'PZU'      |
+				| 'Item'                  | 'Item key'     |
+				| 'Product 1 with SLN'    | 'PZU'          |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Store 08' |
+				| 'Description'     |
+				| 'Store 08'        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ReceiptFromConsignor" table
 			And I input "70,000" text in "Quantity" field of "ReceiptFromConsignor" table
@@ -509,13 +509,13 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I click choice button of the attribute named "ReceiptFromConsignorSerialLotNumber" in "ReceiptFromConsignor" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference'  | 'Serial number' |
-				| 'PZU'   | '8908899877' | '8908899877'    |
+				| 'Owner'    | 'Reference'     | 'Serial number'     |
+				| 'PZU'      | '8908899877'    | '8908899877'        |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Code' | 'Description'  | 'Reference' |
-				| 'TRY'  | 'Turkish lira' | 'TRY'       |
+				| 'Code'    | 'Description'     | 'Reference'     |
+				| 'TRY'     | 'Turkish lira'    | 'TRY'           |
 			And I select current line in "List" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table	
@@ -524,9 +524,9 @@ Scenario: _410013 create Opening entry receipt from consignor
 		* Post document
 			And I click the button named "FormPost"
 			And "ReceiptFromConsignor" table became equal
-				| '#' | 'Amount'   | 'Item'               | 'Item key' | 'Store'    | 'Quantity' | 'Currency' | 'Price' | 'Amount tax' | 'Item serial/lot number' |
-				| '1' | '2 500,00' | 'Dress'              | 'M/White'  | 'Store 08' | '50,000'   | 'TRY'      | '50,00' | '381,36'     | ''                       |
-				| '2' | '3 500,00' | 'Product 1 with SLN' | 'PZU'      | 'Store 08' | '70,000'   | 'TRY'      | '50,00' | '533,90'     | '8908899877'             |			
+				| '#'    | 'Amount'      | 'Item'                  | 'Item key'    | 'Store'       | 'Quantity'    | 'Currency'    | 'Price'    | 'Amount tax'    | 'Item serial/lot number'     |
+				| '1'    | '2 500,00'    | 'Dress'                 | 'M/White'     | 'Store 08'    | '50,000'      | 'TRY'         | '50,00'    | '381,36'        | ''                           |
+				| '2'    | '3 500,00'    | 'Product 1 with SLN'    | 'PZU'         | 'Store 08'    | '70,000'      | 'TRY'         | '50,00'    | '533,90'        | '8908899877'                 |
 			And I delete "$$NumberOpeningEntry4100101$$" variable
 			And I delete "$$OpeningEntry4100101$$" variable
 			And I save the value of "Number" field as "$$NumberOpeningEntry4100101$$"
@@ -535,12 +535,12 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And Delay 5
 		* Check creation
 			And I go to line in "List" table
-				| 'Number' |
-				|  '$$NumberOpeningEntry4100101$$'    |	
+				| 'Number'                            |
+				| '$$NumberOpeningEntry4100101$$'     |
 			And I select current line in "List" table
 			And "ReceiptFromConsignor" table became equal
-				| '#' | 'Amount'   | 'Item'               | 'Item key' | 'Store'    | 'Quantity' | 'Currency' | 'Price' | 'Amount tax' | 'Item serial/lot number' |
-				| '1' | '2 500,00' | 'Dress'              | 'M/White'  | 'Store 08' | '50,000'   | 'TRY'      | '50,00' | '381,36'     | ''                       |
-				| '2' | '3 500,00' | 'Product 1 with SLN' | 'PZU'      | 'Store 08' | '70,000'   | 'TRY'      | '50,00' | '533,90'     | '8908899877'             |	
+				| '#'    | 'Amount'      | 'Item'                  | 'Item key'    | 'Store'       | 'Quantity'    | 'Currency'    | 'Price'    | 'Amount tax'    | 'Item serial/lot number'     |
+				| '1'    | '2 500,00'    | 'Dress'                 | 'M/White'     | 'Store 08'    | '50,000'      | 'TRY'         | '50,00'    | '381,36'        | ''                           |
+				| '2'    | '3 500,00'    | 'Product 1 with SLN'    | 'PZU'         | 'Store 08'    | '70,000'      | 'TRY'         | '50,00'    | '533,90'        | '8908899877'                 |
 			Then the form attribute named "LegalNameConsignor" became equal to "Consignor 1"
 			Then the form attribute named "AgreementConsignor" became equal to "Consignor partner term 1"		

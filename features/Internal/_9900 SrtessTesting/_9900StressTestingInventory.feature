@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @StressTesting
@@ -52,8 +52,8 @@ Scenario: _043400 preparation (StressTesting)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -62,8 +62,8 @@ Scenario: _043400 preparation (StressTesting)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
 	When Create document PhysicalInventory objects (stress testing, 1000 strings)
@@ -74,24 +74,24 @@ Scenario: _043400 preparation (StressTesting)
 Scenario: _9900001 post Physical inventory (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
 Scenario: _9900002 post Physical inventory (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows	
 
 Scenario: _9900003 open Physical inventory (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I wait "Physical inventory 1 dated 22.04.2021 12:42:15" window opening in "50" seconds
 	And I close all client application windows
@@ -99,8 +99,8 @@ Scenario: _9900003 open Physical inventory (1000 strings)
 Scenario: _9900004 open Physical inventory (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I wait "Physical inventory 2 dated 23.04.2021 12:42:15" window opening in "50" seconds
 	And I close all client application windows
@@ -109,8 +109,8 @@ Scenario: _9900004 open Physical inventory (100 strings)
 Scenario: _9900051 open Inventory transfer (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I wait "Inventory transfer 1 dated 26.04.2021 16:31:28" window opening in "50" seconds
 	And I close all client application windows
@@ -118,16 +118,16 @@ Scenario: _9900051 open Inventory transfer (1000 strings)
 Scenario: _9900052 post Inventory transfer (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
 Scenario: _9900053 open Inventory transfer (100strings)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I wait "Inventory transfer 2 dated 26.04.2021 16:35:28" window opening in "50" seconds
 	And I close all client application windows
@@ -135,7 +135,7 @@ Scenario: _9900053 open Inventory transfer (100strings)
 Scenario: _9900054 post Inventory transfer (100strings)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows

@@ -88,30 +88,30 @@ Scenario: _001 test data
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Reference'        | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
 		Then "Companies" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Reference'        | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
@@ -136,7 +136,6 @@ Scenario: _001 test data
 		When Create document StockAdjustmentAsSurplus objects (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
-		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document RetailReturnReceipt objects (LC)
 		When Create document ItemStockAdjustment objects (LC)
@@ -156,6 +155,11 @@ Scenario: _001 test data
 	* Posting Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then "Sales invoices" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "10"
+	* Posting Price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "10"
@@ -275,8 +279,8 @@ Scenario: _002 creating Calculation movement costs
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "17.08.2021" text in "End date" field
@@ -292,8 +296,8 @@ Scenario: _002 creating Calculation movement costs
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I input "01.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
@@ -327,43 +331,43 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'    |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'    |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'DFC Vendor by agreements' |
+				| 'Description'                  |
+				| 'DFC Vendor by agreements'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Second Company' |
+				| 'Description'        |
+				| 'Second Company'     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Store 10' |
+				| 'Description'     |
+				| 'Store 10'        |
 			And I select current line in "List" table
 			Then the form attribute named "Store" became equal to "Store 10"
 		* Filling item list		
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'       |
+				| 'Description'     |
+				| 'High shoes'      |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'High shoes' | '39/19SD' |
+				| 'Item'          | 'Item key'     |
+				| 'High shoes'    | '39/19SD'      |
 			And I select current line in "List" table
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
@@ -384,8 +388,8 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'End date'   | 'Number' |
-			| '01.08.2021' | 'Second Company' | '20.08.2021' | '2'      |
+			| 'Begin date'   | 'Company'          | 'End date'     | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '20.08.2021'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Checking close Batch wise over balance (High shoes, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
@@ -395,13 +399,13 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 		And I select current line in "OptionsList" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_003_2" template lines by template
@@ -416,25 +420,25 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			And I select from "Partner" drop-down list by "Ka" string
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Company Kalipso'    |
+				| 'Description'         |
+				| 'Company Kalipso'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Boots' | 'Boots/S-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Boots'    | 'Boots/S-8'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "600,000" text in "Quantity" field of "ItemList" table
@@ -452,39 +456,39 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 	* Checking that the invoice is displayed as not relevance in the register BatchRelevance 
 		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
 		And "List" table contains lines
-			| 'Date'                | 'Company'        | 'Store'    | 'Item key'                            | 'Document'                                                 |
-			| '13.08.2021 16:53:01' | 'Main Company'   | 'Store 02' | 'Boots/S-8'                           | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'            |
+			| 'Date'                  | 'Company'        | 'Store'      | 'Item key'    | 'Document'                                         |
+			| '13.08.2021 16:53:01'   | 'Main Company'   | 'Store 02'   | 'Boots/S-8'   | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'    |
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_004_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_004_2" template lines by template
@@ -497,38 +501,38 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'    |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'    |
+				| 'Description'     |
+				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'DFC Vendor by agreements' |
+				| 'Description'                  |
+				| 'DFC Vendor by agreements'     |
 			And I select current line in "List" table
 			Then the form attribute named "Store" became equal to "Store 02"
 		* Filling item list
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Boots' | 'Boots/S-8' |
+				| 'Item'     | 'Item key'      |
+				| 'Boots'    | 'Boots/S-8'     |
 			And I select current line in "List" table
 			And I input "500,000" text in "Quantity" field of "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
@@ -550,33 +554,33 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows closed batches by the created invoice (Boots/S-8, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_2" template lines by template
@@ -584,38 +588,38 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 	* Changing Store and Company on Second company
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 010'    |
+			| 'Number'    |
+			| '9 010'     |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04'    |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'       |
 			| 'Second company'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_3" template lines by template
@@ -623,45 +627,45 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 	* Changing item key and changing Store and Company back 
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 010'    |
+			| 'Number'    |
+			| '9 010'     |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Main company'    |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '39/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
 		And I input "50,00" text in "Price" field of "ItemList" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '39/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_4" template lines by template
@@ -669,37 +673,37 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 	* Clear posting and changing item key back
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 010'    |
+			| 'Number'    |
+			| '9 010'     |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I input "50,00" text in "Price" field of "ItemList" table
 		And I click "Post and close" button
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '9 010'  | 'DFC'     |
+			| 'Number'   | 'Partner'    |
+			| '9 010'    | 'DFC'        |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_5" template lines by template
@@ -707,29 +711,29 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 	* Posting back
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 010'    |
+			| 'Number'    |
+			| '9 010'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_005_2" template lines by template
@@ -741,8 +745,8 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Changing Quantity in the Sales invoice 9100 from Store 02
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'  |
+			| 'Number'    |
+			| '9 100'     |
 		And I activate "Date" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
@@ -753,39 +757,39 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Checking that the invoice is displayed as not relevance in the register BatchRelevance 
 		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
 		And "List" table contains lines
-			| 'Date'                | 'Company'        | 'Store'    | 'Is relevance' | 'Item key'                            | 'Document'                                                 |
-			| '13.08.2021 16:53:01' | 'Main Company'   | 'Store 02' | 'No'           | 'Boots/S-8'                           | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'            |
+			| 'Date'                  | 'Company'        | 'Store'      | 'Is relevance'   | 'Item key'    | 'Document'                                         |
+			| '13.08.2021 16:53:01'   | 'Main Company'   | 'Store 02'   | 'No'             | 'Boots/S-8'   | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'    |
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_2" template lines by template
@@ -793,8 +797,8 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Changing Date (19/08) in the Sales invoice 9100 from Store 02
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'  |
+			| 'Number'    |
+			| '9 100'     |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I input "19.08.2021 12:00:00" text in "Date" field
@@ -803,8 +807,8 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Calculation movement costs for Main company (19/08-20/08)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -812,8 +816,8 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I input "18.08.2021" text in "Begin date" field
 		And I input "20.08.2021" text in "End date" field
@@ -828,55 +832,55 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_3" template lines by template
 	* Changing Store and Company on Second company
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'    |
+			| 'Number'    |
+			| '9 100'     |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04'    |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'       |
 			| 'Second company'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_4" template lines by template
@@ -884,64 +888,64 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Changing item key and changing Store and Company back
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'    |
+			| 'Number'    |
+			| '9 100'     |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Main company'    |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key'  | 'Unit' |
-			| 'Boots' | 'Boots/S-8' | 'pcs'  |
+			| 'Item'    | 'Item key'    | 'Unit'    |
+			| 'Boots'   | 'Boots/S-8'   | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '39/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
 		And I click choice button of "Unit" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
+			| 'Description'       |
+			| 'Boots (12 pcs)'    |
 		And I select current line in "List" table		
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_5" template lines by template
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '39/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '39/18SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_51" template lines by template
@@ -949,36 +953,36 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Clear posting and changing item key back
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'    |
+			| 'Number'    |
+			| '9 100'     |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key'  |
-			| 'Boots' | '39/18SD' |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '39/18SD'     |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '9 100'  | 'Kalipso'     |
+			| 'Number'   | 'Partner'    |
+			| '9 100'    | 'Kalipso'    |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_6" template lines by template
@@ -986,29 +990,29 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 	* Posting back
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '9 100'    |
+			| 'Number'    |
+			| '9 100'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '01.08.2021' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | 'Boots/S-8'  |
+			| 'Item'    | 'Item key'     |
+			| 'Boots'   | 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_006_7" template lines by template
@@ -1021,20 +1025,20 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_007_1" template lines by template
 	* Changing Quantity in the Inventory transfer 1 dated 05.08.2021 12:00:00	
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '05.08.2021 12:00:00' | '1'      |
+			| 'Date'                  | 'Number'    |
+			| '05.08.2021 12:00:00'   | '1'         |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
-			| 'Shirt' | '36/Red'   | '21,000'   | 'pcs'  |			
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Shirt'   | '36/Red'     | '21,000'     | 'pcs'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "48,000" text in "Quantity" field of "ItemList" table
@@ -1043,25 +1047,25 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Checking that the batch calculation is no longer relevant
 		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
 		And "List" table contains lines
-			| 'Date'                | 'Company'      | 'Store'    | 'Is relevance' | 'Item key' | 'Document'                                       |
-			| '05.08.2021 12:00:00' | 'Main Company' | 'Store 02' | 'No'           | '36/Red'  | 'Inventory transfer 1 dated 05.08.2021 12:00:00' |
-			| '05.08.2021 12:00:00' | 'Main Company' | 'Store 03' | 'No'           | '36/Red'  | 'Inventory transfer 1 dated 05.08.2021 12:00:00' |
+			| 'Date'                  | 'Company'        | 'Store'      | 'Is relevance'   | 'Item key'   | 'Document'                                          |
+			| '05.08.2021 12:00:00'   | 'Main Company'   | 'Store 02'   | 'No'             | '36/Red'     | 'Inventory transfer 1 dated 05.08.2021 12:00:00'    |
+			| '05.08.2021 12:00:00'   | 'Main Company'   | 'Store 03'   | 'No'             | '36/Red'     | 'Inventory transfer 1 dated 05.08.2021 12:00:00'    |
 	* Repeated posting document CalculationMovementCosts №1 and creating CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1069,37 +1073,37 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 05 (no balance)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '05.08.2021 12:00:00' | '1'      |
+			| 'Date'                  | 'Number'    |
+			| '05.08.2021 12:00:00'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Checking that the batch calculation is no longer relevant
 		Given I open hyperlink "e1cib/list/InformationRegister.T6030S_BatchRelevance"
 		And "List" table contains lines
-			| 'Date'                | 'Company'      | 'Document'                                       | 'Item key'  | 'Is relevance' |
-			| '05.08.2021 12:00:00' | 'Main Company' | 'Inventory transfer 1 dated 05.08.2021 12:00:00' | '36/Red'    | 'No'           |
+			| 'Date'                  | 'Company'        | 'Document'                                         | 'Item key'   | 'Is relevance'    |
+			| '05.08.2021 12:00:00'   | 'Main Company'   | 'Inventory transfer 1 dated 05.08.2021 12:00:00'   | '36/Red'     | 'No'              |
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1107,14 +1111,14 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 01 and changing date
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '05.08.2021 12:00:00' | '1'      |
+			| 'Date'                  | 'Number'    |
+			| '05.08.2021 12:00:00'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I input "18.08.2021  03:01:34" text in "Date" field
@@ -1122,19 +1126,19 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1142,36 +1146,36 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Receiver on Store 06 and company on Second company
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'       |
 			| 'Second company'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'End date'   |
-			| '01.08.2021' | 'Second Company' | '20.08.2021' |
+			| 'Begin date'   | 'Company'          | 'End date'      |
+			| '01.08.2021'   | 'Second Company'   | '20.08.2021'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1179,48 +1183,48 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing item key and changing Store Receiver and Company back
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Main company'    |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I activate "Item key" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I activate field named "ItemKey" in "List" table
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/38/Black)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'End date'   |
-			| '01.08.2021' | 'Second Company' | '20.08.2021' |
+			| 'Begin date'   | 'Company'          | 'End date'      |
+			| '01.08.2021'   | 'Second Company'   | '20.08.2021'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1228,46 +1232,46 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Clear posting
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Main company'    |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  |
-			| 'Shirt' |
+			| 'Item'     |
+			| 'Shirt'    |
 		And I activate "Item key" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1275,20 +1279,20 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Posting back
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №3 and Сhecking the report (Shirt/36/Red)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'  |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1302,15 +1306,15 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 	* Creating Sales return for Sales invoice 461 (Trousers 38/Yellow)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' | 'Partner'   |
-			| '4'    | 'Ferron BP' |
+			| 'Number'   | 'Partner'      |
+			| '4'        | 'Ferron BP'    |
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And I click "Uncheck all" button
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
-			| 'USD'      | '80,00' | '7,000'    | 'Trousers (38/Yellow)' | 'pcs'  | 'No'  |
+			| 'Currency'   | 'Price'   | 'Quantity'   | 'Row presentation'       | 'Unit'   | 'Use'    |
+			| 'USD'        | '80,00'   | '7,000'      | 'Trousers (38/Yellow)'   | 'pcs'    | 'No'     |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -1328,33 +1332,33 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow'  |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Store 02' | 
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table		
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_008_1" template lines by template
 	* Changing date (Sales return 10 -18/08)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '10'     |
+			| 'Number'    |
+			| '10'        |
 		And I activate "Date" field in "List" table
 		And I select current line in "List" table
 		And I move to "Other" tab
@@ -1363,48 +1367,48 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow'  |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Store 02' | 
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table	
 		And I click "Generate" button
 	* Clear posting Sales return №10 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '10'     |
+			| 'Number'    |
+			| '10'        |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow'  |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1412,25 +1416,25 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 	* Posting Sales return №10 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '10'     |
+			| 'Number'    |
+			| '10'        |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow'  |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click "Generate" button
@@ -1442,21 +1446,21 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Boots' | '37/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '37/18SD'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_009_1" template lines by template
 	* Changing date (Purchase return 15 -18/08)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '15'     |
+			| 'Number'    |
+			| '15'        |
 		And I activate "Date" field in "List" table
 		And I select current line in "List" table
 		And I move to "Other" tab
@@ -1465,84 +1469,84 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (37/18SD)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '37/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '37/18SD'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_009_2" template lines by template
 	* Clear posting Purchase return №15 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '15'     |
+			| 'Number'    |
+			| '15'        |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report ((37/18SD)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '37/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '37/18SD'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_009_3" template lines by template
 	* Posting Purchase return №15 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
-			| 'Number' |
-			| '15'     |
+			| 'Number'    |
+			| '15'        |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №1 and CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (37/18SD)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Boots' | '37/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '37/18SD'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_009_4" template lines by template
@@ -1554,12 +1558,12 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 	* Changing quantity (Stock adjustment as write-off 2 - 6pcs) 
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Company'      | 'Number' | 'Store'    |
-			| 'Main Company' | '2'      | 'Store 03' |
+			| 'Company'        | 'Number'   | 'Store'       |
+			| 'Main Company'   | '2'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
-			| 'Dress' | 'XS/Blue'  | '5,000'    | 'pcs'  |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | 'XS/Blue'    | '5,000'      | 'pcs'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
@@ -1567,142 +1571,142 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_010_2" template lines by template
 	* Changing company (Stock adjustment as surplus 2) 
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
-			| 'Company'      | 'Number' | 'Store'    |
-			| 'Main Company' | '3'      | 'Store 03' |
+			| 'Company'        | 'Number'   | 'Store'       |
+			| 'Main Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_010_3" template lines by template
 	* Clear posting Opening entry 1 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'     |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_010_5" template lines by template
 	* Posting opening entry №1, Changing company (Stock adjustment as surplus 3)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'     |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
-			| 'Company'        | 'Number' | 'Store'    |
-			| 'Second Company' | '3'      | 'Store 03' |
+			| 'Company'          | 'Number'   | 'Store'       |
+			| 'Second Company'   | '3'        | 'Store 03'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'        | 'Number' |
-			| '01.08.2021' | 'Second Company' | '2'      |
+			| 'Begin date'   | 'Company'          | 'Number'    |
+			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_010_6" template lines by template
@@ -1716,18 +1720,18 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "5,000" text in the field named "Quantity"
 		And I click Choice button of the field named "Unit"
@@ -1735,14 +1739,14 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'        | 'Item key'   |
-			| 'Сhewing gum' | 'Mint/Mango' |
+			| 'Item'          | 'Item key'      |
+			| 'Сhewing gum'   | 'Mint/Mango'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1750,14 +1754,14 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'        | 'Item key'    |
-			| 'Сhewing gum' | 'Mint/Cherry' |
+			| 'Item'          | 'Item key'       |
+			| 'Сhewing gum'   | 'Mint/Cherry'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1773,19 +1777,19 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -1795,32 +1799,32 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'Сhewing gum/Сhewing gum' |
+			| 'Item key'                   |
+			| 'Сhewing gum/Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Choice button of the field named "Unit"
 		And I select current line in "List" table
 		And in the table "ItemList" I click "By bundle content" button
 		And "ItemList" table became equal
-			| 'Item'        | 'Quantity' | 'Item key'    | 'Unit' |
-			| 'Сhewing gum' | '1,000'    | 'Mint/Mango'  | 'pcs'  |
-			| 'Сhewing gum' | '1,000'    | 'Mint/Cherry' | 'pcs'  |
+			| 'Item'          | 'Quantity'   | 'Item key'      | 'Unit'    |
+			| 'Сhewing gum'   | '1,000'      | 'Mint/Mango'    | 'pcs'     |
+			| 'Сhewing gum'   | '1,000'      | 'Mint/Cherry'   | 'pcs'     |
 		And I move to "Other" tab
 		And I input "10.08.2021  0:00:00" text in "Date" field
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -1832,19 +1836,19 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -1854,18 +1858,18 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "10,000" text in the field named "Quantity"
 		And I click Choice button of the field named "Unit"
@@ -1873,14 +1877,14 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'        | 'Item key'   |
-			| 'Сhewing gum' | 'Mint/Mango' |
+			| 'Item'          | 'Item key'      |
+			| 'Сhewing gum'   | 'Mint/Mango'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1888,14 +1892,14 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Сhewing gum' |
+			| 'Description'    |
+			| 'Сhewing gum'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'        | 'Item key'    |
-			| 'Сhewing gum' | 'Mint/Cherry' |
+			| 'Item'          | 'Item key'       |
+			| 'Сhewing gum'   | 'Mint/Cherry'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1911,19 +1915,19 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -1931,30 +1935,30 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Clear posting (Bundling 11, Unbundling 15)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number' |
-			| '11'     |
+			| 'Number'    |
+			| '11'        |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-			| 'Number' |
-			| '15'     |
+			| 'Number'    |
+			| '15'        |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -1962,30 +1966,30 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Posting back (Bundling 11, Unbundling 15)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
-			| 'Number' |
-			| '11'     |
+			| 'Number'    |
+			| '11'        |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
-				| 'Number' |
-				| '15'     |
+				| 'Number'     |
+				| '15'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '01.08.2021' | 'Main Company' | '1'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      | 'Number' |
-			| '18.08.2021' | 'Main Company' | '3'      |
+			| 'Begin date'   | 'Company'        | 'Number'    |
+			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -1995,37 +1999,37 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Skittles + Сhewing gum' |
+			| 'Description'               |
+			| 'Skittles + Сhewing gum'    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'Skittles + Сhewing gum/Skittles + Сhewing gum' |
+			| 'Item key'                                         |
+			| 'Skittles + Сhewing gum/Skittles + Сhewing gum'    |
 		And I select current line in "List" table
 		And I input "12,000" text in the field named "Quantity"
 		And I click Choice button of the field named "Unit"
 		And I select current line in "List" table
 		And in the table "ItemList" I click "By specification" button		
 		And I go to line in "ItemList" table
-			| 'Item'        | 'Item key'    | 'Quantity' | 'Unit' |
-			| 'Сhewing gum' | 'Mint/Cherry' | '1,000'    | 'pcs'  |
+			| 'Item'          | 'Item key'      | 'Quantity'   | 'Unit'    |
+			| 'Сhewing gum'   | 'Mint/Cherry'   | '1,000'      | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "1,00000" text in "Amount value" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key' | 'Quantity' | 'Unit' |
-			| 'Skittles' | 'fruit'    | '1,000'    | 'pcs'  |
+			| 'Item'       | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Skittles'   | 'fruit'      | '1,000'      | 'pcs'     |
 		And I input "3,00000" text in "Amount value" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
@@ -2039,15 +2043,15 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 	* Repeated posting document CalculationMovementCosts №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Company'      | 'Number' |
-			| 'Main Company' | '3'      |
+			| 'Company'        | 'Number'    |
+			| 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
 		And I click "Generate" button
@@ -2064,46 +2068,46 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'    |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_012_1" template lines by template
 	* Unpost First Retail sales receipt and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '01.08.2021' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'    |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_012_2" template lines by template
 	* Change first sales receipt date and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I input "10.08.2021 16:00:00" text in "Date" field
@@ -2113,32 +2117,32 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		And I click "Post and close" button
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '01.08.2021' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'    |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_012_4" template lines by template
 	* Change quantity in the first Retail sales receipt and Retail return receipt and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Quantity'     |
-			| 'High shoes' | '39/19SD'  | '2,000' |		
+			| 'Item'         | 'Item key'   | 'Quantity'    |
+			| 'High shoes'   | '39/19SD'    | '2,000'       |
 		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
@@ -2148,8 +2152,8 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		And I click "Post and close" button
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
@@ -2160,24 +2164,24 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		And I click "Post and close" button
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '01.08.2021' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '01.08.2021' | 'Second Company' |
+			| 'Begin date'   | 'Company'           |
+			| '01.08.2021'   | 'Second Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'    |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_012_5" template lines by template
@@ -2189,35 +2193,35 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And I select from "Partner" drop-down list by "Retail customer" string
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail customer company'    |
+				| 'Description'                 |
+				| 'Retail customer company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 10'    |
+				| 'Description'     |
+				| 'Store 10'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail partner term'    |
+				| 'Description'             |
+				| 'Retail partner term'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'    |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'M/Brown' |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/Brown'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -2239,8 +2243,8 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And I input "15.08.2021 19:32:00" text in "Date" field
 			And I click Select button of "Branch" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shop 01'     |
+				| 'Description'     |
+				| 'Shop 01'         |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I input "0" text in "Number" field
@@ -2260,20 +2264,20 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		* Batches calculation
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 			And I go to line in "List" table
-				| 'Begin date' | 'Company'      |
-				| '01.08.2021' | 'Main Company' |
+				| 'Begin date'    | 'Company'          |
+				| '01.08.2021'    | 'Main Company'     |
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Сhecking the report (Store 10)
 			Given I open hyperlink "e1cib/app/Report.BatchBalance"
 			And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 10'    |
+				| 'Description'     |
+				| 'Store 10'        |
 			And I select current line in "List" table
 			And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'M/Brown'    |
+				| 'Item key'     |
+				| 'M/Brown'      |
 			And I select current line in "List" table
 			And I click "Generate" button
 			And "Result" spreadsheet document contains "BathBalance_012_7" template lines by template
@@ -2284,8 +2288,8 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	* Select Stock adjustment as write off
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
@@ -2293,17 +2297,17 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 		And I click "Generate report" button
 	* Check movements
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 1 dated 10.08.2021 16:47:25' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
-			| 'Document registrations records'                            | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
-			| 'Register  "R5022 Expenses"'                                | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
-			| ''                                                          | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                                             |
-			| ''                                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost'                              |
-			| ''                                                          | '10.08.2021 16:47:25' | '17,12'     | '17,29'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
-			| ''                                                          | '10.08.2021 16:47:25' | '100'       | '101'               | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
-			| ''                                                          | '10.08.2021 16:47:25' | '100'       | '101'               | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
-			| ''                                                          | '10.08.2021 16:47:25' | '171,2'     | '174,62'            | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
-			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | '1 020'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
-			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | '1 020'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| 'Stock adjustment as write-off 1 dated 10.08.2021 16:47:25'   | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                                                          |
+			| 'Document registrations records'                              | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                                                          |
+			| 'Register  "R5022 Expenses"'                                  | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                                                          |
+			| ''                                                            | 'Period'                | 'Resources'   | ''                    | ''              | 'Dimensions'     | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                               | 'Attributes'                                                |
+			| ''                                                            | ''                      | 'Amount'      | 'Amount with taxes'   | 'Amount cost'   | 'Company'        | 'Branch'   | 'Profit loss center'   | 'Expense type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'   | 'Calculation movement cost'                                 |
+			| ''                                                            | '10.08.2021 16:47:25'   | '17,12'       | '17,29'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| ''                                                            | '10.08.2021 16:47:25'   | '100'         | '101'                 | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| ''                                                            | '10.08.2021 16:47:25'   | '100'         | '101'                 | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| ''                                                            | '10.08.2021 16:47:25'   | '171,2'       | '174,62'              | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| ''                                                            | '10.08.2021 16:47:25'   | '1 000'       | '1 020'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| ''                                                            | '10.08.2021 16:47:25'   | '1 000'       | '1 020'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
 		And I close all client application windows
 		
 Scenario: _024 check Stock adjustment as surplus movements by register R5021 Revenues		
@@ -2311,8 +2315,8 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	* Select Stock adjustment as surplus
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
@@ -2320,14 +2324,14 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 		And I click "Generate report" button
 	* Check movements
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as surplus 1 dated 01.08.2021 09:42:37' | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'                          | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5021 Revenues"'                              | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                                        | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                                        | '01.08.2021 09:42:37' | '154,08'    | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                                        | '01.08.2021 09:42:37' | '900'       | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                                        | '01.08.2021 09:42:37' | '900'       | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'TRY'      | ''                    | 'en description is empty'      |
+			| 'Stock adjustment as surplus 1 dated 01.08.2021 09:42:37'   | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                |
+			| 'Document registrations records'                            | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                |
+			| 'Register  "R5021 Revenues"'                                | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                |
+			| ''                                                          | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                |
+			| ''                                                          | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'   | 'Profit loss center'   | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    |
+			| ''                                                          | '01.08.2021 09:42:37'   | '154,08'      | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'USD'        | ''                      | 'Reporting currency'              |
+			| ''                                                          | '01.08.2021 09:42:37'   | '900'         | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'Local currency'                  |
+			| ''                                                          | '01.08.2021 09:42:37'   | '900'         | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'en description is empty'         |
 		And I close all client application windows
 		
 						
@@ -2337,8 +2341,8 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 	* Post 	ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |	
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Create Calculation movement cost
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -2346,8 +2350,8 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I input "18.09.2022 00:00:00" text in the field named "Date"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Landed cost" exact value from "Calculation mode" drop-down list
 		And I input "18.09.2022" text in "Begin date" field
@@ -2359,8 +2363,8 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"	
@@ -2370,21 +2374,21 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 	* Clear posting 
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Batches calculation
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '18.09.2022' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '18.09.2022'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check report
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
@@ -2393,21 +2397,21 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 	* Post ItemStockAdjustment back	
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |	
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Batches calculation
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
-			| 'Begin date' | 'Company'      |
-			| '18.09.2022' | 'Main Company' |
+			| 'Begin date'   | 'Company'         |
+			| '18.09.2022'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check report
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 10'    |
+			| 'Description'    |
+			| 'Store 10'       |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
@@ -2423,8 +2427,8 @@ Scenario: _028 check landed cost by materials
 		And I click "Create" button
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "22.09.2022" text in "Begin date" field
@@ -2439,8 +2443,8 @@ Scenario: _028 check landed cost by materials
 		And I click "Generate" button	
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
@@ -2457,34 +2461,34 @@ Scenario: _030 check landed cost (double return)
 	* Load documents for double return
 		When Data preparation (double return, landed cost)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(9012).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(9012).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(185).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(185).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CalculationMovementCosts.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(186).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(186).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseReturn.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseReturn.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check movement cost calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I go to line in "OptionsList" table
-			| 'Report option' |
-			| 'Test'          |
+			| 'Report option'    |
+			| 'Test'             |
 		And I click "Load setting" button
 		And I click "Generate" button	
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened

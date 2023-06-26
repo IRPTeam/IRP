@@ -54,8 +54,8 @@ Scenario: _029200 preparation (work order)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -63,8 +63,8 @@ Scenario: _029200 preparation (work order)
 	* Add work order in tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'VAT'         |
+			| 'Description'    |
+			| 'VAT'            |
 		And I select current line in "List" table
 		And I move to "Use documents" tab
 		And in the table "UseDocuments" I click "Add" button
@@ -74,21 +74,22 @@ Scenario: _029200 preparation (work order)
 	* Price list
 		When Create document PriceList objects (for works)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PriceList.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PriceList.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PriceList.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PriceList.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Discount
 		When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 	* SO
 		When Create document SalesOrder objects (with works)
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(183).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(183).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesOrder.FindByNumber(183).GetObject().Write(DocumentWriteMode.Posting);"    |
 	
 
 Scenario: _0292001 check preparation
@@ -104,14 +105,14 @@ Scenario: _029201 create work order
 		Then the form attribute named "Status" became equal to "Wait"		
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Add works
@@ -121,8 +122,8 @@ Scenario: _029201 create work order
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Assembly'    |
+				| 'Description'     |
+				| 'Assembly'        |
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
@@ -132,38 +133,38 @@ Scenario: _029201 create work order
 			And I select current line in "ItemList" table
 			And I click choice button of "Bill of materials" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Assembly'    |
+				| 'Description'     |
+				| 'Assembly'        |
 			And I select current line in "List" table
 		* Check materials tab
 			And "Materials" table became equal
-				| '#' | 'Cost write off'       | 'Item'       | 'Item key'   | 'Procurement method' | 'Unit' | 'Store'    | 'Quantity' |
-				| '1' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Stock'              | 'pcs'  | 'Store 01' | '2,000'    |
-				| '2' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Stock'              | 'pcs'  | 'Store 01' | '2,000'    |
+				| '#'    | 'Cost write off'          | 'Item'          | 'Item key'      | 'Procurement method'    | 'Unit'    | 'Store'       | 'Quantity'     |
+				| '1'    | 'Include to work cost'    | 'Material 1'    | 'Material 1'    | 'Stock'                 | 'pcs'     | 'Store 01'    | '2,000'        |
+				| '2'    | 'Include to work cost'    | 'Material 2'    | 'Material 2'    | 'Stock'                 | 'pcs'     | 'Store 01'    | '2,000'        |
 		* Second work
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Installation' |
+				| 'Description'      |
+				| 'Installation'     |
 			And I select current line in "List" table
 			And I activate "Bill of materials" field in "ItemList" table
 			And I click choice button of "Bill of materials" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'            |
-				| 'Furniture installation' |
+				| 'Description'                |
+				| 'Furniture installation'     |
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check material tab
 			And "Materials" table contains lines
-				| '#' | 'Cost write off'       | 'Item'       | 'Item key'   | 'Procurement method' | 'Unit' | 'Store'    | 'Quantity' |
-				| '3' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Stock'              | 'pcs'  | 'Store 01' | '2,000'    |
-				| '4' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Stock'              | 'pcs'  | 'Store 01' | '4,000'    |
-				| '5' | 'Include to work cost' | 'Material 3' | 'Material 3' | 'Stock'              | 'kg'   | 'Store 01' | '1,521'    |
+				| '#'    | 'Cost write off'          | 'Item'          | 'Item key'      | 'Procurement method'    | 'Unit'    | 'Store'       | 'Quantity'     |
+				| '3'    | 'Include to work cost'    | 'Material 1'    | 'Material 1'    | 'Stock'                 | 'pcs'     | 'Store 01'    | '2,000'        |
+				| '4'    | 'Include to work cost'    | 'Material 2'    | 'Material 2'    | 'Stock'                 | 'pcs'     | 'Store 01'    | '4,000'        |
+				| '5'    | 'Include to work cost'    | 'Material 3'    | 'Material 3'    | 'Stock'                 | 'kg'      | 'Store 01'    | '1,521'        |
 		* Add workers
 			And I move to "Workers" tab
 			And in the table "Workers" I click the button named "WorkersAdd"
@@ -171,14 +172,14 @@ Scenario: _029201 create work order
 			And I select current line in "Workers" table
 			And I click choice button of "Employee" attribute in "Workers" table
 			And I go to line in "List" table
-				| 'Description'     |
-				| 'Alexander Orlov' |
+				| 'Description'         |
+				| 'Alexander Orlov'     |
 			And I select current line in "List" table
 			And I activate field named "WorkersUnit" in "Workers" table
 			And I click choice button of the attribute named "WorkersUnit" in "Workers" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'hour'        |
+				| 'Description'     |
+				| 'hour'            |
 			And I select current line in "List" table
 			And I activate field named "WorkersQuantity" in "Workers" table
 			And I input "2,000" text in the field named "WorkersQuantity" of "Workers" table
@@ -187,29 +188,29 @@ Scenario: _029201 create work order
 			And I activate "Employee" field in "Workers" table
 			And I click choice button of "Employee" attribute in "Workers" table
 			And I go to line in "List" table
-				| 'Description'   |
-				| 'David Romanov' |
+				| 'Description'       |
+				| 'David Romanov'     |
 			And I select current line in "List" table
 			And I activate field named "WorkersUnit" in "Workers" table
 			And I click choice button of the attribute named "WorkersUnit" in "Workers" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'hour'        |
+				| 'Description'     |
+				| 'hour'            |
 			And I select current line in "List" table
 			And I activate field named "WorkersQuantity" in "Workers" table
 			And I input "2,500" text in the field named "WorkersQuantity" of "Workers" table
 			And I finish line editing in "Workers" table
 		* Check workers tab
 			And "Workers" table became equal
-				| '#' | 'Employee'        | 'Unit' | 'Quantity' |
-				| '1' | 'Alexander Orlov' | 'hour' | '2,000'    |
-				| '2' | 'David Romanov'   | 'hour' | '2,500'    |
+				| '#'    | 'Employee'           | 'Unit'    | 'Quantity'     |
+				| '1'    | 'Alexander Orlov'    | 'hour'    | '2,000'        |
+				| '2'    | 'David Romanov'      | 'hour'    | '2,500'        |
 		* Filling branch
 			And I move to "Other" tab
 			And I click Choice button of the field named "Branch"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Workshop 1'  |
+				| 'Description'     |
+				| 'Workshop 1'      |
 			And I select current line in "List" table
 			And I select "Approved" exact value from the drop-down list named "Status"			
 		* Post document
@@ -222,8 +223,8 @@ Scenario: _029201 create work order
 		* Check document creation
 			Given I open hyperlink "e1cib/list/Document.WorkOrder"
 			And "List" table contains lines
-				| 'Number'                    | 'Company'      |
-				| '$$NumberWorkOrder1$$'      | 'Main Company' |
+				| 'Number'                  | 'Company'          |
+				| '$$NumberWorkOrder1$$'    | 'Main Company'     |
 			And I close all client application windows
 							
 Scenario: _029202 create work order	based on Sales order
@@ -231,22 +232,22 @@ Scenario: _029202 create work order	based on Sales order
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"							
 		And I go to line in "List" table
-			| 'Number' |
-			| '183'    |
+			| 'Number'    |
+			| '183'       |
 	* Create WO
 		And I click "Work order" button
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
-			| 'TRY'      | '120,00' | '1,000'    | 'Delivery (Delivery)' | 'pcs'  | 'Yes' |
+			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'      | 'Unit'   | 'Use'    |
+			| 'TRY'        | '120,00'   | '1,000'      | 'Delivery (Delivery)'   | 'pcs'    | 'Yes'    |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 	* Check WO
 		And "ItemList" table became equal
-			| '#' | 'Item'         | 'Price type'        | 'Item key'     | 'Bill of materials'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'                               |
-			| '1' | 'Installation' | 'Basic Price Types' | 'Installation' | 'Furniture installation' | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |
-			| '2' | 'Assembly'     | 'Basic Price Types' | 'Assembly'     | 'Assembly'               | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |
+			| '#'   | 'Item'           | 'Price type'          | 'Item key'       | 'Bill of materials'        | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Sales order'                                  |
+			| '1'   | 'Installation'   | 'Basic Price Types'   | 'Installation'   | 'Furniture installation'   | 'pcs'    | 'No'                   | '14,49'        | '1,000'      | '100,00'   | '5,00'            | '80,51'        | '95,00'          | 'Sales order 183 dated 22.09.2022 11:13:46'    |
+			| '2'   | 'Assembly'       | 'Basic Price Types'   | 'Assembly'       | 'Assembly'                 | 'pcs'    | 'No'                   | '14,49'        | '1,000'      | '100,00'   | '5,00'            | '80,51'        | '95,00'          | 'Sales order 183 dated 22.09.2022 11:13:46'    |
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -267,8 +268,8 @@ Scenario: _029202 create work order	based on Sales order
 	* Check document creation
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And "List" table contains lines
-			| 'Number'                    | 'Company'      |
-			| '$$NumberWorkOrder2$$'      | 'Main Company' |
+			| 'Number'                 | 'Company'         |
+			| '$$NumberWorkOrder2$$'   | 'Main Company'    |
 		And I close all client application windows	
 				
 				
@@ -282,59 +283,59 @@ Scenario: _029203 create work order	based on Sales order (link form)
 		Then the form attribute named "Status" became equal to "Wait"		
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'     |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		And I move to "Other" tab
 		And I click Choice button of the field named "Branch"		
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Front office' |
+			| 'Description'     |
+			| 'Front office'    |
 		And I select current line in "List" table
 	* Select work from SO
 		And in the table "ItemList" I click "Add basis documents" button
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
-			| 'TRY'      | '120,00' | '1,000'    | 'Delivery (Delivery)' | 'pcs'  | 'No'  |
+			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'      | 'Unit'   | 'Use'    |
+			| 'TRY'        | '120,00'   | '1,000'      | 'Delivery (Delivery)'   | 'pcs'    | 'No'     |
 		And I set "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 	* Check filling WO
 		And "ItemList" table became equal
-			| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'                               |
-			| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '1,000'    | '120,00' | '6,00'          | '96,61'      | '114,00'       | 'Sales order 183 dated 22.09.2022 11:13:46' |
+			| '#'   | 'Item'       | 'Price type'          | 'Item key'   | 'Bill of materials'   | 'Unit'   | 'Dont calculate row'   | 'Quantity'   | 'Price'    | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Sales order'                                  |
+			| '1'   | 'Delivery'   | 'Basic Price Types'   | 'Delivery'   | ''                    | 'pcs'    | 'No'                   | '1,000'      | '120,00'   | '6,00'            | '96,61'        | '114,00'         | 'Sales order 183 dated 22.09.2022 11:13:46'    |
 	* Unlink
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                          |
-			| 'Sales order 183 dated 22.09.2022 11:13:46' |
+			| 'Row presentation'                             |
+			| 'Sales order 183 dated 22.09.2022 11:13:46'    |
 		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table
 		And in the table "ResultsTree" I click "Unlink all" button
 	* Check
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'    |
-			| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '1,000'    | '120,00' | '6,00'          | '96,61'      | '114,00'       | ''               |
+			| '#'   | 'Item'       | 'Price type'          | 'Item key'   | 'Bill of materials'   | 'Unit'   | 'Dont calculate row'   | 'Quantity'   | 'Price'    | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Sales order'    |
+			| '1'   | 'Delivery'   | 'Basic Price Types'   | 'Delivery'   | ''                    | 'pcs'    | 'No'                   | '1,000'      | '120,00'   | '6,00'            | '96,61'        | '114,00'         | ''               |
 	* Link back 
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' |
-			| 'TRY'      | '120,00' | '1,000'    | 'Delivery (Delivery)' | 'pcs'  |
+			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'      | 'Unit'    |
+			| 'TRY'        | '120,00'   | '1,000'      | 'Delivery (Delivery)'   | 'pcs'     |
 		And in the table "BasisesTree" I click the button named "Link"
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'                               |
-			| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '1,000'    | '120,00' | '6,00'          | '96,61'      | '114,00'       | 'Sales order 183 dated 22.09.2022 11:13:46' |
+			| '#'   | 'Item'       | 'Price type'          | 'Item key'   | 'Bill of materials'   | 'Unit'   | 'Dont calculate row'   | 'Quantity'   | 'Price'    | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Sales order'                                  |
+			| '1'   | 'Delivery'   | 'Basic Price Types'   | 'Delivery'   | ''                    | 'pcs'    | 'No'                   | '1,000'      | '120,00'   | '6,00'            | '96,61'        | '114,00'         | 'Sales order 183 dated 22.09.2022 11:13:46'    |
 		And I close all client application windows
 				
 						
@@ -344,14 +345,14 @@ Scenario: _029207 create SI based on Work order (with SO)
 	* Select WO
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'               |
-			| '$$NumberWorkOrder2$$' |
+			| 'Number'                  |
+			| '$$NumberWorkOrder2$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And I expand a line in "BasisesTree" table
-			| 'Row presentation' | 'Use' |
-			| '$$WorkOrder2$$'   | 'Yes' |
+			| 'Row presentation'   | 'Use'    |
+			| '$$WorkOrder2$$'     | 'Yes'    |
 		And I click "Ok" button
 	* Check filling
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -359,14 +360,14 @@ Scenario: _029207 create SI based on Work order (with SO)
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
-			| '#' | 'Price type'        | 'Item'         | 'Item key'     | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Work order'     | 'Revenue type' | 'Sales person' |
-			| '1' | 'Basic Price Types' | 'Installation' | 'Installation' | ''                   | 'No'                 | '14,49'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | 'Sales order 183 dated 22.09.2022 11:13:46' | '$$WorkOrder2$$' | ''             | ''             |
-			| '2' | 'Basic Price Types' | 'Assembly'     | 'Assembly'     | ''                   | 'No'                 | '14,49'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | 'Sales order 183 dated 22.09.2022 11:13:46' | '$$WorkOrder2$$' | ''             | ''             |
+			| '#'   | 'Price type'          | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                 | 'Work order'       | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'Basic Price Types'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
+			| '2'   | 'Basic Price Types'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
 		
 		And "SpecialOffers" table became equal
-			| '#' | 'Amount' | 'Special offer'    |
-			| '1' | '5,00'   | 'DocumentDiscount' |
-			| '2' | '5,00'   | 'DocumentDiscount' |
+			| '#'   | 'Amount'   | 'Special offer'       |
+			| '1'   | '5,00'     | 'DocumentDiscount'    |
+			| '2'   | '5,00'     | 'DocumentDiscount'    |
 		
 		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "161,02"
@@ -383,8 +384,8 @@ Scenario: _029207 create SI based on Work order (with SO)
 	* Check document creation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And "List" table contains lines
-			| 'Number'                  | 'Company'      |
-			| '$$NumberSalesInvoice2$$' | 'Main Company' |
+			| 'Number'                    | 'Company'         |
+			| '$$NumberSalesInvoice2$$'   | 'Main Company'    |
 		And I close all client application windows	
 				
 
@@ -393,8 +394,8 @@ Scenario: _029208 create SI based on Work order (without SO)
 	* Select WO
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
-			| 'Number'               |
-			| '$$NumberWorkOrder1$$' |
+			| 'Number'                  |
+			| '$$NumberWorkOrder1$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"				
 		And I click "Ok" button
 	* Check SI filling
@@ -403,9 +404,9 @@ Scenario: _029208 create SI based on Work order (without SO)
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'         | 'Item key'     | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order'     | 'Revenue type' | 'Sales person' |
-			| '1' | 'en description is empty' | 'Assembly'     | 'Assembly'     | ''                   | 'No'                 | '30,51'      | 'pcs'  | ''                   | '1,000'    | '200,00' | '18%' | ''              | '169,49'     | '200,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
-			| '2' | 'en description is empty' | 'Installation' | 'Installation' | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
+			| '#'   | 'Price type'                | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'       | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'en description is empty'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '30,51'        | 'pcs'    | ''                     | '1,000'      | '200,00'   | '18%'   | ''                | '169,49'       | '200,00'         | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
+			| '2'   | 'en description is empty'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '15,25'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | ''                | '84,75'        | '100,00'         | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
 		Then the form attribute named "Branch" became equal to "Workshop 1"
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "254,24"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "45,76"
@@ -421,8 +422,8 @@ Scenario: _029208 create SI based on Work order (without SO)
 	* Check document creation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And "List" table contains lines
-			| 'Number'                  | 'Company'      |
-			| '$$NumberSalesInvoice3$$' | 'Main Company' |
+			| 'Number'                    | 'Company'         |
+			| '$$NumberSalesInvoice3$$'   | 'Main Company'    |
 		And I close all client application windows				
 						
 				

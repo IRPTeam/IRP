@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CommissionTrade
@@ -281,8 +281,8 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I click Choice button of the field named "Branch"
 		Then "Business units" window is opened
 		And I go to line in "List" table
-			| 'Code'   | 'Department'   | 'Description'               | 'Workshop'    |
-			| '3'      | 'Yes'          | 'Distribution department'   | 'No'          |
+			| 'Description'             |
+			| 'Distribution department' |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I click "Post" button

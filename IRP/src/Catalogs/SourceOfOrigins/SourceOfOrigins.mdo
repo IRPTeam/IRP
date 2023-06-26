@@ -232,6 +232,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="02988437-4f00-4a12-86ad-1b1aa3254039">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="97cf9534-12d1-41b8-82ba-bf3224a31269">
     <name>ListForm</name>
     <synonym>
@@ -246,15 +255,6 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="02988437-4f00-4a12-86ad-1b1aa3254039">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

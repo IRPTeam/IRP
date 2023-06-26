@@ -12,6 +12,8 @@ EndFunction
 
 #EndRegion
 
+#Region Document
+
 Function CheckDocument() Export
 	ArrayOfErrors = New Array();
 	
@@ -64,57 +66,6 @@ Function CheckDocument() Export
 			Query.Execute();
 		Except
 			ArrayOfErrors.Add("Can't select data. Check template in Role. Error:" + Doc.FullName());
-			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
-			ArrayOfErrors.Add("--------------------------");
-			ArrayOfErrors.Add();
-		EndTry;
-	EndDo;
-			
-	
-	If ArrayOfErrors.Count() Then
-		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
-	EndIf;
-	Return "";
-EndFunction
-
-Function AccumulationRegisters() Export
-	ArrayOfErrors = New Array();
-	
-	For Each MetaObj In Metadata.AccumulationRegisters Do
-			
-		
-		Try
-			AccumulationRegisters[MetaObj.Name].GetAccessKey();
-		Except
-			ArrayOfErrors.Add("GetAccessKey error:" + MetaObj.FullName());
-			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
-			ArrayOfErrors.Add("--------------------------");
-			ArrayOfErrors.Add();
-		EndTry;
-		
-		ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateAccumulationRegisters);
-		If Not ReadResult.Accessibility Then
-			ArrayOfErrors.Add("Set Read access to Role TemplateAccumulationRegisters:" + MetaObj.FullName());
-			ArrayOfErrors.Add("--------------------------");
-		EndIf;
-		
-		If Not ReadResult.RestrictionByCondition Then
-			ArrayOfErrors.Add("Set Read template:" + MetaObj.FullName());
-			ArrayOfErrors.Add("--------------------------");
-		EndIf; 
-		
-		ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateAccumulationRegisters);
-		If ReadResult.Accessibility Then
-			ArrayOfErrors.Add("Remove Update access from Role TemplateAccumulationRegisters:" + MetaObj.FullName());
-			ArrayOfErrors.Add("--------------------------");
-		EndIf; 
-
-		Query = New Query("Select ALLOWED TOP 1 * FROM " + MetaObj.FullName());
-		
-		Try
-			Query.Execute();
-		Except
-			ArrayOfErrors.Add("Can't select data. Check template in Role. Error:" + MetaObj.FullName());
 			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();
@@ -251,59 +202,6 @@ Function CreateDoc(Row, MetaObj)
 	Return NewDoc;
 EndFunction
 
-Function GenerateAccumulationRegisters() Export
-	
-	Data = GenerateDataForAccessTest();
-
-	AllReg = New Array;
-	For Each MetaObj In Metadata.AccumulationRegisters Do
-		
-		AccessKey = AccumulationRegisters[MetaObj.Name].GetAccessKey(); // Map
-		If AccessKey.Count() = 0 Then
-			Continue;
-		EndIf;
-		
-		Keys = PrepareAccess_AccumulationRegisters(AccessKey, MetaObj);
-		
-		Table = GetAllCase(Data, Keys);
-		
-		
-		DocType = MetaObj.StandardAttributes.Recorder.Type.Types()[0]; // Type
-		MetaDoc = Metadata.FindByType(DocType);
-		DocRef = Documents[MetaDoc.Name].GetRef(New UUID("11111111-1111-1111-1111-111111111111"));
-		
-		NewReg = AccumulationRegisters[MetaObj.Name].CreateRecordSet();
-		NewReg.DataExchange.Load = True;
-		NewReg.Filter.Recorder.Set(DocRef);
-		NewReg.Write();
-		
-		For Each Row In Table Do
-
-			
-			NewRow = NewReg.Add();
-			NewRow.Recorder = DocRef;
-			NewRow.Period = CurrentDate();
-			FillPropertyValues(NewRow, Row);
-
-			
-			Descr = "";
-			For Each Column In Table.Columns Do
-				Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
-			EndDo;
-			
-			AllReg.Add(MetaObj.FullName() + " " + Descr);
-			
-		EndDo;
-		NewReg.Write();
-		
-	EndDo;
-	
-	CommonFunctionsClientServer.ShowUsersMessage("Total accumulation reg: " + AllReg.Count());
-	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(AllReg, Chars.LF));
-	
-	Return "";
-EndFunction
-
 Function PrepareAccess_Document(Keys, MetaObj)
 	
 	AccessKey = New Structure;
@@ -361,6 +259,114 @@ Function PrepareAccess_Document(Keys, MetaObj)
 	
 EndFunction
 
+#EndRegion
+
+#Region AccumulationRegisters
+
+Function AccumulationRegisters() Export
+	ArrayOfErrors = New Array();
+	
+	For Each MetaObj In Metadata.AccumulationRegisters Do
+			
+		
+		Try
+			AccumulationRegisters[MetaObj.Name].GetAccessKey();
+		Except
+			ArrayOfErrors.Add("GetAccessKey error:" + MetaObj.FullName());
+			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+			ArrayOfErrors.Add("--------------------------");
+			ArrayOfErrors.Add();
+		EndTry;
+		
+		ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateAccumulationRegisters);
+		If Not ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Set Read access to Role TemplateAccumulationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf;
+		
+		If Not ReadResult.RestrictionByCondition Then
+			ArrayOfErrors.Add("Set Read template:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf; 
+		
+		ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateAccumulationRegisters);
+		If ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Remove Update access from Role TemplateAccumulationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf; 
+
+		Query = New Query("Select ALLOWED TOP 1 * FROM " + MetaObj.FullName());
+		
+		Try
+			Query.Execute();
+		Except
+			ArrayOfErrors.Add("Can't select data. Check template in Role. Error:" + MetaObj.FullName());
+			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+			ArrayOfErrors.Add("--------------------------");
+			ArrayOfErrors.Add();
+		EndTry;
+	EndDo;
+			
+	
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+	Return "";
+EndFunction
+
+Function GenerateAccumulationRegisters() Export
+	
+	Data = GenerateDataForAccessTest();
+
+	AllReg = New Array;
+	For Each MetaObj In Metadata.AccumulationRegisters Do
+		
+		AccessKey = AccumulationRegisters[MetaObj.Name].GetAccessKey(); // Map
+		If AccessKey.Count() = 0 Then
+			Continue;
+		EndIf;
+		
+		Keys = PrepareAccess_AccumulationRegisters(AccessKey, MetaObj);
+		
+		Table = GetAllCase(Data, Keys);
+		
+		
+		DocType = MetaObj.StandardAttributes.Recorder.Type.Types()[0]; // Type
+		MetaDoc = Metadata.FindByType(DocType);
+		DocRef = Documents[MetaDoc.Name].GetRef(New UUID("11111111-1111-1111-1111-111111111111"));
+		
+		NewReg = AccumulationRegisters[MetaObj.Name].CreateRecordSet();
+		NewReg.DataExchange.Load = True;
+		NewReg.Filter.Recorder.Set(DocRef);
+		NewReg.Write();
+		
+		For Each Row In Table Do
+
+			
+			NewRow = NewReg.Add();
+			NewRow.Recorder = DocRef;
+			NewRow.Period = CurrentDate();
+			FillPropertyValues(NewRow, Row);
+
+			
+			Descr = "";
+			For Each Column In Table.Columns Do
+				Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
+			EndDo;
+			
+			AllReg.Add(MetaObj.FullName() + " " + Descr);
+			
+		EndDo;
+		NewReg.Write();
+		
+	EndDo;
+	
+	CommonFunctionsClientServer.ShowUsersMessage("Total accumulation reg: " + AllReg.Count());
+	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(AllReg, Chars.LF));
+	
+	Return "";
+EndFunction
+
 Function PrepareAccess_AccumulationRegisters(Keys, MetaObj)
 	
 	AccessKey = New Structure;
@@ -412,6 +418,10 @@ Function PrepareAccess_AccumulationRegisters(Keys, MetaObj)
 	Return AccessKey;
 	
 EndFunction
+
+#EndRegion
+
+#Region Service
 
 Function GetAllCase(Val Data, Val AccessKey)
 
@@ -473,6 +483,7 @@ Function GenerateDataForAccessTest()
 	Data.PriceType.Add(Catalogs.PriceTypes.GetRef(New UUID("22222222-2222-2222-2222-222222222222")));
 	Data.PriceType.Add(Catalogs.PriceTypes.GetRef(New UUID("33333333-3333-3333-3333-333333333333")));
 	
+	//@skip-check reading-attribute-from-database
 	If Not IsBlankString(Data.AccessGroup.DataVersion) Then
 		Return Data;
 	EndIf;
@@ -496,18 +507,21 @@ Function GenerateDataForAccessTest()
 	Company.Write();
 
 	Branch = Catalogs.BusinessUnits.CreateItem();
+	//@skip-check unknown-method-property
 	Branch.Description_en = "Branch Read and Write Access";	
 	Branch.DataExchange.Load = True;
 	Branch.SetNewObjectRef(Data.Branch[0]);
 	Branch.Write();
 	
 	Branch = Catalogs.BusinessUnits.CreateItem();
+	//@skip-check unknown-method-property
 	Branch.Description_en = "Branch Only read access";	
 	Branch.DataExchange.Load = True;
 	Branch.SetNewObjectRef(Data.Branch[1]);
 	Branch.Write();
 	
 	Branch = Catalogs.BusinessUnits.CreateItem();
+	//@skip-check unknown-method-property
 	Branch.Description_en = "Branch access deny";	
 	Branch.DataExchange.Load = True;
 	Branch.SetNewObjectRef(Data.Branch[2]);
@@ -598,3 +612,5 @@ Procedure AddAccessRow(AccessGroup, Key, Ref, Modify)
 	NewRow.ValueRef = Ref;
 	NewRow.Modify = Modify;
 EndProcedure
+
+#EndRegion

@@ -175,22 +175,22 @@ Scenario: _602706 check user message
 // 		And I close all client application windows
 
 
-Scenario: _602780 test data base connection
-	Then I stop script execution "Skipped"
-	And I close all client application windows
-	* Сondition check
-		If "$Publication$" variable is equal to "false" Then
-			Then I stop script execution "Skipped"
-	* Select integration settings
-		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Test'           |
-		And I select current line in "List" table
-	* Test connection
-		And in the table "ConnectionSetting" I click "Test" button
-		Then I wait that in user messages the "Status code: 200" substring will appear in "30" seconds
-		And I close all client application windows
+// 		Scenario: _602780 test data base connection
+// 			Then I stop script execution "Skipped"
+// 			And I close all client application windows
+// 			* Сondition check
+// 				If "$Publication$" variable is equal to "false" Then
+// 					Then I stop script execution "Skipped"
+// 			* Select integration settings
+// 				Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+// 				And I go to line in "List" table
+// 					| 'Description'    |
+// 					| 'Test'           |
+// 				And I select current line in "List" table
+// 			* Test connection
+// 				And in the table "ConnectionSetting" I click "Test" button
+// 				Then I wait that in user messages the "Status code: 200" substring will appear in "30" seconds
+// 				And I close all client application windows
 		
 				
 		

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -135,8 +135,8 @@ Scenario: Create catalog IDInfoAddresses objects (test data base)
 Scenario: Create catalog BankTerms objects (test data base)
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_ru'                           | 'Description_hash'  | 'Description_en'           | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=b762b13668d0905011eb7663e35d7962'  | 'False'         | '1'     | 'Соглашение с банком (розничный магазин)'  | ''                  | 'Bank agreement (retail)'  | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_ru'                          | 'Description_hash' | 'Description_en'          | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=b762b13668d0905011eb7663e35d7962' | 'False'        | '1'    | 'Соглашение с банком (розничный магазин)' | ''                 | 'Bank agreement (retail)' | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -21,8 +21,8 @@ Scenario: _0050 Data base title
 	* Filling in title
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I go to line in "List" table
-			| 'is Product server' |
-			| 'Yes'               | 
+			| 'is Product server'    |
+			| 'Yes'                  |
 		And I select current line in "List" table	
 		And I input "Test IRP" text in the field named "Description_en"
 		And I click "Save and close" button

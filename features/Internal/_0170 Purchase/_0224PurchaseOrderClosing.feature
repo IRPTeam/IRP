@@ -49,8 +49,8 @@ Scenario: _0224000 preparation (Purchase order closing)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -59,7 +59,8 @@ Scenario: _0224000 preparation (Purchase order closing)
 	* Create test PO
 		When Create document PurchaseOrder objects (for check closing)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
+			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 
 Scenario: _02240001 check preparation
 	When check preparation
@@ -68,8 +69,8 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 	* Create Purchase order closing 
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'  | 'Date'                |
-			| '37'      | '09.03.2021 14:29:00'	|	
+			| 'Number'   | 'Date'                   |
+			| '37'       | '09.03.2021 14:29:00'    |
 		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -78,33 +79,33 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "PurchaseOrder" became equal to "Purchase order 37 dated 09.03.2021 14:29:00"
 		And "ItemList" table contains lines
-			| 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Store'    | 'Cancel' | 'Delivery date' | 'Cancel reason' |
-			| 'Shirt'   | '38/Black' | '2,000'    | 'pcs'  | 'Store 03' | 'Yes'    | '11.03.2021'    | ''              |
-			| 'Dress'   | 'XS/Blue'  | '96,000'   | 'pcs'  | 'Store 03' | 'Yes'    | '11.03.2021'    | ''              |
-			| 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'Store 03' | 'Yes'    | '11.03.2021'    | ''              |
+			| 'Item'      | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Cancel'   | 'Delivery date'   | 'Cancel reason'    |
+			| 'Shirt'     | '38/Black'   | '2,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
+			| 'Dress'     | 'XS/Blue'    | '96,000'     | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
+			| 'Service'   | 'Rent'       | '1,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
 		Then the number of "ItemList" table lines is "equal" "3"
 	// * Try to post document without filling in cancel reason
 	// 	And I click the button named "FormPost"
 	// 	Then I wait that in user messages the "Cancel reason has to be filled if string was canceled" substring will appear in "10" seconds
 	* Filling in cancel reason and post Purchase order closing
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'   |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I click choice button of "Cancel reason" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'not available' |
+			| 'Description'      |
+			| 'not available'    |
 		And I select current line in "List" table	
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'  |
+			| 'Item'      | 'Item key'    |
+			| 'Service'   | 'Rent'        |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -123,23 +124,23 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		If "List" table contains lines Then
-				| "Number" |
-				| "$$NumberPurchaseOrderClosing0224001$$" |
+				| "Number"                                    |
+				| "$$NumberPurchaseOrderClosing0224001$$"     |
 			And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrderClosing.FindByNumber($$NumberPurchaseOrderClosing0224001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+				| "Documents.PurchaseOrderClosing.FindByNumber($$NumberPurchaseOrderClosing0224001$$).GetObject().Write(DocumentWriteMode.UndoPosting);"     |
 	* Load PI and GR for PO 37
 		When Create document GoodsReceipt objects (for check closing)
 		When Create document PurchaseInvoice objects (for check closing)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.GoodsReceipt.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Create Purchase order closing 
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'  | 'Date'                |
-			| '37'      | '09.03.2021 14:29:00'	|
+			| 'Number'   | 'Date'                   |
+			| '37'       | '09.03.2021 14:29:00'    |
 		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -148,9 +149,9 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "PurchaseOrder" became equal to "Purchase order 37 dated 09.03.2021 14:29:00"
 		And "ItemList" table contains lines
-			| 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Store'    | 'Cancel' | 'Delivery date' | 'Cancel reason' |
-			| 'Shirt'   | '38/Black' | '1,000'    | 'pcs'  | 'Store 03' | 'No'     | '11.03.2021'    | ''              |
-			| 'Dress'   | 'XS/Blue'  | '8,000'    | 'pcs'  | 'Store 03' | 'Yes'    | '11.03.2021'    | ''              |
-			| 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'Store 03' | 'Yes'    | '11.03.2021'    | ''              |
+			| 'Item'      | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Cancel'   | 'Delivery date'   | 'Cancel reason'    |
+			| 'Shirt'     | '38/Black'   | '1,000'      | 'pcs'    | 'Store 03'   | 'No'       | '11.03.2021'      | ''                 |
+			| 'Dress'     | 'XS/Blue'    | '8,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
+			| 'Service'   | 'Rent'       | '1,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
 		Then the number of "ItemList" table lines is "equal" "3"
 		And I close all client application windows

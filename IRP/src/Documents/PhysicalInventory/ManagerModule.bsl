@@ -301,6 +301,7 @@ EndFunction
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("Store", Obj.Store);
 	Return AccessKeyMap;
 EndFunction
 

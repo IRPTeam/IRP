@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CompanyCatalogs
@@ -25,20 +25,20 @@ Scenario: _005013 filling in the "Companies" catalog
 		When Create catalog Currencies objects
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Forex Buying' |
+			| 'Description'     |
+			| 'Forex Buying'    |
 		And I select current line in "List" table
 		And I select "Currency rates" exact value from "Integration type" drop-down list
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Forex Seling' |
+			| 'Description'     |
+			| 'Forex Seling'    |
 		And I select current line in "List" table
 		And I select "Currency rates" exact value from "Integration type" drop-down list
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank UA'     |
+			| 'Description'    |
+			| 'Bank UA'        |
 		And I select current line in "List" table
 		And I select "Currency rates" exact value from "Integration type" drop-down list
 		And I click "Save and close" button
@@ -65,13 +65,13 @@ Scenario: _005013 filling in the "Companies" catalog
 				And I input "Local currency" text in the field named "Description_en"
 				And I click Select button of "Currency" field
 				And I go to line in "List" table
-					| 'Code' | 'Description'  |
-					| 'TRY'  | 'Turkish lira' |
+					| 'Code'     | 'Description'       |
+					| 'TRY'      | 'Turkish lira'      |
 				And I select current line in "List" table
 				And I click Select button of "Source" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Forex Seling' |
+					| 'Description'       |
+					| 'Forex Seling'      |
 				And I select current line in "List" table
 				And I select "Legal" exact value from "Type" drop-down list
 				And I click "Save and close" button
@@ -84,14 +84,14 @@ Scenario: _005013 filling in the "Companies" catalog
 				And I click the button named "FormCreate"
 				And I click Select button of "Currency" field
 				And I go to line in "List" table
-					| 'Code' | 'Description'     |
-					| 'USD'  | 'American dollar' |
+					| 'Code'     | 'Description'          |
+					| 'USD'      | 'American dollar'      |
 				And I activate "Description" field in "List" table
 				And I select current line in "List" table
 				And I click Select button of "Source" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Forex Seling' |
+					| 'Description'       |
+					| 'Forex Seling'      |
 				And I select current line in "List" table
 				And I select "Reporting" exact value from "Type" drop-down list
 				And I input "Reporting currency" text in the field named "Description_en"
@@ -103,14 +103,14 @@ Scenario: _005013 filling in the "Companies" catalog
 				And I click the button named "FormCreate"
 				And I click Select button of "Currency" field
 				And I go to line in "List" table
-					| 'Code' | 'Description'     |
-					| 'USD'  | 'American dollar' |
+					| 'Code'     | 'Description'          |
+					| 'USD'      | 'American dollar'      |
 				And I activate "Description" field in "List" table
 				And I select current line in "List" table
 				And I click Select button of "Source" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Forex Seling' |
+					| 'Description'       |
+					| 'Forex Seling'      |
 				And I select current line in "List" table
 				And I select "Budgeting" exact value from "Type" drop-down list
 				And I input "Budgeting currency" text in the field named "Description_en"

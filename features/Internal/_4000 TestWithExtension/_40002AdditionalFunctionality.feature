@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ExtensionReportForm
@@ -38,8 +38,8 @@ Scenario: _4000200 preparation
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "AdditionalFunctionality" |
+				| "Description"                 |
+				| "AdditionalFunctionality"     |
 			When add Additional Functionality extension
 	When create Workstation				
 
@@ -77,8 +77,8 @@ Scenario: _4000202 hardware
 	And I select "Input device" exact value from "Types of Equipment" drop-down list
 	And I click Select button of "Driver" field
 	And I go to line in "List" table
-		| 'Description' |
-		| 'barcode'     |
+		| 'Description'   |
+		| 'barcode'       |
 	And I select current line in "List" table
 	And I click "Save" button
 	And I move to "Driver settings" tab
@@ -86,20 +86,20 @@ Scenario: _4000202 hardware
 	And I move to "Predefined settings" tab
 	And in the table "ConnectParameters" I click "Load settings" button
 	And "ConnectParameters" table contains lines
-		| '#'  | 'Name'           | 'Value'                 |
-		| '1'  | 'Port'           | '0'                     |
-		| '2'  | 'Prefix'         | '-1'                    |
-		| '3'  | 'Suffix'         | '3 338'                 |
-		| '4'  | 'OutputDataType' | ''                      |
-		| '5'  | 'GSSymbolKey'    | '7'                     |
-		| '6'  | 'Timeout'        | '35'                    |
-		| '7'  | 'DataBits'       | '8'                     |
-		| '8'  | 'StopBits'       | ''                      |
-		| '9'  | 'Parity'         | ''                      |
-		| '10' | 'Speed'          | '9 600'                 |
-		| '11' | 'COMEncoding'    | 'UTF-8'                 |
-		| '12' | 'LogType'        | '-1'                    |
-		| '13' | 'LogFilePath'    | 'C:\temp\scan_opos.txt' |
+		| '#'   | 'Name'            | 'Value'                   |
+		| '1'   | 'Port'            | '0'                       |
+		| '2'   | 'Prefix'          | '-1'                      |
+		| '3'   | 'Suffix'          | '3 338'                   |
+		| '4'   | 'OutputDataType'  | ''                        |
+		| '5'   | 'GSSymbolKey'     | '7'                       |
+		| '6'   | 'Timeout'         | '35'                      |
+		| '7'   | 'DataBits'        | '8'                       |
+		| '8'   | 'StopBits'        | ''                        |
+		| '9'   | 'Parity'          | ''                        |
+		| '10'  | 'Speed'           | '9 600'                   |
+		| '11'  | 'COMEncoding'     | 'UTF-8'                   |
+		| '12'  | 'LogType'         | '-1'                      |
+		| '13'  | 'LogFilePath'     | 'C:\temp\scan_opos.txt'   |
 	And I click "Save" button		
 	And I click the button named "FormWriteAndClose"
 
@@ -108,15 +108,15 @@ Scenario: _4000203 add hardware	to the workstation
 	Given I open hyperlink "e1cib/list/Catalog.Workstations"
 	* Select workstation
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Workstation 01'     |
+			| 'Description'       |
+			| 'Workstation 01'    |
 		And I select current line in "List" table	
 	* Check add hardware
 		And in the table "HardwareList" I click the button named "HardwareListAdd"
 		And I click choice button of "Hardware" attribute in "HardwareList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test input device'     |
+			| 'Description'          |
+			| 'Test input device'    |
 		And I select current line in "List" table
 		And I activate "Enable" field in "HardwareList" table
 		And I finish line editing in "HardwareList" table
@@ -124,8 +124,8 @@ Scenario: _4000203 add hardware	to the workstation
 		And I finish line editing in "HardwareList" table
 		And I click "Save" button
 		And "HardwareList" table became equal
-			| 'Enable' | 'Hardware'          |
-			| 'Yes'    | 'Test input device' |
+			| 'Enable'   | 'Hardware'             |
+			| 'Yes'      | 'Test input device'    |
 		And I close all client application windows
 		
 		

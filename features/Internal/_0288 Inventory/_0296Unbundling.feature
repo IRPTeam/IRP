@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Inventory
@@ -49,8 +49,8 @@ Scenario: _029600 preparation (Unbundling)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -67,29 +67,29 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| Item  | Item key  |
-			| Dress | Dress/A-8 |
+			| Item    | Item key     |
+			| Dress   | Dress/A-8    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| pcs      |
+			| Description    |
+			| pcs            |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 01  |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
@@ -101,8 +101,8 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 		And I click the button named "FormPostAndClose"
 	* Check the creation of Unbundling
 		And "List" table contains lines
-			| Item key bundle | Company      |
-			| Dress/A-8       | Main Company |
+			| Item key bundle   | Company         |
+			| Dress/A-8         | Main Company    |
 	And I close all client application windows
 	
 
@@ -114,29 +114,29 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Boots       |
+			| Description    |
+			| Boots          |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| Item  | Item key  |
-			| Boots | Boots/S-8 |
+			| Item    | Item key     |
+			| Boots   | Boots/S-8    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| pcs      |
+			| Description    |
+			| pcs            |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 02  |
+			| Description    |
+			| Store 02       |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
@@ -148,8 +148,8 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 		And I click the button named "FormPostAndClose"
 	* Check the creation of Unbundling
 		And "List" table contains lines
-			| Item key bundle | Company      |
-			| Boots/S-8       | Main Company |
+			| Item key bundle   | Company         |
+			| Boots/S-8         | Main Company    |
 	And I close all client application windows
 
 
@@ -163,29 +163,29 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Skittles + Chewing gum'      |
+			| 'Description'               |
+			| 'Skittles + Chewing gum'    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| 'Item'                   | 'Item key'                                    |
-			| 'Skittles + Chewing gum' | 'Skittles + Chewing gum/Skittles+Chewing gum' |
+			| 'Item'                     | 'Item key'                                       |
+			| 'Skittles + Chewing gum'   | 'Skittles + Chewing gum/Skittles+Chewing gum'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| pcs      |
+			| Description    |
+			| pcs            |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 01  |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
@@ -197,8 +197,8 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 		And I click the button named "FormPostAndClose"
 		* Check the creation of Unbundling
 			And "List" table contains lines
-				| 'Item key bundle'                             | 'Company'      |
-				| 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Main Company' |
+				| 'Item key bundle'                                | 'Company'          |
+				| 'Skittles + Chewing gum/Skittles+Chewing gum'    | 'Main Company'     |
 		And I close all client application windows
 
 Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bundling document) for which the specification was changed
@@ -206,8 +206,8 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 	* Change specification Dress+Trousers
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
 		And I go to line in "List" table
-			| Description    | Type   |
-			| Skittles+Chewing gum | Bundle |
+			| Description            | Type      |
+			| Skittles+Chewing gum   | Bundle    |
 		And I select current line in "List" table
 		And I activate field named "Quantity*" in "FormTable*" table
 		And I input "4,000" text in "Quantity" field of "FormTable*" table
@@ -219,36 +219,36 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Skittles + Chewing gum'       |
+			| 'Description'               |
+			| 'Skittles + Chewing gum'    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| 'Item'              | 'Item key'  |
-			| 'Skittles + Chewing gum' | 'Skittles + Chewing gum/Skittles+Chewing gum' |
+			| 'Item'                     | 'Item key'                                       |
+			| 'Skittles + Chewing gum'   | 'Skittles + Chewing gum/Skittles+Chewing gum'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| pcs      |
+			| Description    |
+			| pcs            |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 01  |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By bundle content" button
 		And "ItemList" table contains lines
-			| 'Item'        | 'Quantity' | 'Item key'   | 'Unit' |
-			| 'Chewing gum' | '2,000'    | 'Mint/Mango' | 'pcs'  |
-			| 'Skittles'    | '2,000'    | 'Fruit'      | 'pcs'  |
+			| 'Item'          | 'Quantity'   | 'Item key'     | 'Unit'    |
+			| 'Chewing gum'   | '2,000'      | 'Mint/Mango'   | 'pcs'     |
+			| 'Skittles'      | '2,000'      | 'Fruit'        | 'pcs'     |
 		And I click the button named "FormPost"
 		And I delete "$$NumberUnbundling0029611$$" variable
 		And I delete "$$Unbundling0029611$$" variable
@@ -257,8 +257,8 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 		And I click the button named "FormPostAndClose"
 		* Check the creation of Unbundling
 			And "List" table contains lines
-				| 'Item key bundle' | 'Company'      |
-				| 'Skittles + Chewing gum/Skittles+Chewing gum'       | 'Main Company' |
+				| 'Item key bundle'                                | 'Company'          |
+				| 'Skittles + Chewing gum/Skittles+Chewing gum'    | 'Main Company'     |
 		And I close all client application windows
 
 Scenario: _029612 create Unbundling
@@ -268,29 +268,29 @@ Scenario: _029612 create Unbundling
 	* Filling in details
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Bound Dress+Shirt       |
+			| Description          |
+			| Bound Dress+Shirt    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| Item              | Item key  |
-			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+			| Item                | Item key                         |
+			| Bound Dress+Shirt   | Bound Dress+Shirt/Dress+Shirt    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| pcs      |
+			| Description    |
+			| pcs            |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 07  |
+			| Description    |
+			| Store 07       |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
@@ -304,8 +304,8 @@ Scenario: _029612 create Unbundling
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And "List" table contains lines
-			| 'Number'                |
-			| '$$NumberUnbundling0029612$$' |
+			| 'Number'                         |
+			| '$$NumberUnbundling0029612$$'    |
 		And I close all client application windows
 
 
@@ -316,8 +316,8 @@ Scenario: _300520 check connection to Unbundling report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberUnbundling0029601$$      |
+		| Number                        |
+		| $$NumberUnbundling0029601$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

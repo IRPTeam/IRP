@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -44,54 +44,54 @@ Scenario: _3001000 preparation
 	* Check or create Purchase invoice 30010001
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice30010001$$" |
+				| "Number"                                |
+				| "$$NumberPurchaseInvoice30010001$$"     |
 				And I click the button named "FormCreate"
 				* Filling in details
 					And I click Select button of "Company" field
 					And I go to line in "List" table
-						| Description  |
-						| Main Company |
+						| Description        |
+						| Main Company       |
 					And I select current line in "List" table
 					And I click Select button of "Partner" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Ferron BP'    |
+						| 'Description'       |
+						| 'Ferron BP'         |
 					And I select current line in "List" table
 					And I click Select button of "Legal name" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Company Ferron BP'    |
+						| 'Description'             |
+						| 'Company Ferron BP'       |
 					And I select current line in "List" table
 					And I click Select button of "Legal name" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Company Ferron BP'    |
+						| 'Description'             |
+						| 'Company Ferron BP'       |
 					And I select current line in "List" table
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Vendor Ferron, TRY'    |
+						| 'Description'              |
+						| 'Vendor Ferron, TRY'       |
 					And I select current line in "List" table
 					And I click Select button of "Store" field
 					Then "Stores" window is opened
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Store 05'  |
+						| 'Description'       |
+						| 'Store 05'          |
 					And I select current line in "List" table
 				* Filling in items table
 					And I move to "Item list" tab
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Dress'    |
+						| 'Description'       |
+						| 'Dress'             |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| 'XS/Blue'  |
+						| 'Item key'       |
+						| 'XS/Blue'        |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "197,000" text in "Quantity" field of "ItemList" table
@@ -102,14 +102,14 @@ Scenario: _3001000 preparation
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Dress'    |
+						| 'Description'       |
+						| 'Dress'             |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| 'S/Yellow'  |
+						| 'Item key'       |
+						| 'S/Yellow'       |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "134,000" text in "Quantity" field of "ItemList" table
@@ -120,14 +120,14 @@ Scenario: _3001000 preparation
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Shirt'    |
+						| 'Description'       |
+						| 'Shirt'             |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| '36/Red'  |
+						| 'Item key'       |
+						| '36/Red'         |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "7,000" text in "Quantity" field of "ItemList" table
@@ -138,14 +138,14 @@ Scenario: _3001000 preparation
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Boots'    |
+						| 'Description'       |
+						| 'Boots'             |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| '36/18SD'  |
+						| 'Item key'       |
+						| '36/18SD'        |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -161,8 +161,8 @@ Scenario: _3001000 preparation
 					And I click the button named "FormPostAndClose"
 					Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 					And I go to line in "List" table
-						| 'Number' |
-						| '$$NumberPurchaseInvoice30010001$$'      |
+						| 'Number'                                  |
+						| '$$NumberPurchaseInvoice30010001$$'       |
 					And I activate "Date" field in "List" table
 					And I click the button named "FormDocumentGoodsReceiptGenerate"
 					And I click "Ok" button				
@@ -171,54 +171,54 @@ Scenario: _3001000 preparation
 		* Check or create Purchase invoice 3001002
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice30010002$$" |
+				| "Number"                                |
+				| "$$NumberPurchaseInvoice30010002$$"     |
 				And I click the button named "FormCreate"
 				* Filling in details
 					And I click Select button of "Company" field
 					And I go to line in "List" table
-						| Description  |
-						| Main Company |
+						| Description        |
+						| Main Company       |
 					And I select current line in "List" table
 					And I click Select button of "Partner" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Ferron BP'    |
+						| 'Description'       |
+						| 'Ferron BP'         |
 					And I select current line in "List" table
 					And I click Select button of "Legal name" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Company Ferron BP'    |
+						| 'Description'             |
+						| 'Company Ferron BP'       |
 					And I select current line in "List" table
 					And I click Select button of "Legal name" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Company Ferron BP'    |
+						| 'Description'             |
+						| 'Company Ferron BP'       |
 					And I select current line in "List" table
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
-						| 'Description'  |
-						| 'Vendor Ferron, TRY'    |
+						| 'Description'              |
+						| 'Vendor Ferron, TRY'       |
 					And I select current line in "List" table
 					And I click Select button of "Store" field
 					Then "Stores" window is opened
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Store 06'  |
+						| 'Description'       |
+						| 'Store 06'          |
 					And I select current line in "List" table
 				* Filling in items table
 					And I move to "Item list" tab
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Dress'    |
+						| 'Description'       |
+						| 'Dress'             |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| 'XS/Blue'  |
+						| 'Item key'       |
+						| 'XS/Blue'        |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "398,000" text in "Quantity" field of "ItemList" table
@@ -228,14 +228,14 @@ Scenario: _3001000 preparation
 					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Description' |
-						| 'Trousers'    |
+						| 'Description'       |
+						| 'Trousers'          |
 					And I select current line in "List" table
 					And I activate "Item key" field in "ItemList" table
 					And I click choice button of "Item key" attribute in "ItemList" table
 					And I go to line in "List" table
-						| 'Item key' |
-						| '36/Yellow'  |
+						| 'Item key'        |
+						| '36/Yellow'       |
 					And I select current line in "List" table
 					And I activate "Quantity" field in "ItemList" table
 					And I input "405,000" text in "Quantity" field of "ItemList" table
@@ -260,13 +260,13 @@ Scenario: _3001001 check the form of selection of items in the document StockAdj
 	* Filling the document header
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'      |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'      |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
@@ -280,13 +280,13 @@ Scenario: _3001002 check the form of selection of items in the document StockAdj
 	* Filling the document header
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'      |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'      |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
@@ -299,8 +299,8 @@ Scenario: 3001003 check the form of selection of items in the document PhysicalI
 	* Filling the document header
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'      |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in PhysicalInventory
@@ -317,18 +317,18 @@ Scenario: 3001005 check the form Pick Up items Inventory Transfer Order
 	* Filling the document header Inventory Transfer Order
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in InventoryTransferOrder/InventoryTransfer
@@ -342,18 +342,18 @@ Scenario: 3001006 check the form Pick Up items Inventory Transfer
 	* Filling the document header Inventory Transfer
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in InventoryTransferOrder/InventoryTransfer
@@ -366,13 +366,13 @@ Scenario: 3001007 check the form Pick Up items Internal supply request
 	* Filling the document header Internal supply request
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Check the form of selection items
 		When check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus

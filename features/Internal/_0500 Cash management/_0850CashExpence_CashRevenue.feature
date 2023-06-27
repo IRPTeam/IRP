@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -49,17 +49,17 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
 	* Post
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 	
 Scenario: _0850001 check preparation
@@ -72,27 +72,27 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 	* Filling in company and account
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListRevenueType" in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Fuel'        |
+			| 'Description'    |
+			| 'Fuel'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -100,14 +100,14 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		And I select current line in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Profit loss center'      | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
-			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
+			| 'Net amount'   | 'Profit loss center'   | 'Revenue type'   | 'Total amount'   | 'Currency'   | 'VAT'   | 'Tax amount'    |
+			| '100,00'       | 'Accountants office'   | 'Fuel'           | '118,00'         | 'TRY'        | '18%'   | '18,00'         |
 		And I close all client application windows
 
 Scenario: _085002 check Cash revenue creation
@@ -117,27 +117,27 @@ Scenario: _085002 check Cash revenue creation
 	* Filling in company and account
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListRevenueType" in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Fuel'        |
+			| 'Description'    |
+			| 'Fuel'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -151,8 +151,8 @@ Scenario: _085002 check Cash revenue creation
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCashRevenue1$$' |
+			| 'Number'                    |
+			| '$$NumberCashRevenue1$$'    |
 		And I close all client application windows
 	
 
@@ -167,18 +167,18 @@ Scenario: _085003 check the unavailability of currency selection in Cash revenue
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Bank account, TRY' |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Check the Currency field unavailability
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		When I Check the steps for Exception
-			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
+			| 'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'    |
 
 Scenario: _085004 check the availability of currency selection in Cash revenue (not fixed in the Account)
 	* Open document form
@@ -187,13 +187,13 @@ Scenario: _085004 check the availability of currency selection in Cash revenue (
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Cash desk №1' |
+			| 'Description'     |
+			| 'Cash desk №1'    |
 		And I select current line in "List" table
 	* Check the Currency field availability
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -209,35 +209,35 @@ Scenario: _085005 check tax calculation in the document Cash expense
 	* Filling in company and account
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListExpenseType" in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Fuel'        |
+			| 'Description'    |
+			| 'Fuel'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
-			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
+			| 'Net amount'   | 'Profit loss center'   | 'Expense type'   | 'Total amount'   | 'Currency'   | 'VAT'   | 'Tax amount'    |
+			| '100,00'       | 'Accountants office'   | 'Fuel'           | '118,00'         | 'TRY'        | '18%'   | '18,00'         |
 		And I close all client application windows
 
 Scenario: _085006 check Cash expense creation
@@ -247,27 +247,27 @@ Scenario: _085006 check Cash expense creation
 	* Filling in company and account
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListExpenseType" in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Fuel'        |
+			| 'Description'    |
+			| 'Fuel'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -275,8 +275,8 @@ Scenario: _085006 check Cash expense creation
 		And I select current line in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
@@ -287,8 +287,8 @@ Scenario: _085006 check Cash expense creation
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCashExpense1$$' |
+			| 'Number'                    |
+			| '$$NumberCashExpense1$$'    |
 		And I close all client application windows
 	
 	
@@ -302,18 +302,18 @@ Scenario: _085007 check the unavailability of currency selection in Cash expense
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Bank account, TRY' |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Check the Currency field unavailability
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		When I Check the steps for Exception
-			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
+			| 'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'    |
 
 
 Scenario: _085008 check the availability of currency selection in Cash revenue (not fixed in the Account)
@@ -323,13 +323,13 @@ Scenario: _085008 check the availability of currency selection in Cash revenue (
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Cash desk №1' |
+			| 'Description'     |
+			| 'Cash desk №1'    |
 		And I select current line in "List" table
 	* Check the Currency field availability
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -339,8 +339,8 @@ Scenario: _085009 copy Cash expense and change date
 	* Select Cash expense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 	* Copy Cash expense
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		And I move to "Other" tab
@@ -353,8 +353,8 @@ Scenario: _085010 copy Cash revenue and change date
 	* Select Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 	* Copy Cash revenue
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		And I move to "Other" tab
@@ -374,43 +374,43 @@ Scenario: _085015 check Cash expense (Other company expense)
 		And I select "Other company expense" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		* First line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Anna Petrova' |
+				| 'Description'      |
+				| 'Anna Petrova'     |
 			And I select current line in "List" table
 			And I activate "Profit loss center" field in "PaymentList" table
 			And I click choice button of "Profit loss center" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'Distribution department' |
+				| 'Description'                 |
+				| 'Distribution department'     |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "PaymentList" table
 			And I click choice button of "Expense type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table
 			And I activate "Financial movement type" field in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Movement type 1'     |
 			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
@@ -427,26 +427,26 @@ Scenario: _085015 check Cash expense (Other company expense)
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Arina Brown' |
+			| 'Description'    |
+			| 'Arina Brown'    |
 		And I select current line in "List" table
 		And I activate "Profit loss center" field in "PaymentList" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'             |
+			| 'Logistics department'    |
 		And I select current line in "List" table
 		And I activate "Expense type" field in "PaymentList" table
 		And I click choice button of "Expense type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Expense'     |
+			| 'Description'    |
+			| 'Expense'        |
 		And I select current line in "List" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Movement type 1'     |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I activate "VAT" field in "PaymentList" table
@@ -463,8 +463,8 @@ Scenario: _085015 check Cash expense (Other company expense)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCashExpense2$$' |
+			| 'Number'                    |
+			| '$$NumberCashExpense2$$'    |
 		And I close all client application windows
 		
 
@@ -477,43 +477,43 @@ Scenario: _085016 check Cash revenue (Other company revenue)
 		And I select "Other company revenue" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'  |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		* First line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Anna Petrova' |
+				| 'Description'      |
+				| 'Anna Petrova'     |
 			And I select current line in "List" table
 			And I activate "Profit loss center" field in "PaymentList" table
 			And I click choice button of "Profit loss center" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'Distribution department' |
+				| 'Description'                 |
+				| 'Distribution department'     |
 			And I select current line in "List" table
 			And I activate "Revenue type" field in "PaymentList" table
 			And I click choice button of "Revenue type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Revenue'     |
+				| 'Description'     |
+				| 'Revenue'         |
 			And I select current line in "List" table
 			And I activate "Financial movement type" field in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Movement type 1'     |
 			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
@@ -530,26 +530,26 @@ Scenario: _085016 check Cash revenue (Other company revenue)
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Arina Brown' |
+			| 'Description'    |
+			| 'Arina Brown'    |
 		And I select current line in "List" table
 		And I activate "Profit loss center" field in "PaymentList" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'             |
+			| 'Logistics department'    |
 		And I select current line in "List" table
 		And I activate "Revenue type" field in "PaymentList" table
 		And I click choice button of "Revenue type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
+			| 'Description'    |
+			| 'Revenue'        |
 		And I select current line in "List" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Movement type 1'     |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I activate "VAT" field in "PaymentList" table
@@ -566,8 +566,8 @@ Scenario: _085016 check Cash revenue (Other company revenue)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCashRevenue2$$' |
+			| 'Number'                    |
+			| '$$NumberCashRevenue2$$'    |
 		And I close all client application windows
 
 
@@ -580,43 +580,43 @@ Scenario: _085017 check Cash expense (Other company salary)
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Other company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		* First line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Anna Petrova' |
+				| 'Description'      |
+				| 'Anna Petrova'     |
 			And I select current line in "List" table
 			And I activate "Employee" field in "PaymentList" table
 			And I click choice button of "Employee" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'Alexander Orlov' |
+				| 'Description'         |
+				| 'Alexander Orlov'     |
 			And I select current line in "List" table
 			And I activate "Financial movement type" field in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Movement type 1'     |
 			And I select current line in "List" table
 			And I activate "Payment period" field in "PaymentList" table
 			And I click choice button of "Payment period" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'             |
 				| 'Third (only salary)'     |
 			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
@@ -630,25 +630,25 @@ Scenario: _085017 check Cash expense (Other company salary)
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Anna Petrova' |
+				| 'Description'      |
+				| 'Anna Petrova'     |
 			And I select current line in "List" table
 			And I activate "Employee" field in "PaymentList" table
 			And I click choice button of "Employee" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'David Romanov' |
+				| 'Description'       |
+				| 'David Romanov'     |
 			And I select current line in "List" table
 			And I activate "Financial movement type" field in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Movement type 1'     |
 			And I select current line in "List" table
 			And I activate "Payment period" field in "PaymentList" table
 			And I click choice button of "Payment period" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'             |
 				| 'Third (only salary)'     |
 			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
@@ -663,8 +663,8 @@ Scenario: _085017 check Cash expense (Other company salary)
 			And I move to "More" tab
 			And I click Choice button of the field named "Branch"
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Accountants office' |
+				| 'Description'            |
+				| 'Accountants office'     |
 			And I select current line in "List" table		
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashExpense3$$" variable
@@ -674,6 +674,6 @@ Scenario: _085017 check Cash expense (Other company salary)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And "List" table contains lines
-			| 'Number'        |
-			| '$$NumberCashExpense3$$' |
+			| 'Number'                    |
+			| '$$NumberCashExpense3$$'    |
 		And I close all client application windows

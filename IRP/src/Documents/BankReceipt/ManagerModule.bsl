@@ -386,7 +386,8 @@ Function PaymentList()
 		   |			THEN PaymentList.PlaningTransactionBasis.Ref
 		   |		ELSE NULL
 		   |	END AS CashTransferOrder,
-		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner,
+		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) 
+		   |		OR PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsOtherPartner,
 		   |	PaymentList.RevenueType AS RevenueType
 		   |INTO PaymentList
 		   |FROM
@@ -535,6 +536,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	PaymentList.Payer AS LegalName,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Agreement,
+		   |	PaymentList.TransactionDocument AS Basis,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount AS Amount
 		   |INTO R5015B_OtherPartnersTransactions
@@ -1007,7 +1009,10 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
-	AccessKeyMap.Insert("Account", Obj.Account);
+	AccountList = New Array;
+	AccountList.Add(Obj.Account);
+	AccountList.Add(Obj.TransitAccount);
+	AccessKeyMap.Insert("Account", AccountList);
 	Return AccessKeyMap;
 EndFunction
 

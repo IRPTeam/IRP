@@ -93,7 +93,11 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.CommandBar.ChildItems.FormInformationRegisterRetailWorkersRetailWorkers.Visible = Object.Employee;
+
+	RetailWorkersNavigation = Form.CommandBar.ChildItems.Find("FormInformationRegisterRetailWorkersRetailWorkers");
+	If Not RetailWorkersNavigation = Undefined Then
+		RetailWorkersNavigation.Visible = Object.Employee;
+	EndIf;
 	
 	Form.Items.GroupStaffing.Visible = Object.Employee;
 	

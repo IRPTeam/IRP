@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @AgingAndCreditLimit
@@ -51,8 +51,8 @@ Scenario: _1000000 preparation (credit limit)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -64,33 +64,33 @@ Scenario: _1000000 preparation (credit limit)
 			And I click Select button of "Partner" field
 			And I click "List" button			
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Crystal'     |
+				| 'Description'     |
+				| 'Crystal'         |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
+				| 'Description'     |
+				| 'Shirt'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '38/Black'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -98,32 +98,32 @@ Scenario: _1000000 preparation (credit limit)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Boots (12 pcs)' |
+				| 'Description'        |
+				| 'Boots (12 pcs)'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme
@@ -140,33 +140,33 @@ Scenario: _1000000 preparation (credit limit)
 		* Filling the document header
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'S/Yellow' |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'S/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -174,32 +174,32 @@ Scenario: _1000000 preparation (credit limit)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Boots (12 pcs)' |
+				| 'Description'        |
+				| 'Boots (12 pcs)'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
@@ -216,33 +216,33 @@ Scenario: _1000000 preparation (credit limit)
 		* Filling the document header
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Crystal'     |
+				| 'Description'     |
+				| 'Crystal'         |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/White' |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/White'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -250,32 +250,32 @@ Scenario: _1000000 preparation (credit limit)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Boots (12 pcs)' |
+				| 'Description'        |
+				| 'Boots (12 pcs)'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
@@ -288,8 +288,8 @@ Scenario: _1000000 preparation (credit limit)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		Then "Sales orders" window is opened
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberSalesOrder20400012$$' |
+			| 'Number'                          |
+			| '$$NumberSalesOrder20400012$$'    |
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"
 		And I click "Ok" button	
 		And I move to "Other" tab
@@ -303,24 +303,24 @@ Scenario: _1000000 preparation (credit limit)
 	* Check documents
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table contains lines Then
-			| "Number" |
-			| "1" |
+			| "Number"    |
+			| "1"         |
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		If "List" table contains lines Then
-			| "Number" |
-			| "1" |
+			| "Number"    |
+			| "1"         |
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		If "List" table contains lines Then
-			| "Number" |
-			| "1" |
+			| "Number"    |
+			| "1"         |
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -330,8 +330,8 @@ Scenario: _1000000 preparation (credit limit)
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I input current date in the field named "EndOfPeriod"
 		And I input current date in the field named "BeginOfPeriod"
@@ -348,8 +348,8 @@ Scenario: _1000001 filling in credit limit in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Basic Partner terms, TRY
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I move to "Credit limit & Aging" tab
 		And I set checkbox "Use credit limit"
@@ -358,15 +358,15 @@ Scenario: _1000001 filling in credit limit in the Partner term
 	* DFC Customer by Partner terms
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'DFC Customer by Partner terms' |
+			| 'Description'                      |
+			| 'DFC Customer by Partner terms'    |
 		And I select current line in "List" table
 		And I input "" text in "Partner" field
 		And I input "" text in "Legal name" field
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'      |
+			| 'Description'    |
+			| 'Retail'         |
 		And I select current line in "List" table
 		And I move to "Credit limit & Aging" tab
 		And I set checkbox "Use credit limit"
@@ -378,8 +378,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 	* Create Sales invoice for $$SalesOrder20400011$$
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'              |
-			| '$$NumberSalesOrder20400011$$' |
+			| 'Number'                          |
+			| '$$NumberSalesOrder20400011$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
@@ -392,8 +392,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 	* Create Sales invoice for $$SalesOrder20400014$$ and check credit limit
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'              |
-			| '$$NumberSalesOrder20400014$$' |
+			| 'Number'                          |
+			| '$$NumberSalesOrder20400014$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPostAndClose"
@@ -409,13 +409,13 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 	* Create payment (10 000) and try post $$SalesInvoice20400014$$
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'              |
-			| '$$NumberSalesInvoice20400011$$' |
+			| 'Number'                            |
+			| '$$NumberSalesInvoice20400011$$'    |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Bank account, TRY' |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		And I input current date in the field named "Date"
 		And I click the button named "FormPost"
@@ -425,8 +425,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I save the value of "Number" field as "$$NumberBankReceipt20400011$$"
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'              |
-			| '$$NumberSalesInvoice20400014$$' |
+			| 'Number'                            |
+			| '$$NumberSalesInvoice20400014$$'    |
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -437,26 +437,26 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I move to "Payments" tab
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №1' |
+			| 'Description'     |
+			| 'Cash desk №1'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Crystal'     |
+			| 'Description'    |
+			| 'Crystal'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -468,14 +468,14 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 	* Post CustomersAdvancesClosing
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'     |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check sales invoice posting		
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'              |
-			| '$$NumberSalesInvoice20400014$$' |
+			| 'Number'                            |
+			| '$$NumberSalesInvoice20400014$$'    |
 		And I click the button named "FormPost"
 		Then user message window does not contain messages	
 		And I close all client application windows
@@ -490,19 +490,19 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		* Filling in customer information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'                       |
 				| 'DFC Customer by Partner terms'     |
 			And I select current line in "List" table
 		* Select store 
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
@@ -511,14 +511,14 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -528,8 +528,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		Then I wait that in user messages the "Credit limit exceeded. Limit: 4 000, limit balance: 4 000, transaction: 6 490, lack: 2 490 TRY" substring will appear in 20 seconds                           
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -547,19 +547,19 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		* Filling in customer information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'     |
+				| 'Description'     |
+				| 'Lomaniti'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'                       |
 				| 'DFC Customer by Partner terms'     |
 			And I select current line in "List" table
 		* Select store 
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
@@ -568,14 +568,14 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -594,26 +594,26 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		And I move to "Payments" tab
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №1' |
+			| 'Description'     |
+			| 'Cash desk №1'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -624,27 +624,27 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		* Post CustomersAdvancesClosing
 			Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 			And I go to line in "List" table
-				| 'Number' |
-				| '1'     |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuPost"			
 		* Create SI and filling in customer information
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'                       |
 				| 'DFC Customer by Partner terms'     |
 			And I select current line in "List" table
 		* Select store 
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
@@ -653,14 +653,14 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -675,14 +675,14 @@ Scenario: _999999 close TestClient session
 	* Clear postings
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table contains lines Then
-			| "Partner" |
-			| "Kalipso" |
+			| "Partner"    |
+			| "Kalipso"    |
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		If "List" table contains lines Then
-			| 'Number' |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Close TestClient session				

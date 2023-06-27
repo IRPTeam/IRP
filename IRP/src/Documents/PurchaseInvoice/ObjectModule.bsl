@@ -14,14 +14,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
-	RowIDInfoServer.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
+	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	RowIDInfoServer.OnWrite_RowID(ThisObject, Cancel);
+	RowIDInfoPrivileged.OnWrite_RowID(ThisObject, Cancel);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -32,12 +32,12 @@ EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	RowIDInfoServer.Posting_RowID(ThisObject, Cancel, PostingMode);
+	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
 EndProcedure
 
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	RowIDInfoServer.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
+	RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)

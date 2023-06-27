@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ItemCatalogs
@@ -53,55 +53,55 @@ Scenario: _00506 filling in the "Units" catalog
 	* Create individual unit from Item -tab Item unit (without base unit)
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'      |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item units"
 		And I click the button named "FormCreate"
 		And I input "test individual unit 1" text in "ENG" field
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'      |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I input "1,00000" text in "Quantity" field
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'    |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Description' |
-			| 'pcs'         |
-			| 'test individual unit 1' |
+			| 'Description'               |
+			| 'pcs'                       |
+			| 'test individual unit 1'    |
 	* Create individual unit from Item -tab Item unit (with base unit)
 		And I click the button named "FormCreate"
 		And I input "test individual unit 2" text in "ENG" field
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'      |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'               |
 			| 'test individual unit 1'    |
 		And I select current line in "List" table	
 		And I input "2,00000" text in "Quantity" field
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Description' |
-			| 'pcs'         |
-			| 'test individual unit 1' |
-			| 'test individual unit 2' |
+			| 'Description'               |
+			| 'pcs'                       |
+			| 'test individual unit 1'    |
+			| 'test individual unit 2'    |
 	* Сheck that only a common storage unit can be selected (field Unit)
 		And In this window I click command interface button "Main"
 		And I click Select button of "Unit" field
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'test individual unit 1' |
-			| 'test individual unit 2' |
+			| 'Description'               |
+			| 'test individual unit 1'    |
+			| 'test individual unit 2'    |
 		And I close current window
 	* Сheck that when creating an individual unit you need to select a basis unit
 		And In this window I click command interface button "Item units"
@@ -109,8 +109,8 @@ Scenario: _00506 filling in the "Units" catalog
 		And I input "test individual unit 3" text in "ENG" field
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'      |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I input "1,00000" text in "Quantity" field
 		And I click "Save and close" button
@@ -123,8 +123,8 @@ Scenario: _0050601 check Dimensions and weight information (item unit)
 	*  Select unit
 		Given I open hyperlink "e1cib/list/Catalog.Units"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 	* Change dimensions and check volume calculation
 		And I expand "Dimensions" group
@@ -171,8 +171,8 @@ Scenario: _0050602 filling in the "UnitsOfMeasurement" catalog
 		And I click "Save and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Symbol' | 'Description' |
-			| 'A'      | 'test UOM'    |
+			| 'Symbol'   | 'Description'    |
+			| 'A'        | 'test UOM'       |
 		And I close all client application windows
 		
 		

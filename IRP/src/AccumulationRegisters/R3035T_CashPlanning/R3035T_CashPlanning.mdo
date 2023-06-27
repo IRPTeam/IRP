@@ -71,20 +71,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="17cd708c-7a33-44e0-a8f8-bd4d9590a1a6">
-    <name>BasisDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis document</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePlaningTransactionBasises</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
   <dimensions uuid="f6e992e9-e8e5-4d9b-a331-c0c39a04a7e9">
     <name>Account</name>
     <synonym>
@@ -93,6 +79,20 @@
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="17cd708c-7a33-44e0-a8f8-bd4d9590a1a6">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typePlaningTransactionBasises</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

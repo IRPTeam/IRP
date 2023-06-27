@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ExtensionReportForm
@@ -74,15 +74,15 @@ Scenario: _300101 image setting
 		And I select "Local file storage" exact value from "Integration type" drop-down list
 		And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
 		And I go to line in "ConnectionSetting" table
-			| 'Key'         |
-			| 'AddressPath' |
+			| 'Key'            |
+			| 'AddressPath'    |
 		And I activate "Value" field in "ConnectionSetting" table
 		And I select current line in "ConnectionSetting" table
 		And I input "$Path$/Picture/Source" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'       | 'Value' |
-			| 'QueryType' | 'POST'  |
+			| 'Key'         | 'Value'    |
+			| 'QueryType'   | 'POST'     |
 		And I activate "Key" field in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
@@ -103,15 +103,15 @@ Scenario: _300101 image setting
 		And I select "Local file storage" exact value from "Integration type" drop-down list
 		And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
 		And I go to line in "ConnectionSetting" table
-			| 'Key'         |
-			| 'AddressPath' |
+			| 'Key'            |
+			| 'AddressPath'    |
 		And I activate "Value" field in "ConnectionSetting" table
 		And I select current line in "ConnectionSetting" table
 		And I input "$Path$/Picture/Prewiev" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'       | 'Value' |
-			| 'QueryType' | 'POST'  |
+			| 'Key'         | 'Value'    |
+			| 'QueryType'   | 'POST'     |
 		And I activate "Key" field in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
@@ -132,13 +132,13 @@ Scenario: _300101 image setting
 		And I select "Picture" exact value from "Files type" drop-down list
 		And I click Select button of "POST Integration settings" field
 		And I go to line in "List" table
-			| Description     |
-			| PICTURE STORAGE |
+			| Description        |
+			| PICTURE STORAGE    |
 		And I select current line in "List" table
 		And I click Select button of "GET Integration settings" field
 		And I go to line in "List" table
-			| Description     |
-			| PICTURE STORAGE |
+			| Description        |
+			| PICTURE STORAGE    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Filling a constant by the location of the pictures
@@ -154,54 +154,54 @@ Scenario: _300102 item/item key details display in list form (html field)
 	* Opening the form for setting additional details for Item
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Description' | 'Predefined data name' |
-			| 'Items'       | 'Catalog_Items'             |
+			| 'Description'   | 'Predefined data name'    |
+			| 'Items'         | 'Catalog_Items'           |
 		And I select current line in "List" table
 	* Setting display details in the html field
 		If "Attributes" table does not contain lines Then
-				| "Attribute" |
-				| "Brand" |
+				| "Attribute"     |
+				| "Brand"         |
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Brand'     |
+				| 'Description'     |
+				| 'Brand'           |
 			And I select current line in "List" table
 		And I go to line in "Attributes" table
-			| 'Attribute' |
-			| 'Brand'     |
+			| 'Attribute'    |
+			| 'Brand'        |
 		And I set checkbox named "AttributesShowInHTML" in "Attributes" table
 		And I finish line editing in "Attributes" table
 		If "Attributes" table does not contain lines Then
-				| "Attribute" |
-				| "Country of consignment" |
+				| "Attribute"                  |
+				| "Country of consignment"     |
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'                |
 				| 'Country of consignment'     |
 			And I select current line in "List" table
 		And I go to line in "Attributes" table
-			| 'Attribute'              |
-			| 'Country of consignment' |
+			| 'Attribute'                 |
+			| 'Country of consignment'    |
 		And I set checkbox named "AttributesShowInHTML" in "Attributes" table
 		And I finish line editing in "Attributes" table
 		And I click "Save and close" button
 	* Opening the form for setting additional details for Item key
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Clothes'       |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 	* Setting display details in the html field
 		And I go to line in "AvailableAttributes" table
-			| 'Attribute' |
-			| 'Color'     |
+			| 'Attribute'    |
+			| 'Color'        |
 		And I set "Show in HTML" checkbox in "AvailableAttributes" table
 		And I finish line editing in "AvailableAttributes" table
 		And I go to line in "AvailableAttributes" table
-			| 'Attribute' |
-			| 'Size'     |
+			| 'Attribute'    |
+			| 'Size'         |
 		And I set "Show in HTML" checkbox in "AvailableAttributes" table
 		And I finish line editing in "AvailableAttributes" table
 		And I click "Save and close" button
@@ -214,8 +214,8 @@ Scenario:_300110 add pictures to additional details and additional properties
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
 	* Add a picture to an additional attribute / additional property
 		And I go to line in "List" table
-		| 'Description' |
-		| 'Brand'     |
+		| 'Description'   |
+		| 'Brand'         |
 		And I select current line in "List" table
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/16466.png"
 		And I click "Icon" hyperlink
@@ -229,8 +229,8 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
 	* Add a picture to an additional attribute / additional property
 		And I go to line in "List" table
-		| 'Description' |
-		| 'Brand'     |
+		| 'Description'   |
+		| 'Brand'         |
 		And I select current line in "List" table
 		And Delay 10
 		And I click "Icon" hyperlink
@@ -243,8 +243,8 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
 		And I click "Save and close" button
 	* Add back a picture to an additional attribute / additional property
 		And I go to line in "List" table
-		| 'Description' |
-		| 'Brand'     |
+		| 'Description'   |
+		| 'Brand'         |
 		And I select current line in "List" table
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/16466.png"
 		And I click "Icon" hyperlink
@@ -258,8 +258,8 @@ Scenario: _300103 item pictures upload
 	* Open item list form and select item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 	* Add picture
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/reddress.png"
@@ -268,8 +268,8 @@ Scenario: _300103 item pictures upload
 	* Check adding picture 
 		And I click "Attached files" button	
 		And "FileList" table contains lines
-			| 'File'         |
-			| 'reddress.png' |
+			| 'File'            |
+			| 'reddress.png'    |
 		And I close current window
 	* Add one more picture
 		And In this window I click command interface button "Main"
@@ -281,9 +281,9 @@ Scenario: _300103 item pictures upload
 		And I click "Attached files" button	
 		And I click "Refresh" button
 		And "FileList" table contains lines
-			| 'File'          |
-			| 'reddress.png'  |
-			| 'dressblue.jpg' |
+			| 'File'             |
+			| 'reddress.png'     |
+			| 'dressblue.jpg'    |
 		And I close all client application windows
 
 
@@ -293,13 +293,13 @@ Scenario: _300107 item key pictures upload
 	* Open Item list form
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I go to line in "List" table
-			| 'Item key'     |
-			| 'M/White' |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 	* Add picture
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/dresswhite.jpg"
@@ -307,8 +307,8 @@ Scenario: _300107 item key pictures upload
 	* Check adding picture
 		And I click "Attached files" button	
 		And "FileList" table contains lines
-			| 'File'           |
-			| 'dresswhite.jpg' |
+			| 'File'              |
+			| 'dresswhite.jpg'    |
 		And I close all client application windows
 
 
@@ -316,8 +316,8 @@ Scenario: _300108 open picture gallery from Item and item key
 	* Open picture gallery from Item
 			Given I open hyperlink "e1cib/list/Catalog.Items"
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Dress'     |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 		* Open gallery
 			And I click "addImagesFromGallery" button
@@ -327,7 +327,7 @@ Scenario: _300108 open picture gallery from Item and item key
 			And In this window I click command interface button "Item keys"
 			And I go to line in "List" table
 				| 'Item key'     |
-				| 'M/White' |
+				| 'M/White'      |
 			And I select current line in "List" table
 		* Open gallery
 			And I click "addImagesFromGallery" button
@@ -340,8 +340,8 @@ Scenario: _300110 opening Files catalog element
 		Given I open hyperlink "e1cib/list/Catalog.Files"
 	* Open element
 		And I go to line in "List" table
-			| 'Extension' | 'File name' |
-			| 'JPG'       | 'dresswhite.jpg' |
+			| 'Extension'   | 'File name'         |
+			| 'JPG'         | 'dresswhite.jpg'    |
 		And I select current line in "List" table
 		Then "dresswhite.jpg (File)" window is opened
 		Then system warning window does not appear
@@ -354,7 +354,7 @@ Scenario: _300112 show pictures in the item list
 	* Show pictures
 		And I click the button named "ViewPictures"
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'    |
 			| 'Trousers'       |
 		Then user message window does not contain messages
 		And I click the button named "ViewPictures"
@@ -367,14 +367,14 @@ Scenario: _300113 show add attributes in the item list
 	* Show add attributes
 		And I click the button named "ViewAdditionalAttribute"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
+			| 'Description'    |
+			| 'Dress'          |
 		And I activate current test client window
 		And I click Test Client element "Rose" "Edit" UI Automation
 		And I click the button named "ViewAdditionalAttribute"
 		And I activate current test client window
 		When I Check the steps for Exception
-        	|"And I click Test Client element "Rose" "Edit" UI Automation"|
+									| "And I click Test Client element "Rose" "Edit" UI Automation"          |
 		And I close all client application windows
 		
 				
@@ -383,8 +383,8 @@ Scenario: _300113 show add attributes in the item list
 Scenario: _300115 check removal of pictures from Item
 	Given I open hyperlink "e1cib/list/Catalog.Files"
 	And I go to line in "List" table
-		| 'File name'     |
-		| 'dressblue.jpg' |
+		| 'File name'       |
+		| 'dressblue.jpg'   |
 	And I select current line in "List" table
 	And I save the value of the field named "FileID" as "$$$$FileIDDressBlue$$$$"
 	And Delay "5"
@@ -393,8 +393,8 @@ Scenario: _300115 check removal of pictures from Item
 	* Open Item list form
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Dress'        |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 	* Delete picture from Item
 		And Delay "5"   		
@@ -403,8 +403,8 @@ Scenario: _300115 check removal of pictures from Item
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
 		And "List" table does not contain lines
-			| 'Owner'    | 'File'          |
-			| 'Dress'    | 'dressblue.jpg' |
+			| 'Owner'   | 'File'             |
+			| 'Dress'   | 'dressblue.jpg'    |
 	And I close all client application windows
 
 Scenario: _300116 check download pictures from Item
@@ -412,16 +412,16 @@ Scenario: _300116 check download pictures from Item
 	* Open Item list form
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Trousers'        |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 	* Select DefaultFilesStorageVolume
 		And I click "Attached files" button
 		Then "Attach file" window is opened
 		And I click Choice button of the field named "DefaultFilesStorageVolume"
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'DEFAULT PICTURE STORAGE' |
+			| 'Description'                |
+			| 'DEFAULT PICTURE STORAGE'    |
 		And I select current line in "List" table	
 	* Download picture
 		// And I input "$Path$/features/Internal" text in the field named "dragFile"	
@@ -430,8 +430,8 @@ Scenario: _300116 check download pictures from Item
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "FileList" table became equal
-			| 'File'           |
-			| 'dresswhite.jpg' |
+			| 'File'              |
+			| 'dresswhite.jpg'    |
 		And I input "$Path$/features/Internal/_4000 TestWithExtension\dresswhite12.jpg" text in the field named "saveFile"	
 		And I click "Download file" button
 		// And I wait for "resswhite12" file existence in "20" seconds
@@ -473,20 +473,20 @@ Scenario: _4000105 check add attributes from extensions
 	* Filling settings
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Currencies'   |
+			| 'Predefined data name'    |
+			| 'Catalog_Currencies'      |
 		And I select current line in "List" table
 		And I move to "Extension attributes" tab
 		And in the table "ExtensionAttributes" I click "Fill attributes list" button
 		And "ExtensionAttributes" table became equal
-			| '#' | 'Required' | 'Attribute'      | 'Show' | 'UI group' | 'Show in HTML' |
-			| '1' | 'No'       | 'REP_Attribute1' | 'No'   | ''         | 'No'           |
+			| '#'   | 'Required'   | 'Attribute'        | 'Show'   | 'UI group'   | 'Show in HTML'    |
+			| '1'   | 'No'         | 'REP_Attribute1'   | 'No'     | ''           | 'No'              |
 		And I set "Show" checkbox in "ExtensionAttributes" table
 		And I select current line in "ExtensionAttributes" table
 		And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Accounting information' |
+			| 'Description'               |
+			| 'Accounting information'    |
 		And I select current line in "List" table
 		And I finish line editing in "ExtensionAttributes" table
 	* Set condition
@@ -502,28 +502,28 @@ Scenario: _4000105 check add attributes from extensions
 		Then "Select field" window is opened
 		And I expand current line in "Source" table
 		And I go to line in "Source" table
-			| 'Available fields' |
-			| 'Code'             |
+			| 'Available fields'    |
+			| 'Code'                |
 		And I select current line in "Source" table
 		And I activate field named "SettingsFilterRightValue" in "SettingsFilter" table
 		And I input "USD" text in the field named "SettingsFilterRightValue" of "SettingsFilter" table
 		And I finish line editing in "SettingsFilter" table
 		And in the table "ResultTable" I click "Verify" button
 		And "ResultTable" table contains lines
-			| 'Ref' |
-			| 'USD' |
+			| 'Ref'    |
+			| 'USD'    |
 		And I click "Ok" button			
 		And I click "Save and close" button
 	* Check add attributes from extensions			
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I go to line in "List" table
-			| 'Code' | 'Description'     |
-			| 'USD'  | 'American dollar' |
+			| 'Code'   | 'Description'        |
+			| 'USD'    | 'American dollar'    |
 		And I select current line in "List" table	
 		And the field named "REP_Attribute1" exists on the form
 		And I close current window
 		And I go to line in "List" table
-			| 'Code' | 'Description' |
-			| 'EUR'  | 'Euro'        |
+			| 'Code'   | 'Description'    |
+			| 'EUR'    | 'Euro'           |
 		And the field named "REP_Attribute1" does not exist on the form	
 		And I close all client application windows

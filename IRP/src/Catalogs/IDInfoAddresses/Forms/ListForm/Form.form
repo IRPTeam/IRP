@@ -383,9 +383,7 @@
       <id>37</id>
       <visible>true</visible>
       <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
+      <userVisible/>
       <dataPath xsi:type="form:DataPath">
         <segments>List.Ref</segments>
       </dataPath>
@@ -652,6 +650,9 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.Ref</segments>
+    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT

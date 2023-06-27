@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Price
@@ -59,8 +59,8 @@ Scenario: _016000 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -81,8 +81,8 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'  |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I input "01.11.2018  12:32:21" text in "Date" field
 	* Filling in prices by item key by price type Basic Price Types
@@ -90,8 +90,8 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -102,14 +102,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I input "520,00" text in "Price" field of "ItemKeyList" table
@@ -117,14 +117,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I input "520,00" text in "Price" field of "ItemKeyList" table
@@ -132,14 +132,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I input "550,00" text in "Price" field of "ItemKeyList" table
@@ -147,14 +147,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XL/Green' |
+			| 'Item key'    |
+			| 'XL/Green'    |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I input "550,00" text in "Price" field of "ItemKeyList" table
@@ -162,8 +162,8 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -173,22 +173,22 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| '38/Yellow' |
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "400,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -199,14 +199,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black' |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I input "350,00" text in "Price" field of "ItemKeyList" table
@@ -214,17 +214,17 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/18SD'  |
+			| 'Item key'    |
+			| '37/18SD'     |
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "700,00" text in "Price" field of "ItemKeyList" table
@@ -232,42 +232,42 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/18SD'  |
+			| 'Item key'    |
+			| '37/18SD'     |
 		And I select current line in "List" table
 		And I input "700,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/18SD'  |
+			| 'Item key'    |
+			| '38/18SD'     |
 		And I select current line in "List" table
 		And I input "650,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/18SD'  |
+			| 'Item key'    |
+			| '39/18SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "650,00" text in "Price" field of "ItemKeyList" table
@@ -275,13 +275,13 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -292,14 +292,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/19SD'  |
+			| 'Item key'    |
+			| '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "540,00" text in "Price" field of "ItemKeyList" table
@@ -308,14 +308,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'  |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'Boots/S-8'  |
+			| 'Item key'     |
+			| 'Boots/S-8'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "5 000,00" text in "Price" field of "ItemKeyList" table
@@ -323,14 +323,14 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'Dress/A-8'  |
+			| 'Item key'     |
+			| 'Dress/A-8'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "3 000,00" text in "Price" field of "ItemKeyList" table
@@ -339,21 +339,21 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'  |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
 		And I click choice button of "Unit" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
+			| 'Description'       |
+			| 'Boots (12 pcs)'    |
 		And I select current line in "List" table		
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "7 000,00" text in "Price" field of "ItemKeyList" table
@@ -369,8 +369,8 @@ Scenario: _016001 base price fill (incl. VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                       | 'Price list type'    | 'Price type'        | 'Description' |
-		| '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Price by item keys' | 'Basic Price Types' | 'Basic price' |
+		| 'Number'                                        | 'Price list type'     | 'Price type'         | 'Description'   |
+		| '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'  | 'Basic Price Types'  | 'Basic price'   |
 		And I close all client application windows
 
 Scenario: _016002 change item in Price list and check filling item key
@@ -383,15 +383,15 @@ Scenario: _016002 change item in Price list and check filling item key
 		And in the table "ItemKeyList" I click the button named "ItemKeyListAdd"
 		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
@@ -404,31 +404,31 @@ Scenario: _016002 change item in Price list and check filling item key
 		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
+			| 'Description'    |
+			| 'Router'         |
 		And I select current line in "List" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
 	* Check
 		And "ItemKeyList" table became equal
-			| 'Item'   | 'Item key' | 'Input unit' | 'Price' |
-			| 'Router' | 'Router'   | 'pcs'        | ''      |
+			| 'Item'     | 'Item key'   | 'Input unit'   | 'Price'    |
+			| 'Router'   | 'Router'     | 'pcs'          | ''         |
 		And I close all client application windows
 
 Scenario: _016003 copy price list
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PriceList"	
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPriceListBasicPriceByItemKey016001$$'  |
+		| 'Number'                                         |
+		| '$$NumberPriceListBasicPriceByItemKey016001$$'   |
 	And in the table "List" I click "Copy" button
 	And "ItemKeyList" table contains lines
-		| '#'  | 'Input price' | 'Item'       | 'Item key'  | 'Input unit' | 'Price'    |
-		| '1'  | ''            | 'Dress'      | 'S/Yellow'  | 'pcs'        | '550,00'   |
-		| '2'  | ''            | 'Dress'      | 'XS/Blue'   | 'pcs'        | '520,00'   |
-		| '3'  | ''            | 'Dress'      | 'M/White'   | 'pcs'        | '520,00'   |
-		| '4'  | ''            | 'Dress'      | 'L/Green'   | 'pcs'        | '550,00'   |
-		| '5'  | ''            | 'Dress'      | 'XL/Green'  | 'pcs'        | '550,00'   |
+		| '#'  | 'Input price'  | 'Item'   | 'Item key'  | 'Input unit'  | 'Price'    |
+		| '1'  | ''             | 'Dress'  | 'S/Yellow'  | 'pcs'         | '550,00'   |
+		| '2'  | ''             | 'Dress'  | 'XS/Blue'   | 'pcs'         | '520,00'   |
+		| '3'  | ''             | 'Dress'  | 'M/White'   | 'pcs'         | '520,00'   |
+		| '4'  | ''             | 'Dress'  | 'L/Green'   | 'pcs'         | '550,00'   |
+		| '5'  | ''             | 'Dress'  | 'XL/Green'  | 'pcs'         | '550,00'   |
 	And I close all client application windows	
 	
 
@@ -437,24 +437,24 @@ Scenario: _016005 check movements of the price list document by item key in regi
 		Given I open hyperlink "e1cib/list/InformationRegister.PricesByItemKeys"
 	* Check Price list movements 
 		And "List" table contains lines
-		| 'Price'    | 'Recorder'                               | 'Price type'        | 'Item key'  |
-		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'S/Yellow'  |
-		| '520,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XS/Blue'   |
-		| '520,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'M/White'   |
-		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'L/Green'   |
-		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XL/Green'  |
-		| '400,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Yellow' |
-		| '400,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Yellow' |
-		| '350,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Red'    |
-		| '350,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Black'  |
-		| '700,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/18SD'   |
-		| '700,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/18SD'   |
-		| '650,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/18SD'   |
-		| '650,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/18SD'   |
-		| '500,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/19SD'   |
-		| '540,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/19SD'   |
-		| '3 000,00' | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Dress/A-8' |
-		| '5 000,00' | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Boots/S-8' |
+		| 'Price'     | 'Recorder'                                | 'Price type'         | 'Item key'    |
+		| '550,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'S/Yellow'    |
+		| '520,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'XS/Blue'     |
+		| '520,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'M/White'     |
+		| '550,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'L/Green'     |
+		| '550,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'XL/Green'    |
+		| '400,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '36/Yellow'   |
+		| '400,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '38/Yellow'   |
+		| '350,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '36/Red'      |
+		| '350,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '38/Black'    |
+		| '700,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '36/18SD'     |
+		| '700,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '37/18SD'     |
+		| '650,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '38/18SD'     |
+		| '650,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '39/18SD'     |
+		| '500,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '39/19SD'     |
+		| '540,00'    | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | '37/19SD'     |
+		| '3 000,00'  | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'Dress/A-8'   |
+		| '5 000,00'  | '$$PriceListBasicPriceByItemKey016001$$'  | 'Basic Price Types'  | 'Boots/S-8'   |
 
 
 Scenario: _016006 base price fill and special price fill (not incl. VAT)
@@ -467,8 +467,8 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I input "Basic Price without VAT" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price without VAT'  |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 		And I select current line in "List" table
 		And I input "01.11.2018  12:32:21" text in "Date" field
 		And I move to "Item keys" tab
@@ -476,78 +476,78 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'       |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I input "466,10" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I input "440,68" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I input "440,68" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'  |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And I select current line in "List" table
 		And I input "466,10" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XL/Green' |
+			| 'Item key'    |
+			| 'XL/Green'    |
 		And I select current line in "List" table
 		And I input "466,10" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -557,22 +557,22 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| '38/Yellow' |
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And I select current line in "List" table
 		And I input "338,98" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -584,31 +584,31 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black' |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I input "296,61" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/18SD'  |
+			| 'Item key'    |
+			| '37/18SD'     |
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "648,15" text in "Price" field of "ItemKeyList" table
@@ -616,42 +616,42 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/18SD'  |
+			| 'Item key'    |
+			| '37/18SD'     |
 		And I select current line in "List" table
 		And I input "648,15" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/18SD'  |
+			| 'Item key'    |
+			| '38/18SD'     |
 		And I select current line in "List" table
 		And I input "601,85" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/18SD'  |
+			| 'Item key'    |
+			| '39/18SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "601,85" text in "Price" field of "ItemKeyList" table
@@ -659,13 +659,13 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -676,14 +676,14 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '37/19SD'  |
+			| 'Item key'    |
+			| '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "648,15" text in "Price" field of "ItemKeyList" table
@@ -699,8 +699,8 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                       | 'Price list type'    | 'Price type'              | 'Description'             |
-		| '$$NumberPriceListBasicPriceByItemKey016002$$' | 'Price by item keys' | 'Basic Price without VAT' | 'Basic Price without VAT' |
+		| 'Number'                                        | 'Price list type'     | 'Price type'               | 'Description'               |
+		| '$$NumberPriceListBasicPriceByItemKey016002$$'  | 'Price by item keys'  | 'Basic Price without VAT'  | 'Basic Price without VAT'   |
 		And I close all client application windows
 	
 
@@ -708,8 +708,8 @@ Scenario: _016010 check dependent prices calculation
 	* Adding Plugin sessing
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "SalesPriceCalculation" |
+				| "Description"               |
+				| "SalesPriceCalculation"     |
 			And I click the button named "FormCreate"
 			And I select external file "$Path$/DataProcessor/SalesPriceCalculation.epf"
 			And I click the button named "FormAddExtDataProc"
@@ -730,27 +730,27 @@ Scenario: _016010 check dependent prices calculation
 		And I click "Ok" button
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Source"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Forex Buying' |
+			| 'Description'     |
+			| 'Forex Buying'    |
 		And I select current line in "List" table	
 		And I click "Save" button
 	* Adding external processing to the price type and filling in the settings
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'SalesPriceCalculation' |
+			| 'Description'              |
+			| 'SalesPriceCalculation'    |
 		And I select current line in "List" table
 		And I click "Settings" button
 		And in the table "PriceTypes" I click the button named "PriceTypesAdd"
 		And I click choice button of "Purchase price type" attribute in "PriceTypes" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Price Types' |
+			| 'Description'          |
+			| 'Basic Price Types'    |
 		And I select current line in "List" table
 		And I activate "Сalculation formula for sales price" field in "PriceTypes" table
 		And I input "SalesPrice=PurchasePrice + (PurchasePrice /100 * 10)" text in "Сalculation formula for sales price" field of "PriceTypes" table
@@ -767,8 +767,8 @@ Scenario: _016010 check dependent prices calculation
 			And I input "Dependent Price" text in "Description" field
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Dependent Price New'  |
+					| 'Description'              |
+					| 'Dependent Price New'      |
 			And I select current line in "List" table
 		* Filling in price list
 			And I click "Fill by rules" button
@@ -779,9 +779,9 @@ Scenario: _016010 check dependent prices calculation
 			And I click "Ok" button
 		* Check filling in
 			And "ItemKeyList" table contains lines
-			| 'Item'       | 'Price'    | 'Item key'  |
-			| 'Dress'      | '605,00'   | 'S/Yellow'  |
-			| 'Dress'      | '572,00'   | 'XS/Blue'   |
+			| 'Item'    | 'Price'    | 'Item key'    |
+			| 'Dress'   | '605,00'   | 'S/Yellow'    |
+			| 'Dress'   | '572,00'   | 'XS/Blue'     |
 	* Posting document
 		And I click the button named "FormPost"
 		And I delete "$$PriceListBasicPriceByItemKey016010$$" variable
@@ -793,8 +793,8 @@ Scenario: _016010 check dependent prices calculation
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                       | 'Price list type'    | 'Price type'      | 'Description'     |
-		| '$$NumberPriceListBasicPriceByItemKey016010$$' | 'Price by item keys' | 'Dependent Price New' | 'Dependent Price' |
+		| 'Number'                                        | 'Price list type'     | 'Price type'           | 'Description'       |
+		| '$$NumberPriceListBasicPriceByItemKey016010$$'  | 'Price by item keys'  | 'Dependent Price New'  | 'Dependent Price'   |
 		And I close all client application windows
 	
 Scenario: _016011 check price calculation in the documents
@@ -804,14 +804,14 @@ Scenario: _016011 check price calculation in the documents
 		And in the table "ItemList" I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -819,35 +819,35 @@ Scenario: _016011 check price calculation in the documents
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Basic Price Types' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'          | 'Quantity'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Basic Price Types'   | '1,000'       |
 		* Basic Price without VAT
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price without VAT' |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '440,68' | 'XS/Blue'  | 'Basic Price without VAT' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'                | 'Quantity'    |
+			| 'Dress'   | '440,68'   | 'XS/Blue'    | 'Basic Price without VAT'   | '1,000'       |
 		* Dependent Price New
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Dependent Price New' |
+				| 'Description'             |
+				| 'Dependent Price New'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'            | 'Quantity'    |
+			| 'Dress'   | '572,00'   | 'XS/Blue'    | 'Dependent Price New'   | '1,000'       |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -855,14 +855,14 @@ Scenario: _016011 check price calculation in the documents
 		And in the table "ItemList" I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -870,49 +870,49 @@ Scenario: _016011 check price calculation in the documents
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Basic Price Types' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'          | 'Quantity'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Basic Price Types'   | '1,000'       |
 		* Basic Price without VAT
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price without VAT' |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '440,68' | 'XS/Blue'  | 'Basic Price without VAT' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'                | 'Quantity'    |
+			| 'Dress'   | '440,68'   | 'XS/Blue'    | 'Basic Price without VAT'   | '1,000'       |
 		* Dependent Price
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Dependent Price New' |
+				| 'Description'             |
+				| 'Dependent Price New'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'            | 'Quantity'    |
+			| 'Dress'   | '572,00'   | 'XS/Blue'    | 'Dependent Price New'   | '1,000'       |
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -920,49 +920,49 @@ Scenario: _016011 check price calculation in the documents
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Basic Price Types' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'          | 'Quantity'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Basic Price Types'   | '1,000'       |
 		* Basic Price without VAT
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price without VAT' |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '440,68' | 'XS/Blue'  | 'Basic Price without VAT' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'                | 'Quantity'    |
+			| 'Dress'   | '440,68'   | 'XS/Blue'    | 'Basic Price without VAT'   | '1,000'       |
 		* Dependent Price
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Dependent Price New' |
+				| 'Description'             |
+				| 'Dependent Price New'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'            | 'Quantity'    |
+			| 'Dress'   | '572,00'   | 'XS/Blue'    | 'Dependent Price New'   | '1,000'       |
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		And I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -970,35 +970,35 @@ Scenario: _016011 check price calculation in the documents
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Basic Price Types' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'          | 'Quantity'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Basic Price Types'   | '1,000'       |
 		* Basic Price without VAT
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price without VAT' |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '440,68' | 'XS/Blue'  | 'Basic Price without VAT' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'                | 'Quantity'    |
+			| 'Dress'   | '440,68'   | 'XS/Blue'    | 'Basic Price without VAT'   | '1,000'       |
 		* Dependent Price
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Dependent Price New' |
+				| 'Description'             |
+				| 'Dependent Price New'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Price type'            | 'Quantity'    |
+			| 'Dress'   | '572,00'   | 'XS/Blue'    | 'Dependent Price New'   | '1,000'       |
 
 
 Scenario: _016012 price calculation when change input price in the Price list (by item key)	
@@ -1010,33 +1010,33 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'  |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 	* Filling in prices by item key by price type Basic Price Types
 		And I move to "Item keys" tab
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XL/Green'  |
+			| 'Item key'    |
+			| 'XL/Green'    |
 		And I select current line in "List" table
 	* Check Input unit
 		And "ItemKeyList" table contains lines
-			| 'Input price' | 'Item'  | 'Item key' | 'Input unit' | 'Price' |
-			| ''            | 'Dress' | 'XL/Green' | 'pcs'        | ''      |
+			| 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'    |
+			| ''              | 'Dress'   | 'XL/Green'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
 		And I select current line in "ItemKeyList" table
 		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
+			| 'Description'          |
+			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
@@ -1046,28 +1046,28 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
 		And "ItemKeyList" table became equal
-			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
-			| '1' | '500,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '62,50' |
+			| '#'   | 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'          | 'Price'    |
+			| '1'   | '500,000'       | 'Dress'   | 'XL/Green'   | 'box Dress (8 pcs)'   | '62,50'    |
 		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
 		And I input "600,000" text in the field named "ItemKeyListInputPrice" of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 		And I move to the next attribute
 		And "ItemKeyList" table contains lines
-			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
-			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '75,00' |	
+			| '#'   | 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'          | 'Price'    |
+			| '1'   | '600,000'       | 'Dress'   | 'XL/Green'   | 'box Dress (8 pcs)'   | '75,00'    |
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
 		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I finish line editing in "ItemKeyList" table
 		And "ItemKeyList" table became equal
-			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit' | 'Price'  |
-			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'pcs'        | '600,00' |
+			| '#'   | 'Input price'   | 'Item'    | 'Item key'   | 'Input unit'   | 'Price'     |
+			| '1'   | '600,000'       | 'Dress'   | 'XL/Green'   | 'pcs'          | '600,00'    |
 		And I close all client application windows
 		
 
@@ -1079,14 +1079,14 @@ Scenario: _016013 check price calculation in the documents (price by unit, Add b
 		And in the table "ItemList" I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'    |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -1094,24 +1094,24 @@ Scenario: _016013 check price calculation in the documents (price by unit, Add b
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity' |
-				| 'Boots' | '700,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    |
+				| 'Item'     | 'Price'     | 'Item key'    | 'Price type'           | 'Quantity'     |
+				| 'Boots'    | '700,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'        |
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Boots (12 pcs)' |
+				| 'Description'        |
+				| 'Boots (12 pcs)'     |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'    | 'Item key' | 'Price type'        | 'Quantity' | 'Unit'           |
-				| 'Boots' | '7 000,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    | 'Boots (12 pcs)' |
+				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
+				| 'Boots'    | '7 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |
 			And I close all client application windows
 
 
@@ -1123,13 +1123,13 @@ Scenario: _016014 check price calculation in the documents (price by unit, scan 
 		* Filling partner and agreement
 			And I click Choice button of the field named "Partner"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 		* Add item by barcode
@@ -1141,9 +1141,9 @@ Scenario: _016014 check price calculation in the documents (price by unit, scan 
 			And I move to the next attribute
 		* Check
 			And "ItemList" table became equal
-				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |
-				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'pcs'            | '700,00'   | '18%' | '593,22'     | '700,00'       |
-				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'Boots (12 pcs)' | '7 000,00' | '18%' | '5 932,20'   | '7 000,00'     |		
+				| 'Item key'    | 'Price type'           | 'Item'     | 'Quantity'    | 'Unit'              | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'     |
+				| '36/18SD'     | 'Basic Price Types'    | 'Boots'    | '1,000'       | 'pcs'               | '700,00'      | '18%'    | '593,22'        | '700,00'           |
+				| '36/18SD'     | 'Basic Price Types'    | 'Boots'    | '1,000'       | 'Boots (12 pcs)'    | '7 000,00'    | '18%'    | '5 932,20'      | '7 000,00'         |
 			And I close all client application windows
 			
 			

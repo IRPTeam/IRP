@@ -71,20 +71,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="51544a7a-c21a-45d3-ab27-b513bdb1970c">
-    <name>PaymentType</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PaymentTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
   <dimensions uuid="cb0c3f9e-d203-4145-aab8-ffc154c46b9f">
     <name>Account</name>
     <synonym>
@@ -93,6 +79,20 @@
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="51544a7a-c21a-45d3-ab27-b513bdb1970c">
+    <name>PaymentType</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PaymentTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

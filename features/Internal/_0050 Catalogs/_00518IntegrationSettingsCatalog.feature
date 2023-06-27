@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -46,15 +46,15 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I select "Local file storage" exact value from "Integration type" drop-down list
 		And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
 		And I go to line in "ConnectionSetting" table
-			| 'Key'         |
-			| 'AddressPath' |
+			| 'Key'            |
+			| 'AddressPath'    |
 		And I activate "Value" field in "ConnectionSetting" table
 		And I select current line in "ConnectionSetting" table
 		And I input "$Path$/Picture/Source" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'       | 'Value' |
-			| 'QueryType' | 'POST'  |
+			| 'Key'         | 'Value'    |
+			| 'QueryType'   | 'POST'     |
 		And I activate "Key" field in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
 		And I delete a line in "ConnectionSetting" table
@@ -78,42 +78,42 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I input "POST" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'             |
-			| 'ResourceAddress' |
+			| 'Key'                |
+			| 'ResourceAddress'    |
 		And I select current line in "ConnectionSetting" table
 		And I input "/hs/filetransfer" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key' | 'Value'     |
-			| 'Ip'  | 'localhost' |
+			| 'Key'   | 'Value'        |
+			| 'Ip'    | 'localhost'    |
 		And I select current line in "ConnectionSetting" table
 		And I input "localhost" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'  | 'Value' |
-			| 'Port' | '443' |
+			| 'Key'    | 'Value'    |
+			| 'Port'   | '443'      |
 		And I select current line in "ConnectionSetting" table
 		And I input "8080" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'  |
-			| 'User' |
+			| 'Key'     |
+			| 'User'    |
 		And I select current line in "ConnectionSetting" table
 		And I input "Admin" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'      |
-			| 'Password' |
+			| 'Key'         |
+			| 'Password'    |
 		And I select current line in "ConnectionSetting" table
 		And I input "123" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
-			| 'Key'              |
-			| 'SecureConnection' |
+			| 'Key'                 |
+			| 'SecureConnection'    |
 		And I select current line in "ConnectionSetting" table
 		And I go to line in "" table
-			| ''        |
-			| 'Boolean' |
+			| ''           |
+			| 'Boolean'    |
 		And I select current line in "" table
 		And I select "Yes" exact value from the drop-down list named "ConnectionSettingValue" in "ConnectionSetting" table		
 		And I click "Save" button
@@ -121,17 +121,17 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I wait the field named "UniqueID" will be filled in "10" seconds
 		Then the form attribute named "IntegrationType" became equal to "File storage"
 		And "ConnectionSetting" table became equal
-			| '#'  | 'Key'                    | 'Value'            |
-			| '1'  | 'QueryType'              | 'POST'             |
-			| '2'  | 'ResourceAddress'        | '/hs/filetransfer' |
-			| '3'  | 'Ip'                     | 'localhost'        |
-			| '4'  | 'Port'                   | '8 080'            |
-			| '5'  | 'User'                   | 'Admin'            |
-			| '6'  | 'Password'               | '123'              |
-			| '7'  | 'Proxy'                  | ''                 |
-			| '8'  | 'TimeOut'                | '60'               |
-			| '9' | 'SecureConnection'       | 'Yes'              |
-			| '10' | 'UseOSAuthentication'    | 'No'               |		
+			| '#'    | 'Key'                   | 'Value'               |
+			| '1'    | 'QueryType'             | 'POST'                |
+			| '2'    | 'ResourceAddress'       | '/hs/filetransfer'    |
+			| '3'    | 'Ip'                    | 'localhost'           |
+			| '4'    | 'Port'                  | '8 080'               |
+			| '5'    | 'User'                  | 'Admin'               |
+			| '6'    | 'Password'              | '123'                 |
+			| '7'    | 'Proxy'                 | ''                    |
+			| '8'    | 'TimeOut'               | '60'                  |
+			| '9'    | 'SecureConnection'      | 'Yes'                 |
+			| '10'   | 'UseOSAuthentication'   | 'No'                  |
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)
@@ -148,16 +148,16 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I select "Currency rates" exact value from "Integration type" drop-down list
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'ExternalBankUa' |
+			| 'Description'       |
+			| 'ExternalBankUa'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check data save
 		And "List" table contains lines
-			| 'Description'     |
-			| 'Bank UA'         |
-			| 'FILE STORAGE'    |
-			| 'LOCAL STORAGE'   |
-			| 'Other'           |
+			| 'Description'      |
+			| 'Bank UA'          |
+			| 'FILE STORAGE'     |
+			| 'LOCAL STORAGE'    |
+			| 'Other'            |
 		And I close all client application windows
 		

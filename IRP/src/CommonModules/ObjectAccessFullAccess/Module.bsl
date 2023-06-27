@@ -1,13 +1,94 @@
+
 // @strict-types
 
-// On write object access on write.
+#Region AccumulationRegisters
+
+// Fill posting table.
 // 
 // Parameters:
-//  Source - DefinedType.typeAccessDocument -
-//  Cancel - Boolean - Cancel
-//  WriteMode - DocumentWriteMode -
-//  PostingMode - DocumentPostingMode -
-Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode) Export
+//  PostingTable - AccountingRegisterRecordSetAccountingRegisterName - Posting table:
+//  MetadataObject - MetadataObjectAccumulationRegister -
+Procedure FillPostingTable(PostingTable, MetadataObject) Export
+	If Not GetFunctionalOption("UseObjectAccess") Then
+		Return;
+	EndIf;
+	
+	CalculateAndUpdateAccessKey_AccumulationRegisters(PostingTable, MetadataObject);
+EndProcedure
+
+Procedure CalculateAndUpdateAccessKey_AccumulationRegisters(PostingTable, MetadataObject)
+	
+	For Each Row In PostingTable Do
+	
+		AccessKeyRef = GetAndCalculatedAccessKey(Row, MetadataObject);
+		
+		If AccessKeyRef = Undefined Then
+			Return;
+		EndIf;
+		
+//		Row.ObjectAccessKey = AccessKeyRef;
+	EndDo;
+	
+EndProcedure
+
+// Update access keys Document.
+// 
+// Parameters:
+//  UpdateAll - Boolean - Update all
+//  AccumulationRegistersMetadata - MetadataObjectAccumulationRegister - Document metadata
+Procedure UpdateAccessKeys_AccumulationRegisters(UpdateAll = False, AccumulationRegistersMetadata = Undefined) Export
+	If UpdateAll Then
+		Text = 
+		"SELECT
+		|	Doc.Ref
+		|FROM
+		|	Document.%1 AS Doc
+		|
+		|ORDER BY
+		|	Doc.Date";
+	Else
+		Text = 
+		"SELECT
+		|	Doc.Ref,
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys
+		|FROM
+		|	Document.%1 AS Doc
+		|		LEFT JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		|		ON Doc.Ref = T9100A_ObjectAccessMap.ObjectRef
+		|WHERE
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys IS NULL
+		|
+		|ORDER BY
+		|	Doc.Date";
+	EndIf;             
+	
+	If AccumulationRegistersMetadata = Undefined Then 
+		For Each Doc In Metadata.Documents Do
+			Query = New Query(StrTemplate(Text, Doc.Name));
+			DocSelect = Query.Execute().Select();
+			While DocSelect.Next() Do
+				//@skip-check invocation-parameter-type-intersect, property-return-type
+				CalculateAndUpdateAccessKey_Document(DocSelect.Ref);
+			EndDo;
+		EndDo;   
+	Else
+	    Query = New Query(StrTemplate(Text, AccumulationRegistersMetadata.Name));
+		DocSelect = Query.Execute().Select();
+		While DocSelect.Next() Do
+			//@skip-check invocation-parameter-type-intersect, property-return-type
+			CalculateAndUpdateAccessKey_Document(DocSelect.Ref);
+		EndDo;
+	EndIf;
+	
+EndProcedure
+
+
+#EndRegion
+
+#Region Document
+
+Procedure BeforeWrite_ObjectAccessDocument(Source, Cancel, WriteMode, PostingMode) Export
+	
 	If Cancel Then
 		Return;
 	EndIf;
@@ -16,18 +97,100 @@ Procedure BeforeWrite_ObjectAccessOnWrite(Source, Cancel, WriteMode, PostingMode
 		Return;
 	EndIf;
 	
-	CalculateAndUpdateAccessKey(Source);
+	CalculateAndUpdateAccessKey_Document(Source);
 	
 EndProcedure
 
-// Calculate and update access key.
+Procedure CalculateAndUpdateAccessKey_Document(Source)
+	AccessKeyRef = GetAndCalculatedAccessKey(Source, Source.Metadata());
+	
+	If AccessKeyRef = Undefined Then
+		Return;
+	EndIf;
+	
+	// If not set ref, then can not use RLS on create or update mode
+	If Source.Ref.IsEmpty() Then
+		Ref = Documents[Source.Metadata().Name].GetRef();
+		Source.SetNewObjectRef(Ref);
+	Else
+		Ref = Source.Ref;
+	EndIf;
+
+	Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();
+	Reg.ObjectAccessKeys = AccessKeyRef;
+	Reg.ObjectRef = Ref;
+	Reg.Write();
+EndProcedure
+
+// Update access keys Document.
 // 
 // Parameters:
-//  Source - DocumentRefDocumentName, DocumentObjectDocumentName -
-Procedure CalculateAndUpdateAccessKey(Source)
-	Module = MetadataInfo.GetManager(Source.Metadata().FullName()); // DocumentManager.RetailSalesReceipt
+//  UpdateAll - Boolean - Update all
+//  DocumentMetadata - MetadataObjectDocument - Document metadata
+Procedure UpdateAccessKeys_Document(UpdateAll = False, DocumentMetadata = Undefined) Export
+	If UpdateAll Then
+		Text = 
+		"SELECT
+		|	Doc.Ref
+		|FROM
+		|	Document.%1 AS Doc
+		|
+		|ORDER BY
+		|	Doc.Date";
+	Else
+		Text = 
+		"SELECT
+		|	Doc.Ref,
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys
+		|FROM
+		|	Document.%1 AS Doc
+		|		LEFT JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		|		ON Doc.Ref = T9100A_ObjectAccessMap.ObjectRef
+		|WHERE
+		|	T9100A_ObjectAccessMap.ObjectAccessKeys IS NULL
+		|
+		|ORDER BY
+		|	Doc.Date";
+	EndIf;             
 	
-	AccessKeys = Module.GetAccessKey(Source);
+	If DocumentMetadata = Undefined Then 
+		For Each Doc In Metadata.Documents Do
+			Query = New Query(StrTemplate(Text, Doc.Name));
+			DocSelect = Query.Execute().Select();
+			While DocSelect.Next() Do
+				//@skip-check invocation-parameter-type-intersect, property-return-type
+				CalculateAndUpdateAccessKey_Document(DocSelect.Ref);
+			EndDo;
+		EndDo;   
+	Else
+	    Query = New Query(StrTemplate(Text, DocumentMetadata.Name));
+		DocSelect = Query.Execute().Select();
+		While DocSelect.Next() Do
+			//@skip-check invocation-parameter-type-intersect, property-return-type
+			CalculateAndUpdateAccessKey_Document(DocSelect.Ref);
+		EndDo;
+	EndIf;
+	
+EndProcedure
+
+#EndRegion
+
+#Region Service
+
+Function GetAndCalculatedAccessKey(Source, MetadataObject)
+	Module = MetadataInfo.GetManager(MetadataObject.FullName()); // DocumentManager.RetailSalesReceipt
+	Try
+		AccessKeys = Module.GetAccessKey(Source);
+	Except
+		// Object not connected to access subsystem
+		Return Undefined;		
+	EndTry;
+	
+	If AccessKeys.Count() = 0 Then
+		// Object not using access keys
+		Return Undefined;
+	EndIf;
+	
 	Keys = New ValueTable();
 	Keys.Columns.Add("Key", New TypeDescription("String"));
 	Keys.Columns.Add("ValueSimpleType", Metadata.Catalogs.ObjectAccessKeys.TabularSections.FilterDataList.Attributes.ValueSimpleType.Type);
@@ -71,19 +234,9 @@ Procedure CalculateAndUpdateAccessKey(Source)
 		AccessKeyRef = NewKey.Ref;
 	EndIf;
 
-	// If not set ref, then can not use RLS on create or update mode
-	If Source.Ref.IsEmpty() Then
-		Ref = Documents[Source.Metadata().Name].GetRef();
-		Source.SetNewObjectRef(Ref);
-	Else
-		Ref = Source.Ref;
-	EndIf;
+	Return AccessKeyRef;
 
-	Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();
-	Reg.ObjectAccessKeys = AccessKeyRef;
-	Reg.ObjectRef = Ref;
-	Reg.Write();
-EndProcedure
+EndFunction
 
 Procedure FillKeysTables(Keys, PathKey, Value)
 	NewRow = Keys.Add();
@@ -100,48 +253,4 @@ Procedure FillKeysTables(Keys, PathKey, Value)
 	EndIf;
 EndProcedure
 
-Procedure UpdateAccessKeys(UpdateAll = False, DocumentMetadata = Undefined) Export
-	If UpdateAll Then
-		Text = 
-		"SELECT
-		|	Doc.Ref
-		|FROM
-		|	Document.%1 AS Doc
-		|
-		|ORDER BY
-		|	Doc.Date";
-	Else
-		Text = 
-		"SELECT
-		|	Doc.Ref,
-		|	T9100A_ObjectAccessMap.ObjectAccessKeys
-		|FROM
-		|	Document.%1 AS Doc
-		|		LEFT JOIN InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
-		|		ON Doc.Ref = T9100A_ObjectAccessMap.ObjectRef
-		|WHERE
-		|	T9100A_ObjectAccessMap.ObjectAccessKeys IS NULL
-		|
-		|ORDER BY
-		|	Doc.Date";
-	EndIf;             
-	
-	If DocumentMetadata = Undefined Then 
-		For Each Doc In Metadata.Documents Do
-			Query = New Query(StrTemplate(Text, Doc.Name));
-			DocSelect = Query.Execute().Select();
-			While DocSelect.Next() Do
-				//@skip-check invocation-parameter-type-intersect, property-return-type
-				CalculateAndUpdateAccessKey(DocSelect.Ref);
-			EndDo;
-		EndDo;   
-	Else
-	    Query = New Query(StrTemplate(Text, DocumentMetadata.Name));
-		DocSelect = Query.Execute().Select();
-		While DocSelect.Next() Do
-			//@skip-check invocation-parameter-type-intersect, property-return-type
-			CalculateAndUpdateAccessKey(DocSelect.Ref);
-		EndDo;
-	EndIf;
-	
-EndProcedure
+#EndRegion

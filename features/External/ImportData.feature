@@ -474,8 +474,8 @@ Scenario: Create catalog Partners objects (Employee)
 Scenario: Create catalog BankTerms objects (for Shop 02)
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
-		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'False'        | 2      | 'Bank term 02'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'False'        | 'Bank term 02'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |
@@ -2244,8 +2244,8 @@ Scenario: Create catalog SerialLotNumbers objects (serial lot numbers, with batc
 Scenario: Create catalog BankTerms objects (for retail)
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 3      | 'Bank term 01'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 'Bank term 01'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |
@@ -2260,8 +2260,8 @@ Scenario: Create catalog BankTerms objects (for retail)
 Scenario: Create catalog PaymentTerminals objects
 
 	And I check or create catalog "PaymentTerminals" objects:
-		| 'Ref'                                                                       | 'DeletionMark'  | 'Code'  | 'Account'  | 'Percent'  | 'Description_en'       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876'  | 'False'         | '1'     | ''         | '0'        | 'Payment terminal 01'  | ''                  | ''                | ''                 |
+		| 'Ref'                                                                       | 'DeletionMark'  | 'Account'  | 'Percent'  | 'Description_en'       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
+		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876'  | 'False'         | ''         | '0'        | 'Payment terminal 01'  | ''                  | ''                | ''                 |
 
 Scenario: Create catalog RetailCustomers objects
 
@@ -2283,8 +2283,8 @@ Scenario: Create catalog CashAccounts objects (POS)
 Scenario: Create catalog BankTerms objects
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
-		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'False'        | 1      | 'Test01'         | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'False'        | 'Test01'         | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |

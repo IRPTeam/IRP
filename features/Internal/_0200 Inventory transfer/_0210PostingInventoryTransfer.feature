@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Group4
@@ -519,7 +519,7 @@ Scenario: _02104809 create IT using form link/unlink
 			| ''           | ''        | '5,000'      | 'Shirt (38/Black)'   | 'pcs'     |
 		And I click "Unlink" button
 		And I click "Ok" button
-		And I click "Save" button	
+		And I click "Post" button	
 		And "RowIDInfo" table became equal
 			| 'Basis'                                                   | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27'   | ''            | '20,000'     | 'IT'              |
@@ -591,7 +591,9 @@ Scenario: _02104809 create IT using form link/unlink
 			| 'Description'          |
 			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
-		And I click "Save" button
+		And I remove checkbox "Use shipment confirmation"
+		And I remove checkbox "Use goods receipt"		
+		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                                   | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27'   | ''            | '160,000'    | 'IT'              |

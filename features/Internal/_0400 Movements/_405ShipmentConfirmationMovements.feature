@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -284,13 +284,13 @@ Scenario: _040177 check Shipment confirmation movements by the Register  "R4034 
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| 'Register  "R4034 Scheduled goods shipments"'         | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Basis'                                     | 'Store'      | 'Item key'   | 'Row key'                                 |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Store 02'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Store 02'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'    |
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Register  "R4034 Scheduled goods shipments"'       | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
 		And I close all client application windows
 
 

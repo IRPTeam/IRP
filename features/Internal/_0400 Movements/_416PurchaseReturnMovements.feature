@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -657,14 +657,14 @@ Scenario: _041624 check Purchase return movements by the Register  "R8013 Consig
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 195 dated 02.11.2022 16:31:47'    | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Register  "R8013 Consignor batch wise balance"'   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Batch'                                            | 'Store'      | 'Item key'   | 'Serial lot number'   | 'Source of origin'    |
-			| ''                                                 | 'Expense'       | '02.11.2022 16:31:47'   | '1'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'ODS'        | '899007790088'        | ''                    |
-			| ''                                                 | 'Expense'       | '02.11.2022 16:31:47'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | '38/18SD'    | ''                    | ''                    |
-			| ''                                                 | 'Expense'       | '02.11.2022 16:31:47'   | '3'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'S/Yellow'   | ''                    | ''                    |
+			| 'Purchase return 195 dated 02.11.2022 16:31:47'  | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '38/18SD'  | ''                  | ''                 |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
 	And I close all client application windows
 
 Scenario: _041625 check there is no Purchase return movements by the Register  "R1001 Purchases" (Return to consignor)

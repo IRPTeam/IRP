@@ -65,15 +65,15 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| '18%'           | '18%'          |
+			| 'Description'   |
+			| '18%'           |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| '0%'            | '0%'           |
+			| 'Description'   |
+			| '0%'            |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
@@ -153,8 +153,8 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And in the table "TaxRates" I click the button named "TaxRatesAdd"
 		And I click choice button of "Tax rate" attribute in "TaxRates" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| '1%'            | '1%'           |
+			| 'Description'   |
+			| '1%'            |
 		And I select current line in "List" table
 		And I finish line editing in "TaxRates" table
 		And I click "Save" button
@@ -202,8 +202,8 @@ Scenario: _017903 company tax compliance
 		And I input "01.10.2019" text in "Period" field
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'VAT'           | 'VAT'          |
+			| 'Description'   |
+			| 'VAT'           |
 		And I select current line in "List" table
 		And I set checkbox "Use"
 		And I input "1" text in "Priority" field

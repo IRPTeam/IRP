@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @SourceOfOrigin
 
@@ -80,8 +80,8 @@ Scenario: _150041 preparation
 			And I move to "Landed cost" tab
 			And I click Select button of "Currency movement type" field
 			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Reference'         | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
+				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
+				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
 			And I select current line in "List" table
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
@@ -95,8 +95,8 @@ Scenario: _150041 preparation
 			And I move to "Landed cost" tab
 			And I click Select button of "Currency movement type" field
 			And I go to line in "List" table
-				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Reference'         | 'Source'          | 'Type'      |
-				| 'TRY'         | 'No'                      | 'Local currency'    | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
+				| 'Currency'    | 'Deferred calculation'    | 'Description'       | 'Source'          | 'Type'      |
+				| 'TRY'         | 'No'                      | 'Local currency'    | 'Forex Seling'    | 'Legal'     |
 			And I select current line in "List" table
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
@@ -321,8 +321,8 @@ Scenario: _150045 check filling source of origin in the Opening entry
 			And I click choice button of the attribute named "InventorySerialLotNumber" in "Inventory" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977893'    | '09987897977893'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977893'     |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table		
 		* Check filling Opening entry
@@ -559,8 +559,8 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977895'    | '09987897977895'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977895'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -678,8 +678,8 @@ Scenario: _150052 check filling source of origin in the SI
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'           | 'Reference'              |
-				| 'Product 3 with SLN'    | 'Product 3 with SLN'     |
+				| 'Description'           |
+				| 'Product 3 with SLN'    |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -695,8 +695,8 @@ Scenario: _150052 check filling source of origin in the SI
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977893'    | '09987897977893'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977893'     |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened
@@ -707,8 +707,8 @@ Scenario: _150052 check filling source of origin in the SI
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977895'    | '09987897977895'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977895'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -840,8 +840,8 @@ Scenario: _150053 check filling source of origin in the IT
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'           | 'Reference'              |
-				| 'Product 3 with SLN'    | 'Product 3 with SLN'     |
+				| 'Description'           |
+				| 'Product 3 with SLN'    |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -857,8 +857,8 @@ Scenario: _150053 check filling source of origin in the IT
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977893'    | '09987897977893'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977893'     |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
@@ -952,8 +952,8 @@ Scenario: _150054 check filling source of origin in the RSR
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'           | 'Reference'              |
-				| 'Product 3 with SLN'    | 'Product 3 with SLN'     |
+				| 'Description'           |
+				| 'Product 3 with SLN'    |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -969,8 +969,8 @@ Scenario: _150054 check filling source of origin in the RSR
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977893'    | '09987897977893'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977893'     |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened
@@ -981,8 +981,8 @@ Scenario: _150054 check filling source of origin in the RSR
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977895'    | '09987897977895'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977895'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1119,8 +1119,8 @@ Scenario: _150055 check filling source of origin in the Stock adjustment as writ
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'           | 'Reference'              |
-				| 'Product 3 with SLN'    | 'Product 3 with SLN'     |
+				| 'Description'           |
+				| 'Product 3 with SLN'    |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -1136,8 +1136,8 @@ Scenario: _150055 check filling source of origin in the Stock adjustment as writ
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977893'    | '09987897977893'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977893'     |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened
@@ -1148,8 +1148,8 @@ Scenario: _150055 check filling source of origin in the Stock adjustment as writ
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977895'    | '09987897977895'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977895'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -101,7 +101,6 @@ Scenario: _041300 preparation (Sales return)
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);"      |
@@ -1051,11 +1050,11 @@ Scenario: _041341 check Sales return movements by the Register  "R8013 Consignor
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 193 dated 05.11.2022 00:00:00'       | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Register  "R8013 Consignor batch wise balance"'   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Batch'                                            | 'Store'      | 'Item key'   | 'Serial lot number'   | 'Source of origin'    |
-			| ''                                                 | 'Receipt'       | '05.11.2022 00:00:00'   | '1'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'UNIQ'       | '09987897977889'      | ''                    |
-			| ''                                                 | 'Receipt'       | '05.11.2022 00:00:00'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'S/Yellow'   | ''                    | ''                    |
+			| 'Sales return 193 dated 05.11.2022 00:00:00'     | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                               | 'Receipt'     | '05.11.2022 00:00:00' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977889'    | ''                 |
+			| ''                                               | 'Receipt'     | '05.11.2022 00:00:00' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
 		And I close all client application windows

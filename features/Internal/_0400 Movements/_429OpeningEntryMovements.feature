@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -784,13 +784,13 @@ Scenario: _042927 check Opening entry movements by the Register  "R8013 Consigno
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 15 dated 01.12.2022 12:41:39'       | ''              | ''                      | ''            | ''               | ''                                             | ''           | ''           | ''                    | ''                    |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''                                             | ''           | ''           | ''                    | ''                    |
-			| 'Register  "R8013 Consignor batch wise balance"'   | ''              | ''                      | ''            | ''               | ''                                             | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                             | ''           | ''           | ''                    | ''                    |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Batch'                                        | 'Store'      | 'Item key'   | 'Serial lot number'   | 'Source of origin'    |
-			| ''                                                 | 'Receipt'       | '01.12.2022 12:41:39'   | '50'          | 'Main Company'   | 'Opening entry 15 dated 01.12.2022 12:41:39'   | 'Store 08'   | 'M/White'    | ''                    | ''                    |
-			| ''                                                 | 'Receipt'       | '01.12.2022 12:41:39'   | '70'          | 'Main Company'   | 'Opening entry 15 dated 01.12.2022 12:41:39'   | 'Store 08'   | 'PZU'        | '8908899877'          | ''                    |
+			| 'Opening entry 15 dated 01.12.2022 12:41:39'     | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                           | ''         | ''                  | ''                 |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                      | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Store 08' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | ''                 |
+			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'Store 08' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | ''                 |
 		And I close all client application windows
 
 Scenario: _042928 check Opening entry movements by the Register  "R8015 Consignor prices" (receipt from consignor)

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -286,14 +286,14 @@ Scenario: _040166 check Sales order closing movements by the Register  "R4034 Sc
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| 'Document registrations records'                    | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| 'Register  "R4034 Scheduled goods shipments"'       | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''           | ''           | ''                                        |
-			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Basis'                                     | 'Store'      | 'Item key'   | 'Row key'                                 |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-24'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Store 02'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'    |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-10'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Store 02'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'    |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Store 02'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'    |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Register  "R4034 Scheduled goods shipments"'     | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 
 
 		And I close all client application windows

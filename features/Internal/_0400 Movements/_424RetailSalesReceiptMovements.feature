@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -488,14 +488,14 @@ Scenario: _042422 check Retail sales receipt movements by the Register  "R8013 C
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44'   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Document registrations records'                         | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Register  "R8013 Consignor batch wise balance"'         | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Company'        | 'Batch'                                            | 'Store'      | 'Item key'   | 'Serial lot number'   | 'Source of origin'    |
-			| ''                                                       | 'Expense'       | '14.11.2022 13:29:44'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'S/Yellow'   | ''                    | ''                    |
-			| ''                                                       | 'Expense'       | '14.11.2022 13:29:44'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'UNIQ'       | '09987897977890'      | ''                    |
-			| ''                                                       | 'Expense'       | '14.11.2022 13:29:44'   | '2'           | 'Main Company'   | 'Purchase invoice 196 dated 03.11.2022 16:32:57'   | 'Store 02'   | 'UNIQ'       | '09987897977890'      | ''                    |
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"'       | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | ''                 |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | ''                 |
 		And I close all client application windows
 
 Scenario: _042423 check Retail sales receipt movements by the Register  "R8014 Consignor sales" (consignor and own stocks) 

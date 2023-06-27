@@ -166,8 +166,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Store 01'      | 'Store 01'     |
+			| 'Description'   |
+			| 'Store 01'      |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -643,8 +643,8 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Store 01'      | 'Store 01'     |
+			| 'Description'   |
+			| 'Store 01'      |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1884,8 +1884,8 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    | 'Reference'    |
-			| 'TRY'    | 'Turkish lira'   | 'TRY'          |
+			| 'Code'   | 'Description'    |
+			| 'TRY'    | 'Turkish lira'   |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsSurplus092009$$" variable
@@ -1987,8 +1987,8 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 		And I click "Ok" button
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    | 'Reference'    |
-			| 'TRY'    | 'Turkish lira'   | 'TRY'          |
+			| 'Code'   | 'Description'    |
+			| 'TRY'    | 'Turkish lira'   |
 		And I select current line in "List" table
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
@@ -2208,8 +2208,8 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    | 'Reference'    |
-			| 'TRY'    | 'Turkish lira'   | 'TRY'          |
+			| 'Code'   | 'Description'    |
+			| 'TRY'    | 'Turkish lira'   |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff092010$$" variable
@@ -2312,8 +2312,8 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 	* Post Stock adjustment as write off and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    | 'Reference'    |
-			| 'TRY'    | 'Turkish lira'   | 'TRY'          |
+			| 'Code'   | 'Description'    |
+			| 'TRY'    | 'Turkish lira'   |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff09200101$$" variable
@@ -3727,8 +3727,8 @@ Scenario: _092064 check unique serial lot number settings
 			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Code'    | 'Reference'    | 'Serial number'     |
-				| '11'      | '0512'         | '0512'              |
+				| 'Code'    | 'Serial number'     |
+				| '11'      | '0512'              |
 			And I activate "Serial number" field in "List" table
 			And I go to line in "List" table
 				| 'Owner'        | 'Serial number'     |
@@ -3902,8 +3902,8 @@ Scenario: _092081 switch on scan emulator in the Create serial lot numbers data 
 	* Select another item and scan barcode
 		And I click Choice button of the field named "Item"
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Trousers'      | 'Trousers'     |
+			| 'Description'   |
+			| 'Trousers'      |
 		And I select current line in "List" table
 		And I click Choice button of the field named "ItemKey"
 		And I go to line in "List" table
@@ -3933,8 +3933,8 @@ Scenario: _092083 check serial lot numbers in the POS
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Reference'   | 'Serial number'    |
-			| '11'     | '0512'        | '0512'             |
+			| 'Code'   | 'Serial number'    |
+			| '11'     | '0512'             |
 		And I activate "Serial number" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -3944,8 +3944,8 @@ Scenario: _092083 check serial lot numbers in the POS
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Reference'   | 'Serial number'    |
-			| '12'     | '0514'        | '0514'             |
+			| 'Code'   | 'Serial number'    |
+			| '12'     | '0514'             |
 		And I activate "Serial number" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -4253,8 +4253,8 @@ Scenario: _092093 try replace sln (2 sln in one line)
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'   | 'Serial number'    |
-			| 'ODS'     | '9009099'     | '9009099'          |
+			| 'Owner'   | 'Serial number'    |
+			| 'ODS'     | '9009099'          |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table

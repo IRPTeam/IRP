@@ -1710,8 +1710,8 @@ Scenario: _2060015 check price in the SI when link document with different price
 		And I select current line in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'             | 'Reference'               |
-			| 'TRY'      | 'Basic Price without VAT' | 'Basic Price without VAT' |
+			| 'Currency' | 'Description'             |
+			| 'TRY'      | 'Basic Price without VAT' |
 		And I select current line in "List" table
 	* Link document
 		And in the table "ItemList" I click "Link unlink basis documents" button
@@ -1810,8 +1810,8 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I select current line in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'             | 'Reference'               |
-			| 'TRY'      | 'Basic Price without VAT' | 'Basic Price without VAT' |
+			| 'Currency' | 'Description'             |
+			| 'TRY'      | 'Basic Price without VAT' |
 		And I select current line in "List" table
 	* Link document
 		And I click "Link unlink basis documents" button	
@@ -2142,8 +2142,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' | 'Serial number' |
-				| 'Brown' | '13456778'  | '13456778'      |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '13456778'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table

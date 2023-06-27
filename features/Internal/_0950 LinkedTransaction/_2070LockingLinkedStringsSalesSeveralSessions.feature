@@ -181,8 +181,8 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 		And I select current line in "ItemList" table
 		And I click choice button of "Store" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Store 02'      | 'Store 02'     |
+			| 'Description'   |
+			| 'Store 02'      |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Cancel line and check locking

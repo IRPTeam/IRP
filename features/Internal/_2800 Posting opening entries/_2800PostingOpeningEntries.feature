@@ -561,8 +561,8 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 			And I select current line in "List" table
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
-				| 'Currency'    | 'Description'          | 'Reference'             |
-				| 'TRY'         | 'Vendor price, TRY'    | 'Vendor price, TRY'     |
+				| 'Currency'    | 'Description'          |
+				| 'TRY'         | 'Vendor price, TRY'    |
 			And I select current line in "List" table
 			And I input "01.12.2019" text in "Start using" field
 			And I click "Save and close" button

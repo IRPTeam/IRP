@@ -123,8 +123,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Code'   | 'Description'          | 'Reference'             |
-			| '161'    | 'Product 1 with SLN'   | 'Product 1 with SLN'    |
+			| 'Code'   | 'Description'          |
+			| '161'    | 'Product 1 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -138,8 +138,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899879'   | '8908899879'       |
+			| 'Owner'   | 'Serial number'    |
+			| 'PZU'     | '8908899879'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -149,8 +149,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		Then "Item serial/lot numbers" window is opened
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899877'   | '8908899877'       |
+			| 'Owner'   | 'Serial number'    |
+			| 'PZU'     | '8908899877'       |
 		And I select current line in "List" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -165,8 +165,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Code'   | 'Description'          | 'Reference'             |
-			| '164'    | 'Product 4 with SLN'   | 'Product 4 with SLN'    |
+			| 'Code'   | 'Description'          |
+			| '164'    | 'Product 4 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -197,8 +197,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Code'   | 'Description'   | 'Reference'    |
-			| '1'      | 'Dress'         | 'Dress'        |
+			| 'Code'   | 'Description'   |
+			| '1'      | 'Dress'         |
 		And I select current line in "List" table
 		Then "Sales invoice (create) *" window is opened
 		And I activate field named "ItemListItemKey" in "ItemList" table
@@ -215,8 +215,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Code'   | 'Description'   | 'Reference'    |
-			| '4'      | 'Boots'         | 'Boots'        |
+			| 'Code'   | 'Description'   |
+			| '4'      | 'Boots'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -388,8 +388,8 @@ Scenario: _050009 create Sales report from trade agent
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'          | 'Reference'             |
-			| 'Product 4 with SLN'   | 'Product 4 with SLN'    |
+			| 'Description'          |
+			| 'Product 4 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -480,8 +480,8 @@ Scenario: _050019 check consignment fee calculation
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'          | 'Reference'             |
-			| 'Product 4 with SLN'   | 'Product 4 with SLN'    |
+			| 'Description'          |
+			| 'Product 4 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -620,8 +620,8 @@ Scenario: _050021 check Purchase invoice generate for concignor fee (based on Sa
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'          | 'Reference'             |
-			| 'Product 4 with SLN'   | 'Product 4 with SLN'    |
+			| 'Description'          |
+			| 'Product 4 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table

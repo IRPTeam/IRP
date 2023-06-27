@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -246,13 +246,13 @@ Scenario: _040122 check Purchase order movements by the Register  "R4033 Schedul
 		And I select "R4033 Scheduled goods receipts" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''           | ''            | ''                                        |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''           | ''            | ''                                        |
-			| 'Register  "R4033 Scheduled goods receipts"'     | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''           | ''            | ''                                        |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''           | ''            | ''                                        |
-			| ''                                               | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Basis'                                          | 'Store'      | 'Item key'    | 'Row key'                                 |
-			| ''                                               | 'Receipt'       | '12.02.2021 00:00:00'   | '5'           | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Store 02'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'    |
-			| ''                                               | 'Receipt'       | '12.02.2021 00:00:00'   | '10'          | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Store 02'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'    |
+			| 'Purchase order 115 dated 12.02.2021 12:44:43' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                             | ''          | ''                                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                             | ''          | ''                                     |
+			| 'Register  "R4033 Scheduled goods receipts"'   | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                             | ''          | ''                                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                                             | ''          | ''                                     |
+			| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Basis'                                        | 'Item key'  | 'Row key'                              |
+			| ''                                             | 'Receipt'     | '12.02.2021 00:00:00' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | 'Purchase order 115 dated 12.02.2021 12:44:43' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
+			| ''                                             | 'Receipt'     | '12.02.2021 00:00:00' | '10'        | 'Main Company' | 'Front office' | 'Store 02' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
 		And I close all client application windows
 		
 Scenario: _040123 check Purchase order movements by the Register  "R1011 Receipt of purchase orders"

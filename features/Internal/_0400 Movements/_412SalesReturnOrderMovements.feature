@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -87,10 +87,8 @@ Scenario: _041200 preparation (Sales return order)
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load SC
 		When Create document ShipmentConfirmation objects (check movements)

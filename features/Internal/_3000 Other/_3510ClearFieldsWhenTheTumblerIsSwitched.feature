@@ -165,8 +165,8 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And in the table "Currencies" I click the button named "CurrenciesAdd"
                 And I click choice button of "Movement type" attribute in "Currencies" table
                 And I go to line in "List" table
-																								| 'Currency'                        | 'Deferred calculation'                        | 'Description'                               | 'Reference'                                 | 'Source'                              | 'Type'                              |
-																								| 'USD'                             | 'No'                                          | 'Reporting currency'                        | 'Reporting currency'                        | 'Forex Seling'                        | 'Reporting'                         |
+																								| 'Currency'                        | 'Deferred calculation'                        | 'Description'                               | 'Source'                              | 'Type'                              |
+																								| 'USD'                             | 'No'                                          | 'Reporting currency'                        | 'Forex Seling'                        | 'Reporting'                         |
                 And I activate "Description" field in "List" table
                 And I select current line in "List" table
                 And I finish line editing in "Currencies" table
@@ -180,8 +180,8 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And I activate "Tax" field in "CompanyTaxes" table
                 And I click choice button of "Tax" attribute in "CompanyTaxes" table
                 And I go to line in "List" table
-																								| 'Description'                        | 'Reference'                         |
-																								| 'VAT'                                | 'VAT'                               |
+																								| 'Description'                        |
+																								| 'VAT'                                |
                 And I select current line in "List" table
                 And I activate "Priority" field in "CompanyTaxes" table
                 And I input "2" text in "Priority" field of "CompanyTaxes" table

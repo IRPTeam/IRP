@@ -813,8 +813,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    | 'Reference'     |
-				| 'Dress'          | 'Dress'         |
+				| 'Description'    |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table

@@ -23,8 +23,8 @@ Scenario: _01202501 preparation
 		And I change "Set price" radio button value to "By item keys"
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'        |
-			| 'Current Price'   | 'Current Price'    |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
@@ -85,8 +85,8 @@ Scenario: _01202502 check current price in the Sales order
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'        |
-			| 'Current Price'   | 'Current Price'    |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 		And Delay 4
 	* Check current price
@@ -116,8 +116,8 @@ Scenario: _01202503 check current price in the Sales invoice
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'        |
-			| 'Current Price'   | 'Current Price'    |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
@@ -146,8 +146,8 @@ Scenario: _01202504 check current price in the Purchase order
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'        |
-			| 'Current Price'   | 'Current Price'    |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
@@ -177,8 +177,8 @@ Scenario: _01202504 check current price in the Purchase invoice
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'        |
-			| 'Current Price'   | 'Current Price'    |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines

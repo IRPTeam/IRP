@@ -967,8 +967,8 @@ Scenario: _1035 create document Production
 				And I select current line in "Materials" table
 				And I click choice button of "Writeoff store" attribute in "Materials" table
 				And I go to line in "List" table
-					| 'Description'     | 'Reference'      |
-					| 'Store 05'        | 'Store 05'       |
+					| 'Description'     | 
+					| 'Store 05'        | 
 				And I select current line in "List" table
 				And I finish line editing in "Materials" table
 				And I go to line in "Materials" table
@@ -977,8 +977,8 @@ Scenario: _1035 create document Production
 				And I select current line in "Materials" table
 				And I click choice button of "Writeoff store" attribute in "Materials" table
 				And I go to line in "List" table
-					| 'Description'     | 'Reference'      |
-					| 'Store 05'        | 'Store 05'       |
+					| 'Description'     |
+					| 'Store 05'        |
 				And I select current line in "List" table
 				And I finish line editing in "Materials" table
 				And I go to line in "Materials" table
@@ -999,8 +999,8 @@ Scenario: _1035 create document Production
 				And I click choice button of "Writeoff store" attribute in "Materials" table
 				Then "Stores" window is opened
 				And I go to line in "List" table
-					| 'Description'     | 'Reference'      |
-					| 'Store 05'        | 'Store 05'       |
+					| 'Description'     |
+					| 'Store 05'        |
 				And I select current line in "List" table
 				And I finish line editing in "Materials" table
 				And I go to line in "Materials" table
@@ -1031,8 +1031,8 @@ Scenario: _1035 create document Production
 				And I click choice button of "Writeoff store" attribute in "Materials" table
 				Then "Stores" window is opened
 				And I go to line in "List" table
-					| 'Description'     | 'Reference'      |
-					| 'Store 05'        | 'Store 05'       |
+					| 'Description'     |
+					| 'Store 05'        |
 				And I select current line in "List" table
 				And I finish line editing in "Materials" table
 				And I go to line in "Materials" table
@@ -1352,8 +1352,8 @@ Scenario: _1037 create document Production based on production planning
 		And in the table "Materials" I click the button named "MaterialsAdd"
 		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'      |
-			| 'Упаковка 01'   | 'Упаковка 01'    |
+			| 'Description'   |
+			| 'Упаковка 01'   |
 		And I select current line in "List" table
 		And I input "1,000" text in the field named "MaterialsQuantity" of "Materials" table
 		And I select "Material" exact value from "Material type" drop-down list in "Materials" table
@@ -1505,8 +1505,8 @@ Scenario: _1040 refilling document Production when change specification
 			And I select current line in "Materials" table
 			And I click choice button of "Writeoff store" attribute in "Materials" table
 			And I go to line in "List" table
-				| 'Description'    | 'Reference'     |
-				| 'Store 05'       | 'Store 05'      |
+				| 'Description'    |
+				| 'Store 05'       |
 			And I select current line in "List" table
 			And I finish line editing in "Materials" table
 			And I go to line in "Materials" table
@@ -1515,8 +1515,8 @@ Scenario: _1040 refilling document Production when change specification
 			And I select current line in "Materials" table
 			And I click choice button of "Writeoff store" attribute in "Materials" table
 			And I go to line in "List" table
-				| 'Description'    | 'Reference'     |
-				| 'Store 05'       | 'Store 05'      |
+				| 'Description'    |
+				| 'Store 05'       |
 			And I select current line in "List" table
 			And I finish line editing in "Materials" table
 			And I go to line in "Materials" table
@@ -1617,9 +1617,9 @@ Scenario: _10341 create Production (Repacking)
 		And I select current line in "List" table 
 		And I click Select button of "Store production" field
 		And I go to line in "List" table
-			| 'Company'                    | 'Description'   | 'Reference'    |
-			| 'Shared for all companies'   | 'Store 02'      | 'Store 02'     |
-		And I activate field named "Description" in "List" table
+			| 'Company'                    | 'Description'   |
+			| 'Shared for all companies'   | 'Store 02'      |
+		And I activate field named "Description" in "List" tab
 		And I select current line in "List" table
 		And I click Choice button of the field named "Item"
 		And I activate field named "Description" in "List" table
@@ -1632,8 +1632,8 @@ Scenario: _10341 create Production (Repacking)
 		And I select current line in "Materials" table
 		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
 		And I go to line in "List" table
-			| 'Description'         | 'Reference'            |
-			| 'Стремянка номер 8'   | 'Стремянка номер 8'    |
+			| 'Description'         |
+			| 'Стремянка номер 8'   |
 		And I select current line in "List" table
 		And I activate "Material type" field in "Materials" table
 		And I select "Material" exact value from "Material type" drop-down list in "Materials" table
@@ -1644,8 +1644,8 @@ Scenario: _10341 create Production (Repacking)
 		And I select current line in "Materials" table
 		And I click choice button of "Writeoff store" attribute in "Materials" table
 		And I go to line in "List" table
-			| 'Company'                    | 'Description'   | 'Reference'    |
-			| 'Shared for all companies'   | 'Store 03'      | 'Store 03'     |
+			| 'Company'                    | 'Description'   |
+			| 'Shared for all companies'   | 'Store 03'      |
 		And I select current line in "List" table
 		And I finish line editing in "Materials" table
 		And I click "Post" button

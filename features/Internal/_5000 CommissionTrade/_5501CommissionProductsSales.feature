@@ -161,8 +161,8 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'          | 'Reference'             |
-			| 'Product 3 with SLN'   | 'Product 3 with SLN'    |
+			| 'Description'          |
+			| 'Product 3 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -208,8 +208,8 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Code'   | 'Description'          | 'Reference'             |
-			| '164'    | 'Product 4 with SLN'   | 'Product 4 with SLN'    |
+			| 'Code'   | 'Description'          |
+			| '164'    | 'Product 4 with SLN'   |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -236,8 +236,8 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Code'   | 'Description'   | 'Reference'    |
-			| '1'      | 'Dress'         | 'Dress'        |
+			| 'Code'   | 'Description'   |
+			| '1'      | 'Dress'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -254,8 +254,8 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Code'   | 'Description'   | 'Reference'    |
-			| '4'      | 'Boots'         | 'Boots'        |
+			| 'Code'   | 'Description'   |
+			| '4'      | 'Boots'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -722,8 +722,8 @@ Scenario: _050015 create IT for (Consignor stocks)
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'        | 'Serial number'     |
-			| 'UNIQ'    | '09987897977889'   | '09987897977889'    |
+			| 'Owner'   | 'Serial number'     |
+			| 'UNIQ'    | '09987897977889'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -975,8 +975,8 @@ Scenario: _050026 check trade agent fee calculation
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'        | 'Serial number'     |
-			| 'UNIQ'    | '09987897977889'   | '09987897977889'    |
+			| 'Owner'   | 'Serial number'     |
+			| 'UNIQ'    | '09987897977889'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -988,8 +988,8 @@ Scenario: _050026 check trade agent fee calculation
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Dress'         | 'Dress'        |
+			| 'Description'   |
+			| 'Dress'         |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -600,17 +600,17 @@ Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Co
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35'   | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| 'Register  "R8013 Consignor batch wise balance"'     | ''              | ''                      | ''            | ''               | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                                                 | ''           | ''           | ''                    | ''                    |
-			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Company'        | 'Batch'                                            | 'Store'      | 'Item key'   | 'Serial lot number'   | 'Source of origin'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '1'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 01'   | 'ODS'        | '899007790088'        | ''                    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 01'   | 'S/Yellow'   | ''                    | ''                    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Purchase invoice 196 dated 03.11.2022 16:32:57'   | 'Store 01'   | 'ODS'        | '899007790088'        | ''                    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '1'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'ODS'        | '899007790088'        | ''                    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'Store 02'   | 'S/Yellow'   | ''                    | ''                    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Purchase invoice 196 dated 03.11.2022 16:32:57'   | 'Store 02'   | 'ODS'        | '899007790088'        | ''                    |
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"'   | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Store 01' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 01' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'ODS'      | '899007790088'      | ''                 |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 01' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'ODS'      | '899007790088'      | ''                 |
 		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion

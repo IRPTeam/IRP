@@ -2423,8 +2423,8 @@ Scenario: _201032 сheck filling of the bundle of store and company in the Work 
 		And I activate field named "MaterialsItem" in "Materials" table
 		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Bag'           | 'Bag'          |
+			| 'Description'   |
+			| 'Bag'           |
 		And I select current line in "List" table
 		And I activate "Store" field in "Materials" table
 		And I click choice button of "Store" attribute in "Materials" table
@@ -2485,8 +2485,8 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 		And I activate field named "MaterialsItem" in "Materials" table
 		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Bag'           | 'Bag'          |
+			| 'Description'   |
+			| 'Bag'           |
 		And I select current line in "List" table
 		And I activate "Store" field in "Materials" table
 		And I click choice button of "Store" attribute in "Materials" table

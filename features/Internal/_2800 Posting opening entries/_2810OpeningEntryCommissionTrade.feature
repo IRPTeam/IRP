@@ -158,8 +158,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And I click choice button of the attribute named "InventorySerialLotNumber" in "Inventory" table
 				And I activate field named "Owner" in "List" table
 				And I go to line in "List" table
-					| 'Owner'     | 'Reference'      | 'Serial number'      |
-					| 'PZU'       | '8908899879'     | '8908899879'         |
+					| 'Owner'     | 'Serial number'      |
+					| 'PZU'       | '8908899879'         |
 				And I select current line in "List" table
 				And I finish line editing in "Inventory" table
 			* Third item (with serial lot number)
@@ -190,8 +190,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 				And I click choice button of the attribute named "InventorySerialLotNumber" in "Inventory" table
 				And I activate field named "Owner" in "List" table
 				And I go to line in "List" table
-					| 'Owner'     | 'Reference'          | 'Serial number'       |
-					| 'UNIQ'      | '09987897977889'     | '09987897977889'      |
+					| 'Owner'     | 'Serial number'       |
+					| 'UNIQ'      | '09987897977889'      |
 				And I select current line in "List" table
 				And I finish line editing in "Inventory" table
 		* Post document
@@ -283,8 +283,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'     | 'Serial number'     |
-				| 'PZU'      | '8908899879'    | '8908899879'        |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899879'        |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table	
 		* Post document
@@ -366,8 +366,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'     | 'Serial number'     |
-				| 'PZU'      | '8908899879'    | '8908899879'        |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899879'        |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table
 		* Third item (with serial lot number)
@@ -396,8 +396,8 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I click choice button of the attribute named "ShipmentToTradeAgentSerialLotNumber" in "ShipmentToTradeAgent" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'         | 'Serial number'      |
-				| 'UNIQ'     | '09987897977889'    | '09987897977889'     |
+				| 'Owner'    | 'Serial number'      |
+				| 'UNIQ'     | '09987897977889'     |
 			And I select current line in "List" table
 			And I finish line editing in "ShipmentToTradeAgent" table	
 		* Post document
@@ -475,8 +475,8 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I input "50,000" text in "Quantity" field of "ReceiptFromConsignor" table
 			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Code'    | 'Description'     | 'Reference'     |
-				| 'TRY'     | 'Turkish lira'    | 'TRY'           |
+				| 'Code'    | 'Description'     |
+				| 'TRY'     | 'Turkish lira'    |
 			And I select current line in "List" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,00" text in "Quantity" field of "ReceiptFromConsignor" table	
@@ -509,13 +509,13 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I click choice button of the attribute named "ReceiptFromConsignorSerialLotNumber" in "ReceiptFromConsignor" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'     | 'Serial number'     |
-				| 'PZU'      | '8908899877'    | '8908899877'        |
+				| 'Owner'    | 'Serial number'     |
+				| 'PZU'      | '8908899877'        |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ReceiptFromConsignorCurrency" in "ReceiptFromConsignor" table
 			And I go to line in "List" table
-				| 'Code'    | 'Description'     | 'Reference'     |
-				| 'TRY'     | 'Turkish lira'    | 'TRY'           |
+				| 'Code'    | 'Description'     |
+				| 'TRY'     | 'Turkish lira'    |
 			And I select current line in "List" table
 			And I activate "Price" field in "ReceiptFromConsignor" table
 			And I input "50,000" text in "Price" field of "ReceiptFromConsignor" table	

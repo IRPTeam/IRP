@@ -99,8 +99,8 @@ Scenario: _0154100 preparation ( filling documents)
 			And I select current line in "List" table
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
-				| 'Currency'    | 'Description'          | 'Reference'             |
-				| 'TRY'         | 'Basic Price Types'    | 'Basic Price Types'     |
+				| 'Currency'    | 'Description'          |
+				| 'TRY'         | 'Basic Price Types'    |
 			And I select current line in "List" table
 			And I input "01.11.2018" text in "Start using" field
 			And I click Select button of "Store" field
@@ -135,8 +135,8 @@ Scenario: _0154100 preparation ( filling documents)
 			And I select current line in "List" table
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
-				| 'Currency'    | 'Description'          | 'Reference'             |
-				| 'TRY'         | 'Basic Price Types'    | 'Basic Price Types'     |
+				| 'Currency'    | 'Description'          |
+				| 'TRY'         | 'Basic Price Types'    |
 			And I select current line in "List" table
 			And I input "01.11.2018" text in "Start using" field
 			And I click Select button of "Store" field

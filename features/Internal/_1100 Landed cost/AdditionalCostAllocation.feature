@@ -87,8 +87,8 @@ Scenario: _041 test data
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Reference'        | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"	
 		And I go to line in "CompanyTaxes" table
@@ -105,8 +105,8 @@ Scenario: _041 test data
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Reference'        | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
 		And I click "Save and close" button

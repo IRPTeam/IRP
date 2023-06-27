@@ -383,8 +383,8 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And I click choice button of "Attribute" attribute in "Attributes" table
 		Then "Additional attribute types" window is opened
 		And I go to line in "List" table
-			| 'Description'               | 'Reference'                  |
-			| 'Additional attribute 01'   | 'Additional attribute 01'    |
+			| 'Description'               |
+			| 'Additional attribute 01'   |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 	* Check copy isConditionSet

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -53,35 +53,35 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP TR'   |
+				| 'Description'      |
+				| 'Ferron BP TR'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Partner terms, TRY'   |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02 TR' |
+				| 'Description'     |
+				| 'Store 02 TR'     |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers TR' |
+				| 'Description'     |
+				| 'Trousers TR'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'        | 'Item key'     |
-				| 'Trousers TR' | '38/Yellow TR' |
+				| 'Item'           | 'Item key'         |
+				| 'Trousers TR'    | '38/Yellow TR'     |
 			And I select current line in "List" table
 			And I click Select button of "Manager segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| '2 Region'    |
+				| 'Description'     |
+				| '2 Region'        |
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I click the button named "FormPost"
@@ -114,41 +114,41 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			When in opened panel I select "$$SalesOrder300521$$"
 			And I click "Related documents" button
 			And "DocumentsTree" table became equal
-				| 'Presentation'                          |
-				| '$$SalesOrder300521$$'           |
-				| '$$ShipmentConfirmation300521$$' |
-				| '$$SalesInvoice300521$$'         |
+				| 'Presentation'                       |
+				| '$$SalesOrder300521$$'               |
+				| '$$ShipmentConfirmation300521$$'     |
+				| '$$SalesInvoice300521$$'             |
 		* Check unpost Sales invoice from report Related documents
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
 			And the current line of "DocumentsTree" table is equal to
-				| 'Presentation'                          |
-				| '$$SalesInvoice300521$$'         |
+				| 'Presentation'               |
+				| '$$SalesInvoice300521$$'     |
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And Delay 10
 			And "List" table does not contain lines
-			| 'Recorder'             |
-			| '$$SalesInvoice300521$$*' |
+			| 'Recorder'                   |
+			| '$$SalesInvoice300521$$*'    |
 		* Check post Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreePost"
 			And the current line of "DocumentsTree" table is equal to
-				| 'Presentation'                          |
-				| '$$SalesInvoice300521$$'         |
+				| 'Presentation'               |
+				| '$$SalesInvoice300521$$'     |
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And I click "Refresh" button
 			And Delay 10
 			And "List" table contains lines
-				| 'Recorder'             |
-				| '$$SalesInvoice300521$$' |
+				| 'Recorder'                   |
+				| '$$SalesInvoice300521$$'     |
 		* Mark for deletion Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeDelete"
 			And the current line of "DocumentsTree" table is equal to
-				| 'Presentation'                          |
-				| '$$SalesInvoice300521$$'         |
+				| 'Presentation'               |
+				| '$$SalesInvoice300521$$'     |
 			And I go to the last line in "DocumentsTree" table
 		* Unmark for deletion  Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
@@ -175,10 +175,10 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I press keyboard shortcut "Delete"	
 			Then user message window does not contain messages
 			And "DocumentsTree" table contains lines
-				| 'Presentation'                          |
-				| '$$SalesOrder300521$$'           |
-				| '$$ShipmentConfirmation300521$$' |
-				| '$$SalesInvoice300521$$'         |									
+				| 'Presentation'                       |
+				| '$$SalesOrder300521$$'               |
+				| '$$ShipmentConfirmation300521$$'     |
+				| '$$SalesInvoice300521$$'             |
 		And I close all client application windows
 
 

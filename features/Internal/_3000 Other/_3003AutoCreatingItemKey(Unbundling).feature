@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -48,8 +48,8 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		And I input "Pineapple" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Chewing gum taste' |
+			| 'Description'          |
+			| 'Chewing gum taste'    |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
@@ -57,8 +57,8 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		And I input "Watermelon" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Chewing gum taste' |
+			| 'Description'          |
+			| 'Chewing gum taste'    |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
@@ -66,8 +66,8 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		And I input "Mentol" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Chewing gum brand' |
+			| 'Description'          |
+			| 'Chewing gum brand'    |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 	* Create Specification
@@ -77,19 +77,19 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 			And I change "Type" radio button value to "Set"
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'     |
 				| 'Chewing gum'     |
 			And I select current line in "List" table
 			And in the table "FormTable*" I click "Add" button
 			And I click choice button of "Chewing gum taste" attribute in "FormTable*" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Pineapple'          |
+				| 'Description'     |
+				| 'Pineapple'       |
 			And I select current line in "List" table
 			And I activate "Chewing gum brand" field in "FormTable*" table
 			And I click choice button of "Chewing gum brand" attribute in "FormTable*" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'     |
 				| 'Mentol'          |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "FormTable*" table
@@ -98,8 +98,8 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 			And in the table "FormTable*" I click "Add" button
 			And I click choice button of "Chewing gum taste" attribute in "FormTable*" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Watermelon'          |
+				| 'Description'     |
+				| 'Watermelon'      |
 			And I select current line in "List" table
 			And I activate "Chewing gum brand" field in "FormTable*" table
 			And I click choice button of "Chewing gum brand" attribute in "FormTable*" table
@@ -116,16 +116,16 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 	* Create item key  for Chewing gum Specifications
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Chewing gum TR'          |
+				| 'Description'        |
+				| 'Chewing gum TR'     |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I set checkbox named "SpecificationMode"
 		And I click Choice button of the field named "Specification"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Chewing gum2'          |
+				| 'Description'      |
+				| 'Chewing gum2'     |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 10
@@ -141,43 +141,43 @@ Scenario: _300302 create Unbundling and check creation item key
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company TR |
+			| Description        |
+			| Main Company TR    |
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Chewing gum TR       |
+			| Description       |
+			| Chewing gum TR    |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| 'Item key'  |
-			| 'Chewing gum TR/Chewing gum2' |
+			| 'Item key'                       |
+			| 'Chewing gum TR/Chewing gum2'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| Description |
-			| adet      |
+			| Description    |
+			| adet           |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01 TR' |
+			| 'Description'    |
+			| 'Store 01 TR'    |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
 		And "ItemList" table contains lines
-			| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
-			| 'Chewing gum TR' | '5,000'   | 'Mentol/Pineapple'  | 'adet' |
-			| 'Chewing gum TR' | '5,000'   | 'Mint/Watermelon' | 'adet' |
+			| 'Item'             | 'Quantity'   | 'Item key'           | 'Unit'    |
+			| 'Chewing gum TR'   | '5,000'      | 'Mentol/Pineapple'   | 'adet'    |
+			| 'Chewing gum TR'   | '5,000'      | 'Mint/Watermelon'    | 'adet'    |
 		And I click the button named "FormPostAndClose"
 	* Create item key
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
 		And "List" table contains lines
-		| 'Item key'                                     |
-		| 'Mentol/Pineapple'                                   |
-		| 'Mint/Watermelon'                                  |
+		| 'Item key'           |
+		| 'Mentol/Pineapple'   |
+		| 'Mint/Watermelon'    |
 		And I close all client application windows
 	* Check that when re-create Unbundling, lines are not duplicated
 		* Create one more Unbundling
@@ -185,42 +185,42 @@ Scenario: _300302 create Unbundling and check creation item key
 			And I click the button named "FormCreate"
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company TR |
+				| Description         |
+				| Main Company TR     |
 			And I select current line in "List" table
 			And I click Select button of "Item bundle" field
 			And I go to line in "List" table
-				| Description |
-				| Chewing gum TR       |
+				| Description        |
+				| Chewing gum TR     |
 			And I select current line in "List" table
 			And I click Select button of "Item key bundle" field
 			And I go to line in "List" table
-				| 'Item key'  |
-				| 'Chewing gum TR/Chewing gum2' |
+				| 'Item key'                        |
+				| 'Chewing gum TR/Chewing gum2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Unit"
 			And I go to line in "List" table
-				| Description |
-				| adet      |
+				| Description     |
+				| adet            |
 			And I select current line in "List" table
 			And I input "2,000" text in the field named "Quantity"
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01 TR' |
+				| 'Description'     |
+				| 'Store 01 TR'     |
 			And I select current line in "List" table
 			And I move to "Item list" tab
 			And in the table "ItemList" I click "By specification" button
 			And "ItemList" table contains lines
-				| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
-				| 'Chewing gum TR' | '5,000'   | 'Mentol/Pineapple'  | 'adet' |
-				| 'Chewing gum TR' | '5,000'   | 'Mint/Watermelon' | 'adet' |
+				| 'Item'              | 'Quantity'    | 'Item key'            | 'Unit'     |
+				| 'Chewing gum TR'    | '5,000'       | 'Mentol/Pineapple'    | 'adet'     |
+				| 'Chewing gum TR'    | '5,000'       | 'Mint/Watermelon'     | 'adet'     |
 			And I click the button named "FormPostAndClose"
 		* Check that item key was not duplicated
 			Given I open hyperlink "e1cib/list/Catalog.Items"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Chewing gum TR'          |
+				| 'Description'        |
+				| 'Chewing gum TR'     |
 			And I select current line in "List" table
 			And In this window I click command interface button "Item keys"
 			Then the number of "List" table lines is "меньше или равно" 6

@@ -28,6 +28,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.CalculationMovementCosts.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.CalculationMovementCosts.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.CalculationMovementCosts.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
   <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
@@ -144,6 +145,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="5204773a-a9b0-4681-b771-273f339e2e36">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

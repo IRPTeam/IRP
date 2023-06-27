@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements2
@@ -64,8 +64,8 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -74,9 +74,9 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 		When Create document StockAdjustmentAsWriteOff objects (check movements)
 		When Create document StockAdjustmentAsWriteOff (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0419001 check preparation
 	When check preparation	
@@ -85,81 +85,81 @@ Scenario: _041901 check Stock adjustment as write off movements by the Register 
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| 'Register  "R4010 Actual stocks"'                             | ''            | ''                    | ''          | ''           | ''          | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | '38/Yellow' | '' |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   | ''   |	
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Document registrations records'                                | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| 'Register  "R4010 Actual stocks"'                               | ''              | ''                      | ''            | ''             | ''            | ''                     |
+			| ''                                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
+			| ''                                                              | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '2'           | 'Store 01'     | '38/Yellow'   | ''                     |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '8'           | 'Store 01'     | 'M/White'     | ''                     |
 		And I close all client application windows
 
 Scenario: _041902 check Stock adjustment as write off movements by the Register  "R4011 Free stocks"
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'                               | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | '38/Yellow' |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   |	
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14'   | ''              | ''                      | ''            | ''             | ''             |
+			| 'Document registrations records'                                | ''              | ''                      | ''            | ''             | ''             |
+			| 'Register  "R4011 Free stocks"'                                 | ''              | ''                      | ''            | ''             | ''             |
+			| ''                                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             |
+			| ''                                                              | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '2'           | 'Store 01'     | '38/Yellow'    |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '8'           | 'Store 01'     | 'M/White'      |
 		And I close all client application windows
 
 Scenario: _041903 check Stock adjustment as write off movements by the Register  "R4050 Stock inventory"
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Check movements by the Register  "R4050 Stock inventory"
 		And I click "Registrations report" button
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''               | ''         | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''               | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'                           | ''            | ''                    | ''          | ''               | ''         | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''         | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Company'        | 'Store'    | 'Item key'  |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Second Company' | 'Store 01' | '38/Yellow' |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Second Company' | 'Store 01' | 'M/White'   |
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14'   | ''              | ''                      | ''            | ''                 | ''           | ''             |
+			| 'Document registrations records'                                | ''              | ''                      | ''            | ''                 | ''           | ''             |
+			| 'Register  "R4050 Stock inventory"'                             | ''              | ''                      | ''            | ''                 | ''           | ''             |
+			| ''                                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'       | ''           | ''             |
+			| ''                                                              | ''              | ''                      | 'Quantity'    | 'Company'          | 'Store'      | 'Item key'     |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '2'           | 'Second Company'   | 'Store 01'   | '38/Yellow'    |
+			| ''                                                              | 'Expense'       | '15.03.2021 15:29:14'   | '8'           | 'Second Company'   | 'Store 01'   | 'M/White'      |
 		And I close all client application windows
 
 Scenario: _041904 check Stock adjustment as write off with serial lot number movements by the Register  "R4010 Actual stocks"
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1 112' |
+			| 'Number'    |
+			| '1 112'     |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 1 112 dated 24.05.2022 14:10:25' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                                | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                               | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '2'         | 'Store 01'   | 'UNIQ'     | ''                  |
-			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '5'         | 'Store 01'   | 'PZU'      | '8908899877'        |
-			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '5'         | 'Store 01'   | 'PZU'      | '8908899879'        |	
+			| 'Stock adjustment as write-off 1 112 dated 24.05.2022 14:10:25'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| 'Document registrations records'                                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| 'Register  "R4010 Actual stocks"'                                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
+			| ''                                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
+			| ''                                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
+			| ''                                                                | 'Expense'       | '24.05.2022 14:10:25'   | '2'           | 'Store 01'     | 'UNIQ'       | ''                     |
+			| ''                                                                | 'Expense'       | '24.05.2022 14:10:25'   | '5'           | 'Store 01'     | 'PZU'        | '8908899877'           |
+			| ''                                                                | 'Expense'       | '24.05.2022 14:10:25'   | '5'           | 'Store 01'     | 'PZU'        | '8908899879'           |
 		And I close all client application windows
 
 Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
@@ -167,35 +167,35 @@ Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' |
-			| 'Document registrations records'                    |
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14'    |
+			| 'Document registrations records'                                 |
 		And I close current window
 	* Post Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -203,14 +203,14 @@ Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' |
-			| 'Document registrations records'                    |
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14'    |
+			| 'Document registrations records'                                 |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '201' |
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -220,6 +220,6 @@ Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks'      |
+			| 'R4010 Actual stocks'    |
 		And I close all client application windows

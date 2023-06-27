@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @LoadInfo
@@ -64,8 +64,8 @@ Scenario: _020200 preparation (Import/Export object from DB)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -82,29 +82,29 @@ Scenario: _0202002 check import item
 	* Open Item catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Scarf + Dress' |
+			| 'Description'      |
+			| 'Scarf + Dress'    |
 	* Open Import/Export object from DB
 		Given I open hyperlink "e1cib/app/DataProcessor.LoadAndUnloadData"
 		And in the table "FormItems" I click "Update" button
 		And "FormItems" table became equal
-			| 'Description'       |
-			| 'Items/List/Rows:1' |		
+			| 'Description'          |
+			| 'Items/List/Rows:1'    |
 		And in the table "FormItems" I click "Serialize" button	
 	* Check import item
 		And I save the value of the field named "SerializedInfo" as "SerializedInfo"
 		And I execute 1C:Enterprise script
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "bcc9c5f9-f114-11ea-aa78-120ed92fbced", "bcc9c5f9-f114-11ea-aa78-120ed93fbced");" |
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "Scarf + Dress", "Scarf + Dress New");" |
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "16", "178")" |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "bcc9c5f9-f114-11ea-aa78-120ed92fbced", "bcc9c5f9-f114-11ea-aa78-120ed93fbced");"    |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "Scarf + Dress", "Scarf + Dress New");"                                              |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "16", "178")"                                                                        |
 		And I input "$SerializedInfo$" variable value in "Deserialized info" field
 		And I click the button named "Import"
 		Then the form attribute named "Log" became equal to "Scarf + Dress New"
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click "Refresh" button
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Scarf + Dress New' |	
+			| 'Description'          |
+			| 'Scarf + Dress New'    |
 		And I select current line in "List" table
 		Then the form attribute named "ItemID" became equal to "D20001"
 		Then the form attribute named "ItemType" became equal to "Clothes"
@@ -125,28 +125,28 @@ Scenario: _0202003 check import SI
 	* Open SI list form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'   |
-			| '16' |
+			| 'Number'    |
+			| '16'        |
 	* Open Import/Export object from DB
 		Given I open hyperlink "e1cib/app/DataProcessor.LoadAndUnloadData"
 		And in the table "FormItems" I click "Update" button
 		And "FormItems" table became equal
-			| 'Description'       |
-			| 'Sales invoices/List/Rows:1' |		
+			| 'Description'                   |
+			| 'Sales invoices/List/Rows:1'    |
 		And in the table "FormItems" I click "Serialize" button	
 	* Check import item
 		And I save the value of the field named "SerializedInfo" as "SerializedInfo1"
 		And I execute 1C:Enterprise script
-			| "Контекст.SerializedInfo1=StrReplace(Контекст.SerializedInfo1, "c0c54205-d3a6-11ed-b799-96ebf0bd5444", "c0c54205-d3a6-11ed-b799-96ebf0bd6444");" |
-			| "Контекст.SerializedInfo1=StrReplace(Контекст.SerializedInfo1, "<d2p1:Number>16</d2p1:Number>", "<d2p1:Number>180</d2p1:Number>")" |
+			| "Контекст.SerializedInfo1=StrReplace(Контекст.SerializedInfo1, "c0c54205-d3a6-11ed-b799-96ebf0bd5444", "c0c54205-d3a6-11ed-b799-96ebf0bd6444");"    |
+			| "Контекст.SerializedInfo1=StrReplace(Контекст.SerializedInfo1, "<d2p1:Number>16</d2p1:Number>", "<d2p1:Number>180</d2p1:Number>")"                  |
 		And I input "$SerializedInfo1$" variable value in "Deserialized info" field
 		And I set checkbox "Import data to product data base is granted"
 		And I click the button named "Import"
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click "Refresh" button
 		And I go to line in "List" table
-			| 'Number' |
-			| '180'    |
+			| 'Number'    |
+			| '180'       |
 		And I select current line in "List" table
 		Then the form attribute named "Partner" became equal to "Kalipso"
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
@@ -155,9 +155,9 @@ Scenario: _0202003 check import SI
 		Then the form attribute named "TransactionType" became equal to "Sales"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' |
-			| '1' | 'Own stocks'       | ''             | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '158,64'     | 'pcs'  | ''                   | ''                  | '2,000'    | '440,68' | '18%' | ''              | '881,36'     | '1 040,00'     | 'No'             | 'No'                         | ''                    | 'Store 02' | '11.10.2020'    | 'Yes'                       | ''       | ''            | ''           | ''             |
-			| '2' | 'Own stocks'       | ''             | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '237,97'     | 'pcs'  | ''                   | ''                  | '3,000'    | '440,68' | '18%' | ''              | '1 322,04'   | '1 560,01'     | 'No'             | 'No'                         | ''                    | 'Store 02' | '11.10.2020'    | 'Yes'                       | ''       | ''            | ''           | ''             |
+			| '#'   | 'Inventory origin'   | 'Sales person'   | 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Use work sheet'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'   | 'Revenue type'    |
+			| '1'   | 'Own stocks'         | ''               | 'Basic Price without VAT'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '158,64'       | 'pcs'    | ''                     | ''                    | '2,000'      | '440,68'   | '18%'   | ''                | '881,36'       | '1 040,00'       | 'No'               | 'No'                           | ''                      | 'Store 02'   | '11.10.2020'      | 'Yes'                         | ''         | ''              | ''             | ''                |
+			| '2'   | 'Own stocks'         | ''               | 'Basic Price without VAT'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '237,97'       | 'pcs'    | ''                     | ''                    | '3,000'      | '440,68'   | '18%'   | ''                | '1 322,04'     | '1 560,01'       | 'No'               | 'No'                           | ''                      | 'Store 02'   | '11.10.2020'      | 'Yes'                         | ''         | ''              | ''             | ''                |
 		
 		Then the form attribute named "ManagerSegment" became equal to "Region 2"
 		Then the form attribute named "Branch" became equal to ""
@@ -185,21 +185,21 @@ Scenario: _0202004 check find refs
 		And I click Select button of "Search ref" field
 		Then "Select data type" window is opened
 		And I go to line in "" table
-			| ''        |
-			| 'Company' |
+			| ''           |
+			| 'Company'    |
 		And I select current line in "" table
 		Then "Companies" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		And I click "Find ref" button
 	* Check
 		And "FoundRefList" table contains lines
-			| 'Ref'                           | 'Metadata name'      |
-			| 'Partner term vendor DFC'       | 'Catalog.Agreements' |
-			| 'DFC Vendor by Partner terms'   | 'Catalog.Agreements' |
-			| 'DFC Customer by Partner terms' | 'Catalog.Agreements' |
+			| 'Ref'                             | 'Metadata name'         |
+			| 'Partner term vendor DFC'         | 'Catalog.Agreements'    |
+			| 'DFC Vendor by Partner terms'     | 'Catalog.Agreements'    |
+			| 'DFC Customer by Partner terms'   | 'Catalog.Agreements'    |
 	And I close all client application windows
 	
 				

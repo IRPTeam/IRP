@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -40,8 +40,8 @@ Scenario: _096000 preparation (Employee cash advance)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog PlanningPeriods objects
@@ -50,18 +50,18 @@ Scenario: _096000 preparation (Employee cash advance)
 	* Load documents
 		When Create document OutgoingPaymentOrder (employee cash advance)	
 		And I execute 1C:Enterprise script at server
-			| "Documents.OutgoingPaymentOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.OutgoingPaymentOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.OutgoingPaymentOrder.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.OutgoingPaymentOrder.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashPayment (employee cash advance)
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashPayment.FindByNumber(306).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(306).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document BankPayment (employee cash advance)
 		And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(305).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankPayment.FindByNumber(305).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document PurchaseInvoice objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 
 Scenario: _0960001 check preparation
@@ -76,13 +76,13 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 	* Filling OPO
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Main Company'       |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
@@ -92,14 +92,14 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
@@ -113,8 +113,8 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And "List" table contains lines
-			| 'Number'                                |
-			| '$$NumberOutgoingPaymentOrder0960005$$' |
+			| 'Number'                                   |
+			| '$$NumberOutgoingPaymentOrder0960005$$'    |
 		ANd I close all client application windows
 		
 
@@ -126,18 +126,18 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 	* Filling OPO
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Main Company'       |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №1' |
+			| 'Description'     |
+			| 'Cash desk №1'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
@@ -147,14 +147,14 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
@@ -164,14 +164,14 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'David Romanov' |
+			| 'Description'      |
+			| 'David Romanov'    |
 		And I select current line in "List" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
@@ -185,8 +185,8 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And "List" table contains lines
-			| 'Number'                                |
-			| '$$NumberOutgoingPaymentOrder0960006$$' |
+			| 'Number'                                   |
+			| '$$NumberOutgoingPaymentOrder0960006$$'    |
 		And I close all client application windows				
 
 
@@ -195,8 +195,8 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 	* Select OPO
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I go to line in "List" table	
-			| 'Number' |
-			| '16'     |
+			| 'Number'    |
+			| '16'        |
 	* Create BP
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -204,8 +204,8 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 		Then the form attribute named "TransactionType" became equal to "Employee cash advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'         | 'Commission' | 'Basis document' | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Planning transaction basis'                          | 'Commission percent' | 'Additional analytic' | 'Expense type' |
-			| '1' | 'Olivia Williams' | ''           | ''               | '1 000,00'     | 'Movement type 1'         | ''                   | 'Outgoing payment order 16 dated 12.01.2023 16:34:39' | ''                   | ''                    | ''             |
+			| '#'   | 'Partner'           | 'Commission'   | 'Basis document'   | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'   | 'Planning transaction basis'                            | 'Commission percent'   | 'Additional analytic'   | 'Expense type'    |
+			| '1'   | 'Olivia Williams'   | ''             | ''                 | '1 000,00'       | 'Movement type 1'           | ''                     | 'Outgoing payment order 16 dated 12.01.2023 16:34:39'   | ''                     | ''                      | ''                |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check creation
@@ -217,8 +217,8 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And "List" table contains lines
-			| 'Number'                       |
-			| '$$NumberBankPayment0960010$$' |
+			| 'Number'                          |
+			| '$$NumberBankPayment0960010$$'    |
 		And I close all client application windows	
 				
 				
@@ -228,8 +228,8 @@ Scenario: _0960011 create Cash payment with transaction type Employee cash advan
 	* Select OPO
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I go to line in "List" table	
-			| 'Number' |
-			| '15'     |
+			| 'Number'    |
+			| '15'        |
 	* Create CP
 		Then "Outgoing payment orders" window is opened
 		And I click "Cash payment" button
@@ -238,9 +238,9 @@ Scenario: _0960011 create Cash payment with transaction type Employee cash advan
 		Then the form attribute named "TransactionType" became equal to "Employee cash advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'         | 'Basis document' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis'                          |
-			| '1' | 'Olivia Williams' | ''               | '1 000,00'     | 'Movement type 1'         | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
-			| '2' | 'Emily Jones'     | ''               | '1 000,00'     | 'Movement type 1'         | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
+			| '#'   | 'Partner'           | 'Basis document'   | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'                             |
+			| '1'   | 'Olivia Williams'   | ''                 | '1 000,00'       | 'Movement type 1'           | 'Outgoing payment order 15 dated 12.01.2023 16:34:17'    |
+			| '2'   | 'Emily Jones'       | ''                 | '1 000,00'       | 'Movement type 1'           | 'Outgoing payment order 15 dated 12.01.2023 16:34:17'    |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "2 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check creation
@@ -252,8 +252,8 @@ Scenario: _0960011 create Cash payment with transaction type Employee cash advan
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And "List" table contains lines
-			| 'Number'                       |
-			| '$$NumberCashPayment0960010$$' |
+			| 'Number'                          |
+			| '$$NumberCashPayment0960010$$'    |
 		And I close all client application windows				
 
 Scenario: _0960015 create document Employee cash advance (own expense)
@@ -263,13 +263,13 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 	* Filling header
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Main Company'       |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'David Romanov'       |
+			| 'Description'      |
+			| 'David Romanov'    |
 		And I select current line in "List" table	
 	* Filling tabular part
 		And in the table "PaymentList" I click "Fill by advances" button
@@ -277,18 +277,18 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 		And I select current line in "PaymentList" table
 		And I click choice button of "Expense type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Expense'     |
+			| 'Description'    |
+			| 'Expense'        |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Expense type' | 'Currency' | 'Total amount' |
-			| 'Expense'      | 'TRY'      | '2 000,00'     |
+			| 'Expense type'   | 'Currency'   | 'Total amount'    |
+			| 'Expense'        | 'TRY'        | '2 000,00'        |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'             |
+			| 'Logistics department'    |
 		And I select current line in "List" table
 		And I input "800,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -301,8 +301,8 @@ Scenario: _0960015 create document Employee cash advance (own expense)
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		And "List" table contains lines
-			| 'Number'                       |
-			| '$$NumberECA0960015$$' |
+			| 'Number'                  |
+			| '$$NumberECA0960015$$'    |
 		And I close all client application windows					
 
 
@@ -313,13 +313,13 @@ Scenario: _0960016 create document Employee cash advance (purchase)
 	* Filling header
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Main Company'       |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Sofia Borisova'       |
+			| 'Description'       |
+			| 'Sofia Borisova'    |
 		And I select current line in "List" table	
 	* Filling tabular part
 		And in the table "PaymentList" I click "Fill by advances" button
@@ -328,19 +328,19 @@ Scenario: _0960016 create document Employee cash advance (purchase)
 		And I select current line in "PaymentList" table
 		And I click choice button of "Invoice" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Amount'     | 'Number' |
-			| '137 000,00' | '12'     |
+			| 'Amount'       | 'Number'    |
+			| '137 000,00'   | '12'        |
 		And I select current line in "List" table
 	* Financial movement type
 		And I click choice button of "Expense type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Expense'     |
+			| 'Description'    |
+			| 'Expense'        |
 		And I select current line in "List" table
 		And I click choice button of "Profit loss center" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'             |
+			| 'Logistics department'    |
 		And I select current line in "List" table
 		And I input "50000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -353,8 +353,8 @@ Scenario: _0960016 create document Employee cash advance (purchase)
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		And "List" table contains lines
-			| 'Number'                       |
-			| '$$NumberECA0960016$$' |
+			| 'Number'                  |
+			| '$$NumberECA0960016$$'    |
 		And I close all client application windows
 
 				

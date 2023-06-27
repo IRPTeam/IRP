@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CreationBasedMulti
@@ -56,8 +56,8 @@ Scenario: _0295200 preparation (creation mechanism based on for sales documents)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -97,8 +97,8 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 * Create Sales invoice based on Sales order 324 and 325 (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 324    |
+			| Number    |
+			| 324       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -108,8 +108,8 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Sales order'      |
-			| 'Dress' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 325*' |
+			| 'Item'    | 'Item key'   | 'Store'      | 'Unit'   | 'Quantity'   | 'Sales order'         |
+			| 'Dress'   | 'M/White'    | 'Store 02'   | 'pcs'    | '10,000'     | 'Sales order 325*'    |
 	Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 	* Change the document number to 325
 		And I expand "More" group
@@ -128,10 +128,10 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
-			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
-			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
-			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 324*' | 'pcs'  | '30,000' |
+			| 'Item'       | 'Item key'    | 'Store'      | 'Sales order'        | 'Unit'   | 'Quantity'    |
+			| 'Dress'      | 'M/White'     | 'Store 02'   | 'Sales order 324*'   | 'pcs'    | '20,000'      |
+			| 'Dress'      | 'L/Green'     | 'Store 02'   | 'Sales order 324*'   | 'pcs'    | '20,000'      |
+			| 'Trousers'   | '36/Yellow'   | 'Store 02'   | 'Sales order 324*'   | 'pcs'    | '30,000'      |
 	* Change the document number to 324
 		And I expand "More" group
 		And I input "324" text in "Number" field
@@ -154,8 +154,8 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 		And I input "326" text in "Number" field
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 	And I select current line in "List" table
 	And I click the button named "FormPostAndClose"
 * Create test Sales order 327
@@ -169,15 +169,15 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 		And I input "327" text in "Number" field
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 	And I select current line in "List" table
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 326 and 327 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 326    |
+			| Number    |
+			| 326       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -187,11 +187,11 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
-			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 327*' | 'pcs'  | '10,000' |
-			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
-			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
-			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 326*' | 'pcs'  | '30,000' |
+			| 'Item'       | 'Item key'    | 'Store'      | 'Sales order'        | 'Unit'   | 'Quantity'    |
+			| 'Dress'      | 'M/White'     | 'Store 02'   | 'Sales order 327*'   | 'pcs'    | '10,000'      |
+			| 'Dress'      | 'M/White'     | 'Store 02'   | 'Sales order 326*'   | 'pcs'    | '20,000'      |
+			| 'Dress'      | 'L/Green'     | 'Store 02'   | 'Sales order 326*'   | 'pcs'    | '20,000'      |
+			| 'Trousers'   | '36/Yellow'   | 'Store 02'   | 'Sales order 326*'   | 'pcs'    | '30,000'      |
 	* Change the document number to 327
 		And I expand "More" group
 		And I input "327" text in "Number" field
@@ -216,24 +216,24 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 		And I click Select button of "Partner" field
 		And I click "List" button		
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
@@ -249,32 +249,32 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 2   |
+				| Description          |
+				| Partner Ferron 2     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 328 and 329 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 328    |
+			| Number    |
+			| 328       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -284,8 +284,8 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'     | 'Sales order'      |
-			| 'Dress'| 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 329*' |
+			| 'Item'    | 'Item key'   | 'Store'      | 'Unit'   | 'Quantity'   | 'Sales order'         |
+			| 'Dress'   | 'M/White'    | 'Store 02'   | 'pcs'    | '10,000'     | 'Sales order 329*'    |
 	Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 	* Change the document number to 329
 		And I expand "More" group
@@ -304,10 +304,10 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
-			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
-			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
-			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 328*' | 'pcs'  | '30,000' |
+			| 'Item'       | 'Item key'    | 'Store'      | 'Sales order'        | 'Unit'   | 'Quantity'    |
+			| 'Dress'      | 'M/White'     | 'Store 02'   | 'Sales order 328*'   | 'pcs'    | '20,000'      |
+			| 'Dress'      | 'L/Green'     | 'Store 02'   | 'Sales order 328*'   | 'pcs'    | '20,000'      |
+			| 'Trousers'   | '36/Yellow'   | 'Store 02'   | 'Sales order 328*'   | 'pcs'    | '30,000'      |
 	* Change the document number to 329
 		And I expand "More" group
 		And I input "328" text in "Number" field
@@ -332,24 +332,24 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
@@ -365,31 +365,31 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, without VAT |
+				| Description                          |
+				| Basic Partner terms, without VAT     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 330 and 331 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 330    |
+			| Number    |
+			| 330       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -399,8 +399,8 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'      |
-			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 331*' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Delivery date'   | 'Sales order'         |
+			| 'Dress'   | 'M/White'    | '10,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 331*'    |
 	Then the form attribute named "PriceIncludeTax" became equal to "No"
 	* Change the document number to 331
 		And I expand "More" group
@@ -419,10 +419,10 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'       |
-			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
-			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
-			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
+			| 'Item'       | 'Item key'    | 'Quantity'   | 'Unit'   | 'Store'      | 'Delivery date'   | 'Sales order'         |
+			| 'Trousers'   | '36/Yellow'   | '30,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 330*'    |
+			| 'Dress'      | 'M/White'     | '20,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 330*'    |
+			| 'Dress'      | 'L/Green'     | '20,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 330*'    |
 	* Change the document number to 330
 		And I expand "More" group
 		And I input "330" text in "Number" field
@@ -447,24 +447,24 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
@@ -480,32 +480,32 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 03  |
+				| Description     |
+				| Store 03        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 335 and 334 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 334    |
+			| Number    |
+			| 334       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -514,11 +514,11 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 	Then the form attribute named "Company" became equal to "Main Company"
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date'| 'Sales order'      |
-			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
-			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
-			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
-			| 'Dress'    | 'M/White'   | '10,000' | 'pcs'  | 'Store 03' | '*'            | 'Sales order 335*' |
+			| 'Item'       | 'Item key'    | 'Quantity'   | 'Unit'   | 'Store'      | 'Delivery date'   | 'Sales order'         |
+			| 'Dress'      | 'L/Green'     | '20,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 334*'    |
+			| 'Trousers'   | '36/Yellow'   | '30,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 334*'    |
+			| 'Dress'      | 'M/White'     | '20,000'     | 'pcs'    | 'Store 02'   | '*'               | 'Sales order 334*'    |
+			| 'Dress'      | 'M/White'     | '10,000'     | 'pcs'    | 'Store 03'   | '*'               | 'Sales order 335*'    |
 	* Change the document number to 335
 		And I expand "More" group
 		And I input "335" text in "Number" field
@@ -542,31 +542,31 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Company" field
 		Then "Companies" window is opened
 		And I go to line in "List" table
-				| Description    |
-				| Second Company |
+				| Description        |
+				| Second Company     |
 		And I select current line in "List" table
 	And I click the button named "FormPostAndClose"
 * Create second test SO 337
@@ -581,32 +581,32 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	* Filling in customer info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Partner Ferron 1   |
+				| Description          |
+				| Partner Ferron 1     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 		And I select current line in "List" table
 		And I click "OK" button
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 336 and 337 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-			| Number |
-			| 336    |
+			| Number    |
+			| 336       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -616,8 +616,8 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Store'    | 'Sales order'      |
-			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | 'Sales order 337*' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Sales order'         |
+			| 'Dress'   | 'M/White'    | '10,000'     | 'pcs'    | 'Store 02'   | 'Sales order 337*'    |
 	* Change the document number to 337
 		And I move to "Other" tab
 		And I expand "More" group
@@ -636,10 +636,10 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Sales order'      |
-			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
-			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
-			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
+			| 'Item'       | 'Item key'    | 'Quantity'   | 'Unit'   | 'Store'      | 'Sales order'         |
+			| 'Dress'      | 'M/White'     | '20,000'     | 'pcs'    | 'Store 02'   | 'Sales order 336*'    |
+			| 'Dress'      | 'L/Green'     | '20,000'     | 'pcs'    | 'Store 02'   | 'Sales order 336*'    |
+			| 'Trousers'   | '36/Yellow'   | '30,000'     | 'pcs'    | 'Store 02'   | 'Sales order 336*'    |
 	* Change the document number to 136
 		And I move to "Other" tab
 		And I expand "More" group
@@ -657,42 +657,42 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	* Filling in details
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 		And I select current line in "List" table
 	* Filling in the tabular part
 		* Add services
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Service'     |
+					| 'Description'      |
+					| 'Service'          |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'    | 'Item key' |
-					| 'Service' | 'Rent'     |
+					| 'Item'        | 'Item key'      |
+					| 'Service'     | 'Rent'          |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I activate "Price" field in "ItemList" table
@@ -701,14 +701,14 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -716,8 +716,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I activate "Cancel reason" field in "ItemList" table
 			And I click choice button of "Cancel reason" attribute in "ItemList" table	
 			And I go to line in "List" table
-					| 'Description'     |
-					| 'not available' |
+					| 'Description'        |
+					| 'not available'      |
 			And I select current line in "List" table		
 			And I move to the next attribute
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -726,14 +726,14 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Shirt'       |
+					| 'Description'      |
+					| 'Shirt'            |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'  | 'Item key' |
-					| 'Shirt' | '38/Black' |
+					| 'Item'      | 'Item key'      |
+					| 'Shirt'     | '38/Black'      |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -743,14 +743,14 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -771,42 +771,42 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	* Filling in details
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 		And I select current line in "List" table
 	* Filling in the tabular part
 		* Add a product that will not be shipped
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -814,8 +814,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I activate "Cancel reason" field in "ItemList" table
 			And I click choice button of "Cancel reason" attribute in "ItemList" table	
 			And I go to line in "List" table
-					| 'Description'     |
-					| 'not available' |
+					| 'Description'        |
+					| 'not available'      |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -824,14 +824,14 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -848,23 +848,23 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I click the button named "FormPostAndClose"
 * Create Sales invoice based on SO №800 and SO №801
 	And I go to line in "List" table
-			| Number |
-			| 800    |
+			| Number    |
+			| 800       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity'      |
-			| 'Service'  | 'Rent'      | '1,000'  |
-			| 'Trousers' | '38/Yellow' | '10,000' |
-			| 'Trousers' | '38/Yellow' | '2,000'  |
+			| 'Item'       | 'Item key'    | 'Quantity'    |
+			| 'Service'    | 'Rent'        | '1,000'       |
+			| 'Trousers'   | '38/Yellow'   | '10,000'      |
+			| 'Trousers'   | '38/Yellow'   | '2,000'       |
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I close current window
 * Create Shipment confirmation based on SO №800 and SO №801 (should get 2 lines for items from two orders)
 	And I go to line in "List" table
-			| Number |
-			| 800    |
+			| Number    |
+			| 800       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentShipmentConfirmationGenerate"
 	And I click "Ok" button	
@@ -875,33 +875,33 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	* Check filling in tabular part
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |
-			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 01' | 'Sales order 800*' |
-			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 801*' |
+			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'      | 'Shipment basis'      |
+			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 01'   | 'Sales order 800*'    |
+			| 'Trousers'   | '10,000'     | '38/Yellow'   | 'pcs'    | 'Store 02'   | 'Sales order 801*'    |
 	And I close current window
 * Check filling in Purchase order (should get one string)
 	And I go to line in "List" table
-			| Number |
-			| 800    |
+			| Number    |
+			| 800       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentPurchaseOrderGenerate"
 	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Purchase basis'   |
-			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Purchase basis'      |
+			| 'Shirt'   | '38/Black'   | '1,000'      | 'Sales order 800*'    |
 	And I close current window
 * Check filling in Purchase invoice (should get one string)
 	And I go to line in "List" table
-			| Number |
-			| 800    |
+			| Number    |
+			| 800       |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Sales order'      |
-			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Sales order'         |
+			| 'Shirt'   | '38/Black'   | '1,000'      | 'Sales order 800*'    |
 	And I close all client application windows
 
 
@@ -918,8 +918,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		* First SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberSalesOrder090408$$'    |
+				| 'Number'                         |
+				| '$$NumberSalesOrder090408$$'     |
 			And I click the button named "FormDocumentShipmentConfirmationGenerate"
 			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
@@ -927,14 +927,14 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity' |
-				| 'Dress' | 'L/Green'  | '20,000'   |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'L/Green'     | '20,000'       |
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Quantity' |
-				| 'Trousers' | '36/Yellow' | '30,000'   |
+				| 'Item'        | 'Item key'     | 'Quantity'     |
+				| 'Trousers'    | '36/Yellow'    | '30,000'       |
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -947,8 +947,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		* Second SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberSalesOrder090408$$'    |
+				| 'Number'                         |
+				| '$$NumberSalesOrder090408$$'     |
 			And I click the button named "FormDocumentShipmentConfirmationGenerate"
 			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
@@ -956,14 +956,14 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'L/Green'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'L/Green'      |
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "12,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -976,8 +976,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		* Third SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberSalesOrder090408$$'    |
+				| 'Number'                         |
+				| '$$NumberSalesOrder090408$$'     |
 			And I click the button named "FormDocumentShipmentConfirmationGenerate"
 			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
@@ -985,14 +985,14 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I input "7,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'L/Green'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'L/Green'      |
 			And I select current line in "ItemList" table
 			And I input "7,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -1005,15 +1005,15 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 	* Create Sales invoice for 3 Shipment Confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number' |
+			| 'Number'                        |
 			| '$$NumberSalesOrder090408$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Quantity'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |
-		| '18%' | 'Dress'    | '520,00' | 'M/White'   | '1 689,41'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '8 710,59'   | '10 400,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
-		| '18%' | 'Dress'    | '550,00' | 'L/Green'   | '1 786,88'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '9 213,12'   | '11 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
-		| '18%' | 'Trousers' | '400,00' | '36/Yellow' | '1 949,32'   | '1%'       | '30,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '10 050,68'  | '12 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
+		| 'VAT'  | 'Item'      | 'Price'   | 'Item key'   | 'Tax amount'  | 'SalesTax'  | 'Quantity'  | 'Price type'         | 'Unit'  | 'Dont calculate row'  | 'Net amount'  | 'Total amount'  | 'Store'     | 'Sales order'            |
+		| '18%'  | 'Dress'     | '520,00'  | 'M/White'    | '1 689,41'    | '1%'        | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '8 710,59'    | '10 400,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
+		| '18%'  | 'Dress'     | '550,00'  | 'L/Green'    | '1 786,88'    | '1%'        | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '9 213,12'    | '11 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
+		| '18%'  | 'Trousers'  | '400,00'  | '36/Yellow'  | '1 949,32'    | '1%'        | '30,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '10 050,68'   | '12 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice0904083$$" variable
 		And I delete "$$SalesInvoice0904083$$" variable
@@ -1025,13 +1025,13 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice0904083$$'                 | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                        | ''                     | ''                     | ''                           |
-			| 'Document registrations records'          | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                        | ''                     | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                        | ''                     | ''                     | ''                           |
-			| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                        | ''                     | 'Attributes'           | ''                           |
-			| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                   | 'Order'                | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '5 718,08'  | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | '$$SalesOrder090408$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | '$$SalesOrder090408$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | '$$SalesOrder090408$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | '$$SalesOrder090408$$' | 'No'                   | ''                           |
+			| '$$SalesInvoice0904083$$'                   | ''              | ''                              | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                          | ''                       | ''                       | ''                              |
+			| 'Document registrations records'            | ''              | ''                              | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                          | ''                       | ''                       | ''                              |
+			| 'Register  "R2021 Customer transactions"'   | ''              | ''                              | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                          | ''                       | ''                       | ''                              |
+			| ''                                          | 'Record type'   | 'Period'                        | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                    | ''            | ''                           | ''                          | ''                       | 'Attributes'             | ''                              |
+			| ''                                          | ''              | ''                              | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                     | 'Order'                  | 'Deferred calculation'   | 'Customers advances closing'    |
+			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '5 718,08'    | 'Main Company'   | ''         | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | 'No'                     | ''                              |
+			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | 'No'                     | ''                              |
+			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | 'No'                     | ''                              |
+			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | 'No'                     | ''                              |
 		And I close all client application windows

@@ -49,12 +49,12 @@ Scenario: _017000 preparation
 		When update ItemKeys
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -70,94 +70,94 @@ Scenario: _017002 check filling in Row Id info table in the PO
 	* Select PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'                     |
-			| '$$NumberPurchaseOrder017001$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017001$$'    |
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov1PurchaseOrder017001$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov2PurchaseOrder017001$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '3' |
+			| '#'    |
+			| '3'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov3PurchaseOrder017001$$"
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
-			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov1PurchaseOrder017001$$'   | ''        | '$$Rov1PurchaseOrder017001$$'   | 'PI&GR'       | '100,000'    | ''            | ''               | '$$Rov1PurchaseOrder017001$$'    |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '200,000'    | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
+			| '$$Rov3PurchaseOrder017001$$'   | ''        | '$$Rov3PurchaseOrder017001$$'   | 'PI&GR'       | '300,000'    | ''            | ''               | '$$Rov3PurchaseOrder017001$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+			| '#'   | 'Item'    | 'Item key'   | 'Quantity'    |
+			| '2'   | 'Dress'   | 'L/Green'    | '200,000'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "208,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' |
-			| '4' |
+			| '#'    |
+			| '4'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov4PurchaseOrder017001$$"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
-			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
-			| '$$Rov4PurchaseOrder017001$$' | ''      | '$$Rov4PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov4PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov1PurchaseOrder017001$$'   | ''        | '$$Rov1PurchaseOrder017001$$'   | 'PI&GR'       | '100,000'    | ''            | ''               | '$$Rov1PurchaseOrder017001$$'    |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '200,000'    | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
+			| '$$Rov3PurchaseOrder017001$$'   | ''        | '$$Rov3PurchaseOrder017001$$'   | 'PI&GR'       | '300,000'    | ''            | ''               | '$$Rov3PurchaseOrder017001$$'    |
+			| '$$Rov4PurchaseOrder017001$$'   | ''        | '$$Rov4PurchaseOrder017001$$'   | 'PI&GR'       | '208,000'    | ''            | ''               | '$$Rov4PurchaseOrder017001$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '208,000'    | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Quantity'       |
-			| '4' | 'Dress' | 'L/Green'  | '208,000' |
+			| '#'   | 'Item'    | 'Item key'   | 'Quantity'    |
+			| '4'   | 'Dress'   | 'L/Green'    | '208,000'     |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
-			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov1PurchaseOrder017001$$'   | ''        | '$$Rov1PurchaseOrder017001$$'   | 'PI&GR'       | '100,000'    | ''            | ''               | '$$Rov1PurchaseOrder017001$$'    |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '200,000'    | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
+			| '$$Rov3PurchaseOrder017001$$'   | ''        | '$$Rov3PurchaseOrder017001$$'   | 'PI&GR'       | '300,000'    | ''            | ''               | '$$Rov3PurchaseOrder017001$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+			| '#'   | 'Item'    | 'Item key'   | 'Quantity'    |
+			| '2'   | 'Dress'   | 'L/Green'    | '200,000'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '7,000'   | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
-			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov1PurchaseOrder017001$$'   | ''        | '$$Rov1PurchaseOrder017001$$'   | 'PI&GR'       | '100,000'    | ''            | ''               | '$$Rov1PurchaseOrder017001$$'    |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '7,000'      | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
+			| '$$Rov3PurchaseOrder017001$$'   | ''        | '$$Rov3PurchaseOrder017001$$'   | 'PI&GR'       | '300,000'    | ''            | ''               | '$$Rov3PurchaseOrder017001$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-			| '2' | 'Dress' | 'L/Green'  | '7,000' |
+			| '#'   | 'Item'    | 'Item key'   | 'Quantity'    |
+			| '2'   | 'Dress'   | 'L/Green'    | '7,000'       |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "200,000" text in "Quantity" field of "ItemList" table
@@ -169,8 +169,8 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 	* Copy PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'                     |
-			| '$$NumberPurchaseOrder017001$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017001$$'    |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then "Update item list info" window is opened
 		And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
@@ -185,16 +185,16 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Quantity'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
-			| '1' | ''                   | 'en description is empty' | 'Dress'    | 'M/White'   | 'No'                 | '3 050,85'   | '100,000' | 'pcs'  | '200,00' | '18%' | ''              | '16 949,15'  | '20 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
-			| '2' | ''                   | 'en description is empty' | 'Dress'    | 'L/Green'   | 'No'                 | '6 406,78'   | '200,000' | 'pcs'  | '210,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
-			| '3' | ''                   | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '11 440,68'  | '300,000' | 'pcs'  | '250,00' | '18%' | ''              | '63 559,32'  | '75 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
+			| '#'   | 'Profit loss center'   | 'Price type'                | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Quantity'   | 'Unit'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Internal supply request'   | 'Store'      | 'Expense type'   | 'Detail'   | 'Sales order'   | 'Cancel'   | 'Purchase basis'   | 'Cancel reason'    |
+			| '1'   | ''                     | 'en description is empty'   | 'Dress'      | 'M/White'     | 'No'                   | '3 050,85'     | '100,000'    | 'pcs'    | '200,00'   | '18%'   | ''                | '16 949,15'    | '20 000,00'      | ''                          | 'Store 01'   | ''               | ''         | ''              | 'No'       | ''                 | ''                 |
+			| '2'   | ''                     | 'en description is empty'   | 'Dress'      | 'L/Green'     | 'No'                   | '6 406,78'     | '200,000'    | 'pcs'    | '210,00'   | '18%'   | ''                | '35 593,22'    | '42 000,00'      | ''                          | 'Store 01'   | ''               | ''         | ''              | 'No'       | ''                 | ''                 |
+			| '3'   | ''                     | 'en description is empty'   | 'Trousers'   | '36/Yellow'   | 'No'                   | '11 440,68'    | '300,000'    | 'pcs'    | '250,00'   | '18%'   | ''                | '63 559,32'    | '75 000,00'      | ''                          | 'Store 01'   | ''               | ''         | ''              | 'No'       | ''                 | ''                 |
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 454,40' |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '137 000'   |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '137 000'   |
+			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '23 454,40'    |
+			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '137 000'      |
+			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '137 000'      |
 		And I close current window		
 		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Autor" became equal to "en description is empty"
@@ -210,10 +210,10 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
-			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
-			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
-			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+			| 'Key'                           | 'Basis'   | 'Row ID'                        | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                        |
+			| '$$Rov1PurchaseOrder017001$$'   | ''        | '$$Rov1PurchaseOrder017001$$'   | 'PI&GR'       | '100,000'    | ''            | ''               | '$$Rov1PurchaseOrder017001$$'    |
+			| '$$Rov2PurchaseOrder017001$$'   | ''        | '$$Rov2PurchaseOrder017001$$'   | 'PI&GR'       | '200,000'    | ''            | ''               | '$$Rov2PurchaseOrder017001$$'    |
+			| '$$Rov3PurchaseOrder017001$$'   | ''        | '$$Rov3PurchaseOrder017001$$'   | 'PI&GR'       | '300,000'    | ''            | ''               | '$$Rov3PurchaseOrder017001$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows
 
@@ -226,25 +226,25 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 	* Filling in the details
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 		And I select current line in "List" table
 	* Filling in vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
+			| Description           |
+			| Vendor Ferron, TRY    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
@@ -255,57 +255,57 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '1' | 'Dress' | 'M/White' | 'pcs' |
+			| '#'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '1'   | 'Dress'   | 'M/White'    | 'pcs'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
+			| '#'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '2'   | 'Dress'   | 'L/Green'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "210,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'     | 'Item key' | 'Unit' |
-			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
+			| '#'   | 'Item'       | 'Item key'    | 'Unit'    |
+			| '3'   | 'Trousers'   | '36/Yellow'   | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "30,000" text in "Quantity" field of "ItemList" table
 		And I input "210,00" text in "Price" field of "ItemList" table
@@ -322,57 +322,57 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 	* Check the absence of movements Purchase Order N101 by register PurchaseOrders
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Recorder'                | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                  | 'Order'                      |
+			| '$$PurchaseOrder017005$$'   | '$$PurchaseOrder017005$$'    |
 		And I close all client application windows
 	* Setting the status by Purchase Order №101 'Approved'
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder017005$$'      |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017005$$'    |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
-			| 'Object'                  | 'Status'   | 'Period'                         |
-			| '$$PurchaseOrder017005$$' | 'Wait'     |'$$DatePurchaseOrderWait017005$$*' |
-			| '$$PurchaseOrder017005$$' | 'Approved' |'*'                               |
+			| 'Object'                    | 'Status'     | 'Period'                              |
+			| '$$PurchaseOrder017005$$'   | 'Wait'       | '$$DatePurchaseOrderWait017005$$*'    |
+			| '$$PurchaseOrder017005$$'   | 'Approved'   | '*'                                   |
 		And "List" table does not contain lines
-			| 'Object'                  | 'Status'   | 'Period'                         |
-			| '$$PurchaseOrder017005$$' | 'Approved' |'$$DatePurchaseOrderWait017005$$*' |
+			| 'Object'                    | 'Status'     | 'Period'                              |
+			| '$$PurchaseOrder017005$$'   | 'Approved'   | '$$DatePurchaseOrderWait017005$$*'    |
 		And I close current window
 		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check document movements after the status is set to Approved
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Recorder'                | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                  | 'Order'                      |
+			| '$$PurchaseOrder017005$$'   | '$$PurchaseOrder017005$$'    |
 		And I close current window
 	* Check for cancelled movements when the Approved status is changed to Wait
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder017005$$'      |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017005$$'    |
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Wait" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
-			| 'Object'                  | 'Status'   |
-			| '$$PurchaseOrder017005$$' | 'Wait'     |
-			| '$$PurchaseOrder017005$$' | 'Approved' |
-			| '$$PurchaseOrder017005$$' | 'Wait'     |
+			| 'Object'                    | 'Status'      |
+			| '$$PurchaseOrder017005$$'   | 'Wait'        |
+			| '$$PurchaseOrder017005$$'   | 'Approved'    |
+			| '$$PurchaseOrder017005$$'   | 'Wait'        |
 		And I close current window
 		And I click the button named "FormPostAndClose"
 		And I close current window
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Recorder'                | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                  | 'Order'                      |
+			| '$$PurchaseOrder017005$$'   | '$$PurchaseOrder017005$$'    |
 		And I close current window
 
 Scenario: _017006 create Purchase order based on Internal supply request
@@ -383,65 +383,65 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		* Filling in the main details of the document
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' | 
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Ferron BP' | 
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Vendor Ferron, TRY' | 
+				| 'Description'            |
+				| 'Vendor Ferron, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Select items from basis documents
 			And I click the button named "AddBasisDocuments"
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '50,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'    | 'Use'     |
+				| '50,000'      | 'Dress (XS/Blue)'     | 'pcs'     | 'No'      |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '10,000'    | 'Dress (S/Yellow)'   | 'pcs'  | 'No'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'    | 'Use'     |
+				| '10,000'      | 'Dress (S/Yellow)'    | 'pcs'     | 'No'      |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
-			And I click "Save" button							
+			And I click "Post" button							
 		* Check Item tab and RowID tab
 			And in the table "ItemList" I click "Edit quantity in base unit" button
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Stock quantity' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
-				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'         | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
-				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'         | ''                   | 'Vendor price, TRY' | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+				| 'Store'       | 'Internal supply request'                                  | 'Stock quantity'    | 'Profit loss center'    | 'Price type'           | 'Item'     | 'Item key'    | 'Dont calculate row'    | 'Quantity'    | 'Unit'    | 'Tax amount'    | 'Price'    | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Expense type'    | 'Detail'    | 'Sales order'    | 'Cancel'    | 'Purchase basis'    | 'Delivery date'    | 'Cancel reason'     |
+				| 'Store 02'    | 'Internal supply request 117 dated 12.02.2021 14:39:38'    | '10,000'            | ''                      | 'Vendor price, TRY'    | 'Dress'    | 'S/Yellow'    | 'No'                    | '10,000'      | 'pcs'     | ''              | ''         | '18%'    | ''                 | ''              | ''                | ''                | ''          | ''               | 'No'        | ''                  | ''                 | ''                  |
+				| 'Store 02'    | 'Internal supply request 117 dated 12.02.2021 14:39:38'    | '50,000'            | ''                      | 'Vendor price, TRY'    | 'Dress'    | 'XS/Blue'     | 'No'                    | '50,000'      | 'pcs'     | ''              | ''         | '18%'    | ''                 | ''              | ''                | ''                | ''          | ''               | 'No'        | ''                  | ''                 | ''                  |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                                 | 'Next step' | 'Quantity' | 'Current step' |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'     | '10,000'   | 'ITO&PO&PI'    |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'     | '50,000'   | 'ITO&PO&PI'    |
-			Then the number of "RowIDInfo" table lines is "равно" "2"	
+				| 'Basis'                                                    | 'Next step'    | 'Quantity'    | 'Current step'     |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'PI&GR'        | '10,000'      | 'ITO&PO&PI'        |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'PI&GR'        | '50,000'      | 'ITO&PO&PI'        |
+			Then the number of "RowIDInfo" table lines is "равно" "2"		
 		And I close all client application windows
 	* Create PO based on ISR (Create button)
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number'                           |
-			| '117' |
+			| 'Number'    |
+			| '117'       |
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov1InternalSupplyRequestr017006$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov2InternalSupplyRequestr017006$$"
 		And I click the button named "FormDocumentPurchaseOrderGenerate"
@@ -452,18 +452,18 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		And I click "Show row key" button	
 		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Stock quantity' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'         | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'         | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+			| 'Store'      | 'Internal supply request'                                 | 'Stock quantity'   | 'Profit loss center'   | 'Price type'   | 'Item'    | 'Item key'   | 'Dont calculate row'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Expense type'   | 'Detail'   | 'Sales order'   | 'Cancel'   | 'Purchase basis'   | 'Delivery date'   | 'Cancel reason'    |
+			| 'Store 02'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '10,000'           | ''                     | ''             | 'Dress'   | 'S/Yellow'   | 'No'                   | '10,000'     | 'pcs'    | ''             | ''        | '18%'   | ''                | ''             | ''               | ''               | ''         | ''              | 'No'       | ''                 | ''                | ''                 |
+			| 'Store 02'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '50,000'           | ''                     | ''             | 'Dress'   | 'XS/Blue'    | 'No'                   | '50,000'     | 'pcs'    | ''             | ''        | '18%'   | ''                | ''             | ''               | ''               | ''         | ''              | 'No'       | ''                 | ''                | ''                 |
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1PurchaseOrder017006$$" variable
 		And I save the current field value as "$$Rov1PurchaseOrder017006$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov2PurchaseOrder017006$$" variable
 		And I save the current field value as "$$Rov2PurchaseOrder017006$$"
@@ -471,22 +471,26 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'PI&GR'     | '10,000'   | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
-			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'PI&GR'     | '50,000'   | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
+			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | ''          | '10,000'   | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | ''          | '50,000'   | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		* Filling in the main details of the document
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Ferron BP' | 
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Vendor Ferron, TRY' | 
+				| 'Description'            |
+				| 'Vendor Ferron, TRY'     |
 			And I select current line in "List" table
 			And I click "OK" button					
 		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'PI&GR'     | '10,000'   | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'PI&GR'     | '50,000'   | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		And I delete "$$NumberPurchaseOrder017006$$" variable
 		And I delete "$$PurchaseOrder017006$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017006$$"
@@ -494,8 +498,8 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And "List" table contains lines
-			| 'Number'                |
-			| '$$NumberPurchaseOrder017006$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017006$$'    |
 		And I close all client application windows
 		
 
@@ -505,8 +509,8 @@ Scenario: _017011 check totals in the document Purchase Order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	* Selecting PurchaseOrder
 		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder017001$$'      |
+		| 'Number'                          |
+		| '$$NumberPurchaseOrder017001$$'   |
 		And I select current line in "List" table
 	* Check totals in the document
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
@@ -560,29 +564,29 @@ Scenario: _017101 check input item key by line in the Purchase order
 	* Filling out vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 	* Check input item key line by line
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "S/Yellow" from "Item key" drop-down list by string in "ItemList" table
 		And I activate "Quantity" field in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| Item  | Item key |
-		| Dress | S/Yellow |
+		| Item   | Item key   |
+		| Dress  | S/Yellow   |
 		And I close current window
 		Then "1C:Enterprise" window is opened
 		And I click "No" button
@@ -601,27 +605,27 @@ Scenario: _017102 check for the creation of the missing item key from the Purcha
 	* Filling out vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
+			| Description           |
+			| Vendor Ferron, TRY    |
 		And I select current line in "List" table
 	* Creating an item key when filling out the tabular part
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -634,16 +638,16 @@ Scenario: _017102 check for the creation of the missing item key from the Purcha
 		And I input "" text in "Size" field
 		And I input "" text in "Color" field
 		And "List" table became equal
-		| Item key  | Item  |
-		| S/Yellow  | Dress |
-		| XS/Blue   | Dress |
-		| M/White   | Dress |
-		| L/Green   | Dress |
-		| XL/Green  | Dress |
-		| Dress/A-8 | Dress |
-		| XXL/Red   | Dress |
-		| M/Brown   | Dress |
-		| XL/Red    | Dress |
+		| Item key   | Item    |
+		| S/Yellow   | Dress   |
+		| XS/Blue    | Dress   |
+		| M/White    | Dress   |
+		| L/Green    | Dress   |
+		| XL/Green   | Dress   |
+		| Dress/A-8  | Dress   |
+		| XXL/Red    | Dress   |
+		| M/Brown    | Dress   |
+		| XL/Red     | Dress   |
 		And I close current window
 		And I close current window
 		Then "1C:Enterprise" window is opened
@@ -663,37 +667,37 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 	* Filling out vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 	* Filter check on item key when filling out the commodity part
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And Delay 2
 		And I select from "Size" drop-down list by "l" string
 		And "List" table became equal
-		| Item key |
-		| L/Green  |
-		| Dress/A-8  |
+		| Item key    |
+		| L/Green     |
+		| Dress/A-8   |
 		And I input "" text in "Size" field
 		And I select from "Color" drop-down list by "gr" string
 		And "List" table became equal
-		| Item key |
-		| L/Green  |
-		| XL/Green |
-		| Dress/A-8  |
+		| Item key    |
+		| L/Green     |
+		| XL/Green    |
+		| Dress/A-8   |
 		And I close current window
 		And I close current window
 		Then "1C:Enterprise" window is opened
@@ -712,31 +716,31 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 	* Check registry entries 
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/Red'    |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/Black'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '37/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'   |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'     |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'S/Yellow'     |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'XS/Blue'      |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'M/White'      |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'XL/Green'     |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '36/Yellow'    |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '38/Yellow'    |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '36/Red'       |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '38/Black'     |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '36/18SD'      |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '37/18SD'      |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '38/18SD'      |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '39/18SD'      |
 		And I close all client application windows
 	* Changing the quantity by Item Dress 'S/Yellow' by 250 pcs
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And Delay 2
 		And I go to line in "List" table
-			| 'Number'    |
-			| '$$NumberPurchaseOrder019901$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder019901$$'    |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity'        | 'Unit' |
-			| 'Dress' | 'S/Yellow' | '200,000'  | 'pcs' |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | 'S/Yellow'   | '200,000'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "250,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -744,11 +748,11 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
-			| '250,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'    |
+			| '250,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'S/Yellow'    |
 		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'    |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | 'S/Yellow'    |
 		
 		
 				
@@ -757,8 +761,8 @@ Scenario: _019902 delete line in Purchase order and chek movements changes
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And Delay 2
 		And I go to line in "List" table
-			| 'Number'    |
-			| '$$NumberPurchaseOrder019901$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder019901$$'    |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to the last line in "ItemList" table
@@ -767,34 +771,34 @@ Scenario: _019902 delete line in Purchase order and chek movements changes
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'  |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'    |
+			| '200,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '39/18SD'     |
 	
 Scenario: _019903 add line in Purchase order and chek movements changes
 	* Add line in the order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'    |
-			| '$$NumberPurchaseOrder019901$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder019901$$'    |
 		And Delay 2
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'    |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/18SD'  |
+			| 'Item key'    |
+			| '39/18SD'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Unit' |
-			| 'Boots' | '39/18SD'  | 'pcs' |
+			| 'Item'    | 'Item key'   | 'Unit'    |
+			| 'Boots'   | '39/18SD'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "100,000" text in "Quantity" field of "ItemList" table
 		And I input "195,00" text in "Price" field of "ItemList" table
@@ -803,19 +807,19 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'    |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'  |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Unit' |
-			| 'High shoes' | '39/19SD'  | 'pcs' |
+			| 'Item'         | 'Item key'   | 'Unit'    |
+			| 'High shoes'   | '39/19SD'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "50,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
@@ -826,16 +830,16 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And Delay 2
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key' |
-			| '100,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'  |
-			| '50,000'   | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/19SD'  |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'    |
+			| '100,000'    | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '39/18SD'     |
+			| '50,000'     | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '39/19SD'     |
 	
 Scenario: _019904 add package in Purchase order and chek movements (conversion to storage unit)
 	* Add package in the order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'    |
-			| '$$NumberPurchaseOrder019901$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder019901$$'    |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to the last line in "ItemList" table
@@ -843,25 +847,25 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'    |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'  |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I click choice button of "Unit" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'               |
-			| 'High shoes box (8 pcs)' |
+			| 'High shoes box (8 pcs)'    |
 		And I select current line in "List" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Unit' |
-			| 'High shoes' | '39/19SD'  | 'High shoes box (8 pcs)' |
+			| 'Item'         | 'Item key'   | 'Unit'                      |
+			| 'High shoes'   | '39/19SD'    | 'High shoes box (8 pcs)'    |
 		And I select current line in "ItemList" table
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
@@ -872,8 +876,8 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 	# Packages are converted into pcs.
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
-			| '80,000'   | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/19SD'   |
+			| 'Quantity'   | 'Recorder'                  | 'Order'                     | 'Item key'    |
+			| '80,000'     | '$$PurchaseOrder019901$$'   | '$$PurchaseOrder019901$$'   | '39/19SD'     |
 	
 
 
@@ -882,8 +886,8 @@ Scenario: _300502 check connection to Purchase order report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberPurchaseOrder017001$$      |
+		| Number                          |
+		| $$NumberPurchaseOrder017001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

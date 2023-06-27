@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @StandartAgreement
@@ -53,8 +53,8 @@ Scenario: _060200 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
@@ -74,26 +74,26 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			And I click Select button of "Partner" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Partner Kalipso'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'                  |
 				| 'Partner Kalipso Customer'     |
 			And I select current line in "List" table
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -106,26 +106,26 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			And I save the window as "$$SalesInvoice060202$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'Basic Price Types' | 'pcs'  | '*'          | '*'          | '11 000,00'    | 'Store 02' |
+			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Price type'          | 'Unit'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '550,00'   | 'Dress'   | '18%'   | 'L/Green'    | '20,000'     | 'Basic Price Types'   | 'pcs'    | '*'            | '*'            | '11 000,00'      | 'Store 02'    |
 			And I click the button named "FormPostAndClose"
 		* Check Sales invoice movements
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberSalesInvoice060202$$'  |
+				| 'Number'                           |
+				| '$$NumberSalesInvoice060202$$'     |
 			And I click "Registrations report" button
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice060202$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-				| 'Document registrations records'          | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-				| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-				| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | 'Attributes'           | ''                           |
-				| ''                                        | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'                | 'Basis' | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
-				| ''                                        | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
+				| '$$SalesInvoice060202$$'                     | ''               | ''          | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                   | ''                   | ''                            | ''         | ''         | ''                        | ''                               |
+				| 'Document registrations records'             | ''               | ''          | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                   | ''                   | ''                            | ''         | ''         | ''                        | ''                               |
+				| 'Register  "R2021 Customer transactions"'    | ''               | ''          | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                   | ''                   | ''                            | ''         | ''         | ''                        | ''                               |
+				| ''                                           | 'Record type'    | 'Period'    | 'Resources'    | 'Dimensions'      | ''          | ''                                | ''            | ''                        | ''                   | ''                   | ''                            | ''         | ''         | 'Attributes'              | ''                               |
+				| ''                                           | ''               | ''          | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'         | 'Partner'            | 'Agreement'                   | 'Basis'    | 'Order'    | 'Deferred calculation'    | 'Customers advances closing'     |
+				| ''                                           | 'Receipt'        | '*'         | '1 883,2'      | 'Main Company'    | '*'         | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | 'No'                      | ''                               |
 	And I close all client application windows
 
 Scenario: _060203 create Cash receipt (partner term with Ar details by partner term) and check its movements
@@ -135,32 +135,32 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Cash desk №2' |
+				| 'Description'      |
+				| 'Cash desk №2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Code' |
-				| 'TRY'  |
+				| 'Code'     |
+				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Partner Kalipso'   |
+				| 'Description'         |
+				| 'Partner Kalipso'     |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Partner Kalipso Customer' |
+				| 'Description'                  |
+				| 'Partner Kalipso Customer'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -173,21 +173,21 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 		And I click the button named "FormPostAndClose"
 	* Check movements
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberCashReceipt060203$$'  |
+			| 'Number'                         |
+			| '$$NumberCashReceipt060203$$'    |
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashReceipt060203$$'                   | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| 'Document registrations records'          | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                         | ''      | ''      | 'Attributes'           | ''                           |
-			| ''                                        | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'                | 'Basis' | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
+			| '$$CashReceipt060203$$'                     | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| 'Document registrations records'            | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| 'Register  "R2021 Customer transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| ''                                          | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | 'Attributes'             | ''                              |
+			| ''                                          | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'                  | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Customers advances closing'    |
+			| ''                                          | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 
 Scenario: _0602031 create Bank receipt (partner term with Ar details by partner term) and check its movements
@@ -197,27 +197,27 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
+				| 'Description'           |
+				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Partner Kalipso'   |
+				| 'Description'         |
+				| 'Partner Kalipso'     |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Partner Kalipso Customer' |
+				| 'Description'                  |
+				| 'Partner Kalipso Customer'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -230,21 +230,21 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 		And I click the button named "FormPostAndClose"
 	* Check movements
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt0602031$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt0602031$$'    |
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankReceipt0602031$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     |  ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| 'Document registrations records'          | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     |  ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     |  ''                | ''                | ''                         | ''      | ''      | ''                     | ''                           |
-			| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     |  ''                | ''                | ''                         | ''      | ''      | 'Attributes'           | ''                           |
-			| ''                                        | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |  'Legal name'      | 'Partner'         | 'Agreement'                | 'Basis' | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |  'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  |  'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  |  'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
-			| ''                                        | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |  'Company Kalipso' | 'Partner Kalipso' | 'Partner Kalipso Customer' | ''      | ''      | 'No'                   | ''                           |
+			| '$$BankReceipt0602031$$'                    | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| 'Document registrations records'            | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| 'Register  "R2021 Customer transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | ''                       | ''                              |
+			| ''                                          | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                           | ''        | ''        | 'Attributes'             | ''                              |
+			| ''                                          | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'                  | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Customers advances closing'    |
+			| ''                                          | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
+			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 
 
@@ -256,37 +256,37 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And I click Select button of "Partner" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'          |
 				| 'Partner Ferron 1'     |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table			
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'         |
 				| 'Vendor Ferron 1'     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'     |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -298,8 +298,8 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And I move to "Item list" tab
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
+			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Price type'                | 'Unit'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '550,00'   | 'Dress'   | '18%'   | 'L/Green'    | '20,000'     | 'en description is empty'   | 'pcs'    | '1 677,97'     | '9 322,03'     | '11 000,00'      | 'Store 01'    |
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060205$$" variable
@@ -311,15 +311,15 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseInvoice060205$$'              | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'          | 'Agreement'       | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
+			| '$$PurchaseInvoice060205$$'                | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Receipt'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 	
 Scenario: _060206 create Cash payment (partner term with Ap details by partner term) and check its movements
@@ -329,32 +329,32 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Cash desk №2' |
+				| 'Description'      |
+				| 'Cash desk №2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Code' |
-				| 'TRY'  |
+				| 'Code'     |
+				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Partner Ferron 1'   |
+				| 'Description'          |
+				| 'Partner Ferron 1'     |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'     |
-				| 'Vendor Ferron 1' |
+				| 'Description'         |
+				| 'Vendor Ferron 1'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -366,21 +366,21 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 			And I save the window as "$$CashPayment060206$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberCashPayment060206$$' |
+			| 'Number'                         |
+			| '$$NumberCashPayment060206$$'    |
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashPayment060206$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'          | 'Agreement'       | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
+			| '$$CashPayment060206$$'                    | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 
 		And I close all client application windows
 
@@ -393,27 +393,27 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
+				| 'Description'           |
+				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Partner Ferron 1'   |
+				| 'Description'          |
+				| 'Partner Ferron 1'     |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'                            |
-				| 'Vendor Ferron 1' |
+				| 'Description'         |
+				| 'Vendor Ferron 1'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -425,21 +425,21 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			And I save the window as "$$BankPayment060208$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberBankPayment060208$$' |
+			| 'Number'                         |
+			| '$$NumberBankPayment060208$$'    |
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment060208$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''                 | ''                | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'          | 'Agreement'       | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Partner Ferron 1' | 'Vendor Ferron 1' | ''      | ''      | 'No'                   | ''                         |
+			| '$$BankPayment060208$$'                    | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                    | ''                   | ''                  | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

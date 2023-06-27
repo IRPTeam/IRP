@@ -79,37 +79,37 @@ Scenario: _061 test data
 	* Landed cost settings for company	
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
 	* Fill empty amount
 		And I set checkbox "Fill empty amount"
 		And I click Select button of "Price type for empty amount" field
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Basic Price without VAT' |
+			| 'Description'                |
+			| 'Basic Price without VAT'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Settings for second company
 		Then "Companies" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
 		And I click "Save and close" button
@@ -139,7 +139,6 @@ Scenario: _061 test data
 		When Create document StockAdjustmentAsSurplus objects without amount (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
-		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document AdditionalCostAllocation objects (by rows, amount) (LC)
@@ -174,6 +173,11 @@ Scenario: _061 test data
 	* Posting Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		Then "Sales returns" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+	* Posting Price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
@@ -281,13 +285,13 @@ Scenario: _063 filling landed cost in the Item stock adjastment as surplus by pr
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '36/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '36/Yellow'    |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"	
@@ -302,13 +306,13 @@ Scenario: _064 filling landed cost in the Item stock adjastment as surplus from 
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key'  |
-			| 'Dress' | 'XS/Blue' |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
@@ -327,13 +331,13 @@ Scenario: _065 filling landed cost in the Item stock adjastment as surplus from 
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
+			| 'Description'    |
+			| 'Store 06'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'  | 'Item key'  |
-			| 'Dress' | 'XS/Blue' |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
@@ -346,8 +350,8 @@ Scenario: _065 filling landed cost in the Item stock adjastment as surplus from 
 	* Check one more item
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened

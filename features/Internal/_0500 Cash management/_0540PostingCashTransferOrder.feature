@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -45,8 +45,8 @@ Scenario: _054000 preparation (Cash transfer order)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog PlanningPeriods objects
@@ -63,55 +63,55 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №1 |
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Send amount" field
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| Code | Description     |
-			| USD  | American dollar |
+			| Code   | Description        |
+			| USD    | American dollar    |
 		And I select current line in "List" table
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Receive amount" field
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| Code | Description     |
-			| USD  | American dollar |
+			| Code   | Description        |
+			| USD    | American dollar    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054001$$" variable
@@ -123,41 +123,41 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number | Sender       | Receiver     | Company      |
-		| 1      | Cash desk №1 | Cash desk №2 | Main Company |
+		| Number  | Sender        | Receiver      | Company        |
+		| 1       | Cash desk №1  | Cash desk №2  | Main Company   |
 	And I close all client application windows
 
 Scenario: _054002 check Cash transfer order movements by register Planing cash transactions
 	* Check movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
+			| 'Currency'   | 'Recorder'                      | 'Basis document'                | 'Company'        | 'Account'        | 'Cash flow direction'   | 'Amount'   | 'Financial movement type'    |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №1'   | 'Outgoing'              | '500,00'   | 'Movement type 1'            |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №2'   | 'Incoming'              | '500,00'   | 'Movement type 1'            |
 		And I close all client application windows
 	* Clear movements
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberCashTransferOrder054001$$'       |
+			| 'Number'                               |
+			| '$$NumberCashTransferOrder054001$$'    |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table does not contain lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
+			| 'Currency'   | 'Recorder'                      | 'Basis document'                | 'Company'        | 'Account'        | 'Cash flow direction'   | 'Amount'   | 'Financial movement type'    |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №1'   | 'Outgoing'              | '500,00'   | 'Movement type 1'            |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №2'   | 'Incoming'              | '500,00'   | 'Movement type 1'            |
 		And I close all client application windows
 	* Re-posting document
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberCashTransferOrder054001$$'       |
+			| 'Number'                               |
+			| '$$NumberCashTransferOrder054001$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
-			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
+			| 'Currency'   | 'Recorder'                      | 'Basis document'                | 'Company'        | 'Account'        | 'Cash flow direction'   | 'Amount'   | 'Financial movement type'    |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №1'   | 'Outgoing'              | '500,00'   | 'Movement type 1'            |
+			| 'USD'        | '$$CashTransferOrder054001$$'   | '$$CashTransferOrder054001$$'   | 'Main Company'   | 'Cash desk №2'   | 'Incoming'              | '500,00'   | 'Movement type 1'            |
 		And I close all client application windows
 
 
@@ -167,13 +167,13 @@ Scenario: _054002 check Cash transfer order movements by register Planing cash t
 Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer order + check movements
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
-		| 'Number'                            | 'Sender'       | 'Receiver'     | 'Company'      |
-		| '$$NumberCashTransferOrder054001$$' | 'Cash desk №1' | 'Cash desk №2' | 'Main Company' |
+		| 'Number'                             | 'Sender'        | 'Receiver'      | 'Company'        |
+		| '$$NumberCashTransferOrder054001$$'  | 'Cash desk №1'  | 'Cash desk №2'  | 'Main Company'   |
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'  | 'Total amount' |
-		| '$$CashTransferOrder054001$$' | '500,00'       |
+		| 'Planning transaction basis'   | 'Total amount'   |
+		| '$$CashTransferOrder054001$$'  | '500,00'         |
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashPayment054003$$" variable
 	And I delete "$$CashPayment054003$$" variable
@@ -184,8 +184,8 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 	* Creation of Cash receipt for a partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number                            | Sender       | Receiver     | Company      |
-			| $$NumberCashTransferOrder054001$$ | Cash desk №1 | Cash desk №2 | Main Company |
+			| Number                              | Sender         | Receiver       | Company         |
+			| $$NumberCashTransferOrder054001$$   | Cash desk №1   | Cash desk №2   | Main Company    |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -201,14 +201,14 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 	* Creation of Cash receipt for the remaining amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number                            | Sender       | Receiver     | Company      |
-			| $$NumberCashTransferOrder054001$$ | Cash desk №1 | Cash desk №2 | Main Company |
+			| Number                              | Sender         | Receiver       | Company         |
+			| $$NumberCashTransferOrder054001$$   | Cash desk №1   | Cash desk №2   | Main Company    |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 	* Check that the tabular part shows the rest of the amount
 		And I move to "Payments" tab
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'   | 'Total amount' |
-		| '$$CashTransferOrder054001$$'      | '100,00'    |
+		| 'Planning transaction basis'   | 'Total amount'   |
+		| '$$CashTransferOrder054001$$'  | '100,00'         |
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashReceipt0540031$$" variable
 	And I delete "$$CashReceipt0540031$$" variable
@@ -219,10 +219,10 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 	* Check movement of Cash payment and Cash receipt by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'               | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Financial movement type'   |
-		| 'USD'      | '$$CashPayment054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | 'Movement type 1' |
-		| 'USD'      | '$$CashReceipt054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | 'Movement type 1' |
-		| 'USD'      | '$$CashReceipt0540031$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | 'Movement type 1' |
+		| 'Currency'  | 'Recorder'                | 'Basis document'               | 'Company'       | 'Account'       | 'Cash flow direction'  | 'Financial movement type'   |
+		| 'USD'       | '$$CashPayment054003$$'   | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №1'  | 'Outgoing'             | 'Movement type 1'           |
+		| 'USD'       | '$$CashReceipt054003$$'   | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №2'  | 'Incoming'             | 'Movement type 1'           |
+		| 'USD'       | '$$CashReceipt0540031$$'  | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №2'  | 'Incoming'             | 'Movement type 1'           |
 	And I close all client application windows
 	
 
@@ -232,60 +232,60 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "200,00" text in "Send amount" field
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| Code | Description     |
-			| USD  | American dollar |
+			| Code   | Description        |
+			| USD    | American dollar    |
 		And I select current line in "List" table
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №1 |
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "1150,00" text in "Receive amount" field
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| Code | Description  |
-			| TRY  | Turkish lira |
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054004$$" variable
@@ -297,31 +297,31 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-			| 'Number'                            | 'Sender'       | 'Receiver'     | 'Company'      |
-			| '$$NumberCashTransferOrder054004$$' | 'Cash desk №2' | 'Cash desk №1' | 'Main Company' |
+			| 'Number'                              | 'Sender'         | 'Receiver'       | 'Company'         |
+			| '$$NumberCashTransferOrder054004$$'   | 'Cash desk №2'   | 'Cash desk №1'   | 'Main Company'    |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 	And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Amount'   | 'Financial movement type'   |
-		| 'USD'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '200,00'   | 'Movement type 1' |
-		| 'TRY'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '1 150,00' | 'Movement type 1' |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'       | 'Cash flow direction'  | 'Partner'  | 'Legal name'  | 'Amount'    | 'Financial movement type'   |
+		| 'USD'       | '$$CashTransferOrder054004$$'  | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №2'  | 'Outgoing'             | ''         | ''            | '200,00'    | 'Movement type 1'           |
+		| 'TRY'       | '$$CashTransferOrder054004$$'  | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №1'  | 'Incoming'             | ''         | ''            | '1 150,00'  | 'Movement type 1'           |
 	And I close all client application windows
 
 Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer order in the different currency and check movements
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
-		| Number                            | Sender       | Receiver     | Company      |
-		| $$NumberCashTransferOrder054004$$ | Cash desk №2 | Cash desk №1 | Main Company |
+		| Number                             | Sender        | Receiver      | Company        |
+		| $$NumberCashTransferOrder054004$$  | Cash desk №2  | Cash desk №1  | Main Company   |
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'  | 'Total amount' |
-		| '$$CashTransferOrder054004$$' | '200,00'       |
+		| 'Planning transaction basis'   | 'Total amount'   |
+		| '$$CashTransferOrder054004$$'  | '200,00'         |
 	* Filling in the employee responsible for curremcy exchange
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashPayment054005$$" variable
@@ -333,15 +333,15 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 	* Create Cash receipt for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number | Sender       | Receiver     | Company      |
-			| $$NumberCashTransferOrder054004$$      | Cash desk №2 | Cash desk №1 | Main Company |
+			| Number                              | Sender         | Receiver       | Company         |
+			| $$NumberCashTransferOrder054004$$   | Cash desk №2   | Cash desk №1   | Main Company    |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 	* Check that the correct receipt amount is indicated in the tabular part
 		And I move to "Payments" tab
 		And Delay 5
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'  | 'Partner'      | 'Total amount' | 'Amount exchange' |
-		| '$$CashTransferOrder054004$$' | 'Daniel Smith' | '1 150,00'     | '200,00'          |
+		| 'Planning transaction basis'   | 'Partner'       | 'Total amount'  | 'Amount exchange'   |
+		| '$$CashTransferOrder054004$$'  | 'Daniel Smith'  | '1 150,00'      | '200,00'            |
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashReceipt054005$$" variable
 	And I delete "$$CashReceipt054005$$" variable
@@ -352,11 +352,11 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 	* Check Cash payment and Cash receipt movements by register PlaningCashTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Amount'    |
-		| 'USD'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '200,00'    |
-		| 'TRY'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '1 150,00'  |
-		| 'USD'      | '$$CashPayment054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '-200,00'   |
-		| 'TRY'      | '$$CashReceipt054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '-1 150,00' |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'       | 'Cash flow direction'  | 'Partner'  | 'Legal name'  | 'Amount'      |
+		| 'USD'       | '$$CashTransferOrder054004$$'  | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №2'  | 'Outgoing'             | ''         | ''            | '200,00'      |
+		| 'TRY'       | '$$CashTransferOrder054004$$'  | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №1'  | 'Incoming'             | ''         | ''            | '1 150,00'    |
+		| 'USD'       | '$$CashPayment054005$$'        | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №2'  | 'Outgoing'             | ''         | ''            | '-200,00'     |
+		| 'TRY'       | '$$CashReceipt054005$$'        | '$$CashTransferOrder054004$$'  | 'Main Company'  | 'Cash desk №1'  | 'Incoming'             | ''         | ''            | '-1 150,00'   |
 		And I close all client application windows
 
 	
@@ -365,49 +365,49 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №1 |
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| 'Code' | 'Description'     |
-			| 'USD'  | 'American dollar' |
+			| 'Code'   | 'Description'        |
+			| 'USD'    | 'American dollar'    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Send amount" field
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Bank account, USD |
+			| Description          |
+			| Bank account, USD    |
 		And I select current line in "List" table
 		And I input "500,00" text in "Receive amount" field
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054006$$" variable
@@ -419,19 +419,19 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number | Sender       | Receiver          | Company      |
-		| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
+		| Number                             | Sender        | Receiver           | Company        |
+		| $$NumberCashTransferOrder054006$$  | Cash desk №1  | Bank account, USD  | Main Company   |
 	And I close all client application windows
 	* Post Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number | Sender       | Receiver          | Company      |
-			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
+			| Number                              | Sender         | Receiver            | Company         |
+			| $$NumberCashTransferOrder054006$$   | Cash desk №1   | Bank account, USD   | Main Company    |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-			| 'Planning transaction basis'  | 'Total amount' |
-			| '$$CashTransferOrder054006$$' | '500,00' |
+			| 'Planning transaction basis'    | 'Total amount'    |
+			| '$$CashTransferOrder054006$$'   | '500,00'          |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment054006$$" variable
 		And I delete "$$CashPayment054006$$" variable
@@ -442,24 +442,24 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	*Post Bank receipt
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number | Sender       | Receiver          | Company      |
-			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
+			| Number                              | Sender         | Receiver            | Company         |
+			| $$NumberCashTransferOrder054006$$   | Cash desk №1   | Bank account, USD   | Main Company    |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And Delay 5
 	* Check the filling of the tabular part
 		And I move to "Payments" tab
 		If "PaymentList" table does not contain line Then
-			| 'Total amount' |
-			| '500,00'       |
+			| 'Total amount'    |
+			| '500,00'          |
 			And I close current window
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And I go to line in "List" table
-				| Number | Sender       | Receiver          | Company      |
-				| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
+				| Number                               | Sender          | Receiver             | Company          |
+				| $$NumberCashTransferOrder054006$$    | Cash desk №1    | Bank account, USD    | Main Company     |
 			And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And "PaymentList" table contains lines
-			| 'Total amount' | 'Planning transaction basis'  |
-			| '500,00'       | '$$CashTransferOrder054006$$' |
+			| 'Total amount'   | 'Planning transaction basis'     |
+			| '500,00'         | '$$CashTransferOrder054006$$'    |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt054006$$" variable
 		And I delete "$$BankReceipt054006$$" variable
@@ -469,11 +469,11 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	* Check movements by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'  |
-		| 'USD'      | '$$CashTransferOrder054006$$' | '$$CashTransferOrder054006$$' | 'Main Company' | 'Cash desk №1'      | 'Outgoing'            | '500,00'  |
-		| 'USD'      | '$$CashTransferOrder054006$$' | '$$CashTransferOrder054006$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | '500,00'  |
-		| 'USD'      | '$$CashPayment054006$$'       | '$$CashTransferOrder054006$$' | 'Main Company' | 'Cash desk №1'      | 'Outgoing'            | '-500,00' |
-		| 'USD'      | '$$BankReceipt054006$$'       | '$$CashTransferOrder054006$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | '-500,00' |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'            | 'Cash flow direction'  | 'Amount'    |
+		| 'USD'       | '$$CashTransferOrder054006$$'  | '$$CashTransferOrder054006$$'  | 'Main Company'  | 'Cash desk №1'       | 'Outgoing'             | '500,00'    |
+		| 'USD'       | '$$CashTransferOrder054006$$'  | '$$CashTransferOrder054006$$'  | 'Main Company'  | 'Bank account, USD'  | 'Incoming'             | '500,00'    |
+		| 'USD'       | '$$CashPayment054006$$'        | '$$CashTransferOrder054006$$'  | 'Main Company'  | 'Cash desk №1'       | 'Outgoing'             | '-500,00'   |
+		| 'USD'       | '$$BankReceipt054006$$'        | '$$CashTransferOrder054006$$'  | 'Main Company'  | 'Bank account, USD'  | 'Incoming'             | '-500,00'   |
 		And I close all client application windows
 
 Scenario: _054007 create Cash transfer order from bank account to Cash account (in the same currency)
@@ -481,50 +481,50 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Bank account, USD |
+			| Description          |
+			| Bank account, USD    |
 		And I select current line in "List" table
 		And I input "100,00" text in "Send amount" field
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №1 |
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		And I input "100,00" text in "Receive amount" field
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| Code | Description     |
-			| USD  | American dollar |
+			| Code   | Description        |
+			| USD    | American dollar    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054007$$" variable
@@ -536,19 +536,19 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number                            | Sender            | Receiver     | Company      |
-		| $$NumberCashTransferOrder054007$$ | Bank account, USD | Cash desk №1 | Main Company |
+		| Number                             | Sender             | Receiver      | Company        |
+		| $$NumberCashTransferOrder054007$$  | Bank account, USD  | Cash desk №1  | Main Company   |
 	And I close all client application windows
 	* Post Bank payment
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number                            | Sender            | Receiver     | Company      |
-			| $$NumberCashTransferOrder054007$$ | Bank account, USD | Cash desk №1 | Main Company |
+			| Number                              | Sender              | Receiver       | Company         |
+			| $$NumberCashTransferOrder054007$$   | Bank account, USD   | Cash desk №1   | Main Company    |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
-			| 'Planning transaction basis' | 'Total amount' |
-			| '$$CashTransferOrder054007$$'     | '100,00' |
+			| 'Planning transaction basis'    | 'Total amount'    |
+			| '$$CashTransferOrder054007$$'   | '100,00'          |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment054007$$" variable
 		And I delete "$$BankPayment054007$$" variable
@@ -560,13 +560,13 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	* Post Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| Number                            | Sender            | Receiver     | Company      |
-			| $$NumberCashTransferOrder054007$$ | Bank account, USD | Cash desk №1 | Main Company |
+			| Number                              | Sender              | Receiver       | Company         |
+			| $$NumberCashTransferOrder054007$$   | Bank account, USD   | Cash desk №1   | Main Company    |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
-			| Planning transaction basis  | Total amount   |
-			| $$CashTransferOrder054007$$ | '100,00' |
+			| Planning transaction basis    | Total amount    |
+			| $$CashTransferOrder054007$$   | '100,00'        |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt054007$$" variable
 		And I delete "$$CashReceipt054007$$" variable
@@ -576,11 +576,11 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	* Check movements by register PlaningCashTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'  |
-		| 'USD'      | '$$CashTransferOrder054007$$' | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Outgoing'            | '100,00'  |
-		| 'USD'      | '$$CashTransferOrder054007$$' | '$$CashTransferOrder054007$$' | 'Main Company' | 'Cash desk №1'      | 'Incoming'            | '100,00'  |
-		| 'USD'      | '$$CashReceipt054007$$'        | '$$CashTransferOrder054007$$' | 'Main Company' | 'Cash desk №1'      | 'Incoming'            | '-100,00' |
-		| 'USD'      | '$$BankPayment054007$$'       | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Outgoing'            | '-100,00' |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'            | 'Cash flow direction'  | 'Amount'    |
+		| 'USD'       | '$$CashTransferOrder054007$$'  | '$$CashTransferOrder054007$$'  | 'Main Company'  | 'Bank account, USD'  | 'Outgoing'             | '100,00'    |
+		| 'USD'       | '$$CashTransferOrder054007$$'  | '$$CashTransferOrder054007$$'  | 'Main Company'  | 'Cash desk №1'       | 'Incoming'             | '100,00'    |
+		| 'USD'       | '$$CashReceipt054007$$'        | '$$CashTransferOrder054007$$'  | 'Main Company'  | 'Cash desk №1'       | 'Incoming'             | '-100,00'   |
+		| 'USD'       | '$$BankPayment054007$$'        | '$$CashTransferOrder054007$$'  | 'Main Company'  | 'Bank account, USD'  | 'Outgoing'             | '-100,00'   |
 		And I close all client application windows
 
 Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange in parts (exchange rate has increased)
@@ -588,60 +588,60 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "1150,00" text in "Send amount" field
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| Code | Description  |
-			| TRY  | Turkish lira |
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
 		And I select current line in "List" table
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "175,00" text in "Receive amount" field
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| Code |
-			| EUR  |
+			| Code    |
+			| EUR     |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054008$$" variable
@@ -653,25 +653,25 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number                            | Sender       | Receiver     | Company      |
-		| $$NumberCashTransferOrder054008$$ | Cash desk №2 | Cash desk №2 | Main Company |
+		| Number                             | Sender        | Receiver      | Company        |
+		| $$NumberCashTransferOrder054008$$  | Cash desk №2  | Cash desk №2  | Main Company   |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 	And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount'   |
-		| 'TRY'      | '$$CashTransferOrder054008$$' | '$$CashTransferOrder054008$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | '1 150,00' |
-		| 'EUR'      | '$$CashTransferOrder054008$$' | '$$CashTransferOrder054008$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '175,00'   |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'       | 'Cash flow direction'  | 'Amount'     |
+		| 'TRY'       | '$$CashTransferOrder054008$$'  | '$$CashTransferOrder054008$$'  | 'Main Company'  | 'Cash desk №2'  | 'Outgoing'             | '1 150,00'   |
+		| 'EUR'       | '$$CashTransferOrder054008$$'  | '$$CashTransferOrder054008$$'  | 'Main Company'  | 'Cash desk №2'  | 'Incoming'             | '175,00'     |
 	And I close all client application windows
 	* Create Cash payment based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054008$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I input "650,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -687,8 +687,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And Delay 2
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054008$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "600,00" text in "Amount exchange" field of "PaymentList" table
@@ -703,17 +703,17 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	* Post Cash payment on the rest of the amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054008$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Total amount'  | 'Planning transaction basis'    |
-			| 'Daniel Smith' | '500,00'  | '$$CashTransferOrder054008$$'             |
+			| 'Partner'        | 'Total amount'   | 'Planning transaction basis'     |
+			| 'Daniel Smith'   | '500,00'         | '$$CashTransferOrder054008$$'    |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment0540081$$" variable
 		And I delete "$$CashPayment0540081$$" variable
@@ -724,14 +724,14 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	# Originally 1,150 lire, but the exchange rate of 175 euros cost 1,160 lire. We have to compensate for 10 lire.
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054008$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I input "560,00" text in "Amount exchange" field of "PaymentList" table
 		And Delay 5
 		And "PaymentList" table contains lines
-			|'Partner'      | 'Total amount' | 'Planning transaction basis'    | 'Amount exchange' |
-			| 'Daniel Smith' | '75,00'     |  '$$CashTransferOrder054008$$'            | '560,00'          |
+			| 'Partner'        | 'Total amount'   | 'Planning transaction basis'    | 'Amount exchange'    |
+			| 'Daniel Smith'   | '75,00'          | '$$CashTransferOrder054008$$'   | '560,00'             |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt0540081$$" variable
 		And I delete "$$CashReceipt0540081$$" variable
@@ -748,60 +748,60 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "1315,00" text in "Send amount" field
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| Code | Description  |
-			| TRY  | Turkish lira |
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
 		And I select current line in "List" table
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Cash desk №2 |
+			| Description     |
+			| Cash desk №2    |
 		And I select current line in "List" table
 		And I input "200,00" text in "Receive amount" field
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| Code |
-			| EUR  |
+			| Code    |
+			| EUR     |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054009$$" variable
@@ -813,25 +813,25 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number | Sender       | Receiver     | Company      |
-		| $$NumberCashTransferOrder054009$$      | Cash desk №2 | Cash desk №2 | Main Company |
+		| Number                             | Sender        | Receiver      | Company        |
+		| $$NumberCashTransferOrder054009$$  | Cash desk №2  | Cash desk №2  | Main Company   |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 	And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount'   |
-		| 'TRY'      | '$$CashTransferOrder054009$$' | '$$CashTransferOrder054009$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | '1 315,00' |
-		| 'EUR'      | '$$CashTransferOrder054009$$' | '$$CashTransferOrder054009$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '200,00'   |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'       | 'Cash flow direction'  | 'Amount'     |
+		| 'TRY'       | '$$CashTransferOrder054009$$'  | '$$CashTransferOrder054009$$'  | 'Main Company'  | 'Cash desk №2'  | 'Outgoing'             | '1 315,00'   |
+		| 'EUR'       | '$$CashTransferOrder054009$$'  | '$$CashTransferOrder054009$$'  | 'Main Company'  | 'Cash desk №2'  | 'Incoming'             | '200,00'     |
 	And I close all client application windows
 	* Create Cash payment based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number' | 'Receive amount' |
-			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054009$$'   | '200,00'            |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I input "1315,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -845,15 +845,15 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	* Create Cash receipt based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number' | 'Receive amount' |
-			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054009$$'   | '200,00'            |
 		And I select current line in "List" table
 		And Delay 10
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith' |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1300,00" text in "Amount exchange" field of "PaymentList" table
@@ -887,44 +887,44 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	* Filling Sender and Send amount
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| Description    |
-			| Bank account, TRY |
+			| Description          |
+			| Bank account, TRY    |
 		And I select current line in "List" table
 		And I input "1150,00" text in "Send amount" field
 	* Filling Receiver and Receive amount
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| Description    |
-			| Bank account, EUR |
+			| Description          |
+			| Bank account, EUR    |
 		And I select current line in "List" table
 		And I input "175,00" text in "Receive amount" field
 	* Filling Send period and Receive period
 		And I click Select button of "Send period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'First'       |
+			| 'Description'    |
+			| 'First'          |
 		And I select current line in "List" table
 		And I click Select button of "Receive period" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Second'       |
+			| 'Description'    |
+			| 'Second'         |
 		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054012$$" variable
@@ -936,20 +936,20 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
-		| Number | Sender            | Receiver          | Company      |
-		| $$NumberCashTransferOrder054012$$      | Bank account, TRY | Bank account, EUR | Main Company |
+		| Number                             | Sender             | Receiver           | Company        |
+		| $$NumberCashTransferOrder054012$$  | Bank account, TRY  | Bank account, EUR  | Main Company   |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 	And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'   |
-		| 'TRY'      | '$$CashTransferOrder054012$$' | '$$CashTransferOrder054012$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | '1 150,00' |
-		| 'EUR'      | '$$CashTransferOrder054012$$' | '$$CashTransferOrder054012$$' | 'Main Company' | 'Bank account, EUR' | 'Incoming'            | '175,00'   |
+		| 'Currency'  | 'Recorder'                     | 'Basis document'               | 'Company'       | 'Account'            | 'Cash flow direction'  | 'Amount'     |
+		| 'TRY'       | '$$CashTransferOrder054012$$'  | '$$CashTransferOrder054012$$'  | 'Main Company'  | 'Bank account, TRY'  | 'Outgoing'             | '1 150,00'   |
+		| 'EUR'       | '$$CashTransferOrder054012$$'  | '$$CashTransferOrder054012$$'  | 'Main Company'  | 'Bank account, EUR'  | 'Incoming'             | '175,00'     |
 	And I close all client application windows
 	* Create Bank payment based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054012$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054012$$'   | '175,00'            |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I input "1150,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -963,8 +963,8 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	* Create Bank receipt based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'                            | 'Receive amount' |
-			| '$$NumberCashTransferOrder054012$$' | '175,00'         |
+			| 'Number'                              | 'Receive amount'    |
+			| '$$NumberCashTransferOrder054012$$'   | '175,00'            |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
@@ -983,18 +983,18 @@ Scenario: _054013 check Cash transfer order movements by register Cash in transi
 # if currency exchange takes place, then the money is credited to the person responsible for the conversion
 	Given I open hyperlink "e1cib/list/AccumulationRegister.CashInTransit"
 	And "List" table contains lines
-		| 'Currency' | 'Basis document'              | 'Company'      | 'From account'      | 'To account'        | 'Amount' |
-		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '500,00' |
-		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '400,00' |
-		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '100,00' |
-		| 'USD'      | '$$CashTransferOrder054006$$' | 'Main Company' | 'Cash desk №1'      | 'Bank account, USD' | '500,00' |
-		| 'USD'      | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Cash desk №1'      | '100,00' |
+		| 'Currency'  | 'Basis document'               | 'Company'       | 'From account'       | 'To account'         | 'Amount'   |
+		| 'USD'       | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №1'       | 'Cash desk №2'       | '500,00'   |
+		| 'USD'       | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №1'       | 'Cash desk №2'       | '400,00'   |
+		| 'USD'       | '$$CashTransferOrder054001$$'  | 'Main Company'  | 'Cash desk №1'       | 'Cash desk №2'       | '100,00'   |
+		| 'USD'       | '$$CashTransferOrder054006$$'  | 'Main Company'  | 'Cash desk №1'       | 'Bank account, USD'  | '500,00'   |
+		| 'USD'       | '$$CashTransferOrder054007$$'  | 'Main Company'  | 'Bank account, USD'  | 'Cash desk №1'       | '100,00'   |
 	And "List" table does not contain lines
-		|  'Basis document'   |
-		|  '$$CashTransferOrder054004$$' |
-		|  '$$CashTransferOrder054008$$' |
-		|  '$$CashTransferOrder054009$$' |
-		|  '$$CashTransferOrder054012$$' |
+		| 'Basis document'                |
+		| '$$CashTransferOrder054004$$'   |
+		| '$$CashTransferOrder054008$$'   |
+		| '$$CashTransferOrder054009$$'   |
+		| '$$CashTransferOrder054012$$'   |
 	And I close all client application windows
 
 Scenario: _054014 check message output in case money is transferred from Cash/Bank accounts to bank account and vice versa in different currencies
@@ -1005,24 +1005,24 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 		* Filling in basic details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, TRY |
+				| Description           |
+				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input "1150,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
-				| Description    |
-				| Cash desk №2   |
+				| Description      |
+				| Cash desk №2     |
 			And I select current line in "List" table
 			And I click Select button of "Receive currency" field
 			And I go to line in "List" table
-				| 'Code' | 'Description'     |
-				| 'USD'  | 'American dollar' |
+				| 'Code'    | 'Description'         |
+				| 'USD'     | 'American dollar'     |
 			And I select current line in "List" table
 			And I input "200,00" text in "Receive amount" field
 		* Check the message output and that the document was not created
@@ -1036,8 +1036,8 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			And I close all client application windows
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And "List" table does not contain lines
-			| 'Number'   | 'Sender'                 | 'Receiver'          |
-			| '$$NumberCashTransferOrder0540141$$'      | 'Bank account, TRY'      | 'Cash desk №2'      |
+			| 'Number'                               | 'Sender'              | 'Receiver'        |
+			| '$$NumberCashTransferOrder0540141$$'   | 'Bank account, TRY'   | 'Cash desk №2'    |
 	* Check when moving money from Cash/Bank accounts to bank account in different currencies
 		* Open a creation form
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -1045,24 +1045,24 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 		* Filling in basic details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Sender" field
 			And I go to line in "List" table
-				| Description    |
-				| Cash desk №2   |
+				| Description      |
+				| Cash desk №2     |
 			And I select current line in "List" table
 			And I click Select button of "Send currency" field
 			And I go to line in "List" table
-				| 'Code' | 'Description'     |
-				| 'USD'  | 'American dollar' |
+				| 'Code'    | 'Description'         |
+				| 'USD'     | 'American dollar'     |
 			And I select current line in "List" table
 			And I input "20,00" text in "Send amount" field
 			And I click Select button of "Receiver" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, TRY |
+				| Description           |
+				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input "1150,00" text in "Receive amount" field
 		* Check the message output and that the document was not created
@@ -1075,8 +1075,8 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			And I close all client application windows
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And "List" table does not contain lines
-			| 'Number'   | 'Sender'            | 'Receiver'          |
-			| '$$NumberCashTransferOrder0540142$$'      | 'Cash desk №2'      | 'Bank account, TRY' |
+			| 'Number'                               | 'Sender'         | 'Receiver'             |
+			| '$$NumberCashTransferOrder0540142$$'   | 'Cash desk №2'   | 'Bank account, TRY'    |
 
 
 Scenario: _054015 check message output in case the user tries to create a Bank payment by Cash transfer order for which he does not need to create it
@@ -1084,8 +1084,8 @@ Scenario: _054015 check message output in case the user tries to create a Bank p
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
+		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank payment and check message output
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		Then I wait that in user messages the 'You do not need to create a "Bank payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1096,8 +1096,8 @@ Scenario: _054016 check message output in case the user tries to create a Cash r
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
+		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash receipt and check message output
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Cash receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1108,8 +1108,8 @@ Scenario: _054017 check message output in case the user tries to create Bank rec
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
+		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank receipt and check message output
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Bank receipt" document(s).' substring will appear in 30 seconds
@@ -1120,8 +1120,8 @@ Scenario: _054018 check message output in case the user tries to create Cash pay
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
+		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash payment and check message output
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already paid on the basis of the "Cash payment" document(s).' substring will appear in 30 seconds
@@ -1132,8 +1132,8 @@ Scenario: _054019 check message output in case the user tries to create a Bank r
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
-		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
+		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank receipt and check message output
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Bank receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1144,8 +1144,8 @@ Scenario: _054020 check message output in case the user tries to create a Cash p
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
-		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
+		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash payment and check message output
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		Then I wait that in user messages the 'You do not need to create a "Cash payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1156,8 +1156,8 @@ Scenario: _054021 check message output in case the user tries to create Bank pay
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
-		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
+		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank payment and check message output
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already paid on the basis of the "Bank payment" document(s).' substring will appear in 30 seconds
@@ -1168,8 +1168,8 @@ Scenario: _054022 check message output in case the user tries to create Cash rec
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
-		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
+		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash receipt and check message output
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Cash receipt" document(s).' substring will appear in 30 seconds
@@ -1180,25 +1180,25 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberCashTransferOrder054001$$      |
+		| Number                              |
+		| $$NumberCashTransferOrder054001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 		Then "Related documents" window is opened
 		And "DocumentsTree" table contains lines
-		| 'Presentation'                    | 'Amount' |
-		| '$$CashTransferOrder054001$$' | '*'      |
-		| '$$CashPayment054003$$'        | '500,00' |
-		| '$$CashReceipt054003$$'        | '400,00' |
-		| '$$CashReceipt0540031$$'        | '100,00' |
+		| 'Presentation'                 | 'Amount'   |
+		| '$$CashTransferOrder054001$$'  | '*'        |
+		| '$$CashPayment054003$$'        | '500,00'   |
+		| '$$CashReceipt054003$$'        | '400,00'   |
+		| '$$CashReceipt0540031$$'       | '100,00'   |
 	*  Check the report generation from list
 		And I go to the last line in "DocumentsTree" table
 		And I go to line in "DocumentsTree" table
-		| 'Presentation'      |
-		| '$$CashReceipt0540031$$' |
+		| 'Presentation'             |
+		| '$$CashReceipt0540031$$'   |
 		And in the table "DocumentsTree" I click the button named "DocumentsTreeGenerateForCurrent"
 		And "DocumentsTree" table contains lines
-		| 'Presentation'                    | 'Amount' |
-		| '$$CashTransferOrder054001$$' | ''       |
-		| '$$CashReceipt0540031$$'        | '100,00' |
+		| 'Presentation'                 | 'Amount'   |
+		| '$$CashTransferOrder054001$$'  | ''         |
+		| '$$CashReceipt0540031$$'       | '100,00'   |
 	And I close all client application windows

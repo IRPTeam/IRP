@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Forms
@@ -49,8 +49,8 @@ Scenario: _206000 preparation (specification)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -73,26 +73,26 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And I input "Test" text in the field named "Description_en"
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Bound Dress+Trousers' |
+			| 'Description'             |
+			| 'Bound Dress+Trousers'    |
 		And I select current line in "List" table
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Size'          | 'M'           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Blue'        |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Blue'           |
 		And I select current line in "List" table
 		And I finish line editing in "FormTable*" table
 		And I click "Save" button
@@ -106,8 +106,8 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And Delay 10
 		Then I check for the "Specifications" catalog element with the "Description_en" "Test"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test'        |
+			| 'Description'    |
+			| 'Test'           |
 		And I select current line in "List" table
 	* Check for errors when saving without a filled item
 		And I input "" text in "Item" field
@@ -117,20 +117,20 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 	* Check for errors when saving without a filled item bundle
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I select current line in "FormTable*" table
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Size'          | 'M'           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'White'       |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'White'          |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
@@ -143,8 +143,8 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 	* Check for errors when saving without a filled property
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Bound Dress+Trousers' |
+			| 'Description'             |
+			| 'Bound Dress+Trousers'    |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I select current line in "FormTable*" table
@@ -157,22 +157,22 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And I select current line in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Green'      |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Green'          |
 		And I select current line in "List" table
 		And I finish line editing in "FormTable*" table
 		And I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Size'          | 'M'           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Green'      |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Green'          |
 		And I select current line in "List" table
 		And I finish line editing in "FormTable*" table
 		And I activate "Quantity" field in "FormTable*" table
@@ -190,8 +190,8 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		Then I check for the "Specifications" catalog element with the "Description_en" "Test"
 	* Mark to delete the created specification
 		And I go to line in "List" table
-			| 'Description' | 'Type'   |
-			| 'Test'        | 'Bundle' |
+			| 'Description'   | 'Type'      |
+			| 'Test'          | 'Bundle'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -208,8 +208,8 @@ Scenario: _206000 create a specification double
 		And I change "Type" radio button value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
@@ -223,15 +223,15 @@ Scenario: _206000 create a specification double
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'XS'          |
+			| 'Description'    |
+			| 'XS'             |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Blue'        |
+			| 'Description'    |
+			| 'Blue'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -240,15 +240,15 @@ Scenario: _206000 create a specification double
 		And I click choice button of "Size" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'M'           |
+			| 'Description'    |
+			| 'M'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Brown'       |
+			| 'Description'    |
+			| 'Brown'          |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
@@ -257,15 +257,15 @@ Scenario: _206000 create a specification double
 		And I click choice button of "Size" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'L'           |
+			| 'Description'    |
+			| 'L'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Green'       |
+			| 'Description'    |
+			| 'Green'          |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table

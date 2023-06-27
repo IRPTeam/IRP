@@ -1009,7 +1009,10 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
-	AccessKeyMap.Insert("Account", Obj.Account);
+	AccountList = New Array;
+	AccountList.Add(Obj.Account);
+	AccountList.Add(Obj.TransitAccount);
+	AccessKeyMap.Insert("Account", AccountList);
 	Return AccessKeyMap;
 EndFunction
 

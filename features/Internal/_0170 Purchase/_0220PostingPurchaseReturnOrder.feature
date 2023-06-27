@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -467,7 +467,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I set checkbox "Linked documents"
 		And I click "Unlink" button
 		And I click "Ok" button
-		And I click "Save" button	
+		And I click "Post" button	
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                       | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '5,000'      | 'PRO&PR'          |
@@ -529,6 +529,7 @@ Scenario: _022015 create PRO using form link/unlink
 			| '1'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '40,000'     | 'PRO&PR'          |
 			| '2'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '60,000'     | 'PRO&PR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And I click "Cancel posting" button	
 		And I close all client application windows
 
 Scenario: _022016 check totals in the document Purchase return order

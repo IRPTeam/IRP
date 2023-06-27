@@ -1685,8 +1685,8 @@ Scenario: _0260150 create cash out
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Reference'          | 'Currency'   | 'Transaction type'   | 'Author'    |
-			| '$$NumberCashReceipt2$$'   | '1 000,00'   | 'Main Company'   | 'Cash desk №2'   | '$$CashReceipt2$$'   | 'TRY'        | 'Cash in'            | 'CI'        |
+			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Currency'   | 'Transaction type'   | 'Author'    |
+			| '$$NumberCashReceipt2$$'   | '1 000,00'   | 'Main Company'   | 'Cash desk №2'   | 'TRY'        | 'Cash in'            | 'CI'        |
 		And I close all client application windows		
 		
 

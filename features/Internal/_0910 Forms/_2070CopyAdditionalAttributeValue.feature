@@ -136,8 +136,8 @@ Scenario: _207001 copy additional attribute values when create catalog element
 			| 'Additional attribute value'    |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Additional attribute'      | 'Additional attribute values'    |
-			| 'Additional attribute 02'   | 'Value01'                        |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -158,8 +158,8 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I select current line in "" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'      | 'Additional attribute values'    |
-			| 'Additional attribute 01'   | 'Value01'                        |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 01'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -271,8 +271,8 @@ Scenario: _207002 copy additional attribute values when create document
 			| 'Additional attribute value'    |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Additional attribute'      | 'Additional attribute values'    |
-			| 'Additional attribute 02'   | 'Value01'                        |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -293,8 +293,8 @@ Scenario: _207002 copy additional attribute values when create document
 		And I select current line in "" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'      | 'Additional attribute values'    |
-			| 'Additional attribute 01'   | 'Value02'                        |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 01'   | 'Value02'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button

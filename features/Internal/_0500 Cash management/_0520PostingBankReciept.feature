@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @BankCashDocuments
@@ -664,17 +664,17 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   | 'Reference'                                       |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 | 'Cash statement 104 dated 07.07.2022 16:33:55'    |
-			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | ''         | '150,00'           | '1,50'                 | 'Cash statement 105 dated 08.07.2022 10:47:16'    |
+			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   |
+			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 |
+			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | ''         | '150,00'           | '1,50'                 |
 		And in the table "List" I click the button named "ListSetDateInterval"
 		Then "Select period" window is opened
 		And I input "07.07.2022" text in the field named "DateBegin"
 		And I input "07.07.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   | 'Reference'                                       |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 | 'Cash statement 104 dated 07.07.2022 16:33:55'    |
+			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   |
+			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 |
 		And in the table "List" I click the button named "ListChoose"
 		And I finish line editing in "PaymentList" table
 	* Check creation

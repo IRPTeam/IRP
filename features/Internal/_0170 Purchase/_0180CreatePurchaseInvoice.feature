@@ -660,7 +660,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I set checkbox "Linked documents"
 		And I click "Unlink" button
 		And I click "Ok" button
-		And I click "Save" button	
+		And I click "Post" button	
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                          | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | 'Purchase order 217 dated 12.02.2021 12:45:05'   | 'GR'          | '5,000'      | 'PI&GR'           |
@@ -722,6 +722,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Purchase order 217 dated 12.02.2021 12:45:05'   | ''            | '2,000'      | 'PI'              |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
+		And I click "Cancel posting" button	
 		And I close all client application windows
 
 Scenario: _018015 cancel line in the PO and create PI

@@ -995,14 +995,14 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'   | 'Code'   | 'Description'    |
-			| 'Size'                   | 'XS'                            | '9'      | 'XS'             |
+			| 'Additional attribute'   | 'Code'   | 'Description'    |
+			| 'Size'                   | '9'      | 'XS'             |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'   | 'Code'   | 'Description'    |
-			| 'Color'                  | 'Blue'                          | '20'     | 'Blue'           |
+			| 'Additional attribute'   | 'Code'   | 'Description'    |
+			| 'Color'                  | '20'     | 'Blue'           |
 		And I select current line in "List" table
 	* Check Input unit
 		And "PriceKeyList" table contains lines

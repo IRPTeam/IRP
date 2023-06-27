@@ -96,8 +96,8 @@ Scenario: _099101 filling accounting operation
 			And I click "Save and close" button
 	* Check 
 		And "List" table contains lines
-			| 'Code'   | 'Order'   | 'Predefined data item name'                    | 'Description'                                                                                    | 'Reference'                                                                                       |
-			| '6'      | ''        | 'PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'   | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'   | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'    |
+			| 'Code'   | 'Order'   | 'Predefined data item name'                    | 'Description'                                                                                    |
+			| '6'      | ''        | 'PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'   | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'   |
 		And I close all client application windows
 		
 		

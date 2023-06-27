@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @AccessRights
@@ -204,7 +204,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 	* Check saving
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And "List" table contains lines
-			| 'Reference'         |
+			|  'Descriprion'      |
 			| 'lock documents'    |
 		And I close all client application windows
 	* Check rules (=)
@@ -324,7 +324,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 	* Delete rules
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'         |
+			| 'Description'         |
 			| 'lock documents'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -425,10 +425,10 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-			| 'Reference'                                        |
+			| 'Description'                                        |
 			| 'number of days from the current date for User'    |
 			And I go to line in "List" table
-				| 'Reference'                                         |
+				| 'Description'                                         |
 				| 'number of days from the current date for User'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -489,10 +489,10 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	If "List" table contains lines Then
-			| 'Reference'                                              |
+			| 'Description'                                              |
 			| 'number of days from the current date for User group'    |
 		And I go to line in "List" table
-			| 'Reference'                                              |
+			| 'Description'                                              |
 			| 'number of days from the current date for User group'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -576,10 +576,10 @@ Scenario: 950407 create rules for accumulation register
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'                                                |
+				| 'Description'                                                |
 				| 'number of days from the current date for all objects'     |
 			And I go to line in "List" table
-				| 'Reference'                                                |
+				| 'Description'                                                |
 				| 'number of days from the current date for all objects'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -712,7 +712,7 @@ Scenario: 950407 create rules for accumulation register
 	* Delete rules
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'                     |
+			| 'Description'                     |
 			| 'lock accumulation register'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -861,7 +861,7 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Delete rules
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'                     |
+				| 'Description'                     |
 				| 'lock information register'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -967,10 +967,10 @@ Scenario: 950411 create rules for catalog (<)
 Scenario: 950412 create rules for catalog (<=)
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	If "List" table contains lines Then
-			| 'Reference'         |
+			| 'Description'         |
 			| 'lock catalog <'    |
 		And I go to line in "List" table
-			| 'Reference'         |
+			| 'Description'         |
 			| 'lock catalog <'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -1078,10 +1078,10 @@ Scenario: 950413 create rules for catalog (>)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog <='     |
 			And I go to line in "List" table
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog <='     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1179,10 +1179,10 @@ Scenario: 950414 create rules for catalog (>=)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'          |
+				| 'Description'          |
 				| 'lock catalog >'     |
 			And I go to line in "List" table
-				| 'Reference'          |
+				| 'Description'          |
 				| 'lock catalog >'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1289,10 +1289,10 @@ Scenario: 950415 create rules for catalog (=)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog >='     |
 			And I go to line in "List" table
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog >='     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1381,10 +1381,10 @@ Scenario: 950416 create rules for catalog (<>)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'                  |
+				| 'Description'                  |
 				| 'lock catalog item type'     |
 			And I go to line in "List" table
-				| 'Reference'                  |
+				| 'Description'                  |
 				| 'lock catalog item type'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1473,10 +1473,10 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog <>'     |
 			And I go to line in "List" table
-				| 'Reference'           |
+				| 'Description'           |
 				| 'lock catalog <>'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1565,10 +1565,10 @@ Scenario: 950418 create rules for catalog (IN)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'                     |
+				| 'Description'                     |
 				| 'lock catalog IN HIERARCHY'     |
 			And I go to line in "List" table
-				| 'Reference'                     |
+				| 'Description'                     |
 				| 'lock catalog IN HIERARCHY'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
@@ -1807,7 +1807,7 @@ Scenario: 950425 check that Disable rule does not work
 	* All Reason
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'                                  |
+			| 'Description'                                  |
 			| 'information register (without recorder)'    |
 		And I select current line in "List" table
 		And I set checkbox "Disable rule"
@@ -1831,7 +1831,7 @@ Scenario: 950425 check that Disable rule does not work
 	* One rule from reason
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'                                  |
+			| 'Description'                                  |
 			| 'information register (without recorder)'    |
 		And I select current line in "List" table
 		And I remove checkbox named "DisableRule"
@@ -1965,7 +1965,7 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 		And I finish line editing in "RuleList" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Reference'           |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'         |
 			| 'No'              | 'Yes'             | 'No'         | 'No'        | 'GR number simple'    |
 	* Create advanced lock data reason
 		And I click the button named "FormCreate"
@@ -1989,7 +1989,7 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 		And I finish line editing in "SettingsFilter" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Reference'             |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'             |
 			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'GR number advanced'    |
 	* Check priority
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -2064,7 +2064,7 @@ Scenario: 950436 create advanced rules for branch and date
 		And I click "Save and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Reference'                       |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                     |
 			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Branch and Date for purchase'    |
 	* Check	rules
 		And I close all client application windows
@@ -2157,7 +2157,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 			And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'                        |
+				| 'Descriprion'                      |
 				| 'Branch with responsible user'     |
 			And I select current line in "List" table
 			When I Check the steps for Exception
@@ -2168,7 +2168,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 			And I connect "Этот клиент" profile of TestClient	
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'                        |
+				| 'Descriprion'                      |
 				| 'Branch with responsible user'     |
 			And I select current line in "List" table			
 			And I click "Save and close" button	
@@ -2336,8 +2336,8 @@ Scenario: 950439 lock data modification reasons for user group
 // 		And I select current line in "Source" table
 // 		And I click "Save and close" button
 // 		And "List" table contains lines
-// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
-// 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'                      |
+// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' |  'Descriprion'                      |
+// 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'   |
 // 	* Check
 // 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 // 		And I go to line in "List" table
@@ -2410,7 +2410,7 @@ Scenario: 950441 check is object lock on open (documents)
 		And I click "Save and close" button			
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Reference'                                   |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                                   |
 			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Check is object lock on open (documents)'    |
 	* Check	rules
 		And I close all client application windows
@@ -2491,7 +2491,7 @@ Scenario: 950442 check is object lock on open (catalogs)
 		And I click "Save and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Reference'                                  |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                                  |
 			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Check is object lock on open (catalogs)'    |
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -2534,7 +2534,7 @@ Scenario: 950450 check ignore lock modification data
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I click "Refresh" button	
 		And I go to line in "List" table
-			| 'Reference'                                   |
+			| 'Description'                                   |
 			| 'Check is object lock on open (documents)'    |
 		And Delay 5
 		And I activate current test client window
@@ -2542,7 +2542,7 @@ Scenario: 950450 check ignore lock modification data
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
-			| 'Reference'                                  |
+			| 'Description'                                  |
 			| 'Check is object lock on open (catalogs)'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -2601,7 +2601,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And I go to line in "List" table
-		| 'Reference'                                 |
+		| 'Description'                                 |
 		| 'information register (without recorder)'   |
 	And I select current line in "List" table
 	Then the form attribute named "ForAllUsers" became equal to "Yes"
@@ -2619,7 +2619,7 @@ Scenario: 950490 switch off function option and check that rules does not work
 		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'                   |
+			| 'Description'                   |
 			| 'attribute from extension'    |
 		And Delay 5
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"

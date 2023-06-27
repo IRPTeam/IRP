@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -277,7 +277,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
-		And I click "Save" button		
+		And I click "Post" button		
 		And I click "Show row key" button
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Store'       |

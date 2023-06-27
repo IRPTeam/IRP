@@ -584,13 +584,13 @@ Scenario: _005117 filling in Item keys
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Size'                   | 'XS'                             |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'XS'             |
 		And I select current line in "List" table
 		And I click Select button of "Color" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Color'                  | 'Blue'                           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Blue'           |
 		And I select current line in "List" table
 		And I change "UnitMode" radio button value to "Own"
 		And I click Select button of "Unit" field
@@ -615,13 +615,13 @@ Scenario: _005117 filling in Item keys
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Size'                   | 'M'                              |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I select current line in "List" table
 		And I click Select button of "Color" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Color'                  | 'White'                          |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'White'          |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
@@ -639,25 +639,25 @@ Scenario: _005117 filling in Item keys
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Size'                   | '36'                             |
+			| 'Additional attribute'   |  'Description'    |
+			| 'Size'                   | '36'              |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Season'                 | '19SD'                           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Season'                 | '19SD'           |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Size'                   | '38'                             |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | '38'             |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Season'                 | '18SD'                           |
+			| 'Additional attribute'   |  'Description'    |
+			| 'Season'                 | '18SD'            |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
@@ -1212,8 +1212,8 @@ Scenario: _005131 create specification with primitive type
 		And I click Select button of "Season" field
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Season'                 | '19SD'                           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Season'                 | '19SD'           |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Create specification

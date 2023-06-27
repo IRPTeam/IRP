@@ -200,8 +200,8 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 		Then "Object property editor" window is opened
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Brand'                  | 'Montel'                         |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Brand'                  | 'Montel'         |
 		And I select current line in "List" table
 		And "PropertiesTable" table contains lines
 			| 'Marked'   | 'Is modified'   | 'Object'     | 'Brand'     |
@@ -214,22 +214,22 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Producer'               | 'PZU'                            |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Producer'               | 'PZU'            |
 		And I click the button named "FormChoose"
 		And I activate "Brand" field in "PropertiesTable" table
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueForMarkedRows"
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Additional attribute values'    |
-			| 'Brand'                  | 'Rose'                           |
+			| 'Additional attribute'   |  'Description'    |
+			| 'Brand'                  | 'Rose'            |
 		And I click the button named "FormChoose"
 	* Copy attribute
 		And I activate "Producer" field in "PropertiesTable" table
 		And in the table "PropertiesTable" I click the button named "PropertiesTableContextMenuSetValueToEmptyCells"
 		And I go to line in "List" table
-			| 'Additional attribute values'    |
-			| 'ODS'                            |
+			| 'Description'    |
+			| 'ODS'            |
 		And I click the button named "FormChoose"
 		And "PropertiesTable" table became equal
 			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |

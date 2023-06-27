@@ -116,7 +116,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
-		|PaymentList.LegalNameContract";		
+		|PaymentList.LegalNameContract,
+		|PaymentList.BasisDocument";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,

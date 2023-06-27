@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.26.2411</version>
+  <version>2023.26.2429</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -949,6 +949,7 @@
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
   <enums>Enum.ProductionTransactionTypes</enums>
   <enums>Enum.OfferGroupType</enums>
+  <enums>Enum.BankTermTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

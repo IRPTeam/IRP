@@ -26,13 +26,6 @@
       <value>Card</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="5bcccccf-fc1d-4df0-9f09-5c10340a7ee8">
-    <name>LoyalityPoint</name>
-    <synonym>
-      <key>en</key>
-      <value>Loyality point</value>
-    </synonym>
-  </enumValues>
   <enumValues uuid="acb4e908-95d9-4a02-aea5-3332a8eb783e">
     <name>PaymentAgent</name>
     <synonym>

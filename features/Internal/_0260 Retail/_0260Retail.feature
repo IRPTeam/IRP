@@ -584,8 +584,8 @@ Scenario: _0260130 create cash out
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Reference'          | 'Currency'   | 'Transaction type'   | 'Author'    |
-			| '$$NumberCashReceipt2$$'   | '3 480,00'   | 'Main Company'   | 'Cash desk №2'   | '$$CashReceipt2$$'   | 'TRY'        | 'Cash in'            | 'CI'        |
+			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Currency'   | 'Transaction type'   | 'Author'    |
+			| '$$NumberCashReceipt2$$'   | '3 480,00'   | 'Main Company'   | 'Cash desk №2'   | 'TRY'        | 'Cash in'            | 'CI'        |
 		And I close all client application windows
 
 Scenario: _0260132 create RSR (payment by bank credit)
@@ -760,8 +760,8 @@ Scenario: _0260137 return advance payment (cash)
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    | 'Reference'    |
-			| 'TRY'    | 'Turkish lira'   | 'TRY'          |
+			| 'Code'   | 'Description'    |
+			| 'TRY'    | 'Turkish lira'   |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table

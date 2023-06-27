@@ -801,6 +801,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_002", NStr("en = 'Point of sale'", Lang));
 	Strings.Insert("Add_Setiings_003", NStr("en = 'Disable - Change price'", Lang));
 	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
+	Strings.Insert("Add_Setiings_005", NStr("en = 'Documents'", Lang));
+	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
 #EndRegion
 
 #Region Mobile

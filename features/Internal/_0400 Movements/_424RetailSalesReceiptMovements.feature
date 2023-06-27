@@ -528,19 +528,27 @@ Scenario: _042423 check Retail sales receipt movements by the Register  "R8014 C
 			| ''                                                       | '14.11.2022 13:29:44'   | '2'           | '932,2'        | '1 100'    | '6ebea8a7-366d-409c-84a7-19f5714085e9'   | 'Main Company'   | 'Consignor 1'   | 'Consignor partner term 1'   | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | 'S/Yellow'   | ''                    | ''                   | 'pcs'    | 'Basic Price without VAT'   | 'No'                   | 'en description is empty'        | 'TRY'        | 'No'                  | '550'               | '466,1'    |
 		And I close all client application windows
 
-// Scenario: _042424 check Retail sales receipt movements by the Register "R5015 Other partners transactions" (payment type - bank credit) 
-// 	* Select Retail sales receipt
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number'    |
-// 			| '110'       |
-// 	* Check movements by the Register  "R5015 Other partners transactions"
-// 		And I click "Registrations report" button
-// 		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-
-			
-// 		And I close all client application windows
+Scenario: _042424 check Retail sales receipt movements by the Register "R5015 Other partners transactions" (payment type - bank credit) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '110'       |
+	* Check movements by the Register  "R5015 Other partners transactions"
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| 'Register  "R5015 Other partners transactions"'      | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | 'Attributes'           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner' | 'Agreement' | 'Basis' | 'Deferred calculation' |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '984,4'     | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+		And I close all client application windows
 
 Scenario: _042425 check Retail sales receipt movements by the Register  "R5010 Reconciliation statement" (payment type - bank credit) 
 		And I close all client application windows	

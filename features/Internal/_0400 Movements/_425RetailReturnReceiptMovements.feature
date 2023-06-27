@@ -720,19 +720,28 @@ Scenario: _042527 check Retail return receipt movements by the Register  "R8014 
 		And I close all client application windows
 
 
-// Scenario: _042531 check Retail return receipt movements by the Register  "R5015 Other partners transactions" (bank credit)
-// 		And I close all client application windows
-// 	* Select Retail return receipt
-// 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number'    |
-// 			| '1 206'     |
-// 	* Check movements by the Register  "R5015 Other partners transactions"
-// 		And I click "Registrations report" button
-// 		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-		
-// 		And I close all client application windows
+Scenario: _042531 check Retail return receipt movements by the Register  "R5015 Other partners transactions" (bank credit)
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 206'     |
+	* Check movements by the Register  "R5015 Other partners transactions"
+		And I click "Registrations report" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| 'Register  "R5015 Other partners transactions"'         | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | ''                     |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                             | ''         | ''                     | ''           | ''        | ''          | ''      | 'Attributes'           |
+			| ''                                                      | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name' | 'Partner' | 'Agreement' | 'Basis' | 'Deferred calculation' |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-984,4'    | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | ''      | 'No'                   |	
+		And I close all client application windows
 
 Scenario: _042532 check Retail return receipt movements by the Register  "R5010 Reconciliation statement" (bank credit)
 		And I close all client application windows

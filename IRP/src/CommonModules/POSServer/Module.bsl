@@ -79,20 +79,36 @@ EndFunction
 // 
 // Returns:
 //  ValueTable - Get payment agent types value:
-//  *PaymentType - CatalogRef.PaymentTypes
-//  *Description - DefinedType.typeDescription
+//  * BankTerm - CatalogRef.BankTerms
+//  * PaymentType - CatalogRef.PaymentTypes
+//  * Description - DefinedType.typeDescription
+//  * Partner - CatalogRef.Partners
+//  * Legalname - CatalogRef.Companies
+//  * PartnerTerms - CatalogRef.Agreements
+//  * LegalNameContract - CatalogRef.LegalNameContracts
+//  * Percent - Number -
 Function GetPaymentAgentTypesValue(Branch) Export
+	
 	Query = New Query();
 	Query.Text = 
 		"SELECT
-		|	PaymentTypes.Ref AS PaymentType,
-		|	PaymentTypes.Description_en AS Description
+		|	BranchBankTerms.BankTerm,
+		|	BankTermsPaymentTypes.PaymentType,
+		|	BankTermsPaymentTypes.PaymentType.Description_en AS Description,
+		|	BankTermsPaymentTypes.Partner,
+		|	BankTermsPaymentTypes.LegalName,
+		|	BankTermsPaymentTypes.PartnerTerms,
+		|	BankTermsPaymentTypes.LegalNameContract,
+		|	BankTermsPaymentTypes.Percent
 		|FROM
-		|	Catalog.PaymentTypes AS PaymentTypes
+		|	InformationRegister.BranchBankTerms AS BranchBankTerms
+		|		LEFT JOIN Catalog.BankTerms.PaymentTypes AS BankTermsPaymentTypes
+		|		ON BranchBankTerms.BankTerm = BankTermsPaymentTypes.Ref
 		|WHERE
-		|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
-		|	AND NOT PaymentTypes.DeletionMark
-		|	AND PaymentTypes.Branch = &Branch";
+		|	BranchBankTerms.Branch = &Branch
+		|	AND BankTermsPaymentTypes.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
+		|	AND NOT BranchBankTerms.BankTerm.DeletionMark
+		|	AND NOT BankTermsPaymentTypes.PaymentType.DeletionMark";
 	Query.SetParameter("Branch", Branch);
 	Return Query.Execute().Unload();
 EndFunction

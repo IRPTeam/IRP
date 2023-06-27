@@ -3100,6 +3100,74 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PaymentAgentLegalNameContract</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent legal name contract</value>
+      </title>
+      <id>56</id>
+      <valueType>
+        <types>CatalogRef.LegalNameContracts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentLegalName</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent legal name</value>
+      </title>
+      <id>57</id>
+      <valueType>
+        <types>CatalogRef.Companies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentPartner</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent partner</value>
+      </title>
+      <id>58</id>
+      <valueType>
+        <types>CatalogRef.Partners</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentPartnerTerms</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent partner terms</value>
+      </title>
+      <id>59</id>
+      <valueType>
+        <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -3347,6 +3415,129 @@
       <id>31</id>
       <valueType>
         <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PartnerTerms</name>
+      <title>
+        <key>en</key>
+        <value>Partner terms</value>
+      </title>
+      <id>51</id>
+      <valueType>
+        <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>52</id>
+      <valueType>
+        <types>DefinedType.typeDescription</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Partner</name>
+      <title>
+        <key>en</key>
+        <value>Partner</value>
+      </title>
+      <id>53</id>
+      <valueType>
+        <types>CatalogRef.Partners</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Legalname</name>
+      <title>
+        <key>en</key>
+        <value>Legalname</value>
+      </title>
+      <id>54</id>
+      <valueType>
+        <types>CatalogRef.Companies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>LegalNameContract</name>
+      <title>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </title>
+      <id>55</id>
+      <valueType>
+        <types>CatalogRef.LegalNameContracts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BankTerm</name>
+      <title>
+        <key>en</key>
+        <value>Bank term</value>
+      </title>
+      <id>60</id>
+      <valueType>
+        <types>CatalogRef.BankTerms</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>61</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <scale>3</scale>
+        </numberQualifiers>
       </valueType>
       <view>
         <common>true</common>

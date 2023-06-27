@@ -949,6 +949,7 @@
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
   <enums>Enum.ProductionTransactionTypes</enums>
   <enums>Enum.OfferGroupType</enums>
+  <enums>Enum.BankTermTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

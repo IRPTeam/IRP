@@ -542,18 +542,18 @@ Function PaymentAgent()
 		   |	Payments.Ref.Company AS Company,
 		   |	Payments.Ref.Branch AS Branch,
 		   |	Payments.Ref.Currency AS Currency,
-		   |	Payments.PaymentType.LegalName AS LegalName,
-		   |	Payments.PaymentType.Partner AS Partner,
-		   |	Payments.PaymentType.Agreement AS Agreement,
+		   |	Payments.PaymentAgentLegalName AS LegalName,
+		   |	Payments.PaymentAgentPartner AS Partner,
+		   |	Payments.PaymentAgentPartnerTerms AS Agreement,
 		   |	CASE
-		   |		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		   |		WHEN Payments.PaymentAgentPartnerTerms.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		   |			THEN Payments.Ref
 		   |		ELSE UNDEFINED
 		   |	END AS Basis,
 		   |	UNDEFINED AS Order,
 		   |	Payments.Amount AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing,
-		   |	Payments.PaymentType.LegalNameContract AS LegalNameContract
+		   |	Payments.PaymentAgentLegalNameContract AS LegalNameContract
 		   |INTO PaymentAgent
 		   |FROM
 		   |	Document.RetailSalesReceipt.Payments AS Payments
@@ -592,6 +592,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -1007,38 +1008,6 @@ Function R2021B_CustomersTransactions()
 		   |UNION ALL
 		   |
 		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentAgent.Period,
-		   |	PaymentAgent.Company,
-		   |	PaymentAgent.Branch,
-		   |	PaymentAgent.Currency,
-		   |	PaymentAgent.LegalName,
-		   |	PaymentAgent.Partner,
-		   |	PaymentAgent.Agreement,
-		   |	PaymentAgent.Basis,
-		   |	PaymentAgent.Order,
-		   |	SUM(PaymentAgent.Amount) AS Amount,
-		   |	PaymentAgent.CustomersAdvancesClosing
-		   |FROM
-		   |	PaymentAgent AS PaymentAgent
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	PaymentAgent.Period,
-		   |	PaymentAgent.Company,
-		   |	PaymentAgent.Branch,
-		   |	PaymentAgent.Currency,
-		   |	PaymentAgent.LegalName,
-		   |	PaymentAgent.Partner,
-		   |	PaymentAgent.Agreement,
-		   |	PaymentAgent.Basis,
-		   |	PaymentAgent.Order,
-		   |	PaymentAgent.CustomersAdvancesClosing
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	OffsetOfAdvances.Period,
 		   |	OffsetOfAdvances.Company,
@@ -1055,6 +1024,39 @@ Function R2021B_CustomersTransactions()
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	PaymentAgent.Period,
+		   |	PaymentAgent.Company,
+		   |	PaymentAgent.Branch,
+		   |	PaymentAgent.Currency,
+		   |	PaymentAgent.LegalName,
+		   |	PaymentAgent.Partner,
+		   |	PaymentAgent.Agreement,
+		   |	PaymentAgent.Basis,
+		   |	PaymentAgent.Order,
+		   |	SUM(PaymentAgent.Amount) AS Amount,
+		   |	PaymentAgent.CustomersAdvancesClosing
+		   |INTO R5015B_OtherPartnersTransactions
+		   |FROM
+		   |	PaymentAgent AS PaymentAgent
+		   |WHERE
+		   |	TRUE
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	PaymentAgent.Period,
+		   |	PaymentAgent.Company,
+		   |	PaymentAgent.Branch,
+		   |	PaymentAgent.Currency,
+		   |	PaymentAgent.LegalName,
+		   |	PaymentAgent.Partner,
+		   |	PaymentAgent.Agreement,
+		   |	PaymentAgent.Basis,
+		   |	PaymentAgent.Order,
+		   |	PaymentAgent.CustomersAdvancesClosing";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

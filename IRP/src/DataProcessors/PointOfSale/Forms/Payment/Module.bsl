@@ -627,7 +627,13 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 			
 		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
-			//DefaultPayment.Percent = ????
+			PaymentAgentInfo = PaymentAgentTypes.FindRows(New Structure("PaymentType", Result.PaymentType));
+			Row.PaymentAgentLegalName = PaymentAgentInfo[0].Legalname;
+			Row.PaymentAgentPartner = PaymentAgentInfo[0].Partner;
+			Row.PaymentAgentLegalNameContract = PaymentAgentInfo[0].LegalNameContract;
+			Row.PaymentAgentPartnerTerms = PaymentAgentInfo[0].PartnerTerms;
+			Row.BankTerm = PaymentAgentInfo[0].BankTerm;
+			Row.Percent = PaymentAgentInfo[0].Percent;
 		Else
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
 			Row.Account = DefaultPayment[0].Account;

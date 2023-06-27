@@ -62,6 +62,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListEmployee.Visible      = IsSalaryPayment;
 	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
 	
+	Form.Items.PaymentListFinancialMovementTypeOtherCompany.Visible = IsOtherCompanyExpense;
+	
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 	Form.Items.EditCurrencies.Enabled       = Not Form.ReadOnly;
 EndProcedure
@@ -164,6 +166,20 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE_OTHER_COMPANY
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeOtherCompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeOtherCompanyEditTextChange(Item, Text, StandardProcessing)
 	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 

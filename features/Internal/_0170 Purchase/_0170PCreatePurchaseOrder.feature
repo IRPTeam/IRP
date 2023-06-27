@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -414,7 +414,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
-			And I click "Save" button							
+			And I click "Post" button							
 		* Check Item tab and RowID tab
 			And in the table "ItemList" I click "Edit quantity in base unit" button
 			And "ItemList" table contains lines
@@ -425,7 +425,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 				| 'Basis'                                                    | 'Next step'    | 'Quantity'    | 'Current step'     |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'PI&GR'        | '10,000'      | 'ITO&PO&PI'        |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'PI&GR'        | '50,000'      | 'ITO&PO&PI'        |
-			Then the number of "RowIDInfo" table lines is "равно" "2"	
+			Then the number of "RowIDInfo" table lines is "равно" "2"		
 		And I close all client application windows
 	* Create PO based on ISR (Create button)
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -470,9 +470,9 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		And I click "Save" button	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Key'                           | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1PurchaseOrder017006$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov1InternalSupplyRequestr017006$$'   | 'PI&GR'       | '10,000'     | '$$Rov1InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov1InternalSupplyRequestr017006$$'    |
-			| '2'   | '$$Rov2PurchaseOrder017006$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov2InternalSupplyRequestr017006$$'   | 'PI&GR'       | '50,000'     | '$$Rov2InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov2InternalSupplyRequestr017006$$'    |
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | ''          | '10,000'   | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | ''          | '50,000'   | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		* Filling in the main details of the document
 			And I click Select button of "Partner" field
@@ -487,6 +487,10 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I select current line in "List" table
 			And I click "OK" button					
 		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'PI&GR'     | '10,000'   | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'PI&GR'     | '50,000'   | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		And I delete "$$NumberPurchaseOrder017006$$" variable
 		And I delete "$$PurchaseOrder017006$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017006$$"

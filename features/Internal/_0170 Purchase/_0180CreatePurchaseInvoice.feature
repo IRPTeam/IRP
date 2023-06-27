@@ -430,8 +430,8 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 				| 'Store 02'    | 'Internal supply request 117 dated 12.02.2021 14:39:38'    | '50,000'            | ''                      | 'Vendor price, TRY'    | 'Dress'    | 'XS/Blue'     | 'No'                    | '50,000'      | 'pcs'     | ''              | ''         | '18%'    | ''                 | ''              | ''                | ''                | ''          | ''               | ''                  | ''                  |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                                                    | 'Next step'    | 'Quantity'    | 'Current step'     |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'GR'           | '10,000'      | 'ITO&PO&PI'        |
-				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'GR'           | '50,000'      | 'ITO&PO&PI'        |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | ''             | '10,000'      | 'ITO&PO&PI'        |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | ''             | '50,000'      | 'ITO&PO&PI'        |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
 		And I close all client application windows
 	* Create PI based on ISR (Create button)
@@ -484,14 +484,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 				| 'Item'     | 'Item key'     |
 				| 'Dress'    | 'XS/Blue'      |
 			And I set "Use goods receipt" checkbox in "ItemList" table
-			And I finish line editing in "ItemList" table	
-		And I click "Save" button	
-		And I move to "Row ID Info" tab
-		And "RowIDInfo" table contains lines
-			| '#'   | 'Key'                             | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1PurchaseInvoice018005$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov1InternalSupplyRequestr017006$$'   | 'GR'          | '10,000'     | '$$Rov1InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov1InternalSupplyRequestr017006$$'    |
-			| '2'   | '$$Rov2PurchaseInvoice018005$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov2InternalSupplyRequestr017006$$'   | 'GR'          | '50,000'     | '$$Rov2InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov2InternalSupplyRequestr017006$$'    |
-		Then the number of "RowIDInfo" table lines is "равно" "2"
+			And I finish line editing in "ItemList" table
 		* Filling in the main details of the document
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -503,7 +496,14 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 				| 'Description'            |
 				| 'Vendor Ferron, TRY'     |
 			And I select current line in "List" table
-			And I click "OK" button					
+			And I click "OK" button				
+		And I click "Post" button	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#'   | 'Key'                             | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
+			| '1'   | '$$Rov1PurchaseInvoice018005$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov1InternalSupplyRequestr017006$$'   | 'GR'          | '10,000'     | '$$Rov1InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov1InternalSupplyRequestr017006$$'    |
+			| '2'   | '$$Rov2PurchaseInvoice018005$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov2InternalSupplyRequestr017006$$'   | 'GR'          | '50,000'     | '$$Rov2InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov2InternalSupplyRequestr017006$$'    |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I delete "$$NumberPurchaseInvoice018005$$" variable
 		And I delete "$$PurchaseInvoice018005$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018005$$"

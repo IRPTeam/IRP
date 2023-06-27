@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Sales
@@ -425,7 +425,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'TRY'        | '350,00'   | '7,000'      | 'Shirt (36/Red)'     | 'pcs'     |
 		And I click "Unlink" button
 		And I click "Ok" button
-		And I click "Save" button	
+		And I click "Post" button	
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | 'Sales order 15 dated 01.02.2021 19:50:45'             | 'SC'          | '10,000'     | 'SI&SC'           |
@@ -493,6 +493,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
+		And I click "Cancel posting" button		
 		And I close all client application windows
 
 

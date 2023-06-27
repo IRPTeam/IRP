@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Sales
@@ -506,11 +506,10 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                         | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | 'SR'          | '1,000'      | 'SRO&SR'          |
-			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'          | '4,000'      | 'SRO&SR'          |
-			| '3'   | ''                                              | 'SR'          | '2,000'      | ''                |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+			| '#'   | 'Basis'                                         | 'Next step' | 'Quantity'   | 'Current step'    |
+			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | ''          | '1,000'      | 'SRO&SR'          |
+			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | ''          | '4,000'      | 'SRO&SR'          |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Sales invoice'                                  |
 			| 'Shirt'   | '38/Black'   | ''                                               |
@@ -527,11 +526,12 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'TRY'        | '350,00'   | '2,000'      | 'Shirt (38/Black)'   | 'pcs'     |
 		And I click "Link" button
 		And I click "Ok" button
+		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                         | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | ''            | '1,000'      | 'SRO&SR'          |
-			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | ''            | '2,000'      | 'SRO&SR'          |
-			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | ''            | '4,000'      | 'SRO&SR'          |
+			| '#'   | 'Basis'                                         | 'Next step'     | 'Quantity'   | 'Current step'    |
+			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | 'SR'            | '1,000'      | 'SRO&SR'          |
+			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '2,000'      | 'SRO&SR'          |
+			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '4,000'      | 'SRO&SR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Sales invoice'                                  |
@@ -565,13 +565,14 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Description'          |
 			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
+		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                         | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | ''            | '1,000'      | 'SRO&SR'          |
-			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | ''            | '2,000'      | 'SRO&SR'          |
-			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | ''            | '32,000'     | 'SRO&SR'          |
+			| '#'   | 'Basis'                                         | 'Next step'     | 'Quantity'   | 'Current step'    |
+			| '1'   | 'Sales invoice 102 dated 05.03.2021 12:57:59'   | 'SR'            | '1,000'      | 'SRO&SR'          |
+			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '2,000'      | 'SRO&SR'          |
+			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '32,000'     | 'SRO&SR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
-		And I click "Save" button
+		And I click "Cancel posting" button	
 		And I close all client application windows
 
 

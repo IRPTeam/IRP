@@ -305,7 +305,10 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And in the table "ItemList" I click "Goods receipts" button
 		Then the number of "DocumentsTree" table lines is "равно" 0
 		And I close current window
-		And I click "Save" button
+		And I select current line in "ItemList" table
+		And I input "5,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Key'                        | 'Basis'   | 'Row ID'                     | 'Next step'   | 'Quantity'   | 'Basis key'   | 'Current step'   | 'Row ref'                     |
 			| '1'   | '$$Rov1SalesReturn28402$$'   | ''        | '$$Rov1SalesReturn28402$$'   | 'GR'          | '2,000'      | ''            | ''               | '$$Rov1SalesReturn28402$$'    |

@@ -217,9 +217,9 @@ Scenario: _150045 check filling source of origin in the Opening entry
 			And I select current line in "Inventory" table
 			And I click choice button of the attribute named "InventorySourceOfOrigin" in "Inventory" table
 			And "List" table became equal
-				| 'Source of origin'      | 'Country of origin'    | 'Custom product ID'    | 'Custom declaration ID'    | 'Owner'      | 'Inactive'    | 'Reference'              |
-				| 'Source 2'              | 'Kazakhstan'           | '7997777777889910'     | '78899997667888788'        | 'Clothes'    | 'No'          | 'Source 2'               |
-				| 'Source of origin 5'    | 'Turkey'               | '9000991'              | '8900091'                  | 'Clothes'    | 'No'          | 'Source of origin 5'     |
+				| 'Source of origin'      | 'Country of origin'    | 'Custom product ID'    | 'Custom declaration ID'    | 'Owner'      | 'Inactive'    |
+				| 'Source 2'              | 'Kazakhstan'           | '7997777777889910'     | '78899997667888788'        | 'Clothes'    | 'No'          |
+				| 'Source of origin 5'    | 'Turkey'               | '9000991'              | '8900091'                  | 'Clothes'    | 'No'          |
 			And I go to line in "List" table
 				| 'Source of origin'       |
 				| 'Source of origin 5'     |
@@ -380,9 +380,9 @@ Scenario: _150047 check filling source of origin in the PI
 			And I select current line in "SourceOfOrigins" table
 			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
 			And "List" table contains lines
-				| 'Source of origin'      | 'Country of origin'    | 'Custom product ID'    | 'Custom declaration ID'    | 'Owner'      | 'Inactive'    | 'Reference'              |
-				| 'Source 2'              | 'Kazakhstan'           | '7997777777889910'     | '78899997667888788'        | 'Clothes'    | 'No'          | 'Source 2'               |
-				| 'Source of origin 5'    | 'Turkey'               | '9000991'              | '8900091'                  | 'Clothes'    | 'No'          | 'Source of origin 5'     |
+				| 'Source of origin'      | 'Country of origin'    | 'Custom product ID'    | 'Custom declaration ID'    | 'Owner'      | 'Inactive'    |
+				| 'Source 2'              | 'Kazakhstan'           | '7997777777889910'     | '78899997667888788'        | 'Clothes'    | 'No'          |
+				| 'Source of origin 5'    | 'Turkey'               | '9000991'              | '8900091'                  | 'Clothes'    | 'No'          |
 			Then the number of "List" table lines is "равно" "2"
 			And I go to line in "List" table
 				| 'Source of origin'       |

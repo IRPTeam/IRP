@@ -726,7 +726,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I click "Ok" button
 		And I click "Show row key" button
 		And in the table "ItemList" I click "Edit quantity in base unit" button	
-		And I click "Save" button		
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
@@ -1226,7 +1226,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I click "Ok" button
 		And I click "Show row key" button
 		And in the table "ItemList" I click "Edit quantity in base unit" button	
-		And I click "Save" button		
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
@@ -1386,13 +1386,13 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Ok" button
 		And I click "Show row key" button
 		And in the table "ItemList" I click "Edit quantity in base unit" button	
-		And I click "Save" button		
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '10,000'   | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '3,000'    | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '24,000'   | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"			
@@ -2152,8 +2152,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' |
-				| 'Brown' | '12345678'  |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '12345678'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -2207,8 +2207,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' | 'Serial number' |
-				| 'Brown' | '13456778'  | '13456778'      |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '13456778'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table

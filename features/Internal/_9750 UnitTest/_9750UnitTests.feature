@@ -385,7 +385,7 @@ Scenario: _975002 unit
 		And I save the value of "Log" field as "VariableName"
 		And I display "VariableName" variable value
 		And in the table "TestList" I click "Output list..." button
-		Then "Display list" window is opened
+		Then "Output list" window is opened
 		And I click the button named "Ok"
 		Given "SpreadsheetDocument" spreadsheet document is equal to "Template"
 	And I close all client application windows

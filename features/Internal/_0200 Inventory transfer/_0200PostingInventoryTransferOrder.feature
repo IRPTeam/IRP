@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Group4
@@ -344,7 +344,7 @@ Scenario: _020014 create ITO based on Internal supply request
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button			
-			And I click "Save" button							
+			And I click "Post" button							
 		* Check Item tab and RowID tab
 			And in the table "ItemList" I click "Edit quantity in base unit" button	
 			And "ItemList" table contains lines
@@ -356,6 +356,7 @@ Scenario: _020014 create ITO based on Internal supply request
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'IT'           | '10,000'      | 'ITO&PO&PI'        |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'IT'           | '50,000'      | 'ITO&PO&PI'        |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
+			And I click "Cancel posting" button	
 		And I close all client application windows
 	* Create ITO based on ISR (Create button)
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -402,14 +403,13 @@ Scenario: _020014 create ITO based on Internal supply request
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov2InventoryTransferOrder020014$$" variable
 		And I save the current field value as "$$Rov2InventoryTransferOrder020014$$"
-		And I click "Save" button	
+		And I click "Post" button	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Key'                                    | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
 			| '1'   | '$$Rov1InventoryTransferOrder020014$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov1InternalSupplyRequestr017006$$'   | 'IT'          | '10,000'     | '$$Rov1InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov1InternalSupplyRequestr017006$$'    |
 			| '2'   | '$$Rov2InventoryTransferOrder020014$$'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '$$Rov2InternalSupplyRequestr017006$$'   | 'IT'          | '50,000'     | '$$Rov2InternalSupplyRequestr017006$$'   | 'ITO&PO&PI'      | '$$Rov2InternalSupplyRequestr017006$$'    |
 		Then the number of "RowIDInfo" table lines is "равно" "2"			
-		And I click the button named "FormPost"
 		And I delete "$$NumberInventoryTransferOrder020014$$" variable
 		And I delete "$$InventoryTransferOrder020014$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020014$$"

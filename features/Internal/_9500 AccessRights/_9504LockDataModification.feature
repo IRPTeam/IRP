@@ -204,7 +204,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 	* Check saving
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And "List" table contains lines
-			|  'Descriprion'      |
+			|  'Description'      |
 			| 'lock documents'    |
 		And I close all client application windows
 	* Check rules (=)
@@ -2157,7 +2157,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 			And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Descriprion'                      |
+				| 'Description'                      |
 				| 'Branch with responsible user'     |
 			And I select current line in "List" table
 			When I Check the steps for Exception
@@ -2168,7 +2168,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 			And I connect "Этот клиент" profile of TestClient	
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Descriprion'                      |
+				| 'Description'                      |
 				| 'Branch with responsible user'     |
 			And I select current line in "List" table			
 			And I click "Save and close" button	
@@ -2336,7 +2336,7 @@ Scenario: 950439 lock data modification reasons for user group
 // 		And I select current line in "Source" table
 // 		And I click "Save and close" button
 // 		And "List" table contains lines
-// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' |  'Descriprion'                      |
+// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' |  'Description'                      |
 // 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'   |
 // 	* Check
 // 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"

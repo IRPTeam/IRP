@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @RetailDocuments
@@ -440,7 +440,12 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov3RetailReturnReceipt1$$" variable
 		And I save the current field value as "$$Rov3RetailReturnReceipt1$$"
-		And I click "Save" button	
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "5 480,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button	
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
 			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
@@ -477,6 +482,7 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
 			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
 			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '1,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+		And I click "Cancel posting" button	
 		And I close all client application windows
 
 	
@@ -2235,8 +2241,8 @@ Scenario:  _0154149 create Cash statement
 		And I select current line in "List" table
 		And I click Select button of "Status" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'Done'          | 'Done'         |
+			| 'Description'   |
+			| 'Done'          |
 		And I select current line in "List" table
 		And I click Select button of "Branch" field
 		And I go to line in "List" table

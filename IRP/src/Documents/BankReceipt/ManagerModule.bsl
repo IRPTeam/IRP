@@ -386,7 +386,8 @@ Function PaymentList()
 		   |			THEN PaymentList.PlaningTransactionBasis.Ref
 		   |		ELSE NULL
 		   |	END AS CashTransferOrder,
-		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner,
+		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) 
+		   |		OR PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsOtherPartner,
 		   |	PaymentList.RevenueType AS RevenueType
 		   |INTO PaymentList
 		   |FROM
@@ -535,6 +536,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	PaymentList.Payer AS LegalName,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Agreement,
+		   |	PaymentList.TransactionDocument AS Basis,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount AS Amount
 		   |INTO R5015B_OtherPartnersTransactions

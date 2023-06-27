@@ -147,6 +147,7 @@
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1396,6 +1397,84 @@
           <value>true</value>
         </value>
       </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5ca1975c-83d0-4fd1-a699-725d0e047f31">
+      <name>PaymentAgentPartner</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a660d6ed-6127-43e9-ace0-245ff854afed">
+      <name>PaymentAgentLegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="facdd9d5-bea6-40a8-aba5-24b02f0fb58b">
+      <name>PaymentAgentPartnerTerms</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner terms</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.PaymentAgentLegalName</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b0e8b00e-29e2-4973-a475-c1cb99703101">
+      <name>PaymentAgentLegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

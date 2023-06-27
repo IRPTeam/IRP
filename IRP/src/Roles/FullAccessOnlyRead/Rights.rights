@@ -7783,7 +7783,7 @@
 		</right>
 	</object>
 	<object>
-		<name>SessionParameter.CurrentUserAccessProfiles</name>
+		<name>SessionParameter.CurrentUserAccessGroupList</name>
 		<right>
 			<name>Get</name>
 			<value>true</value>

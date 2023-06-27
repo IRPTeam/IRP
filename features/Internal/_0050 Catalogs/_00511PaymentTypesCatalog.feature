@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -51,14 +51,14 @@ Scenario: _005029 filling in the "BankTerms" catalog
 		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
 		And I click choice button of "Payment type" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 01'     |
+			| 'Description'    |
+			| 'Card 01'        |
 		And I select current line in "List" table
 		And I activate "Account" field in "PaymentTypes" table
 		And I click choice button of "Account" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
+			| 'Description'     |
+			| 'Transit Main'    |
 		And I select current line in "List" table
 		And I activate "Percent" field in "PaymentTypes" table
 		And I input "1,00" text in "Percent" field of "PaymentTypes" table
@@ -66,14 +66,14 @@ Scenario: _005029 filling in the "BankTerms" catalog
 		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
 		And I click choice button of "Payment type" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 02'     |
+			| 'Description'    |
+			| 'Card 02'        |
 		And I select current line in "List" table
 		And I activate "Account" field in "PaymentTypes" table
 		And I click choice button of "Account" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Transit Second' |
+			| 'Description'       |
+			| 'Transit Second'    |
 		And I select current line in "List" table
 		And I activate "Percent" field in "PaymentTypes" table
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
@@ -84,8 +84,8 @@ Scenario: _005029 filling in the "BankTerms" catalog
 		Then "Branch bank term (create)" window is opened
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
+			| 'Description'    |
+			| 'Shop 01'        |
 		And I select current line in "List" table
 		And I click Select button of "Bank term" field
 		Then "Bank terms" window is opened

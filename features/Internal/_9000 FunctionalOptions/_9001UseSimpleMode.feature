@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @FunctionalOptions
@@ -26,8 +26,8 @@ Scenario: _900000 preparation
 		Then the form attribute named "Code" became equal to "1"
 		Then the form attribute named "Description_en" became equal to "My Company"
 		And "Currencies" table became equal
-			| '#' | 'Movement type'       | 'Type'  | 'Currency' |
-			| '1' | 'Legal currency type' | 'Legal' | 'USD'      |
+			| '#'   | 'Movement type'         | 'Type'    | 'Currency'    |
+			| '1'   | 'Legal currency type'   | 'Legal'   | 'USD'         |
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to ""
 		Then the number of "CompanyTaxes" table lines is "равно" 0
 	And I close all client application windows
@@ -65,9 +65,9 @@ Scenario: _900001 create items
 		And I wait "Item (create) *" window closing in 20 seconds
 	* Check
 		And "List" table became equal
-			| 'Description' | 'Item type' |
-			| 'Product 1'   | 'Product'   |
-			| 'Service 1'   | 'Service'   |
+			| 'Description'   | 'Item type'    |
+			| 'Product 1'     | 'Product'      |
+			| 'Service 1'     | 'Service'      |
 		And I close all client application windows
 
 Scenario: _900002 create partners (vendor and customer)
@@ -79,8 +79,8 @@ Scenario: _900002 create partners (vendor and customer)
 		And I click "Save and close" button
 	* Check creation
 		And "List" table became equal
-			| 'Description' |
-			| 'Vendor 1'    |
+			| 'Description'    |
+			| 'Vendor 1'       |
 	* Create customer
 		And In the command interface I select "Sales - A/R" "Customers"
 		Then "Customers" window is opened
@@ -94,9 +94,9 @@ Scenario: _900002 create partners (vendor and customer)
 		And I click "Save and close" button
 	* Check creation
 		And "List" table became equal
-			| 'Description'         |
-			| 'Customer 1'          |
-			| 'Vendor and customer' |
+			| 'Description'            |
+			| 'Customer 1'             |
+			| 'Vendor and customer'    |
 
 Scenario: _900003 create price list (customer price type)
 	* Open price list
@@ -107,15 +107,15 @@ Scenario: _900003 create price list (customer price type)
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Customer price type' |
+			| 'Description'            |
+			| 'Customer price type'    |
 		And I select current line in "List" table
 	* Select items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service 1'   |
+			| 'Description'    |
+			| 'Service 1'      |
 		And I select current line in "List" table
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
@@ -123,7 +123,7 @@ Scenario: _900003 create price list (customer price type)
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'    |
 			| 'Product 1'      |
 		And I select current line in "List" table
 		And I activate field named "ItemListPrice" in "ItemList" table
@@ -132,8 +132,8 @@ Scenario: _900003 create price list (customer price type)
 	* Check creation
 		And I click "Post and close" button
 		And "List" table became equal
-			| 'Number' | 'Price type'          | 'Price list type' |
-			| '1'      | 'Customer price type' | 'Price by items'  |
+			| 'Number'   | 'Price type'            | 'Price list type'    |
+			| '1'        | 'Customer price type'   | 'Price by items'     |
 
 
 Scenario: _900004 create Cash account
@@ -151,8 +151,8 @@ Scenario: _900004 create Cash account
 		And I click "Save and close" button
 	* Check creation
 		And "List" table became equal
-			| 'Description' |
-			| 'Cash 1'      |
+			| 'Description'    |
+			| 'Cash 1'         |
 		And I close all client application windows
 
 Scenario: _900005 create Opening entry
@@ -197,17 +197,17 @@ Scenario: _900005 create Opening entry
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		And "Inventory" table became equal
-			| '#' | 'Item'      | 'Quantity' |
-			| '1' | 'Product 1' | '100,000'  |
+			| '#'   | 'Item'        | 'Quantity'    |
+			| '1'   | 'Product 1'   | '100,000'     |
 		// And "AccountBalance" table became equal
 		// 	| '#' | 'Amount'   | 'Account' | 'Currency' |
 		// 	| '1' | '5 000,00' | 'Cash 1'  | 'USD'      |	
 		And "AccountPayableByAgreements" table became equal
-			| '#' | 'Partner'  | 'Amount' | 'Legal name' | 'Currency' |
-			| '1' | 'Vendor 1' | '500,00' | 'Vendor 1'   | 'USD'      |
+			| '#'   | 'Partner'    | 'Amount'   | 'Legal name'   | 'Currency'    |
+			| '1'   | 'Vendor 1'   | '500,00'   | 'Vendor 1'     | 'USD'         |
 		And "AccountReceivableByAgreements" table became equal
-			| '#' | 'Partner'    | 'Amount' | 'Legal name' | 'Currency' |
-			| '1' | 'Customer 1' | '150,00' | 'Customer 1' | 'USD'      |	
+			| '#'   | 'Partner'      | 'Amount'   | 'Legal name'   | 'Currency'    |
+			| '1'   | 'Customer 1'   | '150,00'   | 'Customer 1'   | 'USD'         |
 		Then the form attribute named "Branch" became equal to ""
 		And I close all client application windows
 		
@@ -220,8 +220,8 @@ Scenario: _900008 create PI
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Vendor and customer' |
+			| 'Description'            |
+			| 'Vendor and customer'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 	* Select items
@@ -231,8 +231,8 @@ Scenario: _900008 create PI
 		And I input "" text in "Item" field of "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service 1'   |
+			| 'Description'    |
+			| 'Service 1'      |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -240,8 +240,8 @@ Scenario: _900008 create PI
 		And I delete a line in "ItemList" table
 		And in the table "ItemList" I click "Pickup" button
 		And I go to line in "ItemList" table
-			| 'Title'     |
-			| 'Product 1' |
+			| 'Title'        |
+			| 'Product 1'    |
 		And I select current line in "ItemList" table
 		And I click "Transfer to document" button		
 		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -249,8 +249,8 @@ Scenario: _900008 create PI
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Service 1' |
+			| 'Item'         |
+			| 'Service 1'    |
 		And I select current line in "ItemList" table
 		And I input "90,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -263,8 +263,8 @@ Scenario: _900008 create PI
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberPurchaseInvoice01$$' |
+			| 'Number'                         |
+			| '$$NumberPurchaseInvoice01$$'    |
 		And I close all client application windows
 
 
@@ -275,8 +275,8 @@ Scenario: _900009 create SI
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Customer 1' |
+			| 'Description'    |
+			| 'Customer 1'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 	* Select items
@@ -289,9 +289,9 @@ Scenario: _900009 create SI
 		And I select "ser" from "Item" drop-down list by string in "ItemList" table
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Price type'          | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| '1' | 'Product 1' | 'Customer price type' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'       |
-			| '2' | 'Service 1' | 'Customer price type' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'       |
+			| '#'   | 'Item'        | 'Price type'            | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'    |
+			| '1'   | 'Product 1'   | 'Customer price type'   | '1,000'      | 'No'                   | '200,00'   | ''                | '200,00'          |
+			| '2'   | 'Service 1'   | 'Customer price type'   | '1,000'      | 'No'                   | '100,00'   | ''                | '100,00'          |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice01$$" variable
 		And I delete "$$SalesInvoice01$$" variable
@@ -301,8 +301,8 @@ Scenario: _900009 create SI
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberSalesInvoice01$$' |
+			| 'Number'                      |
+			| '$$NumberSalesInvoice01$$'    |
 		And I close all client application windows
 		
 Scenario: _900010 create Cash receipt based on SI (Payment from customer)
@@ -310,8 +310,8 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberSalesInvoice01$$' |
+			| 'Number'                      |
+			| '$$NumberSalesInvoice01$$'    |
 	* Create CR
 		And I click "Cash receipt" button
 	* Check filling
@@ -322,8 +322,8 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
-			| '#' | 'Partner'    | 'Total amount' |
-			| '1' | 'Customer 1' | '450,00'       |
+			| '#'   | 'Partner'      | 'Total amount'    |
+			| '1'   | 'Customer 1'   | '450,00'          |
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
@@ -341,8 +341,8 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashReceipt01$$' |
+			| 'Number'                     |
+			| '$$NumberCashReceipt01$$'    |
 		And I close all client application windows
 		
 	
@@ -359,8 +359,8 @@ Scenario: _900011 create Cash receipt without SI (Payment from customer)
 		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#' | 'Partner'    | 'Total amount' |
-			| '1' | 'Customer 1' | '100,00'       |
+			| '#'   | 'Partner'      | 'Total amount'    |
+			| '1'   | 'Customer 1'   | '100,00'          |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt02$$" variable
 		And I delete "$$CashReceipt02$$" variable
@@ -370,8 +370,8 @@ Scenario: _900011 create Cash receipt without SI (Payment from customer)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashReceipt02$$' |
+			| 'Number'                     |
+			| '$$NumberCashReceipt02$$'    |
 		And I close all client application windows
 		
 Scenario: _900015 create Cash payment based on PI (Payment to the vendor)	
@@ -379,8 +379,8 @@ Scenario: _900015 create Cash payment based on PI (Payment to the vendor)
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberPurchaseInvoice01$$' |
+			| 'Number'                         |
+			| '$$NumberPurchaseInvoice01$$'    |
 	* Create CP
 		And I click "Cash payment" button
 	* Check filling
@@ -389,8 +389,8 @@ Scenario: _900015 create Cash payment based on PI (Payment to the vendor)
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'             | 'Total amount' |
-			| '1' | 'Vendor and customer' | '590,00'       |
+			| '#'   | 'Partner'               | 'Total amount'    |
+			| '1'   | 'Vendor and customer'   | '590,00'          |
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "590,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
@@ -408,8 +408,8 @@ Scenario: _900015 create Cash payment based on PI (Payment to the vendor)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashPayment01$$' |
+			| 'Number'                     |
+			| '$$NumberCashPayment01$$'    |
 		And I close all client application windows			
 		
 
@@ -426,8 +426,8 @@ Scenario: _900016 create Cash payment without PI (Payment to the vendor)
 		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#' | 'Partner'             | 'Total amount' |
-			| '1' | 'Vendor and customer' | '100,00'       |
+			| '#'   | 'Partner'               | 'Total amount'    |
+			| '1'   | 'Vendor and customer'   | '100,00'          |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment02$$" variable
 		And I delete "$$CashPayment02$$" variable
@@ -437,8 +437,8 @@ Scenario: _900016 create Cash payment without PI (Payment to the vendor)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashPayment02$$' |
+			| 'Number'                     |
+			| '$$NumberCashPayment02$$'    |
 		And I close all client application windows				
 
 Scenario: _900020 create Purchase return based on PI		
@@ -446,18 +446,18 @@ Scenario: _900020 create Purchase return based on PI
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberPurchaseInvoice01$$' |
+			| 'Number'                         |
+			| '$$NumberPurchaseInvoice01$$'    |
 	* Create PR
 		And I click "Purchase return" button
 		And "BasisesTree" table became equal
-			| 'Row presentation'      | 'Use' | 'Quantity' | 'Price'  | 'Currency' |
-			| '$$PurchaseInvoice01$$' | 'Yes' | ''         | ''       | ''         |
-			| 'Service 1 (Service 1)' | 'Yes' | '1,000'    | '90,00'  | 'USD'      |
-			| 'Product 1 (Product 1)' | 'Yes' | '5,000'    | '100,00' | 'USD'      |
+			| 'Row presentation'        | 'Use'   | 'Quantity'   | 'Price'    | 'Currency'    |
+			| '$$PurchaseInvoice01$$'   | 'Yes'   | ''           | ''         | ''            |
+			| 'Service 1 (Service 1)'   | 'Yes'   | '1,000'      | '90,00'    | 'USD'         |
+			| 'Product 1 (Product 1)'   | 'Yes'   | '5,000'      | '100,00'   | 'USD'         |
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'      | 'Use' |
-			| 'USD'      | '90,00' | '1,000'    | 'Service 1 (Service 1)' | 'Yes' |
+			| 'Currency'   | 'Price'   | 'Quantity'   | 'Row presentation'        | 'Use'    |
+			| 'USD'        | '90,00'   | '1,000'      | 'Service 1 (Service 1)'   | 'Yes'    |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I activate "Quantity" field in "BasisesTree" table
@@ -470,8 +470,8 @@ Scenario: _900020 create Purchase return based on PI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Additional analytic' | 'Return reason' |
-			| '1' | 'Product 1' | '5,000'    | 'No'                 | '100,00' | ''              | '$$PurchaseInvoice01$$' | '500,00'       | ''       | ''                    | ''              |
+			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Purchase invoice'        | 'Total amount'   | 'Detail'   | 'Additional analytic'   | 'Return reason'    |
+			| '1'   | 'Product 1'   | '5,000'      | 'No'                   | '100,00'   | ''                | '$$PurchaseInvoice01$$'   | '500,00'         | ''         | ''                      | ''                 |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Author" became equal to "en description is empty"
@@ -492,8 +492,8 @@ Scenario: _900020 create Purchase return based on PI
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberPurchaseReturn01$$' |
+			| 'Number'                        |
+			| '$$NumberPurchaseReturn01$$'    |
 		And I close all client application windows
 		
 Scenario: _900021 create Purchase return
@@ -516,8 +516,8 @@ Scenario: _900021 create Purchase return
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'      | 'Use' |
-			| 'USD'      | '100,00' | '3,000'    | 'Product 1 (Product 1)' | 'Yes' |
+			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'        | 'Use'    |
+			| 'USD'        | '100,00'   | '3,000'      | 'Product 1 (Product 1)'   | 'Yes'    |
 		And I click "Ok" button
 	* Check filling
 		Then the form attribute named "Partner" became equal to "Vendor and customer"
@@ -526,8 +526,8 @@ Scenario: _900021 create Purchase return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Return reason' |
-			| '1' | 'Product 1' | '1,000'    | 'No'                 | '100,00' | ''              | '$$PurchaseInvoice01$$' | '100,00'       | ''       | ''              |
+			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Purchase invoice'        | 'Total amount'   | 'Detail'   | 'Return reason'    |
+			| '1'   | 'Product 1'   | '1,000'      | 'No'                   | '100,00'   | ''                | '$$PurchaseInvoice01$$'   | '100,00'         | ''         | ''                 |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
@@ -541,8 +541,8 @@ Scenario: _900021 create Purchase return
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberPurchaseReturn02$$' |
+			| 'Number'                        |
+			| '$$NumberPurchaseReturn02$$'    |
 		And I close all client application windows
 				
 		
@@ -552,18 +552,18 @@ Scenario: _900028 create Sales return based on SI
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberSalesInvoice01$$' |
+			| 'Number'                      |
+			| '$$NumberSalesInvoice01$$'    |
 	* Create SR
 		And I click "Sales return" button
 		And "BasisesTree" table became equal
-			| 'Row presentation'      | 'Use' | 'Quantity' | 'Price'  | 'Currency' |
-			| '$$SalesInvoice01$$'    | 'Yes' | ''         | ''       | ''         |
-			| 'Product 1 (Product 1)' | 'Yes' | '1,000'    | '200,00' | 'USD'      |
-			| 'Service 1 (Service 1)' | 'Yes' | '1,000'    | '100,00' | 'USD'      |
+			| 'Row presentation'        | 'Use'   | 'Quantity'   | 'Price'    | 'Currency'    |
+			| '$$SalesInvoice01$$'      | 'Yes'   | ''           | ''         | ''            |
+			| 'Product 1 (Product 1)'   | 'Yes'   | '1,000'      | '200,00'   | 'USD'         |
+			| 'Service 1 (Service 1)'   | 'Yes'   | '1,000'      | '100,00'   | 'USD'         |
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'      | 'Use' |
-			| 'USD'      | '200,00' | '1,000'    | 'Product 1 (Product 1)' | 'Yes' |
+			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'        | 'Use'    |
+			| 'USD'        | '200,00'   | '1,000'      | 'Product 1 (Product 1)'   | 'Yes'    |
 		And I remove "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		Then "Add linked document rows" window is opened
@@ -575,8 +575,8 @@ Scenario: _900028 create Sales return based on SI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' |
-			| '1' | 'Service 1' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'       | '$$SalesInvoice01$$' | ''              |
+			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'   | 'Sales invoice'        | 'Return reason'    |
+			| '1'   | 'Service 1'   | '1,000'      | 'No'                   | '100,00'   | ''                | '100,00'         | '$$SalesInvoice01$$'   | ''                 |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Currency" became equal to "USD"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
@@ -589,8 +589,8 @@ Scenario: _900028 create Sales return based on SI
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberSalesReturn01$$' |
+			| 'Number'                     |
+			| '$$NumberSalesReturn01$$'    |
 		And I close all client application windows
 				
 
@@ -614,9 +614,9 @@ Scenario: _900029 create Sales return
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table				
 		And "BasisesTree" table became equal
-			| 'Row presentation'      | 'Use' | 'Quantity' | 'Price'  | 'Currency' |
-			| '$$SalesInvoice01$$'    | 'No'  | ''         | ''       | ''         |
-			| 'Product 1 (Product 1)' | 'Yes' | '1,000'    | '200,00' | 'USD'      |
+			| 'Row presentation'        | 'Use'   | 'Quantity'   | 'Price'    | 'Currency'    |
+			| '$$SalesInvoice01$$'      | 'No'    | ''           | ''         | ''            |
+			| 'Product 1 (Product 1)'   | 'Yes'   | '1,000'      | '200,00'   | 'USD'         |
 		And I click "Ok" button
 	* Check filling	
 		Then the form attribute named "Partner" became equal to "Customer 1"
@@ -626,8 +626,8 @@ Scenario: _900029 create Sales return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' | 'Additional analytic' |
-			| '1' | 'Product 1' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'       | '$$SalesInvoice01$$' | ''              | ''                    |
+			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'   | 'Sales invoice'        | 'Return reason'   | 'Additional analytic'    |
+			| '1'   | 'Product 1'   | '1,000'      | 'No'                   | '200,00'   | ''                | '200,00'         | '$$SalesInvoice01$$'   | ''                | ''                       |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "200,00"
@@ -641,8 +641,8 @@ Scenario: _900029 create Sales return
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberSalesReturn02$$' |
+			| 'Number'                     |
+			| '$$NumberSalesReturn02$$'    |
 		And I close all client application windows
 		
 Scenario: _900031 return money to customer based on Sales return
@@ -650,8 +650,8 @@ Scenario: _900031 return money to customer based on Sales return
 	* Select SR
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberSalesReturn01$$' |
+			| 'Number'                     |
+			| '$$NumberSalesReturn01$$'    |
 	* Create CP
 		And I click "Cash payment" button
 		Then the form attribute named "Company" became equal to "My Company"
@@ -659,8 +659,8 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "TransactionType" became equal to "Return to customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'    | 'Total amount' |
-			| '1' | 'Customer 1' | '150,00'       |
+			| '#'   | 'Partner'      | 'Total amount'    |
+			| '1'   | 'Customer 1'   | '150,00'          |
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
@@ -678,8 +678,8 @@ Scenario: _900031 return money to customer based on Sales return
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashPayment03$$' |
+			| 'Number'                     |
+			| '$$NumberCashPayment03$$'    |
 		And I close all client application windows
 
 		
@@ -699,8 +699,8 @@ Scenario: _900032 return money to customer
 		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table	
 		And "PaymentList" table became equal
-			| '#' | 'Partner'    | 'Total amount' |
-			| '1' | 'Customer 1' | '50,00'        |
+			| '#'   | 'Partner'      | 'Total amount'    |
+			| '1'   | 'Customer 1'   | '50,00'           |
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "50,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
@@ -713,8 +713,8 @@ Scenario: _900032 return money to customer
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashPayment04$$' |
+			| 'Number'                     |
+			| '$$NumberCashPayment04$$'    |
 		And I close all client application windows
 				
 		
@@ -738,8 +738,8 @@ Scenario: _900035 return money from vendor
 		Then the form attribute named "TransactionType" became equal to "Return from vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'             | 'Total amount' |
-			| '1' | 'Vendor and customer' | '100,00'       |
+			| '#'   | 'Partner'               | 'Total amount'    |
+			| '1'   | 'Vendor and customer'   | '100,00'          |
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
@@ -752,8 +752,8 @@ Scenario: _900035 return money from vendor
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberCashReceipt03$$' |
+			| 'Number'                     |
+			| '$$NumberCashReceipt03$$'    |
 		And I close all client application windows
 		
 				
@@ -762,8 +762,8 @@ Scenario: _900090 change functional options use company and check users settings
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'        | 'Use' |
-			| 'Use companies' | 'No'  |
+			| 'Option'          | 'Use'    |
+			| 'Use companies'   | 'No'     |
 		And I activate "Use" field in "FunctionalOptions" table
 		And I change "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table

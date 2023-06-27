@@ -206,7 +206,7 @@ Function ExpenseTypeCompany2ItemType() Export
 	Return "";
 EndFunction
 
-// Part 3
+// Part 3. Check that always return company filter result. Filter for other field is false
 Function ExpenseTypeCompanyEqualsCompany1() Export
 	PrepareDB();
 	Data = GetData();

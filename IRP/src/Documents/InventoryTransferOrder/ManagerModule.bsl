@@ -392,6 +392,10 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = New Array;
+	StoreList.Add(Obj.StoreReceiver);
+	StoreList.Add(Obj.StoreSender);
+	AccessKeyMap.Insert("Store", StoreList);
 	Return AccessKeyMap;
 EndFunction
 

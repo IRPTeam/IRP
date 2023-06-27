@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @UserCatalogs
@@ -34,33 +34,33 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 		* Set up access for admin
 			And in the table "Roles" I click "Update roles" button
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation' | 'Use' |
-				| 'IRP'           | 'Full access'  | 'No'  |
+				| 'Configuration'    | 'Presentation'    | 'Use'     |
+				| 'IRP'              | 'Full access'     | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'     | 'Use' |
-				| 'IRP'           | 'Run thick client' | 'No'  |
+				| 'Configuration'    | 'Presentation'        | 'Use'     |
+				| 'IRP'              | 'Run thick client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'    | 'Use' |
-				| 'IRP'           | 'Run thin client' | 'No'  |
+				| 'Configuration'    | 'Presentation'       | 'Use'     |
+				| 'IRP'              | 'Run thin client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'   | 'Use' |
-				| 'IRP'           | 'Run web client' | 'No'  |
+				| 'Configuration'    | 'Presentation'      | 'Use'     |
+				| 'IRP'              | 'Run web client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'      | 'Use' |
-				| 'IRP'           | 'Run mobile client' | 'No'  |
+				| 'Configuration'    | 'Presentation'         | 'Use'     |
+				| 'IRP'              | 'Run mobile client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation' | 'Use' |
-				| 'IRP'           | 'Basic role'   | 'No'  |
+				| 'Configuration'    | 'Presentation'    | 'Use'     |
+				| 'IRP'              | 'Basic role'      | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I click the button named "FormWriteAndClose"
@@ -75,13 +75,13 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 		And in the table "Roles" I click "Update roles" button
 		* Set up access for the Logistic team
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'    | 'Use' |
-				| 'IRP'           | 'Run thin client' | 'No'  |
+				| 'Configuration'    | 'Presentation'       | 'Use'     |
+				| 'IRP'              | 'Run thin client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 			And I finish line editing in "Roles" table
 			And I go to line in "Roles" table
-				| 'Configuration' | 'Presentation'   | 'Use' |
-				| 'IRP'           | 'Run web client' | 'No'  |
+				| 'Configuration'    | 'Presentation'      | 'Use'     |
+				| 'IRP'              | 'Run web client'    | 'No'      |
 			And I change "Use" checkbox in "Roles" table
 		And I click the button named "FormWriteAndClose"
 	* Check for created User access profiles

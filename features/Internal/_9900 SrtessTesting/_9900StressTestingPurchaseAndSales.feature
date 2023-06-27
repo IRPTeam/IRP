@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @StressTesting
@@ -52,8 +52,8 @@ Scenario: _043400 preparation (StressTesting)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -62,8 +62,8 @@ Scenario: _043400 preparation (StressTesting)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
 	When Create document SalesInvoice objects (stress testing, 1000 strings)
@@ -76,16 +76,16 @@ Scenario: _043400 preparation (StressTesting)
 Scenario: _9900005 post Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows	
 
 Scenario: _9900006 open Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I wait "Sales invoice 1 dated 22.04.2021 14:25:08" window opening in "50" seconds
 	And I close all client application windows
@@ -93,19 +93,19 @@ Scenario: _9900006 open Sales invoice (1000 strings)
 Scenario: _9900007 change Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'Second Company' |
+		| 'Description'      |
+		| 'Second Company'   |
 	And I select current line in "List" table
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 		| 'Description'    |
-		| 'Main Company' |
+		| 'Main Company'   |
 	And I select current line in "List" table	
 	And I close all client application windows
 
@@ -113,8 +113,8 @@ Scenario: _9900007 change Sales invoice (1000 strings)
 Scenario: _9900008 calculate offer Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And in the table "ItemList" I click "% Offers" button
 	And I activate "%" field in "Offers" table
@@ -123,15 +123,15 @@ Scenario: _9900008 calculate offer Sales invoice (1000 strings)
 	And I click "Ok" button
 	And in the table "Offers" I click "OK" button
 	And "ItemList" table contains lines
-		| 'Offers amount'    |
-		| '3,00' |
+		| 'Offers amount'   |
+		| '3,00'            |
 	And I close all client application windows
 
 Scenario: _9900009 create Shipment confirmation based on Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	* Open link form
 		And I click "Shipment confirmation" button
@@ -143,35 +143,35 @@ Scenario: _9900009 create Shipment confirmation based on Sales invoice (1000 str
 Scenario: _9900010 post Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows	
 
 Scenario: _9900011 open Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
 Scenario: _9900012 change Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'Second Company' |
+		| 'Description'      |
+		| 'Second Company'   |
 	And I select current line in "List" table
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 		| 'Description'    |
-		| 'Main Company' |
+		| 'Main Company'   |
 	And I select current line in "List" table	
 	And I close all client application windows
 
@@ -179,8 +179,8 @@ Scenario: _9900012 change Sales invoice (100 strings)
 Scenario: _9900013 calculate offer Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And in the table "ItemList" I click "% Offers" button
 	And I activate "%" field in "Offers" table
@@ -189,15 +189,15 @@ Scenario: _9900013 calculate offer Sales invoice (100 strings)
 	And I click "Ok" button
 	And in the table "Offers" I click "OK" button
 	And "ItemList" table contains lines
-		| 'Offers amount'    |
-		| '3,00' |
+		| 'Offers amount'   |
+		| '3,00'            |
 	And I close all client application windows
 
 Scenario: _9900014 create Shipment confirmation based on Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	* Open link form
 		And I click "Shipment confirmation" button
@@ -209,8 +209,8 @@ Scenario: _9900014 create Shipment confirmation based on Sales invoice (100 stri
 Scenario: _9900030 open Purchase invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I wait "Purchase invoice 1 dated 26.04.2021 10:34:49" window opening in "50" seconds
 	And I close all client application windows
@@ -218,27 +218,27 @@ Scenario: _9900030 open Purchase invoice (1000 strings)
 Scenario: _9900031 post Purchase invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
 Scenario: _9900032 change Purchase invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'Second Company' |
+		| 'Description'      |
+		| 'Second Company'   |
 	And I select current line in "List" table
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 		| 'Description'    |
-		| 'Main Company' |
+		| 'Main Company'   |
 	And I select current line in "List" table	
 	And I close all client application windows
 
@@ -246,8 +246,8 @@ Scenario: _9900032 change Purchase invoice (1000 strings)
 Scenario: _9900033 calculate offer Purchase invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	And I click "% Offers" button
 	And I activate "%" field in "Offers" table
@@ -256,15 +256,15 @@ Scenario: _9900033 calculate offer Purchase invoice (1000 strings)
 	And I click "Ok" button
 	And in the table "Offers" I click "OK" button
 	And "ItemList" table contains lines
-		| 'Offers amount'    |
-		| '1,00' |
+		| 'Offers amount'   |
+		| '1,00'            |
 	And I close all client application windows
 
 Scenario: _9900034 create Goods receipt based on Purchase invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
+		| 'Number'   |
+		| '1'        |
 	And I select current line in "List" table
 	* Open link form
 		And I click "Goods receipt" button
@@ -277,8 +277,8 @@ Scenario: _9900034 create Goods receipt based on Purchase invoice (1000 strings)
 Scenario: _9900041 open Purchase invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I wait "Purchase invoice 2 dated 26.04.2021 10:34:50" window opening in "50" seconds
 	And I close all client application windows
@@ -286,27 +286,27 @@ Scenario: _9900041 open Purchase invoice (100 strings)
 Scenario: _9900042 post Purchase invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
 Scenario: _9900043 change Purchase invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'Second Company' |
+		| 'Description'      |
+		| 'Second Company'   |
 	And I select current line in "List" table
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 		| 'Description'    |
-		| 'Main Company' |
+		| 'Main Company'   |
 	And I select current line in "List" table	
 	And I close all client application windows
 
@@ -314,8 +314,8 @@ Scenario: _9900043 change Purchase invoice (100 strings)
 Scenario: _9900044 calculate offer Purchase invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	And I click "% Offers" button
 	And I activate "%" field in "Offers" table
@@ -324,15 +324,15 @@ Scenario: _9900044 calculate offer Purchase invoice (100 strings)
 	And I click "Ok" button
 	And in the table "Offers" I click "OK" button
 	And "ItemList" table contains lines
-		| 'Offers amount'    |
-		| '1,00' |
+		| 'Offers amount'   |
+		| '1,00'            |
 	And I close all client application windows
 
 Scenario: _9900045 create Goods receipt based on Purchase invoice (100 strings)
 	Given I open hyperlink "ecib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
+		| 'Number'   |
+		| '2'        |
 	And I select current line in "List" table
 	* Open link form
 		And I click "Goods receipt" button

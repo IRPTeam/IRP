@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Retail
@@ -68,8 +68,8 @@ Scenario: _0260200 change rights (POS)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
@@ -95,8 +95,8 @@ Scenario: _0260200 change rights (POS)
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Workstation 01' |
+			| 'Description'       |
+			| 'Workstation 01'    |
 		And I click "Set current workstation" button
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one	
@@ -109,16 +109,16 @@ Scenario: _0260209 check that change price and Return in POS is not available fo
 	* Add item and try change price
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
-			|'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'|
+			| 'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'    |
 		And I finish line editing in "ItemList" table
 	* Try make return
 		When I Check the steps for Exception
-			|'And I click "Return" button'|
+			| 'And I click "Return" button'    |
 		And I delete a line in "ItemList" table
 		
 Scenario: _0260210 one-time change of access rights (POS)
@@ -128,8 +128,8 @@ Scenario: _0260210 one-time change of access rights (POS)
 	* Add item and try change price
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I click "Change rights" button
@@ -141,8 +141,8 @@ Scenario: _0260210 one-time change of access rights (POS)
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 		And "ItemList" table became equal
-			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Dress' | ''             | 'XS/Blue'  | ''        | '100,00' | '2,000'    | ''       | '200,00' |		
+			| 'Item'    | 'Sales person'   | 'Item key'   | 'Serials'   | 'Price'    | 'Quantity'   | 'Offers'   | 'Total'     |
+			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '2,000'      | ''         | '200,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
 		And I click the button named "Enter"
@@ -150,15 +150,15 @@ Scenario: _0260210 one-time change of access rights (POS)
 	* Check the return of access rights
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
-			|'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'|
+			| 'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'    |
 		And I finish line editing in "ItemList" table
 		When I Check the steps for Exception
-			|'And I click "Return" button'|
+			| 'And I click "Return" button'    |
 		And I delete a line in "ItemList" table		
 
 
@@ -169,8 +169,8 @@ Scenario: _0260212 keep rights when change access rights (POS)
 	* Change rights and return item
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I click "Change rights" button
@@ -183,8 +183,8 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 		And "ItemList" table became equal
-			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Dress' | ''             | 'XS/Blue'  | ''        | '100,00' | '2,000'    | ''       | '200,00' |		
+			| 'Item'    | 'Sales person'   | 'Item key'   | 'Serials'   | 'Price'    | 'Quantity'   | 'Offers'   | 'Total'     |
+			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '2,000'      | ''         | '200,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
 		And I click the button named "Enter"
@@ -192,13 +192,13 @@ Scenario: _0260212 keep rights when change access rights (POS)
 	* Change price and return
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 		And "ItemList" table became equal
-			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Dress' | ''             | 'XS/Blue'  | ''        | '100,00' | '1,000'    | ''       | '100,00' |		
+			| 'Item'    | 'Sales person'   | 'Item key'   | 'Serials'   | 'Price'    | 'Quantity'   | 'Offers'   | 'Total'     |
+			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '1,000'      | ''         | '100,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
 		And I click the button named "Enter"
@@ -207,15 +207,15 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I click "Rollback rights" button
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
-			|'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'|
+			| 'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'    |
 		And I finish line editing in "ItemList" table
 		When I Check the steps for Exception
-			|'And I click "Return" button'|
+			| 'And I click "Return" button'    |
 		And I delete a line in "ItemList" table
 	
 
@@ -224,26 +224,26 @@ Scenario: _0260214 settings of access rights from user group
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.Users"		
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'    |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I click Select button of "User group" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Manager'     |
+			| 'Description'    |
+			| 'Manager'        |
 		And I select current line in "List" table
 		And I click "Save" button
 		And I click "Settings" button
 		Then "Edit user settings" window is opened
 		And I go to line in "MetadataTree" table
-			| 'Group name'             |
-			| 'Disable - Change price' |
+			| 'Group name'                |
+			| 'Disable - Change price'    |
 		And I activate "Use" field in "MetadataTree" table
 		And I remove "Use" checkbox in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name'              |
-			| 'Disable - Create return' |
+			| 'Group name'                 |
+			| 'Disable - Create return'    |
 		And I remove "Use" checkbox in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I click "Ok" button
@@ -253,16 +253,16 @@ Scenario: _0260214 settings of access rights from user group
 	* Add item and try change price
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| '(10001) Dress, XS/Blue' |
+			| 'Item'                      |
+			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
-			|'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'|
+			| 'And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table'    |
 		And I finish line editing in "ItemList" table
 	* Try make return
 		When I Check the steps for Exception
-			|'And I click "Return" button'|
+			| 'And I click "Return" button'    |
 		And I delete a line in "ItemList" table
 
 

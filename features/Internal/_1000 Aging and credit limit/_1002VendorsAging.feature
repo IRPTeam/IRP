@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @IgnoreOnCIMainBuild
@@ -53,8 +53,8 @@ Scenario: _1002000 preparation (vendors aging)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -76,27 +76,27 @@ Scenario: _1002002 filling in payment terms in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Vendor Ferron, TRY (7 days)
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I move to "Credit limit & Aging" tab				
 		And I click Select button of "Payment term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '7 days'      |
+			| 'Description'    |
+			| '7 days'         |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Partner term Maxim (14 days)
 		And I go to line in "List" table
-			| 'Description'                      |
-			| 'Partner term Maxim' |
+			| 'Description'           |
+			| 'Partner term Maxim'    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I move to "Credit limit & Aging" tab
 		And I click Select button of "Payment term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '14 days'     |
+			| 'Description'    |
+			| '14 days'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -107,13 +107,13 @@ Scenario: _1002003 check Aging tab in the Purchase invoice
 		* Check aging tab
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
-					| 'Number' |
-					| '$$NumberPurchaseInvoiceAging$$'|
+					| 'Number'                              |
+					| '$$NumberPurchaseInvoiceAging$$'      |
 			And I select current line in "List" table
 			And I move to "Aging" tab
 			And "PaymentTerms" table contains lines
-				| 'Calculation type'     | 'Date' | 'Due period, days' | 'Proportion of payment' | 'Amount'   |
-				| 'Post-shipment credit' | '*'    | '7'                | '100,00'                | '4 000,00' |
+				| 'Calculation type'        | 'Date'    | 'Due period, days'    | 'Proportion of payment'    | 'Amount'       |
+				| 'Post-shipment credit'    | '*'       | '7'                   | '100,00'                   | '4 000,00'     |
 		* Check payment date calculation
 			And I move to "Other" tab
 			And I input "03.11.2020" text in "Date" field
@@ -124,23 +124,23 @@ Scenario: _1002003 check Aging tab in the Purchase invoice
 			And I remove checkbox "Do you want to update payment term?"			
 			And I click "OK" button
 			And "PaymentTerms" table contains lines
-				| 'Calculation type'     | 'Date'       | 'Due period, days' | 'Proportion of payment' | 'Amount'   |
-				| 'Post-shipment credit' | '10.11.2020' | '7'                | '100,00'                | '4 000,00' |
+				| 'Calculation type'        | 'Date'          | 'Due period, days'    | 'Proportion of payment'    | 'Amount'       |
+				| 'Post-shipment credit'    | '10.11.2020'    | '7'                   | '100,00'                   | '4 000,00'     |
 		* Manualy change payment date
 			And I move to "Aging" tab
 			And I select current line in "PaymentTerms" table
 			And I input "04.11.2020" text in "Date" field of "PaymentTerms" table
 			And I finish line editing in "PaymentTerms" table
 			And "PaymentTerms" table contains lines
-				| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
-				| 'Post-shipment credit' | '04.11.2020'   | '1'               | '100,00'                | '4 000,00' |
+				| 'Calculation type'        | 'Date'          | 'Due period, days'    | 'Proportion of payment'    | 'Amount'       |
+				| 'Post-shipment credit'    | '04.11.2020'    | '1'                   | '100,00'                   | '4 000,00'     |
 		* Manualy change 'Due period, days'
 			And I select current line in "PaymentTerms" table
 			And I input "16" text in "Due period, days" field of "PaymentTerms" table
 			And I finish line editing in "PaymentTerms" table
 			And "PaymentTerms" table contains lines
-				| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
-				| 'Post-shipment credit' | '*'   | '16'               | '100,00'                | '4 000,00' |
+				| 'Calculation type'        | 'Date'    | 'Due period, days'    | 'Proportion of payment'    | 'Amount'       |
+				| 'Post-shipment credit'    | '*'       | '16'                  | '100,00'                   | '4 000,00'     |
 			And I click the button named "FormPost"
 			And I delete "$$PurchaseInvoiceAging1$$" variable
 			And I delete "$$DatePurchaseInvoiceAging1$$" variable
@@ -152,38 +152,38 @@ Scenario: _1002003 check Aging tab in the Purchase invoice
 		* Check movements
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
-					| 'Number' |
-					| '$$NumberPurchaseInvoiceAging1$$'|
+					| 'Number'                               |
+					| '$$NumberPurchaseInvoiceAging1$$'      |
 			And I click "Registrations report" button
 			And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$PurchaseInvoiceAging1$$'              | ''            | ''                              | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                          | ''                         | ''                     | ''                         |
-				| 'Document registrations records'         | ''            | ''                              | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                          | ''                         | ''                     | ''                         |
-				| 'Register  "R1021 Vendors transactions"' | ''            | ''                              | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                          | ''                         | ''                     | ''                         |
-				| ''                                       | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                          | ''                         | 'Attributes'           | ''                         |
-				| ''                                       | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                     | 'Order'                    | 'Deferred calculation' | 'Vendors advances closing' |
-				| ''                                       | 'Receipt'     | '$$DatePurchaseInvoiceAging1$$' | '684,8'     | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | ''                         | 'No'                   | ''                         |
-				| ''                                       | 'Receipt'     | '$$DatePurchaseInvoiceAging1$$' | '4 000'     | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | ''                         | 'No'                   | ''                         |
-				| ''                                       | 'Receipt'     | '$$DatePurchaseInvoiceAging1$$' | '4 000'     | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | ''                         | 'No'                   | ''                         |
-				| ''                                       | 'Receipt'     | '$$DatePurchaseInvoiceAging1$$' | '4 000'     | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | ''                         | 'No'                   | ''                         |
+				| '$$PurchaseInvoiceAging1$$'                 | ''               | ''                                 | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                      | ''                             | ''         | ''                        | ''                             |
+				| 'Document registrations records'            | ''               | ''                                 | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                      | ''                             | ''         | ''                        | ''                             |
+				| 'Register  "R1021 Vendors transactions"'    | ''               | ''                                 | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                      | ''                             | ''         | ''                        | ''                             |
+				| ''                                          | 'Record type'    | 'Period'                           | 'Resources'    | 'Dimensions'      | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                      | ''                             | ''         | 'Attributes'              | ''                             |
+				| ''                                          | ''               | ''                                 | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'           | 'Partner'      | 'Agreement'             | 'Basis'                        | 'Order'    | 'Deferred calculation'    | 'Vendors advances closing'     |
+				| ''                                          | 'Receipt'        | '$$DatePurchaseInvoiceAging1$$'    | '684,8'        | 'Main Company'    | ''          | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Ferron BP'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | ''         | 'No'                      | ''                             |
+				| ''                                          | 'Receipt'        | '$$DatePurchaseInvoiceAging1$$'    | '4 000'        | 'Main Company'    | ''          | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Ferron BP'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | ''         | 'No'                      | ''                             |
+				| ''                                          | 'Receipt'        | '$$DatePurchaseInvoiceAging1$$'    | '4 000'        | 'Main Company'    | ''          | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Ferron BP'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | ''         | 'No'                      | ''                             |
+				| ''                                          | 'Receipt'        | '$$DatePurchaseInvoiceAging1$$'    | '4 000'        | 'Main Company'    | ''          | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Ferron BP'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | ''         | 'No'                      | ''                             |
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$PurchaseInvoiceAging1$$'       | ''            | ''                              | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
-				| 'Document registrations records'  | ''            | ''                              | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
-				| 'Register  "R5012 Vendors aging"' | ''            | ''                              | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
-				| ''                                | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''       | ''         | ''                   | ''          | ''                          | ''             | 'Attributes'    |
-				| ''                                | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                   | 'Payment date' | 'Aging closing' |
-				| ''                                | 'Receipt'     | '$$DatePurchaseInvoiceAging1$$' | '4 000'     | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$PurchaseInvoiceAging1$$' | '*'            | ''              |
+				| '$$PurchaseInvoiceAging1$$'          | ''               | ''                                 | ''             | ''                | ''          | ''            | ''                      | ''             | ''                             | ''                | ''                  |
+				| 'Document registrations records'     | ''               | ''                                 | ''             | ''                | ''          | ''            | ''                      | ''             | ''                             | ''                | ''                  |
+				| 'Register  "R5012 Vendors aging"'    | ''               | ''                                 | ''             | ''                | ''          | ''            | ''                      | ''             | ''                             | ''                | ''                  |
+				| ''                                   | 'Record type'    | 'Period'                           | 'Resources'    | 'Dimensions'      | ''          | ''            | ''                      | ''             | ''                             | ''                | 'Attributes'        |
+				| ''                                   | ''               | ''                                 | 'Amount'       | 'Company'         | 'Branch'    | 'Currency'    | 'Agreement'             | 'Partner'      | 'Invoice'                      | 'Payment date'    | 'Aging closing'     |
+				| ''                                   | 'Receipt'        | '$$DatePurchaseInvoiceAging1$$'    | '4 000'        | 'Main Company'    | ''          | 'TRY'         | 'Vendor Ferron, TRY'    | 'Ferron BP'    | '$$PurchaseInvoiceAging1$$'    | '*'               | ''                  |
 			And I close all client application windows
 	* Create second test PI
 		When create purchase invoice without order (Vendor Ferron, TRY)
 	* Save payment terms date
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoiceAging$$'|
+				| 'Number'                             |
+				| '$$NumberPurchaseInvoiceAging$$'     |
 		And I select current line in "List" table
 		And I move to "Aging" tab
 		And I select current line in "PaymentTerms" table
@@ -200,40 +200,40 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Cash desk №2' |
+				| 'Description'      |
+				| 'Cash desk №2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Code' |
-				| 'TRY'  |
+				| 'Code'     |
+				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Vendor Ferron, TRY' |
+				| 'Description'            |
+				| 'Vendor Ferron, TRY'     |
 			And I select current line in "List" table
 		* Filling in basis documents in a tabular part
 			And I finish line editing in "PaymentList" table
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			And I go to line in "List" table
-				| 'Amount'   | 'Company'      | 'Legal name'        | 'Partner'   | 'Document'                  |
-				| '4 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' | '$$PurchaseInvoiceAging1$$' |
+				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'      | 'Document'                      |
+				| '4 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'    | '$$PurchaseInvoiceAging1$$'     |
 			And I click "Select" button
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "4 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -248,14 +248,14 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 		And I click the button named "FormPostAndClose"
 	* Check movements
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberCashPayment1002009$$'  |
+			| 'Number'                          |
+			| '$$NumberCashPayment1002009$$'    |
 		And I click "Registrations report" button
 		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashPayment1002009$$' |
-			| 'Document registrations records'           |
+			| '$$CashPayment1002009$$'            |
+			| 'Document registrations records'    |
 		And I close all client application windows
 	* Post Vendors advance closing document
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
@@ -267,10 +267,10 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 		And "List" table contains lines
-			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
-			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
-			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+			| 'Period'                          | 'Recorder'                    | 'Currency'   | 'Company'        | 'Branch'   | 'Partner'     | 'Amount'     | 'Agreement'            | 'Invoice'                     | 'Payment date'                               | 'Aging closing'                  |
+			| '$$DatePurchaseInvoiceAging1$$'   | '$$PurchaseInvoiceAging1$$'   | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | ''                               |
+			| '*'                               | '$$PurchaseInvoiceAging$$'    | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'   | ''                               |
+			| '$$DateCashPayment1002009$$'      | '$$CashPayment1002009$$'      | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | 'Vendors advances closing 4*'    |
 		Then the number of "List" table lines is "равно" "3"
 		And I close all client application windows
 		
@@ -284,35 +284,35 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 			* Select company
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Bank account, TRY' |
+					| 'Description'            |
+					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'   |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I activate "Partner term" field in "PaymentList" table
 				And I click choice button of "Partner term" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description'              |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 				And I select current line in "List" table
 			* Filling in basis documents in a tabular part
 				And I finish line editing in "PaymentList" table
 				And I activate "Basis document" field in "PaymentList" table
 				And I select current line in "PaymentList" table
 				And I go to line in "List" table
-					| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
-					| '4 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' | '$$PurchaseInvoiceAging$$' |
+					| 'Amount'       | 'Company'          | 'Legal name'            | 'Partner'       | 'Document'                      |
+					| '4 000,00'     | 'Main Company'     | 'Company Ferron BP'     | 'Ferron BP'     | '$$PurchaseInvoiceAging$$'      |
 				And I click "Select" button
 				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -327,35 +327,35 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 			And I click the button named "FormPostAndClose"
 		* Check movements
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberBankPayment1002015$$'  |
+				| 'Number'                           |
+				| '$$NumberBankPayment1002015$$'     |
 			And I click "Registrations report" button
 			And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			Then "ResultTable" spreadsheet document is equal
-				| '$$BankPayment1002015$$' |
-				| 'Document registrations records'           |
+				| '$$BankPayment1002015$$'             |
+				| 'Document registrations records'     |
 			And I close all client application windows
 		* Post Vendors advance closing document
 			Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 			And I go to line in "List" table
-				| 'Number' |
-				| '1'  |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And I go to line in "List" table
-				| 'Number' |
-				| '4'  |
+				| 'Number'     |
+				| '4'          |
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 			And "List" table contains lines
-				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
-				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
-				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
-				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
+				| 'Period'                           | 'Recorder'                     | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                      | 'Payment date'                                | 'Aging closing'                   |
+				| '$$DatePurchaseInvoiceAging1$$'    | '$$PurchaseInvoiceAging1$$'    | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | ''                                |
+				| '*'                                | '$$PurchaseInvoiceAging$$'     | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | ''                                |
+				| '$$DateCashPayment1002009$$'       | '$$CashPayment1002009$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | 'Vendors advances closing 4*'     |
+				| '$$DateBankPayment1002015$$'       | '$$BankPayment1002015$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '200,00'      | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
 			Then the number of "List" table lines is "равно" "4"
 			And I close all client application windows
 
@@ -367,25 +367,25 @@ Scenario: _1002020 create Credit note and check Aging register movements
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'       |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -400,32 +400,32 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			Then "ResultTable" spreadsheet document is equal
-				| '$$CreditNote1002020$$'           | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                         | ''             | ''              |
-				| 'Document registrations records'  | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                         | ''             | ''              |
-				| 'Register  "R5012 Vendors aging"' | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                         | ''             | ''              |
-				| ''                                | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''       | ''         | ''                   | ''          | ''                         | ''             | 'Attributes'    |
-				| ''                                | ''            | ''                          | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                  | 'Payment date' | 'Aging closing' |
-				| ''                                | 'Receipt'     | '$$CreditNoteDate1002020$$' | '100'       | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$CreditNote1002020$$' | '*'            | ''              |
+				| '$$CreditNote1002020$$'              | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
+				| 'Document registrations records'     | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
+				| 'Register  "R5012 Vendors aging"'    | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
+				| ''                                   | 'Record type'    | 'Period'                       | 'Resources'    | 'Dimensions'      | ''          | ''            | ''                      | ''             | ''                         | ''                | 'Attributes'        |
+				| ''                                   | ''               | ''                             | 'Amount'       | 'Company'         | 'Branch'    | 'Currency'    | 'Agreement'             | 'Partner'      | 'Invoice'                  | 'Payment date'    | 'Aging closing'     |
+				| ''                                   | 'Receipt'        | '$$CreditNoteDate1002020$$'    | '100'          | 'Main Company'    | ''          | 'TRY'         | 'Vendor Ferron, TRY'    | 'Ferron BP'    | '$$CreditNote1002020$$'    | '*'               | ''                  |
 			And I close all client application windows
 		* Post Vendors advance closing document
 			Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 			And I go to line in "List" table
-				| 'Number' |
-				| '1'  |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And I go to line in "List" table
-				| 'Number' |
-				| '4'  |
+				| 'Number'     |
+				| '4'          |
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 			And "List" table contains lines
-				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
-				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
-				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
-				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
-				| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'  | '*'                                        | ''                                                     |
+				| 'Period'                           | 'Recorder'                     | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                      | 'Payment date'                                | 'Aging closing'                   |
+				| '$$DatePurchaseInvoiceAging1$$'    | '$$PurchaseInvoiceAging1$$'    | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | ''                                |
+				| '*'                                | '$$PurchaseInvoiceAging$$'     | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | ''                                |
+				| '$$DateCashPayment1002009$$'       | '$$CashPayment1002009$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | 'Vendors advances closing 4*'     |
+				| '$$DateBankPayment1002015$$'       | '$$BankPayment1002015$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '200,00'      | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
+				| '$$CreditNoteDate1002020$$'        | '$$CreditNote1002020$$'        | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '100,00'      | 'Vendor Ferron, TRY'    | '$$CreditNote1002020$$'        | '*'                                           | ''                                |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -437,25 +437,25 @@ Scenario: _1020030 create Debit note and check Aging register movements
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'       |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -470,8 +470,8 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1020030$$' |
-			| 'Document registrations records'           |
+			| '$$DebitNote1020030$$'              |
+			| 'Document registrations records'    |
 		And I close all client application windows
 	* Post Vendors advance closing document
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
@@ -483,13 +483,13 @@ Scenario: _1020030 create Debit note and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 		And "List" table contains lines
-			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'               |
-			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                            |
-			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                            |
-			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
-			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
-			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'     | '*'                                        | ''                            |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4*' |
+			| 'Period'                          | 'Recorder'                    | 'Currency'   | 'Company'        | 'Branch'   | 'Partner'     | 'Amount'     | 'Agreement'            | 'Invoice'                     | 'Payment date'                               | 'Aging closing'                  |
+			| '$$DatePurchaseInvoiceAging1$$'   | '$$PurchaseInvoiceAging1$$'   | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | ''                               |
+			| '*'                               | '$$PurchaseInvoiceAging$$'    | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'   | ''                               |
+			| '$$DateCashPayment1002009$$'      | '$$CashPayment1002009$$'      | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | 'Vendors advances closing 4*'    |
+			| '$$DateBankPayment1002015$$'      | '$$BankPayment1002015$$'      | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '200,00'     | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'   | 'Vendors advances closing 4*'    |
+			| '$$CreditNoteDate1002020$$'       | '$$CreditNote1002020$$'       | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '100,00'     | 'Vendor Ferron, TRY'   | '$$CreditNote1002020$$'       | '*'                                          | ''                               |
+			| '$$DebitNoteDate1000030$$'        | '$$DebitNote1020030$$'        | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '50,00'      | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '*'                                          | 'Vendors advances closing 4*'    |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				
@@ -501,21 +501,21 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			* Select company
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Bank account, TRY' |
+					| 'Description'            |
+					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'   |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -534,21 +534,21 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			* Select company
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Cash desk №4' |
+					| 'Description'       |
+					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'   |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -567,21 +567,21 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			* Select company
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 			* Filling in the details of the document
 				And I click Select button of "Account" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Bank account, TRY' |
+					| 'Description'            |
+					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'   |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -597,8 +597,8 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			When create purchase invoice without order (Vendor Ferron, TRY)
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
-					| 'Number' |
-					| '$$NumberPurchaseInvoiceAging$$'|
+					| 'Number'                              |
+					| '$$NumberPurchaseInvoiceAging$$'      |
 			And I select current line in "List" table
 			And I click the button named "FormPost"
 			And I delete "$$PurchaseInvoice0240164$$" variable
@@ -610,39 +610,39 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			And I click the button named "FormPostAndClose"
 		* Check movements
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoice0240164$$'  |
+				| 'Number'                               |
+				| '$$NumberPurchaseInvoice0240164$$'     |
 			And I click "Registrations report" button
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button			
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$PurchaseInvoice0240164$$'      | ''            | ''                               | ''          | ''             | ''       | ''         | ''                   | ''          | ''                           | ''                                                  | ''              |
-				| 'Document registrations records'  | ''            | ''                               | ''          | ''             | ''       | ''         | ''                   | ''          | ''                           | ''                                                  | ''              |
-				| 'Register  "R5012 Vendors aging"' | ''            | ''                               | ''          | ''             | ''       | ''         | ''                   | ''          | ''                           | ''                                                  | ''              |
-				| ''                                | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''       | ''         | ''                   | ''          | ''                           | ''                                                  | 'Attributes'    |
-				| ''                                | ''            | ''                               | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                    | 'Payment date'                                      | 'Aging closing' |
-				| ''                                | 'Receipt'     | '$$DatePurchaseInvoice0240164$$' | '4 000'     | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$ 00:00:00' | ''              |
+				| '$$PurchaseInvoice0240164$$'         | ''               | ''                                  | ''             | ''                | ''          | ''            | ''                      | ''             | ''                              | ''                                                     | ''                  |
+				| 'Document registrations records'     | ''               | ''                                  | ''             | ''                | ''          | ''            | ''                      | ''             | ''                              | ''                                                     | ''                  |
+				| 'Register  "R5012 Vendors aging"'    | ''               | ''                                  | ''             | ''                | ''          | ''            | ''                      | ''             | ''                              | ''                                                     | ''                  |
+				| ''                                   | 'Record type'    | 'Period'                            | 'Resources'    | 'Dimensions'      | ''          | ''            | ''                      | ''             | ''                              | ''                                                     | 'Attributes'        |
+				| ''                                   | ''               | ''                                  | 'Amount'       | 'Company'         | 'Branch'    | 'Currency'    | 'Agreement'             | 'Partner'      | 'Invoice'                       | 'Payment date'                                         | 'Aging closing'     |
+				| ''                                   | 'Receipt'        | '$$DatePurchaseInvoice0240164$$'    | '4 000'        | 'Main Company'    | ''          | 'TRY'         | 'Vendor Ferron, TRY'    | 'Ferron BP'    | '$$PurchaseInvoice0240164$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$ 00:00:00'    | ''                  |
 	* Create Cash payment (advance + closed the remainder of the invoice)
 			Given I open hyperlink "e1cib/list/Document.CashPayment"
 			And I click the button named "FormCreate"
 			* Select company
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 			* Filling in the details of the document
 				And I click Select button of "Cash account" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Cash desk №4' |
+					| 'Description'       |
+					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'   |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I input "8000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -658,19 +658,19 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 		* Post Vendors advance closing document
 			Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 			And I go to line in "List" table
-				| 'Number' |
-				| '1'  |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And I go to line in "List" table
-				| 'Number' |
-				| '4'  |
+				| 'Number'     |
+				| '4'          |
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 			And "List" table contains lines:
-				| 'Period'                         | 'Recorder'                   | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                    | 'Payment date'                             | 'Aging closing'                                        |
-				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
+				| 'Period'                            | 'Recorder'                      | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                       | 'Payment date'                                | 'Aging closing'                   |
+				| '$$DatePurchaseInvoice0240164$$'    | '$$PurchaseInvoice0240164$$'    | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoice0240164$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | ''                                |
+				| '$$DateCashPayment10000505$$'       | '$$CashPayment10000505$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoice0240164$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
 			And I close all client application windows	
 
 
@@ -682,19 +682,19 @@ Scenario: _1000055 check Aging sum when delete row from PI
 		* Filling in customer information
 			And I click Select button of "Partner" field 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Ferron BP'     |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table 
 			And I click Select button of "Partner term" field 
 			And I go to line in "List" table 
-					| 'Description'                      |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 			And I select current line in "List" table 
 		* Select store
 			And I click Select button of "Store" field 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Store 02'    |
+					| 'Description'      |
+					| 'Store 02'         |
 			And I select current line in "List" table 
 			And I click Select button of "Legal name" field 
 			And I activate "Description" field in "List" table 
@@ -703,14 +703,14 @@ Scenario: _1000055 check Aging sum when delete row from PI
 			And in the table "ItemList" I click the button named "ItemListAdd" 
 			And I click choice button of "Item" attribute in "ItemList" table 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Dress'       |
+					| 'Description'      |
+					| 'Dress'            |
 			And I select current line in "List" table 
 			And I activate "Item key" field in "ItemList" table 
 			And I click choice button of "Item key" attribute in "ItemList" table 
 			And I go to line in "List" table 
-					| 'Item key' |
-					| 'L/Green'  |
+					| 'Item key'      |
+					| 'L/Green'       |
 			And I select current line in "List" table 
 			And I activate "Quantity" field in "ItemList" table 
 			And I input "1,000" text in "Quantity" field of "ItemList" table 
@@ -719,39 +719,39 @@ Scenario: _1000055 check Aging sum when delete row from PI
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 			And I go to line in "ItemList" table 
-					|'#'| 'Item' |
-					|'2'| 'Dress'       |
+					| '#'     | 'Item'       |
+					| '2'     | 'Dress'      |
 			And I activate "Price" field in "ItemList" table
 			And I input "600,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "PaymentTerms" table contains lines
-				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
-				| '1 500,00' | 'Post-shipment credit' | '7'               | '100,00'                |			
+				| 'Amount'      | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
+				| '1 500,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 		* Delete first string and check Aging sum
 			And I go to line in "ItemList" table 
-				|'#'| 'Item' |
-				|'1'| 'Dress'       |
+				| '#'    | 'Item'      |
+				| '1'    | 'Dress'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 			And "PaymentTerms" table contains lines
-				| 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
-				| '600,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+				| 'Amount'    | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
+				| '600,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 		* Add string and check aging sum
 			And I go to line in "ItemList" table 
-				|'#'| 'Item' |
-				|'1'| 'Dress'       |
+				| '#'    | 'Item'      |
+				| '1'    | 'Dress'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 			And "PaymentTerms" table contains lines
-				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
-				| '1 200,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+				| 'Amount'      | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
+				| '1 200,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 		* Post PI, delete string and check aging sum
 			And I click "Post" button			
 			And I go to line in "ItemList" table 
-				|'#'| 'Item' |
-				|'1'| 'Dress'       |
+				| '#'    | 'Item'      |
+				| '1'    | 'Dress'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 			And "PaymentTerms" table contains lines
-				| 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
-				| '600,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+				| 'Amount'    | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
+				| '600,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 			And I close all client application windows
 
 
@@ -764,33 +764,33 @@ Scenario: _1000056 check aging  date in the PI (created based on GR)
 		* Filling in customer information
 			And I click Select button of "Partner" field 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Ferron BP'     |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table 
 			And I click Select button of "Partner term" field 
 			And I go to line in "List" table 
-					| 'Description'                      |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 			And I select current line in "List" table 
 			And I select "Approved" exact value from the drop-down list named "Status"	
 		* Select store
 			And I click Select button of "Store" field 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Store 01'    |
+					| 'Description'      |
+					| 'Store 01'         |
 			And I select current line in "List" table 
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd" 
 			And I click choice button of "Item" attribute in "ItemList" table 
 			And I go to line in "List" table 
-					| 'Description' |
-					| 'Dress'       |
+					| 'Description'      |
+					| 'Dress'            |
 			And I select current line in "List" table 
 			And I activate "Item key" field in "ItemList" table 
 			And I click choice button of "Item key" attribute in "ItemList" table 
 			And I go to line in "List" table 
-					| 'Item key' |
-					| 'L/Green'  |
+					| 'Item key'      |
+					| 'L/Green'       |
 			And I select current line in "List" table 
 			And I activate "Quantity" field in "ItemList" table 
 			And I input "1,000" text in "Quantity" field of "ItemList" table 
@@ -798,8 +798,8 @@ Scenario: _1000056 check aging  date in the PI (created based on GR)
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 			And I go to line in "ItemList" table 
-					|'#'| 'Item' |
-					|'2'| 'Dress'       |
+					| '#'     | 'Item'       |
+					| '2'     | 'Dress'      |
 			And I activate "Price" field in "ItemList" table
 			And I input "900,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -823,6 +823,6 @@ Scenario: _1000056 check aging  date in the PI (created based on GR)
 			And I click "Ok" button
 			And I move to "Aging" tab
 			And "PaymentTerms" table became equal
-				| '#' | 'Date'                                                | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
-				| '1' | '{Format(CurrentDate() + 7 * 24 * 60 * 60, "DLF=D")}' | '900,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+				| '#'    | 'Date'                                                   | 'Amount'    | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
+				| '1'    | '{Format(CurrentDate() + 7 * 24 * 60 * 60, "DLF=D")}'    | '900,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 			And I close all client application windows

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @LoadInfo
@@ -42,14 +42,14 @@ Scenario: _020000 preparation (Loadinfo)
 			When import mocks for currency rate
 			Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 			And I go to line in "List" table
-				| 'is Product server' |
-				| 'Yes'               |	
+				| 'is Product server'     |
+				| 'Yes'                   |
 			And I select current line in "List" table
 			And I remove checkbox "is Product server"
 			And I click "Save and close" button
 			And "List" table contains lines
-				| 'is Product server' |
-				| 'No'                |						
+				| 'is Product server'     |
+				| 'No'                    |
 		* Add Plugin ExternalBankUa
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
@@ -83,60 +83,60 @@ Scenario: _020000 preparation (Loadinfo)
 		* Filling in the setting for currency rate loading from Bank UA
 			Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Bank UA'     |
+				| 'Description'     |
+				| 'Bank UA'         |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'ExternalBankUa' |
+				| 'Description'        |
+				| 'ExternalBankUa'     |
 			And I select current line in "List" table
 			And I click "Settings" button
 			Then "Settings" window is opened
 			And I click Select button of "Currency from" field
 			And I go to line in "List" table
-				| 'Description'     |
-				| 'Ukraine Hryvnia' |
+				| 'Description'         |
+				| 'Ukraine Hryvnia'     |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "Ok" button
 			And I click "Save and close" button
 		* Filling in the setting for currency rate loading from tcmb.gov.tr
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Forex Buying' |
+				| 'Description'      |
+				| 'Forex Buying'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'ExternalTCMBGovTr' |
+				| 'Description'           |
+				| 'ExternalTCMBGovTr'     |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "Settings" button
 			And I click Select button of "Currency from" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Turkish lira' |
+				| 'Description'      |
+				| 'Turkish lira'     |
 			And I select current line in "List" table
 			And I select "Banknote Buying" exact value from "Download rate type" drop-down list
 			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button
 			And I click "Save and close" button
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Forex Seling' |
+				| 'Description'      |
+				| 'Forex Seling'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'ExternalTCMBGovTr' |
+				| 'Description'           |
+				| 'ExternalTCMBGovTr'     |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "Settings" button
 			And I click Select button of "Currency from" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Turkish lira' |
+				| 'Description'      |
+				| 'Turkish lira'     |
 			And I select current line in "List" table
 			And I select "Banknote Selling" exact value from "Download rate type" drop-down list
 			And I input "#KeyTcmbGovTr#" text in "Key" field
@@ -145,8 +145,8 @@ Scenario: _020000 preparation (Loadinfo)
 		* Check connection
 			Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Bank UA'     |
+				| 'Description'     |
+				| 'Bank UA'         |
 			And I select current line in "List" table
 			And in the table "ConnectionSetting" I click "Test" button
 			// Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
@@ -162,8 +162,8 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 	* Upload currency rate Forex Buying (from tcmb.gov.tr)
 		And I click "Integrations" button
 		And I go to line in "IntegrationTable" table
-			| Integration settings |
-			| Forex Buying         |
+			| Integration settings    |
+			| Forex Buying            |
 		And I click "Ok" button
 		And I click Select button of "Period" field
 		And I click "Clear period" button
@@ -171,13 +171,13 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 		And I input current date in "DateEnd" field
 		And I click "Select" button
 		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'USD'  |
+			| 'Code'    |
+			| 'USD'     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'EUR'  |
+			| 'Code'    |
+			| 'EUR'     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
@@ -187,8 +187,8 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click "Integrations" button
 		And I go to line in "IntegrationTable" table
-			| Integration settings |
-			| Forex Seling         |
+			| Integration settings    |
+			| Forex Seling            |
 		And I click "Ok" button
 		And I click Select button of "Period" field
 		And I click "Clear period" button
@@ -196,8 +196,8 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 		And I input current date in "DateEnd" field
 		And I click "Select" button
 		And I go to line in "Currencies" table
-			| Code |
-			| USD  |
+			| Code    |
+			| USD     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
@@ -206,11 +206,11 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 	* Check currency downloads
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 		And "List" table contains lines
-			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
-			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
-			| 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
-			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
+			| 'Currency from'   | 'Currency to'   | 'Source'         | 'Multiplicity'   | 'Rate'    |
+			| 'TRY'             | 'USD'           | 'Forex Seling'   | '1'              | '*'       |
+			| 'TRY'             | 'USD'           | 'Forex Seling'   | '1'              | '*'       |
+			| 'TRY'             | 'USD'           | 'Forex Buying'   | '1'              | '*'       |
+			| 'TRY'             | 'EUR'           | 'Forex Buying'   | '1'              | '*'       |
 		And I close all client application windows
 
 Scenario: _020002 check load currency rate from bank.gov.ua
@@ -221,8 +221,8 @@ Scenario: _020002 check load currency rate from bank.gov.ua
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click "Integrations" button
 		And I go to line in "IntegrationTable" table
-			| Integration settings |
-			| Bank UA         |
+			| Integration settings    |
+			| Bank UA                 |
 		And I click "Ok" button
 		And I click Select button of "Period" field
 		And I click "Clear period" button
@@ -230,18 +230,18 @@ Scenario: _020002 check load currency rate from bank.gov.ua
 		And I input current date in "DateEnd" field
 		And I click "Select" button
 		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'USD'  |
+			| 'Code'    |
+			| 'USD'     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'EUR'  |
+			| 'Code'    |
+			| 'EUR'     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'TRY'  |
+			| 'Code'    |
+			| 'TRY'     |
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
@@ -250,17 +250,17 @@ Scenario: _020002 check load currency rate from bank.gov.ua
 	* Check currency downloads
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 		And "List" table contains lines
-			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
-			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
-			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
+			| 'Currency from'   | 'Currency to'   | 'Source'    | 'Multiplicity'   | 'Rate'    |
+			| 'UAH'             | 'USD'           | 'Bank UA'   | '1'              | '*'       |
+			| 'UAH'             | 'EUR'           | 'Bank UA'   | '1'              | '*'       |
+			| 'UAH'             | 'TRY'           | 'Bank UA'   | '1'              | '*'       |
 
 Scenario: _020003 delete integration settings
 	* Delete integration settings
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Forex Buying' |
+			| 'Description'     |
+			| 'Forex Buying'    |
 		And I activate field named "Description" in "List" table
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -270,24 +270,24 @@ Scenario: _020003 delete integration settings
 	* Upload currency rate Forex Buying (from tcmb.gov.tr)
 		And I click "Integrations" button
 		And "IntegrationTable" table does not contain lines
-			| Integration settings |
-			| Forex Buying         |
+			| Integration settings    |
+			| Forex Buying            |
 		And I close all client application windows
 		
 		
 Scenario: _999999 close TestClient session
 	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Forex Seling'     |
+		| 'Description'    |
+		| 'Forex Seling'   |
 	And I select current line in "List" table
 	And I click "Settings" button
 	And I input "" text in "Key" field
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Forex Buying'     |
+		| 'Description'    |
+		| 'Forex Buying'   |
 	And I select current line in "List" table
 	And I click "Settings" button
 	And I input "" text in "Key" field

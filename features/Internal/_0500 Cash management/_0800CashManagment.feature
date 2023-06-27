@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -46,8 +46,8 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -63,8 +63,8 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		And I set checkbox "Is financial"
 		And I click the button named "FormWriteAndClose"
 		And "List" table contains lines
-			| 'Description'             |
-			| 'Begin of the next month' |
+			| 'Description'                |
+			| 'Begin of the next month'    |
 		And I close all client application windows
 
 Scenario: _0800001 check preparation
@@ -76,44 +76,44 @@ Scenario: _080001 create Incoming payment order
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| Description    |
+		| Main Company   |
 	And I select current line in "List" table
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 		| Description         |
-		| Bank account, USD |
+		| Bank account, USD   |
 	And I select current line in "List" table
 	And I click Select button of "Currency" field
 	And I go to line in "List" table
-		| Code | Description     |
-		| USD  | American dollar |
+		| Code  | Description       |
+		| USD   | American dollar   |
 	And I select current line in "List" table
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'Begin of the next month' |
+		| 'Description'               |
+		| 'Begin of the next month'   |
 	And I select current line in "List" table	
 	* Filling in tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Lomaniti    |
+			| Description    |
+			| Lomaniti       |
 		And I select current line in "List" table
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description     |
-			| Company Lomaniti |
+			| Description         |
+			| Company Lomaniti    |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListFinancialMovementType" in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I select "Approved" exact value from "Status" drop-down list							
@@ -124,8 +124,8 @@ Scenario: _080001 create Incoming payment order
 	And I save the window as "$$IncomingPaymentOrder080001$$"
 	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
-		| 'Number'                               | 'Company'      | 'Account'           | 'Currency' |
-		| '$$NumberIncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'USD'      |
+		| 'Number'                                | 'Company'       | 'Account'            | 'Currency'   |
+		| '$$NumberIncomingPaymentOrder080001$$'  | 'Main Company'  | 'Bank account, USD'  | 'USD'        |
 	And I close all client application windows
 
 
@@ -138,8 +138,8 @@ Scenario: _080004 check Description in IncomingPaymentOrder
 Scenario: _080005 create Bank receipt based on Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberIncomingPaymentOrder080001$$'      |
+		| 'Number'                                 |
+		| '$$NumberIncomingPaymentOrder080001$$'   |
 	* Create Bank receipt from Incoming Payment Order
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
@@ -156,8 +156,8 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberIncomingPaymentOrder080001$$'      |
+			| 'Number'                                  |
+			| '$$NumberIncomingPaymentOrder080001$$'    |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -172,9 +172,9 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberBankReceipt0800051$$'      |
-			| '$$NumberBankReceipt0800052$$'      |	
+			| 'Number'                          |
+			| '$$NumberBankReceipt0800051$$'    |
+			| '$$NumberBankReceipt0800052$$'    |
 		And I close all client application windows
 
 
@@ -183,23 +183,23 @@ Scenario: _080006 create Outgoing payment order
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
+		| 'Description'    |
+		| 'Main Company'   |
 	And I select current line in "List" table
 	And I click Select button of "Account" field
 	And I go to line in "List" table
 		| 'Description'         |
-		| 'Bank account, TRY' |
+		| 'Bank account, TRY'   |
 	And I select current line in "List" table
 	And I click Select button of "Currency" field
 	And I go to line in "List" table
-		| 'Code' |
-		| 'TRY'  |
+		| 'Code'   |
+		| 'TRY'    |
 	And I select current line in "List" table
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Begin of the next month'  |
+		| 'Description'               |
+		| 'Begin of the next month'   |
 	And I select current line in "List" table
 	* Change status
 		And I select "Approved" exact value from "Status" drop-down list
@@ -207,14 +207,14 @@ Scenario: _080006 create Outgoing payment order
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP    |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click choice button of "Payee" attribute in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "3 000,00" text in "Amount" field of "PaymentList" table
@@ -222,8 +222,8 @@ Scenario: _080006 create Outgoing payment order
 		And I select current line in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
@@ -233,8 +233,8 @@ Scenario: _080006 create Outgoing payment order
 	And I save the window as "$$OutgoingPaymentOrder080006$$"
 	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
-		| Number | Company       | Account           | Currency |
-		| 1      |  Main Company |  Bank account, TRY | TRY      |
+		| Number  | Company       | Account            | Currency   |
+		| 1       | Main Company  | Bank account, TRY  | TRY        |
 	And I close all client application windows
 
 	
@@ -247,8 +247,8 @@ Scenario: _080009 check Description in Outgoing payment order
 Scenario: _080010 create Bank payment based on Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberOutgoingPaymentOrder080006$$'      |
+		| 'Number'                                 |
+		| '$$NumberOutgoingPaymentOrder080006$$'   |
 	* Create Bank payment from Outgoing payment order
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
@@ -265,8 +265,8 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberOutgoingPaymentOrder080006$$'      |
+			| 'Number'                                  |
+			| '$$NumberOutgoingPaymentOrder080006$$'    |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -281,9 +281,9 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberBankPayment08000102$$'      |
-			| '$$NumberBankPayment08000101$$'      |	
+			| 'Number'                           |
+			| '$$NumberBankPayment08000102$$'    |
+			| '$$NumberBankPayment08000101$$'    |
 		And I close all client application windows
 		
 	
@@ -319,8 +319,8 @@ Scenario: _080015 check the display of the header of the collapsible group in In
 	When check the display of the header of the collapsible group in planned incoming/outgoing documents
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'Begin of the next month' |
+		| 'Description'               |
+		| 'Begin of the next month'   |
 	And I select current line in "List" table
 	And I move to the next attribute
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning period: Begin of the next month" text
@@ -331,8 +331,8 @@ Scenario: _080016 check the display of the header of the collapsible group in Ou
 	When check the display of the header of the collapsible group in planned incoming/outgoing documents
 	And I click Select button of "Planning period" field
 	And I go to line in "List" table
-		| 'Description' |
-		| 'First'       |
+		| 'Description'   |
+		| 'First'         |
 	And I select current line in "List" table
 	And I move to the next attribute
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning period: First" text

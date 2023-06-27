@@ -15,7 +15,7 @@ Function CheckDocument(Document, ListOfErrors = Undefined, DetailResult = False)
 	DocName = Document.Metadata().Name;
 	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
 		//@skip-check invocation-parameter-type-intersect, property-return-type
-		Raise StrTemplate(R().ATC_001, DocType);
+		Raise StrTemplate(R().ATC_001, DocType); // Unknown document type
 	EndIf;
 	
 	If ListOfErrors = Undefined Then
@@ -166,7 +166,7 @@ EndFunction
 //  PostingMode - DocumentPostingMode - Posting mode
 Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
 	If WriteMode = DocumentWriteMode.Posting Then
-		If Not Constants.UseAdditionalTableControlDocument.Get() Then
+		If Not FOServer.isUseAdditionalTableControlDocument() Then
 			Return;
 		EndIf;
 		

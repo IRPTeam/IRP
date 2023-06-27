@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -22,12 +22,12 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 	* Creating statuses for the document Reconciliation Statement
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| ReconciliationStatement                |
+			| Predefined data name       |
+			| ReconciliationStatement    |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Reconciliation statement" text in the field named "Description_en"
@@ -37,8 +37,8 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 		And Delay 10
 		* Adding status "Draft"
 			And I go to line in "List" table
-			| 'Description'              |
-			| 'Reconciliation statement' |
+			| 'Description'                 |
+			| 'Reconciliation statement'    |
 			And I click the button named "FormCreate"
 			And I set checkbox "Set by default"
 			And I click Open button of the field named "Description_en"
@@ -59,8 +59,8 @@ Scenario: _060005 availability of Currency, Begin and End period field in Reconc
 	And I click the button named "FormCreate"
 	And I click Select button of "Currency" field
 	And I go to line in "List" table
-		| 'Code' | 'Description'  |
-		| 'TRY'  | 'Turkish lira' |
+		| 'Code'  | 'Description'    |
+		| 'TRY'   | 'Turkish lira'   |
 	And I select current line in "List" table
 	And I click Select button of "Begin period" field
 	And I input "01.09.2019" text in "Begin period" field

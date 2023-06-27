@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @UserCatalogs
@@ -40,14 +40,14 @@ Scenario: _008004 filling in the "Users" catalog
 		And I select "English" exact value from "Interface localization" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Daniel Smith'       |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I select "Compact" exact value from "Form scale variant" drop-down list
 		And I click Select button of "User group" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'       |
+			| 'Description'    |
+			| 'Admin'          |
 		And I select current line in "List" table
 		And I set checkbox named "ShowInList"
 		And I click the button named "FormWrite"
@@ -73,8 +73,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I input "OWilliams" text in "Login" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Olivia Williams'       |
+			| 'Description'        |
+			| 'Olivia Williams'    |
 		And I select current line in "List" table
 		And I select "Auto" exact value from "Form scale variant" drop-down list
 		And I select "English" exact value from "Data localization" drop-down list
@@ -82,8 +82,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'       |
+			| 'Description'    |
+			| 'Admin'          |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -108,8 +108,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I input "EJones" text in "Login" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Emily Jones'       |
+			| 'Description'    |
+			| 'Emily Jones'    |
 		And I select current line in "List" table
 		And I select "Normal" exact value from "Form scale variant" drop-down list
 		And I select "Turkish" exact value from "Data localization" drop-down list
@@ -117,8 +117,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'       |
+			| 'Description'    |
+			| 'Admin'          |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -142,8 +142,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I input "SBorisova" text in "Login" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sofia Borisova'       |
+			| 'Description'       |
+			| 'Sofia Borisova'    |
 		And I select current line in "List" table
 		And I select "Compact" exact value from "Form scale variant" drop-down list
 		And I select "Turkish" exact value from "Data localization" drop-down list
@@ -151,8 +151,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'       |
+			| 'Description'    |
+			| 'Admin'          |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -187,14 +187,14 @@ Scenario: _008005 assignment of access rights to users
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 	* Assignment of access rights to sales rep
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Commercial Agent'       |
+				| 'Description'          |
+				| 'Commercial Agent'     |
 		And I select current line in "List" table
 		And in the table "Profiles" I click the button named "ProfilesAdd"
 		And I click choice button of "Profile" attribute in "Profiles" table
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Commercial Agent'       |
+				| 'Description'          |
+				| 'Commercial Agent'     |
 		And I select current line in "List" table
 		And Delay 1
 		And I move to "Users" tab
@@ -204,40 +204,40 @@ Scenario: _008005 assignment of access rights to users
 		And Delay 3
 		And I activate "Users" window
 		And I go to line in "List" table
-			| 'Login'  |
-			| 'DSmith' |
+			| 'Login'     |
+			| 'DSmith'    |
 		And I select current line in "List" table
 		And I finish line editing in "Users" table
 		And in the table "Users" I click the button named "UsersAdd"
 		And I click choice button of "User" attribute in "Users" table
 		And Delay 1
 		And I go to line in "List" table
-			| 'Login' |
-			| 'AOrlov'       |
+			| 'Login'     |
+			| 'AOrlov'    |
 		And I select current line in "List" table
 		And I finish line editing in "Users" table
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "Description_en" became equal to "Commercial Agent"
 			And "Profiles" table became equal
-				| 'Profile'          |
-				| 'Manager' |
-				| 'Commercial Agent' |
+				| 'Profile'              |
+				| 'Manager'              |
+				| 'Commercial Agent'     |
 			And "Users" table contains lines
-				| 'User'                                 |
-				| 'Daniel Smith (Commercial Agent 1)'    |
-				| 'Alexander Orlov (Commercial Agent 2)' |
+				| 'User'                                     |
+				| 'Daniel Smith (Commercial Agent 1)'        |
+				| 'Alexander Orlov (Commercial Agent 2)'     |
 			And I click the button named "FormWriteAndClose"
 	* Assignment of access rights to managers
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Manager'       |
+			| 'Description'    |
+			| 'Manager'        |
 		And I select current line in "List" table
 		And in the table "Profiles" I click the button named "ProfilesAdd"
 		And I click choice button of "Profile" attribute in "Profiles" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Commercial Agent'       |
+			| 'Description'         |
+			| 'Commercial Agent'    |
 		And I select current line in "List" table
 		And Delay 1
 		And I move to "Users" tab
@@ -246,16 +246,16 @@ Scenario: _008005 assignment of access rights to users
 		And I click choice button of "User" attribute in "Users" table
 		And Delay 1
 		And I go to line in "List" table
-			| 'Login' |
-			| 'OWilliams'       |
+			| 'Login'        |
+			| 'OWilliams'    |
 		And I select current line in "List" table
 		And I finish line editing in "Users" table
 		And in the table "Users" I click the button named "UsersAdd"
 		And I click choice button of "User" attribute in "Users" table
 		And Delay 1
 		And I go to line in "List" table
-				| 'Login' |
-				| 'EJones'       |
+				| 'Login'      |
+				| 'EJones'     |
 		And I select current line in "List" table
 		And I finish line editing in "Users" table
 		And I click the button named "FormWriteAndClose"
@@ -309,42 +309,42 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 	* Adding employees to the Region 1 segment from the form
 		* Adding "Olivia Williams" to the segment Region 1
 			And I go to line in "List" table
-					| 'Description'  |
-					| 'Olivia Williams' |
+					| 'Description'          |
+					| 'Olivia Williams'      |
 			And I select current line in "List" table
 			And In this window I click command interface button "Partner segments content"
 			And I click the button named "FormCreate"
 			And I click Select button of "Segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 1'    |
+				| 'Description'     |
+				| 'Region 1'        |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			* Check data save
 				And "List" table became equal
-				| 'Segment'  | 'Partner'         |
-				| 'Region 1' | 'Olivia Williams' |
+				| 'Segment'     | 'Partner'             |
+				| 'Region 1'    | 'Olivia Williams'     |
 			And I close all client application windows
 			And Delay 2
 		* Adding "Emily Jones" to the segment Region 1
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 			And I go to line in "List" table
-					| 'Description'  |
-					| 'Emily Jones' |
+					| 'Description'      |
+					| 'Emily Jones'      |
 			And I select current line in "List" table
 			And Delay 2
 			And In this window I click command interface button "Partner segments content"
 			And I click the button named "FormCreate"
 			And I click Select button of "Segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 1'    |
+				| 'Description'     |
+				| 'Region 1'        |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			* Check data save
 				And "List" table became equal
-				| 'Segment'  | 'Partner'         |
-				| 'Region 1' | 'Emily Jones' |
+				| 'Segment'     | 'Partner'         |
+				| 'Region 1'    | 'Emily Jones'     |
 			And I close all client application windows
 			And Delay 2
 	* Adding employees to the Region 2 segment from the form
@@ -352,22 +352,22 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 		*  Adding Olivia Williams to the segment Region 2
 			And I go to line in "List" table
-					| 'Description'  |
-					| 'Olivia Williams' |
+					| 'Description'          |
+					| 'Olivia Williams'      |
 			And I select current line in "List" table
 			And In this window I click command interface button "Partner segments content"
 			And I click the button named "FormCreate"
 			And I click Select button of "Segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
+				| 'Description'     |
+				| 'Region 2'        |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			* Check data save
 				And "List" table became equal
-				| 'Segment'  | 'Partner'         |
-				| 'Region 1' | 'Olivia Williams' |
-				| 'Region 2' | 'Olivia Williams' |
+				| 'Segment'     | 'Partner'             |
+				| 'Region 1'    | 'Olivia Williams'     |
+				| 'Region 2'    | 'Olivia Williams'     |
 			And I close all client application windows
 			And Delay 2
 	* Adding employees to the segment Region 1 from the form (the employee also is a client)
@@ -375,8 +375,8 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 		* Adding Emily Jones to the segment Region 1
 			And I go to line in "List" table
-					| 'Description'  |
-					| 'Emily Jones' |
+					| 'Description'      |
+					| 'Emily Jones'      |
 			And I select current line in "List" table
 			And I change checkbox "Customer"
 			And I click the button named "FormWrite"
@@ -384,15 +384,15 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 			And I click the button named "FormCreate"
 			And I click Select button of "Segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'    |
+				| 'Description'     |
+				| 'Retail'          |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			* Check data save
 				And "List" table contains lines
-				| 'Segment'  | 'Partner'         |
-				| 'Region 1' | 'Emily Jones' |
-				| 'Retail' | 'Emily Jones' |
+				| 'Segment'     | 'Partner'         |
+				| 'Region 1'    | 'Emily Jones'     |
+				| 'Retail'      | 'Emily Jones'     |
 			And I close all client application windows
 	* Adding employees to the segment Region 2 in register
 		* Opening register Partner segments content
@@ -401,20 +401,20 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 			And I click the button named "FormCreate"
 			And I click Select button of "Segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 1'  |
+				| 'Description'     |
+				| 'Region 1'        |
 			And I select current line in "List" table
 			Then "Partner segment content (create) *" window is opened
 			And I click Select button of "Partner" field
 			And Delay 5
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Sofia Borisova' |
+				| 'Description'        |
+				| 'Sofia Borisova'     |
 			And I select current line in "List" table
 			And I click the button named "FormWriteAndClose"
 			And "List" table contains lines
-				| 'Segment' | 'Partner' |
-				| 'Region 1' | 'Sofia Borisova' |
+				| 'Segment'     | 'Partner'            |
+				| 'Region 1'    | 'Sofia Borisova'     |
 
 
 Scenario: _008008 create employee positions
@@ -437,9 +437,9 @@ Scenario: _008008 create employee positions
 		And I wait "Expense and revenue type (create) *" window closing in 20 seconds
 	* Check creation
 		And "List" table contains lines
-			| 'Description'          |
-			| 'Manager'              |
-			| 'Sales representative' |
+			| 'Description'             |
+			| 'Manager'                 |
+			| 'Sales representative'    |
 		
 Scenario: _008009 create accrual and deduction types
 	And I close all client application windows
@@ -494,10 +494,10 @@ Scenario: _008009 create accrual and deduction types
 		And I click "Save and close" button		
 	* Check creation
 		And "List" table contains lines
-			| 'Description'             |
-			| 'Salary by day'           |
-			| 'Monthly salary'          |
-			| 'Deduction'               |
-			| 'Cash advance deductions' |
+			| 'Description'                |
+			| 'Salary by day'              |
+			| 'Monthly salary'             |
+			| 'Deduction'                  |
+			| 'Cash advance deductions'    |
 		And I close all client application windows
 		

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ContactInformation
@@ -57,21 +57,21 @@ Scenario: _010004 create Contact info Type - Addresses
 	* Adding Plugin sessing for addresses
 		And I click choice button of "Country" attribute in "ExternalDataProcess" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Ukraine'    |
+			| 'Description'    |
+			| 'Ukraine'        |
 		And I select current line in "List" table
 		And I activate "Plugins" field in "ExternalDataProcess" table
 		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 		Then "Plugins" window is opened
 		And I go to line in "List" table
 			| 'Description'                |
-			| 'ExternalShippingAddress' |
+			| 'ExternalShippingAddress'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines
-		| 'Description' |
-		| 'Google Addreses'  |
+		| 'Description'       |
+		| 'Google Addreses'   |
 
 Scenario: _0100041 check preparation
 	When check preparation
@@ -133,8 +133,8 @@ Scenario: _010009 adding phones to Contact info type
 		And I click Select button of "Value type" field
 		* Filling in description and data type
 			And I go to line in "" table
-				| ''       |
-				| 'String' |
+				| ''           |
+				| 'String'     |
 			And I click "OK" button
 			And I input "Phone_1" text in "Unique ID" field
 			And I click Open button of the field named "Description_en"
@@ -145,16 +145,16 @@ Scenario: _010009 adding phones to Contact info type
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| 'Description'                      |
-				| 'ExternalInputPhoneUkraine' |
+				| 'Description'                   |
+				| 'ExternalInputPhoneUkraine'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I activate "Country" field in "ExternalDataProcess" table
 			And I select current line in "ExternalDataProcess" table
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Ukraine   |
+				| Description     |
+				| Ukraine         |
 			And I select current line in "List" table
 		And I finish line editing in "ExternalDataProcess" table
 			And I click "Save and close" button
@@ -163,7 +163,7 @@ Scenario: _010009 adding phones to Contact info type
 	* Check for created "Company phone"
 		And "List" table contains lines
 		| 'Description'     |
-		| 'Company phone' |
+		| 'Company phone'   |
 	* Creation Partner phone
 		And I click the button named "FormCreate"
 		* Filling in description and data type
@@ -171,8 +171,8 @@ Scenario: _010009 adding phones to Contact info type
 			And I click Select button of "Value type" field
 			Then "Edit data type" window is opened
 			And I go to line in "" table
-				| ''       |
-				| 'String' |
+				| ''           |
+				| 'String'     |
 			And I click "OK" button
 			And I input "Phone_2" text in "Unique ID" field
 			And I click Open button of the field named "Description_en"
@@ -183,24 +183,24 @@ Scenario: _010009 adding phones to Contact info type
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| 'Description'                      |
-				| 'ExternalInputPhoneUkraine' |
+				| 'Description'                   |
+				| 'ExternalInputPhoneUkraine'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I activate "Country" field in "ExternalDataProcess" table
 			And I select current line in "ExternalDataProcess" table
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Ukraine   |
+				| Description     |
+				| Ukraine         |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			And Delay 5
 			And I enter a Unique ID String field type value for the partner phone
 	* Check for created Partner phone
 		And "List" table contains lines
-			| 'Description'     |
-			| 'Partner phone' |
+			| 'Description'      |
+			| 'Partner phone'    |
 
 Scenario: _010010 adding addresses to a Contact info type
 	* Opening the form for filling in Contact info type
@@ -211,8 +211,8 @@ Scenario: _010010 adding addresses to a Contact info type
 			And I click Select button of "Value type" field
 			Then "Edit data type" window is opened
 			And I go to line in "" table
-				| ''                |
-				| 'Address hierarchy' |
+				| ''                      |
+				| 'Address hierarchy'     |
 			And I click "OK" button
 			And I input "Adr_1" text in "Unique ID" field
 			And I change checkbox "Show on form"
@@ -229,8 +229,8 @@ Scenario: _010010 adding addresses to a Contact info type
 			And I click Select button of "Value type" field
 			Then "Edit data type" window is opened
 			And I go to line in "" table
-				| ''                |
-				| 'Address hierarchy' |
+				| ''                      |
+				| 'Address hierarchy'     |
 			And I click "OK" button
 			And I input "Adr_2" text in "Unique ID" field
 			And I change checkbox "Show on form"
@@ -244,30 +244,30 @@ Scenario: _010010 adding addresses to a Contact info type
 		* Adding Plugin sessing to specify the address for Ukraine
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Ukraine     |
+				| Description     |
+				| Ukraine         |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description'                |
-				| 'ExternalShippingAddress' |
+				| 'Description'                 |
+				| 'ExternalShippingAddress'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Turkey     |
+				| Description     |
+				| Turkey          |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description'                |
-				| 'ExternalShippingAddress' |
+				| 'Description'                 |
+				| 'ExternalShippingAddress'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I click "Save and close" button
@@ -278,8 +278,8 @@ Scenario: _010010 adding addresses to a Contact info type
 			And I click Select button of "Value type" field
 			Then "Edit data type" window is opened
 			And I go to line in "" table
-				| ''                |
-				| 'Address hierarchy' |
+				| ''                      |
+				| 'Address hierarchy'     |
 			And I click "OK" button
 			And I input "Adr_3" text in "Unique ID" field
 			And I change checkbox "Show on form"
@@ -293,30 +293,30 @@ Scenario: _010010 adding addresses to a Contact info type
 		* Adding Plugin sessing to specify the address for Ukraine
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Ukraine     |
+				| Description     |
+				| Ukraine         |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description'                |
-				| 'ExternalShippingAddress' |
+				| 'Description'                 |
+				| 'ExternalShippingAddress'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 			And I click choice button of "Country" attribute in "ExternalDataProcess" table
 			And I go to line in "List" table
-				| Description |
-				| Turkey     |
+				| Description     |
+				| Turkey          |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description'                |
-				| 'ExternalShippingAddress' |
+				| 'Description'                 |
+				| 'ExternalShippingAddress'     |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I click "Save and close" button
@@ -325,10 +325,10 @@ Scenario: _010010 adding addresses to a Contact info type
 			And I enter a Unique ID String field type value for the partner addresses
 		* Check for created
 			And "List" table contains lines
-				| 'Description'                     |
-				| 'Location address (Partner)'    |
-				| 'Billing address (Company)'    |
-				| 'Registered address  (Company)' |
+				| 'Description'                       |
+				| 'Location address (Partner)'        |
+				| 'Billing address (Company)'         |
+				| 'Registered address  (Company)'     |
 
 
 Scenario: _010011 adding gps to a Contact info type
@@ -356,8 +356,8 @@ Scenario: _010011 adding gps to a Contact info type
 		And I click Select button of "Value type" field
 		Then "Edit data type" window is opened
 		And I go to line in "" table
-			| ''       |
-			| 'String' |
+			| ''          |
+			| 'String'    |
 		And I select current line in "" table
 		And I click "OK" button
 		And I input "GPS" text in "Unique ID" field
@@ -371,14 +371,14 @@ Scenario: _010011 adding gps to a Contact info type
 		And I activate "Plugins" field in "ExternalDataProcess" table
 		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 		And I go to line in "List" table
-			| 'Description'                 |
-			| 'ExternalCoordinates'  |
+			| 'Description'            |
+			| 'ExternalCoordinates'    |
 		And I select current line in "List" table
 		And I select current line in "ExternalDataProcess" table
 		And I click choice button of "Country" attribute in "ExternalDataProcess" table
 		And I go to line in "List" table
-			| Description |
-			| Ukraine   |
+			| Description    |
+			| Ukraine        |
 		And I select current line in "List" table
 		And I finish line editing in "ExternalDataProcess" table
 		And I click "Save and close" button
@@ -386,8 +386,8 @@ Scenario: _010011 adding gps to a Contact info type
 		And I click the button named "FormCreate"
 		And I click Select button of "Value type" field
 		And I go to line in "" table
-			| ''       |
-			| 'String' |
+			| ''          |
+			| 'String'    |
 		And I select current line in "" table
 		And I click "OK" button
 		And I input "GPSTurkey" text in "Unique ID" field
@@ -401,14 +401,14 @@ Scenario: _010011 adding gps to a Contact info type
 		And I activate "Plugins" field in "ExternalDataProcess" table
 		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
 		And I go to line in "List" table
-			| 'Description'                 |
-			| 'ExternalCoordinates'  |
+			| 'Description'            |
+			| 'ExternalCoordinates'    |
 		And I select current line in "List" table
 		And I select current line in "ExternalDataProcess" table
 		And I click choice button of "Country" attribute in "ExternalDataProcess" table
 		And I go to line in "List" table
-			| Description |
-			| Turkey   |
+			| Description    |
+			| Turkey         |
 		And I select current line in "List" table
 		And I finish line editing in "ExternalDataProcess" table
 		And I click "Save and close" button
@@ -572,8 +572,8 @@ Scenario: _010012 adding additional details for partners "Division"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data name |
-			| Catalog_Partners          |
+			| Predefined data name    |
+			| Catalog_Partners        |
 		And I select current line in "List" table
 	* Filling in the name of the settings for adding additional details for partners
 		And I click Open button of the field named "Description_en"
@@ -610,8 +610,8 @@ Scenario: _010012 adding additional details for partners "Division"
 	* Filling in the created additional attribute for partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Division" field
 		And I click the button named "FormCreate"
@@ -629,19 +629,19 @@ Scenario: _010012 adding additional details for partners "Division"
 		And I click "Save and close" button
 		And Delay 5
 		And I go to line in "List" table
-			| Description |
-			| Region Ukraine     |
+			| Description       |
+			| Region Ukraine    |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 		And Delay 2
 		And I go to line in "List" table
-			| Description |
-			| Kalipso   |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And I click Select button of "Division" field
 		And I go to line in "List" table
-			| Description |
-			| Region Turkey     |
+			| Description      |
+			| Region Turkey    |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 
@@ -652,8 +652,8 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 	* Complete settings to display contact information for Partners
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoSets"
 		And I go to line in "List" table
-		| 'Predefined data name' |
-		| 'Catalog_Partners'          |
+		| 'Predefined data name'   |
+		| 'Catalog_Partners'       |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Partners"
 		And I click Open button of the field named "Description_en"
@@ -663,22 +663,22 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		And I go to line in "List" table
-			| Description                  |
-			| Location address (Partner) |
+			| Description                   |
+			| Location address (Partner)    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		And I go to line in "List" table
-			| Description                  |
-			| Google Addreses |
+			| Description        |
+			| Google Addreses    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		And I go to line in "List" table
-			| Description   |
-			| GPS Ukraine |
+			| Description    |
+			| GPS Ukraine    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And in the table "IDInfoTypes" I click "Set condition" button
@@ -687,16 +687,16 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
 		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
 		And I expand a line in "Source" table
-			| Available fields |
-			| Reference        |
+			| Available fields    |
+			| Reference           |
 		And I go to line in "Source" table
-			| Available fields |
-			| Division  |
+			| Available fields    |
+			| Division            |
 		And I select current line in "Source" table
 		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table	
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Division' 	| 'Region Ukraine'      |
+			| 'Additional attribute'   | 'Description'       |
+			| 'Division'               | 'Region Ukraine'    |
 		And I select current line in "List" table
 		And I finish line editing in "SettingsFilter" table
 		And I click "Ok" button
@@ -704,8 +704,8 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		Then "Contact info types" window is opened
 		And I go to line in "List" table
-			| Description  |
-			| GPS Turkey |
+			| Description    |
+			| GPS Turkey     |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And in the table "IDInfoTypes" I click "Set condition" button
@@ -715,32 +715,32 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
 		Then "Select field" window is opened
 		And I expand a line in "Source" table
-			| Available fields |
-			| Reference        |
+			| Available fields    |
+			| Reference           |
 		And I go to line in "Source" table
-			| Available fields |
-			| Division  |
+			| Available fields    |
+			| Division            |
 		And I select current line in "Source" table
 		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table	
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Division' 	| 'Region Turkey'      |
+			| 'Additional attribute'   | 'Description'      |
+			| 'Division'               | 'Region Turkey'    |
 		And I select current line in "List" table
 		And I finish line editing in "SettingsFilter" table
 		And I click "Ok" button
 		And in the table "IDInfoTypes" I click "Add" button
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		And I go to line in "List" table
-			| Description     |
-			| Partner phone |
+			| Description      |
+			| Partner phone    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
 		And I wait "Partners (Contact info sets) *" window closing in 20 seconds
 	* Fill in the settings for displaying Company contact information
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Companies'          |
+			| 'Predefined data name'    |
+			| 'Catalog_Companies'       |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Companies"
 		And I click Open button of the field named "Description_en"
@@ -757,22 +757,22 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		Then "Contact info types" window is opened
 		And I go to line in "List" table
 			| 'Description'                  |
-			| 'Billing address (Company)' |
+			| 'Billing address (Company)'    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		Then "Contact info types" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Registered address  (Company)' |
+			| 'Description'                      |
+			| 'Registered address  (Company)'    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
 		And Delay 5
 	* Fill in the settings for displaying Store contact information
 		And I go to line in "List" table
-			| 'Predefined data name' |
+			| 'Predefined data name'    |
 			| 'Catalog_Stores'          |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Stores"
@@ -784,8 +784,8 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
 		Then "Contact info types" window is opened
 		And I go to line in "List" table
-			| 'Description'                  |
-			| 'Location address (Partner)' |
+			| 'Description'                   |
+			| 'Location address (Partner)'    |
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
@@ -800,8 +800,8 @@ Scenario: _010014 filling phones for partners
 	* Filling a phone for partner Ferron BP
 		And I click the button named "FormList"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP' |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		And I click Open button of "Partner phone" field
@@ -821,8 +821,8 @@ Scenario: _010015 partner address filling
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling address partner Kalipso
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 	* Check the display of contact information
@@ -846,14 +846,14 @@ Scenario: _010016 address structure input
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Filling in address structure for companies
 		And I go to line in "List" table
-			| Description       |
-			| Company Almo |
+			| Description     |
+			| Company Almo    |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		And I click Open button of "Billing address (Company)" field
 		And I go to line in "CountryTable" table
-		| Country |
-		| Ukraine |
+		| Country   |
+		| Ukraine   |
 		And I select current line in "CountryTable" table
 		// And I input "Country" text in "InputLevel_1" field
 		// And I click the button named "ButtonAdd_2"
@@ -876,14 +876,14 @@ Scenario: _010016 address structure input
 		And Delay 5
 	* Check to save the address structure for Billing address (Company)
 		And I go to line in "List" table
-		| Description     |
-		| Company Sovelie |
+		| Description       |
+		| Company Sovelie   |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		And I click Open button of "Billing address (Company)" field
 		And I go to line in "CountryTable" table
-		| Country |
-		| Ukraine |
+		| Country   |
+		| Ukraine   |
 		And I select current line in "CountryTable" table
 		Then "Shipping address" window is opened
 		And I input "25.03.2022" text in the field named "Period"
@@ -941,15 +941,15 @@ Scenario: _010018 command opening contact information in the partner list
 	* Open catalog Partners and select partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I click "Contact info" button
 	* Check the display of contact information
 		And "IDInfo" table contains lines
-			| 'Type'                       |
-			| 'Location address (Partner)' |
-			| 'GPS Ukraine'                |
-			| 'Partner phone'              |
+			| 'Type'                          |
+			| 'Location address (Partner)'    |
+			| 'GPS Ukraine'                   |
+			| 'Partner phone'                 |
 	And I close all client application windows
 
 
@@ -957,8 +957,8 @@ Scenario: _010019 check edit contact information from the Edit contact info form
 	* Open catalog Partners and select partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I click "Contact info" button
 	* Edit contact info
 		And I input "Odessa, Bunina, 2, №33" text in "Value" field of "IDInfo" table
@@ -966,8 +966,8 @@ Scenario: _010019 check edit contact information from the Edit contact info form
 		And I click "Save and close" button
 	* Check saving of changed contact information
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №33"
@@ -986,8 +986,8 @@ Scenario: _010022 create Addresses
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Description'    |
-			| 'Test addrres 1' |
+			| 'Description'       |
+			| 'Test addrres 1'    |
 	And I close all client application windows
 	
 
@@ -1003,8 +1003,8 @@ Scenario: _010024 create Vehicle type and Vehicle
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Description'    |
-			| 'Vehicle type 1' |
+			| 'Description'       |
+			| 'Vehicle type 1'    |
 		And I close all client application windows	
 	* Create Vehicle
 		Given I open hyperlink "e1cib/list/Catalog.Vehicles"
@@ -1013,14 +1013,14 @@ Scenario: _010024 create Vehicle type and Vehicle
 		And I input "908900" text in "ID (plate)" field
 		And I click Choice button of the field named "Type"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Vehicle type 1' |
+			| 'Description'       |
+			| 'Vehicle type 1'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Description' |'ID (plate)' |
-			| 'Vehicle 1'   |'908900'     |
+			| 'Description'   | 'ID (plate)'    |
+			| 'Vehicle 1'     | '908900'        |
 		And I close all client application windows
 
 

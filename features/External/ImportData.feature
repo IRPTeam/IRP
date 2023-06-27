@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -500,8 +500,8 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 		| 'e1cib/data/Catalog.PaymentTypes?ref=b794e3cbd36876e811eda866939f00cd'  | 'False'         | ''        | 17      | 'Enum.PaymentTypes.Card'  | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | 'False'      | ''         | ''           | ''           | ''                   | ''        | 'Card 04'         | ''                  | ''                | ''                 |
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b'  | 'False'         | 3       | 'Bank term 03'    | ''                  | ''                | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'False'        | 'Bank term 03'   | ''                 | ''               | ''               |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |

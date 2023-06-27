@@ -578,7 +578,7 @@ Function GenerateDataForAccessTest()
 	PriceType = Catalogs.PriceTypes.CreateItem();
 	PriceType.Description_en = "PriceType access deny";	
 	PriceType.DataExchange.Load = True;
-	PriceType.SetNewObjectRef(Data.Account[2]);
+	PriceType.SetNewObjectRef(Data.PriceType[2]);
 	PriceType.Write();
 	
 	AccessGroup = Catalogs.AccessGroups.CreateItem();

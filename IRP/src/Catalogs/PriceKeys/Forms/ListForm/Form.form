@@ -106,7 +106,9 @@
       <id>16</id>
       <visible>true</visible>
       <enabled>true</enabled>
-      <userVisible/>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
       <dataPath xsi:type="form:DataPath">
         <segments>List.Ref</segments>
       </dataPath>

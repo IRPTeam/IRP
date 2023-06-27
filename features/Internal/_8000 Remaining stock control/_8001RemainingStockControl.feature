@@ -521,8 +521,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899879'   | '8908899879'       |
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "25,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -531,8 +531,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
-			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
+			| 'Code' | 'Owner' | 'Serial number' |
+			| '13'   | 'PZU'   | '8908899877'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -795,8 +795,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899879'   | '8908899879'       |
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -805,8 +805,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
-			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
+			| 'Code' | 'Owner' | 'Serial number' |
+			| '13'   | 'PZU'   | '8908899877'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1177,8 +1177,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			Then "Items" window is opened
 			And I go to line in "List" table
-				| 'Description'           | 'Reference'              |
-				| 'Product 1 with SLN'    | 'Product 1 with SLN'     |
+				| 'Description'        |
+				| 'Product 1 with SLN' |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -1194,8 +1194,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'     | 'Serial number'     |
-				| 'PZU'      | '8908899879'    | '8908899879'        |
+				| 'Owner' | 'Serial number' |
+				| 'PZU'   | '8908899879'    |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1203,8 +1203,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I go to line in "List" table
-				| 'Owner'    | 'Reference'     | 'Serial number'     |
-				| 'PZU'      | '8908899877'    | '8908899877'        |
+				| 'Owner' | 'Serial number' |
+				| 'PZU'   | '8908899877'    |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1423,8 +1423,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899879'   | '8908899879'       |
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1433,8 +1433,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
-			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
+			| 'Code' | 'Owner' | 'Serial number' |
+			| '13'   | 'PZU'   | '8908899877'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1641,8 +1641,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Owner'   | 'Reference'    | 'Serial number'    |
-			| 'PZU'     | '8908899879'   | '8908899879'       |
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "6,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -1651,8 +1651,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code'   | 'Owner'   | 'Reference'    | 'Serial number'    |
-			| '13'     | 'PZU'     | '8908899877'   | '8908899877'       |
+			| 'Code' | 'Owner' | 'Serial number' |
+			| '13'   | 'PZU'   | '8908899877'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "4,000" text in "Quantity" field of "SerialLotNumbers" table

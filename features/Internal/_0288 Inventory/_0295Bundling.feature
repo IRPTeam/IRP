@@ -254,17 +254,17 @@ Scenario: _029516 checking duplicate specifications when creating the same bundl
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
 		And "List" table contains lines
-			| 'Description'      | 'Type'     | 'Reference'         |
-			| 'A-8'              | 'Set'      | 'A-8'               |
-			| 'S-8'              | 'Set'      | 'S-8'               |
-			| 'Dress+Shirt'      | 'Bundle'   | 'Dress+Shirt'       |
-			| 'Dress+Trousers'   | 'Bundle'   | 'Dress+Trousers'    |
-			| 'Trousers'         | 'Set'      | 'Trousers'          |
-			| 'Dress'            | 'Set'      | 'Dress'             |
-			| 'Test'             | 'Bundle'   | 'Test'              |
-			| 'Chewing gum'      | 'Set'      | 'Chewing gum'       |
-			| 'Dress+Scarf'      | 'Bundle'   | 'Dress+Scarf'       |
-			| 'Dress+Trousers'   | 'Bundle'   | 'Dress+Trousers'    |
+			| 'Description'      | 'Type'     |
+			| 'A-8'              | 'Set'      |
+			| 'S-8'              | 'Set'      |
+			| 'Dress+Shirt'      | 'Bundle'   |
+			| 'Dress+Trousers'   | 'Bundle'   |
+			| 'Trousers'         | 'Set'      |
+			| 'Dress'            | 'Set'      |
+			| 'Test'             | 'Bundle'   |
+			| 'Chewing gum'      | 'Set'      |
+			| 'Dress+Scarf'      | 'Bundle'   |
+			| 'Dress+Trousers'   | 'Bundle'   |
 		Then the number of "List" table lines is "меньше или равно" 10
 
 

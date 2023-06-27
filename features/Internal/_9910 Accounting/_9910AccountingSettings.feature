@@ -111,8 +111,8 @@ Scenario: _099102 create ledger type
 		And I click Select button of "Currency movement type" field
 		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Reference'        | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Variant"
 		And I click "Create" button
@@ -131,8 +131,8 @@ Scenario: _099102 create ledger type
 			And I click "Save and close" button
 		* Check creation
 			And "List" table contains lines
-				| 'Description'    | 'Currency movement type'    | 'Currency'    | 'Type'     | 'Variant'           | 'Reference'     |
-				| 'Test'           | 'Local currency'            | 'TRY'         | 'Legal'    | 'Test analitics'    | 'Test'          |
+				| 'Description'    | 'Currency movement type'    | 'Currency'    | 'Type'     | 'Variant'           |
+				| 'Test'           | 'Local currency'            | 'TRY'         | 'Legal'    | 'Test analitics'    |
 			And I close all client application windows
 			
 Scenario: _099103 create account charts
@@ -156,23 +156,23 @@ Scenario: _099103 create account charts
 		And I select current line in "ExtDimensionTypes" table
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'   | 'Value type'    |
-			| 'Item'          | 'Item'        | 'Item'          |
+			| 'Description'   | 'Value type'    |
+			| 'Item'          | 'Item'          |
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		Then "Accounting extra dimensions" window is opened
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'   | 'Value type'    |
-			| 'Item key'      | 'Item key'    | 'Item key'      |
+			| 'Description'   | 'Value type'    |
+			| 'Item key'      | 'Item key'      |
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'   | 'Value type'    |
-			| 'Store'         | 'Store'       | 'Store'         |
+			| 'Description'   |  'Value type'    |
+			| 'Store'         |  'Store'         |
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And I click "Save and close" button
@@ -192,23 +192,23 @@ Scenario: _099103 create account charts
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'   | 'Value type'    |
-			| 'Item'          | 'Item'        | 'Item'          |
+			| 'Description'   | 'Value type'    |
+			| 'Item'          | 'Item'          |
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
-			| 'Description'    | 'Reference'      | 'Value type'                  |
-			| 'Expense type'   | 'Expense type'   | 'Expense and revenue type'    |
+			| 'Description'    |  'Value type'                  |
+			| 'Expense type'   |  'Expense and revenue type'    |
 		And I select current line in "List" table
 		Then "Account chart (Basic) (create) *" window is opened
 		And I finish line editing in "ExtDimensionTypes" table
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
-			| 'Description'     | 'Reference'       | 'Value type'       |
-			| 'Business unit'   | 'Business unit'   | 'Business unit'    |
+			| 'Description'     | 'Value type'       |
+			| 'Business unit'   | 'Business unit'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Create new element (1021)	
@@ -420,26 +420,26 @@ Scenario: _099105 create account for partner
 		And I select current line in "List" table
 		And I click Select button of "Account Vendor (advances)" field
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'        | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '1020'   | 'Yes'        | 'Vendors advances'   | 'No'            | '31'      | 'No'         | '1020'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'        | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
+			| '1020'   | 'Yes'        | 'Vendors advances'   | 'No'            | '31'      | 'No'         | 'P'      | 'Management analitics'    |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Account Vendor (transactions)" field
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'      | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '1021'   | 'Yes'        | 'Due to vendors'   | 'No'            | '30'      | 'No'         | '1021'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'      | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
+			| '1021'   | 'Yes'        | 'Due to vendors'   | 'No'            | '30'      | 'No'         | 'P'      | 'Management analitics'    |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Account Customer (advances)" field
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | '2020'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
+			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | 'P'      | 'Management analitics'    |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I click Select button of "Account Customer (transactions)" field
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'     | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '2021'   | 'Yes'        | 'Customers due'   | 'No'            | '40'      | 'No'         | '2021'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'     | 'Off-balance'   | 'Order'   | 'Quantity'   |  'Type'   | 'Variant'                 |
+			| '2021'   | 'Yes'        | 'Customers due'   | 'No'            | '40'      | 'No'         |  'P'      | 'Management analitics'    |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -624,8 +624,8 @@ Scenario: _0991025 create JournalEntry for BP (advance)
 		And I select current line in "List" table
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | '2020'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
+			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | 'P'      | 'Management analitics'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"
@@ -635,8 +635,8 @@ Scenario: _0991025 create JournalEntry for BP (advance)
 		And I select current line in "List" table
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'         | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Reference'   | 'Type'   | 'Variant'                 |
-			| '5022'   | 'Yes'        | 'Service (expense)'   | 'No'            | '70'      | 'No'         | '5022'        | 'P'      | 'Management analitics'    |
+			| 'Code'   | 'Currency'   | 'Description'         | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
+			| '5022'   | 'Yes'        | 'Service (expense)'   | 'No'            | '70'      | 'No'         | 'P'      | 'Management analitics'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Select BP

@@ -42,6 +42,6 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		And I click "Save and close" button
 	* Check data save
 		And "List" table contains lines
-		| 'Description'  | 'Type'          | 'Currency'  | 'Reference'  | 'Source'        | 'Deferred calculation'   |
-		| 'TRY'          | 'Partner term'  | 'TRY'       | 'TRY'        | 'Forex Seling'  | 'No'                     |
+		| 'Description'  | 'Type'          | 'Currency'  | 'Source'        | 'Deferred calculation'   |
+		| 'TRY'          | 'Partner term'  | 'TRY'       | 'Forex Seling'  | 'No'                     |
 		

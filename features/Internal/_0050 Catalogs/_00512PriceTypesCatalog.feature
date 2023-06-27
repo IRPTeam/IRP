@@ -57,8 +57,8 @@ Scenario: _005028 filling in the "Price types" catalog
 	* Check manual price type
 		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
 		And I go to line in "List" table
-			| 'Reference'                 | 'Code'    |
-			| 'en description is empty'   | ''        |
+			| 'Code'    |
+			| ''        |
 		And I select current line in "List" table
 		And I input "Manual price type" text in "ENG" field
 		And I click "Save and close" button

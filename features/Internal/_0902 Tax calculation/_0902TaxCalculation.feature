@@ -75,8 +75,8 @@ Scenario: _0902000 preparation
 		And I select current line in "List" table
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'VAT'           | 'VAT'          |
+			| 'Description'   |
+			| 'VAT'           |
 		And I select current line in "List" table
 		And I click Select button of "Item key" field
 		And I go to line in "List" table
@@ -97,8 +97,8 @@ Scenario: _0902000 preparation
 		And I select current line in "List" table
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'VAT'           | 'VAT'          |
+			| 'Description'   |
+			| 'VAT'           |
 		And I select current line in "List" table
 		And I click Select button of "Item" field
 		And I go to line in "List" table
@@ -119,8 +119,8 @@ Scenario: _0902000 preparation
 		And I select current line in "List" table
 		And I click Select button of "Tax" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'    |
-			| 'VAT'           | 'VAT'          |
+			| 'Description'   |
+			| 'VAT'           |
 		And I select current line in "List" table
 		And I click Select button of "Item type" field
 		And I go to line in "List" table

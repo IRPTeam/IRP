@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @StockControl
@@ -124,8 +124,8 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			Then "Items" window is opened
 			And I go to line in "List" table
-				| 'Description'    | 'Reference'     |
-				| 'Phone A'        | 'Phone A'       |
+				| 'Description' |
+				| 'Phone A'     |
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
@@ -243,8 +243,8 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And in the table "Payments" I click the button named "PaymentsAdd"
 			And I click choice button of "Payment type" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Code'    | 'Description'    | 'Reference'     |
-				| '1'       | 'Cash'           | 'Cash'          |
+				| 'Code' | 'Description' |
+				| '1'    | 'Cash'        |
 			And I select current line in "List" table
 			And I activate field named "PaymentsAmount" in "Payments" table
 			And I input "840,00" text in the field named "PaymentsAmount" of "Payments" table

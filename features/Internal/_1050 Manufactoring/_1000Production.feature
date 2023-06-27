@@ -1619,10 +1619,8 @@ Scenario: _10341 create Production (Repacking)
 		And I go to line in "List" table
 			| 'Company'                    | 'Description'   |
 			| 'Shared for all companies'   | 'Store 02'      |
-		And I activate field named "Description" in "List" tab
 		And I select current line in "List" table
 		And I click Choice button of the field named "Item"
-		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 	* Filling materials

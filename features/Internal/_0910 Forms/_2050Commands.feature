@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Forms
@@ -57,8 +57,8 @@ Scenario: _0205001 preparation (commands)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -91,41 +91,41 @@ Scenario: _0205001 preparation (commands)
 			* Filling the document header
 				And I click Select button of "Partner" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Ferron BP' |
+					| 'Description'      |
+					| 'Ferron BP'        |
 				And I select current line in "List" table
 				And I click Select button of "Legal name" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Company Ferron BP' |
+					| 'Description'            |
+					| 'Company Ferron BP'      |
 				And I select current line in "List" table
 				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Main Company' |
+					| 'Description'       |
+					| 'Main Company'      |
 				And I select current line in "List" table
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 				And I select current line in "List" table
 				And I click Select button of "Store" field
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Store 02'    |
+					| 'Description'      |
+					| 'Store 02'         |
 				And I select current line in "List" table
 			* Filling in the tabular part
 				And I click "Add" button
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Boots'       |
+					| 'Description'      |
+					| 'Boots'            |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Item'  | 'Item key' |
-					| 'Boots' | '37/18SD'  |
+					| 'Item'      | 'Item key'      |
+					| 'Boots'     | '37/18SD'       |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "ItemList" table
 				And I input "15,000" text in "Quantity" field of "ItemList" table
@@ -134,14 +134,14 @@ Scenario: _0205001 preparation (commands)
 				And I click "Add" button
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Dress'       |
+					| 'Description'      |
+					| 'Dress'            |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Item'  | 'Item key' |
-					| 'Dress' | 'L/Green'  |
+					| 'Item'      | 'Item key'      |
+					| 'Dress'     | 'L/Green'       |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "ItemList" table
 				And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -150,14 +150,14 @@ Scenario: _0205001 preparation (commands)
 				And I click "Add" button
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Service'       |
+					| 'Description'      |
+					| 'Service'          |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Item'  | 'Item key' |
-					| 'Service' | 'Rent'  |
+					| 'Item'        | 'Item key'      |
+					| 'Service'     | 'Rent'          |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "ItemList" table
 				And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -171,8 +171,8 @@ Scenario: _0205001 preparation (commands)
 			* Post and check saving
 				And I click the button named "FormPostAndClose"
 				And "List" table contains lines
-					| 'Number' |
-					| '$$NumberPurchaseInvoice0205001$$'       |
+					| 'Number'                                |
+					| '$$NumberPurchaseInvoice0205001$$'      |
 	// * Add plugin QuantityCompare
 	// 	* Open form to add plugin
 	// 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -197,8 +197,8 @@ Scenario: _0205001 preparation (commands)
 			And I input "GoodReceip1" text in "Description" field
 			And I click Select button of "Parent" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
+				| 'Description'     |
+				| 'Documents'       |
 			And I select current line in "List" table
 			And I input "GoodReceip1" text in "Object name" field
 			And I input "Document.GoodReceipt1" text in "Object full name" field	
@@ -207,8 +207,8 @@ Scenario: _0205001 preparation (commands)
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "VAExtension" |
+				| "Description"     |
+				| "VAExtension"     |
 			When add VAExtension
 
 Scenario: _02050011 check preparation
@@ -223,14 +223,14 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button			
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales return'  |
+				| 'Description'      |
+				| 'Sales return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -238,8 +238,8 @@ Scenario: _0205002 add test command to the list of documents Sales return
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Sales return'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Sales return'            | 'Test command'   |
 	* Check the command from the document list Sales Return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to the last line in "List" table
@@ -249,7 +249,7 @@ Scenario: _0205002 add test command to the list of documents Sales return
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -259,13 +259,13 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales return' |
+				| 'Description'      |
+				| 'Sales return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -284,19 +284,19 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales return' |
+				| 'Description'      |
+				| 'Sales return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -311,14 +311,14 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales invoice'  |
+				| 'Description'       |
+				| 'Sales invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -326,8 +326,8 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Sales invoice'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Sales invoice'           | 'Test command'   |
 	* Check the command from the document list Sales Invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to the last line in "List" table
@@ -337,7 +337,7 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -348,12 +348,12 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Sales invoice' |
+				| 'Sales invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -372,18 +372,18 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Sales invoice' |
+				| 'Sales invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+				| 'OpenForm("Document.SalesInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -398,14 +398,14 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Purchase order'  |
+				| 'Description'        |
+				| 'Purchase order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -413,8 +413,8 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Purchase order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Purchase order'          | 'Test command'   |
 	* Check the command from the document list Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to the last line in "List" table
@@ -424,7 +424,7 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -434,13 +434,13 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase order' |
+				| 'Description'        |
+				| 'Purchase order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -458,19 +458,19 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase order' |
+				| 'Description'        |
+				| 'Purchase order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PurchaseOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PurchaseOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -485,14 +485,14 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales order'  |
+				| 'Description'     |
+				| 'Sales order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -500,8 +500,8 @@ Scenario: _0205005 add test command to the list of documents Sales order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Sales order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Sales order'             | 'Test command'   |
 	* Check the command from the document list SalesOrder
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to the last line in "List" table
@@ -511,7 +511,7 @@ Scenario: _0205005 add test command to the list of documents Sales order
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -521,13 +521,13 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales order' |
+				| 'Description'     |
+				| 'Sales order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -546,19 +546,19 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales order' |
+				| 'Description'     |
+				| 'Sales order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -573,14 +573,14 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Purchase invoice'  |
+				| 'Description'          |
+				| 'Purchase invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -588,8 +588,8 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Purchase invoice'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Purchase invoice'        | 'Test command'   |
 	* Check the command from the document list PurchaseInvoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to the last line in "List" table
@@ -599,7 +599,7 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -609,13 +609,13 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase invoice' |
+				| 'Description'          |
+				| 'Purchase invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -634,19 +634,19 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase invoice' |
+				| 'Description'          |
+				| 'Purchase invoice'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PurchaseInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PurchaseInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -662,14 +662,14 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash transfer order'  |
+				| 'Description'             |
+				| 'Cash transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -677,8 +677,8 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Cash transfer order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash transfer order'     | 'Test command'   |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to the last line in "List" table
@@ -688,7 +688,7 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -698,13 +698,13 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash transfer order' |
+				| 'Description'             |
+				| 'Cash transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -723,19 +723,19 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash transfer order' |
+				| 'Description'             |
+				| 'Cash transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -751,14 +751,14 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shipment confirmation'  |
+				| 'Description'               |
+				| 'Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -766,8 +766,8 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Shipment confirmation'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Shipment confirmation'   | 'Test command'   |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to the last line in "List" table
@@ -777,7 +777,7 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -787,13 +787,13 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Shipment confirmation' |
+				| 'Description'               |
+				| 'Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -812,19 +812,19 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Shipment confirmation' |
+				| 'Description'               |
+				| 'Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.ShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.ShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -840,14 +840,14 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Goods receipt'  |
+				| 'Description'       |
+				| 'Goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -855,8 +855,8 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Goods receipt'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Goods receipt'           | 'Test command'   |
 	* Check the command from the document list GoodsReceipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to the last line in "List" table
@@ -866,7 +866,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -877,12 +877,12 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Goods receipt' |
+				| 'Goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -901,18 +901,18 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Goods receipt' |
+				| 'Goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.GoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.GoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -927,14 +927,14 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales return order'  |
+				| 'Description'            |
+				| 'Sales return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -942,8 +942,8 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Sales return order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Sales return order'      | 'Test command'   |
 	* Check the command from the document list SalesReturnOrder
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to the last line in "List" table
@@ -953,7 +953,7 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -963,13 +963,13 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales return order' |
+				| 'Description'            |
+				| 'Sales return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -988,19 +988,19 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales return order' |
+				| 'Description'            |
+				| 'Sales return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1016,14 +1016,14 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Purchase return order'  |
+				| 'Description'               |
+				| 'Purchase return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1031,8 +1031,8 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Purchase return order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Purchase return order'   | 'Test command'   |
 	* Check the command from the document list PurchaseReturnOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to the last line in "List" table
@@ -1042,7 +1042,7 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1052,13 +1052,13 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase return order' |
+				| 'Description'               |
+				| 'Purchase return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1077,19 +1077,19 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase return order' |
+				| 'Description'               |
+				| 'Purchase return order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PurchaseReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PurchaseReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1104,14 +1104,14 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Reconciliation statement'  |
+				| 'Description'                  |
+				| 'Reconciliation statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1119,8 +1119,8 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Reconciliation statement'                | 'Test command'       |
+		| 'Configuration metadata'    | 'Plugins'        |
+		| 'Reconciliation statement'  | 'Test command'   |
 	* Check the command from the document list ReconciliationStatement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I go to the last line in "List" table
@@ -1130,7 +1130,7 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1140,13 +1140,13 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Reconciliation statement' |
+				| 'Description'                  |
+				| 'Reconciliation statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1165,19 +1165,19 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Reconciliation statement' |
+				| 'Description'                  |
+				| 'Reconciliation statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.ReconciliationStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.ReconciliationStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1193,14 +1193,14 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Bank payment'  |
+				| 'Description'      |
+				| 'Bank payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1208,8 +1208,8 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Bank payment'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Bank payment'            | 'Test command'   |
 	* Check the command from the document list Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to the last line in "List" table
@@ -1219,7 +1219,7 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1229,13 +1229,13 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bank payment' |
+				| 'Description'      |
+				| 'Bank payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1254,19 +1254,19 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bank payment' |
+				| 'Description'      |
+				| 'Bank payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.BankPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.BankPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1281,14 +1281,14 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Bank receipt'  |
+				| 'Description'      |
+				| 'Bank receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1296,8 +1296,8 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Bank receipt'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Bank receipt'            | 'Test command'   |
 	* Check the command from the document list BankReceipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to the last line in "List" table
@@ -1307,7 +1307,7 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1317,13 +1317,13 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bank receipt' |
+				| 'Description'      |
+				| 'Bank receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1342,19 +1342,19 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bank receipt' |
+				| 'Description'      |
+				| 'Bank receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.BankReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.BankReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1370,14 +1370,14 @@ Scenario: _0205016 add test command to the list of documents Bundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Bundling'  |
+				| 'Description'     |
+				| 'Bundling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1385,8 +1385,8 @@ Scenario: _0205016 add test command to the list of documents Bundling
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Bundling'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Bundling'                | 'Test command'   |
 	* Check the command from the document list Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to the last line in "List" table
@@ -1396,7 +1396,7 @@ Scenario: _0205016 add test command to the list of documents Bundling
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1406,13 +1406,13 @@ Scenario: _0205016 add test command to the list of documents Bundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bundling' |
+				| 'Description'     |
+				| 'Bundling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1431,19 +1431,19 @@ Scenario: _0205016 add test command to the list of documents Bundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Bundling' |
+				| 'Description'     |
+				| 'Bundling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.Bundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.Bundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1458,14 +1458,14 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash expense'  |
+				| 'Description'      |
+				| 'Cash expense'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1473,8 +1473,8 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Cash expense'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash expense'            | 'Test command'   |
 	* Check the command from the document list CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I go to the last line in "List" table
@@ -1484,7 +1484,7 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1494,13 +1494,13 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash expense' |
+				| 'Description'      |
+				| 'Cash expense'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1519,19 +1519,19 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash expense' |
+				| 'Description'      |
+				| 'Cash expense'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashExpense.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashExpense.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1547,14 +1547,14 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash payment'  |
+				| 'Description'      |
+				| 'Cash payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1562,8 +1562,8 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Cash payment'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash payment'            | 'Test command'   |
 	* Check the command from the document list CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I go to the last line in "List" table
@@ -1573,7 +1573,7 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1583,13 +1583,13 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash payment' |
+				| 'Description'      |
+				| 'Cash payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1608,19 +1608,19 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash payment' |
+				| 'Description'      |
+				| 'Cash payment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1635,14 +1635,14 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash receipt'  |
+				| 'Description'      |
+				| 'Cash receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1650,8 +1650,8 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Cash receipt'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash receipt'            | 'Test command'   |
 	* Check the command from the document list CashReceipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I go to the last line in "List" table
@@ -1661,7 +1661,7 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1671,13 +1671,13 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash receipt' |
+				| 'Description'      |
+				| 'Cash receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1696,19 +1696,19 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash receipt' |
+				| 'Description'      |
+				| 'Cash receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1723,14 +1723,14 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash revenue'  |
+				| 'Description'      |
+				| 'Cash revenue'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1738,8 +1738,8 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Cash revenue'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash revenue'            | 'Test command'   |
 	* Check the command from the document list CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to the last line in "List" table
@@ -1749,7 +1749,7 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1759,13 +1759,13 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash revenue' |
+				| 'Description'      |
+				| 'Cash revenue'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1784,19 +1784,19 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash revenue' |
+				| 'Description'      |
+				| 'Cash revenue'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashRevenue.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashRevenue.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1814,14 +1814,14 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Credit note'  |
+				| 'Description'     |
+				| 'Credit note'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1829,8 +1829,8 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Credit note'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Credit note'             | 'Test command'   |
 	* Check the command from the document list CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to the last line in "List" table
@@ -1840,7 +1840,7 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1850,13 +1850,13 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Credit note' |
+				| 'Description'     |
+				| 'Credit note'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1875,19 +1875,19 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Credit note' |
+				| 'Description'     |
+				| 'Credit note'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1904,14 +1904,14 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Debit note'  |
+				| 'Description'     |
+				| 'Debit note'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -1919,8 +1919,8 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Debit note'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Debit note'              | 'Test command'   |
 	* Check the command from the document list DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to the last line in "List" table
@@ -1930,7 +1930,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -1940,13 +1940,13 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Debit note' |
+				| 'Description'     |
+				| 'Debit note'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -1965,19 +1965,19 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Debit note' |
+				| 'Description'     |
+				| 'Debit note'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.DebitNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.DebitNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -1992,14 +1992,14 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Incoming payment order'  |
+				| 'Description'                |
+				| 'Incoming payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2007,8 +2007,8 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Incoming payment order'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Incoming payment order'  | 'Test command'   |
 	* Check the command from the document list IncomingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 		And I go to the last line in "List" table
@@ -2018,7 +2018,7 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2028,13 +2028,13 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Incoming payment order' |
+				| 'Description'                |
+				| 'Incoming payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2053,19 +2053,19 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Incoming payment order' |
+				| 'Description'                |
+				| 'Incoming payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.IncomingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.IncomingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2080,14 +2080,14 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Internal supply request'  |
+				| 'Description'                 |
+				| 'Internal supply request'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2095,8 +2095,8 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Internal supply request'                | 'Test command'       |
+		| 'Configuration metadata'   | 'Plugins'        |
+		| 'Internal supply request'  | 'Test command'   |
 	* Check the command from the document list InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to the last line in "List" table
@@ -2106,7 +2106,7 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2116,13 +2116,13 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Internal supply request' |
+				| 'Description'                 |
+				| 'Internal supply request'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2141,19 +2141,19 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Internal supply request' |
+				| 'Description'                 |
+				| 'Internal supply request'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.InternalSupplyRequest.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.InternalSupplyRequest.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2168,14 +2168,14 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Inventory transfer'  |
+				| 'Description'            |
+				| 'Inventory transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2183,8 +2183,8 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Inventory transfer'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Inventory transfer'      | 'Test command'   |
 	* Check the command from the document list InventoryTransfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to the last line in "List" table
@@ -2194,7 +2194,7 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2204,13 +2204,13 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Inventory transfer' |
+				| 'Description'            |
+				| 'Inventory transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2229,19 +2229,19 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Inventory transfer' |
+				| 'Description'            |
+				| 'Inventory transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.InventoryTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.InventoryTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2256,14 +2256,14 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Inventory transfer order'  |
+				| 'Description'                  |
+				| 'Inventory transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2271,8 +2271,8 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Inventory transfer order'                | 'Test command'       |
+		| 'Configuration metadata'    | 'Plugins'        |
+		| 'Inventory transfer order'  | 'Test command'   |
 	* Check the command from the document list InventoryTransferOrder
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to the last line in "List" table
@@ -2282,7 +2282,7 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2292,13 +2292,13 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Inventory transfer order' |
+				| 'Description'                  |
+				| 'Inventory transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2317,19 +2317,19 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Inventory transfer order' |
+				| 'Description'                  |
+				| 'Inventory transfer order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.InventoryTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.InventoryTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2346,14 +2346,14 @@ Scenario: _0205029 add test command to the list of documents Labeling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Labeling'  |
+				| 'Description'     |
+				| 'Labeling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2361,8 +2361,8 @@ Scenario: _0205029 add test command to the list of documents Labeling
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Labeling'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Labeling'                | 'Test command'   |
 	* Check the command from the document list Labeling
 		Given I open hyperlink "e1cib/list/Document.Labeling"
 		And I go to the last line in "List" table
@@ -2372,7 +2372,7 @@ Scenario: _0205029 add test command to the list of documents Labeling
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2382,13 +2382,13 @@ Scenario: _0205029 add test command to the list of documents Labeling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Labeling' |
+				| 'Description'     |
+				| 'Labeling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2407,19 +2407,19 @@ Scenario: _0205029 add test command to the list of documents Labeling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Labeling' |
+				| 'Description'     |
+				| 'Labeling'        |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.Labeling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.Labeling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2434,14 +2434,14 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Opening entry'  |
+				| 'Description'       |
+				| 'Opening entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2449,8 +2449,8 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Opening entry'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Opening entry'           | 'Test command'   |
 	* Check the command from the document list OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to the last line in "List" table
@@ -2460,7 +2460,7 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2471,12 +2471,12 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Opening entry' |
+				| 'Opening entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2496,18 +2496,18 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Opening entry' |
+				| 'Opening entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.OpeningEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.OpeningEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2523,14 +2523,14 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Outgoing payment order'  |
+				| 'Description'                |
+				| 'Outgoing payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2538,8 +2538,8 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Outgoing payment order'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Outgoing payment order'  | 'Test command'   |
 	* Check the command from the document list OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I go to the last line in "List" table
@@ -2549,7 +2549,7 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2559,13 +2559,13 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Outgoing payment order' |
+				| 'Description'                |
+				| 'Outgoing payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2584,19 +2584,19 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Outgoing payment order' |
+				| 'Description'                |
+				| 'Outgoing payment order'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.OutgoingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.OutgoingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2611,14 +2611,14 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Physical count by location'  |
+				| 'Description'                    |
+				| 'Physical count by location'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2626,8 +2626,8 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Physical count by location'               | 'Test command'       |
+		| 'Configuration metadata'      | 'Plugins'        |
+		| 'Physical count by location'  | 'Test command'   |
 	* Check the command from the document list PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to the last line in "List" table
@@ -2637,7 +2637,7 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2647,13 +2647,13 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Physical count by location' |
+				| 'Description'                    |
+				| 'Physical count by location'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2672,19 +2672,19 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Physical count by location' |
+				| 'Description'                    |
+				| 'Physical count by location'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PhysicalCountByLocation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PhysicalCountByLocation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2699,14 +2699,14 @@ Scenario: _0205033 add test command to the list of documents Price List
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Price list'  |
+				| 'Description'     |
+				| 'Price list'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2714,8 +2714,8 @@ Scenario: _0205033 add test command to the list of documents Price List
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Price list'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Price list'              | 'Test command'   |
 	* Check the command from the document list PriceList
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to the last line in "List" table
@@ -2725,7 +2725,7 @@ Scenario: _0205033 add test command to the list of documents Price List
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2735,13 +2735,13 @@ Scenario: _0205033 add test command to the list of documents Price List
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Price list' |
+				| 'Description'     |
+				| 'Price list'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2760,13 +2760,13 @@ Scenario: _0205033 add test command to the list of documents Price List
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Price list' |
+				| 'Description'     |
+				| 'Price list'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2783,14 +2783,14 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Purchase return'  |
+				| 'Description'         |
+				| 'Purchase return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2798,8 +2798,8 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Purchase return'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Purchase return'         | 'Test command'   |
 	* Check the command from the document list PurchaseReturn
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to the last line in "List" table
@@ -2809,7 +2809,7 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2819,13 +2819,13 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase return' |
+				| 'Description'         |
+				| 'Purchase return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2844,19 +2844,19 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase return' |
+				| 'Description'         |
+				| 'Purchase return'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PurchaseReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PurchaseReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2873,14 +2873,14 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Unbundling'  |
+				| 'Description'     |
+				| 'Unbundling'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2888,8 +2888,8 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Unbundling'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Unbundling'              | 'Test command'   |
 	* Check the command from the document list Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to the last line in "List" table
@@ -2899,7 +2899,7 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2909,13 +2909,13 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Unbundling' |
+				| 'Description'     |
+				| 'Unbundling'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -2934,19 +2934,19 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Unbundling' |
+				| 'Description'     |
+				| 'Unbundling'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.Unbundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.Unbundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -2960,14 +2960,14 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Stock adjustment as write-off'  |
+				| 'Description'                       |
+				| 'Stock adjustment as write-off'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -2975,8 +2975,8 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Stock adjustment as write-off'                | 'Test command'       |
+		| 'Configuration metadata'         | 'Plugins'        |
+		| 'Stock adjustment as write-off'  | 'Test command'   |
 	* Check the command from the document list StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to the last line in "List" table
@@ -2986,7 +2986,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -2996,13 +2996,13 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Stock adjustment as write-off' |
+				| 'Description'                       |
+				| 'Stock adjustment as write-off'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3021,19 +3021,19 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Stock adjustment as write-off' |
+				| 'Description'                       |
+				| 'Stock adjustment as write-off'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.StockAdjustmentAsWriteOff.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.StockAdjustmentAsWriteOff.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3048,14 +3048,14 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Stock adjustment as surplus'  |
+				| 'Description'                     |
+				| 'Stock adjustment as surplus'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3063,8 +3063,8 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Stock adjustment as surplus'                | 'Test command'       |
+		| 'Configuration metadata'       | 'Plugins'        |
+		| 'Stock adjustment as surplus'  | 'Test command'   |
 	* Check the command from the document list StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to the last line in "List" table
@@ -3074,7 +3074,7 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3084,13 +3084,13 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Stock adjustment as surplus' |
+				| 'Description'                     |
+				| 'Stock adjustment as surplus'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3109,19 +3109,19 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Stock adjustment as surplus' |
+				| 'Description'                     |
+				| 'Stock adjustment as surplus'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.StockAdjustmentAsSurplus.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.StockAdjustmentAsSurplus.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3136,14 +3136,14 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Physical inventory'  |
+				| 'Description'            |
+				| 'Physical inventory'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3151,8 +3151,8 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Physical inventory'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Physical inventory'      | 'Test command'   |
 	* Check the command from the document list PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to the last line in "List" table
@@ -3162,7 +3162,7 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3172,13 +3172,13 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Physical inventory' |
+				| 'Description'            |
+				| 'Physical inventory'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3197,19 +3197,19 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Physical inventory' |
+				| 'Description'            |
+				| 'Physical inventory'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PhysicalInventory.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PhysicalInventory.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3225,14 +3225,14 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales order closing'  |
+				| 'Description'             |
+				| 'Sales order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3240,8 +3240,8 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Sales order closing'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Sales order closing'     | 'Test command'   |
 	* Check the command from the document list Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to the last line in "List" table
@@ -3251,7 +3251,7 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3261,13 +3261,13 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales order closing' |
+				| 'Description'             |
+				| 'Sales order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3286,19 +3286,19 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Sales order closing' |
+				| 'Description'             |
+				| 'Sales order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3315,14 +3315,14 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Planned receipt reservation'  |
+				| 'Description'                     |
+				| 'Planned receipt reservation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3330,8 +3330,8 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'      | 'Plugins'      |
-		| 'Planned receipt reservation' | 'Test command' |
+		| 'Configuration metadata'       | 'Plugins'        |
+		| 'Planned receipt reservation'  | 'Test command'   |
 	* Check the command from the document list Planned receipt reservation
 		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 		And I go to the last line in "List" table
@@ -3346,13 +3346,13 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Planned receipt reservation' |
+				| 'Description'                     |
+				| 'Planned receipt reservation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3371,19 +3371,19 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Planned receipt reservation' |
+				| 'Description'                     |
+				| 'Planned receipt reservation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PlannedReceiptReservation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PlannedReceiptReservation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3397,18 +3397,18 @@ Scenario: _010019 check the operation of the command to open an item list from I
 	* Open catalog Item type
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shoes' |
+			| 'Description'    |
+			| 'Shoes'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Items"
 	* Filter check by items
 		And "List" table contains lines
-		| 'Description'| 'Item type' |
-		| 'Boots'      | 'Shoes'     |
-		| 'High shoes' | 'Shoes'     |
+		| 'Description'  | 'Item type'   |
+		| 'Boots'        | 'Shoes'       |
+		| 'High shoes'   | 'Shoes'       |
 		And "List" table does not contain lines
-		| 'Description'   | 'Item type' |
-		| 'Dress'         | 'Shoes'     |
+		| 'Description'  | 'Item type'   |
+		| 'Dress'        | 'Shoes'       |
 	And I close all client application windows
 
 
@@ -3417,8 +3417,8 @@ Scenario: _010025 auto set Unused checkbox for wrong element in the catalog Conf
 	* Open catalog Item type
 		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'GoodReceip1' |
+			| 'Description'    |
+			| 'GoodReceip1'    |
 		And I select current line in "List" table
 		Then the form attribute named "Unused" became equal to "Yes"
 		And I close all client application windows
@@ -3434,14 +3434,14 @@ Scenario: _010026 add test command to the list of documents Money transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Money transfer'  |
+				| 'Description'        |
+				| 'Money transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3449,8 +3449,8 @@ Scenario: _010026 add test command to the list of documents Money transfer
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Money transfer'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Money transfer'          | 'Test command'   |
 	* Check the command from the document list Money transfer
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to the last line in "List" table
@@ -3460,7 +3460,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3470,13 +3470,13 @@ Scenario: _010026 add test command to the list of documents Money transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Money transfer' |
+				| 'Description'        |
+				| 'Money transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3495,19 +3495,19 @@ Scenario: _010026 add test command to the list of documents Money transfer
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Money transfer' |
+				| 'Description'        |
+				| 'Money transfer'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.MoneyTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.MoneyTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3524,14 +3524,14 @@ Scenario: _010027 add test command to the list of documents Journal entry
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Journal entry'  |
+				| 'Description'       |
+				| 'Journal entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3539,8 +3539,8 @@ Scenario: _010027 add test command to the list of documents Journal entry
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins' |
-		| 'Journal entry'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Journal entry'           | 'Test command'   |
 	* Check the command from the document list JournalEntry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And I go to the last line in "List" table
@@ -3550,7 +3550,7 @@ Scenario: _010027 add test command to the list of documents Journal entry
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3561,12 +3561,12 @@ Scenario: _010027 add test command to the list of documents Journal entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Journal entry' |
+				| 'Journal entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3586,18 +3586,18 @@ Scenario: _010027 add test command to the list of documents Journal entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Journal entry' |
+				| 'Journal entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.JournalEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.JournalEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3614,14 +3614,14 @@ Scenario: _010028 add test command to the list of documents Item stock adjustmen
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Item stock adjustment'  |
+				| 'Description'               |
+				| 'Item stock adjustment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3629,8 +3629,8 @@ Scenario: _010028 add test command to the list of documents Item stock adjustmen
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'            | 'Plugins' |
-		| 'Item stock adjustment'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Item stock adjustment'   | 'Test command'   |
 	* Check the command from the document list Item stock adjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I go to the last line in "List" table
@@ -3640,7 +3640,7 @@ Scenario: _010028 add test command to the list of documents Item stock adjustmen
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3650,13 +3650,13 @@ Scenario: _010028 add test command to the list of documents Item stock adjustmen
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Item stock adjustment' |
+				| 'Description'               |
+				| 'Item stock adjustment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3675,19 +3675,19 @@ Scenario: _010028 add test command to the list of documents Item stock adjustmen
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Item stock adjustment' |
+				| 'Description'               |
+				| 'Item stock adjustment'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.ItemStockAdjustment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.ItemStockAdjustment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3704,14 +3704,14 @@ Scenario: _010029 add test command to the list of documents CashStatement
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cash statement'  |
+				| 'Description'        |
+				| 'Cash statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3719,8 +3719,8 @@ Scenario: _010029 add test command to the list of documents CashStatement
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'     | 'Plugins' |
-		| 'Cash statement'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Cash statement'          | 'Test command'   |
 	* Check the command from the document Cash statement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I go to the last line in "List" table
@@ -3730,7 +3730,7 @@ Scenario: _010029 add test command to the list of documents CashStatement
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3740,13 +3740,13 @@ Scenario: _010029 add test command to the list of documents CashStatement
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cash statement' |
+				| 'Description'        |
+				| 'Cash statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3765,19 +3765,19 @@ Scenario: _010029 add test command to the list of documents CashStatement
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Cash statement' |
+				| 'Description'        |
+				| 'Cash statement'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.CashStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.CashStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3793,14 +3793,14 @@ Scenario: _010030 add test command to the list of documents Retail sales receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail sales receipt'  |
+				| 'Description'              |
+				| 'Retail sales receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3808,8 +3808,8 @@ Scenario: _010030 add test command to the list of documents Retail sales receipt
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Retail sales receipt'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Retail sales receipt'    | 'Test command'   |
 	* Check the command from the document Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -3819,7 +3819,7 @@ Scenario: _010030 add test command to the list of documents Retail sales receipt
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3829,13 +3829,13 @@ Scenario: _010030 add test command to the list of documents Retail sales receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail sales receipt' |
+				| 'Description'              |
+				| 'Retail sales receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3854,19 +3854,19 @@ Scenario: _010030 add test command to the list of documents Retail sales receipt
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Retail sales receipt' |
+				| 'Description'              |
+				| 'Retail sales receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.RetailSalesReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.RetailSalesReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3883,14 +3883,14 @@ Scenario: _010031 add test command to the list of documents Retail return receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail return receipt'  |
+				| 'Description'               |
+				| 'Retail return receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3898,8 +3898,8 @@ Scenario: _010031 add test command to the list of documents Retail return receip
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Retail return receipt'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Retail return receipt'   | 'Test command'   |
 	* Check the command from the document Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to the last line in "List" table
@@ -3909,7 +3909,7 @@ Scenario: _010031 add test command to the list of documents Retail return receip
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -3919,13 +3919,13 @@ Scenario: _010031 add test command to the list of documents Retail return receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail return receipt' |
+				| 'Description'               |
+				| 'Retail return receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -3944,19 +3944,19 @@ Scenario: _010031 add test command to the list of documents Retail return receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Retail return receipt' |
+				| 'Description'               |
+				| 'Retail return receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.RetailReturnReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.RetailReturnReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -3973,14 +3973,14 @@ Scenario: _0100310 add test command to the list of documents Purchase order clos
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Purchase order closing'  |
+				| 'Description'                |
+				| 'Purchase order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -3988,8 +3988,8 @@ Scenario: _0100310 add test command to the list of documents Purchase order clos
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Purchase order closing'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Purchase order closing'  | 'Test command'   |
 	* Check the command from the document Purchase order closing
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to the last line in "List" table
@@ -3999,7 +3999,7 @@ Scenario: _0100310 add test command to the list of documents Purchase order clos
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4009,13 +4009,13 @@ Scenario: _0100310 add test command to the list of documents Purchase order clos
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Purchase order closing' |
+				| 'Description'                |
+				| 'Purchase order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4034,19 +4034,19 @@ Scenario: _0100310 add test command to the list of documents Purchase order clos
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Purchase order closing' |
+				| 'Description'                |
+				| 'Purchase order closing'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.PurchaseOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.PurchaseOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4063,14 +4063,14 @@ Scenario: _010032 add test command to the list of documents ManualRegisterEntry
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Manual register entry'  |
+				| 'Description'               |
+				| 'Manual register entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4078,8 +4078,8 @@ Scenario: _010032 add test command to the list of documents ManualRegisterEntry
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'            | 'Plugins' |
-		| 'Manual register entry'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Manual register entry'   | 'Test command'   |
 	* Check the command from the document ManualRegisterEntry
 		Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
 		And I go to the last line in "List" table
@@ -4089,7 +4089,7 @@ Scenario: _010032 add test command to the list of documents ManualRegisterEntry
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4099,13 +4099,13 @@ Scenario: _010032 add test command to the list of documents ManualRegisterEntry
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Manual register entry' |
+				| 'Description'               |
+				| 'Manual register entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4124,19 +4124,19 @@ Scenario: _010032 add test command to the list of documents ManualRegisterEntry
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Manual register entry' |
+				| 'Description'               |
+				| 'Manual register entry'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.ManualRegisterEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.ManualRegisterEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4153,14 +4153,14 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Cheque bond transaction'  |
+				| 'Description'                 |
+				| 'Cheque bond transaction'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4168,8 +4168,8 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'  | 'Plugins'      |
-		| 'Cheque bond transaction' | 'Test command' |
+		| 'Configuration metadata'   | 'Plugins'        |
+		| 'Cheque bond transaction'  | 'Test command'   |
 	* Check the command from the document list ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I go to the last line in "List" table
@@ -4179,7 +4179,7 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4189,13 +4189,13 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Cheque bond transaction' |
+				| 'Description'                 |
+				| 'Cheque bond transaction'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4214,19 +4214,19 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Cheque bond transaction' |
+				| 'Description'                 |
+				| 'Cheque bond transaction'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.ChequeBondTransaction.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.ChequeBondTransaction.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4243,14 +4243,14 @@ Scenario: _010033 add test command to the list of documents Work order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Work order'  |
+				| 'Description'     |
+				| 'Work order'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4258,8 +4258,8 @@ Scenario: _010033 add test command to the list of documents Work order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata' | 'Plugins'            |
-		| 'Work order'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Work order'              | 'Test command'   |
 	* Check the command from the document Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to the last line in "List" table
@@ -4269,7 +4269,7 @@ Scenario: _010033 add test command to the list of documents Work order
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4279,13 +4279,13 @@ Scenario: _010033 add test command to the list of documents Work order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Work order' |
+				| 'Description'     |
+				| 'Work order'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4304,19 +4304,19 @@ Scenario: _010033 add test command to the list of documents Work order
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Work order' |
+				| 'Description'     |
+				| 'Work order'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.WorkOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.WorkOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4333,14 +4333,14 @@ Scenario: _010034 add test command to the list of documents Work sheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Work sheet'  |
+				| 'Description'     |
+				| 'Work sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4348,8 +4348,8 @@ Scenario: _010034 add test command to the list of documents Work sheet
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata' | 'Plugins'            |
-		| 'Work sheet'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Work sheet'              | 'Test command'   |
 	* Check the command from the document Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		And I go to the last line in "List" table
@@ -4359,7 +4359,7 @@ Scenario: _010034 add test command to the list of documents Work sheet
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4369,13 +4369,13 @@ Scenario: _010034 add test command to the list of documents Work sheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Work sheet'  |
+				| 'Description'     |
+				| 'Work sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4394,19 +4394,19 @@ Scenario: _010034 add test command to the list of documents Work sheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Work sheet' |
+				| 'Description'     |
+				| 'Work sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.WorkSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.WorkSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4423,14 +4423,14 @@ Scenario: _010035 add test command to the list of documents SalesReportFromTrade
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales report from trade agent'  |
+				| 'Description'                       |
+				| 'Sales report from trade agent'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4438,8 +4438,8 @@ Scenario: _010035 add test command to the list of documents SalesReportFromTrade
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'        | 'Plugins'      |
-		| 'Sales report from trade agent' | 'Test command' |
+		| 'Configuration metadata'         | 'Plugins'        |
+		| 'Sales report from trade agent'  | 'Test command'   |
 	* Check the command from the document Sales report from trade agent
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I go to the last line in "List" table
@@ -4449,7 +4449,7 @@ Scenario: _010035 add test command to the list of documents SalesReportFromTrade
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4459,13 +4459,13 @@ Scenario: _010035 add test command to the list of documents SalesReportFromTrade
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales report from trade agent'  |
+				| 'Description'                       |
+				| 'Sales report from trade agent'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4484,19 +4484,19 @@ Scenario: _010035 add test command to the list of documents SalesReportFromTrade
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Sales report from trade agent' |
+				| 'Description'                       |
+				| 'Sales report from trade agent'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesReportFromTradeAgent.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesReportFromTradeAgent.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4513,14 +4513,14 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales report to consignor'  |
+				| 'Description'                   |
+				| 'Sales report to consignor'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4528,8 +4528,8 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'    | 'Plugins'      |
-		| 'Sales report to consignor' | 'Test command' |
+		| 'Configuration metadata'     | 'Plugins'        |
+		| 'Sales report to consignor'  | 'Test command'   |
 	* Check the command from the document Sales report to consignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		And I go to the last line in "List" table
@@ -4539,7 +4539,7 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4549,13 +4549,13 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Sales report to consignor'  |
+				| 'Description'                   |
+				| 'Sales report to consignor'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4574,19 +4574,19 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Sales report to consignor' |
+				| 'Description'                   |
+				| 'Sales report to consignor'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.SalesReportToConsignor.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.SalesReportToConsignor.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4603,14 +4603,14 @@ Scenario: _010036 add test command to the list of documents Payrolls
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Payroll'    |
+				| 'Description'     |
+				| 'Payroll'         |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4618,8 +4618,8 @@ Scenario: _010036 add test command to the list of documents Payrolls
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'    | 'Plugins'      |
-		| 'Payroll'                   | 'Test command' |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Payroll'                 | 'Test command'   |
 	* Check the command from the document Payrolls
 		Given I open hyperlink "e1cib/list/Document.Payroll"
 		And I go to the last line in "List" table
@@ -4629,7 +4629,7 @@ Scenario: _010036 add test command to the list of documents Payrolls
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4639,13 +4639,13 @@ Scenario: _010036 add test command to the list of documents Payrolls
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Payroll'    |
+				| 'Description'     |
+				| 'Payroll'         |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4664,19 +4664,19 @@ Scenario: _010036 add test command to the list of documents Payrolls
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Payroll'   |
+				| 'Description'     |
+				| 'Payroll'         |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.Payroll.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.Payroll.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4693,14 +4693,14 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Time sheet'    |
+				| 'Description'     |
+				| 'Time sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4708,8 +4708,8 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins'      |
-		| 'Time sheet'                   | 'Test command' |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Time sheet'              | 'Test command'   |
 	* Check the command from the document Time sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"
 		And I go to the last line in "List" table
@@ -4719,7 +4719,7 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4729,13 +4729,13 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Time sheet'    |
+				| 'Description'     |
+				| 'Time sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4754,19 +4754,19 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'|
-				| 'Time sheet'   |
+				| 'Description'     |
+				| 'Time sheet'      |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.TimeSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.TimeSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4781,14 +4781,14 @@ Scenario: _0205038 add test command to the list of documents Retail Shipment con
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail Shipment confirmation'  |
+				| 'Description'                      |
+				| 'Retail Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4796,8 +4796,8 @@ Scenario: _0205038 add test command to the list of documents Retail Shipment con
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Retail Shipment confirmation'     | 'Test command'       |
+		| 'Configuration metadata'        | 'Plugins'        |
+		| 'Retail Shipment confirmation'  | 'Test command'   |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
 		And I go to the last line in "List" table
@@ -4807,7 +4807,7 @@ Scenario: _0205038 add test command to the list of documents Retail Shipment con
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4817,13 +4817,13 @@ Scenario: _0205038 add test command to the list of documents Retail Shipment con
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail Shipment confirmation' |
+				| 'Description'                      |
+				| 'Retail Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4842,19 +4842,19 @@ Scenario: _0205038 add test command to the list of documents Retail Shipment con
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail Shipment confirmation' |
+				| 'Description'                      |
+				| 'Retail Shipment confirmation'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.RetailShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.RetailShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
@@ -4869,14 +4869,14 @@ Scenario: _0205039 add test command to the list of documents Retail goods receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail goods receipt'  |
+				| 'Description'              |
+				| 'Retail goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "List form" exact value from "Form type" drop-down list
 	* Save command
@@ -4884,8 +4884,8 @@ Scenario: _0205039 add test command to the list of documents Retail goods receip
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'           | 'Plugins' |
-		| 'Retail goods receipt'             | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Retail goods receipt'    | 'Test command'   |
 	* Check the command from the document list RetailGoodsReceipt
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 		And I go to the last line in "List" table
@@ -4895,7 +4895,7 @@ Scenario: _0205039 add test command to the list of documents Retail goods receip
 	* Check that the command is not displayed in the document
 		And I click "Create" button
 		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+			| 'And I click "Test command" button'    |
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
@@ -4905,13 +4905,13 @@ Scenario: _0205039 add test command to the list of documents Retail goods receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail goods receipt' |
+				| 'Description'              |
+				| 'Retail goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Object form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
@@ -4929,19 +4929,19 @@ Scenario: _0205039 add test command to the list of documents Retail goods receip
 			And I click Select button of "Configuration metadata" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Retail goods receipt' |
+				| 'Description'              |
+				| 'Retail goods receipt'     |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
+				| 'Description'      |
+				| 'Test command'     |
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
-				| 'OpenForm("Document.RetailGoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+				| 'OpenForm("Document.RetailGoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds

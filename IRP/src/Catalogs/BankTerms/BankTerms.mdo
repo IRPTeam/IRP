@@ -65,6 +65,21 @@
   <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="7baa8ab8-9eec-4b10-8816-49bd5db0db85">
+    <name>BankTermType</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank term type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.BankTermTypes</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.BankTermTypes.EnumValue.PaymentTerminal</value>
+    </fillValue>
+  </attributes>
   <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
     <producedTypes>
       <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
@@ -89,6 +104,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
+      <name>Percent</name>
+      <synonym>
+        <key>en</key>
+        <value>Percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="78623f56-8170-45ab-a554-fa1264aedc41">
       <name>Account</name>
       <synonym>
@@ -103,14 +132,78 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
-      <name>Percent</name>
+    <attributes uuid="e99205c1-a89e-48ea-ad08-c14f1c197a04">
+      <name>Partner</name>
       <synonym>
         <key>en</key>
-        <value>Percent</value>
+        <value>Partner</value>
       </synonym>
       <type>
-        <types>DefinedType.typePercent</types>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="42b278f2-eb0b-4e68-88cf-4b7d5f47c2a3">
+      <name>LegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Catalog.BankTerms.TabularSection.PaymentTypes.Attribute.Partner</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1f49099a-607f-49e9-b3e9-483a9b92eb7b">
+      <name>PartnerTerms</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner terms</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Catalog.BankTerms.TabularSection.PaymentTypes.Attribute.Partner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Catalog.BankTerms.TabularSection.PaymentTypes.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.AgreementTypes.EnumValue.Other</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c865cd95-9722-42ff-8ad1-9ac3aab9d67e">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

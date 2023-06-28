@@ -1484,7 +1484,7 @@ EndFunction
 #Region Service
 
 Procedure FormGetProcessing(FormType, Parameters, SelectedForm, AdditionalInfo, StandardProcessing)
-	If FormType = "ListForm" And Constants.UseSimpleMode.Get() Then
+	If FormType = "ListForm" And FOServer.isUseSimpleMode() Then
 		Query = New Query;
 		Query.Text =
 		"SELECT TOP 1 ALLOWED

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @AccessRights
@@ -124,8 +124,8 @@ Scenario: 950100 Basic role
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
-					| 'Description'                 |
-					| 'Emily Jones (Manager 2)' |
+					| 'Description'                  |
+					| 'Emily Jones (Manager 2)'      |
 			And I select current line in "List" table
 	* Change localization code
 			And I select "Turkish" exact value from "Data localization" drop-down list	
@@ -141,13 +141,13 @@ Scenario: 950100 Basic role
 	* When Create user with access role Full access only read
 		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Manager'   |
+				| 'Description'     |
+				| 'Manager'         |
 		And I select current line in "List" table
 		And in the table "Roles" I click "Update roles" button
 		And I go to line in "Roles" table
-				| 'Presentation'    |
-				| 'Basic role' |
+				| 'Presentation'     |
+				| 'Basic role'       |
 		And I set "Use" checkbox in "Roles" table
 		And I finish line editing in "Roles" table
 		And I click "Save and close" button

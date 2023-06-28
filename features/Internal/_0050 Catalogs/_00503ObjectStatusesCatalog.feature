@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -22,12 +22,12 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element InventoryTransferOrder
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| InventoryTransferOrder                |
+			| Predefined data name      |
+			| InventoryTransferOrder    |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Inventory transfer order" text in the field named "Description_en"
@@ -37,8 +37,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click "Save and close" button
 	* Adding status "Wait"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Inventory transfer order' |
+		| 'Description'                |
+		| 'Inventory transfer order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
@@ -49,8 +49,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click "Save and close" button
 	* Adding status "Approved"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Inventory transfer order' |
+		| 'Description'                |
+		| 'Inventory transfer order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
@@ -65,12 +65,12 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element OutgoingPaymentOrder
 			And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| OutgoingPaymentOrder                |
+			| Predefined data name    |
+			| OutgoingPaymentOrder    |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Outgoing payment order" text in the field named "Description_en"
@@ -81,7 +81,7 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 	* Adding status "Wait"
 		And I go to line in "List" table
 		| 'Description'              |
-		| 'Outgoing payment order' |
+		| 'Outgoing payment order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
@@ -92,7 +92,7 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 	* Adding status "Approved"
 		And I go to line in "List" table
 		| 'Description'              |
-		| 'Outgoing payment order' |
+		| 'Outgoing payment order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
@@ -106,12 +106,12 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  PurchaseReturnOrder
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| PurchaseReturnOrder                |
+			| Predefined data name    |
+			| PurchaseReturnOrder     |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Purchase return order" text in the field named "Description_en"
@@ -120,8 +120,8 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 		And I click "Save and close" button
 	* Adding status "Wait"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Purchase return order' |
+		| 'Description'             |
+		| 'Purchase return order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
@@ -131,8 +131,8 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 		And I click "Save and close" button
 	* Adding status "Approved"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Purchase return order' |
+		| 'Description'             |
+		| 'Purchase return order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
@@ -147,12 +147,12 @@ Scenario: _005042 filling in the status catalog for Purchase order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element PurchaseOrder
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| PurchaseOrder                |
+			| Predefined data name    |
+			| PurchaseOrder           |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Purchase order" text in the field named "Description_en"
@@ -161,8 +161,8 @@ Scenario: _005042 filling in the status catalog for Purchase order
 		And I click "Save and close" button
 	* Adding status "Wait"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Purchase order' |
+		| 'Description'      |
+		| 'Purchase order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
@@ -172,8 +172,8 @@ Scenario: _005042 filling in the status catalog for Purchase order
 		And I click "Save and close" button
 	* Adding status "Approved"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Purchase order' |
+		| 'Description'      |
+		| 'Purchase order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
@@ -187,12 +187,12 @@ Scenario: _005043 filling in the status catalog for Sales return order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesReturnOrder
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| SalesReturnOrder                |
+			| Predefined data name    |
+			| SalesReturnOrder        |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Sales return order" text in the field named "Description_en"
@@ -201,8 +201,8 @@ Scenario: _005043 filling in the status catalog for Sales return order
 		And I click "Save and close" button
 	* Adding status "Wait"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Sales return order' |
+		| 'Description'          |
+		| 'Sales return order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
@@ -212,8 +212,8 @@ Scenario: _005043 filling in the status catalog for Sales return order
 		And I click "Save and close" button
 	* Adding status "Approved"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Sales return order' |
+		| 'Description'          |
+		| 'Sales return order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
@@ -227,12 +227,12 @@ Scenario: _005044 filling in the status catalog for Sales order
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesOrder
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| SalesOrder                |
+			| Predefined data name    |
+			| SalesOrder              |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Sales order" text in the field named "Description_en"
@@ -241,8 +241,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 		And I click "Save and close" button
 	* Adding status "Wait"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Sales order' |
+		| 'Description'   |
+		| 'Sales order'   |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Wait" text in the field named "Description_en"
@@ -251,8 +251,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 		And I click "Save and close" button
 	* Adding status "Approved"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Sales order' |
+		| 'Description'   |
+		| 'Sales order'   |
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I set checkbox "Set by default"
@@ -267,16 +267,16 @@ Scenario: _005045 check for clearing the UniqueID field when copying the status
 	* Opening a form for creating Objects status historyes
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 	* Copy status
 		And I expand a line in "List" table
-			| 'Description' | 'Predefined data name' |
-			| 'Sales order' | 'SalesOrder'                |
+			| 'Description'   | 'Predefined data name'    |
+			| 'Sales order'   | 'SalesOrder'              |
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Wait'        |
+			| 'Description'    |
+			| 'Wait'           |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 	* Check UniqueID field deleting
 		Then the form attribute named "UniqueID" became equal to ""
@@ -289,18 +289,18 @@ Scenario: _005046 create statuses for Cheque bond
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I expand current line in "List" table
 		And I expand a line in "List" table
-			| 'Predefined data name' |
-			| 'ChequeBondTransaction'     |
+			| 'Predefined data name'     |
+			| 'ChequeBondTransaction'    |
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'ChequeBondIncoming'     |
+			| 'Predefined data name'    |
+			| 'ChequeBondIncoming'      |
 		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondIncoming" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'ChequeBondOutgoing'     |
+			| 'Predefined data name'    |
+			| 'ChequeBondOutgoing'      |
 		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondOutgoing" text in the field named "Description_en"
@@ -308,8 +308,8 @@ Scenario: _005046 create statuses for Cheque bond
 	* Create statuses for Cheque bond incoming
 		* Create status Taken from partner
 			And I go to line in "List" table
-			| 'Description'        |
-			| 'ChequeBondIncoming' |
+			| 'Description'           |
+			| 'ChequeBondIncoming'    |
 			And I click the button named "FormCreate"
 			And I input "01. TakenFromPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
@@ -320,16 +320,16 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click "Save and close" button
 		* Create status Payment received
 			And I go to line in "List" table
-			| 'Description'        |
-			| 'ChequeBondIncoming' |
+			| 'Description'           |
+			| 'ChequeBondIncoming'    |
 			And I click the button named "FormCreate"
 			And I input "03. PaymentReceived" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I click "Save and close" button
 		* Create status Protested
 			And I go to line in "List" table
-			| 'Description'        |
-			| 'ChequeBondIncoming' |
+			| 'Description'           |
+			| 'ChequeBondIncoming'    |
 			And I click the button named "FormCreate"
 			And I input "04. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
@@ -339,16 +339,16 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click "Save and close" button
 		* Create status Give to bank as assurance
 			And I go to line in "List" table
-			| 'Description'        |
-			| 'ChequeBondIncoming' |
+			| 'Description'           |
+			| 'ChequeBondIncoming'    |
 			And I click the button named "FormCreate"
 			And I input "02. GiveToBankAsAssurance" text in the field named "Description_en"
 			And I click "Save and close" button
 	* Create statuses for Cheque bond outgoing
 		* Create status Given to partner
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'ChequeBondOutgoing' |
+				| 'Description'            |
+				| 'ChequeBondOutgoing'     |
 			And I click the button named "FormCreate"
 			And I input "01. GivenToPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
@@ -358,8 +358,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click "Save and close" button
 		* Create status Payed
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'ChequeBondOutgoing' |
+				| 'Description'            |
+				| 'ChequeBondOutgoing'     |
 			And I click the button named "FormCreate"
 			And I input "02. Payed" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
@@ -367,8 +367,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click "Save and close" button
 		* Create status Protested
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'ChequeBondOutgoing' |
+				| 'Description'            |
+				| 'ChequeBondOutgoing'     |
 			And I click the button named "FormCreate"
 			And I input "03. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
@@ -378,8 +378,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click "Save and close" button
 	* Setting the order of statuses for incoming cheques
 		And I go to line in "List" table
-			| 'Description'          |
-			| '01. TakenFromPartner' |
+			| 'Description'             |
+			| '01. TakenFromPartner'    |
 		And I select current line in "List" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
 		And Delay 2
@@ -394,8 +394,8 @@ Scenario: _005046 create statuses for Cheque bond
 		And I click "Save and close" button
 		And I wait "01. TakenFromPartner (Order status) *" window closing in 20 seconds
 		And I go to line in "List" table
-			| 'Description'               |
-			| '02. GiveToBankAsAssurance' |
+			| 'Description'                  |
+			| '02. GiveToBankAsAssurance'    |
 		And I select current line in "List" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
 		And I select "03. PaymentReceived" exact value from "Status" drop-down list in "NextPossibleStatuses" table
@@ -406,8 +406,8 @@ Scenario: _005046 create statuses for Cheque bond
 		And I click "Save and close" button
 	* Setting the order of statuses for outgoing cheques
 		And I go to line in "List" table
-			| 'Description'          |
-			| '01. GivenToPartner' |
+			| 'Description'           |
+			| '01. GivenToPartner'    |
 		And I select current line in "List" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
 		And I select "02. Payed" exact value from "Status" drop-down list in "NextPossibleStatuses" table

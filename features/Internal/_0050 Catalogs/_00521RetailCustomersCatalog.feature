@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -39,23 +39,23 @@ Scenario: _005049 filling in the "Retail customers" catalog
 		And I set checkbox "Use partner info"		
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Customer'    |
+			| 'Description'    |
+			| 'Customer'       |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Customer'    |
+			| 'Description'    |
+			| 'Customer'       |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'              |
 			| 'Customer partner term'    |
 		And I select current line in "List" table		
 		And I click "Save and close" button
 		And Delay 2
 	* Check for created Retail customer
 		And "List" table contains lines
-		| 'Description'                                  | 'Code' | 'Name'                 | 'Surname'                 |
-		| 'Name Retail customer Surname Retail customer' | '002'  | 'Name Retail customer' | 'Surname Retail customer' |
+		| 'Description'                                   | 'Code'  | 'Name'                  | 'Surname'                   |
+		| 'Name Retail customer Surname Retail customer'  | '002'   | 'Name Retail customer'  | 'Surname Retail customer'   |
 		And I close all client application windows

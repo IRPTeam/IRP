@@ -62,7 +62,6 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentType,
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
-	|PaymentList.CommissionIsSeparate,
 	|PaymentList.RevenueType,
 	|PaymentList.RetailCustomer";
 	
@@ -116,12 +115,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
-		|PaymentList.LegalNameContract";		
+		|PaymentList.LegalNameContract,
+		|PaymentList.BasisDocument";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.POSAccount,
-		|PaymentList.CommissionIsSeparate";
+		|PaymentList.POSAccount";
 	ElsIf TransactionType = ReceiptByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SaasPrepare
@@ -512,92 +512,92 @@ Scenario:_800001 create SaaS area
 		And Delay 60
 	* Check creation
 		If "List" table does not contain lines Then
-			| 'Description'          | 'Data area status' |
-			| 'Discount'             | 'Working'          |
-			| 'Forms'                | 'Working'          |
-			| 'CreationBasedMulti'   | 'Working'          |
-			| 'Other'                | 'Working'          |
-			| 'CashManagement'       | 'Working'          |
-			| 'Inventory'            | 'Working'          |
-			| 'BankCashDocuments'    | 'Working'          |
-			| 'Filters'              | 'Working'          |
-			| 'Purchase'             | 'Working'          |
-			| 'AdditionalAttributes' | 'Working'          |
-			| 'UserSettings'         | 'Working'          |
-			| 'Sales'                | 'Working'          |
-			| 'LinkedTransaction'    | 'Working'          |
-			| 'AgingAndCreditLimit'  | 'Working'          |
-			| 'RetailDocuments'      | 'Working'          |
-			| 'PartnerCatalogs'      | 'Working'          |
-			| 'InfoMessages'         | 'Working'          |
-			| 'ExtensionReportForm'  | 'Working'          |
-			| 'ContactInformation'   | 'Working'          |
-			| 'DocumentVerification' | 'Working'          |
-			| 'StandartAgreement'    | 'Working'          |
-			| 'AccessRights'         | 'Working'          |
-			| 'ItemCatalogs'         | 'Working'          |
-			| 'PhysicalInventory'    | 'Working'          |
-			| 'Price'                | 'Working'          |
-			| 'SerialLotNumber'      | 'Working'          |
-			| 'InputBySearchInLine'  | 'Working'          |
-			| 'LoadInfo'             | 'Working'          |
-			| 'Services'             | 'Working'          |
-			| 'SettingsCatalogs'     | 'Working'          |
-			| 'BasicFormsCheck'      | 'Working'          |
-			| 'OpeningEntries'       | 'Working'          |
-			| 'ProcurementDataProc'  | 'Working'          |
-			| 'InventoryTransfer'    | 'Working'          |
-			| 'UserCatalogs'         | 'Working'          |
-			| 'CompanyCatalogs'      | 'Working'          |
-			| 'TaxCalculation'       | 'Working'          |
-			| 'PrintForm'            | 'Working'          |
-			| 'CurrencyRate'         | 'Working'          |
-			| 'Barcodes'             | 'Working'          |
-			| 'FillingDocuments'     | 'Working'          |
+			| 'Description'            | 'Data area status'    |
+			| 'Discount'               | 'Working'             |
+			| 'Forms'                  | 'Working'             |
+			| 'CreationBasedMulti'     | 'Working'             |
+			| 'Other'                  | 'Working'             |
+			| 'CashManagement'         | 'Working'             |
+			| 'Inventory'              | 'Working'             |
+			| 'BankCashDocuments'      | 'Working'             |
+			| 'Filters'                | 'Working'             |
+			| 'Purchase'               | 'Working'             |
+			| 'AdditionalAttributes'   | 'Working'             |
+			| 'UserSettings'           | 'Working'             |
+			| 'Sales'                  | 'Working'             |
+			| 'LinkedTransaction'      | 'Working'             |
+			| 'AgingAndCreditLimit'    | 'Working'             |
+			| 'RetailDocuments'        | 'Working'             |
+			| 'PartnerCatalogs'        | 'Working'             |
+			| 'InfoMessages'           | 'Working'             |
+			| 'ExtensionReportForm'    | 'Working'             |
+			| 'ContactInformation'     | 'Working'             |
+			| 'DocumentVerification'   | 'Working'             |
+			| 'StandartAgreement'      | 'Working'             |
+			| 'AccessRights'           | 'Working'             |
+			| 'ItemCatalogs'           | 'Working'             |
+			| 'PhysicalInventory'      | 'Working'             |
+			| 'Price'                  | 'Working'             |
+			| 'SerialLotNumber'        | 'Working'             |
+			| 'InputBySearchInLine'    | 'Working'             |
+			| 'LoadInfo'               | 'Working'             |
+			| 'Services'               | 'Working'             |
+			| 'SettingsCatalogs'       | 'Working'             |
+			| 'BasicFormsCheck'        | 'Working'             |
+			| 'OpeningEntries'         | 'Working'             |
+			| 'ProcurementDataProc'    | 'Working'             |
+			| 'InventoryTransfer'      | 'Working'             |
+			| 'UserCatalogs'           | 'Working'             |
+			| 'CompanyCatalogs'        | 'Working'             |
+			| 'TaxCalculation'         | 'Working'             |
+			| 'PrintForm'              | 'Working'             |
+			| 'CurrencyRate'           | 'Working'             |
+			| 'Barcodes'               | 'Working'             |
+			| 'FillingDocuments'       | 'Working'             |
 			And Delay 120
 			If "List" table does not contain lines Then
-				| 'Description'          | 'Data area status' |
-				| 'Discount'             | 'Working'          |
-				| 'Forms'                | 'Working'          |
-				| 'CreationBasedMulti'   | 'Working'          |
-				| 'Other'                | 'Working'          |
-				| 'CashManagement'       | 'Working'          |
-				| 'Inventory'            | 'Working'          |
-				| 'BankCashDocuments'    | 'Working'          |
-				| 'Filters'              | 'Working'          |
-				| 'Purchase'             | 'Working'          |
-				| 'AdditionalAttributes' | 'Working'          |
-				| 'UserSettings'         | 'Working'          |
-				| 'Sales'                | 'Working'          |
-				| 'LinkedTransaction'    | 'Working'          |
-				| 'AgingAndCreditLimit'  | 'Working'          |
-				| 'RetailDocuments'      | 'Working'          |
-				| 'PartnerCatalogs'      | 'Working'          |
-				| 'InfoMessages'         | 'Working'          |
-				| 'ExtensionReportForm'  | 'Working'          |
-				| 'ContactInformation'   | 'Working'          |
-				| 'DocumentVerification' | 'Working'          |
-				| 'StandartAgreement'    | 'Working'          |
-				| 'AccessRights'         | 'Working'          |
-				| 'ItemCatalogs'         | 'Working'          |
-				| 'PhysicalInventory'    | 'Working'          |
-				| 'Price'                | 'Working'          |
-				| 'SerialLotNumber'      | 'Working'          |
-				| 'InputBySearchInLine'  | 'Working'          |
-				| 'LoadInfo'             | 'Working'          |
-				| 'Services'             | 'Working'          |
-				| 'SettingsCatalogs'     | 'Working'          |
-				| 'BasicFormsCheck'      | 'Working'          |
-				| 'OpeningEntries'       | 'Working'          |
-				| 'ProcurementDataProc'  | 'Working'          |
-				| 'InventoryTransfer'    | 'Working'          |
-				| 'UserCatalogs'         | 'Working'          |
-				| 'CompanyCatalogs'      | 'Working'          |
-				| 'TaxCalculation'       | 'Working'          |
-				| 'PrintForm'            | 'Working'          |
-				| 'CurrencyRate'         | 'Working'          |
-				| 'Barcodes'             | 'Working'          |
-				| 'FillingDocuments'     | 'Working'          |
+				| 'Description'             | 'Data area status'     |
+				| 'Discount'                | 'Working'              |
+				| 'Forms'                   | 'Working'              |
+				| 'CreationBasedMulti'      | 'Working'              |
+				| 'Other'                   | 'Working'              |
+				| 'CashManagement'          | 'Working'              |
+				| 'Inventory'               | 'Working'              |
+				| 'BankCashDocuments'       | 'Working'              |
+				| 'Filters'                 | 'Working'              |
+				| 'Purchase'                | 'Working'              |
+				| 'AdditionalAttributes'    | 'Working'              |
+				| 'UserSettings'            | 'Working'              |
+				| 'Sales'                   | 'Working'              |
+				| 'LinkedTransaction'       | 'Working'              |
+				| 'AgingAndCreditLimit'     | 'Working'              |
+				| 'RetailDocuments'         | 'Working'              |
+				| 'PartnerCatalogs'         | 'Working'              |
+				| 'InfoMessages'            | 'Working'              |
+				| 'ExtensionReportForm'     | 'Working'              |
+				| 'ContactInformation'      | 'Working'              |
+				| 'DocumentVerification'    | 'Working'              |
+				| 'StandartAgreement'       | 'Working'              |
+				| 'AccessRights'            | 'Working'              |
+				| 'ItemCatalogs'            | 'Working'              |
+				| 'PhysicalInventory'       | 'Working'              |
+				| 'Price'                   | 'Working'              |
+				| 'SerialLotNumber'         | 'Working'              |
+				| 'InputBySearchInLine'     | 'Working'              |
+				| 'LoadInfo'                | 'Working'              |
+				| 'Services'                | 'Working'              |
+				| 'SettingsCatalogs'        | 'Working'              |
+				| 'BasicFormsCheck'         | 'Working'              |
+				| 'OpeningEntries'          | 'Working'              |
+				| 'ProcurementDataProc'     | 'Working'              |
+				| 'InventoryTransfer'       | 'Working'              |
+				| 'UserCatalogs'            | 'Working'              |
+				| 'CompanyCatalogs'         | 'Working'              |
+				| 'TaxCalculation'          | 'Working'              |
+				| 'PrintForm'               | 'Working'              |
+				| 'CurrencyRate'            | 'Working'              |
+				| 'Barcodes'                | 'Working'              |
+				| 'FillingDocuments'        | 'Working'              |
 				And Delay 120
 		And I close all client application windows
 		

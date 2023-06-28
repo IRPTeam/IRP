@@ -625,35 +625,39 @@ EndFunction
 
 Function Payments()
 	Return "SELECT
-		   |	Payments.Ref.Date AS Period,
-		   |	Payments.Ref.Company AS Company,
-		   |	Payments.Ref AS Basis,
-		   |	Payments.Account AS Account,
-		   |	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Bank) AS IsBankAccount,
-		   |	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Cash) AS IsCashAccount,
-		   |	Payments.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsPOSAccount,
-		   |	Payments.PostponedPayment AS IsPostponedPayment,
-		   |	Payments.Ref.Currency AS Currency,
-		   |	Payments.Amount AS Amount,
-		   |	Payments.Ref.Branch AS Branch,
-		   |	Payments.PaymentType AS PaymentType,
-		   |	Payments.FinancialMovementType AS FinancialMovementType,
-		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
-		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
-		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
-		   |	Payments.PaymentTerminal AS PaymentTerminal,
-		   |	Payments.Percent AS Percent,
-		   |	Payments.Commission AS Commission,
-		   |	CASE
-		   |		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN Payments.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument
-		   |INTO Payments
-		   |FROM
-		   |	Document.RetailReturnReceipt.Payments AS Payments
-		   |WHERE
-		   |	Payments.Ref = &Ref";
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref AS Basis,
+	|	Payments.Account AS Account,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Bank) AS IsBankAccount,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Cash) AS IsCashAccount,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsPOSAccount,
+	|	Payments.PostponedPayment AS IsPostponedPayment,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Amount AS Amount,
+	|	Payments.Ref.Branch AS Branch,
+	|	Payments.PaymentType AS PaymentType,
+	|	Payments.FinancialMovementType AS FinancialMovementType,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
+	|	Payments.PaymentTerminal AS PaymentTerminal,
+	|	Payments.Percent AS Percent,
+	|	Payments.Commission AS Commission,
+	|	CASE
+	|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN Payments.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	Payments.PaymentAgentPartner AS Partner,
+	|	Payments.PaymentAgentLegalName AS LegalName,
+	|	Payments.PaymentAgentPartnerTerms AS Agreement,
+	|	Payments.PaymentAgentLegalNameContract AS LegalNameContract
+	|INTO Payments
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -860,6 +864,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -1110,22 +1115,24 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList.LegalName,
 		   |	ItemList.Partner,
 		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Expense)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense)";
+
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	Payments.Period,
 		   |	Payments.Company,
 		   |	Payments.Branch,
 		   |	Payments.Currency,
-		   |	Payments.PaymentType.LegalName AS LegalName,
-		   |	Payments.PaymentType.Partner AS Partner,
-		   |	Payments.PaymentType.Agreement AS Agreement,
+		   |	Payments.LegalName AS LegalName,
+		   |	Payments.Partner AS Partner,
+		   |	Payments.Agreement AS Agreement,
 		   |	Payments.BasisDocument AS Basis,
 		   |	-SUM(Payments.Amount) AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
+		   |INTO R5015B_OtherPartnersTransactions
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
@@ -1136,9 +1143,9 @@ Function R2021B_CustomersTransactions()
 		   |	Payments.Company,
 		   |	Payments.Branch,
 		   |	Payments.Currency,
-		   |	Payments.PaymentType.LegalName,
-		   |	Payments.PaymentType.Partner,
-		   |	Payments.PaymentType.Agreement,
+		   |	Payments.LegalName,
+		   |	Payments.Partner,
+		   |	Payments.Agreement,
 		   |	Payments.BasisDocument";
 
 EndFunction
@@ -1197,8 +1204,8 @@ Function R5010B_ReconciliationStatement()
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	Payments.Company,
 		   |	Payments.Branch,
-		   |	Payments.PaymentType.LegalName AS LegalName,
-		   |	Payments.PaymentType.LegalNameContract AS LegalNameContract,
+		   |	Payments.LegalName AS LegalName,
+		   |	Payments.LegalNameContract AS LegalNameContract,
 		   |	Payments.Currency,
 		   |	-SUM(Payments.Amount) AS Amount,
 		   |	Payments.Period
@@ -1210,8 +1217,8 @@ Function R5010B_ReconciliationStatement()
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	Payments.Company,
 		   |	Payments.Branch,
-		   |	Payments.PaymentType.LegalName,
-		   |	Payments.PaymentType.LegalNameContract,
+		   |	Payments.LegalName,
+		   |	Payments.LegalNameContract,
 		   |	Payments.Currency,
 		   |	Payments.Period";
 EndFunction
@@ -1436,6 +1443,9 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = Obj.ItemList.Unload(, "Store");
+	StoreList.GroupBy("Store");
+	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
 

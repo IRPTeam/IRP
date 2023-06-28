@@ -735,6 +735,11 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 	EndIf;
 	CalculateOffersAfterSet(Result);
 	OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject, AdditionalParameters);
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;	
 EndProcedure
 
 &AtServer
@@ -765,6 +770,11 @@ Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
 	EndIf;
 	CalculateAndLoadOffers_ForRow(Result);
 	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;	
 EndProcedure
 
 &AtServer

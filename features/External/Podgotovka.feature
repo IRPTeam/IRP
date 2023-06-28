@@ -1641,7 +1641,7 @@ Scenario: set True value to the constant Use lock data modification
 
 Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
-				| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server

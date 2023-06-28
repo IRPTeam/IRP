@@ -23,14 +23,16 @@ Procedure Write(Name, Logs, Level = 0, Step = "", Ref = Undefined) Export
 	Else
 		EventLevel = EventLogLevel.Note;
 	EndIf;
-	
+	_Logs = "";
 	If Not TypeOf(Logs) = Type("String") Then
 		Try
-			Logs = CommonFunctionsServer.SerializeJSON(Logs);
+			_Logs = CommonFunctionsServer.SerializeJSON(Logs);
 		Except
-			Logs = String(Logs);
+			_Logs = String(Logs);
 		EndTry;
+	Else
+		_Logs = Logs
 	EndIf;
 	
-	WriteLogEvent(Name, EventLevel, , Ref, Logs);
+	WriteLogEvent(Name, EventLevel, , Ref, _Logs);
 EndProcedure

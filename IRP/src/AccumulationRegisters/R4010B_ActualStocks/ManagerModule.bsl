@@ -1,4 +1,5 @@
 #Region Service
+
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.R4010B_ActualStocks");
@@ -27,6 +28,21 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	Tables.Insert("Records_Exists", Records_Exists);
 
 	Return PostingServer.CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo);
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 	See Role.TemplateAccumulationRegisters - Parameters orders has to be the same
+//  
+// Returns:
+//  Structure
+Function GetAccessKey() Export
+	AccessKeyStructure = New Structure;
+	AccessKeyStructure.Insert("Store", Catalogs.Stores.EmptyRef());
+	Return AccessKeyStructure;
 EndFunction
 
 #EndRegion

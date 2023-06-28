@@ -82,30 +82,30 @@ Scenario: _0050 preparation
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
 		Then "Companies" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
-			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
+			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
@@ -114,27 +114,27 @@ Scenario: _0050 preparation
 		When Create documents Batch relocation (LC)
 		When Create document AdditionalCostAllocation, PurchaseInvoice (additional cost, batch realocate)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.ItemStockAdjustment.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ItemStockAdjustment.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailSalesReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document StockAdjustmentAsSurplus, SalesInvoice, Sales return (batch realocate)
 		And I close all client application windows
 	
@@ -148,8 +148,8 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "30.05.2022" text in "Begin date" field
@@ -176,16 +176,16 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Check unpost BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table became equal
-			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Outgoing' |
-			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+			| 'Number'   | 'Batch reallocate'   | 'Date'   | 'Company'   | 'Document'   | 'Outgoing'    |
+			| '1'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '2'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '3'        | ''                   | '*'      | ''          | ''           | ''            |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table became equal
-			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Incoming' |
-			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+			| 'Number'   | 'Batch reallocate'   | 'Date'   | 'Company'   | 'Document'   | 'Incoming'    |
+			| '1'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '2'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '3'        | ''                   | '*'      | ''          | ''           | ''            |
 	* Post CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -194,16 +194,16 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Check post BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
-			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
-			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
-			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
+			| 'Number'   | 'Batch reallocate'                 | 'Date'   | 'Company'          | 'Document'                     | 'Outgoing'                        |
+			| '1'        | 'Calculation movement costs 22*'   | '*'      | 'Second Company'   | 'Item stock adjustment 161*'   | 'Batch reallocate outgoing 1*'    |
+			| '2'        | 'Calculation movement costs 22*'   | '*'      | 'Second Company'   | 'Sales invoice 1 011*'         | 'Batch reallocate outgoing 2*'    |
+			| '3'        | 'Calculation movement costs 22*'   | '*'      | 'Second Company'   | 'Sales invoice 1 012*'         | 'Batch reallocate outgoing 3*'    |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
-			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
-			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
-			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
+			| 'Number'   | 'Batch reallocate'                 | 'Date'   | 'Company'        | 'Document'                     | 'Incoming'                        |
+			| '1'        | 'Calculation movement costs 22*'   | '*'      | 'Main Company'   | 'Item stock adjustment 161*'   | 'Batch reallocate incoming 1*'    |
+			| '2'        | 'Calculation movement costs 22*'   | '*'      | 'Main Company'   | 'Sales invoice 1 011*'         | 'Batch reallocate incoming 2*'    |
+			| '3'        | 'Calculation movement costs 22*'   | '*'      | 'Main Company'   | 'Sales invoice 1 012*'         | 'Batch reallocate incoming 3*'    |
 	* Mark for daletion CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -214,16 +214,16 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Check unpost BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table became equal
-			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Outgoing' |
-			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+			| 'Number'   | 'Batch reallocate'   | 'Date'   | 'Company'   | 'Document'   | 'Outgoing'    |
+			| '1'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '2'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '3'        | ''                   | '*'      | ''          | ''           | ''            |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table became equal
-			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Incoming' |
-			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
-			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+			| 'Number'   | 'Batch reallocate'   | 'Date'   | 'Company'   | 'Document'   | 'Incoming'    |
+			| '1'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '2'        | ''                   | '*'      | ''          | ''           | ''            |
+			| '3'        | ''                   | '*'      | ''          | ''           | ''            |
 		And I close all client application windows
 		
 		
@@ -231,19 +231,19 @@ Scenario: _0054 check batch realocate with return (batch StockAdjustmentAsSurplu
 	And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
-			| "Documents.StockAdjustmentAsSurplus.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1014).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.SalesInvoice.FindByNumber(1014).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1015).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.SalesInvoice.FindByNumber(1015).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1016).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(1016).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check batch balance calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Select option..." button

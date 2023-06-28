@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @StandartAgreement
@@ -53,8 +53,8 @@ Scenario: _060000 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
@@ -73,21 +73,21 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Nicoletta'     |
+				| 'Description'     |
+				| 'Nicoletta'       |
 			And I select current line in "List" table
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -100,25 +100,25 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I save the window as "$$SalesInvoice060002$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'Basic Price Types' | 'pcs'  | '*'          | '*'          | '11 000,00'    | 'Store 01' |
+			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Price type'          | 'Unit'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '550,00'   | 'Dress'   | '18%'   | 'L/Green'    | '20,000'     | 'Basic Price Types'   | 'pcs'    | '*'            | '*'            | '11 000,00'      | 'Store 01'    |
 			And I click the button named "FormPostAndClose"
 		* Check Sales invoice movements
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberSalesInvoice060002$$'  |
+				| 'Number'                           |
+				| '$$NumberSalesInvoice060002$$'     |
 			And I click "Registrations report" button
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Document registrations records'          | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                    | ''      | ''      | ''                     | ''                           |
-				| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                    | ''      | ''      | ''                     | ''                           |
-				| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                    | ''      | ''      | 'Attributes'           | ''                           |
-				| ''                                        | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'           | 'Basis' | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
-				| ''                                        | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | ''      | 'No'                   | ''                           |
-				| ''                                        | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | ''      | 'No'                   | ''                           |
+				| 'Document registrations records'             | ''               | ''          | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                       | ''         | ''         | ''                        | ''                               |
+				| 'Register  "R2021 Customer transactions"'    | ''               | ''          | ''             | ''                | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                       | ''         | ''         | ''                        | ''                               |
+				| ''                                           | 'Record type'    | 'Period'    | 'Resources'    | 'Dimensions'      | ''          | ''                                | ''            | ''                        | ''                     | ''             | ''                       | ''         | ''         | 'Attributes'              | ''                               |
+				| ''                                           | ''               | ''          | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'           | 'Partner'      | 'Agreement'              | 'Basis'    | 'Order'    | 'Deferred calculation'    | 'Customers advances closing'     |
+				| ''                                           | 'Receipt'        | '*'         | '1 883,2'      | 'Main Company'    | '*'         | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Nicoletta'    | 'Nicoletta'    | 'Standard (Customer)'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Nicoletta'    | 'Nicoletta'    | 'Standard (Customer)'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Nicoletta'    | 'Nicoletta'    | 'Standard (Customer)'    | ''         | ''         | 'No'                      | ''                               |
+				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Nicoletta'    | 'Nicoletta'    | 'Standard (Customer)'    | ''         | ''         | 'No'                      | ''                               |
 	And I close all client application windows
 
 Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements
@@ -128,32 +128,32 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Cash desk №2' |
+				| 'Description'      |
+				| 'Cash desk №2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Code' |
-				| 'TRY'  |
+				| 'Code'     |
+				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Nicoletta'   |
+				| 'Description'     |
+				| 'Nicoletta'       |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'                            |
-				| 'Posting by Standard Partner term Customer' |
+				| 'Description'                                   |
+				| 'Posting by Standard Partner term Customer'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -166,8 +166,8 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberCashReceipt060003$$'  |
+			| 'Number'                         |
+			| '$$NumberCashReceipt060003$$'    |
 		And I close all client application windows
 
 Scenario: _0600031 create Bank receipt with the type of settlements under standard Partner terms and check its movements
@@ -177,27 +177,27 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
+				| 'Description'           |
+				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Nicoletta'   |
+				| 'Description'     |
+				| 'Nicoletta'       |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'                            |
-				| 'Posting by Standard Partner term Customer' |
+				| 'Description'                                   |
+				| 'Posting by Standard Partner term Customer'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -210,8 +210,8 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt0600031$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt0600031$$'    |
 		And I close all client application windows
 
 
@@ -223,22 +223,22 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Veritas'     |
+				| 'Description'     |
+				| 'Veritas'         |
 			And I select current line in "List" table
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -246,8 +246,8 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And I input "550,00" text in "Price" field of "ItemList" table
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
+			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Price type'                | 'Unit'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '550,00'   | 'Dress'   | '18%'   | 'L/Green'    | '20,000'     | 'en description is empty'   | 'pcs'    | '1 677,97'     | '9 322,03'     | '11 000,00'      | 'Store 01'    |
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060005$$" variable
@@ -259,15 +259,15 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseInvoice060005$$'              | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner' | 'Agreement'         | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
+			| '$$PurchaseInvoice060005$$'                | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'         | 'Partner'   | 'Agreement'           | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Receipt'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 	
 Scenario: _060006 create Cash payment with the type of settlements under standard contracts and check its movements
@@ -277,32 +277,32 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Cash desk №2' |
+				| 'Description'      |
+				| 'Cash desk №2'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Code' |
-				| 'TRY'  |
+				| 'Code'     |
+				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Veritas'   |
+				| 'Description'     |
+				| 'Veritas'         |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'                            |
-				| 'Posting by Standard Partner term (Veritas)' |
+				| 'Description'                                    |
+				| 'Posting by Standard Partner term (Veritas)'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -314,21 +314,21 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			And I save the window as "$$CashPayment060006$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberCashPayment060006$$' |
+			| 'Number'                         |
+			| '$$NumberCashPayment060006$$'    |
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashPayment060006$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                                           | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                                           | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                                           | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                                           | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner' | 'Agreement'                                  | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | ''      | 'No'                   | ''                         |
+			| '$$CashPayment060006$$'                    | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                                             | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                                             | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                                             | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                                             | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'         | 'Partner'   | 'Agreement'                                    | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 
 	
@@ -340,27 +340,27 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 		* Select company
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in the details of the document
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
+				| 'Description'           |
+				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Veritas'   |
+				| 'Description'     |
+				| 'Veritas'         |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'                            |
-				| 'Posting by Standard Partner term (Veritas)' |
+				| 'Description'                                    |
+				| 'Posting by Standard Partner term (Veritas)'     |
 			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -372,21 +372,21 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 			And I save the window as "$$BankPayment060008$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberBankPayment060008$$' |
+			| 'Number'                         |
+			| '$$NumberBankPayment060008$$'    |
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment060008$$'                  | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                 | ''        | ''                  | ''      | ''      | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner' | 'Agreement'         | 'Basis' | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | '*'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
-			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | '*'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | ''      | 'No'                   | ''                         |
+			| '$$BankPayment060008$$'                    | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| 'Document registrations records'           | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| 'Register  "R1021 Vendors transactions"'   | ''              | ''         | ''            | ''               | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | ''                       | ''                            |
+			| ''                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                   | ''          | ''                    | ''        | ''        | 'Attributes'             | ''                            |
+			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'         | 'Partner'   | 'Agreement'           | 'Basis'   | 'Order'   | 'Deferred calculation'   | 'Vendors advances closing'    |
+			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
+			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

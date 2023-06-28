@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @AccessRights
@@ -130,8 +130,8 @@ Scenario: 950000 preparation (role Full access only read)
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
-					| 'Description'                 |
-					| 'Sofia Borisova (Manager 3)' |
+					| 'Description'                     |
+					| 'Sofia Borisova (Manager 3)'      |
 			And I select current line in "List" table
 	* Change localization code
 			And I select "English" exact value from "Data localization" drop-down list	
@@ -147,13 +147,13 @@ Scenario: 950000 preparation (role Full access only read)
 	* Update user roles
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 		And I go to line in "List" table
-			| 'Description'                 |
-			| 'Manager' |
+			| 'Description'    |
+			| 'Manager'        |
 		And I click "Update all user roles" button		
 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
 	And Delay 3
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: 9500001 check preparation
 	When check preparation
@@ -162,15 +162,15 @@ Scenario: 9500001 check preparation
 Scenario: 950001 check role Full access only read (Payment types)
 		And In the command interface I select "Master data" "Payment types"	
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 01'     |
+			| 'Description'    |
+			| 'Card 01'        |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash'     |
+			| 'Description'    |
+			| 'Cash'           |
 		And I select current line in "List" table
 		Then system warning window does not appear
 
@@ -180,15 +180,15 @@ Scenario: 950002 check role Full access only read (Cash/Bank accounts)
 	* Master data
 		And In the command interface I select "Master data" "Cash/Bank accounts"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash desk №2'     |
+			| 'Description'     |
+			| 'Cash desk №2'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank account, TRY'     |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -196,15 +196,15 @@ Scenario: 950002 check role Full access only read (Cash/Bank accounts)
 	* Treasury
 		And In the command interface I select "Master data" "Cash/Bank accounts"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash desk №2'     |
+			| 'Description'     |
+			| 'Cash desk №2'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank account, TRY'     |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -214,8 +214,8 @@ Scenario: 950003 check role Full access only read (Currencies)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Currencies"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkish lira'     |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -225,8 +225,8 @@ Scenario: 950004 check role Full access only read (ExpenseAndRevenueTypes)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Expense and revenue types"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Rent'     |
+			| 'Description'    |
+			| 'Rent'           |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -237,8 +237,8 @@ Scenario: 950005 check role Full access only read (Tax rates)
 	* Master data
 		And In the command interface I select "Settings" "Tax rates"		
 		And I go to line in "List" table
-			| 'Description' |
-			| '18%'     |
+			| 'Description'    |
+			| '18%'            |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -249,8 +249,8 @@ Scenario: 950006 check role Full access only read (Company taxes)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Company taxes"		
 		And I go to line in "List" table
-			| 'Tax' |
-			| 'VAT'     |
+			| 'Tax'    |
+			| 'VAT'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -260,15 +260,15 @@ Scenario: 950007 check role Full access only read (Companies)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Companies"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'     |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'     |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -279,15 +279,15 @@ Scenario: 950008 check role Full access only read (Stores)
 	* Master data
 		And In the command interface I select "Master data" "Stores"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'     |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'     |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -295,15 +295,15 @@ Scenario: 950008 check role Full access only read (Stores)
 	* Inventory
 		And In the command interface I select "Inventory" "Stores"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'     |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window	
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'     |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -314,15 +314,15 @@ Scenario: 950009 check role Full access only read (Partner terms)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Partner terms"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close current window
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Standard (Customer)'     |
+			| 'Description'            |
+			| 'Standard (Customer)'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -334,8 +334,8 @@ Scenario: 950010 check role Full access only read (Price types)
 	* Master data
 		And In the command interface I select "Master data" "Price types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Price Types'     |
+			| 'Description'          |
+			| 'Basic Price Types'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -343,8 +343,8 @@ Scenario: 950010 check role Full access only read (Price types)
 	* Sales - A/R
 		And In the command interface I select "Sales - A/R" "Price types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Price Types'     |
+			| 'Description'          |
+			| 'Basic Price Types'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -354,8 +354,8 @@ Scenario: 950011 check role Full access only read (Partner segment)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Partner segments"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dealer'     |
+			| 'Description'    |
+			| 'Dealer'         |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -365,8 +365,8 @@ Scenario: 9500110 check role Full access only read (Countries)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Countries"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'     |
+			| 'Description'    |
+			| 'Turkey'         |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -376,8 +376,8 @@ Scenario: 950012 check role Full access only read (Partners)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Partners"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lomaniti'     |
+			| 'Description'    |
+			| 'Lomaniti'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -388,16 +388,16 @@ Scenario: 950013 check role Full access only read (Items and item key)
 	* Master data
 		And In the command interface I select "Master data" "Items"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And In this window I click command interface button "Item keys"
 		And I activate "Item key" field in "List" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'     |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
@@ -405,16 +405,16 @@ Scenario: 950013 check role Full access only read (Items and item key)
 	* Inventory	
 		And In the command interface I select "Inventory" "Items"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And In this window I click command interface button "Item keys"
 		And I activate "Item key" field in "List" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'     |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
@@ -422,16 +422,16 @@ Scenario: 950013 check role Full access only read (Items and item key)
 	* Sales
 		And In the command interface I select "Sales - A/R" "Items"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And In this window I click command interface button "Item keys"
 		And I activate "Item key" field in "List" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'     |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
@@ -439,16 +439,16 @@ Scenario: 950013 check role Full access only read (Items and item key)
 	* Purchase
 		And In the command interface I select "Purchase  - A/P" "Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And In this window I click command interface button "Item keys"
 		And I activate "Item key" field in "List" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'     |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
@@ -459,8 +459,8 @@ Scenario: 950014 check role Full access only read (Item units)
 	* Master data
 		And In the command interface I select "Master data" "Item units"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'box (8 pcs)'     |
+			| 'Description'    |
+			| 'box (8 pcs)'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -468,8 +468,8 @@ Scenario: 950014 check role Full access only read (Item units)
 	* Inventory
 		And In the command interface I select "Master data" "Item units"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'box (8 pcs)'     |
+			| 'Description'    |
+			| 'box (8 pcs)'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -480,8 +480,8 @@ Scenario: 950015 check role Full access only read (Item types)
 	* Master data
 		And In the command interface I select "Master data" "Item types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'     |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -489,8 +489,8 @@ Scenario: 950015 check role Full access only read (Item types)
 	* Inventory
 		And In the command interface I select "Inventory" "Item types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'     |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -501,8 +501,8 @@ Scenario: 950016 check role Full access only read (Users)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sofia Borisova (Manager 3)'     |
+			| 'Description'                   |
+			| 'Sofia Borisova (Manager 3)'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -512,8 +512,8 @@ Scenario: 950017 check role Full access only read (User access group)
 		And I close all client application windows
 		And In the command interface I select "Settings" "User access groups"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Financier'     |
+			| 'Description'    |
+			| 'Financier'      |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -523,8 +523,8 @@ Scenario: 950018 check role Full access only read (User access profile)
 		And I close all client application windows
 		And In the command interface I select "Settings" "User access profiles"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Financier'     |
+			| 'Description'    |
+			| 'Financier'      |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -534,8 +534,8 @@ Scenario: 950019 check role Full access only read (User groups)
 		And I close all client application windows
 		And In the command interface I select "Settings" "User groups"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'     |
+			| 'Description'    |
+			| 'Admin'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -547,8 +547,8 @@ Scenario: 950020 check role Full access only read (Additional attribute sets)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Additional attribute sets"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Item key'     |
+			| 'Description'    |
+			| 'Item key'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -558,8 +558,8 @@ Scenario: 950021 check role Full access only read (Additional attribute types)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Additional attribute types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Brand'     |
+			| 'Description'    |
+			| 'Brand'          |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -569,8 +569,8 @@ Scenario: 950022 check role Full access only read (Additional attribute values)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Additional attribute values"		
 		And I go to line in "List" table
-			| 'Additional attribute' |
-			| 'Size'     |
+			| 'Additional attribute'    |
+			| 'Size'                    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -580,8 +580,8 @@ Scenario: 950023 check role Full access only read (Contact info sets)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Contact info sets"		
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Companies'     |
+			| 'Predefined data name'    |
+			| 'Catalog_Companies'       |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -591,8 +591,8 @@ Scenario: 950024 check role Full access only read (Integration settings)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Integration settings"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank UA'     |
+			| 'Description'    |
+			| 'Bank UA'        |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -602,8 +602,8 @@ Scenario: 950025 check role Full access only read (Plugins)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Plugins"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'ExternalBankUa'     |
+			| 'Description'       |
+			| 'ExternalBankUa'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -645,8 +645,8 @@ Scenario: 950031 check role Full access only read (UI groups)
 		And I close all client application windows
 		And In the command interface I select "Settings" "UI groups"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Product information'     |
+			| 'Description'            |
+			| 'Product information'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -657,12 +657,12 @@ Scenario: 950032 check role Full access only read (Object statuses)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Objects statuses"		
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| InventoryTransferOrder                |
+			| Predefined data name      |
+			| InventoryTransferOrder    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -674,8 +674,8 @@ Scenario: 950034 check role Full access only read (Tax rate settings)
 	* Master data
 		And In the command interface I select "Settings" "Tax rate settings"		
 		And I go to line in "List" table
-			| 'Tax' |
-			| 'VAT'     |
+			| 'Tax'    |
+			| 'VAT'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -689,7 +689,7 @@ Scenario: 950037 check role Full access only read (Item segments)
 	* Master data
 		And In the command interface I select "Master data" "Item segments"		
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'    |
 			| 'Sale autum'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
@@ -698,7 +698,7 @@ Scenario: 950037 check role Full access only read (Item segments)
 	* Inventory
 		And In the command interface I select "Inventory" "Item segments"		
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'    |
 			| 'Sale autum'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
@@ -709,8 +709,8 @@ Scenario: 950038 check role Full access only read (Customers partner terms)
 		And I close all client application windows
 		And In the command interface I select "Sales - A/R" "Customers partner terms"	
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -721,8 +721,8 @@ Scenario: 950040 check role Full access only read (Vendors partner terms)
 		And I close all client application windows
 		And In the command interface I select "Purchase  - A/P" "Vendors partner terms"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Vendor Ferron, EUR'     |
+			| 'Description'           |
+			| 'Vendor Ferron, EUR'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1009,8 +1009,8 @@ Scenario: 950076 check role Full access only read (Retail customers)
 		And I close all client application windows
 		And In the command interface I select "Retail" "Retail customers"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test01 Test01'     |
+			| 'Description'      |
+			| 'Test01 Test01'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1020,8 +1020,8 @@ Scenario: 950077 check role Full access only read (Cash statement statuses)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Cash statement statuses"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test'     |
+			| 'Description'    |
+			| 'Test'           |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1031,8 +1031,8 @@ Scenario: 950078 check role Full access only read (Bank terms)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Bank terms"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test01'     |
+			| 'Description'    |
+			| 'Test01'         |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1042,8 +1042,8 @@ Scenario: 950079 check role Full access only read (Special offer rules)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Special offer rules"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Range Discount Basic (Dress)'     |
+			| 'Description'                     |
+			| 'Range Discount Basic (Dress)'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1053,8 +1053,8 @@ Scenario: 950080 check role Full access only read (Special offer types)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Special offer types"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Discount Price 1'     |
+			| 'Description'         |
+			| 'Discount Price 1'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1064,8 +1064,8 @@ Scenario: 950081 check role Full access only read (Special offers)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Special offers"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Document discount'     |
+			| 'Description'          |
+			| 'Document discount'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1083,8 +1083,8 @@ Scenario: 950035 check role Full access only read (Cheque bonds)
 		And I close all client application windows
 		And In the command interface I select "Treasury" "Cheque bonds"		
 		And I go to line in "List" table
-			| 'Cheque No' |
-			| 'Own cheque 2'     |
+			| 'Cheque No'       |
+			| 'Own cheque 2'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1136,8 +1136,8 @@ Scenario: 950091 check role Full access only read (Bill of materials)
 		And I close all client application windows
 		And In the command interface I select "Manufacturing" "Bill of materials"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Furniture installation'     |
+			| 'Description'               |
+			| 'Furniture installation'    |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

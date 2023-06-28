@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Forms
@@ -16,8 +16,8 @@ Scenario: _206200 preparation
 	* Create test bank term
 		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
 		If "List" table does not contain lines Then
-			| 'Description' |
-			| 'Test02'  |
+			| 'Description'    |
+			| 'Test02'         |
 			And I click the button named "FormCreate"
 			And I click Open button of "ENG" field
 			And I input "Test02" text in "RU" field
@@ -26,14 +26,14 @@ Scenario: _206200 preparation
 			And I click "Ok" button		
 			And I click "Save and close" button
 			And "List" table contains lines
-				| 'Description' |
-				| 'Test02'  |
+				| 'Description'     |
+				| 'Test02'          |
 		And I close all client application windows
 	* Create test Addresses hierarchy element
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoAddresses"
 		If "List" table does not contain lines Then
-			| 'Description' |
-			| 'Test02'  |
+			| 'Description'    |
+			| 'Test02'         |
 			And I click the button named "FormCreate"
 			And I input "Test02" text in "ENG" field
 			And I click Select button of "Owner" field
@@ -43,8 +43,8 @@ Scenario: _206200 preparation
 			And I click the button named "FormChoose"	
 			And I click "Save and close" button
 			And "List" table contains lines
-				| 'Description' |
-				| 'Test02'  |
+				| 'Description'     |
+				| 'Test02'          |
 		And I close all client application windows
 		
 Scenario: _2062001 check preparation
@@ -55,8 +55,8 @@ Scenario: _206201 duplicate check (multi language catalog)
 		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank terms'  |
+			| 'Description'    |
+			| 'Bank terms'     |
 		And I select current line in "List" table
 		And I set checkbox "Check description duplicate"
 		And I click "Save and close" button
@@ -95,8 +95,8 @@ Scenario: _206202 switch-off duplicate checks
 		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bank terms'  |
+			| 'Description'    |
+			| 'Bank terms'     |
 		And I select current line in "List" table
 		And I remove checkbox "Check description duplicate"	
 		And I click "Save and close" button
@@ -110,9 +110,9 @@ Scenario: _206202 switch-off duplicate checks
 		And I click "Save and close" button
 		Then user message window does not contain messages
 		And "List" table contains lines
-			| 'Description' |
-			| 'Test02'  |
-			| 'Test02'  |
+			| 'Description'    |
+			| 'Test02'         |
+			| 'Test02'         |
 		And I close all client application windows
 
 
@@ -121,8 +121,8 @@ Scenario: _206205 duplicate check (not multi language catalog)
 		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Addresses hierarchy'  |
+			| 'Description'            |
+			| 'Addresses hierarchy'    |
 		And I select current line in "List" table
 		And I set checkbox "Check description duplicate"
 		And I click "Save and close" button
@@ -132,8 +132,8 @@ Scenario: _206205 duplicate check (not multi language catalog)
 		And I input "Test02" text in "ENG" field
 		And I click Select button of "Owner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Test02'      |
+			| 'Description'    |
+			| 'Test02'         |
 		And I select current line in "List" table		
 		And I click "Save and close" button
 		Then I wait that in user messages the 'Description (en) "Test02" is already in use.' substring will appear in "10" seconds

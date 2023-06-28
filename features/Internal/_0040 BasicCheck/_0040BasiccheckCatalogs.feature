@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @BasicFormsCheck
@@ -17,8 +17,8 @@ Scenario: preparation
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "VAExtension" |
+				| "Description"     |
+				| "VAExtension"     |
 			When add VAExtension
 
 	
@@ -1026,7 +1026,7 @@ Scenario: Open object form "EmployeePositions"
 Scenario: Open choise form "EmployeePositions"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.EmployeePositions.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.EmployeePositions.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form EmployeePositions" exception
 	And I close current window
@@ -1034,7 +1034,7 @@ Scenario: Open choise form "EmployeePositions"
 Scenario: Open choise form "AccrualAndDeductionTypes"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.AccrualAndDeductionTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.AccrualAndDeductionTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
 	And I close current window
@@ -1042,7 +1042,7 @@ Scenario: Open choise form "AccrualAndDeductionTypes"
 Scenario: Open choise form "BillOfMaterials"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.BillOfMaterials.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.BillOfMaterials.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form BillOfMaterials" exception
 	And I close current window
@@ -1050,7 +1050,7 @@ Scenario: Open choise form "BillOfMaterials"
 Scenario: Open choise form "SpecialOffers"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.SpecialOffers.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.SpecialOffers.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form SpecialOffers" exception
 	And I close current window
@@ -1058,7 +1058,7 @@ Scenario: Open choise form "SpecialOffers"
 Scenario: Open choise form "AddAttributeAndPropertySets"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.AddAttributeAndPropertySets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.AddAttributeAndPropertySets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form AddAttributeAndPropertySets" exception
 	And I close current window
@@ -1066,7 +1066,7 @@ Scenario: Open choise form "AddAttributeAndPropertySets"
 Scenario: Open choise form "IdInfoSets"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.IdInfoSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.IdInfoSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form IdInfoSets" exception
 	And I close current window
@@ -1074,7 +1074,7 @@ Scenario: Open choise form "IdInfoSets"
 Scenario: Open choise form "ObjectStatuses"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.ObjectStatuses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.ObjectStatuses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form ObjectStatuses" exception
 	And I close current window
@@ -1082,7 +1082,7 @@ Scenario: Open choise form "ObjectStatuses"
 Scenario: Open choise form "ItemTypes"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.ItemTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.ItemTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form ItemTypes" exception
 	And I close current window
@@ -1090,7 +1090,7 @@ Scenario: Open choise form "ItemTypes"
 Scenario: Open choise form "TaxAnalytics"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.TaxAnalytics.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.TaxAnalytics.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form TaxAnalytics" exception
 	And I close current window
@@ -1098,7 +1098,7 @@ Scenario: Open choise form "TaxAnalytics"
 Scenario: Open choise form "WorkStations"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.WorkStations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.WorkStations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form WorkStations" exception
 	And I close current window
@@ -1106,7 +1106,7 @@ Scenario: Open choise form "WorkStations"
 Scenario: Open choise form "Currencies"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.Currencies.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.Currencies.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form Currencies" exception
 	And I close current window
@@ -1114,7 +1114,7 @@ Scenario: Open choise form "Currencies"
 Scenario: Open choise form "CurrencyMovementSets"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.CurrencyMovementSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.CurrencyMovementSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form CurrencyMovementSets" exception
 	And I close current window
@@ -1122,7 +1122,7 @@ Scenario: Open choise form "CurrencyMovementSets"
 Scenario: Open choise form "UnitsOfMeasurement"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.UnitsOfMeasurement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.UnitsOfMeasurement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form UnitsOfMeasurement" exception
 	And I close current window
@@ -1130,7 +1130,7 @@ Scenario: Open choise form "UnitsOfMeasurement"
 Scenario: Open choise form "AccountingOperations"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.AccountingOperations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.AccountingOperations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form AccountingOperations" exception
 	And I close current window
@@ -1138,7 +1138,7 @@ Scenario: Open choise form "AccountingOperations"
 Scenario: Open choise form "LedgerTypes"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.LedgerTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.LedgerTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form LedgerTypes" exception
 	And I close current window
@@ -1146,7 +1146,7 @@ Scenario: Open choise form "LedgerTypes"
 Scenario: Open choise form "IdInfoAddresses"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.IdInfoAddresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.IdInfoAddresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form IdInfoAddresses" exception
 	And I close current window
@@ -1168,7 +1168,7 @@ Scenario: Open object form "ChequeBonds"
 Scenario: Open choise form "ChequeBonds"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.ChequeBonds.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.ChequeBonds.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form IChequeBonds" exception
 	And I close current window
@@ -1190,7 +1190,7 @@ Scenario: Open object form "Addresses"
 Scenario: Open choise form "Addresses"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.Addresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.Addresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form Addresses" exception
 	And I close current window
@@ -1212,7 +1212,7 @@ Scenario: Open object form "Vehicles"
 Scenario: Open choise form "Vehicles"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.Vehicles.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.Vehicles.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form Vehicles" exception
 	And I close current window
@@ -1234,7 +1234,7 @@ Scenario: Open object form "VehicleTypes"
 Scenario: Open choise form "VehicleTypes"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
-		| 'OpenForm("Catalog.VehicleTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+		| 'OpenForm("Catalog.VehicleTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form VehicleTypes" exception
 	And I close current window

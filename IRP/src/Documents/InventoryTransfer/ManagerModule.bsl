@@ -1022,7 +1022,7 @@ EndFunction
 // Get access key.
 // 
 // Parameters:
-//  Obj - DocumentObjectDocumentName -
+//  Obj - DocumentObject.InventoryTransfer -
 // 
 // Returns:
 //  Map
@@ -1030,6 +1030,11 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = New Array;
+	StoreList.Add(Obj.StoreReceiver);
+	StoreList.Add(Obj.StoreSender);
+	StoreList.Add(Obj.StoreTransit);
+	AccessKeyMap.Insert("Store", StoreList);
 	Return AccessKeyMap;
 EndFunction
 

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ObjectsRemovel
@@ -20,8 +20,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* VAT
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'TaxCalculation' |
+						| 'Description'          |
+						| 'TaxCalculation'       |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -31,8 +31,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* Discount
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'DocumentDiscount' |
+						| 'Description'            |
+						| 'DocumentDiscount'       |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/DocumentDiscount.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -42,8 +42,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* Contact info
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'Address' |
+						| 'Description'       |
+						| 'Address'           |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/InputAddress.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -93,13 +93,13 @@ When Create information register Taxes records (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-						| 'Description'  |
-						| 'Own company 1' |
+						| 'Description'         |
+						| 'Own company 1'       |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I go to line in "CompanyTaxes" table
-						| 'Tax' |
-						| 'VAT' |
+						| 'Tax'       |
+						| 'VAT'       |
 		And I select current line in "CompanyTaxes" table
 		And I click Open button of "Tax" field
 		And I click "Settings" button
@@ -167,7 +167,7 @@ When Create document CashStatement objects  (test data base)
 When Create catalog PartnerItems objects (test data base)
 * Posting first documents
 	And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -191,7 +191,7 @@ When Create catalog PartnerItems objects (test data base)
 		And Delay "3"
 * Posting Sales invoice
 		And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
@@ -383,434 +383,434 @@ Scenario: _985002 check preparation
 Scenario: _985003 test objects removel
 	* AddAttributeAndPropertySets
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.AddAttributeAndPropertySets.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.AddAttributeAndPropertySets.Select();"    |
+			| "Ob.Next();"                                             |
+			| "Ob.GetObject().Delete();"                               |
 	* AddAttributeAndPropertyValues
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.AddAttributeAndPropertyValues.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|	
+			| "Ob = Catalogs.AddAttributeAndPropertyValues.Select();"    |
+			| "Ob.Next();"                                               |
+			| "Ob.GetObject().Delete();"                                 |
 	* IDInfoAddresses
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.AddAttributeAndPropertyValues.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.AddAttributeAndPropertyValues.Select();"    |
+			| "Ob.Next();"                                               |
+			| "Ob.GetObject().Delete();"                                 |
 	* BankTerms
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.BankTerms.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.BankTerms.Select();"    |
+			| "Ob.Next();"                           |
+			| "Ob.GetObject().Delete();"             |
 	* BusinessUnits
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.BusinessUnits.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.BusinessUnits.Select();"    |
+			| "Ob.Next();"                               |
+			| "Ob.GetObject().Delete();"                 |
 	* CancelReturnReasons
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.CancelReturnReasons.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|	
+			| "Ob = Catalogs.CancelReturnReasons.Select();"    |
+			| "Ob.Next();"                                     |
+			| "Ob.GetObject().Delete();"                       |
 	* CashStatementStatuses
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.CashStatementStatuses.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|	
+			| "Ob = Catalogs.CashStatementStatuses.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* CashAccounts
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.CashAccounts.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|	
+			| "Ob = Catalogs.CashAccounts.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* Companies
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Companies.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|	
+			| "Ob = Catalogs.Companies.Select();"    |
+			| "Ob.Next();"                           |
+			| "Ob.GetObject().Delete();"             |
 	* ConfigurationMetadata
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.ConfigurationMetadata.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.ConfigurationMetadata.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* IDInfoSets
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.IDInfoSets.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.IDInfoSets.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* Countries
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Countries.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Countries.Select();"    |
+			| "Ob.Next();"                           |
+			| "Ob.GetObject().Delete();"             |
 	* Currencies
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Currencies.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Currencies.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* DataBaseStatus
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.DataBaseStatus.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.DataBaseStatus.Select();"    |
+			| "Ob.Next();"                                |
+			| "Ob.GetObject().Delete();"                  |
 	* ExpenseAndRevenueTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.ExpenseAndRevenueTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.ExpenseAndRevenueTypes.Select();"    |
+			| "Ob.Next();"                                        |
+			| "Ob.GetObject().Delete();"                          |
 	* IntegrationSettings
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.IntegrationSettings.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.IntegrationSettings.Select();"    |
+			| "Ob.Next();"                                     |
+			| "Ob.GetObject().Delete();"                       |
 	* ItemKeys
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.ItemKeys.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.ItemKeys.Select();"    |
+			| "Ob.Next();"                          |
+			| "Ob.GetObject().Delete();"            |
 	* ItemTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.ItemTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.ItemTypes.Select();"    |
+			| "Ob.Next();"                           |
+			| "Ob.GetObject().Delete();"             |
 	* Units
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Units.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Units.Select();"    |
+			| "Ob.Next();"                       |
+			| "Ob.GetObject().Delete();"         |
 	* Items
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Items.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Items.Select();"    |
+			| "Ob.Next();"                       |
+			| "Ob.GetObject().Delete();"         |
 	* CurrencyMovementSets
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.CurrencyMovementSets.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.CurrencyMovementSets.Select();"    |
+			| "Ob.Next();"                                      |
+			| "Ob.GetObject().Delete();"                        |
 	* ObjectStatuses
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.ObjectStatuses.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.ObjectStatuses.Select();"    |
+			| "Ob.Next();"                                |
+			| "Ob.GetObject().Delete();"                  |
 	* PartnerSegments
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PartnerSegments.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PartnerSegments.Select();"    |
+			| "Ob.Next();"                                 |
+			| "Ob.GetObject().Delete();"                   |
 	* Agreements
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Agreements.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Agreements.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* Partners
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Partners.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Partners.Select();"    |
+			| "Ob.Next();"                          |
+			| "Ob.GetObject().Delete();"            |
 	* PartnersBankAccounts
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PartnersBankAccounts.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PartnersBankAccounts.Select();"    |
+			| "Ob.Next();"                                      |
+			| "Ob.GetObject().Delete();"                        |
 	* PaymentTerminals
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PaymentTerminals.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PaymentTerminals.Select();"    |
+			| "Ob.Next();"                                  |
+			| "Ob.GetObject().Delete();"                    |
 	* PaymentSchedules
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PaymentSchedules.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PaymentSchedules.Select();"    |
+			| "Ob.Next();"                                  |
+			| "Ob.GetObject().Delete();"                    |
 	* PaymentTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PaymentTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PaymentTypes.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* PriceTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PriceTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PriceTypes.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* RetailCustomers
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.RetailCustomers.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.RetailCustomers.Select();"    |
+			| "Ob.Next();"                                 |
+			| "Ob.GetObject().Delete();"                   |
 	* SpecialOfferTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.SpecialOfferTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.SpecialOfferTypes.Select();"    |
+			| "Ob.Next();"                                   |
+			| "Ob.GetObject().Delete();"                     |
 	* SpecialOffers
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.SpecialOffers.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.SpecialOffers.Select();"    |
+			| "Ob.Next();"                               |
+			| "Ob.GetObject().Delete();"                 |
 	* Stores
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Stores.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Stores.Select();"    |
+			| "Ob.Next();"                        |
+			| "Ob.GetObject().Delete();"          |
 	* TaxRates
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.TaxRates.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.TaxRates.Select();"    |
+			| "Ob.Next();"                          |
+			| "Ob.GetObject().Delete();"            |
 	* Taxes
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Taxes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Taxes.Select();"    |
+			| "Ob.Next();"                       |
+			| "Ob.GetObject().Delete();"         |
 	* InterfaceGroups
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.InterfaceGroups.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.InterfaceGroups.Select();"    |
+			| "Ob.Next();"                                 |
+			| "Ob.GetObject().Delete();"                   |
 	* AccessGroups
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.AccessGroups.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.AccessGroups.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* AccessProfiles
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.AccessProfiles.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.AccessProfiles.Select();"    |
+			| "Ob.Next();"                                |
+			| "Ob.GetObject().Delete();"                  |
 	* UserGroups
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.UserGroups.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.UserGroups.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* Workstations
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Workstations.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.Workstations.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* PlanningPeriods
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PlanningPeriods.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PlanningPeriods.Select();"    |
+			| "Ob.Next();"                                 |
+			| "Ob.GetObject().Delete();"                   |
 	* PartnerItems
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.PartnerItems.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Catalogs.PartnerItems.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* BankPayment
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.BankPayment.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.BankPayment.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* BankReceipt
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.BankReceipt.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.BankReceipt.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* Bundling
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.Bundling.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.Bundling.Select();"    |
+			| "Ob.Next();"                           |
+			| "Ob.GetObject().Delete();"             |
 	* CashExpense
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashExpense.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashExpense.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* CashPayment
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashPayment.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashPayment.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* CashReceipt
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashReceipt.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashReceipt.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* CashRevenue
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashRevenue.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashRevenue.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* CashTransferOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashTransferOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashTransferOrder.Select();"    |
+			| "Ob.Next();"                                    |
+			| "Ob.GetObject().Delete();"                      |
 	* CreditNote
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CreditNote.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CreditNote.Select();"    |
+			| "Ob.Next();"                             |
+			| "Ob.GetObject().Delete();"               |
 	* DebitNote
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.DebitNote.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.DebitNote.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* GoodsReceipt
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.GoodsReceipt.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.GoodsReceipt.Select();"    |
+			| "Ob.Next();"                               |
+			| "Ob.GetObject().Delete();"                 |
 	* IncomingPaymentOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.IncomingPaymentOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.IncomingPaymentOrder.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* InternalSupplyRequest
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.InternalSupplyRequest.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.InternalSupplyRequest.Select();"    |
+			| "Ob.Next();"                                        |
+			| "Ob.GetObject().Delete();"                          |
 	* InventoryTransfer
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.InventoryTransfer.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.InventoryTransfer.Select();"    |
+			| "Ob.Next();"                                    |
+			| "Ob.GetObject().Delete();"                      |
 	* InventoryTransferOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.InventoryTransferOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.InventoryTransferOrder.Select();"    |
+			| "Ob.Next();"                                         |
+			| "Ob.GetObject().Delete();"                           |
 	* OpeningEntry
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.OpeningEntry.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.OpeningEntry.Select();"    |
+			| "Ob.Next();"                               |
+			| "Ob.GetObject().Delete();"                 |
 	* OutgoingPaymentOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.OutgoingPaymentOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.OutgoingPaymentOrder.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* PhysicalCountByLocation 
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PhysicalCountByLocation.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PhysicalCountByLocation.Select();"    |
+			| "Ob.Next();"                                          |
+			| "Ob.GetObject().Delete();"                            |
 	* PhysicalInventory 
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PhysicalInventory.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PhysicalInventory.Select();"    |
+			| "Ob.Next();"                                    |
+			| "Ob.GetObject().Delete();"                      |
 	* PlannedReceiptReservation
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PlannedReceiptReservation.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PlannedReceiptReservation.Select();"    |
+			| "Ob.Next();"                                            |
+			| "Ob.GetObject().Delete();"                              |
 	* PriceList
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PriceList.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PriceList.Select();"    |
+			| "Ob.Next();"                            |
+			| "Ob.GetObject().Delete();"              |
 	* PurchaseInvoice
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PurchaseInvoice.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PurchaseInvoice.Select();"    |
+			| "Ob.Next();"                                  |
+			| "Ob.GetObject().Delete();"                    |
 	* PurchaseOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PurchaseOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PurchaseOrder.Select();"    |
+			| "Ob.Next();"                                |
+			| "Ob.GetObject().Delete();"                  |
 	* PurchaseOrderClosing
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PurchaseOrderClosing.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PurchaseOrderClosing.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* PurchaseReturn
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PurchaseReturn.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PurchaseReturn.Select();"    |
+			| "Ob.Next();"                                 |
+			| "Ob.GetObject().Delete();"                   |
 	* ReconciliationStatement
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.ReconciliationStatement.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.ReconciliationStatement.Select();"    |
+			| "Ob.Next();"                                          |
+			| "Ob.GetObject().Delete();"                            |
 	* RetailReturnReceipt
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.RetailReturnReceipt.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.RetailReturnReceipt.Select();"    |
+			| "Ob.Next();"                                      |
+			| "Ob.GetObject().Delete();"                        |
 	* RetailSalesReceipt
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.RetailSalesReceipt.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.RetailSalesReceipt.Select();"    |
+			| "Ob.Next();"                                     |
+			| "Ob.GetObject().Delete();"                       |
 	* SalesInvoice
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.SalesInvoice.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.SalesInvoice.Select();"    |
+			| "Ob.Next();"                               |
+			| "Ob.GetObject().Delete();"                 |
 	* SalesOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.SalesOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.SalesOrder.Select();"    |
+			| "Ob.Next();"                             |
+			| "Ob.GetObject().Delete();"               |
 	* SalesReturn
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.SalesReturn.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.SalesReturn.Select();"    |
+			| "Ob.Next();"                              |
+			| "Ob.GetObject().Delete();"                |
 	* SalesReturnOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.SalesReturnOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.SalesReturnOrder.Select();"    |
+			| "Ob.Next();"                                   |
+			| "Ob.GetObject().Delete();"                     |
 	* ShipmentConfirmation
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.ShipmentConfirmation.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.ShipmentConfirmation.Select();"    |
+			| "Ob.Next();"                                       |
+			| "Ob.GetObject().Delete();"                         |
 	* StockAdjustmentAsSurplus
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.StockAdjustmentAsSurplus.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.StockAdjustmentAsSurplus.Select();"    |
+			| "Ob.Next();"                                           |
+			| "Ob.GetObject().Delete();"                             |
 	* StockAdjustmentAsWriteOff
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.StockAdjustmentAsWriteOff.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.StockAdjustmentAsWriteOff.Select();"    |
+			| "Ob.Next();"                                            |
+			| "Ob.GetObject().Delete();"                              |
 	* Unbundling
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.Unbundling.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.Unbundling.Select();"    |
+			| "Ob.Next();"                             |
+			| "Ob.GetObject().Delete();"               |
 	* ItemStockAdjustment
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.ItemStockAdjustment.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.ItemStockAdjustment.Select();"    |
+			| "Ob.Next();"                                      |
+			| "Ob.GetObject().Delete();"                        |
 	* CashStatement
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.CashStatement.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.CashStatement.Select();"    |
+			| "Ob.Next();"                                |
+			| "Ob.GetObject().Delete();"                  |
 	* PurchaseReturnOrder
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PurchaseReturnOrder.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = Documents.PurchaseReturnOrder.Select();"    |
+			| "Ob.Next();"                                      |
+			| "Ob.GetObject().Delete();"                        |
 	* AddAttributeAndProperty
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartsOfCharacteristicTypes.AddAttributeAndProperty.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = ChartsOfCharacteristicTypes.AddAttributeAndProperty.Select();"    |
+			| "Ob.Next();"                                                            |
+			| "Ob.GetObject().Delete();"                                              |
 	* IDInfoTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartsOfCharacteristicTypes.IDInfoTypes.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = ChartsOfCharacteristicTypes.IDInfoTypes.Select();"    |
+			| "Ob.Next();"                                                |
+			| "Ob.GetObject().Delete();"                                  |
 	* CustomUserSettings
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartsOfCharacteristicTypes.CustomUserSettings.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = ChartsOfCharacteristicTypes.CustomUserSettings.Select();"    |
+			| "Ob.Next();"                                                       |
+			| "Ob.GetObject().Delete();"                                         |
 	* CurrencyMovementType
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartsOfCharacteristicTypes.CurrencyMovementType.Select();"|
-			| "Ob.Next();"|
-			| "Ob.GetObject().Delete();"|
+			| "Ob = ChartsOfCharacteristicTypes.CurrencyMovementType.Select();"    |
+			| "Ob.Next();"                                                         |
+			| "Ob.GetObject().Delete();"                                           |
 	
 	
 		

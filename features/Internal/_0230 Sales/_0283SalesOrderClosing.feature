@@ -50,8 +50,8 @@ Scenario: _0230000 preparation (Sales order closing)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -60,7 +60,7 @@ Scenario: _0230000 preparation (Sales order closing)
 	* Create test SO
 		When Create document SalesOrder objects (SI before SC for check closing)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"     |
 		
 Scenario: _0230001 check preparation
 	When check preparation
@@ -70,8 +70,8 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 	* Create Sales order closing 
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'  | 'Date'                |
-			| '32'      | '09.02.2021 19:53:45'	|	
+			| 'Number'   | 'Date'                   |
+			| '32'       | '09.02.2021 19:53:45'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -80,37 +80,37 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
-			| 'Item'    | 'Quantity' | 'Unit' | 'Store'    | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' | 'Sales person'    |
-			| 'Dress'   | '1,000'    | 'pcs'  | 'Store 02' | 'XS/Blue'  | 'Stock'              | 'Yes'    | '09.02.2021'    | ''              | 'Alexander Orlov' |
-			| 'Shirt'   | '10,000'   | 'pcs'  | 'Store 02' | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              | ''                |
-			| 'Boots'   | '24,000'   | 'pcs'  | 'Store 02' | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              | ''                |
-			| 'Service' | '1,000'    | 'pcs'  | 'Store 02' | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              | ''                |
+			| 'Item'      | 'Quantity'   | 'Unit'   | 'Store'      | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'   | 'Sales person'       |
+			| 'Dress'     | '1,000'      | 'pcs'    | 'Store 02'   | 'XS/Blue'    | 'Stock'                | 'Yes'      | '09.02.2021'      | ''                | 'Alexander Orlov'    |
+			| 'Shirt'     | '10,000'     | 'pcs'    | 'Store 02'   | '36/Red'     | 'No reserve'           | 'Yes'      | '09.02.2021'      | ''                | ''                   |
+			| 'Boots'     | '24,000'     | 'pcs'    | 'Store 02'   | '37/18SD'    | 'Purchase'             | 'Yes'      | '09.02.2021'      | ''                | ''                   |
+			| 'Service'   | '1,000'      | 'pcs'    | 'Store 02'   | 'Internet'   | ''                     | 'Yes'      | '09.02.2021'      | ''                | ''                   |
 		Then the number of "ItemList" table lines is "equal" "4"
 	* Filling in cancel reason and post Sales order closing
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'   |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I click choice button of "Cancel reason" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'not available' |
+			| 'Description'      |
+			| 'not available'    |
 		And I select current line in "List" table	
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '37/18SD'  |
+			| 'Item'    | 'Item key'    |
+			| 'Boots'   | '37/18SD'     |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Internet' |
+			| 'Item'      | 'Item key'    |
+			| 'Service'   | 'Internet'    |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -126,8 +126,8 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And "List" table contains lines
-			| 'Number'                |
-			| '$$NumberSalesOrderClosing0230001$$' |
+			| 'Number'                                |
+			| '$$NumberSalesOrderClosing0230001$$'    |
 		And I close all client application windows
 	
 
@@ -135,23 +135,23 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		If "List" table contains lines Then
-				| "Number" |
-				| "$$NumberSalesOrderClosing0230001$$" |
+				| "Number"                                 |
+				| "$$NumberSalesOrderClosing0230001$$"     |
 			And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);"     |
 	* Load SI and SC for SO 32
 		When Create document SalesInvoice objects (for check SO closing)
 		When Create document ShipmentConfirmation objects (check SO closing)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Create Sales order closing 
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'  | 'Date'                |
-			| '32'      | '09.02.2021 19:53:45'	|
+			| 'Number'   | 'Date'                   |
+			| '32'       | '09.02.2021 19:53:45'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -161,28 +161,28 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
-			| 'Item'    | 'Quantity' | 'Unit' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
-			| 'Shirt'   | '1,000'    | 'pcs'  | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Boots'   | '24,000'   | 'pcs'  | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Service' | '1,000'    | 'pcs'  | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
+			| 'Item'      | 'Quantity'   | 'Unit'   | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'    |
+			| 'Shirt'     | '1,000'      | 'pcs'    | '36/Red'     | 'No reserve'           | 'Yes'      | '09.02.2021'      | ''                 |
+			| 'Boots'     | '24,000'     | 'pcs'    | '37/18SD'    | 'Purchase'             | 'Yes'      | '09.02.2021'      | ''                 |
+			| 'Service'   | '1,000'      | 'pcs'    | 'Internet'   | ''                     | 'Yes'      | '09.02.2021'      | ''                 |
 		Then the number of "ItemList" table lines is "equal" "3"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I select current line in "ItemList" table
 		And I click choice button of "Cancel reason" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I select current line in "ItemList" table
 		And I click choice button of "Cancel reason" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' |
-			| '3' |
+			| '#'    |
+			| '3'    |
 		And I select current line in "ItemList" table
 		And I click choice button of "Cancel reason" attribute in "ItemList" table
 		And I select current line in "List" table
@@ -191,12 +191,12 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 	* Check SO mark
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And "List" table contains lines
-			| 'Number' | 'Closed' |
-			| '32'     | 'Yes'    |
+			| 'Number'   | 'Closed'    |
+			| '32'       | 'Yes'       |
 	* Repost SO
 		And I go to line in "List" table
-			| 'Number' |
-			| '32' |
+			| 'Number'    |
+			| '32'        |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Then user message window does not contain messages
 		And I close all client application windows

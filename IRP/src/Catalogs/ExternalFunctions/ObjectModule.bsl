@@ -5,5 +5,7 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;
 	
-	CommonFunctionsServer.CreateScheduledJob(Ref);
+	If Not IsFolder Then
+		CommonFunctionsServer.CreateScheduledJob(Ref);
+	EndIf;
 EndProcedure

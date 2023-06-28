@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
@@ -1541,6 +1541,10 @@ Scenario: set True value to the constant
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
+	* Disable LinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+
 		
 		
 Scenario: set True value to the constant Use salary
@@ -1635,9 +1639,9 @@ Scenario: set True value to the constant Use lock data modification
 		And I click "Save" button
 		And I close current window	
 
-Scenario: set True value to the constant EnableLinkedRowsIntegrity
+Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
-				| "Constants.EnableLinkedRowsIntegrity.Set(True);"     |
+				| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server

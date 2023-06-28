@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -474,8 +474,8 @@ Scenario: Create catalog Partners objects (Employee)
 Scenario: Create catalog BankTerms objects (for Shop 02)
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc'  | 'False'         | 2       | 'Bank term 02'    | ''                  | ''                | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'False'        | 'Bank term 02'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |
@@ -500,8 +500,8 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 		| 'e1cib/data/Catalog.PaymentTypes?ref=b794e3cbd36876e811eda866939f00cd'  | 'False'         | ''        | 17      | 'Enum.PaymentTypes.Card'  | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | 'False'      | ''         | ''           | ''           | ''                   | ''        | 'Card 04'         | ''                  | ''                | ''                 |
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b'  | 'False'         | 3       | 'Bank term 03'    | ''                  | ''                | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'False'        | 'Bank term 03'   | ''                 | ''               | ''               |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |
@@ -976,8 +976,8 @@ Scenario: Create catalog Partners and Payment type (Bank)
 	// Catalog.Agreements
 
 	And I check or create catalog "Agreements" objects:
-		| 'Ref'                                                                 | 'DeletionMark'  | 'Code'  | 'Number'  | 'Date'                 | 'PartnerSegment'  | 'Partner'                                                           | 'Company'  | 'PriceType'                                                           | 'ItemSegment'  | 'StartUsing'           | 'EndOfUse'             | 'ManagerSegment'  | 'PriceIncludeTax'  | 'DaysBeforeDelivery'  | 'Store'  | 'Type'                          | 'LegalName'  | 'CurrencyMovementType'                                                                             | 'ApArPostingDetail'                   | 'StandardAgreement'  | 'Kind'                         | 'UseCreditLimit'  | 'CreditLimitAmount'  | 'PaymentTerm'  | 'TradeAgentFeeType'  | 'TradeAgentFeePercent'  | 'TradeAgentFeeItem'  | 'TradeAgentFeeItemKey'  | 'TradeAgentFeeProfitLossCenter'  | 'TradeAgentFeeExpenseRevenueType'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391'  | 'False'         | 177     | ''        | '01.01.0001 00:00:00'  | ''                | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f'  | ''         | 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8baf320dc8'  | ''             | '01.01.0001 00:00:00'  | '01.01.0001 00:00:00'  | ''                | 'False'            |                       | ''       | 'Enum.AgreementTypes.Customer'  | ''           | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f'  | 'Enum.ApArPostingDetail.ByDocuments'  | ''                   | 'Enum.AgreementKinds.Regular'  | 'False'           |                      | ''             | ''                   |                         | ''                   | ''                      | ''                               | ''                                 | 'Bank 1'          | ''                  | ''                | ''                 |
+		| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'               | 'PartnerSegment' | 'Partner'                                                          | 'Company'                                                           | 'PriceType' | 'ItemSegment' | 'StartUsing'         | 'EndOfUse'           | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store' | 'Type'                      | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                   | 'StandardAgreement' | 'Kind'                        | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'TradeAgentFeeType' | 'TradeAgentFeePercent' | 'TradeAgentFeeItem' | 'TradeAgentFeeItemKey' | 'TradeAgentFeeProfitLossCenter' | 'TradeAgentFeeExpenseRevenueType' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391' | 'False'        | 177    | ''       | '01.01.0001 0:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''          | ''            | '01.01.0001 0:00:00' | '01.01.0001 0:00:00' | ''               | 'False'           |                      | ''      | 'Enum.AgreementTypes.Other' | 'e1cib/data/Catalog.Companies?ref=b790eb46b44093f611ed85b827e16390' | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByAgreements' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          |                     | ''            | ''                  |                        | ''                  | ''                     | ''                              | ''                                | 'Bank 1'         | ''                 | ''               | ''               |
 
 	// Catalog.Companies
 
@@ -990,6 +990,21 @@ Scenario: Create catalog Partners and Payment type (Bank)
 	And I check or create catalog "PaymentTypes" objects:
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Parent'  | 'Code'  | 'Type'                            | 'Icon'                                   | 'isIconSet'  | 'Partner'                                                           | 'LegalName'                                                          | 'Agreement'                                                           | 'LegalNameContract'  | 'Branch'                                                                 | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
 		| 'e1cib/data/Catalog.PaymentTypes?ref=b790eb46b44093f611ed85b827e16392'  | 'False'         | ''        | 8       | 'Enum.PaymentTypes.PaymentAgent'  | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | 'False'      | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f'  | 'e1cib/data/Catalog.Companies?ref=b790eb46b44093f611ed85b827e16390'  | 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391'  | ''                   | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4'  | 'Bank credit'     | ''                  | ''                | ''                 |
+
+	// Catalog.BankTerms
+	And I check or create catalog "BankTerms" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'BankTermType'                    | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79f84707d634d7f11ee14f1dde2b4df' | 'False'        | 3      | 'Enum.BankTermTypes.PaymentAgent' | 'Payment agent'  | ''                 | ''               | ''               |
+
+	And I refill object tabular section "PaymentTypes":
+		| 'Ref'                                                               | 'PaymentType'                                                          | 'Percent' | 'Account' | 'Partner'                                                          | 'LegalName'                                                         | 'PartnerTerms'                                                       | 'LegalNameContract' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79f84707d634d7f11ee14f1dde2b4df' | 'e1cib/data/Catalog.PaymentTypes?ref=b790eb46b44093f611ed85b827e16392' | 10        | ''        | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | 'e1cib/data/Catalog.Companies?ref=b790eb46b44093f611ed85b827e16390' | 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391' | ''                  |
+
+	// InformationRegister.BranchBankTerms
+
+	And I check or create information register "BranchBankTerms" records:
+		| 'Branch'                                                                | 'BankTerm'                                                          |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'e1cib/data/Catalog.BankTerms?ref=b79f84707d634d7f11ee14f1dde2b4df' |
 
 
 
@@ -2229,8 +2244,8 @@ Scenario: Create catalog SerialLotNumbers objects (serial lot numbers, with batc
 Scenario: Create catalog BankTerms objects (for retail)
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf'  | 'False'         | 3       | 'Bank term 01'    | ''                  | ''                | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 'Bank term 01'   | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |
@@ -2245,8 +2260,8 @@ Scenario: Create catalog BankTerms objects (for retail)
 Scenario: Create catalog PaymentTerminals objects
 
 	And I check or create catalog "PaymentTerminals" objects:
-		| 'Ref'                                                                       | 'DeletionMark'  | 'Code'  | 'Account'  | 'Percent'  | 'Description_en'       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876'  | 'False'         | '1'     | ''         | '0'        | 'Payment terminal 01'  | ''                  | ''                | ''                 |
+		| 'Ref'                                                                       | 'DeletionMark'  | 'Account'  | 'Percent'  | 'Description_en'       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
+		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876'  | 'False'         | ''         | '0'        | 'Payment terminal 01'  | ''                  | ''                | ''                 |
 
 Scenario: Create catalog RetailCustomers objects
 
@@ -2268,8 +2283,8 @@ Scenario: Create catalog CashAccounts objects (POS)
 Scenario: Create catalog BankTerms objects
 
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                                | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7'  | 'False'         | 1       | 'Test01'          | ''                  | ''                | ''                 |
+		| 'Ref'                                                               | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'BankTermType'                       |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'False'        | 'Test01'         | ''                 | ''               | ''               | 'Enum.BankTermTypes.PaymentTerminal' |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                                | 'PaymentType'                                                           | 'Account'                                                               | 'Percent'   |

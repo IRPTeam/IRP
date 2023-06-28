@@ -584,8 +584,8 @@ Scenario: _0260130 create cash out
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Currency'   | 'Transaction type'   | 'Author'    |
-			| '$$NumberCashReceipt2$$'   | '3 480,00'   | 'Main Company'   | 'Cash desk №2'   | 'TRY'        | 'Cash in'            | 'CI'        |
+			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account' | 'Currency' | 'Transaction type' | 'Author' |
+			| '$$NumberCashReceipt2$$' | '3 480,00' | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Cash in'          | 'CI'     |
 		And I close all client application windows
 
 Scenario: _0260132 create RSR (payment by bank credit)
@@ -624,8 +624,8 @@ Scenario: _0260132 create RSR (payment by bank credit)
 		And I select current line in "List" table
 		And I move to "Payments" tab
 		And "Payments" table became equal
-			| '#'   | 'Amount'     | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'   | 'Account'   | 'Percent'    |
-			| '1'   | '5 750,00'   | ''             | 'Bank credit'    | ''                   | ''            | ''          | ''           |
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'     | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '5 750,00' | '575,00'     | 'Bank credit'  | ''                        | ''                                  | ''                 | 'Payment agent' | ''        | '10,00'   | ''         | 'Bank 1'                | 'Bank 1'                   | 'Bank 1'                      |	
 		And I close all client application windows
 		
 
@@ -760,8 +760,8 @@ Scenario: _0260137 return advance payment (cash)
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'    |
-			| 'TRY'    | 'Turkish lira'   |
+			| 'Code' | 'Description'  |
+			| 'TRY'  | 'Turkish lira' |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table

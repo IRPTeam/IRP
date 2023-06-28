@@ -68,8 +68,8 @@ Scenario: _2990000 preparation (product inventory)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -81,7 +81,7 @@ Scenario: _2990000 preparation (product inventory)
 		When add sales tax settings 
 		When Create document PurchaseInvoice objects (serial lot numbers)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Add balances for created store (Opening entry)
 		* Open document form opening entry
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -89,26 +89,26 @@ Scenario: _2990000 preparation (product inventory)
 		* Filling in company info
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in the tabular part Inventory
 			And I move to "Inventory" tab
 			And in the table "Inventory" I click the button named "InventoryAdd"
 			And I click choice button of "Item" attribute in "Inventory" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "Inventory" table
 			And I go to line in "List" table
-				| Item  | Item key |
-				| Dress | XS/Blue  |
+				| Item     | Item key     |
+				| Dress    | XS/Blue      |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "Inventory" table
 			And I go to line in "List" table
-				| Description |
-				| Store 05    |
+				| Description     |
+				| Store 05        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "Inventory" table
 			And I input "200,000" text in "Quantity" field of "Inventory" table
@@ -116,19 +116,19 @@ Scenario: _2990000 preparation (product inventory)
 			And in the table "Inventory" I click the button named "InventoryAdd"
 			And I click choice button of "Item" attribute in "Inventory" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "Inventory" table
 			And I go to line in "List" table
-				| Item  | Item key |
-				| Dress | S/Yellow |
+				| Item     | Item key     |
+				| Dress    | S/Yellow     |
 			And I select current line in "List" table
 			And I activate "Store" field in "Inventory" table
 			And I click choice button of "Store" attribute in "Inventory" table
 			And I go to line in "List" table
-				| Description |
-				| Store 05    |
+				| Description     |
+				| Store 05        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "Inventory" table
 			And I input "120,000" text in "Quantity" field of "Inventory" table
@@ -149,12 +149,12 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Assigning a name to a predefined element of PhysicalInventory
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| PhysicalInventory         |
+			| Predefined data name    |
+			| PhysicalInventory       |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Physical inventory" text in the field named "Description_en"
@@ -164,8 +164,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And Delay 10
 	* Add status "Draft"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical inventory' |
+		| 'Description'          |
+		| 'Physical inventory'   |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Draft" text in the field named "Description_en"
@@ -175,12 +175,12 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And Delay 2
 	* Assigning a name to a predefined element of PhysicalCountByLocation
 		And I go to line in "List" table
-			| 'Code'    |
-			| 'Objects statuses'|
+			| 'Code'                |
+			| 'Objects statuses'    |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data name |
-			| PhysicalCountByLocation         |
+			| Predefined data name       |
+			| PhysicalCountByLocation    |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Physical count by location" text in the field named "Description_en"
@@ -190,8 +190,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And Delay 10
 	* Add status "Draft"
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical count by location' |
+		| 'Description'                  |
+		| 'Physical count by location'   |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Draft" text in the field named "Description_en"
@@ -208,49 +208,49 @@ Scenario: _2990002 create Stock adjustment as surplus
 	* Filling the document header
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'      |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'      |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table	
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Distribution department'  |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Delivery'  |
+			| 'Description'    |
+			| 'Delivery'       |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'      | 'Unit' | 'Revenue type' | 'Basis document' |
-			| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
+			| 'Item'    | 'Quantity'   | 'Item key'   | 'Profit loss center'        | 'Unit'   | 'Revenue type'   | 'Basis document'    |
+			| 'Dress'   | '8,000'      | 'M/White'    | 'Distribution department'   | 'pcs'    | 'Delivery'       | ''                  |
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberStockAdjustmentAsSurplus2990002$$" variable
@@ -263,13 +263,13 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Store 01' |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I close all client application windows
@@ -281,49 +281,49 @@ Scenario: _2990003 create Stock adjustment as write off
 	* Filling the document header
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'      |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'      |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table	
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Distribution department'  |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I click choice button of "Expense type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Delivery'  |
+			| 'Description'    |
+			| 'Delivery'       |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'           | 'Unit' | 'Expense type' | 'Basis document' |
-			| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
+			| 'Item'    | 'Quantity'   | 'Item key'   | 'Profit loss center'        | 'Unit'   | 'Expense type'   | 'Basis document'    |
+			| 'Dress'   | '8,000'      | 'M/White'    | 'Distribution department'   | 'pcs'    | 'Delivery'       | ''                  |
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberStockAdjustmentAsWriteOff2990003$$" variable
@@ -336,13 +336,13 @@ Scenario: _2990003 create Stock adjustment as write off
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Store 01' |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then the form attribute named "Company" became equal to "Second Company"
@@ -356,40 +356,40 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click "Fill expected count" button		
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' |
-			| 'Dress' | '-120,000'   | 'S/Yellow' | '120,000'    | 'pcs'  |
-			| 'Dress' | '-200,000'   | 'XS/Blue'  | '200,000'    | 'pcs'  |
+			| 'Item'    | 'Difference'   | 'Item key'   | 'Exp. count'   | 'Unit'    |
+			| 'Dress'   | '-120,000'     | 'S/Yellow'   | '120,000'      | 'pcs'     |
+			| 'Dress'   | '-200,000'     | 'XS/Blue'    | '200,000'      | 'pcs'     |
 		And I click "Fill expected count" button
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' |
-			| 'Dress' | '-120,000'   | 'S/Yellow' | '120,000'    | 'pcs'  |
-			| 'Dress' | '-200,000'   | 'XS/Blue'  | '200,000'    | 'pcs'  |
+			| 'Item'    | 'Difference'   | 'Item key'   | 'Exp. count'   | 'Unit'    |
+			| 'Dress'   | '-120,000'     | 'S/Yellow'   | '120,000'      | 'pcs'     |
+			| 'Dress'   | '-200,000'     | 'XS/Blue'    | '200,000'      | 'pcs'     |
 	* Filling in Phys. count
 		And I go to line in "ItemList" table
-			| 'Difference' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' |
-			| '-200,000'   | '200,000'    | 'Dress' | 'XS/Blue'  | 'pcs'  |
+			| 'Difference'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '-200,000'     | '200,000'      | 'Dress'   | 'XS/Blue'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "198,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Difference' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' |
-			| '-120,000'   | '120,000'    | 'Dress' | 'S/Yellow' | 'pcs'  |
+			| 'Difference'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '-120,000'     | '120,000'      | 'Dress'   | 'S/Yellow'   | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "125,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '120,000'    | 'Dress' | 'S/Yellow' | 'pcs'  | '5,000'      | '125,000'     | ''                   | ''            |
-			| '2' | '200,000'    | 'Dress' | 'XS/Blue'  | 'pcs'  | '-2,000'     | '198,000'     | ''                   | ''            |					
+			| '#'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '120,000'      | 'Dress'   | 'S/Yellow'   | 'pcs'    | '5,000'        | '125,000'       | ''                     | ''               |
+			| '2'   | '200,000'      | 'Dress'   | 'XS/Blue'    | 'pcs'    | '-2,000'       | '198,000'       | ''                     | ''               |
 	* Posting the document Physical inventory
 		And I select "Done" exact value from the drop-down list named "Status"
 		And I click the button named "FormPost"
@@ -399,21 +399,21 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 		And I save the window as "$$PhysicalInventory2990004$$"
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov1PhysicalInventory2990004$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov2PhysicalInventory2990004$$"
 	* Check row id info tab
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#' | 'Key'                              | 'Basis' | 'Row ID'                           | 'Next step'                     | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                          |
-			| '1' | '$$Rov1PhysicalInventory2990004$$' | ''      | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus'   | '5,000' | '                                    ' | ''             | '$$Rov1PhysicalInventory2990004$$' |
-			| '2' | '$$Rov2PhysicalInventory2990004$$' | ''      | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '2,000' | '                                    ' | ''             | '$$Rov2PhysicalInventory2990004$$' |
+			| '#'   | 'Key'                                | 'Basis'   | 'Row ID'                             | 'Next step'                       | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                             |
+			| '1'   | '$$Rov1PhysicalInventory2990004$$'   | ''        | '$$Rov1PhysicalInventory2990004$$'   | 'Stock adjustment as surplus'     | '5,000'      | '                                    '   | ''               | '$$Rov1PhysicalInventory2990004$$'    |
+			| '2'   | '$$Rov2PhysicalInventory2990004$$'   | ''        | '$$Rov2PhysicalInventory2990004$$'   | 'Stock adjustment as write off'   | '2,000'      | '                                    '   | ''               | '$$Rov2PhysicalInventory2990004$$'    |
 		And I close all client application windows
 	
 Scenario: _2990005 try to add Service to the Physical inventory
@@ -424,8 +424,8 @@ Scenario: _2990005 try to add Service to the Physical inventory
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click "Fill expected count" button		
 		And Delay 2
@@ -434,8 +434,8 @@ Scenario: _2990005 try to add Service to the Physical inventory
 		And I activate "Item" field in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'Service' |
+			| 'Description'    |
+			| 'Service'        |
 		And I close "Items" window			
 		And I finish line editing in "ItemList" table
 		And I delete a line in "ItemList" table	
@@ -446,8 +446,8 @@ Scenario: _2990005 try to add Service to the Physical inventory
 		And I move to the next attribute
 	* Check
 		And "ItemList" table does not contain lines
-			| 'Item'    |
-			| 'Service' |
+			| 'Item'       |
+			| 'Service'    |
 		And I close all client application windows
 		
 
@@ -459,48 +459,48 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 	* Create a document StockAdjustmentAsSurplus and check filling in
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Store 05' |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description'             |
-			| 'Logistics department' |
+			| 'Logistics department'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table		
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'    | 'Use'     |
+				| '5,000'       | 'Dress (S/Yellow)'    | 'pcs'     | 'No'      |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
-				| 'Dress' | '5,000'    | 'S/Yellow' | ''                   | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'    | 'Unit'    | 'Revenue type'    | 'Basis document'                   |
+				| 'Dress'    | '5,000'       | 'S/Yellow'    | ''                      | 'pcs'     | ''                | '$$PhysicalInventory2990004$$'     |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'          |
-				| 'Logistics department' |
+				| 'Description'              |
+				| 'Logistics department'     |
 			And I select current line in "List" table
 			And I activate "Revenue type" field in "ItemList" table
 			And I click choice button of "Revenue type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Revenue'     |
+				| 'Description'     |
+				| 'Revenue'         |
 			And I select current line in "List" table	
 			And I click the button named "FormPost"
 			And I delete "$$NumberStockAdjustmentAsSurplus2990006$$" variable
@@ -510,59 +510,59 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		* Check Row ID info tab
 			And I click "Show row key" button
 			And I go to line in "ItemList" table
-				| '#' |
-				| '1' |
+				| '#'     |
+				| '1'     |
 			And I activate "Key" field in "ItemList" table
 			And I delete "$$Rov1StockAdjustmentAsSurplus2990006$$" variable
 			And I save the current field value as "$$Rov1StockAdjustmentAsSurplus2990006$$"
 			And I move to "Row ID Info" tab
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity' | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
-				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000'    | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
+				| '#'    | 'Key'                                        | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                   | 'Row ref'                              |
+				| '1'    | '$$Rov1StockAdjustmentAsSurplus2990006$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov1PhysicalInventory2990004$$'    | ''             | '5,000'       | '$$Rov1PhysicalInventory2990004$$'    | 'Stock adjustment as surplus'    | '$$Rov1PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
 			And in the table "ItemList" I click "Link unlink basis documents" button			
 			And I set checkbox "Linked documents"		
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 			And I go to line in "ResultsTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
+				| '5,000'       | 'Dress (S/Yellow)'    | 'pcs'      |
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Revenue type' | 'Basis document' |
-				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | ''               |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'      | 'Unit'    | 'Revenue type'    | 'Basis document'     |
+				| 'Dress'    | '5,000'       | 'S/Yellow'    | 'Logistics department'    | 'pcs'     | 'Revenue'         | ''                   |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis' | 'Row ID'                                  | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                                 |
-				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''      | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''          | '5,000' | '                                    ' | ''             | '$$Rov1StockAdjustmentAsSurplus2990006$$' |
+				| '#'    | 'Key'                                        | 'Basis'    | 'Row ID'                                     | 'Next step'    | 'Quantity'    | 'Basis key'                               | 'Current step'    | 'Row ref'                                     |
+				| '1'    | '$$Rov1StockAdjustmentAsSurplus2990006$$'    | ''         | '$$Rov1StockAdjustmentAsSurplus2990006$$'    | ''             | '5,000'       | '                                    '    | ''                | '$$Rov1StockAdjustmentAsSurplus2990006$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '5,000'    | 'Dress (S/Yellow)' | 'pcs'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
+				| '5,000'       | 'Dress (S/Yellow)'    | 'pcs'      |
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Revenue type' | 'Basis document'               |
-				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | '$$PhysicalInventory2990004$$' |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'      | 'Unit'    | 'Revenue type'    | 'Basis document'                   |
+				| 'Dress'    | '5,000'       | 'S/Yellow'    | 'Logistics department'    | 'pcs'     | 'Revenue'         | '$$PhysicalInventory2990004$$'     |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'          |
-				| 'Logistics department' |
+				| 'Description'              |
+				| 'Logistics department'     |
 			And I select current line in "List" table
 			And I activate "Revenue type" field in "ItemList" table
 			And I click choice button of "Revenue type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Revenue'     |
+				| 'Description'     |
+				| 'Revenue'         |
 			And I select current line in "List" table
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
-				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
+				| '#'    | 'Key'                                        | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                   | 'Row ref'                              |
+				| '1'    | '$$Rov1StockAdjustmentAsSurplus2990006$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov1PhysicalInventory2990004$$'    | ''             | '5,000'       | '$$Rov1PhysicalInventory2990004$$'    | 'Stock adjustment as surplus'    | '$$Rov1PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 	
@@ -575,42 +575,42 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 	* Create a document StockAdjustmentAsSurplus and check filling in
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Store 05' |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And in the table "ItemList" I click "Add basis documents" button
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'    | 'Use'     |
+				| '2,000'       | 'Dress (XS/Blue)'     | 'pcs'     | 'No'      |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
-				| 'Dress' | '2,000'    | 'XS/Blue'  | ''                   | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'    | 'Unit'    | 'Expense type'    | 'Basis document'                   |
+				| 'Dress'    | '2,000'       | 'XS/Blue'     | ''                      | 'pcs'     | ''                | '$$PhysicalInventory2990004$$'     |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'          |
-				| 'Logistics department' |
+				| 'Description'              |
+				| 'Logistics department'     |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table	
 			And I click the button named "FormPost"
 			And I delete "$$NumberStockAdjustmentAsWriteOff2990007$$" variable
@@ -620,64 +620,64 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		* Check Row ID info tab
 			And I click "Show row key" button
 			And I go to line in "ItemList" table
-				| '#' |
-				| '1' |
+				| '#'     |
+				| '1'     |
 			And I activate "Key" field in "ItemList" table
 			And I delete "$$Rov1StockAdjustmentAsWriteOff2990007$$" variable
 			And I save the current field value as "$$Rov1StockAdjustmentAsWriteOff2990007$$"
 			And I move to "Row ID Info" tab
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
-				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
+				| '#'    | 'Key'                                         | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                     | 'Row ref'                              |
+				| '1'    | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov2PhysicalInventory2990004$$'    | ''             | '2,000'       | '$$Rov2PhysicalInventory2990004$$'    | 'Stock adjustment as write off'    | '$$Rov2PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 			And I click Choice button of the field named "Currency"
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Turkish lira' |
+				| 'Description'      |
+				| 'Turkish lira'     |
 			And I select current line in "List" table
 		* Unlink line and check Row ID info tab
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 			And I set checkbox "Linked documents"	
 			And I go to line in "ResultsTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
+				| '2,000'       | 'Dress (XS/Blue)'     | 'pcs'      |
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Expense type' | 'Basis document' |
-				| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Expense'      | ''               |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'      | 'Unit'    | 'Expense type'    | 'Basis document'     |
+				| 'Dress'    | '2,000'       | 'XS/Blue'     | 'Logistics department'    | 'pcs'     | 'Expense'         | ''                   |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis' | 'Row ID'                                   | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                                  |
-				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''      | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''          | '2,000' | '                                    ' | ''             | '$$Rov1StockAdjustmentAsWriteOff2990007$$' |
+				| '#'    | 'Key'                                         | 'Basis'    | 'Row ID'                                      | 'Next step'    | 'Quantity'    | 'Basis key'                               | 'Current step'    | 'Row ref'                                      |
+				| '1'    | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | ''         | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | ''             | '2,000'       | '                                    '    | ''                | '$$Rov1StockAdjustmentAsWriteOff2990007$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I go to line in "BasisesTree" table
-				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
+				| '2,000'       | 'Dress (XS/Blue)'     | 'pcs'      |
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Expense type' | 'Basis document'               |
-				| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Expense'      | '$$PhysicalInventory2990004$$' |
+				| 'Item'     | 'Quantity'    | 'Item key'    | 'Profit loss center'      | 'Unit'    | 'Expense type'    | 'Basis document'                   |
+				| 'Dress'    | '2,000'       | 'XS/Blue'     | 'Logistics department'    | 'pcs'     | 'Expense'         | '$$PhysicalInventory2990004$$'     |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'          |
-				| 'Logistics department' |
+				| 'Description'              |
+				| 'Logistics department'     |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Expense'     |
+				| 'Description'     |
+				| 'Expense'         |
 			And I select current line in "List" table
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
-				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
+				| '#'    | 'Key'                                         | 'Basis'                           | 'Row ID'                              | 'Next step'    | 'Quantity'    | 'Basis key'                           | 'Current step'                     | 'Row ref'                              |
+				| '1'    | '$$Rov1StockAdjustmentAsWriteOff2990007$$'    | '$$PhysicalInventory2990004$$'    | '$$Rov2PhysicalInventory2990004$$'    | ''             | '2,000'       | '$$Rov2PhysicalInventory2990004$$'    | 'Stock adjustment as write off'    | '$$Rov2PhysicalInventory2990004$$'     |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 
@@ -690,14 +690,14 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 	* Filling out a document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'    |
+			| 'Description'    |
+			| 'Store 05'       |
 		And I select current line in "List" table
 		And I click "Fill expected count" button
 	* Check message output
 		And I click "Physical count by location" button
 		Then the form attribute named "Message" became equal to
-		|'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'|
+		| 'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'   |
 	And I close all client application windows
 
 
@@ -712,17 +712,17 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 	* Filling out a document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 07'    |
+			| 'Description'    |
+			| 'Store 07'       |
 		And I select current line in "List" table
 		And I click "Fill expected count" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-120,000'   | ''            | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-120,000'     | ''              | ''                     | ''               |
 	* Create Physical count by location
 		And I click "Post" button
 		And I delete "$$NumberPhysicalInventory3$$" variable
@@ -736,10 +736,10 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I click "OK" button
 		* Check
 			And "PhysicalCountByLocationList" table contains lines
-				| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-				| 'Location count 1*' | 'Prepared' | ''           | ''            |
-				| 'Location count 2*' | 'Prepared' | ''           | ''            |
-				| 'Location count 3*' | 'Prepared' | ''           | ''            |
+				| 'Reference'            | 'Status'      | 'Count rows'    | 'Phys. count'     |
+				| 'Location count 1*'    | 'Prepared'    | ''              | ''                |
+				| 'Location count 2*'    | 'Prepared'    | ''              | ''                |
+				| 'Location count 3*'    | 'Prepared'    | ''              | ''                |
 			Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 	* Filling second Physical count by location
 		And I go to the last line in "PhysicalCountByLocationList" table	
@@ -765,19 +765,19 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 				Then "Item serial/lot number (create)" window is opened
 				And I click "Save and close" button
 				And "ItemList" table contains lines
-					| 'Item'               | 'Item key' | 'Serial lot number' |
-					| 'Dress'              | 'XS/Blue'  | ''                  |
-					| 'Product 1 with SLN' | 'PZU'      | '8908898754'        |
+					| 'Item'                   | 'Item key'     | 'Serial lot number'      |
+					| 'Dress'                  | 'XS/Blue'      | ''                       |
+					| 'Product 1 with SLN'     | 'PZU'          | '8908898754'             |
 			* Change serial lot number
 				And I go to line in "ItemList" table
-					| 'Item'               | 'Item key' | 'Serial lot number' |
-					| 'Product 1 with SLN' | 'PZU'      | '8908898754'        |
+					| 'Item'                   | 'Item key'     | 'Serial lot number'      |
+					| 'Product 1 with SLN'     | 'PZU'          | '8908898754'             |
 				And I select current line in "ItemList" table
 				And I input "8908899877" text in "Serial lot number" field of "ItemList" table
 				And "ItemList" table contains lines
-					| 'Item'               | 'Item key' | 'Serial lot number' |
-					| 'Dress'              | 'XS/Blue'  | ''                  |
-					| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |					
+					| 'Item'                   | 'Item key'     | 'Serial lot number'      |
+					| 'Dress'                  | 'XS/Blue'      | ''                       |
+					| 'Product 1 with SLN'     | 'PZU'          | '8908899877'             |
 		* Scan item without serial lot number (need to select serial lot number)
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "67789997777899" text in the field named "Barcode"
@@ -788,21 +788,21 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I click "Create" button
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'               | 'Item key' | 'Phys. count' |
-				| 'Product 1 with SLN' | 'ODS'      | '1,000'       |
+				| 'Item'                  | 'Item key'    | 'Phys. count'     |
+				| 'Product 1 with SLN'    | 'ODS'         | '1,000'           |
 			And I select current line in "ItemList" table
 			And I input "4,000" text in "Phys. count" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
 		* Add item from Pickup form
 			And in the table "ItemList" I click "Pickup" button
 			And I go to line in "ItemList" table
-				| 'Title' |
-				| 'Dress' |
+				| 'Title'     |
+				| 'Dress'     |
 			And I select current line in "ItemList" table
 			And I move to the next attribute
 			And I go to line in "ItemKeyList" table
-				| 'Title'    |
-				| 'S/Yellow' |
+				| 'Title'        |
+				| 'S/Yellow'     |
 			And I select current line in "ItemKeyList" table
 			And I click "Transfer to document" button
 			And I activate "Phys. count" field in "ItemList" table
@@ -813,14 +813,14 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' | 'Reference' |
-				| 'Dress'       | 'Dress'     |
+				| 'Description' |
+				| 'Dress'       |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			And I select current line in "List" table
 			And I activate "Phys. count" field in "ItemList" table
 			And I input "50,000" text in "Phys. count" field of "ItemList" table
@@ -831,10 +831,10 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I click "Save and close" button
 	* Check update Physical count by location tab in the Physical inventory
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-			| 'Location count 1*' | 'Prepared' | ''           | ''            |
-			| 'Location count 2*' | 'Prepared' | ''           | ''            |
-			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
+			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
+			| 'Location count 1*'   | 'Prepared'   | ''             | ''               |
+			| 'Location count 2*'   | 'Prepared'   | ''             | ''               |
+			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And I close all client application windows
 
@@ -889,20 +889,20 @@ Scenario: _2990016 check Physical count by location (mobile form)
 		And I input "1,000" text in the field named "Quantity"
 		And I click the button named "OK"
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' | 'Date' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '1,000'       | '*'    |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '3,000'       | '*'    |
-			| 'Product 1 with SLN' | 'ODS'      | '234567'            | '1,000'       | '*'    |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'   | 'Date'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '1,000'         | '*'       |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '3,000'         | '*'       |
+			| 'Product 1 with SLN'   | 'ODS'        | '234567'              | '1,000'         | '*'       |
 	* Delete string
 		And I remove checkbox "Edit quantity"
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '3,000'       |	
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '3,000'          |
 		And I delete a line in "ItemList" table
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' | 'Date' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '1,000'       | '*'    |
-			| 'Product 1 with SLN' | 'ODS'      | '234567'            | '1,000'       | '*'    |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'   | 'Date'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '1,000'         | '*'       |
+			| 'Product 1 with SLN'   | 'ODS'        | '234567'              | '1,000'         | '*'       |
 		And I close all client application windows			
 
 Scenario: _2990016 filling Physical count by location (mobile form without scan emulator)
@@ -926,8 +926,8 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		And I input "23455677788976667" text in the field named "Barcode"
 		And I move to the next attribute
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Phys. count' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '1,000'       | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Phys. count'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '1,000'         | '8908899877'           |
 		And I activate "Phys. count" field in "ItemList" table
 		And I select current line in "ItemList" table
 		Then "Row form" window is opened
@@ -940,10 +940,10 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		Given Recent TestClient message contains "Can not add Service item type:*" string by template
 	* Check item tab
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '2,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
 		Then the number of "ItemList" table lines is "равно" 3
 	* Add product without Serial lot number (item type use Serial lot numbers)
 		And I click the button named "SearchByBarcode"
@@ -963,11 +963,11 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 			And I click the button named "OK"
 	* Check filling item tab
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | '1,000'          |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '2,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
 		And I click "Save" button		
 	* Change Phys. count (manual)
 		And I set checkbox "Edit quantity"
@@ -978,25 +978,25 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		And I input "2,000" text in the field named "Quantity"
 		And I click the button named "OK"
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '2,000'       |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | '2,000'          |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | '2,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
+			| 'Boots'                | '36/18SD'    | ''                    | '1,000'          |
 	* Close without save and check saving result
 		And I close "Location count * dated *" window
 	* Check Physical count by location
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Phys. count' |
-			| '1' | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'       |
-			| '2' | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '2,000'       |
-			| '3' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
-			| '4' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
+			| '#'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Phys. count'    |
+			| '1'   | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'          |
+			| '2'   | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '2,000'          |
+			| '3'   | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '1,000'          |
+			| '4'   | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '1,000'          |
 		And I close all client application windows
 
 Scenario: _2990018 check the document Location count fixation for the user
@@ -1004,14 +1004,14 @@ Scenario: _2990018 check the document Location count fixation for the user
 	* Change responsible person in the Physical count by location
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to line in "List" table
-			| 'Number' |
-			| '2'      |
+			| 'Number'    |
+			| '2'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I click Select button of "Responsible user" field
 		And I go to line in "List" table
-			| 'Description'                       |
-			| 'Anna Petrova (Commercial Agent 3)' |
+			| 'Description'                          |
+			| 'Anna Petrova (Commercial Agent 3)'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I wait "Location count * dated * *" window closing in 20 seconds
@@ -1030,11 +1030,11 @@ Scenario: _2990019 rescan a previously created document Physical count by locati
 	And I input "1" text in the field named "InputFld"
 	And I click the button named "OK"
 	And "ItemList" table became equal
-		| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-		| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '2,000'       |	
-		| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+		| 'Item'                | 'Item key'  | 'Serial lot number'  | 'Phys. count'   |
+		| 'Product 2 with SLN'  | 'UNIQ'      | '45678899'           | '2,000'         |
+		| 'Product 1 with SLN'  | 'PZU'       | '8908899877'         | '2,000'         |
+		| 'Boots'               | '36/18SD'   | ''                   | '1,000'         |
+		| 'Boots'               | '36/18SD'   | ''                   | '1,000'         |
 	Given Recent TestClient message contains "Current location #* was linked to you. Other users will not be able to scan it." string by template
 	And I close all client application windows
 	
@@ -1045,29 +1045,29 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 	* Open Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPhysicalInventory3$$'      |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-			| 'Location count 1*' | 'Prepared' | '4'          | '6,000'       |
-			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
-			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
+			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
+			| 'Location count 1*'   | 'Prepared'   | '4'            | '6,000'          |
+			| 'Location count 2*'   | 'Prepared'   | '*'            | '*'              |
+			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-120,000'   | ''            | ''                   | ''            |	
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-120,000'     | ''              | ''                     | ''               |
 	* Try to filling Physical inventory from Physical count by location (status prepared)
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-120,000'   | ''            | ''                   | ''            |	
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-120,000'     | ''              | ''                     | ''               |
 	* Change status and fill Physical inventory from first Physical count by location
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
@@ -1077,20 +1077,20 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I select "Done" exact value from the drop-down list named "Status"
 		And I click "Save and close" button
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-			| 'Location count 1*' | 'Done'     | '4'          | '6,000'       |
-			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
-			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
+			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
+			| 'Location count 1*'   | 'Done'       | '4'            | '6,000'          |
+			| 'Location count 2*'   | 'Prepared'   | '*'            | '*'              |
+			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-118,000'   | '2,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-118,000'     | '2,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
 	* Change status and fill Physical inventory from third Physical count by location	
 		And I move to "Physical count by location" tab
 		And I go to the last line in "PhysicalCountByLocationList" table
@@ -1101,27 +1101,27 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 	* Update exp count
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 	* Mark for deletion Physical count by location and update physical count
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
@@ -1134,15 +1134,15 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-115,000'   | '5,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | ''           | ''            | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | ''           | ''            | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-115,000'     | '5,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | ''             | ''              | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | ''             | ''              | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 	* Unmark Physical count by location and update physical count
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
@@ -1157,15 +1157,15 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 					
 	* Try to close invent (not all Physical count by location close)
 		And I click "Decoration group title collapsed picture" hyperlink
@@ -1187,13 +1187,13 @@ Scenario: _2990025 write off product and check update exp count
 	* Create a document StockAdjustmentAsSurplus and check filling in
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Store 07' |
+			| 'Description'    |
+			| 'Store 07'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
@@ -1204,53 +1204,53 @@ Scenario: _2990025 write off product and check update exp count
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Accountants office' |
+			| 'Description'           |
+			| 'Accountants office'    |
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I activate "Expense type" field in "ItemList" table
 		And I click choice button of "Expense type" attribute in "ItemList" table
 		Then "Expense and revenue types" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Expense'     |
+			| 'Description'    |
+			| 'Expense'        |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I input "16.05.2022 00:00:00" text in the field named "Date"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table	
 		And I click "Post and close" button
 		And I wait "Stock adjustment as write-off * dated * *" window closing in 20 seconds
 	* Open Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberPhysicalInventory3$$' |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table				
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 		And I click "Post and close" button
 		And I wait "Physical inventory * dated * *" window closing in 20 seconds
 		And I close all client application windows
@@ -1260,74 +1260,74 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 	* Open Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberPhysicalInventory3$$' |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table
 	* Filling manual fixed count
 		And I go to line in "ItemList" table
-			| '#' | 'Difference' | 'Exp. count' | 'Item'       | 'Item key' | 'Unit' |
-			| '3' | '-20,000'    | '20,000'     | 'High shoes' | '37/19SD'  | 'pcs'  |
+			| '#'   | 'Difference'   | 'Exp. count'   | 'Item'         | 'Item key'   | 'Unit'    |
+			| '3'   | '-20,000'      | '20,000'       | 'High shoes'   | '37/19SD'    | 'pcs'     |
 		And I activate "Manual fixed count" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "18,000" text in "Manual fixed count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Difference' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' |
-			| '2' | '-150,000'   | '150,000'    | 'Boots' | '37/18SD'  | 'pcs'  |
+			| '#'   | 'Difference'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '2'   | '-150,000'     | '150,000'      | 'Boots'   | '37/18SD'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "140,000" text in "Manual fixed count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Difference' | 'Item'  | 'Item key' | 'Phys. count' | 'Unit' |
-			| '6' | '2,000'      | 'Boots' | '36/18SD'  | '2,000'       | 'pcs'  |
+			| '#'   | 'Difference'   | 'Item'    | 'Item key'   | 'Phys. count'   | 'Unit'    |
+			| '6'   | '2,000'        | 'Boots'   | '36/18SD'    | '2,000'         | 'pcs'     |
 	* Check tab
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 	* Update exp count
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 	* Update phys count
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
-			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
-			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
-			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
-			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |	
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
+			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
+			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |
+			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-113,000'     | '7,000'         | ''                     | ''               |
+			| '5'   | ''             | 'Product 2 with SLN'   | 'UNIQ'       | '45678899'            | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '6'   | ''             | 'Boots'                | '36/18SD'    | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '7'   | ''             | 'Product 1 with SLN'   | 'ODS'        | '677899'              | 'pcs'    | '4,000'        | '4,000'         | ''                     | ''               |
+			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 		And I click "Post and close" button
 	* Post invent with status Done
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to line in "List" table
-			| 'Number' |
-			| '2'      |
+			| 'Number'    |
+			| '2'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberPhysicalInventory3$$' |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Done" exact value from the drop-down list named "Status"
@@ -1340,8 +1340,8 @@ Scenario: _2990030 check filling in Stock adjustment as surplus based on Physica
 	* Select Physical Inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberPhysicalInventory3$$' |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 	* Create Stock adjustment as surplus
 		And I click "Stock adjustment as surplus" button
 		Then "Add linked document rows" window is opened
@@ -1349,12 +1349,12 @@ Scenario: _2990030 check filling in Stock adjustment as surplus based on Physica
 		And I click "Ok" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Revenue type' | 'Amount' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' |
-			| '1' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'XS/Blue'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '103,000'  |
-			| '2' | ''             | ''       | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '2,000'    |
-			| '3' | ''             | ''       | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    |
-			| '4' | ''             | ''       | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'ODS'      | ''                   | '$$PhysicalInventory3$$' | '677899'             | 'pcs'  | '4,000'    |
-			| '5' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'S/Yellow' | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '110,000'  |
+			| '#'   | 'Revenue type'   | 'Amount'   | 'Item'                 | 'Basis document'           | 'Item key'   | 'Profit loss center'   | 'Physical inventory'       | 'Serial lot numbers'   | 'Unit'   | 'Quantity'    |
+			| '1'   | ''               | ''         | 'Dress'                | '$$PhysicalInventory3$$'   | 'XS/Blue'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '103,000'     |
+			| '2'   | ''               | ''         | 'Product 2 with SLN'   | '$$PhysicalInventory3$$'   | 'UNIQ'       | ''                     | '$$PhysicalInventory3$$'   | '45678899'             | 'pcs'    | '2,000'       |
+			| '3'   | ''               | ''         | 'Boots'                | '$$PhysicalInventory3$$'   | '36/18SD'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '2,000'       |
+			| '4'   | ''               | ''         | 'Product 1 with SLN'   | '$$PhysicalInventory3$$'   | 'ODS'        | ''                     | '$$PhysicalInventory3$$'   | '677899'               | 'pcs'    | '4,000'       |
+			| '5'   | ''               | ''         | 'Dress'                | '$$PhysicalInventory3$$'   | 'S/Yellow'   | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '110,000'     |
 	And I close all client application windows
 		
 Scenario: _2990032 check filling in Stock adjustment as write off based on Physical Inventory with Serial lot numbers
@@ -1362,8 +1362,8 @@ Scenario: _2990032 check filling in Stock adjustment as write off based on Physi
 	* Select Physical Inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
-			| 'Number'                       |
-			| '$$NumberPhysicalInventory3$$' |
+			| 'Number'                          |
+			| '$$NumberPhysicalInventory3$$'    |
 	* Create Stock adjustment as write off
 		And I click "Stock adjustment as write-off" button
 		Then "Add linked document rows" window is opened
@@ -1371,10 +1371,10 @@ Scenario: _2990032 check filling in Stock adjustment as write off based on Physi
 		And I click "Ok" button
 	* Check filling		
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Expense type' |
-			| '1' | 'Boots'              | '$$PhysicalInventory3$$' | '37/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '10,000'   | ''             |
-			| '2' | 'High shoes'         | '$$PhysicalInventory3$$' | '37/19SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    | ''             |
-			| '3' | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'PZU'      | ''                   | '$$PhysicalInventory3$$' | '8908899877'         | 'pcs'  | '113,000'  | ''             |
+			| '#'   | 'Item'                 | 'Basis document'           | 'Item key'   | 'Profit loss center'   | 'Physical inventory'       | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Expense type'    |
+			| '1'   | 'Boots'                | '$$PhysicalInventory3$$'   | '37/18SD'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '10,000'     | ''                |
+			| '2'   | 'High shoes'           | '$$PhysicalInventory3$$'   | '37/19SD'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '2,000'      | ''                |
+			| '3'   | 'Product 1 with SLN'   | '$$PhysicalInventory3$$'   | 'PZU'        | ''                     | '$$PhysicalInventory3$$'   | '8908899877'           | 'pcs'    | '113,000'    | ''                |
 	And I close all client application windows
 
 
@@ -1383,12 +1383,12 @@ Scenario: _2990050 check label print for Physical count by location
 	* Select Physical count by location
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 	* Print label
 		And I click "PrintQR" button
 		Then "SpreadsheetDocument" spreadsheet document is equal
-			| '1' |
+			| '1'    |
 	And I close all client application windows
 	
 		
@@ -1399,8 +1399,8 @@ Scenario: _2990053 create serial lot number from Physical inventory form
 		And I click "Create" button
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 07'    |
+			| 'Description'    |
+			| 'Store 07'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I move to "Rules" tab
@@ -1410,8 +1410,8 @@ Scenario: _2990053 create serial lot number from Physical inventory form
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill expected count" button
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'           |
 		And I activate "Serial lot number" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "89090098" text in "Serial lot number" field of "ItemList" table
@@ -1427,8 +1427,8 @@ Scenario: _2990053 create serial lot number from Physical inventory form
 		And I wait "Item serial/lot number (create)" window closing in 20 seconds
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '89090098'          |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '89090098'             |
 		And I close all client application windows
 		
 Scenario: _2990054 check item change in the Physical Inventory
@@ -1438,8 +1438,8 @@ Scenario: _2990054 check item change in the Physical Inventory
 		And I click "Create" button
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 07'    |
+			| 'Description'    |
+			| 'Store 07'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I move to "Rules" tab
@@ -1447,38 +1447,38 @@ Scenario: _2990054 check item change in the Physical Inventory
 		And in the table "ItemList" I click "Fill expected count" button
 	* Change item with serial lot number on item without serial lot number
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'           |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And "ItemList" table does not contain lines
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'           |
 		And "ItemList" table contains lines	
-			| 'Item'  | 'Item key' | 'Serial lot number' |
-			| 'Dress' | ''         | ''                  |
+			| 'Item'    | 'Item key'   | 'Serial lot number'    |
+			| 'Dress'   | ''           | ''                     |
 	* Change item with serial lot number on item with serial lot number
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 2 with SLN'   | 'UNIQ'       | '45678899'             |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Product 1 with SLN'       |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table		
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | ''                  |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | ''                     |
 		And I close all client application windows
 		
 	
@@ -1494,14 +1494,14 @@ Scenario: _2990055 check item change in the Physical count by location
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 1 with SLN' |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table
 		And I activate "Serial lot number" field in "ItemList" table
 		And I click choice button of "Serial lot number" attribute in "ItemList" table
@@ -1512,45 +1512,45 @@ Scenario: _2990055 check item change in the Physical count by location
 		And I activate "Item" field in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Product 2 with SLN' |
+			| 'Description'           |
+			| 'Product 2 with SLN'    |
 		And I select current line in "List" table
 		And I activate "Serial lot number" field in "ItemList" table
 		And I select "899" from "Serial lot number" drop-down list by string in "ItemList" table
 	* Change item with serial lot number on item without serial lot number
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'           |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And "ItemList" table does not contain lines
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | '8908899877'           |
 		And "ItemList" table contains lines	
-			| 'Item'  | 'Item key' | 'Serial lot number' |
-			| 'Dress' | ''         | ''                  |
+			| 'Item'    | 'Item key'   | 'Serial lot number'    |
+			| 'Dress'   | ''           | ''                     |
 	* Change item with serial lot number on item with serial lot number
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 2 with SLN'   | 'UNIQ'       | '45678899'             |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Product 1 with SLN'       |
+			| 'Description'           |
+			| 'Product 1 with SLN'    |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I select current line in "List" table		
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Serial lot number' |
-			| 'Product 1 with SLN' | 'PZU'      | ''                  |
+			| 'Item'                 | 'Item key'   | 'Serial lot number'    |
+			| 'Product 1 with SLN'   | 'PZU'        | ''                     |
 		And I close all client application windows
 		
 Scenario: _2990055 check filling price and sum in the Stock adjustment as surplus
@@ -1561,25 +1561,25 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 	* Filling in company info
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description  |
-			| Store 01 |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 	* Amount calculation
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Dress | XS/Blue  |
+			| Item    | Item key    |
+			| Dress   | XS/Blue     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "500,000" text in "Quantity" field of "ItemList" table
@@ -1588,19 +1588,19 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I finish line editing in "ItemList" table
 	* Check amount calculation
 		And "ItemList" table became equal
-			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
-			| '5 000,00' | 'Dress' | 'XS/Blue'  | '500,000'  | '10,00' | ''           |
+			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
+			| '5 000,00'   | 'Dress'   | 'XS/Blue'    | '500,000'    | '10,00'   | ''              |
 	* Price calculation	
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Dress | S/Yellow |
+			| Item    | Item key    |
+			| Dress   | S/Yellow    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "400,000" text in "Quantity" field of "ItemList" table
@@ -1609,38 +1609,38 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I finish line editing in "ItemList" table
 	* Check price calculation
 		And "ItemList" table contains lines
-			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' |
-			| '4 400,00' | 'Dress' | 'S/Yellow' | '400,000'  | '11,00' |
+			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    |
+			| '4 400,00'   | 'Dress'   | 'S/Yellow'   | '400,000'    | '11,00'    |
 	* Change quantity and check amount
 		And I go to line in "ItemList" table
-			| '#' | 'Amount'   | 'Item'  | 'Item key' | 'Price' | 'Quantity' |
-			| '1' | '5 000,00' | 'Dress' | 'XS/Blue'  | '10,00' | '500,000'  |
+			| '#'   | 'Amount'     | 'Item'    | 'Item key'   | 'Price'   | 'Quantity'    |
+			| '1'   | '5 000,00'   | 'Dress'   | 'XS/Blue'    | '10,00'   | '500,000'     |
 		And I select current line in "ItemList" table
 		And I input "550,00" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
-			| '5 500,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '10,00' | ''           |
+			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
+			| '5 500,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '10,00'   | ''              |
 	* Change amount and check price
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "ItemList" table
 		And I input "10 000,00" text in the field named "ItemListAmount" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'    | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
-			| '10 000,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '18,18' | ''           |
+			| 'Amount'      | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
+			| '10 000,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '18,18'   | ''              |
 	* Change price and check amount	
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'XS/Blue'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "ItemList" table
 		And I input "22,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'    | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
-			| '12 100,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '22,00' | ''           |
+			| 'Amount'      | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
+			| '12 100,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '22,00'   | ''              |
 		And I close all client application windows					
 
 		

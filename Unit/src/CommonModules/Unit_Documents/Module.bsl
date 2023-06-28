@@ -39,16 +39,6 @@ Function DocumentManagerCheck() Export
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();
 		EndTry;
-		
-		Try
-			Documents[Doc.Name].GetAccessKey(EmptyRef);
-		Except
-			ArrayOfErrors.Add("GetAccessKey error:" + Doc.FullName());
-			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
-			ArrayOfErrors.Add("--------------------------");
-			ArrayOfErrors.Add();
-		EndTry;
-		
 	EndDo;		
 		
 	If ArrayOfErrors.Count() Then

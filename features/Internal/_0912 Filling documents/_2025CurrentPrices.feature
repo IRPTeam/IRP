@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -23,20 +23,20 @@ Scenario: _01202501 preparation
 		And I change "Set price" radio button value to "By item keys"
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'     |
-			| 'Current Price' | 'Current Price' |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And I activate field named "ItemKeyListPrice" in "ItemKeyList" table
 		And I input "50,00" text in the field named "ItemKeyListPrice" of "ItemKeyList" table
@@ -44,17 +44,17 @@ Scenario: _01202501 preparation
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '39/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '39/19SD'     |
 		And I select current line in "List" table
 		And I activate field named "ItemKeyListPrice" in "ItemKeyList" table
 		And I input "40,00" text in the field named "ItemKeyListPrice" of "ItemKeyList" table
@@ -72,27 +72,27 @@ Scenario: _01202502 check current price in the Sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And Delay 4
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'     |
-			| 'Current Price' | 'Current Price' |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 		And Delay 4
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
-		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
+		| 'Item'        | 'Price'  | 'Item key'  | 'Price type'     | 'Quantity'   |
+		| 'High shoes'  | '50,00'  | '37/19SD'   | 'Current Price'  | '1,000'      |
 		And I close all client application windows
 		
 
@@ -104,25 +104,25 @@ Scenario: _01202503 check current price in the Sales invoice
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'     |
-			| 'Current Price' | 'Current Price' |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
-		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
+		| 'Item'        | 'Price'  | 'Item key'  | 'Price type'     | 'Quantity'   |
+		| 'High shoes'  | '50,00'  | '37/19SD'   | 'Current Price'  | '1,000'      |
 		And I close all client application windows
 
 
@@ -134,25 +134,25 @@ Scenario: _01202504 check current price in the Purchase order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'     |
-			| 'Current Price' | 'Current Price' |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
-		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
+		| 'Item'        | 'Price'  | 'Item key'  | 'Price type'     | 'Quantity'   |
+		| 'High shoes'  | '50,00'  | '37/19SD'   | 'Current Price'  | '1,000'      |
 		And I close all client application windows
 
 
@@ -165,25 +165,25 @@ Scenario: _01202504 check current price in the Purchase invoice
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
+			| 'Item'         | 'Item key'    |
+			| 'High shoes'   | '37/19SD'     |
 		And I select current line in "List" table
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'   | 'Reference'     |
-			| 'Current Price' | 'Current Price' |
+			| 'Description'     |
+			| 'Current Price'   |
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
-		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
+		| 'Item'        | 'Price'  | 'Item key'  | 'Price type'     | 'Quantity'   |
+		| 'High shoes'  | '50,00'  | '37/19SD'   | 'Current Price'  | '1,000'      |
 		And I close all client application windows
 
 

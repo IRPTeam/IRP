@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Discount
@@ -19,8 +19,8 @@ Scenario: _034001 check the Document discount in Purchase order
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Document discount' |
+			| 'Description'          |
+			| 'Document discount'    |
 		And I select current line in "List" table
 		And I set checkbox "Launch"
 		And I click "Save and close" button
@@ -33,81 +33,81 @@ Scenario: _034001 check the Document discount in Purchase order
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, TRY |
+				| Description            |
+				| Vendor Ferron, TRY     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'M/White'  |
+				| 'Item key'     |
+				| 'M/White'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'M/White' | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'M/White'     | 'pcs'      |
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "100" text in "Quantity" field of "ItemList" table
 			And I input "200" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '2'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "200" text in "Quantity" field of "ItemList" table
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'     | 'Item key' | 'Unit' |
-				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
+				| '#'    | 'Item'        | 'Item key'     | 'Unit'     |
+				| '3'    | 'Trousers'    | '36/Yellow'    | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "300" text in "Quantity" field of "ItemList" table
 			And I input "250" text in "Price" field of "ItemList" table
@@ -115,27 +115,27 @@ Scenario: _034001 check the Document discount in Purchase order
 	* Calculate Document discount for Purchase order
 		And I click "% Offers" button
 		And I go to line in "Offers" table
-			| 'Presentation'      |
-			| 'Document discount' |
+			| 'Presentation'         |
+			| 'Document discount'    |
 		And I select current line in "Offers" table
 		And I input "10,00" text in "Percent" field
 		And I click "Ok" button
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity' | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-		| 'Dress'    | '200,00' | 'M/White'   | '100,000'  | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-		| 'Dress'    | '210,00' | 'L/Green'   | '200,000'  | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-		| 'Trousers' | '250,00' | '36/Yellow' | '300,000'  | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Quantity'  | 'Offers amount'  | 'Unit'  | 'Total amount'  | 'Store'      |
+		| 'Dress'     | '200,00'  | 'M/White'    | '100,000'   | '2 000,00'       | 'pcs'   | '18 000,00'     | 'Store 01'   |
+		| 'Dress'     | '210,00'  | 'L/Green'    | '200,000'   | '4 200,00'       | 'pcs'   | '37 800,00'     | 'Store 01'   |
+		| 'Trousers'  | '250,00'  | '36/Yellow'  | '300,000'   | '7 500,00'       | 'pcs'   | '67 500,00'     | 'Store 01'   |
 	* Check the transfer of the discount value from Purchase order to Purchase invoice when creating based on
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Quantity'  | 'Offers amount'  | 'Unit'  | 'Total amount'  | 'Store'      |
+		| 'Dress'     | '200,00'  | 'M/White'    | '100,000'   | '2 000,00'       | 'pcs'   | '18 000,00'     | 'Store 01'   |
+		| 'Dress'     | '210,00'  | 'L/Green'    | '200,000'   | '4 200,00'       | 'pcs'   | '37 800,00'     | 'Store 01'   |
+		| 'Trousers'  | '250,00'  | '36/Yellow'  | '300,000'   | '7 500,00'       | 'pcs'   | '67 500,00'     | 'Store 01'   |
 		And I close all client application windows
 
 Scenario: _034002 check the Document discount in Purchase invoice
@@ -143,8 +143,8 @@ Scenario: _034002 check the Document discount in Purchase invoice
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Document discount' |
+			| 'Description'          |
+			| 'Document discount'    |
 		And I select current line in "List" table
 		And I set checkbox "Launch"
 		And I click "Save and close" button
@@ -155,81 +155,81 @@ Scenario: _034002 check the Document discount in Purchase invoice
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, TRY |
+				| Description            |
+				| Vendor Ferron, TRY     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'M/White'  |
+				| 'Item key'     |
+				| 'M/White'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'M/White' | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'M/White'     | 'pcs'      |
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "100" text in "Quantity" field of "ItemList" table
 			And I input "200" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '2'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "200" text in "Quantity" field of "ItemList" table
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'     | 'Item key' | 'Unit' |
-				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
+				| '#'    | 'Item'        | 'Item key'     | 'Unit'     |
+				| '3'    | 'Trousers'    | '36/Yellow'    | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "300" text in "Quantity" field of "ItemList" table
 			And I input "250" text in "Price" field of "ItemList" table
@@ -237,18 +237,18 @@ Scenario: _034002 check the Document discount in Purchase invoice
 	* Calculate Document discount for Purchase invoice
 		And I click "% Offers" button
 		And I go to line in "Offers" table
-			| 'Presentation'      |
-			| 'Document discount' |
+			| 'Presentation'         |
+			| 'Document discount'    |
 		And I select current line in "Offers" table
 		And I input "10,00" text in "Percent" field
 		And I click "Ok" button
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Quantity'  | 'Offers amount'  | 'Unit'  | 'Total amount'  | 'Store'      |
+		| 'Dress'     | '200,00'  | 'M/White'    | '100,000'   | '2 000,00'       | 'pcs'   | '18 000,00'     | 'Store 01'   |
+		| 'Dress'     | '210,00'  | 'L/Green'    | '200,000'   | '4 200,00'       | 'pcs'   | '37 800,00'     | 'Store 01'   |
+		| 'Trousers'  | '250,00'  | '36/Yellow'  | '300,000'   | '7 500,00'       | 'pcs'   | '67 500,00'     | 'Store 01'   |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice034001$$" variable
 		And I delete "$$PurchaseInvoice034001$$" variable
@@ -264,8 +264,8 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 	* Check the discount tree
 		And I click "% Offers" button
 		And "Offers" table became equal
-		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
-		| 'Document discount' | '☐'         | ''  | ''       |
+		| 'Presentation'       | 'Is select'  | '%'  | 'Amount'   |
+		| 'Document discount'  | '☐'          | ''   | ''         |
 		And I close all client application windows
 	* Open Purchase Order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -273,8 +273,8 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 	* Check the discount tree
 		And I click "% Offers" button
 		And "Offers" table became equal
-		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
-		| 'Document discount' | '☐'        | ''  | ''  |
+		| 'Presentation'       | 'Is select'  | '%'  | 'Amount'   |
+		| 'Document discount'  | '☐'          | ''   | ''         |
 		And I close all client application windows
 
 
@@ -283,8 +283,8 @@ Scenario: _034004 check that discounts with the Purchase document type are not d
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Document discount' |
+			| 'Description'          |
+			| 'Document discount'    |
 		And I select current line in "List" table
 		And I select "Purchases" exact value from "Document type" drop-down list
 		And I click "Save and close" button
@@ -293,23 +293,23 @@ Scenario: _034004 check that discounts with the Purchase document type are not d
 		And I click the button named "FormCreate"
 		And I click "% Offers" button
 		And "Offers" table does not contain lines
-		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
-		| 'Document discount' | ' '         | ''  | ''  |
+		| 'Presentation'       | 'Is select'  | '%'  | 'Amount'   |
+		| 'Document discount'  | ' '          | ''   | ''         |
 		And I close all client application windows
 	* Check that the Document discount is not displayed in the Sales invoice document
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 		And I click "% Offers" button
 		And "Offers" table does not contain lines
-		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
-		| 'Document discount' | ' '         | ''  | ''  |
+		| 'Presentation'       | 'Is select'  | '%'  | 'Amount'   |
+		| 'Document discount'  | ' '          | ''   | ''         |
 		And I close all client application windows
 	* Then I return the Document discount type back
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Document discount' |
+			| 'Description'          |
+			| 'Document discount'    |
 		And I select current line in "List" table
 		And I select "Purchases and sales" exact value from "Document type" drop-down list
 		And I click "Save and close" button
@@ -319,8 +319,8 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 		* Create Purchase return based on $$PurchaseInvoice034001$$
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoice034001$$'  |
+				| 'Number'                              |
+				| '$$NumberPurchaseInvoice034001$$'     |
 			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 			And I click "Ok" button	
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
@@ -328,20 +328,20 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Total amount'    | 'Store'        |
+				| 'Dress'       | '200,00'    | 'M/White'      | '100,000'     | '2 000,00'         | 'pcs'     | '18 000,00'       | 'Store 01'     |
+				| 'Dress'       | '210,00'    | 'L/Green'      | '200,000'     | '4 200,00'         | 'pcs'     | '37 800,00'       | 'Store 01'     |
+				| 'Trousers'    | '250,00'    | '36/Yellow'    | '300,000'     | '7 500,00'         | 'pcs'     | '67 500,00'       | 'Store 01'     |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'L/Green'  | '200,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'L/Green'     | '200,000'      |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Trousers' | '36/Yellow'  |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -350,10 +350,10 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
-				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
-				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
+				| 'Price'     | 'Item'        | 'VAT'    | 'Dont calculate row'    | 'Item key'     | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '200,00'    | 'Dress'       | '18%'    | 'No'                    | 'M/White'      | '100,000'     | '2 000,00'         | 'pcs'     | '2 745,76'      | '15 254,24'     | '18 000,00'       | 'Store 01'     |
+				| '210,00'    | 'Dress'       | '18%'    | 'No'                    | 'L/Green'      | '1,000'       | '21,00'            | 'pcs'     | '28,83'         | '160,17'        | '189,00'          | 'Store 01'     |
+				| '250,00'    | 'Trousers'    | '18%'    | 'No'                    | '36/Yellow'    | '5,000'       | '125,00'           | 'pcs'     | '171,61'        | '953,39'        | '1 125,00'        | 'Store 01'     |
 			And I click the button named "FormPostAndClose"	
 
 Scenario: _034031 check discount recalculation when change quantity in the Purchase return
@@ -361,8 +361,8 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 		* Create Purchase return based on $$PurchaseInvoice034001$$
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoice034001$$'  |
+				| 'Number'                              |
+				| '$$NumberPurchaseInvoice034001$$'     |
 			And I click the button named "FormDocumentPurchaseReturnGenerate"
 			And I click "Ok" button	
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
@@ -370,20 +370,20 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Total amount'    | 'Store'        |
+				| 'Dress'       | '200,00'    | 'M/White'      | '100,000'     | '2 000,00'         | 'pcs'     | '18 000,00'       | 'Store 01'     |
+				| 'Dress'       | '210,00'    | 'L/Green'      | '200,000'     | '4 200,00'         | 'pcs'     | '37 800,00'       | 'Store 01'     |
+				| 'Trousers'    | '250,00'    | '36/Yellow'    | '300,000'     | '7 500,00'         | 'pcs'     | '67 500,00'       | 'Store 01'     |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'L/Green'  | '200,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'L/Green'     | '200,000'      |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Trousers' | '36/Yellow'  |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -392,10 +392,10 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
-				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
-				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
+				| 'Price'     | 'Item'        | 'VAT'    | 'Dont calculate row'    | 'Item key'     | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '200,00'    | 'Dress'       | '18%'    | 'No'                    | 'M/White'      | '100,000'     | '2 000,00'         | 'pcs'     | '2 745,76'      | '15 254,24'     | '18 000,00'       | 'Store 01'     |
+				| '210,00'    | 'Dress'       | '18%'    | 'No'                    | 'L/Green'      | '1,000'       | '21,00'            | 'pcs'     | '28,83'         | '160,17'        | '189,00'          | 'Store 01'     |
+				| '250,00'    | 'Trousers'    | '18%'    | 'No'                    | '36/Yellow'    | '5,000'       | '125,00'           | 'pcs'     | '171,61'        | '953,39'        | '1 125,00'        | 'Store 01'     |
 			And I click the button named "FormPostAndClose"		
 
 

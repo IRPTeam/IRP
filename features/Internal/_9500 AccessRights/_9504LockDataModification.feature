@@ -16,46 +16,46 @@ Scenario: 950400 preparation
 	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Document.PriceList'
 	And I go to line in "List" table
-		| 'Number'         |
-		| '100' |
+		| 'Number'   |
+		| '100'      |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	* Filling settings for attribute from extension
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Currencies'   |
+			| 'Predefined data name'    |
+			| 'Catalog_Currencies'      |
 		And I select current line in "List" table
 		And I move to "Extension attributes" tab
 		And in the table "ExtensionAttributes" I click "Fill attributes list" button
 		And "ExtensionAttributes" table became equal
-			| '#' | 'Required' | 'Attribute'      | 'Show' | 'UI group' | 'Show in HTML' |
-			| '1' | 'No'       | 'REP_Attribute1' | 'No'   | ''         | 'No'           |
+			| '#'   | 'Required'   | 'Attribute'        | 'Show'   | 'UI group'   | 'Show in HTML'    |
+			| '1'   | 'No'         | 'REP_Attribute1'   | 'No'     | ''           | 'No'              |
 		And I set "Show" checkbox in "ExtensionAttributes" table
 		And I select current line in "ExtensionAttributes" table
 		And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
 		And I go to line in "List" table
-			| 'Description'            |
-			| 'Accounting information' |
+			| 'Description'               |
+			| 'Accounting information'    |
 		And I select current line in "List" table
 		And I finish line editing in "ExtensionAttributes" table
 		And I click "Save and close" button
 	* Filling in attribute from extension
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I input "2" text in "REP_Attribute1" field
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'American dollar' |
+			| 'Description'        |
+			| 'American dollar'    |
 		And I select current line in "List" table
 		And I input "3" text in "REP_Attribute1" field
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Euro'        |
+			| 'Description'    |
+			| 'Euro'           |
 		And I select current line in "List" table
 		And I input "4" text in "REP_Attribute1" field
 		And I click "Save and close" button
@@ -63,8 +63,8 @@ Scenario: 950400 preparation
 	* Tax
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog TaxRates objects
@@ -80,23 +80,23 @@ Scenario: 950400 preparation
 	* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
-					| 'Description'                 |
-					| 'Arina Brown (Financier 3)' |
+					| 'Description'                    |
+					| 'Arina Brown (Financier 3)'      |
 			And I select current line in "List" table
 			And I select "English" exact value from "Data localization" drop-down list	
 			And I click "Save" button
 			Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Administrators' |
+				| 'Description'        |
+				| 'Administrators'     |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 	* Load SI and change it date
 		When Create document SalesInvoice objects (stock control)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I save "CurrentDate() - 8 * 24 * 60 * 60" in "$$$$Date1$$$$" variable
 		And I input "$$$$Date1$$$$" variable value in "Date" field
@@ -115,44 +115,44 @@ Scenario: 950400 preparation
 		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
-				| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server	
-				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)	
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document GoodsReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
-				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server	
-				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
 				// | "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
-				| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document PurchaseInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server	
-			| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server	
-			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 		
 Scenario: 9504001 check preparation
@@ -161,10 +161,10 @@ Scenario: 9504001 check preparation
 Scenario: 950403 check function option UseLockDataModification
 	When in sections panel I select "Settings"
 	And functions panel does not contain menu items
-		| "Lock data modification reasons" |
-		| "Lock data modification rules" |
+		| "Lock data modification reasons"   |
+		| "Lock data modification rules"     |
 	And I execute 1C:Enterprise script at server
- 			| "Constants.UseLockDataModification.Set(True);" |
+				| "Constants.UseLockDataModification.Set(True);"     |
 	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
 
@@ -204,15 +204,15 @@ Scenario: 950405 create reasons for documents with different comparison type
 	* Check saving
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And "List" table contains lines
-			| 'Reference'            |
-			| 'lock documents' |
+			|  'Description'      |
+			| 'lock documents'    |
 		And I close all client application windows
 	* Check rules (=)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -220,8 +220,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 			Given Recent TestClient message contains "lock documents" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -241,8 +241,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -254,8 +254,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 		* Does not fall under the conditions
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -263,16 +263,16 @@ Scenario: 950405 create reasons for documents with different comparison type
 			And I click "Save" button
 			And I click "Post and close" button
 			And "List" table contains lines
-				| 'Number'         |
-				| '1' |
-				| '2' |
+				| 'Number'     |
+				| '1'          |
+				| '2'          |
 			And I close all client application windows			
 	* Check rules (in)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '15' |
+				| 'Number'     |
+				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -280,8 +280,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 			Given Recent TestClient message contains "lock documents" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '15' |
+				| 'Number'     |
+				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -295,8 +295,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '15' |
+				| 'Number'     |
+				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -307,8 +307,8 @@ Scenario: 950405 create reasons for documents with different comparison type
 		* Does not fall under the conditions
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -317,15 +317,15 @@ Scenario: 950405 create reasons for documents with different comparison type
 			And I click "Post and close" button
 			Then user message window does not contain messages
 			And "List" table contains lines
-				| 'Number'         |
-				| '1' |
-				| '2' |
+				| 'Number'     |
+				| '1'          |
+				| '2'          |
 			And I close all client application windows	
 	* Delete rules
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'            |
-			| 'lock documents' |
+			| 'Description'         |
+			| 'lock documents'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -338,11 +338,11 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "16" |
+				| "Number"     |
+				| "16"         |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '15' |
+					| 'Number'      |
+					| '15'          |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				Then "Update item list info" window is opened
 				And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -361,8 +361,8 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 		And in the table "UserList" I click the button named "UserListAdd"
 		And I click choice button of "User" attribute in "UserList" table
 		And I go to line in "List" table
-			| 'Description'               |
-			| 'Arina Brown (Financier 3)' |
+			| 'Description'                  |
+			| 'Arina Brown (Financier 3)'    |
 		And I select current line in "List" table
 		And in the table "RuleList" I click the button named "RuleListAdd"
 		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
@@ -378,8 +378,8 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 	* Check lock data
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then "1C:Enterprise" window is opened
@@ -388,8 +388,8 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 		And I close current window
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '16'    |
+			| 'Number'    |
+			| '16'        |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -398,8 +398,8 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 		Then I connect launched Test client "Этот клиент"
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -411,11 +411,11 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "16" |
+				| "Number"     |
+				| "16"         |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '15' |
+					| 'Number'      |
+					| '15'          |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I move to "Other" tab
 				And I input "0" text in "Number" field
@@ -425,11 +425,11 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-			| 'Reference'            |
-			| 'number of days from the current date for User' |
+			| 'Description'                                        |
+			| 'number of days from the current date for User'    |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'number of days from the current date for User' |
+				| 'Description'                                         |
+				| 'number of days from the current date for User'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -441,8 +441,8 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 		And in the table "AccessGroupList" I click the button named "AccessGroupListAdd"		
 		And I click choice button of "Access group" attribute in "AccessGroupList" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Administrators' |
+			| 'Description'       |
+			| 'Administrators'    |
 		And I select current line in "List" table		
 		And in the table "RuleList" I click the button named "RuleListAdd"
 		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
@@ -458,8 +458,8 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 	* Check lock data
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then "1C:Enterprise" window is opened
@@ -468,8 +468,8 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 		And I close current window
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '16'    |
+			| 'Number'    |
+			| '16'        |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -478,8 +478,8 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 		Then I connect launched Test client "Этот клиент"
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -489,11 +489,11 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	If "List" table contains lines Then
-			| 'Reference'            |
-			| 'number of days from the current date for User group' |
+			| 'Description'                                              |
+			| 'number of days from the current date for User group'    |
 		And I go to line in "List" table
-			| 'Reference'      |
-			| 'number of days from the current date for User group' |
+			| 'Description'                                              |
+			| 'number of days from the current date for User group'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -519,8 +519,8 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 	* Check lock data
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
+			| 'Number'    |
+			| '251'       |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then "1C:Enterprise" window is opened
@@ -529,8 +529,8 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 		And I close current window
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I click "Post and close" button
 		Then "1C:Enterprise" window is opened
@@ -539,8 +539,8 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 		And I close current window
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
+			| 'Number'    |
+			| '1'         |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -558,29 +558,29 @@ Scenario: 950407 create rules for accumulation register
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "16" |
+				| "Number"     |
+				| "16"         |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '15' |
+					| 'Number'      |
+					| '15'          |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "2" |
+				| "Number"     |
+				| "2"          |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '1' |
+					| 'Number'      |
+					| '1'           |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'number of days from the current date for all objects' |
+				| 'Description'                                                |
+				| 'number of days from the current date for all objects'     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'number of days from the current date for all objects' |
+				| 'Description'                                                |
+				| 'number of days from the current date for all objects'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -598,8 +598,8 @@ Scenario: 950407 create rules for accumulation register
 		And I move to the next attribute
 		And I click choice button of the attribute named "RuleListValue" in "RuleList" table
 		And I go to line in "List" table
-			| 'Description' | 
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I finish line editing in "RuleList" table
@@ -621,8 +621,8 @@ Scenario: 950407 create rules for accumulation register
 		* Modification (UndoPosting)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -630,8 +630,8 @@ Scenario: 950407 create rules for accumulation register
 			Given Recent TestClient message contains "lock accumulation register" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -645,8 +645,8 @@ Scenario: 950407 create rules for accumulation register
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -658,8 +658,8 @@ Scenario: 950407 create rules for accumulation register
 		* Modification (re-Posting)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
@@ -667,8 +667,8 @@ Scenario: 950407 create rules for accumulation register
 		* Modification (UndoPosting)
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '16' |
+				| 'Number'     |
+				| '16'         |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -676,8 +676,8 @@ Scenario: 950407 create rules for accumulation register
 			Given Recent TestClient message contains "lock accumulation register" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '15' |
+				| 'Number'     |
+				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -691,8 +691,8 @@ Scenario: 950407 create rules for accumulation register
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '16' |
+				| 'Number'     |
+				| '16'         |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -704,16 +704,16 @@ Scenario: 950407 create rules for accumulation register
 		* Modification (re-Posting)
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '16' |
+				| 'Number'     |
+				| '16'         |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
 	* Delete rules
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'            |
-			| 'lock accumulation register' |
+			| 'Description'                     |
+			| 'lock accumulation register'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -724,20 +724,20 @@ Scenario: 950409 create rules for information register (with recorder)
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
-			| "Number" |
-			| "16"  |
+			| "Number"    |
+			| "16"        |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '15' |
+					| 'Number'      |
+					| '15'          |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "2" |
+				| "Number"     |
+				| "2"          |
 				And I go to line in "List" table
-					| 'Number'         |
-					| '1' |
+					| 'Number'      |
+					| '1'           |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
@@ -754,8 +754,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		And I move to the next attribute
 		And I click choice button of the attribute named "RuleListValue" in "RuleList" table
 		And I go to line in "List" table
-			| 'Item key' | 'Item' |
-			| '38/Yellow'| 'Trousers' |
+			| 'Item key'    | 'Item'        |
+			| '38/Yellow'   | 'Trousers'    |
 		And I select current line in "List" table
 		And I finish line editing in "RuleList" table
 	* Create rule for Prices by item keys (in)
@@ -773,8 +773,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Modification (UndoPosting)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -782,8 +782,8 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given Recent TestClient message contains "lock information register" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
+				| 'Number'     |
+				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
@@ -797,8 +797,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -810,8 +810,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Modification (re-Posting)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '2' |
+				| 'Number'     |
+				| '2'          |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
@@ -819,8 +819,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Modification (UndoPosting)
 			Given I open hyperlink 'e1cib/list/Document.PriceList'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '100' |
+				| 'Number'     |
+				| '100'        |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -828,8 +828,8 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given Recent TestClient message contains "lock information register" string by template
 		* Create new
 			And I go to line in "List" table
-				| 'Number'         |
-				| '100' |
+				| 'Number'     |
+				| '100'        |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
@@ -840,8 +840,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Marked for deletion
 			Given I open hyperlink 'e1cib/list/Document.PriceList'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '100' |
+				| 'Number'     |
+				| '100'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -853,16 +853,16 @@ Scenario: 950409 create rules for information register (with recorder)
 		* Modification (re-Posting)
 			Given I open hyperlink 'e1cib/list/Document.PriceList'
 			And I go to line in "List" table
-				| 'Number'         |
-				| '100' |
+				| 'Number'     |
+				| '100'        |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
 		* Delete rules
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'            |
-				| 'lock information register' |
+				| 'Description'                     |
+				| 'lock information register'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -891,8 +891,8 @@ Scenario: 950411 create rules for catalog (<)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10001"
 			And I click "Save" button
@@ -902,8 +902,8 @@ Scenario: 950411 create rules for catalog (<)
 			Given Recent TestClient message contains "lock catalog <" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'       |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10002"
 			And I click "Save" button
@@ -913,8 +913,8 @@ Scenario: 950411 create rules for catalog (<)
 			Given Recent TestClient message contains "lock catalog <" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
+				| 'Description'     |
+				| 'Shirt'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10003"
 			And I click "Save" button
@@ -926,8 +926,8 @@ Scenario: 950411 create rules for catalog (<)
 			And I input "Test" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
@@ -944,8 +944,8 @@ Scenario: 950411 create rules for catalog (<)
 			Then user message window does not contain messages	
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -956,8 +956,8 @@ Scenario: 950411 create rules for catalog (<)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test'       |
+				| 'Description'     |
+				| 'Test'            |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -967,11 +967,11 @@ Scenario: 950411 create rules for catalog (<)
 Scenario: 950412 create rules for catalog (<=)
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	If "List" table contains lines Then
-			| 'Reference'            |
-			| 'lock catalog <' |
+			| 'Description'         |
+			| 'lock catalog <'    |
 		And I go to line in "List" table
-			| 'Reference'      |
-			| 'lock catalog <' |
+			| 'Description'         |
+			| 'lock catalog <'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -994,8 +994,8 @@ Scenario: 950412 create rules for catalog (<=)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10001"
 			And I click "Save" button
@@ -1005,8 +1005,8 @@ Scenario: 950412 create rules for catalog (<=)
 			Given Recent TestClient message contains "lock catalog <=" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10004"
 			And I click "Save" button
@@ -1016,8 +1016,8 @@ Scenario: 950412 create rules for catalog (<=)
 			Given Recent TestClient message contains "lock catalog <=" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'       |
+				| 'Description'     |
+				| 'High shoes'      |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10005"
 			And I click "Save" button
@@ -1029,8 +1029,8 @@ Scenario: 950412 create rules for catalog (<=)
 			And I input "Test 2" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
@@ -1053,8 +1053,8 @@ Scenario: 950412 create rules for catalog (<=)
 			Then user message window does not contain messages	
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1065,8 +1065,8 @@ Scenario: 950412 create rules for catalog (<=)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 2'       |
+				| 'Description'     |
+				| 'Test 2'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1078,11 +1078,11 @@ Scenario: 950413 create rules for catalog (>)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog <=' |
+				| 'Description'           |
+				| 'lock catalog <='     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog <=' |
+				| 'Description'           |
+				| 'lock catalog <='     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1104,16 +1104,16 @@ Scenario: 950413 create rules for catalog (>)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10001"
 			And I click "Save" button
 			Then user message window does not contain messages
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
+				| 'Description'     |
+				| 'Shirt'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10003"
 			And I click "Save" button
@@ -1123,8 +1123,8 @@ Scenario: 950413 create rules for catalog (>)
 			Given Recent TestClient message contains "lock catalog >" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'       |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10002"
 			And I click "Save" button
@@ -1136,8 +1136,8 @@ Scenario: 950413 create rules for catalog (>)
 			And I input "Test 3" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
@@ -1154,8 +1154,8 @@ Scenario: 950413 create rules for catalog (>)
 			Then user message window does not contain messages	
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
+				| 'Description'     |
+				| 'Shirt'           |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1166,8 +1166,8 @@ Scenario: 950413 create rules for catalog (>)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 3'       |
+				| 'Description'     |
+				| 'Test 3'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1179,11 +1179,11 @@ Scenario: 950414 create rules for catalog (>=)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog >' |
+				| 'Description'          |
+				| 'lock catalog >'     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog >' |		
+				| 'Description'          |
+				| 'lock catalog >'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1205,16 +1205,16 @@ Scenario: 950414 create rules for catalog (>=)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10001"
 			And I click "Save" button
 			Then user message window does not contain messages
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
+				| 'Description'     |
+				| 'Shirt'           |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10003"
 			And I click "Save" button
@@ -1224,8 +1224,8 @@ Scenario: 950414 create rules for catalog (>=)
 			Given Recent TestClient message contains "lock catalog >=" string by template
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'       |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			Then the form attribute named "ItemID" became equal to "10002"
 			And I click "Save" button
@@ -1240,8 +1240,8 @@ Scenario: 950414 create rules for catalog (>=)
 			And I input "Test 4" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
@@ -1264,8 +1264,8 @@ Scenario: 950414 create rules for catalog (>=)
 			Then user message window does not contain messages	
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'       |
+				| 'Description'     |
+				| 'Trousers'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1276,8 +1276,8 @@ Scenario: 950414 create rules for catalog (>=)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 4'       |
+				| 'Description'     |
+				| 'Test 4'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1289,11 +1289,11 @@ Scenario: 950415 create rules for catalog (=)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog >=' |
+				| 'Description'           |
+				| 'lock catalog >='     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog >=' |		
+				| 'Description'           |
+				| 'lock catalog >='     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1315,8 +1315,8 @@ Scenario: 950415 create rules for catalog (=)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click "Save" button
 			Then "1C:Enterprise" window is opened
@@ -1325,8 +1325,8 @@ Scenario: 950415 create rules for catalog (=)
 			Given Recent TestClient message contains "lock catalog item type" string by template	
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I click the button named "FormWriteAndClose"		
 			Then user message window does not contain messages
@@ -1336,8 +1336,8 @@ Scenario: 950415 create rules for catalog (=)
 			And I input "Test 5" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
 			And I activate "Description" field in "List" table
@@ -1349,15 +1349,15 @@ Scenario: 950415 create rules for catalog (=)
 			Given Recent TestClient message contains "lock catalog item type" string by template	
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shoes'     |
+				| 'Description'     |
+				| 'Shoes'           |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 			Then user message window does not contain messages
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'       |
+				| 'Description'     |
+				| 'Trousers'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1368,8 +1368,8 @@ Scenario: 950415 create rules for catalog (=)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 5'       |
+				| 'Description'     |
+				| 'Test 5'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1381,11 +1381,11 @@ Scenario: 950416 create rules for catalog (<>)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog item type' |
+				| 'Description'                  |
+				| 'lock catalog item type'     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog item type' |	
+				| 'Description'                  |
+				| 'lock catalog item type'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1407,8 +1407,8 @@ Scenario: 950416 create rules for catalog (<>)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I click "Save" button
 			Then "1C:Enterprise" window is opened
@@ -1417,8 +1417,8 @@ Scenario: 950416 create rules for catalog (<>)
 			Given Recent TestClient message contains "lock catalog <>" string by template	
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click the button named "FormWriteAndClose"		
 			Then user message window does not contain messages
@@ -1428,8 +1428,8 @@ Scenario: 950416 create rules for catalog (<>)
 			And I input "Test 6" text in "ENG" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Shoes'     |
+				| 'Description'     |
+				| 'Shoes'           |
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
 			And I activate "Description" field in "List" table
@@ -1441,15 +1441,15 @@ Scenario: 950416 create rules for catalog (<>)
 			Given Recent TestClient message contains "lock catalog <>" string by template	
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 			Then user message window does not contain messages
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1460,8 +1460,8 @@ Scenario: 950416 create rules for catalog (<>)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 6'       |
+				| 'Description'     |
+				| 'Test 6'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1473,11 +1473,11 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog <>' |
+				| 'Description'           |
+				| 'lock catalog <>'     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog <>' |	
+				| 'Description'           |
+				| 'lock catalog <>'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1500,8 +1500,8 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			Given I open hyperlink 'e1cib/list/Catalog.Partners'
 			And I click "List" button				
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Partner Ferron 1'       |
+				| 'Description'          |
+				| 'Partner Ferron 1'     |
 			And I select current line in "List" table
 			And I click "Save" button
 			Then "1C:Enterprise" window is opened
@@ -1510,8 +1510,8 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			Given Recent TestClient message contains "lock catalog IN HIERARCHY" string by template	
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'       |
+				| 'Description'     |
+				| 'Lomaniti'        |
 			And I select current line in "List" table
 			And I click the button named "FormWriteAndClose"		
 			Then user message window does not contain messages
@@ -1521,8 +1521,8 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			And I input "Test 7" text in "ENG" field
 			And I click Select button of "Main partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'     |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click "Save" button
 			Then "1C:Enterprise" window is opened
@@ -1532,15 +1532,15 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			And I click Select button of "Main partner" field
 			And I click "List" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Alians'     |
+				| 'Description'     |
+				| 'Alians'          |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 			Then user message window does not contain messages
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Partner Ferron 2'       |
+				| 'Description'          |
+				| 'Partner Ferron 2'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1551,8 +1551,8 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Partners'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 7'       |
+				| 'Description'     |
+				| 'Test 7'          |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1565,11 +1565,11 @@ Scenario: 950418 create rules for catalog (IN)
 	* Create rule
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		If "List" table contains lines Then
-				| 'Reference'            |
-				| 'lock catalog IN HIERARCHY' |
+				| 'Description'                     |
+				| 'lock catalog IN HIERARCHY'     |
 			And I go to line in "List" table
-				| 'Reference'      |
-				| 'lock catalog IN HIERARCHY' |	
+				| 'Description'                     |
+				| 'lock catalog IN HIERARCHY'     |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1591,8 +1591,8 @@ Scenario: 950418 create rules for catalog (IN)
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Table'       |
+				| 'Description'     |
+				| 'Table'           |
 			And I select current line in "List" table
 			And I click "Save" button
 			Then "1C:Enterprise" window is opened
@@ -1601,8 +1601,8 @@ Scenario: 950418 create rules for catalog (IN)
 			Given Recent TestClient message contains "lock catalog IN" string by template	
 			And I close current window
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I click the button named "FormWriteAndClose"		
 			Then user message window does not contain messages
@@ -1613,8 +1613,8 @@ Scenario: 950418 create rules for catalog (IN)
 			And I click Select button of "Item type" field
 			And I click "List" button	
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Furniture'     |
+				| 'Description'     |
+				| 'Furniture'       |
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
 			And I activate "Description" field in "List" table
@@ -1626,15 +1626,15 @@ Scenario: 950418 create rules for catalog (IN)
 			Given Recent TestClient message contains "lock catalog IN" string by template	
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Clothes'     |
+				| 'Description'     |
+				| 'Clothes'         |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 			Then user message window does not contain messages
 		* Deletion
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Table'       |
+				| 'Description'     |
+				| 'Table'           |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1645,8 +1645,8 @@ Scenario: 950418 create rules for catalog (IN)
 			And I close current window
 			Given I open hyperlink 'e1cib/list/Catalog.Items'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test 15'       |
+				| 'Description'     |
+				| 'Test 15'         |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button	
@@ -1686,8 +1686,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Modification
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
-				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'      |
+				| 'UAH'              | 'USD'            | '1'               | '07.09.2020 00:00:00'    | '0,0361'    | 'Bank UA'     |
 			And I select current line in "List" table
 			And I input "27,7425" text in "Rate" field
 			And I click "Save and close" button
@@ -1699,8 +1699,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Create new
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
-				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'      |
+				| 'UAH'              | 'USD'            | '1'               | '07.09.2020 00:00:00'    | '0,0361'    | 'Bank UA'     |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I input "12.09.2020 00:00:00" text in "Period" field
 			And I click "Save and close" button
@@ -1712,8 +1712,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Deletion
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
-				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'      |
+				| 'UAH'              | 'USD'            | '1'               | '07.09.2020 00:00:00'    | '0,0361'    | 'Bank UA'     |
 			And in the table "List" I click the button named "ListContextMenuDelete"				
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1725,8 +1725,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Re-Save
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
-				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'      |
+				| 'UAH'              | 'USD'            | '1'               | '07.09.2020 00:00:00'    | '0,0361'    | 'Bank UA'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then "1C:Enterprise" window is opened
@@ -1738,8 +1738,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Modification
 			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 			And I go to line in "List" table
-				| 'Tax' |
-				| 'VAT' |
+				| 'Tax'     |
+				| 'VAT'     |
 			And I select current line in "List" table
 			And I input "01.02.2020" text in "Period" field	
 			And I click "Save and close" button
@@ -1751,8 +1751,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Create new
 			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 			And I go to line in "List" table
-				| 'Tax' |
-				| 'VAT' |
+				| 'Tax'     |
+				| 'VAT'     |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I remove checkbox "Use"
 			And I click "Save and close" button
@@ -1764,8 +1764,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Deletion
 			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 			And I go to line in "List" table
-				| 'Tax' |
-				| 'VAT' |
+				| 'Tax'     |
+				| 'VAT'     |
 			And in the table "List" I click the button named "ListContextMenuDelete"				
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1777,8 +1777,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		* Re-Save
 			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 			And I go to line in "List" table
-				| 'Tax' |
-				| 'VAT' |
+				| 'Tax'     |
+				| 'VAT'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then "1C:Enterprise" window is opened
@@ -1789,15 +1789,15 @@ Scenario: 950420 create rules for information register (without recorder)
 	* Does not fall under the conditions
 			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 			And I go to line in "List" table
-				| 'Tax' |
-				| 'SalesTax' |
+				| 'Tax'          |
+				| 'SalesTax'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
-				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'   | 'Source'       |
-				| 'USD'           | 'EUR'         | '1'            | '21.06.2019 17:40:13' | '1,1235' | 'Forex Seling' |
+				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'           |
+				| 'USD'              | 'EUR'            | '1'               | '21.06.2019 17:40:13'    | '1,1235'    | 'Forex Seling'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages	
@@ -1807,23 +1807,23 @@ Scenario: 950425 check that Disable rule does not work
 	* All Reason
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'      |
-			| 'information register (without recorder)' |	
+			| 'Description'                                  |
+			| 'information register (without recorder)'    |
 		And I select current line in "List" table
 		And I set checkbox "Disable rule"
 		And I click "Save and close" button
 		Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 		And I go to line in "List" table
-			| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-			| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+			| 'Currency from'   | 'Currency to'   | 'Multiplicity'   | 'Period'                | 'Rate'     | 'Source'     |
+			| 'UAH'             | 'USD'           | '1'              | '07.09.2020 00:00:00'   | '0,0361'   | 'Bank UA'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then user message window does not contain messages	
 		And I close all client application windows
 		Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 		And I go to line in "List" table
-			| 'Tax' |
-			| 'VAT' |
+			| 'Tax'    |
+			| 'VAT'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then user message window does not contain messages	
@@ -1831,28 +1831,28 @@ Scenario: 950425 check that Disable rule does not work
 	* One rule from reason
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'      |
-			| 'information register (without recorder)' |
+			| 'Description'                                  |
+			| 'information register (without recorder)'    |
 		And I select current line in "List" table
 		And I remove checkbox named "DisableRule"
 		And I go to line in "RuleList" table
-			| 'Type'                      |
-			| 'InformationRegister.Taxes' |
+			| 'Type'                         |
+			| 'InformationRegister.Taxes'    |
 		And I set checkbox named "RuleListDisableRule" in "RuleList" table
 		And I finish line editing in "RuleList" table
 		And I click "Save and close" button
 		Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
 		And I go to line in "List" table
-			| 'Tax' |
-			| 'VAT' |
+			| 'Tax'    |
+			| 'VAT'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then user message window does not contain messages	
 		And I close all client application windows
 		Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 		And I go to line in "List" table
-			| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-			| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
+			| 'Currency from'   | 'Currency to'   | 'Multiplicity'   | 'Period'                | 'Rate'     | 'Source'     |
+			| 'UAH'             | 'USD'           | '1'              | '07.09.2020 00:00:00'   | '0,0361'   | 'Bank UA'    |
 		And I select current line in "List" table
 		And I input "27,7425" text in "Rate" field
 		And I click "Save and close" button
@@ -1882,8 +1882,8 @@ Scenario: 950430 create rules for attribute from extension
 		* Modification
 			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Euro' |
+				| 'Description'     |
+				| 'Euro'            |
 			And I select current line in "List" table
 			And I input "978" text in "Numeric code" field	
 			And I click "Save and close" button
@@ -1895,8 +1895,8 @@ Scenario: 950430 create rules for attribute from extension
 		* Create new
 			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Euro' |
+				| 'Description'     |
+				| 'Euro'            |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I click Open button of "ENG" field
 			And I input "Euro1" text in "ENG" field
@@ -1911,11 +1911,11 @@ Scenario: 950430 create rules for attribute from extension
 		* Deletion
 			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 			And "List" table does not contain lines
-				| 'Description' |
-				| 'Euro1' |
+				| 'Description'     |
+				| 'Euro1'           |
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Euro' |
+				| 'Description'     |
+				| 'Euro'            |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"					
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1927,8 +1927,8 @@ Scenario: 950430 create rules for attribute from extension
 		* Re-Save
 			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Euro' |
+				| 'Description'     |
+				| 'Euro'            |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then "1C:Enterprise" window is opened
@@ -1939,8 +1939,8 @@ Scenario: 950430 create rules for attribute from extension
 	* Does not fall under the conditions
 			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 			And I go to line in "List" table
-				| 'Description' |
-				| 'American dollar' |
+				| 'Description'         |
+				| 'American dollar'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages
@@ -1965,8 +1965,8 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 		And I finish line editing in "RuleList" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
-			| 'No'            | 'Yes'           | 'No'       | 'No'      | 'GR number simple'                                     |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'         |
+			| 'No'              | 'Yes'             | 'No'         | 'No'        | 'GR number simple'    |
 	* Create advanced lock data reason
 		And I click the button named "FormCreate"
 		And I input "GR number advanced" text in "ENG" field
@@ -1989,26 +1989,26 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 		And I finish line editing in "SettingsFilter" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
-			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'GR number advanced'                                   |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'             |
+			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'GR number advanced'    |
 	* Check priority
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '115'    |
+			| 'Number'    |
+			| '115'       |
 		And in the table "List" I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number simple" string by template
 		And I go to line in "List" table
-			| 'Number' |
-			| '116'    |
+			| 'Number'    |
+			| '116'       |
 		And in the table "List" I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number advanced:" string by template
 		Given Recent TestClient message contains 'Number Less than "117"' string by template	
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button			
 		Then user message window does not contain messages						
 
@@ -2064,34 +2064,34 @@ Scenario: 950436 create advanced rules for branch and date
 		And I click "Save and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                   |
-			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Branch and Date for purchase'                |		
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                     |
+			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Branch and Date for purchase'    |
 	* Check	rules
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button			
 		Then user message window does not contain messages	
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Branch and Date for purchase:" string by template
 		Given Recent TestClient message contains 'Branch Equal to "Front office" AND Date Less than "12.02.2021 16:20:00"' string by template
 		And I go to line in "List" table
-			| 'Number' |
-			| '119'    |
+			| 'Number'    |
+			| '119'       |
 		And in the table "List" I click "Post" button			
 		Then user message window does not contain messages	
 		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2123,7 +2123,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 		And I finish line editing in "RuleList" table
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
 		When I Check the steps for Exception
-			|'And I select "Transaction type" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table'|
+			| 'And I select "Transaction type" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table'    |
 		And I select "Branch" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
 		And I move to the next attribute
 		And I select "Equal to" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
@@ -2139,37 +2139,37 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 			And in the table "ResponsibleUsers" I click the button named "ResponsibleUsersAdd"
 			And I click choice button of the attribute named "ResponsibleUsersUser" in "ResponsibleUsers" table
 			And I go to line in "List" table
-				| 'Login' |
-				| 'CI'    |
+				| 'Login'     |
+				| 'CI'        |
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And "ResponsibleUsers" table became equal
-				| 'User' |
-				| 'CI'   |		
+				| 'User'     |
+				| 'CI'       |
 			* Check set current user
 				And I delete a line in "ResponsibleUsers" table
 				And in the table "ResponsibleUsers" I click "Set current user" button
 				And "ResponsibleUsers" table became equal
-					| 'User' |
-					| 'CI'   |
+					| 'User'      |
+					| 'CI'        |
 			And I click "Save and close" button
 		* Check
 			And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'                    |
-				| 'Branch with responsible user' |
+				| 'Description'                      |
+				| 'Branch with responsible user'     |
 			And I select current line in "List" table
 			When I Check the steps for Exception
-				|'And I click choice button of the attribute named "ResponsibleUsersUser" in "ResponsibleUsers" table'|
+				| 'And I click choice button of the attribute named "ResponsibleUsersUser" in "ResponsibleUsers" table'     |
 			When I Check the steps for Exception
-				|'And I click "Save and close" button'|			
+				| 'And I click "Save and close" button'     |
 			And I close TestClient session
 			And I connect "Этот клиент" profile of TestClient	
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Reference'                    |
-				| 'Branch with responsible user' |
+				| 'Description'                      |
+				| 'Branch with responsible user'     |
 			And I select current line in "List" table			
 			And I click "Save and close" button	
 			Then user message window does not contain messages		
@@ -2210,8 +2210,8 @@ Scenario: 950438 lock data modification reasons for user
 		And in the table "UserList" I click the button named "UserListAdd"
 		And I click choice button of the attribute named "UserListUser" in "UserList" table
 		And I go to line in "List" table
-			| 'Description'               |
-			| 'Arina Brown (Financier 3)' |
+			| 'Description'                  |
+			| 'Arina Brown (Financier 3)'    |
 		And I select current line in "List" table
 		Then "Lock data modification reason (create) *" window is opened
 		And I finish line editing in "UserList" table
@@ -2221,8 +2221,8 @@ Scenario: 950438 lock data modification reasons for user
 		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2232,8 +2232,8 @@ Scenario: 950438 lock data modification reasons for user
 		And I connect "Этот клиент" profile of TestClient
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		Then user message window does not contain messages	
 
@@ -2274,16 +2274,16 @@ Scenario: 950439 lock data modification reasons for user group
 		And I click choice button of "Access group" attribute in "AccessGroupList" table
 		Then "User access groups" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Administrators' |
+			| 'Description'       |
+			| 'Administrators'    |
 		And I select current line in "List" table	
 		And I click "Save and close" button
 	* Check
 		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -2293,8 +2293,8 @@ Scenario: 950439 lock data modification reasons for user group
 		And I connect "Этот клиент" profile of TestClient
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		Then user message window does not contain messages
 
@@ -2336,8 +2336,8 @@ Scenario: 950439 lock data modification reasons for user group
 // 		And I select current line in "Source" table
 // 		And I click "Save and close" button
 // 		And "List" table contains lines
-// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
-// 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'                      |
+// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' |  'Description'                      |
+// 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'   |
 // 	* Check
 // 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 // 		And I go to line in "List" table
@@ -2410,31 +2410,31 @@ Scenario: 950441 check is object lock on open (documents)
 		And I click "Save and close" button			
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                   |
-			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Check is object lock on open (documents)'    |		
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                                   |
+			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Check is object lock on open (documents)'    |
 	* Check	rules
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button			
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And I select current line in "List" table
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
 		When I Check the steps for Exception
-			|'And I click "Post and close" button'|
+			| 'And I click "Post and close" button'    |
 		And I close current window
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		And I move to "Other" tab
 		And I input "05.10.2020 00:00:00" text in the field named "Date"
@@ -2445,8 +2445,8 @@ Scenario: 950441 check is object lock on open (documents)
 		And I input "05.10.2022 00:00:00" text in the field named "Date"
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Front office' |
+			| 'Description'     |
+			| 'Front office'    |
 		And I select current line in "List" table
 		And I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2483,21 +2483,21 @@ Scenario: 950442 check is object lock on open (catalogs)
 		And I move to the next attribute
 		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		Then "Lock data modification reason (create) *" window is opened
 		And I finish line editing in "SettingsFilter" table
 		And I click "Save and close" button
 	* Check creation
 		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                  |
-			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Check is object lock on open (catalogs)'    |
+			| 'Advanced mode'   | 'For all users'   | 'One rule'   | 'Disable'   | 'Description'                                  |
+			| 'Yes'             | 'Yes'             | 'Yes'        | 'No'        | 'Check is object lock on open (catalogs)'    |
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Dress'         |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2506,19 +2506,19 @@ Scenario: 950442 check is object lock on open (catalogs)
 		And I close current window
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
 		And I go to line in "List" table
-			| 'Item key'   |
-			| 'S/Yellow'   |
+			| 'Item key'    |
+			| 'S/Yellow'    |
 		And in the table "List" I click "Copy" button
 		And I click Select button of "Color" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Black'       |
+			| 'Description'    |
+			| 'Black'          |
 		And I select current line in "List" table
 		And I change the radio button named "UnitMode" value to "Own"
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2534,16 +2534,16 @@ Scenario: 950450 check ignore lock modification data
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I click "Refresh" button	
 		And I go to line in "List" table
-			| 'Reference' |
-			| 'Check is object lock on open (documents)'       |
+			| 'Description'                                   |
+			| 'Check is object lock on open (documents)'    |
 		And Delay 5
 		And I activate current test client window
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
-			| 'Reference' |
-			| 'Check is object lock on open (catalogs)'       |
+			| 'Description'                                  |
+			| 'Check is object lock on open (catalogs)'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -2553,16 +2553,16 @@ Scenario: 950450 check ignore lock modification data
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Dress'         |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then user message window does not contain messages	
 		And I close all client application windows		
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button
 		Then user message window does not contain messages	
 		And I close all client application windows	
@@ -2574,8 +2574,8 @@ Scenario: 950450 check ignore lock modification data
 	* Check
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number' |
-			| '117'    |
+			| 'Number'    |
+			| '117'       |
 		And in the table "List" I click "Post" button	
 		And I click "OK" button		
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
@@ -2583,8 +2583,8 @@ Scenario: 950450 check ignore lock modification data
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Dress'         |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I click "OK" button
@@ -2601,8 +2601,8 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And I go to line in "List" table
-		| 'Reference'      |
-		| 'information register (without recorder)' |	
+		| 'Description'                                 |
+		| 'information register (without recorder)'   |
 	And I select current line in "List" table
 	Then the form attribute named "ForAllUsers" became equal to "Yes"
 	Then the form attribute named "SetOneRuleForAllObjects" became equal to "No"
@@ -2619,8 +2619,8 @@ Scenario: 950490 switch off function option and check that rules does not work
 		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I go to line in "List" table
-			| 'Reference'                |
-			| 'attribute from extension' |
+			| 'Description'                   |
+			| 'attribute from extension'    |
 		And Delay 5
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
@@ -2630,8 +2630,8 @@ Scenario: 950490 switch off function option and check that rules does not work
 	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Catalog.Currencies'
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Euro' |
+		| 'Description'   |
+		| 'Euro'          |
 	And I select current line in "List" table
 	And I click "Save and close" button
 	Then user message window does not contain messages
@@ -2647,13 +2647,13 @@ Scenario: 950465 check filter in the LockDataModificationReasons
 	And I select "Documents" exact value from the drop-down list named "TypeFilter"
 	And in the table "RuleList" I click the button named "RuleListAdd"
 	When I Check the steps for Exception
-		| 'And I select "Item keys" exact value from "Type" drop-down list in "RuleList" table' |
+		| 'And I select "Item keys" exact value from "Type" drop-down list in "RuleList" table'   |
 	And I move to the next attribute
 	And I select "Bank receipt" exact value from "Type" drop-down list in "RuleList" table
 	And I move to the next attribute
 	And in the table "RuleList" I click the button named "RuleListAdd"
 	When I Check the steps for Exception
-		| 'And I select "Bank receipt" exact value from "Type" drop-down list in "RuleList" table' |
+		| 'And I select "Bank receipt" exact value from "Type" drop-down list in "RuleList" table'   |
 	And I select "Bank payment" exact value from "Type" drop-down list in "RuleList" table
 	And I move to the next attribute
 	And I close TestClient session

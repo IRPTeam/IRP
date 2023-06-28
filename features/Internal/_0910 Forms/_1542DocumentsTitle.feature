@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Forms
@@ -63,8 +63,8 @@ Scenario: _020200 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -72,8 +72,8 @@ Scenario: _020200 preparation
 	* Check or create create SalesInvoice024016 (Shipment confirmation does not used)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
-			| "Number" |
-			| "$$NumberSalesInvoice024016$$" |
+			| "Number"                          |
+			| "$$NumberSalesInvoice024016$$"    |
 			When create SalesInvoice024016 (Shipment confirmation does not used)
 
 Scenario: _0202001 check preparation
@@ -85,7 +85,7 @@ Scenario: _018025 check the display of the header of the collapsible group in Pu
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -97,7 +97,7 @@ Scenario: _018021 check the display of the header of the collapsible group in Pu
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -108,7 +108,7 @@ Scenario: _022017 check the display of the header of the collapsible group in Pu
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -120,7 +120,7 @@ Scenario: _022337 check the display of the header of the collapsible group in Pu
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -131,7 +131,7 @@ Scenario: _020016 check the display of the header of the collapsible group in In
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Store sender: Store 02   Store receiver: Store 03   Status: Wait" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store sender" field'|
+								| 'And I click Select button of  "Store sender" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -141,7 +141,7 @@ Scenario: _021050 check the display of the header of the collapsible group in In
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Store sender: Store 02   Store receiver: Store 03" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store sender" field'|
+								| 'And I click Select button of  "Store sender" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -154,7 +154,7 @@ Scenario: _023114 check the display of the header of the collapsible group in Sa
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Approved" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -166,7 +166,7 @@ Scenario: _023115 check the display of the header of the collapsible group in Wo
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -176,7 +176,7 @@ Scenario: _023116 check the display of the header of the collapsible group in Wo
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -186,7 +186,7 @@ Scenario: _024044 check the display of the header of the collapsible group in Sa
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -197,7 +197,7 @@ Scenario: _028014 check the display of the header of the collapsible group in Sa
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -209,7 +209,7 @@ Scenario: _028536 check the display of the header of the collapsible group in Sa
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -221,7 +221,7 @@ Scenario: _028814 check the display of the header of the collapsible group in Sh
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -231,7 +231,7 @@ Scenario: _028815 check the display of the header of the collapsible group in It
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -242,7 +242,7 @@ Scenario: _028908 check the display of the header of the collapsible group in Go
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -252,7 +252,7 @@ Scenario: _028909 check the display of the header of the collapsible group in St
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -262,7 +262,7 @@ Scenario: _028909 check the display of the header of the collapsible group in St
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -274,7 +274,7 @@ Scenario: _029522 check the display of the header of the collapsible group in Bu
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Store: Store 03   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -287,7 +287,7 @@ Scenario: _029615 check the display of the header of the collapsible group in Un
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Store: Store 03   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -299,7 +299,7 @@ Scenario: _050012 check the display of the header of the collapsible group in Ca
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Cash account: Cash desk №2   Currency: USD   Transaction type: Payment from customer   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -310,7 +310,7 @@ Scenario: _051011 check the display of the header of the collapsible group in Ca
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Cash account: Cash desk №2   Currency: USD   Transaction type: Payment to the vendor   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -322,7 +322,7 @@ Scenario: _052012 check the display of the header of the collapsible group in Ba
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD   Transaction type: Payment from customer   " text	
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -333,7 +333,7 @@ Scenario: _053012 check the display of the header of the collapsible group in Ba
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD   Transaction type: Payment to the vendor   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -350,7 +350,7 @@ Scenario: _02013 check the display of the header of the collapsible group in Rec
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -363,7 +363,7 @@ Scenario: _020140 check the display of the header of the collapsible group in Ph
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Store: Store 01" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -376,7 +376,7 @@ Scenario: _02015 check the display of the header of the collapsible group in Ope
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -388,7 +388,7 @@ Scenario: _02016 check the display of the header of the collapsible group in Cas
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, TRY" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -400,7 +400,7 @@ Scenario: _02017 check the display of the header of the collapsible group in Cre
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -412,7 +412,7 @@ Scenario: _02021 check the display of the header of the collapsible group in Deb
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -425,7 +425,7 @@ Scenario: _02018 check the display of the header of the collapsible group in Int
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains " Company: Main Company   Store: Store 03   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -436,7 +436,7 @@ Scenario: _02019 check the display of the header of the collapsible group in Out
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD   Status: Wait   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -447,7 +447,7 @@ Scenario: _02020 check the display of the header of the collapsible group in Inc
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -460,7 +460,7 @@ Scenario: _023121 check the display of the header of the collapsible group in Re
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -472,7 +472,7 @@ Scenario: _023122 check the display of the header of the collapsible group in Re
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -483,7 +483,7 @@ Scenario: _02023 check the display of the header of the collapsible group in Pla
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -495,7 +495,7 @@ Scenario: _023125 check the display of the header of the collapsible group in Co
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Cash account: Cash desk №2   Status: Open" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Cash account" field'|
+								| 'And I click Select button of  "Cash account" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -505,7 +505,7 @@ Scenario: _023126 check the display of the header of the collapsible group in Sa
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Trade agent 1   Legal name: Trade agent 1" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -515,7 +515,7 @@ Scenario: _023127 check the display of the header of the collapsible group in Sa
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Consignor 1   Legal name: Consignor 1" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Partner" field'|
+								| 'And I click Select button of  "Partner" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -526,7 +526,7 @@ Scenario: _023128 check the display of the header of the collapsible group in Ti
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -537,7 +537,7 @@ Scenario: _023129 check the display of the header of the collapsible group in Pa
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Company" field'|
+								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -547,7 +547,7 @@ Scenario: _023130 check the display of the header of the collapsible group in Re
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
@@ -557,7 +557,7 @@ Scenario: _023131 check the display of the header of the collapsible group in Re
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Store" field'|
+								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 

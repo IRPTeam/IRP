@@ -191,7 +191,7 @@
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
-  <sessionParameters>SessionParameter.CurrentUserAccessProfiles</sessionParameters>
+  <sessionParameters>SessionParameter.CurrentUserAccessGroupList</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUserPartner</sessionParameters>
   <sessionParameters>SessionParameter.IDUse</sessionParameters>
   <sessionParameters>SessionParameter.IDValue</sessionParameters>
@@ -214,13 +214,16 @@
   <roles>Role.RunWebClient</roles>
   <roles>Role.SaveUserData</roles>
   <roles>Role.SystemAdministrator</roles>
+  <roles>Role.TemplateAccumulationRegisters</roles>
+  <roles>Role.TemplateCatalogs</roles>
+  <roles>Role.TemplateDocument</roles>
+  <roles>Role.TemplateInformationRegisters</roles>
+  <roles>Role.TemplateInformationRegistersCommon</roles>
   <roles>Role.UseAllFunctionsMode</roles>
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.TemplateDocument</roles>
-  <roles>Role.TemplateBasicAccess</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -578,6 +581,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -949,6 +953,7 @@
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
   <enums>Enum.ProductionTransactionTypes</enums>
   <enums>Enum.OfferGroupType</enums>
+  <enums>Enum.BankTermTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1051,6 +1056,7 @@
   <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
   <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
+  <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1075,6 +1081,7 @@
   <accumulationRegisters>AccumulationRegister.R2020B_AdvancesFromCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2021B_CustomersTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2022B_CustomersPaymentPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2031B_ShipmentInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
@@ -1086,6 +1093,8 @@
   <accumulationRegisters>AccumulationRegister.R3022B_CashInTransitOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3050T_PosCashBalances</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
@@ -1111,6 +1120,7 @@
   <accumulationRegisters>AccumulationRegister.R5010B_ReconciliationStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5011B_CustomersAging</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5012B_VendorsAging</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5015B_OtherPartnersTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
@@ -1126,12 +1136,7 @@
   <accumulationRegisters>AccumulationRegister.R7020T_MaterialPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7030T_ProductionPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
@@ -1139,12 +1144,13 @@
   <accumulationRegisters>AccumulationRegister.R8014T_ConsignorSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8015T_ConsignorPrices</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9010B_SourceOfOriginStock</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9510B_SalaryPayment</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R5015B_OtherPartnersTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

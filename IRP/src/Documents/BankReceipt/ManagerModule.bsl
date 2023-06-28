@@ -675,11 +675,7 @@ Function R3010B_CashOnHand()
 		|	PaymentList.Branch,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,
-		|	case
-		|		when NOT PaymentList.CommissionIsSeparate
-		|			then PaymentList.Amount + PaymentList.Commission
-		|		else PaymentList.Amount
-		|	end AS Amount
+		|	PaymentList.Amount
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
@@ -718,11 +714,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
-		|	case
-		|		when NOT PaymentList.CommissionIsSeparate
-		|			then PaymentList.Amount + PaymentList.Commission
-		|		else PaymentList.Amount
-		|	end AS Amount
+		|	PaymentList.Amount
 		|INTO R3011T_CashFlow
 		|FROM
 		|	PaymentList AS PaymentList
@@ -976,7 +968,11 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.FromAccount_POS AS Account,
 		|	PaymentList.Account AS ReceiptingAccount,
 		|	PaymentList.PlaningTransactionBasis AS Basis,
-		|	PaymentList.Commission + PaymentList.Amount AS Amount,
+		|	case
+		|		when PaymentList.CommissionIsSeparate
+		|			then PaymentList.Commission + PaymentList.Amount
+		|		else PaymentList.Amount
+		|	end AS Amount,
 		|	PaymentList.Commission
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
@@ -996,7 +992,11 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.AccountSender,
 		|	PaymentList.Account,
 		|	PaymentList.CashTransferOrder,
-		|	PaymentList.Commission + PaymentList.Amount,
+		|	case
+		|		when PaymentList.CommissionIsSeparate
+		|			then PaymentList.Commission + PaymentList.Amount
+		|		else PaymentList.Amount
+		|	end AS Amount,
 		|	PaymentList.Commission
 		|FROM
 		|	PaymentList AS PaymentList

@@ -11,14 +11,15 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region Access
+	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en = 'SMS sent successfully'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en = 'Error while SMS send'", Lang));
 	Strings.Insert("SMS_WaitUntilNextSend", NStr("en = 'Wait until next send. %1 second'", Lang));
 	Strings.Insert("SMS_SMSCodeWrong", NStr("en = 'Not valid SMS code. Try again.'", Lang));
-
-
-
 #EndRegion
 
 #Region AdditionalTableControl
@@ -518,6 +519,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_125", NStr("en = 'Invoice for document: [%1] is empty'", Lang));
 	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
 	Strings.Insert("Error_127", NStr("en = 'Quantity must be more than 0'", Lang));
+	Strings.Insert("Error_128", NStr("en = 'Wrong data in basis document'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));

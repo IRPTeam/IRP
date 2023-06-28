@@ -17,6 +17,7 @@ EndFunction
 //  String - Run test
 Function RunTest(Code) Export
 	Try
+		//@skip-check server-execution-safe-mode
 		Result = Eval(Code);
 		Return "";
 	Except
@@ -30,9 +31,10 @@ EndFunction
 //  Array of String - Get all test
 Function GetAllTest() Export
 
-	TestList = New Array;
+	TestList = New Array; // Array Of String
 	For Each Module In Metadata.CommonModules Do
 		If StrStartsWith(Module.Name, "Unit_") Then
+			//@skip-check server-execution-safe-mode
 			TestInModule = Eval(Module.Name + ".Tests()");
 			For Each Test In TestInModule Do
 				TestList.Add(Module.Name + "." + Test + "()");

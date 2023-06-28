@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Purchase
@@ -53,8 +53,8 @@ Scenario: _016500 preparation
 		* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
-					| "Description" |
-					| "TaxCalculateVAT_TR" |
+					| "Description"             |
+					| "TaxCalculateVAT_TR"      |
 				* Opening a form to add Plugin sessing
 					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
@@ -73,13 +73,13 @@ Scenario: _016500 preparation
 					Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
 					Given I open hyperlink "e1cib/list/Catalog.Taxes"		
 					And I go to line in "List" table
-						| 'Description' |
-						| 'VAT'         |
+						| 'Description'       |
+						| 'VAT'               |
 					And I select current line in "List" table
 					And I click Select button of "Plugins" field
 					And I go to line in "List" table
-						| 'Description' |
-						| 'TaxCalculateVAT_TR'         |
+						| 'Description'              |
+						| 'TaxCalculateVAT_TR'       |
 					And I select current line in "List" table
 					And I click "Save and close" button
 				And I close all client application windows
@@ -95,26 +95,26 @@ Scenario: _016501 create document Internal Supply Request
 		And I click Select button of "Company" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 01  |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Trousers    |
+			| Description    |
+			| Trousers       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Item     | Item key          |
-			| Trousers | 36/Yellow |
+			| Item       | Item key     |
+			| Trousers   | 36/Yellow    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -122,8 +122,8 @@ Scenario: _016501 create document Internal Supply Request
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Shirt       |
+			| Description    |
+			| Shirt          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -134,14 +134,14 @@ Scenario: _016501 create document Internal Supply Request
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Shirt       |
+			| Description    |
+			| Shirt          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Shirt | 38/Black |
+			| Item    | Item key    |
+			| Shirt   | 38/Black    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -155,8 +155,8 @@ Scenario: _016501 create document Internal Supply Request
 		And I click the button named "FormPostAndClose"
 	* Check document creation
 		And "List" table contains lines
-			| 'Number'                                     | 'Company'      | 'Store'    |
-			| '$$NumberInternalSupplyRequest016501$$'      | 'Main Company' | 'Store 01' |
+			| 'Number'                                  | 'Company'        | 'Store'       |
+			| '$$NumberInternalSupplyRequest016501$$'   | 'Main Company'   | 'Store 01'    |
 		And I close all client application windows
 	
 	
@@ -170,8 +170,8 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 	* Check the visual filter by Company
 		And I click Select button of "Company" field
 		And "List" table became equal
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check filter by Company when inpute by string
@@ -180,11 +180,11 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 		And I click Select button of "Store" field
 		And Delay 2
 		And "List" table does not contain lines
-			| Description  |
-			| Company Kalipso |
+			| Description        |
+			| Company Kalipso    |
 		And I click the button named "FormChoose"
 		When I Check the steps for Exception
-			|'Then the form attribute named "Company" became equal to "Company Kalipso"'|
+			| 'Then the form attribute named "Company" became equal to "Company Kalipso"'    |
 		And I close all client application windows
 	
 
@@ -202,13 +202,13 @@ Scenario: _016504 check display of the title of the collapsible group when creat
 		And I click Select button of "Company" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description  |
-			| Main Company | 
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| Description |
-			| Store 01  |
+			| Description    |
+			| Store 01       |
 		And I select current line in "List" table
 	* Check display of the title of the collapsible group
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Number: 215   Company: Main Company   Store: Store 01" text
@@ -222,8 +222,8 @@ Scenario: _300501 check connection to Internal Supply Request report "Related do
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberInternalSupplyRequest016501$$      |
+		| Number                                  |
+		| $$NumberInternalSupplyRequest016501$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

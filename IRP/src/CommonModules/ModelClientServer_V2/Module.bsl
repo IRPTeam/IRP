@@ -1089,7 +1089,8 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 		
 	For Each Row In Options.RowIDInfo Do
 		DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep);
-		If DataFromBasis <> Undefined And DataFromBasis.Count() And DataFromBasis[0].ItemList.Count() Then
+		If DataFromBasis <> Undefined And DataFromBasis.Count() 
+			And DataFromBasis[0].ItemList.Count() And DataFromBasis[0].SpecialOffers.Count() Then
 			BasisRow = DataFromBasis[0].ItemList[0];
 			PriceFromBasis = BasisRow.Price;
 			UnitFactor = ModelServer_V2.GetUnitFactor(Options.Unit, BasisRow.Unit);

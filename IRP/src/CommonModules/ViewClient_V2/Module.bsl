@@ -1927,6 +1927,7 @@ Procedure ItemListOnAddRowFormNotify(Parameters) Export
 EndProcedure
 
 Procedure ItemListOnCopyRowFormNotify(Parameters) Export
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
 	Parameters.Form.Modified = True;
 EndProcedure
 
@@ -3089,7 +3090,9 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet") Then
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff") Then
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		
@@ -3100,11 +3103,7 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
-			
-		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
-		EndIf;
-		
+					
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @ErrorsTest
 
@@ -50,8 +50,8 @@ Scenario: _9800 preparation (errors test)
 Scenario: _9801 filling user settings for Sales order
 	Given I open hyperlink "e1cib/list/Catalog.Users"
 	And I go to line in "List" table
-		| 'Login' |
-		| 'CI'          |
+		| 'Login'   |
+		| 'CI'      |
 	And I select current line in "List" table
 	And I input "CI" text in the field named "Description_en"
 	And I select "English" exact value from "Interface localization" drop-down list
@@ -59,33 +59,33 @@ Scenario: _9801 filling user settings for Sales order
 	And I click "User settings" button
 	* Fill in custom settings for Sales order
 		And I go to line in "MetadataTree" table
-		| 'Group name'  |
-		| 'Sales order' |
+		| 'Group name'    |
+		| 'Sales order'   |
 		And I activate "Group name" field in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Company'    | 'No'  |
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
 		And I click choice button of "Value" attribute in "MetadataTree" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Partner term'  | 'No'  |
+			| 'Group name'     | 'Use'    |
+			| 'Partner term'   | 'No'     |
 		And I select current line in "MetadataTree" table
 		And I click choice button of "Value" attribute in "MetadataTree" table
 		And I go to line in "List" table
-			| 'Description'           |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Store'      | 'No'  |
+			| 'Group name'   | 'Use'    |
+			| 'Store'        | 'No'     |
 		And I activate "Use" field in "MetadataTree" table
 		And I change "Use" checkbox in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
@@ -93,8 +93,8 @@ Scenario: _9801 filling user settings for Sales order
 		And I select current line in "MetadataTree" table
 		And I click choice button of "Value" attribute in "MetadataTree" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 	And I click "Ok" button
@@ -108,14 +108,14 @@ Scenario: _9802 create document SI based on Sales order
 		And I click "Sales invoice" button
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
-			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'L/Green'   | 'No'                 | ''                   | '10,000' | 'pcs'  | ''           | '550,00' | ''              | '2 750,00'   | '2 750,00'     | ''                    | 'Store 01' | '12.03.2021'    | 'No'                        | '123'    | 'Sales order 1 dated 12.03.2021 19:07:17' | 'Revenue'      |
-			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | '36/Yellow' | 'No'                 | ''                   | '4,000'  | 'pcs'  | ''           | '400,00' | ''              | '1 600,00'   | '1 600,00'     | ''                    | 'Store 01' | '12.03.2021'    | 'No'                        | ''       | 'Sales order 1 dated 12.03.2021 19:07:17' | 'Revenue'      |
+			| '#'   | 'Profit loss center'        | 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                               | 'Revenue type'    |
+			| '1'   | 'Distribution department'   | 'Basic Price Types'   | 'Dress'      | 'L/Green'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | ''             | '550,00'   | ''                | '2 750,00'     | '2 750,00'       | ''                      | 'Store 01'   | '12.03.2021'      | 'No'                          | '123'      | 'Sales order 1 dated 12.03.2021 19:07:17'   | 'Revenue'         |
+			| '2'   | 'Distribution department'   | 'Basic Price Types'   | 'Trousers'   | '36/Yellow'   | 'No'                   | ''                     | '4,000'      | 'pcs'    | ''             | '400,00'   | ''                | '1 600,00'     | '1 600,00'       | ''                      | 'Store 01'   | '12.03.2021'      | 'No'                          | ''         | 'Sales order 1 dated 12.03.2021 19:07:17'   | 'Revenue'         |
 		And I close all client application windows
 		
 Scenario: _9803 check barcode
 	And I execute 1C:Enterprise script
-		 | "BarcodeClient.InputBarcodeEnd(123, 123)" |
+			| "BarcodeClient.InputBarcodeEnd(123, 123)"    |
 
 Scenario: _9804 check Purchase subsystem
 	When in sections panel I select "Purchase"

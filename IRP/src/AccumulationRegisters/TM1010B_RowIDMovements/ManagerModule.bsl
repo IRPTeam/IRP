@@ -115,3 +115,17 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	// is error
 	Return False;
 EndFunction
+
+#Region AccessObject
+
+// Get access key.
+// 	See Role.TemplateAccumulationRegisters - Parameters orders has to be the same
+//  
+// Returns:
+//  Structure
+Function GetAccessKey() Export
+	AccessKeyStructure = New Structure;
+	Return AccessKeyStructure;
+EndFunction
+
+#EndRegion

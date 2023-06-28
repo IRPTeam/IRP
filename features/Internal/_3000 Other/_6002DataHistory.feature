@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -51,8 +51,8 @@ Scenario: _602700 preparation (data history)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -66,12 +66,12 @@ Scenario: _602701 check data history for catalog (Partners)
 	* Data history settings
 		Given I open hyperlink "e1cib/app/DataProcessor.DataHistory"
 		And I go to line in "MetadataTree" table
-			| 'Name'     |
-			| 'Catalogs' | 
+			| 'Name'        |
+			| 'Catalogs'    |
 		And I expand current line in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Name'     |
-			| 'Partners' |
+			| 'Name'        |
+			| 'Partners'    |
 		And I set "Use" checkbox in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And in the table "MetadataTree" I click "Save settings" button
@@ -79,15 +79,15 @@ Scenario: _602701 check data history for catalog (Partners)
 	* Check 
 		Given I open hyperlink "e1cib/list/Catalog.Partners"	
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		Then "Ferron BP (Partner)" window is opened
 		And I click "Save" button
 		And I click "Change history" button
 		And "Versions" table contains lines
-			| '№'      | 'Date' | 'Author'|
-			| '*'      | '*'    | '*'     |	
+			| '№'   | 'Date'   | 'Author'    |
+			| '*'   | '*'      | '*'         |
 	And I close all client application windows
 	
 Scenario: _602702 check data history for document (Purchase order)	
@@ -95,13 +95,13 @@ Scenario: _602702 check data history for document (Purchase order)
 	* Data history settings
 		Given I open hyperlink "e1cib/app/DataProcessor.DataHistory"
 		And I go to line in "MetadataTree" table
-			| 'Name'      |
-			| 'Documents' | 
+			| 'Name'         |
+			| 'Documents'    |
 		And I activate "Name" field in "MetadataTree" table
 		And I expand current line in "MetadataTree" table	
 		And I go to line in "MetadataTree" table
-			| 'Name'     |
-			| 'PurchaseOrder' |
+			| 'Name'             |
+			| 'PurchaseOrder'    |
 		And I set "Use" checkbox in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And in the table "MetadataTree" I click "Save settings" button
@@ -109,14 +109,14 @@ Scenario: _602702 check data history for document (Purchase order)
 	* Check 
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number' |'Date' |
-			| '116'    |'12.02.2021 12:44:59' |
+			| 'Number'   | 'Date'                   |
+			| '116'      | '12.02.2021 12:44:59'    |
 		And I select current line in "List" table
 		And I click "Post" button
 		And I click "Change history" button
 		And "Versions" table contains lines
-			| '№'      | 'Date' | 'Author'|
-			| '*'      | '*'    | '*'     |
+			| '№'   | 'Date'   | 'Author'    |
+			| '*'   | '*'      | '*'         |
 	And I close all client application windows
 		
 				

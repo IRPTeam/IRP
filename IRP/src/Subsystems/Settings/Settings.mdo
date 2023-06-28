@@ -27,4 +27,5 @@
   <subsystems>AdminFunctions</subsystems>
   <subsystems>Taxes</subsystems>
   <subsystems>ContactInfo</subsystems>
+  <subsystems>ObjectAccess</subsystems>
 </mdclass:Subsystem>

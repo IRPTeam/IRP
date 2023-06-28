@@ -9,7 +9,12 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		Return;
 	EndIf;
 
+	If WriteMode <> DocumentWriteMode.Posting Then
+		Return;
+	EndIf;
+	
 	BeginTransaction();
+	
 	Is = Is(Source);
 	If Is.SO Then
 		FillRowID_SO(Source, Cancel);
@@ -74,6 +79,13 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	
+	If Not Source.Posted Then
+		Return;
+	EndIf;
+	
+	SetPrivilegedMode(True);
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -11130,6 +11142,9 @@ Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
 	If QuerySelection.Next() Then
 		FillPropertyValues(BasisInfo, QuerySelection); 
+	Else
+		Log.Write(R().Error_128, New Structure("Basis, BasisKey, RowID", String(Basis), BasisKey, RowID));
+		Raise R().Error_128;
 	EndIf;
 	Return BasisInfo;
 EndFunction

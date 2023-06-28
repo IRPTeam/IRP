@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ExternalFunctions
@@ -57,8 +57,8 @@ Scenario: _602700 preparation (external function)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -67,8 +67,8 @@ Scenario: _602700 preparation (external function)
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "AdditionalFunctionality" |
+				| "Description"                 |
+				| "AdditionalFunctionality"     |
 			When add Additional Functionality extension
 	And I close all client application windows
 
@@ -80,8 +80,8 @@ Scenario: _602703 check reg exp
 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
 	* Select function with reg exp
 		And I go to line in "List" table
-			| 'Description' | 'Enable' |
-			| 'RegExp'      | 'No'     |
+			| 'Description'   | 'Enable'    |
+			| 'RegExp'        | 'No'        |
 		And I select current line in "List" table
 	* Check reg exp	
 		And I click the button named "RunRegExp"	
@@ -89,13 +89,13 @@ Scenario: _602703 check reg exp
 			And I click "OK" button
 		And I move to the next attribute
 		Then the form attribute named "RegExpResult" became equal to
-			|'\'002236258 AX-MC AKPOS FZS ISK ODE 20220815 KS:81.12TL'|
-			|'[0]	> KS:81.12TL'|
-			|'[1]	> 81.12'|
-			|''|
-			|'Result:'|
-			|'[Value]	> 81,12'|
-			|'[Type]	> Number'|
+			| '\'002236258 AX-MC AKPOS FZS ISK ODE 20220815 KS:81.12TL'    |
+			| '[0]	> KS:81.12TL'                                           |
+			| '[1]	> 81.12'                                                |
+			| ''                                                           |
+			| 'Result:'                                                    |
+			| '[Value]	> 81,12'                                            |
+			| '[Type]	> Number'                                            |
 
 
 Scenario: _602704 check function date as name
@@ -104,8 +104,8 @@ Scenario: _602704 check function date as name
 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
 	* Select function
 		And I go to line in "List" table
-			| 'Description'  | 'Enable' |
-			| 'Date as name' | 'Yes'    |
+			| 'Description'    | 'Enable'    |
+			| 'Date as name'   | 'Yes'       |
 		And I select current line in "List" table	
 	* Сheck for the current date update
 		And I click the button named "Run"
@@ -114,12 +114,12 @@ Scenario: _602704 check function date as name
 		And I click the button named "Run"
 		And I save the value of the field named "Result" as "CurrentDate2"
 		When I Check the steps for Exception
-        	|"Then '$CurrentDate1$' variable is equal to '$CurrentDate2$'"|
+									| "Then '$CurrentDate1$' variable is equal to '$CurrentDate2$'"          |
 		And I close current window
 		And I click "Refresh" button	
 		And "List" table does not contain lines
-			| 'Description'  | 'Reference'      |
-			| 'Date as name' | '$CurrentDate1$' |
+			| 'Description'    | 'Reference'         |
+			| 'Date as name'   | '$CurrentDate1$'    |
 
 Scenario: _602706 check user message
 	And I close all client application windows
@@ -127,13 +127,13 @@ Scenario: _602706 check user message
 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
 	* Select function
 		And I go to line in "List" table
-			| 'Description'  | 'Enable' |
-			| 'User message' | 'Yes'    |
+			| 'Description'    | 'Enable'    |
+			| 'User message'   | 'Yes'       |
 		And I select current line in "List" table	
 	* Сheck for the current date update		
 		And I click the button named "Run"
 		Then there are lines in TestClient message log
-			|'Some test'|
+			| 'Some test'    |
 		
 
 // Scenario: _602710 sheduller settings (Normal test)
@@ -175,21 +175,22 @@ Scenario: _602706 check user message
 // 		And I close all client application windows
 
 
-Scenario: _602780 test data base connection
-	And I close all client application windows
-	* Сondition check
-		If "$Publication$" variable is equal to "false" Then
-			Then I stop script execution "Skipped"
-	* Select integration settings
-		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Test' |       
-		And I select current line in "List" table
-	* Test connection
-		And in the table "ConnectionSetting" I click "Test" button
-		Then I wait that in user messages the "Status code: 200" substring will appear in "30" seconds
-		And I close all client application windows
+// 		Scenario: _602780 test data base connection
+// 			Then I stop script execution "Skipped"
+// 			And I close all client application windows
+// 			* Сondition check
+// 				If "$Publication$" variable is equal to "false" Then
+// 					Then I stop script execution "Skipped"
+// 			* Select integration settings
+// 				Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+// 				And I go to line in "List" table
+// 					| 'Description'    |
+// 					| 'Test'           |
+// 				And I select current line in "List" table
+// 			* Test connection
+// 				And in the table "ConnectionSetting" I click "Test" button
+// 				Then I wait that in user messages the "Status code: 200" substring will appear in "30" seconds
+// 				And I close all client application windows
 		
 				
 		

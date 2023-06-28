@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -35,24 +35,24 @@ Scenario: _351501 create a group of item types
         And I click "Save and close" button
     * Create item type Lipstick
         And I go to line in "List" table
-            | 'Description' |
-            | 'Cosmetics'            |
+			| 'Description'             |
+			| 'Cosmetics'               |
         And I move one level down in "List" table
         And "List" table became equal
-            | 'Description'    |
-            | 'Cosmetics' |
-            | 'Lipstick'    |
+			| 'Description'             |
+			| 'Cosmetics'               |
+			| 'Lipstick'                |
         And I close all client application windows
     * Check the items group display in AddAttributeAndPropertySets by item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-        | 'Predefined data name' |
-        | 'Catalog_ItemKeys'          |
+			| 'Predefined data name'         |
+			| 'Catalog_ItemKeys'             |
         And I select current line in "List" table
         And "AttributesTree" table contains lines
-            | 'Presentation'      |
-            | 'Cosmetics'    |
-            | 'Lipstick'       |
+			| 'Presentation'             |
+			| 'Cosmetics'                |
+			| 'Lipstick'                 |
         And I close all client application windows
 
 

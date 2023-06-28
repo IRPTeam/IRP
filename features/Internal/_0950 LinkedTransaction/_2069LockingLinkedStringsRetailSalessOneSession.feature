@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 
 @tree
 @Positive
@@ -11,7 +11,7 @@ import "Variables.feature"
 
 Scenario: _2069001 preparation (locking linked strings)
 	When set True value to the constant
-	When set True value to the constant EnableLinkedRowsIntegrity
+	When set False value to the constant DisableLinkedRowsIntegrity
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -50,8 +50,8 @@ Scenario: _2069001 preparation (locking linked strings)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
@@ -68,9 +68,9 @@ Scenario: _2069001 preparation (locking linked strings)
 	When create PaymentTypes
 	When Create Retail sales receipt, Retail return receipt (locking linked strings)
 	And I execute 1C:Enterprise script at server
-		| "Documents.RetailSalesReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.RetailSalesReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.RetailReturnReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.RetailReturnReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: _20690011 check preparation
 	When check preparation
@@ -80,8 +80,8 @@ Scenario: _2069002 check locking header in the Retail sales receipt with linked 
 	* Open Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Check locking header
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
@@ -103,8 +103,8 @@ Scenario: _2069003 check locking header in the Retail return receipt with linked
 	* Open Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Check locking header
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
@@ -126,24 +126,24 @@ Scenario: _2069004 check unlock linked rows in the Retail sales receipt
 	* Open Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Check unlock linked rows
 		And I click "Unlock linked rows" button
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item key' | 'Item'  |
-			| '38/Black' | 'Shirt' |
+			| 'Item key'   | 'Item'     |
+			| '38/Black'   | 'Shirt'    |
 		And I close all client application windows
 
 Scenario: _2069005 check locking tab in the Retail sales receipt with linked documents (one session)
@@ -151,56 +151,56 @@ Scenario: _2069005 check locking tab in the Retail sales receipt with linked doc
 	* Open RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Check locking tab
 		* Items
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I close current window
 		* Item key
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item key" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item key" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I close current window
 		* Store
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Store" attribute in "ItemList" table'|
+				| 'And I click choice button of "Store" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Store" attribute in "ItemList" table'|
+				| 'And I click choice button of "Store" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I click choice button of "Store" attribute in "ItemList" table
 			And I close current window
 
@@ -210,85 +210,85 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 	* Open RRR
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     | 
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Add new string
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  |
-			| 'Boots' |
+			| 'Item'     |
+			| 'Boots'    |
 		And I select current line in "List" table	
 	* Check locking tab
 		* Items
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I close current window
 		* Item key
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item key" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+				| 'And I click choice button of "Item key" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I close current window
 		* Store
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Store" attribute in "ItemList" table'|
+				| 'And I click choice button of "Store" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Store" attribute in "ItemList" table'|
+				| 'And I click choice button of "Store" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I click choice button of "Store" attribute in "ItemList" table
 			And I close current window
 		* Retail sales receipt
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'XS/Blue'  |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |
 			When I Check the steps for Exception
-				|'And I click choice button of "Retail sales receipt" attribute in "ItemList" table'|
+				| 'And I click choice button of "Retail sales receipt" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '36/Red'  |
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
 			When I Check the steps for Exception
-				|'And I click choice button of "Retail sales receipt" attribute in "ItemList" table'|
+				| 'And I click choice button of "Retail sales receipt" attribute in "ItemList" table'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '36/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '36/18SD'      |
 			And I click choice button of "Retail sales receipt" attribute in "ItemList" table
 			And I close current window
 		* Try return more than sold
@@ -297,21 +297,21 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 			And I input "10,00" text in "Landed cost" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Retail sales receipt'                              | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
-				| 'No'                 | 'Dress' | 'XS/Blue'  | '3 525,42'   | '520,00' | '8,000'    | 'Retail sales receipt 51 dated 05.10.2021 10:08:07' | 'Store 01' | '634,58'     | '4 160,00'     | 'pcs'  | '18%' |
+				| 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Quantity'    | 'Retail sales receipt'                                 | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
+				| 'No'                    | 'Dress'    | 'XS/Blue'     | '3 525,42'      | '520,00'    | '8,000'       | 'Retail sales receipt 51 dated 05.10.2021 10:08:07'    | 'Store 01'    | '634,58'        | '4 160,00'        | 'pcs'     | '18%'     |
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "15,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Retail sales receipt'                              | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
-				| 'No'                 | 'Shirt' | '36/Red'   | '1 186,44'   | '350,00' | '4,000'    | 'Retail sales receipt 51 dated 05.10.2021 10:08:07' | 'Store 01' | '213,56'     | '1 400,00'     | 'pcs'  | '18%' |
+				| 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Net amount'    | 'Price'     | 'Quantity'    | 'Retail sales receipt'                                 | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
+				| 'No'                    | 'Shirt'    | '36/Red'      | '1 186,44'      | '350,00'    | '4,000'       | 'Retail sales receipt 51 dated 05.10.2021 10:08:07'    | 'Store 01'    | '213,56'        | '1 400,00'        | 'pcs'     | '18%'     |
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Landed cost' | 'Net amount' | 'Price'  | 'Quantity' | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
-				| 'No'                 | 'Boots' | '36/18SD'  | '10,00'       | '593,22'     | '700,00' | '1,000'    | 'Store 01' | '106,78'     | '700,00'       | 'pcs'  | '18%' |
+				| 'Dont calculate row'    | 'Item'     | 'Item key'    | 'Landed cost'    | 'Net amount'    | 'Price'     | 'Quantity'    | 'Store'       | 'Tax amount'    | 'Total amount'    | 'Unit'    | 'VAT'     |
+				| 'No'                    | 'Boots'    | '36/18SD'     | '10,00'          | '593,22'        | '700,00'    | '1,000'       | 'Store 01'    | '106,78'        | '700,00'          | 'pcs'     | '18%'     |
 			And I move to "Payments" tab
 			And I activate "Amount" field in "Payments" table
 			And I select current line in "Payments" table
@@ -323,8 +323,8 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Dress XS/Blue] Return remaining: 10 . Required: 15 . Lacking: 5 .'|
- 				|'Line No. [2] [Shirt 36/Red] Return remaining: 5 . Required: 8 . Lacking: 3 .'|					
+				| 'Line No. [1] [Dress XS/Blue] Return remaining: 10 . Required: 15 . Lacking: 5 .'     |
+				| 'Line No. [2] [Shirt 36/Red] Return remaining: 5 . Required: 8 . Lacking: 3 .'        |
 		And I close all client application windows
 
 Scenario: _2069007 check unlock linked rows in the Retail return receipt
@@ -332,24 +332,24 @@ Scenario: _2069007 check unlock linked rows in the Retail return receipt
 	* Open Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Check unlock linked rows
 		And I click "Unlock linked rows" button
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item key' | 'Item'  |
-			| '38/Black' | 'Shirt' |
+			| 'Item key'   | 'Item'     |
+			| '38/Black'   | 'Shirt'    |
 		And I close all client application windows
 
 
@@ -357,13 +357,13 @@ Scenario: _2068010 change quantity in the linked string in the Retail sales rece
 	* Open RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Change quantity (less then RRR)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
@@ -378,11 +378,11 @@ Scenario: _2068010 change quantity in the linked string in the Retail sales rece
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then there are lines in TestClient message log
-			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 3 . Lacking: 1 .'|
+			| 'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 3 . Lacking: 1 .'    |
 	* Change quantity (more then RRR)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
@@ -403,21 +403,21 @@ Scenario: _2069015 delete linked string in the Retail sales receipt (one session
 	* Open Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 		And I select current line in "List" table
 	* Delete linked string
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |		
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '36/Red'      |
 		And Delay 3
 		Then there are lines in TestClient message log
-			|'Can not delete linked row [2] [Shirt] [36/Red]'|
+			| 'Can not delete linked row [2] [Shirt] [36/Red]'    |
 		And I close all client application windows
 
 
@@ -426,8 +426,8 @@ Scenario: _2069019 unpost Retail sales receipt with linked strings (one session)
 	* Select Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 	* Try unpost Retail sales receipt
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
@@ -435,8 +435,8 @@ Scenario: _2069019 unpost Retail sales receipt with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'|
-			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .' |		
+			| 'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'    |
+			| 'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .'     |
 		And I close all client application windows
 
 Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
@@ -444,8 +444,8 @@ Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
 	* Select Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '51'     |
+			| 'Number'    |
+			| '51'        |
 	* Try delete Retail sales receipt
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
@@ -455,6 +455,6 @@ Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'|
-			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .' |		
+			| 'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'    |
+			| 'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .'     |
 		And I close all client application windows

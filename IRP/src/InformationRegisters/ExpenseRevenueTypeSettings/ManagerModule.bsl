@@ -55,20 +55,27 @@ Function GetERType(Filter)
 		|	ERTS.ExpenseType,
 		|	ERTS.RevenueType,
 		|	CASE
-		|		When ERTS.ItemKey = &ItemKey
-		|			Then 100
+		|		When ERTS.ItemKey = &ItemKey And Not ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)   
+		|			Then 1000
 		|		Else 0
 		|	END AS ItemKeyPart,
 		|	CASE
-		|		When ERTS.Item = &Item
-		|			Then 10
+		|		When ERTS.Item = &Item And Not ERTS.Item = Value(Catalog.Items.EmptyRef) 
+		|			Then 100
 		|		Else 0
 		|	END AS ItemPart,
 		|	CASE
-		|		When ERTS.ItemType = &ItemType
+		|		When ERTS.ItemType = &ItemType And Not ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef) 
+		|			Then 10
+		|		Else 0
+		|	END AS ItemTypePart,
+		|	CASE
+		|		When ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef) 
+		|			AND ERTS.Item = Value(Catalog.Items.EmptyRef)
+		|			AND ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)
 		|			Then 1
 		|		Else 0
-		|	END AS ItemTypePart
+		|	END AS CompanyPart
 		|INTO VT
 		|FROM
 		|	InformationRegister.ExpenseRevenueTypeSettings AS ERTS
@@ -77,10 +84,10 @@ Function GetERType(Filter)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT TOP 1
+		|SELECT
 		|	VT.ExpenseType,
 		|	VT.RevenueType,
-		|	VT.ItemKeyPart + VT.ItemPart + VT.ItemTypePart AS Priority
+		|	VT.ItemKeyPart + VT.ItemPart + VT.ItemTypePart + VT.CompanyPart AS Priority
 		|FROM
 		|	VT AS VT
 		|

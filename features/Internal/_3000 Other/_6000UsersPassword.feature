@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @ee
 @Positive
 @Other
@@ -28,8 +28,8 @@ Scenario: _351001 check user password setting from enterprise mode
         * Select user
                         Given I open hyperlink "e1cib/list/Catalog.Users"
                         And I go to line in "List" table
-                                | 'Description'                 |
-                                | 'Arina Brown (Financier 3)' |
+				| 'Description'                                               |
+				| 'Arina Brown (Financier 3)'                                 |
                         And I select current line in "List" table
                 * Change localization code
                         And I select "English" exact value from "Interface localization" drop-down list	
@@ -49,23 +49,23 @@ Scenario: _351001 check user password setting from enterprise mode
                                 And Delay 10
                 Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
                 And I go to line in "List" table
-                                | 'Description' |
-                                | 'Financier'   |
+			| 'Description'                                 |
+			| 'Financier'                                   |
                 And I select current line in "List" table
                 And in the table "Roles" I click "Update roles" button
                 And I go to line in "Roles" table
-                        | 'Presentation'    |
-                        | 'Run thin client' |
+			| 'Presentation'                            |
+			| 'Run thin client'                         |
                 And I set "Use" checkbox in "Roles" table
                 And I finish line editing in "Roles" table
                 And I go to line in "Roles" table
-                        | 'Presentation'   |
-                        | 'Run web client' |
+			| 'Presentation'                           |
+			| 'Run web client'                         |
                 And I set "Use" checkbox in "Roles" table
                 And I finish line editing in "Roles" table
                 And I go to line in "Roles" table
-                        | 'Presentation' |
-                        | 'Full access'  |
+			| 'Presentation'                         |
+			| 'Full access'                          |
                 And I set "Use" checkbox in "Roles" table
                 And I finish line editing in "Roles" table
                 And I click "Save and close" button
@@ -80,8 +80,8 @@ Scenario: _351002 check user password generation from enterprise mode
         * Select user
                 Given I open hyperlink "e1cib/list/Catalog.Users"
                 And I go to line in "List" table
-                | 'Description'                 |
-                | 'Arina Brown (Financier 3)' |
+			| 'Description'                               |
+			| 'Arina Brown (Financier 3)'                 |
                 And I select current line in "List" table
         * Set password
                 And I click "Set password" button

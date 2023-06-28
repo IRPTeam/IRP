@@ -91,8 +91,10 @@ EndProcedure
 
 #EndRegion
 
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -110,6 +112,10 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
@@ -117,18 +123,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R2011B_SalesOrdersShipment());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -194,6 +188,22 @@ Function SerialLotNumbers()
 		|		AND ItemList.Ref = &Ref
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array();
+	QueryArray.Add(R2011B_SalesOrdersShipment());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
@@ -474,3 +484,30 @@ Function T3010S_RowIDInfo()
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = Obj.ItemList.Unload(, "Store");
+	StoreList.GroupBy("Store");
+	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+
+
+

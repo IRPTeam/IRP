@@ -52,9 +52,11 @@
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
+  <commonModules>CommonModule.Unit_AccessSubsystem</commonModules>
   <commonModules>CommonModule.Unit_AddAttributeAndPropertySets</commonModules>
-  <commonModules>CommonModule.Unit_CatalogCode</commonModules>
+  <commonModules>CommonModule.Unit_CatalogCodeAndDocumentNumber</commonModules>
   <commonModules>CommonModule.Unit_CommonTests</commonModules>
+  <commonModules>CommonModule.Unit_Documents</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_MockService</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>

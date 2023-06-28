@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 
@@ -50,8 +50,8 @@ Scenario: _154500 preparation (information messages)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -199,18 +199,18 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
+					| 'Description'                           |
+					| 'Basic Partner terms, without VAT'      |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
+					| 'Description'            |
+					| 'Company Ferron BP'      |
 			And I select current line in "List" table
 		When adding the items to the sales order (Dress and Trousers)
 		And I move to "Other" tab
@@ -246,16 +246,16 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 		* Select Store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -263,14 +263,14 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -288,50 +288,50 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		* Filling in the necessary details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
+				| Description            |
+				| Vendor Ferron, USD     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
@@ -373,49 +373,49 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 		* Filling in the necessary details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
+				| Description            |
+				| Vendor Ferron, USD     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -437,50 +437,50 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 		* Filling in the necessary details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
+				| Description            |
+				| Vendor Ferron, USD     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
@@ -514,18 +514,18 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
+					| 'Description'                           |
+					| 'Basic Partner terms, without VAT'      |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
+					| 'Description'            |
+					| 'Company Ferron BP'      |
 			And I select current line in "List" table
 		When adding the items to the sales order (Dress and Trousers)
 		And I click "Save" button
@@ -555,18 +555,18 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
+					| 'Description'                           |
+					| 'Basic Partner terms, without VAT'      |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
+					| 'Description'            |
+					| 'Company Ferron BP'      |
 			And I select current line in "List" table
 		When adding the items to the sales order (Dress and Trousers)
 		And I click "Save" button
@@ -601,16 +601,16 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 		* Select Store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -618,14 +618,14 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -657,16 +657,16 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 		* Select Store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -674,14 +674,14 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Service'     |
+				| 'Description'     |
+				| 'Service'         |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'Rent'  |
+				| 'Item key'     |
+				| 'Rent'         |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -704,16 +704,16 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'     |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 		* Select Store
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -721,14 +721,14 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Service'     |
+				| 'Description'     |
+				| 'Service'         |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'Rent'  |
+				| 'Item key'     |
+				| 'Rent'         |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -751,56 +751,56 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 		* Filling in customer info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
+					| 'Description'      |
+					| 'Ferron BP'        |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
+					| 'Description'                           |
+					| 'Basic Partner terms, without VAT'      |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
+					| 'Description'            |
+					| 'Company Ferron BP'      |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Service'     |
+				| 'Description'     |
+				| 'Service'         |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'    | 'Item key' |
-				| 'Service' | 'Rent'     |
+				| 'Item'       | 'Item key'     |
+				| 'Service'    | 'Rent'         |
 			And I select current line in "List" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -825,26 +825,26 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 			And I click Select button of "Company" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description  |
-				| Main Company | 
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Trousers    |
+				| Description     |
+				| Trousers        |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item     | Item key          |
-				| Trousers | 36/Yellow |
+				| Item        | Item key      |
+				| Trousers    | 36/Yellow     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -859,18 +859,18 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 		And I click "OK" button
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I click the button named "FormChoose"
 		Then If dialog box is visible I click "OK" button
 		And I click "OK" button
@@ -1009,32 +1009,32 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 	* Filling in Sales order
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'         |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -1043,14 +1043,14 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -1059,14 +1059,14 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -1076,8 +1076,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I move to "Other" tab
 			And I click Select button of "Manager segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
+				| 'Description'     |
+				| 'Region 2'        |
 			And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder0154513$$" variable
@@ -1125,20 +1125,20 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I select current line in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I select "Approved" exact value from "Status" drop-down list
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '36/Yellow'     |
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I move to "Other" tab
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseOrder0154513$$" variable
@@ -1155,30 +1155,30 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			* Create GR
 				Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 				And I go to line in "List" table
-				| 'Number' | 'Partner'   |
-				| '$$NumberPurchaseOrder0154513$$'  | 'Ferron BP' |
+				| 'Number'                            | 'Partner'       |
+				| '$$NumberPurchaseOrder0154513$$'    | 'Ferron BP'     |
 				And I click the button named "FormDocumentGoodsReceiptGenerate"
 				And I click "OK" button
 				And I click the button named "FormPostAndClose"
 			* Create SC
 				Given I open hyperlink "e1cib/list/Document.SalesOrder"
 				And I go to line in "List" table
-				| 'Number' | 'Partner'   |
-				| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
+				| 'Number'                         | 'Partner'     |
+				| '$$NumberSalesOrder0154513$$'    | 'Kalipso'     |
 				And I click the button named "FormDocumentShipmentConfirmationGenerate"
 				And I click "Ok" button	
 				And "ItemList" table contains lines
-				| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    |
-				| 'Trousers' | '4,000'    | '38/Yellow' | 'Store 02' |
-				| 'Trousers' | '1,000'    | '36/Yellow' | 'Store 02' |
+				| 'Item'        | 'Quantity'    | 'Item key'     | 'Store'        |
+				| 'Trousers'    | '4,000'       | '38/Yellow'    | 'Store 02'     |
+				| 'Trousers'    | '1,000'       | '36/Yellow'    | 'Store 02'     |
 				And I click the button named "FormPostAndClose"
 				And I close all client application windows
 	* Check the message output when the order is already closed by the purchase order
 		* Create a PO for the remaining amount
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
-			| 'Number' | 'Partner'   |
-			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
+			| 'Number'                        | 'Partner'    |
+			| '$$NumberSalesOrder0154513$$'   | 'Kalipso'    |
 			And I select current line in "List" table
 			And I click the button named "FormDocumentPurchaseOrderGenerate"
 			And I click "Ok" button	
@@ -1186,15 +1186,15 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I click Select button of "Partner" field
 			Then "Partners" window is opened
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Vendor Ferron, TRY' |
+				| 'Description'            |
+				| 'Vendor Ferron, TRY'     |
 			And I select current line in "List" table
 			And I click "OK" button
 			And I activate "Price" field in "ItemList" table
@@ -1206,8 +1206,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 		* Check the message output when the order is already closed by the purchase order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
-			| 'Number' | 'Partner'   |
-			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
+			| 'Number'                        | 'Partner'    |
+			| '$$NumberSalesOrder0154513$$'   | 'Kalipso'    |
 			And I click the button named "FormDocumentPurchaseOrderGenerate"
 			Then the number of "BasisesTree" table lines is "равно" 0
 			And I close all client application windows
@@ -1217,27 +1217,27 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'     |
 				| 'Kalipso'         |
 			And I select current line in "List" table
 			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, TRY' |
+					| 'Description'                   |
+					| 'Basic Partner terms, TRY'      |
 			And I select current line in "List" table
 			* Add a row of items
 				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 				And I select current line in "List" table
 				And I activate field named "ItemListItemKey" in "ItemList" table
 				And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 				And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 				And I select current line in "List" table
 				And I activate "Procurement method" field in "ItemList" table
 				And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -1246,8 +1246,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				And I move to "Other" tab
 				And I click Select button of "Manager segment" field
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Region 2'    |
+					| 'Description'      |
+					| 'Region 2'         |
 				And I select current line in "List" table
 				And I click the button named "FormPost"
 		* Check message output when trying to create a PO
@@ -1263,27 +1263,27 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 		* Filling in Sales order
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'     |
 				| 'Kalipso'         |
 			And I select current line in "List" table
 			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, TRY' |
+					| 'Description'                   |
+					| 'Basic Partner terms, TRY'      |
 			And I select current line in "List" table
 			* Add a row of items
 				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Trousers'    |
+					| 'Description'      |
+					| 'Trousers'         |
 				And I select current line in "List" table
 				And I activate field named "ItemListItemKey" in "ItemList" table
 				And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 				And I go to line in "List" table
-					| 'Item'     | 'Item key'  |
-					| 'Trousers' | '38/Yellow' |
+					| 'Item'         | 'Item key'       |
+					| 'Trousers'     | '38/Yellow'      |
 				And I select current line in "List" table
 				And I activate "Procurement method" field in "ItemList" table
 				And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -1294,8 +1294,8 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I move to "Other" tab
 			And I click Select button of "Manager segment" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
+				| 'Description'     |
+				| 'Region 2'        |
 			And I select current line in "List" table
 			And I move to "Other" tab
 		And I click the button named "FormPost"
@@ -1333,19 +1333,19 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I select current line in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I move to "Other" tab
 			And I select "Wait" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
@@ -1371,41 +1371,41 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 		* Filling in details
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I click Clear button of "Procurement method" field
@@ -1424,8 +1424,8 @@ Scenario: __015457 message when trying to create Price list without unit
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
+		| 'Description'   |
+		| 'Dress'         |
 	And I select current line in "List" table
 	And I activate field named "ItemListUnit" in "ItemList" table
 	And I input "" text in the field named "ItemListUnit" of "ItemList" table

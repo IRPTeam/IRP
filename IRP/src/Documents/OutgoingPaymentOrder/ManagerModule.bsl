@@ -10,7 +10,7 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 
-	Tables = New Structure();
+	Tables = New Structure;
 
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -29,7 +29,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -44,7 +44,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -75,8 +75,10 @@ EndProcedure
 
 #EndRegion
 
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -84,23 +86,20 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-	QueryArray.Add(PaymentList());
-	Return QueryArray;
-EndFunction
+#EndRegion
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(R3035T_CashPlanning());
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
@@ -126,6 +125,17 @@ Function PaymentList()
 		   |WHERE
 		   |	PaymentList.Ref = &Ref
 		   |	AND &StatusInfoPosting";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
+	QueryArray.Add(R3035T_CashPlanning());
+	Return QueryArray;
 EndFunction
 
 Function R1022B_VendorsPaymentPlanning()
@@ -165,3 +175,24 @@ Function R3035T_CashPlanning()
 		   |FROM
 		   |	PaymentList AS PaymentList";
 EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("Account", Obj.Account);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion

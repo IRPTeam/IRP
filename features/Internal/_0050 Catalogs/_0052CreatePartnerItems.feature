@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @ItemCatalogs
@@ -38,27 +38,27 @@ Scenario: _005210 filling in the "Partner Items" catalog
 		And I input "QN90999" text in "Item ID" field
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'       |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Item"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I click Select button of "Item key" field
 		And "List" table does not contain lines
-			| 'Item' |
-			| 'Boots'       |
+			| 'Item'     |
+			| 'Boots'    |
 		And I go to line in "List" table
-			| 'Item key'  |
-			| 'XS/Blue' |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check creation
 		And I go to line in "List" table
-			| 'Description'          | 'Partner'   | 'Item ID' | 'Item'  | 'Item key' |
-			| 'Dress XS/Blue Ferron' | 'Ferron BP' | 'QN90999' | 'Dress' | 'XS/Blue'  |
+			| 'Description'            | 'Partner'     | 'Item ID'   | 'Item'    | 'Item key'    |
+			| 'Dress XS/Blue Ferron'   | 'Ferron BP'   | 'QN90999'   | 'Dress'   | 'XS/Blue'     |
 		And I select current line in "List" table
 		Then the form attribute named "ItemID" became equal to "QN90999"
 		Then the form attribute named "Partner" became equal to "Ferron BP"

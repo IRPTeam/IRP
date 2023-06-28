@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @ProductionPlanningClosing
 
@@ -33,8 +33,8 @@ Scenario: _7001 Production planning closing
 	* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
-					| "Description" |
-					| "TaxCalculateVAT_TR" |
+					| "Description"             |
+					| "TaxCalculateVAT_TR"      |
 				When add Plugin for tax calculation
 			When Create information register Taxes records (VAT)
 		* Tax settings
@@ -65,19 +65,19 @@ Scenario: _7001 Production planning closing
 	When Create catalog Stores objects
 	When Create document SalesOrder objects (MF)
 	And I execute 1C:Enterprise script at server
-		| "Doc = Documents.SalesOrder.FindByNumber(12).GetObject();" |
-		| "Doc.Write(DocumentWriteMode.Posting);" |
+		| "Doc = Documents.SalesOrder.FindByNumber(12).GetObject();"   |
+		| "Doc.Write(DocumentWriteMode.Posting);"                      |
 	When Create document ProductionPlanning objects (first period)
 	When Create document Production objects (reservation)
 	And I execute 1C:Enterprise script at server
-		| "Doc = Documents.Production.FindByNumber(12).GetObject();" |
-		| "Doc.Date = CurrentDate();" |
-		| "Doc.Write(DocumentWriteMode.Posting);" |
+		| "Doc = Documents.Production.FindByNumber(12).GetObject();"   |
+		| "Doc.Date = CurrentDate();"                                  |
+		| "Doc.Write(DocumentWriteMode.Posting);"                      |
 	* Create Production planning closing
 		Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 		And I go to line in "List" table
-			| 'Number'|
-			| '12'    |
+			| 'Number'    |
+			| '12'        |
 		And I click "Production planning closing" button
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Shop 01"

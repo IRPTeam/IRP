@@ -160,6 +160,76 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="8cab4c70-b516-44c7-bb5c-d4033b62a2d9">
+    <producedTypes>
+      <objectType typeId="13bee1dd-7c5f-4935-9db7-b2cbd03dd1a9" valueTypeId="8188eef7-3ad2-449f-be2a-f68c3812fffc"/>
+      <rowType typeId="b248d77a-defc-456f-a88a-efc2a46ba78e" valueTypeId="c03fb706-45b1-4639-8369-4cffb402ad0d"/>
+    </producedTypes>
+    <name>ObjectAccess</name>
+    <synonym>
+      <key>en</key>
+      <value>Object access</value>
+    </synonym>
+    <attributes uuid="f7fb02b0-b1fd-40a6-8381-8435f8d55ce0">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>200</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2014f0af-e6dd-472e-af2f-b35e47edbe32">
+      <name>ValueRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Value ref</value>
+      </synonym>
+      <type>
+        <types>AnyRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b85cf419-7afb-4a4e-87a6-9aa13782d0a8">
+      <name>Modify</name>
+      <synonym>
+        <key>en</key>
+        <value>Modify</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d9cde578-3b4b-4d2e-8eef-63a9a0bd37ef">
+      <name>DoNotControl</name>
+      <synonym>
+        <key>en</key>
+        <value>Do not control</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4834790e-58e6-473b-b3f3-988d799569ee">
     <name>ItemForm</name>
     <synonym>

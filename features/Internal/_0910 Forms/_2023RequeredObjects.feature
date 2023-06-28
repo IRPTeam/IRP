@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @NotCritical
@@ -20,21 +20,21 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 	* Check of the sign of required filling at the additional attribute for Item
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Items'       |
+			| 'Description'    |
+			| 'Items'          |
 		And I select current line in "List" table
 		If "Attributes" table does not contain lines Then
-			| "Attribute" |
-			| "Article" |
+			| "Attribute"    |
+			| "Article"      |
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Article'     |
+				| 'Description'     |
+				| 'Article'         |
 			And I select current line in "List" table
 		And I go to line in "Attributes" table
-			| 'Attribute'  |
-			| 'Article'    |
+			| 'Attribute'    |
+			| 'Article'      |
 		And I activate "Required" field in "Attributes" table
 		And I set "Required" checkbox in "Attributes" table
 		And I finish line editing in "Attributes" table
@@ -42,12 +42,12 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 	* Check of the sign of required filling at the additional attribute for item key (shoes)
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shoes'       |
+			| 'Description'    |
+			| 'Shoes'          |
 		And I select current line in "List" table
 		And I go to line in "AvailableAttributes" table
-			| 'Attribute' |
-			| 'Season'    |
+			| 'Attribute'    |
+			| 'Season'       |
 		And I activate "Required" field in "AvailableAttributes" table
 		And I set "Required" checkbox in "AvailableAttributes" table
 		And I finish line editing in "AvailableAttributes" table
@@ -55,8 +55,8 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 	* Check that the Article in Item is required to be filled in
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I input "" text in "Article" field
 		And I click "Save" button
@@ -65,8 +65,8 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 	* Check that the Season account in the Item key is required by Shoes
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I input "" text in "Season" field
 		And I click "Save" button
@@ -77,12 +77,12 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 	* Check of the sign of required filling at the additional attribute for Item
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Items'       |
+			| 'Description'    |
+			| 'Items'          |
 		And I select current line in "List" table
 		And I go to line in "Attributes" table
-			| 'Attribute'  |
-			| 'Article'    |
+			| 'Attribute'    |
+			| 'Article'      |
 		And I activate "Required" field in "Attributes" table
 		And I remove "Required" checkbox in "Attributes" table
 		And I finish line editing in "Attributes" table
@@ -90,12 +90,12 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 	* Check of the sign of required filling at the additional attribute for item key (shoes)
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shoes'       |
+			| 'Description'    |
+			| 'Shoes'          |
 		And I select current line in "List" table
 		And I go to line in "AvailableAttributes" table
-			| 'Attribute' |
-			| 'Season'    |
+			| 'Attribute'    |
+			| 'Season'       |
 		And I activate "Required" field in "AvailableAttributes" table
 		And I remove "Required" checkbox in "AvailableAttributes" table
 		And I finish line editing in "AvailableAttributes" table

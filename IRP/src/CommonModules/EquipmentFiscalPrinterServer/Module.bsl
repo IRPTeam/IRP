@@ -51,6 +51,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	For Each ItemRow In SourceData.ItemList Do
 		RowFilter = New Structure();
 		RowFilter.Insert("Key", ItemRow.Key);
+		
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
  		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
@@ -64,10 +65,12 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		If ItemRow.isControlCodeString Then
 			If CCSRows.Count() = 0 Then
 				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
-			ElsIf CCSRows.Count() <> ItemRow.Quantity Then
+			ElsIf Not CCSRows.Count() = ItemRow.Quantity Then
 				Raise "Control string code count not the same as item quantity. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
+			ElsIf CCSRows[0].NotCheck Then
+				// Not check an not send
 			Else
 				CodeString = CCSRows[0].CodeString;
 				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
@@ -508,6 +511,11 @@ EndFunction
 Function GetStringCode(DocumentRef) Export
 	Array = New Array; // Array Of String
 	For Each Row In DocumentRef.ControlCodeStrings Do
+		
+		If Row.NotCheck Then
+			Continue;
+		EndIf;
+		
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;

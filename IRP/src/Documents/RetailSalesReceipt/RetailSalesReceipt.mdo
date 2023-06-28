@@ -2030,6 +2030,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="923d1044-f895-4c3a-94f0-d63de015e498">
+      <name>NotCheck</name>
+      <synonym>
+        <key>en</key>
+        <value>Not check</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="823b2bab-3058-4d74-ac02-dcebfca479c0">
     <producedTypes>

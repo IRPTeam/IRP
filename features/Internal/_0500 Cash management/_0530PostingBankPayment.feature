@@ -64,8 +64,8 @@ Scenario: _053000 preparation (Bank payment)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -73,24 +73,24 @@ Scenario: _053000 preparation (Bank payment)
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseOrder017001$$" |
+				| "Number"                            |
+				| "$$NumberPurchaseOrder017001$$"     |
 			When create PurchaseOrder017001
 	* Check or create PurchaseInvoice018001
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice018001$$" |
+				| "Number"                              |
+				| "$$NumberPurchaseInvoice018001$$"     |
 			When create PurchaseInvoice018001 based on PurchaseOrder017001
 	* Check or create PurchaseInvoice29604
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice29604$$" |
+				| "Number"                             |
+				| "$$NumberPurchaseInvoice29604$$"     |
 			When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
 	When Create document SalesReturn objects (advance, customers)
 	And I execute 1C:Enterprise script at server
- 			| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"     |
 
 Scenario: _0530001 check preparation
 	When check preparation
@@ -99,41 +99,41 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 	* Open list form Purchase invoice and select PI №1
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseInvoice018001$$'      |
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice018001$$'    |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 	* Create and filling in Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
+			| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
+			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '136 000,00'     | '$$PurchaseInvoice018001$$'    |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 283,20' |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '23 283,20'    |
+			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
+			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 		And I close current window
 	* Data overflow check
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Bank account, TRY' |
+			| 'Currency'   | 'Description'          |
+			| 'TRY'        | 'Bank account, TRY'    |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
+			| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
+			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '136 000,00'     | '$$PurchaseInvoice018001$$'    |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 283,20' |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '23 283,20'    |
+			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
+			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 		And I close current window
 	* Check calculation Document amount
 		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "136 000,00"
@@ -141,8 +141,8 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Document'        |
-			| '$$PurchaseInvoice29604$$'      |
+			| 'Document'                    |
+			| '$$PurchaseInvoice29604$$'    |
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
@@ -151,8 +151,8 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I input "20 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | '$$PurchaseInvoice29604$$' |
+			| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'              |
+			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '20 000,00'      | '$$PurchaseInvoice29604$$'    |
 	And I close all client application windows
 
 
@@ -167,37 +167,37 @@ Scenario: _053001 create Bank payment (independently)
 		* Filling in the details of the document
 			And I click Select button of "Currency" field
 			And I go to line in "List" table
-				| Code | Description  |
-				| TRY  | Turkish lira |
+				| Code    | Description      |
+				| TRY     | Turkish lira     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, TRY |
+				| Description           |
+				| Bank account, TRY     |
 			And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click choice button of "Payee" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 		* Filling in an Partner term
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-					| 'Description'           |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in basis documents in a tabular part
@@ -207,8 +207,8 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Amount'     | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '136 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
+				| '136 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
@@ -220,8 +220,8 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'     |
-				| 'Movement type 1' |
+				| 'Description'         |
+				| 'Movement type 1'     |
 			And I select current line in "List" table		
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
@@ -232,8 +232,8 @@ Scenario: _053001 create Bank payment (independently)
 		And I click the button named "FormPostAndClose"
 		* Check creation
 			And "List" table contains lines
-				| 'Number' |
-				| '$$NumberBankPayment0530011$$'    |
+				| 'Number'                           |
+				| '$$NumberBankPayment0530011$$'     |
 	* Create Bank payment in USD for Ferron BP (Purchase invoice in lire)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -242,37 +242,37 @@ Scenario: _053001 create Bank payment (independently)
 			And I click Select button of "Currency" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Code | Description     |
-				| USD  | American dollar |
+				| Code    | Description         |
+				| USD     | American dollar     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, USD |
+				| Description           |
+				| Bank account, USD     |
 			And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click choice button of "Payee" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 		* Filling in an Partner term
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-					| 'Description'           |
-					| 'Vendor Ferron, TRY' |
+					| 'Description'             |
+					| 'Vendor Ferron, TRY'      |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in basis documents in a tabular part
@@ -282,8 +282,8 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '135 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
+				| '135 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
@@ -298,8 +298,8 @@ Scenario: _053001 create Bank payment (independently)
 		And I click the button named "FormPostAndClose"
 		* Check creation a Cash receipt
 			And "List" table contains lines
-				| 'Number' |
-				| '$$NumberBankPayment0530012$$'    |
+				| 'Number'                           |
+				| '$$NumberBankPayment0530012$$'     |
 	* Create Bank payment in Euro for Ferron BP (Purchase invoice in USD)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -308,37 +308,37 @@ Scenario: _053001 create Bank payment (independently)
 			And I click Select button of "Currency" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Code | Description |
-				| EUR  | Euro        |
+				| Code    | Description     |
+				| EUR     | Euro            |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, EUR |
+				| Description           |
+				| Bank account, EUR     |
 			And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click choice button of "Payee" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 		* Filling in an Partner term
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Vendor Ferron, USD' |
+				| 'Description'            |
+				| 'Vendor Ferron, USD'     |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -352,8 +352,8 @@ Scenario: _053001 create Bank payment (independently)
 		And I click the button named "FormPostAndClose"
 		* Check creation a Bank payment
 			And "List" table contains lines
-				| 'Number' |
-				| '$$NumberBankPayment0530013$$'    |
+				| 'Number'                           |
+				| '$$NumberBankPayment0530013$$'     |
 
 
 
@@ -401,8 +401,8 @@ Scenario: _053009 create Bank payment based on Sales return
 	* Select SR
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '27.01.2021 19:50:46' | '12'     |
+			| 'Date'                  | 'Number'    |
+			| '27.01.2021 19:50:46'   | '12'        |
 		And I select current line in "List" table
 		And I click "Bank payment" button
 	* Check creation
@@ -415,8 +415,8 @@ Scenario: _053009 create Bank payment based on Sales return
 		Then the form attribute named "TransactionType" became equal to "Return to customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'   | 'Payee'             | 'Partner term'             | 'Legal name contract' | 'Basis document'                            | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
-			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | 'Sales return 12 dated 27.01.2021 19:50:46' | '500,00'       | ''                        | ''                           |
+			| '#'   | 'Partner'     | 'Payee'               | 'Partner term'               | 'Legal name contract'   | 'Basis document'                              | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '1'   | 'Ferron BP'   | 'Company Ferron BP'   | 'Basic Partner terms, TRY'   | ''                      | 'Sales return 12 dated 27.01.2021 19:50:46'   | '500,00'         | ''                          | ''                              |
 		
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "500,00"
@@ -451,12 +451,12 @@ Scenario: _053013 check the display of details on the form Bank payment with the
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description  |
-			| Kalipso |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| '#' | Partner | Total amount | Payee              | Basis document | Planning transaction basis |
-			| '1' | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
+			| '#'   | Partner   | Total amount   | Payee             | Basis document   | Planning transaction basis    |
+			| '1'   | Kalipso   | ''             | Company Kalipso   | ''               | ''                            |
 
 
 
@@ -483,8 +483,8 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		If "PaymentList" table does not contain column named "Payee" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
-			| '#' | 'Total amount' | 'Planning transaction basis' |
-			| '1' | '100,00'       | ''                           |
+			| '#'   | 'Total amount'   | 'Planning transaction basis'    |
+			| '1'   | '100,00'         | ''                              |
 
 Scenario: _052017 check Commission calculation in the Bank payment (Payment from customer by POS)
 	And I close all client application windows
@@ -497,20 +497,20 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I select current line in "PaymentList" table
 		And I click choice button of "Bank term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Test01' |
+			| 'Description'    |
+			| 'Test01'         |
 		And I select current line in "List" table
 		And I activate "Payment type" field in "PaymentList" table
 		And I click choice button of "Payment type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 01'     |
+			| 'Description'    |
+			| 'Card 01'        |
 		And I select current line in "List" table
 		And I activate "Payment terminal" field in "PaymentList" table
 		And I click choice button of "Payment terminal" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Payment terminal 01'     |
+			| 'Description'            |
+			| 'Payment terminal 01'    |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -518,51 +518,51 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I finish line editing in "PaymentList" table
 	* Check Commission
 		And "PaymentList" table contains lines
-			| 'Commission' | 'Payment terminal' | 'Payment type' | 'Commission percent' | 'Bank term' | 'Total amount' |
-			| '1,00'       | 'Payment terminal 01'           | 'Card 01'      | '1,00'               | 'Test01'    | '100,33'       |
+			| 'Commission'   | 'Payment terminal'      | 'Payment type'   | 'Commission percent'   | 'Bank term'   | 'Total amount'    |
+			| '1,00'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
 	* Check Commission calculation (sum and commision percent)
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "333,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '3,33'       | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '1,00'               |
+			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
+			| '1'   | '333,33'         | '3,33'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
 	* Change Commission percent
 		And I activate "Commission percent" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "5,00" text in "Commission percent" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '16,67'      | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '5,00'               |
+			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
+			| '1'   | '333,33'         | '16,67'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
 	* Change Commission sum
 		And I activate "Commission" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "22,52" text in "Commission" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'              | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '22,52'      | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '6,76'               |
+			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
+			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,76'                  |
 	* Change payment type
 		And I activate "Payment type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Payment type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 02'     |
+			| 'Description'    |
+			| 'Card 02'        |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'              | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '6,67'       | 'Card 02'      | 'Payment terminal 01'           | 'Test01'    | '2,00'               |
+			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
+			| '1'   | '333,33'         | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 	* Change sum
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "999,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'     | 'Bank term' | 'Commission percent' |
-			| '1' | '999,00'       | '19,98'      | 'Card 02'      | 'Payment terminal 01'  | 'Test01'    | '2,00'               |
+			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
+			| '1'   | '999,00'         | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 		And I close all client application windows
 
 
@@ -570,8 +570,8 @@ Scenario: _300514 check connection to BankPayment report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberBankPayment0530011$$      |
+		| Number                         |
+		| $$NumberBankPayment0530011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

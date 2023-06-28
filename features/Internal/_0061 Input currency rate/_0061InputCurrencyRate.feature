@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CurrencyRate
@@ -56,8 +56,8 @@ Scenario: _006100 preparation (filling in currency rates)
 	When Create catalog Currencies objects
 	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 	If "List" table does not contain line Then
-		| "Description" |
-		| "Forex Seling" |
+		| "Description"    |
+		| "Forex Seling"   |
 		When create setting to download the course (Forex Seling)
 
 Scenario: _0061001 check preparation
@@ -70,18 +70,18 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click the button named "FormCreate"
 		And I click Select button of "Currency from" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Currency to" field
 		And I go to line in "List" table
-			| Code |
-			| EUR  |
+			| Code    |
+			| EUR     |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| Description    |
-			| Forex Seling |
+			| Description     |
+			| Forex Seling    |
 		And I select current line in "List" table
 		And I input "1" text in "Multiplicity" field
 		And I input "6,54" text in "Rate" field
@@ -91,18 +91,18 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click the button named "FormCreate"
 		And I click Select button of "Currency from" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Currency to" field
 		And I go to line in "List" table
-			| Code |
-			| USD  |
+			| Code    |
+			| USD     |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| Description    |
-			| Forex Seling |
+			| Description     |
+			| Forex Seling    |
 		And I select current line in "List" table
 		And I input "1" text in "Multiplicity" field
 		And I input "5,84" text in "Rate" field
@@ -112,18 +112,18 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click the button named "FormCreate"
 		And I click Select button of "Currency from" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Currency to" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| Description    |
-			| Forex Seling |
+			| Description     |
+			| Forex Seling    |
 		And I select current line in "List" table
 		And I input "1" text in "Multiplicity" field
 		And I input "1" text in "Rate" field
@@ -133,18 +133,18 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click the button named "FormCreate"
 		And I click Select button of "Currency from" field
 		And I go to line in "List" table
-			| Code |
-			| USD  |
+			| Code    |
+			| USD     |
 		And I select current line in "List" table
 		And I click Select button of "Currency to" field
 		And I go to line in "List" table
-			| Code |
-			| EUR  |
+			| Code    |
+			| EUR     |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| Description    |
-			| Forex Seling |
+			| Description     |
+			| Forex Seling    |
 		And I select current line in "List" table
 		And I input "1" text in "Multiplicity" field
 		And I input "0,8900" text in "Rate" field
@@ -154,18 +154,18 @@ Scenario: _006101 filling in exchange rates in registers
 		And I click the button named "FormCreate"
 		And I click Select button of "Currency from" field
 		And I go to line in "List" table
-			| Code |
-			| USD  |
+			| Code    |
+			| USD     |
 		And I select current line in "List" table
 		And I click Select button of "Currency to" field
 		And I go to line in "List" table
-			| Code |
-			| TRY  |
+			| Code    |
+			| TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Source" field
 		And I go to line in "List" table
-			| Description    |
-			| Forex Seling |
+			| Description     |
+			| Forex Seling    |
 		And I select current line in "List" table
 		And I input "1" text in "Multiplicity" field
 		And I input "0,1770" text in "Rate" field

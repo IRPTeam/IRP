@@ -69,6 +69,18 @@ Function IsUseRetail() Export
 	Return GetFunctionalOption("UseRetail");
 EndFunction
 
+Function IsUseLockDataModification() Export
+	Return GetFunctionalOption("UseLockDataModification");
+EndFunction
+
+Function IsUseAdditionalTableControlDocument() Export
+	Return GetFunctionalOption("UseAdditionalTableControlDocument");
+EndFunction
+
+Function IsUseSimpleMode() Export
+	Return GetFunctionalOption("UseSimpleMode");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

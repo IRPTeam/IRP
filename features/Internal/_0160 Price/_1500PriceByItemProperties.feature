@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Price
@@ -35,17 +35,17 @@ Scenario: _150000 preparation
 		* For item type Clothes
 			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 			And I go to line in "List" table
-				| Description |
-				| Clothes     |
+				| Description     |
+				| Clothes         |
 			And I select current line in "List" table
 			And I go to line in "AvailableAttributes" table
-				| Attribute |
-				| Color     |
+				| Attribute     |
+				| Color         |
 			And I set "Affect pricing" checkbox in "AvailableAttributes" table
 			And I finish line editing in "AvailableAttributes" table
 			And I go to line in "AvailableAttributes" table
-				| Attribute |
-				| Size      |
+				| Attribute     |
+				| Size          |
 			And I set "Affect pricing" checkbox in "AvailableAttributes" table
 			And I finish line editing in "AvailableAttributes" table
 			And I click "Save and close" button
@@ -53,12 +53,12 @@ Scenario: _150000 preparation
 		* For item type Shoes
 			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 			And I go to line in "List" table
-				| Description |
-				| Shoes     |
+				| Description     |
+				| Shoes           |
 			And I select current line in "List" table
 			And I go to line in "AvailableAttributes" table
-				| Attribute |
-				| Size      |
+				| Attribute     |
+				| Size          |
 			And I set "Affect pricing" checkbox in "AvailableAttributes" table
 			And I finish line editing in "AvailableAttributes" table
 			And I click "Save and close" button
@@ -77,73 +77,73 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'  |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 	* Filling in tabular part
 		And I change "Set price" radio button value to "By Properties"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| Description |
-			| Clothes     |
+			| Description    |
+			| Clothes        |
 		And I select current line in "List" table
 		And I click the button named "PriceKeyListAdd"
 		And I click choice button of "Item" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Size          | L           |
+			| Additional attribute   | Description    |
+			| Size                   | L              |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Color         | Green       |
+			| Additional attribute   | Description    |
+			| Color                  | Green          |
 		And I select current line in "List" table
 		And I input "350,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 		And I click the button named "PriceKeyListAdd"
 		And I click choice button of "Item" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Size          | S           |
+			| Additional attribute   | Description    |
+			| Size                   | S              |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Color         | Yellow       |
+			| Additional attribute   | Description    |
+			| Color                  | Yellow         |
 		And I select current line in "List" table
 		And I input "300,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 		And I click the button named "PriceKeyListAdd"
 		And I click choice button of "Item" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Size          | M           |
+			| Additional attribute   | Description    |
+			| Size                   | M              |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Color         | Yellow       |
+			| Additional attribute   | Description    |
+			| Color                  | Yellow         |
 		And I select current line in "List" table
 		And I input "415,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
@@ -157,20 +157,20 @@ Scenario: _150001 basic price entry by properties (including VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                          | 'Price list type'     | 'Price type'        | 'Description' |
-		| '$$NumberPriceListBasicPriceByProperties150001$$' | 'Price by properties' | 'Basic Price Types' | 'Basic price' |
+		| 'Number'                                           | 'Price list type'      | 'Price type'         | 'Description'   |
+		| '$$NumberPriceListBasicPriceByProperties150001$$'  | 'Price by properties'  | 'Basic Price Types'  | 'Basic price'   |
 		And I close all client application windows
 	* Create Price key for Dress
 		Given I open hyperlink "e1cib/list/Catalog.PriceKeys"
 		And "List" table contains lines
-			| 'Price key'|
-			| 'L/Green'  |
-			| 'S/Yellow' |
-			| 'M/Yellow' |
+			| 'Price key'    |
+			| 'L/Green'      |
+			| 'S/Yellow'     |
+			| 'M/Yellow'     |
 		* PriceKeys MD5 completion check
 			And I go to line in "List" table
-			| 'Price key'|
-			| 'S/Yellow' |
+			| 'Price key'    |
+			| 'S/Yellow'     |
 			And I select current line in "List" table
 			And field "Affect pricing MD5" is filled
 		And I close all client application windows
@@ -185,16 +185,16 @@ Scenario: _150002 basic price entry by items (including VAT)
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Price Types'  |
+			| 'Description'          |
+			| 'Basic Price Types'    |
 		And I select current line in "List" table
 		And I input begin of the current month date in "Date" field
 	And I move to "Item keys" tab
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
+		| 'Description'   |
+		| 'Dress'         |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "700,00" text in "Price" field of "ItemList" table
@@ -202,8 +202,8 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Trousers'       |
+		| 'Description'   |
+		| 'Trousers'      |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "500,00" text in "Price" field of "ItemList" table
@@ -211,8 +211,8 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Shirt'       |
+		| 'Description'   |
+		| 'Shirt'         |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "400,00" text in "Price" field of "ItemList" table
@@ -220,23 +220,23 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Boots'       |
+		| 'Description'   |
+		| 'Boots'         |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "6000,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Unit" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'Boots (12 pcs)' |
+		| 'Description'      |
+		| 'Boots (12 pcs)'   |
 	And I select current line in "List" table	
 	And I finish line editing in "ItemList" table
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'High shoes'       |
+		| 'Description'   |
+		| 'High shoes'    |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "400,00" text in "Price" field of "ItemList" table
@@ -244,16 +244,16 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Boots'       |
+		| 'Description'   |
+		| 'Boots'         |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "700,00" text in "Price" field of "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Unit" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description'    |
-		| 'pcs' |
+		| 'Description'   |
+		| 'pcs'           |
 	And I select current line in "List" table	
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
@@ -269,73 +269,73 @@ Scenario: _150003 check that the current prices are displayed in the Item
 	* OPen item Dress
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
+		| 'Description'   |
+		| 'Dress'         |
 		And I select current line in "List" table
 	* Open price report (tab Price info)
 		And In this window I click command interface button "Price info"
 		Then "Result" spreadsheet document is equal by template
-			| 'Prices on*'       | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                          |
-			| ''                 | ''          | 'Price'             | 'Reason'                    | 'Price'                   | 'Reason'              | 'Price'               | 'Reason'                    |
-			| 'Dress'            | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'       | '466,1'                   | 'Item key = S/Yellow' | '605'                 | 'Item key = S/Yellow'       |
-			| 'Dress'            | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'        | '440,68'                  | 'Item key = XS/Blue'  | '572'                 | 'Item key = XS/Blue'        |
-			| 'Dress'            | 'M/White'   | '520'               | 'Item key = M/White'        | '440,68'                  | 'Item key = M/White'  | '572'                 | 'Item key = M/White'        |
-			| 'Dress'            | 'L/Green'   | '550'               | 'Item key = L/Green'        | '466,1'                   | 'Item key = L/Green'  | '605'                 | 'Item key = L/Green'        |
-			| 'Dress'            | 'XL/Green'  | '550'               | 'Item key = XL/Green'       | '466,1'                   | 'Item key = XL/Green' | '605'                 | 'Item key = XL/Green'       |
-			| 'Dress'            | 'Dress/A-8' | '3 000'             | 'Specification = Dress/A-8' | ''                        | ''                    | '3 300'               | 'Specification = Dress/A-8' |
-			| 'Dress'            | 'XXL/Red'   | '700'               | 'Item = Dress'              | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'M/Brown'   | '700'               | 'Item = Dress'              | ''                        | ''                    | ''                    | ''                          |
-			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'All prices'       | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                          |
-			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| '1. By item keys'  | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'S/Yellow'  | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
-			| 'Dress'            | 'XS/Blue'   | '520'               | ''                          | '440,68'                  | ''                    | '572'                 | ''                          |
-			| 'Dress'            | 'M/White'   | '520'               | ''                          | '440,68'                  | ''                    | '572'                 | ''                          |
-			| 'Dress'            | 'L/Green'   | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
-			| 'Dress'            | 'XL/Green'  | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
-			| '2. By properties' | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'S/Yellow'  | '300'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'L/Green'   | '350'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| '3. By items'      | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'S/Yellow'  | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'XS/Blue'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'M/White'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'L/Green'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'XL/Green'  | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'XXL/Red'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
-			| 'Dress'            | 'M/Brown'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Prices on*'         | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| ''                   | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Item'               | 'Item Key'    | 'Basic Price Types'   | ''                            | 'Basic Price without VAT'   | ''                      | 'Dependent Price New'   | ''                             |
+			| ''                   | ''            | 'Price'               | 'Reason'                      | 'Price'                     | 'Reason'                | 'Price'                 | 'Reason'                       |
+			| 'Dress'              | 'S/Yellow'    | '550'                 | 'Item key = S/Yellow'         | '466,1'                     | 'Item key = S/Yellow'   | '605'                   | 'Item key = S/Yellow'          |
+			| 'Dress'              | 'XS/Blue'     | '520'                 | 'Item key = XS/Blue'          | '440,68'                    | 'Item key = XS/Blue'    | '572'                   | 'Item key = XS/Blue'           |
+			| 'Dress'              | 'M/White'     | '520'                 | 'Item key = M/White'          | '440,68'                    | 'Item key = M/White'    | '572'                   | 'Item key = M/White'           |
+			| 'Dress'              | 'L/Green'     | '550'                 | 'Item key = L/Green'          | '466,1'                     | 'Item key = L/Green'    | '605'                   | 'Item key = L/Green'           |
+			| 'Dress'              | 'XL/Green'    | '550'                 | 'Item key = XL/Green'         | '466,1'                     | 'Item key = XL/Green'   | '605'                   | 'Item key = XL/Green'          |
+			| 'Dress'              | 'Dress/A-8'   | '3 000'               | 'Specification = Dress/A-8'   | ''                          | ''                      | '3 300'                 | 'Specification = Dress/A-8'    |
+			| 'Dress'              | 'XXL/Red'     | '700'                 | 'Item = Dress'                | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'M/Brown'     | '700'                 | 'Item = Dress'                | ''                          | ''                      | ''                      | ''                             |
+			| ''                   | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'All prices'         | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| ''                   | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Item'               | 'Item Key'    | 'Basic Price Types'   | ''                            | 'Basic Price without VAT'   | ''                      | 'Dependent Price New'   | ''                             |
+			| ''                   | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| '1. By item keys'    | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'S/Yellow'    | '550'                 | ''                            | '466,1'                     | ''                      | '605'                   | ''                             |
+			| 'Dress'              | 'XS/Blue'     | '520'                 | ''                            | '440,68'                    | ''                      | '572'                   | ''                             |
+			| 'Dress'              | 'M/White'     | '520'                 | ''                            | '440,68'                    | ''                      | '572'                   | ''                             |
+			| 'Dress'              | 'L/Green'     | '550'                 | ''                            | '466,1'                     | ''                      | '605'                   | ''                             |
+			| 'Dress'              | 'XL/Green'    | '550'                 | ''                            | '466,1'                     | ''                      | '605'                   | ''                             |
+			| '2. By properties'   | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'S/Yellow'    | '300'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'L/Green'     | '350'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| '3. By items'        | ''            | ''                    | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'S/Yellow'    | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'XS/Blue'     | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'M/White'     | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'L/Green'     | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'XL/Green'    | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'XXL/Red'     | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
+			| 'Dress'              | 'M/Brown'     | '700'                 | ''                            | ''                          | ''                      | ''                      | ''                             |
 		* Check to display the current prices at an earlier date
 			And I input "12.12.2019" text in "on date" field
 			And I click "Refresh" button
 			Then "Result" spreadsheet document is equal by template
-			| 'Prices on 12.12.2019' | ''          | ''                  | ''                          | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
-			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    |
-			| ''                     | ''          | 'Price'             | 'Reason'                    | 'Price'                   | 'Reason'              |
-			| 'Dress'                | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'       | '466,1'                   | 'Item key = S/Yellow' |
-			| 'Dress'                | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'        | '440,68'                  | 'Item key = XS/Blue'  |
-			| 'Dress'                | 'M/White'   | '520'               | 'Item key = M/White'        | '440,68'                  | 'Item key = M/White'  |
-			| 'Dress'                | 'L/Green'   | '550'               | 'Item key = L/Green'        | '466,1'                   | 'Item key = L/Green'  |
-			| 'Dress'                | 'XL/Green'  | '550'               | 'Item key = XL/Green'       | '466,1'                   | 'Item key = XL/Green' |
-			| 'Dress'                | 'Dress/A-8' | '3 000'             | 'Specification = Dress/A-8' | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
-			| 'All prices'           | ''          | ''                  | ''                          | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
-			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    |
-			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
-			| '1. By item keys'      | ''          | ''                  | ''                          | ''                        | ''                    |
-			| 'Dress'                | 'S/Yellow'  | '550'               | ''                          | '466,1'                   | ''                    |
-			| 'Dress'                | 'XS/Blue'   | '520'               | ''                          | '440,68'                  | ''                    |
-			| 'Dress'                | 'M/White'   | '520'               | ''                          | '440,68'                  | ''                    |
-			| 'Dress'                | 'L/Green'   | '550'               | ''                          | '466,1'                   | ''                    |
-			| 'Dress'                | 'XL/Green'  | '550'               | ''                          | '466,1'                   | ''                    |
-			| '2. By properties'     | ''          | ''                  | ''                          | ''                        | ''                    |
-			| '3. By items'          | ''          | ''                  | ''                          | ''                        | ''                    |
+			| 'Prices on 12.12.2019'   | ''            | ''                    | ''                            | ''                          | ''                       |
+			| ''                       | ''            | ''                    | ''                            | ''                          | ''                       |
+			| 'Item'                   | 'Item Key'    | 'Basic Price Types'   | ''                            | 'Basic Price without VAT'   | ''                       |
+			| ''                       | ''            | 'Price'               | 'Reason'                      | 'Price'                     | 'Reason'                 |
+			| 'Dress'                  | 'S/Yellow'    | '550'                 | 'Item key = S/Yellow'         | '466,1'                     | 'Item key = S/Yellow'    |
+			| 'Dress'                  | 'XS/Blue'     | '520'                 | 'Item key = XS/Blue'          | '440,68'                    | 'Item key = XS/Blue'     |
+			| 'Dress'                  | 'M/White'     | '520'                 | 'Item key = M/White'          | '440,68'                    | 'Item key = M/White'     |
+			| 'Dress'                  | 'L/Green'     | '550'                 | 'Item key = L/Green'          | '466,1'                     | 'Item key = L/Green'     |
+			| 'Dress'                  | 'XL/Green'    | '550'                 | 'Item key = XL/Green'         | '466,1'                     | 'Item key = XL/Green'    |
+			| 'Dress'                  | 'Dress/A-8'   | '3 000'               | 'Specification = Dress/A-8'   | ''                          | ''                       |
+			| ''                       | ''            | ''                    | ''                            | ''                          | ''                       |
+			| 'All prices'             | ''            | ''                    | ''                            | ''                          | ''                       |
+			| ''                       | ''            | ''                    | ''                            | ''                          | ''                       |
+			| 'Item'                   | 'Item Key'    | 'Basic Price Types'   | ''                            | 'Basic Price without VAT'   | ''                       |
+			| ''                       | ''            | ''                    | ''                            | ''                          | ''                       |
+			| '1. By item keys'        | ''            | ''                    | ''                            | ''                          | ''                       |
+			| 'Dress'                  | 'S/Yellow'    | '550'                 | ''                            | '466,1'                     | ''                       |
+			| 'Dress'                  | 'XS/Blue'     | '520'                 | ''                            | '440,68'                    | ''                       |
+			| 'Dress'                  | 'M/White'     | '520'                 | ''                            | '440,68'                    | ''                       |
+			| 'Dress'                  | 'L/Green'     | '550'                 | ''                            | '466,1'                     | ''                       |
+			| 'Dress'                  | 'XL/Green'    | '550'                 | ''                            | '466,1'                     | ''                       |
+			| '2. By properties'       | ''            | ''                    | ''                            | ''                          | ''                       |
+			| '3. By items'            | ''            | ''                    | ''                            | ''                          | ''                       |
 
 
 
@@ -346,8 +346,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description' | 'Number'                                          | 'Price list type'    |
-		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -356,14 +356,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item  | Item key  |
-				| Dress | Dress/A-8 |
+				| Item     | Item key      |
+				| Dress    | Dress/A-8     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -371,14 +371,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  |  'Quantity'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000'  | 'pcs'  |
+			| 'Item'    | 'Price'      | 'Item key'    | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '3 100,00'   | 'Dress/A-8'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -387,14 +387,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item  | Item key  |
-				| Dress | Dress/A-8 |
+				| Item     | Item key      |
+				| Dress    | Dress/A-8     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -402,14 +402,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
+			| 'Item'    | 'Price'      | 'Item key'    | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '3 100,00'   | 'Dress/A-8'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -418,14 +418,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item  | Item key  |
-				| Dress | Dress/A-8 |
+				| Item     | Item key      |
+				| Dress    | Dress/A-8     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -433,14 +433,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
+			| 'Item'    | 'Price'      | 'Item key'    | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '3 100,00'   | 'Dress/A-8'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -449,14 +449,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item  | Item key  |
-				| Dress | Dress/A-8 |
+				| Item     | Item key      |
+				| Dress    | Dress/A-8     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -464,14 +464,14 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
+			| 'Item'    | 'Price'      | 'Item key'    | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '3 100,00'   | 'Dress/A-8'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 
 
@@ -479,8 +479,8 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description' | 'Number'                                          | 'Price list type'    |
-		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 	* Price calculation in the Sales order
@@ -489,14 +489,14 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 		And in the table "ItemList" I click "Add" button
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'    |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
+			| 'Item key'    |
+			| '36/18SD'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -504,24 +504,24 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity' |
-				| 'Boots' | '700,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    |
+				| 'Item'     | 'Price'     | 'Item key'    | 'Price type'           | 'Quantity'     |
+				| 'Boots'    | '700,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'        |
 		* By box
 			And I activate "Unit" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'    |
-				| 'Boots (12 pcs)' |
+				| 'Description'        |
+				| 'Boots (12 pcs)'     |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'    | 'Item key' | 'Price type'        | 'Quantity' | 'Unit'           |
-				| 'Boots' | '6 000,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    | 'Boots (12 pcs)' |
+				| 'Item'     | 'Price'       | 'Item key'    | 'Price type'           | 'Quantity'    | 'Unit'               |
+				| 'Boots'    | '6 000,00'    | '36/18SD'     | 'Basic Price Types'    | '1,000'       | 'Boots (12 pcs)'     |
 			And I close all client application windows
 
 
@@ -531,8 +531,8 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description' | 'Number'                                          | 'Price list type'    |
-		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 	* Price calculation in the Sales order
@@ -541,13 +541,13 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 		* Filling partner and agreement
 			And I click Choice button of the field named "Partner"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 		* Add item by barcode
@@ -559,9 +559,9 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 			And I move to the next attribute
 		* Check
 			And "ItemList" table became equal
-				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |
-				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'pcs'            | '700,00'   | '18%' | '593,22'     | '700,00'       |
-				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'Boots (12 pcs)' | '6 000,00' | '18%' | '5 084,75'   | '6 000,00'     |		
+				| 'Item key'    | 'Price type'           | 'Item'     | 'Quantity'    | 'Unit'              | 'Price'       | 'VAT'    | 'Net amount'    | 'Total amount'     |
+				| '36/18SD'     | 'Basic Price Types'    | 'Boots'    | '1,000'       | 'pcs'               | '700,00'      | '18%'    | '593,22'        | '700,00'           |
+				| '36/18SD'     | 'Basic Price Types'    | 'Boots'    | '1,000'       | 'Boots (12 pcs)'    | '6 000,00'    | '18%'    | '5 084,75'      | '6 000,00'         |
 			And I close all client application windows
 
 
@@ -570,8 +570,8 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description' | 'Number'                                          | 'Price list type'    |
-		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -580,28 +580,28 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Bound Dress+Shirt       |
+				| Description           |
+				| Bound Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item              | Item key  |
-				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+				| Item                 | Item key                          |
+				| Bound Dress+Shirt    | Bound Dress+Shirt/Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
+			| 'Item'                | 'Price'      | 'Item key'                        | 'Quantity'   | 'Unit'    |
+			| 'Bound Dress+Shirt'   | '1 100,00'   | 'Bound Dress+Shirt/Dress+Shirt'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -610,28 +610,28 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Bound Dress+Shirt       |
+				| Description           |
+				| Bound Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item              | Item key  |
-				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+				| Item                 | Item key                          |
+				| Bound Dress+Shirt    | Bound Dress+Shirt/Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
+			| 'Item'                | 'Price'      | 'Item key'                        | 'Quantity'   | 'Unit'    |
+			| 'Bound Dress+Shirt'   | '1 100,00'   | 'Bound Dress+Shirt/Dress+Shirt'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -640,28 +640,28 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Bound Dress+Shirt       |
+				| Description           |
+				| Bound Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item              | Item key  |
-				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+				| Item                 | Item key                          |
+				| Bound Dress+Shirt    | Bound Dress+Shirt/Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
+			| 'Item'                | 'Price'      | 'Item key'                        | 'Quantity'   | 'Unit'    |
+			| 'Bound Dress+Shirt'   | '1 100,00'   | 'Bound Dress+Shirt/Dress+Shirt'   | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -670,28 +670,28 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Bound Dress+Shirt       |
+				| Description           |
+				| Bound Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item              | Item key  |
-				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+				| Item                 | Item key                          |
+				| Bound Dress+Shirt    | Bound Dress+Shirt/Dress+Shirt     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' |  'pcs'  |
+			| 'Item'                | 'Price'      | 'Item key'                        | 'Unit'    |
+			| 'Bound Dress+Shirt'   | '1 100,00'   | 'Bound Dress+Shirt/Dress+Shirt'   | 'pcs'     |
 		And I close all client application windows
 
 Scenario: _150005 price check by properties
@@ -702,28 +702,28 @@ Scenario: _150005 price check by properties
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item     | Item key  |
-				| Dress    | L/Green |
+				| Item     | Item key     |
+				| Dress    | L/Green      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '350,00'   | 'L/Green'    | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -732,28 +732,28 @@ Scenario: _150005 price check by properties
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item     | Item key  |
-				| Dress    | L/Green |
+				| Item     | Item key     |
+				| Dress    | L/Green      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '350,00'   | 'L/Green'    | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -762,28 +762,28 @@ Scenario: _150005 price check by properties
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item     | Item key  |
-				| Dress    | L/Green |
+				| Item     | Item key     |
+				| Dress    | L/Green      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '350,00'   | 'L/Green'    | '1,000'      | 'pcs'     |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -792,28 +792,28 @@ Scenario: _150005 price check by properties
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Item     | Item key  |
-				| Dress    | L/Green |
+				| Item     | Item key     |
+				| Dress    | L/Green      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Quantity'   | 'Unit'    |
+			| 'Dress'   | '350,00'   | 'L/Green'    | '1,000'      | 'pcs'     |
 		And I close all client application windows
 
 
@@ -825,42 +825,42 @@ Scenario: _150006 check the redrawing of columns in the price list for additiona
 	* Check the addition of properties for item type Clothes
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| Description |
-			| Clothes     |
+			| Description    |
+			| Clothes        |
 		And I select current line in "List" table
 		And I click the button named "PriceKeyListAdd"
 		And "PriceKeyList" table became equal
-			| 'Item' | 'Size' | 'Color' | 'Price' |
-			| ''     | ''     | ''      | ''      |
+			| 'Item'   | 'Size'   | 'Color'   | 'Price'    |
+			| ''       | ''       | ''        | ''         |
 		And I click choice button of the attribute named "PriceKeyListItem" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Size'          | 'M'           |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Brown'       |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Brown'          |
 		And I select current line in "List" table
 		And I input "200,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 	* Check the addition of properties for item type Clothes
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| Description |
-			| Shoes     |
+			| Description    |
+			| Shoes          |
 		And I select current line in "List" table
 		And I click the button named "PriceKeyListAdd"
 		And "PriceKeyList" table became equal
-			| 'Item' | 'Size' | 'Price' |
-			| ''     | ''     | ''      |
+			| 'Item'   | 'Size'   | 'Price'    |
+			| ''       | ''       | ''         |
 	And I close all client application windows
 
 
@@ -873,8 +873,8 @@ Scenario: _150007 check input by line in the price list for additional propertie
 		And I change "Set price" radio button value to "By Properties"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 		And I click the button named "PriceKeyListAdd"
 		And I select "dress" by string from the drop-down list named "PriceKeyListItem" in "PriceKeyList" table
@@ -884,8 +884,8 @@ Scenario: _150007 check input by line in the price list for additional propertie
 		And I select "bla" from "Color" drop-down list by string in "PriceKeyList" table
 	* Check entered values
 		And "PriceKeyList" table contains lines
-		| 'Item'  | 'Size' | 'Color' |
-		| 'Dress' | '36'   | 'Black' |
+		| 'Item'   | 'Size'  | 'Color'   |
+		| 'Dress'  | '36'    | 'Black'   |
 	And I close all client application windows
 
 
@@ -898,26 +898,26 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'  |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 	* Filling in prices by item key by price type Basic Price Types
 		And I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 	* Check Input unit
 		And "ItemList" table contains lines
-			| 'Input price' | 'Item'  | 'Input unit' | 'Price' |
-			| ''            | 'Dress' | 'pcs'        | ''      |
+			| 'Input price'   | 'Item'    | 'Input unit'   | 'Price'    |
+			| ''              | 'Dress'   | 'pcs'          | ''         |
 	* Check Price calculation when change input price
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
+			| 'Description'          |
+			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I move to the next attribute
@@ -927,43 +927,43 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I finish line editing in "ItemList" table
 		And I move to the next attribute
 		And "ItemList"  table contains lines
-			| '#' | 'Input price' | 'Item'  | 'Input unit'        | 'Price'    |
-			| '1' | '500,000'     | 'Dress' | 'box Dress (8 pcs)' | '62,50' |
+			| '#'   | 'Input price'   | 'Item'    | 'Input unit'          | 'Price'    |
+			| '1'   | '500,000'       | 'Dress'   | 'box Dress (8 pcs)'   | '62,50'    |
 		And I activate field named "ItemListInputPrice" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "600,000" text in the field named "ItemListInputPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to the next attribute
 		And "ItemList" table contains lines
-			| '#' | 'Input price' | 'Item'  | 'Input unit'        | 'Price'    |
-			| '1' | '600,000'     | 'Dress' | 'box Dress (8 pcs)' | '75,00' |
+			| '#'   | 'Input price'   | 'Item'    | 'Input unit'          | 'Price'    |
+			| '1'   | '600,000'       | 'Dress'   | 'box Dress (8 pcs)'   | '75,00'    |
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemListInputUnit" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| '#' | 'Input price' | 'Item'  | 'Input unit' | 'Price'  |
-			| '1' | '600,000'     | 'Dress' | 'pcs'        | '600,00' |
+			| '#'   | 'Input price'   | 'Item'    | 'Input unit'   | 'Price'     |
+			| '1'   | '600,000'       | 'Dress'   | 'pcs'          | '600,00'    |
 	* Change Item
 		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
+			| 'Description'          |
+			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| '#' | 'Input price' | 'Item'  | 'Input unit' | 'Price'  |
-			| '1' | '600,000'     | 'Boots' | 'pcs'        | '600,00' |		
+			| '#'   | 'Input price'   | 'Item'    | 'Input unit'   | 'Price'     |
+			| '1'   | '600,000'       | 'Boots'   | 'pcs'          | '600,00'    |
 		And I close all client application windows
 
 
@@ -976,44 +976,44 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'  |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 	* Filling in prices by item key by price type Basic Price Types
 		And I click the button named "PriceKeyListAdd"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 		And I click the button named "PriceKeyListAdd"
 		And I click choice button of the attribute named "PriceKeyListItem" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Size" field in "PriceKeyList" table
 		And I click choice button of "Size" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' | 'Code' | 'Description' |
-			| 'Size'                 | 'XS'                          | '9'    | 'XS'          |
+			| 'Additional attribute'   | 'Code'   | 'Description'    |
+			| 'Size'                   | '9'      | 'XS'             |
 		And I select current line in "List" table
 		And I activate "Color" field in "PriceKeyList" table
 		And I click choice button of "Color" attribute in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' | 'Code' | 'Description' |
-			| 'Color'                | 'Blue'                        | '20'   | 'Blue'        |
+			| 'Additional attribute'   | 'Code'   | 'Description'    |
+			| 'Color'                  | '20'     | 'Blue'           |
 		And I select current line in "List" table
 	* Check Input unit
 		And "PriceKeyList" table contains lines
-			| 'Item'  | 'Input unit' | 'Size' | 'Color' | 'Input price' | 'Price' |
-			| 'Dress' | 'pcs'        | 'XS'   | 'Blue'  | ''            | ''      |		
+			| 'Item'    | 'Input unit'   | 'Size'   | 'Color'   | 'Input price'   | 'Price'    |
+			| 'Dress'   | 'pcs'          | 'XS'     | 'Blue'    | ''              | ''         |
 	* Check Price calculation when change input price
 		And I select current line in "PriceKeyList" table
 		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
+			| 'Description'          |
+			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And I finish line editing in "PriceKeyList" table
 		And I move to the next attribute
@@ -1023,43 +1023,43 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I finish line editing in "PriceKeyList" table
 		And I move to the next attribute
 		And "PriceKeyList"  table contains lines
-			| 'Item'  | 'Input unit'        | 'Size' | 'Color' | 'Input price' | 'Price'    |
-			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '500,00'     | '62,50' |
+			| 'Item'    | 'Input unit'          | 'Size'   | 'Color'   | 'Input price'   | 'Price'    |
+			| 'Dress'   | 'box Dress (8 pcs)'   | 'XS'     | 'Blue'    | '500,00'        | '62,50'    |
 		And I activate field "Input price" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table
 		And I input "600,000" text in "Input price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
 		And I move to the next attribute
 		And "PriceKeyList" table contains lines
-			| 'Item'  | 'Input unit'        | 'Size' | 'Color' | 'Input price' | 'Price'    |
-			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '600,00'     | '75,00' |
+			| 'Item'    | 'Input unit'          | 'Size'   | 'Color'   | 'Input price'   | 'Price'    |
+			| 'Dress'   | 'box Dress (8 pcs)'   | 'XS'     | 'Blue'    | '600,00'        | '75,00'    |
 	* Check Price calculation when change Input unit
 		And I activate field named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table
 		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I finish line editing in "PriceKeyList" table
 		And "PriceKeyList" table contains lines
-			| 'Item'  | 'Input unit' | 'Size' | 'Color' | 'Input price' | 'Price'  |
-			| 'Dress' | 'pcs'        | 'XS'   | 'Blue'  | '600,00'      | '600,00' |
+			| 'Item'    | 'Input unit'   | 'Size'   | 'Color'   | 'Input price'   | 'Price'     |
+			| 'Dress'   | 'pcs'          | 'XS'     | 'Blue'    | '600,00'        | '600,00'    |
 	* Change Item
 		And I click choice button of the attribute named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'box Dress (8 pcs)' |
+			| 'Description'          |
+			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And I activate field named "PriceKeyListItem" in "PriceKeyList" table
 		And I click choice button of the attribute named "PriceKeyListItem" in "PriceKeyList" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'    |
 			| 'Trousers'       |
 		And I select current line in "List" table
 		And "PriceKeyList" table contains lines
-			| 'Item'     | 'Input unit' | 'Size' | 'Color' | 'Input price' | 'Price'  |
-			| 'Trousers' | 'pcs'        | 'XS'   | 'Blue'  | '600,00'      | '600,00' |
+			| 'Item'       | 'Input unit'   | 'Size'   | 'Color'   | 'Input price'   | 'Price'     |
+			| 'Trousers'   | 'pcs'          | 'XS'     | 'Blue'    | '600,00'        | '600,00'    |
 		And I close all client application windows
 
 		

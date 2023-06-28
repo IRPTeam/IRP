@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -41,58 +41,58 @@ Scenario: _012001 adding partners (customers) to a segment (register)
 		And I click Select button of "Segment" field
 		And Delay 2
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'  |
+			| 'Description'    |
+			| 'Retail'         |
 		And I select current line in "List" table
 		And Delay 2
 		And I click Select button of "Partner" field
 		And Delay 5
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Ferron BP' |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines
-			| Segment | Partner |
-			| Retail | Ferron BP |
+			| Segment   | Partner      |
+			| Retail    | Ferron BP    |
 	* Adding partner Kalipso to the Dealer Segment
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Select button of "Segment" field
 		And Delay 2
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dealer'  |
+			| 'Description'    |
+			| 'Dealer'         |
 		And I select current line in "List" table
 		And Delay 2
 		And I click Select button of "Partner" field
 		And Delay 5
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines
-			| Segment | Partner |
-			| Dealer | Kalipso |
+			| Segment   | Partner    |
+			| Dealer    | Kalipso    |
 	* Adding partner Kalipso to the Retail Segment
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Select button of "Segment" field
 		And Delay 2
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'  |
+			| 'Description'    |
+			| 'Retail'         |
 		And I select current line in "List" table
 		And Delay 2
 		And I click Select button of "Partner" field
 		And I click the button named "FormList"
 		And Delay 5
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
@@ -110,47 +110,47 @@ Scenario: _012002 adding partners (customers) to 2 segments at the same time (re
 		And I click Select button of "Segment" field
 		And Delay 2
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dealer'  |
+			| 'Description'    |
+			| 'Dealer'         |
 		And I select current line in "List" table
 		And Delay 2
 		And I click Select button of "Partner" field
 		And Delay 5
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Ferron BP' |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 10
 	* Check to add a Ferron BP partner to 2 segments at the same time
 		And "List" table contains lines
-			| Segment | Partner |
-			| Retail | Ferron BP |
-			| Dealer | Ferron BP |
+			| Segment   | Partner      |
+			| Retail    | Ferron BP    |
+			| Dealer    | Ferron BP    |
 
 Scenario: _012003 filling in the segment of managers in the customers
 	* Opening the partner catalog
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling Manager segment for partner Ferron BP
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP' |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Manager segment" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Region 1'  |
+			| 'Description'    |
+			| 'Region 1'       |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Filling Manager segment for partner Kalipso
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Manager segment" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Region 2'  |
+			| 'Description'    |
+			| 'Region 2'       |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	
@@ -167,23 +167,23 @@ Scenario: _012004 create common Partner term
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'TRY'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'       |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
@@ -191,8 +191,8 @@ Scenario: _012004 create common Partner term
 		And I input "4" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Basic Partner terms, TRY" text in the field named "Description_en"
@@ -209,31 +209,31 @@ Scenario: _012004 create common Partner term
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'USD'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'USD'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'       |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
 		And I input "5" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Basic Partner terms, $" text in the field named "Description_en"
@@ -251,35 +251,35 @@ Scenario: _012004 create common Partner term
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I input "m" text in "Multi currency movement type" field
 		And I select from "Multi currency movement type" drop-down list by "try" string
 		And I move to the next attribute		
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'TRY'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price without VAT'       |
+				| 'Description'                 |
+				| 'Basic Price without VAT'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
 		And I input "4" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Basic Partner terms, without VAT" text in the field named "Description_en"
@@ -300,24 +300,24 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'USD'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'USD'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'       |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'       |
+				| 'Description'     |
+				| 'Kalipso'         |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price includes tax"
@@ -325,8 +325,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		And I input "Personal Partner terms, $" text in the field named "Description_en"
@@ -344,23 +344,23 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'TRY'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| Description         |
-				| Vendor price, TRY |
+				| Description           |
+				| Vendor price, TRY     |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price includes tax"
@@ -379,23 +379,23 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'       |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'USD'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'USD'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-			| Description         |
-			| Vendor price, USD |
+			| Description          |
+			| Vendor price, USD    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price includes tax"
@@ -421,28 +421,28 @@ Scenario: _012007 create common Partner term with Item Segment
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'EUR'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'EUR'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'       |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I click Select button of "Item segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Sale autum'       |
+				| 'Description'     |
+				| 'Sale autum'      |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I input "01.11.2018" text in "End of Use" field
@@ -467,24 +467,24 @@ Scenario: _012010 create Partner term without currency (negative test)
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
 		Then "Price types" window is opened
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Basic Price Types'       |
+				| 'Description'           |
+				| 'Basic Price Types'     |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I click Select button of "Item segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Sale autum'       |
+				| 'Description'     |
+				| 'Sale autum'      |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I click Open button of the field named "Description_en"
@@ -497,7 +497,7 @@ Scenario: _012010 create Partner term without currency (negative test)
 		If current window contains user messages Then
 		And I close all client application windows
 		When I Check the steps for Exception
-			|'Then I check for the "Agreements" catalog element with the "Description_en" 'Currency, TRY''|
+			| 'Then I check for the "Agreements" catalog element with the "Description_en" 'Currency, TRY''    |
 
 Scenario: _012011 create Partner term without price type (negative test)
 	* Opening an Partner term catalog
@@ -509,23 +509,23 @@ Scenario: _012011 create Partner term without price type (negative test)
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'       |
+				| 'Description'      |
+				| 'Main Company'     |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'TRY'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'       |
+				| 'Description'     |
+				| 'Retail'          |
 		And I select current line in "List" table
 		And I click Select button of "Item segment" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Sale autum'       |
+				| 'Description'     |
+				| 'Sale autum'      |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I click Open button of the field named "Description_en"
@@ -538,7 +538,7 @@ Scenario: _012011 create Partner term without price type (negative test)
 		If current window contains user messages Then
 		And I close all client application windows
 		When I Check the steps for Exception
-			|'Then I check for the "Agreements" catalog element with the "Description_en" 'Price Type, TRY''|
+			| 'Then I check for the "Agreements" catalog element with the "Description_en" 'Price Type, TRY''    |
 
 
 Scenario: _012012 create Partner term for other partners
@@ -553,13 +553,13 @@ Scenario: _012012 create Partner term for other partners
 		And I input "01.11.2022" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Description' | 'Type'         |
-			| 'TRY'         | 'Partner term' |
+			| 'Description'   | 'Type'            |
+			| 'TRY'           | 'Partner term'    |
 		And I select current line in "List" table
 		And I input "01.11.2022" text in "Start using" field
 		And Delay 3

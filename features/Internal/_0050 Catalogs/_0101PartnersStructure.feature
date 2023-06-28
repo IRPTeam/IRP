@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -53,8 +53,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I input "Ukraine" text in "Country" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'  |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
@@ -102,26 +102,26 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		Then I check for the "Partners" catalog element with the "Description_en" "Seven Brand" 
 	* Subordination of partners 'Alians', 'MIO' to the main partner 'Seven Brand'
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Alians'  |
+			| 'Description'    |
+			| 'Alians'         |
 		And I select current line in "List" table
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
+			| 'Description'    |
+			| 'Seven Brand'    |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to "Seven Brand"
 		And I click "Save and close" button
 		And Delay 5
 		Then "Partners" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO'  |
+			| 'Description'    |
+			| 'MIO'            |
 		And I select current line in "List" table
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
+			| 'Description'    |
+			| 'Seven Brand'    |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to "Seven Brand"
 		And I click "Save and close" button
@@ -131,18 +131,18 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click "Hierarchical list" button
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'MIO' |
-			| 'Alians'  |
+			| 'Description'    |
+			| 'MIO'            |
+			| 'Alians'         |
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
+			| 'Description'    |
+			| 'Seven Brand'    |
 		And I move one level down in "List" table
 		And "List" table contains lines
-			| 'Description' |
-			| 'Seven Brand' |
-			| 'Alians' |
-			| 'MIO' |
+			| 'Description'    |
+			| 'Seven Brand'    |
+			| 'Alians'         |
+			| 'MIO'            |
 		Then the number of "List" table lines is "равно" "3"
 
 		
@@ -151,13 +151,13 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling in the "Seven Brand" partner Kalipso as the main partner
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
+			| 'Description'    |
+			| 'Seven Brand'    |
 		And I select current line in "List" table
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'  |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to "Kalipso"
 		And I click "Save and close" button
@@ -167,18 +167,18 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click "Hierarchical list" button
 		And "List" table contains lines
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'  |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I move one level down in "List" table
 		And I move one level down in "List" table
 		And "List" table contains lines
-			| 'Description' |
-			| 'Kalipso' |
-			| 'Alians' |
-			| 'MIO' |
+			| 'Description'    |
+			| 'Kalipso'        |
+			| 'Alians'         |
+			| 'MIO'            |
 		Then the number of "List" table lines is "равно" "3"
 
 Scenario: _010009 check filling legal name in the partner term (complex partner structure)
@@ -187,8 +187,8 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click "List" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO'         |
+			| 'Description'    |
+			| 'MIO'            |
 		And I select current line in "List" table
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
@@ -201,11 +201,11 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I click "Create" button
 		And I click Select button of "Legal name" field
 		And "List" table became equal
-			| 'Description' |
-			| 'MIO'         |
+			| 'Description'    |
+			| 'MIO'            |
 		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO'         |
+			| 'Description'    |
+			| 'MIO'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "MIO"
 		And I close current window
@@ -213,8 +213,8 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 	* Mark for deletion legal name and check filling legal name from main partner
 		And In this window I click command interface button "Company"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO'         |
+			| 'Description'    |
+			| 'MIO'            |
 		And in the table "List" I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -222,14 +222,14 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I click "Create" button
 		And I click Select button of "Legal name" field
 		And "List" table contains lines
-			| 'Description'     |
-			| 'Company Kalipso' |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'MIO'         |
+			| 'Description'    |
+			| 'MIO'            |
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Company Kalipso' |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		And I close all client application windows

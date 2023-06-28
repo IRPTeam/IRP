@@ -2,7 +2,7 @@
 #Region LockLinkedRows
 
 Function LinkedRowsIntegrityIsEnable() Export
-	Return Constants.EnableLinkedRowsIntegrity.Get();
+	Return Not Constants.DisableLinkedRowsIntegrity.Get();
 EndFunction
 
 #EndRegion

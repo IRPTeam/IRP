@@ -386,8 +386,7 @@ Function PaymentList()
 		   |			THEN PaymentList.PlaningTransactionBasis.Ref
 		   |		ELSE NULL
 		   |	END AS CashTransferOrder,
-		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) 
-		   |		OR PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsOtherPartner,
+		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner,
 		   |	PaymentList.RevenueType AS RevenueType
 		   |INTO PaymentList
 		   |FROM
@@ -667,77 +666,81 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Key,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Account,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Amount
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Key,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Account,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Commission AS Amount
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	(PaymentList.IsTransferFromPOS
-		   |	AND NOT PaymentList.CommissionIsSeparate)
-		   |	OR (PaymentList.IsPaymentFromCustomerByPOS)";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.Commission AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	((PaymentList.IsTransferFromPOS
+		|	AND NOT PaymentList.CommissionIsSeparate)
+		|	OR (PaymentList.IsPaymentFromCustomerByPOS))
+		|	AND PaymentList.Commission <> 0";
 EndFunction
 
 Function R3011T_CashFlow()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Account,
-		   |	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.PlanningPeriod,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Key,
-		   |	PaymentList.Amount
-		   |INTO R3011T_CashFlow
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Account,
-		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.PlanningPeriod,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Key,
-		   |	PaymentList.Commission
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	(PaymentList.IsTransferFromPOS
-		   |	AND NOT PaymentList.CommissionIsSeparate)
-		   |	OR (PaymentList.IsPaymentFromCustomerByPOS)";
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.Commission
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	((PaymentList.IsTransferFromPOS
+		|	AND NOT PaymentList.CommissionIsSeparate)
+		|	OR (PaymentList.IsPaymentFromCustomerByPOS))
+		|	AND PaymentList.Commission <> 0";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -954,44 +957,53 @@ Function R3050T_PosCashBalances()
 EndFunction
 
 Function R3021B_CashInTransitIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.FromAccount_POS AS Account,
-		   |	PaymentList.Account AS ReceiptingAccount,
-		   |	PaymentList.PlaningTransactionBasis AS Basis,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
-		   |INTO R3021B_CashInTransitIncoming
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsTransferFromPOS
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.AccountSender,
-		   |	PaymentList.Account,
-		   |	PaymentList.CashTransferOrder,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	(PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsCurrencyExchange)
-		   |	AND NOT PaymentList.CashTransferOrder IS NULL";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.FromAccount_POS AS Account,
+		|	PaymentList.Account AS ReceiptingAccount,
+		|	PaymentList.PlaningTransactionBasis AS Basis,
+		|	case
+		|		when PaymentList.CommissionIsSeparate
+		|			then PaymentList.Commission + PaymentList.Amount
+		|		else PaymentList.Amount
+		|	end AS Amount,
+		|	PaymentList.Commission
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsTransferFromPOS
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.AccountSender,
+		|	PaymentList.Account,
+		|	PaymentList.CashTransferOrder,
+		|	case
+		|		when PaymentList.CommissionIsSeparate
+		|			then PaymentList.Commission + PaymentList.Amount
+		|		else PaymentList.Amount
+		|	end AS Amount,
+		|	PaymentList.Commission
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	(PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsCurrencyExchange)
+		|	AND NOT PaymentList.CashTransferOrder IS NULL";
 EndFunction
 
 #EndRegion

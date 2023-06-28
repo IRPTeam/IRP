@@ -8,7 +8,7 @@
 //  StandardProcessing - Boolean - Standard processing
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	
-	If Not Data.UseForSetDescription Then
+	If Not Data.UseForSetDescription = True Then
 		Return;
 	EndIf;
 	

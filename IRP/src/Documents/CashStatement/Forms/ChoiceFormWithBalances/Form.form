@@ -826,9 +826,10 @@ FROM
 		ON CashStatementPaymentList.Ref = CashStatement.Ref
 		AND CashStatementPaymentList.PaymentType.Type = VALUE(Enum.PaymentTypes.Card)
 		AND CashStatementPaymentList.Account = &amp;Account
+		AND CashStatementPaymentList.ReceiptingAccount = &amp;ReceiptingAccount
+		AND CashStatementPaymentList.ReceiptingAccount.Branch = &amp;ReceiptingBranch
 WHERE
 	CashStatement.Company = &amp;Company
-	AND CashStatement.Branch = &amp;Branch
 GROUP BY
 	CashStatement.Ref,
 	CashStatement.Company,
@@ -1041,21 +1042,6 @@ GROUP BY
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
-        <name>Branch</name>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Branch</value>
-            </content>
-          </localValue>
-        </title>
-        <valueType>
-          <types>CatalogRef.BusinessUnits</types>
-        </valueType>
-        <useRestriction>true</useRestriction>
-      </parameters>
-      <parameters>
         <name>Account</name>
         <title>
           <localValue>
@@ -1067,6 +1053,36 @@ GROUP BY
         </title>
         <valueType>
           <types>CatalogRef.CashAccounts</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>ReceiptingAccount</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Receipting account</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.CashAccounts</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>ReceiptingBranch</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Receipting branch</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.BusinessUnits</types>
         </valueType>
         <useRestriction>true</useRestriction>
       </parameters>

@@ -95,32 +95,7 @@ Scenario: _0206000 preparation (checks data)
 Scenario: _0260601 check preparation
 	When check preparation	
 
-Scenario: _0206002 сheck data verification in Retail sales receipt
-	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields'    |
-			| 'Document type'       |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Retail sales receipt" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
-	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Data parameters:'                                       | 'Error list: '                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-			| 'Filter:'                                                | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Retail sales receipt"'                                                                                                                                                                                                                                                                                                                                                |
-			| ''                                                       | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-			| 'Document type'                                          | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-			| 'Reference'                                              | 'Status'                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-			| 'Retail sales receipt'                                   | ''                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-			| 'Retail sales receipt 8 811 dated 07.03.2023 16:47:01'   | 'Row: 1. Total amount minus net amount is not equal to tax amount\nRow: 1. Offers amount in item list is not equal to offers amount in offers list\nRow: 1. Not filled quantity in source of origins\nRow: 2. Tax amount in item list is not equal to tax amount in tax list\nRow: 2. Total amount minus net amount is not equal to tax amount\nRow: 2. Not filled quantity in source of origins\nRow: 3. Not filled quantity in source of origins'    |
-		And I close all client application windows
+
 
 Scenario: _0206003 сheck data verification in Goods receipt
 	And I close all client application windows

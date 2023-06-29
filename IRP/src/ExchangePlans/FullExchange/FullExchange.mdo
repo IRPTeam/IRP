@@ -754,9 +754,6 @@
     <mdObject>Constant.DefaultFilesStorageVolume</mdObject>
   </content>
   <content>
-    <mdObject>Constant.EnableLinkedRowsIntegrity</mdObject>
-  </content>
-  <content>
     <mdObject>Constant.MaximumServerDifficultLevel</mdObject>
   </content>
   <content>

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @SettingsFilters
 
@@ -533,6 +533,11 @@ Scenario: _9065 non active and default Bill of materials
 	* Check
 		Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 		And I click "Create" button
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Production store 05' |
+		And I select current line in "List" table
 		And in the table "Productions" I click "Add" button
 		And I activate "Item" field in "Productions" table
 		And I select current line in "Productions" table

@@ -165,6 +165,70 @@ Procedure FillExtensionAttributesList(Command)
 	FillExtensionAttributesListAtServer();
 EndProcedure
 
+&AtClient
+Procedure CopyAttributeRequired(Command)
+	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
+		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
+		Row.Required = Items.ExtensionAttributes.CurrentData.Required;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyAttributeShow(Command)
+	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
+		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
+		Row.Show = Items.ExtensionAttributes.CurrentData.Show;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyAttributeShowInHTML(Command)
+	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
+		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
+		Row.ShowInHTML = Items.ExtensionAttributes.CurrentData.ShowInHTML;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyCondition(Command)
+	If Items.ExtensionAttributes.CurrentRow = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;	
+	IndicesArray = New Array;
+	CurrentIndex = 0;
+	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
+		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
+		If SelectedRow <> Items.ExtensionAttributes.CurrentRow Then
+			IndicesArray.Add(Object.ExtensionAttributes.IndexOf(Row));
+		Else
+			CurrentIndex = Object.ExtensionAttributes.IndexOf(Row);
+		EndIf;
+	EndDo;	
+	If Write() Then
+		CopyExtensionAttributesConditionAtServer(CurrentIndex, IndicesArray);
+	EndIf; 
+EndProcedure
+
+&AtClient
+Procedure CopyInterfaceGroup(Command)
+	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
+		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
+		Row.InterfaceGroup = Items.ExtensionAttributes.CurrentData.InterfaceGroup;
+	EndDo;	
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -379,6 +443,18 @@ Procedure FillExtensionAttributesListAtServer()
 		NewRow = Object.ExtensionAttributes.Add();
 		NewRow.Attribute = Attribute.Name;
 	EndDo;
+EndProcedure
+
+&AtServer
+Procedure CopyExtensionAttributesConditionAtServer(CurrentRow, IndicesArray)
+	CatalogObject = Object.Ref.GetObject();
+	CurrentData = CatalogObject.ExtensionAttributes.Get(CurrentRow);	
+	For Each Row In CatalogObject.ExtensionAttributes Do
+		Row.IsConditionSet = CurrentData.IsConditionSet;
+		Row.Condition = CurrentData.Condition; 
+	EndDo;
+	CatalogObject.Write();
+	ThisObject.Read();	
 EndProcedure
 
 #EndRegion

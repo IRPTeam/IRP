@@ -1309,7 +1309,6 @@ Scenario: Create catalog AddAttributeAndPropertySets objects
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_ExpenseAndRevenueTypes'      | 'False'         | 'Expense and revenue types'      | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_CashAccounts'                | 'False'         | 'Cash/Bank accounts'             | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_PurchaseInvoice'            | 'False'         | 'Purchase Invoice'               | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_CompanyTypes'                | 'False'         | 'Company types'                  | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_CashPayment'                | 'False'         | 'Cash payment'                   | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_CashReceipt'                | 'False'         | 'Cash receipt'                   | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_BusinessUnits'               | 'False'         | 'Business units'                 | ''                  | ''                | ''                 |

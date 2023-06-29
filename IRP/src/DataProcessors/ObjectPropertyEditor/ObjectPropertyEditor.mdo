@@ -71,7 +71,7 @@
       <key>en</key>
       <value>Group editing of properties</value>
     </synonym>
-    <group>CommandGroup.Service</group>
+    <group>FormCommandBarImportant</group>
     <commandParameterType>
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>

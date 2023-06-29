@@ -1773,6 +1773,7 @@ Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentPeriod"    , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter" , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("ExpenseType"      , BindPaymentListExpenseType(Parameters));
+	ResourceToBinding.Insert("FinancialMovementTypeOtherCompany" , BindPaymentListFinancialMovementTypeOtherCompany(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1938,6 +1939,7 @@ Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
+		Options.FinancialMovementTypeOtherCompany = GetPaymentListFinancialMovementTypeOtherCompany(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashExpense";
 		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
@@ -6950,6 +6952,28 @@ Function BindPaymentListFinancialMovementType(Parameters)
 	DataPath = "PaymentList.FinancialMovementType";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListFinancialMovementType");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_FINANCIAL_MOVEMENT_TYPE_OTHER_COMPANY
+
+// PaymentList.FinancialMovementTypeOtherCompany.Set
+Procedure SetPaymentListFinancialMovementTypeOtherCompany(Parameters, Results) Export
+	Binding = BindPaymentListFinancialMovementTypeOtherCompany(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.FinancialMovementTypeOtherCompany.Get
+Function GetPaymentListFinancialMovementTypeOtherCompany(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListFinancialMovementTypeOtherCompany(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.FinancialMovementTypeOtherCompany.Bind
+Function BindPaymentListFinancialMovementTypeOtherCompany(Parameters)
+	DataPath = "PaymentList.FinancialMovementTypeOtherCompany";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListFinancialMovementTypeOtherCompany");
 EndFunction
 
 #EndRegion

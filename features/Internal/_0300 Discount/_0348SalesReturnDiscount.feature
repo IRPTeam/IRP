@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Discount
@@ -38,6 +38,7 @@ Scenario: _034801 preparation
 			| 'Presentation'         |
 			| 'Document discount'    |
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Percent"		
 		And I input "10,00" text in "Percent" field
 		And I click "Ok" button
 		And in the table "Offers" I click "OK" button
@@ -167,6 +168,7 @@ Scenario: _034804 check 2 Document Discount (percent)
 				| '☐'            | 'Document discount'     |
 			And I activate "Presentation" field in "Offers" table
 			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Percent"
 			And I input "10,00" text in the field named "Percent"
 			And I click the button named "Ok"
 			And in the table "Offers" I click "OK" button

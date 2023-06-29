@@ -96,6 +96,7 @@ Scenario: _034501 check discount in Retail sales receipt
 				| 'Document discount'     |
 			And I activate "Presentation" field in "Offers" table
 			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Percent"
 			And I input "10,00" text in "Percent" field
 			And I click "Ok" button
 			Then "Pickup special offers" window is opened

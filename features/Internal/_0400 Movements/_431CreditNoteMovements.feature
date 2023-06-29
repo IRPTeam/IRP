@@ -305,28 +305,6 @@ Scenario: _043109 check Credit note movements by the Register "R5015 Other partn
 			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      | 
 	And I close all client application windows
 
-Scenario: _043109 check Credit note movements by the Register "R5015 Other partners transactions" (OtherPartnersTransactions)
-	And I close all client application windows
-	* Select Credit note
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '3'         |
-	* Check movements by the Register  "R5015 Other partners transactions" 
-		And I click "Registrations report" button
-		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 3 dated 12.06.2023 14:56:54'         | ''              | ''                      | ''            | ''               | ''               | ''                               | ''           | ''                       | ''                  | ''                  | ''                  | ''                        |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''               | ''               | ''                               | ''           | ''                       | ''                  | ''                  | ''                  | ''                        |
-			| 'Register  "R5015 Other partners transactions"'   | ''              | ''                      | ''            | ''               | ''               | ''                               | ''           | ''                       | ''                  | ''                  | ''                  | ''                        |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                               | ''           | ''                       | ''                  | ''                  | ''                  | 'Attributes'              |
-			| ''                                                | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'         | 'Deferred calculation'    |
-			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '17,12'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | 'No'                      |
-			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | 'No'                      |
-			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | 'No'                      |
-			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | 'No'                      |
-	And I close all client application windows
 
 Scenario: _043110 check Credit note movements by the Register "R5010 Reconciliation statement" (OtherPartnersTransactions)
 	And I close all client application windows

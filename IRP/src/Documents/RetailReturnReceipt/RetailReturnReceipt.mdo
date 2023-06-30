@@ -1781,6 +1781,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="3b00ea7b-7e11-4a4b-af04-a108976ce31a">
+      <name>NotCheck</name>
+      <synonym>
+        <key>en</key>
+        <value>Not check</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
     <name>Genarate</name>

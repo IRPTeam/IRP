@@ -506,12 +506,14 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I set checkbox "Check code string"
 		And I click "Save and close" button
 		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
 		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f"
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I set checkbox "Check code string"
 		And I click "Save and close" button
 		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
 						

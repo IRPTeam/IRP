@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Discount
@@ -17,6 +17,7 @@ Scenario: _034901 preparation (discounts in POS)
 	When Create catalog PaymentTypes objects
 	When Create information register Barcodes records
 	When Create information register UserSettings records (Retail document)
+	When Create catalog SpecialOffers objects (Document discount for row)
 	* Launch Two plus part of third
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I click "List" button
@@ -499,7 +500,7 @@ Scenario: _034912 check auto calculate discount
 			| 'Description'            |
 			| 'Discount coupon 10%'    |
 		And I select current line in "List" table
-		And I change checkbox named "Launch"
+		And I set checkbox named "Launch"
 		And I click "Save and close" button
 	* Check auto calculate discount
 		And In the command interface I select "Retail" "Point of sale"
@@ -508,7 +509,7 @@ Scenario: _034912 check auto calculate discount
 		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'    | 'Item key'   | 'Price'    | 'Quantity'   | 'Offers'   | 'Total'     |
-			| 'Dress'   | 'XS/Blue'    | '520,00'   | '1,000'      | '52,00'    | '468,00'    |
+			| 'Dress'   | 'XS/Blue'    | '520,00'   | '1,000'      | '52,00'    | '468,00'    |	
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
@@ -526,6 +527,69 @@ Scenario: _034912 check auto calculate discount
 		
 		
 						
+Scenario: _034914 discount for row
+	And I close all client application windows
+	* Launch document discount for row
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'Document discount for row'   |
+		And I select current line in "List" table
+		And I set checkbox named "Launch"
+		And I click "Save and close" button
+	* Check discount calculate (Discount coupon + Document discount for row)
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "2202283714" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'XS/Blue'     |
+		And I click the button named "SetSpecialOffersAtRow"
+		Then "Pickup special offers" window is opened
+		And I go to line in "Offers" table
+			| 'Presentation'              |
+			| 'Document discount for row' |
+		And I select current line in "Offers" table
+		And I input "10,00" text in the field named "Amount"
+		And I click the button named "Ok"
+		Then "Pickup special offers" window is opened
+		And in the table "Offers" I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '62,00'  | '458,00' |
+			| 'Dress' | ''             | 'M/Brown'  | ''        | '500,00' | '1,000'    | '50,00'  | '450,00' |
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/Brown'     |
+		And I click the button named "SetSpecialOffersAtRow"
+		Then "Pickup special offers" window is opened
+		And I go to line in "Offers" table
+			| 'Presentation'              |
+			| 'Document discount for row' |
+		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Percent"
+		And I input "5,00" text in the field named "Percent"
+		And I click the button named "Ok"
+		Then "Pickup special offers" window is opened
+		And in the table "Offers" I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '62,00'  | '458,00' |
+			| 'Dress' | ''             | 'M/Brown'  | ''        | '500,00' | '1,000'    | '75,00'  | '425,00' |
+		And I delete all lines of "ItemList" table
+		And I close all client application windows
+				
+				
+		
+						
+				
+
+
+
 
 				
 		

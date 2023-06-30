@@ -118,6 +118,7 @@ Scenario: _034001 check the Document discount in Purchase order
 			| 'Presentation'         |
 			| 'Document discount'    |
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Percent"
 		And I input "10,00" text in "Percent" field
 		And I click "Ok" button
 		And in the table "Offers" I click "OK" button
@@ -240,6 +241,7 @@ Scenario: _034002 check the Document discount in Purchase invoice
 			| 'Presentation'         |
 			| 'Document discount'    |
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Percent"
 		And I input "10,00" text in "Percent" field
 		And I click "Ok" button
 		And in the table "Offers" I click "OK" button

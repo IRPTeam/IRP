@@ -78,16 +78,21 @@ Function GetSessionParameter(ParameterName) Export
 EndFunction
 
 Function OurCompanies()
-	OurCompanies = New Array();
-	Query = New Query();
-	Query.Text = "SELECT ALLOWED
-				 |	Companies.Ref
-				 |FROM
-				 |	Catalog.Companies AS Companies
-				 |WHERE
-				 |	Companies.OurCompany";
-	QueryUnload = Query.Execute().Unload();
-	OurCompanies = QueryUnload.UnloadColumn("Ref");
+	OurCompanies = New Array();	
+	If GetFunctionalOption("UseCompanies") = True Then
+		Query = New Query();
+		Query.Text = 
+		"SELECT ALLOWED
+		|	Companies.Ref
+		|FROM
+		|	Catalog.Companies AS Companies
+		|WHERE
+		|	Companies.OurCompany";
+		QueryUnload = Query.Execute().Unload();
+		OurCompanies = QueryUnload.UnloadColumn("Ref");
+	Else
+		OurCompanies.Add(Catalogs.Companies.Default);
+	EndIf;
 	Return New FixedArray(OurCompanies);
 EndFunction
 

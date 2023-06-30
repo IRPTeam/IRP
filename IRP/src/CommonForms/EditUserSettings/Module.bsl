@@ -172,6 +172,17 @@ EndProcedure
 
 &AtServer
 Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttributes, RowOwner, PictureIndex, ExistPredefinedDataNames)
+	Query = New Query();
+	Query.Text = 
+	"SELECT DISTINCT
+	|	UserSettings.MetadataObject,
+	|	UserSettings.AttributeName,
+	|	UserSettings.KindOfAttribute
+	|FROM
+	|	InformationRegister.UserSettings AS UserSettings";
+	QueryResult = Query.Execute();
+	SettingsFromRegister = QueryResult.Unload();
+	
 	Show = False;
 	For Each MetadataObject In MetadataCollection Do
 
@@ -183,33 +194,39 @@ Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttrib
 		NewRow.Insert("Rows"         , New Array());
 
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Standard) <> Undefined Then
-			If GetStandardAttributes(MetadataObject, NewRow, TableOfSettings) Then
+			If GetStandardAttributes(MetadataObject, NewRow, TableOfSettings, 
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Standard))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Regular) <> Undefined Then
-			If GetRegularAttributes(MetadataObject, NewRow, TableOfSettings) Then
+			If GetRegularAttributes(MetadataObject, NewRow, TableOfSettings,
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Regular))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Common) <> Undefined Then
-			If GetCommonAttributes(MetadataObject, NewRow, TableOfSettings) Then
+			If GetCommonAttributes(MetadataObject, NewRow, TableOfSettings,
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Common))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Additional) <> Undefined Then
-			If GetAdditionalAttributes(MetadataObject, NewRow, TableOfSettings, ExistPredefinedDataNames) Then
+			If GetAdditionalAttributes(MetadataObject, NewRow, TableOfSettings, ExistPredefinedDataNames,
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Additional))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Column) <> Undefined Then
-			If GetTabularSections(MetadataObject, NewRow, TableOfSettings) Then
+			If GetTabularSections(MetadataObject, NewRow, TableOfSettings,
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Column))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Custom) <> Undefined Then
-			If GetCustomAttributes(MetadataObject, NewRow, TableOfSettings) Then
+			If GetCustomAttributes(MetadataObject, NewRow, TableOfSettings,
+				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Custom))) Then
 				Show = True;
 			EndIf;
 		EndIf;
@@ -326,8 +343,9 @@ EndProcedure
 
 &AtServer
 Function FilterIsOk(AttributeInfo)
-	If AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Regular Or AttributeInfo.KindOfAttribute
-		= Enums.KindsOfAttributes.Common Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Column Then
+	If AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Regular 
+		Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Common 
+		Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Column Then
 		If Not AccessRight("View", AttributeInfo.Metadata, Metadata.Roles.FilterForUserSettings) Then
 			Return False;
 		EndIf;
@@ -337,7 +355,7 @@ Function FilterIsOk(AttributeInfo)
 EndFunction
 
 &AtServer
-Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
+Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings, SettingsFromRegister)
 	// Standard attributes
 	For Each Attribute In MetadataObject.StandardAttributes Do
 		NewRow = New Structure();
@@ -349,7 +367,8 @@ Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
 		NewRow.Insert("SettingID", New UUID());
 		NewRow.Insert("PictureIndex", 2);
 		NewRow.Insert("Metadata", Attribute);
-		If FilterIsOk(NewRow) Then
+		If FilterIsOk(NewRow) 
+			Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 			RowOwner.Rows.Add(NewRow);
 		EndIf;
 		
@@ -361,7 +380,7 @@ Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
 EndFunction
 
 &AtServer
-Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings)
+Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings, SettingsFromRegister)
 	// Attributes
 	For Each Attribute In MetadataObject.Attributes Do
 		NewRow = New Structure();
@@ -373,7 +392,8 @@ Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings)
 		NewRow.Insert("SettingID", New UUID());
 		NewRow.Insert("PictureIndex", 3);
 		NewRow.Insert("Metadata", Attribute);
-		If FilterIsOk(NewRow) Then
+		If FilterIsOk(NewRow) 
+			Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 			RowOwner.Rows.Add(NewRow);
 		EndIf;
 		
@@ -384,26 +404,26 @@ Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings)
 EndFunction
 
 &AtServer
-Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings)
+Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings, SettingsFromRegister)
 	// Common attributes
 	For Each CommonAttribute In Metadata.CommonAttributes Do
 		Content = CommonAttribute.Content.Find(MetadataObject);
 
 		If Not Content = Undefined Then
-			If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Or (Content.Use
-				= Metadata.ObjectProperties.CommonAttributeUse.Auto And CommonAttribute.AutoUse
-				= Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
+			If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use 
+				Or (Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
+				And CommonAttribute.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
 				NewRow = New Structure();
 				NewRow.Insert("Name", CommonAttribute.Name);
 				NewRow.Insert("FullName", MetadataObject.FullName());
-				NewRow.Insert("Synonym", ?(ValueIsFilled(CommonAttribute.Synonym), CommonAttribute.Synonym,
-					CommonAttribute.Name));
+				NewRow.Insert("Synonym", ?(ValueIsFilled(CommonAttribute.Synonym), CommonAttribute.Synonym, CommonAttribute.Name));
 				NewRow.Insert("KindOfAttribute", Enums.KindsOfAttributes.Common);
 				NewRow.Insert("TypeRestriction", CommonAttribute.Type);
 				NewRow.Insert("SettingID", New UUID());
 				NewRow.Insert("PictureIndex", 4);
 				NewRow.Insert("Metadata", CommonAttribute);
-				If FilterIsOk(NewRow) Then
+				If FilterIsOk(NewRow) 
+					Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 					RowOwner.Rows.Add(NewRow);
 				EndIf;
 				
@@ -416,7 +436,7 @@ Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings)
 EndFunction
 
 &AtServer
-Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, ExistPredefinedDataNames)
+Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, ExistPredefinedDataNames, SettingsFromRegister)
 	PredefinedDataName = StrReplace(MetadataObject.FullName(), ".", "_");
 	If ExistPredefinedDataNames.Find(PredefinedDataName) = Undefined Then
 		Return False;
@@ -449,7 +469,8 @@ Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, Exis
 		NewRow.Insert("SettingID", New UUID());
 		NewRow.Insert("AddAttributeRef", QuerySelection.Attribute);
 		NewRow.Insert("PictureIndex", 5);
-		If FilterIsOk(NewRow) Then
+		If FilterIsOk(NewRow) 
+			Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 			RowOwner.Rows.Add(NewRow);
 		EndIf;
 		
@@ -460,7 +481,7 @@ Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, Exis
 EndFunction
 
 &AtServer
-Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
+Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings, SettingsFromRegister)
 	// Tabular sections
 	ArrayOfTabularSections = New Array();
 
@@ -483,7 +504,8 @@ Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 			NewRow.Insert("SettingID", New UUID());
 			NewRow.Insert("PictureIndex", 3);
 			NewRow.Insert("Metadata", Column);
-			If FilterIsOk(NewRow) Then
+			If FilterIsOk(NewRow) 
+				Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 				NewRow_TabularSection.Rows.Add(NewRow);
 			EndIf;
 			// TableOfSettings
@@ -501,7 +523,7 @@ Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 EndFunction
 
 &AtServer
-Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings)
+Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings, SettingsFromRegister)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -530,7 +552,8 @@ Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings)
 		NewRow.Insert("TypeRestriction", QuerySelection.Ref.ValueType);
 		NewRow.Insert("SettingID", New UUID());
 		NewRow.Insert("PictureIndex", 9);
-		If FilterIsOk(NewRow) Then
+		If FilterIsOk(NewRow) 
+			Or SettingsFromRegister.FindRows(New Structure("MetadataObject, AttributeName", NewRow.FullName, NewRow.Name)).Count() <> 0 Then
 			RowOwner.Rows.Add(NewRow);
 		EndIf;
 		
@@ -577,12 +600,12 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	// Additional settings for Point of sale
 	FullName = "DataProcessor.PointOfSale.AdditionalSettings";
 	
-	NewRow = New Structure();
-	NewRow.Insert("FullName"     , FullName);
-	NewRow.Insert("Name"         , "PointOfSale");
-	NewRow.Insert("Synonym"      , R().Add_Setiings_002);
-	NewRow.Insert("PictureIndex" , 11);
-	NewRow.Insert("Rows"         , New Array());
+	NewRow_PointOfSales = New Structure();
+	NewRow_PointOfSales.Insert("FullName"     , FullName);
+	NewRow_PointOfSales.Insert("Name"         , "PointOfSale");
+	NewRow_PointOfSales.Insert("Synonym"      , R().Add_Setiings_002);
+	NewRow_PointOfSales.Insert("PictureIndex" , 11);
+	NewRow_PointOfSales.Insert("Rows"         , New Array());
 	
 	// change price
 	NewSetting = New Structure();
@@ -593,7 +616,7 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
 	NewSetting.Insert("SettingID"      , New UUID());
 	NewSetting.Insert("PictureIndex"   , 12);
-	NewRow.Rows.Add(NewSetting);
+	NewRow_PointOfSales.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	
 	// create return
@@ -605,10 +628,35 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
 	NewSetting.Insert("SettingID"      , New UUID());
 	NewSetting.Insert("PictureIndex"   , 12);
-	NewRow.Rows.Add(NewSetting);
+	NewRow_PointOfSales.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	
-	RowOwner.Rows.Add(NewRow);
+	RowOwner.Rows.Add(NewRow_PointOfSales);
+	
+	// Additional settings for all documents
+	FullName = "Documents.AllDocuments.AdditionalSettings";
+	
+	NewRow_Documents = New Structure();
+	NewRow_Documents.Insert("FullName"     , FullName);
+	NewRow_Documents.Insert("Name"         , "Documents");
+	NewRow_Documents.Insert("Synonym"      , R().Add_Setiings_005);
+	NewRow_Documents.Insert("PictureIndex" , 1);
+	NewRow_Documents.Insert("Rows"         , New Array());
+	
+	// change author
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "DisableChangeAuthor");
+	NewSetting.Insert("FullName", FullName + ".DisableChangeAuthor");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_006);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Documents.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_Documents);
+	
 	Return True;
 EndFunction
 

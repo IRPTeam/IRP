@@ -13,9 +13,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("PutInTable") Then
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;
+	
+	RestoreSettings = CommonSettingsStorage.Load("DocumentRegistrationsReport", , , "DocumentRegistrationsReport");
+	If TypeOf(RestoreSettings) = Type("Structure") Then
+		FillPropertyValues(ThisObject, RestoreSettings);
+	EndIf;
 
-	If Parameters.Property("GenerateOnOpen") And Not Parameters.GenerateOnOpen = Undefined
-		And Parameters.GenerateOnOpen Then
+	If Parameters.Property("GenerateOnOpen") 
+			And Not Parameters.GenerateOnOpen = Undefined
+			And Parameters.GenerateOnOpen Then
 		GenerateReportAtServer(ThisObject.ResultTable);
 	EndIf;
 EndProcedure
@@ -48,6 +54,8 @@ EndFunction
 
 &AtServer
 Procedure GenerateReportAtServer(Result)
+
+	SaveSettings();
 
 	If Not CanBuildReport() Then
 		Return;
@@ -128,6 +136,8 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	ArrayOfTechnicalRegisters.Add(Upper("TM1010T_RowIDMovements"));
 	ArrayOfTechnicalRegisters.Add(Upper("TM1020B_AdvancesKey"));
 	ArrayOfTechnicalRegisters.Add(Upper("TM1030B_TransactionsKey"));
+	
+	ArrayOfTechnicalRegisters.Add(Upper("T1050T_AccountingQuantities"));
 	
 	ArrayOfTechnicalRegisters.Add(Upper("T2010S_OffsetOfAdvances"));
 	ArrayOfTechnicalRegisters.Add(Upper("T2013S_OffsetOfAging"));
@@ -571,4 +581,13 @@ Procedure FillFieldPresentations(FieldPresentations, ReportBuilder)
 			EndIf;
 		EndDo;
 	EndDo;
+EndProcedure
+
+&AtServer
+Procedure SaveSettings()
+	SaveSettings = New Structure();
+	SaveSettings.Insert("ShowItemInItemKey", ThisObject.ShowItemInItemKey);
+	SaveSettings.Insert("OnlyTransactionCurrency", ThisObject.OnlyTransactionCurrency);
+	SaveSettings.Insert("HideTechnicalRegisters", ThisObject.HideTechnicalRegisters);
+	CommonSettingsStorage.Save("DocumentRegistrationsReport", , SaveSettings, , "DocumentRegistrationsReport");	
 EndProcedure

@@ -356,10 +356,19 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>Vertical</group>
-        <behavior>Auto</behavior>
+        <group>HorizontalIfPossible</group>
+        <verticalSpacing>Half</verticalSpacing>
+        <behavior>Collapsible</behavior>
+        <collapsedRepresentationTitle>
+          <key>en</key>
+          <value>Filters</value>
+        </collapsedRepresentationTitle>
+        <collapsed>true</collapsed>
+        <controlRepresentation>Picture</controlRepresentation>
+        <representation>WeakSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
+        <showTitle>true</showTitle>
         <throughAlign>Auto</throughAlign>
         <currentRowUse>Auto</currentRowUse>
       </extInfo>

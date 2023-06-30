@@ -14,14 +14,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;
 	
-	RestoreSettings = CommonSettingsStorage.Load("DocumentRegistrationsReport", , , "DocumentRegistrationsReport");
-	If TypeOf(RestoreSettings) = Type("Structure") Then
-		FillPropertyValues(ThisObject, RestoreSettings);
-	EndIf;
+	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
+EndProcedure
 
-	If Parameters.Property("GenerateOnOpen") 
-			And Not Parameters.GenerateOnOpen = Undefined
-			And Parameters.GenerateOnOpen Then
+&AtClient
+Procedure OnOpen(Cancel)
+	If ThisObject.GenerateOnOpen Then
 		GenerateReportAtServer(ThisObject.ResultTable);
 	EndIf;
 EndProcedure
@@ -54,8 +52,6 @@ EndFunction
 
 &AtServer
 Procedure GenerateReportAtServer(Result)
-
-	SaveSettings();
 
 	If Not CanBuildReport() Then
 		Return;
@@ -581,13 +577,4 @@ Procedure FillFieldPresentations(FieldPresentations, ReportBuilder)
 			EndIf;
 		EndDo;
 	EndDo;
-EndProcedure
-
-&AtServer
-Procedure SaveSettings()
-	SaveSettings = New Structure();
-	SaveSettings.Insert("ShowItemInItemKey", ThisObject.ShowItemInItemKey);
-	SaveSettings.Insert("OnlyTransactionCurrency", ThisObject.OnlyTransactionCurrency);
-	SaveSettings.Insert("HideTechnicalRegisters", ThisObject.HideTechnicalRegisters);
-	CommonSettingsStorage.Save("DocumentRegistrationsReport", , SaveSettings, , "DocumentRegistrationsReport");	
 EndProcedure

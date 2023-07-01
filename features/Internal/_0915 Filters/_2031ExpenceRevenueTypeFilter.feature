@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Filters
@@ -52,8 +52,8 @@ Scenario: _203100 preparation (expence and revenue type filter)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -75,13 +75,13 @@ Scenario: _0203101 check filters in the Sales order
 	And I select current line in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Delivery'                 | 
-		| 'Revenue'                  | 
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows
 	
 
@@ -94,13 +94,13 @@ Scenario: _0203102 check filters in the Sales invoice
 	And I select current line in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              |
-		| 'Delivery'                 |
-		| 'Revenue'                  |
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows
 
 
@@ -112,13 +112,13 @@ Scenario: _0203103 check filters in the Purchase order
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Expense'                  | 
-		| 'Delivery'                 | 
+		| 'Description'   |
+		| 'Expense'       |
+		| 'Delivery'      |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Movement type 1'          |
-		| 'Revenue'                  |
+		| 'Description'       |
+		| 'Movement type 1'   |
+		| 'Revenue'           |
 	And I close all client application windows
 
 
@@ -130,13 +130,13 @@ Scenario: _0203104 check filters in the Purchase invoice
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Expense'                  | 
-		| 'Delivery'                 | 
+		| 'Description'   |
+		| 'Expense'       |
+		| 'Delivery'      |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Movement type 1'                 |
-		| 'Revenue'                  |
+		| 'Description'       |
+		| 'Movement type 1'   |
+		| 'Revenue'           |
 	And I close all client application windows
 
 
@@ -148,13 +148,13 @@ Scenario: _0203105 check filters in the Stock adjustment as surplus
 	And I select current line in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              |
-		| 'Delivery'                 |
-		| 'Revenue'                  |
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows
 	
 
@@ -166,13 +166,13 @@ Scenario: _0203106 check filters in the Stock adjustment as write off
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Expense'                  | 
-		| 'Delivery'                 | 
+		| 'Description'   |
+		| 'Expense'       |
+		| 'Delivery'      |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Movement type 1'          |
-		| 'Revenue'                  |
+		| 'Description'       |
+		| 'Movement type 1'   |
+		| 'Revenue'           |
 	And I close all client application windows
 
 
@@ -184,13 +184,13 @@ Scenario: _0203107 check filters in the Cash expense
 	And I select current line in "PaymentList" table
 	And I click choice button of "Expense type" attribute in "PaymentList" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Expense'                  | 
-		| 'Delivery'                 | 
+		| 'Description'   |
+		| 'Expense'       |
+		| 'Delivery'      |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Movement type 1'          |
-		| 'Revenue'                  |
+		| 'Description'       |
+		| 'Movement type 1'   |
+		| 'Revenue'           |
 	And I close all client application windows
 
 
@@ -203,13 +203,13 @@ Scenario: _0203108 check filters in the Cash revenue
 	And I select current line in "PaymentList" table
 	And I click choice button of "Revenue type" attribute in "PaymentList" table
 	And "List" table contains lines
-		| 'Description'              |
-		| 'Delivery'                 |
-		| 'Revenue'                  |
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows	
 
 Scenario: _0203109 check filters in the Retail sales receipt
@@ -220,13 +220,13 @@ Scenario: _0203109 check filters in the Retail sales receipt
 	And I select current line in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And "List" table contains lines
-		| 'Description'              |
-		| 'Delivery'                 |
-		| 'Revenue'                  |
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows
 
 
@@ -238,13 +238,13 @@ Scenario: _0203110 check filters in the Credit note
 	And I select current line in "Transactions" table
 	And I click choice button of "Expense type" attribute in "Transactions" table
 	And "List" table contains lines
-		| 'Description'              | 
-		| 'Expense'                  | 
-		| 'Delivery'                 | 
+		| 'Description'   |
+		| 'Expense'       |
+		| 'Delivery'      |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Movement type 1'          |
-		| 'Revenue'                  |
+		| 'Description'       |
+		| 'Movement type 1'   |
+		| 'Revenue'           |
 	And I close all client application windows
 
 
@@ -257,12 +257,12 @@ Scenario: _0203111 check filters in the Debit note
 	And I select current line in "Transactions" table
 	And I click choice button of "Revenue type" attribute in "Transactions" table
 	And "List" table contains lines
-		| 'Description'              |
-		| 'Delivery'                 |
-		| 'Revenue'                  |
+		| 'Description'   |
+		| 'Delivery'      |
+		| 'Revenue'       |
 	And "List" table does not contain lines	
-		| 'Description'              |
-		| 'Expense'                  |
-		| 'Movement type 1'          |
+		| 'Description'       |
+		| 'Expense'           |
+		| 'Movement type 1'   |
 	And I close all client application windows
 	

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Filters
@@ -506,13 +506,13 @@ Scenario: _028050 check the filter by Company when selecting cash/bank in Cash e
 	* Temporary filling in Cash desk 3 Second Company
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №3' |
+			| 'Description'     |
+			| 'Cash desk №3'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
+			| 'Description'       |
+			| 'Second Company'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Open form Cash expense
@@ -521,24 +521,24 @@ Scenario: _028050 check the filter by Company when selecting cash/bank in Cash e
 	* Check the filter by Company when selecting cash register/bank
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And "List" table does not contain lines
-			| 'Description'  |
-			| 'Cash desk №3' |
+			| 'Description'     |
+			| 'Cash desk №3'    |
 		And I close all client application windows
 	* Changing back to Cash Desk 3 to Main Company
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №3' |
+			| 'Description'     |
+			| 'Cash desk №3'    |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 

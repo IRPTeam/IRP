@@ -21,8 +21,8 @@ Scenario: _0050 Data base title
 	* Filling in title
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I go to line in "List" table
-			| 'is Product server' |
-			| 'Yes'               | 
+			| 'is Product server'    |
+			| 'Yes'                  |
 		And I select current line in "List" table	
 		And I input "Test IRP" text in the field named "Description_en"
 		And I click "Save and close" button
@@ -35,3 +35,21 @@ Scenario: _0050 Data base title
 		And I display "$$$$DataBaseTitle0050$$$$" variable value
 		Then "$$$$DataBaseTitle0050$$$$" variable is equal to "Test IRP"
 	And I close all client application windows	
+
+Scenario: _0051 external function folder
+	And I close all client application windows
+	* Open external function catalog
+		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
+		And I click the button named "FormCreateFolder"
+		And I input "Test" text in the field named "Description"
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Description' |
+			| 'Test'        |
+	And I close all client application windows
+		
+		
+				
+						
+	

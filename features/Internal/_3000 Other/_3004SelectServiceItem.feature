@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -58,10 +58,10 @@ Scenario: _300401 check filter on the choice of services in the document Purchas
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300402 check filter on the choice of services in the document Purchase invoice
@@ -70,10 +70,10 @@ Scenario: _300402 check filter on the choice of services in the document Purchas
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300403 check filter on the choice of services in the document Sales order
@@ -82,10 +82,10 @@ Scenario: _300403 check filter on the choice of services in the document Sales o
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 
@@ -95,10 +95,10 @@ Scenario: _300404 check filter on the choice of services in the document Sales i
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 # services not available
@@ -109,8 +109,8 @@ Scenario: _300405 check filter on the choice of services in the document Invento
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300406 check filter on the choice of services in the document Inventory transfer order
@@ -119,8 +119,8 @@ Scenario: _300406 check filter on the choice of services in the document Invento
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300407 check filter on the choice of services in the document Internal Supply Request
@@ -129,9 +129,9 @@ Scenario: _300407 check filter on the choice of services in the document Interna
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300408 check filter on the choice of services in the document Purchase return order
@@ -140,10 +140,10 @@ Scenario: _300408 check filter on the choice of services in the document Purchas
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300409 check filter on the choice of services in the document Purchase return
@@ -152,10 +152,10 @@ Scenario: _300409 check filter on the choice of services in the document Purchas
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300410 check filter on the choice of services in the document Sales Return
@@ -164,10 +164,10 @@ Scenario: _300410 check filter on the choice of services in the document Sales R
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300411 check filter on the choice of services in the document Sales return order
@@ -176,10 +176,10 @@ Scenario: _300411 check filter on the choice of services in the document Sales r
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
-		| Description          |
-		| Dress TR             |
-		| Service TR           |
-		| Router               |
+		| Description   |
+		| Dress TR      |
+		| Service TR    |
+		| Router        |
 	And I close all client application windows
 
 Scenario: _300412 check filter on the choice of services in the document GoodsReceipt
@@ -188,8 +188,8 @@ Scenario: _300412 check filter on the choice of services in the document GoodsRe
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300413 check filter on the choice of services in the document Shipment Confirmation
@@ -198,8 +198,8 @@ Scenario: _300413 check filter on the choice of services in the document Shipmen
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 
@@ -209,15 +209,15 @@ Scenario: _300416 check filter on the choice of services in the document Bundlin
 	And I click Select button of "Item bundle" field
 	Then "Items" window is opened
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close "Items" window
 	And I move to "Item list" tab
 	And in the table "ItemList" I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300417 check filter on the choice of services in the document Unbundling
@@ -226,15 +226,15 @@ Scenario: _300417 check filter on the choice of services in the document Unbundl
 	And I click Select button of "Item bundle" field
 	Then "Items" window is opened
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close "Items" window
 	And I move to "Item list" tab
 	And in the table "ItemList" I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300418 check filter on the choice of services in the document StockAdjustmentAsSurplus
@@ -243,8 +243,8 @@ Scenario: _300418 check filter on the choice of services in the document StockAd
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300419 check filter on the choice of services in the document StockAdjustmentAsWriteOff
@@ -253,8 +253,8 @@ Scenario: _300419 check filter on the choice of services in the document StockAd
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows
 
 Scenario: _300420 check filter on the choice of services in the document PhysicalInventory
@@ -263,6 +263,6 @@ Scenario: _300420 check filter on the choice of services in the document Physica
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
-		| Description          |
-		| Service TR           |
+		| Description   |
+		| Service TR    |
 	And I close all client application windows

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Discount
@@ -19,66 +19,66 @@ Scenario: _034501 check discount in Retail sales receipt
 		* Filling in customers info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'M/White'  |
+				| 'Item key'     |
+				| 'M/White'      |
 			And I select current line in "List" table
 			And I input "100" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I input "10" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Discount price 1	
 			And in the table "ItemList" I click "% Offers" button
 			And I go to line in "Offers" table
-				| 'Presentation'     |
-				| 'Discount Price 1' |
+				| 'Presentation'         |
+				| 'Discount Price 1'     |
 			And I activate "Is select" field in "Offers" table
 			And I select current line in "Offers" table
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '2 600,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 535,59'   | '41 864,41'  | '49 400,00'    | 'Store 01' |
-				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '275,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '797,03'     | '4 427,97'   | '5 225,00'     | 'Store 01' |
+				| 'Price'     | 'Detail'    | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Price type'           | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | ''          | 'Dress'    | '18%'    | 'M/White'     | '2 600,00'         | '100,000'     | 'Basic Price Types'    | 'pcs'     | 'No'                    | '7 535,59'      | '41 864,41'     | '49 400,00'       | 'Store 01'     |
+				| '550,00'    | ''          | 'Dress'    | '18%'    | 'L/Green'     | '275,00'           | '10,000'      | 'Basic Price Types'    | 'pcs'     | 'No'                    | '797,03'        | '4 427,97'      | '5 225,00'        | 'Store 01'     |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 875,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "46 292,38"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "8 332,62"
@@ -87,15 +87,16 @@ Scenario: _034501 check discount in Retail sales receipt
 			And in the table "ItemList" I click "% Offers" button
 			Then "Pickup special offers" window is opened
 			And I go to line in "Offers" table
-				| 'Presentation'     |
-				| 'Discount Price 1' |
+				| 'Presentation'         |
+				| 'Discount Price 1'     |
 			And I activate "Is select" field in "Offers" table
 			And I select current line in "Offers" table
 			And I go to line in "Offers" table
-				| 'Presentation'      |
-				| 'Document discount' |
+				| 'Presentation'          |
+				| 'Document discount'     |
 			And I activate "Presentation" field in "Offers" table
 			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Percent"
 			And I input "10,00" text in "Percent" field
 			And I click "Ok" button
 			Then "Pickup special offers" window is opened
@@ -105,16 +106,16 @@ Scenario: _034501 check discount in Retail sales receipt
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "51 750,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'   | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Price type'           | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '5 200,00'         | '100,000'     | 'Basic Price Types'    | 'pcs'     | 'No'                    | '7 138,98'      | '39 661,02'     | '46 800,00'       | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'Basic Price Types'    | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 			* Filling in payment tab
 				And I move to "Payments" tab
 				And in the table "Payments" I click "Add" button
 				And I click choice button of "Account" attribute in "Payments" table
 				And I go to line in "List" table
-					| 'Description'  |
-					| 'Transit Main' |
+					| 'Description'       |
+					| 'Transit Main'      |
 				And I select current line in "List" table
 				And I activate "Amount" field in "Payments" table
 				And I input "51 750,00" text in "Amount" field of "Payments" table
@@ -135,66 +136,66 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 		* Filling in customers info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Basic Partner terms, TRY |
+				| Description                  |
+				| Basic Partner terms, TRY     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'M/White'  |
+				| 'Item key'     |
+				| 'M/White'      |
 			And I select current line in "List" table
 			And I input "100" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I input "10" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Discount 5+1
 			And in the table "ItemList" I click "% Offers" button
 			And I go to line in "Offers" table
-				| 'Presentation'     |
-				| 'All items 5+1, Discount on Basic Partner terms' |
+				| 'Presentation'                                       |
+				| 'All items 5+1, Discount on Basic Partner terms'     |
 			And I activate "Is select" field in "Offers" table
 			And I select current line in "Offers" table
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
-				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'   | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Detail'    | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Price type'           | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | ''          | 'Dress'    | '18%'    | 'M/White'     | '8 320,00'         | '100,000'     | 'Basic Price Types'    | 'pcs'     | 'No'                    | '6 663,05'      | '37 016,95'     | '43 680,00'       | 'Store 01'     |
+				| '550,00'    | ''          | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'Basic Price Types'    | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "8 870,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "41 211,87"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 418,13"
@@ -204,8 +205,8 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Account" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Transit Main' |
+				| 'Description'      |
+				| 'Transit Main'     |
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "48 630,00" text in "Amount" field of "Payments" table
@@ -224,8 +225,8 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 		* Create Retail return receipt based on $$RetailSalesReceipt034501$$
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberRetailSalesReceipt034501$$'  |
+				| 'Number'                                 |
+				| '$$NumberRetailSalesReceipt034501$$'     |
 			And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 			And I click "Ok" button		
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "5 750,00"
@@ -233,19 +234,19 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "51 750,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '5 200,00'         | '100,000'     | 'pcs'     | 'No'                    | '7 138,98'      | '39 661,02'     | '46 800,00'       | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'L/Green'  | '10,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'L/Green'     | '10,000'       |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'M/White'  | '100,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'M/White'     | '100,000'      |
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -254,12 +255,12 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "432,46"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 835,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '260,00'        | '5,000' | 'pcs'  | 'No'                 | '356,95'     | '1 983,05'   | '2 340,00'     | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '260,00'           | '5,000'       | 'pcs'     | 'No'                    | '356,95'        | '1 983,05'      | '2 340,00'        | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '55,00'            | '1,000'       | 'pcs'     | 'No'                    | '75,51'         | '419,49'        | '495,00'          | 'Store 01'     |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'M/White'  | '5,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'M/White'     | '5,000'        |
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
@@ -268,25 +269,25 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "789,41"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "5 175,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '520,00'        | '10,000' | 'pcs'  | 'No'                 | '713,90'     | '3 966,10'   | '4 680,00'     | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |	
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '520,00'           | '10,000'      | 'pcs'     | 'No'                    | '713,90'        | '3 966,10'      | '4 680,00'        | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '55,00'            | '1,000'       | 'pcs'     | 'No'                    | '75,51'         | '419,49'        | '495,00'          | 'Store 01'     |
 			And I click the button named "FormPost"
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "575,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "4 385,59"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "789,41"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "5 175,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '520,00'        | '10,000' | 'pcs'  | 'No'                 | '713,90'     | '3 966,10'   | '4 680,00'     | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |	
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '520,00'           | '10,000'      | 'pcs'     | 'No'                    | '713,90'        | '3 966,10'      | '4 680,00'        | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '55,00'            | '1,000'       | 'pcs'     | 'No'                    | '75,51'         | '419,49'        | '495,00'          | 'Store 01'     |
 		* Filling in payment tab
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Account" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Transit Main' |
+				| 'Description'      |
+				| 'Transit Main'     |
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "5 175,00" text in "Amount" field of "Payments" table
@@ -296,41 +297,41 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 		* Create Retail return receipt based on $$RetailSalesReceipt034502$$
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberRetailSalesReceipt034502$$'  |
+				| 'Number'                                 |
+				| '$$NumberRetailSalesReceipt034502$$'     |
 			And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 			And I click "Ok" button	
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '8 320,00'         | '100,000'     | 'pcs'     | 'No'                    | '6 663,05'      | '37 016,95'     | '43 680,00'       | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "8 870,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "41 211,87"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 418,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "48 630,00"
 		* Change quantity and check discount recalculation	
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'M/White'  | '100,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'M/White'     | '100,000'      |
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '832,00'        | '10,000' | 'pcs'  | 'No'                 | '666,31'     | '3 701,69'   | '4 368,00'     | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '520,00'    | 'Dress'    | '18%'    | 'M/White'     | '832,00'           | '10,000'      | 'pcs'     | 'No'                    | '666,31'        | '3 701,69'      | '4 368,00'        | 'Store 01'     |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "1 382,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "7 896,61"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 421,39"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "9 318,00"
 		* Delete string and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Quantity'       |
-				| 'Dress' | 'M/White'  | '10,000' |
+				| 'Item'     | 'Item key'    | 'Quantity'     |
+				| 'Dress'    | 'M/White'     | '10,000'       |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'     | 'Item'     | 'VAT'    | 'Item key'    | 'Offers amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
+				| '550,00'    | 'Dress'    | '18%'    | 'L/Green'     | '550,00'           | '10,000'      | 'pcs'     | 'No'                    | '755,08'        | '4 194,92'      | '4 950,00'        | 'Store 01'     |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "550,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "4 194,92"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "755,08"
@@ -340,8 +341,8 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Account" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Transit Main' |
+				| 'Description'      |
+				| 'Transit Main'     |
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "4 950,00" text in "Amount" field of "Payments" table

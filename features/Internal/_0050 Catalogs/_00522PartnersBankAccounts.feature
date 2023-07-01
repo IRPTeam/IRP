@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -36,19 +36,19 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 		And I input "56788888888888689" text in "Number" field
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Euro'        |
+			| 'Description'    |
+			| 'Euro'           |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I input "Bank name" text in "Bank name" field
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Front office'     |
+			| 'Description'     |
+			| 'Front office'    |
 		And I select current line in "List" table
 		And I click "Save" button
 		* Check data save

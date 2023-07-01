@@ -22,7 +22,7 @@ EndProcedure
 
 &AtClient
 Procedure RunTest(Command)
-	
+	ClearMessages();
 	RunTestAtServer();
 	UpdateLog();
 	
@@ -31,7 +31,7 @@ EndProcedure
 &AtServer
 Procedure RunTestAtServer()
 	
-	For Each RowID In Items.TestList.SelectedRows Do
+	For Each RowID In Items.TestList.SelectedRows Do // Number
 		Row = TestList.FindByID(RowID);
 		RunTestByRow(Row);
 	EndDo;
@@ -53,7 +53,7 @@ EndProcedure
 
 &AtClient
 Procedure RunAllTest(Command)
-	
+	ClearMessages();
 	RunAllTestAtServer();
 	UpdateLog(); 
 	
@@ -86,3 +86,9 @@ Procedure UpdateLog()
 	
 EndProcedure
 
+
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	FillTestsAtServer();  
+EndProcedure

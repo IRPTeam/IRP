@@ -8,6 +8,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
 	isReturn = Parameters.isReturn;
+	AdditionalCheckIsOn = Parameters.Item.CheckCodeString;
+	
+	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
 EndProcedure
 
 &AtClient
@@ -17,6 +20,7 @@ Procedure OnOpen(Cancel)
 		NewRow = CurrentCodes.Add();
 		NewRow.StringCode = Row.CodeString;
 		NewRow.CodeIsApproved = Row.CodeIsApproved;
+		NewRow.NotCheck = Row.NotCheck;
 	EndDo;
 EndProcedure
 
@@ -83,21 +87,28 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
-		RequestKMSettings.Quantity = 1;
-		RequestKMSettings.MarkingCode = StringCode;
-		
-		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
-		
-		If Not Result.Approved Then
-			AllBarcodesIsOk = False;
-			Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
-			Return;
+		If AdditionalCheckIsOn Then
+			RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
+			RequestKMSettings.Quantity = 1;
+			RequestKMSettings.MarkingCode = StringCode;
+			
+			Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
+			
+			If Not Result.Approved Then
+				AllBarcodesIsOk = False;
+				Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
+				Return;
+			EndIf;
+			NewRow = CurrentCodes.Add();
+			NewRow.StringCode = StringCode;	
+			NewRow.CodeIsApproved = Result.Approved;
+		Else
+			NewRow = CurrentCodes.Add();
+			NewRow.StringCode = StringCode;	
+			NewRow.CodeIsApproved = True;
+			NewRow.NotCheck = True;
 		EndIf;
-		NewRow = CurrentCodes.Add();
-		NewRow.StringCode = StringCode;	
-		NewRow.CodeIsApproved = Result.Approved;
 	EndDo;
 	
 	If AllBarcodesIsOk And ArrayOfApprovedCodeStrings.Count() > 0 Then
@@ -114,6 +125,7 @@ Procedure Done(Command = Undefined)
 		Str.Insert("Key", RowKey);
 		Str.Insert("CodeString", Row.StringCode);
 		Str.Insert("CodeIsApproved", Row.CodeIsApproved);
+		Str.Insert("NotCheck", Row.NotCheck);
 		Array.Add(Str);
 	EndDo;
 	

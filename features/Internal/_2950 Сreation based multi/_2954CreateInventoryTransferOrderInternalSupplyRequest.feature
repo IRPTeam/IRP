@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CreationBasedMulti
@@ -54,8 +54,8 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -78,26 +78,26 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click Select button of "Company" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description  |
-				| Main Company | 
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -105,14 +105,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -120,14 +120,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'  |
+				| 'Description'     |
+				| 'High shoes'      |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |
+				| 'Item'          | 'Item key'     |
+				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -146,26 +146,26 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click Select button of "Company" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description  |
-				| Main Company | 
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| Description |
-				| Store 02  |
+				| Description     |
+				| Store 02        |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'    |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Dress' | 'S/Yellow' |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'S/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -173,14 +173,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -188,14 +188,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'  |
+				| 'Description'     |
+				| 'High shoes'      |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |
+				| 'Item'          | 'Item key'     |
+				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -214,26 +214,26 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I click Select button of "Company" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description  |
-				| Main Company | 
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| Description |
-				| Store 03  |
+				| Description     |
+				| Store 03        |
 			And I select current line in "List" table
 		* Filling in the tabular part
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'    |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key'  |
-				| 'Dress' | 'M/White' |
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'M/White'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -241,14 +241,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -256,14 +256,14 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'  |
+				| 'Description'     |
+				| 'High shoes'      |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |
+				| 'Item'          | 'Item key'     |
+				| 'High shoes'    | '37/19SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
@@ -278,37 +278,37 @@ Scenario: _295401 check filling in Inventory transfer order when creating based 
 	* Select InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '295' | 
+			| 'Number'    |
+			| '295'       |
 		And I move one line down in "List" table and select line
 	* Create Inventory transfer order and check filling in
 		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'Item'       | 'Quantity' | 'Internal supply request'      | 'Item key'  | 'Unit' |
-		| 'Dress'      | '2,000'    | 'Internal supply request 296*' | 'S/Yellow'  | 'pcs'  |
-		| 'Trousers'   | '2,000'    | 'Internal supply request 295*' | '38/Yellow' | 'pcs'  |
-		| 'Boots'      | '1,000'    | 'Internal supply request 295*' | '37/18SD'   | 'pcs'  |
-		| 'Boots'      | '2,000'    | 'Internal supply request 296*' | '37/18SD'   | 'pcs'  |
-		| 'High shoes' | '2,000'    | 'Internal supply request 295*' | '37/19SD'   | 'pcs'  |
-		| 'High shoes' | '2,000'    | 'Internal supply request 296*' | '37/19SD'   | 'pcs'  |
+		| 'Item'        | 'Quantity'  | 'Internal supply request'       | 'Item key'   | 'Unit'   |
+		| 'Dress'       | '2,000'     | 'Internal supply request 296*'  | 'S/Yellow'   | 'pcs'    |
+		| 'Trousers'    | '2,000'     | 'Internal supply request 295*'  | '38/Yellow'  | 'pcs'    |
+		| 'Boots'       | '1,000'     | 'Internal supply request 295*'  | '37/18SD'    | 'pcs'    |
+		| 'Boots'       | '2,000'     | 'Internal supply request 296*'  | '37/18SD'    | 'pcs'    |
+		| 'High shoes'  | '2,000'     | 'Internal supply request 295*'  | '37/19SD'    | 'pcs'    |
+		| 'High shoes'  | '2,000'     | 'Internal supply request 296*'  | '37/19SD'    | 'pcs'    |
 	And I close all client application windows
 
 Scenario: _295402 check filling in Inventory transfer order when creating based on two Internal supply requests with the different warehouse
 	* Select InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '296' | 
+			| 'Number'    |
+			| '296'       |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
 		And I click "Ok" button
 	* Create Inventory transfer order and check filling in
 		And "ItemList" table contains lines
-		| 'Item'       | 'Quantity' | 'Internal supply request'      | 'Item key' | 'Unit' |
-		| 'Dress'      | '2,000'    | 'Internal supply request 297*' | 'M/White'  | 'pcs'  |
-		| 'Boots'      | '2,000'    | 'Internal supply request 297*' | '37/18SD'  | 'pcs'  |
-		| 'High shoes' | '2,000'    | 'Internal supply request 297*' | '37/19SD'  | 'pcs'  |
+		| 'Item'        | 'Quantity'  | 'Internal supply request'       | 'Item key'  | 'Unit'   |
+		| 'Dress'       | '2,000'     | 'Internal supply request 297*'  | 'M/White'   | 'pcs'    |
+		| 'Boots'       | '2,000'     | 'Internal supply request 297*'  | '37/18SD'   | 'pcs'    |
+		| 'High shoes'  | '2,000'     | 'Internal supply request 297*'  | '37/19SD'   | 'pcs'    |
 	And I close all client application windows
 
 Scenario: _999999 close TestClient session

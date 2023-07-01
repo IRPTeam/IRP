@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.PageExtensionsAttributes);
 EndProcedure
 
 &AtServer

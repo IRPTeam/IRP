@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <title>
     <key>en</key>
     <value>Payment</value>
@@ -3683,20 +3683,27 @@ WHERE
 			InformationRegister.BranchBankTerms AS BranchBankTerms
 		WHERE
 			BranchBankTerms.Branch = &amp;Branch)
+	AND PaymentTypesData.PaymentType.Type = &amp;PaymentType
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
-SELECT
+ SELECT
 	PaymentTypes.Ref
 FROM
 	Catalog.PaymentTypes AS PaymentTypes
 		INNER JOIN PaymentTypesData AS PaymentTypesData
-		ON PaymentTypes.Ref = PaymentTypesData.PaymentType</queryText>
+		ON PaymentTypes.Ref = PaymentTypesData.PaymentType
+WHERE
+	PaymentTypes.Type = &amp;Type</queryText>
       <mainTable>Catalog.PaymentTypes</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Code</dataPath>
         <field>Code</field>
@@ -3734,6 +3741,10 @@ FROM
         <field>Branch</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>FinancialMovementType</dataPath>
+        <field>FinancialMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Description_en</dataPath>
         <field>Description_en</field>
       </fields>
@@ -3769,10 +3780,6 @@ FROM
         <dataPath>Parent</dataPath>
         <field>Parent</field>
       </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Ref</dataPath>
-        <field>Ref</field>
-      </fields>
       <parameters>
         <name>Branch</name>
         <title>
@@ -3786,6 +3793,46 @@ FROM
         <valueType>
           <types>CatalogRef.BusinessUnits</types>
         </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Type</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Type</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>EnumRef.PaymentTypes</types>
+        </valueType>
+        <values xsi:type="core_1:DesignTimeValueValue">
+          <value>
+            <value>Enum.PaymentTypes.Card</value>
+          </value>
+        </values>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>PaymentType</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Payment type</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>EnumRef.PaymentTypes</types>
+        </valueType>
+        <values xsi:type="core_1:DesignTimeValueValue">
+          <value>
+            <value>Enum.PaymentTypes.Card</value>
+          </value>
+        </values>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

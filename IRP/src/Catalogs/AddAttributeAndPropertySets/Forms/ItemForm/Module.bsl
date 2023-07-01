@@ -8,6 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		"Catalog.AddAttributeAndPropertySets.Catalog_Items") Or Object.Ref = PredefinedValue(
 		"Catalog.AddAttributeAndPropertySets.Catalog_Partners");
 
+	Items.AttributesCopyInterfaceGroup.Visible = Items.AttributesInterfaceGroup.Visible; 
+
 	IsCatalog_ItemKeys = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys")
 		Or Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 
@@ -163,6 +165,103 @@ EndProcedure
 &AtClient
 Procedure FillExtensionAttributesList(Command)
 	FillExtensionAttributesListAtServer();
+EndProcedure
+
+&AtClient
+Procedure CopyAttributeRequired(Command)
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.Required = FormTable.CurrentData.Required;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyAttributeShow(Command)
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.Show = FormTable.CurrentData.Show;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyAttributeShowInHTML(Command)
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.ShowInHTML = FormTable.CurrentData.ShowInHTML;
+	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure CopyCondition(Command)
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		TableName = "ExtensionAttributes";
+	Else
+		TableName = "Attributes";
+	EndIf;	
+	If Items[TableName].CurrentRow = Undefined Or Items[TableName].SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;	
+	IndicesArray = New Array;
+	CurrentIndex = 0;
+	For Each SelectedRow In Items[TableName].SelectedRows Do
+		Row = Object[TableName].FindByID(SelectedRow);
+		If SelectedRow <> Items[TableName].CurrentRow Then
+			IndicesArray.Add(Object[TableName].IndexOf(Row));
+		Else
+			CurrentIndex = Object[TableName].IndexOf(Row);
+		EndIf;
+	EndDo;	
+	If Write() Then
+		CopyExtensionAttributesConditionAtServer(TableName, CurrentIndex, IndicesArray);
+	EndIf; 
+EndProcedure
+
+&AtClient
+Procedure CopyInterfaceGroup(Command)
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
+		Return;
+	EndIf;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.InterfaceGroup = FormTable.CurrentData.InterfaceGroup;
+	EndDo;	
 EndProcedure
 
 #EndRegion
@@ -379,6 +478,19 @@ Procedure FillExtensionAttributesListAtServer()
 		NewRow = Object.ExtensionAttributes.Add();
 		NewRow.Attribute = Attribute.Name;
 	EndDo;
+EndProcedure
+
+&AtServer
+Procedure CopyExtensionAttributesConditionAtServer(TableName, CurrentRow, IndicesArray)
+	CatalogObject = Object.Ref.GetObject();
+	CurrentData = CatalogObject[TableName].Get(CurrentRow);	
+	For Each Index In IndicesArray Do
+		Row = CatalogObject[TableName][Index];
+		Row.IsConditionSet = CurrentData.IsConditionSet;
+		Row.Condition = CurrentData.Condition; 
+	EndDo;
+	CatalogObject.Write();
+	ThisObject.Read();	
 EndProcedure
 
 #EndRegion

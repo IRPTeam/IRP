@@ -1,4 +1,4 @@
-﻿	#language: en
+	#language: en
 	@tree
 	@Reservation
 
@@ -30,8 +30,8 @@
 		* Add plugin for taxes calculation
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				If "List" table does not contain lines Then
-						| "Description" |
-						| "TaxCalculateVAT_TR" |
+						| "Description"              |
+						| "TaxCalculateVAT_TR"       |
 					When add Plugin for tax calculation
 				When Create information register Taxes records (VAT)
 			* Tax settings
@@ -63,14 +63,14 @@
 		When Create catalog Stores objects
 		When Create document SalesOrder objects (MF)
 		And I execute 1C:Enterprise script at server
-			| "Doc = Documents.SalesOrder.FindByNumber(12).GetObject();" |
-			| "Doc.Write(DocumentWriteMode.Posting);" |
+			| "Doc = Documents.SalesOrder.FindByNumber(12).GetObject();"    |
+			| "Doc.Write(DocumentWriteMode.Posting);"                       |
 		When Create document ProductionPlanning objects (first period)
 		When Create document PlannedReceiptReservation objects
 		And I execute 1C:Enterprise script at server
-				| "Doc = Documents.PlannedReceiptReservation.FindByNumber(1).GetObject();" |
-				| "Doc.Date = CurrentDate();" |
-				| "Doc.Write(DocumentWriteMode.Posting);" |
+				| "Doc = Documents.PlannedReceiptReservation.FindByNumber(1).GetObject();"     |
+				| "Doc.Date = CurrentDate();"                                                  |
+				| "Doc.Write(DocumentWriteMode.Posting);"                                      |
 		* Check PlannedReceiptReservation movements
 			Given I open hyperlink "e1cib/data/Document.PlannedReceiptReservation?ref=b76197e183b782dc11eb6bb2f008e2ac"
 			And I delete "$$DatePlannedReceiptReservation4001$$" variable
@@ -82,23 +82,23 @@
 				And I select "R4035 Incoming stocks" exact value from "Register" drop-down list
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document contains lines
-				| '$$PlannedReceiptReservation4001$$' | ''            | ''                                      | ''          | ''           | ''                                   | ''                                                 |
-				| 'Document registrations records'    | ''            | ''                                      | ''          | ''           | ''                                   | ''                                                 |
-				| 'Register  "R4035 Incoming stocks"' | ''            | ''                                      | ''          | ''           | ''                                   | ''                                                 |
-				| ''                                  | 'Record type' | 'Period'                                | 'Resources' | 'Dimensions' | ''                                   | ''                                                 |
-				| ''                                  | ''            | ''                                      | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order'                                            |
-				| ''                                  | 'Expense'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'   | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' |
+				| '$$PlannedReceiptReservation4001$$'    | ''               | ''                                         | ''             | ''              | ''                                 | ''                                                     |
+				| 'Document registrations records'       | ''               | ''                                         | ''             | ''              | ''                                 | ''                                                     |
+				| 'Register  "R4035 Incoming stocks"'    | ''               | ''                                         | ''             | ''              | ''                                 | ''                                                     |
+				| ''                                     | 'Record type'    | 'Period'                                   | 'Resources'    | 'Dimensions'    | ''                                 | ''                                                     |
+				| ''                                     | ''               | ''                                         | 'Quantity'     | 'Store'         | 'Item key'                         | 'Order'                                                |
+				| ''                                     | 'Expense'        | '$$DatePlannedReceiptReservation4001$$'    | '45'           | 'Store 02'      | 'Стремянка номер 6 ступенчатая'    | 'Production planning 12 dated 01.01.2021 16:47:36'     |
 			* R4036 Incoming stock requested
 				And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document contains lines
-				| '$$PlannedReceiptReservation4001$$'          | ''            | ''                                      | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-				| 'Document registrations records'             | ''            | ''                                      | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-				| 'Register  "R4036 Incoming stock requested"' | ''            | ''                                      | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-				| ''                                           | 'Record type' | 'Period'                                | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
-				| ''                                           | ''            | ''                                      | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 01'       | 'Store 01'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
-				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'       | 'Store 02'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+				| '$$PlannedReceiptReservation4001$$'             | ''               | ''                                         | ''             | ''                  | ''                   | ''                                 | ''                                                    | ''                                             |
+				| 'Document registrations records'                | ''               | ''                                         | ''             | ''                  | ''                   | ''                                 | ''                                                    | ''                                             |
+				| 'Register  "R4036 Incoming stock requested"'    | ''               | ''                                         | ''             | ''                  | ''                   | ''                                 | ''                                                    | ''                                             |
+				| ''                                              | 'Record type'    | 'Period'                                   | 'Resources'    | 'Dimensions'        | ''                   | ''                                 | ''                                                    | ''                                             |
+				| ''                                              | ''               | ''                                         | 'Quantity'     | 'Incoming store'    | 'Requester store'    | 'Item key'                         | 'Order'                                               | 'Requester'                                    |
+				| ''                                              | 'Receipt'        | '$$DatePlannedReceiptReservation4001$$'    | '45'           | 'Store 01'          | 'Store 01'           | 'Стремянка номер 6 ступенчатая'    | 'Production planning 12 dated 01.01.2021 16:47:36'    | 'Sales order 12 dated 10.02.2021 17:38:12'     |
+				| ''                                              | 'Receipt'        | '$$DatePlannedReceiptReservation4001$$'    | '45'           | 'Store 02'          | 'Store 02'           | 'Стремянка номер 6 ступенчатая'    | 'Production planning 12 dated 01.01.2021 16:47:36'    | 'Sales order 12 dated 10.02.2021 17:38:12'     |
 		And I close all client application windows
 		When Create document Production objects
 		* Check MF_Production movements
@@ -112,28 +112,28 @@
 				And I select "R4012 Stock Reservation" exact value from "Register" drop-down list		
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document is equal
-					| '$$Production4001$$'                  | ''            | ''                       | ''          | ''           | ''                                   | ''      |
-					| 'Document registrations records'      | ''            | ''                       | ''          | ''           | ''                                   | ''      |
-					| 'Register  "R4012 Stock Reservation"' | ''            | ''                       | ''          | ''           | ''                                   | ''      |
-					| ''                                    | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions' | ''                                   | ''      |
-					| ''                                    | ''            | ''                       | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order' |
-					| ''                                    | 'Receipt'     | '$$DateProduction4001$$' | '40'        | 'Store 02'   | 'Стремянка номер 6 ступенчатая' | ''      |
+					| '$$Production4001$$'                      | ''                | ''                           | ''              | ''               | ''                                  | ''           |
+					| 'Document registrations records'          | ''                | ''                           | ''              | ''               | ''                                  | ''           |
+					| 'Register  "R4012 Stock Reservation"'     | ''                | ''                           | ''              | ''               | ''                                  | ''           |
+					| ''                                        | 'Record type'     | 'Period'                     | 'Resources'     | 'Dimensions'     | ''                                  | ''           |
+					| ''                                        | ''                | ''                           | 'Quantity'      | 'Store'          | 'Item key'                          | 'Order'      |
+					| ''                                        | 'Receipt'         | '$$DateProduction4001$$'     | '40'            | 'Store 02'       | 'Стремянка номер 6 ступенчатая'     | ''           |
 			* R4036 Incoming stock requested
 				And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list		
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document is equal
-					| '$$Production4001$$'                         | ''            | ''                       | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-					| 'Document registrations records'             | ''            | ''                       | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-					| 'Register  "R4036 Incoming stock requested"' | ''            | ''                       | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-					| ''                                           | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
-					| ''                                           | ''            | ''                       | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-					| ''                                           | 'Expense'     | '$$DateProduction4001$$' | '40'        | 'Store 02'       | 'Store 02'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| '$$Production4001$$'                             | ''                | ''                           | ''              | ''                   | ''                    | ''                                  | ''                                                     | ''                                              |
+					| 'Document registrations records'                 | ''                | ''                           | ''              | ''                   | ''                    | ''                                  | ''                                                     | ''                                              |
+					| 'Register  "R4036 Incoming stock requested"'     | ''                | ''                           | ''              | ''                   | ''                    | ''                                  | ''                                                     | ''                                              |
+					| ''                                               | 'Record type'     | 'Period'                     | 'Resources'     | 'Dimensions'         | ''                    | ''                                  | ''                                                     | ''                                              |
+					| ''                                               | ''                | ''                           | 'Quantity'      | 'Incoming store'     | 'Requester store'     | 'Item key'                          | 'Order'                                                | 'Requester'                                     |
+					| ''                                               | 'Expense'         | '$$DateProduction4001$$'     | '40'            | 'Store 02'           | 'Store 02'            | 'Стремянка номер 6 ступенчатая'     | 'Production planning 12 dated 01.01.2021 16:47:36'     | 'Sales order 12 dated 10.02.2021 17:38:12'      |
 			And I close all client application windows
 		When Create document InventoryTransfer objects (MF)
 		And I execute 1C:Enterprise script at server
-			| "Doc = Documents.InventoryTransfer.FindByNumber(12).GetObject();" |
-			| "Doc.Date = CurrentDate();" |
-			| "Doc.Write(DocumentWriteMode.Posting);" |
+			| "Doc = Documents.InventoryTransfer.FindByNumber(12).GetObject();"    |
+			| "Doc.Date = CurrentDate();"                                          |
+			| "Doc.Write(DocumentWriteMode.Posting);"                              |
 		* Check InventoryTransfer movements by Register "R4012 Stock Reservation"
 			Given I open hyperlink "e1cib/data/Document.InventoryTransfer?ref=b76197e183b782dc11eb6c544959f30e"
 			And I delete "$$DateInventoryTransfer4001$$" variable
@@ -153,9 +153,9 @@
 			// And I close all client application windows
 		When Create document GoodsReceipt objects (MF)
 		And I execute 1C:Enterprise script at server
-			| "Doc = Documents.GoodsReceipt.FindByNumber(12).GetObject();" |
-			| "Doc.Date = CurrentDate();" |
-			| "Doc.Write(DocumentWriteMode.Posting);" |
+			| "Doc = Documents.GoodsReceipt.FindByNumber(12).GetObject();"    |
+			| "Doc.Date = CurrentDate();"                                     |
+			| "Doc.Write(DocumentWriteMode.Posting);"                         |
 		* Check GoodsReceipt movements
 			Given I open hyperlink "e1cib/data/Document.GoodsReceipt?ref=b76197e183b782dc11eb6c544959f30f"
 			And I delete "$$DateGoodsReceipt4001$$" variable
@@ -167,31 +167,31 @@
 				And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list
 				And I click "Generate report" button		
 				Then "ResultTable" spreadsheet document contains lines
-					| 'Register  "R4036 Incoming stock requested"' | ''            | ''                         | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
-					| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
-					| ''                                           | ''            | ''                         | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-					| ''                                           | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'       | 'Store 01'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| 'Register  "R4036 Incoming stock requested"'     | ''                | ''                             | ''              | ''                   | ''                    | ''                                  | ''                                                     | ''                                              |
+					| ''                                               | 'Record type'     | 'Period'                       | 'Resources'     | 'Dimensions'         | ''                    | ''                                  | ''                                                     | ''                                              |
+					| ''                                               | ''                | ''                             | 'Quantity'      | 'Incoming store'     | 'Requester store'     | 'Item key'                          | 'Order'                                                | 'Requester'                                     |
+					| ''                                               | 'Expense'         | '$$DateGoodsReceipt4001$$'     | '40'            | 'Store 01'           | 'Store 01'            | 'Стремянка номер 6 ступенчатая'     | 'Production planning 12 dated 01.01.2021 16:47:36'     | 'Sales order 12 dated 10.02.2021 17:38:12'      |
 			* R4011 Free stocks
 				And I select "R4011 Free stocks" exact value from "Register" drop-down list
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document contains lines
-					| '$$GoodsReceipt4001$$'           | ''            | ''                         | ''          | ''           | ''                                   |
-					| 'Document registrations records' | ''            | ''                         | ''          | ''           | ''                                   |
-					| 'Register  "R4011 Free stocks"'  | ''            | ''                         | ''          | ''           | ''                                   |
-					| ''                               | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                                   |
-					| ''                               | ''            | ''                         | 'Quantity'  | 'Store'      | 'Item key'                           |
-					| ''                               | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' |
-					| ''                               | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' |
+					| '$$GoodsReceipt4001$$'               | ''                | ''                             | ''              | ''               | ''                                   |
+					| 'Document registrations records'     | ''                | ''                             | ''              | ''               | ''                                   |
+					| 'Register  "R4011 Free stocks"'      | ''                | ''                             | ''              | ''               | ''                                   |
+					| ''                                   | 'Record type'     | 'Period'                       | 'Resources'     | 'Dimensions'     | ''                                   |
+					| ''                                   | ''                | ''                             | 'Quantity'      | 'Store'          | 'Item key'                           |
+					| ''                                   | 'Receipt'         | '$$DateGoodsReceipt4001$$'     | '40'            | 'Store 01'       | 'Стремянка номер 6 ступенчатая'      |
+					| ''                                   | 'Expense'         | '$$DateGoodsReceipt4001$$'     | '40'            | 'Store 01'       | 'Стремянка номер 6 ступенчатая'      |
 			* R4012 Stock Reservation
 				And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 				And I click "Generate report" button
 				Then "ResultTable" spreadsheet document contains lines
-					| '$$GoodsReceipt4001$$'                | ''            | ''                         | ''          | ''           | ''                                   | ''                                         |
-					| 'Document registrations records'      | ''            | ''                         | ''          | ''           | ''                                   | ''                                         |
-					| 'Register  "R4012 Stock Reservation"' | ''            | ''                         | ''          | ''           | ''                                   | ''                                         |
-					| ''                                    | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                                   | ''                                         |
-					| ''                                    | ''            | ''                         | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order'                                    |
-					| ''                                    | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| '$$GoodsReceipt4001$$'                    | ''                | ''                             | ''              | ''               | ''                                  | ''                                              |
+					| 'Document registrations records'          | ''                | ''                             | ''              | ''               | ''                                  | ''                                              |
+					| 'Register  "R4012 Stock Reservation"'     | ''                | ''                             | ''              | ''               | ''                                  | ''                                              |
+					| ''                                        | 'Record type'     | 'Period'                       | 'Resources'     | 'Dimensions'     | ''                                  | ''                                              |
+					| ''                                        | ''                | ''                             | 'Quantity'      | 'Store'          | 'Item key'                          | 'Order'                                         |
+					| ''                                        | 'Receipt'         | '$$DateGoodsReceipt4001$$'     | '40'            | 'Store 01'       | 'Стремянка номер 6 ступенчатая'     | 'Sales order 12 dated 10.02.2021 17:38:12'      |
 			And I close all client application windows
 			
 

@@ -57,8 +57,8 @@ Scenario: _040158 preparation (Sales order closing)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -67,41 +67,42 @@ Scenario: _040158 preparation (Sales order closing)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
 	*Load Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "1" |
+				| "Number"     |
+				| "1"          |
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Load Sales order closing document
 		When Create document SalesOrderClosing objects (check movements)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 		When Create document SalesOrder, SalesInvoice, SalesOrderClosing, CashReceipt objects (with aging)
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrder.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrder.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrder.FindByNumber(230).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrder.FindByNumber(230).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesInvoice.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesInvoice.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.CashReceipt.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CashReceipt.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);"     |
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number' |
-			| '4'      |
+			| 'Number'    |
+			| '4'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 	// * Check query for sales order closing movements
@@ -128,34 +129,34 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R2010 Sales orders" 
 		And I click "Registrations report" button
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''                    | ''          | ''          | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | ''                | ''                     |
-			| 'Document registrations records'                  | ''                    | ''          | ''          | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | ''                | ''                     |
-			| 'Register  "R2010 Sales orders"'                  | ''                    | ''          | ''          | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | ''                | ''                     |
-			| ''                                                | 'Period'              | 'Resources' | ''          | ''           | ''              | 'Dimensions'   | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | ''                | 'Attributes'           |
-			| ''                                                | ''                    | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Order'                                   | 'Item key' | 'Row key'                              | 'Procurement method' | 'Sales person'    | 'Deferred calculation' |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | '-840'          | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | '-840'          | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | '-840'          | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-2 732,35' | '-2 315,55'  | '-143,81'       | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | '-175'          | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | '-175'          | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | '-175'          | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-569,24'   | '-482,41'    | '-29,96'        | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | '-26'           | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | '-26'           | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | '-26'           | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | '-5'            | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | '-5'            | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | '-5'            | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | ''                | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-84,57'    | '-71,67'     | '-4,45'         | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'Alexander Orlov' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-16,26'    | '-13,78'     | '-0,86'         | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | ''                | 'No'                   |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''                      | ''            | ''            | ''             | ''                | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                     | ''                  | ''                        |
+			| 'Document registrations records'                    | ''                      | ''            | ''            | ''             | ''                | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                     | ''                  | ''                        |
+			| 'Register  "R2010 Sales orders"'                    | ''                      | ''            | ''            | ''             | ''                | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                     | ''                  | ''                        |
+			| ''                                                  | 'Period'                | 'Resources'   | ''            | ''             | ''                | 'Dimensions'     | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                     | ''                  | 'Attributes'              |
+			| ''                                                  | ''                      | 'Quantity'    | 'Amount'      | 'Net amount'   | 'Offers amount'   | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Order'                                     | 'Item key'   | 'Row key'                                | 'Procurement method'   | 'Sales person'      | 'Deferred calculation'    |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-24'         | '-15 960'     | '-13 525,42'   | '-840'            | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'Purchase'             | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-24'         | '-15 960'     | '-13 525,42'   | '-840'            | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'Purchase'             | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-24'         | '-15 960'     | '-13 525,42'   | '-840'            | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'Purchase'             | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-24'         | '-2 732,35'   | '-2 315,55'    | '-143,81'         | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'Purchase'             | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-10'         | '-3 325'      | '-2 817,8'     | '-175'            | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'No reserve'           | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-10'         | '-3 325'      | '-2 817,8'     | '-175'            | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'No reserve'           | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-10'         | '-3 325'      | '-2 817,8'     | '-175'            | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'No reserve'           | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-10'         | '-569,24'     | '-482,41'      | '-29,96'          | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'No reserve'           | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-494'        | '-418,64'      | '-26'             | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'Stock'                | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-494'        | '-418,64'      | '-26'             | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'Stock'                | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-494'        | '-418,64'      | '-26'             | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'Stock'                | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-95'         | '-80,51'       | '-5'              | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | ''                     | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-95'         | '-80,51'       | '-5'              | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | ''                     | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-95'         | '-80,51'       | '-5'              | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | ''                     | ''                  | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-84,57'      | '-71,67'       | '-4,45'           | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'Stock'                | 'Alexander Orlov'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-1'          | '-16,26'      | '-13,78'       | '-0,86'           | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | ''                     | ''                  | 'No'                      |
 		And I close all client application windows
 		
 Scenario: _040160 check Sales order closing movements by the Register  "R2014 Canceled sales orders"
@@ -163,34 +164,34 @@ Scenario: _040160 check Sales order closing movements by the Register  "R2014 Ca
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R2014 Canceled sales orders" 
 		And I click "Registrations report" button
 		And I select "R2014 Canceled sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''                    | ''          | ''         | ''           | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | ''                     |
-			| 'Document registrations records'                  | ''                    | ''          | ''         | ''           | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | ''                     |
-			| 'Register  "R2014 Canceled sales orders"'         | ''                    | ''          | ''         | ''           | ''             | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | ''                     |
-			| ''                                                | 'Period'              | 'Resources' | ''         | ''           | 'Dimensions'   | ''                        | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | 'Attributes'           |
-			| ''                                                | ''                    | 'Quantity'  | 'Amount'   | 'Net amount' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Order'                                   | 'Item key' | 'Row key'                              | 'Cancel reason' | 'Deferred calculation' |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '16,26'    | '13,78'      | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '84,57'    | '71,67'      | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'      | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'      | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'      | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '569,24'   | '482,41'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '2 732,35' | '2 315,55'   | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42'  | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42'  | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42'  | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''                      | ''            | ''           | ''             | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                | ''                        |
+			| 'Document registrations records'                    | ''                      | ''            | ''           | ''             | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                | ''                        |
+			| 'Register  "R2014 Canceled sales orders"'           | ''                      | ''            | ''           | ''             | ''               | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                | ''                        |
+			| ''                                                  | 'Period'                | 'Resources'   | ''           | ''             | 'Dimensions'     | ''                          | ''                               | ''           | ''                                          | ''           | ''                                       | ''                | 'Attributes'              |
+			| ''                                                  | ''                      | 'Quantity'    | 'Amount'     | 'Net amount'   | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Order'                                     | 'Item key'   | 'Row key'                                | 'Cancel reason'   | 'Deferred calculation'    |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '16,26'      | '13,78'        | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '84,57'      | '71,67'        | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '95'         | '80,51'        | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '95'         | '80,51'        | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '95'         | '80,51'        | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '494'        | '418,64'       | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '494'        | '418,64'       | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '1'           | '494'        | '418,64'       | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '10'          | '569,24'     | '482,41'       | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '10'          | '3 325'      | '2 817,8'      | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '10'          | '3 325'      | '2 817,8'      | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '10'          | '3 325'      | '2 817,8'      | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '24'          | '2 732,35'   | '2 315,55'     | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '24'          | '15 960'     | '13 525,42'    | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '24'          | '15 960'     | '13 525,42'    | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'not available'   | 'No'                      |
+			| ''                                                  | '28.01.2021 14:46:50'   | '24'          | '15 960'     | '13 525,42'    | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'   | 'not available'   | 'No'                      |
 		And I close all client application windows
 		
 
@@ -198,40 +199,40 @@ Scenario: _040162 check Sales order closing movements by the Register  "R2011 Sh
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R2011 Shipment of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
-			| 'Register  "R2011 Shipment of sales orders"'      | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
+			| 'Document registrations records'                    | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
+			| 'Register  "R2011 Shipment of sales orders"'        | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
+			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''            |
+			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'    |
+			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-24'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'     |
+			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-10'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'      |
+			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'     |
 		And I close all client application windows
 		
 Scenario: _040163 check Sales order closing movements by the Register  "R4011 Free stocks"
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''           | ''         |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4011 Free stocks"'                   | ''            | ''                    | ''          | ''           | ''         |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                                | 'Expense'     | '28.01.2021 14:46:50' | '-1'        | 'Store 02'   | 'XS/Blue'  |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''             | ''            |
+			| 'Document registrations records'                    | ''              | ''                      | ''            | ''             | ''            |
+			| 'Register  "R4011 Free stocks"'                     | ''              | ''                      | ''            | ''             | ''            |
+			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            |
+			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    |
+			| ''                                                  | 'Expense'       | '28.01.2021 14:46:50'   | '-1'          | 'Store 02'     | 'XS/Blue'     |
 
 		And I close all client application windows
 		
@@ -239,19 +240,19 @@ Scenario: _040164 check Sales order closing movements by the Register  "R4012 St
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''           | ''         | ''                                        |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''         | ''                                        |
-			| 'Register  "R4012 Stock Reservation"'             | ''            | ''                    | ''          | ''           | ''         | ''                                        |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                        |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                   |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Store 02'   | 'XS/Blue'  | 'Sales order 1 dated 27.01.2021 19:50:45' |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''             | ''           | ''                                           |
+			| 'Document registrations records'                    | ''              | ''                      | ''            | ''             | ''           | ''                                           |
+			| 'Register  "R4012 Stock Reservation"'               | ''              | ''                      | ''            | ''             | ''           | ''                                           |
+			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                                           |
+			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Order'                                      |
+			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | 'Store 02'     | 'XS/Blue'    | 'Sales order 1 dated 27.01.2021 19:50:45'    |
 
 		And I close all client application windows
 		
@@ -259,40 +260,40 @@ Scenario: _040165 check Sales order closing movements by the Register  "R2013 Pr
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''                   | ''                     | ''                      | ''                        | ''                    | ''                      | ''                 | ''                   | ''             | ''                        | ''                                        | ''         | ''                                     |
-			| 'Document registrations records'                  | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''                   | ''                     | ''                      | ''                        | ''                    | ''                      | ''                 | ''                   | ''             | ''                        | ''                                        | ''         | ''                                     |
-			| 'Register  "R2013 Procurement of sales orders"'   | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''                   | ''                     | ''                      | ''                        | ''                    | ''                      | ''                 | ''                   | ''             | ''                        | ''                                        | ''         | ''                                     |
-			| ''                                                | 'Period'              | 'Resources'        | ''                    | ''                  | ''                 | ''                 | ''               | ''                   | ''                     | ''                      | ''                        | ''                    | ''                      | ''                 | ''                   | 'Dimensions'   | ''                        | ''                                        | ''         | ''                                     |
-			| ''                                                | ''                    | 'Ordered quantity' | 'Re ordered quantity' | 'Purchase quantity' | 'Receipt quantity' | 'Shipped quantity' | 'Sales quantity' | 'Ordered net amount' | 'Ordered total amount' | 'Re ordered net amount' | 'Re ordered total amount' | 'Purchase net amount' | 'Purchase total amount' | 'Sales net amount' | 'Sales total amount' | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' | 'Row key'                              |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'              | ''                    | ''                  | ''                 | ''                 | ''               | '-13 525,42'         | '-15 960'              | ''                      | ''                        | ''                    | ''                      | ''                 | ''                   | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '                                    ' |		
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''                      | ''                   | ''                      | ''                    | ''                   | ''                   | ''                 | ''                     | ''                       | ''                        | ''                          | ''                      | ''                        | ''                   | ''                     | ''               | ''                          | ''                                          | ''           | ''                                        |
+			| 'Document registrations records'                    | ''                      | ''                   | ''                      | ''                    | ''                   | ''                   | ''                 | ''                     | ''                       | ''                        | ''                          | ''                      | ''                        | ''                   | ''                     | ''               | ''                          | ''                                          | ''           | ''                                        |
+			| 'Register  "R2013 Procurement of sales orders"'     | ''                      | ''                   | ''                      | ''                    | ''                   | ''                   | ''                 | ''                     | ''                       | ''                        | ''                          | ''                      | ''                        | ''                   | ''                     | ''               | ''                          | ''                                          | ''           | ''                                        |
+			| ''                                                  | 'Period'                | 'Resources'          | ''                      | ''                    | ''                   | ''                   | ''                 | ''                     | ''                       | ''                        | ''                          | ''                      | ''                        | ''                   | ''                     | 'Dimensions'     | ''                          | ''                                          | ''           | ''                                        |
+			| ''                                                  | ''                      | 'Ordered quantity'   | 'Re ordered quantity'   | 'Purchase quantity'   | 'Receipt quantity'   | 'Shipped quantity'   | 'Sales quantity'   | 'Ordered net amount'   | 'Ordered total amount'   | 'Re ordered net amount'   | 'Re ordered total amount'   | 'Purchase net amount'   | 'Purchase total amount'   | 'Sales net amount'   | 'Sales total amount'   | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'   | 'Row key'                                 |
+			| ''                                                  | '28.01.2021 14:46:50'   | '-24'                | ''                      | ''                    | ''                   | ''                   | ''                 | '-13 525,42'           | '-15 960'                | ''                        | ''                          | ''                      | ''                        | ''                   | ''                     | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'    | '                                    '    |
 		And I close all client application windows
 		
 Scenario: _040166 check Sales order closing movements by the Register  "R4034 Scheduled goods shipments"
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R4034 Scheduled goods shipments" 
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| 'Register  "R4034 Scheduled goods shipments"'     | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| 'Register  "R4034 Scheduled goods shipments"'     | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                        | ''         | ''                                     |
+			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 
 
 		And I close all client application windows
@@ -301,22 +302,22 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Check movements by the Register  "R2012 Invoice closing of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''            | ''                    | ''          | ''        | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''        | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''        | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''        | ''           | 'Dimensions'   | ''                        | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Branch'                  | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | '-15 960' | '-13 525,42' | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | '-3 325'  | '-2 817,8'   | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-494'    | '-418,64'    | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-95'     | '-80,51'     | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'     | ''              | ''                      | ''            | ''          | ''             | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''          | ''             | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
+			| 'Register  "R2012 Invoice closing of sales orders"'   | ''              | ''                      | ''            | ''          | ''             | ''               | ''                          | ''                                          | ''           | ''           | ''                                        |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | ''          | ''             | 'Dimensions'     | ''                          | ''                                          | ''           | ''           | ''                                        |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Amount'    | 'Net amount'   | 'Company'        | 'Branch'                    | 'Order'                                     | 'Currency'   | 'Item key'   | 'Row key'                                 |
+			| ''                                                    | 'Receipt'       | '28.01.2021 14:46:50'   | '-24'         | '-15 960'   | '-13 525,42'   | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'TRY'        | '37/18SD'    | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689'    |
+			| ''                                                    | 'Receipt'       | '28.01.2021 14:46:50'   | '-10'         | '-3 325'    | '-2 817,8'     | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'TRY'        | '36/Red'     | 'e34f52ea-1fe2-47b2-9b37-63c093896662'    |
+			| ''                                                    | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | '-494'      | '-418,64'      | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'TRY'        | 'XS/Blue'    | '63008c12-b682-4aff-b29f-e6927036b05a'    |
+			| ''                                                    | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | '-95'       | '-80,51'       | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'TRY'        | 'Internet'   | '0a13bddb-cb97-4515-a9ef-777b6924ebf1'    |
 
 		And I close all client application windows
 
@@ -324,56 +325,56 @@ Scenario: _0401671 check Sales order closing movements by the Register  "T2014 A
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "T2014 Advances info" 
 		And I click "Registrations report" button
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 4 dated 10.03.2022 11:27:01' | ''          | ''                        | ''                     | ''                    | ''                                     | ''             | ''                        | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
-			| 'Document registrations records'                  | ''          | ''                        | ''                     | ''                    | ''                                     | ''             | ''                        | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
-			| 'Register  "T2014 Advances info"'                 | ''          | ''                        | ''                     | ''                    | ''                                     | ''             | ''                        | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
-			| ''                                                | 'Resources' | ''                        | ''                     | 'Dimensions'          | ''                                     | ''             | ''                        | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
-			| ''                                                | 'Amount'    | 'Is purchase order close' | 'Is sales order close' | 'Date'                | 'Key'                                  | 'Company'      | 'Branch'                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Order'                                     | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' |
-			| ''                                                | ''          | 'No'                      | 'Yes'                  | '10.03.2022 11:27:01' | '                                    ' | 'Main Company' | 'Distribution department' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Sales order 229 dated 10.03.2022 10:57:17' | 'No'                | 'Yes'                 | '*'         |
+			| 'Sales order closing 4 dated 10.03.2022 11:27:01'   | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
+			| 'Document registrations records'                    | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
+			| 'Register  "T2014 Advances info"'                   | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
+			| ''                                                  | 'Resources'   | ''                          | ''                       | 'Dimensions'            | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
+			| ''                                                  | 'Amount'      | 'Is purchase order close'   | 'Is sales order close'   | 'Date'                  | 'Key'                                    | 'Company'        | 'Branch'                    | 'Currency'   | 'Partner'     | 'Legal name'          | 'Order'                                       | 'Is vendor advance'   | 'Is customer advance'   | 'Unique ID'    |
+			| ''                                                  | ''            | 'No'                        | 'Yes'                    | '10.03.2022 11:27:01'   | '                                    '   | 'Main Company'   | 'Distribution department'   | 'TRY'        | 'Ferron BP'   | 'Company Ferron BP'   | 'Sales order 229 dated 10.03.2022 10:57:17'   | 'No'                  | 'Yes'                   | '*'            |
 		And I close all client application windows
 
 Scenario: _040169 Sales order closing clear posting/mark for deletion
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' |
-			| 'Document registrations records'                    |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'    |
+			| 'Document registrations records'                     |
 		And I close current window
 	* Post Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R2010 Sales orders' |
-			| 'R4011 Free stocks' |
-			| 'R4012 Stock Reservation' |
-			| 'R2012 Invoice closing of sales orders' |
+			| 'R2010 Sales orders'                       |
+			| 'R4011 Free stocks'                        |
+			| 'R4012 Stock Reservation'                  |
+			| 'R2012 Invoice closing of sales orders'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -381,14 +382,14 @@ Scenario: _040169 Sales order closing clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' |
-			| 'Document registrations records'                    |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50'    |
+			| 'Document registrations records'                     |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'    |
+			| '1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -398,10 +399,10 @@ Scenario: _040169 Sales order closing clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R2010 Sales orders' |
-			| 'R4011 Free stocks' |
-			| 'R4012 Stock Reservation' |
-			| 'R2012 Invoice closing of sales orders' |
+			| 'R2010 Sales orders'                       |
+			| 'R4011 Free stocks'                        |
+			| 'R4012 Stock Reservation'                  |
+			| 'R2012 Invoice closing of sales orders'    |
 		And I close all client application windows
 
 

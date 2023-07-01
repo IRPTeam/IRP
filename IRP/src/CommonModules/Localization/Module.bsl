@@ -519,6 +519,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_125", NStr("en = 'Invoice for document: [%1] is empty'", Lang));
 	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
 	Strings.Insert("Error_127", NStr("en = 'Quantity must be more than 0'", Lang));
+	Strings.Insert("Error_128", NStr("en = 'Wrong data in basis document'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -801,6 +802,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_002", NStr("en = 'Point of sale'", Lang));
 	Strings.Insert("Add_Setiings_003", NStr("en = 'Disable - Change price'", Lang));
 	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
+	Strings.Insert("Add_Setiings_005", NStr("en = 'Documents'", Lang));
+	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
 #EndRegion
 
 #Region Mobile

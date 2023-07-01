@@ -1458,7 +1458,7 @@
       <choiceParameters>
         <name>Filter.Type</name>
         <value xsi:type="core:ReferenceValue">
-          <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
+          <value>Enum.AgreementTypes.EnumValue.Other</value>
         </value>
       </choiceParameters>
       <dataHistory>Use</dataHistory>
@@ -1772,6 +1772,20 @@
       <synonym>
         <key>en</key>
         <value>Code is approved</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3b00ea7b-7e11-4a4b-af04-a108976ce31a">
+      <name>NotCheck</name>
+      <synonym>
+        <key>en</key>
+        <value>Not check</value>
       </synonym>
       <type>
         <types>Boolean</types>

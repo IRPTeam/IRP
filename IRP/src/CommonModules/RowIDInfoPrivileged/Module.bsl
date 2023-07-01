@@ -35,3 +35,18 @@ Procedure FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, 
 	RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 EndProcedure
 
+Procedure BeforeWrite_RowID(Object, Cancel, WriteMode, PostingMode) Export
+	RowIDInfoServer.BeforeWrite_RowID(Object, Cancel, WriteMode, PostingMode);
+EndProcedure
+
+Procedure OnWrite_RowID(Object, Cancel) Export
+	RowIDInfoServer.OnWrite_RowID(Object, Cancel);
+EndProcedure
+
+Procedure Posting_RowID(Object, Cancel, PostingMode) Export
+	RowIDInfoServer.Posting_RowID(Object, Cancel, PostingMode);
+EndProcedure
+
+Procedure UndoPosting_RowIDUndoPosting(Object, Cancel) Export
+	RowIDInfoServer.UndoPosting_RowIDUndoPosting(Object, Cancel);
+EndProcedure

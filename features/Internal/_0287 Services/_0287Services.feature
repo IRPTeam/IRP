@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Services
@@ -51,8 +51,8 @@ Scenario: _029100 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -79,8 +79,8 @@ Scenario: _029101 create item type for services
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I go to line in "List" table
-		| Description  |
-		| Service type |
+		| Description    |
+		| Service type   |
 	And I click the button named "FormChoose"
 	And I finish line editing in "AvailableAttributes" table
 	And I click "Save and close" button
@@ -96,13 +96,13 @@ Scenario: _029102 create Item - Service
 	And I click "Ok" button
 	And I click Select button of "Item type" field
 	And I go to line in "List" table
-		| Description |
-		| Service     |
+		| Description   |
+		| Service       |
 	And I select current line in "List" table
 	And I click Select button of "Unit" field
 	And I go to line in "List" table
-		| Description |
-		| pcs         |
+		| Description   |
+		| pcs           |
 	And I select current line in "List" table
 	And I click "Save" button
 	And In this window I click command interface button "Item keys"
@@ -138,33 +138,33 @@ Scenario: _029103 create a Purchase order for service
 	* Filling in Company and Status
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
+			| Description           |
+			| Vendor Ferron, TRY    |
 		And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Service     |
+			| Description    |
+			| Service        |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -176,8 +176,8 @@ Scenario: _029103 create a Purchase order for service
 		And I activate "Expense type" field in "ItemList" table
 		And I click choice button of "Expense type" attribute in "ItemList" table
 		And I go to line in "List" table
-		| 'Description'              |
-		| 'Telephone communications' |
+		| 'Description'                |
+		| 'Telephone communications'   |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -196,23 +196,23 @@ Scenario: _029103 create a Purchase order for service
 		* Check creation
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And "List" table contains lines
-				| 'Number' |
-				| '$$NumberPurchaseOrder029103$$'      |
+				| 'Number'                            |
+				| '$$NumberPurchaseOrder029103$$'     |
 		And I close all client application windows
 
 
 Scenario: _029104 create a Purchase invoice for service 
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder029103$$'      |
+		| 'Number'                          |
+		| '$$NumberPurchaseOrder029103$$'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 	And I click "Ok" button
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Quantity'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Profit loss center' | 'Purchase order'      |
-		| '1 000,00' | 'Service' | '18%' | 'Internet' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
+		| 'Price'     | 'Item'     | 'VAT'  | 'Item key'  | 'Quantity'  | 'Tax amount'  | 'Unit'  | 'Net amount'  | 'Total amount'  | 'Expense type'              | 'Profit loss center'  | 'Purchase order'            |
+		| '1 000,00'  | 'Service'  | '18%'  | 'Internet'  | '1,000'     | '152,54'      | 'pcs'   | '847,46'      | '1 000,00'      | 'Telephone communications'  | 'Front office'        | '$$PurchaseOrder029103$$'   |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseInvoice029104$$" variable
 	And I delete "$$PurchaseInvoice029104$$" variable
@@ -222,8 +222,8 @@ Scenario: _029104 create a Purchase invoice for service
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberPurchaseInvoice029104$$'      |
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice029104$$'    |
 		And I close all client application windows
 		
 	
@@ -250,32 +250,32 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 		* Filling in details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 		* Filling in vendor information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, TRY |
+				| Description            |
+				| Vendor Ferron, TRY     |
 			And I select current line in "List" table
 		* Filling in items table ((add product and service))
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Service     |
+				| Description     |
+				| Service         |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -287,8 +287,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I go to line in "List" table
-			| Description              |
-			| Telephone communications |
+			| Description                 |
+			| Telephone communications    |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -300,8 +300,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Router      |
+				| Description     |
+				| Router          |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -309,20 +309,20 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I activate "Profit loss center" field in "ItemList" table
 			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description  |
-				| Front office | 
+				| Description      |
+				| Front office     |
 			And I select current line in "List" table
 			And I click choice button of "Store" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Store 02    |
+				| Description     |
+				| Store 02        |
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description |
-				| Software    |
+				| Description     |
+				| Software        |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -339,8 +339,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberPurchaseInvoice029106$$'       |
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice029106$$'    |
 		And I close all client application windows
 
 
@@ -350,33 +350,33 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
+			| 'Description'    |
+			| 'Ferron BP'      |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	Then "Partner terms" window is opened
 	And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'  |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 	And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Service     |
+			| Description    |
+			| Service        |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| Item    | Item key |
-			| Service | Rent     |
+			| Item      | Item key    |
+			| Service   | Rent        |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -386,23 +386,23 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity' | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'    | ''              | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | ''         |
+			| 'Price'    | 'Item'      | 'VAT'   | 'Item key'   | 'Procurement method'   | 'Price type'                | 'Quantity'   | 'Offers amount'   | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'    |
+			| '100,00'   | 'Service'   | '18%'   | 'Rent'       | ''                     | 'en description is empty'   | '1,000'      | ''                | 'pcs'    | 'No'                   | '15,25'        | '84,75'        | '100,00'         | ''         |
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "84,75"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Table'       |
+			| 'Description'    |
+			| 'Table'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Table' | 'Table'  |
+			| 'Item'    | 'Item key'    |
+			| 'Table'   | 'Table'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -416,9 +416,9 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 083,05"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "7 100,00"
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'    | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | ''         |
-			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000'   | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
+			| 'Price'    | 'Item'      | 'VAT'   | 'Item key'   | 'Procurement method'   | 'Price type'                | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
+			| '100,00'   | 'Service'   | '18%'   | 'Rent'       | ''                     | 'en description is empty'   | '1,000'      | 'pcs'    | 'No'                   | '15,25'        | '84,75'        | '100,00'         | ''            |
+			| '700,00'   | 'Table'     | '18%'   | 'Table'      | 'Stock'                | 'en description is empty'   | '10,000'     | 'pcs'    | 'No'                   | '1 067,80'     | '5 932,20'     | '7 000,00'       | 'Store 01'    |
 		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029107$$" variable
@@ -434,8 +434,8 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesOrder029107$$'       |
+			| 'Number'                        |
+			| '$$NumberSalesOrder029107$$'    |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
@@ -446,8 +446,8 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberSalesInvoice029115$$'       |
+			| 'Number'                          |
+			| '$$NumberSalesInvoice029115$$'    |
 		And I close all client application windows
 
 	
@@ -460,21 +460,21 @@ Scenario: _029130 create Retail sales receipt for service and product
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Ferron BP'         |
+		| 'Description'   |
+		| 'Ferron BP'     |
 	And I select current line in "List" table
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 	And I select current line in "List" table
 	* Filling in items tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Table'      |
+			| 'Description'    |
+			| 'Table'          |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -483,8 +483,8 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Table'      |
+			| 'Description'    |
+			| 'Table'          |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -493,15 +493,15 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
+			| 'Description'    |
+			| 'Service'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Internet' |
+			| 'Item'      | 'Item key'    |
+			| 'Service'   | 'Internet'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "50,00" text in "Price" field of "ItemList" table
@@ -516,8 +516,8 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And I activate "Account" field in "Payments" table
 		And I click choice button of "Account" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'  |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I finish line editing in "Payments" table
@@ -531,14 +531,14 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailSalesReceipt029130$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key'                              |
-			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Internet' | ''                  | '*' |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
+			| '$$RetailSalesReceipt029130$$'     | ''         | ''            | ''         | ''             | ''                | ''               | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| 'Document registrations records'   | ''         | ''            | ''         | ''             | ''                | ''               | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| 'Register  "R2050 Retail sales"'   | ''         | ''            | ''         | ''             | ''                | ''               | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| ''                                 | 'Period'   | 'Resources'   | ''         | ''             | ''                | 'Dimensions'     | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| ''                                 | ''         | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Offers amount'   | 'Company'        | 'Branch'   | 'Store'      | 'Sales person'   | 'Retail sales receipt'           | 'Item key'   | 'Serial lot number'   | 'Row key'    |
+			| ''                                 | '*'        | '1'           | '50'       | '42,37'        | ''                | 'Main Company'   | ''         | ''           | ''               | '$$RetailSalesReceipt029130$$'   | 'Internet'   | ''                    | '*'          |
+			| ''                                 | '*'        | '1'           | '200'      | '169,49'       | ''                | 'Main Company'   | ''         | 'Store 01'   | ''               | '$$RetailSalesReceipt029130$$'   | 'Table'      | ''                    | '*'          |
+			| ''                                 | '*'        | '1'           | '200'      | '169,49'       | ''                | 'Main Company'   | ''         | 'Store 01'   | ''               | '$$RetailSalesReceipt029130$$'   | 'Table'      | ''                    | '*'          |
 		And I close all client application windows
 	
 
@@ -548,8 +548,8 @@ Scenario: _029130 create Retail sales receipt for service and product
 Scenario: _029140 create PurchaseReturn for service and product (based on $$PurchaseInvoice029106$$)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice029106$$'       |	
+		| 'Number'                            |
+		| '$$NumberPurchaseInvoice029106$$'   |
 	And I click the button named "FormDocumentPurchaseReturnGenerate"
 	And I click "Ok" button	
 	And I click the button named "FormPost"
@@ -561,8 +561,8 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberPurchaseReturn029140$$'      |
+			| 'Number'                            |
+			| '$$NumberPurchaseReturn029140$$'    |
 		And I close all client application windows
 
 	
@@ -571,17 +571,17 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 Scenario: _029141 create Purchase return order and Purchase return for service and product (based on $$PurchaseInvoice029106$$)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	If "List" table contains lines Then
-		| "Number" |
-		| "$$NumberPurchaseReturn029140$$" |
+		| "Number"                           |
+		| "$$NumberPurchaseReturn029140$$"   |
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseReturn029140$$'      |
+			| 'Number'                            |
+			| '$$NumberPurchaseReturn029140$$'    |
 		And I activate "Partner" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice029106$$'       |	
+		| 'Number'                            |
+		| '$$NumberPurchaseInvoice029106$$'   |
 	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 	And I click "Ok" button	
 	And I select "Approved" exact value from "Status" drop-down list
@@ -593,8 +593,8 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 	And I click "Registrations report" button
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturnOrder029141$$'       |	
+		| 'Number'                                |
+		| '$$NumberPurchaseReturnOrder029141$$'   |
 	And I click the button named "FormDocumentPurchaseReturnGenerate"
 	And I click "Ok" button	
 	And I click the button named "FormPost"
@@ -605,8 +605,8 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And "List" table contains lines
-		| 'Number' |
-		| '$$NumberPurchaseReturn029141$$'       |	
+		| 'Number'                           |
+		| '$$NumberPurchaseReturn029141$$'   |
 	And I close all client application windows
 	
 Scenario: _029142 create Purchase return for service and product without Purchase invoice
@@ -615,24 +615,24 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'         |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Store 03' |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Table'      |
+			| 'Description'    |
+			| 'Table'          |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -641,15 +641,15 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
+			| 'Description'    |
+			| 'Service'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Internet' |
+			| 'Item'      | 'Item key'    |
+			| 'Service'   | 'Internet'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "50,00" text in "Price" field of "ItemList" table
@@ -663,8 +663,8 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
-			| 'Number' |
-			| '$$NumberPurchaseReturn029142$$'       |	
+			| 'Number'                            |
+			| '$$NumberPurchaseReturn029142$$'    |
 		And I close all client application windows
 		
 
@@ -673,8 +673,8 @@ Scenario: _029150 create Retail return receipt for service and product
 	* Create Retail return receipt based on Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberRetailSalesReceipt029130$$'       |	
+			| 'Number'                                |
+			| '$$NumberRetailSalesReceipt029130$$'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button	
 		And I click the button named "FormPost"
@@ -686,20 +686,20 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person' | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '*'      | ''         | ''             | '$$RetailSalesReceipt029130$$' | 'Internet' | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '*'      | 'Store 01' | ''             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
+			| 'Register  "R2050 Retail sales"'   | ''         | ''            | ''         | ''             | ''                | ''               | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| ''                                 | 'Period'   | 'Resources'   | ''         | ''             | ''                | 'Dimensions'     | ''         | ''           | ''               | ''                               | ''           | ''                    | ''           |
+			| ''                                 | ''         | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Offers amount'   | 'Company'        | 'Branch'   | 'Store'      | 'Sales person'   | 'Retail sales receipt'           | 'Item key'   | 'Serial lot number'   | 'Row key'    |
+			| ''                                 | '*'        | '-1'          | '-50'      | '-42,37'       | ''                | 'Main Company'   | '*'        | ''           | ''               | '$$RetailSalesReceipt029130$$'   | 'Internet'   | ''                    | '*'          |
+			| ''                                 | '*'        | '-1'          | '-200'     | '-169,49'      | ''                | 'Main Company'   | '*'        | 'Store 01'   | ''               | '$$RetailSalesReceipt029130$$'   | 'Table'      | ''                    | '*'          |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     | '' | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                     | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-			| ''                               | 'Expense'     | '*'      | '77,04'     | 'Main Company' | '*'       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | '*'       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | '*'       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"'   | ''              | ''         | ''            | ''               | ''         | ''               | ''           | ''                       | ''                               | ''                       | ''   | ''   | ''   | ''   | ''    |
+			| ''                                 | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''         | ''               | ''           | ''                       | ''                               | 'Attributes'             | ''   | ''   | ''   | ''   | ''    |
+			| ''                                 | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Account'        | 'Currency'   | 'Transaction currency'   | 'Multi currency movement type'   | 'Deferred calculation'   | ''   | ''   | ''   | ''   | ''    |
+			| ''                                 | 'Expense'       | '*'        | '77,04'       | 'Main Company'   | '*'        | 'Cash desk №4'   | 'USD'        | 'TRY'                    | 'Reporting currency'             | 'No'                     | ''   | ''   | ''   | ''   | ''    |
+			| ''                                 | 'Expense'       | '*'        | '450'         | 'Main Company'   | '*'        | 'Cash desk №4'   | 'TRY'        | 'TRY'                    | 'Local currency'                 | 'No'                     | ''   | ''   | ''   | ''   | ''    |
+			| ''                                 | 'Expense'       | '*'        | '450'         | 'Main Company'   | '*'        | 'Cash desk №4'   | 'TRY'        | 'TRY'                    | 'en description is empty'        | 'No'                     | ''   | ''   | ''   | ''   | ''    |
 		
 		And I close all client application windows
 	* Create Retail return receipt without Retail sales receipt
@@ -707,20 +707,20 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'         |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, TRY' |
+					| 'Description'                   |
+					| 'Basic Partner terms, TRY'      |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Table'      |
+				| 'Description'     |
+				| 'Table'           |
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -730,15 +730,15 @@ Scenario: _029150 create Retail return receipt for service and product
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Service'     |
+				| 'Description'     |
+				| 'Service'         |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'    | 'Item key' |
-				| 'Service' | 'Internet' |
+				| 'Item'       | 'Item key'     |
+				| 'Service'    | 'Internet'     |
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
@@ -754,8 +754,8 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I activate "Account" field in "Payments" table
 			And I click choice button of "Account" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Currency' | 'Description'  |
-				| 'TRY'      | 'Cash desk №4' |
+				| 'Currency'    | 'Description'      |
+				| 'TRY'         | 'Cash desk №4'     |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I finish line editing in "Payments" table
@@ -768,8 +768,8 @@ Scenario: _029150 create Retail return receipt for service and product
 	* Check creation	
 			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 			And "List" table contains lines
-				| 'Number' |
-				| '$$NumberRetailReturnReceipt029150$$'       |	
+				| 'Number'                                  |
+				| '$$NumberRetailReturnReceipt029150$$'     |
 			And I close all client application windows
 		
 

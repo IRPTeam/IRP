@@ -328,7 +328,7 @@ EndFunction
 // Get access key.
 // 
 // Parameters:
-//  Obj - DocumentObjectDocumentName -
+//  Obj - DocumentObject.AdditionalCostAllocation -
 // 
 // Returns:
 //  Map
@@ -336,6 +336,9 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = Obj.AllocationList.Unload(, "Store");
+	StoreList.GroupBy("Store");
+	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
 

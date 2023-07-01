@@ -223,8 +223,8 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
@@ -251,8 +251,8 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Workstation 01' |
+			| 'Description'       |
+			| 'Workstation 01'    |
 		And I click "Set current workstation" button
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one	
@@ -265,41 +265,41 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register Barcodes records (marking code)
 	* Post document
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
-			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table
-			| 'Number' |
-			| '11'     |
+			| 'Number'    |
+			| '11'        |
 		And I select current line in "List" table
 		And I delete "$$MoneyTransfer11$$" variable
 		And I save the window as "$$MoneyTransfer11$$" 
@@ -307,17 +307,17 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Consolidated retail sales
 		When create ConsolidatedRetailSales and RetailSalesReceipt
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Setting for Company commission trade
 		When settings for Company (commission trade)
 	And I close all client application windows
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "AdditionalFunctionality" |
+				| "Description"                 |
+				| "AdditionalFunctionality"     |
 			When add Additional Functionality extension
 	* Instal fiscal driver
 		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
@@ -354,20 +354,20 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
 		And I click Select button of "Driver" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'KKT_3004'     |
+			| 'Description'    |
+			| 'KKT_3004'       |
 		And I select current line in "List" table
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Fiscal printer' |
+			| 'Description'       |
+			| 'Fiscal printer'    |
 		And I select current line in "List" table
 		And in the table "DriverParameter" I click "Reload settings" button		
 		And I go to line in "DriverParameter" table
-			| 'Name'    |
-			| 'LogFile' |
+			| 'Name'       |
+			| 'LogFile'    |
 		And I delete "$$LogPath$$" variable
 		And I save the value of "Value" field of "DriverParameter" table as "$$LogPath$$"	
 		And I click the button named "FormWriteAndClose"
@@ -378,35 +378,35 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I select "Acquiring" exact value from "Types of Equipment" drop-down list
 		And I click Select button of "Driver" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Acquiring_3007' |
+			| 'Description'       |
+			| 'Acquiring_3007'    |
 		And I select current line in "List" table
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Acquiring terminal' |
+			| 'Description'           |
+			| 'Acquiring terminal'    |
 		And I select current line in "List" table
 		And in the table "DriverParameter" I click "Reload settings" button		
 		And I go to line in "DriverParameter" table
-			| 'Name'    |
-			| 'LogFile' |
+			| 'Name'       |
+			| 'LogFile'    |
 		And I delete "$$LogPathAcquiring$$" variable
 		And I save the value of "Value" field of "DriverParameter" table as "$$LogPathAcquiring$$"	
 		And I click the button named "FormWriteAndClose"
 	* Add fiscal printer to the workstation
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Workstation 01'     |
+			| 'Description'       |
+			| 'Workstation 01'    |
 		And I select current line in "List" table	
 	* Check add hardware
 		* Fiscal printer
 			And in the table "HardwareList" I click the button named "HardwareListAdd"
 			And I click choice button of "Hardware" attribute in "HardwareList" table
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Description'        |
 				| 'Fiscal printer'     |
 			And I select current line in "List" table
 			And I activate "Enable" field in "HardwareList" table
@@ -415,14 +415,14 @@ Scenario: _0850000 preparation (fiscal printer)
 			And I finish line editing in "HardwareList" table
 			And I click "Save" button
 			And "HardwareList" table became equal
-				| 'Enable' | 'Hardware'       |
-				| 'Yes'    | 'Fiscal printer' |
+				| 'Enable'    | 'Hardware'           |
+				| 'Yes'       | 'Fiscal printer'     |
 		*Acquiring terminal
 			And in the table "HardwareList" I click the button named "HardwareListAdd"
 			And I click choice button of "Hardware" attribute in "HardwareList" table
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'Acquiring terminal' |
+				| 'Description'            |
+				| 'Acquiring terminal'     |
 			And I select current line in "List" table
 			And I activate "Enable" field in "HardwareList" table
 			And I finish line editing in "HardwareList" table
@@ -430,20 +430,20 @@ Scenario: _0850000 preparation (fiscal printer)
 			And I finish line editing in "HardwareList" table
 			And I click "Save" button
 			And "HardwareList" table became equal
-				| 'Enable' | 'Hardware'           |
-				| 'Yes'    | 'Fiscal printer'     |
-				| 'Yes'    | 'Acquiring terminal' |
+				| 'Enable'    | 'Hardware'               |
+				| 'Yes'       | 'Fiscal printer'         |
+				| 'Yes'       | 'Acquiring terminal'     |
 		And I click "Save and close" button
 	* Check fiscal printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Fiscal printer'     |
+			| 'Description'       |
+			| 'Fiscal printer'    |
 		And I select current line in "List" table
 		And I click "Connect" button
 		Then the form attribute named "CommandResult" became equal to template
-			| 'Fiscal printer connected.' |
-			| 'ID:KKT_3004*'              |
+			| 'Fiscal printer connected.'    |
+			| 'ID:KKT_3004*'                 |
 		And I click "Disconnect" button
 		Then the form attribute named "CommandResult" became equal to "Fiscal printer disconnected."
 		And I click the button named "UpdateStatus"
@@ -459,13 +459,13 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Check acquiring printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Acquiring terminal' |
+			| 'Description'           |
+			| 'Acquiring terminal'    |
 		And I select current line in "List" table
 		And I click "Connect" button
 		Then the form attribute named "CommandResult" became equal to template
-			| 'Acquiring terminal connected.' |
-			| 'ID:Acquiring_3007*'            |
+			| 'Acquiring terminal connected.'    |
+			| 'ID:Acquiring_3007*'               |
 		And I click "Disconnect" button
 		Then the form attribute named "CommandResult" became equal to "Acquiring terminal disconnected."
 		And I click the button named "UpdateStatus"
@@ -480,24 +480,24 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Add acquiring printer to the POS account
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'POS Terminal' |
+			| 'Description'     |
+			| 'POS Terminal'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Acquiring"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Acquiring terminal' |
+			| 'Description'           |
+			| 'Acquiring terminal'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'POS Terminal 2' |
+			| 'Description'       |
+			| 'POS Terminal 2'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Acquiring"
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Acquiring terminal' |
+			| 'Description'           |
+			| 'Acquiring terminal'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I close all client application windows
@@ -506,12 +506,14 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I set checkbox "Check code string"
 		And I click "Save and close" button
 		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
 		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f"
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I set checkbox "Check code string"
 		And I click "Save and close" button
 		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
 						
@@ -540,7 +542,7 @@ Scenario: _0850002 open session
 		And I click "Open session" button
 * Check fiscal log
 	When I Check the steps for Exception
-		|'And I click "Open session" button'|		
+		| 'And I click "Open session" button'   |
 	And I close all client application windows
 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 	And I check "$ParsingResult$" with "0" and method is "OpenShift"
@@ -556,15 +558,15 @@ Scenario: _0850010 create cash in
 		And I click "Create cash in" button		
 		Then the number of "CashInList" table lines is "равно" 1
 		And I go to line in "CashInList" table
-			| 'Money transfer'      | 'Currency' | 'Amount'   |
-			| '$$MoneyTransfer11$$' | 'TRY'      | '1 000,00' |
+			| 'Money transfer'        | 'Currency'   | 'Amount'      |
+			| '$$MoneyTransfer11$$'   | 'TRY'        | '1 000,00'    |
 	* Print cash in
 		And in the table "CashInList" I click "Create and post" button	
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
 		And "List" table became equal
-			| 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
-			| '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
+			| 'Amount'     | 'Company'        | 'Cash account'         | 'Currency'   | 'Transaction type'    |
+			| '1 000,00'   | 'Main Company'   | 'Pos cash account 1'   | 'TRY'        | 'Cash in'             |
 		Then the number of "List" table lines is "равно" 1
 		When in opened panel I select "Point of sales"
 		And in the table "CashInList" I click "Update money transfers" button
@@ -658,14 +660,14 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I finish line editing in "ItemList" table	
 	* Change quantity and check marking data clean
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Price'  | 'Quantity' | 'Serials'    | 'Total'  |
-			| 'Product 1 with SLN' | 'PZU'      | '100,00' | '1,000'    | '8908899877' | '100,00' |
+			| 'Item'                 | 'Item key'   | 'Price'    | 'Quantity'   | 'Serials'      | 'Total'     |
+			| 'Product 1 with SLN'   | 'PZU'        | '100,00'   | '1,000'      | '8908899877'   | '100,00'    |
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I click "Payment (+)" button
 		Then there are lines in TestClient message log
-			|'Quantity [2] does not match the quantity [1] by serial/lot numbers'|
+			| 'Quantity [2] does not match the quantity [1] by serial/lot numbers'    |
 		And I activate "Serials" field in "ItemList" table
 		And I click choice button of "Serials" attribute in "ItemList" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -684,15 +686,15 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
 		And I move to the next attribute
 		Then there are lines in TestClient message log
-			|'Current barcode already use at document line: 3'|
-			|'Current barcode already use at document line: 3'|
+			| 'Current barcode already use at document line: 3'    |
+			| 'Current barcode already use at document line: 3'    |
 		And I click "Search by barcode" button
 		Then "Barcode" window is opened
 		And I input "Current row will decode to base64" text in the field named "Barcode"
 		And I move to the next attribute
 		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
+			| 'Item'                 | 'Item key'    |
+			| 'Product 1 with SLN'   | 'PZU'         |
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I activate "Serials" field in "ItemList" table
 		And I click choice button of "Serials" attribute in "ItemList" table
@@ -711,8 +713,8 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 02'   |
+			| 'Reference'    |
+			| 'Card 02'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click the button named "Enter"
 		And I close all client application windows	
@@ -770,8 +772,8 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 02'   |
+			| 'Reference'    |
+			| 'Card 02'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I activate field named "PaymentsAmountString" in "Payments" table
 		And I select current line in "Payments" table
@@ -811,8 +813,8 @@ Scenario: _0850017 payment by payment agent from POS
 		And I click "Payment (+)" button
 		And I click "P\A" button
 		And "Payments" table became equal
-			| 'Payment type' | 'Amount' |
-			| 'Bank credit'  | '118,00' |
+			| 'Payment type'   | 'Amount'    |
+			| 'Bank credit'    | '118,00'    |
 		And I click the button named "Enter"
 		And Delay 3
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -872,8 +874,8 @@ Scenario: _08500181 advance payment (card)
 		And I click the button named "Advance"
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "1" button
 		And I click "0" button
@@ -917,8 +919,8 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "Pay" button
 		Then "1C:Enterprise" window is opened
@@ -960,14 +962,14 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "5" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click the button named "Enter"
 		And I click "OK" button
@@ -995,14 +997,14 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Check RRN
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'      |
-			| '100,00' |
+			| 'Σ'         |
+			| '100,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' |
-			| '1' | '50,00'  | '0,50'       | 'Card 04'      | ''                 | 'Bank term 03' | 'POS Terminal 2' | '1,00'    | '*'        |
-			| '2' | '50,00'  | '0,50'       | 'Card 03'      | ''                 | 'Bank term 03' | 'POS Terminal'   | '1,00'    | '*'        |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'      | 'Account'          | 'Percent'   | 'RRN Code'    |
+			| '1'   | '50,00'    | '0,50'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | '*'           |
+			| '2'   | '50,00'    | '0,50'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | '*'           |
 		And I go to the first line in "Payments" table
 		And I delete "$$RRN1$$" variable
 		And I delete "$$RRN2$$" variable
@@ -1020,24 +1022,24 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I move to "ControlCodeStrings [1]" tab
 		And I activate "Code string" field in "ControlCodeStrings" table
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'          | 'Code is approved' |
-			| '*'   | '11111111111111111111' | 'Yes'              |
+			| 'Key'   | 'Code string'            | 'Code is approved'    |
+			| '*'     | '11111111111111111111'   | 'Yes'                 |
 	And I close all client application windows
 	
 Scenario: _0850022 check than RRN not copy
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And I go to line in "List" table
-		| 'Number'                        |
-		| '$$NumberRetailSalesReceipt5$$' |
+		| 'Number'                          |
+		| '$$NumberRetailSalesReceipt5$$'   |
 	And in the table "List" I click the button named "ListContextMenuCopy"
 	And I click "OK" button
 	Then "Retail sales receipt (create)" window is opened
 	And I move to "Payments" tab
 	And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' |
-			| '1' | '50,00'  | '0,50'       | 'Card 04'      | ''                 | 'Bank term 03' | 'POS Terminal 2' | '1,00'    | ''         |
-			| '2' | '50,00'  | '0,50'       | 'Card 03'      | ''                 | 'Bank term 03' | 'POS Terminal'   | '1,00'    | ''         |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'      | 'Account'          | 'Percent'   | 'RRN Code'    |
+			| '1'   | '50,00'    | '0,50'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | ''            |
+			| '2'   | '50,00'    | '0,50'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | ''            |
 	And I close all client application windows
 	
 Scenario: _0850023 check return payment by card and cash (sales by card)
@@ -1047,8 +1049,8 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I click the button named "Return"
 		And I click Select button of "Retail sales receipt (basis)" field
 		And I go to line in "List" table
-			| 'Retail sales receipt'    |
-			| '$$RetailSalesReceipt5$$' |
+			| 'Retail sales receipt'       |
+			| '$$RetailSalesReceipt5$$'    |
 		And I select current line in "List" table
 	* Code scan
 		And I click "Payment Return" button
@@ -1061,31 +1063,31 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		Then "Payment" window is opened
 		And I click "5" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		Then "Payment" window is opened
 		And I click "4" button
 		And I click "0" button
 		And I click "Cash (/)" button
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode'  |
-			| '⚪'            | 'Card 04'      | '50,00'  | '$$RRN1$$' |
-			| '⚪'            | 'Card 03'      | '40,00'  | '$$RRN2$$' |
-			| ' '            | 'Cash'         | '10,00'  | ''         |
+			| 'Payment done'   | 'Payment type'   | 'Amount'   | 'RRNCode'     |
+			| '⚪'              | 'Card 04'        | '50,00'    | '$$RRN1$$'    |
+			| '⚪'              | 'Card 03'        | '40,00'    | '$$RRN2$$'    |
+			| ' '              | 'Cash'           | '10,00'    | ''            |
 		And I go to line in "Payments" table
-			| 'Amount' | 'Payment done' | 'Payment type' | 'RRNCode'  |
-			| '50,00'  | '⚪'            | 'Card 04'      | '$$RRN1$$' |
+			| 'Amount'   | 'Payment done'   | 'Payment type'   | 'RRNCode'     |
+			| '50,00'    | '⚪'              | 'Card 04'        | '$$RRN1$$'    |
 		And I activate "Payment type" field in "Payments" table
 		When I Check the steps for Exception
-			|'And I click "Return" button'|
+			| 'And I click "Return" button'    |
 		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1136,15 +1138,15 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I click "Payment Return" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| '⚪'            | 'Card 03'      | '200,00' | ''        |
+			| 'Payment done'   | 'Payment type'   | 'Amount'   | 'RRNCode'    |
+			| '⚪'              | 'Card 03'        | '200,00'   | ''           |
 		Then "Payment" window is opened
 		When I Check the steps for Exception
-			|'And I click "Cancel" button'|
+			| 'And I click "Cancel" button'    |
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1152,20 +1154,20 @@ Scenario: _0850024 return by card without basis document (without RRN)
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Amount' |
-			| '200,00' |
+			| 'Amount'    |
+			| '200,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' |
-			| '1' | '200,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | ''         |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
+			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | ''            |
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
 		And I expand "ControlCodeStrings [1]" group
 		And I move to "ControlCodeStrings [1]" tab
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'          | 'Code is approved' |
-			| '*'   | '11111111111111111111' | 'Yes'              |	
+			| 'Key'   | 'Code string'            | 'Code is approved'    |
+			| '*'     | '11111111111111111111'   | 'Yes'                 |
 		And I close all client application windows
 	* Check acquiring log
 		And Delay 5
@@ -1199,12 +1201,12 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I click "Payment Return" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| '⚪'            | 'Card 03'      | '111,00' | ''        |
+			| 'Payment done'   | 'Payment type'   | 'Amount'   | 'RRNCode'    |
+			| '⚪'              | 'Card 03'        | '111,00'   | ''           |
 		And I activate "RRNCode" field in "Payments" table
 		And I select current line in "Payments" table
 		And I input "23457" text in "RRNCode" field of "Payments" table
@@ -1214,13 +1216,13 @@ Scenario: _08500241 return by card without basis document (with RRN)
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Amount' |
-			| '111,00' |
+			| 'Amount'    |
+			| '111,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code'      |
-			| '1' | '111,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | '23457'         |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
+			| '1'   | '111,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '23457'       |
 		And I close all client application windows
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -1241,18 +1243,18 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "9" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I go to line in "Payments" table
-			| 'Amount' | 'Payment done' | 'Payment type' |
-			| '90,00'  | '⚪'            | 'Card 04'      |
+			| 'Amount'   | 'Payment done'   | 'Payment type'    |
+			| '90,00'    | '⚪'              | 'Card 04'         |
 		And I activate "Payment type" field in "Payments" table
 	* Check auto card cancellation
 		And I click "Pay" button
@@ -1273,9 +1275,9 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 		And I click "OK" button
 		And I click "OK" button
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' |
-			| '⚪'            | 'Card 04'      | '90,00'  |
-			| '⚪'            | 'Card 03'      | '430,00' |
+			| 'Payment done'   | 'Payment type'   | 'Amount'    |
+			| '⚪'              | 'Card 04'        | '90,00'     |
+			| '⚪'              | 'Card 03'        | '430,00'    |
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -1300,14 +1302,14 @@ Scenario: _0850021 check the form of payment by card
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "9" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 	* Close payment window
 		And I click "X" button
@@ -1316,25 +1318,25 @@ Scenario: _0850021 check the form of payment by card
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "5" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 03'   |
+			| 'Reference'    |
+			| 'Card 03'      |
 		And I select current line in "BankPaymentTypeList" table
 		And I click "4" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 	* Payment by first card
 		And I go to line in "Payments" table
-			| 'Amount' | 'Payment done' | 'Payment type' |
-			| '50,00'  | '⚪'            | 'Card 04'      |
+			| 'Amount'   | 'Payment done'   | 'Payment type'    |
+			| '50,00'    | '⚪'              | 'Card 04'         |
 		And I activate "Payment type" field in "Payments" table
 		And I click "Pay" button
 		Then "1C:Enterprise" window is opened
@@ -1342,11 +1344,11 @@ Scenario: _0850021 check the form of payment by card
 	* Check that the payment window will not close
 		And I click "X" button	
 		Then there are lines in TestClient message log
-			|'Cancel all payment before close form.'|		
+			| 'Cancel all payment before close form.'    |
 	* Cancel payment
 		And I go to line in "Payments" table
-			| 'Amount' | 'Payment type' |
-			| '50,00'  | 'Card 04'      |
+			| 'Amount'   | 'Payment type'    |
+			| '50,00'    | 'Card 04'         |
 		And I click "Cancel" button
 		And I click "OK" button
 	* Check acquiring log
@@ -1395,20 +1397,20 @@ Scenario: _0850027 check acquiring in BP
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'POS Terminal 2' |
+			| 'Description'       |
+			| 'POS Terminal 2'    |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lomaniti'    |
+			| 'Description'    |
+			| 'Lomaniti'       |
 		And I select current line in "List" table
 		And I activate "Payment terminal" field in "PaymentList" table
 		And I click choice button of "Payment terminal" attribute in "PaymentList" table
@@ -1416,8 +1418,8 @@ Scenario: _0850027 check acquiring in BP
 		And I activate "Payment type" field in "PaymentList" table
 		And I click choice button of "Payment type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 03'     |
+			| 'Description'    |
+			| 'Card 03'        |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -1448,20 +1450,20 @@ Scenario: _0850028 check acquiring in BR
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'POS Terminal 2' |
+			| 'Description'       |
+			| 'POS Terminal 2'    |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lomaniti'    |
+			| 'Description'    |
+			| 'Lomaniti'       |
 		And I select current line in "List" table
 		And I activate "Payment terminal" field in "PaymentList" table
 		And I click choice button of "Payment terminal" attribute in "PaymentList" table
@@ -1469,8 +1471,8 @@ Scenario: _0850028 check acquiring in BR
 		And I activate "Payment type" field in "PaymentList" table
 		And I click choice button of "Payment type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 03'     |
+			| 'Description'    |
+			| 'Card 03'        |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -1504,8 +1506,8 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I click the button named "Advance"
 			And I click "Card (*)" button
 			And I go to line in "BankPaymentTypeList" table
-				| 'Reference' |
-				| 'Card 03'   |
+				| 'Reference'     |
+				| 'Card 03'       |
 			And I select current line in "BankPaymentTypeList" table		
 			And I click "2" button
 			And I click "0" button
@@ -1558,8 +1560,8 @@ Scenario: _0850025 sales return (cash)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'      |
-			| '210,00' |
+			| 'Σ'         |
+			| '210,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
@@ -1577,8 +1579,8 @@ Scenario: _08500251 sales return (bank credit)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'      |
-			| '118,00' |
+			| 'Σ'         |
+			| '118,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
@@ -1596,13 +1598,13 @@ Scenario: _0850026 sales return (card)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'      |
-			| '620,00' |
+			| 'Σ'         |
+			| '620,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Row presentation'         |
-			| 'Product 1 with SLN (PZU)' |
+			| 'Row presentation'            |
+			| 'Product 1 with SLN (PZU)'    |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -1652,8 +1654,8 @@ Scenario: _0260150 create cash out
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table
-			| 'Author' | 'Company'      | 'Receive amount' | 'Receive currency' | 'Receiver'     | 'Send amount' | 'Send currency' | 'Sender'             |
-			| 'CI'     | 'Main Company' | '1 000,00'       | 'TRY'              | 'Cash desk №2' | '1 000,00'    | 'TRY'           | 'Pos cash account 1' |
+			| 'Author'   | 'Company'        | 'Receive amount'   | 'Receive currency'   | 'Receiver'       | 'Send amount'   | 'Send currency'   | 'Sender'                |
+			| 'CI'       | 'Main Company'   | '1 000,00'         | 'TRY'                | 'Cash desk №2'   | '1 000,00'      | 'TRY'             | 'Pos cash account 1'    |
 		And I select current line in "List" table
 		And I delete "$$NumberMoneyTransfer3$$" variable
 		And I delete "$$MoneyTransfer3$$" variable
@@ -1672,8 +1674,8 @@ Scenario: _0260150 create cash out
 		Then the form attribute named "TransactionType" became equal to "Cash in"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'     |
-			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer3$$' |
+			| '#'   | 'Total amount'   | 'Financial movement type'   | 'Money transfer'        |
+			| '1'   | '1 000,00'       | 'Movement type 1'           | '$$MoneyTransfer3$$'    |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -1685,8 +1687,8 @@ Scenario: _0260150 create cash out
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And "List" table contains lines
-			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account' | 'Reference'        | 'Currency' | 'Transaction type' | 'Author' |
-			| '$$NumberCashReceipt2$$' | '1 000,00' | 'Main Company' | 'Cash desk №2' | '$$CashReceipt2$$' | 'TRY'      | 'Cash in'          | 'CI'     |
+			| 'Number'                   | 'Amount'     | 'Company'        | 'Cash account'   | 'Currency'   | 'Transaction type'   | 'Author'    |
+			| '$$NumberCashReceipt2$$'   | '1 000,00'   | 'Main Company'   | 'Cash desk №2'   | 'TRY'        | 'Cash in'            | 'CI'        |
 		And I close all client application windows		
 		
 
@@ -1698,18 +1700,18 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I select "Cash in" exact value from "Transaction type" drop-down list
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'  |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I select current line in "List" table
 		And I click Select button of "Consolidated retail sales" field
 		And I go to line in "List" table
-			| 'Status' |
-			| 'Open'   |
+			| 'Status'    |
+			| 'Open'      |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click "Add" button
 		And I activate "Total amount" field in "PaymentList" table
@@ -1718,8 +1720,8 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
 		And I click "Post" button
@@ -1733,7 +1735,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 	* Check double click Print cash in
 		And I click "Print cash in" button
 		Then there are lines in TestClient message log
-			|'The document is already printed.'|
+			| 'The document is already printed.'    |
 		And I close all client application windows
 		
 
@@ -1744,55 +1746,55 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I click the button named "FormCreate" 
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №3' |
+			| 'Description'     |
+			| 'Cash desk №3'    |
 		And I select current line in "List" table
 		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Send currency" field
 		And I go to line in "List" table
-			| 'Code' |
-			| 'TRY'  |
+			| 'Code'    |
+			| 'TRY'     |
 		And I select current line in "List" table
 		And I input "11,00" text in "Send amount" field		
 		And I click Select button of "Receiver" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №2' |
+			| 'Description'     |
+			| 'Cash desk №2'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     |
-			| 'Movement type 1' |
+			| 'Description'        |
+			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I click Select button of "Receive currency" field
 		And I go to line in "List" table
-			| 'Code' |
-			| 'TRY'  |
+			| 'Code'    |
+			| 'TRY'     |
 		And I select current line in "List" table
 		And I input "11,00" text in "Receive amount" field	
 		And I click Select button of "Send branch" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 02'     |
+			| 'Description'    |
+			| 'Shop 02'        |
 		And I select current line in "List" table
 		And I click Select button of "Receive branch" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Front office'     |
+			| 'Description'     |
+			| 'Front office'    |
 		And I select current line in "List" table
 		And I click Select button of "Consolidated retail sales" field
 		And I go to line in "List" table
-			| 'Status' |
-			| 'Open'   |
+			| 'Status'    |
+			| 'Open'      |
 		And I select current line in "List" table
 		And I click "Post" button
 	* Check Print cash out
@@ -1805,7 +1807,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 	* Check double click Print cash out
 		And I click "Print cash out" button
 		Then there are lines in TestClient message log
-			|'The document is already printed.'|
+			| 'The document is already printed.'    |
 		And I close all client application windows
 
 
@@ -1813,7 +1815,7 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 		And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Open POS and create RSR
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
@@ -1837,17 +1839,17 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 	* Check filling consignor
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 		And I go to line in "List" table
-			| 'Σ'      |
-			| '520,00' |
+			| 'Σ'         |
+			| '520,00'    |
 		And I select current line in "List" table	
 		And I click "Show row key" button
 		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table became equal
-			| 'Store'    | 'Stock quantity'        | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
-			| 'Store 01' | '1,000'                 | 'Yes'                   | '1' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 1' | 'No'                 | '15,25'      | '09999900989900'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       |
-			| 'Store 01' | '1,000'                 | 'Yes'                   | '2' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '09999900989901'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | 'Without VAT' | '100,00'     | '100,00'       |
-			| 'Store 01' | '1,000'                 | 'Yes'                   | '3' | 'Consignor stocks' | 'Basic Price Types' | 'Product 8 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '090998897898979998' | 'pcs'  | 'Shop 02'            | 'UNIQ'     | 'No'         | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |
-			| 'Store 01' | '1,000'                 | 'Yes'                   | '4' | 'Own stocks'       | 'Basic Price Types' | 'Product 4 with SLN'           | ''            | 'No'                 | '18,31'      | '899007790088'       | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '120,00' | '18%'         | '101,69'     | '120,00'       |
+			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                           | 'Consignor'     | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Is service'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
+			| 'Store 01'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '15,25'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '84,75'        | '100,00'          |
+			| 'Store 01'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '09999900989901'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
+			| 'Store 01'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '090998897898979998'   | 'pcs'    | 'Shop 02'              | 'UNIQ'       | 'No'           | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
+			| 'Store 01'   | '1,000'            | 'Yes'                     | '4'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 4 with SLN'             | ''              | 'No'                   | '18,31'        | '899007790088'         | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '120,00'   | '18%'           | '101,69'       | '120,00'          |
 		And I close all client application windows
 	* Check logs
 		And Delay 2
@@ -1864,19 +1866,19 @@ Scenario: return from previous Consolidated retail sales
 		And I click the button named "Return"
 		And I click Select button of "Retail sales receipt (basis)" field
 		And I go to line in "List" table
-			| 'Retail sales receipt'    |
-			| 'Retail sales receipt 8 dated 10.05.2023 10:59:44' |
+			| 'Retail sales receipt'                                |
+			| 'Retail sales receipt 8 dated 10.05.2023 10:59:44'    |
 		And I select current line in "List" table
 	* Payment return
 		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
-			| 'Reference' |
-			| 'Card 04'   |
+			| 'Reference'    |
+			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
 		When I Check the steps for Exception
-			|'And I click "Cancel" button'|
+			| 'And I click "Cancel" button'    |
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1911,7 +1913,7 @@ Scenario: _0260154 Checking restrictions on Control State values in POS
 			And I input "89088088989" text in the field named "Barcode"
 			And I move to the next attribute
 			Then there are lines in TestClient message log
-				|'Scan control string barcode. Wrong barcode 89088088989'|			
+				| 'Scan control string barcode. Wrong barcode 89088088989'     |
 		* Scan a code that is different from the one in the series
 			And I click "Search by barcode" button
 			Then "Barcode" window is opened
@@ -1926,13 +1928,13 @@ Scenario: _0260154 Checking restrictions on Control State values in POS
 			And I input "111111111111111111111112" text in the field named "Barcode"
 			And I move to the next attribute
 			Then there are lines in TestClient message log
-				|'Current barcode already use at document line: 1' |
+				| 'Current barcode already use at document line: 1'     |
 			And I click "Search by barcode" button
 			Then "Barcode" window is opened
 			And I input "111111111111111111111111" text in the field named "Barcode"
 			And I move to the next attribute
 			Then there are lines in TestClient message log
-				|'This is barcode used for Product 6 with SLN[PZU]'|
+				| 'This is barcode used for Product 6 with SLN[PZU]'     |
 		* Scan wrong code	
 			And I click "Search by barcode" button
 			Then "Barcode" window is opened
@@ -1946,9 +1948,9 @@ Scenario: _0260154 Checking restrictions on Control State values in POS
 			And I move to the next attribute
 	* Check
 		And "ItemList" table became equal
-			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'     | 'Price' | 'Quantity' | 'Offers' | 'Total' |
-			| 'Product 6 with SLN' | ''             | 'PZU'      | '89088088989' | ''      | '1,000'    | ''       | ''      |
-			| 'Product 1 with SLN' | ''             | 'PZU'      | '8908899880'  | ''      | '1,000'    | ''       | ''      |
+			| 'Item'                 | 'Sales person'   | 'Item key'   | 'Serials'       | 'Price'   | 'Quantity'   | 'Offers'   | 'Total'    |
+			| 'Product 6 with SLN'   | ''               | 'PZU'        | '89088088989'   | ''        | '1,000'      | ''         | ''         |
+			| 'Product 1 with SLN'   | ''               | 'PZU'        | '8908899880'    | ''        | '1,000'      | ''         | ''         |
 		And I delete all lines of "ItemList" table
 				
 	
@@ -1957,7 +1959,7 @@ Scenario: _0260155 disabling marking check in the Workstation
 	* Disabling marking check
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'       |
 			| 'Workstation 01'    |
 		And I select current line in "List" table
 		And I set checkbox "Ignore code string control"
@@ -1969,14 +1971,14 @@ Scenario: _0260155 disabling marking check in the Workstation
 		And I input "89088088989" text in the field named "Barcode"
 		And I move to the next attribute
 		When I Check the steps for Exception
-			|'Then the form attribute named "DecorationInfo" became equal to "Scan control code"'|
+			| 'Then the form attribute named "DecorationInfo" became equal to "Scan control code"'    |
 		When I Check the steps for Exception
-			|'Then the number of "CurrentCodes" table lines is "равно" 0'|	
+			| 'Then the number of "CurrentCodes" table lines is "равно" 0'    |
 		And I delete all lines of "ItemList" table
 	* Enabling marking check
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'       |
 			| 'Workstation 01'    |
 		And I select current line in "List" table
 		And I remove checkbox "Ignore code string control"
@@ -2009,8 +2011,8 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I expand "ControlCodeStrings [1]" group
 		And I move to "ControlCodeStrings [1]" tab		
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'                                  | 'Code is approved' |
-			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 		And I close current window
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -2021,8 +2023,8 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I select current line in "Payments" table
 		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash'        |
+			| 'Description'    |
+			| 'Cash'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "100,00" text in the field named "PaymentsAmount" of "Payments" table
@@ -2031,8 +2033,8 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I select current line in "Payments" table
 		And I click choice button of "Account" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'  |
-			| 'TRY'      | 'Cash desk №4' |
+			| 'Currency'   | 'Description'     |
+			| 'TRY'        | 'Cash desk №4'    |
 		And I select current line in "List" table
 		And I finish line editing in "Payments" table
 		And I click "Post" button
@@ -2043,8 +2045,8 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I expand "ControlCodeStrings [1]" group
 		And I move to "ControlCodeStrings [1]" tab		
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'                                  | 'Code is approved' |
-			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               |
+			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
 		And I close current window
 	* Add one more item in RRR and check code
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
@@ -2060,9 +2062,9 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I expand "ControlCodeStrings [2]" group
 		And I move to "ControlCodeStrings [2]" tab		
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'                                  | 'Code is approved' |
-			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               |
-			| '*'   | '11111111111111111111113'                      | 'Yes'              |
+			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
+			| '*'     | '11111111111111111111113'                        | 'Yes'                 |
 		And I close all client application windows
 		
 
@@ -2083,15 +2085,15 @@ Scenario: _0260157 check marking code clean when change item key in the RSR
 		And I expand "ControlCodeStrings [1]" group
 		And I move to "ControlCodeStrings [1]" tab		
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'                                  | 'Code is approved' |
-			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 		And I close current window
 	* Change item key and check clean marking code
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'ODS'      |
+			| 'Item key'    |
+			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
 		And I expand "ControlCodeStrings [0]" group
@@ -2136,15 +2138,15 @@ Scenario: _0260158 check marking code clean when change item key in the RRR
 		And I expand "ControlCodeStrings [1]" group
 		And I move to "ControlCodeStrings [1]" tab		
 		And "ControlCodeStrings" table became equal
-			| 'Key' | 'Code string'                                  | 'Code is approved' |
-			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 		And I close current window
 	* Change item key and check clean marking code
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'ODS'      |
+			| 'Item key'    |
+			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
 		And I expand "ControlCodeStrings [0]" group
@@ -2197,8 +2199,8 @@ Scenario: _0260153 check hardware parameter saving
 			And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
 			And I click Choice button of the field named "Driver"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'KKT_3004'    |
+				| 'Description'     |
+				| 'KKT_3004'        |
 			And I select current line in "List" table
 			And I click "Save" button
 			And I move to "Driver settings" tab
@@ -2206,14 +2208,14 @@ Scenario: _0260153 check hardware parameter saving
 			And I move to "Predefined settings" tab
 			And in the table "ConnectParameters" I click "Load settings" button
 			And "ConnectParameters" table became equal
-				| '#' | 'Name' | 'Value'  |
-				| '1' | 'Show' | 'Yes'    |		
+				| '#'    | 'Name'    | 'Value'     |
+				| '1'    | 'Show'    | 'Yes'       |
 		* Check parameter saving
 			And I activate field named "ConnectParametersValue" in "ConnectParameters" table
 			And I select current line in "ConnectParameters" table
 			And I go to line in "" table
-				| ''        |
-				| 'Boolean' |
+				| ''            |
+				| 'Boolean'     |
 			And I select current line in "" table
 			And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
 			And I select current line in "" table
@@ -2224,12 +2226,12 @@ Scenario: _0260153 check hardware parameter saving
 			And in the table "ConnectParameters" I click "Write settings" button
 			And I click "Save and close" button
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Test'        |
+				| 'Description'     |
+				| 'Test'            |
 			And I select current line in "List" table
 			And "ConnectParameters" table became equal
-				| '#' | 'Name' | 'Value'  |
-				| '1' | 'Show' | 'No'     |	
+				| '#'    | 'Name'    | 'Value'     |
+				| '1'    | 'Show'    | 'No'        |
 			And I close all client application windows
 				
 					

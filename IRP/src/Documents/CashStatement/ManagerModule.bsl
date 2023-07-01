@@ -225,7 +225,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	PaymentList.Period,
 		   |	PaymentList.Key,
 		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
+		   |	PaymentList.ReceiptingAccount.Branch AS Branch,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Account,
 		   |	PaymentList.ReceiptingAccount,

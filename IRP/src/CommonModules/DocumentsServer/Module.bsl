@@ -36,6 +36,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		LoadDataFromTableServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	EndIf;
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
+		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
+	EndIf;
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

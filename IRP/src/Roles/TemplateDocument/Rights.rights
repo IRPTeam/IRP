@@ -226,10 +226,6 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UpdateDataHistory</name>
 			<value>true</value>
 		</right>
@@ -242,27 +238,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -287,15 +263,19 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>ReadDataHistoryOfMissingData</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ViewDataHistory</name>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -307,11 +287,27 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractivePostingRegular</name>
+			<name>InteractiveInsert</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>UpdateDataHistoryVersionComment</name>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePostingRegular</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -319,11 +315,15 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>View</name>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1198,10 +1198,6 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UpdateDataHistory</name>
 			<value>true</value>
 		</right>
@@ -1214,27 +1210,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -1259,15 +1235,19 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>ReadDataHistoryOfMissingData</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ViewDataHistory</name>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -1279,11 +1259,15 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractivePostingRegular</name>
+			<name>InteractiveInsert</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>UpdateDataHistoryVersionComment</name>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -1291,11 +1275,27 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>View</name>
+			<name>InteractivePostingRegular</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5086,10 +5086,6 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UpdateDataHistory</name>
 			<value>true</value>
 		</right>
@@ -5102,27 +5098,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -5147,15 +5123,19 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>ReadDataHistoryOfMissingData</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ViewDataHistory</name>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -5167,11 +5147,15 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractivePostingRegular</name>
+			<name>InteractiveInsert</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>UpdateDataHistoryVersionComment</name>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -5179,11 +5163,27 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>View</name>
+			<name>InteractivePostingRegular</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -7354,10 +7354,6 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UpdateDataHistory</name>
 			<value>true</value>
 		</right>
@@ -7370,27 +7366,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -7415,15 +7391,19 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>ReadDataHistoryOfMissingData</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ViewDataHistory</name>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -7435,11 +7415,27 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractivePostingRegular</name>
+			<name>InteractiveInsert</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>UpdateDataHistoryVersionComment</name>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePostingRegular</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -7447,11 +7443,15 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>View</name>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -7573,17 +7573,16 @@
 Table
 WHERE NOT (FALSE) IN (
 	SELECT
-		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AccessProfilesObjectAccess.Key IS NULL))
+		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AG.Key IS NULL))
 		
 	FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
 		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
-			LEFT JOIN Catalog.AccessProfiles.ObjectAccess AS AccessProfilesObjectAccess
-				ON AccessProfilesObjectAccess.Ref IN (&amp;CurrentUserAccessProfiles)
-					AND AccessProfilesObjectAccess.Key = ObjectAccessKeysFilterDataList.Key
-					AND AccessProfilesObjectAccess.ValueSimpleType = ObjectAccessKeysFilterDataList.ValueSimpleType
-					AND AccessProfilesObjectAccess.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
+			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
+				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
+					AND AG.Key = ObjectAccessKeysFilterDataList.Key
+					AND AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
 					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
-					AND (AccessProfilesObjectAccess.Modify)
+					AND (AG.Modify)
 					#EndIf
 			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
 		

@@ -8,6 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		"Catalog.AddAttributeAndPropertySets.Catalog_Items") Or Object.Ref = PredefinedValue(
 		"Catalog.AddAttributeAndPropertySets.Catalog_Partners");
 
+	Items.AttributesCopyInterfaceGroup.Visible = Items.AttributesInterfaceGroup.Visible; 
+
 	IsCatalog_ItemKeys = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys")
 		Or Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 
@@ -167,65 +169,98 @@ EndProcedure
 
 &AtClient
 Procedure CopyAttributeRequired(Command)
-	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
 		Return;
 	EndIf;
-	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
-		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
-		Row.Required = Items.ExtensionAttributes.CurrentData.Required;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.Required = FormTable.CurrentData.Required;
 	EndDo;	
 EndProcedure
 
 &AtClient
 Procedure CopyAttributeShow(Command)
-	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
 		Return;
 	EndIf;
-	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
-		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
-		Row.Show = Items.ExtensionAttributes.CurrentData.Show;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.Show = FormTable.CurrentData.Show;
 	EndDo;	
 EndProcedure
 
 &AtClient
 Procedure CopyAttributeShowInHTML(Command)
-	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
 		Return;
 	EndIf;
-	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
-		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
-		Row.ShowInHTML = Items.ExtensionAttributes.CurrentData.ShowInHTML;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.ShowInHTML = FormTable.CurrentData.ShowInHTML;
 	EndDo;	
 EndProcedure
 
 &AtClient
 Procedure CopyCondition(Command)
-	If Items.ExtensionAttributes.CurrentRow = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		TableName = "ExtensionAttributes";
+	Else
+		TableName = "Attributes";
+	EndIf;	
+	If Items[TableName].CurrentRow = Undefined Or Items[TableName].SelectedRows.Count() < 2 Then
 		Return;
 	EndIf;	
 	IndicesArray = New Array;
 	CurrentIndex = 0;
-	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
-		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
-		If SelectedRow <> Items.ExtensionAttributes.CurrentRow Then
-			IndicesArray.Add(Object.ExtensionAttributes.IndexOf(Row));
+	For Each SelectedRow In Items[TableName].SelectedRows Do
+		Row = Object[TableName].FindByID(SelectedRow);
+		If SelectedRow <> Items[TableName].CurrentRow Then
+			IndicesArray.Add(Object[TableName].IndexOf(Row));
 		Else
-			CurrentIndex = Object.ExtensionAttributes.IndexOf(Row);
+			CurrentIndex = Object[TableName].IndexOf(Row);
 		EndIf;
 	EndDo;	
 	If Write() Then
-		CopyExtensionAttributesConditionAtServer(CurrentIndex, IndicesArray);
+		CopyExtensionAttributesConditionAtServer(TableName, CurrentIndex, IndicesArray);
 	EndIf; 
 EndProcedure
 
 &AtClient
 Procedure CopyInterfaceGroup(Command)
-	If Items.ExtensionAttributes.CurrentData = Undefined Or Items.ExtensionAttributes.SelectedRows.Count() < 2 Then
+	If Items.Pages.CurrentPage = Items.GroupExtensionAttributes Then
+		FormTable = Items.ExtensionAttributes;
+		ObjectTable = Object.ExtensionAttributes;
+	Else
+		FormTable = Items.Attributes;
+		ObjectTable = Object.Attributes;
+	EndIf;	
+	If FormTable.CurrentData = Undefined Or FormTable.SelectedRows.Count() < 2 Then
 		Return;
 	EndIf;
-	For Each SelectedRow In Items.ExtensionAttributes.SelectedRows Do
-		Row = Object.ExtensionAttributes.FindByID(SelectedRow);
-		Row.InterfaceGroup = Items.ExtensionAttributes.CurrentData.InterfaceGroup;
+	For Each SelectedRow In FormTable.SelectedRows Do
+		Row = ObjectTable.FindByID(SelectedRow);
+		Row.InterfaceGroup = FormTable.CurrentData.InterfaceGroup;
 	EndDo;	
 EndProcedure
 
@@ -446,10 +481,11 @@ Procedure FillExtensionAttributesListAtServer()
 EndProcedure
 
 &AtServer
-Procedure CopyExtensionAttributesConditionAtServer(CurrentRow, IndicesArray)
+Procedure CopyExtensionAttributesConditionAtServer(TableName, CurrentRow, IndicesArray)
 	CatalogObject = Object.Ref.GetObject();
-	CurrentData = CatalogObject.ExtensionAttributes.Get(CurrentRow);	
-	For Each Row In CatalogObject.ExtensionAttributes Do
+	CurrentData = CatalogObject[TableName].Get(CurrentRow);	
+	For Each Index In IndicesArray Do
+		Row = CatalogObject[TableName][Index];
 		Row.IsConditionSet = CurrentData.IsConditionSet;
 		Row.Condition = CurrentData.Condition; 
 	EndDo;

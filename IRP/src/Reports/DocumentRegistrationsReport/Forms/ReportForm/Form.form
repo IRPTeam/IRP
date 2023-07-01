@@ -356,10 +356,19 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>Vertical</group>
-        <behavior>Auto</behavior>
+        <group>HorizontalIfPossible</group>
+        <verticalSpacing>Half</verticalSpacing>
+        <behavior>Collapsible</behavior>
+        <collapsedRepresentationTitle>
+          <key>en</key>
+          <value>Filters</value>
+        </collapsedRepresentationTitle>
+        <collapsed>true</collapsed>
+        <controlRepresentation>Picture</controlRepresentation>
+        <representation>WeakSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
+        <showTitle>true</showTitle>
         <throughAlign>Auto</throughAlign>
         <currentRowUse>Auto</currentRowUse>
       </extInfo>
@@ -468,6 +477,11 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
+  <autoSaveDataInSettings>Use</autoSaveDataInSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -574,6 +588,9 @@
     <edit>
       <common>true</common>
     </edit>
+    <settingsSavedData xsi:type="form:DataPath">
+      <segments>ShowItemInItemKey</segments>
+    </settingsSavedData>
   </attributes>
   <attributes>
     <name>OnlyTransactionCurrency</name>
@@ -591,6 +608,9 @@
     <edit>
       <common>true</common>
     </edit>
+    <settingsSavedData xsi:type="form:DataPath">
+      <segments>OnlyTransactionCurrency</segments>
+    </settingsSavedData>
   </attributes>
   <attributes>
     <name>HideTechnicalRegisters</name>
@@ -599,6 +619,26 @@
       <value>Hide technical registers</value>
     </title>
     <id>10</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <settingsSavedData xsi:type="form:DataPath">
+      <segments>HideTechnicalRegisters</segments>
+    </settingsSavedData>
+  </attributes>
+  <attributes>
+    <name>GenerateOnOpen</name>
+    <title>
+      <key>en</key>
+      <value>Generate on open</value>
+    </title>
+    <id>11</id>
     <valueType>
       <types>Boolean</types>
     </valueType>

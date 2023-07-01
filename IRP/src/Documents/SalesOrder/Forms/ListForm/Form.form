@@ -763,68 +763,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Ref</name>
-   <id>28</id>
-   <title>
-    <key>en</key>
-    <value>Ref</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Ссылка</value>
-   </title>
-   <title>
-    <key>tr</key>
-    <value>Ref</value>
-   </title>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Ref</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>RefExtendedTooltip</name>
-    <id>30</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>RefContextMenu</name>
-    <id>29</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>ClosingOrder</name>
    <id>46</id>
    <title>
@@ -865,6 +803,116 @@
    <contextMenu>
     <name>ClosingOrderContextMenu</name>
     <id>47</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>Description</name>
+   <id>58</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Description</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>DescriptionExtendedTooltip</name>
+    <id>60</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DescriptionContextMenu</name>
+    <id>59</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>Ref</name>
+   <id>28</id>
+   <title>
+    <key>en</key>
+    <value>Ref</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ref</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible/>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Ref</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>RefExtendedTooltip</name>
+    <id>30</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>RefContextMenu</name>
+    <id>29</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -1110,6 +1158,9 @@
   <edit>
    <common>true</common>
   </edit>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>List.Ref</segments>
+  </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
@@ -1136,7 +1187,8 @@
 		WHEN COUNT(DISTINCT SalesOrderItemList.Store) = 1
 			THEN MAX(SalesOrderItemList.Store)
 		ELSE UNDEFINED
-	END AS Store
+	END AS Store,
+	SalesOrderList.Description
 FROM
 	Document.SalesOrder AS SalesOrderList
 		LEFT JOIN Document.SalesOrderClosing AS SalesOrderClosing
@@ -1163,7 +1215,8 @@ GROUP BY
 	SalesOrderList.ShipmentMode,
 	NOT SalesOrderClosing.Ref IS NULL,
 	SalesOrderClosing.Ref,
-	SalesOrderList.TransactionType</queryText>
+	SalesOrderList.TransactionType,
+	SalesOrderList.Description</queryText>
    <mainTable>Document.SalesOrder</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -1299,6 +1352,10 @@ GROUP BY
     <field>ShipmentMode</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>LegalName</dataPath>
     <field>LegalName</field>
    </fields>
@@ -1311,12 +1368,36 @@ GROUP BY
     <field>RetailCustomer</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Branch</dataPath>
-    <field>Branch</field>
+    <dataPath>ShipFrom</dataPath>
+    <field>ShipFrom</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
+    <dataPath>ShipFromAddress</dataPath>
+    <field>ShipFromAddress</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ShipTo</dataPath>
+    <field>ShipTo</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ShipToAddress</dataPath>
+    <field>ShipToAddress</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Carrier</dataPath>
+    <field>Carrier</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>VehicleDriver</dataPath>
+    <field>VehicleDriver</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Vehicle</dataPath>
+    <field>Vehicle</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>

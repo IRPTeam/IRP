@@ -6,20 +6,6 @@
 		<item>
 			<selection>
 				<item>
-					<field>Ref</field>
-				</item>
-			</selection>
-			<filter/>
-			<appearance>
-				<dcscor:item xsi:type="SettingsParameterValue">
-					<dcscor:parameter>Visible</dcscor:parameter>
-					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</item>
-		<item>
-			<selection>
-				<item>
 					<field>Amount</field>
 				</item>
 				<item>

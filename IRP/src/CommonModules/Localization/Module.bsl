@@ -960,6 +960,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_127", NStr("en='Quantity must be more than 0';
 		|ru='Количество должно быть больше 0';
 		|tr='Quantity must be more than 0'", Lang));
+	Strings.Insert("Error_128", NStr("en='Wrong data in basis document';
+		|ru='Не правильные данные в документе основания';
+		|tr='Wrong data in basis document'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
@@ -1566,6 +1569,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return';
 		|ru='Запретить - Создание возврата';
 		|tr='Disable - Create return'", Lang));
+	Strings.Insert("Add_Setiings_005", NStr("en='Documents';
+		|ru='Документы';
+		|tr='Evraklar'", Lang));
+	Strings.Insert("Add_Setiings_006", NStr("en='Disable - Change author';
+		|ru='Отключить - Изменять автора';
+		|tr='Disable - Change author'", Lang));
 #EndRegion
 
 #Region Mobile

@@ -1617,7 +1617,7 @@ EndFunction
 // Get access key.
 // 
 // Parameters:
-//  Obj - DocumentObjectDocumentName -
+//  Obj - DocumentObject.SalesInvoice -
 // 
 // Returns:
 //  Map
@@ -1625,6 +1625,9 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	CopyTable = Obj.ItemList.Unload(, "Store");
+	CopyTable.GroupBy("Store");
+	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
 

@@ -531,6 +531,10 @@ EndFunction
 // Returns:
 //  Boolean - Is common attribute use for metadata
 Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
+	If Metadata.CommonAttributes.Find(Name) = Undefined Then
+		Return False;
+	EndIf;
+	
 	Attr = Metadata.CommonAttributes[Name];
 	Content = Attr.Content.Find(MetadataFullName);
 	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;

@@ -30,6 +30,9 @@
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>
  <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.WorkOrderClosing.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.WorkOrderClosing.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.WorkOrderClosing.Form.ChoiceForm</defaultChoiceForm>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">
@@ -56,4 +59,55 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <forms uuid="c02890d7-1004-4a0b-8db7-89036fa0461e">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4c31fd92-d2c0-4f5b-b16f-257b59f54fbf">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="577f519e-f00b-4090-8433-d406c3dd4715">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Document>

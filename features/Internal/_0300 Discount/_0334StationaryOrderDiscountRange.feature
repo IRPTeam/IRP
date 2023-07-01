@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Discount
@@ -36,12 +36,12 @@ Scenario: _033402 range discount calculation by line
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Calculate range discount for Trousers - 6%
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Trousers'     |
+			| 'Item'        |
+			| 'Trousers'    |
 		And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 		And I go to line in "Offers" table
-			| 'Presentation'                               |
-			| 'Range Discount Basic (Trousers)' |
+			| 'Presentation'                       |
+			| 'Range Discount Basic (Trousers)'    |
 		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "6" text in the field named "PercentNumber"
@@ -50,27 +50,27 @@ Scenario: _033402 range discount calculation by line
 		And Delay 2
 	* Calculate range discount for Dress - 5%
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Dress' |
+			| 'Item'     |
+			| 'Dress'    |
 		And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 		And I go to line in "Offers" table
-			| 'Presentation'                               |
-			| 'Range Discount Basic (Dress)' |
+			| 'Presentation'                    |
+			| 'Range Discount Basic (Dress)'    |
 		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "5" text in the field named "PercentNumber"
 		And I click the button named "FormOk"
 		And I click the button named "FormOK"
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity' | 'Offers amount' | 'Unit' | 'Total amount' |
-		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000'   | '260,00'        | 'pcs'  | '4 940,00'     |
-		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'    | '120,00'        | 'pcs'  | '1 880,00'     |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'  | 'Total amount'   |
+		| 'Dress'     | '520,00'  | 'XS/Blue'    | 'Store 01'  | '10,000'    | '260,00'         | 'pcs'   | '4 940,00'       |
+		| 'Trousers'  | '400,00'  | '36/Yellow'  | 'Store 01'  | '5,000'     | '120,00'         | 'pcs'   | '1 880,00'       |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-		| 'Partner'    | 'Σ'     |
-		| 'Ferron BP'  |  '6 820,00'|
+		| 'Partner'    | 'Σ'          |
+		| 'Ferron BP'  | '6 820,00'   |
 	
 
 Scenario: _033403 check of the minimum percentage of the range discount by lines
@@ -78,12 +78,12 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 		When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 		* Calculate range discount for Trousers - 4%
 			And I go to line in "ItemList" table
-				| 'Item'      |
-				| 'Trousers' |
+				| 'Item'         |
+				| 'Trousers'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 			And I go to line in "Offers" table
-				| 'Presentation'                               |
-				| 'Range Discount Basic (Trousers)' |
+				| 'Presentation'                        |
+				| 'Range Discount Basic (Trousers)'     |
 			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "5" text in the field named "PercentNumber"
@@ -93,11 +93,11 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 		* Calculate range discount for Dress - 3%
 			And I go to line in "ItemList" table
 				| 'Item'      |
-				| 'Dress' |
+				| 'Dress'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 			And I go to line in "Offers" table
-				| 'Presentation'                               |
-				| 'Range Discount Basic (Dress)' |
+				| 'Presentation'                     |
+				| 'Range Discount Basic (Dress)'     |
 			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "3" text in the field named "PercentNumber"
@@ -105,15 +105,15 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 			And I click the button named "FormOK"
 			And Delay 2
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit'| 'Total amount'    |
-				| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '156,00'        | 'pcs' | '5 044,00'        |
-				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '100,00'        | 'pcs' | '1 900,00'        |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Store'       | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Total amount'     |
+				| 'Dress'       | '520,00'    | 'XS/Blue'      | 'Store 01'    | '10,000'      | '156,00'           | 'pcs'     | '5 044,00'         |
+				| 'Trousers'    | '400,00'    | '36/Yellow'    | 'Store 01'    | '5,000'       | '100,00'           | 'pcs'     | '1 900,00'         |
 			And in the table "ItemList" I click "% Offers" button
 			And I click "OK" button
 			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
-				| 'Partner'    | 'Σ'     |
-				| 'Ferron BP'  |  '6 944,00'|
+				| 'Partner'      | 'Σ'            |
+				| 'Ferron BP'    | '6 944,00'     |
 		
 
 Scenario: _033404 check of the maximum percentage of the range discount by lines
@@ -121,12 +121,12 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 		When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 		* Calculate range discount for Trousers - 8%
 			And I go to line in "ItemList" table
-				| 'Item'      |
-				| 'Trousers' |
+				| 'Item'         |
+				| 'Trousers'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 			And I go to line in "Offers" table
-				| 'Presentation'                               |
-				| 'Range Discount Basic (Trousers)' |
+				| 'Presentation'                        |
+				| 'Range Discount Basic (Trousers)'     |
 			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "7" text in the field named "PercentNumber"
@@ -136,11 +136,11 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 		* Calculate range discount for Dress - 10%
 			And I go to line in "ItemList" table
 				| 'Item'      |
-				| 'Dress' |
+				| 'Dress'     |
 			And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 			And I go to line in "Offers" table
-				| 'Presentation'                               |
-				| 'Range Discount Basic (Dress)' |
+				| 'Presentation'                     |
+				| 'Range Discount Basic (Dress)'     |
 			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "10" text in the field named "PercentNumber"
@@ -148,15 +148,15 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 			And I click the button named "FormOK"
 			And Delay 2
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
-				| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '520,00'        | 'pcs'  | '4 680,00'        |
-				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '140,00'        | 'pcs'  | '1 860,00'        |
+				| 'Item'        | 'Price'     | 'Item key'     | 'Store'       | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Total amount'     |
+				| 'Dress'       | '520,00'    | 'XS/Blue'      | 'Store 01'    | '10,000'      | '520,00'           | 'pcs'     | '4 680,00'         |
+				| 'Trousers'    | '400,00'    | '36/Yellow'    | 'Store 01'    | '5,000'       | '140,00'           | 'pcs'     | '1 860,00'         |
 			And in the table "ItemList" I click "% Offers" button
 			And I click "OK" button
 			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
-				| 'Partner'    | 'Σ'     |
-				| 'Ferron BP'  |  '6 540,00'|
+				| 'Partner'      | 'Σ'            |
+				| 'Ferron BP'    | '6 540,00'     |
 		
 
 Scenario: _033405 Range discount and Special price discount calculation 
@@ -164,12 +164,12 @@ Scenario: _033405 Range discount and Special price discount calculation
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Trousers' |
+			| 'Item'        |
+			| 'Trousers'    |
 		And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 		And I go to line in "Offers" table
-			| 'Presentation'                               |
-			| 'Range Discount Basic (Trousers)' |
+			| 'Presentation'                       |
+			| 'Range Discount Basic (Trousers)'    |
 		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
@@ -179,22 +179,22 @@ Scenario: _033405 Range discount and Special price discount calculation
 	* Calculate Discount price 1
 		And in the table "ItemList" I click "% Offers" button
 		And I go to line in "Offers" table
-			| 'Presentation'                  |
-			| 'Discount Price 1' |
+			| 'Presentation'        |
+			| 'Discount Price 1'    |
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I click "OK" button
 	* Check that the calculation is correct
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' |
-			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '260,00'        | 'pcs'  | '4 940,00'        |
-			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '540,00'        | 'pcs'  | '1 460,00'        |
+			| 'Item'       | 'Price'    | 'Item key'    | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'   | 'Total amount'    |
+			| 'Dress'      | '520,00'   | 'XS/Blue'     | 'Store 01'   | '10,000'     | '260,00'          | 'pcs'    | '4 940,00'        |
+			| 'Trousers'   | '400,00'   | '36/Yellow'   | 'Store 01'   | '5,000'      | '540,00'          | 'pcs'    | '1 460,00'        |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-				| 'Partner'    | 'Σ'     |
-				| 'Ferron BP'  |  '6 400,00'|
+				| 'Partner'      | 'Σ'            |
+				| 'Ferron BP'    | '6 400,00'     |
 
 
 Scenario: _033406 check the discount order Range discount and crowding out 2 price special offers
@@ -203,12 +203,12 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Trousers' |
+			| 'Item'        |
+			| 'Trousers'    |
 		And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 		And I go to line in "Offers" table
-			| 'Presentation'                               |
-			| 'Range Discount Basic (Trousers)' |
+			| 'Presentation'                       |
+			| 'Range Discount Basic (Trousers)'    |
 		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
@@ -218,27 +218,27 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 	* Calculate discount Discount price 1
 		And in the table "ItemList" I click "% Offers" button
 		And I go to line in "Offers" table
-			| 'Presentation'                  |
-			| 'Discount Price 1' |
+			| 'Presentation'        |
+			| 'Discount Price 1'    |
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I go to line in "Offers" table
-			| 'Presentation'                  |
-			| 'Discount Price 2' |
+			| 'Presentation'        |
+			| 'Discount Price 2'    |
 		And I activate "Is select" field in "Offers" table
 		And I select current line in "Offers" table
 		And I click "OK" button
 	* Check that the calculation is correct
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
-			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '1 310,00'      | 'pcs'  | '3 890,00'        |
-			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '725,00'        | 'pcs'  | '1 275,00'        |
+			| 'Item'       | 'Price'    | 'Item key'    | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'   | 'Total amount'    |
+			| 'Dress'      | '520,00'   | 'XS/Blue'     | 'Store 01'   | '10,000'     | '1 310,00'        | 'pcs'    | '3 890,00'        |
+			| 'Trousers'   | '400,00'   | '36/Yellow'   | 'Store 01'   | '5,000'      | '725,00'          | 'pcs'    | '1 275,00'        |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-				| 'Partner'    | 'Σ'     |
-				| 'Ferron BP'  |  '5 165,00'|
+				| 'Partner'      | 'Σ'            |
+				| 'Ferron BP'    | '5 165,00'     |
 
 
 Scenario: _033407 range discount recalculation when the quantity of items in the order changes
@@ -246,12 +246,12 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		And I go to line in "ItemList" table
-			| 'Item'      |
-			| 'Trousers' |
+			| 'Item'        |
+			| 'Trousers'    |
 		And in the table "ItemList" I click the button named "ItemListContextMenuSetSpecialOffersAtRow"
 		And I go to line in "Offers" table
-			| 'Presentation'                               |
-			| 'Range Discount Basic (Trousers)' |
+			| 'Presentation'                       |
+			| 'Range Discount Basic (Trousers)'    |
 		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
@@ -260,9 +260,9 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		And Delay 2
 	* Recalculation
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity' | 'Offers amount' | 'Unit' | 'Total amount' |
-			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000'   | ''              | 'pcs'  | '5 200,00'     |
-			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'    | '140,00'        | 'pcs'  | '1 860,00'     |
+			| 'Item'       | 'Price'    | 'Item key'    | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'   | 'Total amount'    |
+			| 'Dress'      | '520,00'   | 'XS/Blue'     | 'Store 01'   | '10,000'     | ''                | 'pcs'    | '5 200,00'        |
+			| 'Trousers'   | '400,00'   | '36/Yellow'   | 'Store 01'   | '5,000'      | '140,00'          | 'pcs'    | '1 860,00'        |
 	// * Change the quantity by Trousers by 30 pieces
 	// 	And I go to line in "ItemList" table
 	// 	| 'Item'      |
@@ -281,8 +281,8 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 	// And I click "OK" button
 	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
-		| 'Partner'    | 'Σ'        |
-		| 'Ferron BP'  |  '7 060,00'|
+		| 'Partner'    | 'Σ'          |
+		| 'Ferron BP'  | '7 060,00'   |
 	// And "List" table contains lines
 	// 	| 'Partner'    | 'Σ'     |
 	// 	| 'Ferron BP'  |  '17 060,00'|

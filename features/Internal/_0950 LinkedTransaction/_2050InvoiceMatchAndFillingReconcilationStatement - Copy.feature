@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @LinkedTransaction
@@ -53,8 +53,8 @@ Scenario: _2050001 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -66,14 +66,14 @@ Scenario: _2050001 preparation
 		When add sales tax settings 
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '101' |
+			| '101'       |
 		And I select current line in "List" table	
 		And I delete "$$PurchaseInvoice2040005$$" variable
 		And I delete "$$NumberPurchaseInvoice2040005$$" variable
@@ -82,7 +82,7 @@ Scenario: _2050001 preparation
 		And I close current window
 		And I go to line in "List" table
 			| 'Number'    |
-			| '102' |
+			| '102'       |
 		And I select current line in "List" table	
 		And I delete "$$PurchaseInvoice20400051$$" variable
 		And I delete "$$NumberPurchaseInvoice20400051$$" variable
@@ -91,16 +91,16 @@ Scenario: _2050001 preparation
 		And I close all client application windows
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '101' |
+			| '101'       |
 		And I select current line in "List" table	
 		And I delete "$$SalesInvoice20400022$$" variable
 		And I delete "$$NumberSalesInvoice20400022$$" variable
@@ -109,7 +109,7 @@ Scenario: _2050001 preparation
 		And I close current window
 		And I go to line in "List" table
 			| 'Number'    |
-			| '102' |
+			| '102'       |
 		And I select current line in "List" table	
 		And I delete "$$SalesInvoice2040002$$" variable
 		And I delete "$$NumberSalesInvoice2040002$$" variable
@@ -118,7 +118,7 @@ Scenario: _2050001 preparation
 		And I close current window
 		And I go to line in "List" table
 			| 'Number'    |
-			| '103' |
+			| '103'       |
 		And I select current line in "List" table	
 		And I delete "$$SalesInvoice20400021$$" variable
 		And I delete "$$NumberSalesInvoice20400021$$" variable
@@ -132,13 +132,13 @@ Scenario: _2050001 preparation
 		* Filling in the details of the document
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, TRY |
+				| Description           |
+				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -147,8 +147,8 @@ Scenario: _2050001 preparation
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I click "List" button		
 			And I go to line in "List" table
-				| Description |
-				| Crystal   |
+				| Description     |
+				| Crystal         |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -167,13 +167,13 @@ Scenario: _2050001 preparation
 		* Filling in the details of the document
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Account" field
 			And I go to line in "List" table
-				| Description    |
-				| Bank account, TRY |
+				| Description           |
+				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -181,8 +181,8 @@ Scenario: _2050001 preparation
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Crystal   |
+				| Description     |
+				| Crystal         |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -201,18 +201,18 @@ Scenario: _2050001 preparation
 		* Filling in the details of the document
 			And I click Select button of "Currency" field
 			And I go to line in "List" table
-				| Code | Description  |
-				| TRY  | Turkish lira |
+				| Code    | Description      |
+				| TRY     | Turkish lira     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| Description    |
-				| Cash desk №3 |
+				| Description      |
+				| Cash desk №3     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -220,14 +220,14 @@ Scenario: _2050001 preparation
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Crystal   |
+				| Description     |
+				| Crystal         |
 			And I select current line in "List" table
 		* Filling in an Partner term
 			And I click choice button of "Partner term" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 		* Filling in basis documents in a tabular part
 			# temporarily
@@ -238,8 +238,8 @@ Scenario: _2050001 preparation
 			# temporarily
 			And Delay 2
 			And I go to line in "List" table
-				| 'Legal name'   | 'Partner' |
-				| 'Company Adel' | 'Crystal' |
+				| 'Legal name'      | 'Partner'     |
+				| 'Company Adel'    | 'Crystal'     |
 			And I click "Select" button
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -258,18 +258,18 @@ Scenario: _2050001 preparation
 		* Filling in the details of the document
 			And I click Select button of "Currency" field
 			And I go to line in "List" table
-				| Code | Description  |
-				| TRY  | Turkish lira |
+				| Code    | Description      |
+				| TRY     | Turkish lira     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click Select button of "Cash account" field
 			And I go to line in "List" table
-				| Description    |
-				| Cash desk №3 |
+				| Description      |
+				| Cash desk №3     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -277,8 +277,8 @@ Scenario: _2050001 preparation
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| Description |
-				| Crystal   |
+				| Description     |
+				| Crystal         |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -293,14 +293,14 @@ Scenario: _2050001 preparation
 	* Check or create PurchaseReturn300301
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseReturn300301$$" |
+				| "Number"                             |
+				| "$$NumberPurchaseReturn300301$$"     |
 			When create PurchaseReturn300301
 	* Check or create SalesReturn30001
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesReturn30001$$" |
+				| "Number"                         |
+				| "$$NumberSalesReturn30001$$"     |
 			When create SalesReturn30001
 	
 Scenario: _20500011 check preparation
@@ -313,39 +313,39 @@ Scenario: 2050002 check filling in Reconcilation statement
 	* Fill in a document header
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
+			| 'Code'   | 'Description'     |
+			| 'TRY'    | 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click Select button of "Begin period" field
 		And I input "01.03.2020" text in "Begin period" field		
 		And I input end of the current month date in "End period" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Crystal' |
+			| 'Description'    |
+			| 'Crystal'        |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Company Adel' |
+			| 'Description'     |
+			| 'Company Adel'    |
 		And I select current line in "List" table
 	* Check filling in tabular part
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date' | 'Document'                    | 'Credit'    | 'Debit'     |
-		| '*'    | '$$CashPayment2050001$$*'     | ''          | '5 000,00'  |
-		| '*'    | '$$CashReceipt2050001$$*'     | '5 000,00'  | ''          |
-		| '*'    | '$$BankPayment2050001$$*'     | ''          | '1 000,00'  |
-		| '*'    | '$$BankReceipt2050001$$*'     | '20 000,00' | ''          |
-		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '20 980,00' |
-		| '*'    | '$$SalesInvoice2040002$$'     | ''          | '1 740,00'  |
-		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 445,24' |
-		| '*'    | '$$PurchaseInvoice2040005$$'  | '40 544,80' | ''          |
+		| 'Date'  | 'Document'                    | 'Credit'     | 'Debit'       |
+		| '*'     | '$$CashPayment2050001$$*'     | ''           | '5 000,00'    |
+		| '*'     | '$$CashReceipt2050001$$*'     | '5 000,00'   | ''            |
+		| '*'     | '$$BankPayment2050001$$*'     | ''           | '1 000,00'    |
+		| '*'     | '$$BankReceipt2050001$$*'     | '20 000,00'  | ''            |
+		| '*'     | '$$SalesInvoice20400022$$'    | ''           | '20 980,00'   |
+		| '*'     | '$$SalesInvoice2040002$$'     | ''           | '1 740,00'    |
+		| '*'     | '$$SalesInvoice20400021$$'    | ''           | '28 445,24'   |
+		| '*'     | '$$PurchaseInvoice2040005$$'  | '40 544,80'  | ''            |
 	* Check document
 		And I click the button named "FormPost"
 	* Clear movements

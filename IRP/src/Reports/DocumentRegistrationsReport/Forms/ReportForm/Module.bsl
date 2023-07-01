@@ -13,9 +13,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("PutInTable") Then
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;
+	
+	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
+EndProcedure
 
-	If Parameters.Property("GenerateOnOpen") And Not Parameters.GenerateOnOpen = Undefined
-		And Parameters.GenerateOnOpen Then
+&AtClient
+Procedure OnOpen(Cancel)
+	If ThisObject.GenerateOnOpen Then
 		GenerateReportAtServer(ThisObject.ResultTable);
 	EndIf;
 EndProcedure
@@ -128,6 +132,8 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	ArrayOfTechnicalRegisters.Add(Upper("TM1010T_RowIDMovements"));
 	ArrayOfTechnicalRegisters.Add(Upper("TM1020B_AdvancesKey"));
 	ArrayOfTechnicalRegisters.Add(Upper("TM1030B_TransactionsKey"));
+	
+	ArrayOfTechnicalRegisters.Add(Upper("T1050T_AccountingQuantities"));
 	
 	ArrayOfTechnicalRegisters.Add(Upper("T2010S_OffsetOfAdvances"));
 	ArrayOfTechnicalRegisters.Add(Upper("T2013S_OffsetOfAging"));

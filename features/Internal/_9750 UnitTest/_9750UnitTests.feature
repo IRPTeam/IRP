@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Unit
 
@@ -19,8 +19,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* VAT
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'TaxCalculation' |
+						| 'Description'          |
+						| 'TaxCalculation'       |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -30,8 +30,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* Discount
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'DocumentDiscount' |
+						| 'Description'            |
+						| 'DocumentDiscount'       |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/DocumentDiscount.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -41,8 +41,8 @@ When Create catalog ExternalDataProc objects (test data base)
 		* Contact info
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
-						| 'Description'    |
-						| 'Address' |
+						| 'Description'       |
+						| 'Address'           |
 				And I select current line in "List" table
 				And I select external file "$Path$/DataProcessor/InputAddress.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -92,13 +92,13 @@ When Create information register Taxes records (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
-						| 'Description'  |
-						| 'Own company 1' |
+						| 'Description'         |
+						| 'Own company 1'       |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I go to line in "CompanyTaxes" table
-						| 'Tax' |
-						| 'VAT' |
+						| 'Tax'       |
+						| 'VAT'       |
 		And I select current line in "CompanyTaxes" table
 		And I click Open button of "Tax" field
 		And I click "Settings" button
@@ -166,7 +166,7 @@ When Create document CashStatement objects  (test data base)
 When Create catalog PartnerItems objects (test data base)
 * Posting first documents
 	And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -190,7 +190,7 @@ When Create catalog PartnerItems objects (test data base)
 		And Delay "3"
 * Posting Sales invoice
 		And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
@@ -385,7 +385,7 @@ Scenario: _975002 unit
 		And I save the value of "Log" field as "VariableName"
 		And I display "VariableName" variable value
 		And in the table "TestList" I click "Output list..." button
-		Then "Display list" window is opened
+		Then "Output list" window is opened
 		And I click the button named "Ok"
 		Given "SpreadsheetDocument" spreadsheet document is equal to "Template"
 	And I close all client application windows

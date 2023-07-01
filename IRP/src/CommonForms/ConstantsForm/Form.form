@@ -108,9 +108,6 @@
   <userVisible>
    <common>true</common>
   </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>ConstantsSet.EnableLinkedRowsIntegrity</segments>
-  </dataPath>
   <extendedTooltip>
    <name>EnableLinkedRowsIntegrityExtendedTooltip</name>
    <id>9</id>
@@ -136,12 +133,10 @@
    </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
-  <type>CheckBoxField</type>
   <editMode>EnterOnInput</editMode>
   <showInHeader>true</showInHeader>
   <headerHorizontalAlign>Left</headerHorizontalAlign>
   <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
  </items>
  <items xsi:type="form:FormField">
   <name>UsePlannedReceiptReservation</name>

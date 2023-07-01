@@ -450,7 +450,7 @@
      <precision>10</precision>
     </numberQualifiers>
     <stringQualifiers>
-     <length>10</length>
+     <length>150</length>
     </stringQualifiers>
     <dateQualifiers>
      <dateFractions>Date</dateFractions>

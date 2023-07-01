@@ -21,7 +21,9 @@
  <content>Constant.UseObjectAccess</content>
  <content>FunctionalOption.UseObjectAccess</content>
  <content>Role.TemplateDocument</content>
- <content>SessionParameter.CurrentUserAccessProfiles</content>
- <content>Role.TemplateBasicAccess</content>
+ <content>SessionParameter.CurrentUserAccessGroupList</content>
+ <content>Role.TemplateAccumulationRegisters</content>
+ <content>InformationRegister.T9101A_ObjectAccessRegisters</content>
+ <content>Role.TemplateCatalogs</content>
  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 
@@ -24,8 +24,8 @@ Scenario: _207001 copy additional attribute values when create catalog element
 			And I click the button named "FormCreate"
 			And I click Choice button of the field named "ValueType"
 			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
+					| ''                                |
+					| 'Additional attribute value'      |
 			And I click the button named "OK"
 			And I click Open button of the field named "Description_en"
 			And I input "Additional attribute 01" text in the field named "Description_en"
@@ -46,8 +46,8 @@ Scenario: _207001 copy additional attribute values when create catalog element
 			And I click the button named "FormCreate"
 			And I click Choice button of the field named "ValueType"
 			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
+					| ''                                |
+					| 'Additional attribute value'      |
 			And I click the button named "OK"
 			And I click Open button of the field named "Description_en"
 			And I input "Additional attribute 02" text in the field named "Description_en"
@@ -67,25 +67,25 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		* Opening the form for adding additional attributes for Partners
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-				| 'Predefined data name' |
-				| 'Catalog_Partners'      |
+				| 'Predefined data name'     |
+				| 'Catalog_Partners'         |
 			And I select current line in "List" table
 			If "Attributes" table contains lines Then
-					| 'Attribute' |
-					| 'Additional attribute 01'  |
-					| 'Additional attribute 02'  |
+					| 'Attribute'                    |
+					| 'Additional attribute 01'      |
+					| 'Additional attribute 02'      |
 					And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Additional attribute 02'  |
+				| 'Description'                 |
+				| 'Additional attribute 02'     |
 			And I select current line in "List" table
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'Additional attribute 01' |
+				| 'Description'                 |
+				| 'Additional attribute 01'     |
 			And I select current line in "List" table
 			And I finish line editing in "Attributes" table
 			And I input "Partners" text in the field named "Description_en"
@@ -95,20 +95,20 @@ Scenario: _207001 copy additional attribute values when create catalog element
 	* Filling in additional attributes for Partner 01
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Partner 01'  |
+			| 'Description'    |
+			| 'Partner 01'     |
 		And I select current line in "List" table
 		And I click Select button of "Additional attribute 02" field
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Description' |
-			| 'Additional attribute 02' | 'Value01'     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Copy partner and check filling in additional attributes
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Partner 01'  |
+			| 'Description'    |
+			| 'Partner 01'     |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to ""
@@ -124,20 +124,20 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'          |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
 		And I input "additionalAttribute02" text in "Attribute name" field
 		And I select "Additional" exact value from "Kind of attribute" drop-down list
 		And I click Select button of "Value" field
 		And I go to line in "" table
-			| ''                           |
-			| 'Additional attribute value' |
+			| ''                              |
+			| 'Additional attribute value'    |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Additional attribute values' |
-			| 'Additional attribute 02' | 'Value01'                     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -145,29 +145,29 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'          |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
 		And I input "additionalAttribute01" text in "Attribute name" field
 		And I select "Additional" exact value from "Kind of attribute" drop-down list
 		And I click Select button of "Value" field
 		And I go to line in "" table
-			| ''                           |
-			| 'Additional attribute value' |
+			| ''                              |
+			| 'Additional attribute value'    |
 		And I select current line in "" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Additional attribute values' |
-			| 'Additional attribute 01' | 'Value01'                     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 01'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check filling in additional attributes from user settings when clone partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Partner 01'  |
+			| 'Description'    |
+			| 'Partner 01'     |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to "Value01"
@@ -182,8 +182,8 @@ Scenario: _207001 copy additional attribute values when create catalog element
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "VAExtension" |
+				| "Description"     |
+				| "VAExtension"     |
 			When add VAExtension
 
 Scenario: _207002 copy additional attribute values when create document
@@ -192,49 +192,49 @@ Scenario: _207002 copy additional attribute values when create document
 		* Opening the form for adding additional attributes for BankReceipt
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-				| 'Predefined data name' |
-				| 'Document_BankReceipt'      |
+				| 'Predefined data name'     |
+				| 'Document_BankReceipt'     |
 			And I select current line in "List" table
 			If "Attributes" table contains lines Then
-					| 'Attribute' |
-					| 'Additional attribute 02'  |
-					| 'Additional attribute 01'  |
+					| 'Attribute'                    |
+					| 'Additional attribute 02'      |
+					| 'Additional attribute 01'      |
 					And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Additional attribute 02'  |
+				| 'Description'                 |
+				| 'Additional attribute 02'     |
 			And I select current line in "List" table
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
-				| 'Description'             |
-				| 'Additional attribute 01' |
+				| 'Description'                 |
+				| 'Additional attribute 01'     |
 			And I select current line in "List" table
 			And I finish line editing in "Attributes" table
 			And I input "Bank receipt" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I execute the built-in language code (Extension)
- 				| "RefreshReusableValues()" |
+					| "RefreshReusableValues()"      |
 	* Create test Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Main company' |
+			| 'Description'     |
+			| 'Main company'    |
 		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'USD'      | 'Bank account, USD' |
+			| 'Currency'   | 'Description'          |
+			| 'USD'        | 'Bank account, USD'    |
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I click Select button of "Additional attribute 02" field
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Description' |
-			| 'Additional attribute 02' | 'Value01'     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt2070022$$" variable
@@ -243,8 +243,8 @@ Scenario: _207002 copy additional attribute values when create document
 	* Copy Bank receipt and check filling in additional attributes
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt2070022$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt2070022$$'    |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to ""
@@ -259,20 +259,20 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'          |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field
 		And I input "additionalAttribute02" text in "Attribute name" field
 		And I select "Additional" exact value from "Kind of attribute" drop-down list
 		And I click Select button of "Value" field
 		And I go to line in "" table
-			| ''                           |
-			| 'Additional attribute value' |
+			| ''                              |
+			| 'Additional attribute value'    |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Additional attribute values' |
-			| 'Additional attribute 02' | 'Value01'                     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 02'   | 'Value01'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
@@ -280,31 +280,31 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'          |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field
 		And I input "additionalAttribute01" text in "Attribute name" field
 		And I select "Additional" exact value from "Kind of attribute" drop-down list
 		And I click Select button of "Value" field
 		And I go to line in "" table
-			| ''                           |
-			| 'Additional attribute value' |
+			| ''                              |
+			| 'Additional attribute value'    |
 		And I select current line in "" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute'    | 'Additional attribute values' |
-			| 'Additional attribute 01' | 'Value02'                     |
+			| 'Additional attribute'      | 'Description'    |
+			| 'Additional attribute 01'   | 'Value02'        |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I execute the built-in language code (Extension)
- 			| "RefreshReusableValues()" |
+				| "RefreshReusableValues()"     |
 	* Check filling in additional attributes from user settings when clone document
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt2070022$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt2070022$$'    |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to "Value02"
@@ -317,20 +317,20 @@ Scenario: _207002 copy additional attribute values when create document
 	* Mark created Bank receipt for deletion 
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt2070022$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt2070022$$'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt2070023$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt2070023$$'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt2070024$$'  |
+			| 'Number'                          |
+			| '$$NumberBankReceipt2070024$$'    |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -341,18 +341,18 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 	* Opening the form for adding additional attributes for Partners
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Partners'      |
+			| 'Predefined data name'    |
+			| 'Catalog_Partners'        |
 		And I select current line in "List" table
 	* Delete Additional attribute 01
 		And I go to line in "Attributes" table
-			| 'Attribute'               |
-			| 'Additional attribute 01' |
+			| 'Attribute'                  |
+			| 'Additional attribute 01'    |
 		And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
 	* Add Condition for Additional attribute 02
 		And I go to line in "Attributes" table
-			| 'Attribute'               |
-			| 'Additional attribute 02' |
+			| 'Attribute'                  |
+			| 'Additional attribute 02'    |
 		And in the table "Attributes" I click the button named "AttributesSetCondition"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -360,12 +360,12 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
 		Then "Select field" window is opened
 		And I go to line in "Source" table
-			| 'Available fields' |
-			| 'Ref'              |
+			| 'Available fields'    |
+			| 'Ref'                 |
 		And I expand current line in "Source" table
 		And I go to line in "Source" table
-			| 'Available fields' |
-			| 'ENG'              |
+			| 'Available fields'    |
+			| 'ENG'                 |
 		And I select current line in "Source" table	
 		And I move to the next attribute
 		And I select "Contains" exact value from "Comparison type" drop-down list in "SettingsFilter" table
@@ -374,17 +374,17 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And I finish line editing in "SettingsFilter" table
 		And in the table "ResultTable" I click "Verify" button
 		And "ResultTable" table became equal
-			| 'Ref'                 |
-			| 'Partner 01 (clone)'  |
-			| 'Partner 01 (clone2)' |
+			| 'Ref'                    |
+			| 'Partner 01 (clone)'     |
+			| 'Partner 01 (clone2)'    |
 		And I click "Ok" button
 	* Copy Additional attribute 02 and change attribute on Additional attribute 01
 		And in the table "Attributes" I click the button named "AttributesContextMenuCopy"
 		And I click choice button of "Attribute" attribute in "Attributes" table
 		Then "Additional attribute types" window is opened
 		And I go to line in "List" table
-			| 'Description'             | 'Reference'               |
-			| 'Additional attribute 01' | 'Additional attribute 01' |
+			| 'Description'               |
+			| 'Additional attribute 01'   |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 	* Check copy isConditionSet
@@ -395,23 +395,23 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And I expand current line in "SettingsFilter" table
 		And in the table "ResultTable" I click "Verify" button
 		And "ResultTable" table became equal
-			| 'Ref'                 |
-			| 'Partner 01 (clone)'  |
-			| 'Partner 01 (clone2)' |
+			| 'Ref'                    |
+			| 'Partner 01 (clone)'     |
+			| 'Partner 01 (clone2)'    |
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Check Condition
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description'               |
-			| 'Partner 01' |
+			| 'Description'    |
+			| 'Partner 01'     |
 		And I select current line in "List" table
 		And field "Additional attribute 02" is not present on the form
 		And field "Additional attribute 01" is not present on the form
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'               |
-			| 'Partner 01 (clone)' |
+			| 'Description'           |
+			| 'Partner 01 (clone)'    |
 		And I select current line in "List" table
 		And field "Additional attribute 02" is present on the form
 		And field "Additional attribute 01" is present on the form

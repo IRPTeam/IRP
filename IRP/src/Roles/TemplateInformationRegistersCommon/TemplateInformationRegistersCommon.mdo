@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="64afa159-a657-444a-9365-e08a334db0b9">
+ <name>TemplateInformationRegistersCommon</name>
+ <synonym>
+  <key>en</key>
+  <value>Template information registers common</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Шаблон информационных регистров общий</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Template information registers common</value>
+ </synonym>
+</mdclass:Role>

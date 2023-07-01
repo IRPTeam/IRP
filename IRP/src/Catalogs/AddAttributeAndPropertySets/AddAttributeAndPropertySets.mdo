@@ -156,13 +156,6 @@
     <value>8</value>
    </code>
   </items>
-  <items id="49d5fa3f-515b-4d80-8b1c-307112a4158a">
-   <name>Catalog_CompanyTypes</name>
-   <description>Catalog Company types</description>
-   <code xsi:type="core:NumberValue">
-    <value>9</value>
-   </code>
-  </items>
   <items id="60670f4a-f08a-4ca4-a6d3-05236f383207">
    <name>Catalog_Countries</name>
    <description>Catalog Countries</description>

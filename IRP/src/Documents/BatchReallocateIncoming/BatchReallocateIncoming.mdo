@@ -145,6 +145,23 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <forms uuid="ba1da1e5-da19-4067-88ba-258ed626c473">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
  <forms uuid="4ee1e274-a088-4fb4-a8fd-56eac88f4804">
   <name>ListForm</name>
   <synonym>
@@ -175,23 +192,6 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
- <forms uuid="ba1da1e5-da19-4067-88ba-258ed626c473">
-  <name>DocumentForm</name>
-  <synonym>
-   <key>en</key>
-   <value>Document form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма документа</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

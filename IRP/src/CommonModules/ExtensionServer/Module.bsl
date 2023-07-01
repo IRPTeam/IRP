@@ -25,6 +25,10 @@ EndProcedure
 #Region AddExtensionsAttributes
 
 Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefined) Export
+	Types = New Array();
+	Types.Add(Type("Boolean"));
+	BooleanTypeDescription = New TypeDescription(Types);
+
 	ElementParent = Undefined;
 
 	If Not ItemElement = Undefined Then
@@ -63,6 +67,9 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object." + Attribute.Attribute;
+		If ObjectMetadata.Attributes[Attribute.Attribute].Type = BooleanTypeDescription Then
+			NewAttribute.Type = FormFieldType.CheckBoxField;
+		EndIf;
 	EndDo;
 
 	For Each TabularSection In ObjectMetadata.TabularSections Do
@@ -78,6 +85,9 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			NewColumn = Form.Items.Add(Column.Name, Type("FormField"), Parent);
 			NewColumn.Type = FormFieldType.InputField;
 			NewColumn.DataPath = "Object." + TabularSection.Name + "." + Column.Name;
+			If Column.Type = BooleanTypeDescription Then
+				NewColumn.Type = FormFieldType.CheckBoxField;
+			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @SettingsFilters
 
@@ -22,9 +22,9 @@ Scenario: _9001 preparation
 	When Create catalog BusinessUnits objects (MF)
 	Given I open hyperlink 'e1cib/list/Catalog.PlanningPeriods'
 	If "List" table does not contain lines Then
-		| "Description"   |
-		| 'Current day'   |	
-		| 'Current month' |
+		| "Description"     |
+		| 'Current day'     |
+		| 'Current month'   |
 		* Current day
 			And I click the button named "FormCreate"
 			And I input "Current day" text in "Description" field
@@ -36,8 +36,8 @@ Scenario: _9001 preparation
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Цех 06' |
+				| 'Description'     |
+				| 'Цех 06'          |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 		* Next day
@@ -50,8 +50,8 @@ Scenario: _9001 preparation
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Цех 06' |
+				| 'Description'     |
+				| 'Цех 06'          |
 			And I select current line in "List" table
 			And I click "Save and close" button	
 		* Current month
@@ -65,14 +65,14 @@ Scenario: _9001 preparation
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Цех 07' |
+				| 'Description'     |
+				| 'Цех 07'          |
 			And I select current line in "List" table
 			And in the table "BusinessUnits" I click the button named "BusinessUnitsAdd"
 			And I click choice button of "Business unit" attribute in "BusinessUnits" table
 			And I go to line in "List" table
-				| 'Description'           |
-				| 'Склад производства 04' |
+				| 'Description'               |
+				| 'Склад производства 04'     |
 			And I select current line in "List" table	
 			And I click "Save and close" button	
 
@@ -82,23 +82,23 @@ Scenario: _9005 business units and planning periods filters in the document Prod
 		And I click the button named "FormCreate"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description'           |
-			| 'Склад производства 04' |
+			| 'Description'              |
+			| 'Склад производства 04'    |
 		And I select current line in "List" table		
 		Then the form attribute named "PlanningPeriod" became equal to "Current month"
 		Then the form attribute named "PlanningPeriodBeginDate" became equal to "$$StartDateCurrentMonth$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentMonth$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-		| 'Description'   |
-		| 'Current month' |
+		| 'Description'     |
+		| 'Current month'   |
 		Then the number of "List" table lines is "равно" "1"
 		And I close current window
 	* Change business unit and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button		
@@ -107,21 +107,21 @@ Scenario: _9005 business units and planning periods filters in the document Prod
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentDay$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-			| 'Description'   |
-			| 'Current day' |
-			| 'Next day' |
+			| 'Description'    |
+			| 'Current day'    |
+			| 'Next day'       |
 		Then the number of "List" table lines is "равно" "2"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Next day'    |
+			| 'Description'    |
+			| 'Next day'       |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Next day"
 		Then the form attribute named "PlanningPeriodBeginDate" became equal to "$$$$DateNextDay$$$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$$$DateNextDay$$$$"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Склад производства 05'      |
+			| 'Description'              |
+			| 'Склад производства 05'    |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -131,8 +131,8 @@ Scenario: _9005 business units and planning periods filters in the document Prod
 	* Change date and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current day"
 		Then the form attribute named "PlanningPeriodBeginDate" became equal to "$$StartDateCurrentDay$$"
@@ -155,23 +155,23 @@ Scenario: _9008 business units and planning periods filters in the document Prod
 		And I click the button named "FormCreate"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description'           |
-			| 'Склад производства 04' |
+			| 'Description'              |
+			| 'Склад производства 04'    |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current month"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$StartDateCurrentMonth$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentMonth$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-		| 'Description'   |
-		| 'Current month' |
+		| 'Description'     |
+		| 'Current month'   |
 		Then the number of "List" table lines is "равно" "1"
 		And I close current window
 	* Change business unit and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button		
@@ -180,21 +180,21 @@ Scenario: _9008 business units and planning periods filters in the document Prod
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentDay$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-			| 'Description' |
-			| 'Current day' |
-			| 'Next day'    |
+			| 'Description'    |
+			| 'Current day'    |
+			| 'Next day'       |
 		Then the number of "List" table lines is "равно" "2"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Next day'    |
+			| 'Description'    |
+			| 'Next day'       |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Next day"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$$$DateNextDay$$$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$$$DateNextDay$$$$"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Склад производства 05'      |
+			| 'Description'              |
+			| 'Склад производства 05'    |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button		
@@ -204,8 +204,8 @@ Scenario: _9008 business units and planning periods filters in the document Prod
 	* Change date and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current day"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$StartDateCurrentDay$$"
@@ -228,44 +228,44 @@ Scenario: _9012 business units and planning periods filters in the document Prod
 		And I click the button named "FormCreate"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description'           |
-			| 'Склад производства 04' |
+			| 'Description'              |
+			| 'Склад производства 04'    |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current month"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$StartDateCurrentMonth$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentMonth$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-		| 'Description'   |
-		| 'Current month' |
+		| 'Description'     |
+		| 'Current month'   |
 		Then the number of "List" table lines is "равно" "1"
 		And I close current window
 	* Change business unit and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current day"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$StartDateCurrentDay$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateCurrentDay$$"
 		And I click Select button of "Planning period" field
 		And "List" table contains lines
-			| 'Description'   |
-			| 'Current day' |
-			| 'Next day' |
+			| 'Description'    |
+			| 'Current day'    |
+			| 'Next day'       |
 		Then the number of "List" table lines is "равно" "2"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Next day'    |
+			| 'Description'    |
+			| 'Next day'       |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Next day"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$$$DateNextDay$$$$"
 		Then the form attribute named "PlanningPeriodEndDate" became equal to "$$$$DateNextDay$$$$"
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Склад производства 05'      |
+			| 'Description'              |
+			| 'Склад производства 05'    |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to ""
 		And the editing text of form attribute named "PlanningPeriodStartDate" became equal to "  .  .    "
@@ -273,8 +273,8 @@ Scenario: _9012 business units and planning periods filters in the document Prod
 	* Change date and check Planning period
 		And I click Select button of "Business unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Цех 06'      |
+			| 'Description'    |
+			| 'Цех 06'         |
 		And I select current line in "List" table
 		Then the form attribute named "PlanningPeriod" became equal to "Current day"
 		Then the form attribute named "PlanningPeriodStartDate" became equal to "$$StartDateCurrentDay$$"

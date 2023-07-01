@@ -127,6 +127,7 @@
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.DataAreas.Form.ItemForm</defaultObjectForm>
  <defaultListForm>Catalog.DataAreas.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.DataAreas.Form.ChoiceForm</defaultChoiceForm>
  <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
   <name>DataAreaStatus</name>
   <synonym>
@@ -330,6 +331,23 @@
   <synonym>
    <key>tr</key>
    <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5169e26a-cc71-41b4-b3e8-1a43011ba4af">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

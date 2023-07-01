@@ -89,28 +89,6 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
- <dimensions uuid="b79b4d1b-43c2-48c1-a0bb-3c947065fe9f">
-  <name>Basis</name>
-  <synonym>
-   <key>en</key>
-   <value>Basis</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Документ основание</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeOrders</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <useInTotals>true</useInTotals>
- </dimensions>
  <dimensions uuid="040c1283-f4df-4af1-8c67-81ee40660118">
   <name>Store</name>
   <synonym>
@@ -127,6 +105,28 @@
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b79b4d1b-43c2-48c1-a0bb-3c947065fe9f">
+  <name>Basis</name>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ основание</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeOrders</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

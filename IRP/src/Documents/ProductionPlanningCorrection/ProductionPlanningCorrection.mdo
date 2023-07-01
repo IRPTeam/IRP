@@ -467,6 +467,10 @@
     <name>Filter.ItemKey</name>
     <field>Document.ProductionPlanningCorrection.TabularSection.Productions.Attribute.ItemKey</field>
    </choiceParameterLinks>
+   <choiceParameterLinks>
+    <name>Filter.BusinessUnit</name>
+    <field>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</field>
+   </choiceParameterLinks>
    <choiceParameters>
     <name>Filter.Active</name>
     <value xsi:type="core:BooleanValue">

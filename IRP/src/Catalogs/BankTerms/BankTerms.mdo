@@ -270,7 +270,7 @@
    <choiceParameters>
     <name>Filter.Type</name>
     <value xsi:type="core:ReferenceValue">
-     <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
+     <value>Enum.AgreementTypes.EnumValue.Other</value>
     </value>
    </choiceParameters>
    <dataHistory>Use</dataHistory>

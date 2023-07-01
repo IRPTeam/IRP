@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Data versions</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">

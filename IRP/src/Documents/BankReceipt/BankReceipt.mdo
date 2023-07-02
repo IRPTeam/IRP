@@ -670,6 +670,34 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="b5db8c5e-dd6b-41d9-91fa-182d678b8cfa">
+      <name>SendingAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Sending account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d9681477-3ba5-497c-95c6-2ba41fe55ee8">
+      <name>SendingBranch</name>
+      <synonym>
+        <key>en</key>
+        <value>Sending branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="2434d324-00b7-4acc-847b-a51fc5c9af2e">
     <producedTypes>

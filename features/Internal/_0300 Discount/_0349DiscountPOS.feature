@@ -535,8 +535,21 @@ Scenario: _034914 discount for row
 			| 'Description'                 |
 			| 'Document discount for row'   |
 		And I select current line in "List" table
+		And I click Select button of "Special offer type" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Document discount' |
+		And I select current line in "List" table
 		And I set checkbox named "Launch"
 		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Document discount for row' |
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Consequentially' |
+		And I click "Select" button		
 	* Check discount calculate (Discount coupon + Document discount for row)
 		And In the command interface I select "Retail" "Point of sale"
 		And I click "Search by barcode (F7)" button

@@ -1558,7 +1558,7 @@ Procedure FillCashInList()
 	|FROM
 	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND ReceiptingAccount = &CashAccount) AS R3021B_CashInTransitIncoming";
+	|	AND Account = &CashAccount) AS R3021B_CashInTransitIncoming";
 	Query.SetParameter("CashAccount", Workstation.CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

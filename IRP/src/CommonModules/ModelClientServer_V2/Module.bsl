@@ -2799,7 +2799,15 @@ EndFunction
 
 // Bank Payment
 Function FillByPTBBankPaymentOptions() Export
-	Return GetChainLinkOptions("PlanningTransactionBasis, Ref, Company, Account, Currency, TotalAmount");
+	Return GetChainLinkOptions("PlanningTransactionBasis, 
+		|Ref, 
+		|Company, 
+		|Account, 
+		|Currency, 
+		|TotalAmount,
+		|ReceiptingAccount,
+		|ReceiptingBranch,
+		|FinancialMovementType");		
 EndFunction
 
 Function FillByPTBBankPaymentExecute(Options) Export
@@ -2808,6 +2816,9 @@ Function FillByPTBBankPaymentExecute(Options) Export
 	Result.Insert("Company"     , Options.Company);
 	Result.Insert("Currency"    , Options.Currency);
 	Result.Insert("TotalAmount" , Options.TotalAmount);
+	Result.Insert("ReceiptingAccount" , Options.ReceiptingAccount);
+	Result.Insert("ReceiptingBranch"  , Options.ReceiptingBranch);
+	Result.Insert("FinancialMovementType"  , Options.FinancialMovementType);
 	
 	If ValueIsFilled(Options.PlanningTransactionBasis) Then
 		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
@@ -2815,6 +2826,9 @@ Function FillByPTBBankPaymentExecute(Options) Export
 			Result.Account  = OrderInfo.Account;
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
+			Result.ReceiptingAccount = OrderInfo.ReceiptingAccount;
+			Result.ReceiptingBranch  = OrderInfo.ReceiptingBranch;
+			Result.FinancialMovementType  = OrderInfo.SendFinancialMovementType;
 			
 			ArrayOfDocs = New Array();
 			ArrayOfDocs.Add(Options.PlanningTransactionBasis);
@@ -2849,7 +2863,10 @@ Function FillByPTBBankReceiptOptions() Export
 		|Currency, 
 		|CurrencyExchange, 
 		|TotalAmount,
-		|AmountExchange");
+		|AmountExchange,
+		|SendingAccount,
+		|SendingBranch,
+		|FinancialMovementType");
 EndFunction
 
 Function FillByPTBBankReceiptExecute(Options) Export
@@ -2860,6 +2877,9 @@ Function FillByPTBBankReceiptExecute(Options) Export
 	Result.Insert("CurrencyExchange", Options.CurrencyExchange);
 	Result.Insert("TotalAmount"     , Options.TotalAmount);
 	Result.Insert("AmountExchange"  , Options.AmountExchange);
+	Result.Insert("SendingAccount" , Options.SendingAccount);
+	Result.Insert("SendingBranch"  , Options.SendingBranch);
+	Result.Insert("FinancialMovementType"  , Options.FinancialMovementType);
 	
 	If ValueIsFilled(Options.PlanningTransactionBasis) Then
 		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
@@ -2868,6 +2888,10 @@ Function FillByPTBBankReceiptExecute(Options) Export
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
 			Result.CurrencyExchange = OrderInfo.CurrencyExchange;
+			Result.SendingAccount = OrderInfo.SendingAccount;
+			Result.SendingBranch  = OrderInfo.SendingBranch;
+			Result.FinancialMovementType  = OrderInfo.ReceiveFinancialMovementType;
+			
 			
 			ArrayOfDocs = New Array();
 			ArrayOfDocs.Add(Options.PlanningTransactionBasis);
@@ -2903,7 +2927,10 @@ Function FillByPTBCashPaymentOptions() Export
 		|Account, 
 		|Currency, 
 		|Partner, 
-		|TotalAmount");
+		|TotalAmount,
+		|ReceiptingAccount,
+		|ReceiptingBranch,
+		|FinancialMovementType");
 EndFunction
 
 Function FillByPTBCashPaymentExecute(Options) Export
@@ -2913,6 +2940,9 @@ Function FillByPTBCashPaymentExecute(Options) Export
 	Result.Insert("Currency"    , Options.Currency);
 	Result.Insert("Partner"     , Options.Partner);
 	Result.Insert("TotalAmount" , Options.TotalAmount);
+	Result.Insert("ReceiptingAccount" , Options.ReceiptingAccount);
+	Result.Insert("ReceiptingBranch"  , Options.ReceiptingBranch);
+	Result.Insert("FinancialMovementType"  , Options.FinancialMovementType);
 	
 	If ValueIsFilled(Options.PlanningTransactionBasis)
 		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
@@ -2920,6 +2950,9 @@ Function FillByPTBCashPaymentExecute(Options) Export
 			Result.Account  = OrderInfo.CashAccount;
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
+			Result.ReceiptingAccount = OrderInfo.ReceiptingAccount;
+			Result.ReceiptingBranch  = OrderInfo.ReceiptingBranch;
+			Result.FinancialMovementType  = OrderInfo.SendFinancialMovementType;
 			
 			ArrayOfDocs = New Array();
 			ArrayOfDocs.Add(Options.PlanningTransactionBasis);
@@ -2945,7 +2978,10 @@ Function FillByPTBCashReceiptOptions() Export
 		|CurrencyExchange, 
 		|Partner, 
 		|TotalAmount,
-		|AmountExchange");
+		|AmountExchange,
+		|SendingAccount,
+		|SendingBranch,
+		|FinancialMovementType");
 EndFunction
 
 Function FillByPTBCashReceiptExecute(Options) Export
@@ -2957,7 +2993,10 @@ Function FillByPTBCashReceiptExecute(Options) Export
 	Result.Insert("Partner"         , Options.Partner);
 	Result.Insert("TotalAmount"     , Options.TotalAmount);
 	Result.Insert("AmountExchange"  , Options.AmountExchange);
-	
+	Result.Insert("SendingAccount" , Options.SendingAccount);
+	Result.Insert("SendingBranch"  , Options.SendingBranch);
+	Result.Insert("FinancialMovementType"  , Options.FinancialMovementType);
+
 	If ValueIsFilled(Options.PlanningTransactionBasis)
 		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
@@ -2965,6 +3004,9 @@ Function FillByPTBCashReceiptExecute(Options) Export
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
 			Result.CurrencyExchange = OrderInfo.CurrencyExchange;
+			Result.SendingAccount = OrderInfo.SendingAccount;
+			Result.SendingBranch  = OrderInfo.SendingBranch;
+			Result.FinancialMovementType  = OrderInfo.ReceiveFinancialMovementType;
 			
 			ArrayOfDocs = New Array();
 			ArrayOfDocs.Add(Options.PlanningTransactionBasis);
@@ -3088,7 +3130,9 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|BankTerm,
 		|RetailCustomer,
 		|Employee,
-		|PaymentPeriod");
+		|PaymentPeriod,
+		|ReceiptingAccount,
+		|ReceiptingBranch");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3107,6 +3151,8 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
+	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3122,11 +3168,15 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
-		StrByType = "";
+		StrByType = "
+		|ReceiptingAccount,
+		|ReceiptingBranch";
 	ElsIf Options.TransactionType = Outgoing_PaymentByCheque Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
+		|ReceiptingAccount,
+		|ReceiptingBranch,
 		|TransitAccount";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor 
 		Or Options.TransactionType = Outgoing_ReturnToCustomer
@@ -3201,7 +3251,9 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|BankTerm,
 		|CommissionIsSeparate,
 		|RetailCustomer,
-		|RevenueType");
+		|RevenueType,
+		|SendingAccount,
+		|SendingBranch");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3223,6 +3275,8 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("RevenueType"              , Options.RevenueType);
+	Result.Insert("SendingAccount"           , Options.SendingAccount);
+	Result.Insert("SendingBranch"            , Options.SendingBranch);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3239,11 +3293,15 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Incoming_CashTransferOrder Then
-		StrByType = "";
+		StrByType = "
+		|SendingAccount,
+		|SendingBranch";
 	ElsIf Options.TransactionType = Incoming_ReceiptByCheque Then
 		StrByType = "";	
 	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
 		StrByType = "
+		|SendingAccount,
+		|SendingBranch,
 		|TransitAccount, 
 		|CurrencyExchange,
 		|AmountExchange";
@@ -3316,7 +3374,9 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Order,
 		|RetailCustomer,
 		|Employee,
-		|PaymentPeriod");
+		|PaymentPeriod,
+		|ReceiptingAccount,
+		|ReceiptingBranch");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3331,6 +3391,8 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
+	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3344,9 +3406,13 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
-		StrByType = "";
+		StrByType = "
+		|ReceiptingAccount,
+		|ReceiptingBranch";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then 
 		StrByType = "
+		|ReceiptingAccount,
+		|ReceiptingBranch,
 		|Partner";
 	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
@@ -3402,7 +3468,9 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|AmountExchange,
 		|Order,
 		|MoneyTransfer,
-		|RetailCustomer");
+		|RetailCustomer,
+		|SendingAccount,
+		|SendingBranch");		
 EndFunction
 
 Function ClearByTransactionTypeCashReceiptExecute(Options) Export
@@ -3418,7 +3486,9 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("MoneyTransfer"            , Options.MoneyTransfer);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
-
+	Result.Insert("SendingAccount"           , Options.SendingAccount);
+	Result.Insert("SendingBranch"            , Options.SendingBranch);
+	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
@@ -3431,11 +3501,15 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
 	If Options.TransactionType = Incoming_CashTransferOrder Then
-		StrByType = "";
+		StrByType = "
+		|SendingAccount,
+		|SendingBranch";
 	ElsIf Options.TransactionType = Incoming_CashIn Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
 		StrByType = "
+		|SendingAccount,
+		|SendingBranch,
 		|Partner, 
 		|CurrencyExchange,
 		|AmountExchange";

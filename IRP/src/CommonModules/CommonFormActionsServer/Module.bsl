@@ -109,19 +109,24 @@ Function QuerySearchInputByString(Settings) Export
 
 	IDSearch = "False";
 	NumberSearch = "False";
+	UseDescriptionSearch = Settings.MetadataObject.DescriptionLength > 0;
+	
 	If Settings.MetadataObject = Metadata.Catalogs.Items Then
 		IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
 
 		If Settings.MetadataObject.CodeLength And Settings.MetadataObject.CodeType = Metadata.ObjectProperties.CatalogCodeType.Number Then
 			NumberSearch = "Table.Ref.Code = &SearchStringNumber";
 		EndIf;
+	ElsIf Settings.MetadataObject = Metadata.Catalogs.Users Then
+		IDSearch = "Table.Description LIKE &SearchString + ""%%""";
+		UseDescriptionSearch = False;
 	EndIf;
 	
 	If Settings.Property("UseSearchByCode") And Settings.UseSearchByCode Then
 		NumberSearch = "Table.Ref.Code = &SearchStringNumber";
 	EndIf;
 	
-	If Settings.MetadataObject.DescriptionLength = 0 Then
+	If Not UseDescriptionSearch Then
 		If CommonFunctionsServer.isCommonAttributeUseForMetadata("Description_en", Settings.MetadataObject) Then
 			QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch, NumberSearch);
 			QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
@@ -182,10 +187,12 @@ Function QueryTableToChoiceData(QueryTable) Export
 		If Row.Sort = 0 Then
 			ChoiceData.Add(Row.Ref, "[" + Row.Ref.Code + "] " + Row.Presentation, False, PictureLib.AddToFavorites);
 		ElsIf Row.Sort = 1 Then
-			If IsBlankString(Row.Ref.ItemID) Then
-				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
-			Else
+			If TypeOf(Row.Ref) = Type("CatalogRef.Items") And Not IsBlankString(Row.Ref.ItemID) Then
 				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
+			ElsIf TypeOf(Row.Ref) = Type("CatalogRef.Users") Then
+				ChoiceData.Add(Row.Ref, Row.Presentation + " (" + Row.Ref.Description + ")", False, PictureLib.AddToFavorites);
+			Else
+				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
 			EndIf;
 		Else
 			ChoiceData.Add(Row.Ref, Row.Presentation);

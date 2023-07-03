@@ -5,8 +5,10 @@ Function Tests() Export
 	TestList = New Array;
 	TestList.Add("CheckDocument");
 	TestList.Add("AccumulationRegisters");	
+	TestList.Add("InformationRegisters");	
 	TestList.Add("GenerateDocuments");	
 	TestList.Add("GenerateAccumulationRegisters");	
+	TestList.Add("GenerateInformationRegisters");	
 	Return TestList;
 EndFunction
 
@@ -413,6 +415,144 @@ Function PrepareAccess_AccumulationRegisters(Keys, MetaObj)
 	
 	If Not MetaObj.Dimensions.Find("ReceiptingAccount") = Undefined Then
 		AccessKey.Insert("ReceiptingAccount", "Account");
+	EndIf;
+	
+	Return AccessKey;
+	
+EndFunction
+
+#EndRegion
+
+#Region InformationRegisters
+
+Function InformationRegisters() Export
+	ArrayOfErrors = New Array();
+	
+	For Each MetaObj In Metadata.InformationRegisters Do
+			
+		
+		Try
+			InformationRegisters[MetaObj.Name].GetAccessKey();
+		Except
+			ArrayOfErrors.Add("GetAccessKey error:" + MetaObj.FullName());
+			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+			ArrayOfErrors.Add("--------------------------");
+			ArrayOfErrors.Add();
+		EndTry;
+		
+		ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+		If Not ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf;
+		
+		ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+		If ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf; 
+
+		Query = New Query("Select ALLOWED TOP 1 * FROM " + MetaObj.FullName());
+		
+		Try
+			Query.Execute();
+		Except
+			ArrayOfErrors.Add("Can't select data. Check template in Role. Error:" + MetaObj.FullName());
+			ArrayOfErrors.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+			ArrayOfErrors.Add("--------------------------");
+			ArrayOfErrors.Add();
+		EndTry;
+	EndDo;
+			
+	
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+	Return "";
+EndFunction
+
+Function GenerateInformationRegisters() Export
+	
+	Data = GenerateDataForAccessTest();
+
+	AllReg = New Array;
+	For Each MetaObj In Metadata.InformationRegisters Do
+		
+		AccessKey = InformationRegisters[MetaObj.Name].GetAccessKey(); // Map
+		If AccessKey.Count() = 0 Then
+			Continue;
+		EndIf;
+		
+		Keys = PrepareAccess_InformationRegisters(AccessKey, MetaObj);
+		
+		Table = GetAllCase(Data, Keys);
+		
+		If MetaObj.WriteMode = Metadata.ObjectProperties.RegisterWriteMode.RecorderSubordinate Then 
+			DocType = MetaObj.StandardAttributes.Recorder.Type.Types()[0]; // Type
+			MetaDoc = Metadata.FindByType(DocType);
+			DocRef = Documents[MetaDoc.Name].GetRef(New UUID("11111111-1111-1111-1111-111111111111"));
+			
+			NewReg = InformationRegisters[MetaObj.Name].CreateRecordSet();
+			NewReg.DataExchange.Load = True;
+			NewReg.Filter.Recorder.Set(DocRef);
+			NewReg.Write();
+			
+			For Each Row In Table Do
+	
+				
+				NewRow = NewReg.Add();
+				NewRow.Recorder = DocRef;
+				NewRow.Period = CurrentDate();
+				FillPropertyValues(NewRow, Row);
+	
+				
+				Descr = "";
+				For Each Column In Table.Columns Do
+					Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
+				EndDo;
+				
+				AllReg.Add(MetaObj.FullName() + " " + Descr);
+				
+			EndDo;
+			NewReg.Write();
+		Else
+			NewReg = InformationRegisters[MetaObj.Name].CreateRecordSet();
+			NewReg.DataExchange.Load = True;
+			NewReg.Write();
+			
+			For Each Row In Table Do
+				NewRow = NewReg.Add();
+				FillPropertyValues(NewRow, Row);
+				Descr = "";
+				For Each Column In Table.Columns Do
+					Descr = Descr + Column.Name + ": " + Row[Column.Name] + ";";
+				EndDo;
+				AllReg.Add(MetaObj.FullName() + " " + Descr);
+			EndDo;
+			NewReg.Write();
+		EndIf;
+	EndDo;
+	
+	CommonFunctionsClientServer.ShowUsersMessage("Total Information reg: " + AllReg.Count());
+	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(AllReg, Chars.LF));
+	
+	Return "";
+EndFunction
+
+Function PrepareAccess_InformationRegisters(Keys, MetaObj)
+	
+	AccessKey = New Structure;
+	For Each KeyData In Keys Do
+		
+		If MetaObj.Dimensions.Find(KeyData.Key) = Undefined Then
+			Continue;
+		EndIf;
+		
+		AccessKey.Insert(KeyData.Key, KeyData.Key);
+	EndDo;
+	
+	If Not MetaObj.Dimensions.Find("CashAccount") = Undefined Then
+		AccessKey.Insert("CashAccount", "Account");
 	EndIf;
 	
 	Return AccessKey;

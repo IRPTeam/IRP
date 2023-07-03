@@ -5,12 +5,11 @@
 // 
 // Returns:
 //  Structure - Get access key:
-// * Company - CatalogRef.Companies -
-// * Store - CatalogRef.Stores -
+// * PriceType - CatalogRef.PriceTypes -
 Function GetAccessKey() Export
 	AccessKeyStructure = New Structure;
-	AccessKeyStructure.Insert("Company", Catalogs.Companies.EmptyRef());
-	AccessKeyStructure.Insert("Store", Catalogs.Stores.EmptyRef());
+	AccessKeyStructure.Insert("PriceType", Catalogs.PriceTypes.EmptyRef());
 	Return AccessKeyStructure;
 EndFunction
+
 #EndRegion

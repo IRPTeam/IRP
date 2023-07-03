@@ -17,7 +17,6 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(PaymentFromCustomer);
 		ChoiceData.Add(CurrencyExchange);
 		ChoiceData.Add(CashTransferOrder);
-		ChoiceData.Add(TransferFromPOS);
 		ChoiceData.Add(ReturnFromVendor);
 		ChoiceData.Add(CustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
@@ -26,6 +25,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		
 	If IsBankReceipt Then
 		ChoiceData.Add(PaymentFromCustomerByPOS);
+		ChoiceData.Add(TransferFromPOS);
 		ChoiceData.Add(ReceiptByCheque);
 		ChoiceData.Add(OtherIncome);
 	EndIf;

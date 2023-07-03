@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @ProductionWorkSpace
 
@@ -148,7 +148,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		And field "Author" is filled
 	And I close all client application windows
 	
-Scenario: _5004 create IT from Production Workspace (product)				
+Scenario: _5004 create IT from Production Workspace (product) and check filling inventory origin							
 	And I close all client application windows
 	* Open Production workspace
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"
@@ -163,19 +163,28 @@ Scenario: _5004 create IT from Production Workspace (product)
 			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '78,000'             |
 			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		And I click "IT" button
-	* Check creation
 		When I Check the steps for Exception
 			| 'And field "DocProduction" is filled'    |
 		And field "DocInventoryTransfer" is filled
 		And I click the hyperlink named "DocInventoryTransfer"
+	* Check creation
+		* Set Use commission trading for inventory origin check 
+			Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+			And I go to line in "FunctionalOptions" table
+				| 'Option'                 |
+				| 'Use commission trading' |
+			And I set "Use" checkbox in "FunctionalOptions" table
+			And I finish line editing in "FunctionalOptions" table
+			And I click "Save" button	
+		When in opened panel I select "Inventory transfer*"		
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "StoreTransit" became equal to ""
 		Then the form attribute named "StoreReceiver" became equal to ""
 		And "ItemList" table became equal
-			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                |
-			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    |
+			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                | 'Inventory origin'   |
+			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    | 'Own stocks'         |
 		And in the table "ItemList" I click "Open serial lot number tree" button
 		Then the number of "SerialLotNumbersTree" table lines is "равно" 0
 		And I close "Serial lot numbers tree" window
@@ -186,7 +195,7 @@ Scenario: _5004 create IT from Production Workspace (product)
 	And I close all client application windows
 
 
-Scenario: _5005 create IT from Production Workspace (product)				
+Scenario: _5005 create IT from Production Workspace (product)	
 	And I close all client application windows
 	* Open Production workspace
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"

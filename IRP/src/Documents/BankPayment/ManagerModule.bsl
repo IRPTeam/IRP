@@ -327,23 +327,20 @@ Function PaymentList()
 		   |	PaymentList.PaymentType AS PaymentType,
 		   |	PaymentList.PaymentTerminal AS PaymentTerminal,
 		   |	PaymentList.Employee AS Employee,
-		   |	CASE
-		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			THEN PaymentList.PlaningTransactionBasis.ReceiveBranch
-		   |	END AS BranchReceiver,
-		   |	CASE
-		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		   |	PaymentList.ReceiptingBranch,
+		   |	case
+		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		   |			and NOT PaymentList.PlaningTransactionBasis.Ref IS NULL
 		   |			THEN PaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |	END AS CurrencyReceiver,
-		   |	CASE
-		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			THEN PaymentList.PlaningTransactionBasis.Receiver
-		   |	END AS AccountReceiver,
+		   |		else PaymentList.Ref.Currency
+		   |	end as ReceiptingCurrency,
+		   |	PaymentList.ReceiptingAccount,
 		   |	CASE
 		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		   |			THEN PaymentList.PlaningTransactionBasis.Ref
 		   |		ELSE NULL
 		   |	END AS CashTransferOrder,
+		   |
 		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 		   |INTO PaymentList
 		   |FROM
@@ -470,10 +467,9 @@ Function R3021B_CashInTransitIncoming()
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	PaymentList.Period,
 		   |	PaymentList.Company,
-		   |	PaymentList.BranchReceiver AS Branch,
-		   |	PaymentList.CurrencyReceiver AS Currency,
-		   |	PaymentList.Account AS Account,
-		   |	PaymentList.AccountReceiver AS ReceiptingAccount,
+		   |	PaymentList.ReceiptingBranch AS Branch,
+		   |	PaymentList.ReceiptingCurrency AS Currency,
+		   |	PaymentList.ReceiptingAccount AS Account,
 		   |	PaymentList.CashTransferOrder AS Basis,
 		   |	PaymentList.Key,
 		   |	PaymentList.TotalAmount AS Amount
@@ -481,9 +477,8 @@ Function R3021B_CashInTransitIncoming()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	(PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsCurrencyExchange)
-		   |	AND NOT PaymentList.CashTransferOrder IS NULL";
+		   |	PaymentList.IsCashTransferOrder
+		   |	OR PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function R9510B_SalaryPayment()

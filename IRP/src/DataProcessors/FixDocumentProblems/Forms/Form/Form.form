@@ -166,6 +166,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>DocumentList.Ref</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>DocumentListRefOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>DocumentListRefExtendedTooltip</name>
             <id>35</id>
@@ -242,6 +246,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>

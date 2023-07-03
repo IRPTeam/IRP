@@ -206,6 +206,9 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashReceipt.FindByNumber(514).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(515).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document CashReceipt objects (cash transfer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(331).GetObject().Write(DocumentWriteMode.Posting);"    |
 	When Create document CashReceipt objects (return from vendor)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -598,14 +601,14 @@ Scenario: _043627 check Cash receipt movements by the Register "R3021 Cash in tr
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 11 dated 25.08.2022 16:46:16'    | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''                             | ''         | ''                     | ''                   | ''                                            | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| 'Cash receipt 11 dated 25.08.2022 16:46:16'    | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                   | ''                             | ''         | ''                     | ''                                            | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Account'            | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                       | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
 	And I close all client application windows
 
 
@@ -643,14 +646,14 @@ Scenario: _043629 check Cash receipt movements by the Register "R3021 Cash in tr
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 12 dated 25.08.2022 16:46:40'    | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                   | ''                             | ''         | ''                     | ''                   | ''                                            | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                   | ''                             | ''         | ''                     | ''                   | ''                                            | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Account'            | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
-			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
+			| 'Cash receipt 12 dated 25.08.2022 16:46:40'    | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''             | ''                             | ''         | ''                     | ''                                            | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''                             | ''         | ''                     | ''                                            | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                       | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
+			| ''                                             | 'Expense'     | '25.08.2022 16:46:40' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
 	And I close all client application windows
 
 
@@ -744,14 +747,14 @@ Scenario: _043636 check Cash receipt movements by the Register "R3021 Cash in tr
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 514 dated 04.06.2021 12:51:22'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '450'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'USD'                  | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '450'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'USD'      | 'USD'                  | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '2 532,38'  | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Local currency'               | 'TRY'      | 'USD'                  | 'Cash desk №2'       | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| 'Cash receipt 514 dated 04.06.2021 12:51:22'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '450'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'Reporting currency'           | 'USD'      | 'USD'                  | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '450'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'en description is empty'      | 'USD'      | 'USD'                  | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:22' | '2 532,38'  | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'Local currency'               | 'TRY'      | 'USD'                  | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'No'                   |
 	And I close all client application windows
 
 
@@ -767,14 +770,14 @@ Scenario: _043637 check Cash receipt movements by the Register "R3021 Cash in tr
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 515 dated 04.06.2021 12:51:33'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''                   | ''                                                | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Receipting account' | 'Basis'                                           | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '180'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '198'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '1 620'     | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash desk №2'       | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| 'Cash receipt 515 dated 04.06.2021 12:51:33'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '180'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '198'       | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:51:33' | '1 620'     | ''           | 'Main Company' | 'Front office' | 'Cash desk №2' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'No'                   |
 	And I close all client application windows
 
 Scenario: _043630 Cash receipt clear posting/mark for deletion
@@ -949,4 +952,71 @@ Scenario: _043641 check Cash receipt movements by the Register  "R5015 Other par
 			| ''                                                | 'Expense'       | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
+	And I close all client application windows
+
+
+Scenario: _043642 check Cash receipt movements by the Register "R3010 Cash on hand" (cash transfer without CTO)
+	And I close all client application windows
+	* Select Cash receipt 
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '331'       |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 331 dated 03.07.2023 14:21:54' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Receipt'     | '03.07.2023 14:21:54' | '171,2'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Receipt'     | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Receipt'     | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043643 check Cash receipt movements by the Register "R3011 Cash flow" (cash transfer without CTO)
+	And I close all client application windows
+	* Select Cash receipt 
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '331'       |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 331 dated 03.07.2023 14:21:54' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '03.07.2023 14:21:54' | '171,2'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _043644 check Cash receipt movements by the Register "R3021 Cash in transit (incoming)" (cash transfer without CTO)
+	And I close all client application windows
+	* Select Cash receipt 
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '331'       |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 331 dated 03.07.2023 14:21:54'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''      | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '171,2'     | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | ''      | 'No'                   |
+			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '1 000'     | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Local currency'               | 'TRY'      | 'TRY'                  | ''      | 'No'                   |
+			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '1 000'     | ''           | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | ''      | 'No'                   |		
 	And I close all client application windows

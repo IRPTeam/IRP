@@ -7,13 +7,212 @@ EndProcedure
 
 &AtServer
 Procedure FillDocumentsAtServer()
-	QueryTxt = Reports.AdditionalDocumentTablesCheck.GetTemplate("Template").DataSets[0].Query;
-	QueryTxt = QueryTxt + 
-		"
-		|WHERE 
-		|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
-		|ORDER BY 
-		|	AllDocuments.Ref.Date";
+	QueryTxt =  
+	"SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref) AS DocumentType
+	|INTO AllDocuments
+	|FROM
+	|	Document.RetailSalesReceipt AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.GoodsReceipt AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.Bundling AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.InternalSupplyRequest AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.InventoryTransfer AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.InventoryTransferOrder AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.ItemStockAdjustment AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PhysicalCountByLocation AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PhysicalInventory AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PurchaseInvoice AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PurchaseOrder AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PurchaseReturn AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.PurchaseReturnOrder AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.RetailReturnReceipt AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesInvoice AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesOrder AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesReportFromTradeAgent AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesReportToConsignor AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesReturn AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.SalesReturnOrder AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.ShipmentConfirmation AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.StockAdjustmentAsSurplus AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.StockAdjustmentAsWriteOff AS Doc
+	|
+	|UNION
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	VALUETYPE(Doc.Ref)
+	|FROM
+	|	Document.Unbundling AS Doc
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllDocuments.Ref.Date AS Date,
+	|	AllDocuments.Ref,
+	|	AllDocuments.DocumentType
+	|FROM
+	|	AllDocuments AS AllDocuments
+	|WHERE
+	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
+	|
+	|ORDER BY
+	|	AllDocuments.Ref.Date";
+	
 	Query = New Query(QueryTxt);
 	Query.SetParameter("StartDate", Period.StartDate);
 	Query.SetParameter("EndDate", Period.EndDate);
@@ -31,23 +230,24 @@ EndProcedure
 
 &AtServer
 Procedure CheckDocumentsAtServer()
-	For Each Document In DocumentList Do
-		Result = AdditionalDocumentTableControl.CheckDocument(Document.Ref, , True);
-		If Result.Count() = 0 Then
-			Continue;
-		EndIf;
-		
-		ParentRow = CheckList.GetItems().Add();
-		ParentRow.Ref = Document.Ref;
-		ParentRow.LineNumber = Result.Count();
-		ParentRow.Date = Document.Ref.Date;
-		For Each Row In Result Do
-			NewRow = ParentRow.GetItems().Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.Date = Row.Ref.Date;
-		EndDo;
-		
-	EndDo;
+	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
+	TypesTable.GroupBy("DocumentType");
+	For Each TypeItem In TypesTable Do
+		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
+		 DocumentTable = DocumentList.Unload(DocumentsRows, "Ref, Date");
+		 ErrorsTree = AdditionalDocumentTableControl.CheckDocumentArray(DocumentTable.UnloadColumn("Ref"));
+		 For Each DocRow In ErrorsTree.Rows Do
+			ParentRow = CheckList.GetItems().Add();
+			ParentRow.Ref = DocRow.Ref;
+			ParentRow.LineNumber = DocRow.Rows.Count();
+			ParentRow.Date = DocumentTable.Find(DocRow.Ref).Date;
+			For Each ErrorRow In DocRow.Rows Do
+				NewRow = ParentRow.GetItems().Add();
+				FillPropertyValues(NewRow, ErrorRow.Error);
+				NewRow.Date = ParentRow.Date;
+			EndDo;
+		 EndDo;
+	EndDo;	
 EndProcedure
 
 &AtClient
@@ -114,3 +314,15 @@ Function QuickFixAtServer(Val CurrentDoc)
 	EndDo;
 	Return CurrentDoc;
 EndFunction
+
+&AtClient
+Procedure DocumentListRefOnChange(Item)
+	CurrentData = Items.DocumentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	ElsIf Not ValueIsFilled(CurrentData.Ref) Then
+		CurrentData.DocumentType = "";
+	Else
+		CurrentData.DocumentType = TypeOf(CurrentData.Ref);
+	EndIf;
+EndProcedure

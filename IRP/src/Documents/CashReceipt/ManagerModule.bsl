@@ -287,7 +287,6 @@ Function PaymentList()
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS
 		   |		IsCashTransferOrder,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashIn) AS IsCashIn,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
@@ -301,10 +300,6 @@ Function PaymentList()
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.LegalNameContract AS LegalNameContract,
 		   |	PaymentList.Order,
-		   |	case
-		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			then PaymentList.PlaningTransactionBasis.Sender
-		   |	end as AccountSender,
 		   |	case
 		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		   |			then PaymentList.PlaningTransactionBasis.Ref
@@ -369,8 +364,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.MoneyTransfer AS Basis,
-		   |	PaymentList.AccountFrom AS Account,
-		   |	PaymentList.AccountTo AS ReceiptingAccount,
+		   |	PaymentList.AccountTo AS Account,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key
@@ -386,19 +380,17 @@ Function R3021B_CashInTransitIncoming()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	PaymentList.Period,
 		   |	PaymentList.Company,
-		   |	PaymentList.Branch AS Branch,
-		   |	PaymentList.CashTransferOrder AS Basis,
-		   |	PaymentList.AccountSender AS Account,
-		   |	PaymentList.CashAccount AS ReceiptingAccount,
+		   |	PaymentList.Branch,
+		   |	PaymentList.CashTransferOrder,
+		   |	PaymentList.CashAccount,
 		   |	PaymentList.Amount,
-		   |	PaymentList.Currency AS Currency,
+		   |	PaymentList.Currency,
 		   |	PaymentList.Key
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	(PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsCurrencyExchange)
-		   |	AND NOT PaymentList.CashTransferOrder IS NULL";
+		   |	PaymentList.IsCashTransferOrder
+		   |	OR PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

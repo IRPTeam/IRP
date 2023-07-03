@@ -4790,6 +4790,7 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options.ItemKey = GetItemKey(Parameters);
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
 	Options.TransactionType = GetTransactionType(Parameters);
+	Options.BusinessUnit = GetBusinessUnit(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
 EndProcedure
@@ -7779,6 +7780,7 @@ Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Expor
 		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
 		Options.CurrentBillOfMaterials = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.BusinessUnit = GetBusinessUnit(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
 		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);

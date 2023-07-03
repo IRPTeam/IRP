@@ -1525,7 +1525,7 @@ EndFunction
 #Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 
 Function ChangeBillOfMaterialsByItemKeyOptions() Export
-	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials, TransactionType");
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials, TransactionType, BusinessUnit");
 EndFunction
 
 Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
@@ -1537,7 +1537,7 @@ Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
 	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
-	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey);
+	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey, Options.BusinessUnit);
 EndFunction
 
 #EndRegion

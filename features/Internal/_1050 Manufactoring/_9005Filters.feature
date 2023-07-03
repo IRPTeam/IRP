@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @SettingsFilters
 
@@ -20,6 +20,14 @@ Scenario: _9001 preparation
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog BusinessUnits objects (MF)
+	When Create catalog ItemTypes objects (MF)
+	When Create catalog Items objects (MF)
+	When Create catalog Units objects (MF)
+	When Create catalog ItemKeys objects (MF)
+	When Create catalog Units objects
+	When Create chart of characteristic types AddAttributeAndProperty objects
+	When update ItemKeys
+	When Create catalog MFBillOfMaterials objects
 	Given I open hyperlink 'e1cib/list/Catalog.PlanningPeriods'
 	If "List" table does not contain lines Then
 		| "Description"     |
@@ -290,8 +298,132 @@ Scenario: _9012 business units and planning periods filters in the document Prod
 		And I close all client application windows	
 	
 
-
-
+Scenario: _9014 bill of materials filter (business unit) in the document Production
+	And I close all client application windows
+	* Create Production
+		Given I open hyperlink "e1cib/list/Document.Production"
+		And I click "Create" button
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 04' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Стремянка номер 5 ступенчатая' |
+		And I select current line in "List" table
+	* Check filter
+		Then the form attribute named "BillOfMaterials" became equal to ""
+		And I click Select button of "Bill of materials" field
+		Then the number of "List" table lines is "равно" "0"
+		And I close current window
+	* Change BU and check filter
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 05' |
+		And I select current line in "List" table
+		And I click Select button of "Bill of materials" field
+		Then the number of "List" table lines is "равно" "1"
+		And "List" table became equal
+			| 'Description'                   |
+			| 'Стремянка номер 5 ступенчатая' |
+	And I close all client application windows
+	
+		
+							
+Scenario: _9015 bill of materials filter (business unit) in the document Production planning
+	And I close all client application windows
+	* Create Production planning
+		Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
+		And I click "Create" button
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 04' |
+		And I select current line in "List" table
+	* Check filter
+		And in the table "Productions" I click the button named "ProductionsAdd"
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Стремянка номер 6 ступенчатая' |
+		And I select current line in "List" table
+		And I finish line editing in "Productions" table
+		And "Productions" table became equal
+			| 'Business unit' | 'Item'                          | 'Item key'                      | 'Unit' | 'Q'     | 'Bill of materials' |
+			| ''              | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | 'pcs'  | '1,000' | ''                  |	
+		And I click choice button of the attribute named "ProductionsBillOfMaterials" in "Productions" table
+		Then the number of "List" table lines is "равно" "0"
+		And I close "Bill of materials" window
+		And I finish line editing in "Productions" table	
+	* Change BU and check filter
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 05' |
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+		And I go to line in "Productions" table
+			| 'Item'                          |
+			| 'Стремянка номер 6 ступенчатая' |
+		And I click choice button of the attribute named "ProductionsBillOfMaterials" in "Productions" table
+		Then the number of "List" table lines is "равно" "1"
+		And "List" table became equal
+			| 'Description'                   |
+			| 'Стремянка номер 6 ступенчатая' |
+	And I close all client application windows				
+						
+				
+				
+Scenario: _9016 bill of materials filter (business unit) in the document Production planning correction
+	And I close all client application windows
+	* Create Production planning correction
+		Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
+		And I click "Create" button
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 04' |
+		And I select current line in "List" table
+	* Check filter
+		And in the table "Productions" I click the button named "ProductionsAdd"
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Стремянка номер 6 ступенчатая' |
+		And I select current line in "List" table
+		And I finish line editing in "Productions" table
+		And "Productions" table became equal
+			| 'Business unit' | 'Item'                          | 'Item key'                      | 'Unit' | 'Q'     | 'Bill of materials' |
+			| ''              | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | 'pcs'  | '1,000' | ''                  |	
+		And I click choice button of the attribute named "ProductionsBillOfMaterials" in "Productions" table
+		Then the number of "List" table lines is "равно" "0"
+		And I close "Bill of materials" window
+		And I finish line editing in "Productions" table	
+	* Change BU and check filter
+		And I click Choice button of the field named "BusinessUnit"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Склад производства 05' |
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+		And I go to line in "Productions" table
+			| 'Item'                          |
+			| 'Стремянка номер 6 ступенчатая' |
+		And I click choice button of the attribute named "ProductionsBillOfMaterials" in "Productions" table
+		Then the number of "List" table lines is "равно" "1"
+		And "List" table became equal
+			| 'Description'                   |
+			| 'Стремянка номер 6 ступенчатая' |
+	And I close all client application windows
 
 
 		

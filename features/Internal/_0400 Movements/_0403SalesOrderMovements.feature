@@ -510,3 +510,53 @@ Scenario: _0401573 Sales order clear posting/mark for deletion
 		And I close all client application windows
 
 		
+Scenario: _0401575 check registration report
+	And I close all client application windows
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '314'       |
+	* Check registration report
+		And I click "Registrations report" button
+		* Show item and item key
+			Then "Document registrations report" window is opened
+			And I set checkbox "Show item in item key"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document contains values
+				| 'ItemKeyItem'  |
+				| 'Dress'        |
+				| 'Boots'        |
+			And I remove checkbox "Show item in item key"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document does not contain values
+				| 'ItemKeyItem'  |
+				| 'Dress'        |
+				| 'Boots'        |
+		* Only transaction currency
+			And I set checkbox "Only transaction currency"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document does not contain values
+				| 'Reporting currency'           |
+				| 'Local currency'               |
+			And I remove checkbox "Only transaction currency"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document contains values
+				| 'Reporting currency'           |
+				| 'Local currency'               |
+		* Hide technical register
+			And I set checkbox "Hide technical registers"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document does not contain values
+				| 'Register  "T3010S Row ID info"'       |
+				| 'Register  "TM1010B Row ID movements"' |
+			And I remove checkbox "Hide technical registers"
+			And I click "Generate report" button
+			Then "ResultTable" spreadsheet document contains values
+				| 'Register  "T3010S Row ID info"'       |
+				| 'Register  "TM1010B Row ID movements"' |
+			And I close all client application windows
+			
+			
+
+						

@@ -505,3 +505,306 @@ Function CheckDocumentsQuery()
 	|	ResultSourceOfOrigins AS Result
 	|WHERE %5";
 EndFunction
+
+// Get query for documents array.
+// 
+// Parameters:
+//  MetaDocName - String - Name of document
+// 
+// Returns:
+//  String - A query for document array
+Function GetQueryForDocumentArray(MetaDocName) Export
+	
+	MetaDoc = Metadata.Documents[MetaDocName];
+	ErrorsArray = New Array; // Array of Structure
+	
+	QueryText = "SELECT
+	|	ItemList.Ref,
+	|	ItemList.LineNumber,
+	|	ItemList.Key,
+	|	ItemList.*
+	|INTO ItemList
+	|FROM
+	|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref IN (&Refs)
+	|;";
+	ErrorsArray.Add(ErrorItemList());
+	
+	If MetaDoc.TabularSections.Find("TaxList") <> Undefined Then
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	TaxList.Ref,
+		|	TaxList.Key,
+		|	SUM(TaxList.ManualAmount) As Amount
+		|INTO TaxList
+		|FROM
+		|	" + MetaDoc.FullName() + ".TaxList AS TaxList
+		|WHERE
+		|	TaxList.Ref IN (&Refs)
+		|GROUP BY
+		|	TaxList.Ref,
+		|	TaxList.Key
+		|;";
+		ErrorsArray.Add(ErrorWithTax());
+	Else
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.Key,
+		|	0 As Amount
+		|INTO TaxList
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+		|WHERE FALSE
+		|;";
+	EndIf;
+	
+	If MetaDoc.TabularSections.Find("RowIDInfo") <> Undefined Then
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key,
+		|	SUM(RowIDInfo.Quantity) As Quantity
+		|INTO RowIDInfo
+		|FROM
+		|	" + MetaDoc.FullName() + ".RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref IN (&Refs)
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;";
+	Else
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.Key,
+		|	0 As Quantity
+		|INTO RowIDInfo
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+		|WHERE FALSE
+		|;";
+	EndIf;
+	
+	If MetaDoc.TabularSections.Find("SpecialOffers") <> Undefined Then
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SpecialOffers.Ref,
+		|	SpecialOffers.Key,
+		|	SUM(SpecialOffers.Amount) As Amount
+		|INTO SpecialOffers
+		|FROM
+		|	" + MetaDoc.FullName() + ".SpecialOffers AS SpecialOffers
+		|WHERE
+		|	SpecialOffers.Ref IN (&Refs)
+		|GROUP BY
+		|	SpecialOffers.Ref,
+		|	SpecialOffers.Key
+		|;";
+		ErrorsArray.Add(ErrorWithOffers());
+	Else
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.Key,
+		|	0 As Amount
+		|INTO SpecialOffers
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+		|WHERE FALSE
+		|;";
+	EndIf;
+
+	If MetaDoc.TabularSections.Find("SerialLotNumbers") <> Undefined Then
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SerialLotNumbers.Ref,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO SerialLotNumbersTmp
+		|FROM
+		|	" + MetaDoc.FullName() + ".SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	SerialLotNumbers.Ref IN (&Refs)
+		|;";
+		ErrorsArray.Add(ErrorWithSerialInTable());
+	Else
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.Key,
+		|	Null As SerialLotNumber,
+		|	0 As Quantity
+		|INTO SerialLotNumbersTmp
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+		|WHERE FALSE
+		|;";
+	EndIf;
+	
+	QueryText = QueryText + "
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Key,
+	|	SUM(SerialLotNumbers.Quantity) AS Quantity
+	|INTO SerialLotNumbers
+	|FROM
+	|	SerialLotNumbersTmp AS SerialLotNumbers
+	|GROUP BY
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity AS Quantity
+	|INTO SerialLotNumbersForSourceOfOrigins
+	|FROM
+	|	SerialLotNumbersTmp AS SerialLotNumbers
+	|;";
+	
+	If MetaDoc.TabularSections.Find("SourceOfOrigins") <> Undefined Then
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SourceOfOrigins.Ref,
+		|	SourceOfOrigins.Key,
+		|	SourceOfOrigins.SerialLotNumber,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.Quantity
+		|INTO SourceOfOriginsTmp
+		|FROM
+		|	" + MetaDoc.FullName() + ".SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref IN (&Refs)
+		|;";
+		ErrorsArray.Add(SourceOfOrigins());
+	Else
+		QueryText = QueryText + "
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.Key,
+		|	Null As SerialLotNumber,
+		|	Null As SourceOfOrigin,
+		|	0 As Quantity
+		|INTO SourceOfOriginsTmp
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+		|WHERE FALSE
+		|;";
+	EndIf;
+	
+	QueryText = QueryText + "
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SourceOfOrigins.Ref,
+	|	SourceOfOrigins.Key,
+	|	SUM(SourceOfOrigins.Quantity) AS Quantity
+	|INTO SourceOfOrigins
+	|FROM
+	|	SourceOfOriginsTmp AS SourceOfOrigins
+	|GROUP BY
+	|	SourceOfOrigins.Ref,
+	|	SourceOfOrigins.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SourceOfOrigins.Ref,
+	|	SourceOfOrigins.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.Quantity AS Quantity
+	|INTO SourceOfOriginsForSourceOfOrigins
+	|FROM
+	|	SourceOfOriginsTmp AS SourceOfOrigins
+	|;";	
+
+	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0);
+	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1);
+	
+	QueryText = QueryText + "
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref,
+	|	ItemList.Key,
+	|	ItemList.LineNumber,
+	|	" + GetInfo_0.Fields + "
+	|INTO Result
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SpecialOffers AS SpecialOffers
+	|		ON ItemList.Ref = SpecialOffers.Ref
+	|			AND ItemList.Key = SpecialOffers.Key
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON ItemList.Ref = RowIDInfo.Ref
+	|			AND ItemList.Key = RowIDInfo.Key
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Ref = SerialLotNumbers.Ref
+	|			AND ItemList.Key = SerialLotNumbers.Key
+	|		LEFT JOIN TaxList AS TaxList
+	|		ON ItemList.Ref = TaxList.Ref
+	|			AND ItemList.Key = TaxList.Key
+	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+	|		ON ItemList.Ref = SourceOfOrigins.Ref
+	|			AND ItemList.Key = SourceOfOrigins.Key
+	|;
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref,
+	|	ItemList.Key,
+	|	ItemList.LineNumber,
+	|	" + GetInfo_1.Fields + "
+	|INTO ResultSourceOfOrigins
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbersForSourceOfOrigins AS SerialLotNumbers
+	|		ON ItemList.Ref = SerialLotNumbers.Ref
+	|			AND ItemList.Key = SerialLotNumbers.Key
+	|		LEFT JOIN SourceOfOriginsForSourceOfOrigins AS SourceOfOrigins
+	|		ON SerialLotNumbers.Ref = SourceOfOrigins.Ref 
+	|			AND SerialLotNumbers.Key = SourceOfOrigins.Key 
+	|			AND SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	" + GetInfo_0.Results + "
+	|FROM
+	|	Result AS Result
+	|WHERE " + GetInfo_0.Filters + "
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	" + GetInfo_1.Results + "
+	|FROM
+	|	ResultSourceOfOrigins AS Result
+	|WHERE " + GetInfo_1.Filters + "
+	|";
+	
+	Return QueryText;
+	
+EndFunction

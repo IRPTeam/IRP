@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ItemCatalogs
@@ -1380,7 +1380,90 @@ Scenario: _005135 fill default description for catalog AddAttributeAndPropertySe
 		And I close all client application windows
 		
 		
+Scenario: _005136 check add attribute set form
+	And I close all client application windows
+	* Add test element
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Items'    |
+		And I select current line in "List" table
+		And in the table "ExtensionAttributes" I click "Add" button
+		And I input "Test1" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesAdd"
+		And I input "Test2" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesAdd"
+		And I input "Test3" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I go to line in "ExtensionAttributes" table
+			| 'Attribute' |
+			| 'Test1'     |
+		And I select current line in "ExtensionAttributes" table
+		And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Main information' |
+		And I select current line in "List" table
+		And I set checkbox named "ExtensionAttributesRequired" in "ExtensionAttributes" table
+		And I set checkbox named "ExtensionAttributesShowInHTML" in "ExtensionAttributes" table
+		And I set "Show" checkbox in "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I activate field named "ExtensionAttributesIsConditionSet" in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesSetConditionExtensionAttribute"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Item type" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I click "Ok" button
+	* Copy settings from first line
+		And I select all lines of "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click "Copy \"Condition\"" button
+		And in the table "ExtensionAttributes" I click "Copy attribute \"Show\"" button
+		And in the table "ExtensionAttributes" I click "Copy attribute \"Show in HTML\"" button
+		And in the table "ExtensionAttributes" I click "Copy \"Interface group\"" button
+	* Check
+		And "ExtensionAttributes" table became equal
+			| '#' | 'Required' | 'Attribute' | 'Show' | 'UI group'         | 'Show in HTML' |
+			| '1' | 'Yes'      | 'Test1'     | 'Yes'  | 'Main information' | 'Yes'          |
+			| '2' | 'No'       | 'Test2'     | 'Yes'  | 'Main information' | 'Yes'          |
+			| '3' | 'No'       | 'Test3'     | 'Yes'  | 'Main information' | 'Yes'          |		
+		And I go to line in "ExtensionAttributes" table
+			| 'Attribute' |
+			| 'Test3'     |
+		And in the table "ExtensionAttributes" I click "Set condition" button
+		And I expand current line in "SettingsFilter" table
+		And "SettingsFilter" table contains lines
+			| 'Right value' |
+			| 'Jeans'       |
+		And I close all client application windows
+		
+		
 				
+				
+				
+		
+
+				
+	
+				
+
+		
+				
+		
+		
+				
+										
 
 										
 

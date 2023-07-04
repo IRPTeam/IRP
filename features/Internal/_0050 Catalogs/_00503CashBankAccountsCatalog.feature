@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -154,6 +154,29 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		* Check data save
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 			And I click the button named "FormWriteAndClose"
+	* Create POS account
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "POS 1" text in the field named "Description_en"
+		And I click "Ok" button
+		And I change the radio button named "Type" value to "POS"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description      |
+			| Main Company     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
+		And I select current line in "List" table
+		And I input "1120000000" text in "Number" field
+		And I click the button named "FormWrite"
+		Then the form attribute named "Type" became equal to "POS"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Number" became equal to "1120000000"
+		And I click the button named "FormWriteAndClose"
 	# * Clean catalog CashAccounts
 	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
 	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"

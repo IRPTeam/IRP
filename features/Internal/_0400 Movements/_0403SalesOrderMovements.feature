@@ -521,6 +521,7 @@ Scenario: _0401575 check registration report
 		And I click "Registrations report" button
 		* Show item and item key
 			Then "Document registrations report" window is opened
+			And I expand "Filters" group			
 			And I set checkbox "Show item in item key"
 			And I click "Generate report" button
 			Then "ResultTable" spreadsheet document contains values

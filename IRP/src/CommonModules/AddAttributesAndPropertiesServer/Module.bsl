@@ -221,6 +221,11 @@ EndFunction
 Function CreateFormItemFields(Form, GroupNameForPlacement, FormAttributesInfo, AddInfo = Undefined) Export
 	ArrayOfFormElements = New Array();
 	For Each AttrInfo In FormAttributesInfo Do
+		If AttrInfo.isURL = True Then
+			CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormElements);
+			Continue;
+		EndIf;
+		
 		NewFormElement = Form.Items.Add(AttrInfo.Name, Type("FormField"), GetFormItemParent(Form,
 			GroupNameForPlacement, AttrInfo));
 
@@ -441,6 +446,7 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Result.Insert("Ref", AttributePropertyRow.Attribute);
 	Result.Insert("Name", Name);
 	Result.Insert("Type", AttributePropertyRow.Attribute.ValueType);
+	Result.Insert("isURL", AttributePropertyRow.Attribute.isURL);
 	Result.Insert("Path", Name);
 	Result.Insert("Title", String(AttributePropertyRow.Attribute));
 	Result.Insert("StoredData", True);
@@ -860,6 +866,61 @@ Function AdditionPropertyValueByRef(Ref, ArrayProperties) Export
 
 	Return PropertyArray;
 EndFunction
+
+Procedure CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormElements)
+	
+	ElementPages = Form.Items.Add(
+		AttrInfo.Name + "Pages", 
+		Type("FormGroup"), 
+		GetFormItemParent(Form, GroupNameForPlacement, AttrInfo));	
+	ElementPages.Type = FormGroupType.Pages;
+	ElementPages.PagesRepresentation = FormPagesRepresentation.None;
+	ElementPages.HorizontalStretch = True;
+	
+	ElementPageURL = Form.Items.Add(AttrInfo.Name + "PageURL", Type("FormGroup"), ElementPages);	
+	ElementPageURL.Type = FormGroupType.Page;
+	ElementPageURL.Group = ChildFormItemsGroup.Horizontal;
+	
+	ElementPageEdit = Form.Items.Add(AttrInfo.Name + "PageEdit", Type("FormGroup"), ElementPages);	
+	ElementPageEdit.Type = FormGroupType.Page;
+	ElementPageEdit.Group = ChildFormItemsGroup.Horizontal;
+	
+	FormElementEdit = Form.Items.Add(AttrInfo.Name, Type("FormField"), ElementPageEdit);
+	FormElementEdit.DataPath = AttrInfo.Path;
+	FormElementEdit.Type = FormFieldType.InputField;
+	FormElementEdit.HorizontalStretch = True;
+	FormElementEdit.ClearButton = True;
+	
+	FormButtonSave = Form.Items.Add(AttrInfo.Name + "_SaveURL", Type("FormDecoration"), ElementPageEdit);
+	FormButtonSave.Type = FormDecorationType.Picture;
+	FormButtonSave.Hyperlink = True;
+	FormButtonSave.Picture = PictureLib.SaveFile;
+	FormButtonSave.SetAction("Click", "AddAttributeButtonClick");
+	
+	FormElementURL = Form.Items.Add(AttrInfo.Name + "_URL", Type("FormDecoration"), ElementPageURL);
+	FormElementURL.Hyperlink = True;
+	FormElementURL.Title = Form[AttrInfo.Path];
+	FormElementURL.ToolTip = AttrInfo.Title;
+	FormElementURL.ToolTipRepresentation = ToolTipRepresentation.ShowLeft;
+	FormElementURL.BackColor = StyleColors.ToolTipBackColor;
+	FormElementURL.HorizontalStretch = True;
+	FormElementURL.SetAction("Click", "AddAttributeButtonClick");
+	
+	FormButtonEditURL = Form.Items.Add(AttrInfo.Name + "_EditURL", Type("FormDecoration"), ElementPageURL);
+	FormButtonEditURL.Type = FormDecorationType.Picture;
+	FormButtonEditURL.Hyperlink = True;
+	FormButtonEditURL.Picture = PictureLib.Change;
+	FormButtonEditURL.SetAction("Click", "AddAttributeButtonClick");
+	
+	ArrayOfFormElements.Add(FormElementURL);
+	ArrayOfFormElements.Add(FormButtonEditURL);
+	ArrayOfFormElements.Add(FormElementEdit);
+	ArrayOfFormElements.Add(FormButtonSave);
+	ArrayOfFormElements.Add(ElementPageURL);
+	ArrayOfFormElements.Add(ElementPageEdit);
+	ArrayOfFormElements.Add(ElementPages);
+	
+EndProcedure
 
 #Region HTML
 

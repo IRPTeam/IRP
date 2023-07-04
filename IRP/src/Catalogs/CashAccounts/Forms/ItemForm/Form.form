@@ -1013,10 +1013,6 @@
       <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
-    </handlers>
-    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
     </handlers>

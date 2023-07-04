@@ -352,6 +352,8 @@
         <useAlternationRowColor>true</useAlternationRowColor>
         <searchOnInput>Auto</searchOnInput>
         <initialListView>Auto</initialListView>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <fileDragMode>AsFileRef</fileDragMode>
         <borderColor xsi:type="core:ColorRef">
@@ -376,6 +378,8 @@
         <value>Group bank type list</value>
       </title>
       <width>20</width>
+      <horizontalStretch>true</horizontalStretch>
+      <verticalStretch>true</verticalStretch>
       <extendedTooltip>
         <name>GroupBankTypeListExtendedTooltip</name>
         <id>271</id>
@@ -1662,6 +1666,7 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <textColor xsi:type="core:ColorRef">
                 <color>Windows.ToolTip</color>
@@ -1707,6 +1712,7 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <textColor xsi:type="core:ColorRef">
                 <color>Windows.ToolTip</color>
@@ -1747,6 +1753,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.LargeTextFont</font>
@@ -1784,6 +1791,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Web.Cream</color>
@@ -1824,6 +1832,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Web.AliceBlue</color>
@@ -1908,6 +1917,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -1949,6 +1959,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -1990,6 +2001,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2031,6 +2043,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2047,6 +2060,8 @@
                 <value>Group one</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupOneExtendedTooltip</name>
                 <id>58</id>
@@ -2111,6 +2126,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2152,6 +2168,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2193,6 +2210,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2234,6 +2252,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ReportHeaderBackColor</color>
@@ -2253,6 +2272,8 @@
                 <value>Group two</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupTwoExtendedTooltip</name>
                 <id>70</id>
@@ -2317,6 +2338,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2358,6 +2380,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2399,6 +2422,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2440,6 +2464,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ToolTipBackColor</color>
@@ -2459,6 +2484,8 @@
                 <value>Group three</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupThreeExtendedTooltip</name>
                 <id>82</id>
@@ -2519,6 +2546,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2562,6 +2590,7 @@
                 <height>7</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2578,6 +2607,8 @@
                 <value>Group enter</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupEnterExtendedTooltip</name>
                 <id>135</id>
@@ -2655,6 +2686,8 @@
             <key>en</key>
             <value>Group amounts right</value>
           </toolTip>
+          <horizontalStretch>true</horizontalStretch>
+          <verticalStretch>true</verticalStretch>
           <extendedTooltip>
             <name>GroupAmountsRightExtendedTooltip</name>
             <id>54</id>

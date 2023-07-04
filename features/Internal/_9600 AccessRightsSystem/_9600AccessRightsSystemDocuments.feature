@@ -20,6 +20,13 @@ Scenario: 960000 preparation (access rights system documents)
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)
+	* Create documents for tests
+		Given I open hyperlink "e1cib/app/DataProcessor.Unit_RunTest"
+		And I go to line in "TestList" table
+			| 'Test'                                     |
+			| 'Unit_AccessSubsystem.GenerateDocuments()' |
+		And in the table "TestList" I click "Run test" button
+		And Delay 60
 	Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 	And I go to line in "List" table
 		| 'Description'          |
@@ -57,13 +64,6 @@ Scenario: 960000 preparation (access rights system documents)
 	* Check ObjectAccess register
 		Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
 		And "List" table is equal to "ObjectAccessRegister" by template
-	* Create documents for tests
-		Given I open hyperlink "e1cib/app/DataProcessor.Unit_RunTest"
-		And I go to line in "TestList" table
-			| 'Test'                                     |
-			| 'Unit_AccessSubsystem.GenerateDocuments()' |
-		And in the table "TestList" I click "Run test" button
-		And Delay 60
 	* Check catalog Object access keys
 		Given I open hyperlink "e1cib/list/Catalog.ObjectAccessKeys"
 		And "List" table is equal to "ObjectAccessKeys" by template

@@ -695,7 +695,7 @@ INDEX BY
 		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
 		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END AS Status,
 	ShipmentConfirmation.DeletionMark AS DeletionMark,
 	ShipmentConfirmation.Number AS Number,
@@ -744,7 +744,7 @@ GROUP BY
 		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
 		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END</queryText>
       <mainTable>Document.RetailShipmentConfirmation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

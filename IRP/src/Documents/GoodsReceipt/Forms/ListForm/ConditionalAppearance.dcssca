@@ -30,7 +30,7 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingStatuses.Invoicing</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingStatuses.Processing</right>
 			</item>
 		</filter>
 		<appearance>

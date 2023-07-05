@@ -20,10 +20,10 @@
     </synonym>
   </enumValues>
   <enumValues uuid="a15ab1b3-b40d-4896-8d80-f4c1d33b6c84">
-    <name>Invoicing</name>
+    <name>Processing</name>
     <synonym>
       <key>en</key>
-      <value>Invoicing</value>
+      <value>Processing</value>
     </synonym>
   </enumValues>
   <enumValues uuid="f7f39f0d-1d59-4ca0-864d-91ef4cc6dcdc">

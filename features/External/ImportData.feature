@@ -2336,6 +2336,13 @@ Scenario: Create catalog Workstations objects  (Test)
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Description'  | 'CashAccount'  | 'UniqueID'   |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee'  | 'False'         | 'Test'         | ''             | ''           |
 
+Scenario: Create catalog AddAttributeAndProperty (hyperlink)
+
+	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:
+		| 'Ref'                                                                                                | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Icon'                                  | 'isIconSet' | 'isURL' | 'Description_en'            | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'ValueType'                           |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7a0d8de1a1c04c611ee1b0a09bcb8a1' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'False' | 'Add attribute (hyperlink)' | ''                 | ''               | ''               | '_e19e213c0a1647deb8835dab2a35086f' | '{!New TypeDescription("String")}'    |
+
+
 Scenario: Create information register UserSettings records (check registers balance)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:

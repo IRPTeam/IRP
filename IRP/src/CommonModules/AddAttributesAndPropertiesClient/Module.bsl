@@ -26,6 +26,19 @@ Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 	AddAttributesAndPropertiesServer.SetRequiredAtAllSets(Object.Ref, Result);
 EndProcedure
 
+Procedure AddAttributeButtonClick(Form, Item, AddInfo = Undefined) Export
+	NameParts = StrSplit(Item.Name, "_", False);
+	CommandName = NameParts[NameParts.Count() - 1];
+	If CommandName = "EditURL" Then
+		Form.Items["__" + NameParts[0] + "Pages"].CurrentPage = Form.Items["__" + NameParts[0] + "PageEdit"]; 
+	ElsIf CommandName = "SaveURL" Then
+		Form.Items["__" + NameParts[0] + "_URL"].Title = Form["__" + NameParts[0]];
+		Form.Items["__" + NameParts[0] + "Pages"].CurrentPage = Form.Items["__" + NameParts[0] + "PageURL"]; 
+	ElsIf CommandName = "URL" Then
+		GotoURL(Form["__" + NameParts[0]]);
+	EndIf; 
+EndProcedure
+
 #Region HTML
 
 Procedure UpdateObjectAddAttributeHTML(Form, OwnerRef) Export

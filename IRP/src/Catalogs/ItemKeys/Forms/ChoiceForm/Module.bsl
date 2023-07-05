@@ -27,7 +27,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			FormAttributes.FormAttributesInfo);
 
 		For Each Row In ArrayOfFormElements Do
-			Row.SetAction("OnChange", "AddAttributeOnChange");
+			If TypeOf(Row) = Type("FormField") Then
+				Row.SetAction("OnChange", "AddAttributeOnChange");
+			EndIf;
 		EndDo;
 	EndIf;
 
@@ -50,10 +52,24 @@ Procedure IsSpecificationFilterOnChange(Item)
 	UpdateListWithFilter();
 EndProcedure
 
+#Region AddAttributes
+
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure AddAttributeOnChange(Item) Export

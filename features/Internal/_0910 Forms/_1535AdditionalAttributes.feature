@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 
@@ -84,6 +84,8 @@ Scenario: _0153500 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Load additional attribute hyperlink
+		When Create catalog AddAttributeAndProperty (hyperlink)
 
 Scenario: _01535001 check preparation
 	When check preparation
@@ -5316,3 +5318,44 @@ Scenario: _015400668 check that additional attributes and properties are display
 			| 'Property'   | 'Value'    |
 			| 'Test'       | ''         |
 	And I close all client application windows
+
+
+Scenario: _015400670 check AddAttribute with type hyperlink
+	And I close all client application windows
+	* Select AddAttribute with type hyperlink
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Add attribute (hyperlink)' |
+		And I select current line in "List" table
+		And I set checkbox "Is URL"
+		And I click "Save and close" button
+	* Adding additional Add attribute (hyperlink) for Item
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name |
+			| Catalog_Items        |
+		And I select current line in "List" table
+		And in the table "Attributes" I click "Add" button
+		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Add attribute (hyperlink)' |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3"
+		And I click the hyperlink named "__e19e213c0a1647deb8835dab2a35086f_EditURL"
+		And I input "123" text in "Add attribute (hyperlink)" field
+		And I click the hyperlink named "__e19e213c0a1647deb8835dab2a35086f_SaveURL"
+		And I click "123" hyperlink
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+				
+				
+						
+				
+
+				
+				

@@ -791,15 +791,27 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
-SELECT
+ SELECT
 	GoodsReceipt.Ref AS Ref,
 	CASE
-		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
+		WHEN case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+		WHEN ItemListTable.QuantityInBaseUnit = case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END AS Status,
 	GoodsReceipt.DeletionMark AS DeletionMark,
 	GoodsReceipt.Number AS Number,
@@ -821,8 +833,8 @@ FROM
 	Document.GoodsReceipt AS GoodsReceipt
 		LEFT JOIN ItemListTable AS ItemListTable
 		ON ItemListTable.Ref = GoodsReceipt.Ref
-		LEFT JOIN AccumulationRegister.R1031B_ReceiptInvoicing.Balance AS R1031B_ReceiptInvoicingBalance
-		ON GoodsReceipt.Ref = CAST(R1031B_ReceiptInvoicingBalance.Basis AS Document.GoodsReceipt)
+		LEFT JOIN AccumulationRegister.R4031B_GoodsInTransitIncoming.Balance AS R4031B_GoodsInTransitIncoming
+		ON GoodsReceipt.Ref = CAST(R4031B_GoodsInTransitIncoming.Basis AS Document.GoodsReceipt)
 GROUP BY
 	GoodsReceipt.Ref,
 	GoodsReceipt.DeletionMark,
@@ -841,14 +853,26 @@ GROUP BY
 			THEN ItemListTable.Store
 		ELSE VALUE(Catalog.Stores.EmptyRef)
 	END,
-	R1031B_ReceiptInvoicingBalance.QuantityBalance,
+	R4031B_GoodsInTransitIncoming.QuantityBalance,
 	CASE
-		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
+		WHEN case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+		WHEN ItemListTable.QuantityInBaseUnit = case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> case
+			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		end
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END</queryText>
       <mainTable>Document.GoodsReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
@@ -867,26 +891,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList</dataPath>
-        <field>ItemList</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes</dataPath>
-        <field>AddAttributes</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo</dataPath>
-        <field>RowIDInfo</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers</dataPath>
-        <field>SerialLotNumbers</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PointInTime</dataPath>
-        <field>PointInTime</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Ref</dataPath>
@@ -955,6 +959,26 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ItemKey</dataPath>
         <field>ItemKey</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemList</dataPath>
+        <field>ItemList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RowIDInfo</dataPath>
+        <field>RowIDInfo</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SerialLotNumbers</dataPath>
+        <field>SerialLotNumbers</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
       </fields>
       <parameters>
         <name>Period</name>

@@ -288,7 +288,7 @@ Procedure CopyThisRowValueToMarkedRows(Command)
 		FieldName = ColumnKeyValue.Key; // String
 		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
 		FieldData = New Structure;
-		FieldData.Insert("Property", FieldDescription.Ref);
+		FieldData.Insert("Property", FieldDescription.Presentation);
 		FieldData.Insert("Value", CurrentRow[FieldName]);
 		FieldData.Insert("isCollection", FieldDescription.isCollection);
 		FieldData.Insert("FieldName", FieldName);

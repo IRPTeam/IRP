@@ -24,20 +24,38 @@ EndFunction
 // 
 // Returns:
 //  Structure - Prepare receipt data by retail sales receipt:
-// * CashierName - String -
+// * CashierName - DefinedType.typeDescription -
+// * CashierINN  - String -
+// * SaleAddress  - String -
+// * SaleLocation  - String -
 // * OperationType - Number -
 // * TaxationSystem - Number -
-// * FiscalStrings - Array -
+// * FiscalStrings - Array Of Structure:
+// ** AmountWithDiscount - Number -
+// ** DiscountAmount - Number -
+// ** CalculationSubject - String -
+// ** MarkingCode - String -
+// ** MeasureOfQuantity - String -
+// ** Name - String -
+// ** Quantity - Number -
+// ** PaymentMethod - Number -
+// ** PriceWithDiscount - Number -
+// ** VATRate - String -
+// ** VATAmount - Number -
+// ** CalculationAgent - String -
+// ** VendorData - Structure:
+// *** VendorINN - String -
+// *** VendorName - String -
+// *** VendorPhone - String -
 // * Cash - Number -
 // * ElectronicPayment - Number -
 // * PrePayment - Number -
 // * PostPayment - Number -
 // * Barter - Number -
 // * Cash - Number -
-// * TextStrings - Array -
+// * TextStrings - Array Of String -
 Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		Str.Insert("OperationType", 1);
 	Else
@@ -62,6 +80,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
+		// TODO: Get from ItemType (or Item) CalculationSubject
 		If ItemRow.isControlCodeString Then
 			If CCSRows.Count() = 0 Then
 				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
@@ -71,6 +90,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows[0].NotCheck Then
 				// Not check an not send
+				FiscalStringData.Insert("CalculationSubject", "1");
 			Else
 				CodeString = CCSRows[0].CodeString;
 				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
@@ -80,7 +100,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
-			FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+			FiscalStringData.Insert("CalculationSubject", "1");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
 		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));
@@ -191,10 +211,16 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by cash receipt.
+// 
+// Parameters:
+//  SourceData - DocumentRef.CashReceipt
+// 
+// Returns:
+//  Structure - Prepare receipt data by cash receipt
 Function PrepareReceiptDataByCashReceipt(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 1);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -253,10 +279,16 @@ Function PrepareReceiptDataByCashReceipt(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by cash payment.
+// 
+// Parameters:
+//  SourceData - DocumentRef.CashPayment
+// 
+// Returns:
+//  Structure - Prepare receipt data by cash payment
 Function PrepareReceiptDataByCashPayment(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 2);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -315,10 +347,16 @@ Function PrepareReceiptDataByCashPayment(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by bank receipt.
+// 
+// Parameters:
+//  SourceData - DocumentRef.BankReceipt
+// 
+// Returns:
+//  Structure - Prepare receipt data by bank receipt
 Function PrepareReceiptDataByBankReceipt(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 1);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -377,10 +415,16 @@ Function PrepareReceiptDataByBankReceipt(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by bank payment.
+// 
+// Parameters:
+//  SourceData - DocumentRef.BankPayment
+// 
+// Returns:
+//  Structure - Prepare receipt data by bank payment
 Function PrepareReceiptDataByBankPayment(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 2);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -519,6 +563,31 @@ Function GetStringCode(DocumentRef) Export
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;
+EndFunction
+
+// Shift get XMLOperation settings.
+// 
+// Parameters:
+//  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
+// 
+// Returns:
+//  Structure - Shift get XMLOperation settings:
+// * CashierName - DefinedType.typeDescription -
+// * CashierINN - String -
+// * SaleAddress - String -
+// * SaleLocation - String -
+Function ShiftGetXMLOperationSettings(Ref) Export
+	Str = New Structure;
+	Str.Insert("CashierName", Ref.Author.Partner.Description_ru);
+	Str.Insert("CashierINN", Ref.Author.Partner.TaxID);
+	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales") Then
+		Str.Insert("SaleAddress", Ref.FiscalPrinter.SaleAddress);
+		Str.Insert("SaleLocation", Ref.FiscalPrinter.SaleLocation);
+	Else
+		Str.Insert("SaleAddress", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress);
+		Str.Insert("SaleLocation", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation);
+	EndIf;
+	Return Str;
 EndFunction
 
 #EndRegion

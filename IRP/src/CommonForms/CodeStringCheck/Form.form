@@ -1147,7 +1147,7 @@
     <name>ApproveWithoutScan</name>
     <title>
       <key>en</key>
-      <value>Approve without scan</value>
+      <value>Code string is missing</value>
     </title>
     <id>5</id>
     <use>

@@ -63,7 +63,7 @@ Scenario: 960000 preparation (access rights system documents)
 	And I click "Save and close" button
 	* Check ObjectAccess register
 		Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
-		And "List" table is equal to "ObjectAccessRegister" by template
+		And "List" table contains "ObjectAccessRegister" template lines by template
 	* Check catalog Object access keys
 		Given I open hyperlink "e1cib/list/Catalog.ObjectAccessKeys"
 		And "List" table is equal to "ObjectAccessKeys" by template

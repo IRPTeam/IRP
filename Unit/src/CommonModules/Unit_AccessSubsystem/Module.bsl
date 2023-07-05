@@ -225,9 +225,9 @@ Function PrepareAccess_Document(Keys, MetaObj)
 		AccessKey.Insert("ReceiveBranch", "Branch");
 	EndIf;
 	
-	If Not MetaObj.Attributes.Find("BusinessUnit") = Undefined Then
-		AccessKey.Insert("BusinessUnit", "Branch");
-	EndIf;
+//	If Not MetaObj.Attributes.Find("BusinessUnit") = Undefined Then
+//		AccessKey.Insert("BusinessUnit", "Branch");
+//	EndIf;
 	
 	If Not MetaObj.Attributes.Find("TransitAccount") = Undefined Then
 		AccessKey.Insert("TransitAccount", "Account");
@@ -255,6 +255,10 @@ Function PrepareAccess_Document(Keys, MetaObj)
 	
 	If Not MetaObj.Attributes.Find("StoreTransit") = Undefined Then
 		AccessKey.Insert("StoreTransit", "Store");
+	EndIf;
+	
+	If Not MetaObj.Attributes.Find("StoreProduction") = Undefined Then
+		AccessKey.Insert("StoreProduction", "Store");
 	EndIf;
 
 	Return AccessKey;

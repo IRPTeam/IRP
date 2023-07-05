@@ -1,3 +1,4 @@
+
 // @strict-types
 
 &AtServer
@@ -53,8 +54,12 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisBarcodeFromAnotherItem, Descr));
 			Return;
 		EndIf;
-
-		ArrayOfCodeStrings.Add(Row.Barcode);
+		If GetCodeStringFromSerialLotNumber Then
+			CodeStringFromSerial = CommonFunctionsServer.GetRefAttribute(Row.SerialLotNumber, "CodeString"); // String
+			ArrayOfCodeStrings.Add(CodeStringFromSerial);
+		Else	
+			ArrayOfCodeStrings.Add(Row.Barcode);
+		EndIf;
 	EndDo;
 
 	For Each Row In Result.Barcodes Do
@@ -96,7 +101,9 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			
 			If Not Result.Approved Then
 				AllBarcodesIsOk = False;
+				//@skip-check transfer-object-between-client-server
 				Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
+				//@skip-check invocation-parameter-type-intersect, property-return-type
 				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
 				Return;
 			EndIf;
@@ -118,7 +125,14 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 EndProcedure
 
 &AtClient
+Procedure ApproveWithoutScan(Command)
+	Close(New Structure("WithoutScan", True));
+EndProcedure
+
+&AtClient
 Procedure Done(Command = Undefined)
+	Result = New Structure;
+	Result.Insert("WithoutScan", False);
 	Array = New Array; // Array Of Structure
 	For Each Row In CurrentCodes Do
 		Str = New Structure;
@@ -128,8 +142,8 @@ Procedure Done(Command = Undefined)
 		Str.Insert("NotCheck", Row.NotCheck);
 		Array.Add(Str);
 	EndDo;
-	
-	Close(Array);
+	Result.Insert("Scaned", Array);
+	Close(Result);
 EndProcedure
 
 &AtClient
@@ -153,4 +167,10 @@ Async Procedure CheckKM(Command)
 		
 		Row.CodeIsApproved = Result.Approved;
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure GetCodeStringFromSerialLotNumber(Command)
+	Items.GetCodeStringFromSerialLotNumber.Visible = True;
+	GetCodeStringFromSerialLotNumber = True;
 EndProcedure

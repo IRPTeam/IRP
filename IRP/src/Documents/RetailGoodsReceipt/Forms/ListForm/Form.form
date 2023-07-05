@@ -695,7 +695,7 @@ SELECT
 		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
 		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END AS Status,
 	GoodsReceipt.DeletionMark AS DeletionMark,
 	GoodsReceipt.Number AS Number,
@@ -744,7 +744,7 @@ GROUP BY
 		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
 		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END</queryText>
       <mainTable>Document.RetailGoodsReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

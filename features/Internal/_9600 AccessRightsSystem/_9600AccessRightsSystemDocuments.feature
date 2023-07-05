@@ -1931,34 +1931,34 @@ Scenario: 960042 check Production creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Branch access deny'           | 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Branch access deny'           | 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Branch access deny'           | 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
+		| 'Description'                                                                                                                                 |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
 	
 		
 
@@ -3490,46 +3490,46 @@ Scenario: 960091 check AdditionalCostAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"	
 	And "List" table became equal
-		| 'Number' | 'Date'                | 'Company'                       | 'Allocation mode' | 'Description'                                                                                                                                                             |
-		| '1'      | '05.07.2023 08:56:15' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | '05.07.2023 08:56:15' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | '05.07.2023 08:56:15' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | '05.07.2023 08:56:15' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | '05.07.2023 08:56:15' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | '05.07.2023 08:56:16' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | '05.07.2023 08:56:16' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | '05.07.2023 08:56:16' | 'Company Read and Write Access' | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | '05.07.2023 08:56:16' | 'Company Only read access'      | ''                | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                             |
+		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
+		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
+		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
+		| '5'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
+		| '9'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
+		| '10'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
+		| '11'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
+		| '13'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
+		| '25'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
+		| '26'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
+		| '27'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
+		| '29'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
+		| '33'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
+		| '34'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
+		| '35'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
+		| '37'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
 	
 			
 Scenario: 960092 check AdditionalRevenueAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And "List" table became equal
-		| 'Number' | 'Date'                | 'Company'                       | 'Allocation mode' | 'Description'                                                                                                                                                                |
-		| '1'      | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | '05.07.2023 08:56:17' | 'Company Read and Write Access' | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | '05.07.2023 08:56:17' | 'Company Only read access'      | ''                | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                |
+		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
+		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
+		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
+		| '5'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
+		| '9'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
+		| '10'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
+		| '11'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
+		| '13'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
+		| '25'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
+		| '26'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
+		| '27'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
+		| '29'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
+		| '33'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
+		| '34'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
+		| '35'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
+		| '37'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
 	
 		
 
@@ -3998,21 +3998,21 @@ Scenario: 960125 check Payroll access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And "List" table became equal
-		| 'Number' | 'Date'                | 'Company'                       | 'Amount' | 'Begin date' | 'Branch'                       | 'End date' | 'Payment period' | 'Currency' | 'Author' | 'Description'                                                                                   |
-		| '1'      | '05.07.2023 08:56:37' | 'Company Read and Write Access' | ''       | ''           | 'Branch Read and Write Access' | ''         | ''               | ''         | ''       | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | '05.07.2023 08:56:37' | 'Company Read and Write Access' | ''       | ''           | 'Branch Only read access'      | ''         | ''               | ''         | ''       | 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | '05.07.2023 08:56:37' | 'Company Only read access'      | ''       | ''           | 'Branch Read and Write Access' | ''         | ''               | ''         | ''       | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | '05.07.2023 08:56:37' | 'Company Only read access'      | ''       | ''           | 'Branch Only read access'      | ''         | ''               | ''         | ''       | 'Document.Payroll Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                   |
+		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Payroll Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960126 check PhysicalCountByLocation access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And "List" table became equal
-		| 'Number' | 'Date'                | 'Store'                       | 'Author' | 'Status' | 'Physical inventory' | 'Description'                                                                                               |
-		| '1'      | '05.07.2023 08:56:37' | 'Store Read and Write Access' | ''       | ''       | ''                   | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
-		| '2'      | '05.07.2023 08:56:37' | 'Store Only read access'      | ''       | ''       | ''                   | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
-		| '4'      | '05.07.2023 08:56:37' | 'Store Read and Write Access' | ''       | ''       | ''                   | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Only read access;'      |
-		| '5'      | '05.07.2023 08:56:37' | 'Store Only read access'      | ''       | ''       | ''                   | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Only read access;'           |
+		| 'Number' | 'Store'                       | 'Description'                                                                                               |
+		| '1'      | 'Store Read and Write Access' | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
+		| '2'      | 'Store Only read access'      | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
+		| '4'      | 'Store Read and Write Access' | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Only read access;'      |
+		| '5'      | 'Store Only read access'      | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Only read access;'           |
 	
 Scenario: 960127 check PhysicalInventory access rights (LimitedAccess)	
 	And I close all client application windows

@@ -178,34 +178,34 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		EndIf;
 		
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PrePayment Then
-				Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+				Str.PostPayment = Str.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;
 			Else
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			EndIf;
 		Else
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PrePayment Then
-				Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);				
+				Str.PostPayment = Str.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;				
 			Else
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			EndIf;
 		EndIf;
 	EndDo;

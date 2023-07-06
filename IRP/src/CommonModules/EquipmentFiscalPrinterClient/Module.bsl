@@ -20,8 +20,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
-	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
@@ -30,15 +29,12 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	DriverObject.GetLineLength(Settings.ConnectedDriver.ID, LineLength);
 	
 	DataKKT = "";
-	DataKKTResult = DriverObject.GetDataKKT(Settings.ConnectedDriver.ID
-																		, DataKKT);
+	DataKKTResult = DriverObject.GetDataKKT(Settings.ConnectedDriver.ID, DataKKT);
 	If Not DataKKTResult Then
 		Raise "Can not get data KKT";
 	EndIf;
 
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
 		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
@@ -86,8 +82,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
-	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
@@ -138,8 +133,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
-	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
@@ -200,7 +194,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	XMLOperationSettings = ShiftGetXMLOperationSettings();
+	XMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
 	DriverObject = Settings.ConnectedDriver.DriverObject;
@@ -258,9 +252,9 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 				EndIf;
 			EndDo;
 			
-			If Not DriverObject.CloseSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
-				Raise R().EqFP_CanNotCloseSessionRegistrationKM;
-			EndIf;
+//			If Not DriverObject.CloseSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
+//				Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+//			EndIf;
 			
 		EndIf;
 	EndIf;
@@ -301,9 +295,9 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	Return Result;
 EndFunction
 
-Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
+Async Function CashInCome(ConsolidatedRetailSales, DataSource, Summ) Export
 	Result = ShiftResultStructure();
-	StatusData = EquipmentFiscalPrinterServer.GetStatusData(PrintDocument);
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
 	If StatusData.IsPrinted Then
 		Result.Status = StatusData.Status;
 		Result.Success = True;
@@ -318,8 +312,7 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
-	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	DriverObject = Settings.ConnectedDriver.DriverObject;
@@ -354,14 +347,14 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	If ResultInfo Then
 		Result.Status = "Printed";
 		Result.Success = True;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status);
 	Else
 		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status
 						, Result.ErrorDescription);
 						
@@ -371,9 +364,9 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Return Result;
 EndFunction
 
-Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
+Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Summ) Export
 	Result = ShiftResultStructure();
-	StatusData = EquipmentFiscalPrinterServer.GetStatusData(PrintDocument);
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
 	If StatusData.IsPrinted Then
 		Result.Status = StatusData.Status;
 		Result.Success = True;
@@ -388,8 +381,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
-	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
@@ -425,14 +417,14 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	If ResultInfo Then
 		Result.Status = "Printed";
 		Result.Success = True;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status);
 	Else
 		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status
 						, Result.ErrorDescription);
 						
@@ -492,7 +484,7 @@ EndFunction
 // 
 // Returns:
 //  Structure - Request KMSettings:
-// * GUID - UUID -
+// * GUID - String -
 // * WaitForResult - Boolean -
 // * MarkingCode - String -
 // * PlannedStatus - Number -
@@ -698,15 +690,6 @@ Function ShiftSettings() Export
 	Return Str;
 EndFunction
 
-Function ShiftGetXMLOperationSettings()
-	Str = New Structure;
-	Str.Insert("CashierName", "");	//Mandatory
-	Str.Insert("CashierINN", "");
-	Str.Insert("SaleAddress", "");
-	Str.Insert("SaleLocation", "");
-	Return Str;
-EndFunction
-
 Function ShiftResultStructure()
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Success", False);
@@ -846,6 +829,13 @@ Function ShiftGetXMLOperation(CommonParameters) Export
 	
 EndFunction
 
+// Receipt get XMLOperation.
+// 
+// Parameters:
+//  CommonParameters - See EquipmentFiscalPrinterServer.PrepareReceiptDataByRetailSalesReceipt
+// 
+// Returns:
+//  String - Receipt get XMLOperation
 Function ReceiptGetXMLOperation(CommonParameters) Export
 	
 	XMLWriter = New XMLWriter();
@@ -855,6 +845,9 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 	
 	XMLWriter.WriteStartElement("Parameters");
 	XMLWriter.WriteAttribute("CashierName", ?(Not IsBlankString(CommonParameters.CashierName), ToXMLString(CommonParameters.CashierName), "Administrator"));
+	XMLWriter.WriteAttribute("CashierINN" , ToXMLString(CommonParameters.CashierINN));
+	XMLWriter.WriteAttribute("SaleAddress" , ToXMLString(CommonParameters.SaleAddress));
+	XMLWriter.WriteAttribute("SaleLocation" , ToXMLString(CommonParameters.SaleLocation));
 	XMLWriter.WriteAttribute("OperationType" , ToXMLString(CommonParameters.OperationType));
 	XMLWriter.WriteAttribute("TaxationSystem" , ToXMLString(CommonParameters.TaxationSystem));
 	XMLWriter.WriteEndElement();
@@ -868,6 +861,7 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 			XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
 		EndIf;
 		XMLWriter.WriteAttribute("MeasureOfQuantity", ToXMLString(Item.MeasureOfQuantity));
+		XMLWriter.WriteAttribute("CalculationSubject", ToXMLString(Item.CalculationSubject));
 		XMLWriter.WriteAttribute("Name", ToXMLString(Item.Name));
 		XMLWriter.WriteAttribute("Quantity", ToXMLString(Item.Quantity));
 		XMLWriter.WriteAttribute("PaymentMethod", ToXMLString(Item.PaymentMethod));

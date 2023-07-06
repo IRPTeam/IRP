@@ -794,7 +794,21 @@ Procedure SetSourceSettings(Form)
 	SelectionItems.Clear();
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
-	For Each ColumnKeyValue In FormCash.ColumnsData Do
+	AdditionalSourceSettingsProcessing(Form, DataSettingsComposer);
+	
+    DataSettingsComposer.Settings.Structure.Clear();
+    DetailGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
+	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
+    
+EndProcedure
+
+&AtServerNoContext
+Procedure AdditionalSourceSettingsProcessing(Form, DataSettingsComposer)
+	
+	SelectionItems = DataSettingsComposer.Settings.Selection.Items;
+	ColumnsData = GetFormCash(Form).ColumnsData;
+	
+	For Each ColumnKeyValue In ColumnsData Do
 		SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField(ColumnKeyValue.Key);
 		QueryParameter = DataSettingsComposer.Settings.DataParameters.Items.Find(ColumnKeyValue.Key);
 		If QueryParameter <> Undefined Then
@@ -804,10 +818,6 @@ Procedure SetSourceSettings(Form)
 		EndIf;
 	EndDo;
 	
-    DataSettingsComposer.Settings.Structure.Clear();
-    DetailGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
-	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
-    
 EndProcedure
 
 // Get DCSchema.
@@ -848,7 +858,7 @@ Function GetDCSchema(Form)
 		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
 		If FieldDescription.isCollection Then
 			PropertiesText = PropertiesText + "
-			|	, " + PropertyTable + "." + Table_String + ".(Ref, Value) As " + ColumnKeyValue.Key;
+			|	, " + PropertyTable + "." + Table_String + ".(Ref as Ref, Value as Value, Property as Property) As " + ColumnKeyValue.Key;
 			SourcesText = SourcesText + "
 			|LEFT JOIN " + RootTable + " AS " + PropertyTable + "
 			|ON (Table.Ref = " + PropertyTable + "." + Table_String + ".Ref)
@@ -1669,6 +1679,7 @@ Procedure LoadTableData()
 	Object_String = "Object";
 	Object_LineNumber = "LineNumber";
 	Constraint_String = "Constraint";
+	Table_String = GetObjectTable(ThisObject);
 	
 	ColumnsData = GetFormCash(ThisObject).ColumnsData;
 	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
@@ -1704,15 +1715,15 @@ Procedure LoadTableData()
 			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
 			If ColumnDescription.isCollection Then
 				ValueListResult = New ValueList(); // ValueList of Arbitrary, Undefined
-				ValueQueryResult = RowData[ColumnName]; // QueryResult
-				ValueSelection = ValueQueryResult.Select(); 
-				While ValueSelection.Next() Do
+				//@skip-check dynamic-access-method-not-found
+				ValueRows = DataRef[Table_String].FindRows(New Structure("Property", ColumnDescription.Ref)); // Array
+				For Each ValueRow In ValueRows Do
 					//@skip-check property-return-type
-					ValueListResult.Add(ValueSelection.Value);
+					ValueListResult.Add(ValueRow.Value);
 				EndDo;
 				TableRecord[ColumnName] = ValueListResult;
 			Else
-				TableRecord[ColumnName] = RowData[ColumnName];
+				TableRecord[ColumnName] = ReadPropertyValueFromTableRow(ColumnName, RowData, ColumnDescription);
 			EndIf;
 			TableRecord[ColumnName + "_old"] = TableRecord[ColumnName];
 		EndDo;
@@ -1724,6 +1735,20 @@ Procedure LoadTableData()
 	SetPropertyAvailability();
 	
 EndProcedure
+
+// Read property value from table row.
+// 
+// Parameters:
+//  ColumnName - String - Column name
+//  RowData - ValueTableRow - Row data
+//  ColumnDescription - See GetFieldDescription
+// 
+// Returns:
+//  Undefined
+&AtServer
+Function ReadPropertyValueFromTableRow(ColumnName, RowData, ColumnDescription)
+	Return RowData[ColumnName];
+EndFunction
 
 &AtServer
 Procedure LoadConstraints()

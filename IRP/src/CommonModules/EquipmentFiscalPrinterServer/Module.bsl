@@ -33,7 +33,7 @@ EndFunction
 // * FiscalStrings - Array Of Structure:
 // ** AmountWithDiscount - Number -
 // ** DiscountAmount - Number -
-// ** CalculationSubject - String -
+// ** CalculationSubject - Number -
 // ** MarkingCode - String -
 // ** MeasureOfQuantity - String -
 // ** Name - String -
@@ -90,17 +90,17 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows[0].NotCheck Then
 				// Not check an not send
-				FiscalStringData.Insert("CalculationSubject", "1");
+				FiscalStringData.Insert("CalculationSubject", 1);
 			Else
 				CodeString = CCSRows[0].CodeString;
 				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
 					CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
 				EndIf;
 				FiscalStringData.Insert("MarkingCode", CodeString);
-				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+				FiscalStringData.Insert("CalculationSubject", 33);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
-			FiscalStringData.Insert("CalculationSubject", "1");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+			FiscalStringData.Insert("CalculationSubject", 1);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
 		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));
@@ -208,6 +208,16 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	
 	Str.Insert("TextStrings", TextStrings);
 	
+	// TODO: Fix
+	isEmulator = StrStartsWith(SourceData.ConsolidatedRetailSales.FiscalPrinter.Driver.AddInID, "AddIn.Modul_KKT");
+	If isEmulator Then
+		For Each Row In Str.FiscalStrings Do
+			If Row.CalculationSubject = 33 Then
+				Row.CalculationSubject = 1;
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	Return Str;
 EndFunction
 
@@ -244,7 +254,7 @@ Function PrepareReceiptDataByCashReceipt(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -312,7 +322,7 @@ Function PrepareReceiptDataByCashPayment(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -380,7 +390,7 @@ Function PrepareReceiptDataByBankReceipt(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -448,7 +458,7 @@ Function PrepareReceiptDataByBankPayment(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);

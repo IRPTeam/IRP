@@ -139,20 +139,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="ed747d28-4afe-435b-8579-07bbaed4815b">
-    <name>ReceiptingAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipting account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
   <dimensions uuid="c4ecb6fc-0deb-4331-a72e-3ebf6ae58a82">
     <name>Basis</name>
     <synonym>

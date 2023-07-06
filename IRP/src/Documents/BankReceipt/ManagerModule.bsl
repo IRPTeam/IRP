@@ -379,10 +379,6 @@ Function PaymentList()
 		   |	PaymentList.CommissionIsSeparate AS CommissionIsSeparate,
 		   |	CASE
 		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			THEN PaymentList.PlaningTransactionBasis.Sender
-		   |	END AS AccountSender,
-		   |	CASE
-		   |		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		   |			THEN PaymentList.PlaningTransactionBasis.Ref
 		   |		ELSE NULL
 		   |	END AS CashTransferOrder,
@@ -965,8 +961,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Currency,
-		|	PaymentList.FromAccount_POS AS Account,
-		|	PaymentList.Account AS ReceiptingAccount,
+		|	PaymentList.Account,
 		|	PaymentList.PlaningTransactionBasis AS Basis,
 		|	case
 		|		when PaymentList.CommissionIsSeparate
@@ -989,7 +984,6 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Currency,
-		|	PaymentList.AccountSender,
 		|	PaymentList.Account,
 		|	PaymentList.CashTransferOrder,
 		|	case
@@ -1001,9 +995,8 @@ Function R3021B_CashInTransitIncoming()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	(PaymentList.IsCashTransferOrder
-		|	OR PaymentList.IsCurrencyExchange)
-		|	AND NOT PaymentList.CashTransferOrder IS NULL";
+		|	PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsCurrencyExchange";
 EndFunction
 
 #EndRegion

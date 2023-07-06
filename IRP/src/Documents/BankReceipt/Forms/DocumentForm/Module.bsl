@@ -63,7 +63,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
 	|PaymentList.RevenueType,
-	|PaymentList.RetailCustomer";
+	|PaymentList.RetailCustomer,
+	|PaymentList.SendingAccount,
+	|PaymentList.SendingBranch";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -84,11 +86,17 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
-		|PaymentList.PlaningTransactionBasis";
-	ElsIf TransactionType = CurrencyExchange Then
-		StrByType = "TransitAccount, CurrencyExchange,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.AmountExchange";
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
+	ElsIf TransactionType = CurrencyExchange Then
+		StrByType = "
+		|TransitAccount, 
+		|CurrencyExchange,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.AmountExchange,
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
 	ElsIf TransactionType = PaymentFromCustomer 
 		Or TransactionType = ReturnFromVendor 
 		Or TransactionType = PaymentFromCustomerByPOS Then
@@ -161,7 +169,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
-	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 
 	ArrayTypes = New Array();
 	
@@ -185,13 +192,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Else
 			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		EndIf;
-	ElsIf IsEmployeeCashAdvance Then
-		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	ElsIf IsReceiptByCheque Then
 		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
 	Else
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	EndIf;
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
@@ -539,6 +542,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -310,7 +310,7 @@ Function GetDocumentTable_MoneyTransfer(ArrayOfBasisDocuments)
 	|	VALUE(Enum.IncomingPaymentTransactionType.CashIn) AS TransactionType,
 	|	R3021B_CashInTransitIncoming.Company AS Company,
 	|	R3021B_CashInTransitIncoming.Branch AS Branch,
-	|	R3021B_CashInTransitIncoming.ReceiptingAccount AS CashAccount,
+	|	R3021B_CashInTransitIncoming.Account AS CashAccount,
 	|	R3021B_CashInTransitIncoming.Currency AS Currency,
 	|	R3021B_CashInTransitIncoming.AmountBalance AS Amount,
 	|	R3021B_CashInTransitIncoming.Basis AS MoneyTransfer,

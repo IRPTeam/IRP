@@ -107,8 +107,8 @@ Function GetLandedCostCurrencyByCompany(Company) Export
 	EndIf;
 EndFunction
 
-Function GetBillOfMaterialsByItemKey(ItemKey) Export
-	Return Catalogs.BillOfMaterials.GetBillOfMaterialsByItemKey(ItemKey);
+Function GetBillOfMaterialsByItemKey(ItemKey, BusinessUnit) Export
+	Return Catalogs.BillOfMaterials.GetBillOfMaterialsByItemKey(ItemKey, BusinessUnit);
 EndFunction
 
 Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export

@@ -294,23 +294,19 @@ Function PaymentList()
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.LegalNameContract AS LegalNameContract,
 		   |	PaymentList.Order,
+		   |	PaymentList.ReceiptingBranch,
 		   |	case
 		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			then PaymentList.PlaningTransactionBasis.ReceiveBranch
-		   |	end as BranchReceiver,
-		   |	case
-		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
+		   |			and NOT PaymentList.PlaningTransactionBasis.Ref IS NULL
 		   |			then PaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |	end as CurrencyReceiver,
-		   |	case
-		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
-		   |			then PaymentList.PlaningTransactionBasis.Receiver
-		   |	end as AccountReceiver,
+		   |		else PaymentList.Ref.Currency
+		   |	end as ReceiptingCurrency,
+		   |	PaymentList.ReceiptingAccount,
 		   |	case
 		   |		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		   |			then PaymentList.PlaningTransactionBasis.Ref
-		   |		else NULL
 		   |	end as CashTransferOrder,
+		   |
 		   |	PaymentList.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOtherPartner
 		   |INTO PaymentList
 		   |FROM
@@ -347,24 +343,23 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function R3021B_CashInTransitIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.BranchReceiver AS Branch,
-		   |	PaymentList.CurrencyReceiver AS Currency,
-		   |	PaymentList.CashAccount AS Account,
-		   |	PaymentList.AccountReceiver AS ReceiptingAccount,
-		   |	PaymentList.CashTransferOrder AS Basis,
-		   |	PaymentList.Key,
-		   |	PaymentList.Amount
-		   |INTO R3021B_CashInTransitIncoming
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	(PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsCurrencyExchange)
-		   |	AND NOT PaymentList.CashTransferOrder IS NULL";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.ReceiptingBranch AS Branch,
+		|	PaymentList.ReceiptingCurrency AS Currency,
+		|	PaymentList.ReceiptingAccount AS Account,
+		|	PaymentList.CashTransferOrder AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function R9510B_SalaryPayment()

@@ -106,11 +106,6 @@ Procedure SpecificationModeOnChange(Item)
 	SetVisible();
 EndProcedure
 
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupAttributes");
-EndProcedure
-
 &AtClient
 Procedure UnitModeOnChange(Item)
 	If ThisObject.UnitMode = "Inherit" Then
@@ -119,10 +114,24 @@ Procedure UnitModeOnChange(Item)
 	SetVisible();
 EndProcedure
 
+#Region AddAttributes
+
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupAttributes");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)

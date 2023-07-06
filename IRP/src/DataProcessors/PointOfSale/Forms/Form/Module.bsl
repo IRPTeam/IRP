@@ -707,10 +707,14 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	Str.Insert("Key", AddInfo.RowKey);
 	Array.Add(Str);
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
-	
-	For Each Row In Result Do
-		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
-	EndDo;
+	If Result.WithoutScan Then
+		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
+		CurrentRow.isControlCodeString = False;
+	Else
+		For Each Row In Result.Scaned Do
+			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+		EndDo;
+	EndIf;
 	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;
@@ -1558,7 +1562,7 @@ Procedure FillCashInList()
 	|FROM
 	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND ReceiptingAccount = &CashAccount) AS R3021B_CashInTransitIncoming";
+	|	AND Account = &CashAccount) AS R3021B_CashInTransitIncoming";
 	Query.SetParameter("CashAccount", Workstation.CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

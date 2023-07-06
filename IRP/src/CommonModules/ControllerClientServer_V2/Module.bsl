@@ -1694,6 +1694,8 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1717,6 +1719,8 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1733,6 +1737,8 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1750,6 +1756,8 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1809,6 +1817,8 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1842,6 +1852,8 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -1868,6 +1880,8 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -1895,6 +1909,8 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.MoneyTransfer            = GetPaymentListMoneyTransfer(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -4774,6 +4790,7 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options.ItemKey = GetItemKey(Parameters);
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
 	Options.TransactionType = GetTransactionType(Parameters);
+	Options.BusinessUnit = GetBusinessUnit(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
 EndProcedure
@@ -5960,6 +5977,50 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_RECEIPTING_BRANCH
+
+// PaymentList.ReceiptingBranch.Set
+Procedure SetPaymentListReceiptingBranch(Parameters, Results) Export
+	Binding = BindPaymentListReceiptingBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ReceiptingBranch.Get
+Function GetPaymentListReceiptingBranch(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListReceiptingBranch(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.ReceiptingBranch.Bind
+Function BindPaymentListReceiptingBranch(Parameters)
+	DataPath = "PaymentList.ReceiptingBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListReceiptingBranch");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_SENDING_BRANCH
+
+// PaymentList.SendingBranch.Set
+Procedure SetPaymentListSendingBranch(Parameters, Results) Export
+	Binding = BindPaymentListSendingBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.SendingBranch.Get
+Function GetPaymentListSendingBranch(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListSendingBranch(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.SendingBranch.Bind
+Function BindPaymentListSendingBranch(Parameters)
+	DataPath = "PaymentList.SendingBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListSendingBranch");
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_RECEIPTING_ACCOUNT
 
 // PaymentList.ReceiptingAccount.OnChange
@@ -6002,6 +6063,34 @@ Procedure StepPaymentListChangeReceiptingAccountByAccount(Parameters, Chain) Exp
 		Chain.ChangeReceiptingAccountByAccount.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_SENDING_ACCOUNT
+
+// PaymentList.SendingAccount.OnChange
+Procedure PaymentListSendingAccountOnChange(Parameters) Export
+	Binding = BindPaymentListSendingAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.SendingAccount.Set
+Procedure SetPaymentListSendingAccount(Parameters, Results) Export
+	Binding = BindPaymentListSendingAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.SendingAccount.Get
+Function GetPaymentListSendingAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListSendingAccount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.SendingAccount.Bind
+Function BindPaymentListSendingAccount(Parameters)
+	DataPath = "PaymentList.SendingAccount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListSendingAccount");
+EndFunction
 
 #EndRegion
 
@@ -6139,6 +6228,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_BankPayment(Parameters, Re
 	ResourceToBinding.Insert("Company"     , BindCompany(Parameters));
 	ResourceToBinding.Insert("Currency"    , BindCurrency(Parameters));
 	ResourceToBinding.Insert("TotalAmount" , BindPaymentListTotalAmount(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount" , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"  , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -6150,6 +6242,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_CashPayment(Parameters, Re
 	ResourceToBinding.Insert("Currency"    , BindCurrency(Parameters));
 	ResourceToBinding.Insert("Partner"     , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("TotalAmount" , BindPaymentListTotalAmount(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount" , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"  , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -6162,6 +6257,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Re
 	ResourceToBinding.Insert("CurrencyExchange" , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("TotalAmount"      , BindPaymentListTotalAmount(Parameters));
 	ResourceToBinding.Insert("AmountExchange"   , BindPaymentListAmountExchange(Parameters));
+	ResourceToBinding.Insert("SendingAccount" , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"  , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -6175,6 +6273,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Re
 	ResourceToBinding.Insert("Partner"          , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("TotalAmount"      , BindPaymentListTotalAmount(Parameters));
 	ResourceToBinding.Insert("AmountExchange"   , BindPaymentListAmountExchange(Parameters));
+	ResourceToBinding.Insert("SendingAccount" , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"  , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -6188,6 +6289,9 @@ Procedure StepPaymentListFillByPTBBankPayment(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.ReceiptingAccount = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch  = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.Company     = GetCompany(Parameters);
 		Options.Account     = GetAccount(Parameters);
@@ -6209,6 +6313,9 @@ Procedure StepPaymentListFillByPTBCashPayment(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.ReceiptingAccount = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch  = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.Partner     = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Company     = GetCompany(Parameters);
@@ -6231,6 +6338,9 @@ Procedure StepPaymentListFIllByPTBBankReceipt(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.SendingAccount = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch  = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount    = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.AmountExchange = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.Company  = GetCompany(Parameters);
@@ -6254,6 +6364,9 @@ Procedure StepPaymentListFillByPTBCashReceipt(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.SendingAccount = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch  = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount       = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.AmountExchange    = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.Partner           = GetPaymentListPartner(Parameters, Row.Key);
@@ -7667,6 +7780,7 @@ Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Expor
 		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
 		Options.CurrentBillOfMaterials = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.BusinessUnit = GetBusinessUnit(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
 		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);

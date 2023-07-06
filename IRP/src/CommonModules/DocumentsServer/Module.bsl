@@ -168,15 +168,8 @@ EndProcedure
 Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
 		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
 		CheckedAttributes.Add("CurrencyExchange");
-
-	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
-		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-
-		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
-
 	EndIf;
 EndProcedure
 

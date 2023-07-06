@@ -164,8 +164,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	MoneyReceiver.Company,
 		   |	MoneyReceiver.ReceiveBranch AS Branch,
 		   |	MoneyReceiver.Ref AS Basis,
-		   |	MoneyReceiver.AccountFrom AS Account,
-		   |	MoneyReceiver.AccountTo AS ReceiptingAccount,
+		   |	MoneyReceiver.AccountTo AS Account,
 		   |	MoneyReceiver.Amount,
 		   |	MoneyReceiver.Currency,
 		   |	MoneyReceiver.Key
@@ -183,8 +182,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	MoneySender.Company,
 		   |	MoneySender.Branch,
 		   |	MoneySender.Ref AS Basis,
-		   |	MoneySender.AccountFrom AS Account,
-		   |	MoneySender.AccountTo AS ReceiptiongAccount,
+		   |	MoneySender.AccountTo AS Account,
 		   |	MoneySender.Amount,
 		   |	MoneySender.Currency,
 		   |	MoneySender.Key

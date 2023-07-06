@@ -167,6 +167,8 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(331).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document BankPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -1019,4 +1021,72 @@ Scenario: _0433304 check Bank payment movements by the Register  "R5022 Expenses
 			| ''                                               | '12.06.2023 17:34:39'   | '17,12'       | '17,12'               | ''              | 'Main Company'   | 'Front office'   | ''                     | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | ''                             |
 			| ''                                               | '12.06.2023 17:34:39'   | '100'         | '100'                 | ''              | 'Main Company'   | 'Front office'   | ''                     | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | ''                             |
 			| ''                                               | '12.06.2023 17:34:39'   | '100'         | '100'                 | ''              | 'Main Company'   | 'Front office'   | ''                     | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | ''                             |
+		And I close all client application windows
+
+
+Scenario: _0433305 check Bank payment movements by the Register  "R3010 Cash on hand" (cash transfer without CTO)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '331'     |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 331 dated 03.07.2023 14:20:52' | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '03.07.2023 14:20:52' | '1 000'     | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'EUR'      | 'EUR'                  | 'en description is empty'      | 'No'                   |		
+		And I close all client application windows
+
+
+Scenario: _0433306 check Bank payment movements by the Register  "R3011 Cash flow" (cash transfer without CTO)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '331'     |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 331 dated 03.07.2023 14:20:52' | ''                    | ''          | ''             | ''                        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''                        | ''                  | ''          | ''                        | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'Outgoing'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'Outgoing'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.07.2023 14:20:52' | '1 000'     | 'Main Company' | 'Distribution department' | 'Bank account, EUR' | 'Outgoing'  | 'Movement type 1'         | ''                | 'EUR'      | 'en description is empty'      | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _0433307 check Bank payment movements by the Register  "R3021 Cash in transit (incoming)" (cash transfer without CTO)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '331'     |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 331 dated 03.07.2023 14:20:52'   | ''            | ''                    | ''          | ''           | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''      | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''                    | ''                             | ''         | ''                     | ''      | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'       | 'Account'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis' | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | ''          | ''           | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Local currency'               | 'TRY'      | 'EUR'                  | ''      | 'No'                   |
+			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | ''          | ''           | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Reporting currency'           | 'USD'      | 'EUR'                  | ''      | 'No'                   |
+			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | '1 000'     | ''           | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'en description is empty'      | 'EUR'      | 'EUR'                  | ''      | 'No'                   |		
 		And I close all client application windows

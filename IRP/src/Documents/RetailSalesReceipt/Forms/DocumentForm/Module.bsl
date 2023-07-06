@@ -894,10 +894,15 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	Str.Insert("Key", AddInfo.RowKey);
 	Array.Add(Str);
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
+	If Result.WithoutScan Then
+		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
+		CurrentRow.isControlCodeString = False;
+	Else
+		For Each Row In Result.Scaned Do
+			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+		EndDo;
+	EndIf;
 	
-	For Each Row In Result Do
-		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
-	EndDo;
 	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;

@@ -370,6 +370,9 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'    |
 			| 'KKT_3004'       |
 		And I select current line in "List" table
+		And I expand "Additional info" group
+		And I input "Sale address" text in "Sale address" field
+		And I input "Sale location" text in "Sale location" field	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -394,6 +397,9 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'       |
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
+		And I expand "Additional info" group
+		And I input "Sale address" text in "Sale address" field
+		And I input "Sale location" text in "Sale location" field	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -564,8 +570,10 @@ Scenario: _0850002 open session
 	And I close all client application windows
 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 	And I check "$ParsingResult$" with "0" and method is "OpenShift"
-	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierName="CI"'
-	
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierName="Арина Браун"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierINN="1111111111"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'SaleAddress="Sale address"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'SaleLocation="Sale location"'
 
 
 Scenario: _0850010 create cash in
@@ -2292,6 +2300,9 @@ Scenario: _0260153 check hardware parameter saving
 				| 'Description'     |
 				| 'KKT_3004'        |
 			And I select current line in "List" table
+			And I expand "Additional info" group
+			And I input "Sale address" text in "Sale address" field
+			And I input "Sale location" text in "Sale location" field		
 			And I click "Save" button
 			And I move to "Driver settings" tab
 			And in the table "DriverParameter" I click "Reload settings" button

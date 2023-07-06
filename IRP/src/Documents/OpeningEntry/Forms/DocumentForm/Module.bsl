@@ -80,7 +80,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesEmployeeCashAdvance.Enabled           = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAdvanceFromRetailCustomers.Enabled    = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesSalaryPayment.Enabled                 = Not Form.ReadOnly;
-	
+	Form.Items.EditCurrenciesCashInTransit.Enabled                 = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableOther.Enabled           = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableOther.Enabled        = Not Form.ReadOnly;
+
 	UseCommissionTrading = FOServer.IsUseCommissionTrading();
 	
 	Form.Items.GroupReceiptFromConsignor.Visible = UseCommissionTrading;
@@ -298,7 +301,7 @@ EndProcedure
 
 &AtClient
 Procedure AccountBalanceBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocOpeningEntryClient.AccountBalanceBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)	
+	DocOpeningEntryClient.AccountBalanceBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);	
 EndProcedure
 
 &AtClient
@@ -313,6 +316,33 @@ EndProcedure
 &AtClient
 Procedure AccountBalanceAccountOnChange(Item)
 	DocOpeningEntryClient.AccountBalanceAccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT
+
+&AtClient
+Procedure CashInTransitBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.CashInTransitBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure CashInTransitAfterDeleteRow(Item)
+	DocOpeningEntryClient.CashInTransitAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region CASH_IN_TRANSIT_COLUMNS
+
+#Region RECEIPTING_ACCOUNT
+
+&AtClient
+Procedure CashInTransitReceiptingAccountOnChange(Item)
+	DocOpeningEntryClient.CashInTransitReceiptingAccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -428,6 +458,11 @@ Procedure AccountPayableByDocumentsOnActivateCell(Item)
 EndProcedure
 
 &AtClient
+Procedure AccountPayableOtherOnActivateCell(Item)
+	AccountByAgreementsMainTableOnActivateCell("AccountPayableOther", Item);
+EndProcedure
+
+&AtClient
 Procedure AccountReceivableByAgreementsOnActivateCell(Item)
 	AccountByAgreementsMainTableOnActivateCell("AccountReceivableByAgreements", Item);
 EndProcedure
@@ -435,6 +470,11 @@ EndProcedure
 &AtClient
 Procedure AccountReceivableByDocumentsOnActivateCell(Item)
 	AccountByDocumentsMainTableOnActivateCell("AccountReceivableByDocuments", Item);
+EndProcedure
+
+&AtClient
+Procedure AccountReceivableOtherOnActivateCell(Item)
+	AccountByAgreementsMainTableOnActivateCell("AccountReceivableOther", Item);
 EndProcedure
 
 &AtClient
@@ -476,11 +516,11 @@ Procedure AdvanceMainTablePartnerOnChange(Item)
 EndProcedure
 
 &AtClient
-Function AccountByAgreementsMainTablePartnerOnChange(Item, AgreementType, ApArPostingDetail)
+Procedure AccountByAgreementsMainTablePartnerOnChange(Item, AgreementType, ApArPostingDetail)
 	TableName = StrReplace(Item.Name, "Partner", "");
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
-		Return Undefined;
+		Return;
 	EndIf;
 	CurrentData.LegalName = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
 	AgreementParameters = New Structure();
@@ -497,15 +537,14 @@ Function AccountByAgreementsMainTablePartnerOnChange(Item, AgreementType, ApArPo
 	CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
-	Return TableName;
-EndFunction
+EndProcedure
 
 &AtClient
-Function AccountByDocumentsMainTablePartnerOnChange(Item, AgreementType, ApArPostingDetail)
+Procedure AccountByDocumentsMainTablePartnerOnChange(Item, AgreementType, ApArPostingDetail)
 	TableName = StrReplace(Item.Name, "Partner", "");
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
-		Return Undefined;
+		Return;
 	EndIf;
 	CurrentData.LegalName = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
 	AgreementParameters = New Structure();
@@ -519,35 +558,42 @@ Function AccountByDocumentsMainTablePartnerOnChange(Item, AgreementType, ApArPos
 	CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
-	Return TableName;
-EndFunction
+EndProcedure
 
 &AtClient
 Procedure AccountPayableByAgreementsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
+	AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
 		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
+EndProcedure
+
+&AtClient
+Procedure AccountPayableOtherPartnerOnChange(Item, AddInfo = Undefined) Export
+	AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Other"),
+		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByAgreementsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
+	AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
 		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
+EndProcedure
+
+&AtClient
+Procedure AccountReceivableOtherPartnerOnChange(Item, AddInfo = Undefined) Export
+	AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Other"),
+		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
+	AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
 		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
+	AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
 		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
 &AtClient
@@ -563,8 +609,7 @@ Procedure MainTableLegalNameEditTextChange(Item, Text, StandardProcessing)
 		AdditionalParameters.Insert("Partner", CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 &AtClient
@@ -602,6 +647,26 @@ Procedure AccountPayableByDocumentsAgreementStartChoice(Item, ChoiceData, Standa
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
 
 	AgreementStartChoice("AccountPayableByDocuments", PredefinedValue("Enum.AgreementTypes.Vendor"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountReceivableOtherAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+
+	AgreementStartChoice("AccountReceivableOther", PredefinedValue("Enum.AgreementTypes.Other"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountPayableOtherAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+
+	AgreementStartChoice("AccountPayableOther", PredefinedValue("Enum.AgreementTypes.Other"),
 		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
@@ -677,6 +742,26 @@ Procedure AccountPayableByDocumentsAgreementEditTextChange(Item, Text, StandardP
 EndProcedure
 
 &AtClient
+Procedure AccountReceivableOtherAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+
+	AgreementEditTextChange("AccountReceivableOther", PredefinedValue("Enum.AgreementTypes.Other"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountPayableOtherAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+
+	AgreementEditTextChange("AccountPayableOther", PredefinedValue("Enum.AgreementTypes.Other"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure AgreementEditTextChange(TableName, AgreementType, ArrayOfApArPostingDetail, Item, Text, StandardProcessing)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
@@ -700,13 +785,11 @@ EndProcedure
 
 &AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	CountLeftSymbols = 29;
-	TableName  = Left("AccountReceivableByAgreementsAgreement", CountLeftSymbols);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
+	TableName = StrReplace(Item.Name, "Agreement", "");
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;
+	EndIf;	
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
 EndProcedure
@@ -872,6 +955,20 @@ Procedure EditCurrenciesAccountBalance(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesCashInTransit(Command)
+	CurrentData = ThisObject.Items.CashInTransit.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
 Procedure EditCurrenciesEmployeeCashAdvance(Command)
 	CurrentData = ThisObject.Items.EmployeeCashAdvance.CurrentData;
 	If CurrentData = Undefined Then
@@ -970,6 +1067,20 @@ Procedure EditCurrenciesAccountReceivableByDocuments(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesAccountReceivableOther(Command)
+	CurrentData = ThisObject.Items.AccountReceivableOther.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
 Procedure EditCurrenciesAccountPayableByAgreements(Command)
 	CurrentData = ThisObject.Items.AccountPayableByAgreements.CurrentData;
 	If CurrentData = Undefined Then
@@ -995,6 +1106,20 @@ Procedure EditCurrenciesAccountPayableByDocuments(Command)
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountPayableOther(Command)
+	CurrentData = ThisObject.Items.AccountPayableOther.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
 &AtClient
@@ -1422,5 +1547,6 @@ MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|AccountReceivableByDocuments, AccountReceivableByAgreements,
 		|Inventory,
 		|ShipmentToTradeAgent, ReceiptFromConsignor,
-		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment";
+		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment,
+		|AccountReceivableOther, AccountPayableOther, CashInTransit";
 

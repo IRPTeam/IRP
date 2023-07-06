@@ -1368,7 +1368,7 @@ Procedure AccountBalanceOnCopyRowFormNotify(Parameters) Export
 EndProcedure
 
 Procedure AccountBalanceAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "Inventory");
+	DeleteRows(Object, Form, "AccountBalance");
 EndProcedure
 
 #EndRegion
@@ -1382,6 +1382,47 @@ Procedure AccountBalanceAccountOnChange(Object, Form, CurrentData = Undefined) E
 	Rows = GetRowsByCurrentData(Form, "AccountBalance", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "AccountBalance", Rows);
 	ControllerClientServer_V2.AccountBalanceAccountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT
+
+Function CashInTransitBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "CashInTransit", Cancel, Clone, CurrentData,
+		"CashInTransitOnAddRowFormNotify", "CashInTransitOnCopyRowFormNotify");
+	Form.Items.CashInTransit.CurrentRow = NewRow.GetID();
+	If Form.Items.CashInTransit.CurrentRow <> Undefined Then
+		Form.Items.CashInTransit.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CashInTransitOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CashInTransitOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CashInTransitAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "CashInTransit");
+EndProcedure
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_COLUMNS
+
+#Region CASH_IN_TRANSIT_RECEIPTING_ACCOUNT
+
+// CashInTransit.ReceiptingAccount
+Procedure CashInTransitReceiptingAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "CashInTransit", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "CashInTransit", Rows);
+	ControllerClientServer_V2.CashInTransitReceiptingAccountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

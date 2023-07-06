@@ -1083,7 +1083,8 @@ Function GetFormItemNames()
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
 				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,
-				|ItemListConsignor, isControlCodeString";
+				|ItemListConsignor, isControlCodeString,
+				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency";
 	Return ItemNames;
 EndFunction	
 

@@ -107,7 +107,31 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("T1", BatchKeysInfo_DataTableGrouped);
 	Query.Execute();
 
-	Return New Structure;
+	AccReg = Metadata.AccumulationRegisters;
+	Tables = New Structure;
+	Tables.Insert("RegCashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
+
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	OpeningEntryCashInTransit.Ref.Date AS Period,
+	|	OpeningEntryCashInTransit.Ref.Company,
+	|	OpeningEntryCashInTransit.Account AS FromAccount,
+	|	OpeningEntryCashInTransit.ReceiptingAccount AS ToAccount,
+	|	OpeningEntryCashInTransit.Currency,
+	|	OpeningEntryCashInTransit.Amount,
+	|	OpeningEntryCashInTransit.Key
+	|FROM
+	|	Document.OpeningEntry.CashInTransit AS OpeningEntryCashInTransit
+	|WHERE
+	|	OpeningEntryCashInTransit.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Tables.RegCashInTransit = QueryTable;
+
+	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -128,12 +152,19 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
+	
+	// CashInIransit
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, 
+		New Structure("RecordType, RecordSet", AccumulationRecordType.Receipt, Parameters.DocumentDataTables.RegCashInTransit));
+	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -226,6 +257,9 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(EmployeeCashAdvance());
 	QueryArray.Add(AdvanceFromRetailCustomers());
 	QueryArray.Add(SalaryPayment());
+	QueryArray.Add(OtherVendorsTransactions());
+	QueryArray.Add(OtherCustomersTransactions());
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -341,6 +375,26 @@ Function VendorsTransactions()
 		   |	OpeningEntryAccountPayableByAgreements.Ref = &Ref";
 EndFunction
 
+Function OtherVendorsTransactions()
+	Return 
+		"SELECT
+		|	OpeningEntryAccountPayableOther.Ref.Date AS Period,
+		|	OpeningEntryAccountPayableOther.Key,
+		|	OpeningEntryAccountPayableOther.Ref.Company AS Company,
+		|	OpeningEntryAccountPayableOther.Ref.Branch AS Branch,
+		|	OpeningEntryAccountPayableOther.Partner,
+		|	OpeningEntryAccountPayableOther.LegalName,
+		|	OpeningEntryAccountPayableOther.LegalNameContract,
+		|	OpeningEntryAccountPayableOther.Agreement AS Agreement,
+		|	OpeningEntryAccountPayableOther.Currency,
+		|	OpeningEntryAccountPayableOther.Amount AS Amount
+		|INTO OtherVendorsTransactions
+		|FROM
+		|	Document.OpeningEntry.AccountPayableOther AS OpeningEntryAccountPayableOther
+		|WHERE
+		|	OpeningEntryAccountPayableOther.Ref = &Ref";
+EndFunction
+
 Function AdvancesFromCustomers()
 	Return "SELECT
 		   |	OpeningEntryAdvanceFromCustomers.Ref.Company AS Company,
@@ -408,6 +462,26 @@ Function CustomersTransactions()
 		   |	Document.OpeningEntry.AccountReceivableByAgreements AS OpeningEntryAccountReceivableByAgreements
 		   |WHERE
 		   |	OpeningEntryAccountReceivableByAgreements.Ref = &Ref";
+EndFunction
+
+Function OtherCustomersTransactions()
+	Return 
+		"SELECT
+		|	OpeningEntryAccountReceivableOther.Key,
+		|	OpeningEntryAccountReceivableOther.Ref.Date AS Period,
+		|	OpeningEntryAccountReceivableOther.Ref.Company AS Company,
+		|	OpeningEntryAccountReceivableOther.Ref.Branch AS Branch,
+		|	OpeningEntryAccountReceivableOther.Partner,
+		|	OpeningEntryAccountReceivableOther.LegalName,
+		|	OpeningEntryAccountReceivableOther.LegalNameContract,
+		|	OpeningEntryAccountReceivableOther.Agreement AS Agreement,
+		|	OpeningEntryAccountReceivableOther.Currency,
+		|	OpeningEntryAccountReceivableOther.Amount AS Amount
+		|INTO OtherCustomersTransactions
+		|FROM
+		|	Document.OpeningEntry.AccountReceivableOther AS OpeningEntryAccountReceivableOther
+		|WHERE
+		|	OpeningEntryAccountReceivableOther.Ref = &Ref";
 EndFunction
 
 Function CustomersAging()
@@ -562,6 +636,23 @@ Function SalaryPayment()
 		   |	SalaryPayment.Ref = &Ref";
 EndFunction
 
+Function CashInTransit()
+	Return
+		"SELECT
+		|	CashInTransit.Key,
+		|	CashInTransit.Ref.Date AS Period,
+		|	CashInTransit.Ref.Company AS Company,
+		|	CashInTransit.ReceiptingBranch AS Branch,
+		|	CashInTransit.ReceiptingAccount,
+		|	CashInTransit.Currency,
+		|	CashInTransit.Amount
+		|INTO CashInTransit
+		|FROM
+		|	Document.OpeningEntry.CashInTransit AS CashInTransit
+		|WHERE
+		|	CashInTransit.Ref = &Ref";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -593,6 +684,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	Return QueryArray;
 EndFunction
 
@@ -837,61 +930,142 @@ Function R3010B_CashOnHand()
 		   |	TRUE";
 EndFunction
 
+Function R3021B_CashInTransitIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CashInTransit.Key,
+		|	CashInTransit.Period,
+		|	CashInTransit.Company,
+		|	CashInTransit.Branch,
+		|	CashInTransit.ReceiptingAccount AS Account,
+		|	CashInTransit.Currency,
+		|	CashInTransit.Amount
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	CashInTransit AS CashInTransit
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OtherVendorsTransactions.Key,
+		|	OtherVendorsTransactions.Period,
+		|	OtherVendorsTransactions.Company,
+		|	OtherVendorsTransactions.Branch,
+		|	OtherVendorsTransactions.Partner,
+		|	OtherVendorsTransactions.LegalName,
+		|	OtherVendorsTransactions.Agreement,
+		|	OtherVendorsTransactions.Currency,
+		|	OtherVendorsTransactions.Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	OtherVendorsTransactions AS OtherVendorsTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	OtherCustomersTransactions.Key,
+		|	OtherCustomersTransactions.Period,
+		|	OtherCustomersTransactions.Company,
+		|	OtherCustomersTransactions.Branch,
+		|	OtherCustomersTransactions.Partner,
+		|	OtherCustomersTransactions.LegalName,
+		|	OtherCustomersTransactions.Agreement,
+		|	OtherCustomersTransactions.Currency,
+		|	OtherCustomersTransactions.Amount
+		|FROM
+		|	OtherCustomersTransactions AS OtherCustomersTransactions";
+EndFunction
+
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	VendorsTransactions.Period,
-		   |	VendorsTransactions.Company,
-		   |	VendorsTransactions.Branch,
-		   |	VendorsTransactions.LegalName,
-		   |	VendorsTransactions.LegalNameContract,
-		   |	VendorsTransactions.Currency,
-		   |	VendorsTransactions.Amount
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	VendorsTransactions AS VendorsTransactions
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	AdvancesToVendors.Period,
-		   |	AdvancesToVendors.Company,
-		   |	AdvancesToVendors.Branch,
-		   |	AdvancesToVendors.LegalName,
-		   |	AdvancesToVendors.LegalNameContract,
-		   |	AdvancesToVendors.Currency,
-		   |	AdvancesToVendors.Amount
-		   |FROM
-		   |	AdvancesToVendors AS AdvancesToVendors
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	CustomersTransactions.Period,
-		   |	CustomersTransactions.Company,
-		   |	CustomersTransactions.Branch,
-		   |	CustomersTransactions.LegalName,
-		   |	CustomersTransactions.LegalNameContract,
-		   |	CustomersTransactions.Currency,
-		   |	CustomersTransactions.Amount
-		   |FROM
-		   |	CustomersTransactions AS CustomersTransactions
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	AdvancesFromCustomers.Period,
-		   |	AdvancesFromCustomers.Company,
-		   |	AdvancesFromCustomers.Branch,
-		   |	AdvancesFromCustomers.LegalName,
-		   |	AdvancesFromCustomers.LegalNameContract,
-		   |	AdvancesFromCustomers.Currency,
-		   |	AdvancesFromCustomers.Amount
-		   |FROM
-		   |	AdvancesFromCustomers AS AdvancesFromCustomers";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Branch,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.LegalNameContract,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.Amount
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	VendorsTransactions AS VendorsTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OtherVendorsTransactions.Period,
+		|	OtherVendorsTransactions.Company,
+		|	OtherVendorsTransactions.Branch,
+		|	OtherVendorsTransactions.LegalName,
+		|	OtherVendorsTransactions.LegalNameContract,
+		|	OtherVendorsTransactions.Currency,
+		|	OtherVendorsTransactions.Amount
+		|FROM
+		|	OtherVendorsTransactions AS OtherVendorsTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	AdvancesToVendors.Period,
+		|	AdvancesToVendors.Company,
+		|	AdvancesToVendors.Branch,
+		|	AdvancesToVendors.LegalName,
+		|	AdvancesToVendors.LegalNameContract,
+		|	AdvancesToVendors.Currency,
+		|	AdvancesToVendors.Amount
+		|FROM
+		|	AdvancesToVendors AS AdvancesToVendors
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersTransactions.Period,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Branch,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.LegalNameContract,
+		|	CustomersTransactions.Currency,
+		|	CustomersTransactions.Amount
+		|FROM
+		|	CustomersTransactions AS CustomersTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	OtherCustomersTransactions.Period,
+		|	OtherCustomersTransactions.Company,
+		|	OtherCustomersTransactions.Branch,
+		|	OtherCustomersTransactions.LegalName,
+		|	OtherCustomersTransactions.LegalNameContract,
+		|	OtherCustomersTransactions.Currency,
+		|	OtherCustomersTransactions.Amount
+		|FROM
+		|	OtherCustomersTransactions AS OtherCustomersTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	AdvancesFromCustomers.Period,
+		|	AdvancesFromCustomers.Company,
+		|	AdvancesFromCustomers.Branch,
+		|	AdvancesFromCustomers.LegalName,
+		|	AdvancesFromCustomers.LegalNameContract,
+		|	AdvancesFromCustomers.Currency,
+		|	AdvancesFromCustomers.Amount
+		|FROM
+		|	AdvancesFromCustomers AS AdvancesFromCustomers";
 EndFunction
 
 Function T2014S_AdvancesInfo()

@@ -13231,6 +13231,114 @@ EndProcedure
 
 #EndRegion
 
+#Region CASH_IN_TRANSIT
+
+#Region CASH_IN_TRANSIT_RECEIPTING_ACCOUNT
+
+// CashInTransit.ReceiptingAccount.OnChange
+Procedure CashInTransitReceiptingAccountOnChange(Parameters) Export
+	Binding = BindCashInTransitReceiptingAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// CashInTransit.ReceiptingAccount.Set
+Procedure SetCashInTransitReceiptingAccount(Parameters, Results) Export
+	Binding = BindCashInTransitReceiptingAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.ReceiptingAccount.Get
+Function GetCashInTransitReceiptingAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindCashInTransitReceiptingAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// CashInTransit.ReceiptingAccount.Bind
+Function BindCashInTransitReceiptingAccount(Parameters)
+	DataPath = "CashInTransit.ReceiptingAccount";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepCashInTransitChangeCurrencyByReceiptingAccount,
+		|StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitReceiptingAccount");
+EndFunction
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_CURRENCY
+
+// CashInTransit.Currency.Set
+Procedure SetCashInTransitCurrency(Parameters, Results) Export
+	Binding = BindCashInTransitCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.Currency.Get
+Function GetCashInTransitCurrency(Parameters, _Key)
+	Binding = BindCashInTransitCurrency(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// CashInTransit.Currency.Bind
+Function BindCashInTransitCurrency(Parameters)
+	DataPath = "CashInTransit.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitCurrency");
+EndFunction
+
+// CashInTransit.Currency.ChangeCurrencyByReceiptingAccount.Step
+Procedure StepCashInTransitChangeCurrencyByReceiptingAccount(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeCurrencyByAccount.Setter = "SetCashInTransitCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+		Options.Account         = GetCashInTransitReceiptingAccount(Parameters, Row.Key);
+		Options.CurrentCurrency = GetCashInTransitCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCashInTransitChangeCurrencyByReceiptingAccount";
+		Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_IS_FIXED_CURRENCY
+
+// CashInTransit.IsFixedCurrency.Set
+Procedure SetCashInTransitIsFixedCurrency(Parameters, Results) Export
+	Binding = BindCashInTransitIsFixedCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.IsFixedCurrency.Bind
+Function BindCashInTransitIsFixedCurrency(Parameters)
+	DataPath = "CashInTransit.IsFixedCurrency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitIsFixedCurrency");
+EndFunction
+
+// CashInTransit.IsFixedCurrency.ChangeIsFixedCurrencyByReceiptingAccount.Step
+Procedure StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount(Parameters, Chain) Export
+	Chain.ChangeIsFixedCurrencyByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeIsFixedCurrencyByAccount.Setter = "SetCashInTransitIsFixedCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeIsFixedCurrencyByAccountOptions();
+		Options.Account = GetCashInTransitReceiptingAccount(Parameters, Row.Key);
+		Options.Key     = Row.Key;
+		Options.StepName = "StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount";
+		Chain.ChangeIsFixedCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region EMPLOYEE_CASH_ADVANCE
 
 #Region EMPLOYEE_CASH_ADVANCE_ACCOUNT
@@ -13641,6 +13749,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnCopyRowFormNotify"     Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CashInTransitOnAddRowFormNotify"       Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CashInTransitOnCopyRowFormNotify"      Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsOnAddRowFormNotify"         Then ViewClient_V2.ChequeBondsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsOnCopyRowFormNotify"        Then ViewClient_V2.ChequeBondsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsAfterDeleteRowFormNotify"   Then ViewClient_V2.ChequeBondsAfterDeleteRowFormNotify(Parameters);

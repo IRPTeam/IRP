@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @OpeningEntries
@@ -32,6 +32,8 @@ Scenario: _400000 preparation (Opening entries)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
+		When Create catalog BusinessUnits objects
+		When Create OtherPartners objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
@@ -1433,6 +1435,129 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 			| 'Amount'     | 'Retail customer'   | 'Currency'    |
 			| '1 200,00'   | 'Sam Jons'          | 'TRY'         |
 		And I close all client application windows
+
+Scenario: _400019 create OpeningEntry (cash in transit)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description     |
+			| Main Company    |
+		And I select current line in "List" table
+	* Filling cash in transit tab
+		And I move to "Cash in transit" tab
+		And in the table "CashInTransit" I click the button named "CashInTransitAdd"
+		And I activate field named "CashInTransitAccount" in "CashInTransit" table
+		And I select current line in "CashInTransit" table
+		And I click choice button of the attribute named "CashInTransitAccount" in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, EUR' |
+		And I select current line in "List" table
+		And I activate "Receipting account" field in "CashInTransit" table
+		And I click choice button of "Receipting account" attribute in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Bank account 2, EUR' |
+		And I select current line in "List" table
+		And I click choice button of "Receipting branch" attribute in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I activate field named "CashInTransitAmount" in "CashInTransit" table
+		And I input "50,00" text in the field named "CashInTransitAmount" of "CashInTransit" table
+		And I finish line editing in "CashInTransit" table
+		And in the table "CashInTransit" I click the button named "CashInTransitAdd"
+		And I activate field named "CashInTransitAccount" in "CashInTransit" table
+		And I select current line in "CashInTransit" table
+		And I click choice button of the attribute named "CashInTransitAccount" in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №1' |
+		And I select current line in "List" table
+		And I activate "Receipting account" field in "CashInTransit" table
+		And I click choice button of "Receipting account" attribute in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table
+		And I click choice button of "Receipting branch" attribute in "CashInTransit" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I activate field named "CashInTransitAmount" in "CashInTransit" table
+		And I input "50,00" text in the field named "CashInTransitAmount" of "CashInTransit" table
+		And I finish line editing in "CashInTransit" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400019$$" variable
+		And I delete "$$OpeningEntry400019$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400019$$"
+		And I save the window as "$$OpeningEntry400019$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number'                          |
+			| '$$NumberOpeningEntry400019$$'    |
+
+
+
+Scenario: _400020 create OpeningEntry (account payble other and account receivable other)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description     |
+			| Main Company    |
+		And I select current line in "List" table
+	* Filling Account payble (other)
+		And I move to "Account payable (other)" tab
+		And in the table "AccountPayableOther" I click the button named "AccountPayableOtherAdd"
+		And I click choice button of the attribute named "AccountPayableOtherPartner" in "AccountPayableOther" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Other partner 1' |
+		And I select current line in "List" table
+		And I activate field named "AccountPayableOtherAmount" in "AccountPayableOther" table
+		And I input "50,00" text in the field named "AccountPayableOtherAmount" of "AccountPayableOther" table
+		And I finish line editing in "AccountPayableOther" table
+		And in the table "AccountPayableOther" I click the button named "AccountPayableOtherAdd"
+		And I click choice button of the attribute named "AccountPayableOtherPartner" in "AccountPayableOther" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Other partner 2' |
+		And I select current line in "List" table
+		And I activate field named "AccountPayableOtherAmount" in "AccountPayableOther" table
+		And I input "70,00" text in the field named "AccountPayableOtherAmount" of "AccountPayableOther" table
+		And I finish line editing in "AccountPayableOther" table
+		And I move to "Account receivable (other)" tab
+		And in the table "AccountReceivableOther" I click the button named "AccountReceivableOtherAdd"
+		And I click choice button of the attribute named "AccountReceivableOtherPartner" in "AccountReceivableOther" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Other'       |
+		And I select current line in "List" table
+		And I activate field named "AccountReceivableOtherAmount" in "AccountReceivableOther" table
+		And I input "10,00" text in the field named "AccountReceivableOtherAmount" of "AccountReceivableOther" table
+		And I finish line editing in "AccountReceivableOther" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400020$$" variable
+		And I delete "$$OpeningEntry400020$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400020$$"
+		And I save the window as "$$OpeningEntry400020$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number'                          |
+			| '$$NumberOpeningEntry400020$$'    |				
+
 
 
 

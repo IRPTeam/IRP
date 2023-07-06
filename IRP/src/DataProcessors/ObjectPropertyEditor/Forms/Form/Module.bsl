@@ -51,9 +51,11 @@ EndProcedure
 Procedure ObjectTableOnChange(Item)
 	SetNewTable();
 	If GetFormCash(ThisObject).ColumnsData.Count() = 0 Then
+		Items.SettingsFilter.Enabled = False;
 		//@skip-warning
 		ShowMessageBox(, R().InfoMessage_NotProperty);
 	EndIf;
+	Items.SettingsFilter.Enabled = True;
 EndProcedure
 
 // Properties table selection.
@@ -734,6 +736,9 @@ Procedure SetTablesList(Form, NotChangeTable = False)
 			NewCurrentTable = Form.ObjectTable;
 		Else
 			NewCurrentTable = TablesChoiceList[0].Value;
+			If TablesStructure.Property("Ref") Then
+				NewCurrentTable = "Ref";
+			EndIf;
 		EndIf;
 	EndIf;
 	Form.ObjectTable = NewCurrentTable;
@@ -746,18 +751,14 @@ EndProcedure
 &AtServer
 Procedure SetNewTable()
 	SetPropertiesConstraint(ThisObject);
-	If GetObjectTable(ThisObject) = "Ref" Then
-		ThisObject.isTableMode = False;
-		SetTableSettings(ThisObject);
-		SetSourceSettings(ThisObject);
-	ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") Then
+	If StrStartsWith(GetObjectTable(ThisObject), "TS_") Then
 		ThisObject.isTableMode = True;
 		SetTableSettings(ThisObject);
 		SetSourceSettingsForTable(ThisObject);
 	Else
 		ThisObject.isTableMode = False;
-		SetSourceSettings(ThisObject);
 		SetTableSettings(ThisObject);
+		SetSourceSettings(ThisObject);
 	EndIf;
 	SetPropertyAvailability();
 EndProcedure
@@ -792,17 +793,19 @@ Procedure SetSourceSettings(Form)
 	SelectionItems = DataSettingsComposer.Settings.Selection.Items;
 	SelectionItems.Clear();
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Property");
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Value");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField(ColumnKeyValue.Key);
+		QueryParameter = DataSettingsComposer.Settings.DataParameters.Items.Find(ColumnKeyValue.Key);
+		If QueryParameter <> Undefined Then
+			//@skip-check property-return-type, statement-type-change
+			QueryParameter.Value = ColumnKeyValue.Value.Ref;
+			QueryParameter.Use = True;
+		EndIf;
+	EndDo;
 	
     DataSettingsComposer.Settings.Structure.Clear();
-    RefGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
-	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Ref");
-	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
-	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Constraint");
-	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
-	DetailGroup = RefGroup.Structure.Add(Type("DataCompositionGroup"));
+    DetailGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
 	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
     
 EndProcedure
@@ -821,13 +824,12 @@ Function GetDCSchema(Form)
 		Return GetDCSchemaByRef(Form);
 	EndIf;
 	
-	TS_String = "TabularSections";
 	Table_String = GetObjectTable(Form); // String
 	
 	FormCash = GetFormCash(Form);
 	 
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
-	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
+	RootTable = MetaObject.FullName();
 	
 	DCSchema = New DataCompositionSchema;
 
@@ -838,20 +840,36 @@ Function GetDCSchema(Form)
 	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
 	DataSet.Name = "DataSet";
 	DataSet.DataSource = "DataSources";
-	DataSet.Query = StrTemplate(
-		"SELECT
-		|	Table.Ref,
-		|	%4 As Constraint,
-		|	Attributes.Property,
-		|	Attributes.Value
-		|FROM
-		|	%1.%2 AS Attributes
-		|		FULL JOIN %3 AS Table
-		|		ON Attributes.Ref = Table.Ref", 
-		MetaObject.FullName(), 
-		Table_String, 
-		MetaObject.FullName(),
-		?(IsBlankString(FormCash.ConstraintName), "Undefined", "Table.Ref." + FormCash.ConstraintName));
+	
+	PropertiesText = "";
+	SourcesText = "";
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		PropertyTable = "Table_" + ColumnKeyValue.Key;
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		If FieldDescription.isCollection Then
+			PropertiesText = PropertiesText + "
+			|	, " + PropertyTable + "." + Table_String + ".(Ref, Value) As " + ColumnKeyValue.Key;
+			SourcesText = SourcesText + "
+			|LEFT JOIN " + RootTable + " AS " + PropertyTable + "
+			|ON (Table.Ref = " + PropertyTable + "." + Table_String + ".Ref)
+			|	AND (" + PropertyTable + "." + Table_String + ".Property = &" + ColumnKeyValue.Key + ")";
+		Else
+			PropertiesText = PropertiesText + "
+			|	, " + PropertyTable + ".Value" + " As " + ColumnKeyValue.Key;
+			SourcesText = SourcesText + "
+			|LEFT JOIN " + RootTable + "." + Table_String + " AS " + PropertyTable + "
+			|ON (Table.Ref = " + PropertyTable + ".Ref)
+			|	AND (" + PropertyTable + ".Property = &" + ColumnKeyValue.Key + ")";
+		EndIf;
+	EndDo;
+	
+	ConstraintText = ?(IsBlankString(FormCash.ConstraintName), "Undefined", "Table.Ref." + FormCash.ConstraintName);
+	DataSet.Query = 
+	"SELECT
+	|	Table.Ref,
+	|	" + ConstraintText + " As Constraint " + PropertiesText + "
+	|FROM
+	|	" + RootTable + " AS Table" + SourcesText;
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -859,24 +877,18 @@ Function GetDCSchema(Form)
 	DataField.Title = "Ref";
 		
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Property";
-	DataField.DataPath = "Property";
-	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Value";
-	DataField.DataPath = "Value";
-	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-	
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Constraint";
 	DataField.DataPath = "Constraint";
 	DataField.UseRestriction.Condition = True;
 	DataField.AttributeUseRestriction.Condition = True;
+		
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+		DataField.Field = ColumnKeyValue.Key;
+		DataField.DataPath = ColumnKeyValue.Key;
+		DataField.Title = FieldDescription.Presentation;
+	EndDo;	
 		
 	Return DCSchema;
 EndFunction
@@ -1242,47 +1254,29 @@ Function GetDCSchemaByRef(Form)
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
 	ObjectName = MetaObject.FullName();
 	
+	QueryText = 
+	"SELECT
+	|	Table.Ref,
+	|	UNDEFINED As Constraint
+	|	#Properties#
+	|FROM
+	|	" + ObjectName + " AS Table";
+	
+	PropertiesText = "";
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		PropertiesText = PropertiesText + "
+		|	, Table." + FieldDescription.Ref + " As " + ColumnKeyValue.Key;
+	EndDo;
+	QueryText = StrReplace(QueryText, "#Properties#", PropertiesText);
+	
 	If FormCash.ColumnsData.Count() = 0 Then
-		DataSet.Query = StrTemplate(
-		"SELECT
-		|	Table.Ref,
-		|	UNDEFINED As Constraint,
-		|	"""" As Property,
-		|	UNDEFINED As Value
-		|FROM
-		|	%1 AS Table
+		QueryText = QueryText + "
 		|WHERE
-		|	FALSE", 
-		ObjectName);
-	Else
-		PropertyRows = New Array; // Array of String
-		For Each ColumnKeyValue In FormCash.ColumnsData Do
-			FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
-			PropertyRow = StrTemplate(
-			"SELECT
-			|	Table.Ref As Ref,
-			|	UNDEFINED As Constraint,
-			|	""%2"" As Property,
-			|	Table.%2 As Value
-			|FROM
-			|	%1 AS Table",
-			ObjectName,
-			FieldDescription.Ref);
-			PropertyRows.Add(PropertyRow);
-		EndDo;
-		InnerText = StrConcat(PropertyRows, "
-		|	UNION ALL
-		|");
-		
-		DataSet.Query = 
-		"SELECT
-		|	Properties.Ref,
-		|	Properties.Constraint,
-		|	Properties.Property,
-		|	Properties.Value
-		|FROM
-		|	(" + InnerText + ") AS Properties";
+		|	FALSE";
 	EndIf;
+	
+	DataSet.Query = QueryText;
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -1290,22 +1284,18 @@ Function GetDCSchemaByRef(Form)
 	DataField.Title = "Ref";
 		
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Property";
-	DataField.DataPath = "Property";
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Value";
-	DataField.DataPath = "Value";
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-	
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Constraint";
 	DataField.DataPath = "Constraint";
 	DataField.UseRestriction.Condition = True;
 	DataField.AttributeUseRestriction.Condition = True;
+	
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+		DataField.Field = ColumnKeyValue.Key;
+		DataField.DataPath = ColumnKeyValue.Key;
+		DataField.Title = FieldDescription.Presentation; 
+	EndDo;	
 		
 	Return DCSchema;
 EndFunction
@@ -1363,19 +1353,13 @@ Procedure SetSourceSettingsForTable(Form)
 	SelectionItems.Clear();
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("LineNumber");
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Property");
-	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Value");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField(ColumnKeyValue.Key);
+	EndDo;
 	
     DataSettingsComposer.Settings.Structure.Clear();
-    RefGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
-	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Ref");
-	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
-	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("LineNumber");
-	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("LineNumber");
-	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Constraint");
-	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
-	DetailGroup = RefGroup.Structure.Add(Type("DataCompositionGroup"));
+    DetailGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
 	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
     
 EndProcedure
@@ -1404,65 +1388,36 @@ Function GetDCSchemaForTable(Form)
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
 	ObjectName = StrTemplate("%1.%2", MetaObject.FullName(), GetRefTableName(Form));
 	
+	QueryText = 
+	"SELECT
+	|	Table.Ref,
+	|	Table.LineNumber,
+	|	UNDEFINED As Constraint
+	|	#Properties#
+	|FROM
+	|	" + ObjectName + " AS Table"; 
+	
+	PropertiesText = "";
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		If FieldDescription.ValueType.ContainsType(Type("String")) 
+				And FieldDescription.ValueType.StringQualifiers.Length = 0 Then
+			PropertiesText = PropertiesText + "
+			|	, CAST(Table." + FieldDescription.Ref + " AS STRING(1024)) As " + ColumnKeyValue.Key;
+		Else
+			PropertiesText = PropertiesText + "
+			|	, Table." + FieldDescription.Ref + " As " + ColumnKeyValue.Key;
+		EndIf;
+	EndDo;
+	QueryText = StrReplace(QueryText, "#Properties#", PropertiesText);
+	
 	If FormCash.ColumnsData.Count() = 0 Then
-		DataSet.Query = StrTemplate(
-		"SELECT
-		|	Table.Ref,
-		|	Table.LineNumber,
-		|	UNDEFINED As Constraint,
-		|	"""" As Property,
-		|	UNDEFINED As Value
-		|FROM
-		|	%1 AS Table
+		QueryText = QueryText + "
 		|WHERE
-		|	FALSE", 
-		ObjectName);
-	Else
-		PropertyRows = New Array; // Array of String
-		For Each ColumnKeyValue In FormCash.ColumnsData Do
-			FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
-			If FieldDescription.ValueType.ContainsType(Type("String")) 
-					And FieldDescription.ValueType.StringQualifiers.Length = 0 Then
-				PropertyRow = StrTemplate(
-				"SELECT
-				|	Table.Ref As Ref,
-				|	Table.LineNumber As LineNumber,
-				|	UNDEFINED As Constraint,
-				|	""%2"" As Property,
-				|	CAST(Table.%2 AS STRING(1024)) As Value
-				|FROM
-				|	%1 AS Table",
-				ObjectName,
-				FieldDescription.Ref);
-			Else
-				PropertyRow = StrTemplate(
-				"SELECT
-				|	Table.Ref As Ref,
-				|	Table.LineNumber As LineNumber,
-				|	UNDEFINED As Constraint,
-				|	""%2"" As Property,
-				|	Table.%2 As Value
-				|FROM
-				|	%1 AS Table",
-				ObjectName,
-				FieldDescription.Ref);
-			EndIf;
-			PropertyRows.Add(PropertyRow);
-		EndDo;
-		InnerText = StrConcat(PropertyRows, "
-		|	UNION ALL
-		|");
-		
-		DataSet.Query = 
-		"SELECT
-		|	Properties.Ref,
-		|	Properties.LineNumber,
-		|	Properties.Constraint,
-		|	Properties.Property,
-		|	Properties.Value
-		|FROM
-		|	(" + InnerText + ") AS Properties";
+		|	FALSE";
 	EndIf;
+	
+	DataSet.Query = QueryText;
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -1475,23 +1430,19 @@ Function GetDCSchemaForTable(Form)
 	DataField.Title = "LineNumber";
 		
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Property";
-	DataField.DataPath = "Property";
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Value";
-	DataField.DataPath = "Value";
-	DataField.UseRestriction.Condition = True;
-	DataField.AttributeUseRestriction.Condition = True;
-	
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Constraint";
 	DataField.DataPath = "Constraint";
 	DataField.UseRestriction.Condition = True;
 	DataField.AttributeUseRestriction.Condition = True;
 		
+	For Each ColumnKeyValue In FormCash.ColumnsData Do
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+		DataField.Field = ColumnKeyValue.Key;
+		DataField.DataPath = ColumnKeyValue.Key;
+		DataField.Title = FieldDescription.Presentation; 
+	EndDo;	
+	
 	Return DCSchema;
 EndFunction
 
@@ -1616,6 +1567,7 @@ Procedure LoadNewColumns(Form)
 		EndIf;  
 		
 		QuerySelection = Query.Execute().Select();
+		//@skip-check property-return-type
 		While QuerySelection.Next() Do
 			AvailableItems.Add(QuerySelection.Ref);
 		EndDo;
@@ -1688,6 +1640,7 @@ Procedure LoadNewColumns(Form)
 	EndIf;
 	
 	QuerySelection = Query.Execute().Select();
+	//@skip-check property-return-type
 	While QuerySelection.Next() Do
 		ItemRef = QuerySelection.Property; // AnyRef
 		If Not ValueIsFilled(ItemRef) Then
@@ -1730,13 +1683,13 @@ Procedure LoadTableData()
 	DataCompositionProcessor = New DataCompositionProcessor;
 	DataCompositionProcessor.Initialize(DataCompositionTemplate);
 	
-	DataTree = New ValueTree();
+	DataTable = New ValueTable();
 	OutputProcessor = New DataCompositionResultValueCollectionOutputProcessor;
-	OutputProcessor.SetObject(DataTree);
+	OutputProcessor.SetObject(DataTable);
 	OutputProcessor.Output(DataCompositionProcessor);
 	
 	ThisObject.PropertiesTable.Clear();
-	For Each RowData In DataTree.Rows Do
+	For Each RowData In DataTable Do
 		TableRecord = ThisObject.PropertiesTable.Add();
 		DataRef = RowData[Ref_String]; // AnyRef
 		ConstraintRef = RowData[Constraint_String]; // AnyRef
@@ -1746,25 +1699,22 @@ Procedure LoadTableData()
 			LineNumber = RowData[Object_LineNumber]; // Number
 			TableRecord[Object_LineNumber] = LineNumber;
 		EndIf;
-		For Each RowProperty In RowData.Rows Do
-			PropertyRef = ReadPropertyFromTreeRow(RowProperty);
-			If PropertyRef = Null Then
-				Break;
+		For Each ColumndKeyValue In ColumnsData Do
+			ColumnName = ColumndKeyValue.Key; // String
+			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+			If ColumnDescription.isCollection Then
+				ValueListResult = New ValueList(); // ValueList of Arbitrary, Undefined
+				ValueQueryResult = RowData[ColumnName]; // QueryResult
+				ValueSelection = ValueQueryResult.Select(); 
+				While ValueSelection.Next() Do
+					//@skip-check property-return-type
+					ValueListResult.Add(ValueSelection.Value);
+				EndDo;
+				TableRecord[ColumnName] = ValueListResult;
+			Else
+				TableRecord[ColumnName] = RowData[ColumnName];
 			EndIf;
-			PropertyKey = GetFieldKeyFromRef(PropertyRef);
-			ColumnDescription = Undefined; // See GetFieldDescription
-			If ColumnsData.Property(PropertyKey, ColumnDescription) Then
-				If ColumnDescription.isCollection Then
-					If TableRecord[PropertyKey] = Undefined Then
-						TableRecord[PropertyKey] = New ValueList();
-					EndIf;
-					PropertyValues = TableRecord[PropertyKey]; // ValueList of Arbitrary, Undefined
-					PropertyValues.Add(ReadPropertyValueFromTreeRow(RowProperty, PropertyRef));
-				Else
-					TableRecord[PropertyKey] = ReadPropertyValueFromTreeRow(RowProperty, PropertyRef);
-				EndIf;
-				TableRecord[PropertyKey + "_old"] = TableRecord[PropertyKey];
-			EndIf;
+			TableRecord[ColumnName + "_old"] = TableRecord[ColumnName];
 		EndDo;
 		CheckRowModified(ThisObject, TableRecord);
 	EndDo;
@@ -1892,33 +1842,6 @@ Procedure SetPropertyAvailability()
 	
 EndProcedure
 
-// Read property from Tree Row.
-// 
-// Parameters:
-//  TreeRow - ValueTreeRow - TableRow:
-//  * Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary - Property
-// 
-// Returns:
-//  ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary
-&AtServer
-Function ReadPropertyFromTreeRow(TreeRow)
-	Return TreeRow.Property;
-EndFunction
-
-// Read property value from Tree Row.
-// 
-// Parameters:
-//  TreeRow - ValueTreeRow - TableRow:
-//  * Value - Characteristic.AddAttributeAndProperty, Arbitrary, Undefined - 
-//  Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary - Property
-// 
-// Returns:
-//  Characteristic.AddAttributeAndProperty, Arbitrary, Undefined - Value
-&AtServer
-Function ReadPropertyValueFromTreeRow(TreeRow, Property)
-	Return TreeRow.Value;
-EndFunction
-
 #EndRegion
 
 #Region SaveData
@@ -1980,7 +1903,7 @@ Procedure SaveAtServer()
 				
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And FormCash.UpdateRelatedFieldsWhenWriting Then
 			
-			ModifiedObj = BuilderAPI.Initialize(ObjectItem, , , CurrentTable);
+			ModifiedObj = BuilderAPI.Initialize(ObjectItem, , , CurrentTable); // See BuilderAPI.CreateWrapper
 			ModifiedTable = ModifiedObj.Object[CurrentTable]; // TabularSection
 			
 			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));

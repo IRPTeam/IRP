@@ -785,7 +785,7 @@ EndProcedure
 
 &AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	TableName = StrReplace(Item.Name, "Agreement", "");
+	TableName = Left(Item.Name, StrFind(Item.Name, "Agreement", SearchDirection.FromEnd) - 1);
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;

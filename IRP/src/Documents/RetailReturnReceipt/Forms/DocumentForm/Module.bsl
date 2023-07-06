@@ -622,6 +622,11 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region ExternalCommands
@@ -867,10 +872,14 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	Str.Insert("Key", AddInfo.RowKey);
 	Array.Add(Str);
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
-	
-	For Each Row In Result Do
-		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
-	EndDo;
+	If Result.WithoutScan Then
+		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
+		CurrentRow.isControlCodeString = False;
+	Else
+		For Each Row In Result.Scaned Do
+			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+		EndDo;
+	EndIf;
 	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;

@@ -717,6 +717,50 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="5b3ff04e-719a-49b5-bd4a-d2edc8a2e2eb">
+   <name>SendingAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>Sending account</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Касса/банк отправитель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sending account</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CashAccounts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6b07b05e-5a70-41a6-ac7a-721c8d1ded24">
+   <name>SendingBranch</name>
+   <synonym>
+    <key>en</key>
+    <value>Sending branch</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Структурное подразделение отправитель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sending branch</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="1a288d2e-b06b-469b-aab9-59aa3bbc4d34">
   <producedTypes>

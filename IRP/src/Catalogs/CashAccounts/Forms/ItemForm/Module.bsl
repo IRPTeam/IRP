@@ -34,11 +34,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	CatCashAccountsClient.BeforeWrite(Object, ThisObject, Cancel, WriteParameters);
-EndProcedure
-
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If ThisObject.CurrencyType = "Fixed" And Not ValueIsFilled(Object.Currency) Then
@@ -160,6 +155,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

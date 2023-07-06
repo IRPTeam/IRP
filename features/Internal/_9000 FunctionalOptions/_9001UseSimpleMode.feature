@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FunctionalOptions
@@ -10,13 +10,23 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _900000 preparation
+
+Scenario: _900000 check open company catalog (dont use company)
+	* Check open Company catalog
+		And In the command interface I select "Master data" "Companies"
+		Then the form attribute named "Country" became equal to ""
+		Then the form attribute named "MainCompany" became equal to ""
+		Then the form attribute named "Partner" became equal to ""
+		And I close all client application windows
+		
+
+Scenario: _900001 Check Company creation
 	When set True value to the constant UseSimpleMode
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 	And I click "Update defaults" button
 	And I click "Update all user settings" button
 	And I close "Functional option settings" window
-	* Check Coompany creation
+	* Check Company creation
 		And In the command interface I select "Master data" "Companies"
 		Then the form attribute named "Country" became equal to ""
 		Then the form attribute named "MainCompany" became equal to ""
@@ -32,10 +42,10 @@ Scenario: _900000 preparation
 		Then the number of "CompanyTaxes" table lines is "равно" 0
 	And I close all client application windows
 		
-Scenario: _900001 check preparation
+Scenario: _900002 check preparation
 	When check preparation
 
-Scenario: _900001 create items
+Scenario: _900003 create items
 	* Create Product 1
 		And In the command interface I select "Purchase  - A/P" "Items"
 		Then "Items" window is opened
@@ -70,7 +80,7 @@ Scenario: _900001 create items
 			| 'Service 1'     | 'Service'      |
 		And I close all client application windows
 
-Scenario: _900002 create partners (vendor and customer)
+Scenario: _900004 create partners (vendor and customer)
 	* Create vendor
 		And In the command interface I select "Purchase  - A/P" "Vendors"
 		Then "Vendors" window is opened
@@ -98,7 +108,7 @@ Scenario: _900002 create partners (vendor and customer)
 			| 'Customer 1'             |
 			| 'Vendor and customer'    |
 
-Scenario: _900003 create price list (customer price type)
+Scenario: _900005 create price list (customer price type)
 	* Open price list
 		And In the command interface I select "Purchase  - A/P" "Price lists"
 		Then "Price lists" window is opened
@@ -136,7 +146,7 @@ Scenario: _900003 create price list (customer price type)
 			| '1'        | 'Customer price type'   | 'Price by items'     |
 
 
-Scenario: _900004 create Cash account
+Scenario: _900006 create Cash account
 	* Open creation form
 		And In the command interface I select "Treasury" "Cash/Bank accounts"
 		Then "Cash/Bank accounts" window is opened
@@ -155,7 +165,7 @@ Scenario: _900004 create Cash account
 			| 'Cash 1'         |
 		And I close all client application windows
 
-Scenario: _900005 create Opening entry
+Scenario: _900007 create Opening entry
 	* Open OE form
 		And In the command interface I select "Master data" "Opening entries"
 	* Filling Inventory tab

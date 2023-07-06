@@ -950,6 +950,50 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="84b65a15-1320-45bf-970e-2bff2a0740b3">
+   <name>ReceiptingAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>Receipting account</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Касса/банк получатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Alıcı kasa/banka</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CashAccounts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c4f67f87-1ff2-44ed-b501-4c47f88034e7">
+   <name>ReceiptingBranch</name>
+   <synonym>
+    <key>en</key>
+    <value>Receipting branch</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Структурное подразделение получатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Receipting branch</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
   <producedTypes>

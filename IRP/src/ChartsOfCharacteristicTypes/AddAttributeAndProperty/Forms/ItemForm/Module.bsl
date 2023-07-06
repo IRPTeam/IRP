@@ -5,6 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrentObject = FormAttributeToValue("Object");
 		Icon = PutToTempStorage(CurrentObject.Icon.Get());
 	EndIf;
+	ShowFormItems(ThisObject.Items, ThisObject.Object);
 EndProcedure
 
 &AtClient
@@ -75,4 +76,19 @@ Procedure SelectFileEnd(Files, AdditionalParameters) Export
 	Icon = PutToTempStorage(BDScaled, UUID);
 	Object.isIconSet = True;
 
+EndProcedure
+
+&AtClient
+Procedure ValueTypeOnChange(Item)
+	ShowFormItems(ThisObject.Items, ThisObject.Object);
+EndProcedure
+
+// Show form items.
+// 
+// Parameters:
+//  Items - ClientApplicationForm, FormAllItems - Items
+//  Object - ClientApplicationForm, FormDataStructure - Object
+&AtClientAtServerNoContext
+Procedure ShowFormItems(Items, Object)
+	Items.isURL.Visible = Object.ValueType.ContainsType(Type("String"));
 EndProcedure

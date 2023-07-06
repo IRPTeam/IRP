@@ -15,7 +15,8 @@
  </synonym>
  <source>
   <types>CatalogManager</types>
-  <types>ChartOfCharacteristicTypesManager.CurrencyMovementType</types>
+  <types>ChartOfCharacteristicTypesManager</types>
+  <types>ChartOfAccountsManager.Basic</types>
  </source>
  <event>ChoiceDataGetProcessing</event>
  <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>

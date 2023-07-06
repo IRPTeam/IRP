@@ -59,7 +59,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.AmountExchange,
 	|PaymentList.Order,
 	|PaymentList.MoneyTransfer,
-	|PaymentList.RetailCustomer";
+	|PaymentList.RetailCustomer,
+	|PaymentList.SendingAccount,
+	|PaymentList.SendingBranch";
 
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -70,7 +72,6 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
-	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
@@ -79,15 +80,20 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	// visible columns
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
-		|PaymentList.PlaningTransactionBasis";
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
 	ElsIf TransactionType = CashIn Then
 		StrByType = "
 		|PaymentList.MoneyTransfer";		
 	ElsIf TransactionType = CurrencyExchange Then
-		StrByType = "CurrencyExchange,
+		StrByType = "
+		|CurrencyExchange,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.Partner,
-		|PaymentList.AmountExchange";
+		|PaymentList.AmountExchange,
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
 	ElsIf TransactionType = PaymentFromCustomer Or TransactionType = ReturnFromVendor Then
 		StrByType = "
 		|PaymentList.BasisDocument,
@@ -105,9 +111,6 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
 		|PaymentList.LegalNameContract";		
-	ElsIf TransactionType = TransferFromPOS Then
-		StrByType = "
-		|PaymentList.PlaningTransactionBasis";
 	ElsIf TransactionType = CustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,
@@ -137,7 +140,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
-	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	
 	ArrayTypes = New Array();
 	
@@ -155,11 +157,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.Company.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
 		Form.Items.Currency.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);		
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-	ElsIf IsEmployeeCashAdvance Then
-		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	Else
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	EndIf;
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
@@ -456,6 +454,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

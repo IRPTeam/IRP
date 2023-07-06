@@ -3112,10 +3112,10 @@
      </items>
      <items xsi:type="form:FormGroup">
       <name>LinkedDocuments</name>
-      <id>1180</id>
+      <id>1215</id>
       <items xsi:type="form:Button">
        <name>ItemListLinkedDocuments_ShipmentConfirmations</name>
-       <id>1182</id>
+       <id>1217</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -3162,7 +3162,7 @@
       </title>
       <extendedTooltip>
        <name>LinkedDocumentsExtendedTooltip</name>
-       <id>1181</id>
+       <id>1216</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>

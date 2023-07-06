@@ -63,7 +63,15 @@ Function UseCashAdvanceHolder(Val Object) Export
 EndFunction
 
 Function GetInfoForFillingCashReceipt(Ref) Export
-	Result = New Structure("Ref, CashAccount, Company, Currency, CurrencyExchange");
+	Result = New Structure("Ref, 
+		|CashAccount, 
+		|Company, 
+		|Currency, 
+		|CurrencyExchange,
+		|SendingAccount, 
+		|SendingBranch,
+		|ReceiveFinancialMovementType");
+		
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -71,6 +79,9 @@ Function GetInfoForFillingCashReceipt(Ref) Export
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.ReceiveCurrency AS Currency,
 	|	CashTransferOrder.SendCurrency AS CurrencyExchange,
+	|	CashTransferOrder.Sender AS SendingAccount,
+	|	CashTransferOrder.Branch AS SendingBranch,
+	|	CashTransferOrder.ReceiveFinancialMovementType AS ReceiveFinancialMovementType,
 	|	CashTransferOrder.Ref
 	|FROM
 	|	Document.CashTransferOrder AS CashTransferOrder
@@ -86,13 +97,23 @@ Function GetInfoForFillingCashReceipt(Ref) Export
 EndFunction
 
 Function GetInfoForFillingCashPayment(Ref) Export
-	Result = New Structure("Ref, CashAccount, Company, Currency");
+	Result = New Structure("Ref, 
+		|CashAccount, 
+		|Company, 
+		|Currency, 
+		|ReceiptingAccount, 
+		|ReceiptingBranch, 
+		|SendFinancialMovementType");
+		
 	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Sender AS CashAccount,
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.SendCurrency AS Currency,
+	|	CashTransferOrder.Receiver AS ReceiptingAccount,
+	|	CashTransferOrder.ReceiveBranch AS ReceiptingBranch,
+	|	CashTransferOrder.SendFinancialMovementType AS SendFinancialMovementType,
 	|	CashTransferOrder.Ref
 	|FROM
 	|	Document.CashTransferOrder AS CashTransferOrder
@@ -108,7 +129,15 @@ Function GetInfoForFillingCashPayment(Ref) Export
 EndFunction
 
 Function GetInfoForFillingBankReceipt(Ref) Export
-	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
+	Result = New Structure("Ref, 
+		|Account, 
+		|Company, 
+		|Currency, 
+		|CurrencyExchange,
+		|SendingAccount, 
+		|SendingBranch,
+		|ReceiveFinancialMovementType");
+		
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -116,6 +145,9 @@ Function GetInfoForFillingBankReceipt(Ref) Export
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.ReceiveCurrency AS Currency,
 	|	CashTransferOrder.SendCurrency AS CurrencyExchange,
+	|	CashTransferOrder.Sender AS SendingAccount,
+	|	CashTransferOrder.Branch AS SendingBranch,
+	|	CashTransferOrder.ReceiveFinancialMovementType AS ReceiveFinancialMovementType,
 	|	CashTransferOrder.Ref
 	|FROM
 	|	Document.CashTransferOrder AS CashTransferOrder
@@ -131,13 +163,24 @@ Function GetInfoForFillingBankReceipt(Ref) Export
 EndFunction
 
 Function GetInfoForFillingBankPayment(Ref) Export
-	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
+	Result = New Structure("Ref, 
+		|Account, 
+		|Company, 
+		|Currency, 
+		|CurrencyExchange, 
+		|ReceiptingAccount, 
+		|ReceiptingBranch,
+		|SendFinancialMovementType");
+		
 	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Sender AS Account,
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.SendCurrency AS Currency,
+	|	CashTransferOrder.Receiver AS ReceiptingAccount,
+	|	CashTransferOrder.ReceiveBranch AS ReceiptingBranch,
+	|	CashTransferOrder.SendFinancialMovementType AS SendFinancialMovementType,
 	|	CashTransferOrder.Ref
 	|FROM
 	|	Document.CashTransferOrder AS CashTransferOrder

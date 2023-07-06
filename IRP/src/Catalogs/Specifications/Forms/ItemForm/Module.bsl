@@ -480,10 +480,15 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 &AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+&AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
-
-#EndRegion

@@ -46,18 +46,6 @@
 						<comparisonType>NotFilled</comparisonType>
 					</item>
 				</item>
-				<item xsi:type="FilterItemGroup">
-					<groupType>AndGroup</groupType>
-					<item xsi:type="FilterItemComparison">
-						<left xsi:type="dcscor:Field">Object.TransactionType</left>
-						<comparisonType>Equal</comparisonType>
-						<right xsi:type="dcscor:DesignTimeValue">Enum.OutgoingPaymentTransactionTypes.CashTransferOrder</right>
-					</item>
-					<item xsi:type="FilterItemComparison">
-						<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
-						<comparisonType>NotFilled</comparisonType>
-					</item>
-				</item>
 			</item>
 		</filter>
 		<appearance>

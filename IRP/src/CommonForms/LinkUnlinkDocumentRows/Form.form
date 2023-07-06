@@ -4559,7 +4559,7 @@
    <valueType>
     <types>String</types>
     <stringQualifiers>
-     <length>200</length>
+     <length>500</length>
     </stringQualifiers>
    </valueType>
    <view>

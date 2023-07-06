@@ -1,5 +1,5 @@
 
-Function GetBillOfMaterialsByItemKey(ItemKey) Export
+Function GetBillOfMaterialsByItemKey(ItemKey, BusinessUnit = Undefined) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -10,7 +10,14 @@ Function GetBillOfMaterialsByItemKey(ItemKey) Export
 		|	ItemKeys.Ref = &ItemKey
 		|	AND NOT ItemKeys.DefaultBillOfMaterials.DeletionMark
 		|	AND ItemKeys.DefaultBillOfMaterials.Active
-		|;		
+		|	and case
+		|		when &Filter_BusinessUnit
+		|			then ItemKeys.DefaultBillOfMaterials.BusinessUnit = &BusinessUnit
+		|		else true
+		|	end
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT TOP 2
 		|	Table.Ref
 		|FROM
@@ -18,8 +25,16 @@ Function GetBillOfMaterialsByItemKey(ItemKey) Export
 		|WHERE
 		|	Table.ItemKey = &ItemKey
 		|	AND NOT Table.DeletionMark
-		|	AND Table.Active";
+		|	AND Table.Active
+		|	and case
+		|		when &Filter_BusinessUnit
+		|			then Table.BusinessUnit = &BusinessUnit
+		|		else true
+		|	end";
 	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("BusinessUnit", BusinessUnit);
+	Query.SetParameter("Filter_BusinessUnit", BusinessUnit <> Undefined);
+	
 	QueryResults = Query.ExecuteBatch();
 	DefaultRef = QueryResults[0].Unload();
 	If DefaultRef.Count() Then

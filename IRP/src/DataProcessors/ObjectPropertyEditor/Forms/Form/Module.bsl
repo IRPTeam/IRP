@@ -1208,6 +1208,9 @@ Function GetColumnsDataByRef(Form)
 		If Not CommonFunctionsServer.isCommonAttributeUseForMetadata(AttributItem.Name, MetaObject) Then
 			Continue;
 		EndIf;
+		If Not CommonFunctionsServer.isMetadataAvailableByCurrentFunctionalOptions(AttributItem, True) Then
+			Continue;
+		EndIf;
 		ItemRef = AttributItem.Name;
 		ItemKey = GetFieldKeyFromRef(AttributItem.Name);
 		ItemPresentation = AttributItem.Synonym;
@@ -1222,6 +1225,9 @@ Function GetColumnsDataByRef(Form)
 	EndDo;
 	
 	For Each AttributItem In MetaObject.Attributes Do
+		If Not CommonFunctionsServer.isMetadataAvailableByCurrentFunctionalOptions(AttributItem, True) Then
+			Continue;
+		EndIf;
 		ValueType = AttributItem.Type;
 		If ValueType.ContainsType(Type("ValueStorage")) Then
 			Continue;
@@ -1321,6 +1327,9 @@ Function GetColumnsDataForTable(Form)
 	Meta_TS = MetaObject.TabularSections[TabularSection];
 	
 	For Each AttributItem In Meta_TS.Attributes Do
+		If Not CommonFunctionsServer.isMetadataAvailableByCurrentFunctionalOptions(AttributItem, True) Then
+			Continue;
+		EndIf;
 		ValueType = AttributItem.Type;
 		If ValueType.ContainsType(Type("ValueStorage")) Then
 			Continue;

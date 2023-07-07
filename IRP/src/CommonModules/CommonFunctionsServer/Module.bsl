@@ -1001,4 +1001,36 @@ Procedure DeleteFormArrayIfPresent(Array, Value) Export
 		Array.Delete(Index);
 	EndIf;
 EndProcedure	
+
+// Is metadata available by current functional options.
+// 
+// Parameters:
+//  ValidatedMetadata - MetadataObjectAttribute - Validated metadata
+//  hasType - Boolean - has type
+// 
+// Returns:
+//  Boolean - Is metadata available by current functional options
+Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasType = False) Export
 	
+	MetadataByType = Undefined;
+	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
+		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
+	EndIf;
+	If MetadataByType = Undefined Then
+		MetadataByType = ValidatedMetadata;
+	EndIf;
+	
+	UsedInFunctionalOptions = False;
+    
+    For Each FunctionalOption In Metadata.FunctionalOptions Do
+        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
+            UsedInFunctionalOptions = True;
+            If GetFunctionalOption(FunctionalOption.Name) = True Then
+                Return True;
+            EndIf;
+        EndIf;
+    EndDo;
+    
+    Return Not UsedInFunctionalOptions;
+    	
+EndFunction	

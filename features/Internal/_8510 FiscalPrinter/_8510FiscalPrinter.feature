@@ -1075,8 +1075,8 @@ Scenario: _0850022 check than RRN not copy
 	And I move to "Payments" tab
 	And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'      | 'Account'          | 'Percent'   | 'RRN Code'    |
-			| '1'   | '50,00'    | '0,50'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | ''            |
-			| '2'   | '50,00'    | '0,50'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | ''            |
+			| '1'   | '40,00'    | '0,40'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | ''            |
+			| '2'   | '60,00'    | '0,60'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | ''            |
 	And I close all client application windows
 	
 Scenario: _0850023 check return payment by card and cash (sales by card)

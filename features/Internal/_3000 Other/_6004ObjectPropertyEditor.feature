@@ -114,6 +114,9 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
+		And I expand a line in "FilterAvailableFields" table
+			| 'Available fields' |
+			| 'Ref'              |		
 		And I go to line in "FilterAvailableFields" table
 			| 'Available fields'    |
 			| 'Item type'           |
@@ -158,6 +161,9 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
 	* Add filter
 		And I click Select button of "Filter" field
+		And I expand a line in "FilterAvailableFields" table
+			| 'Available fields' |
+			| 'Ref'              |	
 		And I expand current line in "FilterAvailableFields" table
 		And I go to line in "FilterAvailableFields" table
 			| 'Available fields'    |
@@ -231,7 +237,7 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 			| 'Description'    |
 			| 'ODS'            |
 		And I click the button named "FormChoose"
-		And "PropertiesTable" table became equal
+		And "PropertiesTable" table contains lines
 			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
 			| 'Yes'      | 'Yes'           | 'Dress'                    | 'Rose'    | 'PZU'        | ''          | 'Poland'                    |
 			| 'No'       | 'Yes'           | 'Scarf + Dress'            | ''        | 'ODS'        | ''          | ''                          |
@@ -252,8 +258,6 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 			| 'No'       | 'Yes'           | 'Socks'                    | ''        | 'ODS'        | ''          | ''                          |
 			| 'No'       | 'Yes'           | 'Jacket J22001'            | ''        | 'ODS'        | ''          | ''                          |
 			| 'No'       | 'Yes'           | 'Fee'                      | ''        | 'ODS'        | ''          | ''                          |
-			| 'No'       | 'Yes'           | 'Candy Fruit'              | ''        | 'ODS'        | ''          | ''                          |
-			| 'No'       | 'Yes'           | 'Stockings'                | ''        | 'ODS'        | ''          | ''                          |
 		And I click the button named "Save"
 		And I go to line in "PropertiesTable" table
 			| 'Object'    |

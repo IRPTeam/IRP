@@ -1542,7 +1542,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And I click choice button of the attribute named "AccountReceivableOtherPartner" in "AccountReceivableOther" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Other'       |
+			| 'Other partner 2'       |
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableOtherAmount" in "AccountReceivableOther" table
 		And I input "10,00" text in the field named "AccountReceivableOtherAmount" of "AccountReceivableOther" table

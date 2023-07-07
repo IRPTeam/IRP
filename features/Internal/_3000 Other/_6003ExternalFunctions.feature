@@ -122,6 +122,7 @@ Scenario: _602704 check function date as name
 			| 'Date as name'   | '$CurrentDate1$'    |
 
 Scenario: _602706 check user message
+	Then I stop script execution "Skipped"
 	And I close all client application windows
 	* Open External functions
 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"

@@ -181,6 +181,41 @@ SalesReceiptXML13 =
 </CheckPackage>
 """
 
+SalesReceiptXML14 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
+	</Positions>
+	<Payments Cash="112" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+SalesReceiptXML15 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+	</Positions>
+	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML16 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+	</Positions>
+	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -2287,72 +2322,71 @@ Scenario: _0260160 check sale product control code string, without check, paymen
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML13"	
 
 		
-// Scenario: _0260161 check return product control code string, without check
-// 		And I close all client application windows
-// 	* Open POS
-// 		And In the command interface I select "Retail" "Point of sale"
-// 	* Scan item with code
-// 		And I click the button named "Return"
-// 		And I click Select button of "Retail sales receipt (basis)" field
-// 		And I go to line in "List" table
-// 			| 'Amount' |
-// 			| '112,00' |
-// 		And I select current line in "List" table
-// 		And I activate "Control code string state" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I click "Code string is missing" button
-// 		And I click "Payment Return" button
-// 		And I click "OK" button
-
-		
-// 	* Check fiscal log
-// 		And Delay 5
-// 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-// 		And Delay 5
-// 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-// 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML14"
+Scenario: _0260161 check return product control code string, without check
+		And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Amount' |
+			| '112,00' |
+		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Code string is missing" button
+		And I click "Payment Return" button
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML14"
 				
 	
-// Scenario: _0260162 receipt with marking code, return without marking code
-	// And I close all client application windows
-	// * Open POS
-	// 	And In the command interface I select "Retail" "Point of sale"
-	// * Scan item with code
-	// 	And I click "Search by barcode (F7)" button
-	// 	And I input "8908899880" text in the field named "Barcode"
-	// 	And I move to the next attribute
-	// 	And I click "Search by barcode" button
-	// 	And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-	// 	And I move to the next attribute
-	// 	And I activate "Price" field in "ItemList" table
-	// 	And I select current line in "ItemList" table
-	// 	And I input "113,00" text in "Price" field of "ItemList" table
-	// 	And I finish line editing in "ItemList" table
-	// 	And I click "OK" button
-	// * Check fiscal log
-	// 	And Delay 5
-	// 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-	// 	And Delay 5
-	// 	And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-	// 	And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML15"	
-	// * Return
-	// 	And I click the button named "Return"
-// 		And I click Select button of "Retail sales receipt (basis)" field
-// 		And I go to line in "List" table
-// 			| 'Amount' |
-// 			| '113,00' |
-// 		And I select current line in "List" table
-// 		And I activate "Control code string state" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I click "Code string is missing" button
-// 		And I click "Payment Return" button
-// 		And I click "OK" button	
-// * Check fiscal log
-// 		And Delay 5
-// 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-// 		And Delay 5
-// 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-// 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
+Scenario: _0260162 receipt with marking code, return without marking code
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click "Search by barcode (F7)" button
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "113,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML15"	
+	* Return
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Amount' |
+			| '113,00' |
+		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Code string is missing" button
+		And I click "Payment Return" button
+		And I click "OK" button	
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
 
 
 Scenario: _0260152 close session

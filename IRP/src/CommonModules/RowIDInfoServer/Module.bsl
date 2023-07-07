@@ -4387,7 +4387,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 	"SELECT ALLOWED
-	|	""SalesInvoice"" AS BasedOn,
+	|	""RetailSalesReceipt"" AS BasedOn,
 	|	UNDEFINED AS Ref,
 	|	ItemList.Ref AS RetailSalesReceipt,
 	|	ItemList.Ref.Partner AS Partner,
@@ -4423,7 +4423,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ISNULL(ItemList.isControlCodeString, False) AS isControlCodeString
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
@@ -10687,7 +10688,9 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypePurchases,
 		   |TransactionTypePR,
 		   |InventoryOrigin,
-		   |TransactionTypeRGR";
+		   |TransactionTypeRGR,
+		   |isControlCodeString";
+		
 EndFunction
 
 Function GetEmptyTable_ItemList()

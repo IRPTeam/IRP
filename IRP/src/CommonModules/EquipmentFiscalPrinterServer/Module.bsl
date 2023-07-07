@@ -24,20 +24,38 @@ EndFunction
 // 
 // Returns:
 //  Structure - Prepare receipt data by retail sales receipt:
-// * CashierName - String -
+// * CashierName - DefinedType.typeDescription -
+// * CashierINN  - String -
+// * SaleAddress  - String -
+// * SaleLocation  - String -
 // * OperationType - Number -
 // * TaxationSystem - Number -
-// * FiscalStrings - Array -
+// * FiscalStrings - Array Of Structure:
+// ** AmountWithDiscount - Number -
+// ** DiscountAmount - Number -
+// ** CalculationSubject - Number -
+// ** MarkingCode - String -
+// ** MeasureOfQuantity - String -
+// ** Name - String -
+// ** Quantity - Number -
+// ** PaymentMethod - Number -
+// ** PriceWithDiscount - Number -
+// ** VATRate - String -
+// ** VATAmount - Number -
+// ** CalculationAgent - String -
+// ** VendorData - Structure:
+// *** VendorINN - String -
+// *** VendorName - String -
+// *** VendorPhone - String -
 // * Cash - Number -
 // * ElectronicPayment - Number -
 // * PrePayment - Number -
 // * PostPayment - Number -
 // * Barter - Number -
 // * Cash - Number -
-// * TextStrings - Array -
+// * TextStrings - Array Of String -
 Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		Str.Insert("OperationType", 1);
 	Else
@@ -62,6 +80,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
+		// TODO: Get from ItemType (or Item) CalculationSubject
 		If ItemRow.isControlCodeString Then
 			If CCSRows.Count() = 0 Then
 				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
@@ -71,16 +90,17 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows[0].NotCheck Then
 				// Not check an not send
+				FiscalStringData.Insert("CalculationSubject", 1);
 			Else
 				CodeString = CCSRows[0].CodeString;
 				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
 					CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
 				EndIf;
 				FiscalStringData.Insert("MarkingCode", CodeString);
-				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+				FiscalStringData.Insert("CalculationSubject", 33);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
-			FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+			FiscalStringData.Insert("CalculationSubject", 1);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
 		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));
@@ -158,43 +178,63 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		EndIf;
 		
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+			Str.PrePayment = Str.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
+				Str.PostPayment = Str.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;
 			Else
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			EndIf;
 		Else
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
+				Str.PostPayment = Str.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;				
 			Else
-				Str.Insert("Cash", Str.Cash + Payment.Amount);
+				Str.Cash = Str.Cash + Payment.Amount;
 			EndIf;
 		EndIf;
 	EndDo;
 	
 	Str.Insert("TextStrings", TextStrings);
 	
+	// TODO: Fix
+	isEmulator = StrStartsWith(SourceData.ConsolidatedRetailSales.FiscalPrinter.Driver.AddInID, "AddIn.Modul_KKT");
+	If isEmulator Then
+		For Each Row In Str.FiscalStrings Do
+			If Row.CalculationSubject = 33 Then
+				Row.CalculationSubject = 1;
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	Return Str;
 EndFunction
 
+// Prepare receipt data by cash receipt.
+// 
+// Parameters:
+//  SourceData - DocumentRef.CashReceipt
+// 
+// Returns:
+//  Structure - Prepare receipt data by cash receipt
 Function PrepareReceiptDataByCashReceipt(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 1);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -218,7 +258,7 @@ Function PrepareReceiptDataByCashReceipt(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -253,10 +293,16 @@ Function PrepareReceiptDataByCashReceipt(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by cash payment.
+// 
+// Parameters:
+//  SourceData - DocumentRef.CashPayment
+// 
+// Returns:
+//  Structure - Prepare receipt data by cash payment
 Function PrepareReceiptDataByCashPayment(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 2);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -280,7 +326,7 @@ Function PrepareReceiptDataByCashPayment(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -315,10 +361,16 @@ Function PrepareReceiptDataByCashPayment(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by bank receipt.
+// 
+// Parameters:
+//  SourceData - DocumentRef.BankReceipt
+// 
+// Returns:
+//  Structure - Prepare receipt data by bank receipt
 Function PrepareReceiptDataByBankReceipt(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 1);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -342,7 +394,7 @@ Function PrepareReceiptDataByBankReceipt(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -377,10 +429,16 @@ Function PrepareReceiptDataByBankReceipt(SourceData) Export
 	Return Str;
 EndFunction
 
+// Prepare receipt data by bank payment.
+// 
+// Parameters:
+//  SourceData - DocumentRef.BankPayment
+// 
+// Returns:
+//  Structure - Prepare receipt data by bank payment
 Function PrepareReceiptDataByBankPayment(SourceData) Export
 	
-	Str = New Structure;
-	Str.Insert("CashierName", String(SourceData.Author));
+	Str = ShiftGetXMLOperationSettings(SourceData);
 	Str.Insert("OperationType", 2);
 	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
 	
@@ -404,7 +462,7 @@ Function PrepareReceiptDataByBankPayment(SourceData) Export
 			FiscalStringData = New Structure();
 			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			FiscalStringData.Insert("MeasureOfQuantity", "255");
 			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
 			FiscalStringData.Insert("Quantity", 1);
@@ -519,6 +577,31 @@ Function GetStringCode(DocumentRef) Export
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;
+EndFunction
+
+// Shift get XMLOperation settings.
+// 
+// Parameters:
+//  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
+// 
+// Returns:
+//  Structure - Shift get XMLOperation settings:
+// * CashierName - DefinedType.typeDescription -
+// * CashierINN - String -
+// * SaleAddress - String -
+// * SaleLocation - String -
+Function ShiftGetXMLOperationSettings(Ref) Export
+	Str = New Structure;
+	Str.Insert("CashierName", Ref.Author.Partner.Description_ru);
+	Str.Insert("CashierINN", Ref.Author.Partner.TaxID);
+	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales") Then
+		Str.Insert("SaleAddress", Ref.FiscalPrinter.SaleAddress);
+		Str.Insert("SaleLocation", Ref.FiscalPrinter.SaleLocation);
+	Else
+		Str.Insert("SaleAddress", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress);
+		Str.Insert("SaleLocation", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation);
+	EndIf;
+	Return Str;
 EndFunction
 
 #EndRegion

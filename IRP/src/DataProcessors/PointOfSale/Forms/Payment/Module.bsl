@@ -725,11 +725,11 @@ EndProcedure
 
 &AtClient
 Async Function Payment_PayByPaymentCard(PaymentRow)
-	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	PaymentSettings.Form.ElementToHideAndShow = Items.GroupWait;
-	Result = Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
@@ -753,12 +753,12 @@ EndProcedure
 &AtClient
 Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	
-	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	PaymentSettings.InOut.RRNCode = PaymentRow.RRNCode;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	PaymentSettings.Form.ElementToHideAndShow = Items.GroupWait;
-	Result = Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
@@ -781,7 +781,7 @@ EndProcedure
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	
-	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings();
     If PaymentRow.PaymentDone Then
 		PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
 		
@@ -795,7 +795,7 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 		PaymentSettings.In.Amount = PaymentRow.Amount;
 	   	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
 	EndIf;
-	Result = Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
 		If ReturnInTheSameConsolidateSales Then
 			PaymentRow.PaymentDone = True;

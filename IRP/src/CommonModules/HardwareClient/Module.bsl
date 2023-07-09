@@ -218,6 +218,21 @@ Async Function GetDriverObject(DriverInfo) Export
 
 EndFunction
 
+// Get last error.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware
+//  
+// Return:
+//  String - Error description
+Async Function GetLastError(Hardware) Export
+	Device = HardwareServer.GetConnectionSettings(Hardware);
+	ConnectedDriver = Await GetDriverObject(Device);
+	ErrorDescription = "";
+	Device_GetLastError(ConnectedDriver, ConnectedDriver.DriverObject, ErrorDescription);
+	Return ErrorDescription;
+EndFunction
+
 #EndRegion
 
 #Region API
@@ -693,6 +708,37 @@ Function Device_SetParameter(Settings, DriverObject, Name, Value)
 	EndIf;
 	
 	Result =  DriverObject.SetParameter(Structure.In.Name, Structure.In.Value); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", False, Structure, Result);
+	EndIf;
+		
+	Return Result;
+EndFunction
+
+// Get last error.
+// 
+// Parameters:
+//  Settings - See GetDriverObject
+//  DriverObject - Arbitrary - Driver object
+//  ErrorDescription - String - Error result text
+// 
+// Returns:
+//  Boolean
+//  
+// @skip-check dynamic-access-method-not-found
+Function Device_GetLastError(Settings, DriverObject, ErrorDescription)
+	Structure = New Structure;
+	Structure.Insert("Out", New Structure);
+	Structure.Out.Insert("ErrorDescription", "");
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", True, Structure);
+	EndIf;
+	
+	//@skip-check property-return-type
+	Result =  DriverObject.GetLastError(Structure.Out.ErrorDescription); // Boolean
+	//@skip-check property-return-type
+	ErrorDescription = Structure.Out.ErrorDescription; // String
 	
 	If Settings.WriteLog Then
 		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", False, Structure, Result);

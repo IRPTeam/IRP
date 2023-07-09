@@ -1,4 +1,4 @@
-#Region API
+#Region MainFunctions
 
 // Open shift.
 // 
@@ -17,7 +17,8 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		Return Result;
 	EndIf;
 	
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+	Hardware = CRS.FiscalPrinter;
+	
 		
 	Parameters = ShiftSettings();
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
@@ -25,19 +26,21 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	LineLength = 0;
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	DriverObject.GetLineLength(Settings.ConnectedDriver.ID, LineLength);
+	LineLengthSettings = EquipmentFiscalPrinterAPIClient.GetLineLengthSettings();
+	If EquipmentFiscalPrinterAPIClient.GetLineLength(Hardware, LineLengthSettings) Then
+		LineLength = LineLengthSettings.Out.LineLength;
+	EndIf;
 	
-	DataKKT = "";
-	DataKKTResult = DriverObject.GetDataKKT(Settings.ConnectedDriver.ID, DataKKT);
-	If Not DataKKTResult Then
+	DataKKTSettings = EquipmentFiscalPrinterAPIClient.GetDataKKTSettings();
+	If Not EquipmentFiscalPrinterAPIClient.GetDataKKT(Hardware, DataKKTSettings) Then
 		Raise "Can not get data KKT";
 	EndIf;
 
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
-	If ResultInfo Then
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = Parameters.ParametersXML;
+	If EquipmentFiscalPrinterAPIClient.GetCurrentStatus(Hardware, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			
 		ElsIf ShiftData.ShiftState = 2 Then
@@ -50,6 +53,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
+		EquipmentFiscalPrinterAPIClient.Get
 		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
@@ -236,7 +240,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			
 			ArrayForApprove = New Array; // Array Of String
 			For Each CodeString In EquipmentFiscalPrinterServer.GetStringCode(DataSource) Do
-				RequestKMSettings = RequestKMSettings(isReturn);
+				RequestKMSettings = RequestKMSettingsInfo(isReturn);
 				RequestKMSettings.MarkingCode = CodeString;
 				RequestKMSettings.Quantity = 1;
 				CheckResult = Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings, False);
@@ -471,7 +475,7 @@ EndFunction
 // 
 // Parameters:
 //  Hardware - CatalogRef.Hardware - 
-//  RequestKMSettings - See RequestKMSettings
+//  RequestKMSettingsInfo - See RequestKMSettingsInfo
 // 
 // Returns:
 //  See EquipmentFiscalPrinterClient.ProcessingKMResult
@@ -489,7 +493,7 @@ EndFunction
 // * MarkingCode - String -
 // * PlannedStatus - Number -
 // * Quantity - Number -
-Function RequestKMSettings(isReturn = False) Export
+Function RequestKMSettingsInfo(isReturn = False) Export
 	Str = New Structure;
 	Str.Insert("GUID", String(New UUID()));
 	Str.Insert("WaitForResult", True);
@@ -536,14 +540,14 @@ EndFunction
 
 #EndRegion
 
-#Region Device
+#Region Check
 
 // Device request KM.
 // 
 // Parameters:
 //  Settings - See HardwareClient.GetDriverObject
 //  DriverObject - Arbitrary - Driver object
-//  RequestKMSettings - See RequestKMSettings
+//  RequestKMSettingsInfo - See RequestKMSettingsInfo
 //  OpenAndClose - Boolean -
 // 
 // Returns:
@@ -637,8 +641,8 @@ Function RequestXML(RequestKMSettings)
 	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
 	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(CodeString));
 	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
-	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettings.WaitForResult));
-	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettings.Quantity));
+	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettingsInfo.WaitForResult));
+	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettingsInfo.Quantity));
 	XMLWriter.WriteEndElement();
 	
 	RequestXML = XMLWriter.Close();

@@ -174,8 +174,8 @@ Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	
 	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Object.Workstation, PredefinedValue("Enum.EquipmentTypes.Acquiring"));
 	For Each Acquiring In AcquiringList Do
-		SettlementSettings = EquipmentAcquiringClient.SettlementSettings();
-		ResultSettlement = Await EquipmentAcquiringClient.Settlement(Acquiring, SettlementSettings);
+		SettlementSettings = EquipmentAcquiringAPIClient.SettlementSettings();
+		ResultSettlement = Await EquipmentAcquiringAPIClient.Settlement(Acquiring, SettlementSettings);
 		Str = New Structure("Payments", New Array);
 		Str.Payments.Add(New Structure("PaymentInfo", SettlementSettings));
 		If ResultSettlement Then  

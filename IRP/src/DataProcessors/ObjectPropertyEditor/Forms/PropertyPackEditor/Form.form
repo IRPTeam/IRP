@@ -511,7 +511,8 @@
    </title>
    <id>3</id>
    <valueType>
-    <types>AnyRef</types>
+    <types>String</types>
+    <stringQualifiers/>
    </valueType>
    <view>
     <common>true</common>

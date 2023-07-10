@@ -538,7 +538,7 @@ EndFunction
 // 	** Key - String - Table name
 // 	** Value - ValueTable - Table
 // * DefaultTable - Undefined, String - Default table name
-Function CreateWrapper(DefaultTable = Undefined)
+Function CreateWrapper(DefaultTable = Undefined) Export
 	Wrapper = New Structure("Object", New Structure());
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());

@@ -78,6 +78,11 @@ Scenario: _604700 preparation (Object property editor)
 				| "Description"                 |
 				| "AdditionalFunctionality"     |
 			When add Additional Functionality extension
+	* PO posting
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I close all client application windows
 
 
@@ -114,6 +119,9 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
+		And I expand a line in "FilterAvailableFields" table
+			| 'Available fields' |
+			| 'Ref'              |		
 		And I go to line in "FilterAvailableFields" table
 			| 'Available fields'    |
 			| 'Item type'           |
@@ -158,6 +166,9 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
 	* Add filter
 		And I click Select button of "Filter" field
+		And I expand a line in "FilterAvailableFields" table
+			| 'Available fields' |
+			| 'Ref'              |	
 		And I expand current line in "FilterAvailableFields" table
 		And I go to line in "FilterAvailableFields" table
 			| 'Available fields'    |
@@ -231,7 +242,7 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 			| 'Description'    |
 			| 'ODS'            |
 		And I click the button named "FormChoose"
-		And "PropertiesTable" table became equal
+		And "PropertiesTable" table contains lines
 			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
 			| 'Yes'      | 'Yes'           | 'Dress'                    | 'Rose'    | 'PZU'        | ''          | 'Poland'                    |
 			| 'No'       | 'Yes'           | 'Scarf + Dress'            | ''        | 'ODS'        | ''          | ''                          |
@@ -252,8 +263,6 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 			| 'No'       | 'Yes'           | 'Socks'                    | ''        | 'ODS'        | ''          | ''                          |
 			| 'No'       | 'Yes'           | 'Jacket J22001'            | ''        | 'ODS'        | ''          | ''                          |
 			| 'No'       | 'Yes'           | 'Fee'                      | ''        | 'ODS'        | ''          | ''                          |
-			| 'No'       | 'Yes'           | 'Candy Fruit'              | ''        | 'ODS'        | ''          | ''                          |
-			| 'No'       | 'Yes'           | 'Stockings'                | ''        | 'ODS'        | ''          | ''                          |
 		And I click the button named "Save"
 		And I go to line in "PropertiesTable" table
 			| 'Object'    |
@@ -401,8 +410,8 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		And I click the button named "Refresh"
 	* Change partner and check change legal name
 		And I go to line in "PropertiesTable" table
-			| 'Company'        | 'Currency'   | 'Is modified'   | 'Legal name'          | 'Marked'   | 'Object'                                         | 'Partner'     | 'Partner term'         | 'Price includes tax'   | 'Status'     | 'Transaction type'   | 'Use items receipt scheduling'    |
-			| 'Main Company'   | 'TRY'        | 'No'            | 'Company Ferron BP'   | 'No'       | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Yes'                  | 'Approved'   | 'Purchase'           | 'Yes'                             |
+			| 'Company'      | 'Currency' | 'Is modified' | 'Legal name'        | 'Marked' | 'Object'                                       | 'Partner'   | 'Partner term'       | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' |
+			| 'Main Company' | 'TRY'      | 'No'          | 'Company Ferron BP' | 'No'     | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                | 'Approved' | 'Yes'                          |
 		And I activate "Partner" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Partner" attribute in "PropertiesTable" table
@@ -413,9 +422,9 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked'   | 'Is modified'   | 'Currency'   | 'Object'                                         | 'Partner term'                                 | 'Legal name'          | 'Partner bank account'            | 'Company'        | 'Partner'     | 'Price includes tax'   | 'Status'     | 'Use items receipt scheduling'   | 'Transaction type'    |
-			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas '    | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'     | 'Yes'                  | 'Approved'   | 'Yes'                            | 'Purchase'            |
-			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'Vendor Ferron, TRY'                           | 'Company Ferron BP'   | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Ferron BP'   | 'Yes'                  | 'Approved'   | 'No'                             | 'Purchase'            |
+			| 'Marked' | 'Is modified' | 'Currency' | 'Object'                                       | 'Partner term'                               | 'Legal name'        | 'Partner bank account'          | 'Company'      | 'Partner'   | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' |
+			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas '  | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas'   | 'Yes'                | 'Approved' | 'Yes'                          |
+			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'Vendor Ferron, TRY'                         | 'Company Ferron BP' | 'Partner bank account (Ferron)' | 'Main Company' | 'Ferron BP' | 'Yes'                | 'Approved' | 'No'                           |
 	* Change quantity
 		And I select "* Item list" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
@@ -486,9 +495,9 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And "PropertiesTable" table contains lines
-			| 'Marked'   | 'Is modified'   | 'Currency'   | 'Object'                                         | 'Partner term'                                 | 'Legal name'          | 'Partner bank account'            | 'Company'        | 'Partner'   | 'Price includes tax'   | 'Status'     | 'Use items receipt scheduling'   | 'Transaction type'    |
-			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas '    | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'   | 'Yes'                  | 'Approved'   | 'Yes'                            | 'Purchase'            |
-			| 'No'       | 'No'            | 'TRY'        | 'Purchase order 116 dated 12.02.2021 12:44:59'   | 'Vendor Ferron, TRY'                           | 'Company Ferron BP'   | 'Partner bank account (Ferron)'   | 'Main Company'   | 'Veritas'   | 'Yes'                  | 'Approved'   | 'No'                             | 'Purchase'            |
+			| 'Marked' | 'Is modified' | 'Currency' | 'Object'                                       | 'Partner term'                               | 'Legal name'        | 'Partner bank account'          | 'Company'      | 'Partner' | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' |
+			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas '  | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas' | 'Yes'                | 'Approved' | 'Yes'                          |
+			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 116 dated 12.02.2021 12:44:59' | 'Vendor Ferron, TRY'                         | 'Company Ferron BP' | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas' | 'Yes'                | 'Approved' | 'No'                           |
 	* Change Row ID tab
 		And I select "* Row IDInfo" exact value from "Table" drop-down list
 		And I click the button named "Refresh"

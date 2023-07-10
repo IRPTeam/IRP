@@ -1811,6 +1811,10 @@ Procedure CreateReturnOnBase(PaymentData)
 			For Each ControlCode In Object.ControlCodeStrings Do
 				FillPropertyValues(ExtractedDataItem.ControlCodeStrings.Add(), ControlCode);
 			EndDo;
+			For Each ItemListRow In ExtractedDataItem.ItemList Do
+				ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", ItemListRow.Key));
+				ItemListRow.isControlCodeString = ReturnDataItems[0].isControlCodeString;
+			EndDo;
 		EndIf;
 		
 		ExtractedDataItem.ItemList.FillValues(ThisObject.Object.Branch, "Branch");

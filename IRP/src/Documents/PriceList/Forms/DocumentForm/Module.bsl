@@ -728,3 +728,48 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+#Region LOAD_DATA_FROM_TABLE
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	AddInfo = New Structure;
+	AddInfo.Insert("TargetField", "Price");
+	If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItems") Then
+		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData"]);
+	ElsIf Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
+		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData_ItemKey"]);
+	EndIf;
+	AddInfo.Insert("EndNotify", New NotifyDescription("LoadDataFromTableEnd", ThisObject));
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object, AddInfo);
+EndProcedure
+
+&AtClient
+Procedure LoadDataFromTableEnd(Result, AddInfo) Export
+	
+	If Not Result = Undefined Then
+		LoadDataFromTableEndAtServer(Result.Address);
+	EndIf;
+	
+EndProcedure
+
+Procedure LoadDataFromTableEndAtServer(TableAddress)
+	
+	DocumentTable = Object.ItemList;
+	NameFieldForUnit = "Item";
+	If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
+		DocumentTable = Object.ItemKeyList;
+		NameFieldForUnit = "ItemKey";
+	EndIf;
+	
+	DataTable = GetFromTempStorage(TableAddress);
+	For Each TableRow In DataTable Do
+		NewRecord = DocumentTable.Add();
+		FillPropertyValues(NewRecord, TableRow);
+		Unit = GetInputUnit(NewRecord[NameFieldForUnit]);
+		NewRecord.InputUnit = Unit;
+		NewRecord.Unit = Unit;		
+	EndDo;
+	
+EndProcedure	
+
+#EndRegion

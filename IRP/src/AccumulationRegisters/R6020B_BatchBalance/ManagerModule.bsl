@@ -197,7 +197,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
 	|	R6010B_BatchWiseBalance.Recorder = &Recorder
-	|
 	|GROUP BY
 	|	R6010B_BatchWiseBalance.Document
 	|
@@ -237,10 +236,8 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.AmountCostAdditional AS AmountCostAdditional,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
 	|	R6010B_BatchWiseBalance.AmountCostTax AS AmountCostTax,
-	|
 	|	R6010B_BatchWiseBalance.AmountRevenue AS AmountRevenue,
 	|	R6010B_BatchWiseBalance.AmountRevenueTax AS AmountRevenueTax,
-	|
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
@@ -249,61 +246,65 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.PurchaseInvoice
 	|			THEN CASE
-	|					WHEN R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
-	|						THEN VALUE(Enum.InventoryOriginTypes.ConsignorStocks)
-	|					ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
-	|				END
+	|				WHEN
+	|					R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|					THEN VALUE(Enum.InventoryOriginTypes.ConsignorStocks)
+	|				ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
+	|			END
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.OpeningEntry
 	|			THEN CASE
-	|					WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
-	|						THEN VALUE(Enum.InventoryOriginTypes.ConsignorStocks)
-	|					ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
-	|				END
+	|				WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
+	|					THEN VALUE(Enum.InventoryOriginTypes.ConsignorStocks)
+	|				ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
+	|			END
 	|		ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
 	|	END AS InventoryOrigin,
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.PurchaseInvoice
 	|			THEN CASE
-	|					WHEN R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.Partner
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN
+	|					R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.Partner
+	|				ELSE UNDEFINED
+	|			END
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.OpeningEntry
 	|			THEN CASE
-	|					WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor
+	|				ELSE UNDEFINED
+	|			END
 	|		ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
 	|	END AS Partner,
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.PurchaseInvoice
 	|			THEN CASE
-	|					WHEN R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.Agreement
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN
+	|					R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.Agreement
+	|				ELSE UNDEFINED
+	|			END
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.OpeningEntry
 	|			THEN CASE
-	|					WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.AgreementConsignor
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.AgreementConsignor
+	|				ELSE UNDEFINED
+	|			END
 	|		ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
 	|	END AS Agreement,
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.PurchaseInvoice
 	|			THEN CASE
-	|					WHEN R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.LegalName
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN
+	|					R6010B_BatchWiseBalance.Batch.Document.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.LegalName
+	|				ELSE UNDEFINED
+	|			END
 	|		WHEN R6010B_BatchWiseBalance.Batch.Document REFS Document.OpeningEntry
 	|			THEN CASE
-	|					WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
-	|						THEN R6010B_BatchWiseBalance.Batch.Document.LegalNameConsignor
-	|					ELSE UNDEFINED
-	|				END
+	|				WHEN NOT R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref IS NULL
+	|					THEN R6010B_BatchWiseBalance.Batch.Document.LegalNameConsignor
+	|				ELSE UNDEFINED
+	|			END
 	|		ELSE VALUE(Enum.InventoryOriginTypes.OwnStocks)
 	|	END AS LegalName,
 	|	R6010B_BatchWiseBalance.BatchKey.SerialLotNumber AS SerialLotNumber,
@@ -328,10 +329,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
-	|
 	|	0,
 	|	0,
-	|
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
@@ -362,10 +362,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
-	|
 	|	0,
 	|	0,
-	|
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
 	|	R6040T_BatchShortageIncoming.BatchKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
@@ -397,10 +396,8 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.AmountCostAdditional AS AmountCostAdditional,
 	|	BatchBalance.AmountCost AS AmountCost,
 	|	BatchBalance.AmountCostTax AS AmountCostTax,
-	|
 	|	BatchBalance.AmountRevenue AS AmountRevenue,
 	|	BatchBalance.AmountRevenueTax AS AmountRevenueTax,
-	|
 	|	BatchBalance.Batch AS Batch,
 	|	BatchBalance.BatchKey AS BatchKey,
 	|	BatchBalance.ItemKey AS ItemKey,
@@ -414,7 +411,8 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.SourceOfOrigin AS SourceOfOrigin
 	|FROM
 	|	BatchBalance AS BatchBalance
-	|TOTALS BY
+	|TOTALS
+	|BY
 	|	Document";
 	Query.SetParameter("Recorder", CalculationMovementCostRef);
 	QueryResult = Query.Execute();

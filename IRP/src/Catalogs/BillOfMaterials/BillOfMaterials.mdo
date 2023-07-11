@@ -219,6 +219,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="add9125f-2f85-42ca-b167-82de61604519">
+    <name>AdditionalCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional cost</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="dde04875-4896-4358-8eb2-3468c9999f2f">
     <producedTypes>
       <objectType typeId="f1571f06-5b6a-43c3-ad4f-ad152a788602" valueTypeId="b6cd4d33-e9d9-40b8-8494-9bcfc98e204f"/>

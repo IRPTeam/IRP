@@ -134,6 +134,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="4df89424-458c-4f48-b46d-46654ee3be96">
+    <name>AmountCostAdditional</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost additional</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
     <name>Batch</name>
     <synonym>

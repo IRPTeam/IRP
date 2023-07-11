@@ -109,6 +109,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
 	|	R6010B_BatchWiseBalance.NotDirectCosts AS NotDirectCosts,
 	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
+	|	R6010B_BatchWiseBalance.AmountCostAdditional AS AmountCostAdditional,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
 	|	R6010B_BatchWiseBalance.AmountCostTax AS AmountCostTax,
 	|	R6010B_BatchWiseBalance.AmountRevenue AS AmountRevenue,
@@ -231,6 +232,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
 	|	R6010B_BatchWiseBalance.NotDirectCosts AS NotDirectCosts,
 	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
+	|	R6010B_BatchWiseBalance.AmountCostAdditional AS AmountCostAdditional,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
 	|	R6010B_BatchWiseBalance.AmountCostTax AS AmountCostTax,
 	|
@@ -390,6 +392,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.AmountTax AS AmountTax,
 	|	BatchBalance.NotDirectCosts AS NotDirectCosts,
 	|	BatchBalance.AmountCostRatio AS AmountCostRatio,
+	|	BatchBalance.AmountCostAdditional AS AmountCostAdditional,
 	|	BatchBalance.AmountCost AS AmountCost,
 	|	BatchBalance.AmountCostTax AS AmountCostTax,
 	|

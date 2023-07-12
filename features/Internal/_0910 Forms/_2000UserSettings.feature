@@ -1756,7 +1756,7 @@ Scenario: _200052 check Disable - Change author
 			| 'Description'               |
 			| 'Arina Brown (Financier 3)' |
 		And I select current line in "List" table
-		Then the form attribute named "Autor" became equal to "Arina Brown (Financier 3)"
+		Then the form attribute named "Author" became equal to "Arina Brown (Financier 3)"
 		And I close all client application windows
 		
 								

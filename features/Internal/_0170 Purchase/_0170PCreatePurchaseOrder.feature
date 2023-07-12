@@ -197,7 +197,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '137 000'      |
 		And I close current window		
 		Then the form attribute named "Branch" became equal to ""
-		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "UseItemsReceiptScheduling" became equal to "No"
 		Then the form attribute named "Currency" became equal to "TRY"

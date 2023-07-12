@@ -588,3 +588,22 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost5" by template
 
+Scenario: _2020 check filling additional cost from bill of material
+	And I close all client application windows
+	* Create production
+		Given I open hyperlink "e1cib/list/Document.Production"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select from "Business unit" drop-down list by "Production store 05" string
+		And I select from the drop-down list named "Item" by "Product" string
+		And I move to the next attribute
+	* Check filling AdditionalCost
+		And the editing text of form attribute named "AdditionalCost" became equal to "100,00"
+	And I close all client application windows
+
+				
+						

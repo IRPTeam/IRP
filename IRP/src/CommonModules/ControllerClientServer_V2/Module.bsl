@@ -4774,6 +4774,7 @@ Function BindBillOfMaterials(Parameters)
 	Binding.Insert("Production",
 		"StepMaterialsCalculations,
 		|StepChangeCostMultiplierRatioByBillOfMaterials,
+		|StepChangeAdditionalCostByBillOfMaterials,
 		|StepChangeDurationOfProductionByBillOfMaterials");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBillOfMaterials");
@@ -4823,6 +4824,36 @@ Procedure StepChangeCostMultiplierRatioByBillOfMaterials(Parameters, Chain) Expo
 	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
 	Options.StepName = "StepChangeCostMultiplierRatioByBillOfMaterials";
 	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region ADDITIONAL_COST
+
+// AdditionalCost.Set
+Procedure SetAdditionalCost(Parameters, Results) Export
+	Binding = BindAdditionalCost(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AdditionalCost.Bind
+Function BindAdditionalCost(Parameters)
+	DataPath = "AdditionalCost";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAdditionalCost");
+EndFunction
+
+// AdditionalCost.ChangeAdditionalCostByBillOfMaterials.Step
+Procedure StepChangeAdditionalCostByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeAdditionalCostByBillOfMaterials.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAdditionalCostByBillOfMaterials.Setter = "SetAdditionalCost";
+	Options = ModelClientServer_V2.ChangeAdditionalCostByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeAdditionalCostByBillOfMaterials";
+	Chain.ChangeAdditionalCostByBillOfMaterials.Options.Add(Options);
 EndProcedure
 
 #EndRegion

@@ -111,6 +111,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.DataBaseStatus.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.DataBaseStatus.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.DataBaseStatus.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="64bcd2ce-0942-4a11-9d24-9edc503dc945">
     <name>isProduction</name>
     <synonym>
@@ -197,6 +199,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="fedfc9ba-0ed2-466b-b759-7402d1928674">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0cebef85-3698-4aac-bc6a-21acac59219e">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

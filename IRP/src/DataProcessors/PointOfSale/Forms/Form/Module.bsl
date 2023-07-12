@@ -100,6 +100,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
 EndProcedure
 
+&AtClient
+Procedure PageButtonsOnCurrentPageChange(Item, CurrentPage)
+	If CurrentPage = Items.OffersPage Then
+		UpdateOffersPreviewID();
+	EndIf;
+EndProcedure
+
 #Region AGREEMENT
 
 &AtClient
@@ -276,7 +283,11 @@ EndProcedure
 Procedure ItemListOnActivateRow(Item)
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
-	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;
+	
+	UpdateOffersPreviewID();
 EndProcedure
 
 #EndRegion
@@ -696,10 +707,14 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	Str.Insert("Key", AddInfo.RowKey);
 	Array.Add(Str);
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
-	
-	For Each Row In Result Do
-		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
-	EndDo;
+	If Result.WithoutScan Then
+		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
+		CurrentRow.isControlCodeString = False;
+	Else
+		For Each Row In Result.Scaned Do
+			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+		EndDo;
+	EndIf;
 	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;
@@ -724,6 +739,11 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 	EndIf;
 	CalculateOffersAfterSet(Result);
 	OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject, AdditionalParameters);
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;	
 EndProcedure
 
 &AtServer
@@ -754,6 +774,11 @@ Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
 	EndIf;
 	CalculateAndLoadOffers_ForRow(Result);
 	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;	
 EndProcedure
 
 &AtServer
@@ -762,6 +787,19 @@ Procedure CalculateAndLoadOffers_ForRow(Result)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure UpdateOffersPreview(Command)
+	UpdateOffersPreviewID();
+EndProcedure
+
+&AtClient
+Procedure UpdateOffersPreviewID()
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		CurrentItemListID = CurrentData.Key;
+	EndIf;
+EndProcedure
 
 #EndRegion
 
@@ -1169,6 +1207,11 @@ Function WriteTransaction(Result)
 		ObjectValue = FormAttributeToValue("Object");
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Payments.Load(Payments);
+		For Each Row In ObjectValue.Payments Do
+			If ValueIsFilled(Row.PaymentType) Then
+				Row.FinancialMovementType = Row.PaymentType.FinancialMovementType;
+			EndIf;
+		EndDo;
 		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
@@ -1204,7 +1247,7 @@ EndProcedure
 
 &AtClient
 Procedure SetShowItems()
-	Items.PageButtons.CurrentPage = Items.GroupItems;
+	Items.PageButtons.CurrentPage = Items.ItemsPage;
 EndProcedure
 
 &AtClient
@@ -1519,7 +1562,7 @@ Procedure FillCashInList()
 	|FROM
 	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND ReceiptingAccount = &CashAccount) AS R3021B_CashInTransitIncoming";
+	|	AND Account = &CashAccount) AS R3021B_CashInTransitIncoming";
 	Query.SetParameter("CashAccount", Workstation.CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -1640,6 +1683,8 @@ Function GetRetailBasisData()
 			ItemStructure.Insert("Offer", TableItem.Offer);
 			ItemStructure.Insert("Amount", TableItem.Amount);
 			ItemStructure.Insert("Percent", TableItem.Percent);
+			ItemStructure.Insert("Bonus", TableItem.Bonus);
+			ItemStructure.Insert("AddInfo", TableItem.AddInfo);
 			SpecialOffersArray.Add(ItemStructure);
 		EndDo;
 		
@@ -1766,6 +1811,10 @@ Procedure CreateReturnOnBase(PaymentData)
 			For Each ControlCode In Object.ControlCodeStrings Do
 				FillPropertyValues(ExtractedDataItem.ControlCodeStrings.Add(), ControlCode);
 			EndDo;
+			For Each ItemListRow In ExtractedDataItem.ItemList Do
+				ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", ItemListRow.Key));
+				ItemListRow.isControlCodeString = ReturnDataItems[0].isControlCodeString;
+			EndDo;
 		EndIf;
 		
 		ExtractedDataItem.ItemList.FillValues(ThisObject.Object.Branch, "Branch");
@@ -1818,6 +1867,7 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	NewDoc.Fill(FillingData);
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
 	NewDoc.Write(DocumentWriteMode.Posting);
 	
 	DocRef = NewDoc.Ref;
@@ -1863,12 +1913,15 @@ Procedure RecalculateOffer(ListItem)
 	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
 	For Each OfferRow In OfferRows Do
 		RetailBasisAmount = 0;
+		RetailBasisBonus = 0;
 		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
 			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
 		For Each BasisOffer In BasisOffers Do
 			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount; 
+			RetailBasisBonus = RetailBasisBonus + BasisOffer.Bonus; 
 		EndDo;
 		OfferRow.Amount = RetailBasisAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+		OfferRow.Bonus = RetailBasisBonus * ListItem.Quantity / ListItem.RetailBasisQuantity;
 		ListItem.OffersAmount = ListItem.OffersAmount + OfferRow.Amount; 
 	EndDo;
 EndProcedure

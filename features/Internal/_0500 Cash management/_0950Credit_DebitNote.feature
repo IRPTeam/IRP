@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @CashManagement
@@ -48,12 +48,13 @@ Scenario: _095001 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create OtherPartners objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
@@ -64,28 +65,28 @@ Scenario: _095001 preparation
 	* Create a Sales invoice for creating customer
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesInvoice095001$$" |
+				| "Number"                           |
+				| "$$NumberSalesInvoice095001$$"     |
 			And I click the button named "FormCreate"
 			And I select from "Partner" drop-down list by "Lunch" string
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Boots'       |
+				| 'Description'     |
+				| 'Boots'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "15,000" text in "Quantity" field of "ItemList" table
@@ -104,33 +105,33 @@ Scenario: _095001 preparation
 	* Create Purchase invoice for creating vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice095001$$" |
+				| "Number"                              |
+				| "$$NumberPurchaseInvoice095001$$"     |
 			And I click the button named "FormCreate"
 			* Filling data about vendor
 				And I click Select button of "Partner" field
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Maxim'     |
+					| 'Description'      |
+					| 'Maxim'            |
 				And I select current line in "List" table
 				And I click Select button of "Legal name" field
 				And I go to line in "List" table
-					| 'Description'   |
-					| 'Company Maxim' |
+					| 'Description'        |
+					| 'Company Maxim'      |
 				And I select current line in "List" table
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
 				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
+				| 'Description'     |
+				| 'Dress'           |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Item key' |
-					| 'L/Green'  |
+					| 'Item key'      |
+					| 'L/Green'       |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "ItemList" table
 				And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -154,34 +155,34 @@ Scenario: _095001 preparation
 				And I click the button named "FormPostAndClose"
 	* Create one more Purchase invoice
 		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice0950011$$" |
+				| "Number"                               |
+				| "$$NumberPurchaseInvoice0950011$$"     |
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click the button named "FormCreate"
 			* Filling data about vendor
 				And I click Select button of "Partner" field
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Maxim'     |
+					| 'Description'      |
+					| 'Maxim'            |
 				And I select current line in "List" table
 				And I click Select button of "Legal name" field
 				And I go to line in "List" table
-					| 'Description'   |
-					| 'Company Maxim' |
+					| 'Description'        |
+					| 'Company Maxim'      |
 				And I select current line in "List" table
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
 				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Description' |
-					| 'Dress'       |
+					| 'Description'      |
+					| 'Dress'            |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
 				And I go to line in "List" table
-					| 'Item key' |
-					| 'L/Green'  |
+					| 'Item key'      |
+					| 'L/Green'       |
 				And I select current line in "List" table
 				And I activate "Quantity" field in "ItemList" table
 				And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -214,24 +215,24 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Maxim'       |
+			| 'Description'    |
+			| 'Maxim'          |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Maxim' |
+			| 'Description'      |
+			| 'Company Maxim'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Partner term Maxim' |
+			| 'Description'           |
+			| 'Partner term Maxim'    |
 		And I select current line in "List" table
 		And I select current line in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -240,29 +241,29 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I select current line in "Transactions" table
 		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Revenue type" field in "Transactions" table
 		And I click choice button of "Revenue type" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Software'    |
+			| 'Description'    |
+			| 'Software'       |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
 		And I click choice button of "Currency" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Maxim'    |
+			| 'Description'    |
+			| 'Maxim'          |
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check creation
@@ -275,8 +276,8 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                |'Date'                |
-			| '$$NumberDeditNote095002$$' | '$$DeditNoteDate095002$$' |
+			| 'Number'                      | 'Date'                       |
+			| '$$NumberDeditNote095002$$'   | '$$DeditNoteDate095002$$'    |
 		And I close all client application windows
 
 
@@ -287,25 +288,25 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Maxim'       |
+			| 'Description'    |
+			| 'Maxim'          |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Maxim' |
+			| 'Description'      |
+			| 'Company Maxim'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Partner term Maxim' |
+			| 'Description'           |
+			| 'Partner term Maxim'    |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
 		And I activate field named "TransactionsAmount" in "Transactions" table
@@ -315,29 +316,29 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 		And I select current line in "Transactions" table
 		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Expense type" field in "Transactions" table
 		And I click choice button of "Expense type" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Software'    |
+			| 'Description'    |
+			| 'Software'       |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'           |
 			| 'Partner term Maxim'    |
 		And I select current line in "List" table
 		And I click choice button of "Currency" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Maxim'    |
+			| 'Description'    |
+			| 'Maxim'          |
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check creation
@@ -350,8 +351,8 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                         |'Date'                |
-			| '$$NumberCreditNote095003$$' | '$$CreditNoteDate095003$$' |
+			| 'Number'                       | 'Date'                        |
+			| '$$NumberCreditNote095003$$'   | '$$CreditNoteDate095003$$'    |
 		And I close all client application windows
 
 
@@ -363,25 +364,25 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in document 
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'       |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Lunch' |
+			| 'Description'      |
+			| 'Company Lunch'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -390,29 +391,29 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 		And I select current line in "Transactions" table
 		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Expense type" field in "Transactions" table
 		And I click choice button of "Expense type" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Software'    |
+			| 'Description'    |
+			| 'Software'       |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click choice button of "Currency" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'    |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check creation
@@ -425,8 +426,8 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                     |'Date'                |
-			| '$$NumberCreditNote095004$$' | '$$CreditNoteDate095004$$' |
+			| 'Number'                       | 'Date'                        |
+			| '$$NumberCreditNote095004$$'   | '$$CreditNoteDate095004$$'    |
 		And I close all client application windows
 
 
@@ -437,25 +438,25 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 	* Filling in the details of the document
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'       |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Lunch' |
+			| 'Description'      |
+			| 'Company Lunch'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -464,29 +465,29 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I select current line in "Transactions" table
 		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Revenue type" field in "Transactions" table
 		And I click choice button of "Revenue type" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Software'    |
+			| 'Description'    |
+			| 'Software'       |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click choice button of "Currency" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'    |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check creation
@@ -500,8 +501,8 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                |'Date'                |
-			| '$$DeditNoteNumber095005$$' | '$$DeditNoteDate095005$$' |
+			| 'Number'                      | 'Date'                       |
+			| '$$DeditNoteNumber095005$$'   | '$$DeditNoteDate095005$$'    |
 		And I close all client application windows
 
 
@@ -512,47 +513,47 @@ Scenario: _095006 check Reconcilation statement
 	* Check for Maxim
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Maxim'       |
+			| 'Description'    |
+			| 'Maxim'          |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Maxim' |
+			| 'Description'      |
+			| 'Company Maxim'    |
 		And I select current line in "List" table
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Turkish lira' |
+			| 'Description'     |
+			| 'Turkish lira'    |
 		And I select current line in "List" table
 		Then "Reconciliation statement (create) *" window is opened
 		And I input "01.01.2020" text in "Begin period" field
 		And I input end of the current month date in "End period" field
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date'                     | 'Document'                   | 'Credit'    | 'Debit'    |
-		| '01.01.2020 10:00:00'      | '$$PurchaseInvoice095001$$'  | '11 000,00' | ''         |
-		| '01.01.2020 10:00:00'      | '$$PurchaseInvoice0950011$$' | '10 000,00' | ''         |
-		| '$$DeditNoteDate095002$$'  | '$$DeditNote095002$$'        | ''          | '1 000,00' |
-		| '$$CreditNoteDate095003$$' | '$$CreditNote095003$$'       | '100,00'    | ''         |
+		| 'Date'                      | 'Document'                    | 'Credit'     | 'Debit'      |
+		| '01.01.2020 10:00:00'       | '$$PurchaseInvoice095001$$'   | '11 000,00'  | ''           |
+		| '01.01.2020 10:00:00'       | '$$PurchaseInvoice0950011$$'  | '10 000,00'  | ''           |
+		| '$$DeditNoteDate095002$$'   | '$$DeditNote095002$$'         | ''           | '1 000,00'   |
+		| '$$CreditNoteDate095003$$'  | '$$CreditNote095003$$'        | '100,00'     | ''           |
 	* Check for Lunch
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'       |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date'                     | 'Document'               | 'Credit'   | 'Debit'     |
-		| '01.01.2020 10:00:00'      | '$$SalesInvoice095001$$' | ''         | '10 500,00' |
-		| '$$CreditNoteDate095004$$' | '$$CreditNote095004$$'   | '1 000,00' | ''          |
-		| '$$DeditNoteDate095005$$'  | '$$DeditNote095005$$'    | ''         | '100,00'    |
+		| 'Date'                      | 'Document'                | 'Credit'    | 'Debit'       |
+		| '01.01.2020 10:00:00'       | '$$SalesInvoice095001$$'  | ''          | '10 500,00'   |
+		| '$$CreditNoteDate095004$$'  | '$$CreditNote095004$$'    | '1 000,00'  | ''            |
+		| '$$DeditNoteDate095005$$'   | '$$DeditNote095005$$'     | ''          | '100,00'      |
 		And I close all client application windows
 		
 
@@ -564,21 +565,21 @@ Scenario: _095007 check the legal name filling if the partner has only one
 	* Filling in legal name
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'    |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And "Transactions" table contains lines
-			| 'Partner' | 'Legal name'    |
-			| 'Lunch'   | 'Company Lunch' |
+			| 'Partner'   | 'Legal name'       |
+			| 'Lunch'     | 'Company Lunch'    |
 	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'    |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		And "Transactions" table contains lines
-			| 'Partner' | 'Legal name'    |
-			| 'DFC'     | 'DFC' |
+			| 'Partner'   | 'Legal name'    |
+			| 'DFC'       | 'DFC'           |
 	* Create Dedit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -586,21 +587,143 @@ Scenario: _095007 check the legal name filling if the partner has only one
 	* Filling in legal name
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Lunch'       |
+			| 'Description'    |
+			| 'Lunch'          |
 		And I select current line in "List" table
 		And "Transactions" table contains lines
-			| 'Partner' | 'Legal name'    |
-			| 'Lunch'   | 'Company Lunch' |
+			| 'Partner'   | 'Legal name'       |
+			| 'Lunch'     | 'Company Lunch'    |
 	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
+			| 'Description'    |
+			| 'DFC'            |
 		And I select current line in "List" table
 		And "Transactions" table contains lines
-			| 'Partner' | 'Legal name'    |
-			| 'DFC'     | 'DFC' |
+			| 'Partner'   | 'Legal name'    |
+			| 'DFC'       | 'DFC'           |
+		And I close all client application windows
+
+Scenario: _095008 create DebitNote (OtherPartnersTransactions)
+	And I close all client application windows
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Filling in document
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Other partner 1'    |
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'                |
+			| 'Distribution department'    |
+		And I select current line in "List" table
+		And I activate "Revenue type" field in "Transactions" table
+		And I click choice button of "Revenue type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Revenue'        |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Check creation
+		And I click the button named "FormPost"
+		And "Transactions" table became equal
+			| '#'   | 'Partner'           | 'Amount'   | 'Revenue type'   | 'Legal name'        | 'Partner term'      | 'Legal name contract'   | 'Currency'   | 'Profit loss center'        | 'Additional analytic'    |
+			| '1'   | 'Other partner 1'   | '100,00'   | 'Revenue'        | 'Other partner 1'   | 'Other partner 1'   | ''                      | 'TRY'        | 'Distribution department'   | ''                       |
+		Then the form attribute named "Branch" became equal to "Front office"
+		And I delete "$$DeditNote095008$$" variable
+		And I delete "$$DeditNoteDate095008$$" variable
+		And I delete "$$DeditNoteDate095008$$" variable
+		And I save the window as "$$DeditNote095008$$"
+		And I save the value of the field named "Date" as  "$$DeditNoteDate095008$$"
+		And I save the value of "Number" field as "$$DeditNoteNumber095008$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And "List" table contains lines
+			| 'Number'                      | 'Date'                       |
+			| '$$DeditNoteNumber095008$$'   | '$$DeditNoteDate095008$$'    |
+		And I close all client application windows
+
+
+Scenario: _095009 create CreditNote (OtherPartnersTransactions)
+	And I close all client application windows
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Filling in document
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Other partner 2'    |
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'                |
+			| 'Distribution department'    |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Expense'        |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Check creation
+		And I click the button named "FormPost"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And "Transactions" table became equal
+			| '#'   | 'Partner'           | 'Amount'   | 'Legal name'        | 'Partner term'      | 'Legal name contract'   | 'Currency'   | 'Profit loss center'        | 'Expense type'   | 'Additional analytic'    |
+			| '1'   | 'Other partner 2'   | '100,00'   | 'Other partner 2'   | 'Other partner 2'   | ''                      | 'TRY'        | 'Distribution department'   | 'Expense'        | ''                       |
+		Then the form attribute named "Branch" became equal to "Front office"	
+		And I delete "$$CreditNote095009$$" variable
+		And I delete "$$CreditNoteDate095009$$" variable
+		And I delete "$$CreditNoteDate095009$$" variable
+		And I save the window as "$$CreditNote095009$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate095009$$"
+		And I save the value of "Number" field as "$$CreditNoteNumber095009$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And "List" table contains lines
+			| 'Number'                       | 'Date'                        |
+			| '$$CreditNoteNumber095009$$'   | '$$CreditNoteDate095009$$'    |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

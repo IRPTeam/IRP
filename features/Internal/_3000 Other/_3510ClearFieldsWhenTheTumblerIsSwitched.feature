@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -48,8 +48,8 @@ Scenario: _3510000 preparation (check the cleaning of fields in forms)
         * Add plugin for taxes calculation
                 Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
                 If "List" table does not contain lines Then
-                                | "Description" |
-                                | "TaxCalculateVAT_TR" |
+			| "Description"                                        |
+			| "TaxCalculateVAT_TR"                                 |
                         When add Plugin for tax calculation
                 When Create information register Taxes records (VAT)
         * Tax settings
@@ -67,20 +67,20 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
         And I input "Test Bank" text in the field named "Description_en"
         And I click Select button of "Company" field
         And I go to line in "List" table
-        | 'Description'  |
-        | 'Main Company' |
+								| 'Description'          |
+								| 'Main Company'         |
         And I select current line in "List" table
         And I input "12345" text in "Number" field
         And I input "1234" text in "Bank name" field
         And I click Select button of "Transit account" field
         And I go to line in "List" table
-        | 'Description'    |
-        | 'Transit Second' |
+								| 'Description'            |
+								| 'Transit Second'         |
         And I select current line in "List" table
         And I click Choice button of the field named "Currency"
         And I go to line in "List" table
-        | 'Code' | 'Description'     |
-        | 'USD'  | 'American dollar' |
+								| 'Code'        | 'Description'             |
+								| 'USD'         | 'American dollar'         |
         And I activate "Description" field in "List" table
         And I select current line in "List" table
         * Check filling in
@@ -106,8 +106,8 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
         And I change the radio button named "CurrencyType" value to "Fixed"
         And I click Choice button of the field named "Currency"
         And I go to line in "List" table
-        | 'Code' | 'Description' |
-        | 'EUR'  | 'Euro'        |
+								| 'Code'        | 'Description'         |
+								| 'EUR'         | 'Euro'                |
         And I activate "Description" field in "List" table
         And I select current line in "List" table
 * Check reset when switching transit and back to Cash
@@ -125,8 +125,8 @@ Scenario: _3510002 check clearing values ​​when changing the Ap-ar posting /
         And I change "Kind" radio button value to "Regular"
         And I click Select button of "Multi currency movement type" field
         And I go to line in "List" table
-        | 'Description' |
-        | 'EUR'         |
+								| 'Description'         |
+								| 'EUR'                 |
         And I select current line in "List" table
         And I change "AP/AR posting detail" radio button value to "By standard partner term"
         And I click Select button of "Standard Partner term" field
@@ -137,8 +137,8 @@ Scenario: _3510002 check clearing values ​​when changing the Ap-ar posting /
         And I click the button named "FormChoose"
         And I click Select button of "Price type" field
         And I go to line in "List" table
-        | 'Description'       |
-        | 'Basic Price Types' |
+								| 'Description'               |
+								| 'Basic Price Types'         |
         And I select current line in "List" table
 * Check filling in
         Then the form attribute named "CurrencyMovementType" became equal to "EUR"
@@ -165,14 +165,14 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And in the table "Currencies" I click the button named "CurrenciesAdd"
                 And I click choice button of "Movement type" attribute in "Currencies" table
                 And I go to line in "List" table
-                        | 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
-                        | 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
+																								| 'Currency'                        | 'Deferred calculation'                        | 'Description'                               | 'Source'                              | 'Type'                              |
+																								| 'USD'                             | 'No'                                          | 'Reporting currency'                        | 'Forex Seling'                        | 'Reporting'                         |
                 And I activate "Description" field in "List" table
                 And I select current line in "List" table
                 And I finish line editing in "Currencies" table
                 And "Currencies" table contains lines
-                        | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
-                        | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
+																								| 'Movement type'                             | 'Type'                             | 'Currency'                        | 'Source'                               |
+																								| 'Reporting currency'                        | 'Reporting'                        | 'USD'                             | 'Forex Seling'                         |
         * Filling in Tax types
                 And I move to "Tax types" tab
                 And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
@@ -180,15 +180,15 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And I activate "Tax" field in "CompanyTaxes" table
                 And I click choice button of "Tax" attribute in "CompanyTaxes" table
                 And I go to line in "List" table
-                        | 'Description' | 'Reference' |
-                        | 'VAT'         | 'VAT'       |
+																								| 'Description'                        |
+																								| 'VAT'                                |
                 And I select current line in "List" table
                 And I activate "Priority" field in "CompanyTaxes" table
                 And I input "2" text in "Priority" field of "CompanyTaxes" table
                 And I finish line editing in "CompanyTaxes" table
                 And "CompanyTaxes" table contains lines
-                        | 'Use' | 'Tax' | 'Priority' |
-                        | 'Yes' | 'VAT' | '2'        |
+																								| 'Use'                        | 'Tax'                        | 'Priority'                         |
+																								| 'Yes'                        | 'VAT'                        | '2'                                |
         * Check to clear completed data when uncheck OurCompany
                 And I move to "Info" tab
                 And I remove checkbox "Our Company"
@@ -196,9 +196,9 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And I click "Save" button
                 And I set checkbox "Our Company"
                 And "Currencies" table does not contain lines
-                        | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
-                        | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
+																								| 'Movement type'                             | 'Type'                             | 'Currency'                        | 'Source'                               |
+																								| 'Reporting currency'                        | 'Reporting'                        | 'USD'                             | 'Forex Seling'                         |
                 And "CompanyTaxes" table does not contain lines
-                        | 'Use' | 'Tax' | 'Priority' |
-                        | 'Yes' | 'VAT' | '2'        |
+																								| 'Use'                        | 'Tax'                        | 'Priority'                         |
+																								| 'Yes'                        | 'VAT'                        | '2'                                |
                 And I close all client application windows

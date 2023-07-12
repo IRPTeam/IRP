@@ -106,6 +106,15 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_PERIOD
+
+&AtClient
+Procedure PaymentPeriodOnChange(Item)
+	DocPayrollClient.PaymentPeriodOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region COMPANY
 
 &AtClient
@@ -244,6 +253,11 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region EXTERNAL_COMMANDS
@@ -305,7 +319,7 @@ Function FillCashAdvanceDeductionListAtServer()
 	FillingParameters.Insert("Branch"   , Object.Branch);
 	FillingParameters.Insert("Currency" , Object.Currency);
 	FillingParameters.Insert("Ref"      , Object.Ref);
-	FillingParameters.Insert("EndDate"  , Object.EndDate);
+	FillingParameters.Insert("EndDate"  , EndOfDay(Object.EndDate));
 	
 	Result = DocPayrollServer.GetCashAdvanceDeduction(FillingParameters);
 	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
@@ -332,8 +346,8 @@ Function FillPayrollListsAtServer(TypeColumnName, _Type)
 	FillingParameters = New Structure();
 	FillingParameters.Insert("Company"   , Object.Company);
 	FillingParameters.Insert("Branch"    , Object.Branch);
-	FillingParameters.Insert("BeginDate" , Object.BeginDate);
-	FillingParameters.Insert("EndDate"   , Object.EndDate);
+	FillingParameters.Insert("BeginDate" , BegOfDay(Object.BeginDate));
+	FillingParameters.Insert("EndDate"   , EndOfDay(Object.EndDate));
 	FillingParameters.Insert("_Type"     , _Type);
 	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
 	

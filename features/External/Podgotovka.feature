@@ -18,8 +18,8 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And I click the button named "FormCreate"
 	And I click Select button of "Plugins" field
 	And I go to line in "List" table
-			| 'Description'                   |
-			| 'ExternalSpecialMessage' |
+			| 'Description'               |
+			| 'ExternalSpecialMessage'    |
 	And I select current line in "List" table
 	And I click Open button of the field named "Description_en"
 	And I input "DialogBox2" text in the field named "Description_en"
@@ -35,7 +35,7 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And I wait "DialogBox2 (Special offer types) *" window closing in 20 seconds
 	And I click the button named "FormChoose"
 	And I input "8" text in "Priority" field
-	And I input "01.01.2019  0:00:00" text in "Start of" field
+	And I input "01.01.2019  0:00:00" text in "Period" field
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
@@ -45,23 +45,23 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And in the table "Rules" I click the button named "RulesAdd"
 	And I click choice button of "Rule" attribute in "Rules" table
 	And I go to line in "List" table
-			| 'Description'                                |
-			| 'Discount on Basic Partner terms without Vat' |
+			| 'Description'                                    |
+			| 'Discount on Basic Partner terms without Vat'    |
 	And I select current line in "List" table
 	And I finish line editing in "Rules" table
 	And I click "Save and close" button
 	And Delay 2
 	And I go to line in "List" table
-			| 'Description'              |
-			| 'Discount 2 without Vat' |
+			| 'Description'               |
+			| 'Discount 2 without Vat'    |
 	And I go to line in "List" table
-			| 'Description'  |
-			| 'DialogBox2' |
+			| 'Description'    |
+			| 'DialogBox2'     |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And I click "List" button
 	And I go to line in "List" table
-			| 'Priority' | 'Special offer type' |
-			| '1'        | 'Sum'                |
+			| 'Description'    |
+			| 'Sum'            |
 	And I click the button named "FormChoose"
 
 Scenario: transfer the discount Discount 1 without Vat from Sum to Maximum
@@ -69,14 +69,14 @@ Scenario: transfer the discount Discount 1 without Vat from Sum to Maximum
 	And I click "List" button
 	And I go to line in "List" table
 		| 'Description'              |
-		| 'Discount 1 without Vat' |
+		| 'Discount 1 without Vat'   |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And I expand a line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '1'        | 'Special Offers'     |
+		| 'Launch'  | 'Manually'  | 'Priority'  | 'Special offer type'   |
+		| 'No'      | 'No'        | '1'         | 'Special Offers'       |
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '3'        | 'Maximum'            |
+		| 'Launch'  | 'Manually'  | 'Priority'  | 'Special offer type'   |
+		| 'No'      | 'No'        | '3'         | 'Maximum'              |
 	And I click the button named "FormChoose"
 
 
@@ -85,8 +85,8 @@ Scenario: changing the auto apply of Discount 1 without Vat
 	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 	And I click "List" button
 	And I go to line in "List" table
-			| 'Description'              |
-			| 'Discount 1 without Vat' |
+			| 'Description'               |
+			| 'Discount 1 without Vat'    |
 	And I select current line in "List" table
 	And I remove checkbox "Manually"
 	And Delay 2
@@ -99,28 +99,28 @@ Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes a
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-			| 'Description'             |
-			| 'MIO' |
+			| 'Description'    |
+			| 'MIO'            |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-			| 'Description'                     |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 	And I select current line in "List" table
 	* Adding items to sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'High shoes' |
+			| 'Description'    |
+			| 'High shoes'     |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/19SD'  |
+			| 'Item key'    |
+			| '39/19SD'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -130,15 +130,15 @@ Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes a
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Boots' |
+			| 'Description'    |
+			| 'Boots'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '39/18SD'  |
+			| 'Item key'    |
+			| '39/18SD'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -153,14 +153,14 @@ Scenario: transfer the Discount 1 without Vat discount from Maximum to Minimum.
 	And I click "List" button
 	And I go to line in "List" table
 		| 'Description'              |
-		| 'Discount 1 without Vat' |
+		| 'Discount 1 without Vat'   |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And in the table "List" I click the button named "ListContextMenuLevelDown"
 	And Delay 2
 	And I click "List" button
 	And I go to line in "List" table
-		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
-		| 'No'     | 'No'       | '2'        | 'Minimum'            |
+		| 'Description'   |
+		| 'Min'           |
 	And I click the button named "FormChoose"
 
 
@@ -172,13 +172,13 @@ Scenario: transfer the Discount 1 without Vat discount from Maximum to Minimum.
 Scenario: filling in Tax settings for company
 	Given I open hyperlink "e1cib/list/Catalog.Companies"
 	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
+		| 'Description'    |
+		| 'Main Company'   |
 	And I select current line in "List" table
 	And I move to "Tax types" tab
 	And I go to line in "CompanyTaxes" table
-		| 'Period'     | 'Use' | 'Tax' | 'Priority' |
-		| '01.01.2020' | 'Yes' | 'VAT' | '5'         |
+		| 'Period'      | 'Use'  | 'Tax'  | 'Priority'   |
+		| '01.01.2020'  | 'Yes'  | 'VAT'  | '5'          |
 	And I select current line in "CompanyTaxes" table
 	And I click Open button of "Tax" field
 	Then "VAT (Tax type)" window is opened
@@ -191,7 +191,7 @@ Scenario: check load data form in the document
 	* Open load date form	
 		And in the table "ItemList" I click "Load data from table" button
 		Then "Load data from table" window is opened
-		And I set checkbox "Show or hide image"
+		And I set checkbox "Show image"
 	* Add barcodes
 		And in "Template" spreadsheet document I move to "R3C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
@@ -235,27 +235,27 @@ Scenario: check load data form in the document
 	* Check
 		And I click "Next" button
 		Then "Template" spreadsheet document is equal
-			| 'Barcode'           | 'Quantity' |
-			| 'Barcode'           | 'Quantity' |
-			| '2202283705'        | ''         |
-			| '67789997777801'    | '2'        |
-			| '23455677788976667' | ''         |
-			| '234500000'         | ''         |
-			| '2202283705'        | '5'        |
+			| 'Barcode'             | 'Quantity'    |
+			| 'Barcode'             | 'Quantity'    |
+			| '2202283705'          | ''            |
+			| '67789997777801'      | '2'           |
+			| '23455677788976667'   | ''            |
+			| '234500000'           | ''            |
+			| '2202283705'          | '5'           |
 		Then the form attribute named "LoadType" became equal to "Barcode"
 		Then "Result" spreadsheet document is equal by template
-			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
-			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
-			| '1'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
-			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
-			| '3'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
-			| '4'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
-			| '5'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
+			| 'Key'   | 'Image'                                      | 'ItemType'                                      | 'Item'                 | 'ItemKey'     | 'SerialLotNumber'           | 'Unit'         | 'hasSpecification'   | 'UseSerialLotNumber'      | 'Quantity'   | 'Barcode'              |
+			| 'Key'   | ''                                           | 'Item types'                                    | 'Items'                | 'Item keys'   | 'Item serial/lot numbers'   | 'Item units'   | 'Item types'         | 'Use serial lot number'   | 'Quantity'   | 'Barcode'              |
+			| '1'     | 'f82457a7c91f5d12beec5826930cb235blue.jpg'   | 'Clothes'                                       | 'Dress'                | 'XS/Blue'     | ''                          | 'pcs'          | '*'                  | '*'                       | '1,000'      | '2202283705'           |
+			| '2'     | ''                                           | 'With serial lot numbers (use stock control)'   | 'Product 1 with SLN'   | 'ODS'         | ''                          | 'pcs'          | '*'                  | '*'                       | '2,000'      | '67789997777801'       |
+			| '3'     | ''                                           | 'With serial lot numbers (use stock control)'   | 'Product 1 with SLN'   | 'PZU'         | '8908899877'                | 'pcs'          | '*'                  | '*'                       | '1,000'      | '23455677788976667'    |
+			| '4'     | ''                                           | ''                                              | ''                     | ''            | ''                          | ''             | '*'                  | '*'                       | '1,000'      | '234500000'            |
+			| '5'     | 'f82457a7c91f5d12beec5826930cb235blue.jpg'   | 'Clothes'                                       | 'Dress'                | 'XS/Blue'     | ''                          | 'pcs'          | '*'                  | '*'                       | '5,000'      | '2202283705'           |
 		And "ErrorList" table became equal
-			| 'Row' | 'Column' | 'Error text'   |
-			| '4'   | '6'      | '[Not filled]' |
-			| '6'   | '4'      | '[Not filled]' |
-			| '6'   | '5'      | '[Not filled]' |
+			| 'Row'   | 'Column'   | 'Error text'      |
+			| '4'     | '6'        | '[Not filled]'    |
+			| '6'     | '4'        | '[Not filled]'    |
+			| '6'     | '5'        | '[Not filled]'    |
 	* Fix barcode and check loading
 		And I click "Back" button
 		And Delay 5
@@ -293,13 +293,13 @@ Scenario: add Plugin for tax calculation
 			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
 			Given I open hyperlink "e1cib/list/Catalog.Taxes"		
 			And I go to line in "List" table
-				| 'Description' |
-				| 'VAT'         |
+				| 'Description'     |
+				| 'VAT'             |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'TaxCalculateVAT_TR'         |
+				| 'Description'            |
+				| 'TaxCalculateVAT_TR'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
@@ -329,89 +329,89 @@ Scenario: create PurchaseOrder017001
 	* Filling in vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
+			| Description    |
+			| Ferron BP      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
+			| Description          |
+			| Company Ferron BP    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
+			| Description           |
+			| Vendor Ferron, TRY    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '1' | 'Dress' | 'M/White' | 'pcs' |
+			| '#'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '1'   | 'Dress'   | 'M/White'    | 'pcs'     |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
+			| '#'   | 'Item'    | 'Item key'   | 'Unit'    |
+			| '2'   | 'Dress'   | 'L/Green'    | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'     | 'Item key' | 'Unit' |
-			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
+			| '#'   | 'Item'       | 'Item key'    | 'Unit'    |
+			| '3'   | 'Trousers'   | '36/Yellow'   | 'pcs'     |
 		And I select current line in "ItemList" table
 		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Store' | 'Unit' |
-			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
+			| 'Item'    | 'Quantity'   | 'Item key'   | 'Store'      | 'Unit'    |
+			| 'Dress'   | '100,000'    | 'M/White'    | 'Store 01'   | 'pcs'     |
 		And I input end of the current month date in "Delivery date" field
 	* Post document
 		And I click the button named "FormPost"
@@ -428,50 +428,50 @@ Scenario: create PurchaseOrder017003
 		* Filling in the details
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
+				| Description     |
+				| Ferron BP       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
+				| Description           |
+				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
+				| Description            |
+				| Vendor Ferron, USD     |
 			And I select current line in "List" table
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			Then "Item keys" window is opened
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'L/Green'     | 'pcs'      |
 			And I select current line in "ItemList" table
 			And I input "500,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
@@ -488,8 +488,8 @@ Scenario: create PurchaseOrder017003
 Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'                        |
-			| '$$NumberPurchaseOrder017001$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017001$$'    |
 		And I select current line in "List" table
 		* Check filling of elements upon entry based on
 			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
@@ -502,21 +502,21 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'     | 'Purchase order'          | 'Item key'  | 'Unit' | 'Quantity'       |
-			| 'Dress'    | '$$PurchaseOrder017001$$' | 'M/White'   | 'pcs'  | '100,000' |
-			| 'Dress'    | '$$PurchaseOrder017001$$' | 'L/Green'   | 'pcs'  | '200,000' |
-			| 'Trousers' | '$$PurchaseOrder017001$$' | '36/Yellow' | 'pcs'  | '300,000' |
+			| 'Item'       | 'Purchase order'            | 'Item key'    | 'Unit'   | 'Quantity'    |
+			| 'Dress'      | '$$PurchaseOrder017001$$'   | 'M/White'     | 'pcs'    | '100,000'     |
+			| 'Dress'      | '$$PurchaseOrder017001$$'   | 'L/Green'     | 'pcs'    | '200,000'     |
+			| 'Trousers'   | '$$PurchaseOrder017001$$'   | '36/Yellow'   | 'pcs'    | '300,000'     |
 		* Check filling prices
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'Item key'  | 'Quantity'       | 'Price type'                         | 'Store'    |
-			| '200,00' | 'Dress'    | 'M/White'   | '100,000' | 'en description is empty'           | 'Store 01' |
-			| '210,00' | 'Dress'    | 'L/Green'   | '200,000' | 'en description is empty'           | 'Store 01' |
-			| '250,00' | 'Trousers' | '36/Yellow' | '300,000' | 'en description is empty'           | 'Store 01' |
+			| 'Price'    | 'Item'       | 'Item key'    | 'Quantity'   | 'Price type'                | 'Store'       |
+			| '200,00'   | 'Dress'      | 'M/White'     | '100,000'    | 'en description is empty'   | 'Store 01'    |
+			| '210,00'   | 'Dress'      | 'L/Green'     | '200,000'    | 'en description is empty'   | 'Store 01'    |
+			| '250,00'   | 'Trousers'   | '36/Yellow'   | '300,000'    | 'en description is empty'   | 'Store 01'    |
 		* Check addition of the store in tabular part
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'       |
-			| 'Dress' | 'M/White'  | 'Store 01' | 'pcs'  | '100,000' |
+			| 'Item'    | 'Item key'   | 'Store'      | 'Unit'   | 'Quantity'    |
+			| 'Dress'   | 'M/White'    | 'Store 01'   | 'pcs'    | '100,000'     |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice018001$$" variable
 		And I delete "$$PurchaseInvoice018001$$" variable
@@ -527,8 +527,8 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'                        |
-			| '$$NumberPurchaseOrder017003$$' |
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder017003$$'    |
 		And I select current line in "List" table
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "Ok" button
@@ -540,12 +540,12 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'     | 'Purchase order'    | 'Item key' | 'Unit' | 'Quantity'       |
-			| 'Dress'    | '$$PurchaseOrder017003$$' | 'L/Green'  | 'pcs' | '500,000' |
+			| 'Item'    | 'Purchase order'            | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'   | '$$PurchaseOrder017003$$'   | 'L/Green'    | 'pcs'    | '500,000'     |
 		* Filling prices
 			And "ItemList" table contains lines
-			| 'Price' | 'Item'  | 'Item key' | 'Quantity'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
+			| 'Price'   | 'Item'    | 'Item key'   | 'Quantity'   | 'Price type'                | 'Unit'   | 'Tax amount'   | 'Net amount'   | 'Total amount'    |
+			| '40,00'   | 'Dress'   | 'L/Green'    | '500,000'    | 'en description is empty'   | 'pcs'    | '3 050,85'     | '16 949,15'    | '20 000,00'       |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice018006$$" variable
 		And I delete "$$PurchaseInvoice018006$$" variable
@@ -559,8 +559,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018006$$'      |
+		| 'Number'                            |
+		| '$$NumberPurchaseInvoice018006$$'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 	And I click "Ok" button
@@ -574,8 +574,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
@@ -587,8 +587,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 	* Check the addition of the store to the tabular partner
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Quantity'     |
-		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
+		| 'Item'   | 'Item key'  | 'Purchase invoice'           | 'Store'     | 'Unit'  | 'Quantity'   |
+		| 'Dress'  | 'L/Green'   | '$$PurchaseInvoice018006$$'  | 'Store 02'  | 'pcs'   | '2,000'      |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder022001$$" variable
 	And I delete "$$PurchaseReturnOrder022001$$" variable
@@ -599,8 +599,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018001$$'      |
+		| 'Number'                            |
+		| '$$NumberPurchaseInvoice018001$$'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 	And I click "Ok" button
@@ -613,21 +613,21 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
 	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Trousers'    | '36/Yellow'   | 'pcs' |
+		| 'Item'      | 'Item key'   | 'Unit'   |
+		| 'Trousers'  | '36/Yellow'  | 'pcs'    |
 	And I select current line in "ItemList" table
 	And Delay 2
 	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And Delay 2
 	And I finish line editing in "ItemList" table
 	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Dress'    | 'L/Green'   | 'pcs' |
+		| 'Item'   | 'Item key'  | 'Unit'   |
+		| 'Dress'  | 'L/Green'   | 'pcs'    |
 	And Delay 2
 	And I delete a line in "ItemList" table
 	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Dress'    | 'M/White'   | 'pcs' |
+		| 'Item'   | 'Item key'  | 'Unit'   |
+		| 'Dress'  | 'M/White'   | 'pcs'    |
 	And I delete a line in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder022006$$" variable
@@ -646,33 +646,33 @@ Scenario: create InventoryTransferOrder020001
 		* Filling in Store sender and Store receiver
 			And I click Select button of "Store sender" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Store receiver" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
+				| 'Description'     |
+				| 'Store 02'        |
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 		* Filling in items table
 			And I move to "Item list" tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I move to the next attribute
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key'  |
-				| 'M/White' |
+				| 'Item key'     |
+				| 'M/White'      |
 			And I select current line in "List" table
 			And I click choice button of "Unit" attribute in "ItemList" table
 			And I click the button named "FormChoose"
@@ -682,14 +682,14 @@ Scenario: create InventoryTransferOrder020001
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| Description |
-				| Dress       |
+				| Description     |
+				| Dress           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key'  |
-				| 'S/Yellow' |
+				| 'Item key'     |
+				| 'S/Yellow'     |
 			And I select current line in "List" table
 			And I activate "Unit" field in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
@@ -711,33 +711,33 @@ Scenario: create InventoryTransferOrder020004
 	* Filling in Store sender and Store receiver
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'  |
+			| 'Description'    |
+			| 'Store 03'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| 'L/Green' |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -759,33 +759,33 @@ Scenario: create InventoryTransferOrder020007
 	* Filling in Store sender and Store receiver
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Dress       |
+			| Description    |
+			| Dress          |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| 'L/Green' |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -807,33 +807,33 @@ Scenario: create InventoryTransferOrder020010
 	* Filling in Store sender and Store receiver
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I click Select button of "Store receiver" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04'  |
+			| 'Description'    |
+			| 'Store 04'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
+			| Description    |
 			| Trousers       |
 		And I select current line in "List" table
 		And I move to the next attribute
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| '36/Yellow' |
+			| 'Item key'     |
+			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Unit" field in "ItemList" table
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -853,32 +853,32 @@ Scenario: create SalesOrder023001
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
+			| 'Description'    |
+			| 'Ferron BP'      |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	Then "Partner terms" window is opened
 	And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'  |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 	And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -886,26 +886,26 @@ Scenario: create SalesOrder023001
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Revenue type" field in "ItemList" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
+			| 'Description'    |
+			| 'Revenue'        |
 		And I select current line in "List" table
 		And I input "123" text in "Detail" field of "ItemList" table
 		And I click choice button of "Sales person" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Anna Petrova'     |
+			| 'Description'     |
+			| 'Anna Petrova'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
+			| Description    |
 			| Trousers       |
 		And I select current line in "List" table
 		And I move to the next attribute
@@ -917,25 +917,25 @@ Scenario: create SalesOrder023001
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description'                |
+			| 'Distribution department'    |
 		And I select current line in "List" table
 		And I activate "Revenue type" field in "ItemList" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
+			| 'Description'    |
+			| 'Revenue'        |
 		And I select current line in "List" table
 		And I click choice button of "Sales person" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Alexander Orlov'     |
+			| 'Description'        |
+			| 'Alexander Orlov'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check store filling in the tabular section
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    |
-		| 'Dress'    | '550,00' | 'L/Green'   | 'Store 01' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'      |
+		| 'Dress'  | '550,00'  | 'L/Green'   | 'Store 01'   |
 	* Check default sales order status
 		And I move to "Other" tab
 		Then the form attribute named "Status" became equal to "Approved"
@@ -957,30 +957,30 @@ Scenario: create SalesOrder023005
 	* Filling in customer information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'  |
+				| 'Description'     |
+				| 'Ferron BP'       |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Partner terms, without VAT' |
+				| 'Description'                          |
+				| 'Basic Partner terms, without VAT'     |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Company Ferron BP'  |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 		And I select current line in "List" table
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 	And I select current line in "List" table
 	And I activate "Item key" field in "ItemList" table
 	And I click choice button of "Item key" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Item key' |
-		| 'L/Green'  |
+		| 'Item key'   |
+		| 'L/Green'    |
 	And I select current line in "List" table
 	And I activate "Quantity" field in "ItemList" table
 	And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -988,22 +988,22 @@ Scenario: create SalesOrder023005
 	And I activate "Profit loss center" field in "ItemList" table
 	And I click choice button of "Profit loss center" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'Distribution department' |
+		| 'Description'               |
+		| 'Distribution department'   |
 	And I select current line in "List" table
 	And I activate "Revenue type" field in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Revenue'     |
+		| 'Description'   |
+		| 'Revenue'       |
 	And I select current line in "List" table
 	And I input "123" text in "Detail" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| Description |
-		| Trousers       |
+		| Description   |
+		| Trousers      |
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I click choice button of "Item key" attribute in "ItemList" table
@@ -1014,14 +1014,14 @@ Scenario: create SalesOrder023005
 	And I activate "Profit loss center" field in "ItemList" table
 	And I click choice button of "Profit loss center" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'Distribution department' |
+		| 'Description'               |
+		| 'Distribution department'   |
 	And I select current line in "List" table
 	And I activate "Revenue type" field in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Revenue'     |
+		| 'Description'   |
+		| 'Revenue'       |
 	And I select current line in "List" table
 	And I input "123" text in "Detail" field of "ItemList" table
 	And I finish line editing in "ItemList" table
@@ -1040,8 +1040,8 @@ Scenario: create SalesOrder023005
 Scenario: create SalesInvoice024001
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-		| Number |
-		| $$NumberSalesOrder023001$$       |
+		| Number                       |
+		| $$NumberSalesOrder023001$$   |
 	And I click the button named "FormDocumentSalesInvoiceGenerate"	
 	And I click "Ok" button
 	* Check that information is filled in when creating based on
@@ -1052,14 +1052,14 @@ Scenario: create SalesInvoice024001
 	* Check adding Store
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Sales order'          | 'Unit' | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| 'Dress'    | '*'   | 'L/Green'   | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '5,000' | '*'             | '*'          | '*'          | '*'            |
-			| 'Trousers' | '*'   | '36/Yellow' | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '4,000' | '*'             | '*'          | '*'          | '*'            |
+			| 'Item'       | Price   | 'Item key'    | 'Store'      | 'Sales order'            | 'Unit'   | 'Quantity'   | 'Offers amount'   | 'Tax amount'   | 'Net amount'   | 'Total amount'    |
+			| 'Dress'      | '*'     | 'L/Green'     | 'Store 01'   | '$$SalesOrder023001$$'   | 'pcs'    | '5,000'      | '*'               | '*'            | '*'            | '*'               |
+			| 'Trousers'   | '*'     | '36/Yellow'   | 'Store 01'   | '$$SalesOrder023001$$'   | 'pcs'    | '4,000'      | '*'               | '*'            | '*'            | '*'               |
 	* Check prices and type of prices
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Quantity'     | 'Price type'        |
-		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
-		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
+		| 'Price'   | 'Item'      | 'Item key'   | 'Quantity'  | 'Price type'          |
+		| '550,00'  | 'Dress'     | 'L/Green'    | '5,000'     | 'Basic Price Types'   |
+		| '400,00'  | 'Trousers'  | '36/Yellow'  | '4,000'     | 'Basic Price Types'   |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesInvoice024001$$" variable
 	And I delete "$$SalesInvoice024001$$" variable
@@ -1071,8 +1071,8 @@ Scenario: create SalesInvoice024001
 Scenario: create SalesInvoice024008
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
-		| 'Number'                     | 'Partner'   |
-		| '$$NumberSalesOrder023005$$' | 'Ferron BP' |
+		| 'Number'                      | 'Partner'     |
+		| '$$NumberSalesOrder023005$$'  | 'Ferron BP'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentSalesInvoiceGenerate"
 	And I click "Ok" button
@@ -1084,9 +1084,9 @@ Scenario: create SalesInvoice024008
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check filling prices and type of prices
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Quantity'      |
-		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
-		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
+		| 'Price'   | 'Item'      | 'Item key'   | 'Price type'               | 'Quantity'   |
+		| '466,10'  | 'Dress'     | 'L/Green'    | 'Basic Price without VAT'  | '10,000'     |
+		| '338,98'  | 'Trousers'  | '36/Yellow'  | 'Basic Price without VAT'  | '14,000'     |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesInvoice024008$$" variable
 	And I delete "$$SalesInvoice024008$$" variable
@@ -1099,8 +1099,8 @@ Scenario: create SalesInvoice024008
 Scenario: create SalesReturnOrder028004
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' | 'Partner'     |
-			| '$$NumberSalesInvoice024001$$'      |  'Ferron BP' |
+			| 'Number'                         | 'Partner'      |
+			| '$$NumberSalesInvoice024001$$'   | 'Ferron BP'    |
 		And I select current line in "List" table
 		And I click the button named "FormDocumentSalesReturnOrderGenerate"
 		And I click "Ok" button
@@ -1112,22 +1112,22 @@ Scenario: create SalesReturnOrder028004
 			Then the form attribute named "Company" became equal to "Main Company"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'L/Green'  |
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'L/Green'     |
 		And I select current line in "ItemList" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I input "550,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| Item     | Item key  |
-			| Trousers | 36/Yellow |
+			| Item       | Item key     |
+			| Trousers   | 36/Yellow    |
 		And I select current line in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -1144,8 +1144,8 @@ Scenario: create SalesReturnOrder028001
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
-		| 'Number'                       | 'Partner'   |
-		| '$$NumberSalesInvoice024008$$' | 'Ferron BP' |
+		| 'Number'                        | 'Partner'     |
+		| '$$NumberSalesInvoice024008$$'  | 'Ferron BP'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentSalesReturnOrderGenerate"
 	And I click "Ok" button
@@ -1158,14 +1158,14 @@ Scenario: create SalesReturnOrder028001
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
 	And I go to line in "ItemList" table
-		| 'Item'     |
-		| 'Trousers' |
+		| 'Item'       |
+		| 'Trousers'   |
 	And I delete a line in "ItemList" table
 	And I activate "Quantity" field in "ItemList" table
 	And I select current line in "ItemList" table
@@ -1174,8 +1174,8 @@ Scenario: create SalesReturnOrder028001
 	And I finish line editing in "ItemList" table
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Store'    |
-		| 'Dress'    |  'L/Green'  | 'Store 02' |
+		| 'Item'   | 'Item key'  | 'Store'      |
+		| 'Dress'  | 'L/Green'   | 'Store 02'   |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesReturnOrder028001$$" variable
 	And I delete "$$SalesReturnOrder028001$$" variable
@@ -1191,13 +1191,13 @@ Scenario: create SalesInvoice024025
 	* Filling in customer information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I activate "Description" field in "List" table
@@ -1205,21 +1205,21 @@ Scenario: create SalesInvoice024025
 	* Change store to Store 02
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| Description |
-			| Store 02  |
+			| Description    |
+			| Store 02       |
 		And I select current line in "List" table
 	* Filling in items table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'  |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
+			| 'Item key'    |
+			| 'L/Green'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
@@ -1235,8 +1235,8 @@ Scenario: create SalesInvoice024025
 Scenario: create PurchaseReturn022314
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018006$$'      |
+		| 'Number'                            |
+		| '$$NumberPurchaseInvoice018006$$'   |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentPurchaseReturnGenerate"
 	And I click "Ok" button
@@ -1260,31 +1260,31 @@ Scenario: create InventoryTransfer021030
 	And I click the button named "FormCreate"
 	And I click Select button of "Store sender" field
 	And I go to line in "List" table
-		| Description |
-		| Store 02    |
+		| Description   |
+		| Store 02      |
 	And I select current line in "List" table
 	And I click Select button of "Store receiver" field
 	And I go to line in "List" table
-		| Description |
-		| Store 03    |
+		| Description   |
+		| Store 03      |
 	And I select current line in "List" table
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
+		| 'Description'    |
+		| 'Main Company'   |
 	And I select current line in "List" table
 	And I move to "Items" tab
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
+		| 'Description'   |
+		| 'Dress'         |
 	And I select current line in "List" table
 	And I activate "Item key" field in "ItemList" table
 	And I click choice button of "Item key" attribute in "ItemList" table
 	And I go to line in "List" table
-		| 'Item key' |
-		| 'L/Green' |
+		| 'Item key'   |
+		| 'L/Green'    |
 	And I select current line in "List" table
 	And I activate "Unit" field in "ItemList" table
 	And I click choice button of "Unit" attribute in "ItemList" table
@@ -1302,18 +1302,18 @@ Scenario: create InventoryTransfer021030
 Scenario: Create document PriceList objects (works)
 
 	And I check or create document "PriceList" objects:
-		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Branch' | 'Description' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'False'        | 21       | '25.09.2022 17:18:39' | 'False'  | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'False'        | 22       | '25.09.2022 17:19:14' | 'False'  | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+		| 'Ref'                                                                 | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'ItemType'  | 'PriceListType'                     | 'PriceType'                                                           | 'Author'                                                         | 'Branch'  | 'Description'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'False'         | 21        | '25.09.2022 17:18:39'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'False'         | 22        | '25.09.2022 17:19:14'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                | 'Item'                                                          | 'Price' | 'InputUnit'                                                     | 'InputPrice' | 'Unit'                                                          |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 100     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | 110     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 120     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 70      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | 80      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
-		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 90      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'Ref'                                                                 | 'Item'                                                           | 'Price'  | 'InputUnit'                                                      | 'InputPrice'  | 'Unit'                                                            |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e'  | 100      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71'  | 110      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03'  | 120      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e'  | 70       | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71'  | 80       | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03'  | 90       | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  |               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'   |
 
 
 
@@ -1323,19 +1323,19 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 		* Filling in customer information
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
+				| 'Description'     |
+				| 'Kalipso'         |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, without VAT'     |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 			And I select current line in "List" table
 		* Select store 
 			And I click Select button of "Store" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
+				| 'Description'     |
+				| 'Store 01'        |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
@@ -1344,14 +1344,14 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
+				| 'Description'     |
+				| 'Dress'           |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
+				| 'Item key'     |
+				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -1373,27 +1373,27 @@ Scenario: create SalesReturn30001
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'         |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'         |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 		* Filling in item and item key
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -1413,32 +1413,32 @@ Scenario: create PurchaseReturn300301
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'         |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Vendor Ferron, TRY'         |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'         |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		* Filling in item and item key
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
+				| 'Description'     |
+				| 'Trousers'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
 			And I select current line in "List" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -1485,51 +1485,74 @@ Scenario: set True value to the constant
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I click "Check all" button
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                     | 'Use' |
-			| 'Use lock data modification' | 'Yes' |
+			| 'Option'                       | 'Use'    |
+			| 'Use lock data modification'   | 'Yes'    |
 		And I activate "Use" field in "FunctionalOptions" table
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                        | 'Use' |
-			| 'Use consolidated retail sales' | 'Yes' |
+			| 'Option'                          | 'Use'    |
+			| 'Use consolidated retail sales'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                               | 'Use' |
-			| 'Use job queue for external functions' | 'Yes' |
+			| 'Option'                                 | 'Use'    |
+			| 'Use job queue for external functions'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'             | 'Use' |
-			| 'Use all functional' | 'Yes' |
+			| 'Option'               | 'Use'    |
+			| 'Use all functional'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'         | 'Use' |
-			| 'Use accounting' | 'Yes' |
+			| 'Option'           | 'Use'    |
+			| 'Use accounting'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                 | 'Use' |
-			| 'Use commission trading' | 'Yes' |
+			| 'Option'                   | 'Use'    |
+			| 'Use commission trading'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
-			| 'Option'     | 'Use' |
-			| 'Use salary' | 'Yes' |
+			| 'Option'       | 'Use'    |
+			| 'Use salary'   | 'Yes'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
+		// And I go to line in "FunctionalOptions" table
+		// 	| 'Option'                                | 'Use' |
+		// 	| 'Use additional table control document' | 'Yes' |
+		// And I remove "Use" checkbox in "FunctionalOptions" table
+		// And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                | 'Use' |
+			| 'Use additional table control document' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use simple mode' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use object access' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
+	* Disable LinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+
 		
 		
 Scenario: set True value to the constant Use salary
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'     |
-			| 'Use salary' |
+			| 'Option'        |
+			| 'Use salary'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window				
@@ -1539,8 +1562,8 @@ Scenario: set True value to the constant Use consolidated retail sales
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                        |
-			| 'Use consolidated retail sales' |
+			| 'Option'                           |
+			| 'Use consolidated retail sales'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1549,8 +1572,8 @@ Scenario: set True value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use commission trading' |
+			| 'Option'                    |
+			| 'Use commission trading'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1559,8 +1582,8 @@ Scenario: set True value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use retail orders' |
+			| 'Option'               |
+			| 'Use retail orders'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1570,8 +1593,8 @@ Scenario: set False value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use retail orders' |
+			| 'Option'               |
+			| 'Use retail orders'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1580,8 +1603,8 @@ Scenario: set False value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use commission trading' |
+			| 'Option'                    |
+			| 'Use commission trading'    |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1590,8 +1613,8 @@ Scenario: set True value to the constant Use accounting
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'         |
-			| 'Use accounting' |
+			| 'Option'            |
+			| 'Use accounting'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window				
@@ -1600,8 +1623,8 @@ Scenario: set True value to the constant Use job queue for external functions
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'         |
-			| 'Use job queue for external functions' |
+			| 'Option'                                  |
+			| 'Use job queue for external functions'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
@@ -1610,34 +1633,34 @@ Scenario: set True value to the constant Use lock data modification
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'         |
-			| 'Use lock data modification' |
+			| 'Option'                        |
+			| 'Use lock data modification'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
 
-Scenario: set True value to the constant EnableLinkedRowsIntegrity
+Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
- 			| "Constants.EnableLinkedRowsIntegrity.Set(True);" |
+				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server
- 			| "Constants.SaasMode.Set(True);" |
+				| "Constants.SaasMode.Set(True);"     |
 
 Scenario: set True value to the constant UseSimpleMode
 		And I execute 1C:Enterprise script at server
- 			| "Constants.UseSimpleMode.Set(True);" |
+				| "Constants.UseSimpleMode.Set(True);"     |
 
 Scenario: add sales tax settings 
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'SalesTax'         |
+				| 'Description'     |
+				| 'SalesTax'        |
 		And I select current line in "List" table
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-				| 'Description'        |
-				| 'TaxCalculateVAT_TR' |
+				| 'Description'            |
+				| 'TaxCalculateVAT_TR'     |
 		And I select current line in "List" table
 		And I click "Settings" button
 		And I click "Ok" button
@@ -1677,8 +1700,8 @@ Scenario: create Workstation
 		And I input "Workstation 01" text in "Description" field
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №2' |
+			| 'Description'     |
+			| 'Cash desk №2'    |
 		And I select current line in "List" table
 		And I click "Set current" button
 		And I click "Save and close" button
@@ -1692,107 +1715,107 @@ Scenario: auto filling Configuration metadata catalog
 		And Delay 20
 		And I click "List" button
 		And "List" table contains lines
-		| 'Description'                    |
-		| 'Additional attribute sets'      |
-		| 'Additional attribute values'    |
-		| 'Addresses hierarchy'            |
-		| 'Bank payment'                   |
-		| 'Bank receipt'                   |
-		| 'Bank terms'                     |
-		| 'Bundling'                       |
-		| 'Business units'                 |
-		| 'Cash expense'                   |
-		| 'Cash payment'                   |
-		| 'Cash receipt'                   |
-		| 'Cash revenue'                   |
-		| 'Cash statement'                 |
-		| 'Cash statement statuses'        |
-		| 'Cash transfer order'            |
-		| 'Cash/Bank accounts'             |
-		| 'Catalogs'                       |
-		| 'Companies'                      |
-		| 'Configuration metadata'         |
-		| 'Contact info sets'              |
-		| 'Countries'                      |
-		| 'Credit note'                    |
-		| 'Currencies'                     |
-		| 'Data areas'                     |
-		| 'Data base status'               |
-		| 'Data mapping items'             |
-		| 'Data processors'                |
-		| 'Debit note'                     |
-		| 'Documents'                      |
-		| 'Equipment drivers'              |
-		| 'Expense and revenue types'      |
-		| 'Extensions'                     |
-		| 'File storage volumes'           |
-		| 'File storages info'             |
-		| 'Files'                          |
-		| 'Goods receipt'                  |
-		| 'Hardware'                       |
-		| 'Incoming payment order'         |
-		| 'Integration settings'           |
-		| 'Internal supply request'        |
-		| 'Inventory transfer'             |
-		| 'Inventory transfer order'       |
-		| 'Item keys'                      |
-		| 'Item segments'                  |
-		| 'Item serial/lot numbers'        |
-		| 'Item types'                     |
-		| 'Item units'                     |
-		| 'Items'                          |
-		| 'Labeling'                       |
-		| 'Lock data modification reasons' |
-		| 'Multi currency movement sets'   |
-		| 'Objects statuses'               |
-		| 'Opening entry'                  |
-		| 'Outgoing payment order'         |
-		| 'Partner segments'               |
-		| 'Partner terms'                  |
-		| 'Partners'                       |
-		| 'Payment terminals'              |
-		| 'Payment terms'                  |
-		| 'Payment types'                  |
-		| 'Physical count by location'     |
-		| 'Physical inventory'             |
-		| 'Plugins'                        |
-		| 'Price keys'                     |
-		| 'Price list'                     |
-		| 'Price types'                    |
-		| 'Print templates'                |
-		| 'Purchase invoice'               |
-		| 'Purchase order'                 |
-		| 'Purchase return'                |
-		| 'Purchase return order'          |
-		| 'Reconciliation statement'       |
-		| 'Report options'                 |
-		| 'Reports'                        |
-		| 'Retail customers'               |
-		| 'Retail return receipt'          |
-		| 'Retail sales receipt'           |
-		| 'Sales invoice'                  |
-		| 'Sales order'                    |
-		| 'Sales return'                   |
-		| 'Sales return order'             |
-		| 'Shipment confirmation'          |
-		| 'Special offer rules'            |
-		| 'Special offer types'            |
-		| 'Special offers'                 |
-		| 'Specifications'                 |
-		| 'Stock adjustment as surplus'    |
-		| 'Stock adjustment as write-off'  |
-		| 'Stores'                         |
-		| 'Tax additional analytics'       |
-		| 'Tax rates'                      |
-		| 'Tax types'                      |
-		| 'UI groups'                      |
-		| 'Unbundling'                     |
-		| 'Units of measurement'           |
-		| 'User access groups'             |
-		| 'User access profiles'           |
-		| 'User groups'                    |
-		| 'Users'                          |
-		| 'Workstations'                   |
+		| 'Description'                      |
+		| 'Additional attribute sets'        |
+		| 'Additional attribute values'      |
+		| 'Addresses hierarchy'              |
+		| 'Bank payment'                     |
+		| 'Bank receipt'                     |
+		| 'Bank terms'                       |
+		| 'Bundling'                         |
+		| 'Business units'                   |
+		| 'Cash expense'                     |
+		| 'Cash payment'                     |
+		| 'Cash receipt'                     |
+		| 'Cash revenue'                     |
+		| 'Cash statement'                   |
+		| 'Cash statement statuses'          |
+		| 'Cash transfer order'              |
+		| 'Cash/Bank accounts'               |
+		| 'Catalogs'                         |
+		| 'Companies'                        |
+		| 'Configuration metadata'           |
+		| 'Contact info sets'                |
+		| 'Countries'                        |
+		| 'Credit note'                      |
+		| 'Currencies'                       |
+		| 'Data areas'                       |
+		| 'Data base status'                 |
+		| 'Data mapping items'               |
+		| 'Data processors'                  |
+		| 'Debit note'                       |
+		| 'Documents'                        |
+		| 'Equipment drivers'                |
+		| 'Expense and revenue types'        |
+		| 'Extensions'                       |
+		| 'File storage volumes'             |
+		| 'File storages info'               |
+		| 'Files'                            |
+		| 'Goods receipt'                    |
+		| 'Hardware'                         |
+		| 'Incoming payment order'           |
+		| 'Integration settings'             |
+		| 'Internal supply request'          |
+		| 'Inventory transfer'               |
+		| 'Inventory transfer order'         |
+		| 'Item keys'                        |
+		| 'Item segments'                    |
+		| 'Item serial/lot numbers'          |
+		| 'Item types'                       |
+		| 'Item units'                       |
+		| 'Items'                            |
+		| 'Labeling'                         |
+		| 'Lock data modification reasons'   |
+		| 'Multi currency movement sets'     |
+		| 'Objects statuses'                 |
+		| 'Opening entry'                    |
+		| 'Outgoing payment order'           |
+		| 'Partner segments'                 |
+		| 'Partner terms'                    |
+		| 'Partners'                         |
+		| 'Payment terminals'                |
+		| 'Payment terms'                    |
+		| 'Payment types'                    |
+		| 'Physical count by location'       |
+		| 'Physical inventory'               |
+		| 'Plugins'                          |
+		| 'Price keys'                       |
+		| 'Price list'                       |
+		| 'Price types'                      |
+		| 'Print templates'                  |
+		| 'Purchase invoice'                 |
+		| 'Purchase order'                   |
+		| 'Purchase return'                  |
+		| 'Purchase return order'            |
+		| 'Reconciliation statement'         |
+		| 'Report options'                   |
+		| 'Reports'                          |
+		| 'Retail customers'                 |
+		| 'Retail return receipt'            |
+		| 'Retail sales receipt'             |
+		| 'Sales invoice'                    |
+		| 'Sales order'                      |
+		| 'Sales return'                     |
+		| 'Sales return order'               |
+		| 'Shipment confirmation'            |
+		| 'Special offer rules'              |
+		| 'Special offer types'              |
+		| 'Special offers'                   |
+		| 'Specifications'                   |
+		| 'Stock adjustment as surplus'      |
+		| 'Stock adjustment as write-off'    |
+		| 'Stores'                           |
+		| 'Tax additional analytics'         |
+		| 'Tax rates'                        |
+		| 'Tax types'                        |
+		| 'UI groups'                        |
+		| 'Unbundling'                       |
+		| 'Units of measurement'             |
+		| 'User access groups'               |
+		| 'User access profiles'             |
+		| 'User groups'                      |
+		| 'Users'                            |
+		| 'Workstations'                     |
 
 	And I close all client application windows
 
@@ -1824,14 +1847,14 @@ Scenario: create Bank terms
 		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
 		And I click choice button of "Payment type" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 01'     |
+			| 'Description'    |
+			| 'Card 01'        |
 		And I select current line in "List" table
 		And I activate "Account" field in "PaymentTypes" table
 		And I click choice button of "Account" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
+			| 'Description'     |
+			| 'Transit Main'    |
 		And I select current line in "List" table
 		And I activate "Percent" field in "PaymentTypes" table
 		And I input "1,00" text in "Percent" field of "PaymentTypes" table
@@ -1839,14 +1862,14 @@ Scenario: create Bank terms
 		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
 		And I click choice button of "Payment type" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Card 02'     |
+			| 'Description'    |
+			| 'Card 02'        |
 		And I select current line in "List" table
 		And I activate "Account" field in "PaymentTypes" table
 		And I click choice button of "Account" attribute in "PaymentTypes" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Transit Second' |
+			| 'Description'       |
+			| 'Transit Second'    |
 		And I select current line in "List" table
 		And I activate "Percent" field in "PaymentTypes" table
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
@@ -1856,8 +1879,8 @@ Scenario: create Bank terms
 		And I click the button named "FormCreate"
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
+			| 'Description'    |
+			| 'Shop 01'        |
 		And I select current line in "List" table
 		And I click Select button of "Bank term" field
 		Then "Bank terms" window is opened
@@ -1890,14 +1913,14 @@ Scenario: add Plugin for document discount
 			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "DocumentDiscount"
 			Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"		
 			And I go to line in "List" table
-				| 'Description' |
-				| 'DocumentDiscount'         |
+				| 'Description'          |
+				| 'DocumentDiscount'     |
 			And I select current line in "List" table
 			And I click Open button of "Special offer type" field
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
-				| 'Description'      |
-				| 'DocumentDiscount' |
+				| 'Description'          |
+				| 'DocumentDiscount'     |
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
@@ -1928,18 +1951,18 @@ Scenario: create Document discount2
 	And I click Select button of "Plugins" field
 	Then "Plugins" window is opened
 	And I go to line in "List" table
-		| Description               |
-		| ExternalSpecialOfferRules |
+		| Description                 |
+		| ExternalSpecialOfferRules   |
 	And I go to line in "List" table
-		| Description      |
-		| DocumentDiscount |
+		| Description        |
+		| DocumentDiscount   |
 	And I select current line in "List" table
 	And I click "Save and close" button
 	And I wait "Special offer type (create) *" window closing in 20 seconds
 	Then "Special offer types" window is opened
 	And I click the button named "FormChoose"
 	And I input "12" text in "Priority" field
-	And I input current date in "Start of" field
+	And I input current date in "Period" field
 	And I change checkbox "Manually"
 	And I change checkbox "Manual input value"
 	And I set checkbox "Launch"
@@ -1952,19 +1975,19 @@ Scenario: settings for Main Company (commission trade)
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'    |
-			| 'TRY'      | 'Local currency' |
+			| 'Currency'   | 'Description'       |
+			| 'TRY'        | 'Local currency'    |
 		And I select current line in "List" table
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Trade agent store' |
+			| 'Description'          |
+			| 'Trade agent store'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Main Company partner' |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 
@@ -1975,46 +1998,46 @@ Scenario: settings for Company (commission trade)
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'    |
-			| 'TRY'      | 'Local currency' |
+			| 'Currency'   | 'Description'       |
+			| 'TRY'        | 'Local currency'    |
 		And I select current line in "List" table
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Trade agent store' |
+			| 'Description'          |
+			| 'Trade agent store'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Main Company partner' |
+			| 'Description'             |
+			| 'Main Company partner'    |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Second Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Second Company partner' |
+			| 'Description'               |
+			| 'Second Company partner'    |
 		And I select current line in "List" table
 		And I move to "Landed cost" tab
 		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Description'    |
-			| 'TRY'      | 'Local currency' |
+			| 'Currency'   | 'Description'       |
+			| 'TRY'        | 'Local currency'    |
 		And I select current line in "List" table
 		And I move to "Comission trading" tab
 		And I click Select button of "Trade agent store" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Trade agent store' |
+			| 'Description'          |
+			| 'Trade agent store'    |
 		And I select current line in "List" table
 		And I move to "Currencies" tab
 		And in the table "Currencies" I click the button named "CurrenciesAdd"
 		And I click choice button of "Movement type" attribute in "Currencies" table
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Local currency' |
+			| 'Description'       |
+			| 'Local currency'    |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I finish line editing in "Currencies" table

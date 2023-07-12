@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -53,8 +53,8 @@ Scenario: _3001002 preparation
 		* Check or create PurchaseOrder017001
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			If "List" table does not contain lines Then
-					| "Number" |
-					| "$$NumberPurchaseOrder017001$$" |
+					| "Number"                             |
+					| "$$NumberPurchaseOrder017001$$"      |
 				When create PurchaseOrder017001
 		When auto filling Configuration metadata catalog
 
@@ -66,8 +66,8 @@ Scenario: _300000 user check for Turkish data
 		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Change localization code for CI
 		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'          |
+			| 'Login'    |
+			| 'CI'       |
 		And I select current line in "List" table
 		And I select "Turkish" exact value from "Data localization" drop-down list
 		And I input "CI" text in the field named "Description_en"
@@ -96,17 +96,17 @@ Scenario: _300202 setting up barcode generation button display in Purchase order
 		And I click the button named "FormCreate"
 		And I click Select button of "Configuration metadata" field
 		And I go to line in "List" table
-			| Description |
-			| Documents   |
+			| Description    |
+			| Documents      |
 		And I move one level down in "List" table		
 		And I go to line in "List" table
-			| Description         |
-			| Labeling |
+			| Description    |
+			| Labeling       |
 		And I select current line in "List" table
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
-			| Description       |
-			| GenerateBarcodeTR |
+			| Description          |
+			| GenerateBarcodeTR    |
 		And I select current line in "List" table
 		And I select "Object form" exact value from "Form type" drop-down list
 		And I click "Save and close" button
@@ -119,82 +119,82 @@ Scenario: _300202 setting up barcode generation button display in Purchase order
 Scenario: _300203 create Labeling based on Purchase order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder017001$$'|
+		| 'Number'                          |
+		| '$$NumberPurchaseOrder017001$$'   |
 	And I select current line in "List" table
 	And I click "Labeling" button
 	And I click "GenerateBarcodeTR" button
 	* Check filling in document
 		And "Items" table contains lines
-			| 'Item'        | 'Item key'     | 'Item serial/lot number' | 'Barcode' |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'M/White TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Dress TR'    | 'L/Green TR'   | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
+			| 'Item'          | 'Item key'       | 'Item serial/lot number'   | 'Barcode'    |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'M/White TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Dress TR'      | 'L/Green TR'     | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
+			| 'Trousers TR'   | '36/Yellow TR'   | '*'                        | '*'          |
 	And I click the button named "FormPostAndClose"

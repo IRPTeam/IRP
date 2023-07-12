@@ -1,57 +1,58 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	InfoReg = Metadata.InformationRegisters;
 	AccReg  = Metadata.AccumulationRegisters;
-	Tables = New Structure();
-	Tables.Insert("BillOfMaterials"      , PostingServer.CreateTable(InfoReg.T7010S_BillOfMaterials));
-	Tables.Insert("ProductionPlanning"   , PostingServer.CreateTable(AccReg.R7030T_ProductionPlanning));
-	Tables.Insert("MaterialPlanning"     , PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning));
-	Tables.Insert("DetailingSupplies"    , PostingServer.CreateTable(AccReg.R7010T_DetailingSupplies));
-	
+	Tables = New Structure;
+	Tables.Insert("BillOfMaterials", PostingServer.CreateTable(InfoReg.T7010S_BillOfMaterials));
+	Tables.Insert("ProductionPlanning", PostingServer.CreateTable(AccReg.R7030T_ProductionPlanning));
+	Tables.Insert("MaterialPlanning", PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning));
+	Tables.Insert("DetailingSupplies", PostingServer.CreateTable(AccReg.R7010T_DetailingSupplies));
+
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
-		PutTablesToTempTablesManager(Parameters, Tables.BillOfMaterials, 
-                                                 Tables.DetailingSupplies,
-                                                 Tables.MaterialPlanning,
-                                                 Tables.ProductionPlanning);
-		
+		PutTablesToTempTablesManager(Parameters, Tables.BillOfMaterials, Tables.DetailingSupplies,
+			Tables.MaterialPlanning, Tables.ProductionPlanning);
+
 		Return Tables;
 	EndIf;
-	
+
 	BillOfMaterialsTable = GetBillOfMaterials(Ref, GetQueryTex_BillOfMaterialsPlanned());
 	MaterialPlanningEmptyTable    = Tables.MaterialPlanning.CopyColumns();
-	
+
 	MaterialPlanningTable    = GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningEmptyTable);
 	ProductionPlanningTable  = GetProductionPlanning(BillOfMaterialsTable);
 	DetailingSuppliesTable   = GetDetailingSupplies(MaterialPlanningTable);
 	BillOfMaterialsTable     = GetBillOfMaterials(Ref, GetQueryText_BillOfMaterialsContent());
-		
-	PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, 
-                                             DetailingSuppliesTable,
-                                             MaterialPlanningTable,
-                                             ProductionPlanningTable);
-		
+
+	PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, DetailingSuppliesTable, MaterialPlanningTable,
+		ProductionPlanningTable);
+
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	
+
 	Return Tables;
 EndFunction
 
-Procedure PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, 
-                                                   DetailingSuppliesTable,
-                                                   MaterialPlanningTable,
-                                                   ProductionPlanningTable)
-	Query = New Query();
+Procedure PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, DetailingSuppliesTable, MaterialPlanningTable, ProductionPlanningTable)
+	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.SetParameter("ProductionPlanningTable" , ProductionPlanningTable);
-	Query.SetParameter("DetailingSuppliesTable"  , DetailingSuppliesTable);
-	Query.SetParameter("MaterialPlanningTable"   , MaterialPlanningTable);
-	Query.SetParameter("BillOfMaterialsTable"    , BillOfMaterialsTable);
-	
-	Query.Text = 
+	Query.SetParameter("ProductionPlanningTable", ProductionPlanningTable);
+	Query.SetParameter("DetailingSuppliesTable", DetailingSuppliesTable);
+	Query.SetParameter("MaterialPlanningTable", MaterialPlanningTable);
+	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
+
+	Query.Text =
 	"SELECT
 	|	*
 	|INTO IncomingStocks
@@ -91,12 +92,10 @@ Procedure PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable,
 	|	&BillOfMaterialsTable AS BillOfMaterialsTable";
 	Query.Execute();
 EndProcedure
-
-
 #Region CreatingTables
 
 Function GetDetailingSupplies(MaterialPlanningTable)
-	Query = New Query();
+	Query = New Query;
 	Query.Text =
 	"SELECT
 	|	MaterialPlanningTable.Period,
@@ -137,8 +136,8 @@ Function GetDetailingSupplies(MaterialPlanningTable)
 EndFunction
 
 Function GetProductionPlanning(BillOfMaterialsTable)
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT
 	|	BillOfMaterialsTable.ProductionPlanning,
 	|	BillOfMaterialsTable.ProductionPlanningBasis,
@@ -179,7 +178,7 @@ Function GetProductionPlanning(BillOfMaterialsTable)
 	|	tmp AS tmp
 	|WHERE
 	|	tmp.IsProduct = TRUE OR tmp.IsSemiproduct = TRUE";
-	
+
 	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
 	QueryResult = Query.Execute();
 	PlanningTable = QueryResult.Unload();
@@ -187,10 +186,10 @@ Function GetProductionPlanning(BillOfMaterialsTable)
 EndFunction
 
 Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
-	TmpManager = New TempTablesManager();
-	Query = New Query();
+	TmpManager = New TempTablesManager;
+	Query = New Query;
 	Query.TempTablesManager = TmpManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	BillOfMaterialsTable.ProductionPlanning,
 	|   BillOfMaterialsTable.PlanningDocument,
@@ -233,7 +232,7 @@ Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
 	|WHERE
 	|	tmp.IsProduct = TRUE
 	|	OR tmp.IsSemiproduct = TRUE";
-	
+
 	Query.SetParameter("BillOfMaterialsTable", BillOfMaterialsTable);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -251,7 +250,7 @@ Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
 EndFunction
 
 Function GetMaterialByProduct(TmpManager, OutputID, UniqueID)
-	Query = New Query();
+	Query = New Query;
 	Query.TempTablesManager = TmpManager;
 	Query.Text =
 	"SELECT
@@ -273,93 +272,91 @@ Function GetMaterialByProduct(TmpManager, OutputID, UniqueID)
 EndFunction
 
 Function GetQueryTex_BillOfMaterialsPlanned()
-	Return
-		"SELECT
-		|	DocBillOfMaterials.Ref AS ProductionPlanning,
-		|	DocBillOfMaterials.Ref.ProductionPlanning AS PlanningDocument,
-		|	DocBillOfMaterials.Ref.ProductionPlanning AS ProductionPlanningBasis,
-		|	DocBillOfMaterials.Ref.Company AS Company,
-		|	DocBillOfMaterials.Ref.ApprovedDate AS Period,
-		|	DocBillOfMaterials.BusinessUnit AS BusinessUnit,
-		|	DocBillOfMaterials.PlanningPeriod AS PlanningPeriod,
-		|	DocBillOfMaterials.ItemKey AS ItemKey,
-		|	CASE
-		|		WHEN DocBillOfMaterials.IsMaterial
-		|			THEN DocBillOfMaterials.MaterialStore
-		|		WHEN DocBillOfMaterials.IsSemiproduct
-		|			THEN DocBillOfMaterials.SemiproductStore
-		|		ELSE VALUE(Catalog.Stores.EmptyRef)
-		|	END AS WriteoffStore,
-		|	CASE
-		|		WHEN DocBillOfMaterials.IsSemiproduct
-		|		OR DocBillOfMaterials.IsProduct
-		|			THEN DocBillOfMaterials.ReleaseStore
-		|		ELSE VALUE(Catalog.Stores.EmptyRef)
-		|	END AS SurplusStore,
-		|	DocBillOfMaterials.IsProduct AS IsProduct,
-		|	DocBillOfMaterials.IsSemiproduct AS IsSemiproduct,
-		|	DocBillOfMaterials.IsMaterial AS IsMaterial,
-		|	DocBillOfMaterials.IsService AS IsService,
-		|	DocBillOfMaterials.InputID AS InputID,
-		|	DocBillOfMaterials.OutputID AS OutputID,
-		|	DocBillOfMaterials.UniqueID AS UniqueID,
-		|	DocBillOfMaterials.BillOfMaterials AS BillOfMaterials,
-		|	DocBillOfMaterials.Unit AS Unit,
-		|	DocBillOfMaterials.PlannedQuantity AS Quantity,
-		|	DocBillOfMaterials.BasisUnit AS BasisUnit,
-		|	DocBillOfMaterials.PlannedBasisQuantity AS BasisQuantity
-		|FROM
-		|	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
-		|WHERE
-		|	DocBillOfMaterials.Ref = &Ref
-		|	AND DocBillOfMaterials.PlannedQuantity <> 0";
+	Return "SELECT
+		   |	DocBillOfMaterials.Ref AS ProductionPlanning,
+		   |	DocBillOfMaterials.Ref.ProductionPlanning AS PlanningDocument,
+		   |	DocBillOfMaterials.Ref.ProductionPlanning AS ProductionPlanningBasis,
+		   |	DocBillOfMaterials.Ref.Company AS Company,
+		   |	DocBillOfMaterials.Ref.ApprovedDate AS Period,
+		   |	DocBillOfMaterials.BusinessUnit AS BusinessUnit,
+		   |	DocBillOfMaterials.PlanningPeriod AS PlanningPeriod,
+		   |	DocBillOfMaterials.ItemKey AS ItemKey,
+		   |	CASE
+		   |		WHEN DocBillOfMaterials.IsMaterial
+		   |			THEN DocBillOfMaterials.MaterialStore
+		   |		WHEN DocBillOfMaterials.IsSemiproduct
+		   |			THEN DocBillOfMaterials.SemiproductStore
+		   |		ELSE VALUE(Catalog.Stores.EmptyRef)
+		   |	END AS WriteoffStore,
+		   |	CASE
+		   |		WHEN DocBillOfMaterials.IsSemiproduct
+		   |		OR DocBillOfMaterials.IsProduct
+		   |			THEN DocBillOfMaterials.ReleaseStore
+		   |		ELSE VALUE(Catalog.Stores.EmptyRef)
+		   |	END AS SurplusStore,
+		   |	DocBillOfMaterials.IsProduct AS IsProduct,
+		   |	DocBillOfMaterials.IsSemiproduct AS IsSemiproduct,
+		   |	DocBillOfMaterials.IsMaterial AS IsMaterial,
+		   |	DocBillOfMaterials.IsService AS IsService,
+		   |	DocBillOfMaterials.InputID AS InputID,
+		   |	DocBillOfMaterials.OutputID AS OutputID,
+		   |	DocBillOfMaterials.UniqueID AS UniqueID,
+		   |	DocBillOfMaterials.BillOfMaterials AS BillOfMaterials,
+		   |	DocBillOfMaterials.Unit AS Unit,
+		   |	DocBillOfMaterials.PlannedQuantity AS Quantity,
+		   |	DocBillOfMaterials.BasisUnit AS BasisUnit,
+		   |	DocBillOfMaterials.PlannedBasisQuantity AS BasisQuantity
+		   |FROM
+		   |	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
+		   |WHERE
+		   |	DocBillOfMaterials.Ref = &Ref
+		   |	AND DocBillOfMaterials.PlannedQuantity <> 0";
 EndFunction
 
 Function GetQueryText_BillOfMaterialsContent()
-	Return
-		"SELECT
-		|	DocBillOfMaterials.Ref AS ProductionPlanning,
-		|	DocBillOfMaterials.Ref.ProductionPlanning AS PlanningDocument,
-		|	DocBillOfMaterials.Ref.ProductionPlanning AS ProductionPlanningBasis,
-		|	DocBillOfMaterials.Ref.Company AS Company,
-		|	DocBillOfMaterials.Ref.ApprovedDate AS Period,
-		|	DocBillOfMaterials.BusinessUnit AS BusinessUnit,
-		|	DocBillOfMaterials.PlanningPeriod AS PlanningPeriod,
-		|	DocBillOfMaterials.ItemKey AS ItemKey,
-		|	CASE
-		|		WHEN DocBillOfMaterials.IsMaterial
-		|			THEN DocBillOfMaterials.MaterialStore
-		|		WHEN DocBillOfMaterials.IsSemiproduct
-		|			THEN DocBillOfMaterials.SemiproductStore
-		|		ELSE VALUE(Catalog.Stores.EmptyRef)
-		|	END AS WriteoffStore,
-		|	CASE
-		|		WHEN DocBillOfMaterials.IsSemiproduct
-		|		OR DocBillOfMaterials.IsProduct
-		|			THEN DocBillOfMaterials.ReleaseStore
-		|		ELSE VALUE(Catalog.Stores.EmptyRef)
-		|	END AS SurplusStore,
-		|	DocBillOfMaterials.IsProduct AS IsProduct,
-		|	DocBillOfMaterials.IsSemiproduct AS IsSemiproduct,
-		|	DocBillOfMaterials.IsMaterial AS IsMaterial,
-		|	DocBillOfMaterials.IsService AS IsService,
-		|	DocBillOfMaterials.InputID AS InputID,
-		|	DocBillOfMaterials.OutputID AS OutputID,
-		|	DocBillOfMaterials.UniqueID AS UniqueID,
-		|	DocBillOfMaterials.BillOfMaterials AS BillOfMaterials,
-		|	DocBillOfMaterials.Unit AS Unit,
-		|	DocBillOfMaterials.Quantity AS Quantity,
-		|	DocBillOfMaterials.BasisUnit AS BasisUnit,
-		|	DocBillOfMaterials.BasisQuantity AS BasisQuantity
-		|FROM
-		|	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
-		|WHERE
-		|	DocBillOfMaterials.Ref = &Ref
-		|	AND DocBillOfMaterials.PlannedQuantity <> 0";
+	Return "SELECT
+		   |	DocBillOfMaterials.Ref AS ProductionPlanning,
+		   |	DocBillOfMaterials.Ref.ProductionPlanning AS PlanningDocument,
+		   |	DocBillOfMaterials.Ref.ProductionPlanning AS ProductionPlanningBasis,
+		   |	DocBillOfMaterials.Ref.Company AS Company,
+		   |	DocBillOfMaterials.Ref.ApprovedDate AS Period,
+		   |	DocBillOfMaterials.BusinessUnit AS BusinessUnit,
+		   |	DocBillOfMaterials.PlanningPeriod AS PlanningPeriod,
+		   |	DocBillOfMaterials.ItemKey AS ItemKey,
+		   |	CASE
+		   |		WHEN DocBillOfMaterials.IsMaterial
+		   |			THEN DocBillOfMaterials.MaterialStore
+		   |		WHEN DocBillOfMaterials.IsSemiproduct
+		   |			THEN DocBillOfMaterials.SemiproductStore
+		   |		ELSE VALUE(Catalog.Stores.EmptyRef)
+		   |	END AS WriteoffStore,
+		   |	CASE
+		   |		WHEN DocBillOfMaterials.IsSemiproduct
+		   |		OR DocBillOfMaterials.IsProduct
+		   |			THEN DocBillOfMaterials.ReleaseStore
+		   |		ELSE VALUE(Catalog.Stores.EmptyRef)
+		   |	END AS SurplusStore,
+		   |	DocBillOfMaterials.IsProduct AS IsProduct,
+		   |	DocBillOfMaterials.IsSemiproduct AS IsSemiproduct,
+		   |	DocBillOfMaterials.IsMaterial AS IsMaterial,
+		   |	DocBillOfMaterials.IsService AS IsService,
+		   |	DocBillOfMaterials.InputID AS InputID,
+		   |	DocBillOfMaterials.OutputID AS OutputID,
+		   |	DocBillOfMaterials.UniqueID AS UniqueID,
+		   |	DocBillOfMaterials.BillOfMaterials AS BillOfMaterials,
+		   |	DocBillOfMaterials.Unit AS Unit,
+		   |	DocBillOfMaterials.Quantity AS Quantity,
+		   |	DocBillOfMaterials.BasisUnit AS BasisUnit,
+		   |	DocBillOfMaterials.BasisQuantity AS BasisQuantity
+		   |FROM
+		   |	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
+		   |WHERE
+		   |	DocBillOfMaterials.Ref = &Ref
+		   |	AND DocBillOfMaterials.PlannedQuantity <> 0";
 EndFunction
 
 Function GetBillOfMaterials(Ref, QueryText)
-	Query = New Query();
+	Query = New Query;
 	Query.Text = QueryText;
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
@@ -370,13 +367,13 @@ EndFunction
 #EndRegion
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	If Parameters.StatusInfo.Posting Then
-		Tables = Parameters.DocumentDataTables;	
+		Tables = Parameters.DocumentDataTables;
 		QueryArray = GetQueryTextsMasterTables();
 		PostingServer.SetRegisters(Tables, Ref);
 		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -384,7 +381,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -424,17 +421,19 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-		
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ProductionPlanning.Productions");
+
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.ProductionPlanning.Productions");
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
-	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
+		"R4035B_IncomingStocks_Exists", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
 
 #EndRegion
+
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
@@ -445,10 +444,14 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
@@ -456,77 +459,97 @@ Function GetQueryTextsSecondaryTables()
 	Return QueryArray;
 EndFunction
 
+Function R4035B_IncomingStocks_Exists()
+	Return "SELECT *
+		   |	INTO R4035B_IncomingStocks_Exists
+		   |FROM
+		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		   |WHERE
+		   |	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(T7010S_BillOfMaterials());
-	QueryArray.Add(R7030T_ProductionPlanning());
-	QueryArray.Add(R7020T_MaterialPlanning());
 	QueryArray.Add(R7010T_DetailingSupplies());
-	Return QueryArray;	
-EndFunction	
-
-Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	IncomingStocks AS IncomingStocks
-		|WHERE
-		|	IncomingStocks.ItemKey.UseIncomingStockReservation";
+	QueryArray.Add(R7020T_MaterialPlanning());
+	QueryArray.Add(R7030T_ProductionPlanning());
+	QueryArray.Add(T7010S_BillOfMaterials());
+	Return QueryArray;
 EndFunction
 
-Function R4035B_IncomingStocks_Exists()
-	Return
-		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		|WHERE
-		|	R4035B_IncomingStocks.Recorder = &Ref";
+Function R4035B_IncomingStocks()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	*
+		   |INTO R4035B_IncomingStocks
+		   |FROM
+		   |	IncomingStocks AS IncomingStocks
+		   |WHERE
+		   |	IncomingStocks.ItemKey.UseIncomingStockReservation";
 EndFunction
 
 Function T7010S_BillOfMaterials()
-	Return
-		"SELECT * 
-		|INTO T7010S_BillOfMaterials
-		|FROM BillOfMaterialsTable AS BillOfMaterialsTable
-		|WHERE
-		|	TRUE";
+	Return "SELECT * 
+		   |INTO T7010S_BillOfMaterials
+		   |FROM BillOfMaterialsTable AS BillOfMaterialsTable
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function R7030T_ProductionPlanning()
-	Return
-		"SELECT * 
-		|INTO R7030T_ProductionPlanning
-		|FROM ProductionPlanningTable AS ProductionPlanningTable
-		|WHERE
-		|	TRUE";
+	Return "SELECT * 
+		   |INTO R7030T_ProductionPlanning
+		   |FROM ProductionPlanningTable AS ProductionPlanningTable
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function R7020T_MaterialPlanning()
-	Return
-		"SELECT * 
-		|INTO R7020T_MaterialPlanning
-		|FROM MaterialPlanningTable AS MaterialPlanningTable
-		|WHERE
-		|	TRUE";
+	Return "SELECT * 
+		   |INTO R7020T_MaterialPlanning
+		   |FROM MaterialPlanningTable AS MaterialPlanningTable
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function R7010T_DetailingSupplies()
-	Return
-		"SELECT * 
-		|INTO R7010T_DetailingSupplies
-		|FROM DetailingSuppliesTable AS DetailingSuppliesTable
-		|WHERE
-		|	TRUE";
+	Return "SELECT * 
+		   |INTO R7010T_DetailingSupplies
+		   |FROM DetailingSuppliesTable AS DetailingSuppliesTable
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+#Region API
+
 Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey) Export
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT
 	|	ISNULL(Planned.Company, Correction.Company) AS Company,
 	|	ISNULL(Planned.BusinessUnit, Correction.BusinessUnit) AS BusinessUnit,
@@ -605,20 +628,22 @@ Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfM
 	|	Production AS Production
 	|WHERE
 	|	Production.BasisQuantity > 0";
-		
-	Query.SetParameter("Company"            , Company);
-	Query.SetParameter("ProductionPlanning" , ProductionPlanning);
-	Query.SetParameter("PlanningPeriod"     , PlanningPeriod);
-	Query.SetParameter("ItemKey"            , ItemKey);
-	Query.SetParameter("BillOfMaterials"    , BillOfMaterials);
-	
+
+	Query.SetParameter("Company", Company);
+	Query.SetParameter("ProductionPlanning", ProductionPlanning);
+	Query.SetParameter("PlanningPeriod", PlanningPeriod);
+	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("BillOfMaterials", BillOfMaterials);
+
 	Result = New Structure("BasisUnit, BasisQuantity", Catalogs.Units.EmptyRef(), 0);
-	
+
 	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();	
+	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		Result.BasisUnit = QuerySelection.BasisUnit;
 		Result.BasisQuantity = QuerySelection.BasisQuantity;
 	EndIf;
 	Return Result;
 EndFunction
+
+#EndRegion

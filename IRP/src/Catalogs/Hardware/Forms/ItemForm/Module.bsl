@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.PageExtensionsAttributes);
 EndProcedure
 
 &AtServer
@@ -117,6 +118,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

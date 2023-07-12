@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @AccessRights
@@ -15,17 +15,17 @@ Scenario: 950500 preparation
 	* Check test user roles
 		Given I open hyperlink 'e1cib/list/Catalog.Users'
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Sofia Borisova (Manager 3)' |
+			| 'Description'                   |
+			| 'Sofia Borisova (Manager 3)'    |
 		And I select current line in "List" table
 		And I move to "Roles" tab
 		And "RoleList" table contains lines
-			| 'Value'                 |
-			| 'Basic role'            |
-			| 'Run mobile client'     |
-			| 'Run thin client'       |
-			| 'Run web client'        |
-			| 'Full access only read' |
+			| 'Value'                    |
+			| 'Basic role'               |
+			| 'Run mobile client'        |
+			| 'Run thin client'          |
+			| 'Run web client'           |
+			| 'Full access only read'    |
 		And I close all client application windows
 		
 Scenario: 9505001 check preparation
@@ -35,8 +35,8 @@ Scenario: 9505001 check preparation
 Scenario: 950503 change login and check access
 	Given I open hyperlink 'e1cib/list/Catalog.Users'
 	And I go to line in "List" table
-		| 'Description'       |
-		| 'Sofia Borisova (Manager 3)' |
+		| 'Description'                  |
+		| 'Sofia Borisova (Manager 3)'   |
 	And I select current line in "List" table
 	And I input "BorisovaS" text in "Login" field
 	And I click "Save and close" button	
@@ -51,10 +51,10 @@ Scenario: 950503 change login and check access
 	Given I open hyperlink 'e1cib/list/Catalog.Users'
 	And "List" table does not contain lines
 		| 'Login'       |
-		| 'SBorisova' |
+		| 'SBorisova'   |
 	And "List" table contains lines
 		| 'Login'       |
-		| 'BorisovaS' |
+		| 'BorisovaS'   |
 		
 Scenario: 950510 check disable user
 		And I connect launched Test client "Этот клиент"
@@ -62,39 +62,39 @@ Scenario: 950510 check disable user
 	* Disable user
 		Given I open hyperlink 'e1cib/list/Catalog.Users'
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'David Romanov (Financier 1)' |
+			| 'Description'                    |
+			| 'David Romanov (Financier 1)'    |
 		And I select current line in "List" table
 		And I move to "Roles" tab
 		And "RoleList" table contains lines
-			| 'Value'           |
-			| 'Run thin client' |
-			| 'Run web client'  |
-			| 'Full access'     |
-			| 'Basic role'      |
+			| 'Value'              |
+			| 'Run thin client'    |
+			| 'Run web client'     |
+			| 'Full access'        |
+			| 'Basic role'         |
 		And I set checkbox named "Disable"
 		And I click "Save and close" button
 		And I wait "David Romanov (Financier 1) (User) *" window closing in 20 seconds
 	* Check
 		When I Check the steps for Exception
-			|'And I connect "DRomanov" TestClient using "DRomanov" login and "" password'|
+			| 'And I connect "DRomanov" TestClient using "DRomanov" login and "" password'    |
 	* Enable user
 		And I connect launched Test client "Этот клиент"
 		Given I open hyperlink 'e1cib/list/Catalog.Users'
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'David Romanov (Financier 1)' |
+			| 'Description'                    |
+			| 'David Romanov (Financier 1)'    |
 		And I select current line in "List" table
 		Then the form attribute named "Disable" became equal to "Yes"
 		And I remove checkbox named "Disable"
 		And I click "Save" button
 		And I move to "Roles" tab
 		And "RoleList" table contains lines
-			| 'Value'           |
-			| 'Run thin client' |
-			| 'Run web client'  |
-			| 'Full access'     |
-			| 'Basic role'      |
+			| 'Value'              |
+			| 'Run thin client'    |
+			| 'Run web client'     |
+			| 'Full access'        |
+			| 'Basic role'         |
 		And I click "Save and close" button
 		And I wait "David Romanov (Financier 1) (User) *" window closing in 20 seconds
 	* Check
@@ -108,8 +108,8 @@ Scenario: 950512 change password
 	* Set change passord for user
 		Given I open hyperlink 'e1cib/list/Catalog.Users'
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Arina Brown (Financier 3)' |
+			| 'Description'                  |
+			| 'Arina Brown (Financier 3)'    |
 		And I select current line in "List" table
 		And I set checkbox "Change password on next login"
 		And I click "Save and close" button		

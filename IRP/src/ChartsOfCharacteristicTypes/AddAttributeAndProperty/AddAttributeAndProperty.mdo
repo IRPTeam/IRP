@@ -90,6 +90,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="f175a6e7-8ec5-4df2-acc4-b83ec90b6816">
+    <name>isURL</name>
+    <synonym>
+      <key>en</key>
+      <value>Is URL</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
     <name>ItemForm</name>
     <synonym>

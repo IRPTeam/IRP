@@ -39,6 +39,13 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 &AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+&AtClient
 Procedure PartnerOnChange(Item)
 	Object.LegalEntity = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalEntity);
 EndProcedure
@@ -60,5 +67,3 @@ Procedure LegalEntityStartChoice(Item, ChoiceData, StandardProcessing)
 	DocumentsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 
 EndProcedure
-
-#EndRegion

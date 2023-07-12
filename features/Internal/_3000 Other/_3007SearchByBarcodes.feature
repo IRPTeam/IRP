@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Other
@@ -52,8 +52,8 @@ Scenario: _300700 preparation (add items to documents by barcode)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -87,7 +87,7 @@ Scenario: _300706 barcode check in Purchase invoice
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| 'Description' |
+		| 'Description'   |
 		| 'Ferron BP'     |
 	And I select current line in "List" table
 	And I click "SearchByBarcode" button
@@ -95,15 +95,16 @@ Scenario: _300706 barcode check in Purchase invoice
 	And I move to the next attribute
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
-			| 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '1,000'                 |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Stock quantity'    |
+			| 'Dress'   | 'S/Yellow'   | '1,000'      | 'pcs'    | '1,000'             |
 		And I click "SearchByBarcode" button
 		And I input "2202283713" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
-			| 'Dress' | 'S/Yellow' | '2,000' | 'pcs'  | '2,000'                 |
+			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'   | 'Stock quantity'    |
+			| 'Dress'   | 'S/Yellow'   | '2,000'      | 'pcs'    | '2,000'             |
 	And I close all client application windows
 
 Scenario: _300707 barcode check in Purchase return order
@@ -175,9 +176,9 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And I input "2202283713" text in the field named "Barcode"
 	And I move to the next attribute
 	And "ItemList" table became equal
-		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 'Date'|
-		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
-		| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
+		| '#'  | 'Item'   | 'Item key'  | 'Unit'  | 'Phys. count'  | 'Date'   |
+		| '1'  | 'Dress'  | 'S/Yellow'  | 'pcs'   | '1,000'        | '*'      |
+		| '2'  | 'Dress'  | 'S/Yellow'  | 'pcs'   | '1,000'        | '*'      |
 	And I close all client application windows
 
 
@@ -195,26 +196,26 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemKeyList" table contains lines
-				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
-				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
+				| 'Item'     | 'Item key'    | 'Price'    | 'Input unit'     |
+				| 'Dress'    | 'S/Yellow'    | ''         | 'pcs'            |
 		* Add second string
 			And I click the button named "SearchByBarcode"
 			And I input "978020137962" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemKeyList" table contains lines
-				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
-				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
-				| 'Boots' | '37/18SD'  | ''      | 'pcs'      |
+				| 'Item'     | 'Item key'    | 'Price'    | 'Input unit'     |
+				| 'Dress'    | 'S/Yellow'    | ''         | 'pcs'            |
+				| 'Boots'    | '37/18SD'     | ''         | 'pcs'            |
 		* Check active string when scan the same item
 			And I go to line in "ItemKeyList" table
-				| 'Item'  | 'Item key' |
-				| 'Boots' | '37/18SD'  |			
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
 			And I click the button named "SearchByBarcode"
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And the current line of "ItemKeyList" table is equal to
-				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
-				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
+				| 'Item'     | 'Item key'    | 'Price'    | 'Input unit'     |
+				| 'Dress'    | 'S/Yellow'    | ''         | 'pcs'            |
 			And I close all client application windows
 	* By item
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -225,26 +226,26 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price' | 'Input unit' |
-				| 'Dress' | ''      | 'pcs'      |
+				| 'Item'     | 'Price'    | 'Input unit'     |
+				| 'Dress'    | ''         | 'pcs'            |
 		* Add second string
 			And I click the button named "SearchByBarcodeItem"
 			And I input "978020137962" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price' | 'Input unit' |
-				| 'Dress' | ''      | 'pcs'      |
-				| 'Boots' | ''      | 'pcs'      |
+				| 'Item'     | 'Price'    | 'Input unit'     |
+				| 'Dress'    | ''         | 'pcs'            |
+				| 'Boots'    | ''         | 'pcs'            |
 		* Check active string when scan the same item
 			And I go to line in "ItemList" table
-				| 'Item'  |
-				| 'Boots' |
+				| 'Item'      |
+				| 'Boots'     |
 			And I click the button named "SearchByBarcodeItem"	
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And the current line of "ItemList" table is equal to
-				| 'Item'  | 'Price' | 'Input unit' |
-				| 'Dress' | ''      | 'pcs'      |
+				| 'Item'     | 'Price'    | 'Input unit'     |
+				| 'Dress'    | ''         | 'pcs'            |
 		And I close all client application windows
 		
 Scenario: _300725 check function Always add new row after scan
@@ -252,8 +253,8 @@ Scenario: _300725 check function Always add new row after scan
 	* Select item type
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"		
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
+			| 'Description'    |
+			| 'Clothes'        |
 		And I select current line in "List" table
 		And I set checkbox "Always add new row after scan"
 		And I click "Save and close" button
@@ -267,9 +268,9 @@ Scenario: _300725 check function Always add new row after scan
 		And I input "2202283713" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table became equal
-			| '#' | 'Item'  | 'Item key' | 'Unit' | 'Quantity' |
-			| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    |
-			| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    |
+			| '#'   | 'Item'    | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| '1'   | 'Dress'   | 'S/Yellow'   | 'pcs'    | '1,000'       |
+			| '2'   | 'Dress'   | 'S/Yellow'   | 'pcs'    | '1,000'       |
 		And I close all client application windows
 		
 		

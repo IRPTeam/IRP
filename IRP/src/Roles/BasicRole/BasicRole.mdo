@@ -5,4 +5,5 @@
     <key>en</key>
     <value>Basic role</value>
   </synonym>
+  <comment>Basic role, with this role - user can login to database</comment>
 </mdclass:Role>

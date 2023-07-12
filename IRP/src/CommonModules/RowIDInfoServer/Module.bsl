@@ -9,7 +9,12 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		Return;
 	EndIf;
 
+	If WriteMode <> DocumentWriteMode.Posting Then
+		Return;
+	EndIf;
+	
 	BeginTransaction();
+	
 	Is = Is(Source);
 	If Is.SO Then
 		FillRowID_SO(Source, Cancel);
@@ -74,6 +79,13 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	
+	If Not Source.Posted Then
+		Return;
+	EndIf;
+	
+	SetPrivilegedMode(True);
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -2455,6 +2467,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.SalesOrder.SpecialOffers AS SpecialOffers
@@ -2616,6 +2630,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
@@ -3274,6 +3290,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
@@ -3397,6 +3415,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.PurchaseInvoice.SpecialOffers AS SpecialOffers
@@ -4018,6 +4038,8 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.PurchaseReturn.SpecialOffers AS SpecialOffers
@@ -4117,6 +4139,8 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.PurchaseReturnOrder.SpecialOffers AS SpecialOffers
@@ -4227,6 +4251,8 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.SalesReturn.SpecialOffers AS SpecialOffers
@@ -4327,6 +4353,8 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	0 AS Percent
 	|FROM
 	|	Document.SalesReturnOrder.SpecialOffers AS SpecialOffers
@@ -4359,7 +4387,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 	"SELECT ALLOWED
-	|	""SalesInvoice"" AS BasedOn,
+	|	""RetailSalesReceipt"" AS BasedOn,
 	|	UNDEFINED AS Ref,
 	|	ItemList.Ref AS RetailSalesReceipt,
 	|	ItemList.Ref.Partner AS Partner,
@@ -4395,7 +4423,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ISNULL(ItemList.isControlCodeString, False) AS isControlCodeString
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
@@ -4429,6 +4458,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.RetailSalesReceipt.SpecialOffers AS SpecialOffers
@@ -4455,6 +4486,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.PaymentType,
 	|	Payments.PaymentTerminal,
 	|	Payments.Account,
+	|	Payments.FinancialMovementType,
 	|	Payments.Amount,
 	|	Payments.Percent,
 	|	Payments.Commission,
@@ -4469,6 +4501,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|GROUP BY
 	|	Payments.Key,
 	|	Payments.Account,
+	|	Payments.FinancialMovementType,
 	|	Payments.Amount,
 	|	Payments.BankTerm,
 	|	Payments.Commission,
@@ -4601,6 +4634,8 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.WorkOrder.SpecialOffers AS SpecialOffers
@@ -4932,8 +4967,11 @@ Procedure RecalculateAmounts(Tables)
 			For Each RowSpecialOffers In Tables.SpecialOffers.FindRows(Filter) Do
 				If RowItemList.OriginalQuantity = 0 Then
 					RowSpecialOffers.Amount = 0;
+					RowSpecialOffers.Bonus = 0;
 				Else
 					RowSpecialOffers.Amount = RowSpecialOffers.Amount / RowItemList.OriginalQuantity
+						* RowItemList.QuantityInBaseUnit;
+					RowSpecialOffers.Bonus = RowSpecialOffers.Bonus / RowItemList.OriginalQuantity
 						* RowItemList.QuantityInBaseUnit;
 				EndIf;
 			EndDo;
@@ -10650,7 +10688,9 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypePurchases,
 		   |TransactionTypePR,
 		   |InventoryOrigin,
-		   |TransactionTypeRGR";
+		   |TransactionTypeRGR,
+		   |isControlCodeString";
+		
 EndFunction
 
 Function GetEmptyTable_ItemList()
@@ -10698,11 +10738,11 @@ EndFunction
 #Region EmptyTables_SpecialOffers
 
 Function GetColumnNames_SpecialOffers()
-	Return "Ref, Key, Offer, Percent";
+	Return "Ref, Key, Offer, Percent, AddInfo";
 EndFunction
 
 Function GetColumnNamesSum_SpecialOffers()
-	Return "Amount";
+	Return "Amount, Bonus";
 EndFunction
 
 Function GetEmptyTable_SpecialOffers()
@@ -10778,7 +10818,7 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Key, Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm, RRNCode, PaymentInfo";
+	Return "Key, Ref, PaymentType, PaymentTerminal, Account, FinancialMovementType, Percent, BankTerm, RRNCode, PaymentInfo";
 EndFunction
 
 Function GetColumnNamesSum_Payments()
@@ -11105,6 +11145,9 @@ Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
 	If QuerySelection.Next() Then
 		FillPropertyValues(BasisInfo, QuerySelection); 
+	Else
+		Log.Write(R().Error_128, New Structure("Basis, BasisKey, RowID", String(Basis), BasisKey, RowID));
+		Raise R().Error_128;
 	EndIf;
 	Return BasisInfo;
 EndFunction

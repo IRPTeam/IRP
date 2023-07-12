@@ -97,6 +97,8 @@
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
   <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -477,6 +479,34 @@
       </synonym>
       <type>
         <types>CatalogRef.RetailCustomers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5b3ff04e-719a-49b5-bd4a-d2edc8a2e2eb">
+      <name>SendingAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Sending account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6b07b05e-5a70-41a6-ac7a-721c8d1ded24">
+      <name>SendingBranch</name>
+      <synonym>
+        <key>en</key>
+        <value>Sending branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

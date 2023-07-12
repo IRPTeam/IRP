@@ -18,6 +18,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure OnOpen(Cancel)
+	SetVisible();
+EndProcedure
+
 #EndRegion
 
 &AtClient
@@ -37,4 +42,37 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
+
+#Region Actions
+
+&AtClient
+Procedure BankTermTypeOnChange(Item)
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure SetVisible()
+	If Object.BankTermType = PredefinedValue("Enum.BankTermTypes.PaymentAgent") Then
+		SetVisibleByBankTermType(False);
+	ElsIf Object.BankTermType = PredefinedValue("Enum.BankTermTypes.PaymentTerminal") Then
+		SetVisibleByBankTermType(True);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SetVisibleByBankTermType(isTerminal)
+	Items.PaymentTypesAccount.Visible = isTerminal;
+	Items.PaymentTypesLegalName.Visible = Not isTerminal;
+	Items.PaymentTypesLegalNameContract.Visible = Not isTerminal;
+	Items.PaymentTypesPartner.Visible = Not isTerminal;
+	Items.PaymentTypesPartnerTerms.Visible = Not isTerminal;
+EndProcedure
+
+#EndRegion
+

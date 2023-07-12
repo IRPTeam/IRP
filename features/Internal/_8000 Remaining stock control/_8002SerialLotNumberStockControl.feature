@@ -56,8 +56,8 @@ Scenario:_800020 preparation (remaining stock control)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)	
 	* Tax settings
@@ -72,19 +72,19 @@ Scenario:_800020 preparation (remaining stock control)
 	When create PaymentTypes
 	Given I open hyperlink "e1cib/list/Catalog.BankTerms"
 	If "List" table does not contain lines Then
-		| "Description" |
-		| 'Bank term 01' |
+		| "Description"    |
+		| 'Bank term 01'   |
 			When create bank terms
 	* Workstation
 		If "List" table does not contain lines Then
-			| 'Description' |
-			| 'Bank term 01' |
+			| 'Description'     |
+			| 'Bank term 01'    |
 			When create Workstation
 	When Create catalog SerialLotNumbers objects (for Phone)
 	When Create Item with SerialLotNumbers (Phone)
 	When Create document Purchase invoice objects (with SerialLotNumber)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(1252).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(1252).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario:_8000201 check preparation
 	When check preparation 
@@ -96,47 +96,47 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 03'    |
+				| 'Description'     |
+				| 'Store 03'        |
 			And I select current line in "List" table
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			Then "Items" window is opened
 			And I go to line in "List" table
-				| 'Description' | 'Reference' |
-				| 'Phone A'     | 'Phone A'   |
+				| 'Description' |
+				| 'Phone A'     |
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'    | 'Item key' |
-				| 'Phone A' | 'Blue'     |
+				| 'Item'       | 'Item key'     |
+				| 'Phone A'    | 'Blue'         |
 			And I activate field named "Item" in "List" table
 			And I go to line in "List" table
-				| 'Item'    | 'Item key' |
-				| 'Phone A' | 'Brown'    |
+				| 'Item'       | 'Item key'     |
+				| 'Phone A'    | 'Brown'        |
 			And I select current line in "List" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -185,40 +185,40 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And I click the button named "FormCreate"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
+				| 'Description'     |
+				| 'Ferron BP'       |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
+				| 'Description'           |
+				| 'Company Ferron BP'     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
 			And I select current line in "List" table
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
+				| 'Description'      |
+				| 'Main Company'     |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 03'    |
+				| 'Description'     |
+				| 'Store 03'        |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Phone A'       |
+				| 'Description'     |
+				| 'Phone A'         |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Phone A' | 'Brown'  |
+				| 'Item'       | 'Item key'     |
+				| 'Phone A'    | 'Brown'        |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
@@ -243,8 +243,8 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And in the table "Payments" I click the button named "PaymentsAdd"
 			And I click choice button of "Payment type" attribute in "Payments" table
 			And I go to line in "List" table
-				| 'Code' | 'Description' | 'Reference' |
-				| '1'    | 'Cash'        | 'Cash'      |
+				| 'Code' | 'Description' |
+				| '1'    | 'Cash'        |
 			And I select current line in "List" table
 			And I activate field named "PaymentsAmount" in "Payments" table
 			And I input "840,00" text in the field named "PaymentsAmount" of "Payments" table
@@ -262,8 +262,8 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'Brown' | '13456778'      |
+				| 'Owner'    | 'Serial number'     |
+				| 'Brown'    | '13456778'          |
 			And I select current line in "List" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button

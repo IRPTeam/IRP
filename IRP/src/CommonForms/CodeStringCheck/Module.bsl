@@ -1,3 +1,4 @@
+
 // @strict-types
 
 &AtServer
@@ -8,6 +9,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
 	isReturn = Parameters.isReturn;
+	AdditionalCheckIsOn = Parameters.Item.CheckCodeString;
+	
+	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
 EndProcedure
 
 &AtClient
@@ -17,6 +21,7 @@ Procedure OnOpen(Cancel)
 		NewRow = CurrentCodes.Add();
 		NewRow.StringCode = Row.CodeString;
 		NewRow.CodeIsApproved = Row.CodeIsApproved;
+		NewRow.NotCheck = Row.NotCheck;
 	EndDo;
 EndProcedure
 
@@ -49,8 +54,12 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisBarcodeFromAnotherItem, Descr));
 			Return;
 		EndIf;
-
-		ArrayOfCodeStrings.Add(Row.Barcode);
+		If GetCodeStringFromSerialLotNumber Then
+			CodeStringFromSerial = CommonFunctionsServer.GetRefAttribute(Row.SerialLotNumber, "CodeString"); // String
+			ArrayOfCodeStrings.Add(CodeStringFromSerial);
+		Else	
+			ArrayOfCodeStrings.Add(Row.Barcode);
+		EndIf;
 	EndDo;
 
 	For Each Row In Result.Barcodes Do
@@ -83,21 +92,30 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
-		RequestKMSettings.Quantity = 1;
-		RequestKMSettings.MarkingCode = StringCode;
-		
-		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
-		
-		If Not Result.Approved Then
-			AllBarcodesIsOk = False;
-			Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
-			Return;
+		If AdditionalCheckIsOn Then
+			RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
+			RequestKMSettings.Quantity = 1;
+			RequestKMSettings.MarkingCode = StringCode;
+			
+			Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
+			
+			If Not Result.Approved Then
+				AllBarcodesIsOk = False;
+				//@skip-check transfer-object-between-client-server
+				Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
+				//@skip-check invocation-parameter-type-intersect, property-return-type
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
+				Return;
+			EndIf;
+			NewRow = CurrentCodes.Add();
+			NewRow.StringCode = StringCode;	
+			NewRow.CodeIsApproved = Result.Approved;
+		Else
+			NewRow = CurrentCodes.Add();
+			NewRow.StringCode = StringCode;	
+			NewRow.CodeIsApproved = True;
+			NewRow.NotCheck = True;
 		EndIf;
-		NewRow = CurrentCodes.Add();
-		NewRow.StringCode = StringCode;	
-		NewRow.CodeIsApproved = Result.Approved;
 	EndDo;
 	
 	If AllBarcodesIsOk And ArrayOfApprovedCodeStrings.Count() > 0 Then
@@ -107,17 +125,25 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 EndProcedure
 
 &AtClient
+Procedure ApproveWithoutScan(Command)
+	Close(New Structure("WithoutScan", True));
+EndProcedure
+
+&AtClient
 Procedure Done(Command = Undefined)
+	Result = New Structure;
+	Result.Insert("WithoutScan", False);
 	Array = New Array; // Array Of Structure
 	For Each Row In CurrentCodes Do
 		Str = New Structure;
 		Str.Insert("Key", RowKey);
 		Str.Insert("CodeString", Row.StringCode);
 		Str.Insert("CodeIsApproved", Row.CodeIsApproved);
+		Str.Insert("NotCheck", Row.NotCheck);
 		Array.Add(Str);
 	EndDo;
-	
-	Close(Array);
+	Result.Insert("Scaned", Array);
+	Close(Result);
 EndProcedure
 
 &AtClient
@@ -137,8 +163,17 @@ Async Procedure CheckKM(Command)
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = Row.StringCode;
 		
-		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
-		
-		Row.CodeIsApproved = Result.Approved;
+		If isReturn Then
+			Row.CodeIsApproved = True;
+		Else			
+			Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
+			Row.CodeIsApproved = Result.Approved;
+		EndIf;
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure GetCodeStringFromSerialLotNumber(Command)
+	Items.GetCodeStringFromSerialLotNumber.Visible = True;
+	GetCodeStringFromSerialLotNumber = True;
 EndProcedure

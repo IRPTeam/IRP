@@ -35,14 +35,14 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		Then the form attribute named "Type" became equal to "Cash"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I change the radio button named "CurrencyType" value to "Fixed"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| 'Code' | 'Description'     |
-			| 'USD'  | 'American dollar' |
+			| 'Code'   | 'Description'        |
+			| 'USD'    | 'American dollar'    |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -67,8 +67,8 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		Then the form attribute named "Type" became equal to "Cash"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -94,13 +94,13 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		And I input "OTP" text in "Bank name" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| Description     |
+			| Main Company    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
-			| Code | Description  |
-			| TRY  | Turkish lira |
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
@@ -123,8 +123,8 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			And I change the radio button named "Type" value to "Transit"
 			And I click Select button of "Company" field
 			And I go to line in "List" table
-				| Description  |
-				| Main Company |
+				| Description      |
+				| Main Company     |
 			And I select current line in "List" table
 			And I click the button named "FormWrite"
 			* Check data save	
@@ -142,18 +142,41 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Filling Transit account in the Bank account, TRY
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Bank account, TRY' |
+			| 'Description'          |
+			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Transit account" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
+			| 'Description'     |
+			| 'Transit Main'    |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 			And I click the button named "FormWriteAndClose"
+	* Create POS account
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "POS 1" text in the field named "Description_en"
+		And I click "Ok" button
+		And I change the radio button named "Type" value to "POS"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description      |
+			| Main Company     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| Code   | Description     |
+			| TRY    | Turkish lira    |
+		And I select current line in "List" table
+		And I input "1120000000" text in "Number" field
+		And I click the button named "FormWrite"
+		Then the form attribute named "Type" became equal to "POS"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Number" became equal to "1120000000"
+		And I click the button named "FormWriteAndClose"
 	# * Clean catalog CashAccounts
 	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
 	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"

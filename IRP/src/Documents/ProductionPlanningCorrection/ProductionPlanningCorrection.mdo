@@ -136,9 +136,9 @@
       <field>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</field>
     </choiceParameterLinks>
     <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.PlanningPeriodTypes.EnumValue.Manufacturing</value>
+      <name>Filter.IsManufacturing</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -322,6 +322,10 @@
       <choiceParameterLinks>
         <name>Filter.ItemKey</name>
         <field>Document.ProductionPlanningCorrection.TabularSection.Productions.Attribute.ItemKey</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.BusinessUnit</name>
+        <field>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</field>
       </choiceParameterLinks>
       <choiceParameters>
         <name>Filter.Active</name>

@@ -62,8 +62,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentType,
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
-	|PaymentList.CommissionIsSeparate,
-	|PaymentList.RetailCustomer";
+	|PaymentList.RevenueType,
+	|PaymentList.RetailCustomer,
+	|PaymentList.SendingAccount,
+	|PaymentList.SendingBranch";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -79,14 +81,22 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
+	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
-		|PaymentList.PlaningTransactionBasis";
-	ElsIf TransactionType = CurrencyExchange Then
-		StrByType = "TransitAccount, CurrencyExchange,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.AmountExchange";
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
+	ElsIf TransactionType = CurrencyExchange Then
+		StrByType = "
+		|TransitAccount, 
+		|CurrencyExchange,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.AmountExchange,
+		|PaymentList.SendingAccount,
+		|PaymentList.SendingBranch";
 	ElsIf TransactionType = PaymentFromCustomer 
 		Or TransactionType = ReturnFromVendor 
 		Or TransactionType = PaymentFromCustomerByPOS Then
@@ -108,11 +118,17 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			|PaymentList.PaymentTerminal,
 			|PaymentList.BankTerm";
 		EndIf;
+	ElsIf TransactionType = OtherPartner Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payer,
+		|PaymentList.LegalNameContract,
+		|PaymentList.BasisDocument";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.POSAccount,
-		|PaymentList.CommissionIsSeparate";
+		|PaymentList.POSAccount";
 	ElsIf TransactionType = ReceiptByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
@@ -128,6 +144,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.BasisDocument";
+	ElsIf TransactionType = OtherIncome Then
+		StrByType = "
+		|PaymentList.RevenueType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -150,8 +169,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
-	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
-	
+
 	ArrayTypes = New Array();
 	
 	If IsCurrencyExchange Or IsCashTransferOrder Or IsTransferFromPOS Then
@@ -174,13 +192,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Else
 			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		EndIf;
-	ElsIf IsEmployeeCashAdvance Then
-		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	ElsIf IsReceiptByCheque Then
 		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
 	Else
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	EndIf;
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
@@ -528,6 +542,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -73,8 +73,8 @@ Scenario: _005111 filling in the "Add attribute and property"
 		And I click Choice button of the field named "ValueType"
 		And Delay 2
 		And I go to line in "" table
-				| ''       |
-				| 'Additional attribute value' |
+				| ''                               |
+				| 'Additional attribute value'     |
 		And I click the button named "OK"
 		And I click Open button of the field named "Description_en"
 		And I input "Brand" text in the field named "Description_en"
@@ -92,8 +92,8 @@ Scenario: _005111 filling in the "Add attribute and property"
 		And I click Choice button of the field named "ValueType"
 		And Delay 2
 		And I go to line in "" table
-				| ''       |
-				| 'Additional attribute value' |
+				| ''                               |
+				| 'Additional attribute value'     |
 		And I click the button named "OK"
 		And I click Open button of the field named "Description_en"
 		And I input "Producer" text in the field named "Description_en"
@@ -107,9 +107,9 @@ Scenario: _005111 filling in the "Add attribute and property"
 		And I click the button named "FormWriteAndClose"
 	* Check for added additional attributes
 			And "List" table contains lines
-			| 'Description' |
-			| 'Brand'       |
-			| 'Producer'    |
+			| 'Description'    |
+			| 'Brand'          |
+			| 'Producer'       |
 
 
 
@@ -120,7 +120,7 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
 	* Adding value Producer
 		And I go to line in "List" table
-		| 'Description' |
+		| 'Description'   |
 		| 'Producer'      |
 		And I select current line in "List" table
 		And In this window I click command interface button "Additional attribute values"
@@ -148,8 +148,8 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And I click "Save and close" button
 	* Adding value Brand
 		And I go to line in "List" table
-		| 'Description' |
-		| 'Brand'      |
+		| 'Description'   |
+		| 'Brand'         |
 		And I select current line in "List" table
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
@@ -177,11 +177,11 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 	* Check for added additional attributes values
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		And "List" table contains lines
-		| 'Additional attribute' | 'Description' |
-		| 'Producer'             | 'UNIQ'        |
-		| 'Producer'             | 'PZU'         |
-		| 'Brand'                | 'York'        |
-		| 'Brand'                | 'Gir'         |
+		| 'Additional attribute'  | 'Description'   |
+		| 'Producer'              | 'UNIQ'          |
+		| 'Producer'              | 'PZU'           |
+		| 'Brand'                 | 'York'          |
+		| 'Brand'                 | 'Gir'           |
 
 
 
@@ -248,24 +248,24 @@ Scenario: _005113 filling in the "Item types" catalog
 			And I click "Save and close" button
 		* Create item type Earrings
 			And I go to line in "List" table
-				| 'Description' |
-				| 'Accessories'            |
+				| 'Description'     |
+				| 'Accessories'     |
 			And I move one level down in "List" table
 			And "List" table contains lines
-				| 'Description'    |
-				| 'Accessories' |
-				| 'Earrings'    |
+				| 'Description'     |
+				| 'Accessories'     |
+				| 'Earrings'        |
 			And I close all client application windows
 	* Check the items group display in AddAttributeAndPropertySets by item key
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_ItemKeys'          |
+			| 'Predefined data name'    |
+			| 'Catalog_ItemKeys'        |
 			And I select current line in "List" table
 			And "AttributesTree" table contains lines
-				| 'Presentation'      |
-				| 'Accessories'    |
-				| 'Earrings'       |
+				| 'Presentation'     |
+				| 'Accessories'      |
+				| 'Earrings'         |
 			And I close all client application windows
 
 
@@ -278,21 +278,21 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Co
 	* Opening the form for filling in Item keys settings 
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| Description      |
-			| Coat |
+			| Description    |
+			| Coat           |
 		And I select current line in "List" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I go to line in "List" table
-			| Description |
-			| Size      |
+			| Description    |
+			| Size           |
 		And I select current line in "List" table
 		And I finish line editing in "AvailableAttributes" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I go to line in "List" table
-			| Description |
-			| Color      |
+			| Description    |
+			| Color          |
 		And I select current line in "List" table
 		And I finish line editing in "AvailableAttributes" table
 		And I click "Save" button
@@ -300,27 +300,27 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Co
 			Then the form attribute named "Type" became equal to "Product"
 			Then the form attribute named "Description_en" became equal to "Coat"
 			And "AvailableAttributes" table became equal
-				| 'Attribute' | 'Affect pricing' | 'Show in HTML' | 'Required' |
-				| 'Size'      | 'No'             | 'No'           | 'No'       |
-				| 'Color'     | 'No'             | 'No'           | 'No'       |
+				| 'Attribute'    | 'Affect pricing'    | 'Show in HTML'    | 'Required'     |
+				| 'Size'         | 'No'                | 'No'              | 'No'           |
+				| 'Color'        | 'No'                | 'No'              | 'No'           |
 		And I click "Save and close" button
 	* Item key creation options for Jeans
 		And I go to line in "List" table
-			| Description      |
-			| Jeans |
+			| Description    |
+			| Jeans          |
 		And I select current line in "List" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I go to line in "List" table
-			| Description |
-			| Size      |
+			| Description    |
+			| Size           |
 		And I select current line in "List" table
 		And I finish line editing in "AvailableAttributes" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I go to line in "List" table
-			| Description |
-			| Season      |
+			| Description    |
+			| Season         |
 		And I select current line in "List" table
 		And I finish line editing in "AvailableAttributes" table
 		And I click "Save" button
@@ -328,9 +328,9 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Co
 			Then the form attribute named "Type" became equal to "Product"
 			Then the form attribute named "Description_en" became equal to "Jeans"
 			And "AvailableAttributes" table became equal
-				| 'Attribute' | 'Affect pricing' | 'Show in HTML' | 'Required' |
-				| 'Size'      | 'No'             | 'No'           | 'No'       |
-				| 'Season'    | 'No'             | 'No'           | 'No'       |
+				| 'Attribute'    | 'Affect pricing'    | 'Show in HTML'    | 'Required'     |
+				| 'Size'         | 'No'                | 'No'              | 'No'           |
+				| 'Season'       | 'No'                | 'No'              | 'No'           |
 		And I click "Save and close" button
 		And I close current window
 
@@ -345,8 +345,8 @@ Scenario: _005115 adding general additional attributes and properties for catalo
 			And I click Choice button of the field named "ValueType"
 			And Delay 2
 			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
+					| ''                                |
+					| 'Additional attribute value'      |
 			And I click the button named "OK"
 			And I click Open button of the field named "Description_en"
 			And I input "Property 01" text in the field named "Description_en"
@@ -355,44 +355,44 @@ Scenario: _005115 adding general additional attributes and properties for catalo
 	* Opening the form for adding additional attributes for Items
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Items'      |
+			| 'Predefined data name'    |
+			| 'Catalog_Items'           |
 		And I select current line in "List" table
 	* Adding additional attributes
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Producer'  |
+			| 'Description'    |
+			| 'Producer'       |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Brand'     |
+			| 'Description'    |
+			| 'Brand'          |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 	* Distribution of added additional attributes by UI groups
 		And I activate "UI group" field in "Attributes" table
 		And I go to line in "Attributes" table
-			| 'Attribute' |
-			| 'Brand'   |
+			| 'Attribute'    |
+			| 'Brand'        |
 		And I select current line in "Attributes" table
 		And I click choice button of "UI group" attribute in "Attributes" table
 		And I go to line in "List" table
-			| 'Description'      |
-			| 'Purchase and production' |
+			| 'Description'                |
+			| 'Purchase and production'    |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I go to line in "Attributes" table
-			| 'Attribute' |
+			| 'Attribute'    |
 			| 'Producer'     |
 		And I select current line in "Attributes" table
 		And I click choice button of "UI group" attribute in "Attributes" table
 		And I go to line in "List" table
-			| 'Description'      |
-			| 'Main information' |
+			| 'Description'         |
+			| 'Main information'    |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I click Open button of the field named "Description_en"
@@ -405,20 +405,20 @@ Scenario: _005115 adding general additional attributes and properties for catalo
 		And in the table "Properties" I click the button named "PropertiesAdd"
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Property 01' |
+			| 'Description'    |
+			| 'Property 01'    |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save" button
 	* Check data save
 		Then the form attribute named "Description_en" became equal to "Items"
 		And "Attributes" table became equal
-			| 'UI group'                | 'Attribute' | 'Required' | 'Show in HTML' |
-			| 'Main information'        | 'Producer'  | 'No'       | 'No'           |
-			| 'Purchase and production' | 'Brand'     | 'No'       | 'No'           |
+			| 'UI group'                  | 'Attribute'   | 'Required'   | 'Show in HTML'    |
+			| 'Main information'          | 'Producer'    | 'No'         | 'No'              |
+			| 'Purchase and production'   | 'Brand'       | 'No'         | 'No'              |
 		And "Properties" table became equal
-			| 'Property'    | 'Show in HTML' |
-			| 'Property 01' | 'No'           |
+			| 'Property'      | 'Show in HTML'    |
+			| 'Property 01'   | 'No'              |
 		And I click "Save and close" button
 	* Check the display additional attributes in Item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -448,36 +448,36 @@ Scenario: _005116 filling in the "Items" catalog
 		And I click "Ok" button
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Coat'       |
+			| 'Description'    |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'box (8 pcs)' |
+			| 'Description'    |
+			| 'box (8 pcs)'    |
 		Then the number of "List" table lines is "меньше или равно" "2"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I click Select button of "Producer" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'UNIQ'        |
+			| 'Description'    |
+			| 'UNIQ'           |
 		And I select current line in "List" table
 		Then "Item (create) *" window is opened
 		And I expand "Purchase and production" group
 		And I move to "Purchase and production" tab		
 		And I click Select button of "Brand" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Gir'        |
+			| 'Description'    |
+			| 'Gir'            |
 		And I select current line in "List" table
 		And I input "AB475590i" text in "Item ID" field
 		And I click Select button of "Vendor" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
@@ -497,28 +497,28 @@ Scenario: _005116 filling in the "Items" catalog
 		And I click "Ok" button
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Jeans'       |
+				| 'Description'     |
+				| 'Jeans'           |
 		And I select current line in "List" table
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 	* Check Items save
 		And "List" table contains lines
-		| 'Description' | 'Item type' |
-		| 'Bodie'       | 'Coat'      |
-		| 'Jeans'       | 'Jeans'     |
+		| 'Description'  | 'Item type'   |
+		| 'Bodie'        | 'Coat'        |
+		| 'Jeans'        | 'Jeans'       |
 
 Scenario: _005118 check filling in additional property for item
 	And I close all client application windows
 	* Opening the Item form
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bodie' |
+			| 'Description'    |
+			| 'Bodie'          |
 	* Filling additional property
 		And I click "Add properties" button
 		Then "Edit add properties" window is opened
@@ -532,22 +532,22 @@ Scenario: _005118 check filling in additional property for item
 		And I input "Property 002" text in "ENG" field
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Property 001' |
+			| 'Description'     |
+			| 'Property 001'    |
 		And I click the button named "FormChoose"
 		And I finish line editing in "Properties" table
 		And I click "Save" button
 	* Check
 		And "Properties" table became equal
-			| 'Property'    | 'Value'        |
-			| 'Property 01' | 'Property 001' |
+			| 'Property'      | 'Value'           |
+			| 'Property 01'   | 'Property 001'    |
 	* Refill property		
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Description'  |
-			| 'Property 01'          | 'Property 002' |
+			| 'Additional attribute'   | 'Description'     |
+			| 'Property 01'            | 'Property 002'    |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -556,8 +556,8 @@ Scenario: _005118 check filling in additional property for item
 		And I click "Add properties" button
 		Then "Edit add properties" window is opened
 		And "Properties" table became equal
-			| 'Property'    | 'Value'        |
-			| 'Property 01' | 'Property 002' |
+			| 'Property'      | 'Value'           |
+			| 'Property 01'   | 'Property 002'    |
 		And I click "Save and close" button
 		
 				
@@ -577,37 +577,37 @@ Scenario: _005117 filling in Item keys
 	* Filling in Item keys for Bodie
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bodie'       |
+			| 'Description'    |
+			| 'Bodie'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Size'                 | 'XS'                          |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'XS'             |
 		And I select current line in "List" table
 		And I click Select button of "Color" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Color'                | 'Blue'                        |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'Blue'           |
 		And I select current line in "List" table
 		And I change "UnitMode" radio button value to "Own"
 		And I click Select button of "Unit" field
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'box (8 pcs)' |
+			| 'Description'    |
+			| 'box (8 pcs)'    |
 		Then the number of "List" table lines is "меньше или равно" "2"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		Then the form attribute named "OwnUnit" became equal to "pcs"
 		Then the form attribute named "UnitMode" became equal to "Own"
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue' |
+			| 'Item key'    |
+			| 'XS/Blue'     |
 		And I select current line in "List" table
 		Then the form attribute named "OwnUnit" became equal to "pcs"
 		Then the form attribute named "UnitMode" became equal to "Own"
@@ -615,55 +615,55 @@ Scenario: _005117 filling in Item keys
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Size'                 | 'M'                          |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | 'M'              |
 		And I select current line in "List" table
 		And I click Select button of "Color" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Color'                | 'White'                        |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Color'                  | 'White'          |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Item key' |
-			| 'XS/Blue'  |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'XS/Blue'     |
+			| 'M/White'     |
 		And I close current window
 	* Filling in Item keys for Jeans
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Size'                 | '36'                          |
+			| 'Additional attribute'   |  'Description'    |
+			| 'Size'                   | '36'              |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Season'                | '19SD'                        |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Season'                 | '19SD'           |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Size'                 | '38'                          |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Size'                   | '38'             |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Season'                | '18SD'                        |
+			| 'Additional attribute'   |  'Description'    |
+			| 'Season'                 | '18SD'            |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
-			| 'Item key' |
-			| '36/19SD'  |
-			| '38/18SD'  |
+			| 'Item key'    |
+			| '36/19SD'     |
+			| '38/18SD'     |
 	And I close all client application windows
 	
 
@@ -680,13 +680,13 @@ Scenario: _005119 packaging for Jeans
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'  |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'      |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I input "8" text in "Quantity" field
 		And I click "Save and close" button
@@ -698,13 +698,13 @@ Scenario: _005119 packaging for Jeans
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'  |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'      |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I input "12" text in "Quantity" field
 		And I click "Save and close" button
@@ -715,20 +715,20 @@ Scenario: _0051191 filling in Package unit
 	* Open item form
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 	* Select Package unit
 		And I click Select button of "Package unit" field
 		And "List" table contains lines
-			| 'Description'       |
-			| 'pcs'               |
-			| 'Jeans box (8 pcs)' |
-			| 'Boots (12 pcs)'    |
+			| 'Description'          |
+			| 'pcs'                  |
+			| 'Jeans box (8 pcs)'    |
+			| 'Boots (12 pcs)'       |
 		Then the number of "List" table lines is "равно" "3"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans box (8 pcs)' |
+			| 'Description'          |
+			| 'Jeans box (8 pcs)'    |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
 	* Check
@@ -741,22 +741,22 @@ Scenario: _0051192 filling in Package unit when create new item
 		And I input "Test1" text in "ENG" field
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		And I click "Save" button		
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table	
 		When I Check the steps for Exception
-			|'And I click Select button of "Package unit" field'|
+			| 'And I click Select button of "Package unit" field'    |
 		And I click "Save" button	
 		And I click Select button of "Package unit" field
 		And "List" table contains lines
-			| 'Description'       |
-			| 'pcs'               |
+			| 'Description'    |
+			| 'pcs'            |
 		Then the number of "List" table lines is "равно" "1"
 		And I select current line in "List" table
 		And I click "Save" button
@@ -766,8 +766,8 @@ Scenario: _0051192 filling in Package unit when create new item
 Scenario: _0051193 filling in Package unit when create new item (copy)
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
+			| 'Description'    |
+			| 'Jeans'          |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		Then the form attribute named "PackageUnit" became equal to ""
 		And I close all client application windows
@@ -781,8 +781,8 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And I change "Type" radio button value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Coat'     |
+			| 'Description'    |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
@@ -796,15 +796,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'XS'          |
+			| 'Description'    |
+			| 'XS'             |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Blue'        |
+			| 'Description'    |
+			| 'Blue'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -813,15 +813,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And I click choice button of "Size" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'M'           |
+			| 'Description'    |
+			| 'M'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Brown'       |
+			| 'Description'    |
+			| 'Brown'          |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
@@ -830,15 +830,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And I click choice button of "Size" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'L'           |
+			| 'Description'    |
+			| 'L'              |
 		And I select current line in "List" table
 		And I activate "Color" field in "FormTable*" table
 		And I click choice button of "Color" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Green'       |
+			| 'Description'    |
+			| 'Green'          |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
@@ -855,20 +855,20 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And I change "Type" radio button value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
+			| 'Description'    |
+			| 'Jeans'          |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| Description |
-			| 36          |
+			| Description    |
+			| 36             |
 		And I select current line in "List" table
 		And I activate "Season" field in "FormTable*" table
 		And I click choice button of "Season" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| '18SD'        |
+			| 'Description'    |
+			| '18SD'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -876,15 +876,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| '37'          |
+			| 'Description'    |
+			| '37'             |
 		And I select current line in "List" table
 		And I activate "Season" field in "FormTable*" table
 		And I click choice button of "Season" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| '18SD'        |
+			| 'Description'    |
+			| '18SD'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -892,15 +892,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| '38'          |
+			| 'Description'    |
+			| '38'             |
 		And I select current line in "List" table
 		And I activate "Season" field in "FormTable*" table
 		And I click choice button of "Season" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| '18SD'        |
+			| 'Description'    |
+			| '18SD'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -908,15 +908,15 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
-			| 'Description' |
-			| '39'          |
+			| 'Description'    |
+			| '39'             |
 		And I select current line in "List" table
 		And I activate "Season" field in "FormTable*" table
 		And I click choice button of "Season" attribute in "FormTable*" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| '18SD'        |
+			| 'Description'    |
+			| '18SD'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -932,8 +932,8 @@ Scenario: _005121 filling item key according to specification for set
 	* Opening the Bodie element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'Bodie'       | 'Coat'   |
+			| 'Description'   | 'Item type'    |
+			| 'Bodie'         | 'Coat'         |
 		And I select current line in "List" table
 	* Creating for Bodie a new item key for the specification
 		And In this window I click command interface button "Item keys"
@@ -941,23 +941,23 @@ Scenario: _005121 filling item key according to specification for set
 		And I change checkbox "Specification"
 		And I click Choice button of the field named "Specification"
 		And "List" table does not contain lines
-			| 'Description' | 'Type' |
-			| 'S-8'         | 'Set'  |
+			| 'Description'   | 'Type'    |
+			| 'S-8'           | 'Set'     |
 		And I go to line in "List" table
-			| 'Description' | 'Type' |
-			| 'A-8'         | 'Set'  |
+			| 'Description'   | 'Type'    |
+			| 'A-8'           | 'Set'     |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines
-			| 'Item key'   |
-			| 'Bodie/A-8'  |
+			| 'Item key'     |
+			| 'Bodie/A-8'    |
 		And I close current window
 	* Opening the Jeans element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description'    | 'Item type' |
-			| 'Jeans'          | 'Jeans'   |
+			| 'Description'   | 'Item type'    |
+			| 'Jeans'         | 'Jeans'        |
 		And I select current line in "List" table
 	* Creating for Boots a new item key for the specification
 		And In this window I click command interface button "Item keys"
@@ -965,17 +965,17 @@ Scenario: _005121 filling item key according to specification for set
 		And I change checkbox "Specification"
 		And I click Choice button of the field named "Specification"
 		And "List" table does not contain lines
-			| 'Description' | 'Type' |
-			| 'A-8'         | 'Set'  |
+			| 'Description'   | 'Type'    |
+			| 'A-8'           | 'Set'     |
 		And I go to line in "List" table
-			| 'Description' | 'Type' |
-			| 'S-8'         | 'Set'  |
+			| 'Description'   | 'Type'    |
+			| 'S-8'           | 'Set'     |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines
-			| 'Item key'   |
-			| 'Jeans/S-8'  |
+			| 'Item key'     |
+			| 'Jeans/S-8'    |
 		And I close current window
 
 
@@ -983,8 +983,8 @@ Scenario: _005125 check Dimensions and weight information (item)
 	*  Select item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bodie'         |
+			| 'Description'    |
+			| 'Bodie'          |
 		And I select current line in "List" table
 	* Change dimensions and check volume calculation
 		And I expand "Dimensions" group
@@ -1021,13 +1021,13 @@ Scenario: _005126 check Dimensions and weight information (item key)
 	*  Select item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Bodie'         |
+			| 'Description'    |
+			| 'Bodie'          |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item key'    |
+			| 'M/White'     |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table		
 	* Change dimensions and check volume calculation
@@ -1065,12 +1065,12 @@ Scenario: _005127 check the filling of required additional attribute
 	* Select Additional attribute
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Description' | 'Predefined data name' |
-			| 'Items'       | 'Catalog_Items'        |
+			| 'Description'   | 'Predefined data name'    |
+			| 'Items'         | 'Catalog_Items'           |
 		And I select current line in "List" table
 		And I go to line in "Attributes" table
-			| '#' | 'Attribute' | 'UI group'                |
-			| '2' | 'Brand'     | 'Purchase and production' |
+			| '#'   | 'Attribute'   | 'UI group'                   |
+			| '2'   | 'Brand'       | 'Purchase and production'    |
 		And I activate field named "AttributesRequired" in "Attributes" table
 		And I set checkbox named "AttributesRequired" in "Attributes" table
 		And I finish line editing in "Attributes" table
@@ -1083,21 +1083,21 @@ Scenario: _005127 check the filling of required additional attribute
 		And I input "Test2" text in the field named "Description_en"
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Coat'       |
+			| 'Description'    |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then I wait that in user messages the "Field [Brand] is empty." substring will appear in "10" seconds
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And table "List" does not contain lines:
-			| 'Description' |
-			| 'Test2'       |
+			| 'Description'    |
+			| 'Test2'          |
 		And I close all client application windows
 
 
@@ -1106,8 +1106,8 @@ Scenario: _005128 check show add property in the html field
 	* Select Additional attribute
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Description' | 'Predefined data name' |
-			| 'Items'       | 'Catalog_Items'        |
+			| 'Description'   | 'Predefined data name'    |
+			| 'Items'         | 'Catalog_Items'           |
 		And I select current line in "List" table
 		And I move to "Properties" tab
 		And I activate field named "PropertiesShowInHTML" in "Properties" table
@@ -1126,14 +1126,14 @@ Scenario: _005129 add additional attribute for item type
 	* Select Additional attribute
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_ItemTypes'        |
+			| 'Predefined data name'    |
+			| 'Catalog_ItemTypes'       |
 		And I select current line in "List" table	
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Season'      |
+			| 'Description'    |
+			| 'Season'         |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I click "Save and close" button
@@ -1141,16 +1141,16 @@ Scenario: _005129 add additional attribute for item type
 	* Check 
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Coat'        |
+			| 'Description'    |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And "Season" form attribute is available
 		And I close current window
 	* Change requered property and check
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_ItemTypes'        |
+			| 'Predefined data name'    |
+			| 'Catalog_ItemTypes'       |
 		And I select current line in "List" table
 		Then "en description is empty (Additional attribute set)" window is opened
 		And I activate "Required" field in "Attributes" table
@@ -1161,8 +1161,8 @@ Scenario: _005129 add additional attribute for item type
 	* Check 
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Coat'        |
+			| 'Description'    |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And "Season" form attribute is available
 		And I click "Save and close" button	
@@ -1176,14 +1176,14 @@ Scenario: _005130 add additional attribute with type boolean for item
 	* Select Additional attribute
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data name' |
-			| 'Catalog_Items'        |
+			| 'Predefined data name'    |
+			| 'Catalog_Items'           |
 		And I select current line in "List" table	
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Add atribute Boolean'      |
+			| 'Description'             |
+			| 'Add atribute Boolean'    |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I click "Save and close" button
@@ -1205,15 +1205,15 @@ Scenario: _005131 create specification with primitive type
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I go to line in "List" table
-			| 'Description'         |
-			| 'Add atribute String' |
+			| 'Description'            |
+			| 'Add atribute String'    |
 		And I select current line in "List" table
 		And I finish line editing in "AvailableAttributes" table
 		And I click Select button of "Season" field
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| 'Additional attribute' | 'Additional attribute values' |
-			| 'Season'               | '19SD'                        |
+			| 'Additional attribute'   | 'Description'    |
+			| 'Season'                 | '19SD'           |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Create specification
@@ -1223,8 +1223,8 @@ Scenario: _005131 create specification with primitive type
 		And I change the radio button named "Type" value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'With one attribute' |
+			| 'Description'           |
+			| 'With one attribute'    |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I input "String 1" text in "Add atribute String" field of "FormTable*" table
@@ -1238,8 +1238,8 @@ Scenario: _005131 create specification with primitive type
 		And I finish line editing in "FormTable*" table
 		And I click "Save and close" button
 		And table "List" contains lines:
-			| 'Description' |
-			| 'Primitive'       |
+			| 'Description'    |
+			| 'Primitive'      |
 		And I close all client application windows
 		
 				
@@ -1253,134 +1253,217 @@ Scenario: _005135 fill default description for catalog AddAttributeAndPropertySe
 	* Check
 		And I click "Refresh" button
 		And "List" table contains lines
-			| 'Description'                    | 'Predefined data name'                  |
-			| 'Item keys'                      | 'Catalog_ItemKeys'                      |
-			| 'Items'                          | 'Catalog_Items'                         |
-			| 'Item types'                     | 'Catalog_ItemTypes'                     |
-			| 'Sales invoice'                  | 'Document_SalesInvoice'                 |
-			| 'Partners'                       | 'Catalog_Partners'                      |
-			| 'Expense and revenue types'      | 'Catalog_ExpenseAndRevenueTypes'        |
-			| 'Business units'                 | 'Catalog_BusinessUnits'                 |
-			| 'Price keys'                     | 'Catalog_PriceKeys'                     |
-			| 'Sales order'                    | 'Document_SalesOrder'                   |
-			| 'Cheque bonds'                   | 'Catalog_ChequeBonds'                   |
-			| 'Specifications'                 | 'Catalog_Specifications'                |
-			| 'Purchase invoice'               | 'Document_PurchaseInvoice'              |
-			| 'Purchase order'                 | 'Document_PurchaseOrder'                |
-			| 'Partner terms'                  | 'Catalog_Agreements'                    |
-			| 'Cash/Bank accounts'             | 'Catalog_CashAccounts'                  |
-			| 'Companies'                      | 'Catalog_Companies'                     |
-			| 'Countries'                      | 'Catalog_Countries'                     |
-			| 'Currencies'                     | 'Catalog_Currencies'                    |
-			| 'Price types'                    | 'Catalog_PriceTypes'                    |
-			| 'Item serial/lot numbers'        | 'Catalog_SerialLotNumbers'              |
-			| 'Stores'                         | 'Catalog_Stores'                        |
-			| 'Tax types'                      | 'Catalog_Taxes'                         |
-			| 'Item units'                     | 'Catalog_Units'                         |
-			| 'Users'                          | 'Catalog_Users'                         |
-			| 'Bank payment'                   | 'Document_BankPayment'                  |
-			| 'Bank receipt'                   | 'Document_BankReceipt'                  |
-			| 'Bundling'                       | 'Document_Bundling'                     |
-			| 'Cash expense'                   | 'Document_CashExpense'                  |
-			| 'Cash payment'                   | 'Document_CashPayment'                  |
-			| 'Cash receipt'                   | 'Document_CashReceipt'                  |
-			| 'Cash revenue'                   | 'Document_CashRevenue'                  |
-			| 'Cash transfer order'            | 'Document_CashTransferOrder'            |
-			| 'Goods receipt'                  | 'Document_GoodsReceipt'                 |
-			| 'Incoming payment order'         | 'Document_IncomingPaymentOrder'         |
-			| 'Inventory transfer'             | 'Document_InventoryTransfer'            |
-			| 'Inventory transfer order'       | 'Document_InventoryTransferOrder'       |
-			| 'Labeling'                       | 'Document_Labeling'                     |
-			| 'Opening entry'                  | 'Document_OpeningEntry'                 |
-			| 'Outgoing payment order'         | 'Document_OutgoingPaymentOrder'         |
-			| 'Physical count by location'     | 'Document_PhysicalCountByLocation'      |
-			| 'Physical inventory'             | 'Document_PhysicalInventory'            |
-			| 'Price list'                     | 'Document_PriceList'                    |
-			| 'Purchase return'                | 'Document_PurchaseReturn'               |
-			| 'Purchase return order'          | 'Document_PurchaseReturnOrder'          |
-			| 'Reconciliation statement'       | 'Document_ReconciliationStatement'      |
-			| 'Sales return'                   | 'Document_SalesReturn'                  |
-			| 'Sales return order'             | 'Document_SalesReturnOrder'             |
-			| 'Shipment confirmation'          | 'Document_ShipmentConfirmation'         |
-			| 'Stock adjustment as surplus'    | 'Document_StockAdjustmentAsSurplus'     |
-			| 'Stock adjustment as write-off'  | 'Document_StockAdjustmentAsWriteOff'    |
-			| 'Unbundling'                     | 'Document_Unbundling'                   |
-			| 'Files'                          | 'Catalog_Files'                         |
-			| 'Retail sales receipt'           | 'Document_RetailSalesReceipt'           |
-			| 'Payment terminals'              | 'Catalog_PaymentTerminals'              |
-			| 'Retail return receipt'          | 'Document_RetailReturnReceipt'          |
-			| 'Bank terms'                     | 'Catalog_BankTerms'                     |
-			| 'Retail customers'               | 'Catalog_RetailCustomers'               |
-			| 'Cash statement'                 | 'Document_CashStatement'                |
-			| 'Cash statement statuses'        | 'Catalog_CashStatementStatuses'         |
-			| 'Credit note'                    | 'Document_CreditNote'                   |
-			| 'Debit note'                     | 'Document_DebitNote'                    |
-			| 'Workstations'                   | 'Catalog_Workstations'                  |
-			| 'Hardware'                       | 'Catalog_Hardware'                      |
-			| 'Item segments'                  | 'Catalog_ItemSegments'                  |
-			| 'Partner segments'               | 'Catalog_PartnerSegments'               |
-			| 'Payment types'                  | 'Catalog_PaymentTypes'                  |
-			| 'Special offer rules'            | 'Catalog_SpecialOfferRules'             |
-			| 'Special offers'                 | 'Catalog_SpecialOffers'                 |
-			| 'Special offer types'            | 'Catalog_SpecialOfferTypes'             |
-			| 'Tax rates'                      | 'Catalog_TaxRates'                      |
-			| 'User groups'                    | 'Catalog_UserGroups'                    |
-			| 'Internal supply request'        | 'Document_InternalSupplyRequest'        |
-			| 'Partners bank accounts'         | 'Catalog_PartnersBankAccounts'          |
-			| 'Lock data modification reasons' | 'Catalog_LockDataModificationReasons'   |
-			| 'Item stock adjustment'          | 'Document_ItemStockAdjustment'          |
-			| 'Manual register entry'          | 'Document_ManualRegisterEntry'          |
-			| 'Sales order closing'            | 'Document_SalesOrderClosing'            |
-			| 'Planned receipt reservation'    | 'Document_PlannedReceiptReservation'    |
-			| 'Purchase order closing'         | 'Document_PurchaseOrderClosing'         |
-			| 'Partner items'                  | 'Catalog_PartnerItems'                  |
-			| 'Journal entry'                  | 'Document_JournalEntry'                 |
-			| 'Ledger types'                   | 'Catalog_LedgerTypes'                   |
-			| 'Money transfer'                 | 'Document_MoneyTransfer'                |
-			| 'User access groups'             | 'Catalog_AccessGroups'                  |
-			| 'User access profiles'           | 'Catalog_AccessProfiles'                |
-			| 'Accounting operations'          | 'Catalog_AccountingOperations'          |
-			| 'Cancel/Return reasons'          | 'Catalog_CancelReturnReasons'           |
-			| 'Equipment drivers'              | 'Catalog_EquipmentDrivers'              |
-			| 'Plugins'                        | 'Catalog_ExternalDataProc'              |
-			| 'File storages info'             | 'Catalog_FileStoragesInfo'              |
-			| 'File storage volumes'           | 'Catalog_FileStorageVolumes'            |
-			| 'Integration settings'           | 'Catalog_IntegrationSettings'           |
-			| 'UI groups'                      | 'Catalog_InterfaceGroups'               |
-			| 'Legal name contracts'           | 'Catalog_LegalNameContracts'            |
-			| 'Objects statuses'               | 'Catalog_ObjectStatuses'                |
-			| 'Payment terms'                  | 'Catalog_PaymentSchedules'              |
-			| 'Planning periods'               | 'Catalog_PlanningPeriods'               |
-			| 'Tax additional analytics'       | 'Catalog_TaxAnalytics'                  |
-			| 'Units of measurement'           | 'Catalog_UnitsOfMeasurement'            |
-			| 'Ledger type variants'           | 'Catalog_LedgerTypeVariants'            |
-			| 'Cheque bond transaction'        | 'Document_ChequeBondTransaction'        |
-			| 'Consolidated retail sales'      | 'Document_ConsolidatedRetailSales'      |
-			| 'Work order'                     | 'Document_WorkOrder'                    |
-			| 'Work order closing'             | 'Document_WorkOrderClosing'             |
-			| 'Bill of materials'              | 'Catalog_BillOfMaterials'               |
-			| 'Work sheet'                     | 'Document_WorkSheet'                    |
-			| 'Filling templates'              | 'Catalog_FillingTemplates'              |
-			| 'Production planning'            | 'Document_ProductionPlanning'           |
-			| 'Production planning correction' | 'Document_ProductionPlanningCorrection' |
-			| 'Production planning closing'    | 'Document_ProductionPlanningClosing'    |
-			| 'Production'                     | 'Document_Production'                   |
-			| 'Sales report from trade agent'  | 'Document_SalesReportFromTradeAgent'    |
-			| 'Sales report to consignor'      | 'Document_SalesReportToConsignor'       |
-			| 'Source of origins'              | 'Catalog_SourceOfOrigins'               |
-			| 'Employee cash advance'          | 'Document_EmployeeCashAdvance'          |
-			| 'Production costs allocation'    | 'Document_ProductionCostsAllocation'    |
-			| 'Payroll'                        | 'Document_Payroll'                      |
-			| 'Accrual and deduction types'    | 'Catalog_AccrualAndDeductionTypes'      |
-			| 'Employee positions'             | 'Catalog_EmployeePositions'             |
-			| 'Time sheet'                     | 'Document_TimeSheet'                    |
-			| 'Addresses'                      | 'Catalog_Addresses'                     |
-			| 'Vehicles'                       | 'Catalog_Vehicles'                      |
-			| 'Vehicle types'                  | 'Catalog_VehicleTypes'                  |
+			| 'Description'                      | 'Predefined data name'                     |
+			| 'Item keys'                        | 'Catalog_ItemKeys'                         |
+			| 'Items'                            | 'Catalog_Items'                            |
+			| 'Item types'                       | 'Catalog_ItemTypes'                        |
+			| 'Sales invoice'                    | 'Document_SalesInvoice'                    |
+			| 'Partners'                         | 'Catalog_Partners'                         |
+			| 'Expense and revenue types'        | 'Catalog_ExpenseAndRevenueTypes'           |
+			| 'Business units'                   | 'Catalog_BusinessUnits'                    |
+			| 'Price keys'                       | 'Catalog_PriceKeys'                        |
+			| 'Sales order'                      | 'Document_SalesOrder'                      |
+			| 'Cheque bonds'                     | 'Catalog_ChequeBonds'                      |
+			| 'Specifications'                   | 'Catalog_Specifications'                   |
+			| 'Purchase invoice'                 | 'Document_PurchaseInvoice'                 |
+			| 'Purchase order'                   | 'Document_PurchaseOrder'                   |
+			| 'Partner terms'                    | 'Catalog_Agreements'                       |
+			| 'Cash/Bank accounts'               | 'Catalog_CashAccounts'                     |
+			| 'Companies'                        | 'Catalog_Companies'                        |
+			| 'Countries'                        | 'Catalog_Countries'                        |
+			| 'Currencies'                       | 'Catalog_Currencies'                       |
+			| 'Price types'                      | 'Catalog_PriceTypes'                       |
+			| 'Item serial/lot numbers'          | 'Catalog_SerialLotNumbers'                 |
+			| 'Stores'                           | 'Catalog_Stores'                           |
+			| 'Tax types'                        | 'Catalog_Taxes'                            |
+			| 'Item units'                       | 'Catalog_Units'                            |
+			| 'Users'                            | 'Catalog_Users'                            |
+			| 'Bank payment'                     | 'Document_BankPayment'                     |
+			| 'Bank receipt'                     | 'Document_BankReceipt'                     |
+			| 'Bundling'                         | 'Document_Bundling'                        |
+			| 'Cash expense'                     | 'Document_CashExpense'                     |
+			| 'Cash payment'                     | 'Document_CashPayment'                     |
+			| 'Cash receipt'                     | 'Document_CashReceipt'                     |
+			| 'Cash revenue'                     | 'Document_CashRevenue'                     |
+			| 'Cash transfer order'              | 'Document_CashTransferOrder'               |
+			| 'Goods receipt'                    | 'Document_GoodsReceipt'                    |
+			| 'Incoming payment order'           | 'Document_IncomingPaymentOrder'            |
+			| 'Inventory transfer'               | 'Document_InventoryTransfer'               |
+			| 'Inventory transfer order'         | 'Document_InventoryTransferOrder'          |
+			| 'Labeling'                         | 'Document_Labeling'                        |
+			| 'Opening entry'                    | 'Document_OpeningEntry'                    |
+			| 'Outgoing payment order'           | 'Document_OutgoingPaymentOrder'            |
+			| 'Physical count by location'       | 'Document_PhysicalCountByLocation'         |
+			| 'Physical inventory'               | 'Document_PhysicalInventory'               |
+			| 'Price list'                       | 'Document_PriceList'                       |
+			| 'Purchase return'                  | 'Document_PurchaseReturn'                  |
+			| 'Purchase return order'            | 'Document_PurchaseReturnOrder'             |
+			| 'Reconciliation statement'         | 'Document_ReconciliationStatement'         |
+			| 'Sales return'                     | 'Document_SalesReturn'                     |
+			| 'Sales return order'               | 'Document_SalesReturnOrder'                |
+			| 'Shipment confirmation'            | 'Document_ShipmentConfirmation'            |
+			| 'Stock adjustment as surplus'      | 'Document_StockAdjustmentAsSurplus'        |
+			| 'Stock adjustment as write-off'    | 'Document_StockAdjustmentAsWriteOff'       |
+			| 'Unbundling'                       | 'Document_Unbundling'                      |
+			| 'Files'                            | 'Catalog_Files'                            |
+			| 'Retail sales receipt'             | 'Document_RetailSalesReceipt'              |
+			| 'Payment terminals'                | 'Catalog_PaymentTerminals'                 |
+			| 'Retail return receipt'            | 'Document_RetailReturnReceipt'             |
+			| 'Bank terms'                       | 'Catalog_BankTerms'                        |
+			| 'Retail customers'                 | 'Catalog_RetailCustomers'                  |
+			| 'Cash statement'                   | 'Document_CashStatement'                   |
+			| 'Cash statement statuses'          | 'Catalog_CashStatementStatuses'            |
+			| 'Credit note'                      | 'Document_CreditNote'                      |
+			| 'Debit note'                       | 'Document_DebitNote'                       |
+			| 'Workstations'                     | 'Catalog_Workstations'                     |
+			| 'Hardware'                         | 'Catalog_Hardware'                         |
+			| 'Item segments'                    | 'Catalog_ItemSegments'                     |
+			| 'Partner segments'                 | 'Catalog_PartnerSegments'                  |
+			| 'Payment types'                    | 'Catalog_PaymentTypes'                     |
+			| 'Special offer rules'              | 'Catalog_SpecialOfferRules'                |
+			| 'Special offers'                   | 'Catalog_SpecialOffers'                    |
+			| 'Special offer types'              | 'Catalog_SpecialOfferTypes'                |
+			| 'Tax rates'                        | 'Catalog_TaxRates'                         |
+			| 'User groups'                      | 'Catalog_UserGroups'                       |
+			| 'Internal supply request'          | 'Document_InternalSupplyRequest'           |
+			| 'Partners bank accounts'           | 'Catalog_PartnersBankAccounts'             |
+			| 'Lock data modification reasons'   | 'Catalog_LockDataModificationReasons'      |
+			| 'Item stock adjustment'            | 'Document_ItemStockAdjustment'             |
+			| 'Manual register entry'            | 'Document_ManualRegisterEntry'             |
+			| 'Sales order closing'              | 'Document_SalesOrderClosing'               |
+			| 'Planned receipt reservation'      | 'Document_PlannedReceiptReservation'       |
+			| 'Purchase order closing'           | 'Document_PurchaseOrderClosing'            |
+			| 'Partner items'                    | 'Catalog_PartnerItems'                     |
+			| 'Journal entry'                    | 'Document_JournalEntry'                    |
+			| 'Ledger types'                     | 'Catalog_LedgerTypes'                      |
+			| 'Money transfer'                   | 'Document_MoneyTransfer'                   |
+			| 'User access groups'               | 'Catalog_AccessGroups'                     |
+			| 'User access profiles'             | 'Catalog_AccessProfiles'                   |
+			| 'Accounting operations'            | 'Catalog_AccountingOperations'             |
+			| 'Cancel/Return reasons'            | 'Catalog_CancelReturnReasons'              |
+			| 'Equipment drivers'                | 'Catalog_EquipmentDrivers'                 |
+			| 'Plugins'                          | 'Catalog_ExternalDataProc'                 |
+			| 'File storages info'               | 'Catalog_FileStoragesInfo'                 |
+			| 'File storage volumes'             | 'Catalog_FileStorageVolumes'               |
+			| 'Integration settings'             | 'Catalog_IntegrationSettings'              |
+			| 'UI groups'                        | 'Catalog_InterfaceGroups'                  |
+			| 'Legal name contracts'             | 'Catalog_LegalNameContracts'               |
+			| 'Objects statuses'                 | 'Catalog_ObjectStatuses'                   |
+			| 'Payment terms'                    | 'Catalog_PaymentSchedules'                 |
+			| 'Planning periods'                 | 'Catalog_PlanningPeriods'                  |
+			| 'Tax additional analytics'         | 'Catalog_TaxAnalytics'                     |
+			| 'Units of measurement'             | 'Catalog_UnitsOfMeasurement'               |
+			| 'Ledger type variants'             | 'Catalog_LedgerTypeVariants'               |
+			| 'Cheque bond transaction'          | 'Document_ChequeBondTransaction'           |
+			| 'Consolidated retail sales'        | 'Document_ConsolidatedRetailSales'         |
+			| 'Work order'                       | 'Document_WorkOrder'                       |
+			| 'Work order closing'               | 'Document_WorkOrderClosing'                |
+			| 'Bill of materials'                | 'Catalog_BillOfMaterials'                  |
+			| 'Work sheet'                       | 'Document_WorkSheet'                       |
+			| 'Filling templates'                | 'Catalog_FillingTemplates'                 |
+			| 'Production planning'              | 'Document_ProductionPlanning'              |
+			| 'Production planning correction'   | 'Document_ProductionPlanningCorrection'    |
+			| 'Production planning closing'      | 'Document_ProductionPlanningClosing'       |
+			| 'Production'                       | 'Document_Production'                      |
+			| 'Sales report from trade agent'    | 'Document_SalesReportFromTradeAgent'       |
+			| 'Sales report to consignor'        | 'Document_SalesReportToConsignor'          |
+			| 'Source of origins'                | 'Catalog_SourceOfOrigins'                  |
+			| 'Employee cash advance'            | 'Document_EmployeeCashAdvance'             |
+			| 'Production costs allocation'      | 'Document_ProductionCostsAllocation'       |
+			| 'Payroll'                          | 'Document_Payroll'                         |
+			| 'Accrual and deduction types'      | 'Catalog_AccrualAndDeductionTypes'         |
+			| 'Employee positions'               | 'Catalog_EmployeePositions'                |
+			| 'Time sheet'                       | 'Document_TimeSheet'                       |
+			| 'Addresses'                        | 'Catalog_Addresses'                        |
+			| 'Vehicles'                         | 'Catalog_Vehicles'                         |
+			| 'Vehicle types'                    | 'Catalog_VehicleTypes'                     |
+		And I close all client application windows
+		
+		
+Scenario: _005136 check add attribute set form
+	And I close all client application windows
+	* Add test element
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Items'    |
+		And I select current line in "List" table
+		And in the table "ExtensionAttributes" I click "Add" button
+		And I input "Test1" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesAdd"
+		And I input "Test2" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesAdd"
+		And I input "Test3" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I go to line in "ExtensionAttributes" table
+			| 'Attribute' |
+			| 'Test1'     |
+		And I select current line in "ExtensionAttributes" table
+		And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Main information' |
+		And I select current line in "List" table
+		And I set checkbox named "ExtensionAttributesRequired" in "ExtensionAttributes" table
+		And I set checkbox named "ExtensionAttributesShowInHTML" in "ExtensionAttributes" table
+		And I set "Show" checkbox in "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I activate field named "ExtensionAttributesIsConditionSet" in "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesSetConditionExtensionAttribute"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Item type" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I click "Ok" button
+	* Copy settings from first line
+		And I select all lines of "ExtensionAttributes" table
+		And in the table "ExtensionAttributes" I click "Copy \"Condition\"" button
+		And in the table "ExtensionAttributes" I click "Copy attribute \"Show\"" button
+		And in the table "ExtensionAttributes" I click "Copy attribute \"Show in HTML\"" button
+		And in the table "ExtensionAttributes" I click "Copy \"Interface group\"" button
+	* Check
+		And "ExtensionAttributes" table became equal
+			| '#' | 'Required' | 'Attribute' | 'Show' | 'UI group'         | 'Show in HTML' |
+			| '1' | 'Yes'      | 'Test1'     | 'Yes'  | 'Main information' | 'Yes'          |
+			| '2' | 'No'       | 'Test2'     | 'Yes'  | 'Main information' | 'Yes'          |
+			| '3' | 'No'       | 'Test3'     | 'Yes'  | 'Main information' | 'Yes'          |		
+		And I go to line in "ExtensionAttributes" table
+			| 'Attribute' |
+			| 'Test3'     |
+		And in the table "ExtensionAttributes" I click "Set condition" button
+		And I expand current line in "SettingsFilter" table
+		And "SettingsFilter" table contains lines
+			| 'Right value' |
+			| 'Jeans'       |
 		And I close all client application windows
 		
 		
 				
+				
+				
+		
+
+				
+	
+				
+
+		
+				
+		
+		
+				
+										
 
 										
 

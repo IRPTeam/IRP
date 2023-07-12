@@ -8,6 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		ThisObject.Finished = False;
 	EndIf;
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -23,6 +24,28 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
+	MaterialQuantity = 0;
+	For Each Row In ThisObject.Materials Do
+		MaterialQuantity = MaterialQuantity + Row.Quantity;
+	EndDo;
+
+	If MaterialQuantity = 0 Then
+		Cancel = True;
+		MessageText = R().Error_127;
+		If ThisObject.Materials.Count() > 0 Then
+			CommonFunctionsClientServer.ShowUsersMessage(MessageText, 
+					"Object.Materials[0].Quantity", 
+					"Object.Materials");
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+		EndIf;
+	EndIf;
+		
+	If ThisObject.TransactionType <> Enums.ProductionTransactionTypes.Produce Then
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "BillOfMaterials");
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.ProductionPlanning) And ThisObject.Date < ThisObject.ProductionPlanning.Date Then
 		Cancel = True;
 		MessageText = StrTemplate(R().MF_Error_004, ThisObject.Date, ThisObject.ProductionPlanning.Date);
@@ -96,12 +119,16 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		ThisObject.Finished = True;
 		ThisObject.ProductionType = Enums.ProductionTypes.Product;
+		ThisObject.TransactionType = Enums.ProductionTransactionTypes.Produce;
 		Return;
 	EndIf;
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ProductionPlanning" Then
+			FillingData.Insert("TransactionType", Enums.ProductionTransactionTypes.Produce);
+			
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			
+			ThisObject.TransactionType    = FillingData.TransactionType;
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.Company            = FillingData.Company;
 			ThisObject.StoreProduction    = FillingData.StoreProduction;

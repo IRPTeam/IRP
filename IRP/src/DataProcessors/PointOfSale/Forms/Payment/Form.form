@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <title>
     <key>en</key>
     <value>Payment</value>
@@ -352,6 +352,8 @@
         <useAlternationRowColor>true</useAlternationRowColor>
         <searchOnInput>Auto</searchOnInput>
         <initialListView>Auto</initialListView>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <fileDragMode>AsFileRef</fileDragMode>
         <borderColor xsi:type="core:ColorRef">
@@ -376,6 +378,8 @@
         <value>Group bank type list</value>
       </title>
       <width>20</width>
+      <horizontalStretch>true</horizontalStretch>
+      <verticalStretch>true</verticalStretch>
       <extendedTooltip>
         <name>GroupBankTypeListExtendedTooltip</name>
         <id>271</id>
@@ -1662,6 +1666,7 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <textColor xsi:type="core:ColorRef">
                 <color>Windows.ToolTip</color>
@@ -1707,6 +1712,7 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <textColor xsi:type="core:ColorRef">
                 <color>Windows.ToolTip</color>
@@ -1747,6 +1753,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.LargeTextFont</font>
@@ -1784,6 +1791,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Web.Cream</color>
@@ -1824,6 +1832,7 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Web.AliceBlue</color>
@@ -1908,6 +1917,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -1949,6 +1959,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -1990,6 +2001,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2031,6 +2043,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2047,6 +2060,8 @@
                 <value>Group one</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupOneExtendedTooltip</name>
                 <id>58</id>
@@ -2111,6 +2126,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2152,6 +2168,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2193,6 +2210,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2234,6 +2252,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ReportHeaderBackColor</color>
@@ -2253,6 +2272,8 @@
                 <value>Group two</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupTwoExtendedTooltip</name>
                 <id>70</id>
@@ -2317,6 +2338,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2358,6 +2380,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2399,6 +2422,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2440,6 +2464,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ToolTipBackColor</color>
@@ -2459,6 +2484,8 @@
                 <value>Group three</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupThreeExtendedTooltip</name>
                 <id>82</id>
@@ -2519,6 +2546,7 @@
                 <height>2</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2562,6 +2590,7 @@
                 <height>7</height>
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
                 <placementArea>UserCmds</placementArea>
                 <font xsi:type="core:FontRef">
                   <font>Style.ExtraLargeTextFont</font>
@@ -2578,6 +2607,8 @@
                 <value>Group enter</value>
               </title>
               <width>10</width>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
               <extendedTooltip>
                 <name>GroupEnterExtendedTooltip</name>
                 <id>135</id>
@@ -2655,6 +2686,8 @@
             <key>en</key>
             <value>Group amounts right</value>
           </toolTip>
+          <horizontalStretch>true</horizontalStretch>
+          <verticalStretch>true</verticalStretch>
           <extendedTooltip>
             <name>GroupAmountsRightExtendedTooltip</name>
             <id>54</id>
@@ -3100,6 +3133,74 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PaymentAgentLegalNameContract</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent legal name contract</value>
+      </title>
+      <id>56</id>
+      <valueType>
+        <types>CatalogRef.LegalNameContracts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentLegalName</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent legal name</value>
+      </title>
+      <id>57</id>
+      <valueType>
+        <types>CatalogRef.Companies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentPartner</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent partner</value>
+      </title>
+      <id>58</id>
+      <valueType>
+        <types>CatalogRef.Partners</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentAgentPartnerTerms</name>
+      <title>
+        <key>en</key>
+        <value>Payment agent partner terms</value>
+      </title>
+      <id>59</id>
+      <valueType>
+        <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -3355,6 +3456,129 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PartnerTerms</name>
+      <title>
+        <key>en</key>
+        <value>Partner terms</value>
+      </title>
+      <id>51</id>
+      <valueType>
+        <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>52</id>
+      <valueType>
+        <types>DefinedType.typeDescription</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Partner</name>
+      <title>
+        <key>en</key>
+        <value>Partner</value>
+      </title>
+      <id>53</id>
+      <valueType>
+        <types>CatalogRef.Partners</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Legalname</name>
+      <title>
+        <key>en</key>
+        <value>Legalname</value>
+      </title>
+      <id>54</id>
+      <valueType>
+        <types>CatalogRef.Companies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>LegalNameContract</name>
+      <title>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </title>
+      <id>55</id>
+      <valueType>
+        <types>CatalogRef.LegalNameContracts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BankTerm</name>
+      <title>
+        <key>en</key>
+        <value>Bank term</value>
+      </title>
+      <id>60</id>
+      <valueType>
+        <types>CatalogRef.BankTerms</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>61</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <scale>3</scale>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>IsAdvance</name>
@@ -3492,20 +3716,27 @@ WHERE
 			InformationRegister.BranchBankTerms AS BranchBankTerms
 		WHERE
 			BranchBankTerms.Branch = &amp;Branch)
+	AND PaymentTypesData.PaymentType.Type = &amp;PaymentType
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
-SELECT
+ SELECT
 	PaymentTypes.Ref
 FROM
 	Catalog.PaymentTypes AS PaymentTypes
 		INNER JOIN PaymentTypesData AS PaymentTypesData
-		ON PaymentTypes.Ref = PaymentTypesData.PaymentType</queryText>
+		ON PaymentTypes.Ref = PaymentTypesData.PaymentType
+WHERE
+	PaymentTypes.Type = &amp;Type</queryText>
       <mainTable>Catalog.PaymentTypes</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Code</dataPath>
         <field>Code</field>
@@ -3543,6 +3774,10 @@ FROM
         <field>Branch</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>FinancialMovementType</dataPath>
+        <field>FinancialMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Description_en</dataPath>
         <field>Description_en</field>
       </fields>
@@ -3578,10 +3813,6 @@ FROM
         <dataPath>Parent</dataPath>
         <field>Parent</field>
       </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Ref</dataPath>
-        <field>Ref</field>
-      </fields>
       <parameters>
         <name>Branch</name>
         <title>
@@ -3595,6 +3826,46 @@ FROM
         <valueType>
           <types>CatalogRef.BusinessUnits</types>
         </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Type</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Type</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>EnumRef.PaymentTypes</types>
+        </valueType>
+        <values xsi:type="core_1:DesignTimeValueValue">
+          <value>
+            <value>Enum.PaymentTypes.Card</value>
+          </value>
+        </values>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>PaymentType</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Payment type</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>EnumRef.PaymentTypes</types>
+        </valueType>
+        <values xsi:type="core_1:DesignTimeValueValue">
+          <value>
+            <value>Enum.PaymentTypes.Card</value>
+          </value>
+        </values>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

@@ -82,13 +82,22 @@ Procedure TradeAgentOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure OtherOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.CommandBar.ChildItems.FormInformationRegisterRetailWorkersRetailWorkers.Visible = Object.Employee;
+
+	RetailWorkersNavigation = Form.CommandBar.ChildItems.Find("FormInformationRegisterRetailWorkersRetailWorkers");
+	If Not RetailWorkersNavigation = Undefined Then
+		RetailWorkersNavigation.Visible = Object.Employee;
+	EndIf;
 	
 	Form.Items.GroupStaffing.Visible = Object.Employee;
 	
@@ -157,9 +166,14 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 &AtServer
 Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
-
-#EndRegion

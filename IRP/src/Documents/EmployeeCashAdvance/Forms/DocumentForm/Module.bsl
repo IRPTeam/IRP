@@ -91,25 +91,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region ACCOUNT
-//
-//&AtClient
-//Procedure AccountOnChange(Item)
-//	DocCashExpenseRevenueClient.AccountOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//&AtClient
-//Procedure AccountStartChoice(Item, ChoiceData, StandardProcessing)
-//	DocCashExpenseRevenueClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-//EndProcedure
-//
-//&AtClient
-//Procedure AccountEditTextChange(Item, Text, StandardProcessing)
-//	DocCashExpenseRevenueClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-//EndProcedure
-//
-//#EndRegion
-
 #Region PAYMENT_LIST
 
 &AtClient
@@ -137,20 +118,6 @@ EndProcedure
 &AtClient
 Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
 	DocEmployeeCashAdvanceClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region FINANCIAL_MOVEMENT_TYPE
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocEmployeeCashAdvanceClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocEmployeeCashAdvanceClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -249,6 +216,11 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region EXTERNAL_COMMANDS
@@ -312,7 +284,7 @@ Function FillByAdvancesAtServer()
 	
 	AdvancesTable = DocEmployeeCashAdvanceServer.GetAdvances(QueryParameters);
 	Address = PutToTempStorage(AdvancesTable, ThisObject.UUID);
-	GroupColumn = "Account, Currency, FinancialMovementType, PlaningTransactionBasis";
+	GroupColumn = "Currency,";
 	SumColumn = "TotalAmount";
 	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
 EndFunction

@@ -10,49 +10,38 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 
-	Tables = New Structure();
+	Tables = New Structure;
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
-#Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
 		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 		Return Tables;
-	EndIf
-	;
+	EndIf;
 
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
-#Region NewRegistersPosting
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -69,15 +58,13 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -95,10 +82,10 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
+#Region Posting_Info
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -106,55 +93,63 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	Return StrParams;
 EndFunction
 
-Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
-	QueryArray.Add(ItemList());
-	Return QueryArray;
-EndFunction
+#EndRegion
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
-	QueryArray.Add(R2010T_SalesOrders());
-	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
-	QueryArray.Add(T3010S_RowIDInfo());
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
 	Return "SELECT
-	|	SalesReturnOrderList.Ref.Company AS Company,
-	|	SalesReturnOrderList.Store AS Store,
-	|	SalesReturnOrderList.ItemKey AS ItemKey,
-	|	SalesReturnOrderList.Ref AS Order,
-	|	SalesReturnOrderList.Quantity AS UnitQuantity,
-	|	SalesReturnOrderList.QuantityInBaseUnit AS Quantity,
-	|	SalesReturnOrderList.Unit,
-	|	SalesReturnOrderList.ItemKey.Item AS Item,
-	|	SalesReturnOrderList.Ref.Date AS Period,
-	|	SalesReturnOrderList.Key AS RowKey,
-	|	VALUE(Enum.ProcurementMethods.EmptyRef) AS ProcurementMethod,
-	|	SalesReturnOrderList.TotalAmount AS Amount,
-	|	SalesReturnOrderList.Ref.Currency AS Currency,
-	|	SalesReturnOrderList.Cancel AS IsCanceled,
-	|	SalesReturnOrderList.CancelReason,
-	|	SalesReturnOrderList.NetAmount,
-	|	SalesReturnOrderList.OffersAmount,
-	|	&StatusInfoPosting AS StatusInfoPosting,
-	|	SalesReturnOrderList.Ref.Branch AS Branch,
-	|	SalesReturnOrderList.SalesPerson
-	|INTO ItemList
-	|FROM
-	|	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList
-	|WHERE
-	|	SalesReturnOrderList.Ref = &Ref
-	|	AND &StatusInfoPosting";
+		   |	SalesReturnOrderList.Ref.Company AS Company,
+		   |	SalesReturnOrderList.Store AS Store,
+		   |	SalesReturnOrderList.ItemKey AS ItemKey,
+		   |	SalesReturnOrderList.Ref AS Order,
+		   |	SalesReturnOrderList.Quantity AS UnitQuantity,
+		   |	SalesReturnOrderList.QuantityInBaseUnit AS Quantity,
+		   |	SalesReturnOrderList.Unit,
+		   |	SalesReturnOrderList.ItemKey.Item AS Item,
+		   |	SalesReturnOrderList.Ref.Date AS Period,
+		   |	SalesReturnOrderList.Key AS RowKey,
+		   |	VALUE(Enum.ProcurementMethods.EmptyRef) AS ProcurementMethod,
+		   |	SalesReturnOrderList.TotalAmount AS Amount,
+		   |	SalesReturnOrderList.Ref.Currency AS Currency,
+		   |	SalesReturnOrderList.Cancel AS IsCanceled,
+		   |	SalesReturnOrderList.CancelReason,
+		   |	SalesReturnOrderList.NetAmount,
+		   |	SalesReturnOrderList.OffersAmount,
+		   |	&StatusInfoPosting AS StatusInfoPosting,
+		   |	SalesReturnOrderList.Ref.Branch AS Branch,
+		   |	SalesReturnOrderList.SalesPerson
+		   |INTO ItemList
+		   |FROM
+		   |	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList
+		   |WHERE
+		   |	SalesReturnOrderList.Ref = &Ref
+		   |	AND &StatusInfoPosting";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R2010T_SalesOrders());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
 EndFunction
 
 Function R2010T_SalesOrders()
@@ -181,24 +176,44 @@ Function R2012B_SalesOrdersInvoiceClosing()
 EndFunction
 
 Function T3010S_RowIDInfo()
-	Return
-		"SELECT
-		|	RowIDInfo.RowRef AS RowRef,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Basis AS Basis,
-		|	ItemList.Key AS Key,
-		|	ItemList.Price AS Price,
-		|	ItemList.Ref.Currency AS Currency,
-		|	ItemList.Unit AS Unit
-		|INTO T3010S_RowIDInfo
-		|FROM
-		|	Document.SalesReturnOrder.ItemList AS ItemList
-		|		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
-		|		ON RowIDInfo.Ref = &Ref
-		|		AND ItemList.Ref = &Ref
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND RowIDInfo.Ref = ItemList.Ref";
+	Return "SELECT
+		   |	RowIDInfo.RowRef AS RowRef,
+		   |	RowIDInfo.BasisKey AS BasisKey,
+		   |	RowIDInfo.RowID AS RowID,
+		   |	RowIDInfo.Basis AS Basis,
+		   |	ItemList.Key AS Key,
+		   |	ItemList.Price AS Price,
+		   |	ItemList.Ref.Currency AS Currency,
+		   |	ItemList.Unit AS Unit
+		   |INTO T3010S_RowIDInfo
+		   |FROM
+		   |	Document.SalesReturnOrder.ItemList AS ItemList
+		   |		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
+		   |		ON RowIDInfo.Ref = &Ref
+		   |		AND ItemList.Ref = &Ref
+		   |		AND RowIDInfo.Key = ItemList.Key
+		   |		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	StoreList = Obj.ItemList.Unload(, "Store");
+	StoreList.GroupBy("Store");
+	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

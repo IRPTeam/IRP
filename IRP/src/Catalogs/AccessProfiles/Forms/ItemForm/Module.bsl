@@ -3,6 +3,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	UpdateRolesAtServer();
 EndProcedure
 
 &AtClient
@@ -76,6 +77,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

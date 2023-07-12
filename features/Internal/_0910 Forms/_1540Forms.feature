@@ -72,8 +72,8 @@ Scenario: _0154000 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -221,28 +221,28 @@ Scenario: _0154033 check if the Partner form contains an option to include a par
 	* Select partner
 		And I click "List" button		
 		And I go to line in "List" table
-			| Description |
-			| Seven Brand |
+			| Description    |
+			| Seven Brand    |
 		And I select current line in "List" table
 	* Add a test partner to the Dealer segment
 		And In this window I click command interface button "Partner segments content"
 		And "List" table does not contain lines
-		| Segment | Partner     |
-		| Dealer  | Seven Brand |
+		| Segment  | Partner       |
+		| Dealer   | Seven Brand   |
 		And I click the button named "FormCreate"
 		And I click Select button of "Segment" field
 		And I go to line in "List" table
-			| Description |
-			| Dealer      |
+			| Description    |
+			| Dealer         |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Add a test partner to the Retail segment
 		And I go to line in "List" table
-			| Partner     | Segment |
-			| Seven Brand | Retail  |
+			| Partner       | Segment    |
+			| Seven Brand   | Retail     |
 		And I go to line in "List" table
-			| Partner     | Segment |
-			| Seven Brand | Dealer  |
+			| Partner       | Segment    |
+			| Seven Brand   | Dealer     |
 	* Delete added record
 		And I delete a line in "List" table
 		Then "1C:Enterprise" window is opened
@@ -264,65 +264,65 @@ Scenario: _0154035 search the item key selection list
 	* General search check including All/Single/Specification switch selection
 		And I input "s" text in "SearchString" field
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'M/White'   | 'Dress' |
-		| 'L/Green'   | 'Dress' |
-		| 'XL/Green'  | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'  | 'Item'    |
+		| 'M/White'   | 'Dress'   |
+		| 'L/Green'   | 'Dress'   |
+		| 'XL/Green'  | 'Dress'   |
+		| 'XXL/Red'   | 'Dress'   |
+		| 'M/Brown'   | 'Dress'   |
 		And I click Clear button of "SearchString" field
 		And I change "IsSpecificationFilter" radio button value to "Single"
 		And I input "gr" text in "SearchString" field
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'S/Yellow'  | 'Dress' |
-		| 'XS/Blue'   | 'Dress' |
-		| 'M/White'   | 'Dress' |
-		| 'Dress/A-8' | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'   | 'Item'    |
+		| 'S/Yellow'   | 'Dress'   |
+		| 'XS/Blue'    | 'Dress'   |
+		| 'M/White'    | 'Dress'   |
+		| 'Dress/A-8'  | 'Dress'   |
+		| 'XXL/Red'    | 'Dress'   |
+		| 'M/Brown'    | 'Dress'   |
 		And I click Clear button of "SearchString" field
 		And I change "IsSpecificationFilter" radio button value to "Specification"
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'S/Yellow'  | 'Dress' |
-		| 'XS/Blue'   | 'Dress' |
-		| 'M/White'   | 'Dress' |
-		| 'L/Green'   | 'Dress' |
-		| 'XL/Green'  | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'  | 'Item'    |
+		| 'S/Yellow'  | 'Dress'   |
+		| 'XS/Blue'   | 'Dress'   |
+		| 'M/White'   | 'Dress'   |
+		| 'L/Green'   | 'Dress'   |
+		| 'XL/Green'  | 'Dress'   |
+		| 'XXL/Red'   | 'Dress'   |
+		| 'M/Brown'   | 'Dress'   |
 		And I click Clear button of "SearchString" field
 		And I change "IsSpecificationFilter" radio button value to "All"
 		And I select from "Size" drop-down list by "s" string
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'XS/Blue'   | 'Dress' |
-		| 'M/White'   | 'Dress' |
-		| 'L/Green'   | 'Dress' |
-		| 'XL/Green'  | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'  | 'Item'    |
+		| 'XS/Blue'   | 'Dress'   |
+		| 'M/White'   | 'Dress'   |
+		| 'L/Green'   | 'Dress'   |
+		| 'XL/Green'  | 'Dress'   |
+		| 'XXL/Red'   | 'Dress'   |
+		| 'M/Brown'   | 'Dress'   |
 	* Check search by properties
 		And I click Clear button of "Size" field
 		And I select from "Color" drop-down list by "gr" string
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'S/Yellow'  | 'Dress' |
-		| 'XS/Blue'   | 'Dress' |
-		| 'M/White'   | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'  | 'Item'    |
+		| 'S/Yellow'  | 'Dress'   |
+		| 'XS/Blue'   | 'Dress'   |
+		| 'M/White'   | 'Dress'   |
+		| 'XXL/Red'   | 'Dress'   |
+		| 'M/Brown'   | 'Dress'   |
 		And I change "IsSpecificationFilter" radio button value to "Single"
 		And I select from "Color" drop-down list by "gr" string
 		And "List" table does not contain lines
-		| 'Item key'  | 'Item'  |
-		| 'S/Yellow'  | 'Dress' |
-		| 'XS/Blue'   | 'Dress' |
-		| 'M/White'   | 'Dress' |
-		| 'Dress/A-8' | 'Dress' |
-		| 'XXL/Red'   | 'Dress' |
-		| 'M/Brown'   | 'Dress' |
+		| 'Item key'   | 'Item'    |
+		| 'S/Yellow'   | 'Dress'   |
+		| 'XS/Blue'    | 'Dress'   |
+		| 'M/White'    | 'Dress'   |
+		| 'Dress/A-8'  | 'Dress'   |
+		| 'XXL/Red'    | 'Dress'   |
+		| 'M/Brown'    | 'Dress'   |
 		And I change "IsSpecificationFilter" radio button value to "Specification"
 		And I select from "Color" drop-down list by "Black" string
 		Then the number of "List" table lines is "равно" 0
@@ -347,27 +347,27 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -375,8 +375,8 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 	
 
@@ -387,27 +387,27 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -415,8 +415,8 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 		
 
@@ -428,27 +428,27 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -456,8 +456,8 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 
 Scenario: _0154044 check impossibility deleting of the store field by line with the product in a Sales return order
@@ -467,27 +467,27 @@ Scenario: _0154044 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -495,8 +495,8 @@ Scenario: _0154044 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 
 Scenario: _0154045 check impossibility deleting of the store field by line with the product in a Sales return
@@ -506,27 +506,27 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -534,8 +534,8 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 
 Scenario: _0154046 check impossibility deleting of the store field by line with the product in a Purchase return
@@ -545,27 +545,27 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -573,8 +573,8 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 	
 Scenario: _0154047 check impossibility deleting of the store field by line with the product in a Purchase return order
@@ -584,27 +584,27 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -612,8 +612,8 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
 		And I close all client application windows
 
 Scenario: _0154048 check impossibility deleting of the store field by line with the product in a Goods receipt
@@ -623,28 +623,28 @@ Scenario: _0154048 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And Delay 2
 		And I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -652,8 +652,8 @@ Scenario: _0154048 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
 		And I close all client application windows
 
 Scenario: _0154049 check impossibility deleting of the store field by line with the product in a  ShipmentConfirmation
@@ -663,27 +663,27 @@ Scenario: _0154049 check impossibility deleting of the store field by line with 
 	* Add to the table part of the product with the item type - Product
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
+			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -691,8 +691,8 @@ Scenario: _0154049 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
+		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
 		And I close all client application windows
 			
 	
@@ -706,8 +706,8 @@ Scenario: _010018 check the display on the Partners Description ENG form after c
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Anna Petrova
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Anna Petrova'         |
+			| 'Description'     |
+			| 'Anna Petrova'    |
 		And I select current line in "List" table
 	* Changing Description_en to Anna Petrova1 and display checking
 		And I input "Anna Petrova1" text in the field named "Description_en"
@@ -725,8 +725,8 @@ Scenario: _010019 check the display on the Company Description ENG form after ch
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Select Company Lomaniti
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Lomaniti'         |
+			| 'Description'         |
+			| 'Company Lomaniti'    |
 		And I select current line in "List" table
 	* Changing Description_en to Company Lomaniti1 and display checking
 		And I input "Company Lomaniti1" text in the field named "Description_en"
@@ -745,16 +745,16 @@ Scenario: _010017 check the move to the Company tab from the Partner (shows the 
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Ferron BP
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP' |
+				| 'Description'     |
+				| 'Ferron BP'       |
 		And I select current line in "List" table
 		And Delay 2
 	* Check the move to the Company tab
 		And In this window I click command interface button "Company"
 		And "List" table became equal
-			| 'Description'       |
-			| 'Company Ferron BP' |
-			| 'Second Company Ferron BP' |
+			| 'Description'                 |
+			| 'Company Ferron BP'           |
+			| 'Second Company Ferron BP'    |
 		And I select current line in "List" table
 		* Check the display of Company information
 			Then the form attribute named "Country" became equal to "Turkey"
@@ -798,8 +798,8 @@ Scenario: _005118 check the display on the Items Description ENG form after chan
 	* Open Item Box
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Box'         |
+			| 'Description'    |
+			| 'Box'            |
 		And I select current line in "List" table
 	* Changing Description_en to Box1 and display checking
 		And I input "Box1" text in the field named "Description_en"
@@ -816,8 +816,8 @@ Scenario: _012008 check the display on the Partner term Description ENG form aft
 	* Open Personal Partner terms, $ (catalog Partner terms)  
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Personal Partner terms, $'         |
+			| 'Description'                  |
+			| 'Personal Partner terms, $'    |
 		And I select current line in "List" table
 	* Changing Description_en to Personal Partner terms, $ 1 and display checking
 		And I input "Personal Partner terms, $ 1" text in the field named "Description_en"
@@ -834,8 +834,8 @@ Scenario: _012009 check the move to Partner terms from the Partner card (shows a
 	* Open Ferron BP (catalog Partners)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP' |
+				| 'Description'     |
+				| 'Ferron BP'       |
 		And I select current line in "List" table
 		And Delay 2
 	* Moving to Partner terms
@@ -844,15 +844,15 @@ Scenario: _012009 check the move to Partner terms from the Partner card (shows a
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 8
 		And "List" table contains lines
-			| Description                     |
-			| Basic Partner terms, TRY         |
-			| Basic Partner terms, $           |
-			| Basic Partner terms, without VAT |
-			| Vendor Ferron, TRY            |
-			| Vendor Ferron, USD            |
-			| Vendor Ferron, EUR            |
-			| Sale autum, TRY               |
-			| Ferron, USD               |
+			| Description                         |
+			| Basic Partner terms, TRY            |
+			| Basic Partner terms, $              |
+			| Basic Partner terms, without VAT    |
+			| Vendor Ferron, TRY                  |
+			| Vendor Ferron, USD                  |
+			| Vendor Ferron, EUR                  |
+			| Sale autum, TRY                     |
+			| Ferron, USD                         |
 		And I close current window
 	
 
@@ -864,33 +864,33 @@ Scenario: _012010 check the filter by Company and Legal name field when creating
 	* Check the filter by Company
 		And I click Select button of "Company" field
 		And "List" table became equal
-			| 'Description'              |
-			| 'Main Company'             |
-			| 'Second Company'           |
+			| 'Description'       |
+			| 'Main Company'      |
+			| 'Second Company'    |
 		And I select current line in "List" table
 	* Check the filter by Legal name
 		And I click Select button of "Legal name" field
 		And "List" table does not contain lines
-			| 'Description'              |
-			| 'Main Company'             |
-			| 'Second Company'           |
+			| 'Description'       |
+			| 'Main Company'      |
+			| 'Second Company'    |
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 	* Check the filter by partners Legal name 
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And "List" table does not contain lines
-		| 'Description'              |
-		| 'Company Ferron BP'        |
-		| 'DFC'                      |
-		| 'Big foot'                 |
-		| 'Second Company Ferron BP' |
+		| 'Description'                |
+		| 'Company Ferron BP'          |
+		| 'DFC'                        |
+		| 'Big foot'                   |
+		| 'Second Company Ferron BP'   |
 		And I close all client application windows
 
 Scenario: _012011 filter check by Partner segment when creating an Partner term
@@ -902,13 +902,13 @@ Scenario: _012011 filter check by Partner segment when creating an Partner term
 	* Check the filter by Partner segment
 		And I click Select button of "Partner segment" field
 		And "List" table contains lines
-			| 'Description' |
-			| 'Retail'      |
-			| 'Dealer'      |
+			| 'Description'    |
+			| 'Retail'         |
+			| 'Dealer'         |
 		And "List" table does not contain lines
-			| 'Description' |
-			| 'Region 1'    |
-			| 'Region 2'    |
+			| 'Description'    |
+			| 'Region 1'       |
+			| 'Region 2'       |
 		And I close all client application windows
 	
 
@@ -917,8 +917,8 @@ Scenario: _012012 inability to create your own company for Partner
 	* Open Partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
@@ -937,26 +937,26 @@ Scenario: _012015 check row key when cloning a string in Sales invoice
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'         |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                   |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table
 	* Filling in Sales invoice
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListItem" in "ItemList" table
@@ -966,19 +966,19 @@ Scenario: _012015 check row key when cloning a string in Sales invoice
 	* Check that the row keys do not match
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "Rov1"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		And "ItemList" table does not contain lines
-			| 'Key' | '#' |
-			| 'Rov1'  | '2' |
+			| 'Key'    | '#'    |
+			| 'Rov1'   | '2'    |
 		And I close all client application windows
 		
 
@@ -989,37 +989,37 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Ferron BP'     |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Store 02'     |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 	* Filling in Purchase order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -1032,19 +1032,19 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 	* Check that the row keys do not match
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "Rov1"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		And "ItemList" table does not contain lines
-			| 'Key' | '#' |
-			| 'Rov1'  | '2' |
+			| 'Key'    | '#'    |
+			| 'Rov1'   | '2'    |
 		And I close all client application windows
 
 Scenario: _012017 check row key when cloning a string in Shipment confirmation
@@ -1055,36 +1055,36 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 		And I select "Sales" exact value from "Transaction type" drop-down list
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Ferron BP'     |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 	* Filling in Shipment confirmation
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -1096,19 +1096,19 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 	* Check that the row keys do not match
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "Rov1"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		And "ItemList" table does not contain lines
-			| 'Key' | '#' |
-			| 'Rov1'  | '2' |
+			| 'Key'    | '#'    |
+			| 'Rov1'   | '2'    |
 		And I close all client application windows
 
 
@@ -1119,26 +1119,26 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I click the button named "FormCreate"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Store 02'     |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Main Company'     |
+			| 'Description'     |
+			| 'Main Company'    |
 		And I select current line in "List" table
 	* Filling in Internal supply request
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "2,00" text in "Quantity" field of "ItemList" table
@@ -1154,31 +1154,31 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I delete "$$$$RovISR2$$$$" variable
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$$$RovISR1$$$$"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I save the current field value as "$$$$RovISR2$$$$"		
 		And I display "$$$$RovISR1$$$$" variable value
 		And I display "$$$$RovISR2$$$$" variable value
 		And "ItemList" table does not contain lines
-			| 'Key' | '#' |
-			| '$$$$RovISR1$$$$'  | '2' |
+			| 'Key'               | '#'    |
+			| '$$$$RovISR1$$$$'   | '2'    |
 		And I close all client application windows
 	* Copy ISR and check row key
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
-			| 'Number' |
+			| 'Number'           |
 			| '$$NumberISR$$'    |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 		And I click the button named "FormPost"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| '$$$$RovISR1$$$$' |
-			| '$$$$RovISR2$$$$' |
+			| '$$$$RovISR1$$$$'    |
+			| '$$$$RovISR2$$$$'    |
 		And I close all client application windows
 				
 
@@ -1189,36 +1189,36 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Ferron BP'     |
+			| 'Description'    |
+			| 'Ferron BP'      |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'        |
-			| 'Vendor Ferron, TRY' |
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
+			| 'Description'          |
+			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Store 02'     |
+			| 'Description'    |
+			| 'Store 02'       |
 		And I select current line in "List" table
 	* Filling in Purchase invoice
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -1231,19 +1231,19 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 	* Check that the row keys do not match
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
+			| '#'    |
+			| '1'    |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "Rov1"
 		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
+			| '#'    |
+			| '2'    |
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		And "ItemList" table does not contain lines
-			| 'Key' | '#' |
-			| 'Rov1'  | '2' |
+			| 'Key'    | '#'    |
+			| 'Rov1'   | '2'    |
 		And I close all client application windows	
 
 
@@ -1256,8 +1256,8 @@ Scenario: _012019 check filling in partner and customer/vendor sign when creatin
 	* Opening a customer partner card
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 	* Open a creation form Partner term
 		And In this window I click command interface button "Partner terms"
@@ -1268,8 +1268,8 @@ Scenario: _012019 check filling in partner and customer/vendor sign when creatin
 	* Open a supplier partner card
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas' |
+			| 'Description'    |
+			| 'Veritas'        |
 		And I select current line in "List" table
 	* Open a creation form Partner term
 		And In this window I click command interface button "Partner terms"
@@ -1318,46 +1318,47 @@ Scenario: _012025 check box Show item in item key it the Registrations report
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'         |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                   |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table
 	* Filling in Sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
 		And I select current line in "List" table
 		And I click the button named "FormPost"	
 	* Check box Show item in item key
 		And I click "Registrations report" button
+		And I expand "Filters" group		
 		And I set checkbox "Show item in item key"
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values
-			| 'Item key'  |
-			| '38/Yellow' |
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And "ResultTable" spreadsheet document contains values
-			| 'ItemKeyItem' |
-			| 'Trousers'    |
+			| 'ItemKeyItem'    |
+			| 'Trousers'       |
 		And I remove checkbox "Show item in item key"
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values
-			| 'Item key'  |
-			| '38/Yellow' |
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And "ResultTable" spreadsheet document does not contain values
-			| 'ItemKeyItem' |
-			| 'Trousers'    |
+			| 'ItemKeyItem'    |
+			| 'Trousers'       |
 	And I close all client application windows
 	
 		
@@ -1374,8 +1375,8 @@ Scenario: _012026 check Partners selection form (SO)
 		And I wait "Partner (create) *" window closing in 20 seconds
 	* Check current position in list
 		And the current line of "List" table is equal to
-			| 'Description'  |
-			| 'Test Partner' |
+			| 'Description'     |
+			| 'Test Partner'    |
 		And I close all client application windows
 		
 Scenario: _012027 try change item from item key
@@ -1383,22 +1384,22 @@ Scenario: _012027 try change item from item key
 	* Open item key from item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |		
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I activate field named "Code" in "List" table
 		And I go to line in "List" table
-			| 'Item key'  |
-			| '38/Yellow' |
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And I select current line in "List" table
 		And "Item" attribute is read-only
 		And I close all client application windows
 	* Open item key from catalog
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
 		And I go to line in "List" table
-			| 'Item key'  |
-			| '38/Yellow' |	
+			| 'Item key'     |
+			| '38/Yellow'    |
 		And I select current line in "List" table
 		And "Item" attribute is read-only
 		And I close all client application windows
@@ -1415,8 +1416,8 @@ Scenario: _012029 search for item key in the selection form
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
+			| 'Description'    |
+			| 'Dress'          |
 		And I select current line in "List" table
 	* Search for item key
 		And I activate "Item key" field in "ItemList" table
@@ -1425,20 +1426,20 @@ Scenario: _012029 search for item key in the selection form
 		And I input "gre" text in the field named "SearchString"
 	* Check
 		And "List" table contains lines
-			| 'Item key' | 'Item'  | 'Specification' |
-			| 'L/Green'  | 'Dress' | ''              |
-			| 'XL/Green' | 'Dress' | ''              |
+			| 'Item key'   | 'Item'    | 'Specification'    |
+			| 'L/Green'    | 'Dress'   | ''                 |
+			| 'XL/Green'   | 'Dress'   | ''                 |
 		Then the number of "List" table lines is "равно" "2"
 	* Search another item key
 		And I input "bl" text in the field named "SearchString"
 		And "List" table became equal
-			| 'Item key' | 'Item'  |
-			| 'XS/Blue'  | 'Dress' |
+			| 'Item key'   | 'Item'     |
+			| 'XS/Blue'    | 'Dress'    |
 	* Select item key
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Item key' | 'Item'  |
-			| 'XS/Blue'  | 'Dress' |
+			| 'Item key'   | 'Item'     |
+			| 'XS/Blue'    | 'Dress'    |
 		And I close all client application windows
 				
 

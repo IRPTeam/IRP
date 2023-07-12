@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @Movements
@@ -28,6 +28,7 @@ Scenario: _040990 preparation (payroll movements)
 		When Create catalog ItemTypes objects
 		When Create PaymentType (advance)
 		When Create catalog PaymentTypes objects
+		When Create catalog PlanningPeriods objects
 		When Create catalog BankTerms objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -61,8 +62,8 @@ Scenario: _040990 preparation (payroll movements)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -71,8 +72,8 @@ Scenario: _040990 preparation (payroll movements)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "DocumentDiscount" |
+				| "Description"          |
+				| "DocumentDiscount"     |
 			When add Plugin for document discount
 		When Create catalog CancelReturnReasons objects
 	* Data for salary
@@ -83,7 +84,7 @@ Scenario: _040990 preparation (payroll movements)
 		When Create information register T9500S_AccrualAndDeductionValues records
 		When create Payroll object (movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.Payroll.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Payroll.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _040991 check Payroll movements by the Register  "R3027 Employee cash advance"
@@ -91,21 +92,21 @@ Scenario: _040991 check Payroll movements by the Register  "R3027 Employee cash 
 	* Select Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "R3027 Employee cash advance" 
 		And I click "Registrations report" button
 		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Payroll 4 dated 27.04.2023 12:39:37'     | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
-			| 'Register  "R3027 Employee cash advance"' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                     | ''              | ''                             | ''                        | ''                          | 'Attributes'           |
-			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Transaction currency' | 'Partner'       | 'Multi currency movement type' | 'Financial movement type' | 'Planing transaction basis' | 'Deferred calculation' |
-			| ''                                        | 'Expense'     | '27.04.2023 12:39:37' | '11,98'     | 'Main Company' | 'Front office' | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'David Romanov' | 'Reporting currency'           | 'Movement type 1'         | ''                          | 'No'                   |
-			| ''                                        | 'Expense'     | '27.04.2023 12:39:37' | '70'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'David Romanov' | 'Local currency'               | 'Movement type 1'         | ''                          | 'No'                   |
-			| ''                                        | 'Expense'     | '27.04.2023 12:39:37' | '70'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'David Romanov' | 'en description is empty'      | 'Movement type 1'         | ''                          | 'No'                   |
+			| 'Payroll 4 dated 27.04.2023 12:39:37'       | ''              | ''                      | ''            | ''               | ''               | ''           | ''                       | ''                | ''                               | ''                        |
+			| 'Document registrations records'            | ''              | ''                      | ''            | ''               | ''               | ''           | ''                       | ''                | ''                               | ''                        |
+			| 'Register  "R3027 Employee cash advance"'   | ''              | ''                      | ''            | ''               | ''               | ''           | ''                       | ''                | ''                               | ''                        |
+			| ''                                          | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''           | ''                       | ''                | ''                               | 'Attributes'              |
+			| ''                                          | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Currency'   | 'Transaction currency'   | 'Partner'         | 'Multi currency movement type'   | 'Deferred calculation'    |
+			| ''                                          | 'Expense'       | '27.04.2023 12:39:37'   | '11,98'       | 'Main Company'   | 'Front office'   | 'USD'        | 'TRY'                    | 'David Romanov'   | 'Reporting currency'             | 'No'                      |
+			| ''                                          | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'TRY'        | 'TRY'                    | 'David Romanov'   | 'Local currency'                 | 'No'                      |
+			| ''                                          | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'TRY'        | 'TRY'                    | 'David Romanov'   | 'en description is empty'        | 'No'                      |
 		And I close all client application windows
 		
 				
@@ -114,21 +115,21 @@ Scenario: _040992 check Payroll movements by the Register  "R5021 Revenues"
 	* Select Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "R5021 Revenues" 
 		And I click "Registrations report" button
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Payroll 4 dated 27.04.2023 12:39:37' | ''                    | ''          | ''                  | ''             | ''             | ''                     | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'      | ''                    | ''          | ''                  | ''             | ''             | ''                     | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5021 Revenues"'          | ''                    | ''          | ''                  | ''             | ''             | ''                     | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                    | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                     | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                    | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'   | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                    | '27.04.2023 12:39:37' | '8,56'      | ''                  | 'Main Company' | 'Front office' | 'Logistics department' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                    | '27.04.2023 12:39:37' | '50'        | ''                  | 'Main Company' | 'Front office' | 'Logistics department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                    | '27.04.2023 12:39:37' | '50'        | ''                  | 'Main Company' | 'Front office' | 'Logistics department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |	
+			| 'Payroll 4 dated 27.04.2023 12:39:37'   | ''                      | ''            | ''                    | ''               | ''               | ''                       | ''               | ''           | ''           | ''                      | ''                                |
+			| 'Document registrations records'        | ''                      | ''            | ''                    | ''               | ''               | ''                       | ''               | ''           | ''           | ''                      | ''                                |
+			| 'Register  "R5021 Revenues"'            | ''                      | ''            | ''                    | ''               | ''               | ''                       | ''               | ''           | ''           | ''                      | ''                                |
+			| ''                                      | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''               | ''                       | ''               | ''           | ''           | ''                      | ''                                |
+			| ''                                      | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'         | 'Profit loss center'     | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    |
+			| ''                                      | '27.04.2023 12:39:37'   | '8,56'        | ''                    | 'Main Company'   | 'Front office'   | 'Logistics department'   | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'              |
+			| ''                                      | '27.04.2023 12:39:37'   | '50'          | ''                    | 'Main Company'   | 'Front office'   | 'Logistics department'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                  |
+			| ''                                      | '27.04.2023 12:39:37'   | '50'          | ''                    | 'Main Company'   | 'Front office'   | 'Logistics department'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'         |
 		And I close all client application windows		
 
 Scenario: _040993 check Payroll movements by the Register  "R5022 Expenses"
@@ -136,27 +137,27 @@ Scenario: _040993 check Payroll movements by the Register  "R5022 Expenses"
 	* Select Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "R5022 Expenses" 
 		And I click "Registrations report" button
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Payroll 4 dated 27.04.2023 12:39:37' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
-			| 'Document registrations records'      | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
-			| 'Register  "R5022 Expenses"'          | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
-			| ''                                    | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
-			| ''                                    | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
-			| ''                                    | '27.04.2023 12:39:37' | '-30'       | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '-30'       | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '-5,14'     | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '136,96'    | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '256,8'     | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '800'       | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '800'       | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '1 500'     | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
-			| ''                                    | '27.04.2023 12:39:37' | '1 500'     | ''                  | ''            | 'Main Company' | 'Front office' | 'Accountants office' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |	
+			| 'Payroll 4 dated 27.04.2023 12:39:37'   | ''                      | ''            | ''                    | ''              | ''               | ''               | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                             |
+			| 'Document registrations records'        | ''                      | ''            | ''                    | ''              | ''               | ''               | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                             |
+			| 'Register  "R5022 Expenses"'            | ''                      | ''            | ''                    | ''              | ''               | ''               | ''                     | ''               | ''           | ''           | ''                      | ''                               | ''                             |
+			| ''                                      | 'Period'                | 'Resources'   | ''                    | ''              | 'Dimensions'     | ''               | ''                     | ''               | ''           | ''           | ''                      | ''                               | 'Attributes'                   |
+			| ''                                      | ''                      | 'Amount'      | 'Amount with taxes'   | 'Amount cost'   | 'Company'        | 'Branch'         | 'Profit loss center'   | 'Expense type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'   | 'Calculation movement cost'    |
+			| ''                                      | '27.04.2023 12:39:37'   | '-30'         | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '-30'         | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '-5,14'       | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '136,96'      | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '256,8'       | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'USD'        | ''                      | 'Reporting currency'             | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '800'         | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '800'         | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '1 500'       | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'Local currency'                 | ''                             |
+			| ''                                      | '27.04.2023 12:39:37'   | '1 500'       | ''                    | ''              | 'Main Company'   | 'Front office'   | 'Accountants office'   | 'Expense'        | ''           | 'TRY'        | ''                      | 'en description is empty'        | ''                             |
 		And I close all client application windows
 
 
@@ -165,31 +166,31 @@ Scenario: _040994 check Payroll movements by the Register  "R9510 Salary payment
 	* Select Payroll
 		Given I open hyperlink "e1cib/list/Document.Payroll"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
+			| 'Number'    |
+			| '4'         |
 	* Check movements by the Register  "R9510 Salary payment" 
 		And I click "Registrations report" button
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Payroll 4 dated 27.04.2023 12:39:37' | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| 'Document registrations records'      | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| 'Register  "R9510 Salary payment"'    | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
-			| ''                                    | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''         | ''                     | ''                             |
-			| ''                                    | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '136,96'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '256,8'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '800'       | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '800'       | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '1 500'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                    | 'Receipt'     | '27.04.2023 12:39:37' | '1 500'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '5,14'      | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '8,56'      | 'Main Company' | 'Front office' | 'David Romanov'   | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '11,98'     | 'Main Company' | 'Front office' | 'David Romanov'   | 'USD'      | 'TRY'                  | 'Reporting currency'           |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '30'        | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '30'        | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '50'        | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '50'        | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'en description is empty'      |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '70'        | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'Local currency'               |
-			| ''                                    | 'Expense'     | '27.04.2023 12:39:37' | '70'        | 'Main Company' | 'Front office' | 'David Romanov'   | 'TRY'      | 'TRY'                  | 'en description is empty'      |	
+			| 'Payroll 4 dated 27.04.2023 12:39:37'   | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
+			| 'Document registrations records'        | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
+			| 'Register  "R9510 Salary payment"'      | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
+			| ''                                      | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
+			| ''                                      | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Employee'          | 'Payment period'        | 'Currency'   | 'Transaction currency'   | 'Multi currency movement type'    |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '136,96'      | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '256,8'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '800'         | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '800'         | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
+			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '5,14'        | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '8,56'        | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '11,98'       | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '30'          | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '30'          | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '50'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '50'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
+			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
 		And I close all client application windows

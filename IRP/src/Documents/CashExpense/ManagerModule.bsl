@@ -9,14 +9,14 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
+	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map();
+	DataMapWithLockFields = New Map;
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -27,11 +27,14 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
+	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -62,8 +65,10 @@ EndProcedure
 
 #EndRegion
 
+#Region Posting_Info
+
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure();
+	Str = New Structure;
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -71,59 +76,123 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
-	StrParams = New Structure();
+	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
+Function PaymentList()
+	Return "SELECT
+		   |	PaymentList.Ref.Date AS Period,
+		   |	PaymentList.Ref.Company AS Company,
+		   |	PaymentList.Ref.OtherCompany AS OtherCompany,
+		   |	PaymentList.Ref.Account AS Account,
+		   |	PaymentList.Currency AS Currency,
+		   |	PaymentList.PaymentPeriod AS PaymentPeriod,
+		   |	PaymentList.ExpenseType AS ExpenseType,
+		   |	PaymentList.NetAmount AS NetAmount,
+		   |	PaymentList.TaxAmount AS TaxAmount,
+		   |	PaymentList.TotalAmount AS TotalAmount,
+		   |	PaymentList.Key,
+		   |	PaymentList.ProfitLossCenter,
+		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.FinancialMovementTypeOtherCompany,
+		   |	PaymentList.Partner,
+		   |	PaymentList.Employee,
+		   |	PaymentList.AdditionalAnalytic,
+		   |	PaymentList.Ref.Branch AS Branch,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment
+		   |INTO PaymentList
+		   |FROM
+		   |	Document.CashExpense.PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.Ref = &Ref";
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array();
+	QueryArray = New Array;
 	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R9510B_SalaryPayment());
 	Return QueryArray;
 EndFunction
 
-Function PaymentList()
-	Return 
-		"SELECT
-		|	PaymentList.Ref.Date AS Period,
-		|	PaymentList.Ref.Company AS Company,
-		|	PaymentList.Ref.OtherCompany AS OtherCompany,
-		|	PaymentList.Ref.Account AS Account,
-		|	PaymentList.Currency AS Currency,
-		|	PaymentList.ExpenseType AS ExpenseType,
-		|	PaymentList.NetAmount AS NetAmount,
-		|	PaymentList.TaxAmount AS TaxAmount,
-		|	PaymentList.TotalAmount AS TotalAmount,
-		|	PaymentList.Key,
-		|	PaymentList.ProfitLossCenter,
-		|	PaymentList.Partner,
-		|	PaymentList.AdditionalAnalytic,
-		|	PaymentList.Ref.Branch AS Branch,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS
-		|		IsOtherCompanyExpense
-		|INTO PaymentList
-		|FROM
-		|	Document.CashExpense.PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.Ref = &Ref";
+Function R3010B_CashOnHand()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	PaymentList.Company AS Company,
+		   |	PaymentList.TotalAmount AS Amount,
+		   |	*
+		   |INTO R3010B_CashOnHand
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	PaymentList.OtherCompany,
+		   |	PaymentList.TotalAmount,
+		   |	*
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherCompanyExpense
+		   |	OR PaymentList.IsSalaryPayment
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	PaymentList.OtherCompany,
+		   |	PaymentList.TotalAmount,
+		   |	*
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherCompanyExpense
+		   |	OR PaymentList.IsSalaryPayment";
 EndFunction
 
-Function R3010B_CashOnHand()
+Function R3011T_CashFlow()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Company AS Company,
-		|	PaymentList.TotalAmount AS Amount,
-		|	*
-		|INTO R3010B_CashOnHand
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	Case
+		|		When PaymentList.IsOtherCompanyExpense
+		|		OR PaymentList.IsSalaryPayment
+		|			Then PaymentList.FinancialMovementTypeOtherCompany
+		|		Else PaymentList.FinancialMovementType
+		|	End As FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|INTO R3011T_CashFlow
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
@@ -132,56 +201,122 @@ Function R3010B_CashOnHand()
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentList.Period,
 		|	PaymentList.OtherCompany,
-		|	PaymentList.TotalAmount,
-		|	*
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.IsOtherCompanyExpense";
-EndFunction
-
-Function R5022T_Expenses()
-	Return 
-		"SELECT
-		|	CASE
-		|		WHEN PaymentList.IsOtherCompanyExpense
-		|			THEN PaymentList.OtherCompany
-		|		ELSE PaymentList.Company
-		|	END AS Company,
-		|	PaymentList.NetAmount AS Amount,
-		|	PaymentList.TotalAmount AS AmountWithTaxes,
-		|	*
-		|INTO R5022T_Expenses
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function R3027B_EmployeeCashAdvance()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	PaymentList.Company AS Company,
-		|	PaymentList.TotalAmount AS Amount,
-		|	*
-		|INTO R3027B_EmployeeCashAdvance
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Incoming),
+		|	PaymentList.FinancialMovementTypeOtherCompany AS FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment
 		|
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
 		|	PaymentList.OtherCompany,
-		|	PaymentList.TotalAmount,
-		|	*
+		|	PaymentList.Branch,
+		|	PaymentList.Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing),
+		|	PaymentList.FinancialMovementType,
+		|	UNDEFINED AS PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherCompanyExpense";
+		|	PaymentList.IsOtherCompanyExpense
+		|	OR PaymentList.IsSalaryPayment";
 EndFunction
+
+Function R5022T_Expenses()
+	Return "SELECT
+		   |	CASE
+		   |		WHEN PaymentList.IsOtherCompanyExpense
+		   |			THEN PaymentList.OtherCompany
+		   |		ELSE PaymentList.Company
+		   |	END AS Company,
+		   |	PaymentList.NetAmount AS Amount,
+		   |	PaymentList.TotalAmount AS AmountWithTaxes,
+		   |	*
+		   |INTO R5022T_Expenses
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsCurrentCompanyExpense 
+		   |	OR PaymentList.IsOtherCompanyExpense";
+EndFunction
+
+Function R3027B_EmployeeCashAdvance()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	PaymentList.Company AS Company,
+		   |	PaymentList.TotalAmount AS Amount,
+		   |	*
+		   |INTO R3027B_EmployeeCashAdvance
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherCompanyExpense
+		   |	OR PaymentList.IsSalaryPayment
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	PaymentList.OtherCompany,
+		   |	PaymentList.TotalAmount,
+		   |	*
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsOtherCompanyExpense
+		   |	OR PaymentList.IsSalaryPayment";
+EndFunction
+
+Function R9510B_SalaryPayment()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	PaymentList.Period,
+		   |	PaymentList.OtherCompany AS Company,
+		   |	PaymentList.Currency,
+		   |	PaymentList.TotalAmount AS Amount,
+		   |	PaymentList.Key,
+		   |	PaymentList.Employee,
+		   |	PaymentList.PaymentPeriod,
+		   |	PaymentList.Branch
+		   |INTO R9510B_SalaryPayment
+		   |FROM
+		   |	PaymentList AS PaymentLIst
+		   |WHERE
+		   |	PaymentList.IsSalaryPayment";
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentObjectDocumentName -
+// 
+// Returns:
+//  Map
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("Account", Obj.Account);
+	Return AccessKeyMap;
+EndFunction
+
+#EndRegion

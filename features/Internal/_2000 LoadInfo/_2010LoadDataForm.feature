@@ -64,8 +64,8 @@ Scenario: _020100 preparation (LoadDataForm)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -82,24 +82,24 @@ Scenario: _020110 load data in the SI
 	* Filling SI
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Check load data form
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| '#' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'           | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' | 'Sales person' |
-			| '1' | 'Basic Price Types' | 'Dress'              | 'XS/Blue'  | ''                   | 'No'                 | '475,93'     | 'pcs'  | ''                             | '6,000'    | '520,00' | '18%' | ''              | '2 644,07'   | '3 120,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
-			| '2' | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | ''                   | 'No'                 | ''           | 'pcs'  | ''                             | '2,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
-			| '3' | 'Basic Price Types' | 'Product 1 with SLN' | 'PZU'      | ''                   | 'No'                 | ''           | 'pcs'  | '8908899877'                   | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
-			| '4' | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '251,69'     | 'pcs'  | ''                             | '3,000'    | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
+			| '#'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'Basic Price Types'   | 'Dress'                | 'XS/Blue'    | ''                     | 'No'                   | '475,93'       | 'pcs'    | ''                     | '6,000'      | '520,00'   | '18%'   | ''                | '2 644,07'     | '3 120,00'       | 'No'                           | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
+			| '2'   | 'Basic Price Types'   | 'Product 1 with SLN'   | 'ODS'        | ''                     | 'No'                   | ''             | 'pcs'    | ''                     | '2,000'      | ''         | '18%'   | ''                | ''             | ''               | 'No'                           | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
+			| '3'   | 'Basic Price Types'   | 'Product 1 with SLN'   | 'PZU'        | ''                     | 'No'                   | ''             | 'pcs'    | '8908899877'           | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'No'                           | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
+			| '4'   | 'Basic Price Types'   | 'Dress'                | 'S/Yellow'   | ''                     | 'No'                   | '251,69'       | 'pcs'    | ''                     | '3,000'      | '550,00'   | '18%'   | ''                | '1 398,31'     | '1 650,00'       | 'No'                           | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -108,7 +108,7 @@ Scenario: _020110 load data in the SI
 		And I set checkbox "Detail"
 		And I click "Next" button
 		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "ShowImage" became equal to "No"
 		Then the form attribute named "Field_Price" became equal to "Yes"
 		Then the form attribute named "Field_OffersAmount" became equal to "No"
 		Then the form attribute named "Field_TaxAmount" became equal to "No"
@@ -127,14 +127,14 @@ Scenario: _020111 load data in the SI by serial lot number
 	* Filling SI
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Load type by serial lot number
 		And in the table "ItemList" I click "Load data from table" button
@@ -161,8 +161,8 @@ Scenario: _020111 load data in the SI by serial lot number
 		And I click "Next" button
 		And I click "Next" button
 		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
-			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'No'                 | '61,02'      | 'pcs'  | '09987897977889'     | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | '12.03.2025'    | 'test'   |
+			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Store'      | 'Delivery date'   | 'Detail'    |
+			| '1'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 3 with SLN'   | 'UNIQ'       | 'No'                   | '61,02'        | 'pcs'    | '09987897977889'       | ''                    | '2,000'      | '200,00'   | '18%'   | ''                | '338,98'       | '400,00'         | 'No'                           | 'Store 01'   | '12.03.2025'      | 'test'      |
 		And I close all client application windows
 		
 Scenario: _020111 load data in the SI by item and item key
@@ -173,14 +173,14 @@ Scenario: _020111 load data in the SI by item and item key
 	* Filling SI
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
+			| 'Description'    |
+			| 'Kalipso'        |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
 		And I select current line in "List" table
 	* Load type by serial lot number
 		And in the table "ItemList" I click "Load data from table" button
@@ -206,8 +206,8 @@ Scenario: _020111 load data in the SI by item and item key
 		And I click "Next" button
 		And I click "Next" button
 		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
-			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | 'No'                 | '61,02'      | 'pcs'  | ''                   | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | ''              | 'test'   |
+			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Store'      | 'Delivery date'   | 'Detail'    |
+			| '1'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 1 with SLN'   | 'ODS'        | 'No'                   | '61,02'        | 'pcs'    | ''                     | ''                    | '2,000'      | '200,00'   | '18%'   | ''                | '338,98'       | '400,00'         | 'No'                           | 'Store 01'   | ''                | 'test'      |
 		And I close all client application windows
 		
 		
@@ -220,19 +220,19 @@ Scenario: _020112 load data in the Physical inventory
 	* Filling Physical inventory
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'     |
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I set checkbox "Use serial lot"	
 	* Check load data form
 		When check load data form in the document
 	* Check document
 		And "ItemList" table became equal
-			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '6,000'      | '6,000'       | ''                   | ''            |
-			| '2' | ''           | 'Product 1 with SLN' | 'ODS'      | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
-			| '3' | ''           | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
-			| '4' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |		
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '6,000'        | '6,000'         | ''                     | ''               |
+			| '2'   | ''             | 'Product 1 with SLN'   | 'ODS'        | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
+			| '3'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '1,000'        | '1,000'         | ''                     | ''               |
+			| '4'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '3,000'        | '3,000'         | ''                     | ''               |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -255,11 +255,11 @@ Scenario: _020113 load data in the Bundling
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows	
 
 
@@ -272,11 +272,11 @@ Scenario: _020113 load data in the GoodsReceipt
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 		And I close all client application windows		
 
 Scenario: _020114 load data in the Internal supply request
@@ -288,11 +288,11 @@ Scenario: _020114 load data in the Internal supply request
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 
 Scenario: _020115 load data in the Inventory transfer
@@ -304,11 +304,11 @@ Scenario: _020115 load data in the Inventory transfer
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 		And I close all client application windows	
 
 Scenario: _020116 load data in the Inventory transfer order
@@ -320,11 +320,11 @@ Scenario: _020116 load data in the Inventory transfer order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 
 Scenario: _020117 load data in the Item stock adjustment
@@ -336,11 +336,11 @@ Scenario: _020117 load data in the Item stock adjustment
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key (surplus)' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'            | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'                | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'                | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow'           | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key (surplus)'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'              | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'                  | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'                  | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'             | 'pcs'    | '3,000'       |
 		And I close all client application windows
 		
 Scenario: _020118 load data in the Physical count by location
@@ -352,11 +352,11 @@ Scenario: _020118 load data in the Physical count by location
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Phys. count' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'       |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'       |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'       |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'       |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Phys. count'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'          |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'          |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'          |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'          |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -375,11 +375,11 @@ Scenario: _020119 load data in the Purchase invoice
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -406,11 +406,11 @@ Scenario: _020120 load data in the Purchase order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -438,11 +438,11 @@ Scenario: _020122 load data in the Purchase return
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -467,11 +467,11 @@ Scenario: _020123 load data in the Purchase return order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -494,11 +494,11 @@ Scenario: _020124 load data in the Retail return receipt
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -523,11 +523,11 @@ Scenario: _020125 load data in the Retail sales receipt
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -552,11 +552,11 @@ Scenario: _020126 load data in the Sales order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -584,11 +584,11 @@ Scenario: _020128 load data in the Sales report from trade agent
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -614,18 +614,18 @@ Scenario: _020129 load data in the Sales report to consignor
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
 		And I set checkbox "Consignor price"
 		And I set checkbox "Price"
 		And I set checkbox "Total amount"
-		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "ShowImage" became equal to "No"
 		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
 		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
 		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"
@@ -644,11 +644,11 @@ Scenario: _020130 load data in the Sales return
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'      | ''                      |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'      | '8908899877'            |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'      | ''                      |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -671,11 +671,11 @@ Scenario: _020132 load data in the Sales return order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -698,11 +698,11 @@ Scenario: _020133 load data in the Shipment confirmation
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 
 Scenario: _020134 load data in the Stock adjustment as surplus
@@ -714,11 +714,11 @@ Scenario: _020134 load data in the Stock adjustment as surplus
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -738,11 +738,11 @@ Scenario: _020135 load data in the Stock adjustment as write off
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 
 Scenario: _020136 load data in the Unbundling
@@ -754,11 +754,11 @@ Scenario: _020136 load data in the Unbundling
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 
 
@@ -771,11 +771,11 @@ Scenario: _020137 load data in the Work order
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 	* Check additional fields for load data
 		And in the table "ItemList" I click "Load data from table" button
 		And I move to "Additional fields" tab
@@ -798,11 +798,11 @@ Scenario: _020138 load data in the Work sheet
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+			| 'Item'                 | 'Item key'   | 'Unit'   | 'Quantity'    |
+			| 'Dress'                | 'XS/Blue'    | 'pcs'    | '6,000'       |
+			| 'Product 1 with SLN'   | 'ODS'        | 'pcs'    | '2,000'       |
+			| 'Product 1 with SLN'   | 'PZU'        | 'pcs'    | '1,000'       |
+			| 'Dress'                | 'S/Yellow'   | 'pcs'    | '3,000'       |
 		And I close all client application windows
 				
 
@@ -837,10 +837,10 @@ Scenario: _020139 load data in the SI (each sln new row, load by sln)
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Item'                         | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'    |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'    |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'    |		
+			| 'Inventory origin'   | 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'    |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009098'              | '2,000'       |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009099'              | '1,000'       |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | '9009100'              | '1,000'       |
 		And I close all client application windows
 		
 				
@@ -875,10 +875,10 @@ Scenario: _020140 load data in the SI (each sln new row, load by barcode)
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Item'                         | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'    |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'    |
-			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'    |		
+			| 'Inventory origin'   | 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'    |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009098'              | '2,000'       |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009099'              | '1,000'       |
+			| 'Own stocks'         | 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | '9009100'              | '1,000'       |
 		And I close all client application windows	
 				
 		
@@ -913,9 +913,9 @@ Scenario: _020141 load data in the SO (each sln new row, load by barcode)
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Procurement method' | 'Item key' | 'Quantity' | 'Unit' | 'Item'                         |
-			| 'Stock'              | 'PZU'      | '3,000'    | 'pcs'  | 'Product 7 with SLN (new row)' |
-			| 'Stock'              | 'ODS'      | '1,000'    | 'pcs'  | 'Product 7 with SLN (new row)' |
+			| 'Procurement method'   | 'Item key'   | 'Quantity'   | 'Unit'   | 'Item'                            |
+			| 'Stock'                | 'PZU'        | '3,000'      | 'pcs'    | 'Product 7 with SLN (new row)'    |
+			| 'Stock'                | 'ODS'        | '1,000'      | 'pcs'    | 'Product 7 with SLN (new row)'    |
 		And I close all client application windows
 		
 		
@@ -951,10 +951,10 @@ Scenario: _020142 load data in the PhysicalInventory (each sln new row, use seri
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number'  | 'Phys. count'|
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'      |
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'      |
-			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'      |
+			| 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009098'             | '2,000'          |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009099'             | '1,000'          |
+			| 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | '9009100'             | '1,000'          |
 		And I close all client application windows	
 
 
@@ -988,9 +988,9 @@ Scenario: _020143 load data in the PhysicalInventory (each sln new row, not use 
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | ''                  | '3,000'       |
-			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | ''                  | '1,000'       |
+			| 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | ''                    | '3,000'          |
+			| 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | ''                    | '1,000'          |
 		And I close all client application windows				
 								
 		
@@ -1026,10 +1026,10 @@ Scenario: _020144 load data in the PhysicalCountByLocation (each sln new row, us
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number'  | 'Phys. count'|
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'      |
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'      |
-			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'      |
+			| 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009098'             | '2,000'          |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | '9009099'             | '1,000'          |
+			| 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | '9009100'             | '1,000'          |
 		And I close all client application windows	
 
 
@@ -1063,12 +1063,184 @@ Scenario: _020145 load data in the PhysicalCountByLocation (each sln new row, no
 		And I click "Next" button
 	* Check document
 		And "ItemList" table became equal
-			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number' | 'Phys. count' |
-			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | ''                  | '3,000'       |
-			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | ''                  | '1,000'       |
+			| 'Item'                           | 'Item key'   | 'Unit'   | 'Serial lot number'   | 'Phys. count'    |
+			| 'Product 7 with SLN (new row)'   | 'PZU'        | 'pcs'    | ''                    | '3,000'          |
+			| 'Product 7 with SLN (new row)'   | 'ODS'        | 'pcs'    | ''                    | '1,000'          |
 		And I close all client application windows						
 				
 		
 				
-				
+Scenario: _020146 load data in the Price list (by items)
+		And I close all client application windows
+	* Open PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button					
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "67789997777801"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "10"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 7 with SLN (new row)' | 'pcs'  | 'pcs'        | ''            | '2,00'  |
+			| '2' | 'Product 1 with SLN'           | 'pcs'  | 'pcs'        | ''            | '10,00' |
+		And I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+	* Load by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "8908899877"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "4"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "09987897977894"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "11"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '4,00'  |
+			| '2' | 'Product 3 with SLN' | 'pcs'  | 'pcs'        | ''            | '11,00' |	
+		And I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+	* Load by item/item key			
+		And in the table "ItemList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "Product 1 with SLN"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "5"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "Product 2 with SLN"
+		And in "Template" spreadsheet document I move to "R4C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "12"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '5,00'  |
+			| '2' | 'Product 2 with SLN' | 'pcs'  | 'pcs'        | ''            | '12,00' |
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I save the value of "Number" field as "NumberPL020146"
+		And I click "Post and close" button
+		And "List" table contains lines
+			| 'Number'             |
+			| '$NumberPL020146$' |
 		
+							
+
+Scenario: _020147 load data in the Price list (by item key)
+		And I close all client application windows
+	* Open PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		And I change "Set price" radio button value to "By item keys"		
+	* Check load data form
+		And in the table "ItemKeyList" I click "Load data from table" button							
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "67789997777801"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "10"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemKeyList" table became equal
+			| '#' | 'Item'                         | 'Item key' | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | 'pcs'        | ''            | '2,00'  |
+			| '2' | 'Product 1 with SLN'           | 'ODS'      | 'pcs'  | 'pcs'        | ''            | '10,00' |	
+		And I select all lines of "ItemKeyList" table
+		And in the table "ItemKeyList" I click "Delete" button
+	* Load by serial lot number
+		And in the table "ItemKeyList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "8908899877"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "4"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "09987897977894"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "11"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemKeyList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '4,00'  |
+			| '2' | 'Product 3 with SLN' | 'pcs'  | 'pcs'        | ''            | '11,00' |	
+		And I select all lines of "ItemKeyList" table
+		And in the table "ItemKeyList" I click "Delete" button
+	* Load by item/item key			
+		And in the table "ItemKeyList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "35"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "30"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "38"
+		And in "Template" spreadsheet document I move to "R4C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "31"
+		And I click "Next" button
+		And I click "Next" button
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I save the value of "Number" field as "NumberPL020147"
+		And I click "Post and close" button
+		And "List" table contains lines
+			| 'Number'           |
+			| '$NumberPL020147$' |				
+
+		
+				
+				

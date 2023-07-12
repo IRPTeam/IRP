@@ -12,10 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 
-	RuleListTypeList = FillTypes();
-	For Each Row In RuleListTypeList Do
-		Items.RuleListType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
-	EndDo;
+	FillTypes();
 
 	ComparisonTypeArray = StrSplit("=,<>,<,<=,>,>=,IN,IN HIERARCHY,BETWEEN,IS NULL", ",");
 	Items.RuleListComparisonType.ChoiceList.LoadValues(ComparisonTypeArray);
@@ -111,8 +108,50 @@ Procedure RuleListOnChange(Item)
 	UpdateQueryFromClient();
 EndProcedure
 
+&AtClient
+Procedure RuleListTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	StandardProcessing = False;
+	
+	UsedTypes = New Array; // Array of String
+	CurrentType = "";
+	
+	For Each RuleRow In Object.RuleList Do
+		If RuleRow.GetID() = Items.RuleList.CurrentRow Then
+			CurrentType = RuleRow.Type;
+			Continue;
+		EndIf;
+		UsedTypes.Add(RuleRow.Type);
+	EndDo;
+	
+	//@skip-check invocation-parameter-type-intersect
+	CurrentList = GetTypeList(FormAddData["TypeMap"], TypeFilter, UsedTypes);
+	If Not IsBlankString(CurrentType) Then
+		InitialValue = CurrentList.FindByValue(CurrentType);
+	EndIf;
+	
+	ListNotify = New NotifyDescription("ChooseTypeEnd", ThisObject);
+	If InitialValue = Undefined Then
+		ShowChooseFromList(ListNotify, CurrentList, Item);
+	Else
+		ShowChooseFromList(ListNotify, CurrentList, Item, InitialValue);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
+#Region Notification
+
+&AtClient
+//@skip-check method-param-value-type, statement-type-change
+Procedure ChooseTypeEnd(ChosenType, AddInfo) Export
+	If TypeOf(ChosenType) = Type("ValueListItem") Then
+		Items.RuleList.CurrentData.Type = ChosenType.Value;
+		UpdateQueryFromClient(); 
+	EndIf;
+EndProcedure
+
+#EndRegion
+	
 #Region Privat
 
 &AtClient
@@ -292,26 +331,105 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region FillData
 
 &AtServer
-Function FillTypes()
-	ValueList = New ValueList();
+//@skip-check typed-value-adding-to-untyped-collection, property-return-type
+//@skip-check dynamic-access-method-not-found, invocation-parameter-type-intersect
+Procedure FillTypes()
+	
+	FullTypeList = Items.RuleListType.ChoiceList;
+	FullTypeList.Clear();
+	
+	TypeFilterList = Items.TypeFilter.ChoiceList;
+	TypeFilterList.Clear();
+	
+	If Not TypeOf(FormAddData) = Type("Structure") Then
+		FormAddData = New Structure();
+	EndIf;
+	
+	TypeMap = New Map; // Map
+	FormAddData.Insert("TypeMap", TypeMap);
+	
+	TypeMap.Insert("Catalog", New ValueList);
+	TypeMap.Insert("Document", New ValueList);
+	TypeMap.Insert("InformationRegister", New ValueList);
+	TypeMap.Insert("AccumulationRegister", New ValueList);
+	
 	For Each Cat In Metadata.Catalogs Do
-		ValueList.Add(Cat.FullName(), Cat.Synonym, , PictureLib.Catalog);
+		ListItem = FullTypeList.Add(Cat.FullName(), Cat.Synonym, , PictureLib.Catalog);
+		FillPropertyValues(TypeMap.Get("Catalog").Add(), ListItem);
+		If TypeFilterList.FindByValue("Catalog") = Undefined Then
+			TypeFilterList.Add("Catalog", R().Str_Catalogs, , PictureLib.Catalog);
+		EndIf;
 	EndDo;
 	For Each Doc In Metadata.Documents Do
-		ValueList.Add(Doc.FullName(), Doc.Synonym, , PictureLib.Document);
+		ListItem = FullTypeList.Add(Doc.FullName(), Doc.Synonym, , PictureLib.Document);
+		FillPropertyValues(TypeMap.Get("Document").Add(), ListItem);
+		If TypeFilterList.FindByValue("Document") = Undefined Then
+			TypeFilterList.Add("Document", R().Str_Documents, , PictureLib.Document);
+		EndIf;
 	EndDo;
 	For Each IR In Metadata.InformationRegisters Do
-		ValueList.Add(IR.FullName(), IR.Synonym, , PictureLib.InformationRegister);
+		ListItem = FullTypeList.Add(IR.FullName(), IR.Synonym, , PictureLib.InformationRegister);
+		FillPropertyValues(TypeMap.Get("InformationRegister").Add(), ListItem);
+		If TypeFilterList.FindByValue("InformationRegister") = Undefined Then
+			TypeFilterList.Add("InformationRegister", R().Str_InformationRegisters, , PictureLib.InformationRegister);
+		EndIf;
 	EndDo;
 	For Each AR In Metadata.AccumulationRegisters Do
-		ValueList.Add(AR.FullName(), AR.Synonym, , PictureLib.AccumulationRegister);
+		ListItem = FullTypeList.Add(AR.FullName(), AR.Synonym, , PictureLib.AccumulationRegister);
+		FillPropertyValues(TypeMap.Get("AccumulationRegister").Add(), ListItem);
+		If TypeFilterList.FindByValue("AccumulationRegister") = Undefined Then
+			TypeFilterList.Add("AccumulationRegister", R().Str_AccumulationRegisters, , PictureLib.AccumulationRegister);
+		EndIf;
 	EndDo;
-	Return ValueList;
+	
+EndProcedure
+
+// Get type list.
+// 
+// Parameters:
+//  TypeMap - Map - Type map
+//  TypeFilter - String - Type filter
+//  UsedTypes - Array of String - Used types
+// 
+// Returns:
+//  ValueList - Get type list
+&AtClientAtServerNoContext
+Function GetTypeList(TypeMap, TypeFilter, UsedTypes)
+	Result = New ValueList();
+	If TypeFilter = "" Then
+		ListByType = New ValueList();
+		For Each ListItem In TypeMap.Get("Catalog") Do
+			FillPropertyValues(ListByType.Add(), ListItem);
+		EndDo;
+		For Each ListItem In TypeMap.Get("Document") Do
+			FillPropertyValues(ListByType.Add(), ListItem);
+		EndDo;
+		For Each ListItem In TypeMap.Get("InformationRegister") Do
+			FillPropertyValues(ListByType.Add(), ListItem);
+		EndDo;
+		For Each ListItem In TypeMap.Get("AccumulationRegister") Do
+			FillPropertyValues(ListByType.Add(), ListItem);
+		EndDo;
+	Else
+		ListByType = TypeMap.Get(TypeFilter); // ValueList
+	EndIf;
+	For Each ListItem In ListByType Do
+		//@skip-check invocation-parameter-type-intersect
+		If UsedTypes.Find(ListItem.Value) = Undefined Then
+			FillPropertyValues(Result.Add(), ListItem);
+		EndIf;
+	EndDo;
+	Return Result;
 EndFunction
 
 &AtClient

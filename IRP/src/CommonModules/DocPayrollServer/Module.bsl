@@ -28,6 +28,7 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
+	AttributesArray.Add("PaymentPeriod");
 	AttributesArray.Add("BeginDate");
 	AttributesArray.Add("EndDate");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
@@ -60,9 +61,6 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.Text = 
 	"SELECT
 	|	R3027B.Partner AS Employee,
-	|	R3027B.FinancialMovementType,
-	|	R3027B.Account,
-	|	R3027B.PlaningTransactionBasis,
 	|	R3027B.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
@@ -74,15 +72,14 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.SetParameter("Branch", Parameters.Branch);
 	Query.SetParameter("Currency", Parameters.Currency);
 	If ValueIsFilled(Parameters.Ref) Then
-		Query.SetParameter("Boundary", New Boundary(
-			New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
+		Query.SetParameter("Boundary", New Boundary(New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
 	Else
 		Query.SetParameter("Boundary", Parameters.EndDate);
 	EndIf;
 	
 	ResultTable = Query.Execute().Unload();
 	
-	GroupColumn = "Employee, FinancialMovementType, Account, PlaningTransactionBasis";
+	GroupColumn = "Employee";
 	SumColumn = "Amount";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -182,6 +179,7 @@ EndFunction
 Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Employee");
+	ValueTable.Columns.Add("PaymentPeriod");
 	ValueTable.Columns.Add("NetAmount");
 	ValueTable.Columns.Add("TotalAmount");
 	
@@ -191,7 +189,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 		NewRow.NetAmount  = Row.Amount;
 		NewRow.TotalAmount = Row.Amount;
 	EndDo;
-	GroupColumn = "Employee";
+	GroupColumn = "Employee, PaymentPeriod";
 	SumColumn = "NetAmount, TotalAmount";
 	ValueTable.GroupBy(GroupColumn, SumColumn);
 	Address = PutToTempStorage(ValueTable, FormUUID);

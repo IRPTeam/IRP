@@ -106,6 +106,8 @@
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -663,7 +665,7 @@
       <name>QuantityInBaseUnit</name>
       <synonym>
         <key>en</key>
-        <value>Quantity in base unit</value>
+        <value>Stock quantity</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
@@ -767,6 +769,20 @@
       <synonym>
         <key>en</key>
         <value>Is control code string</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ae18e96a-f9af-4023-88f8-c41e77dcd156">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
       </synonym>
       <type>
         <types>Boolean</types>
@@ -1304,6 +1320,104 @@
         <stringQualifiers/>
       </type>
       <multiLine>true</multiLine>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1b58f00b-3ad8-4b8c-a22a-1ffefdc2333a">
+      <name>FinancialMovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Financial movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsFinancialMovementType</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a058314d-9a45-4a43-9b0d-7c79fe5ac75d">
+      <name>PaymentAgentPartner</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b4a58f10-4ff5-4008-a133-51b0da5e1c94">
+      <name>PaymentAgentLegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c7542472-990f-4acc-bf58-8d9f49e3bdd0">
+      <name>PaymentAgentPartnerTerms</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner terms</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentLegalName</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.AgreementTypes.EnumValue.Other</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d24101f2-44e0-4d53-b5a6-5aecc1a790ff">
+      <name>PaymentAgentLegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -1907,6 +2021,20 @@
       <synonym>
         <key>en</key>
         <value>Code is approved</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="923d1044-f895-4c3a-94f0-d63de015e498">
+      <name>NotCheck</name>
+      <synonym>
+        <key>en</key>
+        <value>Not check</value>
       </synonym>
       <type>
         <types>Boolean</types>

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -77,6 +77,24 @@ Scenario: _005022 filling in the "Partners" catalog
 			Then the form attribute named "Vendor" became equal to "Yes"
 			Then the form attribute named "Employee" became equal to "No"
 		And I click the button named "FormWriteAndClose"
+	* Create other partner
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Other partner" text in the field named "Description_en"
+		And I input "Other partner TR" text in the field named "Description_tr"
+		And I input "Другие" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I set checkbox named "Other"
+		And I click the button named "FormWrite"
+		* Check data save
+			Then the form attribute named "Description_en" became equal to "Other partner"
+			Then the form attribute named "Customer" became equal to "No"
+			Then the form attribute named "Vendor" became equal to "No"
+			Then the form attribute named "Employee" became equal to "No"
+			Then the form attribute named "Other" became equal to "Yes"
+		And I click the button named "FormWriteAndClose"
 	* Check for created partners
 		Then I check for the "Partners" catalog element with the "Description_en" "Ferron1 BP"  
 		Then I check for the "Partners" catalog element with the "Description_tr" "Ferron1 BP TR"
@@ -85,8 +103,5 @@ Scenario: _005022 filling in the "Partners" catalog
 		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"
 		And Delay 2
 		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti1"
-	# * Clean catalog Partners
-	# 	And I delete "Partners" catalog element with the Description_en "Ferron BP"
-	# 	And I delete "Partners" catalog element with the Description_en "Kalipso"
-	# 	And I delete "Partners" catalog element with the Description_en "Manager B"
-	# 	And I delete "Partners" catalog element with the Description_en "Lomaniti"
+		Then I check for the "Partners" catalog element with the "Description_en" "Other partner"
+	

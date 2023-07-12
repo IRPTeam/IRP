@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -27,16 +27,16 @@ Scenario: _005231 create an incoming check in the Cheque bonds catalog
 		And I input end of the current month date in "Due date" field
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
+			| 'Code'   | 'Description'     |
+			| 'TRY'    | 'Turkish lira'    |
 		And I select current line in "List" table
 		And I input "2 000,00" text in "Amount" field
 		And I click "Save and close" button
 	* Check creation
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
 		And "List" table contains lines
-			| 'Cheque No'        | 'Cheque serial No' | 'Amount'   | 'Type'           | 'Currency' |
-			| 'Partner cheque 1' | 'AA'               | '2 000,00' | 'Partner cheque' | 'TRY'      |
+			| 'Cheque No'          | 'Cheque serial No'   | 'Amount'     | 'Type'             | 'Currency'    |
+			| 'Partner cheque 1'   | 'AA'                 | '2 000,00'   | 'Partner cheque'   | 'TRY'         |
 		And I close all client application windows
 
 Scenario: _005232 create an outgoing check in the Cheque bonds catalog
@@ -51,16 +51,16 @@ Scenario: _005232 create an outgoing check in the Cheque bonds catalog
 		And I input end of the current month date in "Due date" field
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
+			| 'Code'   | 'Description'     |
+			| 'TRY'    | 'Turkish lira'    |
 		And I select current line in "List" table
 		And I input "5 000,00" text in "Amount" field
 		And I click "Save and close" button
 	* Check creation
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
 		And "List" table contains lines
-			| 'Cheque No'        | 'Cheque serial No' | 'Amount'   | 'Type'           | 'Currency' |
-			| 'Own cheque 1'     | 'BB'               | '5 000,00' | 'Own cheque'     | 'TRY'      |
+			| 'Cheque No'      | 'Cheque serial No'   | 'Amount'     | 'Type'         | 'Currency'    |
+			| 'Own cheque 1'   | 'BB'                 | '5 000,00'   | 'Own cheque'   | 'TRY'         |
 		And I close all client application windows
 
 Scenario: _005233 сheck the required fields

@@ -11,14 +11,15 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region Access
+	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en = 'SMS sent successfully'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en = 'Error while SMS send'", Lang));
 	Strings.Insert("SMS_WaitUntilNextSend", NStr("en = 'Wait until next send. %1 second'", Lang));
 	Strings.Insert("SMS_SMSCodeWrong", NStr("en = 'Not valid SMS code. Try again.'", Lang));
-
-
-
 #EndRegion
 
 #Region AdditionalTableControl
@@ -40,6 +41,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Row: %1. Not filled quantity in source of origins'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en = 'Row: %1. Not filled Unit'", Lang));
 	
 #EndRegion
 
@@ -516,6 +518,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_124", NStr("en = 'Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]'", Lang));
 	Strings.Insert("Error_125", NStr("en = 'Invoice for document: [%1] is empty'", Lang));
 	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
+	Strings.Insert("Error_127", NStr("en = 'Quantity must be more than 0'", Lang));
+	Strings.Insert("Error_128", NStr("en = 'Wrong data in basis document'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -787,6 +791,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Number", NStr("en = 'Number'", Lang));
 	Strings.Insert("Str_Date", NStr("en = 'Date'", Lang));
 	Strings.Insert("Str_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("Str_InformationRegister", NStr("en = 'Information register'", Lang));
+	Strings.Insert("Str_InformationRegisters", NStr("en = 'Information registers'", Lang));
+	Strings.Insert("Str_AccumulationRegister", NStr("en = 'Accumulation register'", Lang));
+	Strings.Insert("Str_AccumulationRegisters", NStr("en = 'Accumulation registers'", Lang));
 #EndRegion
 
 #Region AdditionalSettings
@@ -794,6 +802,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_002", NStr("en = 'Point of sale'", Lang));
 	Strings.Insert("Add_Setiings_003", NStr("en = 'Disable - Change price'", Lang));
 	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
+	Strings.Insert("Add_Setiings_005", NStr("en = 'Documents'", Lang));
+	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
 #EndRegion
 
 #Region Mobile

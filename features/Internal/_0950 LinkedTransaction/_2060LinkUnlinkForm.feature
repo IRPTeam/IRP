@@ -6,7 +6,8 @@
 Feature: link unlink form
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -39,6 +40,12 @@ Scenario: _2060001 preparation
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create Document discount
+		* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -76,9 +83,11 @@ Scenario: _2060001 preparation
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -101,33 +110,45 @@ Scenario: _2060001 preparation
 		And I close all client application windows
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Sales invoice and Sales order object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);"   |
 			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Inventory transfer and Inventory transfer object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create SalesOrder and ShipmentConfirmation object (sln, autolink)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -162,37 +183,51 @@ Scenario: _2060001 preparation
 	When Create catalog RetailCustomers objects (check POS)
 	When create GoodsReceipt and PurchaseOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create ShipmentConfirmation and SalesOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create SO and SC for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document RetailSalesReceipt objects (with retail customer)
 	And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"|
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);" |	
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create Physical inventory and Stock adjustment as write-off for link
 	And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);"|
 			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
 		
@@ -607,8 +642,8 @@ Scenario: _20600031 check Link unlink basis documents form
 			And Delay 5
 			And I select current line in "BasisesTree" table
 			And "ResultsTable" table became equal
-				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
-				| 'Dress' | 'XS/Blue'  | 'Store 02' | '*'   | 'Sales order 3 dated 27.01.2021 19:50:45' | 'pcs'  | 'pcs'        | '2,000'                 | 'SI&SC'        | '*'       | ''             | '*'      | '*'         |
+				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Stock quantity' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+				| 'Dress' | 'XS/Blue'  | 'Store 02' | '*'   | 'Sales order 3 dated 27.01.2021 19:50:45' | 'pcs'  | 'pcs'        | '2,000'          | 'SI&SC'        | '*'       | ''             | '*'      | '*'         |
 		* Delete Quantity and check Link unlink basis documents
 			And I close "Link / unlink document row" window
 			And I activate field named "ItemListQuantity" in "ItemList" table
@@ -690,7 +725,8 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
-		And I click "Save" button		
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
@@ -785,11 +821,12 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store'    | 'Stock quantity' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Store 01' | '1,000'          | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '4,000'          | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
+			| 'Store 01' | '24,000'         | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 		
@@ -850,6 +887,7 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And I click "Save" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
@@ -945,8 +983,9 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
+			| 'Store'    | 'Stock quantity'        | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
 			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
 			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
 			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
@@ -1186,7 +1225,8 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
-		And I click "Save" button		
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
@@ -1284,8 +1324,9 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store'    | 'Stock quantity'        | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000'   | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
 			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'    | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
 			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'    | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
@@ -1344,13 +1385,14 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
-		And I click "Save" button		
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
+		And I click "Post" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '10,000'   | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '3,000'    | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'        | '24,000'   | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"			
@@ -1442,8 +1484,9 @@ Scenario: _2060008 check link/unlink form in the PR
 			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store'    | 'Stock quantity'        | '#' | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
 			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
 			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
@@ -1667,8 +1710,8 @@ Scenario: _2060015 check price in the SI when link document with different price
 		And I select current line in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'             | 'Reference'               |
-			| 'TRY'      | 'Basic Price without VAT' | 'Basic Price without VAT' |
+			| 'Currency' | 'Description'             |
+			| 'TRY'      | 'Basic Price without VAT' |
 		And I select current line in "List" table
 	* Link document
 		And in the table "ItemList" I click "Link unlink basis documents" button
@@ -1767,8 +1810,8 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I select current line in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Currency' | 'Description'             | 'Reference'               |
-			| 'TRY'      | 'Basic Price without VAT' | 'Basic Price without VAT' |
+			| 'Currency' | 'Description'             |
+			| 'TRY'      | 'Basic Price without VAT' |
 		And I select current line in "List" table
 	* Link document
 		And I click "Link unlink basis documents" button	
@@ -2099,8 +2142,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' | 'Serial number' |
-				| 'Brown' | '13456778'  | '13456778'      |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '13456778'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -2109,8 +2152,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' |
-				| 'Brown' | '12345678'  |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '12345678'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -2164,8 +2207,8 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Owner' | 'Reference' | 'Serial number' |
-				| 'Brown' | '13456778'  | '13456778'      |
+				| 'Owner' | 'Serial number' |
+				| 'Brown' | '13456778'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -2193,11 +2236,11 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 		And I click "Ok" button
 	* Check tab
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
-			| '1' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778; 12345678' | '2,000'    | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
-			| '2' | 'en description is empty' | 'Phone A' | 'White'    | ''                   | 'No'                 | '100,80'     | 'pcs'  | '12345670'           | '1,000'    | '560,00' | '18%' | ''              | '660,80'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '560,00'     | 'Yes'               |
-			| '3' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778'           | '2,000'    | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
-			| '4' | 'en description is empty' | 'Router'  | 'Router'   | ''                   | 'No'                 | '18,00'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | ''              | '118,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '100,00'     | 'Yes'               |
+			| '#' | 'Item'    | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Store'    | 'Quantity' | 'Purchase order'                                 | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Phone A' | 'Brown'    | '180,00'     | 'pcs'  | '13456778; 12345678' | '500,00' | '18%' | ''              | '1 180,00'     | 'Store 03' | '2,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '1 000,00'   | 'Yes'               |
+			| '2' | 'Phone A' | 'White'    | '100,80'     | 'pcs'  | '12345670'           | '560,00' | '18%' | ''              | '660,80'       | 'Store 03' | '1,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '560,00'     | 'Yes'               |
+			| '3' | 'Phone A' | 'Brown'    | '39,60'      | 'pcs'  | '13456778'           | '110,00' | '18%' | ''              | '259,60'       | 'Store 03' | '2,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '220,00'     | 'Yes'               |
+			| '4' | 'Router'  | 'Router'   | '18,00'      | 'pcs'  | ''                   | '100,00' | '18%' | ''              | '118,00'       | 'Store 03' | '1,000'    | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | '100,00'     | 'Yes'               |
 		And I close all client application windows
 
 
@@ -2347,9 +2390,9 @@ Scenario: _2060022 check button	Show row key in the Add linked documents rows
 	* Check button Show row key	
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
-			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
-			| 'Boots' | '37/18SD'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '1,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
-			| 'Dress' | 'M/White'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '2,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+			| 'Boots' | '37/18SD'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+			| 'Dress' | 'M/White'  | 'Store 01' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
 		And I click "Cancel" button
 		Then user message window does not contain messages
 		

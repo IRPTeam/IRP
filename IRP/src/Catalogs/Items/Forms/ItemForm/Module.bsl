@@ -50,11 +50,6 @@ Procedure AfterWrite(WriteParameters)
 	Items.PackageUnit.InputHint = "";
 EndProcedure
 
-&AtClient
-Procedure ItemTypeOnChange(Item)
-	AddAttributesCreateFormControl();
-EndProcedure
-
 #EndRegion
 
 #Region AddAttributeViewer
@@ -93,6 +88,8 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+#Region AddAttribute
+
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
@@ -104,6 +101,38 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 &AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region FormElementEvents
+
+&AtClient
+Procedure ItemTypeOnChange(Item)
+	AddAttributesCreateFormControl();
+EndProcedure
+
+&AtClient
 Procedure SizeOnChange(Item)
 	CommonFunctionsClientServer.CalculateVolume(Object);
 EndProcedure
+
+&AtClient
+Procedure ControlCodeStringOnChange(Item)
+	If Not Object.ControlCodeString Then
+		Object.CheckCodeString = False;
+	EndIf;
+	SetVisibleCodeString();
+EndProcedure
+
+#EndRegion
+
+#Region Service
+
+Procedure SetVisibleCodeString()
+	Items.CheckCodeString.Visible = Object.ControlCodeString;
+EndProcedure
+
+#EndRegion

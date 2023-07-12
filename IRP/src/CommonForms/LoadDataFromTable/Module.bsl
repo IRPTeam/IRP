@@ -11,8 +11,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	InputFieldsForLoadData = Undefined;
 	Parameters.Property("FieldsForLoadData", InputFieldsForLoadData);
 	
+	InputTargetField = Undefined;
+	Parameters.Property("TargetField", InputTargetField);
+	If InputTargetField = Undefined Then
+		ThisObject.TargetField = "Quantity";
+	Else
+		ThisObject.TargetField = InputTargetField;
+	EndIf;
+	
 	FieldsForLoadData = New Structure;
 	If TypeOf(InputFieldsForLoadData) = Type("Structure") Then
+		ThisObject.NoItemKey = Not InputFieldsForLoadData.Property("ItemKey");
 		For Each InputField In InputFieldsForLoadData Do
 			If InputField.Key = "Item" 
 					Or InputField.Key = "ItemKey" 
@@ -30,7 +39,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 					Or FieldTypes[0] = Type("Date")) Then
 				FieldDescription = GetAddFieldDescription();
 				FillPropertyValues(FieldDescription, InputFieldDescription);
-				FieldsForLoadData.Insert("Field_" + FieldDescription.Name, FieldDescription);
+				If InputField.Key = ThisObject.TargetField Then
+					FieldDescription.isTargetField = True;
+					FieldsForLoadData.Insert(ThisObject.TargetField, FieldDescription);
+				Else
+					FieldsForLoadData.Insert("Field_" + FieldDescription.Name, FieldDescription);
+				EndIf;
 			EndIf;
 		EndDo;
 	EndIf;
@@ -151,6 +165,9 @@ Procedure CreateAdditionalFields()
 	
 	NewAttributes = New Array; // Array of FormAttribute
 	For Each ColumnItem In FieldsForLoadData Do
+		If ColumnItem.Value["isTargetField"] = True Then
+			Continue;
+		EndIf;
 		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
 		FormAttribute = New FormAttribute(
 			ColumnItem.Key, 
@@ -162,11 +179,18 @@ Procedure CreateAdditionalFields()
 	ThisObject.ChangeAttributes(NewAttributes);
 	
 	For Each ColumnItem In FieldsForLoadData Do
+		If ColumnItem.Value["isTargetField"] = True Then
+			Continue;
+		EndIf;
 		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
 		ThisObject[ColumnItem.Key] = ColumnDescription.toShow;
 	EndDo;
 	
 	For Each ColumnItem In FieldsForLoadData Do
+		If ColumnItem.Value["isTargetField"] = True Then
+			Continue;
+		EndIf;
+		
 		ColumnKey = ColumnItem.Key; // String
 		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
 		
@@ -269,13 +293,23 @@ Function GetColumnList()
 		Columns.Insert("ItemKey", ItemKey);
 	EndIf;
 	
-	Quantity = GetColumnInfo();
-	Quantity.Type = New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type);
-	Quantity.Name = Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym;
-	Quantity.Size = 20;
-	Columns.Insert("Quantity", Quantity);
-	
 	FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+	
+	If ThisObject.TargetField = "Quantity" Then
+		Quantity = GetColumnInfo();
+		Quantity.Type = New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type);
+		Quantity.Name = Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym;
+		Quantity.Size = 20;
+		Columns.Insert("Quantity", Quantity);
+	Else
+		TargetColumn = GetColumnInfo();
+		FieldDescription = FieldsForLoadData[ThisObject.TargetField]; // See GetAddFieldDescription 
+		TargetColumn.Type = FieldDescription.Type;
+		TargetColumn.Name = FieldDescription.Synonym;
+		TargetColumn.Size = 20;
+		Columns.Insert(ThisObject.TargetField, TargetColumn);
+	EndIf;
+	
 	For Each FieldForLoad In FieldsForLoadData Do
 		FieldDescription = FieldForLoad.Value; // See GetAddFieldDescription
 		If FieldDescription.toShow Then
@@ -315,6 +349,7 @@ EndFunction
 //	* Synonym - String -
 //	* Type - TypeDescription, Undefined -
 //	* toShow - Boolean -
+//	* isTargetField - Boolean -
 &AtClientAtServerNoContext
 Function GetAddFieldDescription()
 	
@@ -324,6 +359,7 @@ Function GetAddFieldDescription()
 	Result.Insert("Synonym", "");
 	Result.Insert("Type", Undefined);
 	Result.Insert("toShow", False);
+	Result.Insert("isTargetField", False);
 	
 	Return Result; 
 	
@@ -335,7 +371,7 @@ Function GetTemplateData()
 	Result = New Array(); // Array of Structure
 	Columns = GetColumnList();
 	
-	MainColumn = ?(LoadType = "ItemKey", 2, 1);
+	MainColumn = ?(LoadType = "ItemKey" And Not NoItemKey, 2, 1);
 	
 	For RowIndex = 3 To ThisObject.TemplateSpreadsheet.TableHeight Do
 		If IsBlankString(GetAreaText(ThisObject.TemplateSpreadsheet, RowIndex, MainColumn)) Then
@@ -419,7 +455,7 @@ Procedure FillResultTable()
 		AreaToFill.Area("R1").BackColor = ?(FillColor, WebColors.Azure, WebColors.White);
 		FillColor = Not FillColor;
 		
-		If Not Row.Image.IsEmpty() AND ShowOrHideImage Then
+		If Not Row.Image.IsEmpty() AND ShowImage Then
 			PictureData = PictureMap.Get(Row.Image);
 			If PictureData = Undefined Then
 				PictureFromRef = Row.Image.Preview.Get(); // BinaryData
@@ -458,28 +494,33 @@ Function GetItemTable()
 	
 	If LoadType = "Barcode" Then
 		BarcodeTable = BarcodeServer.GetBarcodeTable();
+		AddTargetField(BarcodeTable);
 		For Each TableRow In TemplateData Do
 			NewRow = BarcodeTable.Add();
 			TableRow = TableRow; // Structure
 			NewRow.Key = String(TableRow["Index"]);
 			FillPropertyValues(NewRow, TableRow);
-			NewRow.Quantity = ?(NewRow.Quantity = 0, 1, NewRow.Quantity);
+			FillTargetField(NewRow, TableRow);
 		EndDo;
 		ItemTable = GetItemInfo.ByBarcodeTable(BarcodeTable);
+		LoadTargetField(ItemTable, BarcodeTable);
 	
 	ElsIf LoadType = "SerialLotNumber" Then
 		SerialLotNumberTable = SerialLotNumbersServer.GetSerialLotNumberTable();
+		AddTargetField(SerialLotNumberTable);
 		For Each TableRow In TemplateData Do
 			NewRow = SerialLotNumberTable.Add();
 			TableRow = TableRow; // Structure
 			NewRow.Key = String(TableRow["Index"]);
 			FillPropertyValues(NewRow, TableRow);
-			NewRow.Quantity = ?(NewRow.Quantity = 0, 1, NewRow.Quantity);
+			FillTargetField(NewRow, TableRow);
 		EndDo;
 		ItemTable = GetItemInfo.BySerialLotNumberStringTable(SerialLotNumberTable);
+		LoadTargetField(ItemTable, SerialLotNumberTable);
 		
 	ElsIf LoadType = "ItemKey" Then
 		ItemKeyTable = GetItemInfo.GetItemAndItemKeysInputTable();
+		AddTargetField(ItemKeyTable);
 		RowIndex = 2;
 		For Each TableRow In TemplateData Do
 			TableRow = TableRow; // Structure
@@ -488,8 +529,7 @@ Function GetItemTable()
 			NewRow = ItemKeyTable.Add();
 			NewRow.Key = String(TableRow["Index"]);
 			
-			RowQuantity = TableRow["Quantity"]; // DefinedType.typeQuantity
-			NewRow.Quantity = ?(RowQuantity = 0, 1, RowQuantity);
+			FillTargetField(NewRow, TableRow);
 			
 			ItemString = TableRow["Item"]; // String
 			If not IsBlankString(ItemString) Then
@@ -503,17 +543,25 @@ Function GetItemTable()
 				EndIf;
 			EndIf;
 			
-			ItemKeyString = TableRow["ItemKey"]; // String
-			ItemKeyArray = GetItemInfo.SearchItemKeyByString(ItemKeyString, NewRow.Item); // Array of CatalogRef.ItemKeys
-			If ItemKeyArray.Count() = 0 Then
-				FillError(RowIndex, 2, StrTemplate(ErrorValueNotFound, ItemKeyString));
-			ElsIf ItemKeyArray.Count() > 1 Then
-				FillError(RowIndex, 2, StrTemplate(ErrorTooMuchFound, ItemKeyString));
+			If Not ThisObject.NoItemKey Then
+				ItemKeyString = TableRow["ItemKey"]; // String
+				ItemKeyArray = GetItemInfo.SearchItemKeyByString(ItemKeyString, NewRow.Item); // Array of CatalogRef.ItemKeys
+				If ItemKeyArray.Count() = 0 Then
+					FillError(RowIndex, 2, StrTemplate(ErrorValueNotFound, ItemKeyString));
+				ElsIf ItemKeyArray.Count() > 1 Then
+					FillError(RowIndex, 2, StrTemplate(ErrorTooMuchFound, ItemKeyString));
+				Else
+					NewRow.ItemKey = ItemKeyArray[0];
+				EndIf;
 			Else
-				NewRow.ItemKey = ItemKeyArray[0];
+				ItemKeySelection = Catalogs.ItemKeys.Select(, , New Structure("Item", NewRow.Item));
+				If ItemKeySelection.Next() Then
+					NewRow.ItemKey = ItemKeySelection.Ref;
+				EndIf;
 			EndIf;
 		EndDo;
 		ItemTable = GetItemInfo.ByItemAndItemKeysDescriptionsTable(ItemKeyTable);
+		LoadTargetField(ItemTable, ItemKeyTable);
 		
 	EndIf;
 	
@@ -543,6 +591,37 @@ Function GetItemTable()
 	Return ItemTable;
 	
 EndFunction
+
+&AtServer
+Procedure AddTargetField(ResultTable)
+	If ThisObject.TargetField <> "Quantity" And ResultTable.Columns.Find(ThisObject.TargetField) = Undefined Then
+		FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+		FieldDescription = FieldsForLoadData[ThisObject.TargetField]; // See GetAddFieldDescription
+		ResultTable.Columns.Add(FieldDescription.Name, FieldDescription.Type, FieldDescription.Synonym, 20);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure FillTargetField(ResultRow, SourceRow)
+	If ThisObject.TargetField = "Quantity" Then
+		ResultRow.Quantity = ?(ResultRow.Quantity = 0, 1, ResultRow.Quantity);
+	Else
+		ResultRow[ThisObject.TargetField] = SourceRow[ThisObject.TargetField];
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure LoadTargetField(ItemTable, SourceTable)
+	If ThisObject.TargetField = "Quantity" Then
+		Return;
+	EndIf;
+	
+	AddTargetField(ItemTable);
+	For Each TableRow In ItemTable Do
+		SourceRowByKey = SourceTable.Find(TableRow.Key, "Key");
+		TableRow[ThisObject.TargetField] = SourceRowByKey[ThisObject.TargetField];  
+	EndDo;
+EndProcedure
 
 &AtServer
 Procedure HideResultColumn(ItemTable)

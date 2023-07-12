@@ -1,3 +1,4 @@
+
 // @strict-types
 
 // Check document.
@@ -14,7 +15,7 @@ Function CheckDocument(Document, ListOfErrors = Undefined, DetailResult = False)
 	DocName = Document.Metadata().Name;
 	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
 		//@skip-check invocation-parameter-type-intersect, property-return-type
-		Raise StrTemplate(R().ATC_001, DocType);
+		Raise StrTemplate(R().ATC_001, DocType); // Unknown document type
 	EndIf;
 	
 	If ListOfErrors = Undefined Then
@@ -32,6 +33,37 @@ Function CheckDocument(Document, ListOfErrors = Undefined, DetailResult = False)
 	Else
 		Return Result.Errors;
 	EndIf;
+	
+EndFunction
+
+// Check document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DefinedType.AdditionalTableControlDocument - Document array
+// 
+// Returns:
+//  ValueTree - Check document array:
+// * Ref - DefinedType.AdditionalTableControlDocument
+// * Error - See DetailResult
+Function CheckDocumentArray(DocumentArray) Export
+	
+	Result = New ValueTree();
+	Result.Columns.Add("Ref", Metadata.DefinedTypes.AdditionalTableControlDocument.Type);
+	Result.Columns.Add("Error");
+	
+	If DocumentArray.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	DocType = TypeOf(DocumentArray[0]);
+	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Raise StrTemplate(R().ATC_001, DocType); // Unknown document type
+	EndIf;
+	
+	AdditionalTableControlForDocumentArray(DocumentArray, Result);
+	
+	Return Result;
 	
 EndFunction
 
@@ -89,6 +121,47 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 	ResultErrors.Insert("DetailErrors", DetailErrors);
 	Return ResultErrors;
 EndFunction
+
+// Additional table control for document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DefinedType.AdditionalTableControlDocument - Document array
+//  DocName - String - Doc name
+//  Result - See CheckDocumentArray
+Procedure AdditionalTableControlForDocumentArray(DocumentArray, Result)
+	RefRowsCash = New Map;
+	CheckResult = CheckResultForDocumentArray(DocumentArray);
+	For Each Query In CheckResult Do
+		QueryResult = Query.Unload();
+		If QueryResult.Columns.Count() = 1 Then
+			Continue;
+		EndIf;
+		//@skip-check property-return-type, statement-type-change
+		For Each Row In QueryResult Do
+			RefRow = RefRowsCash.Get(Row.Ref);
+			If RefRow = Undefined Then
+				RefRow = Result.Rows.Add();
+				RefRow.Ref = Row.Ref;
+				RefRowsCash.Insert(Row.Ref, RefRow);
+			EndIf; 
+			For Each Column In QueryResult.Columns Do
+				If StrStartsWith(Column.Name, "Error") Then
+					If Row[Column.Name] = True Then // Can be NULL
+						DetailError = DetailResult();
+						DetailError.Ref = RefRow.Ref;
+						DetailError.LineNumber = Row.LineNumber;
+						DetailError.RowKey = Row.Key;
+						DetailError.ErrorID = Column.Name;
+						
+						ErrorRow = RefRow.Rows.Add();
+						ErrorRow.Ref = RefRow.Ref;
+						ErrorRow.Error = DetailError;
+					EndIf;
+				EndIf;
+			EndDo;
+		EndDo;
+	EndDo;
+EndProcedure
 
 // Detail result.
 // 
@@ -153,6 +226,44 @@ Function CheckDocumentsResult(Document, DocName)
 	
   	Return Query.ExecuteBatch();
 EndFunction
+
+Function CheckResultForDocumentArray(DocumentArray)
+	Query = New Query;
+	Query.SetParameter("Refs", DocumentArray);
+	Query.Text = AdditionalDocumentTableControlReuse.GetQueryForDocumentArray(DocumentArray[0].Metadata().Name);
+ 	Return Query.ExecuteBatch();
+EndFunction
+
+#Region EventHandler
+
+// Before write additional table control document before write.
+// 
+// Parameters:
+//  Source - DefinedType.AdditionalTableControlDocument - Source
+//  Cancel - Boolean - Cancel
+//  WriteMode - DocumentWriteMode - Write mode
+//  PostingMode - DocumentPostingMode - Posting mode
+Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
+	If WriteMode = DocumentWriteMode.Posting Then
+		If Not FOServer.isUseAdditionalTableControlDocument() Then
+			Return;
+		EndIf;
+		
+		Result = CheckDocument(Source, New Array);
+		If Result.Count() = 0 Then
+			Return;
+		EndIf;
+		Cancel = True;
+		
+		//@skip-check property-return-type, invocation-parameter-type-intersect
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
+		For Each ResultItem In Result Do
+			CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
+		EndDo;
+	EndIf;
+EndProcedure
+
+#EndRegion
 
 #Region QuickFix
 
@@ -454,6 +565,22 @@ EndFunction
 //  Array of String
 //@skip-check module-unused-method
 Function ErrorQuantityInSourceOfOriginsDiffQuantityInItemList(Document, RowIDList)
+	Raise "Not supported";
+	Result = New Array; // Array of String
+	Result.Add("Not supported");
+	Return Result;
+EndFunction
+
+// Error not fillen unit.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorNotFilledUnit(Document, RowIDList)
 	Raise "Not supported";
 	Result = New Array; // Array of String
 	Result.Add("Not supported");

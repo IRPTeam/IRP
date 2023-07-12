@@ -49,13 +49,23 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsOtherCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense"));
+	IsCurrentCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.CurrentCompanyExpense"));
+	IsOtherCompanyExpense   = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense"));
+	IsSalaryPayment         = (Object.TransactionType = PredefinedValue("Enum.CashExpenseTransactionTypes.SalaryPayment"));
 	
-	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense;
-	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense;
+	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense Or IsSalaryPayment;
+	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense Or IsSalaryPayment;
+
+	Form.Items.PaymentListProfitLossCenter.Visible = IsCurrentCompanyExpense Or IsOtherCompanyExpense;
+	Form.Items.PaymentListExpenseType.Visible      = IsCurrentCompanyExpense Or IsOtherCompanyExpense;
+
+	Form.Items.PaymentListEmployee.Visible      = IsSalaryPayment;
+	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
+	
+	Form.Items.PaymentListFinancialMovementTypeOtherCompany.Visible = IsOtherCompanyExpense;
 	
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled       = Not Form.ReadOnly;
 EndProcedure
 
 #Region TRANSACTION_TYPE
@@ -161,6 +171,20 @@ EndProcedure
 
 #EndRegion
 
+#Region FINANCIAL_MOVEMENT_TYPE_OTHER_COMPANY
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeOtherCompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeOtherCompanyEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region DONT_CALCULATE_ROW
 
 &AtClient
@@ -253,6 +277,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

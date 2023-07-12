@@ -101,6 +101,9 @@
   <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -612,6 +615,54 @@
           <value>true</value>
         </value>
       </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a7df0b22-e70a-4cc0-80ab-8d28164efb8e">
+      <name>PaymentPeriod</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment period</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PlanningPeriods</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsSalary</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="84b65a15-1320-45bf-970e-2bff2a0740b3">
+      <name>ReceiptingAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Receipting account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c4f67f87-1ff2-44ed-b501-4c47f88034e7">
+      <name>ReceiptingBranch</name>
+      <synonym>
+        <key>en</key>
+        <value>Receipting branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

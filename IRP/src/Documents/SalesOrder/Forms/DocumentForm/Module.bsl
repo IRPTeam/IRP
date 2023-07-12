@@ -103,6 +103,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
+	
+	_QuantityIsFixed = False;
+	For Each Row In Object.ItemList Do
+		If Row.QuantityIsFixed Then
+			_QuantityIsFixed = True;
+			Break;
+		EndIf;
+	EndDo;
+	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
+	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
+	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
 &AtClient
@@ -369,6 +380,24 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY_IN_BASE_UNIT
+
+&AtClient
+Procedure ItemListQuantityInBaseUnitOnChange(Item)
+	DocSalesOrderClient.ItemListQuantityInBaseUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+&AtClient
+Procedure ItemListQuantityIsFixedOnChange(Item)
+	DocSalesOrderClient.ItemListQuantityIsFixedOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
 #Region PRICE
 
 &AtClient
@@ -618,6 +647,11 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region EXTERNAL_COMMANDS
@@ -755,6 +789,12 @@ Procedure EditCurrencies(Command)
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditQuantityInBaseUnit(Command)
+	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
+	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
 EndProcedure
 
 &AtClient

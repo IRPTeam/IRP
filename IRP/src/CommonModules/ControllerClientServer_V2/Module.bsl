@@ -323,7 +323,7 @@ Function WrapRows(Parameters, Rows) Export
 		ArrayOfRowsSpecialOffersCache = New Array();
 		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
 			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(FilterByKey) Do
-				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity, Bonus, AddInfo");
+				NewRowSpecialOffer = OffersServer.GetOffersTableRow();
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
 			EndDo;
@@ -1359,7 +1359,8 @@ EndFunction
 Function BindAccountReceiver(Parameters)
 	DataPath = "Receiver";
 	Binding = New Structure();
-	Return BindSteps("StepChangeReceiveCurrencyByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
+	Return BindSteps("StepChangeReceiveCurrencyByAccount,
+	|StepChangeReceiveBranchByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
 EndFunction
 
 // AccountReceiver.ChangeAccountReceiverByCompany.Step
@@ -1580,6 +1581,7 @@ Function BindTransactionType(Parameters)
 	DataPath.Insert("ShipmentConfirmation", "TransactionType");
 	DataPath.Insert("RetailShipmentConfirmation", "TransactionType");
 	DataPath.Insert("RetailGoodsReceipt",         "TransactionType");
+	DataPath.Insert("Production", "TransactionType");
 		
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
@@ -1606,12 +1608,12 @@ Function BindTransactionType(Parameters)
 		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashExpense", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashExpense,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
 	Binding.Insert("CashRevenue", 
-		"StepClearByTransactionTypeCashExpenseRevenue,
+		"StepClearByTransactionTypeCashRevenue,
 		|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
@@ -1668,6 +1670,10 @@ Function BindTransactionType(Parameters)
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
+	Binding.Insert("Production", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepChangeBillOfMaterialsByItemKey");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTransactionType");
 EndFunction
 
@@ -1687,6 +1693,9 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1709,6 +1718,9 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1724,6 +1736,9 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1741,6 +1756,8 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1755,8 +1772,21 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.CashExpenseRevenue.MultiSet
-Procedure MultiSetTransactionType_CashExpenseRevenue(Parameters, Results) Export
+// TransactionType.CashExpense.MultiSet
+Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"          , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("OtherCompany"     , BindOtherCompany(Parameters));
+	ResourceToBinding.Insert("Employee"         , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"    , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter" , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("ExpenseType"      , BindPaymentListExpenseType(Parameters));
+	ResourceToBinding.Insert("FinancialMovementTypeOtherCompany" , BindPaymentListFinancialMovementTypeOtherCompany(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.CashRevenue.MultiSet
+Procedure MultiSetTransactionType_CashRevenue(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
@@ -1786,6 +1816,9 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1818,6 +1851,9 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -1843,6 +1879,9 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -1870,6 +1909,8 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.MoneyTransfer            = GetPaymentListMoneyTransfer(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -1898,21 +1939,44 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 	EndDo;
 EndProcedure
 
-// TransactionType.ClearByTransactionTypeCashExpenseRevenue.Step
-Procedure StepClearByTransactionTypeCashExpenseRevenue(Parameters, Chain) Export
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Enable = True;
+// TransactionType.ClearByTransactionTypeCashExpense.Step
+Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashExpense.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ClearByTransactionTypeCashExpenseRevenue.Setter = "MultiSetTransactionType_CashExpenseRevenue";
+	Chain.ClearByTransactionTypeCashExpense.Setter = "MultiSetTransactionType_CashExpense";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseRevenueOptions();
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseOptions();
+		Options.TransactionType          = GetTransactionType(Parameters);
+		Options.OtherCompany             = GetOtherCompany(Parameters);
+		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
+		Options.FinancialMovementTypeOtherCompany = GetPaymentListFinancialMovementTypeOtherCompany(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepClearByTransactionTypeCashExpense";
+		Chain.ClearByTransactionTypeCashExpense.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeCashRevenue.Step
+Procedure StepClearByTransactionTypeCashRevenue(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashRevenue.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ClearByTransactionTypeCashRevenue.Setter = "MultiSetTransactionType_CashRevenue";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashRevenueOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.OtherCompany             = GetOtherCompany(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepClearByTransactionTypeCashExpenseRevenue";
-		Chain.ClearByTransactionTypeCashExpenseRevenue.Options.Add(Options);
+		Options.StepName = "StepClearByTransactionTypeCashRevenue";
+		Chain.ClearByTransactionTypeCashRevenue.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2757,6 +2821,43 @@ EndFunction
 
 #EndRegion
 
+#Region RECEIVE_BRANCH
+
+// ReceiveBranch.Set
+Procedure SetReceiveBranch(Parameters, Results) Export
+	Binding = BindReceiveBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveBranch.Get
+Function GetReceiveBranch(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveBranch(Parameters).DataPath);
+EndFunction
+
+// ReceiveBranch.Bind
+Function BindReceiveBranch(Parameters)
+	DataPath = "ReceiveBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveBranch");
+EndFunction
+
+// ReceiveBranch.ChangeReceiveBranchByAccount.Step
+Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
+	Chain.ChangeReceiveBranchByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	
+	Chain.ChangeReceiveBranchByAccount.Setter = "SetReceiveBranch";
+	Options = ModelClientServer_V2.ChangeReceiveBranchByAccountOptions();
+	Options.Account = GetAccountReceiver(Parameters);
+	Options.ReceiveBranch = GetReceiveBranch(Parameters);
+	Options.StepName = "StepChangeReceiveBranchByAccount";
+	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region TRADE_AGENT_FEE_TYPE
 
 // TradeAgentFeeType.OnChange
@@ -3316,6 +3417,19 @@ Function BindBeginDate(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBeginDate");
 EndFunction
 
+// BeginDate.ChangeEndDateByPlanningPeriod.Step
+Procedure StepChangeBeginDateByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeBeginDateByPlanningPeriod.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBeginDateByPlanningPeriod.Setter = "SetBeginDate";
+	Options = ModelClientServer_V2.ChangeBeginDateByPlanningPeriodOptions();
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.StepName = "StepChangeBeginDateByPlanningPeriod";
+	Chain.ChangeBeginDateByPlanningPeriod.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region END_DATE
@@ -3339,6 +3453,19 @@ Function BindEndDate(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEndDate");
 EndFunction
+
+// EndDate.ChangeEndDateByPlanningPeriod.Step
+Procedure StepChangeEndDateByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeEndDateByPlanningPeriod.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeEndDateByPlanningPeriod.Setter = "SetEndDate";
+	Options = ModelClientServer_V2.ChangeEndDateByPlanningPeriodOptions();
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.StepName = "StepChangeEndDateByPlanningPeriod";
+	Chain.ChangeEndDateByPlanningPeriod.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -4647,6 +4774,7 @@ Function BindBillOfMaterials(Parameters)
 	Binding.Insert("Production",
 		"StepMaterialsCalculations,
 		|StepChangeCostMultiplierRatioByBillOfMaterials,
+		|StepChangeAdditionalCostByBillOfMaterials,
 		|StepChangeDurationOfProductionByBillOfMaterials");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBillOfMaterials");
@@ -4662,6 +4790,8 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 	Options.ItemKey = GetItemKey(Parameters);
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.BusinessUnit = GetBusinessUnit(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
 EndProcedure
@@ -4694,6 +4824,36 @@ Procedure StepChangeCostMultiplierRatioByBillOfMaterials(Parameters, Chain) Expo
 	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
 	Options.StepName = "StepChangeCostMultiplierRatioByBillOfMaterials";
 	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region ADDITIONAL_COST
+
+// AdditionalCost.Set
+Procedure SetAdditionalCost(Parameters, Results) Export
+	Binding = BindAdditionalCost(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AdditionalCost.Bind
+Function BindAdditionalCost(Parameters)
+	DataPath = "AdditionalCost";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAdditionalCost");
+EndFunction
+
+// AdditionalCost.ChangeAdditionalCostByBillOfMaterials.Step
+Procedure StepChangeAdditionalCostByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeAdditionalCostByBillOfMaterials.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAdditionalCostByBillOfMaterials.Setter = "SetAdditionalCost";
+	Options = ModelClientServer_V2.ChangeAdditionalCostByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeAdditionalCostByBillOfMaterials";
+	Chain.ChangeAdditionalCostByBillOfMaterials.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -4773,6 +4933,7 @@ Procedure StepChangeProductionPlanningByPlanningPeriod(Parameters, Chain) Export
 	Options.BusinessUnit   = GetBusinessUnit(Parameters);
 	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
 	Options.CurrentProductionPlanning = GetProductionPlanning(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.DontExecuteIfExecutedBefore = True;
 	Options.StepName = "StepChangeProductionPlanningByPlanningPeriod";
 	Chain.ChangeProductionPlanningByPlanningPeriod.Options.Add(Options);
@@ -4802,7 +4963,16 @@ EndFunction
 
 // PlanningPeriod.Bind
 Function BindPlanningPeriod(Parameters)
-	DataPath = "PlanningPeriod";
+	DataPath = New Map();
+	DataPath.Insert("ChequeBondTransactionItem",    "PlanningPeriod");
+	DataPath.Insert("IncomingPaymentOrder",         "PlanningPeriod");
+	DataPath.Insert("OutgoingPaymentOrder",         "PlanningPeriod");
+	DataPath.Insert("Production",                   "PlanningPeriod");
+	DataPath.Insert("ProductionPlanning",           "PlanningPeriod");
+	DataPath.Insert("ProductionPlanningCorrection", "PlanningPeriod");
+	
+	DataPath.Insert("Payroll" , "PaymentPeriod");
+	
 	Binding = New Structure();
 	
 	Binding.Insert("ProductionPlanning",
@@ -4816,6 +4986,9 @@ Function BindPlanningPeriod(Parameters)
 	Binding.Insert("Production",
 		"StepChangeProductionPlanningByPlanningPeriod");
 		
+	Binding.Insert("Payroll", 
+		"StepChangeBeginDateByPlanningPeriod,
+		|StepChangeEndDateByPlanningPeriod");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPlanningPeriod");
 EndFunction
 
@@ -4829,6 +5002,7 @@ Procedure StepChangePlanningPeriodByDateAndBusinessUnit(Parameters, Chain) Expor
 	Options = ModelClientServer_V2.ChangePlanningPeriodByDateAndBusinessUnitOptions();
 	Options.Date = GetDate(Parameters);
 	Options.BusinessUnit = GetBusinessUnit(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangePlanningPeriodByDateAndBusinessUnit";
 	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Options.Add(Options);
 EndProcedure
@@ -5458,6 +5632,94 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_PAYMENT_PERIOD
+
+// PaymentList.PaymentPeriod.Set
+Procedure SetPaymentListPaymentPeriod(Parameters, Results) Export
+	Binding = BindPaymentListPaymentPeriod(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentPeriod.Get
+Function GetPaymentListPaymentPeriod(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentPeriod(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.PaymentPeriod.Bind
+Function BindPaymentListPaymentPeriod(Parameters)
+	DataPath = "PaymentList.PaymentPeriod";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentPeriod");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_PROFIT_LOSS_CENTER
+
+// PaymentList.ProfitLossCenter.Set
+Procedure SetPaymentListProfitLossCenter(Parameters, Results) Export
+	Binding = BindPaymentListProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ProfitLossCenter.Get
+Function GetPaymentListProfitLossCenter(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListProfitLossCenter(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.ProfitLossCenter.Bind
+Function BindPaymentListProfitLossCenter(Parameters)
+	DataPath = "PaymentList.ProfitLossCenter";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListProfitLossCenter");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_EXPENSE_TYPE
+
+// PaymentList.ExpenseType.Set
+Procedure SetPaymentListExpenseType(Parameters, Results) Export
+	Binding = BindPaymentListExpenseType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ExpenseType.Get
+Function GetPaymentListExpenseType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListExpenseType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.ExpenseType.Bind
+Function BindPaymentListExpenseType(Parameters)
+	DataPath = "PaymentList.ExpenseType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListExpenseType");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_REVENUE_TYPE
+
+// PaymentList.RevenueType.Set
+Procedure SetPaymentListRevenueType(Parameters, Results) Export
+	Binding = BindPaymentListRevenueType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.RevenueType.Get
+Function GetPaymentListRevenueType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListRevenueType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.RevenueType.Bind
+Function BindPaymentListRevenueType(Parameters)
+	DataPath = "PaymentList.RevenueType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListRevenueType");
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_PARTNER_BANK_ACCOUNT
 
 // PaymentList.PartnerBankAccount.OnChange
@@ -5746,6 +6008,50 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_RECEIPTING_BRANCH
+
+// PaymentList.ReceiptingBranch.Set
+Procedure SetPaymentListReceiptingBranch(Parameters, Results) Export
+	Binding = BindPaymentListReceiptingBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ReceiptingBranch.Get
+Function GetPaymentListReceiptingBranch(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListReceiptingBranch(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.ReceiptingBranch.Bind
+Function BindPaymentListReceiptingBranch(Parameters)
+	DataPath = "PaymentList.ReceiptingBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListReceiptingBranch");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_SENDING_BRANCH
+
+// PaymentList.SendingBranch.Set
+Procedure SetPaymentListSendingBranch(Parameters, Results) Export
+	Binding = BindPaymentListSendingBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.SendingBranch.Get
+Function GetPaymentListSendingBranch(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListSendingBranch(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.SendingBranch.Bind
+Function BindPaymentListSendingBranch(Parameters)
+	DataPath = "PaymentList.SendingBranch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListSendingBranch");
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_RECEIPTING_ACCOUNT
 
 // PaymentList.ReceiptingAccount.OnChange
@@ -5788,6 +6094,34 @@ Procedure StepPaymentListChangeReceiptingAccountByAccount(Parameters, Chain) Exp
 		Chain.ChangeReceiptingAccountByAccount.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_SENDING_ACCOUNT
+
+// PaymentList.SendingAccount.OnChange
+Procedure PaymentListSendingAccountOnChange(Parameters) Export
+	Binding = BindPaymentListSendingAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.SendingAccount.Set
+Procedure SetPaymentListSendingAccount(Parameters, Results) Export
+	Binding = BindPaymentListSendingAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.SendingAccount.Get
+Function GetPaymentListSendingAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListSendingAccount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.SendingAccount.Bind
+Function BindPaymentListSendingAccount(Parameters)
+	DataPath = "PaymentList.SendingAccount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListSendingAccount");
+EndFunction
 
 #EndRegion
 
@@ -5925,6 +6259,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_BankPayment(Parameters, Re
 	ResourceToBinding.Insert("Company"     , BindCompany(Parameters));
 	ResourceToBinding.Insert("Currency"    , BindCurrency(Parameters));
 	ResourceToBinding.Insert("TotalAmount" , BindPaymentListTotalAmount(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount" , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"  , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -5936,6 +6273,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_CashPayment(Parameters, Re
 	ResourceToBinding.Insert("Currency"    , BindCurrency(Parameters));
 	ResourceToBinding.Insert("Partner"     , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("TotalAmount" , BindPaymentListTotalAmount(Parameters));
+	ResourceToBinding.Insert("ReceiptingAccount" , BindPaymentListReceiptingAccount(Parameters));
+	ResourceToBinding.Insert("ReceiptingBranch"  , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -5948,6 +6288,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Re
 	ResourceToBinding.Insert("CurrencyExchange" , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("TotalAmount"      , BindPaymentListTotalAmount(Parameters));
 	ResourceToBinding.Insert("AmountExchange"   , BindPaymentListAmountExchange(Parameters));
+	ResourceToBinding.Insert("SendingAccount" , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"  , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -5961,6 +6304,9 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Re
 	ResourceToBinding.Insert("Partner"          , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("TotalAmount"      , BindPaymentListTotalAmount(Parameters));
 	ResourceToBinding.Insert("AmountExchange"   , BindPaymentListAmountExchange(Parameters));
+	ResourceToBinding.Insert("SendingAccount" , BindPaymentListSendingAccount(Parameters));
+	ResourceToBinding.Insert("SendingBranch"  , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -5974,6 +6320,9 @@ Procedure StepPaymentListFillByPTBBankPayment(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.ReceiptingAccount = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch  = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.Company     = GetCompany(Parameters);
 		Options.Account     = GetAccount(Parameters);
@@ -5995,6 +6344,9 @@ Procedure StepPaymentListFillByPTBCashPayment(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.ReceiptingAccount = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.ReceiptingBranch  = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.Partner     = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Company     = GetCompany(Parameters);
@@ -6017,6 +6369,9 @@ Procedure StepPaymentListFIllByPTBBankReceipt(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.SendingAccount = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch  = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount    = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.AmountExchange = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.Company  = GetCompany(Parameters);
@@ -6040,6 +6395,9 @@ Procedure StepPaymentListFillByPTBCashReceipt(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
+		Options.SendingAccount = GetPaymentListSendingAccount(Parameters, Row.Key);
+		Options.SendingBranch  = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
 		Options.TotalAmount       = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.AmountExchange    = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.Partner           = GetPaymentListPartner(Parameters, Row.Key);
@@ -6742,6 +7100,28 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_FINANCIAL_MOVEMENT_TYPE_OTHER_COMPANY
+
+// PaymentList.FinancialMovementTypeOtherCompany.Set
+Procedure SetPaymentListFinancialMovementTypeOtherCompany(Parameters, Results) Export
+	Binding = BindPaymentListFinancialMovementTypeOtherCompany(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.FinancialMovementTypeOtherCompany.Get
+Function GetPaymentListFinancialMovementTypeOtherCompany(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListFinancialMovementTypeOtherCompany(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.FinancialMovementTypeOtherCompany.Bind
+Function BindPaymentListFinancialMovementTypeOtherCompany(Parameters)
+	DataPath = "PaymentList.FinancialMovementTypeOtherCompany";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListFinancialMovementTypeOtherCompany");
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_LOAD_DATA
 
 // PaymentList.Load
@@ -7431,6 +7811,7 @@ Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Expor
 		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
 		Options.CurrentBillOfMaterials = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.BusinessUnit = GetBusinessUnit(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
 		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
@@ -8005,6 +8386,7 @@ Procedure StepMaterialsChangeIsManualChangedByQuantity(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.ChangeIsManualChangedByQuantityOptions();		
 		Options.Quantity   = GetMaterialsQuantity(Parameters, Row.Key);
 		Options.QuantityBOM = GetMaterialsQuantityBOM(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeIsManualChangedByQuantity";
 		Chain.ChangeIsManualChangedByQuantity.Options.Add(Options);
@@ -8304,6 +8686,7 @@ Procedure StepMaterialsCalculations(Parameters, Chain) Export
 	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
 	Options.Materials = ArrayOfMaterialsRows;
 	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
 	Options.ItemKey          = GetItemKey(Parameters);
 	Options.Unit             = GetUnit(Parameters);
@@ -10274,6 +10657,7 @@ Function BindItemListQuantity(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged,
 		|StepItemListCalculateQuantityInBaseUnit");
+		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantity");
 EndFunction
 
@@ -10384,13 +10768,56 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_QUANTITY_IS_FIXED
+
+// ItemList.QuantityIsFixed.OnChange
+Procedure ItemListQuantityIsFixedOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityIsFixedNotify", Parameters);
+	Binding = BindItemListQuantityIsFixed(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.QuantityIsFixed.Set
+Procedure SetItemListQuantityIsFixed(Parameters, Results) Export
+	Binding = BindItemListQuantityIsFixed(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListQuantityIsFixedNotify");
+EndProcedure
+
+// ItemList.QuantityIsFixed.Get
+Function GetItemListQuantityIsFixed(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListQuantityIsFixed(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.QuantityIsFixed.Bind
+Function BindItemListQuantityIsFixed(Parameters)
+	DataPath = "ItemList.QuantityIsFixed";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters, "BindItemListQuantityIsFixed");
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
+
+// ItemList.QuantityInBaseUnit.OnChange
+Procedure ItemListQuantityInBaseUnitOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityInBaseUnitNotify", Parameters);
+	Binding = BindItemListQuantityInBaseUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
 
 // ItemList.QuantityInBaseUnit.Set
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
+	_IsChanged = False;
+	If Results.Count() = 1 Then
+		If Results[0].Options.Property("QuantityOptions") And Results[0].Options.QuantityOptions.Property("QuantityIsFixed") Then  
+		_IsChanged = Results[0].Options.QuantityOptions.QuantityIsFixed;
+		EndIf;
+	EndIf;
+	
 	Binding = BindItemListQuantityInBaseUnit(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results,
-		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit");
+		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit",,, _IsChanged);
 EndProcedure
 
 Function GetItemListQuantityInBaseUnit(Parameters, _Key)
@@ -10452,6 +10879,7 @@ EndFunction
 
 // ItemList.QuantityInBaseUnit.CalculateQuantityInBaseUnit.Step
 Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
+	StepName = "StepItemListCalculateQuantityInBaseUnit";
 	Chain.Calculations.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -10465,8 +10893,9 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Options.QuantityOptions.Unit    = GetItemListUnit(Parameters, Row.Key);
 		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepItemListCalculateQuantityInBaseUnit";
+		Options.StepName = StepName;
 		Chain.Calculations.Options.Add(Options);
 	EndDo;	
 EndProcedure
@@ -11658,16 +12087,51 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsGetPercent");
+		"StepPaymentsGetPercent,
+		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsGetPercent");
+		"StepPaymentsGetPercent,
+		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
 		"StepPaymentsGetPercent");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_FINANCIAL_MOVEMENT_TYPE
+
+// Payments.FinancialMovementType.Set
+Procedure SetPaymentsFinancialMovementType(Parameters, Results) Export
+	Binding = BindPaymentsFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.FinancialMovementType.Bind
+Function BindPaymentsFinancialMovementType(Parameters)
+	DataPath = "Payments.FinancialMovementType";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsFinancialMovementType");
+EndFunction
+
+// ItemList.ChangeFinancialMovementTypeByPaymentType.Step
+Procedure StepChangeFinancialMovementTypeByPaymentType(Parameters, Chain) Export
+	Chain.ChangeFinancialMovementTypeByPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeFinancialMovementTypeByPaymentType.Setter = "SetPaymentsFinancialMovementType";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeFinancialMovementTypeByPaymentTypeOptions();
+		Options.PaymentType	= GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeFinancialMovementTypeByPaymentType";
+		Chain.ChangeFinancialMovementTypeByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -12798,6 +13262,114 @@ EndProcedure
 
 #EndRegion
 
+#Region CASH_IN_TRANSIT
+
+#Region CASH_IN_TRANSIT_RECEIPTING_ACCOUNT
+
+// CashInTransit.ReceiptingAccount.OnChange
+Procedure CashInTransitReceiptingAccountOnChange(Parameters) Export
+	Binding = BindCashInTransitReceiptingAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// CashInTransit.ReceiptingAccount.Set
+Procedure SetCashInTransitReceiptingAccount(Parameters, Results) Export
+	Binding = BindCashInTransitReceiptingAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.ReceiptingAccount.Get
+Function GetCashInTransitReceiptingAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindCashInTransitReceiptingAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// CashInTransit.ReceiptingAccount.Bind
+Function BindCashInTransitReceiptingAccount(Parameters)
+	DataPath = "CashInTransit.ReceiptingAccount";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepCashInTransitChangeCurrencyByReceiptingAccount,
+		|StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitReceiptingAccount");
+EndFunction
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_CURRENCY
+
+// CashInTransit.Currency.Set
+Procedure SetCashInTransitCurrency(Parameters, Results) Export
+	Binding = BindCashInTransitCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.Currency.Get
+Function GetCashInTransitCurrency(Parameters, _Key)
+	Binding = BindCashInTransitCurrency(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// CashInTransit.Currency.Bind
+Function BindCashInTransitCurrency(Parameters)
+	DataPath = "CashInTransit.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitCurrency");
+EndFunction
+
+// CashInTransit.Currency.ChangeCurrencyByReceiptingAccount.Step
+Procedure StepCashInTransitChangeCurrencyByReceiptingAccount(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeCurrencyByAccount.Setter = "SetCashInTransitCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+		Options.Account         = GetCashInTransitReceiptingAccount(Parameters, Row.Key);
+		Options.CurrentCurrency = GetCashInTransitCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCashInTransitChangeCurrencyByReceiptingAccount";
+		Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_IS_FIXED_CURRENCY
+
+// CashInTransit.IsFixedCurrency.Set
+Procedure SetCashInTransitIsFixedCurrency(Parameters, Results) Export
+	Binding = BindCashInTransitIsFixedCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CashInTransit.IsFixedCurrency.Bind
+Function BindCashInTransitIsFixedCurrency(Parameters)
+	DataPath = "CashInTransit.IsFixedCurrency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCashInTransitIsFixedCurrency");
+EndFunction
+
+// CashInTransit.IsFixedCurrency.ChangeIsFixedCurrencyByReceiptingAccount.Step
+Procedure StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount(Parameters, Chain) Export
+	Chain.ChangeIsFixedCurrencyByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeIsFixedCurrencyByAccount.Setter = "SetCashInTransitIsFixedCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeIsFixedCurrencyByAccountOptions();
+		Options.Account = GetCashInTransitReceiptingAccount(Parameters, Row.Key);
+		Options.Key     = Row.Key;
+		Options.StepName = "StepCashInTransitChangeIsFixedCurrencyByReceiptingAccount";
+		Chain.ChangeIsFixedCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region EMPLOYEE_CASH_ADVANCE
 
 #Region EMPLOYEE_CASH_ADVANCE_ACCOUNT
@@ -13208,6 +13780,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnCopyRowFormNotify"     Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CashInTransitOnAddRowFormNotify"       Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CashInTransitOnCopyRowFormNotify"      Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsOnAddRowFormNotify"         Then ViewClient_V2.ChequeBondsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsOnCopyRowFormNotify"        Then ViewClient_V2.ChequeBondsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ChequeBondsAfterDeleteRowFormNotify"   Then ViewClient_V2.ChequeBondsAfterDeleteRowFormNotify(Parameters);
@@ -13219,6 +13793,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetItemListNetAmountNotify"          Then ViewClient_V2.OnSetItemListNetAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListTaxAmountNotify"          Then ViewClient_V2.OnSetItemListTaxAmountNotify(Parameters);	
 	ElsIf ViewNotify = "OnSetItemListQuantityNotify"           Then ViewClient_V2.OnSetItemListQuantityNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListQuantityIsFixedNotify"    Then ViewClient_V2.OnSetItemListQuantityIsFixedNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListQuantityInBaseUnitNotify" Then ViewClient_V2.OnSetItemListQuantityInBaseUnitNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListPhysCountNotify"          Then ViewClient_V2.OnSetItemListPhysCountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListManualFixedCountNotify"   Then ViewClient_V2.OnSetItemListManualFixedCountNotify(Parameters);
@@ -13441,8 +14016,8 @@ Function GetRows(Parameters, TableName)
 EndFunction
 
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
+	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged);
 EndProcedure
 
 Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify = Undefined)
@@ -13466,11 +14041,11 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify =
 EndProcedure
 
 Procedure SetterObject(StepNames, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
+	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged);
 EndProcedure
 
-Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
+Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged)
 	IsChanged = False;
 	DisableNextSteps = False;
 	For Each Result In Results Do
@@ -13483,10 +14058,10 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 		If Result.Options.Property("DisableNextSteps") And Result.Options.DisableNextSteps = True Then
 			DisableNextSteps = True;
 		EndIf;
-		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
+		If Source = "Object" And (SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Or _IsChanged) Then
 			IsChanged = True;
 		EndIf;
-		If Source = "Form" And SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
+		If Source = "Form" And (SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Or _IsChanged) Then
 			IsChanged = True;
 		EndIf;
 	EndDo;

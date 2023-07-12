@@ -42,8 +42,8 @@ Scenario: _5001 preparation
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -58,10 +58,10 @@ Scenario: _5001 preparation
 	When Create document Production objects
 	And Delay 5
 	And I execute 1C:Enterprise script at server
-		| "Documents.Production.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
-		| "Documents.Production.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
-		| "Documents.Production.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-		| "Documents.Production.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.Production.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.Production.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.Production.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.Production.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document ProductionPlanningCorrection objects
 	And Delay 5
 
@@ -80,17 +80,17 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
 		And "Planning" table became equal
-			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
-			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '80,000'          |
-			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
+			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
+			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '80,000'             |
+			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		Then the form attribute named "Unit" became equal to "pcs"
 	* Create IT + PR
 		And I input "2,000" text in the field named "Quantity"
 		And I move to the next attribute
 		And "Planning" table became equal
-			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
-			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '80,000'          |
-			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
+			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
+			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '80,000'             |
+			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		And I click "PR+IT" button
 		And field "DocProduction" is filled
 		And field "DocInventoryTransfer" is filled
@@ -113,16 +113,16 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Then the form attribute named "Unit" became equal to "pcs"
 		And the editing text of form attribute named "Quantity" became equal to "2,000"
 		And "Materials" table became equal
-			| '#' | '(BOM) Item'                              | '(BOM) Item key'                          | '(BOM) Unit' | '(BOM) Q' | 'Item'                                    | 'Item key'                                | 'Material type' | 'Writeoff store' | 'Unit' | 'Q'      |
-			| '1' | 'Заклепка 6х47 полупустотелая'            | 'Заклепка 6х47 полупустотелая'            | 'pcs'        | '30,000'  | 'Заклепка 6х47 полупустотелая'            | 'Заклепка 6х47 полупустотелая'            | 'Material'      | 'Store 07'       | 'pcs'  | '30,000' |
-			| '2' | 'Катанка Ст3сп 6,5'                       | 'Катанка Ст3сп 6,5'                       | 'кг'         | '4,000'   | 'Катанка Ст3сп 6,5'                       | 'Катанка Ст3сп 6,5'                       | 'Material'      | 'Store 07'       | 'кг'   | '4,000'  |
-			| '3' | 'Краска порошковая серая 9006'            | 'Краска порошковая серая 9006'            | 'кг'         | '2,000'   | 'Краска порошковая серая 9006'            | 'Краска порошковая серая 9006'            | 'Material'      | 'Store 07'       | 'кг'   | '2,000'  |
-			| '4' | 'труба электросварная круглая 10х1х5660'  | 'труба электросварная круглая 10х1х5660'  | 'pcs'        | '4,000'   | 'труба электросварная круглая 10х1х5660'  | 'труба электросварная круглая 10х1х5660'  | 'Material'      | 'Store 07'       | 'pcs'  | '4,000'  |
-			| '5' | 'Втулка на стремянки Класс 10 мм, черный' | 'Втулка на стремянки Класс 10 мм, черный' | 'pcs'        | '10,000'  | 'Втулка на стремянки Класс 10 мм, черный' | 'Втулка на стремянки Класс 10 мм, черный' | 'Material'      | 'Store 07'       | 'pcs'  | '10,000' |
-			| '6' | 'Коврик для стремянок Класс, черный'      | 'Коврик для стремянок Класс, черный'      | 'pcs'        | '2,000'   | 'Коврик для стремянок Класс, черный'      | 'Коврик для стремянок Класс, черный'      | 'Material'      | 'Store 07'       | 'pcs'  | '2,000'  |
-			| '7' | 'Скобы 3515 (Упаковочные)'                | 'Скобы 3515 (Упаковочные)'                | 'pcs'        | '20,000'  | 'Скобы 3515 (Упаковочные)'                | 'Скобы 3515 (Упаковочные)'                | 'Material'      | 'Store 07'       | 'pcs'  | '20,000' |
-			| '8' | 'Копыта на стремянки Класс 20х20, черный' | 'Копыта на стремянки Класс 20х20, черный' | 'pcs'        | '4,000'   | 'Копыта на стремянки Класс 20х20, черный' | 'Копыта на стремянки Класс 20х20, черный' | 'Semiproduct'   | 'Store 04'       | 'pcs'  | '4,000'  |
-			| '9' | 'Копыта на стремянки Класс 30х20, черный' | 'Копыта на стремянки Класс 30х20, черный' | 'pcs'        | '4,000'   | 'Копыта на стремянки Класс 30х20, черный' | 'Копыта на стремянки Класс 30х20, черный' | 'Semiproduct'   | 'Store 04'       | 'pcs'  | '4,000'  |
+			| '#'   | '(BOM) Item'                                | '(BOM) Item key'                            | '(BOM) Unit'   | '(BOM) Q'   | 'Item'                                      | 'Item key'                                  | 'Material type'   | 'Writeoff store'   | 'Unit'   | 'Q'         |
+			| '1'   | 'Заклепка 6х47 полупустотелая'              | 'Заклепка 6х47 полупустотелая'              | 'pcs'          | '30,000'    | 'Заклепка 6х47 полупустотелая'              | 'Заклепка 6х47 полупустотелая'              | 'Material'        | 'Store 07'         | 'pcs'    | '30,000'    |
+			| '2'   | 'Катанка Ст3сп 6,5'                         | 'Катанка Ст3сп 6,5'                         | 'кг'           | '4,000'     | 'Катанка Ст3сп 6,5'                         | 'Катанка Ст3сп 6,5'                         | 'Material'        | 'Store 07'         | 'кг'     | '4,000'     |
+			| '3'   | 'Краска порошковая серая 9006'              | 'Краска порошковая серая 9006'              | 'кг'           | '2,000'     | 'Краска порошковая серая 9006'              | 'Краска порошковая серая 9006'              | 'Material'        | 'Store 07'         | 'кг'     | '2,000'     |
+			| '4'   | 'труба электросварная круглая 10х1х5660'    | 'труба электросварная круглая 10х1х5660'    | 'pcs'          | '4,000'     | 'труба электросварная круглая 10х1х5660'    | 'труба электросварная круглая 10х1х5660'    | 'Material'        | 'Store 07'         | 'pcs'    | '4,000'     |
+			| '5'   | 'Втулка на стремянки Класс 10 мм, черный'   | 'Втулка на стремянки Класс 10 мм, черный'   | 'pcs'          | '10,000'    | 'Втулка на стремянки Класс 10 мм, черный'   | 'Втулка на стремянки Класс 10 мм, черный'   | 'Material'        | 'Store 07'         | 'pcs'    | '10,000'    |
+			| '6'   | 'Коврик для стремянок Класс, черный'        | 'Коврик для стремянок Класс, черный'        | 'pcs'          | '2,000'     | 'Коврик для стремянок Класс, черный'        | 'Коврик для стремянок Класс, черный'        | 'Material'        | 'Store 07'         | 'pcs'    | '2,000'     |
+			| '7'   | 'Скобы 3515 (Упаковочные)'                  | 'Скобы 3515 (Упаковочные)'                  | 'pcs'          | '20,000'    | 'Скобы 3515 (Упаковочные)'                  | 'Скобы 3515 (Упаковочные)'                  | 'Material'        | 'Store 07'         | 'pcs'    | '20,000'    |
+			| '8'   | 'Копыта на стремянки Класс 20х20, черный'   | 'Копыта на стремянки Класс 20х20, черный'   | 'pcs'          | '4,000'     | 'Копыта на стремянки Класс 20х20, черный'   | 'Копыта на стремянки Класс 20х20, черный'   | 'Semiproduct'     | 'Store 04'         | 'pcs'    | '4,000'     |
+			| '9'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'pcs'          | '4,000'     | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Semiproduct'     | 'Store 04'         | 'pcs'    | '4,000'     |
 		Then the form attribute named "ProductionType" became equal to "Product"
 		Then the form attribute named "Finished" became equal to "Yes"
 		Then the form attribute named "Branch" became equal to ""
@@ -137,8 +137,8 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Then the form attribute named "StoreTransit" became equal to ""
 		Then the form attribute named "StoreReceiver" became equal to ""
 		And "ItemList" table became equal
-			| '#' | 'Item'                          | 'Item key'                      | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order' | 'Production planning'                             |
-			| '1' | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | ''                   | 'pcs'  | '2,000'    | ''                         | 'Production planning 1 dated 29.04.2022 09:40:47' |
+			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                |
+			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    |
 		And in the table "ItemList" I click "Open serial lot number tree" button
 		Then the number of "SerialLotNumbersTree" table lines is "равно" 0
 		And I close "Serial lot numbers tree" window
@@ -148,7 +148,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		And field "Author" is filled
 	And I close all client application windows
 	
-Scenario: _5004 create IT from Production Workspace (product)				
+Scenario: _5004 create IT from Production Workspace (product) and check filling inventory origin							
 	And I close all client application windows
 	* Open Production workspace
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"
@@ -159,23 +159,32 @@ Scenario: _5004 create IT from Production Workspace (product)
 		And I select from the drop-down list named "Unit" by "pcs" string
 		And I move to the tab named "GroupInventoryTransfer"
 		And "Planning" table became equal
-			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
-			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '78,000'          |
-			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
+			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
+			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '78,000'             |
+			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		And I click "IT" button
-	* Check creation
 		When I Check the steps for Exception
-			|'And field "DocProduction" is filled'|
+			| 'And field "DocProduction" is filled'    |
 		And field "DocInventoryTransfer" is filled
 		And I click the hyperlink named "DocInventoryTransfer"
+	* Check creation
+		* Set Use commission trading for inventory origin check 
+			Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+			And I go to line in "FunctionalOptions" table
+				| 'Option'                 |
+				| 'Use commission trading' |
+			And I set "Use" checkbox in "FunctionalOptions" table
+			And I finish line editing in "FunctionalOptions" table
+			And I click "Save" button	
+		When in opened panel I select "Inventory transfer*"		
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "StoreTransit" became equal to ""
 		Then the form attribute named "StoreReceiver" became equal to ""
 		And "ItemList" table became equal
-			| '#' | 'Item'                          | 'Item key'                      | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order' | 'Production planning'                             |
-			| '1' | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | ''                   | 'pcs'  | '2,000'    | ''                         | 'Production planning 1 dated 29.04.2022 09:40:47' |
+			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                | 'Inventory origin'   |
+			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    | 'Own stocks'         |
 		And in the table "ItemList" I click "Open serial lot number tree" button
 		Then the number of "SerialLotNumbersTree" table lines is "равно" 0
 		And I close "Serial lot numbers tree" window
@@ -186,36 +195,36 @@ Scenario: _5004 create IT from Production Workspace (product)
 	And I close all client application windows
 
 
-Scenario: _5005 create IT from Production Workspace (product)				
+Scenario: _5005 create IT from Production Workspace (product)	
 	And I close all client application windows
 	* Open Production workspace
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"
 	* Add item info (semiproduct)		
 		And I click Choice button of the field named "Item"
 		And I go to line in "List" table
-			| 'Description'                             |
-			| 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Description'                                |
+			| 'Копыта на стремянки Класс 20х20, черный'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "ItemKey"
 		And I go to line in "List" table
-			| 'Item key'                                |
-			| 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Item key'                                   |
+			| 'Копыта на стремянки Класс 20х20, черный'    |
 		And I select current line in "List" table
 		And I input "2,000" text in the field named "Quantity"
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
+			| 'Description'    |
+			| 'pcs'            |
 		And I select current line in "List" table
 		And "Planning" table contains lines
-			| 'Planning period' | 'Left to produce' | 'Production planning'                             |
-			| 'First month'     | '680,000'         | 'Production planning 1 dated 29.04.2022 09:40:47' |
+			| 'Planning period'   | 'Left to produce'   | 'Production planning'                                |
+			| 'First month'       | '680,000'           | 'Production planning 1 dated 29.04.2022 09:40:47'    |
 	* Create PR and check
 		And I move to the tab named "GroupProductions"
 		And I click "PR" button
 		And field "DocProduction" is filled
 		When I Check the steps for Exception
-			|'And field "DocInventoryTransfer" is filled'|
+			| 'And field "DocInventoryTransfer" is filled'    |
 		And I click the hyperlink named "DocProduction"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Production store 05"
@@ -232,8 +241,8 @@ Scenario: _5005 create IT from Production Workspace (product)
 		Then the form attribute named "Unit" became equal to "pcs"
 		And the editing text of form attribute named "Quantity" became equal to "2,000"
 		And "Materials" table became equal
-			| '#' | '(BOM) Item' | '(BOM) Item key' | '(BOM) Unit' | '(BOM) Q' | 'Item'    | 'Item key' | 'Material type' | 'Writeoff store' | 'Unit' | 'Q'     |
-			| '1' | 'ПВД 158'    | 'ПВД 158'        | 'кг'         | '1,960'   | 'ПВД 158' | 'ПВД 158'  | 'Material'      | 'Store 07'       | 'кг'   | '1,960' |
+			| '#'   | '(BOM) Item'   | '(BOM) Item key'   | '(BOM) Unit'   | '(BOM) Q'   | 'Item'      | 'Item key'   | 'Material type'   | 'Writeoff store'   | 'Unit'   | 'Q'        |
+			| '1'   | 'ПВД 158'      | 'ПВД 158'          | 'кг'           | '1,960'     | 'ПВД 158'   | 'ПВД 158'    | 'Material'        | 'Store 07'         | 'кг'     | '1,960'    |
 		
 		Then the form attribute named "ProductionType" became equal to "Semiproduct"
 		Then the form attribute named "Finished" became equal to "Yes"
@@ -248,13 +257,13 @@ Scenario: _5006 check chenge item key if change unit in the Production workspace
 	* Add item info (semiproduct)		
 		And I click Choice button of the field named "Item"
 		And I go to line in "List" table
-			| 'Description'                             |
-			| 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Description'                                |
+			| 'Копыта на стремянки Класс 20х20, черный'    |
 		And I select current line in "List" table
 		And I click Choice button of the field named "ItemKey"
 		And I go to line in "List" table
-			| 'Item key'                                |
-			| 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Item key'                                   |
+			| 'Копыта на стремянки Класс 20х20, черный'    |
 		And I select current line in "List" table	
 		Then the form attribute named "ItemKey" became equal to "Копыта на стремянки Класс 20х20, черный"
 	* Change item
@@ -263,11 +272,11 @@ Scenario: _5006 check chenge item key if change unit in the Production workspace
 		Then the form attribute named "Unit" became equal to ""
 	* Check that button for create documents are not available
 		When I Check the steps for Exception
-			|'And I click "PR" button'|
+			| 'And I click "PR" button'    |
 		When I Check the steps for Exception
-			|'And I click "IT" button'|
+			| 'And I click "IT" button'    |
 		When I Check the steps for Exception
-			|'And I click "PR+IT" button'|
+			| 'And I click "PR+IT" button'    |
 		And I close all client application windows
 		
 		

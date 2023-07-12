@@ -1040,7 +1040,7 @@ Function GetFormItemNames()
 				|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 				|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 				|LinkedBasises,
-				|ItemListQuantityInBaseUnit, QuantityInBaseUnit,
+				|QuantityInBaseUnit,
 				|CostList, RevenueList, AllocationList, CostRowsRowID, RevenueRowsRowID, 
 				|AllocationRowsBasisRowID, AllocationRowsRowID, 
 				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,
@@ -1083,7 +1083,8 @@ Function GetFormItemNames()
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
 				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,
-				|ItemListConsignor, isControlCodeString";
+				|ItemListConsignor, isControlCodeString,
+				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency";
 	Return ItemNames;
 EndFunction	
 

@@ -28,7 +28,7 @@ EndProcedure
 Procedure ProceedSelectedRows()
 	ArrayOfDataRows = New Array();
 	For Each Row In Items.List.SelectedRows Do
-		NewRow = New Structure("Employee, Amount");
+		NewRow = New Structure("Employee, PaymentPeriod, Amount");
 		FillPropertyValues(NewRow, Items.List.RowData(Row));
 		ArrayOfDataRows.Add(NewRow);
 	EndDo;

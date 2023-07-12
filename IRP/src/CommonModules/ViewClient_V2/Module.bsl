@@ -1368,7 +1368,7 @@ Procedure AccountBalanceOnCopyRowFormNotify(Parameters) Export
 EndProcedure
 
 Procedure AccountBalanceAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "Inventory");
+	DeleteRows(Object, Form, "AccountBalance");
 EndProcedure
 
 #EndRegion
@@ -1382,6 +1382,47 @@ Procedure AccountBalanceAccountOnChange(Object, Form, CurrentData = Undefined) E
 	Rows = GetRowsByCurrentData(Form, "AccountBalance", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "AccountBalance", Rows);
 	ControllerClientServer_V2.AccountBalanceAccountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT
+
+Function CashInTransitBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "CashInTransit", Cancel, Clone, CurrentData,
+		"CashInTransitOnAddRowFormNotify", "CashInTransitOnCopyRowFormNotify");
+	Form.Items.CashInTransit.CurrentRow = NewRow.GetID();
+	If Form.Items.CashInTransit.CurrentRow <> Undefined Then
+		Form.Items.CashInTransit.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CashInTransitOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CashInTransitOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CashInTransitAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "CashInTransit");
+EndProcedure
+
+#EndRegion
+
+#Region CASH_IN_TRANSIT_COLUMNS
+
+#Region CASH_IN_TRANSIT_RECEIPTING_ACCOUNT
+
+// CashInTransit.ReceiptingAccount
+Procedure CashInTransitReceiptingAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "CashInTransit", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "CashInTransit", Rows);
+	ControllerClientServer_V2.CashInTransitReceiptingAccountOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -1927,6 +1968,7 @@ Procedure ItemListOnAddRowFormNotify(Parameters) Export
 EndProcedure
 
 Procedure ItemListOnCopyRowFormNotify(Parameters) Export
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
 	Parameters.Form.Modified = True;
 EndProcedure
 
@@ -1945,6 +1987,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	EndIf;
 	
 	UpdateTotalAmounts(Parameters);
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
@@ -2338,26 +2381,13 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_QUANTITY
+#Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
 
-// ItemList.Quantity
-Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+// ItemList.QuantityInBaseUnit
+Procedure ItemListQuantityInBaseUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
-EndProcedure
-
-// ItemList.Quantity.Set
-Procedure SetItemListQuantity(Object, Form, Row, Value) Export
-	Row.Quantity = Value;
-	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgramChange", True);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
-EndProcedure
-
-Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Return;
+	ControllerClientServer_V2.ItemListQuantityInBaseUnitOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export	
@@ -2414,6 +2444,45 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY_IS_FIXED
+
+// ItemList.QuantityIsFixed
+Procedure ItemListQuantityIsFixedOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityIsFixedOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListQuantityIsFixedNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_QUANTITY
+
+// ItemList.Quantity
+Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+// ItemList.Quantity.Set
+Procedure SetItemListQuantity(Object, Form, Row, Value) Export
+	Row.Quantity = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListQuantityNotify(Parameters) Export
+	Return;
 EndProcedure
 
 #EndRegion
@@ -3062,7 +3131,9 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
 			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet") Then
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff") Then
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		
@@ -3073,11 +3144,7 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
-			
-		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
-		EndIf;
-		
+					
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
@@ -3371,7 +3438,8 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "Production" Then
 	
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
@@ -3796,7 +3864,7 @@ Procedure PlanningPeriodOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "PlanningPeriodOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.PlanningPeriodOnChange(Parameters);
 	EndDo;

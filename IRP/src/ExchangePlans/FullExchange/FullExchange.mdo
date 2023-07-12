@@ -85,7 +85,7 @@
     <mdObject>AccumulationRegister.R2010T_SalesOrders</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R3011T_CashMovements</mdObject>
+    <mdObject>AccumulationRegister.R3011T_CashFlow</mdObject>
   </content>
   <content>
     <mdObject>Catalog.PartnerSegments</mdObject>
@@ -752,9 +752,6 @@
   </content>
   <content>
     <mdObject>Constant.DefaultFilesStorageVolume</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.EnableLinkedRowsIntegrity</mdObject>
   </content>
   <content>
     <mdObject>Constant.MaximumServerDifficultLevel</mdObject>

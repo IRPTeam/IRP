@@ -4,48 +4,62 @@
 // 
 // Parameters:
 //  LangCode - String - Lang code
+//  LocalizationObject - CommonModule, ExternalDataProcessor -
 // 
 // Returns:
 //  see Localization.Strings
-Function LocalizationStrings(Val LangCode = "") Export
+Function LocalizationStrings(Val LangCode = "", LocalizationObject = Undefined) Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;
 	EndIf;
-	Strings = Localization.Strings(LangCode);
+	If LocalizationObject = Undefined Then
+		Strings = Localization.Strings(LangCode);
+	Else
+		// @skip-check dynamic-access-method-not-found, statement-type-change
+		Strings = LocalizationObject.Strings(LangCode); // Stucture
+	EndIf;
 
 	If LangCode <> Metadata.DefaultLanguage.LanguageCode Then
-		LocalizationStrings_df = Localization.Strings(Metadata.DefaultLanguage.LanguageCode);
+		If LocalizationObject = Undefined Then
+			LocalizationStrings_df = Localization.Strings(Metadata.DefaultLanguage.LanguageCode);
+		Else
+			// @skip-check dynamic-access-method-not-found, statement-type-change
+			LocalizationStrings_df = LocalizationObject.Strings(Metadata.DefaultLanguage.LanguageCode);
+		EndIf;
 		For Each StringsStructureItem In Strings Do
 			If Not ValueIsFilled(StringsStructureItem.Value) Then
 				Strings[StringsStructureItem.Key] = LocalizationStrings_df[StringsStructureItem.Key];
 			EndIf;
 		EndDo;
 	EndIf;
-
-	Strings.Error_016 = StrTemplate(Strings.Error_016, Metadata.Documents.SalesOrder.Synonym);
-	Strings.Error_017 = StrTemplate(Strings.Error_017, Metadata.Documents.GoodsReceipt.Synonym,
-		Metadata.Documents.PurchaseInvoice.Synonym);
-	Strings.Error_018 = StrTemplate(Strings.Error_018, Metadata.Documents.ShipmentConfirmation.Synonym,
-		Metadata.Documents.SalesInvoice.Synonym);
-	Strings.Error_023 = StrTemplate(Strings.Error_023, Metadata.Documents.InternalSupplyRequest.Synonym);
-	Strings.Error_028 = StrTemplate(Strings.Error_028, Metadata.Documents.GoodsReceipt.Synonym,
-		Metadata.Documents.PurchaseInvoice.Synonym);
-	Strings.Error_052 = StrTemplate(Strings.Error_052, "%1",
-		Metadata.Catalogs.Stores.Attributes.UseShipmentConfirmation.Synonym,
-		Metadata.Documents.ShipmentConfirmation.Synonym);
-	Strings.Error_053 = StrTemplate(Strings.Error_053, "%1",
-		Metadata.Catalogs.Stores.Attributes.UseGoodsReceipt.Synonym, Metadata.Documents.GoodsReceipt.Synonym);
-	Strings.Error_056 = StrTemplate(Strings.Error_056, Metadata.Documents.SalesOrder.Synonym,
-		Metadata.Documents.PurchaseOrder.Synonym);
-	Strings.Error_057 = StrTemplate(Strings.Error_057, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-	Strings.Error_058 = StrTemplate(Strings.Error_058, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-	Strings.Error_059 = StrTemplate(Strings.Error_059, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-	Strings.Error_060 = StrTemplate(Strings.Error_060, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-	Strings.Error_064 = StrTemplate(Strings.Error_064, "%1", Metadata.Documents.ShipmentConfirmation.Synonym,
-		Metadata.Documents.SalesOrder.Synonym);
-	Strings.Error_075 = StrTemplate(Strings.Error_075, Metadata.Documents.PhysicalCountByLocation.Synonym);
-	Strings.InfoMessage_006 = StrTemplate(Strings.InfoMessage_006, Metadata.Documents.PhysicalCountByLocation.Synonym);
-
+	If LocalizationObject = Undefined Then
+			
+		Strings.Error_016 = StrTemplate(Strings.Error_016, Metadata.Documents.SalesOrder.Synonym);
+		Strings.Error_017 = StrTemplate(Strings.Error_017, Metadata.Documents.GoodsReceipt.Synonym,
+			Metadata.Documents.PurchaseInvoice.Synonym);
+		Strings.Error_018 = StrTemplate(Strings.Error_018, Metadata.Documents.ShipmentConfirmation.Synonym,
+			Metadata.Documents.SalesInvoice.Synonym);
+		Strings.Error_023 = StrTemplate(Strings.Error_023, Metadata.Documents.InternalSupplyRequest.Synonym);
+		Strings.Error_028 = StrTemplate(Strings.Error_028, Metadata.Documents.GoodsReceipt.Synonym,
+			Metadata.Documents.PurchaseInvoice.Synonym);
+		Strings.Error_052 = StrTemplate(Strings.Error_052, "%1",
+			Metadata.Catalogs.Stores.Attributes.UseShipmentConfirmation.Synonym,
+			Metadata.Documents.ShipmentConfirmation.Synonym);
+		Strings.Error_053 = StrTemplate(Strings.Error_053, "%1",
+			Metadata.Catalogs.Stores.Attributes.UseGoodsReceipt.Synonym, Metadata.Documents.GoodsReceipt.Synonym);
+		Strings.Error_056 = StrTemplate(Strings.Error_056, Metadata.Documents.SalesOrder.Synonym,
+			Metadata.Documents.PurchaseOrder.Synonym);
+		Strings.Error_057 = StrTemplate(Strings.Error_057, "%1", Metadata.Documents.CashTransferOrder.Synonym);
+		Strings.Error_058 = StrTemplate(Strings.Error_058, "%1", Metadata.Documents.CashTransferOrder.Synonym);
+		Strings.Error_059 = StrTemplate(Strings.Error_059, "%1", Metadata.Documents.CashTransferOrder.Synonym);
+		Strings.Error_060 = StrTemplate(Strings.Error_060, "%1", Metadata.Documents.CashTransferOrder.Synonym);
+		Strings.Error_064 = StrTemplate(Strings.Error_064, "%1", Metadata.Documents.ShipmentConfirmation.Synonym,
+			Metadata.Documents.SalesOrder.Synonym);
+		Strings.Error_075 = StrTemplate(Strings.Error_075, Metadata.Documents.PhysicalCountByLocation.Synonym);
+		Strings.InfoMessage_006 = StrTemplate(Strings.InfoMessage_006, Metadata.Documents.PhysicalCountByLocation.Synonym);
+	
+	EndIf;
+	
 	Return Strings;
 EndFunction
 
@@ -90,7 +104,7 @@ Function CatalogDescriptionWithAddAttributes(Val Ref, Val LangCode = "", AddInfo
 
 	Presentation = "";
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
-	UsersL = New Array();
+	UsersL = New Array(); // Array Of String
 	For Each AddAttribute In Ref.AddAttributes Do
 		If StrSplit(Ref.Metadata().FullName(), ".")[0] = "Catalog" Then
 			PresentationAttribute = LocalizationReuse.CatalogDescription(AddAttribute.Value, LangCode, AddInfo);
@@ -120,7 +134,7 @@ EndFunction
 // Returns:
 //  Array of String - All description
 Function AllDescription(AddInfo = Undefined) Export
-	Array = New Array();
+	Array = New Array(); // Array Of String
 	For Each Description In Metadata.CommonAttributes Do
 		If StrStartsWith(Description.Name, "Description_") Then
 			Array.Add(Description.Name);
@@ -176,7 +190,7 @@ EndFunction
 // Returns:
 //  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val Source) Export
-	Fields = New Array();
+	Fields = New Array(); // Array Of String
 	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;

@@ -108,9 +108,6 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>ConstantsSet.EnableLinkedRowsIntegrity</segments>
-    </dataPath>
     <extendedTooltip>
       <name>EnableLinkedRowsIntegrityExtendedTooltip</name>
       <id>9</id>
@@ -136,12 +133,10 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
-    <type>CheckBoxField</type>
     <editMode>EnterOnInput</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <items xsi:type="form:FormField">
     <name>UsePlannedReceiptReservation</name>
@@ -1462,6 +1457,49 @@
     <contextMenu>
       <name>UseSimpleModeContextMenu</name>
       <id>124</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>UseAdditionalTableControlDocument</name>
+    <id>129</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>ConstantsSet.UseAdditionalTableControlDocument</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>UseAdditionalTableControlDocumentExtendedTooltip</name>
+      <id>131</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>UseAdditionalTableControlDocumentContextMenu</name>
+      <id>130</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

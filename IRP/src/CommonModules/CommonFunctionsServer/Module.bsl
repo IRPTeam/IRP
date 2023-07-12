@@ -429,7 +429,7 @@ Function GetMD5(Object, ReturnAsGUID = True, UseXML = False) Export
 		DataToString = Object;
 	Else
 		If UseXML Then
-			DataToString = SerializeXML(Object);
+			DataToString = SerializeXMLUseXDTO(Object);
 		Else
 			DataToString = ValueToStringInternal(Object);
 		EndIf;
@@ -483,7 +483,7 @@ Procedure Pause(Time) Export
     Job = GetCurrentInfoBaseSession().GetBackgroundJob();
 
     If Job = Undefined Then
-        Params = New Array;
+        Params = New Array; // Array Of Number
         Params.Add(Time);
         MethodName = "CommonFunctionsServer.Pause";
         Job = ConfigurationExtensions.ExecuteBackgroundJobWithoutExtensions(MethodName, Params);
@@ -531,6 +531,10 @@ EndFunction
 // Returns:
 //  Boolean - Is common attribute use for metadata
 Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
+	If Metadata.CommonAttributes.Find(Name) = Undefined Then
+		Return False;
+	EndIf;
+	
 	Attr = Metadata.CommonAttributes[Name];
 	Content = Attr.Content.Find(MetadataFullName);
 	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
@@ -643,6 +647,7 @@ Function RecalculateExpression(Params) Export
 			EndIf;
 		ElsIf Params.Type = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
 			For Each Row In Params.CaseParameters Do
+				//@skip-check invocation-parameter-type-intersect
 				If Regex(Params.RegExpString, Row.Value) Then
 					Result = Row.Key;
 					Break;
@@ -688,6 +693,7 @@ Procedure CreateScheduledJob(ExternalFunction) Export
 	NewScheduledJobs.Use = ExternalFunction.isSchedulerSet;
 	JobSchedule = ExternalFunction.JobSchedule.Get(); // JobSchedule
 	NewScheduledJobs.Schedule = JobSchedule;
+	//@skip-check typed-value-adding-to-untyped-collection
 	NewScheduledJobs.Parameters.Add(ExternalFunction);
 	NewScheduledJobs.Write();
 EndProcedure
@@ -782,7 +788,7 @@ EndFunction
 // 
 // Parameters:
 //  ObjectName - String -  Object name
-//  ObjectServerModule - CommonModule, CommonModule.CatCashAccountsServer - Object server module
+//  ObjectServerModule - CommonModule - Object server module
 //  CustomParameters - Structure -  Custom parameters:
 //  * OptionsString - String
 //  * Fields - Array of KeyAndValue
@@ -819,7 +825,7 @@ Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
 	QueryTextArray = New Array(); // Array of String
 	QueryTextArray.Add("SELECT ALLOWED " + QueryOptionsString);
 
-	QueryFieldsArray = New Array();
+	QueryFieldsArray = New Array(); // Array of String
 	For Each Field In Fields Do
 		QueryFieldsArray.Add("Table." + Field.Value + ?(Field.Key <> Field.Value, " AS " + Field.Key, ""));
 	EndDo;
@@ -897,6 +903,7 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
 		AttributesStructure = Attributes;
 	Else
+		//@skip-check property-return-type
 		Raise R().Error_004;
 	EndIf;
 	
@@ -906,7 +913,7 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	
 	FullTableName = Ref.Metadata().FullName();
 	
-	QueryFields = New Array;
+	QueryFields = New Array; // Array of String
 	For Each ItemAttribute In AttributesStructure Do
 		
 		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
@@ -957,6 +964,7 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 		EndDo;
 	EndIf;
 	
+	//@skip-check constructor-function-return-section
 	Return Result;
 	
 EndFunction
@@ -993,4 +1001,36 @@ Procedure DeleteFormArrayIfPresent(Array, Value) Export
 		Array.Delete(Index);
 	EndIf;
 EndProcedure	
+
+// Is metadata available by current functional options.
+// 
+// Parameters:
+//  ValidatedMetadata - MetadataObjectAttribute - Validated metadata
+//  hasType - Boolean - has type
+// 
+// Returns:
+//  Boolean - Is metadata available by current functional options
+Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasType = False) Export
 	
+	MetadataByType = Undefined;
+	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
+		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
+	EndIf;
+	If MetadataByType = Undefined Then
+		MetadataByType = ValidatedMetadata;
+	EndIf;
+	
+	UsedInFunctionalOptions = False;
+    
+    For Each FunctionalOption In Metadata.FunctionalOptions Do
+        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
+            UsedInFunctionalOptions = True;
+            If GetFunctionalOption(FunctionalOption.Name) = True Then
+                Return True;
+            EndIf;
+        EndIf;
+    EndDo;
+    
+    Return Not UsedInFunctionalOptions;
+    	
+EndFunction	

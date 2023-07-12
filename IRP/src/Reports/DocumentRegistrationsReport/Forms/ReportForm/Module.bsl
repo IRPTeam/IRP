@@ -13,9 +13,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("PutInTable") Then
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;
+	
+	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
+EndProcedure
 
-	If Parameters.Property("GenerateOnOpen") And Not Parameters.GenerateOnOpen = Undefined
-		And Parameters.GenerateOnOpen Then
+&AtClient
+Procedure OnOpen(Cancel)
+	If ThisObject.GenerateOnOpen Then
 		GenerateReportAtServer(ThisObject.ResultTable);
 	EndIf;
 EndProcedure
@@ -123,9 +127,41 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		Row.Name = Upper(TrimAll(Row.Name));
 	EndDo;
 
+	ArrayOfTechnicalRegisters = New Array();
+	ArrayOfTechnicalRegisters.Add(Upper("TM1010B_RowIDMovements"));
+	ArrayOfTechnicalRegisters.Add(Upper("TM1010T_RowIDMovements"));
+	ArrayOfTechnicalRegisters.Add(Upper("TM1020B_AdvancesKey"));
+	ArrayOfTechnicalRegisters.Add(Upper("TM1030B_TransactionsKey"));
+	
+	ArrayOfTechnicalRegisters.Add(Upper("T1050T_AccountingQuantities"));
+	
+	ArrayOfTechnicalRegisters.Add(Upper("T2010S_OffsetOfAdvances"));
+	ArrayOfTechnicalRegisters.Add(Upper("T2013S_OffsetOfAging"));
+	ArrayOfTechnicalRegisters.Add(Upper("T2014S_AdvancesInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T2015S_TransactionsInfo"));
+
+	ArrayOfTechnicalRegisters.Add(Upper("T3010S_RowIDInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6010S_BatchesInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6020S_BatchKeysInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6040S_BundleAmountValues"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6050S_ManualBundleAmountValues"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6060S_BatchCostAllocationInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6070S_BatchRevenueAllocationInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6080S_ReallocatedBatchesAmountValues"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6090S_CompositeBatchesAmountValues"));
+	ArrayOfTechnicalRegisters.Add(Upper("T6095S_WriteOffBatchesInfo"));
+	ArrayOfTechnicalRegisters.Add(Upper("T7010S_BillOfMaterials"));
+	ArrayOfTechnicalRegisters.Add(Upper("T7051S_ProductionDurationDetails"));
+	
 	For Each ObjectProperty In ArrayOfDocumentRegisterRecords Do
 
-		If TableOfRegistrations.Find(Upper(ObjectProperty.FullName()), "Name") = Undefined Then
+		RegisterName = ObjectProperty.FullName();
+
+		If TableOfRegistrations.Find(Upper(RegisterName), "Name") = Undefined Then
+			Continue;
+		EndIf;
+
+		If ThisObject.HideTechnicalRegisters And ArrayOfTechnicalRegisters.Find(Upper(StrSplit(RegisterName, ".")[1])) <> Undefined Then
 			Continue;
 		EndIf;
 
@@ -145,8 +181,8 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		StringExpenseReceipt = "";
 		StringPeriod = "";
 		If RegisterType = "InformationRegister" Or RegisterType = "AccumulationRegister" Then
-			If RegisterType = "AccumulationRegister" And ObjectProperty.RegisterType
-				= Metadata.ObjectProperties.AccumulationRegisterType.Balance Then
+			If RegisterType = "AccumulationRegister" 
+			And ObjectProperty.RegisterType = Metadata.ObjectProperties.AccumulationRegisterType.Balance Then
 
 				StringExpenseReceipt = ", RecordType";
 				FieldPresentations.Insert("RecordType", "Record type");
@@ -168,16 +204,20 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 
 			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, Width", StringExpenseReceipt, 10));
 			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, Width", StringPeriod, 15));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfResources,
-				"Resources", 30));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfDimensions,
-				"Dimensions", 40));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfAttributes,
-				"Attributes", 20));
+			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfResources, "Resources", 30));
+			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfDimensions, "Dimensions", 40));
+			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfAttributes, "Attributes", 20));
 
-			PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, ReportBuilder, ObjectProperty.FullName(),
+			FilterByTransactionCurrency = ObjectProperty.Dimensions.Find("CurrencyMovementType") <> Undefined
+				And ThisObject.OnlyTransactionCurrency;
+
+			PutDataProcessing(DocumentRef, 
+				ArrayOfFields, 
+				FieldPresentations, 
+				ReportBuilder, 
+				FilterByTransactionCurrency,
+				ObjectProperty.FullName(), 
 				ThisObject.PutInTable);
-
 		Else
 			Continue;
 		EndIf;
@@ -264,8 +304,13 @@ Function GetListOfFieldsByData(Data)
 EndFunction
 
 &AtServer
-Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, ReportBuilder, Val RegisterName,
-	Val PutInTable = False)
+Procedure PutDataProcessing(DocumentRef, 
+							ArrayOfFields, 
+							FieldPresentations, 
+							ReportBuilder, 
+							FilterByTransactionCurrency,
+							Val RegisterName, 
+							Val PutInTable = False)
 
 	If Not ArrayOfFields.Count() Then
 		Return;
@@ -277,7 +322,9 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 			"SELECT ALLOWED " + ListOfFields + "
 			|{SELECT " + ListOfFields + "}
 			|FROM " + RegisterName + " AS reg
-			|WHERE reg.Recorder = &Recorder
+			|WHERE reg.Recorder = &Recorder " 
+			+ ?(FilterByTransactionCurrency,
+			" AND reg.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)" ,"") + "
 			|ORDER BY " + ListOfFields;
 		ReportBuilder.Parameters.Insert("Recorder", DocumentRef);
 	EndIf;
@@ -504,11 +551,12 @@ Function GetTableRegistrations(ArrayOfDocumentRegisterRecords, DocumentRef)
 		Return New ValueTable();
 	EndIf;
 
-	For Each Row In ArrayOfDocumentRegisterRecords Do
+	For Each Row In ArrayOfDocumentRegisterRecords Do		
 		QueryText = QueryText + "
-								|" + ?(QueryText = "", "", "UNION ALL ") + "
-																		   |SELECT TOP 1 CAST(""" + Row.FullName()
-			+ """ AS STRING(200)) AS Name FROM " + Row.FullName() + " WHERE Recorder = &Recorder";
+		|" + ?(QueryText = "", "", "UNION ALL ") + "
+		|SELECT TOP 1 CAST(""" + Row.FullName() + """ AS STRING(200)) AS Name 
+		|FROM " + Row.FullName() + "
+		|WHERE Recorder = &Recorder";
 	EndDo;
 
 	Query = New Query(QueryText);

@@ -1601,13 +1601,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Payroll</name>
 		<right>
 			<name>View</name>

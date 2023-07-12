@@ -60,8 +60,8 @@ Scenario: _045200 preparation (Cash transfer order)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
+				| "Description"            |
+				| "TaxCalculateVAT_TR"     |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
@@ -69,11 +69,11 @@ Scenario: _045200 preparation (Cash transfer order)
 	* Load Cash transfer order
 		When Create document CashTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _0452001 check preparation
@@ -83,24 +83,24 @@ Scenario: _045203 check Cash transfer order movements by the Register "R3035 Cas
 	* Select Cash transfer order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '2' |
+			| 'Number'    |
+			| '2'         |
 	* Check movements by the Register  "R3035 Cash planning" 
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash transfer order 2 dated 05.04.2021 12:09:54' | ''                    | ''          | ''             | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| 'Document registrations records'                  | ''                    | ''          | ''             | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| 'Register  "R3035 Cash planning"'                 | ''                    | ''          | ''             | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| ''                                                | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                                | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                  | 'Account'             | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
-			| ''                                                | '05.04.2021 12:09:54' | '500'       | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR'   | 'EUR'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'First'           | 'No'                   |
-			| ''                                                | '05.04.2021 12:09:54' | '500'       | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'Second'          | 'No'                   |
-			| ''                                                | '05.04.2021 12:09:54' | '550'       | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR'   | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'First'           | 'No'                   |
-			| ''                                                | '05.04.2021 12:09:54' | '550'       | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'Second'          | 'No'                   |
-			| ''                                                | '05.04.2021 12:09:54' | '4 500'     | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR'   | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'First'           | 'No'                   |
-			| ''                                                | '05.04.2021 12:09:54' | '4 500'     | 'Main Company' | 'Front office' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'Second'          | 'No'                   |
+			| 'Cash transfer order 2 dated 05.04.2021 12:09:54' | ''                    | ''          | ''             | ''                   | ''                    | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| 'Document registrations records'                  | ''                    | ''          | ''             | ''                   | ''                    | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'                 | ''                    | ''          | ''             | ''                   | ''                    | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| ''                                                | 'Period'              | 'Resources' | 'Dimensions'   | ''                   | ''                    | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | 'Attributes'           |
+			| ''                                                | ''                    | 'Amount'    | 'Company'      | 'Branch'             | 'Account'             | 'Basis document'                                  | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
+			| ''                                                | '05.04.2021 12:09:54' | '500'       | 'Main Company' | 'Front office'       | 'Bank account, EUR'   | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'EUR'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | 'First'           | 'No'                   |
+			| ''                                                | '05.04.2021 12:09:54' | '500'       | 'Main Company' | 'Accountants office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | 'Second'          | 'No'                   |
+			| ''                                                | '05.04.2021 12:09:54' | '550'       | 'Main Company' | 'Front office'       | 'Bank account, EUR'   | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | 'First'           | 'No'                   |
+			| ''                                                | '05.04.2021 12:09:54' | '550'       | 'Main Company' | 'Accountants office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | 'Second'          | 'No'                   |
+			| ''                                                | '05.04.2021 12:09:54' | '4 500'     | 'Main Company' | 'Front office'       | 'Bank account, EUR'   | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | 'First'           | 'No'                   |
+			| ''                                                | '05.04.2021 12:09:54' | '4 500'     | 'Main Company' | 'Accountants office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | 'Second'          | 'No'                   |
 	And I close all client application windows
 
 
@@ -109,34 +109,34 @@ Scenario: _045212 Cash transfer order  clear posting/mark for deletion
 	* Select Outgoing payment order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '2' |
+			| 'Number'    |
+			| '2'         |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash transfer order 2 dated 05.04.2021 12:09:54' |
-			| 'Document registrations records'                    |
+			| 'Cash transfer order 2 dated 05.04.2021 12:09:54'    |
+			| 'Document registrations records'                     |
 		And I close current window
 	* Post Outgoing payment order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '2' |
+			| 'Number'    |
+			| '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R3035 Cash planning' |
+			| 'R3035 Cash planning'    |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '2' |
+			| 'Number'    |
+			| '2'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -144,14 +144,14 @@ Scenario: _045212 Cash transfer order  clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash transfer order 2 dated 05.04.2021 12:09:54' |
-			| 'Document registrations records'                    |
+			| 'Cash transfer order 2 dated 05.04.2021 12:09:54'    |
+			| 'Document registrations records'                     |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '2' |
+			| 'Number'    |
+			| '2'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				
@@ -161,5 +161,5 @@ Scenario: _045212 Cash transfer order  clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R3035 Cash planning' |
+			| 'R3035 Cash planning'    |
 		And I close all client application windows				

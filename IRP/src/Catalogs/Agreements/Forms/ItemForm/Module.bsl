@@ -17,6 +17,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.Type.ChoiceList.Add(Enums.AgreementTypes.TradeAgent);
 	EndIf;
 	
+	Items.Type.ChoiceList.Add(Enums.AgreementTypes.Other);
+	
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -60,18 +62,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsVendor     = Object.Type = PredefinedValue("Enum.AgreementTypes.Vendor");
 	IsConsignor  = Object.Type = PredefinedValue("Enum.AgreementTypes.Consignor");
 	IsTradeAgent = Object.Type = PredefinedValue("Enum.AgreementTypes.TradeAgent");
-
-	Form.Items.ItemSegment.Visible = IsCustomer And Not IsStandard;
-
+	IsOther      = Object.Type = PredefinedValue("Enum.AgreementTypes.Other");
+	
+	Form.Items.Kind.ReadOnly = IsOther;
+	
+	Form.Items.PartnerSegment.Visible    = Not IsOther;
+	Form.Items.ItemSegment.Visible       = IsCustomer And Not IsStandard And Not IsOther;
 	Form.Items.StandardAgreement.Visible = ApArByStandardAgreements;
 
-	Form.Items.ApArPostingDetail.ReadOnly       = IsStandard;
-	Form.Items.PriceType.Visible                = IsRegular;
-	Form.Items.PriceIncludeTax.Visible          = IsRegular;
-	Form.Items.NumberDaysBeforeShipment.Visible = IsRegular;
-	Form.Items.Store.Visible                    = IsRegular;
+	Form.Items.ApArPostingDetail.ReadOnly       = IsStandard Or IsOther;
+	Form.Items.PriceType.Visible                = IsRegular And Not IsOther;
+	Form.Items.PriceIncludeTax.Visible          = IsRegular And Not IsOther;
+	Form.Items.NumberDaysBeforeShipment.Visible = IsRegular And Not IsOther;
+	Form.Items.Store.Visible                    = IsRegular And Not IsOther;
 	
-	If IsConsignor Or IsTradeAgent Then
+	If IsConsignor Or IsTradeAgent Or IsOther Then
 		Form.Items.GroupCreditlimitAndAging.Visible = False;
 	Else
 		Form.Items.GroupCreditlimitAndAging.Visible = True;
@@ -222,6 +227,17 @@ Procedure TypeOnChange(Item)
 		Object.TradeAgentFeeExpenseRevenueType = Undefined;
 	EndIf;
 	
+	If Object.Type = PredefinedValue("Enum.AgreementTypes.Other") Then
+		Object.PartnerSegment  = Undefined;
+		Object.PriceType       = Undefined;
+		Object.PriceIncludeTax = Undefined;
+		Object.ItemSegment     = Undefined;
+		Object.Store           = Undefined;
+		Object.DaysBeforeDelivery = Undefined;
+		Object.Kind = PredefinedValue("Enum.AgreementKinds.Regular");
+		Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByAgreements");
+	EndIf;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -297,6 +313,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -1,4 +1,4 @@
-﻿#language: en
+#language: en
 @Positive
 @Discount
 @SpecialOffersMinimum
@@ -29,32 +29,32 @@ Scenario: _032000 discount form
 		And I click Select button of "Partner" field
 		And I click "List" button	
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'MIO' |
+			| 'Description'    |
+			| 'MIO'            |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Basic Partner terms, without VAT' |
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Shirt' |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black'  |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -63,35 +63,30 @@ Scenario: _032000 discount form
 	* Check discount form
 		And in the table "ItemList" I click "% Offers" button
 		And I activate current test client window
-		And I go to line in "Offers" table
-			| 'Presentation' |
-			| 'Maximum'      |
-		And I activate current test client window
-		And I press keyboard shortcut "Enter"
-		When I Check the steps for Exception
-        	|"And I go to line in "Offers" table"|
-			| 'Presentation' |
-			| 'Discount Price 1'      |
-		And I go to line in "Offers" table
-			| 'Presentation' |
-			| 'Maximum'      |
-		And I activate current test client window
-		And I press keyboard shortcut "Enter"
 		And "Offers" table contains lines
-			| 'Presentation'                                                               | 'Is select'  | '%' | 'Amount' |
-			| 'Special Offers'                                                             | ''           | ''  | ''  |
-			| 'Minimum'                                                                    | ''           | ''  | ''  |
-			| 'Special Message DialogBox'                                                  | '✔'          | ''  | ''  |
-			| 'Discount 1 without Vat'                                                     | '✔'         | ''  | ''  |
-			| 'Maximum'                                                                    | ''           | ''  | ''  |
-			| 'Discount Price 1'                                                           | '☐'         | ''  | ''  |
-			| 'Special Message Notification'                                               | '✔'         | ''  | ''  |
-			| 'Discount Price 2'                                                           | '☐'         | ''  | ''  |
-			| 'Discount 2 without Vat'                                                     | '✔'         | ''  | ''  |
-			| 'All items 5+1, Discount on Basic Partner terms'                             | '☐'         | ''  | ''  |
-			| '4+1 Dress and Trousers, Discount on Basic Partner terms'                    | '☐'         | ''  | ''  |
-			| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' | '☐'         | ''  | ''  |
-			| 'Document discount'                                                          | '☐'         | ''  | ''  |
+			| 'Presentation'                                                                 | 'Is select'   | '%'   | 'Amount'    |
+			| 'Special Offers, Max by row'                                                   | ''            | ''    | ''          |
+			| 'Maximum, Max by row'                                                          | ''            | ''    | ''          |
+			| 'Discount Price 1'                                                             | '☐'           | ''    | ''          |
+			| 'Can not use. Wrong Agreement'                                                 | '☐'           | ''    | ''          |
+			| 'Special Message Notification'                                                 | '✔'           | ''    | ''          |
+			| 'Can not use. Wrong Agreement'                                                 | '☐'           | ''    | ''          |
+			| 'Discount Price 2'                                                             | '☐'           | ''    | ''          |
+			| 'Can not use. Wrong Agreement'                                                 | '☐'           | ''    | ''          |
+			| 'Discount 2 without Vat'                                                       | '✔'           | ''    | ''          |
+			| 'Discount on Basic Partner terms without Vat'                                  | '✔'           | ''    | ''          |
+			| 'All items 5+1, Discount on Basic Partner terms'                               | '☐'           | ''    | ''          |
+			| 'All items 5+1, Discount on Basic Partner terms'                               | '☐'           | ''    | ''          |
+			| '4+1 Dress and Trousers, Discount on Basic Partner terms'                      | '☐'           | ''    | ''          |
+			| 'Dress and Trousers 4+1, Discount on Basic Partner terms'                      | '☐'           | ''    | ''          |
+			| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms'   | '☐'           | ''    | ''          |
+			| 'Dress and Trousers 3+1, Discount on Basic Partner terms'                      | '☐'           | ''    | ''          |
+			| 'Min, Min'                                                                     | ''            | ''    | ''          |
+			| 'Special Message DialogBox'                                                    | '✔'           | ''    | ''          |
+			| 'Discount on Basic Partner terms without Vat'                                  | '✔'           | ''    | ''          |
+			| 'Discount 1 without Vat'                                                       | '✔'           | ''    | ''          |
+			| 'Discount on Basic Partner terms without Vat'                                  | '✔'           | ''    | ''          |
+			| 'Document discount'                                                            | '☐'           | ''    | ''          |
 		And I close all client application windows
 		
 				
@@ -107,13 +102,13 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 		And I click Select button of "Segment" field
 		
 		And I go to line in "List" table
-			| Description |
-			| Retail      |
+			| Description    |
+			| Retail         |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Kalipso     |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		If window with "1C:Enterprise" header has appeared Then
@@ -123,33 +118,33 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 	And I click Select button of "Partner" field
 	And I click "List" button	
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'MIO' |
+		| 'Description'   |
+		| 'MIO'           |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-		| 'Description'                     |
-		| 'Basic Partner terms, without VAT' |
+		| 'Description'                        |
+		| 'Basic Partner terms, without VAT'   |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 	And I select current line in "List" table
 	* Adding items to sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Shirt' |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black'  |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -159,15 +154,15 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Trousers' |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/Yellow'  |
+			| 'Item key'     |
+			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -175,26 +170,26 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount 1 without Vat' |
+		| 'Presentation'             |
+		| 'Discount 1 without Vat'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount 2 without Vat' |
+		| 'Presentation'             |
+		| 'Discount 2 without Vat'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity' | 'Offers amount' |
-		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000'    | '474,56'        |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000'    | '271,20'        |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Store'     | 'Quantity'  | 'Offers amount'   |
+		| 'Shirt'     | '296,61'  | '38/Black'   | 'Store 02'  | '8,000'     | '716,88'          |
+		| 'Trousers'  | '338,98'  | '36/Yellow'  | 'Store 02'  | '4,000'     | '395,92'          |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'        |
-		| 'MIO'       | '3 519,99' |
-		| 'MIO'       | '3 519,99' |
+		| 'Partner'  | 'Σ'          |
+		| 'MIO'      | '3 086,88'   |
+		| 'MIO'      | '3 086,88'   |
 
 Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum in Minimum and Discount 1 without Vat in the group Minimum (auto)
 	# Discounted Discount 1 without Vat
@@ -202,8 +197,8 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 	And I click "List" button
 	And I go to line in "List" table
-			| 'Description'              |
-			| 'Discount 2 without Vat' |
+			| 'Description'               |
+			| 'Discount 2 without Vat'    |
 	And I select current line in "List" table
 	And I remove checkbox "Manually"
 	And Delay 2
@@ -216,13 +211,13 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 		And I click Select button of "Segment" field
 		
 		And I go to line in "List" table
-			| Description |
-			| Retail      |
+			| Description    |
+			| Retail         |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Kalipso     |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		If window with "1C:Enterprise" header has appeared Then
@@ -231,33 +226,33 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'MIO' |
+		| 'Description'   |
+		| 'MIO'           |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-		| 'Description'                     |
-		| 'Basic Partner terms, without VAT' |
+		| 'Description'                        |
+		| 'Basic Partner terms, without VAT'   |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 	And I select current line in "List" table
 	* Adding items to sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Shirt' |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black'  |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -267,15 +262,15 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Trousers' |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/Yellow'  |
+			| 'Item key'     |
+			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -285,16 +280,16 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
-		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Store'     | 'Quantity'  | 'Offers amount'   |
+		| 'Shirt'     | '296,61'  | '38/Black'   | 'Store 02'  | '8,000'     | '716,88'          |
+		| 'Trousers'  | '338,98'  | '36/Yellow'  | 'Store 02'  | '4,000'     | '395,92'          |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'        |
-		| 'MIO'       | '3 519,99' |
-		| 'MIO'       | '3 519,99' |
-		| 'MIO'       | '3 519,99' |
+		| 'Partner'  | 'Σ'          |
+		| 'MIO'      | '3 086,88'   |
+		| 'MIO'      | '3 086,88'   |
+		| 'MIO'      | '3 086,88'   |
 
 
 Scenario: _032003 discount calculation Discount 2 without Vat in the main group Special Offers, Discount 1 without Vat in the group Sum in Minimum (auto)
@@ -306,13 +301,13 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 		And I click Select button of "Segment" field
 		
 		And I go to line in "List" table
-			| Description |
-			| Retail      |
+			| Description    |
+			| Retail         |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Kalipso     |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		If window with "1C:Enterprise" header has appeared Then
@@ -321,33 +316,33 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'MIO' |
+		| 'Description'   |
+		| 'MIO'           |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-		| 'Description'                     |
-		| 'Basic Partner terms, without VAT' |
+		| 'Description'                        |
+		| 'Basic Partner terms, without VAT'   |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 	And I select current line in "List" table
 	* Adding items to sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Shirt' |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black'  |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -357,15 +352,15 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Trousers' |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/Yellow'  |
+			| 'Item key'     |
+			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -373,21 +368,21 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount 2 without Vat' |
+		| 'Presentation'             |
+		| 'Discount 2 without Vat'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        | 'pcs' |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        | 'pcs' |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Shirt'     | '296,61'  | '38/Black'   | 'Store 02'  | '8,000'     | '716,88'         | 'pcs'    |
+		| 'Trousers'  | '338,98'  | '36/Yellow'  | 'Store 02'  | '4,000'     | '395,92'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'        |
-		| 'MIO'       | '3 086,88' |
+		| 'Partner'  | 'Σ'          |
+		| 'MIO'      | '3 086,88'   |
 	
 	
 
@@ -400,13 +395,13 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 		And I click the button named "FormCreate"
 		And I click Select button of "Segment" field
 		And I go to line in "List" table
-			| Description |
-			| Retail      |
+			| Description    |
+			| Retail         |
 		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Kalipso     |
+			| Description    |
+			| Kalipso        |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		If window with "1C:Enterprise" header has appeared Then
@@ -415,33 +410,33 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| 'Description'             |
-		| 'MIO' |
+		| 'Description'   |
+		| 'MIO'           |
 	And I select current line in "List" table
 	And I click Select button of "Partner term" field
 	And I go to line in "List" table
-		| 'Description'                     |
-		| 'Basic Partner terms, without VAT' |
+		| 'Description'                        |
+		| 'Basic Partner terms, without VAT'   |
 	And I select current line in "List" table
 	And I click Select button of "Legal name" field
 	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
+			| 'Description'        |
+			| 'Company Kalipso'    |
 	And I select current line in "List" table
 	* Adding items to sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Shirt' |
+			| 'Description'    |
+			| 'Shirt'          |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '38/Black'  |
+			| 'Item key'    |
+			| '38/Black'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -451,15 +446,15 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Trousers' |
+			| 'Description'    |
+			| 'Trousers'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Item key' |
-			| '36/Yellow'  |
+			| 'Item key'     |
+			| '36/Yellow'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "4,000" text in "Quantity" field of "ItemList" table
@@ -467,22 +462,22 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount 2 without Vat' |
+		| 'Presentation'             |
+		| 'Discount 2 without Vat'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
-		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        |
+		| 'Item'      | 'Price'   | 'Item key'   | 'Store'     | 'Quantity'  | 'Offers amount'   |
+		| 'Shirt'     | '296,61'  | '38/Black'   | 'Store 02'  | '8,000'     | '716,88'          |
+		| 'Trousers'  | '338,98'  | '36/Yellow'  | 'Store 02'  | '4,000'     | '395,92'          |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'        |
-		| 'MIO'       | '3 086,88' |
-		| 'MIO'       | '3 086,88' |
+		| 'Partner'  | 'Σ'          |
+		| 'MIO'      | '3 086,88'   |
+		| 'MIO'      | '3 086,88'   |
 
 
 # Procedure for calculating discounts in the main group Minimum
@@ -493,15 +488,9 @@ Scenario: _032005 change Special offers main group Maximum by row to Minimum
 	And I click "List" button
 	And I go to line in "List" table
 		| 'Description'      |
-		| 'Special Offers' |
+		| 'Special Offers'   |
 	And in the table "List" I click the button named "ListContextMenuChange"
-	And I click Open button of "Special offer type" field
-	And I click "Set settings" button
-	Then "Special offer rules" window is opened
-	And I select "Minimum" exact value from "Type joining" drop-down list
-	And I click "Save settings" button
-	And I click "Save and close" button
-	And Delay 10
+	And I select "Min" exact value from "Offer group type" drop-down list
 	And I click "Save and close" button
 	And Delay 10
 	And I close all client application windows
@@ -519,14 +508,14 @@ Scenario: _032006 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
 	
 
 Scenario: _032007 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (auto), priority Discount Price 1 lower than Discount Price 2
@@ -537,15 +526,15 @@ Scenario: _032007 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 Scenario: _032008 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
@@ -555,22 +544,22 @@ Scenario: _032008 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 
@@ -582,23 +571,23 @@ Scenario: _032009 check the discount order (same application rule), Discount Pri
 		When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 		And in the table "ItemList" I click "% Offers" button
 		And I go to line in "Offers" table
-			| 'Presentation'                  |
-			| 'Discount Price 2' |
+			| 'Presentation'        |
+			| 'Discount Price 2'    |
 		And I select current line in "Offers" table
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Store 01'   | '5,000'      | '130,00'          | 'pcs'     |
+			| 'Boots'   | '700,00'   | '36/18SD'    | 'Store 01'   | '1,000'      | '100,00'          | 'pcs'     |
 		And I click the button named "FormPostAndClose"
 		And Delay 2
 		And "List" table contains lines
-			| 'Partner'   | 'Σ'     |
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
+			| 'Partner'    | 'Σ'           |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
 
 Scenario: _032010 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (2 auto), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -612,18 +601,18 @@ Scenario: _032010 check the discount order (same application rule), Discount Pri
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Store 01'   | '5,000'      | '130,00'          | 'pcs'     |
+			| 'Boots'   | '700,00'   | '36/18SD'    | 'Store 01'   | '1,000'      | '100,00'          | 'pcs'     |
 		And I click the button named "FormPostAndClose"
 		And Delay 2
 		And "List" table contains lines
-			| 'Partner'   | 'Σ'     |
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
+			| 'Partner'    | 'Σ'           |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
 
 
 Scenario: _032011 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (auto), priority Discount Price 1 lower than Discount Price 2
@@ -634,19 +623,19 @@ Scenario: _032011 check the discount order (same application rule), Discount Pri
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+			| 'Item'    | 'Price'    | 'Item key'   | 'Store'      | 'Quantity'   | 'Offers amount'   | 'Unit'    |
+			| 'Dress'   | '520,00'   | 'XS/Blue'    | 'Store 01'   | '5,000'      | '130,00'          | 'pcs'     |
+			| 'Boots'   | '700,00'   | '36/18SD'    | 'Store 01'   | '1,000'      | '100,00'          | 'pcs'     |
 		And I click the button named "FormPostAndClose"
 		And Delay 2
 		And "List" table contains lines
-			| 'Partner'   | 'Σ'     |
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
-			| 'Lomaniti'  |  '3 070,00'|
+			| 'Partner'    | 'Σ'           |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
+			| 'Lomaniti'   | '3 070,00'    |
 
 
 Scenario: _032012 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
@@ -656,26 +645,26 @@ Scenario: _032012 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 Scenario: _032013 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (Discount Price 2 manual, Discount Price 1 - auto), priority Discount Price 1 lower than Discount Price 2
@@ -686,27 +675,27 @@ Scenario: _032013 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 Scenario: _032014 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (manual), priority Discount Price 1 higher than Discount Price 2
@@ -717,34 +706,34 @@ Scenario: _032014 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032015 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (manual), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -752,35 +741,35 @@ Scenario: _032015 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032016 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -794,24 +783,24 @@ Scenario: _032016 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And Delay 2
 	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032017 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -821,25 +810,25 @@ Scenario: _032017 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032018 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -848,32 +837,32 @@ Scenario: _032018 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 Scenario: _032019 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 higher than Discount Price 2
@@ -882,39 +871,39 @@ Scenario: _032019 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032020 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -926,28 +915,28 @@ Scenario: _032020 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 Scenario: _032021 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
@@ -958,29 +947,29 @@ Scenario: _032021 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032022 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -989,36 +978,36 @@ Scenario: _032022 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032023 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (Discount Price 2 manual, Discount Price 1 - auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -1028,37 +1017,37 @@ Scenario: _032023 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032024 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -1067,44 +1056,44 @@ Scenario: _032024 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 Scenario: _032025 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
@@ -1112,45 +1101,45 @@ Scenario: _032025 check the discount order (same application rule), Discount Pri
 	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	And in the table "ItemList" I click "% Offers" button
 	And I go to line in "Offers" table
-		| 'Presentation'                  |
-		| 'Discount Price 2' |
+		| 'Presentation'       |
+		| 'Discount Price 2'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I go to line in "Offers" table
-		| 'Presentation'            |
-		| 'Discount Price 1' |
+		| 'Presentation'       |
+		| 'Discount Price 1'   |
 	And I activate "Is select" field in "Offers" table
 	And I select current line in "Offers" table
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
-		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
+		| 'Item'   | 'Price'   | 'Item key'  | 'Store'     | 'Quantity'  | 'Offers amount'  | 'Unit'   |
+		| 'Dress'  | '520,00'  | 'XS/Blue'   | 'Store 01'  | '5,000'     | '130,00'         | 'pcs'    |
+		| 'Boots'  | '700,00'  | '36/18SD'   | 'Store 01'  | '1,000'     | '100,00'         | 'pcs'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'     |
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
-		| 'Lomaniti'  |  '3 070,00'|
+		| 'Partner'   | 'Σ'          |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
+		| 'Lomaniti'  | '3 070,00'   |
 
 
 

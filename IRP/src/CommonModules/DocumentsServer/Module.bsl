@@ -1,6 +1,11 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	
+	If Form.Parameters.Key.IsEmpty() Then
+		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
+	EndIf;
+	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined 
 		And Not Form.Items.Find("GroupOther") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
@@ -31,6 +36,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		LoadDataFromTableServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	EndIf;
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
+		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
+	EndIf;
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -159,15 +168,8 @@ EndProcedure
 Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
 		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
 		CheckedAttributes.Add("CurrencyExchange");
-
-	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
-		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-
-		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
-
 	EndIf;
 EndProcedure
 
@@ -431,6 +433,8 @@ Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Unde
 	|	tmpItemList.Key,
 	|	BasisDocumentSpecialOffers.Offer,
 	|	BasisDocumentSpecialOffers.Amount,
+	|	BasisDocumentSpecialOffers.Bonus,
+	|	BasisDocumentSpecialOffers.AddInfo,
 	|	BasisDocumentItemList.Quantity
 	|FROM
 	|	tmpItemList AS tmpItemList

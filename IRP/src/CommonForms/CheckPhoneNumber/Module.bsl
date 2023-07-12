@@ -1,5 +1,10 @@
 
 &AtClient
+Procedure ShowCode(Command)
+	CommonFunctionsClientServer.ShowUsersMessage(SendedSMSCode);
+EndProcedure
+
+&AtClient
 Procedure RetryToSend(Command)
 	RetryToSendAtServer();
 EndProcedure
@@ -50,18 +55,36 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	 
 	IntegrationSettings = Parameters.IntegrationSettings;
-	If Parameters.SendOnOpen Then
+	
+	If IntegrationSettings.IsEmpty() Then
+		IntegrationSettings = Constants.DefaultSMSProvider.Get();
+	EndIf;
+	
+	If Parameters.SendOnOpen And Not IntegrationSettings.IsEmpty() Then
 		RetryToSendAtServer();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	If IntegrationSettings.IsEmpty() Then
+		ExecuteNotifyProcessing(OnCloseNotifyDescription, CloseOK());
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure CodeOnChange(Item)
 	If SendedSMSCode > 0 And Code = SendedSMSCode Then
-		Str = New Structure;
-		Str.Insert("Success", True);
-		Close(Str);
+		CloseOK();
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(R().SMS_SMSCodeWrong);
 	EndIf;
 EndProcedure
+
+&AtClient
+Function CloseOK()
+	Str = New Structure;
+	Str.Insert("Success", True);
+	Close(Str);
+	Return Str;
+EndFunction

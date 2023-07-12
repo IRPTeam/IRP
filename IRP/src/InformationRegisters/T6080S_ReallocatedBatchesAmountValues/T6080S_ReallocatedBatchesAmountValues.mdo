@@ -154,6 +154,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="17d27021-1583-4b1c-a5b2-c23b3f366374">
+    <name>AmountCostAdditional</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost additional</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
     <name>OutgoingDocument</name>
     <synonym>

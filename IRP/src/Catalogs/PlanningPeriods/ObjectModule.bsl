@@ -3,7 +3,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 	 	If FillingData.Property("BusinessUnit") And ValueIsFilled(FillingData.BusinessUnit) Then
 			ThisObject.BusinessUnits.Add().BusinessUnit = FillingData.BusinessUnit;
-			ThisObject.Type = Enums.PlanningPeriodTypes.Manufacturing;
+			ThisObject.IsManufacturing = True;
 		EndIf;
 	EndIf;
 EndProcedure

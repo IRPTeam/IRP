@@ -17,6 +17,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ArrayOfTableNames.Add("EmployeeCashAdvance");
 	ArrayOfTableNames.Add("AdvanceFromRetailCustomers");
 	ArrayOfTableNames.Add("SalaryPayment");
+	ArrayOfTableNames.Add("AccountReceivableOther");
+	ArrayOfTableNames.Add("AccountPayableOther");
+	ArrayOfTableNames.Add("CashInTransit");
 	
 	For Each TableName In ArrayOfTableNames Do
 		For Each Row In ThisObject[TableName] Do
@@ -31,6 +34,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
+	For Each Row In ThisObject.CashInTransit Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;	
 	For Each Row In ThisObject.AdvanceFromCustomers Do
 		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
@@ -51,6 +59,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
+	For Each Row In ThisObject.AccountReceivableOther Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;	
 	For Each Row In ThisObject.AccountPayableByAgreements Do
 		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
@@ -61,6 +74,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
+	For Each Row In ThisObject.AccountPayableOther Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;	
 	For Each Row In ThisObject.ReceiptFromConsignor Do
 		Parameters = CurrenciesClientServer.GetParameters_V9(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
@@ -83,6 +101,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
 
 Procedure OnWrite(Cancel)

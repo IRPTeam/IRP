@@ -200,7 +200,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 350'     |
 		And I close current window		
 		Then the form attribute named "Branch" became equal to ""
-		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "Manager" became equal to "Region 1"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "UseItemsShipmentScheduling" became equal to "No"

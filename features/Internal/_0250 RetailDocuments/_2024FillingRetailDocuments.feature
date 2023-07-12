@@ -2296,6 +2296,11 @@ Scenario:  _0154149 create Cash statement
 				| 'Movement type 1'     |
 			And I select current line in "List" table		
 			And I set "Use basis document" checkbox in "PaymentList" table
+			And I click choice button of "Receipting account" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Bank account, TRY'   |
+			And I select current line in "List" table
 			And I finish line editing in "PaymentList" table
 			And I go to the last line in "PaymentList" table
 			And I set "Use basis document" checkbox in "PaymentList" table
@@ -2340,25 +2345,25 @@ Scenario:  _0154149 create Cash statement
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'                    | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| 'Document registrations records'               | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| ''                                             | 'Record type' | 'Period'                        | 'Resources' | ''           | 'Dimensions'   | ''       | ''        | ''                             | ''         | ''                     | ''                          | 'Attributes'           |
-			| ''                                             | ''            | ''                              | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Account' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                     | 'Deferred calculation' |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | '2,21'       | 'Main Company' | ''       | ''        | 'Reporting currency'           | 'USD'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | ''       | ''        | 'Local currency'               | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | ''       | ''        | 'en description is empty'      | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| '$$CashStatement01541491$$'                    | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| 'Document registrations records'               | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| ''                                             | 'Record type' | 'Period'                        | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | 'Attributes'           |
+			| ''                                             | ''            | ''                              | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                     | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | '2,21'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'Reporting currency'           | 'USD'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'Local currency'               | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'en description is empty'      | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
 		And I select "Cash in transit" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'        | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| 'Document registrations records'   | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| 'Register  "Cash in transit"'      | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| ''                                 | 'Record type'   | 'Period'                          | 'Resources'   | 'Dimensions'     | ''                            | ''               | ''             | ''           | ''                               | 'Attributes'              |
-			| ''                                 | ''              | ''                                | 'Amount'      | 'Company'        | 'Basis document'              | 'From account'   | 'To account'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '68,48'       | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '400'         | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '400'         | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records' | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "Cash in transit"'    | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''             | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'From account' | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 		
 		

@@ -6,7 +6,9 @@
 //
 // Returns:
 //  Structure - GetDataKKT:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -16,6 +18,7 @@ Function GetDataKKTSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetDataKKT");
     
     Str.Insert("In", New Structure);
@@ -33,7 +36,9 @@ EndFunction
 //
 // Returns:
 //  Structure - OperationFN:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** OperationType - Number - Type of operation:
@@ -47,6 +52,7 @@ Function OperationFNSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OperationFN");
     
     Str.Insert("In", New Structure);
@@ -65,7 +71,9 @@ EndFunction
 //
 // Returns:
 //  Structure - OpenShift:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -76,6 +84,7 @@ Function OpenShiftSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenShift");
     
     Str.Insert("In", New Structure);
@@ -94,7 +103,9 @@ EndFunction
 //
 // Returns:
 //  Structure - CloseShift:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -105,6 +116,7 @@ Function CloseShiftSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CloseShift");
     
     Str.Insert("In", New Structure);
@@ -123,7 +135,9 @@ EndFunction
 //
 // Returns:
 //  Structure - ProcessCheck:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** Electronically - Boolean - Formation of a check only in electronic form. The check is not printed.
@@ -135,6 +149,7 @@ Function ProcessCheckSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ProcessCheck");
     
     Str.Insert("In", New Structure);
@@ -154,7 +169,9 @@ EndFunction
 //
 // Returns:
 //  Structure - ProcessCorrectionCheck:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckPackage - String - XML structure - correction check description.
@@ -165,6 +182,7 @@ Function ProcessCorrectionCheckSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ProcessCorrectionCheck");
     
     Str.Insert("In", New Structure);
@@ -183,7 +201,9 @@ EndFunction
 //
 // Returns:
 //  Structure - PrintTextDocument:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** DocumentPackage - String - XML structure - text document description.
@@ -193,6 +213,7 @@ Function PrintTextDocumentSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintTextDocument");
     
     Str.Insert("In", New Structure);
@@ -210,7 +231,9 @@ EndFunction
 //
 // Returns:
 //  Structure - CashInOutcome:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -221,6 +244,7 @@ Function CashInOutcomeSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CashInOutcome");
     
     Str.Insert("In", New Structure);
@@ -239,7 +263,9 @@ EndFunction
 //
 // Returns:
 //  Structure - PrintXReport:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -249,6 +275,7 @@ Function PrintXReportSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintXReport");
     
     Str.Insert("In", New Structure);
@@ -266,7 +293,9 @@ EndFunction
 //
 // Returns:
 //  Structure - PrintCheckCopy:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
@@ -276,6 +305,7 @@ Function PrintCheckCopySettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintCheckCopy");
     
     Str.Insert("In", New Structure);
@@ -293,7 +323,9 @@ EndFunction
 //
 // Returns:
 //  Structure - GetCurrentStatus:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -304,6 +336,7 @@ Function GetCurrentStatusSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetCurrentStatus");
     
     Str.Insert("In", New Structure);
@@ -322,7 +355,9 @@ EndFunction
 //
 // Returns:
 //  Structure - ReportCurrentStatusOfSettlements:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - String - Input parameters of the operation
@@ -333,6 +368,7 @@ Function ReportCurrentStatusOfSettlementsSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ReportCurrentStatusOfSettlements");
     
     Str.Insert("In", New Structure);
@@ -351,7 +387,9 @@ EndFunction
 //
 // Returns:
 //  Structure - OpenCashDrawer:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -360,6 +398,7 @@ Function OpenCashDrawerSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenCashDrawer");
     
     Str.Insert("In", New Structure);
@@ -376,7 +415,9 @@ EndFunction
 //
 // Returns:
 //  Structure - GetLineLength:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -386,6 +427,7 @@ Function GetLineLengthSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetLineLength");
     
     Str.Insert("In", New Structure);
@@ -403,7 +445,9 @@ EndFunction
 //
 // Returns:
 //  Structure - OpenSessionRegistrationKM:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -412,6 +456,7 @@ Function OpenSessionRegistrationKMSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenSessionRegistrationKM");
     
     Str.Insert("In", New Structure);
@@ -428,7 +473,9 @@ EndFunction
 //
 // Returns:
 //  Structure - CloseSessionRegistrationKM:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -437,6 +484,7 @@ Function CloseSessionRegistrationKMSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CloseSessionRegistrationKM");
     
     Str.Insert("In", New Structure);
@@ -453,7 +501,9 @@ EndFunction
 //
 // Returns:
 //  Structure - RequestKM:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** RequestKM - String - Request data
@@ -464,6 +514,7 @@ Function RequestKMSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "RequestKM");
     
     Str.Insert("In", New Structure);
@@ -482,7 +533,9 @@ EndFunction
 //
 // Returns:
 //  Structure - GetProcessingKMResult:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -496,6 +549,7 @@ Function GetProcessingKMResultSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetProcessingKMResult");
     
     Str.Insert("In", New Structure);
@@ -514,7 +568,9 @@ EndFunction
 //
 // Returns:
 //  Structure - ConfirmKM:
-// * Info - Structure -
+// * Info - Structure:
+// ** Name - String - Function name
+// ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** GUID - String - Unique identifier of the KM request, which was previously made by the RequestKM method
@@ -527,6 +583,7 @@ Function ConfirmKMSettings() Export
     Str = New Structure;
     
     Str.Insert("Info", New Structure);
+    Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ConfirmKM");
     
     Str.Insert("In", New Structure);
@@ -556,6 +613,7 @@ EndFunction
 Async Function GetDataKKT(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetDataKKT", True, Settings);
 	EndIf;
@@ -564,6 +622,11 @@ Async Function GetDataKKT(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.Out.TableParametersKKT
 	); // Boolean
+	
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetDataKKT", False, Settings, Result);
 	EndIf;		
@@ -582,6 +645,7 @@ EndFunction
 Async Function OperationFN(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OperationFN", True, Settings);
 	EndIf;
@@ -591,6 +655,10 @@ Async Function OperationFN(Hardware, Settings) Export
 		Settings.In.OperationType,
 		Settings.In.ParametersFiscal
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OperationFN", False, Settings, Result);
 	EndIf;		
@@ -609,6 +677,7 @@ EndFunction
 Async Function OpenShift(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenShift", True, Settings);
 	EndIf;
@@ -618,6 +687,10 @@ Async Function OpenShift(Hardware, Settings) Export
 		Settings.In.InputParameters,
 		Settings.Out.OutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenShift", False, Settings, Result);
 	EndIf;		
@@ -636,6 +709,7 @@ EndFunction
 Async Function CloseShift(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CloseShift", True, Settings);
 	EndIf;
@@ -645,6 +719,10 @@ Async Function CloseShift(Hardware, Settings) Export
 		Settings.In.InputParameters,
 		Settings.Out.OutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CloseShift", False, Settings, Result);
 	EndIf;		
@@ -663,6 +741,7 @@ EndFunction
 Async Function ProcessCheck(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCheck", True, Settings);
 	EndIf;
@@ -673,6 +752,10 @@ Async Function ProcessCheck(Hardware, Settings) Export
 		Settings.In.CheckPackage,
 		Settings.Out.DocumentOutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCheck", False, Settings, Result);
 	EndIf;		
@@ -691,6 +774,7 @@ EndFunction
 Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCorrectionCheck", True, Settings);
 	EndIf;
@@ -700,6 +784,10 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 		Settings.In.CheckPackage,
 		Settings.Out.DocumentOutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCorrectionCheck", False, Settings, Result);
 	EndIf;		
@@ -718,6 +806,7 @@ EndFunction
 Async Function PrintTextDocument(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintTextDocument", True, Settings);
 	EndIf;
@@ -726,6 +815,10 @@ Async Function PrintTextDocument(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.In.DocumentPackage
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintTextDocument", False, Settings, Result);
 	EndIf;		
@@ -744,15 +837,21 @@ EndFunction
 Async Function CashInOutcome(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CashInOutcome", True, Settings);
 	EndIf;
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.CashInOutcome(
 		ConnectParameters.ID,
 		Settings.In.InputParameters,
 		Settings.In.Amount
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CashInOutcome", False, Settings, Result);
 	EndIf;		
@@ -771,6 +870,7 @@ EndFunction
 Async Function PrintXReport(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintXReport", True, Settings);
 	EndIf;
@@ -779,6 +879,10 @@ Async Function PrintXReport(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.In.InputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintXReport", False, Settings, Result);
 	EndIf;		
@@ -797,6 +901,7 @@ EndFunction
 Async Function PrintCheckCopy(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintCheckCopy", True, Settings);
 	EndIf;
@@ -805,6 +910,10 @@ Async Function PrintCheckCopy(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.In.CheckNumber
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintCheckCopy", False, Settings, Result);
 	EndIf;		
@@ -823,6 +932,7 @@ EndFunction
 Async Function GetCurrentStatus(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetCurrentStatus", True, Settings);
 	EndIf;
@@ -832,6 +942,10 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 		Settings.In.InputParameters,
 		Settings.Out.OutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetCurrentStatus", False, Settings, Result);
 	EndIf;		
@@ -850,6 +964,7 @@ EndFunction
 Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ReportCurrentStatusOfSettlements", True, Settings);
 	EndIf;
@@ -859,6 +974,10 @@ Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
 		Settings.In.InputParameters,
 		Settings.Out.OutputParameters
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ReportCurrentStatusOfSettlements", False, Settings, Result);
 	EndIf;		
@@ -877,6 +996,7 @@ EndFunction
 Async Function OpenCashDrawer(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenCashDrawer", True, Settings);
 	EndIf;
@@ -884,6 +1004,10 @@ Async Function OpenCashDrawer(Hardware, Settings) Export
 	Result = ConnectParameters.DriverObject.OpenCashDrawer(
 		ConnectParameters.ID
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenCashDrawer", False, Settings, Result);
 	EndIf;		
@@ -902,6 +1026,7 @@ EndFunction
 Async Function GetLineLength(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetLineLength", True, Settings);
 	EndIf;
@@ -910,6 +1035,10 @@ Async Function GetLineLength(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.Out.LineLength
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetLineLength", False, Settings, Result);
 	EndIf;		
@@ -928,6 +1057,7 @@ EndFunction
 Async Function OpenSessionRegistrationKM(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenSessionRegistrationKM", True, Settings);
 	EndIf;
@@ -935,6 +1065,10 @@ Async Function OpenSessionRegistrationKM(Hardware, Settings) Export
 	Result = ConnectParameters.DriverObject.OpenSessionRegistrationKM(
 		ConnectParameters.ID
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenSessionRegistrationKM", False, Settings, Result);
 	EndIf;		
@@ -953,6 +1087,7 @@ EndFunction
 Async Function CloseSessionRegistrationKM(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CloseSessionRegistrationKM", True, Settings);
 	EndIf;
@@ -960,6 +1095,10 @@ Async Function CloseSessionRegistrationKM(Hardware, Settings) Export
 	Result = ConnectParameters.DriverObject.CloseSessionRegistrationKM(
 		ConnectParameters.ID
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CloseSessionRegistrationKM", False, Settings, Result);
 	EndIf;		
@@ -978,20 +1117,95 @@ EndFunction
 Async Function RequestKM(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "RequestKM", True, Settings);
 	EndIf;
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.RequestKM(
 		ConnectParameters.ID,
 		Settings.In.RequestKM,
 		Settings.Out.RequestKMResult
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "RequestKM", False, Settings, Result);
 	EndIf;		
 	
 	Return Result;
 EndFunction
+
+// GetProcessingKMResult.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware - Hardware
+//  Settings - See GetProcessingKMResultSettings 
+// 
+// Returns:
+//  Boolean - The method requests the results of the marking code check in the OISM.
+Async Function GetProcessingKMResult(Hardware, Settings) Export
+	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
+	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "GetProcessingKMResult", True, Settings);
+	EndIf;
+	
+	//@skip-check dynamic-access-method-not-found
+	Result = ConnectParameters.DriverObject.GetProcessingKMResult(
+		ConnectParameters.ID,
+		Settings.Out.ProcessingKMResult,
+		Settings.Out.RequestStatus
+	); // Boolean
+	
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "GetProcessingKMResult", False, Settings, Result);
+	EndIf;	
+		
+	Return Result;
+EndFunction
+
+// ConfirmKM.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware - Hardware
+//  Settings - See ConfirmKMSettings 
+// 
+// Returns:
+//  Boolean - Confirms or cancels the previously checked KM as part of the document on the sale of marked goods. KM must have been previously checked by the RequestKM method.
+Async Function ConfirmKM(Hardware, Settings) Export
+	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
+	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "ConfirmKM", True, Settings);
+	EndIf;
+	
+	//@skip-check dynamic-access-method-not-found
+	Result = ConnectParameters.DriverObject.ConfirmKM(
+		ConnectParameters.ID,
+		Settings.In.GUID,
+		Settings.In.ConfirmationType
+	); // Boolean
+	
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "ConfirmKM", False, Settings, Result);
+	EndIf;	
+
+	Return Result;
+EndFunction
+
 
 #EndRegion

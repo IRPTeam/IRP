@@ -17,28 +17,26 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		Return Result;
 	EndIf;
 	
-	Hardware = CRS.FiscalPrinter;
-	
-		
-	Parameters = ShiftSettings();
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
-	
-	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
+	//@skip-check module-unused-local-variable
 	LineLength = 0;
 	LineLengthSettings = EquipmentFiscalPrinterAPIClient.GetLineLengthSettings();
-	If EquipmentFiscalPrinterAPIClient.GetLineLength(Hardware, LineLengthSettings) Then
+	If Await EquipmentFiscalPrinterAPIClient.GetLineLength(CRS.FiscalPrinter, LineLengthSettings) Then
 		LineLength = LineLengthSettings.Out.LineLength;
 	EndIf;
-	
+			
 	DataKKTSettings = EquipmentFiscalPrinterAPIClient.GetDataKKTSettings();
-	If Not EquipmentFiscalPrinterAPIClient.GetDataKKT(Hardware, DataKKTSettings) Then
+	If Not Await EquipmentFiscalPrinterAPIClient.GetDataKKT(CRS.FiscalPrinter, DataKKTSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(DataKKTSettings.Info.Error);
 		Raise "Can not get data KKT";
 	EndIf;
+	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
+	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 
+#Region GetCurrentStatus	
+	
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
-	CurrentStatusSettings.In.InputParameters = Parameters.ParametersXML;
-	If EquipmentFiscalPrinterAPIClient.GetCurrentStatus(Hardware, CurrentStatusSettings) Then
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
 		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
@@ -53,26 +51,30 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		EquipmentFiscalPrinterAPIClient.Get
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
+
+#EndRegion
+
+#Region OpenShift 
 	
-	ResultInfo = DriverObject.OpenShift(Settings.ConnectedDriver.ID
-																	, Parameters.ParametersXML
-																	, Parameters.ResultXML);
-	If ResultInfo Then
+	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
+	OpenShiftSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.OpenShift(CRS.FiscalPrinter, OpenShiftSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, OpenShiftSettings.Out.OutputParameters);
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = OpenShiftSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
-	
+
+#EndRegion
+
 	Return Result;
 EndFunction
 
@@ -83,20 +85,17 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
-		
-	Parameters = ShiftSettings();
+	
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
-	
-	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
-	If ResultInfo Then
+	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+
+#Region GetCurrentStatus	
+		
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
@@ -107,23 +106,30 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 			
 		EndIf;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
+
+#EndRegion
 	
-	ResultInfo = DriverObject.CloseShift(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
-	If ResultInfo Then
+#Region CloseShift
+
+	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
+	CloseShiftSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.CloseShift(CRS.FiscalPrinter, CloseShiftSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CloseShiftSettings.Out.OutputParameters);
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CloseShiftSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
-	
+
+#EndRegion
+
 	Return Result;
 EndFunction
 
@@ -134,20 +140,17 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
-	Parameters = ShiftSettings();
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
+	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
-	If ResultInfo Then
+#Region GetCurrentStatus	
+		
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -162,23 +165,37 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
-	
-	ResultInfo = DriverObject.PrintXReport(Settings.ConnectedDriver.ID, Parameters.ParametersXML);
-	If ResultInfo Then
+
+#EndRegion
+
+#Region PrintXReport
+	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
+	PrintXReportSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.PrintXReport(CRS.FiscalPrinter, PrintXReportSettings) Then
 		Result.Success = True;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = PrintXReportSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
+
+#EndRegion
 	
 	Return Result;
 EndFunction
 
+// Process check.
+// 
+// Parameters:
+//  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales -
+//  DataSource - DocumentRef.RetailSalesReceipt -
+// 
+// Returns:
+//  See EquipmentFiscalPrinterClient.ReceiptResultStructure
 Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	Result = ReceiptResultStructure();
 	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
@@ -190,24 +207,23 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_DocumentAlreadyPrinted);
 		Return Result;
 	EndIf;
+	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
-	Parameters = ShiftSettings();
 	XMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
+	InputParameters = ShiftGetXMLOperation(XMLOperationSettings);
 	
-	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
-	If ResultInfo Then
+#Region GetCurrentStatus	
+		
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -222,11 +238,13 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			Return Result;
 		EndIf;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
+
+#EndRegion
 	
 	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
 		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
@@ -234,7 +252,9 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		CodeStringList = EquipmentFiscalPrinterServer.GetStringCode(DataSource);
 		
 		If CodeStringList.Count() > 0 Then
-			If Not DriverObject.OpenSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
+			OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
+			If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(CRS.FiscalPrinter, OpenSessionRegistrationKMSettings) Then
+				CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
 				Raise R().EqFP_CanNotOpenSessionRegistrationKM;
 			EndIf;
 			
@@ -243,7 +263,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 				RequestKMSettings = RequestKMSettingsInfo(isReturn);
 				RequestKMSettings.MarkingCode = CodeString;
 				RequestKMSettings.Quantity = 1;
-				CheckResult = Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings, False);
+				CheckResult = Await Device_CheckKM(CRS.FiscalPrinter, RequestKMSettings, False);
 				If Not CheckResult.Approved Then
 					Raise StrTemplate(R().EqFP_ProblemWhileCheckCodeString, GetStringFromBinaryData(Base64Value(RequestKMSettings.MarkingCode)));
 				EndIf;
@@ -251,47 +271,47 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			EndDo;
 			
 			For Each ApproveUUID In ArrayForApprove Do
-				If Not DriverObject.ConfirmKM(Settings.ConnectedDriver.ID, ApproveUUID, 0) Then
+				ConfirmKMSettings = EquipmentFiscalPrinterAPIClient.ConfirmKMSettings();
+				ConfirmKMSettings.In.GUID = ApproveUUID;
+				If Not Await EquipmentFiscalPrinterAPIClient.ConfirmKM(CRS.FiscalPrinter, ConfirmKMSettings) Then
+					CommonFunctionsClientServer.ShowUsersMessage(ConfirmKMSettings.Info.Error);
 					Raise StrTemplate(R().EqFP_ErrorWhileConfirmCode, ApproveUUID);
 				EndIf;
 			EndDo;
 			
-//			If Not DriverObject.CloseSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
+//			CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
+//			If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(CRS.FiscalPrinter, CloseSessionRegistrationKMSettings) Then
+//				CommonFunctionsClientServer.ShowUsersMessage(CloseSessionRegistrationKMSettings.Info.Error);
 //				Raise R().EqFP_CanNotCloseSessionRegistrationKM;
 //			EndIf;
 			
 		EndIf;
 	EndIf;
-	Parameters = ReceiptSettings();
+	
 	XMLOperationSettings = ReceiptGetXMLOperationSettings(DataSource);
+	CheckPackage = ReceiptGetXMLOperation(XMLOperationSettings);
 	
-	Parameters.ParametersXML = ReceiptGetXMLOperation(XMLOperationSettings);
-	
-	ResultInfo = DriverObject.ProcessCheck(Settings.ConnectedDriver.ID
-																	, False
-																	, Parameters.ParametersXML
-																	, Parameters.ResultXML);
-	If ResultInfo Then
+	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
+	ProcessCheckSettings.In.CheckPackage = CheckPackage;
+	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
 		ReceiptData = ReceiptResultStructure();
-		FillDataFromDeviceResponse(ReceiptData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ReceiptData, ProcessCheckSettings.Out.DocumentOutputParameters);
+		ReceiptData.Status = "Printed";
+		ReceiptData.DataPresentation = " " + Result.ShiftNumber + " " + Result.DateTime;
+		ReceiptData.FiscalResponse = ProcessCheckSettings.Out.DocumentOutputParameters;
+		ReceiptData.Success = True;
 		FillPropertyValues(Result, ReceiptData);
-		Result.Status = "Printed";
-		Result.DataPresentation = " " + Result.ShiftNumber + " " + Result.DateTime;
-		Result.FiscalResponse = Parameters.ResultXML;
-		Result.Success = True;
 		
 		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status
-						, Result.FiscalResponse
+						, ReceiptData
 						, " " + Result.ShiftNumber + " " + Result.DateTime);
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = ProcessCheckSettings.Info.Error;
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
-						, Result.Status
-						, Result.ErrorDescription);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, Result.Status, Result.ErrorDescription);
 		
 		Return Result;
 	EndIf;
@@ -299,7 +319,80 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	Return Result;
 EndFunction
 
-Async Function CashInCome(ConsolidatedRetailSales, DataSource, Summ) Export
+// Print check copy.
+// 
+// Parameters:
+//  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales -
+//  DataSource - DocumentRef.RetailSalesReceipt -
+// 
+// Returns:
+//  See EquipmentFiscalPrinterClient.ReceiptResultStructure
+Async Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
+	Result = ReceiptResultStructure();
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource); // See InformationRegisters.DocumentFiscalStatus.GetStatusData
+	If Not StatusData.IsPrinted Then
+		Result.Status = StatusData.Status;
+		Result.DataPresentation = StatusData.DataPresentation;
+		Result.FiscalResponse = StatusData.FiscalResponse;
+		Result.Success = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_DocumentNotPrintedOnFiscal);
+		Return Result;
+	EndIf;
+	
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Result.Success = True;
+		Return Result;
+	EndIf;
+		
+//	XMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
+//	InputParameters = ShiftGetXMLOperation(XMLOperationSettings);
+	
+//#Region GetCurrentStatus	
+//		
+//	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+//	CurrentStatusSettings.In.InputParameters = InputParameters;
+//	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
+//		ShiftData = ShiftResultStructure();
+//		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+//		If ShiftData.ShiftState = 1 Then
+//			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
+//			Result.Status = "FiscalReturnedError";
+//			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+//			Return Result;
+//		ElsIf ShiftData.ShiftState = 2 Then
+//			
+//		ElsIf ShiftData.ShiftState = 3 Then
+//			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
+//			Result.Status = "FiscalReturnedError";
+//			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+//			Return Result;
+//		EndIf;
+//	Else
+//		Result.Status = "FiscalReturnedError";
+//		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
+//		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+//		Return Result;
+//	EndIf;
+//
+//#EndRegion
+	
+	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
+	PrintCheckCopySettings.In.CheckNumber = StatusData.CheckNumber;
+	If Await EquipmentFiscalPrinterAPIClient.PrintCheckCopy(CRS.FiscalPrinter, PrintCheckCopySettings) Then
+		Result.Status = "Printed";
+		Result.Success = True;
+	Else
+		Result.ErrorDescription = PrintCheckCopySettings.Info.Error;
+		Result.Status = "FiscalReturnedError";
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	Result = ShiftResultStructure();
 	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
 	If StatusData.IsPrinted Then
@@ -313,19 +406,16 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Summ) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
-		
-	Parameters = ShiftSettings();
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
+	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
-	If ResultInfo Then
+#Region GetCurrentStatus	
+		
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -340,27 +430,26 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
-																		, Parameters.ParametersXML
-																		, Summ);
-	If ResultInfo Then
+#EndRegion	
+	
+	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
+	CashInOutcomeSettings.In.Amount = Amount;
+	CashInOutcomeSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.CashInOutcome(CRS.FiscalPrinter, CashInOutcomeSettings) Then
 		Result.Status = "Printed";
 		Result.Success = True;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
-						, Result.Status);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, Result.Status);
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CashInOutcomeSettings.Info.Error;
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
-						, Result.Status
-						, Result.ErrorDescription);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, Result.Status, Result.ErrorDescription);
 						
 		Return Result;
 	EndIf;
@@ -368,7 +457,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Summ) Export
 	Return Result;
 EndFunction
 
-Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Summ) Export
+Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	Result = ShiftResultStructure();
 	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
 	If StatusData.IsPrinted Then
@@ -382,20 +471,17 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Summ) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
-		
-	Parameters = ShiftSettings();
+	
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
+	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
-																			, Parameters.ResultXML);
-	If ResultInfo Then
+#Region GetCurrentStatus	
+		
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -410,28 +496,25 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
+
+#EndRegion
 	
-	ResultInfo = DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
-																		, Parameters.ParametersXML
-																		, -Summ);
-	If ResultInfo Then
+	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
+	CashInOutcomeSettings.In.Amount = -Amount;
+	CashInOutcomeSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.CashInOutcome(CRS.FiscalPrinter, CashInOutcomeSettings) Then
 		Result.Status = "Printed";
 		Result.Success = True;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
-						, Result.Status);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, Result.Status);
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = CashInOutcomeSettings.Info.Error;
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
-						, Result.Status
-						, Result.ErrorDescription);
-						
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, Result.Status, Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
@@ -445,25 +528,22 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 	
-	Parameters = ReceiptSettings();	
 	XMLOperationSettings = PrintTextGetXMLOperationSettings(DataSource);
 	If Not XMLOperationSettings.TextStrings.Count() Then
 		Result.Success = True;
 		Return Result;
 	EndIf;
 	
-	Parameters.ParametersXML = PrintTextGetXMLOperation(XMLOperationSettings);
+	DocumentPackage = PrintTextGetXMLOperation(XMLOperationSettings);
 	
-	DriverObject = Settings.ConnectedDriver.DriverObject;
-	ResultInfo = DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
-																	, Parameters.ParametersXML);
+	PrintTextDocumentSettings = EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings();
+	PrintTextDocumentSettings.In.DocumentPackage = DocumentPackage;
 																	
-	If ResultInfo Then
+	If Await EquipmentFiscalPrinterAPIClient.PrintTextDocument(CRS.FiscalPrinter, PrintTextDocumentSettings) Then
 		Result.Success = True;		
 	Else
-		DriverObject.GetLastError(Result.ErrorDescription);
+		Result.ErrorDescription = PrintTextDocumentSettings.Info.Error;
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -480,8 +560,7 @@ EndFunction
 // Returns:
 //  See EquipmentFiscalPrinterClient.ProcessingKMResult
 Async Function CheckKM(Hardware, RequestKMSettings) Export
-	Settings = Await HardwareClient.FillDriverParametersSettings(Hardware); // See HardwareClient.FillDriverParametersSettings
-	Return Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings);
+	Return Await Device_CheckKM(Hardware, RequestKMSettings);
 EndFunction
 
 // Request KM settings.
@@ -545,58 +624,59 @@ EndFunction
 // Device request KM.
 // 
 // Parameters:
-//  Settings - See HardwareClient.GetDriverObject
-//  DriverObject - Arbitrary - Driver object
+//  Hardware - CatalogRef.Hardware -
 //  RequestKMSettingsInfo - See RequestKMSettingsInfo
 //  OpenAndClose - Boolean -
 // 
 // Returns:
 //  See ProcessingKMResult
-Function Device_CheckKM(Settings, DriverObject, RequestKMSettings, OpenAndClose = True)
+Async Function Device_CheckKM(Hardware, RequestKMData, OpenAndClose = True)
 	
-	RequestXML = RequestXML(RequestKMSettings);
-	
-	ResultXML = "";
-	RequestStatus = 0;
-	ProcessingKMResultXML = "";
+	RequestXML = RequestXML(RequestKMData);
 	ProcessingKMResult = ProcessingKMResult();
 	
 	If OpenAndClose Then
-		If Not DriverObject.OpenSessionRegistrationKM(Settings.ID) = True Then
+		OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(Hardware, OpenSessionRegistrationKMSettings) Then
+			CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
 			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
 		EndIf;
 	EndIf;
 	
-	If Not DriverObject.RequestKM(Settings.ID, RequestXML, ResultXML) = True Then
-		DriverObject.CloseSessionRegistrationKM(Settings.ID);
+	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMSettings();
+	RequestKMSettings.In.RequestKM = RequestXML;
+	If Not Await EquipmentFiscalPrinterAPIClient.RequestKM(Hardware, RequestKMSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
 		Raise R().EqFP_CanNotRequestKM;
 	EndIf;
 
-	RequestKMResult = RequestXMLResponse(ResultXML);
+	RequestKMResult = RequestXMLResponse(RequestKMSettings.Out.RequestKMResult);
 
 	ResultIsCorrect = False;
 	For Index = 0 To 5 Do
 		CommonFunctionsServer.Pause(2);
-		If Not DriverObject.GetProcessingKMResult(Settings.ID, ProcessingKMResultXML, RequestStatus) = True Then
-			DriverObject.CloseSessionRegistrationKM(Settings.ID);
+		
+		GetProcessingKMResultSettings = EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.GetProcessingKMResult(Hardware, GetProcessingKMResultSettings) Then
+			CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
 			Raise R().EqFP_CanNotGetProcessingKMResult;
 		EndIf;
 		
-		If RequestStatus = 2 Then
+		If GetProcessingKMResultSettings.Out.RequestStatus = 2 Then
 			Raise R().EqFP_GetWrongAnswerFromProcessingKM;
 		EndIf;
 		
-		If RequestStatus = 1 Then
+		If GetProcessingKMResultSettings.Out.RequestStatus = 1 Then
 			Continue;
 		EndIf; 
 
-		If IsBlankString(ProcessingKMResultXML) Then
+		If IsBlankString(GetProcessingKMResultSettings.Out.ProcessingKMResult) Then
 			Continue;	
 		EndIf;
 		
-		ProcessingKMResult = ProcessingKMResultResponse(ProcessingKMResultXML);
+		ProcessingKMResult = ProcessingKMResultResponse(GetProcessingKMResultSettings.Out.ProcessingKMResult);
 		
-		If Not ProcessingKMResult.GUID = RequestKMSettings.GUID Then
+		If Not ProcessingKMResult.GUID = RequestKMData.GUID Then
 			Continue;
 		EndIf;
 		
@@ -605,7 +685,8 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings, OpenAndClose 
 	EndDo;
 	
 	If OpenAndClose Then
-		If Not DriverObject.CloseSessionRegistrationKM(Settings.ID) = True Then
+		CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(Hardware, CloseSessionRegistrationKMSettings) Then
 			Raise R().EqFP_CanNotCloseSessionRegistrationKM;
 		EndIf;
 	EndIf;
@@ -687,13 +768,6 @@ Function ProcessingKMResultResponse(ResultXML)
 	
 EndFunction
 
-Function ShiftSettings() Export
-	Str = New Structure();
-	Str.Insert("ParametersXML", "");
-	Str.Insert("ResultXML", "");	
-	Return Str;
-EndFunction
-
 Function ShiftResultStructure()
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Success", False);
@@ -719,7 +793,7 @@ Function ShiftResultStructure()
 	Return ReturnValue;
 EndFunction
 
-Function ReceiptResultStructure()
+Function ReceiptResultStructure() Export
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Success", False);
 	ReturnValue.Insert("ErrorDescription", "");
@@ -735,13 +809,6 @@ Function ReceiptResultStructure()
 	ReturnValue.Insert("ShiftNumber", 0);
 	
 	Return ReturnValue;
-EndFunction
-
-Function ReceiptSettings() Export
-	Str = New Structure();
-	Str.Insert("ParametersXML", "");
-	Str.Insert("ResultXML", "");	
-	Return Str;	
 EndFunction
 
 Function PrintTextResultStructure()

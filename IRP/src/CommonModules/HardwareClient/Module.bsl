@@ -83,15 +83,15 @@ EndProcedure
 //  * ErrorDescription - String
 //  * ConnectParameters - See GetDriverObject
 Async Function ConnectHardware(Hardware) Export
-	Device = HardwareServer.GetConnectionSettings(Hardware);
+	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
+
 	ResultData = New Structure();
 	ResultData.Insert("Result", False);
 	ResultData.Insert("ErrorDescription", "");
 	ResultData.Insert("ConnectParameters", New Structure());
 	
-	ConnectedDevice = globalEquipment_GetConnectionSettings(Device);
 	If Not ConnectedDevice.Connected Then
-
+		Device = HardwareServer.GetConnectionSettings(Hardware);
 		Settings = Await FillDriverParametersSettings(Hardware, False);
 		
 		If Settings.ConnectedDriver = Undefined Then
@@ -143,12 +143,11 @@ EndFunction
 //  * Result - Boolean
 //  * ErrorDescription - String
 Async Function DisconnectHardware(Hardware) Export
-	Device = HardwareServer.GetConnectionSettings(Hardware);
 	ResultData = New Structure();
 	ResultData.Insert("Result", False);
 	ResultData.Insert("ErrorDescription", "");
 	
-	ConnectedDevice = globalEquipment_GetConnectionSettings(Device);
+	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
 	If ConnectedDevice.Connected Then
 
 		Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
@@ -185,7 +184,7 @@ EndFunction
 // * OldRevision - Boolean - Driver revision less then 3000
 // * WriteLog - Boolean - Write log
 Async Function GetDriverObject(DriverInfo) Export
-	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo);
+	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo.Hardware);
 	If ConnectionSettings.Connected Then
 		Return ConnectionSettings.Settings;
 	EndIf;
@@ -230,7 +229,8 @@ Async Function GetLastError(Hardware) Export
 	ConnectedDriver = Await GetDriverObject(Device);
 	ErrorDescription = "";
 	Device_GetLastError(ConnectedDriver, ConnectedDriver.DriverObject, ErrorDescription);
-	Return ErrorDescription;
+	FullErrorDescription = String(Hardware) + ": " + ErrorDescription;
+	Return FullErrorDescription;
 EndFunction
 
 #EndRegion
@@ -732,7 +732,7 @@ Function Device_GetLastError(Settings, DriverObject, ErrorDescription)
 	Structure.Insert("Out", New Structure);
 	Structure.Out.Insert("ErrorDescription", "");
 	If Settings.WriteLog Then
-		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", True, Structure);
+		HardwareServer.WriteLog(Settings.Hardware, "GetLastError", True, Structure);
 	EndIf;
 	
 	//@skip-check property-return-type
@@ -741,7 +741,7 @@ Function Device_GetLastError(Settings, DriverObject, ErrorDescription)
 	ErrorDescription = Structure.Out.ErrorDescription; // String
 	
 	If Settings.WriteLog Then
-		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", False, Structure, Result);
+		HardwareServer.WriteLog(Settings.Hardware, "GetLastError", False, Structure, Result);
 	EndIf;
 		
 	Return Result;
@@ -918,19 +918,19 @@ EndProcedure
 // Get connection settings.
 // 
 // Parameters:
-//  Device - See HardwareServer.GetConnectionSettings
+//  Hardware - CatalogRef.Hardware
 // 
 // Returns:
 //  Structure - Get connection settings:
 // * Connected - Boolean -
 // * Settings - See GetDriverObject
-Function globalEquipment_GetConnectionSettings(Device) Export
+Function globalEquipment_GetConnectionSettings(Hardware) Export
 	
 	Str = New Structure;
 	Str.Insert("Connected", False);
 	Str.Insert("Settings", New Structure);
 	globalEquipment = globalEquipments; // See NewEquipments
-	CurrentConnection = globalEquipment.ConnectionSettings.Get(Device.Hardware); // See GetDriverObject
+	CurrentConnection = globalEquipment.ConnectionSettings.Get(Hardware); // See GetDriverObject
 	
 	If Not CurrentConnection = Undefined Then
 		Str.Connected = True;

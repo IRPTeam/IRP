@@ -115,7 +115,6 @@ Function _GetUserSettings(User, FilterParameters, CallFromClient = False) Export
 	|		AND tmp_user.AttributeName = tmp_user_group.AttributeName
 	|		AND tmp_user.KindOfAttribute = tmp_user_group.KindOfAttribute";
 	Query.SetParameter("User", User);
-	
 	Workstation = SessionParameters.Workstation;
 	If ValueIsFilled(Workstation) And Not Workstation.UserGroup.IsEmpty() Then
 		Query.SetParameter("Group", Workstation.UserGroup);

@@ -496,6 +496,7 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.ModelClientGlobal</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -723,6 +724,7 @@
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
   <commonForms>CommonForm.CodeStringCheck</commonForms>
   <commonForms>CommonForm.CheckPhoneNumber</commonForms>
+  <commonForms>CommonForm.BackgroungJobSplash</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

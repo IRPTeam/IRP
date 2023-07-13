@@ -1,5 +1,6 @@
 Procedure SessionParametersSetting(RequiredParameters) Export
-
+	WorkstationServer.SetWorkstation(Catalogs.Workstations.EmptyRef());
+	
 	If RequiredParameters = Undefined Then
 		SessionParameters.ConnectionSettings = Catalogs.DataBaseStatus.GetOrCreateDataBaseStatusInfo();
 		StyleName = SessionParameters.ConnectionSettings.SelectedStyle;

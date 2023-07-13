@@ -2005,6 +2005,11 @@ EndFunction
 
 Procedure ItemListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "ItemList", Address, GroupColumn, SumColumn);
+	
+	Parameters.IsBackgroundJob = True;
+	Parameters.ShowBackgroundJobSplash = True;
+	Parameters.BackgroundJobTitle = R().BgJ_Title_002;
+	
 	Parameters.LoadData.ExecuteAllViewNotify = True;
 	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ItemListLoad(Parameters);
@@ -4045,3 +4050,70 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+Procedure ViewIdleHandler(Form, Object) Export
+	JobStatus = ModelServer_V2.GetJobStatus(Form.BackgroungJobKey, Form.BackgroungJobStorageAddress);
+	If JobStatus.JobKey = Undefined Then
+		CancelIdleHandler(Form);
+		Return;
+	EndIf;
+	
+	If JobStatus.Status = "Canceled" Or JobStatus.Status = "Failed" Then
+		CancelIdleHandler(Form);
+		Return;
+	EndIf;
+	
+	If JobStatus.Status = "Active" Then
+		// wait
+		If JobStatus.CompletePercent <> Undefined Then
+			If Form.BackgroungJobSplash <> Undefined Then
+				OpenedSplashForm = GetSplashByUUID(Form.BackgroungJobSplash);
+				If OpenedSplashForm <> Undefined And OpenedSplashForm.IsOpen() Then
+					OpenedSplashForm.Items.Percent.MaxValue = JobStatus.CompletePercent.Total;
+					OpenedSplashForm.Percent = JobStatus.CompletePercent.Complete;
+				EndIf;
+			EndIf;
+		EndIf;
+		Return;
+	EndIf;
+	
+	// complete
+	JobResult = GetFromTempStorage(JobStatus.StorageAddress);
+	JobResult.Parameters.Object = Object;
+	JobResult.Parameters.Form   = Form;
+	ControllerClientServer_V2.OnChainComplete(JobResult.Parameters);
+	ModelClientServer_V2.DestroyEntryPoint(JobResult.Parameters);
+	
+	CancelIdleHandler(Form);
+EndProcedure	
+
+Procedure CancelIdleHandler(Form)
+	Form._DetachIdleHandler();
+	Form.BackgroungJobKey = "";
+	If Form.BackgroungJobSplash <> Undefined Then
+		OpenedSplashForm = GetSplashByUUID(Form.BackgroungJobSplash);
+		If OpenedSplashForm <> Undefined And OpenedSplashForm.IsOpen() Then
+			OpenedSplashForm.Close();
+		EndIf;
+		Form.BackgroungJobSplash = Undefined;
+	EndIf;
+EndProcedure
+
+Function GetSplashByUUID(BackgroungJobSplash)
+	OpenedSplashForm = Undefined;
+	Windows = GetWindows();
+	For Each Window In Windows Do
+		If OpenedSplashForm <> Undefined Then
+			Break;
+		EndIf;
+		If Not Window.IsMain Then
+			For Each Splash In Window.Content Do
+				If Splash.UUID = BackgroungJobSplash Then
+					OpenedSplashForm = Splash;
+					Break;
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+	Return OpenedSplashForm;
+EndFunction

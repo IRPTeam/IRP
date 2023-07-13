@@ -1,4 +1,103 @@
 
+Function RunBackgroundJob(JobParameters) Export
+	JobKey = String(New UUID());	
+	StorageAddress = PutToTempStorage(Undefined, JobParameters.FormUUID);
+	
+	ServiceParameters = New Structure();
+	ServiceParameters.Insert("Parameters_LoadData_Address", Undefined);
+	
+	If ValueIsFilled(JobParameters.Parameters.LoadData.Address) Then
+		_LoadDataValue = GetFromTempStorage(JobParameters.Parameters.LoadData.Address);
+		ServiceParameters.Parameters_LoadData_Address = _LoadDataValue;
+	EndIf;
+	
+	BackgroundParameters = New Array();
+	JobParameters.Parameters.Object = CommonFunctionsServer.SerializeXMLUseXDTO(JobParameters.Parameters.Object);
+	BackgroundParameters.Add(JobParameters);	
+	BackgroundParameters.Add(StorageAddress);
+	BackgroundParameters.Add(ServiceParameters);
+	
+	BackgroundJobs.Execute("ModelServer_V2.BackgroundJob", BackgroundParameters, JobKey);
+	Return New Structure("BackgroungJobKey, BackgroungJobStorageAddress", JobKey, StorageAddress);
+EndFunction
+
+Procedure BackgroundJob(JobParameters, StorageAddress, ServiceParameters) Export
+	JobParameters.Parameters.Object = 
+		CommonFunctionsServer.DeserializeXMLUseXDTO(JobParameters.Parameters.Object);
+	
+	If ValueIsFilled(ServiceParameters.Parameters_LoadData_Address) Then
+		JobParameters.Parameters.LoadData.Address = 
+			PutToTempStorage(ServiceParameters.Parameters_LoadData_Address);
+	EndIf;
+	
+	ServerEntryPoint(JobParameters.StepNames, JobParameters.Parameters, JobParameters.ExecuteLazySteps);
+	JobResult = New Structure();
+	JobResult.Insert("TestMessage", "test message from BJ");
+	JobResult.Insert("Parameters", JobParameters.Parameters);	
+	PutToTempStorage(JobResult, StorageAddress);
+EndProcedure
+
+Procedure SetJobCompletePercent(Parameters, Total, Complete) Export
+	If Parameters.IsBackgroundJob Then
+		Msg = CommonFunctionsServer.SerializeJSON(New Structure("Total, Complete", Total, Complete));
+		Msg = "__complete__percent__" + Msg;
+		Message(Msg);
+	EndIf;
+EndProcedure
+
+Function GetJobStatus(BackgroungJobKey, BackgroungJobStorageAddress) Export
+	//Begin
+	//End
+	//ErrorInfo
+	//Key
+	//Location
+	//MethodName
+	//UUID
+	JobResult = New Structure("JobKey, Status, StorageAddress, CompletePercent");
+		
+	JobResult.StorageAddress = BackgroungJobStorageAddress;
+	
+	If Not ValueIsFilled(BackgroungJobKey) Then
+		Return JobResult;
+	EndIf;
+	
+	ArrayOfJobs = BackgroundJobs.GetBackgroundJobs();
+	Job = Undefined;
+	For Each ItemOfArray In ArrayOfJobs Do
+		If ItemOfArray.Key = BackgroungJobKey Then
+			Job = ItemOfArray;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Job = Undefined Then
+		Return JobResult;
+	EndIf;
+	
+	JobResult.JobKey = BackgroungJobKey;
+	
+	If Job.State = BackgroundJobState.Active Then
+		JobResult.Status = "Active";
+	ElsIf Job.State = BackgroundJobState.Canceled Then
+		JobResult.Status = "Canceled";
+	ElsIf Job.State = BackgroundJobState.Completed Then
+		JobResult.Status = "Completed";
+	ElsIf Job.State = BackgroundJobState.Failed Then
+		JobResult.Status = "Failed";
+	EndIf;
+	
+	ArrayOfMsg = Job.GetUserMessages(True);
+	If ArrayOfMsg.Count() Then
+		Msg = ArrayOfMsg[ArrayOfMsg.Count() - 1];
+		If StrStartsWith(Msg.Text, "__complete__percent__") Then
+			Msg_text = StrReplace(Msg.Text, "__complete__percent__", "");
+			JobResult.CompletePercent = CommonFunctionsServer.DeserializeJSON(Msg_text);
+		EndIf;
+	EndIf;
+
+	Return JobResult;
+EndFunction
+
 Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export	
 	ModelClientServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 EndProcedure

@@ -835,5 +835,10 @@ Function Strings(Lang) Export
 	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en = 'Open serial lot number tree'", Lang));
 #EndRegion	
 	
+#Region BackgroundJobs
+	Strings.Insert("BgJ_Title_001",   NStr("en = 'Background job is running'", Lang));
+	Strings.Insert("BgJ_Title_002",   NStr("en = 'Load Item list'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

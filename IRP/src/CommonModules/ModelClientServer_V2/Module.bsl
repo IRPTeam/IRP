@@ -10,16 +10,45 @@ If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	TransferFormToStructure(Transfer, Parameters);
-#ENDIF
 
+	If Parameters.IsBackgroundJob = True Then
+		
+		If Parameters.ShowBackgroundJobSplash = True Then
+			
+			Splash = OpenForm("CommonForm.BackgroungJobSplash",
+				New Structure("BackgroundJobTitle", Parameters.BackgroundJobTitle),
+				Transfer.Form, 
+				New UUID(),,,,
+				FormWindowOpeningMode.LockOwnerWindow);
+			Transfer.Form.BackgroungJobSplash = Splash.UUID;
+		EndIf;
+				
+		// run background task
+		JobParameters = New Structure();
+		JobParameters.Insert("FormUUID"         , Transfer.Form.UUID);
+		JobParameters.Insert("StepNames"        , StepNames);
+		JobParameters.Insert("Parameters"       , Parameters);
+		JobParameters.Insert("ExecuteLazySteps" , ExecuteLazySteps);
+
+		RunResult = ModelServer_V2.RunBackgroundJob(JobParameters);
+		Transfer.Form.BackgroungJobKey            = RunResult.BackgroungJobKey; 
+		Transfer.Form.BackgroungJobStorageAddress = RunResult.BackgroungJobStorageAddress;
+		Transfer.Form._AttachIdleHandler();
+	Else	
+		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+		TransferStructureToForm(Transfer, Parameters);
+	EndIf;
+
+#ELSE
+	
+	// Is server
 	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-
-#IF Client THEN
-	TransferStructureToForm(Transfer, Parameters);
+	
 #ENDIF
 	
 EndIf;
 
+	
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
 		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
@@ -27,8 +56,10 @@ EndIf;
 			Parameters.ModelEnvironment.ArrayOfLazySteps.Clear();
 			EntryPoint(LazyStepNames, Parameters, True);
 		Else	
-			ControllerClientServer_V2.OnChainComplete(Parameters);
-			DestroyEntryPoint(Parameters);
+			If Parameters.IsBackgroundJob = False Then
+				ControllerClientServer_V2.OnChainComplete(Parameters);
+				DestroyEntryPoint(Parameters);
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure
@@ -3884,7 +3915,7 @@ Procedure InitEntryPoint(StepNames, Parameters)
 	EndIf;
 EndProcedure
 
-Procedure DestroyEntryPoint(Parameters)
+Procedure DestroyEntryPoint(Parameters) Export
 	If Parameters.Property("ModelEnvironment") Then
 		Parameters.Delete("ModelEnvironment");
 	EndIf;

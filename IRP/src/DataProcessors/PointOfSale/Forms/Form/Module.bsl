@@ -1365,6 +1365,7 @@ EndProcedure
 &AtClient
 Procedure CreateCashIn(Command)
 	Items.GroupMainPages.CurrentPage = Items.CashPage;
+	FillCashInList();
 EndProcedure
 
 &AtClient

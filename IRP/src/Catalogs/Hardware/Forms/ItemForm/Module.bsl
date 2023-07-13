@@ -198,7 +198,6 @@ Async Procedure Connect(Command)
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Async Procedure Disconnect(Command)
 	Connections = Await HardwareClient.DisconnectHardware(ThisObject.Object.Ref);
@@ -218,6 +217,12 @@ Procedure UpdateStatus(Command)
 		CommandResult = StrTemplate(R().Eq_004, Object.Ref);
 		CommandResult = CommandResult + Chars.LF + "ID:" + Connections.ID;
 	EndIf;
+EndProcedure
+
+&AtClient
+Async Procedure GetLastError(Command)
+	ErrorDescription = Await HardwareClient.GetLastError(ThisObject.Object.Ref);
+	CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription);
 EndProcedure
 
 #EndRegion

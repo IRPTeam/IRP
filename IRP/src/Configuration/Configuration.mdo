@@ -403,9 +403,10 @@
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
-  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>

@@ -10,7 +10,7 @@ Async Procedure PrintReceipt(CommandParameter)
 	If IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales) Then
 		Return;
 	EndIf;
-	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(ConsolidatedRetailSales, CommandParameter); //  See EquipmentFiscalPrinterClient.ReceiptResultStructure
+	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.PrintCheckCopy(ConsolidatedRetailSales, CommandParameter); //  See EquipmentFiscalPrinterClient.ReceiptResultStructure
 	
 	If EquipmentPrintFiscalReceiptResult.Success Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);

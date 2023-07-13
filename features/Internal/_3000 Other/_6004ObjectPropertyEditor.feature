@@ -460,6 +460,8 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		
 
 Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced writing
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I close all client application windows
 	* Open Object property editor
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			

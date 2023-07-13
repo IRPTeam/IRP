@@ -4859,7 +4859,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>Autor</name>
+        <name>Author</name>
         <id>145</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -4870,7 +4870,7 @@
           <segments>Object.Author</segments>
         </dataPath>
         <extendedTooltip>
-          <name>AutorExtendedTooltip</name>
+          <name>AuthorExtendedTooltip</name>
           <id>147</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4885,7 +4885,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AutorContextMenu</name>
+          <name>AuthorContextMenu</name>
           <id>146</id>
           <visible>true</visible>
           <enabled>true</enabled>

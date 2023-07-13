@@ -174,8 +174,8 @@ Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	
 	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Object.Workstation, PredefinedValue("Enum.EquipmentTypes.Acquiring"));
 	For Each Acquiring In AcquiringList Do
-		SettlementSettings = EquipmentAcquiringClient.SettlementSettings();
-		ResultSettlement = Await EquipmentAcquiringClient.Settlement(Acquiring, SettlementSettings);
+		SettlementSettings = EquipmentAcquiringAPIClient.SettlementSettings();
+		ResultSettlement = Await EquipmentAcquiringAPIClient.Settlement(Acquiring, SettlementSettings);
 		Str = New Structure("Payments", New Array);
 		Str.Payments.Add(New Structure("PaymentInfo", SettlementSettings));
 		If ResultSettlement Then  
@@ -1148,8 +1148,8 @@ Procedure NewTransactionAtServer()
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
-			ChangeConsolidatedRetailSales(Object, ThisObject, 
-				DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation));
+			CRS = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+			ChangeConsolidatedRetailSales(Object, ThisObject, CRS);
 		Else
 			Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSales;
 		EndIf;
@@ -1365,6 +1365,7 @@ EndProcedure
 &AtClient
 Procedure CreateCashIn(Command)
 	Items.GroupMainPages.CurrentPage = Items.CashPage;
+	FillCashInList();
 EndProcedure
 
 &AtClient

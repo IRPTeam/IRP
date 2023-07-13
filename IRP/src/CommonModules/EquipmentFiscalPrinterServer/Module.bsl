@@ -535,10 +535,16 @@ Function PreparePrintTextData(SourceData) Export
 	Return Str;
 EndFunction
 
-Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "") Export
+Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = Undefined, DataPresentation = "") Export
+	
+	If FiscalResponse = Undefined Then
+		FiscalResponse = New Structure;
+	EndIf;	
+	
 	If Status = "Prepaired" Then
 		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Prepaired);
+																, Enums.DocumentFiscalStatuses.Prepaired
+																, FiscalResponse);
 	ElsIf Status = "Printed" Then
 		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
 																, Enums.DocumentFiscalStatuses.Printed
@@ -550,7 +556,8 @@ Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = ""
 																, FiscalResponse);
 	ElsIf Status = "NotPrinted" Then
 		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.NotPrinted);
+																, Enums.DocumentFiscalStatuses.NotPrinted
+																, FiscalResponse);
 	EndIf;
 EndProcedure
 

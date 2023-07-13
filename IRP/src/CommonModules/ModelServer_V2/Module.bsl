@@ -32,7 +32,6 @@ Procedure BackgroundJob(JobParameters, StorageAddress, ServiceParameters) Export
 	
 	ServerEntryPoint(JobParameters.StepNames, JobParameters.Parameters, JobParameters.ExecuteLazySteps);
 	JobResult = New Structure();
-	JobResult.Insert("TestMessage", "test message from BJ");
 	JobResult.Insert("Parameters", JobParameters.Parameters);	
 	PutToTempStorage(JobResult, StorageAddress);
 EndProcedure

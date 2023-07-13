@@ -669,17 +669,17 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'               | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | 'Front office'         | '200,00'           | '2,00'                 |
-			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | 'Front office'         | '150,00'           | '1,50'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
 		And in the table "List" I click the button named "ListSetDateInterval"
 		Then "Select period" window is opened
 		And I input "07.07.2022" text in the field named "DateBegin"
 		And I input "07.07.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'               | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | 'Front office'         | '200,00'           | '2,00'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
 		And in the table "List" I click the button named "ListChoose"
 		And I finish line editing in "PaymentList" table
 	* Check creation
@@ -714,6 +714,11 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			| Description          |
 			| Bank account, TRY    |
 		And I select current line in "List" table
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| Description     |
+			| Front office    |
+		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
 		And I set "Commission is separate" checkbox in "PaymentList" table
@@ -739,9 +744,9 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'               | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | 'Front office'         | '100,00'           | '2,00'                 |
-			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | 'Front office'         | '150,00'           | '1,50'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
 		And I go to line in "List" table
 			| 'Amount'   | 'Amount Balance'   | 'Commission'   | 'Commission Balance'   | 'Company'        | 'Date'                  | 'Number'   |
 			| '200,00'   | '100,00'           | '2,00'         | '2,00'                 | 'Main Company'   | '07.07.2022 16:33:55'   | '104'      |

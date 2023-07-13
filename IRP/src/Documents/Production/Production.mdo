@@ -362,6 +362,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5495c450-50ba-48e4-bc56-66aec29477a9">
+    <name>AdditionalCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional cost</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="57e36e1f-f225-489b-8685-a9656b958641">
     <name>DocumentForm</name>
     <synonym>

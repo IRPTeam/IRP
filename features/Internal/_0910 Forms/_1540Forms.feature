@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -1342,6 +1342,7 @@ Scenario: _012025 check box Show item in item key it the Registrations report
 		And I click the button named "FormPost"	
 	* Check box Show item in item key
 		And I click "Registrations report" button
+		And I expand "Filters" group		
 		And I set checkbox "Show item in item key"
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values

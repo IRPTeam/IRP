@@ -12,12 +12,12 @@ SalesReceiptXML1 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 3 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 3 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
 	</Positions>
 	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -27,11 +27,11 @@ SalesReceiptXML2 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="720" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -41,12 +41,12 @@ SalesReceiptXML3 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 4 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
 	<Payments Cash="440" ElectronicPayment="400" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -56,9 +56,9 @@ SalesReceiptXML4 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -67,9 +67,9 @@ SalesReceiptXML5 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -79,11 +79,11 @@ SalesReceiptXML6 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
+		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
 	</Positions>
-	<Payments Cash="210" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+	<Payments Cash="10" ElectronicPayment="0" PrePayment="200" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -91,9 +91,9 @@ SalesReceiptXML7 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -103,9 +103,9 @@ SalesReceiptXML8 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="520" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -115,18 +115,18 @@ SalesReceiptXML9 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
 	<Payments Cash="520" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -136,10 +136,10 @@ SalesReceiptXML10 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="620" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -149,9 +149,9 @@ SalesReceiptXML11 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="200" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -161,14 +161,60 @@ SalesReceiptXML12 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 9 with SLN (control code string, without check) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 9 with SLN (control code string, without check) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 	</Positions>
 	<Payments Cash="100" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
+SalesReceiptXML13 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
+	</Positions>
+	<Payments Cash="120" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML14 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
+	</Positions>
+	<Payments Cash="112" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+SalesReceiptXML15 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+	</Positions>
+	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML16 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+	</Positions>
+	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -370,6 +416,9 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'    |
 			| 'KKT_3004'       |
 		And I select current line in "List" table
+		And I expand "Additional info" group
+		And I input "Sale address" text in "Sale address" field
+		And I input "Sale location" text in "Sale location" field	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -394,6 +443,9 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'       |
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
+		And I expand "Additional info" group
+		And I input "Sale address" text in "Sale address" field
+		And I input "Sale location" text in "Sale location" field	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -564,8 +616,10 @@ Scenario: _0850002 open session
 	And I close all client application windows
 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 	And I check "$ParsingResult$" with "0" and method is "OpenShift"
-	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierName="CI"'
-	
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierName="Арина Браун"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierINN="1111111111"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'SaleAddress="Sale address"'
+	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'SaleLocation="Sale location"'
 
 
 Scenario: _0850010 create cash in
@@ -951,9 +1005,9 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML10"
-		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '620.00'
+		And I check "$ParsingResult$" with "6" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains '620.00'
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
@@ -983,7 +1037,7 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 			| 'Reference'    |
 			| 'Card 04'      |
 		And I select current line in "BankPaymentTypeList" table
-		And I click "5" button
+		And I click "4" button
 		And I click "0" button
 		And I go to line in "BankPaymentTypeList" table
 			| 'Reference'    |
@@ -999,19 +1053,19 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
 		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
 		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "8" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "6" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains '60.00'
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '60.00'	
 		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'	
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '40.00'	
 	* Check RRN
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
@@ -1021,8 +1075,8 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'      | 'Account'          | 'Percent'   | 'RRN Code'    |
-			| '1'   | '50,00'    | '0,50'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | '*'           |
-			| '2'   | '50,00'    | '0,50'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | '*'           |
+			| '1'   | '40,00'    | '0,40'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | '*'           |
+			| '2'   | '60,00'    | '0,60'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | '*'           |
 		And I go to the first line in "Payments" table
 		And I delete "$$RRN1$$" variable
 		And I delete "$$RRN2$$" variable
@@ -1056,8 +1110,8 @@ Scenario: _0850022 check than RRN not copy
 	And I move to "Payments" tab
 	And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'      | 'Account'          | 'Percent'   | 'RRN Code'    |
-			| '1'   | '50,00'    | '0,50'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | ''            |
-			| '2'   | '50,00'    | '0,50'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | ''            |
+			| '1'   | '40,00'    | '0,40'         | 'Card 04'        | ''                   | 'Bank term 03'   | 'POS Terminal 2'   | '1,00'      | ''            |
+			| '2'   | '60,00'    | '0,60'         | 'Card 03'        | ''                   | 'Bank term 03'   | 'POS Terminal'     | '1,00'      | ''            |
 	And I close all client application windows
 	
 Scenario: _0850023 check return payment by card and cash (sales by card)
@@ -1128,12 +1182,12 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
+		And I check "$ParsingResult$" with "6" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult$" with "6" and data in "In.Parameter2" contains '40.00'
 		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
 		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "8" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
 Scenario: _0850024 return by card without basis document (without RRN)
@@ -2236,11 +2290,104 @@ Scenario: _0260159 check marking code without check code string
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And Delay 5
-		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" the same as "SalesReceiptXML12"		
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"		
 		
+Scenario: _0260160 check sale product control code string, without check, payment more than receipt sum
+		And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click "Search by barcode (F7)" button
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Code string is missing" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "112,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		And I click "1" button
+		And I click "2" button
+		And I click "0" button
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML13"	
+
+		
+Scenario: _0260161 check return product control code string, without check
+		And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Amount' |
+			| '112,00' |
+		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Code string is missing" button
+		And I click "Payment Return" button
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML14"
+				
+	
+Scenario: _0260162 receipt with marking code, return without marking code
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click "Search by barcode (F7)" button
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "113,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML15"	
+	* Return
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Amount' |
+			| '113,00' |
+		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Code string is missing" button
+		And I click "Payment Return" button
+		And I click "OK" button	
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
+
 
 Scenario: _0260152 close session
 	And I close all client application windows
@@ -2292,6 +2439,9 @@ Scenario: _0260153 check hardware parameter saving
 				| 'Description'     |
 				| 'KKT_3004'        |
 			And I select current line in "List" table
+			And I expand "Additional info" group
+			And I input "Sale address" text in "Sale address" field
+			And I input "Sale location" text in "Sale location" field		
 			And I click "Save" button
 			And I move to "Driver settings" tab
 			And in the table "DriverParameter" I click "Reload settings" button

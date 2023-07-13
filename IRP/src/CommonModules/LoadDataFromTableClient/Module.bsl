@@ -4,20 +4,35 @@
 // Parameters:
 //  FormObject - ClientApplicationForm - Form
 //  DocumentObject - FormDataStructure - Document object
-Procedure OpenFormForLoadData(FormObject, DocumentObject) Export
+Procedure OpenFormForLoadData(FormObject, DocumentObject, AddInfo = Undefined) Export
+	
+	Var EndNotify;
+	Var TargetField;
+	Var FieldsForLoadData;
+	
+	If TypeOf(AddInfo) = Type("Structure") Then
+		AddInfo.Property("FieldsForLoadData", FieldsForLoadData);
+		AddInfo.Property("TargetField", TargetField);
+		AddInfo.Property("EndNotify", EndNotify);
+	EndIf;
+	
+	If FieldsForLoadData = Undefined Then
+		FieldsForLoadData = FormObject["_FieldsForLoadData"];
+	EndIf;
+	If EndNotify = Undefined Then
+		AddInfoNotify = New Structure;
+		AddInfoNotify.Insert("FormObject",     FormObject);
+		AddInfoNotify.Insert("DocumentObject", DocumentObject);
+		EndNotify = New NotifyDescription("LoadDataFromTableEnd", ThisObject, AddInfoNotify);
+	EndIf;
 	
 	FormParameters = New Structure;
-	FormParameters.Insert("FieldsForLoadData", FormObject["_FieldsForLoadData"]);
+	FormParameters.Insert("FieldsForLoadData", FieldsForLoadData);
+	If TargetField <> Undefined Then
+		FormParameters.Insert("TargetField", TargetField);
+	EndIf;
 	
-	AddInfo = New Structure;
-	AddInfo.Insert("FormObject",     FormObject);
-	AddInfo.Insert("DocumentObject", DocumentObject);
-	
-	OpenForm(
-		"CommonForm.LoadDataFromTable", 
-		FormParameters, 
-		FormObject, , , , 
-		New NotifyDescription("LoadDataFromTableEnd", ThisObject, AddInfo));
+	OpenForm("CommonForm.LoadDataFromTable", FormParameters, FormObject, , , , EndNotify);
 		
 EndProcedure
 

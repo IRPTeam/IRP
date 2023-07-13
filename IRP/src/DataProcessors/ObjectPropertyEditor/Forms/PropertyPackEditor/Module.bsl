@@ -8,7 +8,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			NewRecord = ThisObject.PropertiesTable.Add();
 			FillPropertyValues(NewRecord, PropertyRow);
 			If NewRecord.isCollection Then
-				NewRecord.isMarked = TypeOf(NewRecord.Value) = Type("ValueList") And NewRecord.Value.Count() > 0; 
+				NewRecord.isMarked = TypeOf(NewRecord.Value) = Type("ValueList") And NewRecord.Value.Count() > 0;
+			ElsIf PropertyRow.FieldName = "Field_Key" Then
+				NewRecord.isMarked = False;
 			Else
 				NewRecord.isMarked = ValueIsFilled(NewRecord.Value);
 			EndIf;

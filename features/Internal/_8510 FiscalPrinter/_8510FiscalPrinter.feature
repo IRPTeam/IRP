@@ -2389,6 +2389,19 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
 
+Scenario: _0260162 check button Print receipt (copy)
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the first line in "List" table
+		And I click "Print copy receipt" button
+	* Check
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintCheckCopy"	
+	And I close all client application windows
 
 Scenario: _0260152 close session
 	And I close all client application windows
@@ -2490,19 +2503,7 @@ Scenario: _0260160 check Get Last Error button
 			|'Fiscal printer: '|
 		And I close all client application windows
 												
-Scenario: _0260162 check button Print receipt (copy)
-	And I close all client application windows
-	* Select RSR
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I go to the first line in "List" table
-		And I click "Print copy receipt" button
-	* Check
-		Then there are lines in TestClient message log
-			|'Done'|
-	* Check fiscal log
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintCheckCopy"	
-	And I close all client application windows
+
 
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows

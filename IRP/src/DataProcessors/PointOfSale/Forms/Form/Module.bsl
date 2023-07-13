@@ -1148,8 +1148,8 @@ Procedure NewTransactionAtServer()
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
-			ChangeConsolidatedRetailSales(Object, ThisObject, 
-				DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation));
+			CRS = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+			ChangeConsolidatedRetailSales(Object, ThisObject, CRS);
 		Else
 			Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSales;
 		EndIf;

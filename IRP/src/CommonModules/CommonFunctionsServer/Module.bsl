@@ -33,6 +33,20 @@ EndFunction
 
 #EndRegion
 	
+// Sort array.
+// 
+// Parameters:
+//  Array - Array - Array
+// 
+// Returns:
+//  Array - Sort array
+Function SortArray(Array) Export
+	VL = New ValueList();
+	VL.LoadValues(Array);
+	VL.SortByValue();
+	Return VL.UnloadValues();
+EndFunction	
+	
 // Is primitive value.
 // 
 // Parameters:

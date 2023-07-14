@@ -28,6 +28,11 @@ Procedure UndoPosting(Cancel)
 	LandedCostServer.ReleaseBatchReallocateDocuments(ThisObject.Ref);
 EndProcedure
 
+// Fill check processing.
+// 
+// Parameters:
+//  Cancel - Boolean - Cancel
+//  CheckedAttributes - Array of String - Checked attributes
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
 		CheckedAttributes.Add("Company");

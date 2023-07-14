@@ -1005,7 +1005,7 @@ EndProcedure
 // Is metadata available by current functional options.
 // 
 // Parameters:
-//  ValidatedMetadata - MetadataObjectAttribute - Validated metadata
+//  ValidatedMetadata - MetadataObjectAttribute, MetadataObjectCommonAttribute - Validated metadata
 //  hasType - Boolean - has type
 // 
 // Returns:

@@ -10,6 +10,7 @@ Async Procedure PrintReceipt(CommandParameter)
 	If IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales) Then
 		Return;
 	EndIf;
+	//@skip-check module-unused-local-variable
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(ConsolidatedRetailSales, CommandParameter);
 EndProcedure
 

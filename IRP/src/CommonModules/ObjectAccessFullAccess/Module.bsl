@@ -193,20 +193,40 @@ Function GetAndCalculatedAccessKey(Source, MetadataObject)
 	
 	Keys = New ValueTable();
 	Keys.Columns.Add("Key", New TypeDescription("String"));
-	Keys.Columns.Add("ValueSimpleType", Metadata.Catalogs.ObjectAccessKeys.TabularSections.FilterDataList.Attributes.ValueSimpleType.Type);
-	Keys.Columns.Add("ValueRef", Metadata.Catalogs.ObjectAccessKeys.TabularSections.FilterDataList.Attributes.ValueRef.Type);
+	MaxCount = 0;
+	For Each Attribute In Metadata.Catalogs.ObjectAccessKeys.TabularSections.FilterDataList.Attributes Do
+		If Not StrStartsWith(Attribute.Name, "ValueRef") Then
+			Continue;
+		EndIf;
+		MaxCount = MaxCount + 1;
+		Keys.Columns.Add("ValueRef" + MaxCount, Metadata.Catalogs.ObjectAccessKeys.TabularSections.FilterDataList.Attributes["ValueRef" + MaxCount].Type);
+	EndDo;
 	
 	For Each AccessKey In AccessKeys Do
 		If TypeOf(AccessKey.Value) = Type("Array") Then
-			For Each Value In AccessKey.Value Do
-				FillKeysTables(Keys, AccessKey.Key, Value);
+			//@skip-check dynamic-access-method-not-found
+			If AccessKey.Value.Count() > MaxCount Then
+				//@skip-check property-return-type
+				Raise R().Error_MaximumAccessKey;
+			EndIf;
+			
+			//@skip-check invocation-parameter-type-intersect
+			SortedArray = CommonFunctionsServer.SortArray(AccessKey.Value);
+			NewRow = Keys.Add();
+			NewRow.Key = AccessKey.Key;			
+			//@skip-check dynamic-access-method-not-found
+			For Index = 0 To SortedArray.Count() - 1 Do
+				NewRow["ValueRef" + (Index + 1)] = SortedArray[Index];
 			EndDo;
 		Else
-			FillKeysTables(Keys, AccessKey.Key, AccessKey.Value);
+			NewRow = Keys.Add();
+			NewRow.Key = AccessKey.Key;
+			//@skip-check property-return-type
+			NewRow.ValueRef1 = AccessKey.Value;
 		EndIf;
 	EndDo; 
 	
-	Keys.Sort("Key, ValueSimpleType, ValueRef");
+	Keys.Sort("Key");
 	
 	HASH = CommonFunctionsServer.GetMD5(Keys, True, True);
 
@@ -237,20 +257,5 @@ Function GetAndCalculatedAccessKey(Source, MetadataObject)
 	Return AccessKeyRef;
 
 EndFunction
-
-Procedure FillKeysTables(Keys, PathKey, Value)
-	NewRow = Keys.Add();
-	NewRow.Key = PathKey;
-	If Keys.Columns.ValueRef.ValueType.ContainsType(TypeOf(Value)) Then
-		//@skip-check property-return-type
-		NewRow.ValueRef = Value;
-	ElsIf Keys.Columns.ValueSimpleType.ValueType.ContainsType(TypeOf(Value)) Then
-		//@skip-check property-return-type
-		NewRow.ValueSimpleType = Value;
-	Else
-		//@skip-check property-return-type
-		Raise R().ACS_UnknownValueType;
-	EndIf;
-EndProcedure
 
 #EndRegion

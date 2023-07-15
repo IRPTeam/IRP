@@ -280,6 +280,11 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	AccessKeyMap.Insert("Store", Obj.Store);
+	StoreList = Obj.ItemList.Unload(, "Store");
+	StoreList.GroupBy("Store");
+	StoreArray = StoreList.UnloadColumn("Store");
+	StoreArray.Add(Obj.Store);
+	AccessKeyMap.Insert("Store", StoreArray);
 	Return AccessKeyMap;
 EndFunction
 

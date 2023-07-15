@@ -177,6 +177,7 @@ Function DeserializeAtServer(Val Data, Val ImportDataToPoductDataBaseIsGranted)
 	Logs = New Array; // Array Of String
 	For Each Row In InfoArray Do
 		Try
+			//@skip-check dynamic-access-method-not-found
 			Row.Write();
 		Except
 			Logs.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()) + Chars.LF + CommonFunctionsServer.SerializeXMLUseXDTO(Row));

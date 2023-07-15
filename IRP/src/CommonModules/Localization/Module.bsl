@@ -543,6 +543,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));
 	Strings.Insert("Error_Store_Company_Row", NStr("en = 'Store [%1] in row [%3] does not match company [%2]'", Lang));
 	
+	Strings.Insert("Error_MaximumAccessKey", NStr("en = 'Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]'", Lang));
 #EndRegion
 
 #Region LandedCost

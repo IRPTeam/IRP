@@ -1578,6 +1578,16 @@ Scenario: set True value to the constant Use commission trading
 		And I click "Save" button
 		And I close current window
 
+Scenario: set True value to the constant Use object access
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                    |
+			| 'Use object access'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set True value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened

@@ -7580,7 +7580,12 @@ WHERE NOT (FALSE) IN (
 			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
 				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
 					AND AG.Key = ObjectAccessKeysFilterDataList.Key
-					AND AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef
+					AND (AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef1 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef2 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef3
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef4
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef5
+					 	OR  AG.DoNotControl)
 					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
 					AND (AG.Modify)
 					#EndIf

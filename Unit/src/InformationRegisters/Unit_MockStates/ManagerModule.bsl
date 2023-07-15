@@ -26,12 +26,34 @@ Procedure SetMockState(Mock, Key, Value) Export
 	RecordManager.Write();
 EndProcedure
 
+// Get mock state.
+// 
+// Parameters:
+//  Mock - CatalogRef.Unit_MockServiceData - Mock
+//  Key - String - Key
+// 
+// Returns:
+//  Structure - Get mock state
 Function GetMockState(Mock, Key) Export
 	Filter = New Structure;
 	Filter.Insert("Mock", Mock);
 	Filter.Insert("Key", Key);
 	
 	Return GetLast(, Filter);
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// See Role.TemplateInformationRegisters
+// 
+// Returns:
+//  Structure - Get access key:
+Function GetAccessKey() Export
+	AccessKeyStructure = New Structure;
+	Return AccessKeyStructure;
 EndFunction
 
 #EndRegion

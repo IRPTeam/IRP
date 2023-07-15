@@ -153,23 +153,6 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <dimensions uuid="b1bd2da2-6475-48f4-9251-06994812e2ff">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-      <types>DocumentRef.WorkSheet</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
   <dimensions uuid="88ba6ef1-2488-4e52-854f-a2218a29a1a6">
     <name>Company</name>
     <synonym>
@@ -197,6 +180,23 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
+  <dimensions uuid="b1bd2da2-6475-48f4-9251-06994812e2ff">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+      <types>DocumentRef.WorkSheet</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="76512ac4-4495-4ad0-869f-f261c7234b01">
     <name>ProfitLossCenter</name>

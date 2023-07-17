@@ -3849,8 +3849,15 @@ Function ChangeisControlCodeStringByItemOptions() Export
 	Return GetChainLinkOptions("Item");
 EndFunction
 
-Function ChangeisControlCodeStringByItemExecute(Options) Export
-	If CommonFunctionsServer.GetRefAttribute(SessionParametersServer.GetSessionParameter("Workstation"), "IgnoreCodeStringControl") Then
+Function ChangeisControlCodeStringByItemExecute(Options) Export  
+	Try
+		Workstation = SessionParametersServer.GetSessionParameter("Workstation");
+	Except
+		Workstation = Undefined;
+	EndTry;
+	
+	
+	If ValueIsFilled(Workstation) And CommonFunctionsServer.GetRefAttribute(Workstation, "IgnoreCodeStringControl") Then
 		Return False;
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");

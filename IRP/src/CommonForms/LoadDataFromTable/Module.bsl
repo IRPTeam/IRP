@@ -604,7 +604,8 @@ EndProcedure
 &AtServer
 Procedure FillTargetField(ResultRow, SourceRow)
 	If ThisObject.TargetField = "Quantity" Then
-		ResultRow.Quantity = ?(ResultRow.Quantity = 0, 1, ResultRow.Quantity);
+		//@skip-check property-return-type
+		ResultRow.Quantity = ?(SourceRow.Quantity = 0, 1, SourceRow.Quantity);
 	Else
 		ResultRow[ThisObject.TargetField] = SourceRow[ThisObject.TargetField];
 	EndIf;

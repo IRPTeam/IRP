@@ -585,7 +585,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6040S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForBundleAmountValues.GroupBy(
 	"Company, Period, Batch, BatchKey, BatchKeyBundle", 
-	"AmountValue, AmountTaxValue, AmountCostRatio, NotDirectCosts, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
+	"AmountValue, AmountTaxValue, AmountCostRatio, AmountCostAdditional, NotDirectCosts, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
 
 	For Each Row In BatchWiseBalanceTables.DataForBundleAmountValues Do
 		NewRecordT6040S = RecordSetT6040S.Add();
@@ -601,7 +601,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6090S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForCompositeBatchesAmountValues.GroupBy(
 	"Company, Period, Batch, BatchKey, BatchComposite, BatchKeyComposite", 
-	"Amount, AmountTax, AmountCostRatio, NotDirectCosts, Quantity, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
+	"Amount, AmountTax, AmountCostRatio, AmountCostAdditional, NotDirectCosts, Quantity, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
 
 	For Each Row In BatchWiseBalanceTables.DataForCompositeBatchesAmountValues Do
 		NewRecordT6090S = RecordSetT6090S.Add();
@@ -617,7 +617,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6080S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues.GroupBy(
 	"Period, OutgoingDocument, IncomingDocument, BatchKey", 
-	"Amount, AmountTax, AmountCostRatio, NotDirectCosts, Quantity, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
+	"Amount, AmountTax, AmountCostRatio, AmountCostAdditional, NotDirectCosts, Quantity, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
 
 	For Each Row In BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues Do
 		NewRecordT6080S = RecordSetT6080S.Add();
@@ -633,7 +633,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForWriteOffBatches.GroupBy(
 	"Period, Document, Company, Branch, ProfitLossCenter, ExpenseType, ItemKey, Currency, RowID", 
-	"Amount, AmountTax, AmountCostRatio, NotDirectCosts, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
+	"Amount, AmountTax, AmountCostRatio, AmountCostAdditional, NotDirectCosts, AmountCost, AmountCostTax, AmountRevenue, AmountRevenueTax");
 
 	For Each Row In BatchWiseBalanceTables.DataForWriteOffBatches Do
 		NewRecord = RecordSet.Add();
@@ -676,6 +676,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountTax" , RegMetadata.Resources.AmountTax.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("NotDirectCosts"  , RegMetadata.Resources.NotDirectCosts.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountCostRatio" , RegMetadata.Resources.AmountCostRatio.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AmountCostAdditional" , RegMetadata.Resources.AmountCostAdditional.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountCost"      , RegMetadata.Resources.AmountCost.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountCostTax"   , RegMetadata.Resources.AmountCostTax.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountRevenue"   , RegMetadata.Resources.AmountRevenue.Type);
@@ -706,6 +707,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForBundleAmountValues.Columns.Add("AmountTaxValue" , RegMetadata.Resources.AmountTaxValue.Type);
 	DataForBundleAmountValues.Columns.Add("NotDirectCosts" , RegMetadata.Resources.NotDirectCosts.Type);
 	DataForBundleAmountValues.Columns.Add("AmountCostRatio" , RegMetadata.Resources.AmountCostRatio.Type);
+	DataForBundleAmountValues.Columns.Add("AmountCostAdditional" , RegMetadata.Resources.AmountCostAdditional.Type);
 	DataForBundleAmountValues.Columns.Add("BatchKeyBundle"  , RegMetadata.Dimensions.BatchKeyBundle.Type);
 	DataForBundleAmountValues.Columns.Add("AmountCost"      , RegMetadata.Resources.AmountCost.Type);
 	DataForBundleAmountValues.Columns.Add("AmountCostTax"   , RegMetadata.Resources.AmountCostTax.Type);
@@ -727,6 +729,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForCompositeBatchesAmountValues.Columns.Add("AmountTax"         , RegMetadata.Resources.AmountTax.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("NotDirectCosts"    , RegMetadata.Resources.NotDirectCosts.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("AmountCostRatio"   , RegMetadata.Resources.AmountCostRatio.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AmountCostAdditional"   , RegMetadata.Resources.AmountCostAdditional.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("AmountCost"      , RegMetadata.Resources.AmountCost.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("AmountCostTax"   , RegMetadata.Resources.AmountCostTax.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("AmountRevenue"   , RegMetadata.Resources.AmountRevenue.Type);
@@ -746,6 +749,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForReallocatedBatchesAmountValues.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("NotDirectCosts"   , RegMetadata.Resources.NotDirectCosts.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("AmountCostRatio"  , RegMetadata.Resources.AmountCostRatio.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AmountCostAdditional"  , RegMetadata.Resources.AmountCostAdditional.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("AmountCost"      , RegMetadata.Resources.AmountCost.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("AmountCostTax"   , RegMetadata.Resources.AmountCostTax.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("AmountRevenue"   , RegMetadata.Resources.AmountRevenue.Type);
@@ -769,6 +773,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForWriteOffBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
 	DataForWriteOffBatches.Columns.Add("NotDirectCosts"   , RegMetadata.Resources.NotDirectCosts.Type);
 	DataForWriteOffBatches.Columns.Add("AmountCostRatio"  , RegMetadata.Resources.AmountCostRatio.Type);
+	DataForWriteOffBatches.Columns.Add("AmountCostAdditional"  , RegMetadata.Resources.AmountCostAdditional.Type);
 	DataForWriteOffBatches.Columns.Add("AmountCost"      , RegMetadata.Resources.AmountCost.Type);
 	DataForWriteOffBatches.Columns.Add("AmountCostTax"   , RegMetadata.Resources.AmountCostTax.Type);
 	DataForWriteOffBatches.Columns.Add("AmountRevenue"   , RegMetadata.Resources.AmountRevenue.Type);
@@ -787,6 +792,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
 	TableOfReturnedBatches.Columns.Add("NotDirectCosts"   , RegMetadata.Resources.NotDirectCosts.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCostRatio"  , RegMetadata.Resources.AmountCostRatio.Type);
+	TableOfReturnedBatches.Columns.Add("AmountCostAdditional"  , RegMetadata.Resources.AmountCostAdditional.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCost"       , RegMetadata.Resources.AmountCost.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCostTax"    , RegMetadata.Resources.AmountCostTax.Type);
 	TableOfReturnedBatches.Columns.Add("AmountRevenue"    , RegMetadata.Resources.AmountRevenue.Type);
@@ -801,6 +807,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("AmountTaxBalance" , RegMetadata.Resources.AmountTax.Type);
 	TableOfReturnedBatches.Columns.Add("NotDirectCostsBalance"  , RegMetadata.Resources.NotDirectCosts.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCostRatioBalance" , RegMetadata.Resources.AmountCostRatio.Type);
+	TableOfReturnedBatches.Columns.Add("AmountCostAdditionalBalance" , RegMetadata.Resources.AmountCostAdditional.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCostBalance"       , RegMetadata.Resources.AmountCost.Type);
 	TableOfReturnedBatches.Columns.Add("AmountCostTaxBalance"    , RegMetadata.Resources.AmountCostTax.Type);
 	TableOfReturnedBatches.Columns.Add("AmountRevenueBalance"    , RegMetadata.Resources.AmountRevenue.Type);
@@ -839,6 +846,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
 	|	SUM(T6020S_BatchKeysInfo.AmountTax) AS AmountTax,
 	|	SUM(T6020S_BatchKeysInfo.AmountCostRatio) AS AmountCostRatio,
+	|	SUM(T6020S_BatchKeysInfo.AmountCostAdditional) AS AmountCostAdditional,
 	|	
 //	|	T6020S_BatchKeysInfo.Recorder AS Document,
 //	|	T6020S_BatchKeysInfo.Recorder.PointInTime AS PointInTime,
@@ -1006,6 +1014,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
 	|	SUM(T6020S_BatchKeysInfo.AmountTax) AS AmountTax,
 	|	SUM(T6020S_BatchKeysInfo.AmountCostRatio) AS AmountCostRatio,
+	|	SUM(T6020S_BatchKeysInfo.AmountCostAdditional) AS AmountCostAdditional,
 	|	
 	|	sum(T6020S_BatchKeysInfo.NotDirectCosts) AS NotDirectCosts,
 	|
@@ -1132,6 +1141,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.Amount AS Amount,
 	|	BatchKeysRegister.AmountTax AS AmountTax,
 	|	BatchKeysRegister.AmountCostRatio AS AmountCostRatio,
+	|	BatchKeysRegister.AmountCostAdditional AS AmountCostAdditional,
 	|
 	|	BatchKeysRegister.NotDirectCosts AS NotDirectCosts,
 	|
@@ -1169,6 +1179,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.Amount,
 	|	BatchKeysRegisterOutPeriod.AmountTax,
 	|	BatchKeysRegisterOutPeriod.AmountCostRatio,
+	|	BatchKeysRegisterOutPeriod.AmountCostAdditional,
 	|
 	|	BatchKeysRegisterOutPeriod.NotDirectCosts,
 	|
@@ -1206,6 +1217,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(BatchKeysInfo.Amount) AS Amount,
 	|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
 	|	SUM(BatchKeysInfo.AmountCostRatio) AS AmountCostRatio,
+	|	SUM(BatchKeysInfo.AmountCostAdditional) AS AmountCostAdditional,
 	|
 	|	SUM(BatchKeysInfo.NotDirectCosts) AS NotDirectCosts,
 	|
@@ -1263,6 +1275,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.Amount AS Amount,
 	|	BatchKeys.AmountTax AS AmountTax,
 	|	BatchKeys.AmountCostRatio AS AmountCostRatio,
+	|	BatchKeys.AmountCostAdditional AS AmountCostAdditional,
 	|
 	|	BatchKeys.NotDirectCosts AS NotDirectCosts,
 	|
@@ -1301,6 +1314,12 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN 0
 	|		ELSE BatchKeys.AmountCostRatio
 	|	END AS AmountCostRatioBalance,
+	|	CASE
+	|		WHEN Batches.Ref IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|			THEN 0
+	|		ELSE BatchKeys.AmountCostAdditional
+	|	END AS AmountCostAdditionalBalance,
 	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
@@ -1366,6 +1385,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	0,
 	|	0,
 	|	0,
+	|	0,
 	|
 	|	0,
 	|
@@ -1385,6 +1405,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.AmountBalance,
 	|	R6010B_BatchWiseBalance.AmountTaxBalance,
 	|	R6010B_BatchWiseBalance.AmountCostRatioBalance,
+	|	R6010B_BatchWiseBalance.AmountCostAdditionalBalance,
 	|
 	|	R6010B_BatchWiseBalance.NotDirectCostsBalance,
 	|
@@ -1419,6 +1440,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(AllData.Amount) AS Amount,
 	|	SUM(AllData.AmountTax) AS AmountTax,
 	|	SUM(AllData.AmountCostRatio) AS AmountCostRatio,
+	|	SUM(AllData.AmountCostAdditional) AS AmountCostAdditional,
 	|
 	|	SUM(AllData.NotDirectCosts) AS NotDirectCosts,
 	|
@@ -1437,6 +1459,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(AllData.AmountBalance) AS AmountBalance,
 	|	SUM(AllData.AmountTaxBalance) AS AmountTaxBalance,
 	|	SUM(AllData.AmountCostRatioBalance) AS AmountCostRatioBalance,
+	|	SUM(AllData.AmountCostAdditionalBalance) AS AmountCostAdditionalBalance,
 	|
 	|	SUM(AllData.NotDirectCostsBalance) AS NotDirectCostsBalance,
 	|
@@ -1485,6 +1508,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.Amount AS Amount,
 	|	AllDataGrouped.AmountTax AS AmountTax,
 	|	AllDataGrouped.AmountCostRatio AS AmountCostRatio,
+	|	AllDataGrouped.AmountCostAdditional AS AmountCostAdditional,
 	|
 	|	AllDataGrouped.NotDirectCosts AS NotDirectCosts,
 	|
@@ -1502,6 +1526,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.AmountBalance AS AmountBalance,
 	|	AllDataGrouped.AmountTaxBalance AS AmountTaxBalance,
 	|	AllDataGrouped.AmountCostRatioBalance AS AmountCostRatioBalance,
+	|	AllDataGrouped.AmountCostAdditionalBalance AS AmountCostAdditionalBalance,
 	|
 	|	AllDataGrouped.NotDirectCostsBalance AS NotDirectCostsBalance,
 	|
@@ -1615,6 +1640,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow.AmountRevenueTax = Row.AmountRevenueTax;
 			
 			NewRow.AmountCostRatio = Row.AmountCostRatio;
+			NewRow.AmountCostAdditional = Row.AmountCostAdditional;
 			NewRow.ItemLinkID = Row.ItemLinkID;
 			
 			// simple receipt	
@@ -1683,6 +1709,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					ReceiptAmountTax        = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "AmountTax");
 					ReceiptNotDirectCosts   = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "NotDirectCosts");
 					ReceiptAmountCostRatio  = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "AmountCostRatio");
+					ReceiptAmountCostAdditional  = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "AmountCostAdditional");
 					
 					ReceiptAmountCost       = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "AmountCost");
 					ReceiptAmountCostTax    = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "AmountCostTax");
@@ -1695,6 +1722,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					BatchBySales.AmountTax = BatchBySales.AmountTax - ReceiptAmountTax;
 					BatchBySales.NotDirectCosts  = BatchBySales.NotDirectCosts  - ReceiptNotDirectCosts;
 					BatchBySales.AmountCostRatio = BatchBySales.AmountCostRatio - ReceiptAmountCostRatio;
+					BatchBySales.AmountCostAdditional = BatchBySales.AmountCostAdditional - ReceiptAmountCostAdditional;
 					
 					BatchBySales.AmountCost     = BatchBySales.AmountCost        - ReceiptAmountCost;
 					BatchBySales.AmountCostTax  = BatchBySales.AmountCostTax     - ReceiptAmountCostTax;
@@ -1728,6 +1756,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						NewRow_ReturnedBatches.AmountTax        = ReceiptAmountTax;
 						NewRow_ReturnedBatches.NotDirectCosts   = ReceiptNotDirectCosts;
 						NewRow_ReturnedBatches.AmountCostRatio  = ReceiptAmountCostRatio;
+						NewRow_ReturnedBatches.AmountCostAdditional  = ReceiptAmountCostAdditional;
 						
 						NewRow_ReturnedBatches.AmountCost       = ReceiptAmountCost;
 						NewRow_ReturnedBatches.AmountCostTax    = ReceiptAmountCostTax;
@@ -1745,6 +1774,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						NewRow_ReturnedBatches.AmountTaxBalance = ReceiptAmountTax;
 						NewRow_ReturnedBatches.NotDirectCostsBalance  = ReceiptNotDirectCosts;
 						NewRow_ReturnedBatches.AmountCostRatioBalance = ReceiptAmountCostRatio;
+						NewRow_ReturnedBatches.AmountCostAdditionalBalance = ReceiptAmountCostAdditional;
 						
 						NewRow_ReturnedBatches.AmountCostBalance       = ReceiptAmountCost;
 						NewRow_ReturnedBatches.AmountCostTaxBalance    = ReceiptAmountCostTax;
@@ -1766,6 +1796,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						NewRow_DataForReceipt.AmountTax = ReceiptAmountTax;
 						NewRow_DataForReceipt.NotDirectCosts  = ReceiptNotDirectCosts;
 						NewRow_DataForReceipt.AmountCostRatio = ReceiptAmountCostRatio;
+						NewRow_DataForReceipt.AmountCostAdditional = ReceiptAmountCostAdditional;
 						
 						NewRow_DataForReceipt.AmountCost       = ReceiptAmountCost;
 						NewRow_DataForReceipt.AmountCostTax    = ReceiptAmountCostTax;
@@ -1908,6 +1939,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				ExpenseAmountTax        = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountTaxBalance");
 				ExpenseNotDirectCosts   = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "NotDirectCostsBalance");
 				ExpenseAmountCostRatio  = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountCostRatioBalance");
+				ExpenseAmountCostAdditional  = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountCostAdditionalBalance");
 				ExpenseAmountCost       = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountCostBalance");
 				ExpenseAmountCostTax    = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountCostTaxBalance");
 				ExpenseAmountRevenue    = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "AmountRevenueBalance");
@@ -1919,6 +1951,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				Row_Batch.AmountTaxBalance = Row_Batch.AmountTaxBalance - ExpenseAmountTax;
 				Row_Batch.NotDirectCostsBalance  = Row_Batch.NotDirectCostsBalance  - ExpenseNotDirectCosts;
 				Row_Batch.AmountCostRatioBalance = Row_Batch.AmountCostRatioBalance - ExpenseAmountCostRatio;
+				Row_Batch.AmountCostAdditionalBalance = Row_Batch.AmountCostAdditionalBalance - ExpenseAmountCostAdditional;
 				
 				Row_Batch.AmountCostBalance       = Row_Batch.AmountCostBalance       - ExpenseAmountCost;
 				Row_Batch.AmountCostTaxBalance    = Row_Batch.AmountCostTaxBalance    - ExpenseAmountCostTax;
@@ -1939,6 +1972,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.AmountTax = ExpenseAmountTax;
 					NewRow.NotDirectCosts  = ExpenseNotDirectCosts;
 					NewRow.AmountCostRatio = ExpenseAmountCostRatio;
+					NewRow.AmountCostAdditional = ExpenseAmountCostAdditional;
 					
 					NewRow.AmountCost       = ExpenseAmountCost;
 					NewRow.AmountCostTax    = ExpenseAmountCostTax;
@@ -2019,6 +2053,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("AmountTax");
 	TableOfNewReceivedBatches.Columns.Add("NotDirectCosts");
 	TableOfNewReceivedBatches.Columns.Add("AmountCostRatio");
+	TableOfNewReceivedBatches.Columns.Add("AmountCostAdditional");
 	TableOfNewReceivedBatches.Columns.Add("AmountCost");
 	TableOfNewReceivedBatches.Columns.Add("AmountCostTax");
 	TableOfNewReceivedBatches.Columns.Add("AmountRevenue");
@@ -2028,6 +2063,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("AmountTaxBalance");
 	TableOfNewReceivedBatches.Columns.Add("NotDirectCostsBalance");
 	TableOfNewReceivedBatches.Columns.Add("AmountCostRatioBalance");
+	TableOfNewReceivedBatches.Columns.Add("AmountCostAdditionalBalance");
 	TableOfNewReceivedBatches.Columns.Add("AmountCostBalance");
 	TableOfNewReceivedBatches.Columns.Add("AmountCostTaxBalance");
 	TableOfNewReceivedBatches.Columns.Add("AmountRevenueBalance");
@@ -2066,6 +2102,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.AmountTax        = Row.AmountTax;
 			NewRowReceivedBatch.NotDirectCosts   = Row.NotDirectCosts;
 			NewRowReceivedBatch.AmountCostRatio  = Row.AmountCostRatio;
+			NewRowReceivedBatch.AmountCostAdditional  = Row.AmountCostAdditional;
 			
 			NewRowReceivedBatch.AmountCost       = Row.AmountCost;
 			NewRowReceivedBatch.AmountCostTax    = Row.AmountCostTax;
@@ -2077,6 +2114,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.AmountTaxBalance = Row.AmountTax;
 			NewRowReceivedBatch.NotDirectCostsBalance  = Row.NotDirectCosts;
 			NewRowReceivedBatch.AmountCostRatioBalance = Row.AmountCostRatio;
+			NewRowReceivedBatch.AmountCostAdditionalBalance = Row.AmountCostAdditional;
 			
 			NewRowReceivedBatch.AmountCostBalance       = Row.AmountCost;
 			NewRowReceivedBatch.AmountCostTaxBalance    = Row.AmountCostTax;
@@ -2136,6 +2174,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			ReallocatedAmountTax = 0;
 			ReallocatedNotDirectCosts  = 0;
 			ReallocatedAmountCostRatio = 0;
+			ReallocatedAmountCostAdditional = 0;
 			ReallocatedAmountCost       = 0;
 			ReallocatedAmountCostTax    = 0;
 			ReallocatedAmountRevenue    = 0;
@@ -2147,6 +2186,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					ReallocatedAmountTax = ReallocatedAmountTax + FilteredRow.AmountTax;
 					ReallocatedNotDirectCosts  = ReallocatedNotDirectCosts  + FilteredRow.NotDirectCosts;
 					ReallocatedAmountCostRatio = ReallocatedAmountCostRatio + FilteredRow.AmountCostRatio;
+					ReallocatedAmountCostAdditional = ReallocatedAmountCostAdditional + FilteredRow.AmountCostAdditional;
 					
 					ReallocatedAmountCost       = ReallocatedAmountCost       + FilteredRow.AmountCost;
 					ReallocatedAmountCostTax    = ReallocatedAmountCostTax    + FilteredRow.AmountCostTax;
@@ -2162,6 +2202,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					ReallocatedAmountTax = QuerySelection.AmountTax;
 					ReallocatedNotDirectCosts  = QuerySelection.NotDirectCosts;
 					ReallocatedAmountCostRatio = QuerySelection.AmountCostRatio;
+					ReallocatedAmountCostAdditional = QuerySelection.AmountCostAdditional;
 					
 					ReallocatedAmountCost       = QuerySelection.AmountCost;
 					ReallocatedAmountCostTax    = QuerySelection.AmountCostTax;
@@ -2177,6 +2218,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				NewRow.AmountTax = ReallocatedAmountTax;
 				NewRow.NotDirectCosts  = ReallocatedNotDirectCosts;
 				NewRow.AmountCostRatio = ReallocatedAmountCostRatio;
+				NewRow.AmountCostAdditional = ReallocatedAmountCostAdditional;
 				
 				NewRow.AmountCost       = ReallocatedAmountCost;
 				NewRow.AmountCostTax    = ReallocatedAmountCostTax;
@@ -2188,6 +2230,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.AmountTax = NewRow.Quantity * (ReallocatedAmountTax / ReallocatedQuantity);
 					NewRow.NotDirectCosts  = NewRow.Quantity * (ReallocatedNotDirectCosts  / ReallocatedQuantity);
 					NewRow.AmountCostRatio = NewRow.Quantity * (ReallocatedAmountCostRatio / ReallocatedQuantity);
+					NewRow.AmountCostAdditional = NewRow.Quantity * (ReallocatedAmountCostAdditional / ReallocatedQuantity);
 					
 					NewRow.AmountCost       = NewRow.Quantity * (ReallocatedAmountCost       / ReallocatedQuantity);
 					NewRow.AmountCostTax    = NewRow.Quantity * (ReallocatedAmountCostTax    / ReallocatedQuantity);
@@ -2198,6 +2241,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.AmountTax = 0;
 					NewRow.NotDirectCosts  = 0;
 					NewRow.AmountCostRatio = 0;
+					NewRow.AmountCostAdditional = 0;
 					
 					NewRow.AmountCost       = 0;
 					NewRow.AmountCostTax    = 0;
@@ -2217,6 +2261,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.AmountTax        = NewRow.AmountTax;
 			NewRowReceivedBatch.NotDirectCosts   = NewRow.NotDirectCosts;
 			NewRowReceivedBatch.AmountCostRatio  = NewRow.AmountCostRatio;
+			NewRowReceivedBatch.AmountCostAdditional  = NewRow.AmountCostAdditional;
 			
 			NewRowReceivedBatch.AmountCost       = NewRow.AmountCost;
 			NewRowReceivedBatch.AmountCostTax    = NewRow.AmountCostTax;
@@ -2228,6 +2273,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.AmountTaxBalance = NewRow.AmountTax;
 			NewRowReceivedBatch.NotDirectCostsBalance  = NewRow.NotDirectCosts;
 			NewRowReceivedBatch.AmountCostRatioBalance = NewRow.AmountCostRatio;
+			NewRowReceivedBatch.AmountCostAdditionalBalance = NewRow.AmountCostAdditional;
 			
 			NewRowReceivedBatch.AmountCostBalance       = NewRow.AmountCost;
 			NewRowReceivedBatch.AmountCostTaxBalance    = NewRow.AmountCostTax;
@@ -2261,6 +2307,7 @@ Function GetReallocatedBatchesAmount(Filter)
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountTax), 0) AS AmountTax,
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.NotDirectCosts), 0) AS NotDirectCosts,
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountCostRatio), 0) AS AmountCostRatio,
+	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountCostAdditional), 0) AS AmountCostAdditional,
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountCost), 0) AS AmountCost,
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountCostTax), 0) AS AmountCostTax,
 	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountRevenue), 0) AS AmountRevenue,
@@ -2398,6 +2445,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				NewRow.AmountTax = Row_Expense.AmountTax;
 				NewRow.NotDirectCosts  = Row_Expense.NotDirectCosts;
 				NewRow.AmountCostRatio = Row_Expense.AmountCostRatio;
+				NewRow.AmountCostAdditional = Row_Expense.AmountCostAdditional;
 				
 				NewRow.AmountCost       = Row_Expense.AmountCost;
 				NewRow.AmountCostTax    = Row_Expense.AmountCostTax;
@@ -2421,6 +2469,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				NewRowReceivedBatch.AmountRevenueTax = Row_Expense.AmountRevenueTax;
 				
 				NewRowReceivedBatch.AmountCostRatio  = Row_Expense.AmountCostRatio;
+				NewRowReceivedBatch.AmountCostAdditional  = Row_Expense.AmountCostAdditional;
 				NewRowReceivedBatch.QuantityBalance  = Row_Expense.Quantity;
 				NewRowReceivedBatch.AmountBalance    = Row_Expense.Amount;
 				NewRowReceivedBatch.AmountTaxBalance = Row_Expense.AmountTax;
@@ -2432,6 +2481,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				NewRowReceivedBatch.AmountRevenueTaxBalance = Row_Expense.AmountRevenueTax;
 				
 				NewRowReceivedBatch.AmountCostRatioBalance = Row_Expense.AmountCostRatio;
+				NewRowReceivedBatch.AmountCostAdditionalBalance = Row_Expense.AmountCostAdditional;
 				NewRowReceivedBatch.IsOpeningBalance = False;
 				NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 				
@@ -2476,6 +2526,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		TotalExpenseAmountTax = DataForExpense.Total("AmountTax");
 		TotalExpenseNotDirectCosts  = DataForExpense.Total("NotDirectCosts");
 		TotalExpenseAmountCostRatio = DataForExpense.Total("AmountCostRatio");
+		TotalExpenseAmountCostAdditional = DataForExpense.Total("AmountCostAdditional");
 		TotalExpenseAmountCost       = DataForExpense.Total("AmountCost");
 		TotalExpenseAmountCostTax    = DataForExpense.Total("AmountCostTax");
 		TotalExpenseAmountRevenue    = DataForExpense.Total("AmountRevenue");
@@ -2493,6 +2544,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 			NewRow.AmountTax = NewRow.AmountTax + Row_Expense.AmountTax;
 			NewRow.NotDirectCosts  = NewRow.NotDirectCosts  + Row_Expense.NotDirectCosts;
 			NewRow.AmountCostRatio = NewRow.AmountCostRatio + Row_Expense.AmountCostRatio;
+			NewRow.AmountCostAdditional = NewRow.AmountCostAdditional + Row_Expense.AmountCostAdditional;
 			NewRow.AmountCost       = NewRow.AmountCost       + Row_Expense.AmountCost;
 			NewRow.AmountCostTax    = NewRow.AmountCostTax    + Row_Expense.AmountCostTax;
 			NewRow.AmountRevenue    = NewRow.AmountRevenue    + Row_Expense.AmountRevenue;
@@ -2526,6 +2578,11 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 					NewRowBundleAmountValues.AmountCostRatio = Row_Expense.AmountCostRatio / (TotalExpenseAmountCostRatio / 100);
 				EndIf;
 				
+				// Amount cost additional
+				If TotalExpenseAmountCostAdditional <> 0 And Row_Expense.AmountCostAdditional <> 0 Then
+					NewRowBundleAmountValues.AmountCostAdditional = Row_Expense.AmountCostAdditional / (TotalExpenseAmountCostAdditional / 100);
+				EndIf;
+				
 				// Amount cost
 				If TotalExpenseAmountCost <> 0 And Row_Expense.AmountCost <> 0 Then
 					NewRowBundleAmountValues.AmountCost = Row_Expense.AmountCost / (TotalExpenseAmountCost / 100);
@@ -2557,6 +2614,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 				NewRowCompositeBatchesAmountValues.AmountTax = Row_Expense.AmountTax; 
 				NewRowCompositeBatchesAmountValues.NotDirectCosts  = Row_Expense.NotDirectCosts;
 				NewRowCompositeBatchesAmountValues.AmountCostRatio = Row_Expense.AmountCostRatio;
+				NewRowCompositeBatchesAmountValues.AmountCostAdditional = Row_Expense.AmountCostAdditional;
 				
 				NewRowCompositeBatchesAmountValues.AmountCost       = Row_Expense.AmountCost;
 				NewRowCompositeBatchesAmountValues.AmountCostTax    = Row_Expense.AmountCostTax;
@@ -2566,12 +2624,13 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 				NewRowCompositeBatchesAmountValues.Quantity  = Row_Expense.Quantity;
 			EndIf;
 		EndDo; // DataForExpense
-		
+		//#@1
 		If TypeOf(Row_Receipt.Document) = Type("DocumentRef.Production") Then
 			CostMultiplierRatio = Row_Receipt.Document.CostMultiplierRatio;
 			If CostMultiplierRatio <> 0 Then		
 				NewRow.AmountCostRatio = (NewRow.Amount + NewRow.AmountCostRatio) / 100 * CostMultiplierRatio;
 			EndIf;	
+			NewRow.AmountCostAdditional = Row_Receipt.Document.AdditionalCost;
 		EndIf;
 		
 		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
@@ -2585,6 +2644,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		NewRowReceivedBatch.AmountTax        = NewRow.AmountTax;
 		NewRowReceivedBatch.NotDirectCosts   = NewRow.NotDirectCosts;
 		NewRowReceivedBatch.AmountCostRatio  = NewRow.AmountCostRatio;
+		NewRowReceivedBatch.AmountCostAdditional  = NewRow.AmountCostAdditional;
 		
 		NewRowReceivedBatch.AmountCost       = NewRow.AmountCost;
 		NewRowReceivedBatch.AmountCostTax    = NewRow.AmountCostTax;
@@ -2596,6 +2656,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		NewRowReceivedBatch.AmountTaxBalance = NewRow.AmountTax;
 		NewRowReceivedBatch.NotDirectCostsBalance  = NewRow.NotDirectCosts;
 		NewRowReceivedBatch.AmountCostRatioBalance = NewRow.AmountCostRatio;
+		NewRowReceivedBatch.AmountCostAdditionalBalance = NewRow.AmountCostAdditional;
 		
 		NewRowReceivedBatch.AmountCostBalance       = NewRow.AmountCost;
 		NewRowReceivedBatch.AmountCostTaxBalance    = NewRow.AmountCostTax;
@@ -2647,6 +2708,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	DataForBundleAmountValues.AmountTaxValue AS AmountTaxValue,
 			|	DataForBundleAmountValues.NotDirectCosts AS NotDirectCosts,
 			|	DataForBundleAmountValues.AmountCostRatio AS AmountCostRatio,
+			|	DataForBundleAmountValues.AmountCostAdditional AS AmountCostAdditional,
 			|	DataForBundleAmountValues.AmountCost AS AmountCost,
 			|	DataForBundleAmountValues.AmountCostTax AS AmountCostTax,
 			|	DataForBundleAmountValues.AmountRevenue AS AmountRevenue,
@@ -2665,6 +2727,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	DataForBundleAmountValues.AmountTaxValue AS AmountTaxValue,
 			|	DataForBundleAmountValues.NotDirectCosts AS NotDirectCosts,
 			|	DataForBundleAmountValues.AmountCostRatio AS AmountCostRatio,
+			|	DataForBundleAmountValues.AmountCostAdditional AS AmountCostAdditional,
 			|	DataForBundleAmountValues.AmountCost AS AmountCost,
 			|	DataForBundleAmountValues.AmountCostTax AS AmountCostTax,
 			|	DataForBundleAmountValues.AmountRevenue AS AmountRevenue,
@@ -2686,6 +2749,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	T6040S_BundleAmountValues.AmountTaxValue,
 			|	T6040S_BundleAmountValues.NotDirectCosts,
 			|	T6040S_BundleAmountValues.AmountCostRatio,
+			|	T6040S_BundleAmountValues.AmountCostAdditional,
 			|	T6040S_BundleAmountValues.AmountCost,
 			|	T6040S_BundleAmountValues.AmountCostTax,
 			|	T6040S_BundleAmountValues.AmountRevenue,
@@ -2707,6 +2771,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	T6050S_ManualBundleAmountValues.AmountTaxValue,
 			|	T6050S_ManualBundleAmountValues.NotDirectCosts,
 			|	T6050S_ManualBundleAmountValues.AmountCostRatio,
+			|	T6050S_ManualBundleAmountValues.AmountCostAdditional,
 			|	T6050S_ManualBundleAmountValues.AmountCost,
 			|	T6050S_ManualBundleAmountValues.AmountCostTax,
 			|	T6050S_ManualBundleAmountValues.AmountRevenue,
@@ -2739,6 +2804,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 				NewRow.AmountTax = NewRow.AmountTax + (Row_Expense.AmountTax / 100 * QuerySelection.AmountTaxValue);
 				NewRow.NotDirectCosts  = NewRow.NotDirectCosts  + (Row_Expense.NotDirectCosts  / 100 * QuerySelection.NotDirectCosts);
 				NewRow.AmountCostRatio = NewRow.AmountCostRatio + (Row_Expense.AmountCostRatio / 100 * QuerySelection.AmountCostRatio);
+				NewRow.AmountCostAdditional = NewRow.AmountCostAdditional + (Row_Expense.AmountCostAdditional / 100 * QuerySelection.AmountCostAdditional);
 				
 				NewRow.AmountCost       = NewRow.AmountCost       + (Row_Expense.AmountCost       / 100 * QuerySelection.AmountCost);
 				NewRow.AmountCostTax    = NewRow.AmountCostTax    + (Row_Expense.AmountCostTax    / 100 * QuerySelection.AmountCostTax);
@@ -2758,6 +2824,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		NewRowReceivedBatch.AmountTax        = NewRow.AmountTax;
 		NewRowReceivedBatch.NotDirectCosts   = NewRow.NotDirectCosts;
 		NewRowReceivedBatch.AmountCostRatio  = NewRow.AmountCostRatio;
+		NewRowReceivedBatch.AmountCostAdditional  = NewRow.AmountCostAdditional;
 		
 		NewRowReceivedBatch.AmountCost       = NewRow.AmountCost;
 		NewRowReceivedBatch.AmountCostTax    = NewRow.AmountCostTax;
@@ -2769,6 +2836,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		NewRowReceivedBatch.AmountTaxBalance = NewRow.AmountTax;
 		NewRowReceivedBatch.NotDirectCostsBalance  = NewRow.NotDirectCosts;
 		NewRowReceivedBatch.AmountCostRatioBalance = NewRow.AmountCostRatio;
+		NewRowReceivedBatch.AmountCostAdditionalBalance = NewRow.AmountCostAdditional;
 		
 		NewRowReceivedBatch.AmountCostBalance       = NewRow.AmountCost;
 		NewRowReceivedBatch.AmountCostTaxBalance    = NewRow.AmountCostTax;
@@ -2806,6 +2874,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	DataForSalesBatches.AmountTax AS AmountTax,
 	|	DataForSalesBatches.NotDirectCosts AS NotDirectCosts,
 	|	DataForSalesBatches.AmountCostRatio AS AmountCostRatio,
+	|	DataForSalesBatches.AmountCostAdditional AS AmountCostAdditional,
 	|	DataForSalesBatches.AmountCost AS AmountCost,
 	|	DataForSalesBatches.AmountCostTax AS AmountCostTax,
 	|	DataForSalesBatches.AmountRevenue AS AmountRevenue,
@@ -2826,6 +2895,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	R6050T_SalesBatchesTurnovers.AmountTaxTurnover AS AmountTax,
 	|	R6050T_SalesBatchesTurnovers.NotDirectCostsTurnover AS NotDirectCosts,
 	|	R6050T_SalesBatchesTurnovers.AmountCostRatioTurnover AS AmountCostRatio,
+	|	R6050T_SalesBatchesTurnovers.AmountCostAdditionalTurnover AS AmountCostAdditional,
 	|	R6050T_SalesBatchesTurnovers.AmountCostTurnover AS AmountCost,
 	|	R6050T_SalesBatchesTurnovers.AmountCostTaxTurnover AS AmountCostTax,
 	|	R6050T_SalesBatchesTurnovers.AmountRevenueTurnover AS AmountRevenue,
@@ -2848,6 +2918,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	DataForSalesBatches.AmountTax AS AmountTax,
 	|	DataForSalesBatches.NotDirectCosts AS NotDirectCosts,
 	|	DataForSalesBatches.AmountCostRatio AS AmountCostRatio,
+	|	DataForSalesBatches.AmountCostAdditional AS AmountCostAdditional,
 	|	DataForSalesBatches.AmountCost AS AmountCost,
 	|	DataForSalesBatches.AmountCostTax AS AmountCostTax,
 	|	DataForSalesBatches.AmountRevenue AS AmountRevenue,
@@ -2873,6 +2944,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	SalesBatches.AmountTax,
 	|	SalesBatches.NotDirectCosts,
 	|	SalesBatches.AmountCostRatio,
+	|	SalesBatches.AmountCostAdditional,
 	|	SalesBatches.AmountCost,
 	|	SalesBatches.AmountCostTax,
 	|	SalesBatches.AmountRevenue,
@@ -2892,6 +2964,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	SUM(AllData.AmountTax) AS AmountTax,
 	|	SUM(AllData.NotDirectCosts) AS NotDirectCosts,
 	|	SUM(AllData.AmountCostRatio) AS AmountCostRatio,
+	|	SUM(AllData.AmountCostAdditional) AS AmountCostAdditional,
 	|	SUM(AllData.AmountCost) AS AmountCost,
 	|	SUM(AllData.AmountCostTax) AS AmountCostTax,
 	|	SUM(AllData.AmountRevenue) AS AmountRevenue,

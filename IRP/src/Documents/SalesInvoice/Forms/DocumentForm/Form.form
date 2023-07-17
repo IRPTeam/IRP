@@ -3285,10 +3285,6 @@
      <event>AfterDeleteRow</event>
      <name>ItemListAfterDeleteRow</name>
     </handlers>
-    <handlers>
-     <event>OnStartEdit</event>
-     <name>ItemListOnStartEdit</name>
-    </handlers>
     <searchStringAddition>
      <visible>true</visible>
      <enabled>true</enabled>

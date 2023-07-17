@@ -70,30 +70,6 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
- <dimensions uuid="64e24f8d-c74c-4853-9e00-d00dee0fbd71">
-  <name>ItemKey</name>
-  <synonym>
-   <key>en</key>
-   <value>Item key</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Характеристика</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.ItemKeys</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
  <dimensions uuid="95ab521b-469c-473d-b656-79510595393e">
   <name>Store</name>
   <synonym>
@@ -110,6 +86,30 @@
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="64e24f8d-c74c-4853-9e00-d00dee0fbd71">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

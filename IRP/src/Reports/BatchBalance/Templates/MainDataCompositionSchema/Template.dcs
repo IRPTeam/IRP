@@ -1646,6 +1646,164 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dataPath>
+			<field>AmountCostAdditionalOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group6</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.AmountCostAdditionalReceipt</dataPath>
+			<field>AmountCostAdditionalReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.AmountCostAdditionalExpense</dataPath>
+			<field>AmountCostAdditionalExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dataPath>
+			<field>AmountCostAdditionalClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cost (additional)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group6</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -2025,6 +2183,32 @@
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostAdditionalOpeningBalance</dataPath>
+				<field>AmountCostAdditionalOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountCostAdditional</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostAdditionalReceipt</dataPath>
+				<field>AmountCostAdditionalReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostAdditionalExpense</dataPath>
+				<field>AmountCostAdditionalExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostAdditionalClosingBalance</dataPath>
+				<field>AmountCostAdditionalClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountCostAdditional</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -2074,6 +2258,10 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalOpeningBalance AS AmountCostAdditionalOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalClosingBalance,
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
 			THEN NULL
@@ -2442,6 +2630,22 @@ WHERE
 		<dataPath>Resources.Receipt.QuantityReceipt</dataPath>
 		<expression>Sum(Resources.Receipt.QuantityReceipt)</expression>
 	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dataPath>
+		<expression>sum(Resources.ClosingBalance.AmountCostAdditionalClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.AmountCostAdditionalExpense</dataPath>
+		<expression>sum(Resources.Expense.AmountCostAdditionalExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dataPath>
+		<expression>sum(Resources.OpeningBalance.AmountCostAdditionalOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.AmountCostAdditionalReceipt</dataPath>
+		<expression>sum(Resources.Receipt.AmountCostAdditionalReceipt)</expression>
+	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
@@ -2644,6 +2848,23 @@ WHERE
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.OpeningBalance.NotDirectCostsOpeningBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
@@ -2810,6 +3031,23 @@ WHERE
 							<v8:item>
 								<v8:lang>tr</v8:lang>
 								<v8:content>Maliyet kat sayısı</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.AmountCostAdditionalReceipt</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -2984,6 +3222,23 @@ WHERE
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.AmountCostAdditionalExpense</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Expense.NotDirectCostsExpense</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
@@ -3150,6 +3405,23 @@ WHERE
 							<v8:item>
 								<v8:lang>tr</v8:lang>
 								<v8:content>Maliyet kat sayısı</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Cost (additional)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

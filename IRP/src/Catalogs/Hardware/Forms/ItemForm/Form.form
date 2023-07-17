@@ -206,32 +206,117 @@
      <textEdit>true</textEdit>
     </extInfo>
    </items>
-   <items xsi:type="form:FormField">
-    <name>Log</name>
-    <id>133</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupLog</name>
+    <id>146</id>
+    <items xsi:type="form:FormField">
+     <name>Log</name>
+     <id>133</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Log</segments>
+     </dataPath>
+     <toolTip>
+      <key>en</key>
+      <value>Write log to Hardware log registr</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Записывать лог в регистр логов оборудования</value>
+     </toolTip>
+     <toolTip>
+      <key>tr</key>
+      <value>Write log to Hardware log registr</value>
+     </toolTip>
+     <extendedTooltip>
+      <name>LogExtendedTooltip</name>
+      <id>135</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>LogContextMenu</name>
+      <id>134</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+      <checkBoxType>Switcher</checkBoxType>
+     </extInfo>
+    </items>
+    <items xsi:type="form:Button">
+     <name>GetLastError</name>
+     <id>148</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>GetLastErrorExtendedTooltip</name>
+      <id>149</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <type>UsualButton</type>
+     <commandName>Form.Command.GetLastError</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
      <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-     <segments>Object.Log</segments>
-    </dataPath>
-    <toolTip>
+    <title>
      <key>en</key>
-     <value>Write log to Hardware log registr</value>
-    </toolTip>
-    <toolTip>
+     <value>Group Log</value>
+    </title>
+    <title>
      <key>ru</key>
-     <value>Записывать лог в регистр логов оборудования</value>
-    </toolTip>
-    <toolTip>
+     <value>Group Log</value>
+    </title>
+    <title>
      <key>tr</key>
-     <value>Write log to Hardware log registr</value>
-    </toolTip>
+     <value>Group Log</value>
+    </title>
     <extendedTooltip>
-     <name>LogExtendedTooltip</name>
-     <id>135</id>
+     <name>GroupLogExtendedTooltip</name>
+     <id>147</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -244,23 +329,14 @@
       <horizontalAlign>Left</horizontalAlign>
      </extInfo>
     </extendedTooltip>
-    <contextMenu>
-     <name>LogContextMenu</name>
-     <id>134</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <autoFill>true</autoFill>
-    </contextMenu>
-    <type>CheckBoxField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-     <checkBoxType>Switcher</checkBoxType>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>AlwaysHorizontal</group>
+     <behavior>Auto</behavior>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
     </extInfo>
    </items>
    <visible>true</visible>
@@ -2398,6 +2474,35 @@
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>GetLastError</name>
+  <title>
+   <key>en</key>
+   <value>Get last error</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Get last error</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Get last error</value>
+  </title>
+  <id>8</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceExclamationMarkIcon</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>GetLastError</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

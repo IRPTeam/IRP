@@ -160,9 +160,12 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.';
 		|ru='Смена уже закрыта.';
 		|tr='Vardya kapanmıştı.'", Lang));
-	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='The document is already printed.';
-		|ru='Документ уже пробит';
-		|tr='Evrak önceden yazdırılmıştı'", Lang));
+	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='Operation cannot be completed because the document has already been printed. You can only print a copy.';
+		|ru='Operation cannot be completed because the document has already been printed. You can only print a copy.';
+		|tr='Operation cannot be completed because the document has already been printed. You can only print a copy.'", Lang));
+	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='Document was not found on the fiscal device.';
+		|ru='Document was not found on the fiscal device.';
+		|tr='Document was not found on the fiscal device.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
@@ -1015,6 +1018,9 @@ Function Strings(Lang) Export
 		|ru='Склад [%1] в строке [%3] не соответствует организации [%2]';
 		|tr='[%3] satırdaki [%1] depo [%2] şirketine uygun değil'", Lang));
 	
+	Strings.Insert("Error_MaximumAccessKey", NStr("en='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
+		|ru='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
+		|tr='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]'", Lang));
 #EndRegion
 
 #Region LandedCost

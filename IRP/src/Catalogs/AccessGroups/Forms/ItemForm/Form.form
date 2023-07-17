@@ -952,6 +952,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.ObjectAccess.DoNotControl</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>ObjectAccessDoNotControlOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>ObjectAccessDoNotControlExtendedTooltip</name>
       <id>81</id>

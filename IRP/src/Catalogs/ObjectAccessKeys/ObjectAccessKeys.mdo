@@ -102,46 +102,107 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="6563142b-5019-4e79-9ee6-146e98827bba">
-   <name>ValueSimpleType</name>
+  <attributes uuid="d562323b-c574-4332-b72b-5291514718b8">
+   <name>ValueRef1</name>
    <synonym>
     <key>en</key>
-    <value>Value simple type</value>
+    <value>Value ref1</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Простой тип данных</value>
+    <value>Value ref1</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value simple type</value>
+    <value>Value ref1</value>
    </synonym>
    <type>
-    <types>Boolean</types>
-    <types>Number</types>
-    <numberQualifiers>
-     <precision>15</precision>
-     <scale>5</scale>
-    </numberQualifiers>
+    <types>AnyRef</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="fa31b84f-4b07-4b17-8825-1a787d4f1f52">
-   <name>ValueRef</name>
+  <attributes uuid="ae0e6a93-ed2d-40ba-b35f-00ae7ded1c1c">
+   <name>ValueRef2</name>
    <synonym>
     <key>en</key>
-    <value>Value ref</value>
+    <value>Value ref2</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Значение ссылка</value>
+    <value>Value ref2</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref</value>
+    <value>Value ref2</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="51a70dc0-472c-4067-8cff-9207e75ef6e8">
+   <name>ValueRef3</name>
+   <synonym>
+    <key>en</key>
+    <value>Value ref3</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Value ref3</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Value ref3</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d817fc47-9961-467b-91fa-e2604fbfbe55">
+   <name>ValueRef4</name>
+   <synonym>
+    <key>en</key>
+    <value>Value ref4</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Value ref4</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Value ref4</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fa4f00a5-6c80-48e4-862e-1cb882988ceb">
+   <name>ValueRef5</name>
+   <synonym>
+    <key>en</key>
+    <value>Value ref5</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Value ref5</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Value ref5</value>
    </synonym>
    <type>
     <types>AnyRef</types>

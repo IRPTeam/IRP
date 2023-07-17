@@ -3319,4 +3319,25 @@
   <modifiesData>true</modifiesData>
   <representation>Auto</representation>
  </commands>
+ <commands uuid="4d666b2d-c24f-4bf7-8109-959c03f8afb5">
+  <name>PrintCopyReceipt</name>
+  <synonym>
+   <key>en</key>
+   <value>Print copy receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Print copy receipt</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Print copy receipt</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>DocumentRef.RetailSalesReceipt</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

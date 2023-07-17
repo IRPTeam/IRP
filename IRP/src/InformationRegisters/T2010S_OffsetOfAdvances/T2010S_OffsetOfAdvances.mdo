@@ -62,6 +62,54 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <dimensions uuid="722b8b9c-3389-450d-a2f0-374def583199">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="efb88480-ba78-425f-ac1a-6f7805551bad">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
  <dimensions uuid="0bb2c99f-8fc5-41ed-a352-121e3036938a">
   <name>Document</name>
   <synonym>
@@ -125,54 +173,6 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <indexing>Index</indexing>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="722b8b9c-3389-450d-a2f0-374def583199">
-  <name>Company</name>
-  <synonym>
-   <key>en</key>
-   <value>Company</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Companies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="efb88480-ba78-425f-ac1a-6f7805551bad">
-  <name>Branch</name>
-  <synonym>
-   <key>en</key>
-   <value>Branch</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.BusinessUnits</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>

@@ -95,6 +95,80 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <dimensions uuid="84c9cb2e-5e97-490e-a10c-d761d4106b43">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="2bb47c99-f36e-4ffb-913a-827f8577de46">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="f612d591-4f8c-45e8-abe8-f16bd673d9b1">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
  <dimensions uuid="353d4e5f-39b5-43f1-bb35-05feddbcb1eb">
   <name>Date</name>
   <synonym>
@@ -144,55 +218,6 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="84c9cb2e-5e97-490e-a10c-d761d4106b43">
-  <name>Company</name>
-  <synonym>
-   <key>en</key>
-   <value>Company</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Companies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <indexing>Index</indexing>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="2bb47c99-f36e-4ffb-913a-827f8577de46">
-  <name>Branch</name>
-  <synonym>
-   <key>en</key>
-   <value>Branch</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Структурное подразделение</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şube</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.BusinessUnits</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <indexing>Index</indexing>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="be707ff0-4569-441a-9819-351a0d83d65b">
   <name>Currency</name>
@@ -290,31 +315,6 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="f612d591-4f8c-45e8-abe8-f16bd673d9b1">
-  <name>Order</name>
-  <synonym>
-   <key>en</key>
-   <value>Order</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Заказ</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
-  </synonym>
-  <type>
-   <types>DocumentRef.PurchaseOrder</types>
-   <types>DocumentRef.SalesOrder</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <indexing>Index</indexing>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="fc71e57a-da5f-4045-8b45-b794a93ba1fc">
   <name>IsVendorTransaction</name>

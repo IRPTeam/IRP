@@ -96,32 +96,6 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
- <dimensions uuid="de70e951-d786-493a-b4cf-363b79428ad7">
-  <name>Date</name>
-  <synonym>
-   <key>en</key>
-   <value>Date</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Дата</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
-  </synonym>
-  <type>
-   <types>Date</types>
-   <dateQualifiers/>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <indexing>Index</indexing>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
  <dimensions uuid="535dccc7-97a9-4bb2-b04b-09c771ff3755">
   <name>Company</name>
   <synonym>
@@ -213,6 +187,32 @@
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="de70e951-d786-493a-b4cf-363b79428ad7">
+  <name>Date</name>
+  <synonym>
+   <key>en</key>
+   <value>Date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tarih</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @LoadInfo
@@ -1070,5 +1070,177 @@ Scenario: _020145 load data in the PhysicalCountByLocation (each sln new row, no
 				
 		
 				
-				
+Scenario: _020146 load data in the Price list (by items)
+		And I close all client application windows
+	* Open PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button					
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "67789997777801"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "10"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 7 with SLN (new row)' | 'pcs'  | 'pcs'        | ''            | '2,00'  |
+			| '2' | 'Product 1 with SLN'           | 'pcs'  | 'pcs'        | ''            | '10,00' |
+		And I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+	* Load by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "8908899877"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "4"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "09987897977894"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "11"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '4,00'  |
+			| '2' | 'Product 3 with SLN' | 'pcs'  | 'pcs'        | ''            | '11,00' |	
+		And I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+	* Load by item/item key			
+		And in the table "ItemList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "Product 1 with SLN"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "5"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "Product 2 with SLN"
+		And in "Template" spreadsheet document I move to "R4C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "12"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '5,00'  |
+			| '2' | 'Product 2 with SLN' | 'pcs'  | 'pcs'        | ''            | '12,00' |
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I save the value of "Number" field as "NumberPL020146"
+		And I click "Post and close" button
+		And "List" table contains lines
+			| 'Number'             |
+			| '$NumberPL020146$' |
 		
+							
+
+Scenario: _020147 load data in the Price list (by item key)
+		And I close all client application windows
+	* Open PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		And I change "Set price" radio button value to "By item keys"		
+	* Check load data form
+		And in the table "ItemKeyList" I click "Load data from table" button							
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "67789997777801"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "10"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemKeyList" table became equal
+			| '#' | 'Item'                         | 'Item key' | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | 'pcs'        | ''            | '2,00'  |
+			| '2' | 'Product 1 with SLN'           | 'ODS'      | 'pcs'  | 'pcs'        | ''            | '10,00' |	
+		And I select all lines of "ItemKeyList" table
+		And in the table "ItemKeyList" I click "Delete" button
+	* Load by serial lot number
+		And in the table "ItemKeyList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "8908899877"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "4"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "09987897977894"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "11"
+		And I click "Next" button
+		And I click "Next" button
+	* Check
+		And "ItemKeyList" table became equal
+			| '#' | 'Item'               | 'Unit' | 'Input unit' | 'Input price' | 'Price' |
+			| '1' | 'Product 1 with SLN' | 'pcs'  | 'pcs'        | ''            | '4,00'  |
+			| '2' | 'Product 3 with SLN' | 'pcs'  | 'pcs'        | ''            | '11,00' |	
+		And I select all lines of "ItemKeyList" table
+		And in the table "ItemKeyList" I click "Delete" button
+	* Load by item/item key			
+		And in the table "ItemKeyList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "35"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "30"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "38"
+		And in "Template" spreadsheet document I move to "R4C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "31"
+		And I click "Next" button
+		And I click "Next" button
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And I click "Post" button
+		And I save the value of "Number" field as "NumberPL020147"
+		And I click "Post and close" button
+		And "List" table contains lines
+			| 'Number'           |
+			| '$NumberPL020147$' |				
+
+		
+				
+				

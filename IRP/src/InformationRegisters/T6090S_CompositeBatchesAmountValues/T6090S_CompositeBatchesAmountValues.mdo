@@ -234,6 +234,29 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="610a7a85-5452-4670-a51c-4cf0c0861f77">
+  <name>AmountCostAdditional</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount cost additional</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Amount cost additional</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount cost additional</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
   <name>Company</name>
   <synonym>

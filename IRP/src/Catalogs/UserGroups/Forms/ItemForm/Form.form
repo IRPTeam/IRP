@@ -527,6 +527,9 @@
   <edit>
    <common>true</common>
   </edit>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>Users.Ref</segments>
+  </notDefaultUseAlwaysAttributes>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
 	Users.Description_en AS Description,

@@ -93,7 +93,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
 		If AdditionalCheckIsOn Then
-			RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
+			RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettingsInfo(isReturn);
 			RequestKMSettings.Quantity = 1;
 			RequestKMSettings.MarkingCode = StringCode;
 			
@@ -159,7 +159,7 @@ EndFunction
 Async Procedure CheckKM(Command)
 	For Each SelectedID In Items.CurrentCodes.SelectedRows Do // Number
 		Row = CurrentCodes.FindByID(SelectedID);
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettingsInfo(isReturn);
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = Row.StringCode;
 		

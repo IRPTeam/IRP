@@ -93,6 +93,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.BillOfMaterials.Visible = isProduce;
 	Form.Items.DurationOfProduction.Visible = isProduce;
 	Form.Items.CostMultiplierRatio.Visible = isProduce;
+	Form.Items.AdditionalCost.Visible = isProduce;
 
 	Form.Items.MaterialsItemBOM.Visible = isProduce;
 	Form.Items.MaterialsItemKeyBOM.Visible = isProduce;

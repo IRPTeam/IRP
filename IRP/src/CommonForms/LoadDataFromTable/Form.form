@@ -1400,6 +1400,57 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>TargetField</name>
+  <title>
+   <key>en</key>
+   <value>Target field</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Target field</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Target field</value>
+  </title>
+  <id>22</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>NoItemKey</name>
+  <title>
+   <key>en</key>
+   <value>No item key</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>No item key</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>No item key</value>
+  </title>
+  <id>23</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Next</name>
   <title>

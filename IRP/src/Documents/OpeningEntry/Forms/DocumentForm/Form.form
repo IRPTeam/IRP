@@ -8363,7 +8363,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Account payable (other)</value>
+    <value>Задолженность прочим партнерам </value>
    </title>
    <title>
     <key>tr</key>
@@ -9045,7 +9045,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Account receivable (other)</value>
+    <value>Задолженность прочих партнеров </value>
    </title>
    <title>
     <key>tr</key>
@@ -13785,7 +13785,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit currencies account payable other</value>
+   <value>Редактирование валют задолженности прочим контрагентам</value>
   </title>
   <title>
    <key>tr</key>
@@ -13814,7 +13814,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit currencies account receivable other</value>
+   <value>Редактирование валют задолженности прочих контрагентов</value>
   </title>
   <title>
    <key>tr</key>
@@ -13843,7 +13843,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit currencies cash in transit</value>
+   <value>Редактирование валют денег в пути </value>
   </title>
   <title>
    <key>tr</key>

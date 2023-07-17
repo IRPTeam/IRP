@@ -161,10 +161,10 @@ Function Strings(Lang) Export
 		|ru='Смена уже закрыта.';
 		|tr='Vardya kapanmıştı.'", Lang));
 	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='Operation cannot be completed because the document has already been printed. You can only print a copy.';
-		|ru='Operation cannot be completed because the document has already been printed. You can only print a copy.';
+		|ru='Действие не может быть совершено, потому что документ уже был распечатан. Возможно только печать копии.';
 		|tr='Operation cannot be completed because the document has already been printed. You can only print a copy.'", Lang));
 	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='Document was not found on the fiscal device.';
-		|ru='Document was not found on the fiscal device.';
+		|ru='Документ не был найден на фискальном регистраторе';
 		|tr='Document was not found on the fiscal device.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
@@ -1019,7 +1019,7 @@ Function Strings(Lang) Export
 		|tr='[%3] satırdaki [%1] depo [%2] şirketine uygun değil'", Lang));
 	
 	Strings.Insert("Error_MaximumAccessKey", NStr("en='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
-		|ru='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
+		|ru='Не удалось создать ключ доступа. Необходимо добавить новый реквизит [ValueRef] к справочнику [ObjectAccessKeys]';
 		|tr='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]'", Lang));
 #EndRegion
 

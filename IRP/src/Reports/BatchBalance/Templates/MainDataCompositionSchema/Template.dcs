@@ -1656,7 +1656,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Стоимость (дополнительная)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
@@ -1698,7 +1698,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Стоимость (дополнительная)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
@@ -1735,7 +1735,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Стоимость (дополнительная)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
@@ -1772,7 +1772,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Стоимость (дополнительная)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
@@ -2856,7 +2856,7 @@ WHERE
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
+								<v8:content>Стоимость (дополнительная)</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -3043,7 +3043,7 @@ WHERE
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
+								<v8:content>Стоимость (дополнительная)</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -3230,7 +3230,7 @@ WHERE
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
+								<v8:content>Стоимость (дополнительная)</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -3417,7 +3417,7 @@ WHERE
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
+								<v8:content>Стоимость (дополнительная)</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>

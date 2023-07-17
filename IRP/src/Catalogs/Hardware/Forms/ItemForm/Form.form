@@ -308,7 +308,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group Log</value>
+     <value>Группа Логирование</value>
     </title>
     <title>
      <key>tr</key>
@@ -2484,7 +2484,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Get last error</value>
+   <value>Получить последнюю ошибку</value>
   </title>
   <title>
    <key>tr</key>

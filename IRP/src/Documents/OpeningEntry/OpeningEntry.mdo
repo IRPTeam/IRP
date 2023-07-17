@@ -3232,7 +3232,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account receivable other</value>
+   <value>Задолженность прочих контрагентов</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -3414,7 +3414,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account payable other</value>
+   <value>Задолженность прочим партнерам </value>
   </synonym>
   <synonym>
    <key>tr</key>

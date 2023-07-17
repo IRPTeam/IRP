@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.28.2552</version>
+  <version>2023.29.2588</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -218,7 +218,6 @@
   <roles>Role.TemplateCatalogs</roles>
   <roles>Role.TemplateDocument</roles>
   <roles>Role.TemplateInformationRegisters</roles>
-  <roles>Role.TemplateInformationRegistersCommon</roles>
   <roles>Role.UseAllFunctionsMode</roles>
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
@@ -403,9 +402,10 @@
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
-  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
@@ -999,11 +999,15 @@
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
+  <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
+  <informationRegisters>InformationRegister.DataVersions</informationRegisters>
+  <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
   <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
+  <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
@@ -1037,27 +1041,23 @@
   <informationRegisters>InformationRegister.T6090S_CompositeBatchesAmountValues</informationRegisters>
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
+  <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
+  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.T9010S_AccountsItemKey</informationRegisters>
   <informationRegisters>InformationRegister.T9011S_AccountsCashAccount</informationRegisters>
   <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>
   <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
-  <informationRegisters>InformationRegister.Taxes</informationRegisters>
-  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
-  <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
-  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
-  <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
-  <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
+  <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
+  <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
   <informationRegisters>InformationRegister.T9500S_AccrualAndDeductionValues</informationRegisters>
   <informationRegisters>InformationRegister.T9510S_Staffing</informationRegisters>
   <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
   <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
-  <informationRegisters>InformationRegister.DataVersions</informationRegisters>
-  <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
-  <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
-  <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
-  <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
+  <informationRegisters>InformationRegister.Taxes</informationRegisters>
+  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
+  <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
+  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

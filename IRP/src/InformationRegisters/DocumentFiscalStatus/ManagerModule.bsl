@@ -1,28 +1,51 @@
 
 #Region Public
 
-Procedure SetStatus(Document, Status, FiscalResponse = "", DataPresentation = "") Export
-	SetPrivilegedMode(True);
+// Set status.
+// 
+// Parameters:
+//  Document - DocumentRef.RetailSalesReceipt -
+//  Status - EnumRef.DocumentFiscalStatuses
+//  FiscalResponse - Structure
+//  DataPresentation - String - Data presentation
+Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Export
 	NewRecord = CreateRecordManager();
 	NewRecord.Document = Document;
 	NewRecord.Status = Status;
-	NewRecord.FiscalResponse = FiscalResponse;
 	NewRecord.DataPresentation = DataPresentation;
+	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
+	If FiscalResponse.Property("CheckNumber") Then 
+		NewRecord.CheckNumber = FiscalResponse.CheckNumber;
+	EndIf;
 	NewRecord.Write(True);
-	SetPrivilegedMode(False);	
 EndProcedure
 
+// Get status data.
+// 
+// Parameters:
+//  Document - DocumentRef.RetailSalesReceipt - Document
+// 
+// Returns:
+//  Structure - Get status data:
+// * Status - EnumRef.DocumentFiscalStatuses -
+// * FiscalResponse - String -
+// * DataPresentation - String -
+// * CheckNumber - Number -
+// * IsPrinted - Boolean -
+// * IsPrinted - Boolean -
 Function GetStatusData(Document) Export
 	StatusData = New Structure();
 	StatusData.Insert("Status", Enums.DocumentFiscalStatuses.EmptyRef());
 	StatusData.Insert("FiscalResponse", "");
 	StatusData.Insert("DataPresentation", "");
+	StatusData.Insert("CheckNumber", 0);
 	StatusData.Insert("IsPrinted", False);
 	Query = New Query;
 	Query.Text = "SELECT
 	|	DocumentFiscalStatus.Status,
 	|	DocumentFiscalStatus.FiscalResponse,
-	|	DocumentFiscalStatus.DataPresentation
+	|	DocumentFiscalStatus.DataPresentation,
+	|	DocumentFiscalStatus.CheckNumber
 	|FROM
 	|	InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
 	|WHERE
@@ -36,6 +59,24 @@ Function GetStatusData(Document) Export
 		EndIf;
 	EndIf;
 	Return StatusData;
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+// Get access key.
+// See Role.TemplateInformationRegisters
+// 
+// Returns:
+//  Structure - Get access key:
+// * Company - CatalogRef.Companies -
+// * Branch - CatalogRef.BusinessUnits -
+Function GetAccessKey() Export
+	AccessKeyStructure = New Structure;
+	AccessKeyStructure.Insert("Company", Catalogs.Companies.EmptyRef());
+	AccessKeyStructure.Insert("Branch", Catalogs.BusinessUnits.EmptyRef());
+	Return AccessKeyStructure;
 EndFunction
 
 #EndRegion

@@ -15,6 +15,7 @@
     <value>Document fiscal status</value>
   </synonym>
   <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.DocumentFiscalStatus.Form.RecordForm</defaultRecordForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="06a1ad82-83ab-4490-9370-1fb93414cfbd">
     <name>Status</name>
@@ -28,6 +29,24 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="e246ca83-846a-43f2-8abf-1dc8b0b904e7">
+    <name>CheckNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Check number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>12</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -87,4 +106,13 @@
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <forms uuid="5d6082ab-02c4-41d5-9aba-a58b77555a72">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:InformationRegister>

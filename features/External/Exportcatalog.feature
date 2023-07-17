@@ -37,3 +37,24 @@ Scenario: create setting to download the course (Forex Seling)
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 10
+
+Scenario: Create catalog Users and AccessProfiles objects (LimitedAccess)
+
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'False'        | 1      | 'Unit profile'   | ''                 | ''               | ''               |
+
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'                          | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'BasicRole'                     | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'RunThinClient'                 | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateAccumulationRegisters' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateCatalogs'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateDocument'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateInformationRegisters'  | 'IRP'           |
+
+	And I check or create catalog "Users" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Description'   | 'InfobaseUserID'                       | 'Partner' | 'LocalizationCode' | 'ShowInList' | 'UserGroup' | 'InterfaceLocalizationCode' | 'FormScaleVariant' | 'Disable' | 'ChangePasswordOnNextLogin' | 'TimeZone' | 'UserID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Users?ref=b7a0d8de1a1c04c611ee1a4d84e42192' | 'False'        | 1      | 'LimitedAccess' | '34ea67b1-2505-405f-8ca6-3ad54becf04f' | ''        | 'en'               | 'False'      | ''          | 'en'                        | ''                 | 'False'   | 'False'                     | ''         | ''       | 'LimitedAccess'  | ''                 | ''               | ''               |
+
+

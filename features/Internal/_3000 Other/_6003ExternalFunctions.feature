@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ExternalFunctions
@@ -114,7 +114,7 @@ Scenario: _602704 check function date as name
 		And I click the button named "Run"
 		And I save the value of the field named "Result" as "CurrentDate2"
 		When I Check the steps for Exception
-									| "Then '$CurrentDate1$' variable is equal to '$CurrentDate2$'"          |
+			| "Then '$CurrentDate1$' variable is equal to '$CurrentDate2$'"          |
 		And I close current window
 		And I click "Refresh" button	
 		And "List" table does not contain lines

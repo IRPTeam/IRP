@@ -8,6 +8,7 @@ EndProcedure
 Async Procedure PrintCashOut(CommandParameter)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CommandParameter, "ConsolidatedRetailSales");
 	If Not IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales) Then
+		//@skip-check module-unused-local-variable
 		EquipmentResult = Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
 				, CommandParameter
 				, CommonFunctionsServer.GetRefAttribute(CommandParameter, "SendAmount"));

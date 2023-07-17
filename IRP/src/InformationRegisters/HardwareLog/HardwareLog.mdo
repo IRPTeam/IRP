@@ -92,6 +92,22 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
+    <name>User</name>
+    <synonym>
+      <key>en</key>
+      <value>User</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="08be0c27-f6ba-4fd9-ad3b-b17d813e8e48">
     <name>Hardware</name>
     <synonym>
@@ -108,22 +124,6 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="7945b88b-3c6c-49dd-bae0-073f7b49761a">

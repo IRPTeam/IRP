@@ -8,6 +8,13 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -15,12 +22,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T2014S_AdvancesInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -30,11 +51,22 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6040S_BundleAmountValues</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -44,11 +76,22 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.RemainingItemsInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -57,12 +100,29 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "Branch", "", "", "",
+	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T2017S_CustomersAdvancesRelevance</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -71,12 +131,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Branch", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T7010S_BillOfMaterials</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -86,11 +160,22 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.PricesByItemKeys</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("PriceType", "", "", "", "","")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -99,12 +184,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T9520S_TimeSheetInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -113,12 +212,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("PriceType", "", "", "", "","")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6020S_BatchKeysInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -127,12 +240,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.ExpenseRevenueTypeSettings</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -141,12 +268,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T8010S_ConsignorBatches</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -155,12 +296,29 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.DocumentFiscalStatus</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "Branch", "", "", "",
+	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -169,12 +327,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE User = &amp;CurrentUser</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6070S_BatchRevenueAllocationInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -183,6 +355,13 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -190,12 +369,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T2013S_OffsetOfAging</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -205,11 +398,25 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6080S_ReallocatedBatchesAmountValues</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "", "", "", "",
+	"OAR.Value1 = Table.OutgoingDocument.Company OR OAR.Value1 = Table.IncomingDocument.Branch"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -217,6 +424,13 @@
 		<name>InformationRegister.T7051S_ProductionDurationDetails</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -226,11 +440,22 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T2016S_VendorsAdvancesRelevance</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -239,12 +464,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.TaxSettings</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -253,12 +492,29 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "Branch", "Store", "", "",
+	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch AND OAR.Value3 = Table.Document.Store"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.PricesByItems</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("PriceType", "", "", "", "","")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -267,6 +523,13 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -274,12 +537,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "CashAccount", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6030S_BatchRelevance</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -289,6 +566,10 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T9500S_AccrualAndDeductionValues</name>
@@ -296,11 +577,8 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>InformationRegister.AttachedFiles</name>
 		<right>
-			<name>Read</name>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -309,12 +587,29 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "Branch", "", "", "",
+	"OAR.Value1 = Table.Order.Company AND OAR.Value2 = Table.Order.Branch"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6010S_BatchesInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -323,12 +618,26 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T2015S_TransactionsInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -337,6 +646,674 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.BundleContents.StandardAttribute.LineNumber</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.StandardAttribute.Active</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.Dimension.ItemKey</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.StandardAttribute.Period</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.Dimension.ItemKeyBundle</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.Resource.Quantity</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BundleContents.StandardAttribute.Recorder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.StandardAttribute.Recorder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.StandardAttribute.Active</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.Dimension.Branch</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.Dimension.BankTerm</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.StandardAttribute.LineNumber</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BranchBankTerms.StandardAttribute.Period</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AttachedFiles</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DataMappingTable</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Barcodes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.TemplateActions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.CurrencyRates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ObjectStatuses</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters(
+	"Company", "", "", "", "",
+	"OAR.Value1 = Table.Object.Company"
+)</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.UserSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AddProperties</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.LedgerTypeOperations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T1010S_ScannedBarcode</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ExternalCommands</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DataVersions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IDInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SharedReportOptions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ItemSegments</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.LockDataModificationRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.BarcodeScanInfoCheck</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.PartnerSegments</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.Attribute.FiscalResponse</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.Attribute.DataPresentation</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.Dimension.Document</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.StandardAttribute.Active</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.Resource.Status</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.StandardAttribute.Recorder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.StandardAttribute.Period</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DocumentFiscalStatus.StandardAttribute.LineNumber</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.StandardAttribute.Active</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.Dimension.Key</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.Resource.SecondValue</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.Dimension.isProduct</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.Dimension.IntegrationSettings</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.IntegrationInfo.Resource.Value</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Result</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Description</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.UserMessages</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Log</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Finish</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.StandardAttribute.Active</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.DifficultLevel</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Start</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.JobID</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Status</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Resource.Parameters</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.JobQueue.Dimension.Job</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<restrictionTemplate>
+		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
+		<condition>
+#If Not &amp;UseObjectAccess #Then
+	// Access restiction not using. Set UseObjectAccess functional option TRUE
+	WHERE TRUE
+	
+#ElseIf  "#D1" = "" AND "#D2" = "" AND "#D3" = "" AND "#D4" = "" AND "#D5" = "" AND "#CompareRule" = "" #Then
+	WHERE TRUE
+#Else
+Table
+WHERE TRUE IN 
+(
+	SELECT	TOP 1	
+		TRUE
+	FROM		
+			 InformationRegister.T9101A_ObjectAccessRegisters AS OAR
+	WHERE OAR.AccessGroup IN (&amp;CurrentUserAccessGroupList)
+		AND #CurrentTableName = OAR.TableName
+		
+		#If "#CompareRule" = "" #Then
+			#If Not "#D1" = "" #Then AND OAR.Value1 = Table.#D1 #EndIf
+			#If Not "#D2" = "" #Then AND OAR.Value2 = Table.#D2 #EndIf
+			#If Not "#D3" = "" #Then AND OAR.Value3 = Table.#D3 #EndIf
+			#If Not "#D4" = "" #Then AND OAR.Value4 = Table.#D4 #EndIf
+			#If Not "#D5" = "" #Then AND OAR.Value5 = Table.#D5 #EndIf
+		#Else
+			AND (#CompareRule)
+		#EndIf
+)
+#EndIf</condition>
+	</restrictionTemplate>
 </Rights>

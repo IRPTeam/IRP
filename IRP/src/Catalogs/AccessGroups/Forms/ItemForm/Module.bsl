@@ -22,6 +22,12 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure ObjectAccessDoNotControlOnChange(Item)
+	CurrentRow = Items.ObjectAccess.CurrentData;
+	CurrentRow.ValueRef = Undefined;
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient

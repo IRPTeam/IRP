@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6317e0c5-c184-4136-ae95-15c1c4fdc32e">
-  <name>BackgroungJobSplash</name>
+  <name>BackgroundJobSplash</name>
   <synonym>
     <key>en</key>
-    <value>Backgroung job splash</value>
+    <value>Background job splash</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -5,48 +5,48 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
+	If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
-	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	TransferFormToStructure(Transfer, Parameters);
-
-	If Parameters.IsBackgroundJob = True Then
-		
-		If Parameters.ShowBackgroundJobSplash = True Then
+		Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+		TransferFormToStructure(Transfer, Parameters);
+	
+		If Parameters.IsBackgroundJob = True Then
 			
-			Splash = OpenForm("CommonForm.BackgroungJobSplash",
-				New Structure("BackgroundJobTitle", Parameters.BackgroundJobTitle),
-				Transfer.Form, 
-				New UUID(),,,,
-				FormWindowOpeningMode.LockOwnerWindow);
-			Transfer.Form.BackgroungJobSplash = Splash.UUID;
-		EndIf;
+			If Parameters.ShowBackgroundJobSplash = True Then
 				
-		// run background task
-		JobParameters = New Structure();
-		JobParameters.Insert("FormUUID"         , Transfer.Form.UUID);
-		JobParameters.Insert("StepNames"        , StepNames);
-		JobParameters.Insert("Parameters"       , Parameters);
-		JobParameters.Insert("ExecuteLazySteps" , ExecuteLazySteps);
-
-		RunResult = ModelServer_V2.RunBackgroundJob(JobParameters);
-		Transfer.Form.BackgroungJobKey            = RunResult.BackgroungJobKey; 
-		Transfer.Form.BackgroungJobStorageAddress = RunResult.BackgroungJobStorageAddress;
-		Transfer.Form._AttachIdleHandler();
-	Else	
-		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-		TransferStructureToForm(Transfer, Parameters);
-	EndIf;
+				Splash = OpenForm("CommonForm.BackgroundJobSplash",
+					New Structure("BackgroundJobTitle", Parameters.BackgroundJobTitle),
+					Transfer.Form, 
+					New UUID(),,,,
+					FormWindowOpeningMode.LockOwnerWindow);
+				Transfer.Form.BackgroundJobSplash = Splash.UUID;
+			EndIf;
+					
+			// run background task
+			JobParameters = New Structure();
+			JobParameters.Insert("FormUUID"         , Transfer.Form.UUID);
+			JobParameters.Insert("StepNames"        , StepNames);
+			JobParameters.Insert("Parameters"       , Parameters);
+			JobParameters.Insert("ExecuteLazySteps" , ExecuteLazySteps);
+	
+			RunResult = ModelServer_V2.RunBackgroundJob(JobParameters);
+			Transfer.Form.BackgroundJobUUID            = RunResult.BackgroundJobUUID; 
+			Transfer.Form.BackgroundJobStorageAddress = RunResult.BackgroundJobStorageAddress;
+			Transfer.Form._AttachIdleHandler();
+		Else	
+			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+			TransferStructureToForm(Transfer, Parameters);
+		EndIf;
 
 #ELSE
 	
-	// Is server
-	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+		// Is server
+		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 	
 #ENDIF
 	
-EndIf;
+	EndIf;
 
 	
 	// if cache was initialized from this EntryPoint then ChainComplete

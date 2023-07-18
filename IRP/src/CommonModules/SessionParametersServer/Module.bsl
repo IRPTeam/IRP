@@ -18,6 +18,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	If RequiredParameters.Find("OurCompanies") <> Undefined Then
 		SessionParameters.OurCompanies = OurCompanies();
 	EndIf;
+	If RequiredParameters.Find("Workstation") <> Undefined Then
+		SessionParameters.Workstation = Catalogs.Workstations.EmptyRef();
+	EndIf;
 	If Saas.isAreaActive() Then
 		CurrentUser = UsersEvent.SessionParametersSetCurrentUser();
 		If RequiredParameters.Find("CurrentUser") <> Undefined Then

@@ -17,8 +17,8 @@ Function RunBackgroundJob(JobParameters) Export
 	BackgroundParameters.Add(StorageAddress);
 	BackgroundParameters.Add(ServiceParameters);
 	
-	BackgroundJobs.Execute("ModelServer_V2.BackgroundJob", BackgroundParameters, JobKey);
-	Return New Structure("BackgroungJobKey, BackgroungJobStorageAddress", JobKey, StorageAddress);
+	Job = BackgroundJobs.Execute("ModelServer_V2.BackgroundJob", BackgroundParameters, JobKey);
+	Return New Structure("BackgroundJobUUID, BackgroundJobStorageAddress", Job.UUID, StorageAddress);
 EndFunction
 
 Procedure BackgroundJob(JobParameters, StorageAddress, ServiceParameters) Export
@@ -44,7 +44,7 @@ Procedure SetJobCompletePercent(Parameters, Total, Complete) Export
 	EndIf;
 EndProcedure
 
-Function GetJobStatus(BackgroungJobKey, BackgroungJobStorageAddress) Export
+Function GetJobStatus(BackgroundJobUUID, BackgroundJobStorageAddress) Export
 	//Begin
 	//End
 	//ErrorInfo
@@ -52,44 +52,46 @@ Function GetJobStatus(BackgroungJobKey, BackgroungJobStorageAddress) Export
 	//Location
 	//MethodName
 	//UUID
-	JobResult = New Structure("JobKey, Status, StorageAddress, CompletePercent");
-		
-	JobResult.StorageAddress = BackgroungJobStorageAddress;
+	JobResult = New Structure;
+	JobResult.Insert("JobUUID", BackgroundJobUUID);
+	JobResult.Insert("Status", Enums.JobStatus.EmptyRef());
+	JobResult.Insert("StorageAddress", BackgroundJobStorageAddress);
+	JobResult.Insert("CompletePercent", Undefined);
+	JobResult.Insert("SystemMessages", New Array);
 	
-	If Not ValueIsFilled(BackgroungJobKey) Then
+	If Not ValueIsFilled(BackgroundJobUUID) Then
 		Return JobResult;
 	EndIf;
 	
-	ArrayOfJobs = BackgroundJobs.GetBackgroundJobs();
-	Job = Undefined;
-	For Each ItemOfArray In ArrayOfJobs Do
-		If ItemOfArray.Key = BackgroungJobKey Then
-			Job = ItemOfArray;
-			Break;
-		EndIf;
-	EndDo;
+	Job = BackgroundJobs.FindByUUID(BackgroundJobUUID);
 	
 	If Job = Undefined Then
 		Return JobResult;
 	EndIf;
 	
-	JobResult.JobKey = BackgroungJobKey;
-	
 	If Job.State = BackgroundJobState.Active Then
-		JobResult.Status = "Active";
+		JobResult.Status = Enums.JobStatus.Active;
 	ElsIf Job.State = BackgroundJobState.Canceled Then
-		JobResult.Status = "Canceled";
+		JobResult.Status = Enums.JobStatus.Canceled;
 	ElsIf Job.State = BackgroundJobState.Completed Then
-		JobResult.Status = "Completed";
+		JobResult.Status = Enums.JobStatus.Completed;
 	ElsIf Job.State = BackgroundJobState.Failed Then
-		JobResult.Status = "Failed";
+		JobResult.Status = Enums.JobStatus.Failed;
 	EndIf;
 	
 	ArrayOfMsg = Job.GetUserMessages(True);
 	If ArrayOfMsg.Count() Then
-		Msg = ArrayOfMsg[ArrayOfMsg.Count() - 1];
-		If StrStartsWith(Msg.Text, "__complete__percent__") Then
-			Msg_text = StrReplace(Msg.Text, "__complete__percent__", "");
+		Msg_text = "";
+		For Each Msg In ArrayOfMsg Do 
+			If StrStartsWith(Msg.Text, "__complete__percent__") Then
+				// we need only last msg
+				Msg_text = StrReplace(Msg.Text, "__complete__percent__", "");
+			Else
+				JobResult.SystemMessages.Add(Msg.Text);
+			EndIf;
+		EndDo;
+		
+		If Not IsBlankString(Msg_text) Then
 			JobResult.CompletePercent = CommonFunctionsServer.DeserializeJSON(Msg_text);
 		EndIf;
 	EndIf;

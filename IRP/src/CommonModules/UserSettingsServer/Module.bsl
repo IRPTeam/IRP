@@ -116,11 +116,7 @@ Function _GetUserSettings(User, FilterParameters, CallFromClient = False) Export
 	|		AND tmp_user.KindOfAttribute = tmp_user_group.KindOfAttribute";
 	Query.SetParameter("User", User);
 	
-	Try
-		Workstation = SessionParameters.Workstation;
-	Except
-		Workstation = Catalogs.Hardware.EmptyRef();	
-	EndTry;
+	Workstation = SessionParameters.Workstation;
 	
 	If ValueIsFilled(Workstation) And Not Workstation.UserGroup.IsEmpty() Then
 		Query.SetParameter("Group", Workstation.UserGroup);

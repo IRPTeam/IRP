@@ -365,7 +365,8 @@ Function ReturnPaymentByPaymentCardSettings() Export
 	Str.InOut.Insert("RRNCode", "");
 	
 	Str.Insert("Out", New Structure);
-		Str.Out.Insert("Slip", "");
+	
+	Str.Out.Insert("Slip", "");
 	
 	Return Str;
 EndFunction

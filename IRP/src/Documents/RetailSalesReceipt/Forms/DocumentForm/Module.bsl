@@ -669,6 +669,7 @@ EndProcedure
 
 #Region COPY_PASTE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure CopyToClipboard(Command)
 	CopyPasteClient.CopyToClipboard(Object, ThisObject);
@@ -689,6 +690,7 @@ Function CopyToClipboardServer(CopySettings)
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
 &AtClient
 Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
@@ -713,6 +715,7 @@ EndFunction
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -742,6 +745,7 @@ Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);

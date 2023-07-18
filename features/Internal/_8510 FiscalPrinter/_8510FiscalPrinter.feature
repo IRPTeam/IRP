@@ -411,6 +411,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I click the button named "FormCreate"
 		And I input "Fiscal printer" text in "Description" field
 		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
+		And I set checkbox named "Log"	
 		And I click Select button of "Driver" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1807,7 +1808,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 	* Check double click Print cash in
 		And I click "Print cash in" button
 		Then there are lines in TestClient message log
-			| 'The document is already printed.'    |
+			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
 		And I close all client application windows
 		
 
@@ -1879,7 +1880,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 	* Check double click Print cash out
 		And I click "Print cash out" button
 		Then there are lines in TestClient message log
-			| 'The document is already printed.'    |
+			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
 		And I close all client application windows
 
 
@@ -2388,6 +2389,19 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
 
+Scenario: _0260162 check button Print receipt (copy)
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the first line in "List" table
+		And I click "Print copy receipt" button
+	* Check
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintCheckCopy"	
+	And I close all client application windows
 
 Scenario: _0260152 close session
 	And I close all client application windows
@@ -2475,4 +2489,23 @@ Scenario: _0260153 check hardware parameter saving
 			And I close all client application windows
 				
 					
-				
+Scenario: _0260160 check Get Last Error button
+	And I close all client application windows
+	* Open hardware
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+	* Check button Get Last Error	
+		And I click "Get last error" button
+		Then there are lines in TestClient message log
+			|'Fiscal printer: '|
+		And I close all client application windows
+												
+
+
+Scenario: _0260180 check fiscal logs
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
+	Then the number of "List" table lines is "равно" "518"	

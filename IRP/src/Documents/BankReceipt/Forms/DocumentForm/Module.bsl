@@ -621,7 +621,7 @@ Procedure PayByCard(Command)
 	
 	Hardware = CommonFunctionsServer.GetRefAttribute(Object.Account, "Acquiring");
 	
-	Settings = EquipmentAcquiringClient.OpenPaymentFormSettings();
+	Settings = EquipmentAcquiringAPIClient.OpenPaymentFormSettings();
 	Settings.Amount = Object.DocumentAmount;
 	Settings.Hardware = Hardware;
 	
@@ -633,7 +633,7 @@ EndProcedure
 // Pay by card end.
 // 
 // Parameters:
-//  Result - See EquipmentAcquiringClient.PayByPaymentCardSettings
+//  Result - See EquipmentAcquiringAPIClient.PayByPaymentCardSettings
 //  AddInfo - Undefined - Add info
 &AtClient
 Procedure PayByCardEnd(Result, AddInfo) Export

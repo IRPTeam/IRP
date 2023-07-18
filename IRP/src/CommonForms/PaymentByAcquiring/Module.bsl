@@ -3,7 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	//@skip-check property-return-type
-	OpenSettings = Parameters.OpenSettings; // See EquipmentAcquiringClient.OpenPaymentFormSettings
+	OpenSettings = Parameters.OpenSettings; // See EquipmentAcquiringAPIClient.OpenPaymentFormSettings
 	isReturn = OpenSettings.isReturn;
 	RRNCode = OpenSettings.RRNCode;
 	Hardware = OpenSettings.Hardware;
@@ -32,12 +32,12 @@ Async Procedure Payment_PayByPaymentCard()
 	
 	Items.DecorationProblem.Visible = False;
 	
-	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = Amount;
 	PaymentSettings.Form.ElementToHideAndShow = Items.DecorationWaiting;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	
-	Result = Await EquipmentAcquiringClient.PayByPaymentCard(Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.PayByPaymentCard(Hardware, PaymentSettings);
 	
 	If Result Then
 		Close(PaymentSettings);
@@ -51,13 +51,13 @@ Async Procedure Payment_ReturnPaymentByPaymentCard()
 	
 	Items.DecorationProblem.Visible = False;
 	
-	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCardSettings();
 	PaymentSettings.In.Amount = Amount;
 	PaymentSettings.InOut.RRNCode = RRNCode;
 	PaymentSettings.Form.ElementToHideAndShow = Items.DecorationWaiting;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	
-	Result = Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCard(Hardware, PaymentSettings);
 	If Result Then
 		Close(PaymentSettings);
 	Else
@@ -70,10 +70,10 @@ Async Procedure Payment_CancelPaymentByPaymentCard()
 	
 	Items.DecorationProblem.Visible = False;
 	
-	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings();
 	PaymentSettings.In.Amount = Amount;
 	
-	If Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(Hardware, PaymentSettings) Then
+	If Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(Hardware, PaymentSettings) Then
 		PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	Else
 		Items.DecorationProblem.Visible = True;
@@ -86,9 +86,9 @@ Async Procedure Payment_EmergencyReversal()
 	
 	Items.DecorationProblem.Visible = False;
 	
-	PaymentSettings = EquipmentAcquiringClient.EmergencyReversalSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.EmergencyReversalSettings();
 	
-	If Await EquipmentAcquiringClient.EmergencyReversal(Hardware, PaymentSettings) Then
+	If Await EquipmentAcquiringAPIClient.EmergencyReversal(Hardware, PaymentSettings) Then
 		PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	Else
 		Items.DecorationProblem.Visible = True;

@@ -2005,6 +2005,11 @@ EndFunction
 
 Procedure ItemListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "ItemList", Address, GroupColumn, SumColumn);
+	
+	Parameters.IsBackgroundJob = True;
+	Parameters.ShowBackgroundJobSplash = True;
+	Parameters.BackgroundJobTitle = R().BgJ_Title_002;
+	
 	Parameters.LoadData.ExecuteAllViewNotify = True;
 	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ItemListLoad(Parameters);
@@ -4045,3 +4050,96 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+Procedure ViewIdleHandler(Form, Object) Export
+	JobStatus = ModelServer_V2.GetJobStatus(Form.BackgroundJobUUID, Form.BackgroundJobStorageAddress);
+	If JobStatus.Status = PredefinedValue("Enum.JobStatus.EmptyRef") Then
+		CancelIdleHandler(Form);
+		Return;
+	EndIf;
+	
+	If JobStatus.Status = PredefinedValue("Enum.JobStatus.Canceled") 
+		Or JobStatus.Status = PredefinedValue("Enum.JobStatus.Failed") Then
+			CancelIdleHandler(Form);
+			Return;
+	EndIf;
+	
+	If JobStatus.Status = PredefinedValue("Enum.JobStatus.Active") Then
+		// wait
+		If JobStatus.CompletePercent = Undefined And JobStatus.SystemMessages.Count() = 0 Then
+			Return;
+		EndIf;
+
+		If Form.BackgroundJobSplash = Undefined Then
+			Return;
+		EndIf;
+
+		OpenedSplashForm = GetSplashByUUID(Form.BackgroundJobSplash); // See CommonForm.BackgroundJobSplash
+		If OpenedSplashForm <> Undefined And OpenedSplashForm.IsOpen() Then
+			If Not JobStatus.CompletePercent = Undefined Then
+				OpenedSplashForm.Items.Percent.MaxValue = JobStatus.CompletePercent.Total;
+				OpenedSplashForm.Percent = JobStatus.CompletePercent.Complete;
+			EndIf;
+			For Each Msg In JobStatus.SystemMessages Do
+				NewMsg = OpenedSplashForm.SystemMessages.Add();
+				NewMsg.Message = Msg;
+			EndDo;
+
+			If OpenedSplashForm.SystemMessages.Count() And Not OpenedSplashForm.Items.GroupMessages.Visible Then
+				OpenedSplashForm.Items.GroupMessages.Visible = True;
+				OpenedSplashForm.DoNotCloseOnFinish = True;
+			EndIf;
+
+			DiffDate = CommonFunctionsServer.GetCurrentSessionDate() - OpenedSplashForm.StartDate;
+			TimeToEnd = OpenedSplashForm.Items.Percent.MaxValue * DiffDate / OpenedSplashForm.Percent - DiffDate;
+			OpenedSplashForm.EndIn = CommonFunctionsServer.GetCurrentSessionDate() + TimeToEnd;
+		EndIf;
+	Else
+		// complete..
+		JobResult = GetFromTempStorage(JobStatus.StorageAddress);
+		JobResult.Parameters.Object = Object;
+		JobResult.Parameters.Form   = Form;
+		ControllerClientServer_V2.OnChainComplete(JobResult.Parameters);
+		ModelClientServer_V2.DestroyEntryPoint(JobResult.Parameters);
+		
+		CancelIdleHandler(Form);
+	EndIf;
+EndProcedure	
+
+Procedure CancelIdleHandler(Form)
+	Form._DetachIdleHandler();
+	Form.BackgroundJobUUID = "";
+	If Form.BackgroundJobSplash <> Undefined Then
+		OpenedSplashForm = GetSplashByUUID(Form.BackgroundJobSplash); // See CommonForm.BackgroundJobSplash
+		If OpenedSplashForm <> Undefined And OpenedSplashForm.IsOpen() Then
+			OpenedSplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
+			OpenedSplashForm.Percent = OpenedSplashForm.Items.Percent.MaxValue;
+			OpenedSplashForm.FormCanBeClose = True;
+			OpenedSplashForm.CommandBar.ChildItems.FormOK.Visible = True;
+			OpenedSplashForm.Items.Decoration.Visible = False;
+			If Not OpenedSplashForm.DoNotCloseOnFinish Then
+				OpenedSplashForm.Close();
+			EndIf;
+		EndIf;
+		Form.BackgroundJobSplash = Undefined;
+	EndIf;
+EndProcedure
+
+Function GetSplashByUUID(BackgroundJobSplash)
+	OpenedSplashForm = Undefined;
+	Windows = GetWindows();
+	For Each Window In Windows Do
+		If OpenedSplashForm <> Undefined Then
+			Break;
+		EndIf;
+		If Not Window.IsMain Then
+			For Each Splash In Window.Content Do
+				If Splash.UUID = BackgroundJobSplash Then
+					OpenedSplashForm = Splash;
+					Break;
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+	Return OpenedSplashForm;
+EndFunction

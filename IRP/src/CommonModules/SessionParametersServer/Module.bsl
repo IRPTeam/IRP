@@ -1,5 +1,4 @@
-Procedure SessionParametersSetting(RequiredParameters) Export
-
+Procedure SessionParametersSetting(RequiredParameters) Export	
 	If RequiredParameters = Undefined Then
 		SessionParameters.ConnectionSettings = Catalogs.DataBaseStatus.GetOrCreateDataBaseStatusInfo();
 		StyleName = SessionParameters.ConnectionSettings.SelectedStyle;
@@ -18,6 +17,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	EndIf;
 	If RequiredParameters.Find("OurCompanies") <> Undefined Then
 		SessionParameters.OurCompanies = OurCompanies();
+	EndIf;
+	If RequiredParameters.Find("Workstation") <> Undefined Then
+		SessionParameters.Workstation = Catalogs.Workstations.EmptyRef();
 	EndIf;
 	If Saas.isAreaActive() Then
 		CurrentUser = UsersEvent.SessionParametersSetCurrentUser();

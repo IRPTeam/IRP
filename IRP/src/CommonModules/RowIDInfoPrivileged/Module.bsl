@@ -15,8 +15,8 @@ Function ExtractData(BasisesTable, Ref, AddInfo = Undefined) Export
 	Return RowIDInfoServer.ExtractData(BasisesTable, Ref, AddInfo);
 EndFunction
 	
-Function ConvertDataToFillingValues(RefMetadata, ExtractedData, IsGR_InventoryTransfer = False) Export
-	Return RowIDInfoServer.ConvertDataToFillingValues(RefMetadata, ExtractedData, IsGR_InventoryTransfer);
+Function ConvertDataToFillingValues(RefMetadata, ExtractedData, Ref = Undefined) Export
+	Return RowIDInfoServer.ConvertDataToFillingValues(RefMetadata, ExtractedData, Ref);
 EndFunction
 
 Function GetBasises(Ref, FullFilter) Export

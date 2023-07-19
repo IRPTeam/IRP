@@ -7,6 +7,15 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "IsCopyingInteractive") Then
 		ArrayOfNewAttribute.Add(New FormAttribute("IsCopyingInteractive", New TypeDescription("Boolean")));
 	EndIf;
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobStorageAddress") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobStorageAddress", New TypeDescription("String")));
+	EndIf;
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobUUID") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobUUID", New TypeDescription("UUID")));
+	EndIf;	
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobSplash") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobSplash", New TypeDescription("UUID")));
+	EndIf;
 	
 	If ArrayOfNewAttribute.Count() Then
 		Form.ChangeAttributes(ArrayOfNewAttribute);

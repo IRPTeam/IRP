@@ -10,4 +10,17 @@
   <name>ItemTypes</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:CatalogExtension"/>
+  <attributes uuid="49aa097b-50a6-4fc7-9c36-506f617a0477" extendedConfigurationObject="1467a8a8-043f-422a-b930-608f5e45d117">
+    <name>Type</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>EnumRef.ItemTypes</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
 </mdclass:Catalog>

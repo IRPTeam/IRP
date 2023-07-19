@@ -117,6 +117,7 @@ Function _GetUserSettings(User, FilterParameters, CallFromClient = False) Export
 	Query.SetParameter("User", User);
 	
 	Workstation = SessionParameters.Workstation;
+	
 	If ValueIsFilled(Workstation) And Not Workstation.UserGroup.IsEmpty() Then
 		Query.SetParameter("Group", Workstation.UserGroup);
 	Else

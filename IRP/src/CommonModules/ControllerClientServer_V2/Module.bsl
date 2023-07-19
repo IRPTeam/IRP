@@ -45,6 +45,9 @@ Function GetFormParameters(Form) Export
 	Result.PropertyBeforeChange.List.Insert("Names"   , "");
 	Result.PropertyBeforeChange.List.Insert("DataPath", "");
 	Result.PropertyBeforeChange.List.Insert("Value"   , Undefined);
+	
+	Result.Insert("IsBackgroundJob", False);
+	Result.Insert("ShowBackgroundJobSplash", False);
 	Return Result;
 EndFunction
 
@@ -53,6 +56,9 @@ Function GetLoadParameters(Address, GroupColumns = "", SumColumns = "") Export
 	Result.Insert("Address", Address);
 	Result.Insert("GroupColumns", GroupColumns);
 	Result.Insert("SumColumns", SumColumns);
+	
+	Result.Insert("IsBackgroundJob", False);
+	Result.Insert("ShowBackgroundJobSplash", False);
 	Return Result;
 EndFunction
 
@@ -239,6 +245,10 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("TableRowsMap" , New Map());
 	Parameters.Insert("BindingMap"   , New Map());
 	Parameters.Insert("CacheRowsRemovable", New Structure());
+	
+	Parameters.Insert("IsBackgroundJob", FormParameters.IsBackgroundJob Or LoadParameters.IsBackgroundJob);
+	Parameters.Insert("ShowBackgroundJobSplash", FormParameters.ShowBackgroundJobSplash Or LoadParameters.ShowBackgroundJobSplash);
+	Parameters.Insert("BackgroundJobTitle", R().BgJ_Title_001);
 	
 	Return Parameters;
 EndFunction
@@ -14652,7 +14662,12 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	DefaultFilledRow = New Structure();
 	
 	RowIndex = Parameters.Rows.Count() - Parameters.LoadData.CountRows;
+	_Total = SourceTable.Count();
+	_Complete = 0;
 	For Each SourceRow In SourceTable Do
+		_Complete = _Complete + 1;
+		ModelServer_V2.SetJobCompletePercent(Parameters, _Total, _Complete);
+		
 		NewRow =  AllRows[RowIndex];
 		Parameters.Rows.Clear();
 		Parameters.Rows.Add(NewRow);

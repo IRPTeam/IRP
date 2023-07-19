@@ -238,7 +238,14 @@ Function GetFillingValues()
 	AddInfo = New Structure();
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IsLinkRows", True);
 	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
-	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
+	
+	IsGR_InventoryTransfer = False;
+	If TypeOf(ThisObject.MainFilter.Ref) = Type("DocumentRef.GoodsReceipt") Then
+		IsGR_InventoryTransfer = 
+			(ThisObject.MainFilter.Ref.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer);
+	EndIf;
+		
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData, IsGR_InventoryTransfer);	
 	Return FillingValues;
 EndFunction
 

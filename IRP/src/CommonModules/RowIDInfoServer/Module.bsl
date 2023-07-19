@@ -10286,7 +10286,7 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
+Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, IsGR_InventoryTransfer = False) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
@@ -10313,7 +10313,11 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 				+ ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
-		Return "Company, Branch, Partner, LegalName, TransactionType";
+		If IsGR_InventoryTransfer Then
+			Return "Company, Partner, LegalName, TransactionType";
+		Else
+			Return "Company, Branch, Partner, LegalName, TransactionType";
+		EndIf;
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
 		Return "Company, Branch, StoreSender, StoreReceiver";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransferOrder Then
@@ -10351,13 +10355,13 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	EndIf;
 EndFunction
 
-Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
+Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, IsGR_InventoryTransfer = False) Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata, True);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata, True, IsGR_InventoryTransfer);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);

@@ -5,21 +5,50 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
+	If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
-	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	TransferFormToStructure(Transfer, Parameters);
-#ENDIF
+		Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+		TransferFormToStructure(Transfer, Parameters);
+	
+		If Parameters.IsBackgroundJob = True Then
+			
+			If Parameters.ShowBackgroundJobSplash = True Then
+				
+				Splash = OpenForm("CommonForm.BackgroundJobSplash",
+					New Structure("BackgroundJobTitle", Parameters.BackgroundJobTitle),
+					Transfer.Form, 
+					New UUID(),,,,
+					FormWindowOpeningMode.LockOwnerWindow);
+				Transfer.Form.BackgroundJobSplash = Splash.UUID;
+			EndIf;
+					
+			// run background task
+			JobParameters = New Structure();
+			JobParameters.Insert("FormUUID"         , Transfer.Form.UUID);
+			JobParameters.Insert("StepNames"        , StepNames);
+			JobParameters.Insert("Parameters"       , Parameters);
+			JobParameters.Insert("ExecuteLazySteps" , ExecuteLazySteps);
+	
+			RunResult = ModelServer_V2.RunBackgroundJob(JobParameters);
+			Transfer.Form.BackgroundJobUUID            = RunResult.BackgroundJobUUID; 
+			Transfer.Form.BackgroundJobStorageAddress = RunResult.BackgroundJobStorageAddress;
+			Transfer.Form._AttachIdleHandler();
+		Else	
+			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+			TransferStructureToForm(Transfer, Parameters);
+		EndIf;
 
-	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-
-#IF Client THEN
-	TransferStructureToForm(Transfer, Parameters);
+#ELSE
+	
+		// Is server
+		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+	
 #ENDIF
 	
-EndIf;
+	EndIf;
 
+	
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
 		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
@@ -27,8 +56,10 @@ EndIf;
 			Parameters.ModelEnvironment.ArrayOfLazySteps.Clear();
 			EntryPoint(LazyStepNames, Parameters, True);
 		Else	
-			ControllerClientServer_V2.OnChainComplete(Parameters);
-			DestroyEntryPoint(Parameters);
+			If Parameters.IsBackgroundJob = False Then
+				ControllerClientServer_V2.OnChainComplete(Parameters);
+				DestroyEntryPoint(Parameters);
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure
@@ -3818,8 +3849,15 @@ Function ChangeisControlCodeStringByItemOptions() Export
 	Return GetChainLinkOptions("Item");
 EndFunction
 
-Function ChangeisControlCodeStringByItemExecute(Options) Export
-	If CommonFunctionsServer.GetRefAttribute(SessionParametersServer.GetSessionParameter("Workstation"), "IgnoreCodeStringControl") Then
+Function ChangeisControlCodeStringByItemExecute(Options) Export  
+	Try
+		Workstation = SessionParametersServer.GetSessionParameter("Workstation");
+	Except
+		Workstation = Undefined;
+	EndTry;
+	
+	
+	If ValueIsFilled(Workstation) And CommonFunctionsServer.GetRefAttribute(Workstation, "IgnoreCodeStringControl") Then
 		Return False;
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
@@ -3884,7 +3922,7 @@ Procedure InitEntryPoint(StepNames, Parameters)
 	EndIf;
 EndProcedure
 
-Procedure DestroyEntryPoint(Parameters)
+Procedure DestroyEntryPoint(Parameters) Export
 	If Parameters.Property("ModelEnvironment") Then
 		Parameters.Delete("ModelEnvironment");
 	EndIf;

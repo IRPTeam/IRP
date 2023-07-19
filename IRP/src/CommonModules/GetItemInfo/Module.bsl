@@ -807,7 +807,12 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
-	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
+	Try
+		Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
+	Except
+		Query.SetParameter("IgnoreCodeStringControl", False);
+	EndTry;
+		
 	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
 	Query.SetParameter("PriceType", PriceType);
 	

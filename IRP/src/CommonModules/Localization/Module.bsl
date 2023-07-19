@@ -1642,5 +1642,14 @@ Function Strings(Lang) Export
 		|tr='Open serial lot number tree'", Lang));
 #EndRegion	
 	
+#Region BackgroundJobs
+	Strings.Insert("BgJ_Title_001",   NStr("en='Background job is running';
+		|ru='Фоновое задание запущено';
+		|tr='Background job is running'", Lang));
+	Strings.Insert("BgJ_Title_002",   NStr("en='Load Item list';
+		|ru='Загрузка списка номенклатуры';
+		|tr='Load Item list'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="04efc967-598d-409f-bc01-09e6e66c3677" extendedConfigurationObject="85fc740a-0bba-4bcd-8ca3-447d426c14ed">
+  <producedTypes>
+    <refType typeId="06e0adcc-8f97-4356-8792-f4a1e201ac90" valueTypeId="bbdc19bc-7cff-4bec-91c5-b71c7ef4704b"/>
+    <listType typeId="b44ce6f5-b54c-456a-a837-6d63585abd04" valueTypeId="92e1c0ec-b5c8-4f59-8438-860983426b37"/>
+    <managerType typeId="e6bb443f-c736-47ab-bd46-f59bc06b0d6b" valueTypeId="32d9de42-870a-4da5-8f99-c98094f68b42"/>
+  </producedTypes>
+  <name>ItemTypes</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:EnumExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <enumValues uuid="70f82c62-b8bc-4d67-a970-032f70721959" extendedConfigurationObject="4be789f8-2d36-4169-9f2d-4c825c8d712c">
+    <name>Service</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:MdObjectExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+    </extension>
+  </enumValues>
+  <enumValues uuid="dd0e238a-60d5-4700-bc40-535f79b4f4bf" extendedConfigurationObject="7bbe3a49-8365-4785-a38c-abee4d666e13">
+    <name>Product</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:MdObjectExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+    </extension>
+  </enumValues>
+</mdclass:Enum>

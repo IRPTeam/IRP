@@ -719,9 +719,6 @@
           <showTitle>true</showTitle>
           <throughAlign>Auto</throughAlign>
           <currentRowUse>Auto</currentRowUse>
-          <associatedTableElementId xsi:type="core:StringValue">
-            <value>SystemMessages</value>
-          </associatedTableElementId>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -840,10 +837,6 @@
   <handlers>
     <event>BeforeClose</event>
     <name>BeforeClose</name>
-  </handlers>
-  <handlers>
-    <event>OnClose</event>
-    <name>OnClose</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoSaveDataInSettings>Use</autoSaveDataInSettings>

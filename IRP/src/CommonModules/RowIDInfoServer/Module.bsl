@@ -5786,13 +5786,12 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store                , ItemList.Store";
 	
 	ElsIf ExternalDocAliase = Aliases.RSR Then
-		Result.Header   = "Company, Branch, Store, RetailCustomer, Currency, PriceIncludeTax, Status,
+		Result.Header   = "Company, Store, RetailCustomer, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
 				
 		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
-							  |Branch               , Branch,
 							  |RetailCustomer       , RetailCustomer,
 							  |CurrencySales        , Currency,
 							  |TransactionTypeSales , TransactionType,
@@ -5826,12 +5825,11 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 							  
 	ElsIf ExternalDocAliase = Aliases.RSC Then
-		Result.Header       = "Company, Branch, ShipmentMode, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
+		Result.Header       = "Company, ShipmentMode, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
 		
 		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
-							  |Branch            , Branch,
 							  |RetailCustomer    , RetailCustomer,
 							  |TransactionTypeRSC, ShipmentMode,
 							  |ProcurementMethod , ItemList.ProcurementMethod,
@@ -6092,11 +6090,6 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_RetailCustomer
 	|					THEN RowRef.RetailCustomer = &RetailCustomer
 	|				ELSE FALSE
@@ -6312,11 +6305,6 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -7147,7 +7135,7 @@ Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.RSR
 		Or InternalDocAliase = Aliases.RGR Then
 
-		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [RSC] to [%1]", InternalDocAliase);
@@ -7158,12 +7146,11 @@ EndFunction
 Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSR Or ExternalDocAliase = Aliases.RGR Then 
-		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
-							  |Branch            , Branch,
 							  |RetailCustomer    , RetailCustomer,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
@@ -7197,11 +7184,6 @@ Procedure ApplyFilterSet_RSC_ForRSR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -7245,11 +7227,6 @@ Procedure ApplyFilterSet_RSC_ForRGR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -8023,7 +8000,7 @@ Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.RSC Then 
 
-		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [RGR] to [%1]", InternalDocAliase);
@@ -8034,12 +8011,11 @@ EndFunction
 Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSC Then 
-		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
-							  |Branch            , Branch,
 							  |RetailCustomer    , RetailCustomer,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
@@ -9156,25 +9132,38 @@ EndFunction
 
 #Region Document_RSR
 
+Function GetFieldsToLock_InternalLink_RSR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Store, RetailCustomer, Partner, LegalName, Agreement, Currency, 
+			|PriceIncludeTax, UsePartnerTransactions";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	ElsIf InternalDocAliase = Aliases.RSC Then
+		Result.Header   = "Company, Store, RetailCustomer";
+		Result.ItemList = "Item, ItemKey, Store";		
+	Else
+		Raise StrTemplate("Not supported Internal link for [RSR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RRR Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
+		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
 		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
-							  |Branch           , Branch,
 							  |PartnerSales     , Partner,
 							  |LegalNameSales   , LegalName,
 							  |ItemKey          , ItemList.ItemKey,
 							  |Store            , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.RSC Then
-		Result.Header   = "Company, Branch, Store, RetailCustomer";
+		Result.Header   = "Company, Store, RetailCustomer";
 		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
-							  |Branch           , Branch,
 							  |RetailCustomer   , RetailCustomer,
 							  |ItemKey          , ItemList.ItemKey,
 							  |Store            , ItemList.Store";		
@@ -9208,11 +9197,6 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|					THEN RowRef.Company = &Company
 	|				ELSE TRUE
 	|
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE TRUE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_PartnerSales
@@ -9305,30 +9289,11 @@ EndFunction
 Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.RSR Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
+		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
 		Result.ItemList = "Item, ItemKey, Store, RetailSalesReceipt";
 	Else
 		Raise StrTemplate("Not supported Internal link for [RRR] to [%1]", InternalDocAliase);
-	EndIf;
-	Return Result;
-EndFunction
-
-#EndRegion
-
-#Region Document_RSR
-
-Function GetFieldsToLock_InternalLink_RSR(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store, RetailCustomer, Partner, LegalName, Agreement, Currency, 
-			|PriceIncludeTax, UsePartnerTransactions";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
-	ElsIf InternalDocAliase = Aliases.RSC Then
-		Result.Header   = "Company, Branch, Store, RetailCustomer";
-		Result.ItemList = "Item, ItemKey, Store";		
-	Else
-		Raise StrTemplate("Not supported Internal link for [RSR] to [%1]", InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10286,22 +10251,22 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
+Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Undefined) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
-		Return "Company, Branch, RetailCustomer, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, RetailCustomer, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailShipmentConfirmation Then
-		Return "Company, Branch, RetailCustomer, Courier, TransactionType";
+		Return "Company, RetailCustomer, Courier, TransactionType";
 		
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailGoodsReceipt Then
-		Return "Company, Branch, RetailCustomer, Courier"
+		Return "Company, RetailCustomer, Courier"
 			+ ?(NameAsAlias, ", TransactionTypeRGR", ", TransactionType");
 		
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
@@ -10313,7 +10278,13 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 				+ ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
-		Return "Company, Branch, Partner, LegalName, TransactionType";
+		If Ref <> Undefined 
+			 And TypeOf(Ref) = Type("DocumentRef.GoodsReceipt") 
+			 And Ref.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
+			Return "Company, Partner, LegalName, TransactionType";
+		Else
+			Return "Company, Branch, Partner, LegalName, TransactionType";
+		EndIf;
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
 		Return "Company, Branch, StoreSender, StoreReceiver";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransferOrder Then
@@ -10339,7 +10310,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 				+ ?(NameAsAlias, ", TransactionTypePR", ", TransactionType");
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkOrder Then
@@ -10351,13 +10322,13 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	EndIf;
 EndFunction
 
-Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
+Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Ref = Undefined) Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata, True);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata, True, Ref);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);

@@ -38,7 +38,6 @@ EndFunction
 Function GetLinkedDocumentsFilter_RSC(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"            , Object.Company);
-	Filter.Insert("Branch"             , Object.Branch);
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
 	Filter.Insert("Ref"                , Object.Ref);
@@ -139,7 +138,6 @@ Function GetLinkedDocumentsFilter_RGR(Object) Export
 	
 	Filter = New Structure();
 	Filter.Insert("Company"            , Object.Company);
-	Filter.Insert("Branch"             , Object.Branch);
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	Filter.Insert("TransactionType"    , Map.Get(Object.TransactionType));
 	Filter.Insert("Ref"                , Object.Ref);
@@ -246,7 +244,6 @@ EndFunction
 Function GetLinkedDocumentsFilter_RSR(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);
-	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("RetailCustomer"       , Object.RetailCustomer);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.RetailSales"));

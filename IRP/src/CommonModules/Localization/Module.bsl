@@ -1647,7 +1647,7 @@ Function Strings(Lang) Export
 		|ru='Фоновое задание запущено';
 		|tr='Background job is running'", Lang));
 	Strings.Insert("BgJ_Title_002",   NStr("en='Load Item list';
-		|ru='Загрузка списка номенклатуры';
+		|ru='Загрузить список товаров';
 		|tr='Load Item list'", Lang));
 #EndRegion	
 	

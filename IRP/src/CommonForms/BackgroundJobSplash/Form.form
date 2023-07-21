@@ -12,7 +12,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Декорация</value>
+    <value>Рисунок1</value>
    </title>
    <title>
     <key>tr</key>
@@ -186,7 +186,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Группа верх</value>
+     <value>Группа Верх</value>
     </title>
     <title>
      <key>tr</key>
@@ -409,7 +409,7 @@
      </toolTip>
      <toolTip>
       <key>ru</key>
-      <value>Не закрывать эту форму при завершении</value>
+      <value>Не закрывать эту форму при окончании</value>
      </toolTip>
      <toolTip>
       <key>tr</key>
@@ -780,7 +780,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Группа информации</value>
+    <value>Группа Инфо</value>
    </title>
    <title>
     <key>tr</key>
@@ -822,7 +822,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Группа картинки и информации</value>
+   <value>Группа картинка и информация</value>
   </title>
   <title>
    <key>tr</key>
@@ -1024,7 +1024,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Окончание в ~</value>
+   <value>Окончение через ~</value>
   </title>
   <title>
    <key>tr</key>
@@ -1052,7 +1052,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Системные уведомления</value>
+   <value>Системные сообщения</value>
   </title>
   <title>
    <key>tr</key>
@@ -1103,7 +1103,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Не закрывать при завершении</value>
+   <value>Не закрывать при окончании</value>
   </title>
   <title>
    <key>tr</key>

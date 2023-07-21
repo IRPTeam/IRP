@@ -95,7 +95,8 @@ Scenario: _2069002 check locking header in the Retail sales receipt with linked 
 		And "Price includes tax" attribute is read-only
 		And "Use partner transactions" attribute is read-only
 		And "Currency" attribute is read-only
-		And "Branch" attribute is read-only
+		When I Check the steps for Exception
+			| 'And "Branch" attribute is read-only'    |
 	And I close all client application windows
 
 Scenario: _2069003 check locking header in the Retail return receipt with linked documents (one session)
@@ -118,7 +119,8 @@ Scenario: _2069003 check locking header in the Retail return receipt with linked
 		And "Price includes tax" attribute is read-only
 		And "Use partner transactions" attribute is read-only
 		And "Currency" attribute is read-only
-		And "Branch" attribute is read-only
+		When I Check the steps for Exception
+			| 'And "Branch" attribute is read-only'    |
 	And I close all client application windows
 
 Scenario: _2069004 check unlock linked rows in the Retail sales receipt

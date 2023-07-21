@@ -237,8 +237,8 @@ Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
 	AddInfo = New Structure();
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IsLinkRows", True);
-	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
-	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
+	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);	
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData, ThisObject.MainFilter.Ref);	
 	Return FillingValues;
 EndFunction
 

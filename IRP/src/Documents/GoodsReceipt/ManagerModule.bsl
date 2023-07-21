@@ -318,6 +318,7 @@ Function R1031B_ReceiptInvoicing()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.PurchaseInvoiceExists
+		   |	AND NOT ItemList.IsTransaction_InventoryTransfer
 		   |
 		   |UNION ALL
 		   |

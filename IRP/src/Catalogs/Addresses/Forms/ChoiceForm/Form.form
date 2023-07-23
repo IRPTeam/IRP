@@ -432,7 +432,7 @@
        Table.Predefined, 
        Table.PredefinedDataName
  FROM 
-       Catalog.Table
+       Catalog.Addresses
  AS 
        Table</queryText>
       <mainTable>Catalog.Addresses</mainTable>
@@ -454,6 +454,26 @@
         <field>Code</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Description</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Predefined</dataPath>
+        <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PredefinedDataName</dataPath>
+        <field>PredefinedDataName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Description_hash</dataPath>
         <field>Description_hash</field>
       </fields>
@@ -466,24 +486,8 @@
         <field>Description_tr</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Predefined</dataPath>
-        <field>Predefined</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PredefinedDataName</dataPath>
-        <field>PredefinedDataName</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description</dataPath>
-        <field>Description</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Description</value>
-            </content>
-          </localValue>
-        </title>
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
       </fields>
     </extInfo>
   </attributes>

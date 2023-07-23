@@ -207,6 +207,20 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 			NewAttribute.SetAction("Opening", "DescriptionOpening");
 		EndIf;
 	EndDo;
+
+	MetadataObj = Form.Object.Ref.Metadata();
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("LocalFullDescription", MetadataObj) Then
+		NewAttribute = Form.Items.Add("LocalFullDescription", Type("FormField"), ParentGroup);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object.LocalFullDescription";
+	EndIf;
+
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ForeignFullDescription", MetadataObj) Then
+		NewAttribute = Form.Items.Add("ForeignFullDescription", Type("FormField"), ParentGroup);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object.ForeignFullDescription";
+	EndIf;
+	
 EndProcedure
 
 // Create sub form item description.

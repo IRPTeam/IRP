@@ -615,15 +615,18 @@ EndFunction
 // 
 // Parameters:
 //  Base64Zip - String - Base64 zip
-//  FileName - String - File name
+//  FileName - String - File name. If empty - return first file
 // 
 // Returns:
 //  BinaryData - String from base64 ZIP
-Function StringFromBase64ZIP(Base64Zip, FileName) Export
+Function StringFromBase64ZIP(Base64Zip, FileName = Undefined) Export
 	MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
 	ZIP = New ZipFileReader(MStream);
 	TmpFileName = TempFilesDir();
 	ZIP.Extract(ZIP.Items[0], TmpFileName);
+	If FileName = Undefined Then
+		FileName = ZIP.Items[0].FullName;
+	EndIf;
 	Zip.Close();
 	MStream.CloseAndGetBinaryData();
 	BD = New BinaryData(TmpFileName + FileName);

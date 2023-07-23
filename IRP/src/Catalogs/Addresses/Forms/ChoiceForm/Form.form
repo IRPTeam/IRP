@@ -425,16 +425,16 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT 
-       Addresses.Ref, 
-       Addresses.DeletionMark, 
-       Addresses.Code, 
-       Addresses.Description_en AS Description,
-       Addresses.Predefined, 
-       Addresses.PredefinedDataName
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.Description_en AS Description,
+       Table.Predefined, 
+       Table.PredefinedDataName
  FROM 
-       Catalog.Addresses
+       Catalog.Table
  AS 
-       Addresses</queryText>
+       Table</queryText>
       <mainTable>Catalog.Addresses</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

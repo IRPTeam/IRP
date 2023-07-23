@@ -464,29 +464,29 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT 
-       LockDataModificationReasons.Ref, 
-       LockDataModificationReasons.DeletionMark, 
-       LockDataModificationReasons.Code, 
-       LockDataModificationReasons.ForAllUsers, 
-       LockDataModificationReasons.DisableRule, 
-       LockDataModificationReasons.SetOneRuleForAllObjects, 
-       LockDataModificationReasons.Attribute, 
-       LockDataModificationReasons.ComparisonType, 
-       LockDataModificationReasons.Value, 
-       LockDataModificationReasons.SetValueAsCode, 
-       LockDataModificationReasons.AdvancedMode, 
-       LockDataModificationReasons.DCS, 
-       LockDataModificationReasons.QueryFilter, 
-       LockDataModificationReasons.isInitDCS, 
-       LockDataModificationReasons.PreviewText, 
-       LockDataModificationReasons.CheckIsObjectLockedOnOpen, 
-       LockDataModificationReasons.Description_en AS Description, 
-       LockDataModificationReasons.Predefined, 
-       LockDataModificationReasons.PredefinedDataName
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.ForAllUsers, 
+       Table.DisableRule, 
+       Table.SetOneRuleForAllObjects, 
+       Table.Attribute, 
+       Table.ComparisonType, 
+       Table.Value, 
+       Table.SetValueAsCode, 
+       Table.AdvancedMode, 
+       Table.DCS, 
+       Table.QueryFilter, 
+       Table.isInitDCS, 
+       Table.PreviewText, 
+       Table.CheckIsObjectLockedOnOpen, 
+       Table.Description_en AS Description, 
+       Table.Predefined, 
+       Table.PredefinedDataName
  FROM 
        Catalog.LockDataModificationReasons
  AS 
-       LockDataModificationReasons</queryText>
+       Table</queryText>
       <mainTable>Catalog.LockDataModificationReasons</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -515,18 +515,18 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT 
-       DataBaseStatus.Ref, 
-       DataBaseStatus.DeletionMark, 
-       DataBaseStatus.Code, 
-       DataBaseStatus.isProduction, 
-       DataBaseStatus.SelectedStyle, 
-       DataBaseStatus.Description_en AS Description, 
-       DataBaseStatus.Predefined, 
-       DataBaseStatus.PredefinedDataName
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.isProduction, 
+       Table.SelectedStyle, 
+       Table.Description_en AS Description, 
+       Table.Predefined, 
+       Table.PredefinedDataName
  FROM 
        Catalog.DataBaseStatus
  AS 
-       DataBaseStatus</queryText>
+       Table</queryText>
       <mainTable>Catalog.DataBaseStatus</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

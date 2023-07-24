@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -120,6 +121,15 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocRetailShipmentConfirmationClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region COURIER
 
 &AtClient
@@ -215,6 +225,29 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocRetailShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_ORIGIN
+
+&AtClient
+Procedure ItemListInventoryOriginOnChange(Item)
+	DocRetailShipmentConfirmationClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	SourceOfOriginClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
+	SourceOfOriginClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -492,6 +525,8 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	CommissionTradeServer.RemoveInventoryOriginFormFillingValues(Result.FillingValues);
+	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);

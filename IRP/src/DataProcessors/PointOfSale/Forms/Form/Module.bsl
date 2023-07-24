@@ -962,6 +962,10 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
+	PaymentForm = Result.PaymentForm; // See DataProcessor.PointOfSale.Form.Payment
+	Result.PaymentForm = Undefined;
+	
 	If ThisObject.isReturn Then
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
 	Else	
@@ -972,6 +976,8 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	For Each CreatedDocument In CreatedDocuments Do
 		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
 	EndDo;
+	
+	PaymentForm.Close();
 	
 	NewTransaction();
 	Modified = False;

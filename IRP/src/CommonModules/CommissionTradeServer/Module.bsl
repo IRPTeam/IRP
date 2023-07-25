@@ -6,7 +6,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpTable_SourceOfOrigins  = New Array();
 	tmpTable_ConsignorBatches = New Array();
 	
-	If TypeOf(DocObject) = Type("DocumentObject.RetailSalesReceipt") Then
+	If TypeOf(DocObject.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		For Each Row_ItemList In Table_ItemList Do
 			
 			Filter = New Structure("Key", Row_ItemList.Key);

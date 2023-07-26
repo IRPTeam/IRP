@@ -1518,13 +1518,3 @@ Function GetConsignorBatchesOnStock(DocObject, Company, Store, ItemKey, SerialLo
 	QueryTable.Sort("BatchDate");
 	Return QueryTable;	
 EndFunction
-
-Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
-	For Each Row1 In FillingValues Do
-		For Each Row2 In Row1.ItemList Do
-			If Row2.Property(FieldName) Then
-				Row2.Delete(FieldName);
-			EndIf;
-		EndDo;
-	EndDo;
-EndProcedure

@@ -2790,6 +2790,7 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query.Text = Query.Text + 
 	"SELECT ALLOWED
 	|	""RetailShipmentConfirmation"" AS BasedOn,
+	|	""RetailShipmentConfirmation"" AS BasedOnName,
 	|	UNDEFINED AS Ref,
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery) then
@@ -10402,7 +10403,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
-		Return "Company, RetailCustomer, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, RetailCustomer, Partner, LegalName, Agreement, Currency, PriceIncludeTax, BasedOnName";
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
@@ -10818,7 +10819,8 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypeRGR,
 		   |isControlCodeString,
 		   //#2062
-		   |Consignor";
+		   |Consignor,
+		   |BasedOnName";
 		
 EndFunction
 
@@ -12338,3 +12340,13 @@ Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Exp
 	
 	Return SingleRowInfo;
 EndFunction
+
+Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
+	For Each Row1 In FillingValues Do
+		For Each Row2 In Row1.ItemList Do
+			If Row2.Property(FieldName) Then
+				Row2.Delete(FieldName);
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure

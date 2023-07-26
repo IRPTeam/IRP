@@ -1320,6 +1320,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		   |		INNER JOIN ConsignorBatches AS ConsignorBatches
 		   |		ON ItemList.IsConsignorStocks
 		   |		AND ItemList.Key = ConsignorBatches.Key
+		   |		AND NOT ItemList.ShipmentConfirmationExists
 		   |;
 		   |
 		   |////////////////////////////////////////////////////////////////////////////////

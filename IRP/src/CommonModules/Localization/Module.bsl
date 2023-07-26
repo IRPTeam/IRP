@@ -371,6 +371,23 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_068_2", NStr(
 		"en = 'Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.'", Lang));
 
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 4
+	// %5 - pcs
+	Strings.Insert("Error_069", NStr(
+		"en = 'Store [%1] [%2 %3] Lacking: %4 %5.'", Lang));
+
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 00001
+	// %5 - 4
+	// %6 - pcs
+	Strings.Insert("Error_069_2", NStr(
+		"en = 'Store [%1] [%2 %3] Serial lot number [%4] Lacking: %5 %6.'", Lang));
+
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	

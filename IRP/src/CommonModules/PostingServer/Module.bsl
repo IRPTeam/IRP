@@ -397,7 +397,6 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
 	
-	CheckExpenseRecorders = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False);
 	ArrayOfPostingErrorMessages = New Array();
 	QuantityColumnName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "QuantityColumnName", "Quantity");
 	For Each Row In QueryTableCopy Do
@@ -451,12 +450,8 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				
 			EndIf;
 			
-			If CheckExpenseRecorders Then
-				ArrayOfPostingErrorMessages.Add(MessageText);
-			Else
-				CommonFunctionsClientServer.ShowUsersMessage(
+			CommonFunctionsClientServer.ShowUsersMessage(
 				MessageText, TableDataPath + "[" + (LineNumber - 1) + "]." + QuantityColumnName, "Object.ItemList");
-			EndIf;
 		
 		Else // row is deleted
 			
@@ -481,11 +476,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 							Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 					EndIf;
 				EndIf;
-				If CheckExpenseRecorders Then
-					ArrayOfPostingErrorMessages.Add(MessageText);
-				Else
-					CommonFunctionsClientServer.ShowUsersMessage(MessageText, ErrorQuantityField);
-				EndIf;
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText, ErrorQuantityField);
 				
 			Else // something else
 				
@@ -497,11 +488,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
 				EndIf;
 				
-				If CheckExpenseRecorders Then
-					ArrayOfPostingErrorMessages.Add(MessageText);
-				Else
-					CommonFunctionsClientServer.ShowUsersMessage(MessageText);
-				EndIf;
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText);
 			EndIf;
 		EndIf;
 	EndDo;
@@ -785,8 +772,6 @@ Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddI
 	Parameters = New Structure();
 	Parameters.Insert("RegisterName"         , "R4011B_FreeStocks");
 	Parameters.Insert("Operation"            , "R4011B_FreeStocks");
-	Parameters.Insert("CheckExpenseRecorders",
-		CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False));
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
@@ -804,8 +789,6 @@ Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, Ad
 	Parameters = New Structure();
 	Parameters.Insert("RegisterName"         , "R4010B_ActualStocks");
 	Parameters.Insert("Operation"            , "R4010B_ActualStocks");
-	Parameters.Insert("CheckExpenseRecorders",
-		CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False));
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
@@ -820,32 +803,35 @@ Function Exists_R4010B_ActualStocks() Export
 EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
+	
+	IsFreeStock = Upper(Parameters.RegisterName) = Upper("R4011B_FreeStocks");
+	
 	If RecordType = AccumulationRecordType.Expense Then
-		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
-		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		If CheckResult.IsOk Then
-			If Not Parameters.CheckExpenseRecorders Then
-				Parameters.Insert("BalancePeriod"     , Undefined);
-				Parameters.Insert("TempTablesManager" , New TempTablesManager());
-				CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-				Return CheckResult.IsOk;
-			Else
-				Return CheckResult.IsOk;
-			EndIf;
+		If IsFreeStock Then
+			Parameters.Insert("BalancePeriod", Undefined);
+		Else	
+			Parameters.Insert("BalancePeriod", 
+				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including)));
 		EndIf;
+		
+		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		Return CheckResult.IsOk;
 	Else // Receipt
-		If Parameters.CheckExpenseRecorders Then
+		
+		IsPostingNewDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsPostingNewDocument", False);
+		If IsPostingNewDocument Then
 			Return True;
 		EndIf;
+		
 		Parameters.Insert("BalancePeriod"     , Undefined);
 		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		
+		If IsFreeStock Then
+			Return CheckResult.IsOk;
+		EndIf;
+		
 		If CheckResult.IsOk Then
-			IsPostingNewDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsPostingNewDocument", False);
-			If IsPostingNewDocument Then
-				Return CheckResult.IsOk;
-			EndIf;
 			ExpensesCheckResult = CheckAllExpenses(Parameters, AddInfo);
 			Return ExpensesCheckResult.IsOk;
 		EndIf;
@@ -860,71 +846,61 @@ Function GetOriginalDocumentDate(DocObject) Export
 	Return DocObject.Ref.Date;
 EndFunction
 
-Function GetExpenseRecorders(Parameters, AddInfo = Undefined)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
-	"SELECT
-	|	BalanceRegister.Recorder,
-	|	BalanceRegister.Recorder.PointInTime
-	|FROM
-	|	AccumulationRegister.%1 AS BalanceRegister
-	|		INNER JOIN Records_All_Grouped AS Records_All_Grouped
-	|		ON Records_All_Grouped.Store = BalanceRegister.Store
-	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
-	|		AND BalanceRegister.RecordType = VALUE(AccumulationRecordType.Expense)
-	|		AND BalanceRegister.Period >= &ReceiptDate
-	|GROUP BY
-	|	BalanceRegister.Recorder,
-	|	BalanceRegister.Recorder.PointInTime
-	|ORDER BY
-	|	BalanceRegister.Recorder.PointInTime DESC";
-	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
-	
-	ReceiptDate = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "OriginalDocumentDate", CommonFunctionsServer.GetCurrentSessionDate());
-	Query.SetParameter("ReceiptDate", ReceiptDate);
-	
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
 Function CheckAllExpenses(Parameters, AddInfo = Undefined)
 	Result = New Structure("IsOk", True);
-	TableOfExpenseRecorders = GetExpenseRecorders(Parameters, AddInfo);
-	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
 	"SELECT
-	|	Records_All_Grouped.ItemKey AS ItemKey,
-	|	Records_All_Grouped.Store AS Store
+	|	ActualStocks.Recorder AS Recorder,
+	|	ActualStocks.Store AS Store,
+	|	ActualStocks.ItemKey.Item AS Item,
+	|	ActualStocks.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN ActualStocks.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ActualStocks.ItemKey.Item.Unit
+	|		ELSE ActualStocks.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	ActualStocks.SerialLotNumber AS SerialLotNumber,
+	|	ActualStocks.QuantityClosingBalance AS LackOfBalance
 	|FROM
-	|	Records_All_Grouped AS Records_All_Grouped
-	|GROUP BY
-	|	Records_All_Grouped.ItemKey,
-	|	Records_All_Grouped.Store";
+	|	AccumulationRegister.R4010B_ActualStocks.BalanceAndTurnovers(&BeginPeriod,, Recorder,, (Store, ItemKey) IN
+	|		(SELECT
+	|			Records_Exists.Store AS Store,
+	|			Records_Exists.ItemKey AS ItemKey
+	|		FROM
+	|			Records_Exists AS Records_Exists)) AS ActualStocks
+	|WHERE
+	|	ActualStocks.QuantityExpense > 0
+	|	and ActualStocks.QuantityClosingBalance < 0";
+	Query.SetParameter("BeginPeriod", 
+		CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "OriginalDocumentDate", CommonFunctionsServer.GetCurrentSessionDate()));
 	QueryResult = Query.Execute();
-	CheckExpenseFilterTable = QueryResult.Unload();
-	
-	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
-		CheckAddInfo = New Structure("CheckExpenseRecorders, CheckExpenseFilterTable", True, CheckExpenseFilterTable);
-		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
-		Cancel = False;
-		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
-		If Cancel Then
-			// Message with error
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_104, String(RowExpenseRecorders.Recorder)));
-			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
-			If ArrayOfPostingErrorMessages.Count() Then
-				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
-					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);
-				EndDo;
-			EndIf;
-			Result.IsOk = False;
-			Return Result;
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_104, String(QuerySelection.Recorder)));
+		
+		If ValueIsFilled(QuerySelection.SerialLotNumber) Then
+			MessageText = StrTemplate(R().Error_069_2, 
+				QuerySelection.Store, 
+				QuerySelection.Item, 
+				QuerySelection.ItemKey, 
+				QuerySelection.SerialLotNumber, 
+				-QuerySelection.LackOfBalance,
+				QuerySelection.BasisUnit);
+		Else
+			MessageText = StrTemplate(R().Error_069, 
+				QuerySelection.Store, 
+				QuerySelection.Item, 
+				QuerySelection.ItemKey, 
+				-QuerySelection.LackOfBalance,
+				QuerySelection.BasisUnit);
 		EndIf;
+		CommonFunctionsClientServer.ShowUsersMessage(MessageText);	
+		Result.IsOk = False;
+		Break;
 	EndDo;
+		
 	Return Result;
 EndFunction
 
@@ -1120,14 +1096,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 		Tables.Records_InDocument.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
 		Tables.Records_InDocument.FillValues(Catalogs.SerialLotNumbers.EmptyRef(), "SerialLotNumber");
 	EndIf;
-	
-	CheckExpenseFilterTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseFilterTable", Undefined);
-	If CheckExpenseFilterTable <> Undefined Then
-		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.ItemList_InDocument);
-		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.Records_Exists);
-		DeleteRowsByFilterTable(CheckExpenseFilterTable, Tables.Records_InDocument);
-	EndIf;
-	
+		
 	Query.SetParameter("Period"              , Parameters.BalancePeriod);
 	Query.SetParameter("ItemList_InDocument" , Tables.ItemList_InDocument);
 	Query.SetParameter("Records_Exists"      , Tables.Records_Exists);
@@ -1161,26 +1130,6 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	EndIf;
 	Return Result;
 EndFunction
-
-Procedure DeleteRowsByFilterTable(FilterTable, SourceTable)
-	ArrayForDelete = New Array();
-	For Each Row In SourceTable Do
-		Filter = New Structure();
-		If ValueIsFilled(Row.ItemKey) Then
-			Filter.Insert("ItemKey", Row.ItemKey);
-		EndIf;
-		If ValueIsFilled(Row.Store) Then
-			Filter.Insert("Store", Row.Store);
-		EndIf;		
-		If FilterTable.FindRows(Filter).Count() = 0 Then
-			ArrayForDelete.Add(Row);
-		EndIf;		
-	EndDo;
-		
-	For Each ItemForDelete In ArrayForDelete Do
-		SourceTable.Delete(ItemForDelete);
-	EndDo;
-EndProcedure
 
 Function UseRegister(Name) Export
 	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";

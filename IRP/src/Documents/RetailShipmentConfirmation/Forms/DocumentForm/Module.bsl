@@ -525,7 +525,8 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	CommissionTradeServer.RemoveInventoryOriginFormFillingValues(Result.FillingValues);
+	CommissionTradeServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
+	CommissionTradeServer.RemoveFieldFormFillingValues(Result.FillingValues, "Consignor");
 	
 	For Each Row In Object.ConsignorBatches Do
 		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");

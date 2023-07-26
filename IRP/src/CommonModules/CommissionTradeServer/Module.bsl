@@ -1519,11 +1519,11 @@ Function GetConsignorBatchesOnStock(DocObject, Company, Store, ItemKey, SerialLo
 	Return QueryTable;	
 EndFunction
 
-Procedure RemoveInventoryOriginFormFillingValues(FillingValues) Export
+Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
 	For Each Row1 In FillingValues Do
 		For Each Row2 In Row1.ItemList Do
-			If Row2.Property("InventoryOrigin") Then
-				Row2.Delete("InventoryOrigin");
+			If Row2.Property(FieldName) Then
+				Row2.Delete(FieldName);
 			EndIf;
 		EndDo;
 	EndDo;

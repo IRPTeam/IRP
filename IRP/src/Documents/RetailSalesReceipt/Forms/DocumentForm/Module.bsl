@@ -798,7 +798,7 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	CommissionTradeServer.RemoveInventoryOriginFormFillingValues(Result.FillingValues);
+	CommissionTradeServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
 	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then

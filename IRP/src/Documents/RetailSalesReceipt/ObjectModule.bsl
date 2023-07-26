@@ -75,33 +75,21 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 		ArrayOfProperties = StrSplit(PropertiesHeader, ",");
-		
-		Index = 0;
-		For Each Property In ArrayOfProperties Do
-			If Upper(TrimAll(Property)) = Upper("BasedOnName") Then
-				ArrayOfProperties.Delete(Index);
-				Break;
-			EndIf;
-			Index = Index + 1;
-		EndDo;
-				
-		If FillingData.Property("BasedOnName") And FillingData.BasedOnName = "RetailShipmentConfirmation" Then
-			If FillingData.Property("PriceIncludeTax") Then
-				FillingData.Delete("PriceIncludeTax");
-				
-				Index = 0;
-				For Each Property In ArrayOfProperties Do
-					If Upper(TrimAll(Property)) = Upper("PriceIncludeTax") Then
-						ArrayOfProperties.Delete(Index);
-						Break;
-					EndIf;
-					Index = Index + 1;
-				EndDo;
 						
-			EndIf;
+		If FillingData.Property("PriceIncludeTax") And FillingData.PriceIncludeTax = Undefined Then
+			FillingData.Delete("PriceIncludeTax");
+				
+			Index = 0;
+			For Each Property In ArrayOfProperties Do
+				If Upper(TrimAll(Property)) = Upper("PriceIncludeTax") Then
+					ArrayOfProperties.Delete(Index);
+					Break;
+				EndIf;
+				Index = Index + 1;
+			EndDo;
+					
 		EndIf;
 		
-		FillingData.Delete("BasedOnName");
 		PropertiesHeader = StrConcat(ArrayOfProperties, ",");
 		
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);

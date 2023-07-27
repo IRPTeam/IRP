@@ -2652,6 +2652,7 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I select from the drop-down list named "Partner" by "Kalipso" string
 		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
 		And I select from "Store" drop-down list by "Store 02" string
+		And I select from "Branch" drop-down list by "Front office" string
 	* Filling in Item tab	
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate "Item" field in "ItemList" table
@@ -2708,6 +2709,7 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Partner" by "Kalipso" string
 		And I select from "Store" drop-down list by "Store 02" string
+		And I select from "Branch" drop-down list by "Front office" string
 	* Filling in Item tab	
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate "Item" field in "ItemList" table
@@ -2753,6 +2755,7 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I save the value of "Number" field as "$$NumberGoodsReceipt1051$$"
 	* Unpost documents
 		And I click "Cancel posting" button
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'                    |
@@ -2764,36 +2767,4 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 			| '$$NumberSalesInvoice1051$$' |
 		And I click the button named "FormUndoPosting"
 		And I close all client application windows
-		
-				
-		
-				
-
-				
-				
-
-
-
-								
-		
-				
-		
-		
-							
-		
-		
-				
-		
-				
-
-		
-				
-
-		
-				
-
-		
-					
-
-		
 				

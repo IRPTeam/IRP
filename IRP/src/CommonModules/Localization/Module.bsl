@@ -704,6 +704,25 @@ Function Strings(Lang) Export
 		|ru='Номер строки [%1] [%2 %3] Серийный номер [%4] %5 остаток: %6 %9. Требуется: %7 %9. Недостача: %8 %9.';
 		|tr='Satır numarası [%1] [%2 %3] Seri lot numarası [%4] %5 kalan: %6 %9. İhtiyaç duyulan: %7 %9. Eksik: %8 %9.'", Lang));
 
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 4
+	// %5 - pcs
+	Strings.Insert("Error_069", NStr("en='Store [%1] [%2 %3] Lacking: %4 %5.';
+		|ru='Магазин [%1] [%2 %3] Недостает: %4 %5.';
+		|tr='Mağaza [%1] [%2 %3] Eksik: %4 %5.'", Lang));
+
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 00001
+	// %5 - 4
+	// %6 - pcs
+	Strings.Insert("Error_069_2", NStr("en='Store [%1] [%2 %3] Serial lot number [%4] Lacking: %5 %6.';
+		|ru='Магазин [%1] [%2 %3] Серия [%4] Недостает: %5 %6.';
+		|tr='Mağaza [%1] [%2 %3] Seri lot numarası [%4] Eksik: %5 %6.'", Lang));
+
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en='Plugin ""%1"" is not connected.';
 		|ru='Внешняя обработка ""%1"" не подключена.';

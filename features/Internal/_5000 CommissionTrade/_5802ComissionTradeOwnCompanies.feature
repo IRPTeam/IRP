@@ -2288,7 +2288,6 @@ Scenario: _05835 check recognation of own and commission goods (retail SO, RSC, 
 			| 'Description' |
 			| 'Shop 01'     |
 		And I select current line in "List" table
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailShipmentConfirmation01$$" variable
 		And I delete "$$RetailShipmentConfirmation01$$" variable
@@ -2307,6 +2306,7 @@ Scenario: _05835 check recognation of own and commission goods (retail SO, RSC, 
 			| 'Description' |
 			| 'Front office'     |
 		And I select current line in "List" table
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And I move to "Payments" tab
 		And in the table "Payments" I click the button named "PaymentsAdd"
 		And I activate "Payment type" field in "Payments" table

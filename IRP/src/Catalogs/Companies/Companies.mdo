@@ -377,11 +377,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Main phone number</value>
+   <value>Основной номер телефона</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Main phone number</value>
+   <value>Ana telefon numarası</value>
   </synonym>
   <type>
    <types>String</types>

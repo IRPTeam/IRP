@@ -7883,13 +7883,13 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
 			|InventoryTransfer, SalesInvoice";
 		// Attribute name, Data path (use for show user message)
-		Result.RowRefFilter = "Company       , Company,
-						  |Branch            , Branch,
+		Result.RowRefFilter = "CompanyReturn       , Company,
+						  |BranchReturn            , Branch,
 						  |PartnerSales      , Partner,
 						  |LegalNameSales    , LegalName,
 						  |TransactionTypeGRReturn , TransactionType,
 						  |ItemKey           , ItemList.ItemKey,
-						  |Store             , ItemList.Store";
+						  |StoreReturn       , ItemList.Store";
 	Else
 		Raise StrTemplate("Not supported External link for [GR] to [%1]", ExternalDocAliase);
 	EndIf;

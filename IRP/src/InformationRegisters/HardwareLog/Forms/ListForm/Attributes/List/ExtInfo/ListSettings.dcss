@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
+	<filter>
+		<userSettingID>d304ac46-1f68-4986-bde4-d0742bee312f</userSettingID>
+	</filter>
+	<order>
+		<userSettingID>dd6d55df-27f5-4c64-8c18-3da49abb0bff</userSettingID>
+	</order>
+	<conditionalAppearance>
+		<userSettingID>e779495d-9947-484e-a61d-f3761b263b3a</userSettingID>
+	</conditionalAppearance>
+	<itemsUserSettingID>fdd5661e-0024-4601-a408-5ffaa1173cfe</itemsUserSettingID>
+</Settings>

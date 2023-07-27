@@ -250,8 +250,10 @@ Async Procedure Enter(Command)
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
 	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
+	ReturnValue.Insert("PaymentForm", ThisObject);
+	
 	FormCanBeClosed = True;
-	Close(ReturnValue);
+	ExecuteNotifyProcessing(OnCloseNotifyDescription, ReturnValue);
 EndProcedure
 
 // Do payment.

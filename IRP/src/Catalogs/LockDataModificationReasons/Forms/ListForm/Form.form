@@ -605,52 +605,34 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       LockDataModificationReasons.Ref, 
-       LockDataModificationReasons.DeletionMark, 
-       LockDataModificationReasons.Code, 
-       LockDataModificationReasons.ForAllUsers, 
-       LockDataModificationReasons.DisableRule, 
-       LockDataModificationReasons.SetOneRuleForAllObjects, 
-       LockDataModificationReasons.Attribute, 
-       LockDataModificationReasons.ComparisonType, 
-       LockDataModificationReasons.Value, 
-       LockDataModificationReasons.SetValueAsCode, 
-       LockDataModificationReasons.AdvancedMode, 
-       LockDataModificationReasons.DCS, 
-       LockDataModificationReasons.QueryFilter, 
-       LockDataModificationReasons.isInitDCS, 
-       LockDataModificationReasons.PreviewText, 
-       LockDataModificationReasons.CheckIsObjectLockedOnOpen, 
-       LockDataModificationReasons.Description_en AS Description, 
-       LockDataModificationReasons.Predefined, 
-       LockDataModificationReasons.PredefinedDataName
- FROM 
-       Catalog.LockDataModificationReasons
- AS 
-       LockDataModificationReasons</queryText>
+      <queryText>SELECT
+	Table.Ref,
+	Table.DeletionMark,
+	Table.Code,
+	Table.ForAllUsers,
+	Table.DisableRule,
+	Table.SetOneRuleForAllObjects,
+	Table.Attribute,
+	Table.ComparisonType,
+	Table.Value,
+	Table.SetValueAsCode,
+	Table.AdvancedMode,
+	Table.DCS,
+	Table.QueryFilter,
+	Table.isInitDCS,
+	Table.PreviewText,
+	Table.CheckIsObjectLockedOnOpen,
+	Table.Description_en AS Description,
+	Table.Predefined,
+	Table.PredefinedDataName
+FROM
+	Catalog.LockDataModificationReasons AS Table</queryText>
       <mainTable>Catalog.LockDataModificationReasons</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>RuleList</dataPath>
-        <field>RuleList</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>UserList</dataPath>
-        <field>UserList</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>AccessGroupList</dataPath>
-        <field>AccessGroupList</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>ResponsibleUsers</dataPath>
-        <field>ResponsibleUsers</field>
-      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Ref</dataPath>
         <field>Ref</field>
@@ -750,6 +732,22 @@
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>AddAttributes</dataPath>
         <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RuleList</dataPath>
+        <field>RuleList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UserList</dataPath>
+        <field>UserList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AccessGroupList</dataPath>
+        <field>AccessGroupList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ResponsibleUsers</dataPath>
+        <field>ResponsibleUsers</field>
       </fields>
     </extInfo>
   </attributes>

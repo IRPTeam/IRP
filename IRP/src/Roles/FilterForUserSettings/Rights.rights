@@ -1935,4 +1935,18 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.Attribute.ShipFrom</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.Attribute.ShipFromAddress</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

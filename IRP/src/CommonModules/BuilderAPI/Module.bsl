@@ -293,13 +293,14 @@ EndFunction
 //  WriteMode - DocumentWriteMode - Write mode
 //  PostingMode - DocumentPostingMode - Posting mode
 //  Object - DocumentObjectDocumentName - Update current object
+//  CheckFilling - Boolean - 
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
 // * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined) Export
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False) Export
 	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
@@ -325,6 +326,13 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
+			
+			If CheckFilling Then
+				If Not Doc.CheckFilling() Then
+					Raise "Error on posting document";
+				EndIf;
+			EndIf;
+			
 			Doc.Write(
 				?(
 					WriteMode = Undefined, 
@@ -361,6 +369,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
+			If CheckFilling Then
+				If Not Ctlg.CheckFilling() Then
+					Raise "Error on posting document";
+				EndIf;
+			EndIf;
 			Ctlg.Write();
 			WrapperObject.Ref = Ctlg.Ref;
 		Else

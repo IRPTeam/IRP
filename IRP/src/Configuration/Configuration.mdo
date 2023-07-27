@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.29.2601</version>
+  <version>2023.30.2637</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -511,6 +511,8 @@
   <commonAttributes>CommonAttribute.Volume</commonAttributes>
   <commonAttributes>CommonAttribute.Weight</commonAttributes>
   <commonAttributes>CommonAttribute.Width</commonAttributes>
+  <commonAttributes>CommonAttribute.LocalFullDescription</commonAttributes>
+  <commonAttributes>CommonAttribute.ForeignFullDescription</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

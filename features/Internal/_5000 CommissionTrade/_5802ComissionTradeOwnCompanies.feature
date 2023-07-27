@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CommissionTrade
@@ -2179,6 +2179,206 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 		
 				
 
+Scenario: _05835 check recognation of own and commission goods (retail SO, RSC, RSR, RGR)
+	And I close all client application windows
+	* Preparation (Add transaction type tax settings for SO)
+		Given I open hyperlink "e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4"	
+		And I move to "Use documents" tab
+		And I go to line in "UseDocuments" table
+			| 'Document name' |
+			| 'SalesOrder'    |
+		And I select current line in "UseDocuments" table
+		And in the table "UseDocuments" I click "Set transaction types" button
+		And I go to line in "TransactionTypes" table
+			| 'Transaction type' |
+			| 'Sales'            |
+		And I set "Use" checkbox in "TransactionTypes" table
+		And I finish line editing in "TransactionTypes" table
+		And I go to line in "TransactionTypes" table
+			| 'Transaction type'        |
+			| 'Shipment to trade agent' |
+		And I set "Use" checkbox in "TransactionTypes" table
+		And I finish line editing in "TransactionTypes" table
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I wait "VAT (Tax type) *" window closing in 5 seconds
+	* Create SO (without VAT)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"	
+		And I click "Create" button
+		And I select "Retail sales" exact value from "Transaction type" drop-down list
+		And I click Select button of "Retail customer" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sam Jons'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select current line in "ItemList" table
+		And I select "Product 8 with SLN (new row)" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 7 with SLN (new row)" from "Item" drop-down list by string in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                         | 'Item key' |
+			| 'Product 7 with SLN (new row)' | 'ODS'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I select "Courier delivery" exact value from "Shipment mode" drop-down list
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder01$$" variable
+		And I delete "$$SalesOrder01$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder01$$"
+		And I save the window as "$$SalesOrder01$$"
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Quantity' | 'Unit' | 'Procurement method' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'Product 8 with SLN (new row)' | 'UNIQ'     | '1,000'    | 'pcs'  | 'Stock'              | '200,00' | '200,00'       | 'Store 01' |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | '1,000'    | 'pcs'  | 'Stock'              | '100,00' | '100,00'       | 'Store 01' |	
+		And I click the button named "FormPostAndClose"
+	* Create RSC and link it to SO
+		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"	
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I select "Sam Jons" exact value from "Retail customer" drop-down list
+		And I select "Courier delivery" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click "Search by barcode" button
+		And I input "09999900989900" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click "Search by barcode" button
+		And I input "090998897898979998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Show row key" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation'                   | 'Store'    | 'Unit' |
+			| '1' | '1,000'    | 'Product 7 with SLN (new row) (ODS)' | 'Store 01' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                   | 'Unit' |
+			| 'TRY'      | '100,00' | '1,000'    | 'Product 7 with SLN (new row) (ODS)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation'                    | 'Store'    | 'Unit' |
+			| '2' | '1,000'    | 'Product 8 with SLN (new row) (UNIQ)' | 'Store 01' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                    | 'Unit' |
+			| 'TRY'      | '200,00' | '1,000'    | 'Product 8 with SLN (new row) (UNIQ)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+		* Check RSC
+			And "ItemList" table became equal
+				| 'Store'    | 'Use serial lot number' | 'Consignor'   | 'Item'                         | 'Inventory origin' | 'Serial lot numbers' | 'Unit' | 'Item key' | 'Source of origins' | 'Quantity' | 'Sales order'      |
+				| 'Store 01' | 'Yes'                   | 'Consignor 1' | 'Product 7 with SLN (new row)' | 'Consignor stocks' | '09999900989900'     | 'pcs'  | 'ODS'      | ''                  | '1,000'    | '$$SalesOrder01$$' |
+				| 'Store 01' | 'Yes'                   | 'Consignor 2' | 'Product 8 with SLN (new row)' | 'Consignor stocks' | '090998897898979998' | 'pcs'  | 'UNIQ'     | ''                  | '1,000'    | '$$SalesOrder01$$' |
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberRetailShipmentConfirmation01$$" variable
+		And I delete "$$RetailShipmentConfirmation01$$" variable
+		And I save the value of "Number" field as "$$NumberRetailShipmentConfirmation01$$"
+		And I save the window as "$$RetailShipmentConfirmation01$$"
+	* Create RSR based on RSC
+		And I click "Retail sales receipt" button
+		And I click "Ok" button
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Store'    | 'Use serial lot number' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Sales order'      |
+			| 'Store 01' | 'Yes'                   | 'Consignor stocks' | 'Basic Price Types' | 'Product 8 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '090998897898979998' | 'pcs'  | ''                   | 'UNIQ'     | 'No'         | ''                  | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | '$$SalesOrder01$$' |
+			| 'Store 01' | 'Yes'                   | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 1' | 'No'                 | '15,25'      | '09999900989900'     | 'pcs'  | ''                   | 'ODS'      | 'No'         | ''                  | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       | '$$SalesOrder01$$' |
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Front office'     |
+		And I select current line in "List" table
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "300,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| 'Store'    | 'Use serial lot number' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Sales order'      |
+			| 'Store 01' | 'Yes'                   | 'Consignor stocks' | 'Basic Price Types' | 'Product 8 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '090998897898979998' | 'pcs'  | ''                   | 'UNIQ'     | 'No'         | ''                  | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | '$$SalesOrder01$$' |
+			| 'Store 01' | 'Yes'                   | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 1' | 'No'                 | '15,25'      | '09999900989900'     | 'pcs'  | ''                   | 'ODS'      | 'No'         | ''                  | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       | '$$SalesOrder01$$' |
+	* Check linked documents
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And "ResultsTree" table contains lines
+			| 'Row presentation'                    | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| '$$SalesOrder01$$'                    | ''         | ''     | ''       | ''         |
+			| 'Product 8 with SLN (new row) (UNIQ)' | '1,000'    | 'pcs'  | '200,00' | 'TRY'      |
+			| 'Product 7 with SLN (new row) (ODS)'  | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+		And I close current window
+	* Unpost RSC and create RGR
+		And I click "Cancel posting" button
+		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"			
+		And I go to line in "List" table
+			| 'Number'                                 |
+			| '$$NumberRetailShipmentConfirmation01$$' |
+		And I click "Retail goods receipt" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| '#' | 'Consignor'   | 'Item'                         | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Store'    | 'Sales order'      |
+			| '1' | 'Consignor 2' | 'Product 8 with SLN (new row)' | 'Consignor stocks' | 'UNIQ'     | '090998897898979998' | 'pcs'  | ''                  | '1,000'    | 'Store 01' | '$$SalesOrder01$$' |
+			| '2' | 'Consignor 1' | 'Product 7 with SLN (new row)' | 'Consignor stocks' | 'ODS'      | '09999900989900'     | 'pcs'  | ''                  | '1,000'    | 'Store 01' | '$$SalesOrder01$$' |
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Consignor'   | 'Item'                         | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Store'    | 'Sales order'      |
+			| '1' | 'Consignor 2' | 'Product 8 with SLN (new row)' | 'Consignor stocks' | 'UNIQ'     | '090998897898979998' | 'pcs'  | ''                  | '1,000'    | 'Store 01' | '$$SalesOrder01$$' |
+			| '2' | 'Consignor 1' | 'Product 7 with SLN (new row)' | 'Consignor stocks' | 'ODS'      | '09999900989900'     | 'pcs'  | ''                  | '1,000'    | 'Store 01' | '$$SalesOrder01$$' |
+	And I close all client application windows
+	
+						
+				
+
+		
+				
+
+		
+				
+				
+						
+
+
+						
+				
+				
+
+
+
+				
+					
+
+					
 
 					
 				

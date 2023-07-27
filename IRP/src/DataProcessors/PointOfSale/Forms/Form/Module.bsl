@@ -936,11 +936,17 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 		Return;
 	EndIf;
 	
+	PaymentForm = Result.PaymentForm; // See DataProcessor.PointOfSale.Form.Payment
+	Result.PaymentForm = Undefined;
+	
 	CashbackAmount = WriteTransaction(Result);
 	ResultPrint = Await PrintFiscalReceipt(DocRef);
+
 	If Not ResultPrint Then
 		Return;
 	EndIf;
+
+	PaymentForm.Close();
 
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
@@ -956,6 +962,10 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
+	PaymentForm = Result.PaymentForm; // See DataProcessor.PointOfSale.Form.Payment
+	Result.PaymentForm = Undefined;
+	
 	If ThisObject.isReturn Then
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
 	Else	
@@ -966,6 +976,8 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	For Each CreatedDocument In CreatedDocuments Do
 		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
 	EndDo;
+	
+	PaymentForm.Close();
 	
 	NewTransaction();
 	Modified = False;
@@ -1219,7 +1231,7 @@ Function WriteTransaction(Result)
 		
 		DocRef = ObjectValue.Ref;
 		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-	
+		ValueToFormAttribute(ObjectValue, "Object");
 	EndIf;
 
 	CashAmountFilter = New Structure();

@@ -2592,6 +2592,189 @@ Scenario: _2060026 check auto form in the Physical inventory - Stock adjustment 
 		And I execute 1C:Enterprise script at server
 			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 					
+Scenario: _2060028 check SR (different store then in the SI) - GR link form	
+	And I close all client application windows
+	* Preparation (create SI - Store 01)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select from the drop-down list named "Partner" by "Kalipso" string
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+	* Filling in Item tab	
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "XS/Blue" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "45,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "750,000" text in the field named "ItemListQuantity" of "ItemList" table
+	* Link strings
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '45,000'   | 'Dress (XS/Blue)'  | 'Store 01' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '45,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '750,000'  | 'Dress (S/Yellow)' | 'Store 01' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '550,00' | '750,000'  | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '1' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | '3 569,49'   | 'pcs'  | '45,000'   | '520,00' | '18%' | '19 830,51'  | '23 400,00'    | 'No'             | 'No'                         | 'Store 01' | 'Yes'                       | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
+			| '2' | 'Basic Price Types' | 'Dress' | 'S/Yellow' | 'No'                 | '62 923,73'  | 'pcs'  | '750,000'  | '550,00' | '18%' | '349 576,27' | '412 500,00'   | 'No'             | 'No'                         | 'Store 01' | 'Yes'                       | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
+		And I click "Post" button
+		And I delete "$$SalesInvoice1051$$" variable
+		And I delete "$$NumberSalesInvoice1051$$" variable
+		And I save the window as "$$SalesInvoice1051$$" 
+		And I save the value of "Number" field as "$$NumberSalesInvoice1051$$"
+	* Create SR (Store 02)
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select from the drop-down list named "Partner" by "Kalipso" string
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+		And I select from "Store" drop-down list by "Store 02" string
+	* Filling in Item tab	
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "XS/Blue" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "11,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Link strings
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '10,000'   | 'Dress (XS/Blue)'  | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '45,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '11,000'   | 'Dress (S/Yellow)' | 'Store 02' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '550,00' | '750,000'  | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'  | 'Item key' | 'Tax amount' | 'Unit' | 'Sales invoice'        | 'Quantity' | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Store'    | 'VAT' |
+			| '1' | 'Dress' | 'XS/Blue'  | '793,22'     | 'pcs'  | '$$SalesInvoice1051$$' | '10,000'   | '520,00' | '4 406,78'   | 'No'                | '5 200,00'     | 'Store 02' | '18%' |
+			| '2' | 'Dress' | 'S/Yellow' | '922,88'     | 'pcs'  | '$$SalesInvoice1051$$' | '11,000'   | '550,00' | '5 127,12'   | 'No'                | '6 050,00'     | 'Store 02' | '18%' |
+		And for each line of "ItemList" table I do
+			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I click "Post" button
+		And I delete "$$SalesReturn1051$$" variable
+		And I delete "$$NumberSalesReturn1051$$" variable
+		And I save the window as "$$SalesReturn1051$$" 
+		And I save the value of "Number" field as "$$NumberSalesReturn1051$$"
+	* Create GR (Store 02)
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Partner" by "Kalipso" string
+		And I select from "Store" drop-down list by "Store 02" string
+	* Filling in Item tab	
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "XS/Blue" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "11,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Link strings
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '10,000'   | 'Dress (XS/Blue)'  | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Quantity' | 'Row presentation' | 'Unit' |
+			| '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '11,000'   | 'Dress (S/Yellow)' | 'Store 02' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Quantity' | 'Row presentation' | 'Unit' |
+			| '11,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Item'  | 'Item key' | 'Unit' | 'Store'    | 'Quantity' | 'Sales invoice'        | 'Receipt basis'       | 'Sales return'        |
+			| '1' | 'Dress' | 'XS/Blue'  | 'pcs'  | 'Store 02' | '10,000'   | '$$SalesInvoice1051$$' | '$$SalesReturn1051$$' | '$$SalesReturn1051$$' |
+			| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | 'Store 02' | '11,000'   | '$$SalesInvoice1051$$' | '$$SalesReturn1051$$' | '$$SalesReturn1051$$' |
+		And I delete "$$NumberGoodsReceipt1051$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt1051$$"
+	* Unpost documents
+		And I click "Cancel posting" button
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'                    |
+			| '$$NumberSalesReturn1051$$' |
+		And I click the button named "FormUndoPosting"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                    |
+			| '$$NumberSalesInvoice1051$$' |
+		And I click the button named "FormUndoPosting"
+		And I close all client application windows
+		
+				
+		
+				
+
+				
+				
+
+
+
+								
 		
 				
 		

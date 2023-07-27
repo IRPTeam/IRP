@@ -7889,7 +7889,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |LegalNameSales    , LegalName,
 						  |TransactionTypeGRReturn , TransactionType,
 						  |ItemKey           , ItemList.ItemKey,
-						  |Store             , ItemList.Store";
+						  |StoreReturn       , ItemList.Store";
 	Else
 		Raise StrTemplate("Not supported External link for [GR] to [%1]", ExternalDocAliase);
 	EndIf;

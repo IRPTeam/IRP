@@ -370,6 +370,7 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList.Branch AS Branch,
 		|	ItemList.SalesOrder AS Order,
 		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.RowKey AS RowKey,
 		|	ItemList.Quantity AS Quantity
 		|INTO R2011B_SalesOrdersShipment
 		|FROM

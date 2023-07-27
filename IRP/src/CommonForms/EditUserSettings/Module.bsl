@@ -183,49 +183,62 @@ Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttrib
 	QueryResult = Query.Execute();
 	SettingsFromRegister = QueryResult.Unload();
 	
-	Show = False;
+	MetadataTable = New ValueTable();
+	MetadataTable.Columns.Add("Synonym");
+	MetadataTable.Columns.Add("MetadataObject");
+	
 	For Each MetadataObject In MetadataCollection Do
+		NewRow = MetadataTable.Add();
+		NewRow.Synonym = MetadataObject.Synonym;
+		NewRow.MetadataObject = MetadataObject;
+	EndDo;
+	
+	MetadataTable.Sort("Synonym");
+	
+	Show = False;
+
+	For Each Row In MetadataTable Do
 
 		NewRow = New Structure();
-		NewRow.Insert("FullName"     , MetadataObject.FullName());
-		NewRow.Insert("Name"         , MetadataObject.Name);
-		NewRow.Insert("Synonym"      , MetadataObject.Synonym);
+		NewRow.Insert("FullName"     , Row.MetadataObject.FullName());
+		NewRow.Insert("Name"         , Row.MetadataObject.Name);
+		NewRow.Insert("Synonym"      , Row.MetadataObject.Synonym);
 		NewRow.Insert("PictureIndex" , PictureIndex);
 		NewRow.Insert("Rows"         , New Array());
 
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Standard) <> Undefined Then
-			If GetStandardAttributes(MetadataObject, NewRow, TableOfSettings, 
+			If GetStandardAttributes(Row.MetadataObject, NewRow, TableOfSettings, 
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Standard))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Regular) <> Undefined Then
-			If GetRegularAttributes(MetadataObject, NewRow, TableOfSettings,
+			If GetRegularAttributes(Row.MetadataObject, NewRow, TableOfSettings,
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Regular))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Common) <> Undefined Then
-			If GetCommonAttributes(MetadataObject, NewRow, TableOfSettings,
+			If GetCommonAttributes(Row.MetadataObject, NewRow, TableOfSettings,
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Common))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Additional) <> Undefined Then
-			If GetAdditionalAttributes(MetadataObject, NewRow, TableOfSettings, ExistPredefinedDataNames,
+			If GetAdditionalAttributes(Row.MetadataObject, NewRow, TableOfSettings, ExistPredefinedDataNames,
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Additional))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Column) <> Undefined Then
-			If GetTabularSections(MetadataObject, NewRow, TableOfSettings,
+			If GetTabularSections(Row.MetadataObject, NewRow, TableOfSettings,
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Column))) Then
 				Show = True;
 			EndIf;
 		EndIf;
 
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Custom) <> Undefined Then
-			If GetCustomAttributes(MetadataObject, NewRow, TableOfSettings,
+			If GetCustomAttributes(Row.MetadataObject, NewRow, TableOfSettings,
 				SettingsFromRegister.Copy(New Structure("KindOfAttribute", Enums.KindsOfAttributes.Custom))) Then
 				Show = True;
 			EndIf;

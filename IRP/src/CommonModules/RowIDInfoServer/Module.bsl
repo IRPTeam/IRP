@@ -7883,8 +7883,8 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
 			|InventoryTransfer, SalesInvoice";
 		// Attribute name, Data path (use for show user message)
-		Result.RowRefFilter = "Company       , Company,
-						  |Branch            , Branch,
+		Result.RowRefFilter = "CompanyReturn       , Company,
+						  |BranchReturn            , Branch,
 						  |PartnerSales      , Partner,
 						  |LegalNameSales    , LegalName,
 						  |TransactionTypeGRReturn , TransactionType,

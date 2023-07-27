@@ -307,7 +307,7 @@
     <value>Hesaplama fiyatı</value>
    </synonym>
    <type>
-    <types>DefinedType.typeQuantity</types>
+    <types>DefinedType.typePrice</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -495,7 +495,7 @@
     <value>Hesaplama fiyatı</value>
    </synonym>
    <type>
-    <types>DefinedType.typeQuantity</types>
+    <types>DefinedType.typePrice</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -736,7 +736,7 @@
     <value>Hesaplama fiyatı</value>
    </synonym>
    <type>
-    <types>DefinedType.typeQuantity</types>
+    <types>DefinedType.typePrice</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

@@ -144,6 +144,9 @@
    <types>DocumentRef.RetailReturnReceipt</types>
    <types>DocumentRef.CashReceipt</types>
    <types>DocumentRef.MoneyTransfer</types>
+   <types>DocumentRef.CashPayment</types>
+   <types>DocumentRef.BankPayment</types>
+   <types>DocumentRef.BankReceipt</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

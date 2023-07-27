@@ -433,14 +433,14 @@
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT 
-       VehicleTypes.Ref, 
-       VehicleTypes.DeletionMark, 
-       VehicleTypes.Code, 
-       VehicleTypes.Description_en AS Description
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.Description_en AS Description
  FROM 
        Catalog.VehicleTypes
  AS 
-       VehicleTypes</queryText>
+       Table</queryText>
    <mainTable>Catalog.VehicleTypes</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>

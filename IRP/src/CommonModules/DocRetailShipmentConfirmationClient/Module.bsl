@@ -38,6 +38,14 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
@@ -120,6 +128,14 @@ EndProcedure
 
 Procedure ItemListItemKeyOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListItemKeyOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_ORIGIN
+
+Procedure ItemListInventoryOriginOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListInventoryOriginOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

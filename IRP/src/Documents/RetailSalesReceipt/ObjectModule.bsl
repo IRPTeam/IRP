@@ -74,6 +74,24 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+		ArrayOfProperties = StrSplit(PropertiesHeader, ",");
+						
+		If FillingData.Property("PriceIncludeTax") And FillingData.PriceIncludeTax = Undefined Then
+			FillingData.Delete("PriceIncludeTax");
+				
+			Index = 0;
+			For Each Property In ArrayOfProperties Do
+				If Upper(TrimAll(Property)) = Upper("PriceIncludeTax") Then
+					ArrayOfProperties.Delete(Index);
+					Break;
+				EndIf;
+				Index = Index + 1;
+			EndDo;
+					
+		EndIf;
+		
+		PropertiesHeader = StrConcat(ArrayOfProperties, ",");
+		
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);

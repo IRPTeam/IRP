@@ -591,6 +591,8 @@
  <commonAttributes>CommonAttribute.Volume</commonAttributes>
  <commonAttributes>CommonAttribute.Weight</commonAttributes>
  <commonAttributes>CommonAttribute.Width</commonAttributes>
+ <commonAttributes>CommonAttribute.LocalFullDescription</commonAttributes>
+ <commonAttributes>CommonAttribute.ForeignFullDescription</commonAttributes>
  <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
  <httpServices>HTTPService.TestConnection</httpServices>

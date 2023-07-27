@@ -370,6 +370,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("Catalog", R().Str_Catalogs, , PictureLib.Catalog);
 		EndIf;
 	EndDo;
+	TypeMap.Get("Catalog").SortByPresentation();
 	For Each Doc In Metadata.Documents Do
 		ListItem = FullTypeList.Add(Doc.FullName(), Doc.Synonym, , PictureLib.Document);
 		FillPropertyValues(TypeMap.Get("Document").Add(), ListItem);
@@ -377,6 +378,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("Document", R().Str_Documents, , PictureLib.Document);
 		EndIf;
 	EndDo;
+	TypeMap.Get("Document").SortByPresentation();
 	For Each IR In Metadata.InformationRegisters Do
 		ListItem = FullTypeList.Add(IR.FullName(), IR.Synonym, , PictureLib.InformationRegister);
 		FillPropertyValues(TypeMap.Get("InformationRegister").Add(), ListItem);
@@ -384,6 +386,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("InformationRegister", R().Str_InformationRegisters, , PictureLib.InformationRegister);
 		EndIf;
 	EndDo;
+	TypeMap.Get("InformationRegister").SortByPresentation();
 	For Each AR In Metadata.AccumulationRegisters Do
 		ListItem = FullTypeList.Add(AR.FullName(), AR.Synonym, , PictureLib.AccumulationRegister);
 		FillPropertyValues(TypeMap.Get("AccumulationRegister").Add(), ListItem);
@@ -391,7 +394,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("AccumulationRegister", R().Str_AccumulationRegisters, , PictureLib.AccumulationRegister);
 		EndIf;
 	EndDo;
-	
+	TypeMap.Get("AccumulationRegister").SortByPresentation();
 EndProcedure
 
 // Get type list.

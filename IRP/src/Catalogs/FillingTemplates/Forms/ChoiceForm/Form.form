@@ -417,6 +417,10 @@
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
+ </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
@@ -444,16 +448,16 @@
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT 
-       FillingTemplates.Ref, 
-       FillingTemplates.DeletionMark, 
-       FillingTemplates.Code, 
-       FillingTemplates.Description_en AS Description, 
-       FillingTemplates.Predefined, 
-       FillingTemplates.PredefinedDataName
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.Description_en AS Description, 
+       Table.Predefined, 
+       Table.PredefinedDataName
  FROM 
        Catalog.FillingTemplates
  AS 
-       FillingTemplates</queryText>
+       Table</queryText>
    <mainTable>Catalog.FillingTemplates</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>

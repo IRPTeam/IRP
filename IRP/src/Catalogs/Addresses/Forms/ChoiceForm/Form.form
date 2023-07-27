@@ -433,16 +433,16 @@
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT 
-       Addresses.Ref, 
-       Addresses.DeletionMark, 
-       Addresses.Code, 
-       Addresses.Description_en AS Description,
-       Addresses.Predefined, 
-       Addresses.PredefinedDataName
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.Description_en AS Description,
+       Table.Predefined, 
+       Table.PredefinedDataName
  FROM 
        Catalog.Addresses
  AS 
-       Addresses</queryText>
+       Table</queryText>
    <mainTable>Catalog.Addresses</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -460,26 +460,6 @@
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Code</dataPath>
     <field>Code</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description_hash</dataPath>
-    <field>Description_hash</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description_ru</dataPath>
-    <field>Description_ru</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description_tr</dataPath>
-    <field>Description_tr</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Predefined</dataPath>
-    <field>Predefined</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>PredefinedDataName</dataPath>
-    <field>PredefinedDataName</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Description</dataPath>
@@ -500,6 +480,30 @@
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Predefined</dataPath>
+    <field>Predefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PredefinedDataName</dataPath>
+    <field>PredefinedDataName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_hash</dataPath>
+    <field>Description_hash</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_ru</dataPath>
+    <field>Description_ru</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_tr</dataPath>
+    <field>Description_tr</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
    </fields>
   </extInfo>
  </attributes>

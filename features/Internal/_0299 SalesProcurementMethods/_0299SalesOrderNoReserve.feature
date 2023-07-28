@@ -152,13 +152,13 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'                       | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''                                     |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key'                              |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | 'a946c305-0c53-48fb-af51-5c68c487e6a4' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '2a285702-581b-43bd-b2ef-cce17e4d9fca' |
+			| '$$SalesOrder029901$$'                       | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''        |
+			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key' |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | '*'       |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '*'       |
 
 	* Check SO movements Register  ("Register  "R2012 Invoice closing of sales orders")
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
@@ -218,13 +218,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''                                     |
-		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key'                              |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | 'a946c305-0c53-48fb-af51-5c68c487e6a4' |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '2a285702-581b-43bd-b2ef-cce17e4d9fca' |
+		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''        |
+		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key' |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | '*'       |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '*'       |
 
 	* Check SI movements (Register  "R4050 Stock inventory")
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
@@ -295,13 +295,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''                                     |
-		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key'                              |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | 'a946c305-0c53-48fb-af51-5c68c487e6a4' |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '2a285702-581b-43bd-b2ef-cce17e4d9fca' |
+		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          | ''        |
+		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''        |
+		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key' |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' | '*'       |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  | '*'       |
 	* Check SI movements (Register  "R4011B Free stocks")
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -413,13 +413,13 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'                       | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''                                     |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key'                              |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' | '3c8ff213-11ae-455c-8e16-770cc3e70349' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  | 'b277e13e-e01a-467a-bf43-37e553a163b4' |
+			| '$$SalesOrder029903$$'                       | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          | ''        |
+			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''        |
+			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key' |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' | '*'       |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  | '*'       |
 
 	* Check SO movements Register  "Register  "R2012 Invoice closing of sales orders")
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
@@ -480,13 +480,13 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$ShipmentConfirmation029903$$'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-				| 'Document registrations records'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-				| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''                                     |
-				| ''                                           | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''                                     |
-				| ''                                           | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key'                              |
-				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' | '3c8ff213-11ae-455c-8e16-770cc3e70349' |
-				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  | 'b277e13e-e01a-467a-bf43-37e553a163b4' |
+				| '$$ShipmentConfirmation029903$$'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''        |
+				| 'Document registrations records'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''        |
+				| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          | ''        |
+				| ''                                           | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          | ''        |
+				| ''                                           | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  | 'Row key' |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' | '*'       |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  | '*'       |
 		* Check SC movements Register  "R4011B_FreeStocks")
 			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button

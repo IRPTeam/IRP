@@ -2810,7 +2810,6 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	//#2062
 	|	ItemList.InventoryOrigin AS InventoryOrigin,
 	|	ItemList.Consignor AS Consignor
 	|FROM
@@ -2852,7 +2851,6 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
 	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
 	|;
-	//#2062
 	|///////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
@@ -2889,7 +2887,6 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableItemList              = QueryResults[2].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
-	//#2062
 	TableSourceOfOrigins       = QueryResults[5].Unload();
 	TableConsignorBatches      = QueryResults[6].Unload();
 	
@@ -2902,14 +2899,11 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
-	//#2062
 	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 	Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
 	
 	AddTables(Tables);
 
-	//#2062
-	//Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit, InventoryOrigin, Consignor", AddInfo);
 EndFunction
 
@@ -3040,7 +3034,6 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
 	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
 	|;
-	//#2062
 	|///////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
@@ -3079,8 +3072,6 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
-	
-	//#2062
 	TableSourceOfOrigins       = QueryResults[5].Unload();
 	TableConsignorBatches      = QueryResults[6].Unload();
 	
@@ -3150,15 +3141,11 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
-
-	//#2062
 	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 	Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
 
 	AddTables(Tables);
 
-	//#2062
-//	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey, InventoryOrigin, Consignor", AddInfo);
 EndFunction
 
@@ -5051,7 +5038,6 @@ Procedure AddTables(Tables)
 		Tables.Insert("SourceOfOrigins", GetEmptyTable_SourceOfOrigins());
 	EndIf;
 	
-	//#2062
 	If Not Tables.Property("ConsignorBatches") Then
 		Tables.Insert("ConsignorBatches", GetEmptyTable_ConsignorBatches());
 	EndIf;
@@ -10608,12 +10594,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Ref = Un
 		For Each Payment In Tables.Payments Do
 			FillingValues.Payments.Add(ValueTableRowToStructure(Tables.Payments.Columns, Payment));
 		EndDo;
-		
-//		//#2062
-//		For Each ConsignorBatch In Tables.ConsignorBatches Do
-//			FillingValues.ConsignorBatches.Add(ValueTableRowToStructure(Tables.ConsignorBatches.Columns, ConsignorBatch));
-//		EndDo;
-		
+				
 		FillingValues.Insert("BasedOn", True);
 		
 		ReplaceAliasToAttributeName(FillingValues, "TransactionTypeSales"     , "TransactionType");
@@ -10649,8 +10630,6 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("Materials"             , GetEmptyTable_Materials());
 	Tables.Insert("SourceOfOrigins"       , GetEmptyTable_SourceOfOrigins());
 	Tables.Insert("ControlCodeStrings"    , GetEmptyTable_ControlCodeStrings());
-	
-	//#2062
 	Tables.Insert("ConsignorBatches"      , GetEmptyTable_ConsignorBatches());
 	
 	For Each Data In ArrayOfData Do
@@ -10676,8 +10655,6 @@ Function GetTableNames_Refreshable(Excludings = "")
 	NamesArray.Add("Materials");
 	NamesArray.Add("SourceOfOrigins");
 	NamesArray.Add("ControlCodeStrings");
-	
-	//#2062
 	NamesArray.Add("ConsignorBatches");
 	
 	If ValueIsFilled(Excludings) Then
@@ -10817,7 +10794,6 @@ Function GetColumnNames_ItemList()
 		   |InventoryOrigin,
 		   |TransactionTypeRGR,
 		   |isControlCodeString,
-		   //#2062
 		   |Consignor";
 		
 EndFunction
@@ -10959,8 +10935,6 @@ Function GetEmptyTable_Payments()
 EndFunction
 
 #EndRegion
-
-//#2062
 
 #Region EmptyTables_ConsignorBatches
 

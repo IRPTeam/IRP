@@ -2603,7 +2603,6 @@ Function BindDate(Parameters)
 	Binding.Insert("Production", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit");
 	
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -2763,7 +2762,6 @@ Function BindCompany(Parameters)
 		"StepChangeProductionPlanningByPlanningPeriod,
 		|StepChangeCurrentQuantityInProductions");
 	
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -9429,7 +9427,6 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
-		//#2062
 		|StepConsignorBatchesFillBatches");
 		
 	Binding.Insert("RetailGoodsReceipt",
@@ -10070,7 +10067,6 @@ Function BindItemListStore(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeStoreInHeaderByStoresInList,
-		//#2062
 		|StepConsignorBatchesFillBatches");
 		
 	Binding.Insert("RetailGoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
@@ -10727,8 +10723,7 @@ Function BindItemListConsignor(Parameters)
 	
 	Binding.Insert("InventoryTransfer",
 		"StepConsignorBatchesFillBatches_StoreSender");
-	
-	//#2062	
+
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -10777,7 +10772,6 @@ Function BindItemListInventoryOrigin(Parameters)
 	Binding.Insert("InventoryTransfer",
 		"StepConsignorBatchesFillBatches_StoreSender");
 	
-	//#2062	
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -10907,7 +10901,6 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	Binding.Insert("SalesReturn",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
 		
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	

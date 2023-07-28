@@ -1425,7 +1425,6 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
 			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
 			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")
-			//#2062
 			Or ObjectRefType = Type("DocumentRef.RetailShipmentConfirmation")) 
 			And FOServer.IsUseCommissionTrading();
 	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);

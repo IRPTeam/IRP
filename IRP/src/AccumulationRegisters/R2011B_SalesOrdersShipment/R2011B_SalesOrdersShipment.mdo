@@ -85,4 +85,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="d85fa2ac-438d-4f18-be1b-c63792668b90">
+    <name>RowKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Row key</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

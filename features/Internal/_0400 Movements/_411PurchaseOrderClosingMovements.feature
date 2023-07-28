@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -205,13 +205,13 @@ Scenario: _041162 check Purchase order closing movements by the Register  "R1011
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PurchaseOrderClosing37$$'                     | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| 'Document registrations records'                 | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| 'Register  "R1011 Receipt of purchase orders"'   | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| ''                                               | 'Record type'   | 'Period'                           | 'Resources'   | 'Dimensions'     | ''               | ''                                              | ''            |
-			| ''                                               | ''              | ''                                 | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                         | 'Item key'    |
-			| ''                                               | 'Receipt'       | '$$DatePurchaseOrderClosing37$$'   | '-64'         | 'Main Company'   | 'Front office'   | 'Purchase order 37 dated 09.03.2021 14:29:00'   | 'XS/Blue'     |
-			| ''                                               | 'Receipt'       | '$$DatePurchaseOrderClosing37$$'   | '1'           | 'Main Company'   | 'Front office'   | 'Purchase order 37 dated 09.03.2021 14:29:00'   | '38/Black'    |
+			| '$$PurchaseOrderClosing37$$'                   | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| 'Document registrations records'               | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| ''                                             | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''             | ''                                            | ''         | ''                                     |
+			| ''                                             | ''            | ''                               | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                       | 'Item key' | 'Row key'                              |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 		
 		

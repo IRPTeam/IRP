@@ -325,19 +325,20 @@ Scenario: _04021 check Goods receipt movements by the Register  "R1011 Receipt o
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35'    | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| 'Register  "R1011 Receipt of purchase orders"'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''             |
-			| ''                                               | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                          | 'Item key'     |
-			| ''                                               | 'Expense'       | '12.02.2021 15:10:35'   | '5'           | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'    |
-			| ''                                               | 'Expense'       | '12.02.2021 15:10:35'   | '10'          | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'     |
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35'  | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''          | ''                                     |
+			| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                        | 'Item key'  | 'Row key'                              |
+			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
+			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
 		And I close all client application windows
 
 
 //117
 
 Scenario: _040211 check Goods receipt movements by the Register  "R1031 Receipt invoicing" (PI exist)
+		And I close all client application windows
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table

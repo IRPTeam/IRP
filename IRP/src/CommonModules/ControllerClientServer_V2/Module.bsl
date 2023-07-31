@@ -9818,6 +9818,8 @@ Function BindItemListSalesDocument(Parameters)
 	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
 	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
 	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
+	//#2080
+	DataPath.Insert("RetailGoodsReceipt"     , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();
 	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");

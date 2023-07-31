@@ -200,10 +200,11 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	EndIf;
 	
 	Unposting = False;
+		
 	Source.RegisterRecords.TM1010B_RowIDMovements.Load(Records_InDocument);
 	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
-	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);	
+	
 
 	If Not Cancel Then
 		Is = Is(Source);
@@ -217,7 +218,9 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 			EndIf;
 		EndIf;
 
-		If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Then
+		//#2080
+		//If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Then
+		If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Or Is.RGR Then
 			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
 			If Is.RRR Then
 				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
@@ -408,7 +411,12 @@ Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	ElsIf Is.PR Or Is.PRO Then
 		CurrentStep = Catalogs.MovementRules.PRO_PR;
 	ElsIf Is.RRR Then
-		CurrentStep = Catalogs.MovementRules.RRR;
+		//#2080
+		//CurrentStep = Catalogs.MovementRules.RRR;
+		CurrentStep = Catalogs.MovementRules.RRR_RGR;
+	//#2080
+	ElsIf Is.RGR Then
+		CurrentStep = Catalogs.MovementRules.RRR_RGR;
 	EndIf;
 
 	Query.SetParameter("CurrentStep", CurrentStep);
@@ -450,7 +458,9 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	ElsIf Is.PI Then
 		NextStep = Catalogs.MovementRules.PRO_PR;
 	ElsIf Is.RSR Then
-		NextStep = Catalogs.MovementRules.RRR;
+		//#2080
+		//NextStep = Catalogs.MovementRules.RRR;
+		NextStep = Catalogs.MovementRules.RRR_RGR;
 	EndIf;
 
 	Query.SetParameter("NextStep", NextStep);
@@ -539,7 +549,9 @@ Function GetRecordsInDocument_TM1010T_RSR(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	VALUE(Catalog.MovementRules.RRR) AS Step,
+	//#2080
+	//|	VALUE(Catalog.MovementRules.RRR) AS Step,
+	|	VALUE(Catalog.MovementRules.RRR_RGR) AS Step,
 	|	RowIDInfo.Key AS BasisKey,
 	|	RowIDInfo.Ref AS Basis,
 	|	*
@@ -1030,7 +1042,9 @@ Procedure FillRowID_RGR(Source, Cancel)
 				NewRow = Source.RowIDInfo.Add();
 				FillPropertyValues(NewRow, Row);
 				NewRow.NextStep = GetNextStep_RGR(Source, RowItemList, NewRow);
-				If ValueIsFilled(Row.Basis) Then
+				If ValueIsFilled(Row.Basis) 
+					//#2080
+					And Source.TransactionType <> Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer  Then
 					BalanceQuantity = GetBalanceQuantity(Source, Row);
 					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
 				Else
@@ -1497,6 +1511,10 @@ EndFunction
 
 Function GetNextStep_RGR(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
+	//#2080
+	If Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+		NextStep = Catalogs.MovementRules.RRR;
+	EndIf;
 	Return NextStep;
 EndFunction
 
@@ -1672,15 +1690,23 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	ElsIf Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
 		RowRefObject.StoreReturn = RowItemList.Store;
+	//#2080
+	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+		RowRefObject.StoreReturn = RowItemList.Store;		
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
 	
 	If Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, Source, , "Company, Branch");
-		
 		RowRefObject.CompanyReturn = Source.Company;
 		RowRefObject.BranchReturn  = Source.Branch;
+	//#2080
+	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+		FillPropertyValues(RowRefObject, Source, , "Company, Branch");
+		RowRefObject.CompanyReturn = Source.Company;
+		RowRefObject.BranchReturn  = Source.Branch;		
 	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		FillPropertyValues(RowRefObject, Source, , "Branch");
 	Else
@@ -1781,6 +1807,10 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.AgreementSales       = Source.Agreement;
 		RowRefObject.CurrencySales        = Source.Currency;
 		RowRefObject.PriceIncludeTaxSales = Source.PriceIncludeTax;
+		//#2080
+		If Is.RSR Then
+			RowRefObject.TransactionTypeRGR = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer;	
+		EndIf;
 	ElsIf Is.SO Then
 		If Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
 			RowRefObject.RetailCustomer = Source.RetailCustomer;
@@ -1833,6 +1863,12 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery;
 		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.Pickup Then
 			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.Pickup;
+		//#2080
+		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.EmptyRef();
+			RowRefObject.PartnerSales   = Source.Partner;
+			RowRefObject.LegalNameSales = Source.LegalName;
+			RowRefObject.TransactionTypeRGR = Source.TransactionType;		
 		Else
 			Raise StrTemplate("Unsapported transaction type [%1]", Source.TransactionType);
 		EndIf;
@@ -1993,6 +2029,9 @@ Function ExtractData(BasisesTable, DataReceiver, AddInfo = Undefined) Export
 			FillTablesFrom_PI(Tables, DataReceiver, Row);
 		ElsIf Is.GR Then
 			FillTablesFrom_GR(Tables, DataReceiver, Row);
+		//#2080
+		ElsIf Is.RGR Then
+			FillTablesFrom_RGR(Tables, DataReceiver, Row);		
 		ElsIf Is.ITO Then
 			FillTablesFrom_ITO(Tables, DataReceiver, Row);
 		ElsIf Is.IT Then
@@ -2054,6 +2093,10 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromWS_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromWS_ThenFromWO_ThenFromSO", EmptyTable.Copy());
 	
+	//#2080
+	Tables.Insert("FromRGR", EmptyTable.Copy());
+	Tables.Insert("FromRGR_ThenFromRSR", EmptyTable.Copy());
+		
 	Return Tables;
 EndFunction
 
@@ -2116,6 +2159,16 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver, AddInfo));
 	EndIf;
 
+	//#2080
+	If Tables.FromRGR.Count() Then
+		ExtractedData.Add(ExtractData_FromRGR(Tables.FromRGR, DataReceiver, AddInfo));
+	EndIf;
+
+	//#2080
+	If Tables.FromRGR_ThenFromRSR.Count() Then
+		ExtractedData.Add(ExtractData_FromRGR_ThenFromRSR(Tables.FromRGR_ThenFromRSR, DataReceiver, AddInfo));
+	EndIf;
+	
 	If Tables.FromITO.Count() Then
 		ExtractedData.Add(ExtractData_FromITO(Tables.FromITO, DataReceiver, AddInfo));
 	EndIf;
@@ -2259,6 +2312,19 @@ Procedure FillTablesFrom_GR(Tables, DataReceiver, RowBasisesTable)
 		Else
 			FillPropertyValues(Tables.FromGR.Add(), RowBasisesTable);
 		EndIf;
+	EndIf;
+EndProcedure
+
+//#2080
+Procedure FillTablesFrom_RGR(Tables, DataReceiver, RowBasisesTable)
+	BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
+	Is = Is(BasisesInfo.ParentBasis);
+	If Is.RSR Then
+		NewRow = Tables.FromRGR_ThenFromRSR.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+	Else
+		FillPropertyValues(Tables.FromRGR.Add(), RowBasisesTable);
 	EndIf;
 EndProcedure
 
@@ -3849,6 +3915,165 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey", AddInfo);
 EndFunction
 
+//#2080
+Function ExtractData_FromRGR(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT ALLOWED
+	|	""RetailGoodsReceipt"" AS BasedOn,
+	|	UNDEFINED AS Ref,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	0 AS Quantity,
+	|	BasisesTable.Key,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.BasisUnit AS BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailGoodsReceipt.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|ORDER BY
+	|	ItemList.LineNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS GoodsReceipt,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailGoodsReceipt.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.RetailGoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();
+	TableGoodsReceipts = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
+	For Each RowItemList In TableItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+	EndDo;
+
+	Tables = New Structure();
+	Tables.Insert("ItemList", TableItemList);
+	Tables.Insert("RowIDInfo", TableRowIDInfo);
+	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
+EndFunction
+
+//#2080
+Function ExtractData_FromRGR_ThenFromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT DISTINCT ALLOWED
+	|	BasisesTable.Key,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	BasisesTable.RowID,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.RowRef,
+	|	VALUE(Document.PurchaseInvoice.EmptyRef) AS ParentBasis,
+	|	BasisesTable.ParentBasis AS Basis,
+	|	BasisesTable.Unit,
+	|	BasisesTable.BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailGoodsReceipt.RowIDInfo AS RowIDInfo
+	|		ON BasisesTable.Basis = RowIDInfo.Ref
+	|		AND BasisesTable.BasisKey = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS GoodsReceipt,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailGoodsReceipt.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.RetailGoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+							  
+
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TablesRSR = ExtractData_FromRSR(QueryResults[2].Unload(), DataReceiver);
+//	TablesPI.ItemList.FillValues(True, "UseGoodsReceipt");
+
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableGoodsReceipts = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"         , TablesRSR.ItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TablesRSR.TaxList);
+	Tables.Insert("SpecialOffers"    , TablesRSR.SpecialOffers);
+	Tables.Insert("GoodsReceipts"    , TableGoodsReceipts);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
+	
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "RetailSalesReceiptKey", AddInfo);
+EndFunction
+
 Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
@@ -4525,6 +4750,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.ManagerSegment AS ManagerSegment,
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
+	|	VALUE(Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer) AS TransactionTypeRGR,
+	|	VALUE(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
@@ -4537,6 +4764,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+	|	ItemList.Key AS RetailSalesReceiptKey,
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -5409,9 +5637,13 @@ EndFunction
 Function GetBasisesFor_RGR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RSR_RGR);
+	//#2080
+	StepArray.Add(Catalogs.MovementRules.RRR_RGR);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.RSC_ForRGR = True;
+	//#2080
+	FilterSets.RSR_ForRGR = True;
 	
 	BaisisesTable = GetBasisesTable(StepArray, FilterValues, FilterSets);
 	Return BaisisesTable
@@ -5505,9 +5737,13 @@ EndFunction
 Function GetBasisesFor_RRR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RRR);
+	//#2080
+	StepArray.Add(Catalogs.MovementRules.RRR_RGR);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.RSR_ForRRR = True;
+	//#2080
+	FilterSets.RGR_ForRRR = True;
 
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -5606,6 +5842,9 @@ Function GetAvailableFilterSets()
 	Result.Insert("PI_ForPR_ForPRO", False);
 
 	Result.Insert("RSR_ForRRR", False);
+	//#2080
+	Result.Insert("RSR_ForRGR", False);
+	Result.Insert("RGR_ForRRR", False);
 
 	Result.Insert("SO_ForWO", False);
 	Result.Insert("SO_ForWS", False);
@@ -5784,6 +6023,18 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_RSR_ForRRR());
 	EndIf;
 	
+	//#2080
+	If FilterSets.RGR_ForRRR Then
+		ApplyFilterSet_RGR_ForRRR(Query);
+		QueryArray.Add(GetDataByFilterSet_RGR_ForRRR());
+	EndIf;
+	
+	//#2080
+	If FilterSets.RSR_ForRGR Then
+		ApplyFilterSet_RSR_ForRGR(Query);
+		QueryArray.Add(GetDataByFilterSet_RSR_ForRGR());
+	EndIf;
+	
 	If FilterSets.WO_ForWS Then
 		ApplyFilterSet_WO_ForWS(Query);
 		QueryArray.Add(GetDataByFilterSet_WO_ForWS());
@@ -5846,6 +6097,130 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	Return Undefined;
 EndFunction
 
+Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
+	Table_ItemList = New ValueTable();
+	Table_ItemList.Columns.Add("FieldName");
+	Table_ItemList.Columns.Add("LinkedDoc");
+	
+	Table_Header = New ValueTable();
+	Table_Header.Columns.Add("FieldName");
+	Table_Header.Columns.Add("LinkedDoc");
+	
+	Table_RowRefFilter = New ValueTable();
+	Table_RowRefFilter.Columns.Add("FieldName");
+	Table_RowRefFilter.Columns.Add("LinkedDoc");
+	
+	Tables = New Structure("Header, ItemList, RowRefFilter", Table_Header, Table_ItemList, Table_RowRefFilter);
+	
+	Is = Is(Ref);
+	DocAliases = DocAliases();
+	
+	If Is.SO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PRR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSC);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSR);
+	EndIf;
+	
+	If Is.SI Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SRO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SC);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.WS);		
+	EndIf;
+	
+	If Is.SC Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.PR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.SI);
+	EndIf;
+	
+	If Is.RSC Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RGR);
+	EndIf;
+	
+	If Is.PO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.PI);
+	EndIf;
+	
+	If Is.PI Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PRO);
+	EndIf;
+	
+	If Is.GR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.SR);
+	EndIf;
+	
+	If Is.RGR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
+		//#2080
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RGR, DocAliases.RRR);
+	EndIf;
+	
+	If Is.ITO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ITO, DocAliases.IT);
+	EndIf;
+	
+	If Is.IT Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.SC);
+	EndIf;
+	
+	If Is.ISR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.ITO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PO);
+	EndIf;
+	
+	If Is.PhysicalInventory Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsSurplus);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsWriteOff);
+	EndIf;
+	
+	If Is.PR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PR, DocAliases.SC);
+	EndIf;
+	
+	If Is.PRO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PRO, DocAliases.PR);
+	EndIf;
+	
+	If Is.SR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SR, DocAliases.GR);
+	EndIf;
+	
+	If Is.SRO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SRO, DocAliases.SR);
+	EndIf;
+	
+	If Is.RSR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
+		//#2080
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RGR);
+	EndIf;
+	
+	If Is.WO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.WS);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.SI);
+	EndIf;
+	
+	If Is.WS Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WS, DocAliases.SI);
+	EndIf;
+	
+	Return Tables;
+EndFunction
+
 Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SI Then
@@ -5892,6 +6267,125 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Raise StrTemplate("Not supported Internal link for [%1]", DocAliase);
 	EndIf;
 	Return Undefined;
+EndFunction
+
+Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
+	Table_ItemList = New ValueTable();
+	Table_ItemList.Columns.Add("FieldName");
+	Table_ItemList.Columns.Add("LinkedDoc");
+	
+	Table_Header = New ValueTable();
+	Table_Header.Columns.Add("FieldName");
+	Table_Header.Columns.Add("LinkedDoc");
+	
+	Tables = New Structure("Header, ItemList", Table_Header, Table_ItemList);
+	
+	Is = Is(Ref);
+	DocAliases = DocAliases();
+	If Is.SI Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
+	EndIf;
+	
+	If Is.SC Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.IT);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.PR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
+	EndIf;
+	
+	If Is.RSC Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.SO);
+	EndIf;	
+	
+	If Is.PO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.ISR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.SO);
+	EndIf;
+	
+	If Is.PI Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.GR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.ISR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.PO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.SO);
+	EndIf;
+	
+	If Is.GR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.IT);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.SR);
+	EndIf;
+	
+	If Is.RGR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
+		//#2080
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RGR, DocAliases.RSR);
+	EndIf;
+	
+	If Is.ITO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.ITO, DocAliases.ISR);
+	EndIf;
+	
+	If Is.IT Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.IT, DocAliases.ITO);
+	EndIf;
+	
+	If Is.StockAdjustmentAsSurplus Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsSurplus, DocAliases.PhysicalInventory);
+	EndIf;
+	
+	If Is.StockAdjustmentAsWriteOff Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsWriteOff, DocAliases.PhysicalInventory);
+	EndIf;
+	
+	If Is.PR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PRO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.SC);
+	EndIf;
+	
+	If Is.PRO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRO, DocAliases.PI);
+	EndIf;
+	
+	If Is.SR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SRO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.GR);
+	EndIf;
+	
+	If Is.SRO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SRO, DocAliases.SI);
+	EndIf;
+	
+	If Is.RSR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.SO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
+	EndIf;
+	
+	If Is.RRR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RRR, DocAliases.RSR);
+		//#2080
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RRR, DocAliases.RGR);
+	EndIf;
+	
+	If Is.PRR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRR, DocAliases.SO);
+	EndIf;
+	
+	If Is.WO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WO, DocAliases.SO);
+	EndIf;
+	
+	If Is.WS Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.WO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.SI);
+	EndIf;
+	
+	Return Tables;
 EndFunction
 
 #Region Document_SO
@@ -8133,6 +8627,11 @@ Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	//#2080
+	ElsIf InternalDocAliase = Aliases.RSR Then 
+
+		Result.Header   = "Company, Partner, LegalName, RetailCustomer, TransactionType";
+		Result.ItemList = "Item, ItemKey, InventoryOrigin, RetailSalesReceipt";		
 	Else
 		Raise StrTemplate("Not supported Internal link for [RGR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -8150,11 +8649,117 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 							  |RetailCustomer    , RetailCustomer,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
-	
+	ElsIf ExternalDocAliase = Aliases.RRR Then 
+		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, InventoryOrigin, Store";
+		
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "CompanyReturn     , Company,
+							  |RetailCustomer    , RetailCustomer,
+							  |PartnerSales      , Partner,
+							  |LegalNameSales    , LegalName,
+							  |BranchReturn      , Branch,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
 	Else
 		Raise StrTemplate("Not supported External link for [RGR] to [%1]", ExternalDocAliase);
 	EndIf;
 	Return Result;
+EndFunction
+
+//#2080
+Procedure ApplyFilterSet_RGR_ForRRR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_RGR_ForRRR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_CompanyReturn
+	|					THEN RowRef.CompanyReturn = &CompanyReturn
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_BranchReturn
+	|					THEN RowRef.BranchReturn = &BranchReturn
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PartnerSales
+	|					THEN RowRef.PartnerSales = &PartnerSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalNameSales
+	|					THEN RowRef.LegalNameSales = &LegalNameSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_RetailCustomer
+	|					THEN RowRef.RetailCustomer = &RetailCustomer
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionTypeRGR
+	|					THEN RowRef.TransactionTypeRGR = &TransactionTypeRGR
+	|				ELSE FALSE
+	|			END  
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.StoreReturn = &Store
+	|				ELSE TRUE
+	|			END
+	|))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+//#2080
+Function GetDataByFilterSet_RGR_ForRRR()
+	Return "SELECT
+		   |	Doc.ItemKey,
+		   |	Doc.ItemKey.Item,
+		   |	Doc.Store,
+		   |	Doc.Ref,
+		   |	Doc.Key,
+		   |	Doc.Key,
+		   |	CASE
+		   |		WHEN Doc.ItemKey.Unit.Ref IS NULL
+		   |			THEN Doc.ItemKey.Item.Unit
+		   |		ELSE Doc.ItemKey.Unit
+		   |	END,
+		   |	RowIDMovements.Quantity,
+		   |	RowIDMovements.RowRef,
+		   |	RowIDMovements.RowID,
+		   |	RowIDMovements.Step,
+		   |	Doc.LineNumber
+		   |FROM
+		   |	Document.RetailGoodsReceipt.ItemList AS Doc
+		   |		INNER JOIN Document.RetailGoodsReceipt.RowIDInfo AS RowIDInfo
+		   |		ON Doc.Ref = RowIDInfo.Ref
+		   |		AND Doc.Key = RowIDInfo.Key
+		   |		INNER JOIN RowIDMovements_RGR_ForRRR AS RowIDMovements
+		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -9297,7 +9902,18 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 		Result.RowRefFilter = "Company          , Company,
 							  |RetailCustomer   , RetailCustomer,
 							  |ItemKey          , ItemList.ItemKey,
-							  |Store            , ItemList.Store";		
+							  |Store            , ItemList.Store";	
+	//#2080
+	ElsIf ExternalDocAliase = Aliases.RGR Then
+		Result.Header   = "Company, Partner, LegalName, RetailCustomer";
+		Result.ItemList = "Item, ItemKey";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |RetailCustomer   , RetailCustomer,	
+							  |PartnerSales     , Partner,
+							  |LegalNameSales   , LegalName,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";			
 	Else
 		Raise StrTemplate("Not supported External link for [RSR] to [%1]", ExternalDocAliase);
 	EndIf;
@@ -9369,6 +9985,78 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	Query.Execute();
 EndProcedure
 
+//#2080
+Procedure ApplyFilterSet_RSR_ForRGR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_RSR_ForRGR
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE TRUE
+	|
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PartnerSales
+	|					THEN RowRef.PartnerSales = &PartnerSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalNameSales
+	|					THEN RowRef.LegalNameSales = &LegalNameSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionTypeRGR
+	|					THEN RowRef.TransactionTypeRGR = &TransactionTypeRGR
+	|				ELSE FALSE
+	|			END
+	
+//	|			AND CASE
+//	|				WHEN &Filter_AgreementSales
+//	|					THEN RowRef.AgreementSales = &AgreementSales
+//	|				ELSE FALSE
+//	|			END
+//	|			AND CASE
+//	|				WHEN &Filter_CurrencySales
+//	|					THEN RowRef.CurrencySales = &CurrencySales
+//	|				ELSE FALSE
+//	|			END
+//	|			AND CASE
+//	|				WHEN &Filter_PriceIncludeTaxSales
+//	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
+//	|				ELSE FALSE
+//	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
+	Query.Execute();
+EndProcedure
+
 Function GetDataByFilterSet_RSR_ForRRR()
 	Return "SELECT 
 		   |	Doc.ItemKey,
@@ -9393,6 +10081,36 @@ Function GetDataByFilterSet_RSR_ForRRR()
 		   |		ON Doc.Ref = RowIDInfo.Ref
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_RSR_ForRRR AS RowIDMovements
+		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
+EndFunction
+
+//#2080
+Function GetDataByFilterSet_RSR_ForRGR()
+	Return "SELECT 
+		   |	Doc.ItemKey,
+		   |	Doc.ItemKey.Item,
+		   |	Doc.Store,
+		   |	Doc.Ref,
+		   |	Doc.Key,
+		   |	Doc.Key,
+		   |	CASE
+		   |		WHEN Doc.ItemKey.Unit.Ref IS NULL
+		   |			THEN Doc.ItemKey.Item.Unit
+		   |		ELSE Doc.ItemKey.Unit
+		   |	END AS BasisUnit,
+		   |	RowIDMovements.Quantity,
+		   |	RowIDMovements.RowRef,
+		   |	RowIDMovements.RowID,
+		   |	RowIDMovements.Step,
+		   |	Doc.LineNumber
+		   |FROM
+		   |	Document.RetailSalesReceipt.ItemList AS Doc
+		   |		INNER JOIN Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
+		   |		ON Doc.Ref = RowIDInfo.Ref
+		   |		AND Doc.Key = RowIDInfo.Key
+		   |		INNER JOIN RowIDMovements_RSR_ForRGR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
 		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
 		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
@@ -9423,6 +10141,9 @@ Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
 		Result.ItemList = "Item, ItemKey, Store, RetailSalesReceipt";
+	ElsIf InternalDocAliase = Aliases.RGR Then
+		Result.Header   = "Company, Store, Partner, LegalName, RetailCustomer";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate("Not supported Internal link for [RRR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -12000,241 +12721,6 @@ Function GetFieldsToLock(Object, Form)
 	
 	Return New Structure("External, Internal, All", 
 		FieldsToLock_ExternalLinkedDocs, FieldsToLock_InternalLinkedDocs, FieldsToLock_All);
-EndFunction
-
-Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
-	Table_ItemList = New ValueTable();
-	Table_ItemList.Columns.Add("FieldName");
-	Table_ItemList.Columns.Add("LinkedDoc");
-	
-	Table_Header = New ValueTable();
-	Table_Header.Columns.Add("FieldName");
-	Table_Header.Columns.Add("LinkedDoc");
-	
-	Table_RowRefFilter = New ValueTable();
-	Table_RowRefFilter.Columns.Add("FieldName");
-	Table_RowRefFilter.Columns.Add("LinkedDoc");
-	
-	Tables = New Structure("Header, ItemList, RowRefFilter", Table_Header, Table_ItemList, Table_RowRefFilter);
-	
-	Is = Is(Ref);
-	DocAliases = DocAliases();
-	
-	If Is.SO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PRR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PI);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSC);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSR);
-	EndIf;
-	
-	If Is.SI Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SRO);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SC);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.WS);		
-	EndIf;
-	
-	If Is.SC Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.PR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.SI);
-	EndIf;
-	
-	If Is.RSC Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RGR);
-	EndIf;
-	
-	If Is.PO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.GR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.PI);
-	EndIf;
-	
-	If Is.PI Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.GR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PRO);
-	EndIf;
-	
-	If Is.GR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.PI);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.SR);
-	EndIf;
-	
-	If Is.RGR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
-	EndIf;
-	
-	If Is.ITO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ITO, DocAliases.IT);
-	EndIf;
-	
-	If Is.IT Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.GR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.SC);
-	EndIf;
-	
-	If Is.ISR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.ITO);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PI);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PO);
-	EndIf;
-	
-	If Is.PhysicalInventory Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsSurplus);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsWriteOff);
-	EndIf;
-	
-	If Is.PR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PR, DocAliases.SC);
-	EndIf;
-	
-	If Is.PRO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PRO, DocAliases.PR);
-	EndIf;
-	
-	If Is.SR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SR, DocAliases.GR);
-	EndIf;
-	
-	If Is.SRO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SRO, DocAliases.SR);
-	EndIf;
-	
-	If Is.RSR Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
-	EndIf;
-	
-	If Is.WO Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.WS);
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.SI);
-	EndIf;
-	
-	If Is.WS Then
-		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WS, DocAliases.SI);
-	EndIf;
-	
-	Return Tables;
-EndFunction
-
-Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
-	Table_ItemList = New ValueTable();
-	Table_ItemList.Columns.Add("FieldName");
-	Table_ItemList.Columns.Add("LinkedDoc");
-	
-	Table_Header = New ValueTable();
-	Table_Header.Columns.Add("FieldName");
-	Table_Header.Columns.Add("LinkedDoc");
-	
-	Tables = New Structure("Header, ItemList", Table_Header, Table_ItemList);
-	
-	Is = Is(Ref);
-	DocAliases = DocAliases();
-	If Is.SI Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
-	EndIf;
-	
-	If Is.SC Then 
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.IT);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.PR);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
-	EndIf;
-	
-	If Is.RSC Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.SO);
-	EndIf;	
-	
-	If Is.PO Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.ISR);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.SO);
-	EndIf;
-	
-	If Is.PI Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.GR);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.ISR);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.PO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.SO);
-	EndIf;
-	
-	If Is.GR Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.IT);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PI);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.SR);
-	EndIf;
-	
-	If Is.RGR Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
-	EndIf;
-	
-	If Is.ITO Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.ITO, DocAliases.ISR);
-	EndIf;
-	
-	If Is.IT Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.IT, DocAliases.ITO);
-	EndIf;
-	
-	If Is.StockAdjustmentAsSurplus Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsSurplus, DocAliases.PhysicalInventory);
-	EndIf;
-	
-	If Is.StockAdjustmentAsWriteOff Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsWriteOff, DocAliases.PhysicalInventory);
-	EndIf;
-	
-	If Is.PR Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PI);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PRO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.SC);
-	EndIf;
-	
-	If Is.PRO Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRO, DocAliases.PI);
-	EndIf;
-	
-	If Is.SR Then 
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SRO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SI);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.GR);
-	EndIf;
-	
-	If Is.SRO Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SRO, DocAliases.SI);
-	EndIf;
-	
-	If Is.RSR Then 
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.SO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
-	EndIf;
-	
-	If Is.RRR Then 
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RRR, DocAliases.RSR);
-	EndIf;
-	
-	If Is.PRR Then 
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRR, DocAliases.SO);
-	EndIf;
-	
-	If Is.WO Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WO, DocAliases.SO);
-	EndIf;
-	
-	If Is.WS Then
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.WO);
-		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.SI);
-	EndIf;
-	
-	Return Tables;
 EndFunction
 
 Procedure FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliase, ExternalDocAliase)

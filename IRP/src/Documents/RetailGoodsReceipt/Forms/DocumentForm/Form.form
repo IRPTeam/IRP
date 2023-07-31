@@ -1262,7 +1262,6 @@
         <items xsi:type="form:FormField">
           <name>ItemListConsignor</name>
           <id>445</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1942,6 +1941,56 @@
           <contextMenu>
             <name>ItemListSalesOrderContextMenu</name>
             <id>431</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListRetailSalesReceipt</name>
+          <id>529</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.RetailSalesReceipt</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListRetailSalesReceiptExtendedTooltip</name>
+            <id>531</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListRetailSalesReceiptContextMenu</name>
+            <id>530</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3429,7 +3478,6 @@
       <items xsi:type="form:Table">
         <name>SourceOfOrigins</name>
         <id>453</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
@@ -3892,7 +3940,6 @@
       <items xsi:type="form:Table">
         <name>ConsignorBatches</name>
         <id>483</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

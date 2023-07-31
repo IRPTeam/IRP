@@ -8279,6 +8279,7 @@
         <edit>
           <common>true</common>
         </edit>
+        <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
       </columns>
       <columns>
         <name>ControlCodeStringState</name>

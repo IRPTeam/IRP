@@ -67,10 +67,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
-	IsCourierDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"));
-	IsPickupDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"));
+	IsCourierDelivery    = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"));
+	IsPickupDelivery     = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"));
+	IsReturnFromCustomer = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	
 	Form.Items.Courier.Visible = IsCourierDelivery;
+			
+	Form.Items.LegalName.Enabled = IsReturnFromCustomer And ValueIsFilled(Object.Partner);
+	Form.Items.Partner.Visible   = IsReturnFromCustomer;
+	Form.Items.LegalName.Visible = IsReturnFromCustomer;
 	
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
@@ -116,6 +121,44 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocRetailGoodsReceiptClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocRetailGoodsReceiptClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailGoodsReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocRetailGoodsReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocRetailGoodsReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailGoodsReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocRetailGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

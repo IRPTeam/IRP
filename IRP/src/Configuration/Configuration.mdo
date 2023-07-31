@@ -513,6 +513,7 @@
   <commonAttributes>CommonAttribute.Width</commonAttributes>
   <commonAttributes>CommonAttribute.LocalFullDescription</commonAttributes>
   <commonAttributes>CommonAttribute.ForeignFullDescription</commonAttributes>
+  <commonAttributes>CommonAttribute.SourceNodeID</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

@@ -6,12 +6,13 @@
     <subsystems>Subsystem.Settings.Subsystem.LockDataModification</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.AdminFunctions</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.AddAttributesAndProperties</subsystems>
-    <subsystems>Subsystem.Settings.Subsystem.AddDataProc</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.BaseSettings</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Contacts</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Equipment</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.OrdersSettings</subsystems>
-    <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.ContactInfo</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.ObjectAccess</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
   <subsystemsOrder>
+    <subsystems>Subsystem.MasterData.Subsystem.Items</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.Finance</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.PurchaseAndSales</subsystems>
-    <subsystems>Subsystem.MasterData.Subsystem.Items</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.OpeningEntry</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.Retail</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.Production</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.KeysCatalogs</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.AdditionalControl</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

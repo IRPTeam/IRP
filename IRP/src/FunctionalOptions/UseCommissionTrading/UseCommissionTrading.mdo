@@ -21,4 +21,10 @@
   <content>Catalog.Partners.Attribute.Consignor</content>
   <content>Catalog.Partners.Attribute.TradeAgent</content>
   <content>Enum.InventoryOriginTypes</content>
+  <content>Document.RetailShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryOrigin</content>
+  <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.InventoryOrigin</content>
+  <content>AccumulationRegister.R6020B_BatchBalance.Dimension.InventoryOrigin</content>
+  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.InventoryOrigin</content>
+  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.InventoryOrigin</content>
+  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.InventoryOrigin</content>
 </mdclass:FunctionalOption>

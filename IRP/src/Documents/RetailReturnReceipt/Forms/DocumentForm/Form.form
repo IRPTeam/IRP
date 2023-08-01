@@ -2947,6 +2947,68 @@
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
+          <items xsi:type="form:FormGroup">
+            <name>LinkedDocuments</name>
+            <id>743</id>
+            <items xsi:type="form:Button">
+              <name>ItemListLinkedDocuments_GoodsReceipts</name>
+              <id>745</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>ItemListLinkedDocuments_GoodsReceiptsExtendedTooltip</name>
+                <id>746</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.LinkedDocuments_GoodsReceipts</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <title>
+              <key>en</key>
+              <value>Linked documents</value>
+            </title>
+            <extendedTooltip>
+              <name>LinkedDocumentsExtendedTooltip</name>
+              <id>744</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>Popup</type>
+            <extInfo xsi:type="form:PopupGroupExtInfo">
+              <representation>Auto</representation>
+            </extInfo>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -7880,6 +7942,23 @@
       </handler>
     </action>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>LinkedDocuments_GoodsReceipts</name>
+    <title>
+      <key>en</key>
+      <value>Goods receipts</value>
+    </title>
+    <id>13</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>LinkedDocuments_GoodsReceipts</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

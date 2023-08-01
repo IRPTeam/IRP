@@ -421,9 +421,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
@@ -448,10 +448,10 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And I click "Post" button	
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
-			| '3'   | '$$Rov3RetailReturnReceipt1$$'   | ''                                                     | '$$Rov3RetailReturnReceipt1$$'           | ''            | '8,000'      | '                                    '   | ''               | '$$Rov3RetailReturnReceipt1$$'            |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| '3' | '$$Rov3RetailReturnReceipt1$$' | ''                                                   | '$$Rov3RetailReturnReceipt1$$'         | ''          | '8,000'    | '                                    ' | ''             | '$$Rov3RetailReturnReceipt1$$'         |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                            | 'Quantity'    |
@@ -464,9 +464,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And in the table "ItemList" I click "Delete" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
@@ -479,9 +479,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And I finish line editing in "ItemList" table			
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '1,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '1,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		And I click "Cancel posting" button	
 		And I close all client application windows
 
@@ -557,9 +557,9 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 	* Check RowIDInfo
 		And I click "Show row key" button		
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''            | '1,000'      | 'RRR'             |
-			| '2'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''            | '2,000'      | 'RRR'             |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '1,000'    | 'RRR&RGR'      |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '2,000'    | 'RRR&RGR'      |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
 		And I close all client application windows					

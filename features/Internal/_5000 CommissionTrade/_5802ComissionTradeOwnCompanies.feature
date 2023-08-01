@@ -2346,6 +2346,7 @@ Scenario: _05835 check recognation of own and commission goods (retail SO, RSC, 
 			| '$$NumberRetailShipmentConfirmation01$$' |
 		And I click "Retail goods receipt" button
 		And I click "Ok" button
+		And I click "Show row key" button	
 		And "ItemList" table became equal
 			| '#' | 'Consignor'   | 'Item'                         | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Store'    | 'Sales order'      |
 			| '1' | 'Consignor 2' | 'Product 8 with SLN (new row)' | 'Consignor stocks' | 'UNIQ'     | '090998897898979998' | 'pcs'  | ''                  | '1,000'    | 'Store 01' | '$$SalesOrder01$$' |

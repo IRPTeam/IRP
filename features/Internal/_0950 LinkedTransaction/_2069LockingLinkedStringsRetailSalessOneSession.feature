@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 
 @tree
 @Positive
@@ -21,6 +21,7 @@ Scenario: _2069001 preparation (locking linked strings)
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
+		When Create catalog PaymentTypes objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects

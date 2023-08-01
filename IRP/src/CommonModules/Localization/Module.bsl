@@ -538,7 +538,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
 	Strings.Insert("Error_127", NStr("en = 'Quantity must be more than 0'", Lang));
 	Strings.Insert("Error_128", NStr("en = 'Wrong data in basis document'", Lang));
-	Strings.Insert("Error_FillTotalAmountOrCommision", NStr("en = 'Fill total amount or commision. Row: [%1]'", Lang));
+	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));

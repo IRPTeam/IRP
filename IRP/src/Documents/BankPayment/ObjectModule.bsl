@@ -34,9 +34,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	DocumentsServer.CheckMatchingToBasisDocument(ThisObject, "Account", "Sender", Cancel);
 	
 	For Each Row In PaymentList Do
-		If Row.Commission = 0 And Row.TotalAmount = 0 Then
+		If Row.TotalAmount = 0 Then
 			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_FillTotalAmountOrCommision, Row.LineNumber));
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_FillTotalAmount, Row.LineNumber));
 		EndIf;
 	EndDo;
 	

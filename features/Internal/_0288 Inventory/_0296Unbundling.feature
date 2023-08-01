@@ -320,7 +320,7 @@ Scenario: _300520 check connection to Unbundling report "Related documents"
 		| $$NumberUnbundling0029601$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 Scenario: _999999 close TestClient session

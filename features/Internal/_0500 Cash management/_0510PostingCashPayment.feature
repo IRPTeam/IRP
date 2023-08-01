@@ -625,5 +625,5 @@ Scenario: _300512 check connection to CashPayment report "Related documents"
 		| $$NumberCashPayment0510011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

@@ -801,7 +801,7 @@ Scenario: _300515 check connection to BankReceipt report "Related documents"
 		| $$NumberBankReceipt0520011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 

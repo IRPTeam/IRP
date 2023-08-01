@@ -1051,8 +1051,8 @@ Scenario: _2060006 check link/unlink form in the RRR
 	* Check RowIDInfo
 		And "RowIDInfo" table became equal
 			| '#' | 'Key' | 'Basis'                                              | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
-			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR'          | '*'       |
-			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR'          | '*'       |
+			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR&RGR'      | '*'       |
+			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR&RGR'      | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Unlink line
 		And I click "Link unlink basis documents" button		
@@ -1086,8 +1086,8 @@ Scenario: _2060006 check link/unlink form in the RRR
 		And I click "Save" button
 		And "RowIDInfo" table became equal
 			| '#' | 'Key' | 'Basis'                                              | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
-			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR'          | '*'       |
-			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR'          | '*'       |
+			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR&RGR'      | '*'       |
+			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR&RGR'      | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Retail sales receipt'                               | 'Item'  | 'Item key' | 'Quantity' | 'Price'    |

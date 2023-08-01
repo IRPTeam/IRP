@@ -1796,6 +1796,85 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="f7f943f6-1b80-4954-8202-5085c8f047b2">
+    <producedTypes>
+      <objectType typeId="00ac2314-e204-4106-86ff-22946a7191fa" valueTypeId="3d122ad7-28b3-44f0-8b67-72d2f23697d9"/>
+      <rowType typeId="05666de9-97df-442b-9203-697fcbdbf17d" valueTypeId="833f7aa0-c227-424e-96cc-15de9fe5a620"/>
+    </producedTypes>
+    <name>GoodsReceipts</name>
+    <synonym>
+      <key>en</key>
+      <value>Goods receipts</value>
+    </synonym>
+    <attributes uuid="5405d5c2-5bd9-4648-8d9f-3e40aab5e1bc">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="17ab7206-573e-4e56-9c3b-8345f6041fd2">
+      <name>GoodsReceipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Goods receipt</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.RetailGoodsReceipt</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a500f944-20a0-4063-916c-ff2c8cea5b89">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="bdfba43a-dd25-4798-91bc-1f858a2ec2b5">
+      <name>QuantityInGoodsReceipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in goods receipt</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="97106019-b811-4781-9888-931aae2ae334">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
     <name>Genarate</name>
     <synonym>
@@ -1805,6 +1884,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.RetailGoodsReceipt</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

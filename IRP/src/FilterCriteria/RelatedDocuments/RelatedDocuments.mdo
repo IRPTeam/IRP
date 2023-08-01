@@ -116,6 +116,8 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ProductionPlanning</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ProductionPlanning</content>
   <content>Document.MoneyTransfer.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
+  <content>Document.RetailReturnReceipt.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

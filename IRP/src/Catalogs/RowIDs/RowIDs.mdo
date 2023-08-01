@@ -698,6 +698,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ce3a3349-c87a-4c8d-b47f-e861c440b6c9">
+    <name>TransactionTypeRGR</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type GR Retail</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RetailGoodsReceiptTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
     <name>ItemForm</name>
     <synonym>

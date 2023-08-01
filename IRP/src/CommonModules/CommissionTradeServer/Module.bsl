@@ -1,6 +1,6 @@
 
 Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode = False) Export
-	//#2062
+	
 	tmpTable_ItemList         = New Array();
 	tmpTable_SerialLotNumber  = New Array();
 	tmpTable_SourceOfOrigins  = New Array();
@@ -61,8 +61,6 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpItemList.Columns.Add("LineNumber"      , Metadata.DefinedTypes.typeQuantity.Type);
 	
 	LineNumber = 1;
-	//#2062
-	//For Each Row In Table_ItemList Do
 	For Each Row In tmpTable_ItemList Do
 		NewRow = tmpItemList.Add();
 		FillPropertyValues(NewRow, Row);
@@ -75,8 +73,6 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpSerialLotNumbers.Columns.Add("SerialLotNumber" , New TypeDescription("CatalogRef.SerialLotNumbers"));
 	tmpSerialLotNumbers.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
 	
-	//#2062
-	//For Each Row In Table_SerialLotNumber Do
 	For Each Row In tmpTable_SerialLotNumber Do
 		FillPropertyValues(tmpSerialLotNumbers.Add(), Row);
 	EndDo;
@@ -88,8 +84,6 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpSourceOfOrigins.Columns.Add("SourceOfOrigin"  , New TypeDescription("CatalogRef.SourceOfOrigins"));
 	tmpSourceOfOrigins.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
 	
-	//#2062
-	//For Each Row In Table_SourceOfOrigins Do
 	For Each Row In tmpTable_SourceOfOrigins Do
 		NewRow = tmpSourceOfOrigins.Add();
 		FillPropertyValues(NewRow, Row);
@@ -121,7 +115,6 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 		Table_ConsignorBatches.Add(NewRow);
 	EndDo;
 	
-	//#2062
 	For Each Row In tmpTable_ConsignorBatches Do
 		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
 		FillPropertyValues(NewRow, Row);

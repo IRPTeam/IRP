@@ -2065,3 +2065,20 @@ Scenario: settings for Company (commission trade)
 		
 		
 
+Scenario: set False value to the constant Use source of origin	
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               |
+			| 'Use source of origin'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+	
+Scenario: set True value to the constant Use source of origin	
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               |
+			| 'Use source of origin'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window

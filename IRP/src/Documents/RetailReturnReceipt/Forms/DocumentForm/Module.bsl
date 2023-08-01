@@ -582,6 +582,15 @@ EndProcedure
 
 #EndRegion
 
+#Region LINKED_DOCUMENTS
+
+&AtClient
+Procedure LinkedDocuments_GoodsReceipts(Command)
+	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "GoodsReceipts", "GoodsReceipt", "QuantityInGoodsReceipt");
+EndProcedure
+
+#EndRegion
+
 #Region SERVICE
 
 &AtClient

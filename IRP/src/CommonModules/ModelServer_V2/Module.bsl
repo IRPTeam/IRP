@@ -294,7 +294,6 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	
 	Map.Insert(Enums.SalesTransactionTypes.Sales                , "Customer");
 	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
-	//Map.Insert(Enums.SalesTransactionTypes.RetailSales          , "RetailCustomer");
 	Map.Insert(Enums.SalesTransactionTypes.RetailSales          , "Customer");
 	
 	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , "Customer");

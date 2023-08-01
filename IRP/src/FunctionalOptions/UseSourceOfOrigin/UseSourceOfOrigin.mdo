@@ -31,8 +31,6 @@
   <content>InformationRegister.T8010S_ConsignorBatches.Dimension.SourceOfOrigin</content>
   <content>Catalog.SourceOfOrigins.Attribute.SourceOfOriginOwner</content>
   <content>Catalog.SourceOfOrigins</content>
-  <content>AccumulationRegister.R6020B_BatchBalance.Dimension.InventoryOrigin</content>
   <content>AccumulationRegister.R9010B_SourceOfOriginStock</content>
-  <content>Enum.InventoryOriginTypes</content>
   <content>Document.SalesReportToConsignor</content>
 </mdclass:FunctionalOption>

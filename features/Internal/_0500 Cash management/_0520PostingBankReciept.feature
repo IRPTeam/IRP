@@ -842,7 +842,7 @@ Scenario: _300516 try post Bank receipt with empty amount
 	* Try post and check message
 		And I click "Post" button
 		Then there are lines in TestClient message log
-			|'Fill total amount or commision. Row: [1]'|
+			|'Fill total amount. Row: [1]'|
 		And I close all client application windows
 		
 				

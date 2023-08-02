@@ -427,11 +427,6 @@ EndProcedure
 #Region FormCommandsEventHandlers
 
 &AtClient
-Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
 	If ValueIsFilled(Object.Agreement) Then
@@ -657,8 +652,54 @@ Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 		Object.RetailCustomer = Value;
 		DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject,
 			ThisObject.Items.RetailCustomer);
+		
+	EndIf;
+	SetSelectBasisDocumentColor();
+EndProcedure
+
+&AtClient
+Procedure SetSelectBasisDocumentColor()
+	If Object.RetailCustomer.IsEmpty() Then
+		Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.WhenActive;
+		Items.SelectBasisDocument.BackColor = Items.SearchByBarcode.BackColor;
+	Else
+		IsRetailCustomerHasOrders = IsRetailCustomerHasOrders();
+		If IsRetailCustomerHasOrders Then
+			Items.SelectBasisDocument.BackColor = WebColors.GreenYellow;
+			Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.Always;
+		Else
+			Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.WhenActive;
+			Items.SelectBasisDocument.BackColor = Items.SearchByBarcode.BackColor;
+		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServer
+Function IsRetailCustomerHasOrders()
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT ALLOWED DISTINCT
+		|	R2012B_SalesOrdersInvoiceClosingBalance.Order
+		|FROM
+		|	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order.RetailCustomer = &RetailCustomer) AS
+		|		R2012B_SalesOrdersInvoiceClosingBalance
+		|WHERE
+		|	R2012B_SalesOrdersInvoiceClosingBalance.QuantityBalance > 0
+		|
+		|UNION ALL
+		|
+		|SELECT DISTINCT
+		|	R4012B_StockReservationBalance.Order
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order.RetailCustomer = &RetailCustomer) AS
+		|		R4012B_StockReservationBalance";
+	
+	Query.SetParameter("RetailCustomer", Object.RetailCustomer);
+	
+	Return Not Query.Execute().IsEmpty();
+
+EndFunction
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
@@ -974,7 +1015,7 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	
 	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	For Each CreatedDocument In CreatedDocuments Do
-		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+		Await PrintFiscalReceipt(CreatedDocument);
 	EndDo;
 	
 	PaymentForm.Close();
@@ -1139,16 +1180,6 @@ Async Function PrintFiscalReceipt(DocumentRef)
 	Return EquipmentPrintFiscalReceiptResult.Success;
 EndFunction
 
-&AtClient
-Async Function PrintTextDocument(DocumentRef)
-	If Object.ConsolidatedRetailSales.IsEmpty() Then
-		Return True;
-	EndIf;
-	
-	EquipmentPrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, DocumentRef);
-	Return EquipmentPrintResult.Success;
-EndFunction
-
 &AtServer
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
@@ -1206,7 +1237,6 @@ Function WriteTransaction(Result)
 				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
 			EndIf;
 		EndDo;
-//		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum, RRNCode, PaymentInfo", "Amount,Commission");
 		
 		If ThisObject.RetailBasis.IsEmpty() Then
 			CreateReturnWithoutBase(PaymentsTable);
@@ -1245,17 +1275,6 @@ Function WriteTransaction(Result)
 	
 	Return CashbackAmount;
 EndFunction
-
-&AtClient
-Procedure ShowPictures()
-	Items.ItemListShowPictures.Check = Not Items.ItemPicture.Visible;
-	Items.ItemPicture.Visible = Items.ItemListShowPictures.Check;
-EndProcedure
-
-&AtClient
-Procedure ShowItems()
-	SetShowItems();
-EndProcedure
 
 &AtClient
 Procedure SetShowItems()
@@ -1329,6 +1348,7 @@ Procedure ClearRetailCustomer(Command)
 
 	ClearRetailCustomerAtServer();
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Items.RetailCustomer);
+	SetSelectBasisDocumentColor();
 EndProcedure
 
 &AtServer
@@ -1431,7 +1451,7 @@ EndProcedure
 Async Procedure PrintCashIn(CashIn)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashIn, "ConsolidatedRetailSales");
 	If ValueIsFilled(ConsolidatedRetailSales) Then
-		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
+		Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
 				, CashIn
 				, GetSumm(CashIn));
 	EndIf;
@@ -1503,7 +1523,7 @@ EndProcedure
 Async Procedure PrintCashOut(CashOut)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashOut, "ConsolidatedRetailSales");
 	If Not ConsolidatedRetailSales.IsEmpty() Then
-		EquipmentResult = Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
+		Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
 				, CashOut
 				, CommonFunctionsServer.GetRefAttribute(CashOut, "SendAmount"));
 	EndIf;
@@ -1994,7 +2014,8 @@ Procedure SelectBasisDocumentClose(Result, AdditionalData) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
-	
+	FillSalesPersonInItemList();
+	EnabledPaymentButton();
 EndProcedure
 
 &AtServer

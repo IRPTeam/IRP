@@ -156,23 +156,6 @@ Function CheckCodeString(StrCode)
 EndFunction
 
 &AtClient
-Async Procedure CheckKM(Command)
-	For Each SelectedID In Items.CurrentCodes.SelectedRows Do // Number
-		Row = CurrentCodes.FindByID(SelectedID);
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettingsInfo(isReturn);
-		RequestKMSettings.Quantity = 1;
-		RequestKMSettings.MarkingCode = Row.StringCode;
-		
-		If isReturn Then
-			Row.CodeIsApproved = True;
-		Else			
-			Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
-			Row.CodeIsApproved = Result.Approved;
-		EndIf;
-	EndDo;
-EndProcedure
-
-&AtClient
 Procedure GetCodeStringFromSerialLotNumber(Command)
 	Items.GetCodeStringFromSerialLotNumber.Visible = True;
 	GetCodeStringFromSerialLotNumber = True;

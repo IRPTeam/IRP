@@ -601,5 +601,5 @@ Scenario: _300507 check connection to GoodsReceipt report "Related documents"
 		| '$$NumberGoodsReceipt028901$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

@@ -827,7 +827,7 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 		| '$$NumberSalesReturn028509$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 Scenario: _300512 check Use GR filling from store when create SR based on SI

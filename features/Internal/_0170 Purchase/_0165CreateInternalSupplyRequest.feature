@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Purchase
@@ -226,7 +226,7 @@ Scenario: _300501 check connection to Internal Supply Request report "Related do
 		| $$NumberInternalSupplyRequest016501$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 

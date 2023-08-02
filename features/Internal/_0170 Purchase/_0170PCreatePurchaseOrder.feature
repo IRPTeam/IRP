@@ -890,5 +890,5 @@ Scenario: _300502 check connection to Purchase order report "Related documents"
 		| $$NumberPurchaseOrder017001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

@@ -14,5 +14,6 @@ Function GetFillingData(ProductionPlanningRef)
 	FillingData.Insert("PlanningPeriod"    , ProductionPlanningRef.PlanningPeriod);
 	FillingData.Insert("Company"           , ProductionPlanningRef.Company);
 	FillingData.Insert("BusinessUnit"      , ProductionPlanningRef.BusinessUnit);
+	FillingData.Insert("Branch"      	   , ProductionPlanningRef.Branch);
 	Return FillingData;
 EndFunction

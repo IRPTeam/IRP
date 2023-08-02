@@ -28,4 +28,9 @@
       <commands>Catalog.Items.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
+  <subsystemsOrder>
+    <subsystems>Subsystem.PurchaseAP.Subsystem.Purchase</subsystems>
+    <subsystems>Subsystem.PurchaseAP.Subsystem.PurchaseReturn</subsystems>
+    <subsystems>Subsystem.PurchaseAP.Subsystem.Pricing</subsystems>
+  </subsystemsOrder>
 </cmi:CommandInterface>

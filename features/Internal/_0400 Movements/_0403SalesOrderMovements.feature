@@ -520,7 +520,7 @@ Scenario: _0401575 check registration report
 	* Check registration report
 		And I click "Registrations report" button
 		* Show item and item key
-			Then "Document registrations report" window is opened
+			Then "Sales order 314 dated 09.01.2023 12:49:08: Document registrations report" window is opened
 			And I expand "Filters" group			
 			And I set checkbox "Show item in item key"
 			And I click "Generate report" button

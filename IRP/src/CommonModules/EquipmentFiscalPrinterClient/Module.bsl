@@ -344,38 +344,6 @@ Async Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-		
-//	XMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
-//	InputParameters = ShiftGetXMLOperation(XMLOperationSettings);
-	
-//#Region GetCurrentStatus	
-//		
-//	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
-//	CurrentStatusSettings.In.InputParameters = InputParameters;
-//	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-//		ShiftData = ShiftResultStructure();
-//		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
-//		If ShiftData.ShiftState = 1 Then
-//			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
-//			Result.Status = "FiscalReturnedError";
-//			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-//			Return Result;
-//		ElsIf ShiftData.ShiftState = 2 Then
-//			
-//		ElsIf ShiftData.ShiftState = 3 Then
-//			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
-//			Result.Status = "FiscalReturnedError";
-//			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-//			Return Result;
-//		EndIf;
-//	Else
-//		Result.Status = "FiscalReturnedError";
-//		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
-//		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-//		Return Result;
-//	EndIf;
-//
-//#EndRegion
 	
 	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
 	PrintCheckCopySettings.In.CheckNumber = StatusData.CheckNumber;

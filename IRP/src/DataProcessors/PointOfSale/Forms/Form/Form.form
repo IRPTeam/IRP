@@ -3816,6 +3816,78 @@
                 <placementArea>UserCmds</placementArea>
                 <representationInContextMenu>Auto</representationInContextMenu>
               </items>
+              <items xsi:type="form:Decoration">
+                <name>Decoration1</name>
+                <id>1322</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>Decoration1ExtendedTooltip</name>
+                  <id>1324</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>Decoration1ContextMenu</name>
+                  <id>1323</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </items>
+              <items xsi:type="form:Button">
+                <name>SelectBasisDocument</name>
+                <id>1320</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>SelectBasisDocumentExtendedTooltip</name>
+                  <id>1321</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <type>UsualButton</type>
+                <commandName>Form.Command.SelectBasisDocument</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <horizontalStretch>true</horizontalStretch>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
               <items xsi:type="form:FormField">
                 <name>Description</name>
                 <id>1043</id>
@@ -7334,30 +7406,6 @@ End</presentationExpression>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>ShowPictures</name>
-    <title>
-      <key>en</key>
-      <value>Show pictures</value>
-    </title>
-    <id>6</id>
-    <toolTip>
-      <key>en</key>
-      <value>Show pictures</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.EmptyPicture</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>ShowPictures</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
     <name>ShowItems</name>
     <title>
       <key>en</key>
@@ -7378,26 +7426,6 @@ items</value>
       </handler>
     </action>
     <representation>Text</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>OpenPickupItems</name>
-    <title>
-      <key>en</key>
-      <value>Pickup</value>
-    </title>
-    <id>9</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.ItemKeyPicture</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>OpenPickupItems</name>
-      </handler>
-    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -7848,26 +7876,6 @@ person</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>OpenPickupItems1</name>
-    <title>
-      <key>en</key>
-      <value>Pickup</value>
-    </title>
-    <id>34</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.ItemKeyPicture</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>OpenPickupItems</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
     <name>UpdateOffersPreview</name>
     <title>
       <key>en</key>
@@ -7886,6 +7894,26 @@ person</value>
       </handler>
     </action>
     <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SelectBasisDocument</name>
+    <title>
+      <key>en</key>
+      <value>Select basis document</value>
+    </title>
+    <id>36</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Document</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SelectBasisDocument</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

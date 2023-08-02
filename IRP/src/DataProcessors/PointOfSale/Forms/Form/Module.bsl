@@ -1968,3 +1968,57 @@ Procedure CheckByRetailBasisAtServer()
 EndProcedure
 
 #EndRegion
+
+#Region BasisDocument
+
+&AtClient
+Procedure SelectBasisDocument(Command)
+	OpenFormNotifyDescription = New NotifyDescription("SelectBasisDocumentClose", ThisObject);
+	FormParameters = New Structure();
+	FormParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+// Select basis document close.
+// 
+// Parameters:
+//  Result - DocumentRef.SalesOrder - Result
+//  AdditionalData - Structure - Additional data
+&AtClient
+Procedure SelectBasisDocumentClose(Result, AdditionalData) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	FillOnSelectBasisDocument(Result);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
+	ThisObject.Object.ControlCodeStrings.Clear();
+	ControlCodeStringsClient.UpdateState(ThisObject.Object);
+	
+EndProcedure
+
+&AtServer
+Procedure FillOnSelectBasisDocument(BasisDocRef)
+	
+	NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	FillParameters = New Structure("Basises, Ref", New Array, NewDocRef);
+	FillParameters.Basises.Add(BasisDocRef);	
+	
+	BasisesTable = RowIDInfoPrivileged.GetBasises(NewDocRef, FillParameters);
+
+	If BasisesTable.Count() = 0 Then
+		Return;
+	EndIf;
+
+	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, BasisDocRef);
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(NewDocRef.Metadata(), ExtractedData);
+	
+	NewObj = Documents.RetailSalesReceipt.CreateDocument();
+	NewObj.Fill(FillingValues[0]);
+	ValueToFormAttribute(NewObj, "Object");
+	Taxes_CreateFormControls();
+	
+EndProcedure
+
+#EndRegion
+

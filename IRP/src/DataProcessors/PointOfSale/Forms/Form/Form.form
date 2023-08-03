@@ -589,7 +589,6 @@
                     </dataPath>
                     <titleLocation>None</titleLocation>
                     <excludedCommands>Change</excludedCommands>
-                    <excludedCommands>Delete</excludedCommands>
                     <excludedCommands>SortListDesc</excludedCommands>
                     <excludedCommands>Add</excludedCommands>
                     <excludedCommands>MoveDown</excludedCommands>

@@ -206,14 +206,14 @@ Scenario: _040162 check Sales order closing movements by the Register  "R2011 Sh
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Document registrations records'                    | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Register  "R2011 Shipment of sales orders"'        | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''            |
-			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'    |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-24'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'     |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-10'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'      |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'     |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Register  "R2011 Shipment of sales orders"'      | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 		And I close all client application windows
 		
 Scenario: _040163 check Sales order closing movements by the Register  "R4011 Free stocks"

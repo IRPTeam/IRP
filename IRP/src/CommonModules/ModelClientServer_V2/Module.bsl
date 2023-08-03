@@ -342,6 +342,8 @@ Function GetChain()
 	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
 	Chain.Insert("ChangeLegalNameByRetailCustomer" , GetChainLink("ChangeLegalNameByRetailCustomerExecute"));
 	Chain.Insert("ChangeUsePartnerTransactionsByRetailCustomer" , GetChainLink("ChangeUsePartnerTransactionsByRetailCustomerExecute"));
+	Chain.Insert("ChangePartnerByRetailCustomerAndTransactionType"   , GetChainLink("ChangePartnerByRetailCustomerAndTransactionTypeExecute"));
+	Chain.Insert("ChangeLegalNameByRetailCustomerAndTransactionType" , GetChainLink("ChangeLegalNameByRetailCustomerAndTransactionTypeExecute"));
 
 	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
 	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
@@ -789,6 +791,22 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_LEGAL_NAME_BY_RETAIL_CUSTOMER_AND_TRANSACTION_TYPE
+
+Function ChangeLegalNameByRetailCustomerAndTransactionTypeOptions() Export
+	Return GetChainLinkOptions("RetailCustomer, TransactionType");
+EndFunction
+
+Function ChangeLegalNameByRetailCustomerAndTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+		Return RetailCustomerInfo.LegalName;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_PARTNER_BY_LEGAL_NAME
 
 Function ChangePartnerByLegalNameOptions() Export
@@ -820,6 +838,14 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	
+	//#2080
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
+		Return Undefined;
+	ElsIf Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		Return Options.Partner;
+	EndIf;
+	
 	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 	
 	If PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
@@ -844,9 +870,25 @@ Function ChangePartnerByRetailCustomerOptions() Export
 	Return GetChainLinkOptions("RetailCustomer");
 EndFunction
 
-Function ChangePartnerByRetailCustomerExecute(Options) Export
+Function ChangePartnerByRetailCustomerExecute(Options) Export	
 	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
 	Return RetailCustomerInfo.Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_RETAIL_CUSTOMER_AND_TRANSACTION_TYPE
+
+Function ChangePartnerByRetailCustomerAndTransactionTypeOptions() Export
+	Return GetChainLinkOptions("RetailCustomer, TransactionType");
+EndFunction
+
+Function ChangePartnerByRetailCustomerAndTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then	
+		RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+		Return RetailCustomerInfo.Partner;
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion

@@ -177,9 +177,17 @@
   </synonym>
   <type>
    <types>String</types>
+   <types>Number</types>
+   <types>Date</types>
+   <types>Boolean</types>
+   <numberQualifiers>
+    <precision>15</precision>
+    <scale>5</scale>
+   </numberQualifiers>
    <stringQualifiers>
-    <length>256</length>
+    <length>512</length>
    </stringQualifiers>
+   <dateQualifiers/>
   </type>
   <toolTip>
    <key>en</key>
@@ -195,9 +203,7 @@
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -450,7 +456,7 @@
      <precision>10</precision>
     </numberQualifiers>
     <stringQualifiers>
-     <length>150</length>
+     <length>512</length>
     </stringQualifiers>
     <dateQualifiers>
      <dateFractions>Date</dateFractions>

@@ -32,6 +32,14 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
 	DocumentsServer.CheckMatchingToBasisDocument(ThisObject, "Account", "Sender", Cancel);
+	
+	For Each Row In PaymentList Do
+		If Row.TotalAmount = 0 Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_FillTotalAmount, Row.LineNumber));
+		EndIf;
+	EndDo;
+	
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

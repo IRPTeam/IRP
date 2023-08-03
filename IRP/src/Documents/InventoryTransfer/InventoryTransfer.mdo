@@ -337,7 +337,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship to address</value>
+   <value>Teslimat adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -406,7 +406,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vehicle</value>
+   <value>Araç</value>
   </synonym>
   <type>
    <types>CatalogRef.Vehicles</types>

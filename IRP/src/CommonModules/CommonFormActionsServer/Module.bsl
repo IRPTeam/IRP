@@ -162,12 +162,24 @@ Procedure SetCustomSearchFilter(QueryBuilder, Parameters) Export
 	EndIf;
 EndProcedure
 
-Procedure SetStandardSearchFilter(QueryBuilder, Parameters) Export
+// Set standard search filter.
+// 
+// Parameters:
+//  QueryBuilder - QueryBuilder - Query builder
+//  Parameters - Structure - Parameters
+//  SourceMetadata - MetadataObjectCatalog - Source metadata
+Procedure SetStandardSearchFilter(QueryBuilder, Parameters, SourceMetadata) Export
 	If TypeOf(Parameters) = Type("Structure") Then
 		For Each Filter In Parameters.Filter Do
 			If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
 				Continue;
 			EndIf;
+			
+			// When current search into add attribute field
+			If Filter.Key = "Owner" And Not SourceMetadata.Owners.Contains(Filter.Value.Metadata()) Then
+				Continue;
+			EndIf;
+			
 			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
 			NewFilter.Use = True;
 			NewFilter.ComparisonType = ComparisonType.Equal;

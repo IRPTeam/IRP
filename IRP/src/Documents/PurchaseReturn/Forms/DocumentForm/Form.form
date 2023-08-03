@@ -909,7 +909,7 @@
    </extendedTooltip>
    <type>UsualGroup</type>
    <extInfo xsi:type="form:UsualGroupExtInfo">
-    <group>HorizontalIfPossible</group>
+    <group>AlwaysHorizontal</group>
     <showLeftMargin>true</showLeftMargin>
     <united>true</united>
     <throughAlign>Auto</throughAlign>
@@ -921,6 +921,7 @@
   <userVisible>
    <common>true</common>
   </userVisible>
+  <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>GroupTitleExtendedTooltip</name>
    <id>134</id>
@@ -6107,6 +6108,7 @@
     <edit>
      <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
    </columns>
   </additionalColumns>
  </attributes>

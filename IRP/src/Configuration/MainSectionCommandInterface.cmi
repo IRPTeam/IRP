@@ -74,6 +74,7 @@
       <group>ActionsPanelTools</group>
       <commands>DataProcessor.MobileInvent.StandardCommand.Open</commands>
       <commands>DataProcessor.StoreKeeperWorkspace.StandardCommand.Open</commands>
+      <commands>DataProcessor.ProductionWorkspace.StandardCommand.Open</commands>
     </placementFragments>
   </commandsPlacement>
   <commandsOrder>

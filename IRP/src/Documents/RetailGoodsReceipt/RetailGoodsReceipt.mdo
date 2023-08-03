@@ -79,6 +79,7 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
+ <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -173,6 +174,58 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="112fbfcc-ebc3-46b9-a8ce-dac1d0bee6f8">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Customer</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="cc39ba66-cc2f-4e62-ae7e-06018d9e4776">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -518,6 +571,28 @@
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="419e27bc-cf52-4106-950c-356b677778ef">
+   <name>RetailSalesReceipt</name>
+   <synonym>
+    <key>en</key>
+    <value>Retail sales receipt</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Розничные чеки - Продажа</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Perakende satış fişi</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.RetailSalesReceipt</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1301,6 +1376,7 @@
   <commandParameterType>
    <types>DocumentRef.RetailShipmentConfirmation</types>
    <types>DocumentRef.SalesOrder</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

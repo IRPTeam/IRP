@@ -50,4 +50,19 @@
    <value>Seç</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="a6a524c8-d43f-4ce8-a370-817a947e72ec">
+  <name>ReturnFromCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>Return from customer</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Возврат от покупателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış iadesi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

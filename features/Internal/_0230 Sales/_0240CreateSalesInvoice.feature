@@ -913,6 +913,6 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 		| '$$NumberSalesInvoice024008$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 

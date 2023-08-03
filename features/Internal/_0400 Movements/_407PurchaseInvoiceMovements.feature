@@ -545,12 +545,12 @@ Scenario: _0401068 check Purchase invoice movements by the Register  "R1011 Rece
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| 'Register  "R1011 Receipt of purchase orders"'     | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''            |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                          | 'Item key'    |
-			| ''                                                 | 'Expense'       | '12.02.2021 15:12:15'   | '10'          | 'Main Company'   | 'Front office'   | 'Purchase order 117 dated 12.02.2021 12:45:05'   | 'S/Yellow'    |
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"'   | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''         | ''                                     |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                        | 'Item key' | 'Row key'                              |
+			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 117 dated 12.02.2021 12:45:05' | 'S/Yellow' | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' |
 
 		And I close all client application windows
 

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FunctionalOptions
@@ -90,3 +90,22 @@ Scenario: _900105 check transaction types in the SO and SI (without FO Use commi
 		When I Check the steps for Exception
 			| 'And I click Select button of "Transaction type" field'    |
 		And I close all client application windows
+
+
+
+
+Scenario: _900199 check use source of origin
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"		
+		And I click "Create" button
+		And in the table "ItemList" I click "Add" button
+		And I activate "Source of origins" field in "ItemList" table
+	* Remove FO Use source of origin		
+		When set False value to the constant Use source of origin	
+	* Check
+		When in opened panel I select "Sales invoice (create)*"
+		When I Check the steps for Exception
+			| 'And I activate "Source of origins" field in "ItemList" table'    |
+	When set True value to the constant Use source of origin	
+	And I close all client application windows

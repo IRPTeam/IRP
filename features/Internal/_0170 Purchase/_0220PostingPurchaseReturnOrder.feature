@@ -555,7 +555,7 @@ Scenario: _300508 check connection to PurchaseReturnOrder report "Related docume
 		| $$NumberPurchaseReturnOrder022001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 

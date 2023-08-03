@@ -985,6 +985,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_128", NStr("en='Wrong data in basis document';
 		|ru='Не правильные данные в документе основания';
 		|tr='Wrong data in basis document'", Lang));
+	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
+		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
+		|tr='Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';

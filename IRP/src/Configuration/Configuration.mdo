@@ -593,6 +593,7 @@
  <commonAttributes>CommonAttribute.Width</commonAttributes>
  <commonAttributes>CommonAttribute.LocalFullDescription</commonAttributes>
  <commonAttributes>CommonAttribute.ForeignFullDescription</commonAttributes>
+ <commonAttributes>CommonAttribute.SourceNodeID</commonAttributes>
  <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
  <httpServices>HTTPService.TestConnection</httpServices>
@@ -665,6 +666,7 @@
  <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
+ <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
  <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -767,6 +769,7 @@
  <constants>Constant.UseUnitsAndDimensions</constants>
  <constants>Constant.UseWorkOrders</constants>
  <constants>Constant.DisableLinkedRowsIntegrity</constants>
+ <constants>Constant.UseSourceOfOrigin</constants>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
  <commonForms>CommonForm.ConstantsForm</commonForms>

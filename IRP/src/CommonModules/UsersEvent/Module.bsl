@@ -249,7 +249,7 @@ Function GetChangePasswordOnNextLogin(User = Undefined) Export
 	 
 EndFunction
 
-Procedure DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
+Function DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
 	
 	If User = Undefined Then
 		User = SessionParameters.CurrentUser;
@@ -261,8 +261,15 @@ Procedure DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
 	UserObject.ChangePasswordOnNextLogin = False;
 	UserObject.AdditionalProperties.Insert("Password", NewPassword);
 	UserObject.AdditionalProperties.Insert("isUpdated", True);
-	UserObject.Write();
+	Try
+		UserObject.Write();
+	Except
+		Error = ErrorInfo();
+		Log.Write("Change password", ErrorProcessing.DetailErrorDescription(Error), , , User);
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(Error));
+		Return False;
+	EndTry;
 	
 	SetPrivilegedMode(False);
-	
-EndProcedure
+	Return True;
+EndFunction

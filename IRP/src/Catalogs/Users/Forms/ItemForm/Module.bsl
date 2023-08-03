@@ -5,7 +5,9 @@
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-	CurrentObject.AdditionalProperties.Insert("Password", Password);
+	If Not IsBlankString(Password) Then
+		CurrentObject.AdditionalProperties.Insert("Password", Password);
+	EndIf;
 EndProcedure
 
 // Notification processing.
@@ -62,6 +64,8 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 		And Not Object.TimeZone = SessionTimeZone() Then
 		SetSessionTimeZone(Object.TimeZone);
 	EndIf;
+	
+	Password = "";
 EndProcedure
 
 #EndRegion

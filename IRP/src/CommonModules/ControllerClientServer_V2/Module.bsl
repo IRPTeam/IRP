@@ -1636,8 +1636,12 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeCourierByTransactionType");
 	
+	//#2080
 	Binding.Insert("RetailGoodsReceipt", 
-		"StepChangeCourierByTransactionType");
+		"StepChangeCourierByTransactionType,	
+		|StepChangePartnerByRetailCustomerAndTransactionType,
+		|StepChangeLegalNameByRetailCustomerAndTransactionType");
+	
 	
 	Binding.Insert("PurchaseInvoice", 
 		"StepChangePartnerByTransactionType,
@@ -2603,7 +2607,6 @@ Function BindDate(Parameters)
 	Binding.Insert("Production", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit");
 	
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -2763,7 +2766,6 @@ Function BindCompany(Parameters)
 		"StepChangeProductionPlanningByPlanningPeriod,
 		|StepChangeCurrentQuantityInProductions");
 	
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -2955,6 +2957,7 @@ Function BindPartner(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepChangeLegalNameByPartner");
 	Binding.Insert("GoodsReceipt"        , "StepChangeLegalNameByPartner");
+	Binding.Insert("RetailGoodsReceipt"  , "StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesOrder",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
@@ -3041,6 +3044,20 @@ Procedure StepChangePartnerByTransactionType(Parameters, Chain) Export
 	Options.Partner         = GetPartner(Parameters);
 	Options.StepName = "StepChangePartnerByTransactionType";
 	Chain.ChangePartnerByTransactionType.Options.Add(Options);
+EndProcedure
+
+// Partner.ChangePartnerByRetailCustomerAndTransactionType.Step
+Procedure StepChangePartnerByRetailCustomerAndTransactionType(Parameters, Chain) Export
+	Chain.ChangePartnerByRetailCustomerAndTransactionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerByRetailCustomerAndTransactionType.Setter = "SetPartner";
+	Options = ModelClientServer_V2.ChangePartnerByRetailCustomerAndTransactionTypeOptions();
+	Options.RetailCustomer  = GetRetailCustomer(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.StepName = "StepChangePartnerByRetailCustomerAndTransactionType";
+	Chain.ChangePartnerByRetailCustomerAndTransactionType.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -3206,6 +3223,20 @@ Procedure StepChangeLegalNameByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangeLegalNameByRetailCustomer";
 	Chain.ChangeLegalNameByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+// LegalName.ChangeLegalNameByRetailCustomer.Step
+Procedure StepChangeLegalNameByRetailCustomerAndTransactionType(Parameters, Chain) Export
+	Chain.ChangeLegalNameByRetailCustomerAndTransactionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByRetailCustomerAndTransactionType.Setter = "SetLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByRetailCustomerAndTransactionTypeOptions();
+	Options.RetailCustomer  = GetRetailCustomer(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.StepName = "StepChangeLegalNameByRetailCustomerAndTransactionType";
+	Chain.ChangeLegalNameByRetailCustomerAndTransactionType.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -3541,6 +3572,18 @@ Function BindRetailCustomer(Parameters)
 		|StepChangeAgreementByRetailCustomer,
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
+	
+	//#2080
+	Binding.Insert("RetailReturnReceipt",
+		"StepChangePartnerByRetailCustomer,
+		|StepChangeAgreementByRetailCustomer,
+		|StepChangeLegalNameByRetailCustomer,
+		|StepChangeUsePartnerTransactionsByRetailCustomer");
+		
+	//#2080
+	Binding.Insert("RetailGoodsReceipt",
+		"StepChangePartnerByRetailCustomerAndTransactionType,
+		|StepChangeLegalNameByRetailCustomerAndTransactionType");
 		
 	Binding.Insert("SalesOrder",
 		"StepChangePartnerByRetailCustomer,
@@ -9429,7 +9472,6 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
-		//#2062
 		|StepConsignorBatchesFillBatches");
 		
 	Binding.Insert("RetailGoodsReceipt",
@@ -9776,6 +9818,8 @@ Function BindItemListSalesDocument(Parameters)
 	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
 	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
 	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
+	//#2080
+	DataPath.Insert("RetailGoodsReceipt"     , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();
 	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");
@@ -10070,7 +10114,6 @@ Function BindItemListStore(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeStoreInHeaderByStoresInList,
-		//#2062
 		|StepConsignorBatchesFillBatches");
 		
 	Binding.Insert("RetailGoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
@@ -10727,8 +10770,7 @@ Function BindItemListConsignor(Parameters)
 	
 	Binding.Insert("InventoryTransfer",
 		"StepConsignorBatchesFillBatches_StoreSender");
-	
-	//#2062	
+
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -10777,7 +10819,6 @@ Function BindItemListInventoryOrigin(Parameters)
 	Binding.Insert("InventoryTransfer",
 		"StepConsignorBatchesFillBatches_StoreSender");
 	
-	//#2062	
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	
@@ -10907,7 +10948,6 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	Binding.Insert("SalesReturn",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
 		
-	//#2062
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepConsignorBatchesFillBatches");
 	

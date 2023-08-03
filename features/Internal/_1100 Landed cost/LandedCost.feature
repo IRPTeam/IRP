@@ -2291,7 +2291,6 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 			| 'Number'    |
 			| '1'         |
 		And I click "Registrations report" button
-		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -2318,7 +2317,6 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 			| 'Number'    |
 			| '1'         |
 		And I click "Registrations report" button
-		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button

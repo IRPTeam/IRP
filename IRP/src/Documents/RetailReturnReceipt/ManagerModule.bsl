@@ -571,6 +571,19 @@ Function ItemList()
 		   |
 		   |////////////////////////////////////////////////////////////////////////////////
 		   |SELECT
+		   |	GoodsReceipts.Key,
+		   |	GoodsReceipts.GoodsReceipt
+		   |INTO GoodsReceipts
+		   |FROM
+		   |	Document.RetailReturnReceipt.GoodsReceipts AS GoodsReceipts
+		   |WHERE
+		   |	GoodsReceipts.Ref = &Ref
+		   |GROUP BY
+		   |	GoodsReceipts.Key,
+		   |	GoodsReceipts.GoodsReceipt
+		   |;
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
 		   |	ItemList.Ref.Company AS Company,
 		   |	ItemList.Store AS Store,
 		   |	ItemList.ItemKey AS ItemKey,
@@ -593,7 +606,6 @@ Function ItemList()
 		   |		ELSE ItemList.RetailSalesReceipt
 		   |	END AS RetailSalesReceipt,
 		   |	ItemList.Key AS RowKey,
-		   //	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		   |	ItemList.IsService AS IsService,
 		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	ItemList.RevenueType AS RevenueType,
@@ -615,10 +627,14 @@ Function ItemList()
 		   |	ItemList.Ref.Branch AS Branch,
 		   |	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		   |	ItemList.SalesPerson,
-		   |	ItemList.Key
+		   |	ItemList.Key,
+		   |	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
+		   |	GoodsReceipts.GoodsReceipt
 		   |INTO ItemList
 		   |FROM
 		   |	Document.RetailReturnReceipt.ItemList AS ItemList
+		   |		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		   |		ON ItemList.Key = GoodsReceipts.Key
 		   |WHERE
 		   |	ItemList.Ref = &Ref";
 EndFunction
@@ -976,7 +992,8 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	NOT ItemList.IsService";
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.GoodsReceiptExists";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -1002,6 +1019,8 @@ Function R4010B_ActualStocks()
 		   |		ON ItemList.Key = SerialLotNumbers.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
+		   //#2080
+		   |	AND NOT ItemList.GoodsReceiptExists
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,

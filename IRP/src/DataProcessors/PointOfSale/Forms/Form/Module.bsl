@@ -1888,6 +1888,7 @@ Procedure CreateReturnWithoutBase(PaymentData)
 		
 EndProcedure
 
+&AtServer
 Function GetItemListForReturn()
 	Result = New Array;
 	For Each ListItem In ThisObject.Object.ItemList Do

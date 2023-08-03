@@ -962,5 +962,5 @@ Scenario: _300503 check connection to Purchase invoice report "Related documents
 		| '$$NumberPurchaseInvoice018012$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

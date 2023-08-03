@@ -292,6 +292,13 @@
         <value>32</value>
       </code>
     </items>
+    <items id="96682eb8-f338-4b94-9953-e11f0c05068c">
+      <name>RRR_RGR</name>
+      <description>RRR&amp;RGR</description>
+      <code xsi:type="core:StringValue">
+        <value>33</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

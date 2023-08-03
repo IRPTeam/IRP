@@ -819,5 +819,5 @@ Scenario: _300506 check connection to Shipment Confirmation report "Related docu
 		| $$NumberShipmentConfirmation028801$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

@@ -1,7 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("Document") Then
-		ThisObject.Document = Parameters.Document;
+		ThisObject.Document = Parameters.Document;		
 		DocumentRegisterRecords = Parameters.Document.Metadata().RegisterRecords;
 		For Each RegisterRecord In DocumentRegisterRecords Do
 			Items.FilterRegister.ChoiceList.Add(RegisterRecord.FullName(), RegisterRecord.Synonym);
@@ -15,6 +15,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
+EndProcedure
+
+&AtClient
+Procedure DocumentOnChange(Item)
+	GenerateReportAtServer(ThisObject.ResultTable);
 EndProcedure
 
 &AtClient
@@ -92,7 +97,7 @@ EndFunction
 
 &AtServer
 Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleArea)
-
+	Title = String(DocumentRef);
 	MainTitleArea.Parameters.Document = String(DocumentRef);
 	Result.Put(MainTitleArea);
 

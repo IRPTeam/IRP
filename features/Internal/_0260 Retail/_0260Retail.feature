@@ -1321,7 +1321,30 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '4'   | '4 770,00'   | 'No'          | 'Card 02'        | ''                   | '4 770,00'       |
 			| '5'   | '2 790,00'   | 'Yes'         | 'Card 01'        | ''                   | ''               |
 			| '6'   | '550,00'     | 'Yes'         | 'Card 02'        | ''                   | '550,00'         |
-		And I close all client application windows		
+		And I delete "$$NumberConsolidatedRetailSales0260135$$" variable
+		And I save the value of "Number" field as "$$NumberConsolidatedRetailSales0260135$$"
+		And I close all client application windows	
+
+Scenario: _0260137 check connection to Consolidated retail sales report "Related documents"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	And I go to line in "List" table
+		| 'Number'                                   |
+		| '$$NumberConsolidatedRetailSales0260135$$' |
+	And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+	And Delay 1
+	And "DocumentsTree" table contains lines
+		| 'Presentation'           |
+		| 'Cash receipt*'          |
+		| 'Retail sales receipt*'  |
+		| 'Retail return receipt*' |
+		| 'Money transfer*'        |
+		| 'Bank receipt*'          |
+		| 'Cash payment*'          |
+		| 'Bank payment*'          |
+	And I close all client application windows
+	
+
 
 Scenario: _0260145 check block RSR form if Consolidated retail sales is closed
 	And I close all client application windows	

@@ -356,7 +356,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(T3010S_RowIDInfo());
-	//#2062
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	Return QueryArray;
 EndFunction
@@ -370,6 +369,7 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList.Branch AS Branch,
 		|	ItemList.SalesOrder AS Order,
 		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.RowKey AS RowKey,
 		|	ItemList.Quantity AS Quantity
 		|INTO R2011B_SalesOrdersShipment
 		|FROM

@@ -97,6 +97,10 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Document</segments>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>DocumentOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>DocumentExtendedTooltip</name>
         <id>17</id>

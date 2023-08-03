@@ -106,6 +106,18 @@
   <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.RetailSalesReceipt.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
   <content>Document.RetailGoodsReceipt.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
+  <content>Document.BankPayment.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.BankReceipt.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.CashPayment.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.CashReceipt.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.CashStatement.Attribute.BasisDocument</content>
+  <content>Document.CashStatement.TabularSection.CashTransactionList.Attribute.Document</content>
+  <content>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.Invoice</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ProductionPlanning</content>
+  <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ProductionPlanning</content>
+  <content>Document.MoneyTransfer.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
+  <content>Document.RetailReturnReceipt.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

@@ -574,5 +574,46 @@ Scenario: _300514 check connection to BankPayment report "Related documents"
 		| $$NumberBankPayment0530011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
+
+
+Scenario: _300516 try post Bank payment with empty amount
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
+			| Code    | Description      |
+			| TRY     | Turkish lira     |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description      |
+			| Main Company     |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description           |
+			| Bank account, TRY     |
+		And I select current line in "List" table
+	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	* Filling in partners in a tabular part
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| Description |
+			| Kalipso     |
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| Description     |
+			| Company Kalipso |
+		And I select current line in "List" table
+	* Try post and check message
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Fill total amount. Row: [1]'|
+		And I close all client application windows

@@ -189,14 +189,14 @@ Scenario: _040152 check Sales order movements by the Register  "R2011 Shipment o
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order 1 dated 27.01.2021 19:50:45'      | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Register  "R2011 Shipment of sales orders"'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'    |
-			| ''                                             | 'Receipt'       | '27.01.2021 19:50:45'   | '1'           | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'     |
-			| ''                                             | 'Receipt'       | '27.01.2021 19:50:45'   | '10'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'      |
-			| ''                                             | 'Receipt'       | '27.01.2021 19:50:45'   | '24'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'     |
+			| 'Sales order 1 dated 27.01.2021 19:50:45'    | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' | 'Row key'                              |
+			| ''                                           | 'Receipt'     | '27.01.2021 19:50:45' | '1'         | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                           | 'Receipt'     | '27.01.2021 19:50:45' | '10'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                           | 'Receipt'     | '27.01.2021 19:50:45' | '24'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
 
 		And I close all client application windows
 		
@@ -520,7 +520,7 @@ Scenario: _0401575 check registration report
 	* Check registration report
 		And I click "Registrations report" button
 		* Show item and item key
-			Then "Document registrations report" window is opened
+			Then "Sales order 314 dated 09.01.2023 12:49:08: Document registrations report" window is opened
 			And I expand "Filters" group			
 			And I set checkbox "Show item in item key"
 			And I click "Generate report" button

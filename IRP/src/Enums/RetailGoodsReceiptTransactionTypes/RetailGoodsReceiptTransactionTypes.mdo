@@ -26,4 +26,11 @@
       <value>Pickup</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="a6a524c8-d43f-4ce8-a370-817a947e72ec">
+    <name>ReturnFromCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Return from customer</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

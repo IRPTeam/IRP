@@ -429,7 +429,7 @@ Scenario: Create catalog MovementRules objects (test data base)
 		| 'e1cib/data/Catalog.MovementRules?refName=SRO'                        | 'False'         | '22'    | 'SRO'                             |
 		| 'e1cib/data/Catalog.MovementRules?refName=SRO_SR'                     | 'False'         | '23'    | 'SRO&SR'                          |
 		| 'e1cib/data/Catalog.MovementRules?refName=PRO_PR'                     | 'False'         | '24'    | 'PRO&PR'                          |
-		| 'e1cib/data/Catalog.MovementRules?refName=RRR'                        | 'False'         | '25'    | 'RRR'                             |
+		| 'e1cib/data/Catalog.MovementRules?refName=RRR_RGR'                        | 'False'         | '25'    | 'RRR'                             |
 		| 'e1cib/data/Catalog.MovementRules?refName=SI_SC'                      | 'False'         | '7'     | 'SI&SC'                           |
 		| 'e1cib/data/Catalog.MovementRules?refName=SI'                         | 'False'         | '8'     | 'SI'                              |
 		| 'e1cib/data/Catalog.MovementRules?refName=SC'                         | 'False'         | '9'     | 'SC'                              |
@@ -1525,7 +1525,7 @@ Scenario: Create document RetailReturnReceipt objects (test data base)
 
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                           | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'                                                                        | 'CurrentStep'                                   | 'NextStep'  | 'RowRef'                                                          | 'BasisKey'                               |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76cbacb2511e57d11ebeab0dfce2250'  | 'c45be945-0f6c-48f3-8f43-1d96a3fb7f72'  | 'df8785e6-457e-4b18-84bf-82587c7e934e'  | '1'         | 'e1cib/data/Document.RetailSalesReceipt?ref=b76cbacb2511e57d11ebeab0dfce224f'  | 'e1cib/data/Catalog.MovementRules?refName=RRR'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76cbacb2511e57d11ebeab0dfce224e'  | 'df8785e6-457e-4b18-84bf-82587c7e934e'   |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76cbacb2511e57d11ebeab0dfce2250'  | 'c45be945-0f6c-48f3-8f43-1d96a3fb7f72'  | 'df8785e6-457e-4b18-84bf-82587c7e934e'  | '1'         | 'e1cib/data/Document.RetailSalesReceipt?ref=b76cbacb2511e57d11ebeab0dfce224f'  | 'e1cib/data/Catalog.MovementRules?refName=RRR_RGR'  | ''          | 'e1cib/data/Catalog.RowIDs?ref=b76cbacb2511e57d11ebeab0dfce224e'  | 'df8785e6-457e-4b18-84bf-82587c7e934e'   |
 
 	And I refill object tabular section "SourceOfOrigins":
 		| 'Ref'                                                                           | 'Key'                                   | 'SerialLotNumber'  | 'SourceOfOrigin'  | 'Quantity'   |

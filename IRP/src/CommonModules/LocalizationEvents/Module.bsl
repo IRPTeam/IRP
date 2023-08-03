@@ -57,7 +57,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndIf;
 	
 	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
-	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters, Source.EmptyRef().Metadata());
 			
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 

@@ -36,10 +36,11 @@
     </orderFragments>
   </commandsOrder>
   <subsystemsOrder>
-    <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
-    <subsystems>Subsystem.SalesAR.Subsystem.WorkOrders</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.Sales</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SalesReturn</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SpecialOffers</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.WorkOrders</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.CommissionTrading</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

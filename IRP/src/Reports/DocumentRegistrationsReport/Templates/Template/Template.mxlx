@@ -8,6 +8,26 @@
 			<code>English</code>
 			<description>English</description>
 		</languageInfo>
+		<languageInfo>
+			<id>tr</id>
+			<code>Turkish</code>
+		</languageInfo>
+		<languageInfo>
+			<id>ru</id>
+			<code>Russian</code>
+		</languageInfo>
+		<languageInfo>
+			<id>fr</id>
+			<code>French</code>
+		</languageInfo>
+		<languageInfo>
+			<id>de</id>
+			<code>German</code>
+		</languageInfo>
+		<languageInfo>
+			<id>ha</id>
+			<code>HASH</code>
+		</languageInfo>
 	</languageSettings>
 	<columns>
 		<size>1</size>
@@ -37,7 +57,6 @@
 	</rowsItem>
 	<rowsItem>
 		<index>1</index>
-		<indexTo>2</indexTo>
 		<row>
 			<empty>true</empty>
 		</row>
@@ -108,8 +127,8 @@
 			<type>Rows</type>
 			<beginRow>3</beginRow>
 			<endRow>4</endRow>
-			<beginColumn>0</beginColumn>
-			<endColumn>0</endColumn>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -118,8 +137,8 @@
 			<type>Rows</type>
 			<beginRow>6</beginRow>
 			<endRow>6</endRow>
-			<beginColumn>0</beginColumn>
-			<endColumn>0</endColumn>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -128,8 +147,8 @@
 			<type>Rows</type>
 			<beginRow>0</beginRow>
 			<endRow>0</endRow>
-			<beginColumn>0</beginColumn>
-			<endColumn>0</endColumn>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
 	<font faceName="Arial" height="12" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>

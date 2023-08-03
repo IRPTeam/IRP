@@ -2107,24 +2107,4 @@ Procedure LockLinkedRows()
 	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 
-&AtServer
-Procedure UnlockLockLinkedRows()
-	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure FromUnlockLinkedRows(Command)
-	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
-	If Items.FormUnlockLinkedRows.Check Then
-		UnlockLockLinkedRows();
-	Else
-		LockLinkedRows();
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure LinkedDocuments_ShipmentConfirmations(Command)
-	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "ShipmentConfirmations", "ShipmentConfirmation", "QuantityInShipmentConfirmation");
-EndProcedure
-
 #EndRegion

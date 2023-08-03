@@ -4983,7 +4983,7 @@
       <valueType>
         <types>String</types>
         <stringQualifiers>
-          <length>50</length>
+          <length>150</length>
         </stringQualifiers>
       </valueType>
       <view>

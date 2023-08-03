@@ -838,7 +838,6 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	
-	//#2080
 	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery")
 		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
 		Return Undefined;

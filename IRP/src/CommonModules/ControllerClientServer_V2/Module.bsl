@@ -1635,8 +1635,7 @@ Function BindTransactionType(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeCourierByTransactionType");
-	
-	//#2080
+
 	Binding.Insert("RetailGoodsReceipt", 
 		"StepChangeCourierByTransactionType,	
 		|StepChangePartnerByRetailCustomerAndTransactionType,
@@ -3573,14 +3572,12 @@ Function BindRetailCustomer(Parameters)
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
 	
-	//#2080
 	Binding.Insert("RetailReturnReceipt",
 		"StepChangePartnerByRetailCustomer,
 		|StepChangeAgreementByRetailCustomer,
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
 		
-	//#2080
 	Binding.Insert("RetailGoodsReceipt",
 		"StepChangePartnerByRetailCustomerAndTransactionType,
 		|StepChangeLegalNameByRetailCustomerAndTransactionType");
@@ -9818,7 +9815,6 @@ Function BindItemListSalesDocument(Parameters)
 	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
 	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
 	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
-	//#2080
 	DataPath.Insert("RetailGoodsReceipt"     , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();

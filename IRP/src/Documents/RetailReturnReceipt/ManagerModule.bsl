@@ -1019,7 +1019,6 @@ Function R4010B_ActualStocks()
 		   |		ON ItemList.Key = SerialLotNumbers.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   //#2080
 		   |	AND NOT ItemList.GoodsReceiptExists
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),

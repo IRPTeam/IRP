@@ -284,7 +284,7 @@ Function T6050S_ManualBundleAmountValues()
 		   |	ItemList.Bundle,
 		   |	ItemList.Store,
 		   |	ItemList.Company,
-		   |	ItemList.AmountValue
+		   |	ItemList.InvoiceAmount
 		   |INTO T6050S_ManualBundleAmountValues
 		   |FROM
 		   |	ItemList AS ItemList

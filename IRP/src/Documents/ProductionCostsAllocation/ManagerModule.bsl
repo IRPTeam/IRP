@@ -219,7 +219,7 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.Store,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Document AS ProductionDocument,
-		   |	BatchKeysInfo.Amount AS NotDirectCosts
+		   |	BatchKeysInfo.Amount AS IndirectCostAmount
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo AS BatchKeysInfo

@@ -385,13 +385,27 @@ Function R5022T_Expenses()
 		   |	WriteOffBatchesInfo.Currency,
 		   |	WriteOffBatchesInfo.RowID AS Key,
 		   |	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-		   |	WriteOffBatchesInfo.Amount 
-		   |		+ WriteOffBatchesInfo.AmountCostRatio
-		   |		+ WriteOffBatchesInfo.AmountCostAdditional AS Amount,
-		   |	WriteOffBatchesInfo.Amount 
-		   |		+ WriteOffBatchesInfo.AmountCostRatio 
-		   |		+ WriteOffBatchesInfo.AmountCostAdditional 
-		   |		+ WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
+		   //#2066
+		   |	T6095S_WriteOffBatchesInfo.InvoiceAmount
+		   |	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
+	       |	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
+	       |	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
+	       |	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
+	       |	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	       |
+	       |	T6095S_WriteOffBatchesInfo.InvoiceAmount
+	       |	+T6095S_WriteOffBatchesInfo.InvoiceTaxAmount
+	       |	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
+	       |	+T6095S_WriteOffBatchesInfo.IndirectCostTaxAmount
+	       |	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
+	       |	+T6095S_WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	       |	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
+	       |	+T6095S_WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	       |	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
+	       |	+T6095S_WriteOffBatchesInfo.AllocatedCostTaxAmount
+	       |	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount
+	       |	-T6095S_WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+	       //--
 		   |INTO R5022T_Expenses
 		   |FROM
 		   |	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo

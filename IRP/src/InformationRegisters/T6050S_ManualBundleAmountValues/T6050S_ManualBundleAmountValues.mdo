@@ -20,10 +20,10 @@
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="3d4f6c6d-816c-42cc-8b1d-4cc6f67b52fa">
-    <name>AmountValue</name>
+    <name>InvoiceAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount value</value>
+      <value>Invoice amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -35,25 +35,10 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="d614b02b-bffd-4973-b3c3-b1bc0de1930b">
-    <name>AmountTaxValue</name>
+    <name>InvoiceTaxAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount tax value</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="e93572d1-a681-431e-b931-e0e5285a31d7">
-    <name>AmountCostRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount cost ratio</value>
+      <value>Invoice tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -65,10 +50,10 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="ad7b6b9f-4cf3-4a1a-a1e3-68410b034465">
-    <name>NotDirectCosts</name>
+    <name>IndirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Not direct costs</value>
+      <value>Indirect cost amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -79,11 +64,11 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="24e069de-f27a-4474-ae9a-6a4dbaed9841">
-    <name>AmountCost</name>
+  <resources uuid="d6235b26-648a-4333-be6b-bed009f22b83">
+    <name>IndirectCostTaxAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount cost</value>
+      <value>Indirect cost tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -94,11 +79,11 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="2390ef03-a17c-4ca4-a7f7-396d49e755e4">
-    <name>AmountCostTax</name>
+  <resources uuid="e93572d1-a681-431e-b931-e0e5285a31d7">
+    <name>ExtraCostAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Amount cost tax</value>
+      <value>Extra cost amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -109,26 +94,11 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="33b8d3b9-83b1-446f-8599-418b2dc48827">
-    <name>AmountRevenue</name>
+  <resources uuid="aad87dbb-c6cd-4c35-90c9-14bc745c1a50">
+    <name>ExtraCostTaxAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Amount revenue</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="b522decc-4010-4a1c-be41-a83ca8c28827">
-    <name>AmountRevenueTax</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount revenue tax</value>
+      <value>Extra cost tax amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -140,10 +110,85 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="456c4d78-f5f2-4246-b7a0-1c396b3a8dca">
-    <name>AmountCostAdditional</name>
+    <name>ExtraDirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount cost additional</value>
+      <value>Extra direct cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="f58b0623-0b0e-4e35-8cf4-89ea4d86dce0">
+    <name>ExtraDirectCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra direct cost tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="24e069de-f27a-4474-ae9a-6a4dbaed9841">
+    <name>AllocatedCostAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="2390ef03-a17c-4ca4-a7f7-396d49e755e4">
+    <name>AllocatedCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated cost tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="33b8d3b9-83b1-446f-8599-418b2dc48827">
+    <name>AllocatedRevenueAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated revenue amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="b522decc-4010-4a1c-be41-a83ca8c28827">
+    <name>AllocatedRevenueTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated revenue tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

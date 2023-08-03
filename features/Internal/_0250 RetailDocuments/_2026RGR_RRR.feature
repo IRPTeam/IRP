@@ -137,10 +137,10 @@ Scenario: _0202601 create RGR based on RSR
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And "ResultsTree" table became equal
-			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:' | ''         | ''     | ''       | ''         |
-			| 'Shirt (38/Black)'                                   | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress (L/Green)'                                    | '1,000'    | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Row presentation'                                     | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' | ''         | ''     | ''       | ''         |
+			| 'Shirt (38/Black)'                                     | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (L/Green)'                                      | '1,000'    | 'pcs'  | '550,00' | 'TRY'      |
 	* Unlink 
 		And in the table "ResultsTree" I click "Unlink all" button
 		And I click "Ok" button
@@ -154,8 +154,8 @@ Scenario: _0202601 create RGR based on RSR
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '1,000'    | 'Dress (L/Green)'  | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
-			| 'Row presentation'                                   |
-			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:' |	
+			| 'Row presentation'                                     |
+			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' |	
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '1,000'    | 'Dress (L/Green)'  | 'pcs'  |
@@ -164,8 +164,8 @@ Scenario: _0202601 create RGR based on RSR
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '1' | '2,000'    | 'Shirt (38/Black)' | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
-			| 'Row presentation'                                   |
-			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:' |
+			| 'Row presentation'                                     |
+			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)' | 'pcs'  |
@@ -244,13 +244,13 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And "ResultsTree" table contains lines
-			| 'Row presentation'                                   | 'Company'      | 'Branch'  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
-			| 'Retail goods receipt*'                              | ''             | ''        | ''         | ''     | ''       | ''         |
-			| 'Shirt (38/Black)'                                   | ''             | ''        | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Retail sales receipt 1 204 dated 02.08.2023 14:37:' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
-			| 'Retail goods receipt*'                              | ''             | ''        | ''         | ''     | ''       | ''         |
-			| 'Product 1 with SLN (PZU)'                           | ''             | ''        | '2,000'    | 'pcs'  | '400,00' | 'TRY'      |
+			| 'Row presentation'                                     | 'Company'      | 'Branch'  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
+			| 'Retail goods receipt*'                                | ''             | ''        | ''         | ''     | ''       | ''         |
+			| 'Shirt (38/Black)'                                     | ''             | ''        | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Retail sales receipt 1 204 dated 02.08.2023 14:37:42' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
+			| 'Retail goods receipt*'                                | ''             | ''        | ''         | ''     | ''       | ''         |
+			| 'Product 1 with SLN (PZU)'                             | ''             | ''        | '2,000'    | 'pcs'  | '400,00' | 'TRY'      |
 	* Unlink 
 		And in the table "ResultsTree" I click "Unlink all" button
 		And I click "Ok" button	

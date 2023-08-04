@@ -1,9 +1,9 @@
 
 &AtClient
 Procedure Select(Command)
-	If Items.MainPages.CurrentPage = Items.PageSalesOrders Then
+	If CurrentItem = Items.SalesOrders Then
 		CurrentRow = Items.SalesOrders.CurrentData;
-	ElsIf Items.MainPages.CurrentPage = Items.PageRetailShipmentConfirmation Then
+	ElsIf CurrentItem = Items.RetailShipmentConfirmation Then
 		CurrentRow = Items.RetailShipmentConfirmation.CurrentData;
 	EndIf;
 	If Not CurrentRow = Undefined Then

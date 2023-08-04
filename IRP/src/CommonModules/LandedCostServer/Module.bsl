@@ -2236,7 +2236,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				
 				NeedExpense = NeedExpense - ExpenseQuantity;
 
-				If ExpenseQuantity <> 0 Or ExpenseAmount <> 0 Then
+				If ExpenseQuantity <> 0 Or ExpenseInvoiceAmount <> 0 Then
 					NewRow = Tables.DataForExpense.Add();
 					NewRow.BatchKey  = Row.BatchKey;
 					NewRow.Document  = Row.Document;

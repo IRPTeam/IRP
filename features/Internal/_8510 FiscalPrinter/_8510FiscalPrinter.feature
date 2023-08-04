@@ -2393,7 +2393,7 @@ Scenario: _0260162 check button Print receipt (copy)
 	And I close all client application windows
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I go to the first line in "List" table
+		And I go to the last line in "List" table
 		And I click "Print copy receipt" button
 	* Check
 		Then there are lines in TestClient message log

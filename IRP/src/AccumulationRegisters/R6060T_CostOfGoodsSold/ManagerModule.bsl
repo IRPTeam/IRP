@@ -212,7 +212,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	BatchWiseBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|
 	|	BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
-	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount
+	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
 	//--	
 	|
 	|	BatchWiseBalance.ItemKey AS ItemKey,

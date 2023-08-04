@@ -158,12 +158,12 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 		* Open document from list form
 			And I go to the first line in "DocumentsTree" table
 			And I select current line in "DocumentsTree" table
-			Then "Sales order * dated *" window is opened
+			Then "$$SalesOrder300521$$" window is opened
 			And I close current window
 		* Click Edit command
 			And I go to the first line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeEdit"
-			Then "Sales order * dated *" window is opened
+			Then "$$SalesOrder300521$$" window is opened
 			And I close current window
 		* Click Refresh command
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeRefresh"

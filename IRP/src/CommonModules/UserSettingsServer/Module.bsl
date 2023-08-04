@@ -248,9 +248,7 @@ EndProcedure
 
 Function GeneratePassword() Export
 
-	Var Alphabet, Index, NewPass, RNG;
-
-	Alphabet = "1234567890ABCDEFGHKLMNPRSTUVWXYZ";
+	Alphabet = "1234567890ABCDEFGHKLMNPRSTUVWXYZ!@#$%&";
 
 	RNG = New RandomNumberGenerator();
 	NewPass = "";

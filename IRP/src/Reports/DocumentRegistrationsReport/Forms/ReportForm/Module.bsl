@@ -239,6 +239,8 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		Template = Reports.DocumentRegistrationsReport.GetTemplate("Template");
 		TitleArea = Template.GetArea("Title");
 		TitleArea.Parameters.RegisterName = ObjectProperty.Synonym;
+		TitleArea.Areas.Title.DetailsUse = SpreadsheetDocumentDetailUse.Cell;
+		TitleArea.Area(1, 1).Details = RegisterName;
 		Result.Put(TitleArea);
 		Result.StartRowGroup();
 
@@ -272,6 +274,14 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	Result.ReadOnly = True;
 	Result.FitToPage = True;
 
+EndProcedure
+
+&AtClient
+Procedure ResultTableDetailProcessing(Item, Details, StandardProcessing, AdditionalParameters)
+	If ValueIsFilled(Details) Then
+		StandardProcessing = False;
+		OpenForm(Details + ".ListForm");
+	EndIf;
 EndProcedure
 
 &AtServer

@@ -76,6 +76,9 @@ Async Function PayByPaymentCard(Hardware, Settings) Export
 				Settings.Out.Slip
 			); // Boolean
 		EndIf;
+		If Not Result Then
+			Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		EndIf;
 		If ConnectParameters.WriteLog Then
 			HardwareServer.WriteLog(Hardware, "PayByPaymentCard", False, Settings, Result);
 		EndIf;		
@@ -133,6 +136,9 @@ Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 				Settings.Out.Slip
 			); // Boolean
 		EndIf;
+		If Not Result Then
+			Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		EndIf;
 		If ConnectParameters.WriteLog Then
 			HardwareServer.WriteLog(Hardware, "ReturnPaymentByPaymentCard", False, Settings, Result);
 		EndIf;
@@ -184,6 +190,10 @@ Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 			Settings.Out.Slip
 		); // Boolean
 	EndIf;
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CancelPaymentByPaymentCard", False, Settings, Result);
 	EndIf;
@@ -209,6 +219,10 @@ Async Function EmergencyReversal(Hardware, Settings) Export
 	Result = ConnectParameters.DriverObject.EmergencyReversal(
 		ConnectParameters.ID,
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+	
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "EmergencyReversal", False, Settings, Result);
 	EndIf;	
@@ -235,6 +249,10 @@ Async Function Settlement(Hardware, Settings) Export
 		ConnectParameters.ID,
 		Settings.Out.Slip
 	); // Boolean
+	If Not Result Then
+		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+	EndIf;
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "Settlement", False, Settings, Result);
 	EndIf;		
@@ -252,6 +270,7 @@ EndFunction
 //  Structure - Terminal parameters settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // * Out - Structure:
@@ -263,6 +282,7 @@ Function TerminalParametersSettings() Export
 	Str = New Structure;
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "TerminalParametersSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
@@ -282,6 +302,7 @@ EndFunction
 //  Structure - Pay by payment card settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * Form - Structure - Lock and unlock form elements:
 // ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
 // ** ElementToHideAndShow - FormDecoration, FormGroup - Element or form. Will be showed until payment end
@@ -301,6 +322,7 @@ Function PayByPaymentCardSettings() Export
 	
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "PayByPaymentCardSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("Form", New Structure);
 	Str.Form.Insert("ElementToLock", Undefined);
@@ -329,6 +351,7 @@ EndFunction
 //  Structure - Return payment by payment card settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * Form - Structure - Lock and unlock form elements:
 // ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
 // ** ElementToHideAndShow - FormDecoration, FormGroup - Element or form. Will be showed until payment end
@@ -348,6 +371,7 @@ Function ReturnPaymentByPaymentCardSettings() Export
 		
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "ReturnPaymentByPaymentCardSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("Form", New Structure);
 	Str.Form.Insert("ElementToLock", Undefined);
@@ -377,6 +401,7 @@ EndFunction
 //  Structure - Pay by payment card settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
@@ -393,6 +418,7 @@ Function CancelPaymentByPaymentCardSettings() Export
 	
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "CancelPaymentByPaymentCardSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
@@ -417,6 +443,7 @@ EndFunction
 //  Structure - Emergency reversal settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 Function EmergencyReversalSettings() Export
@@ -424,6 +451,7 @@ Function EmergencyReversalSettings() Export
 	
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "EmergencyReversalSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
@@ -437,6 +465,7 @@ EndFunction
 //  Structure - Settlement settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// ** Error - String - Error description
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // * Out - Structure:
@@ -446,6 +475,7 @@ Function SettlementSettings() Export
 	
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "SettlementSettings");
+	Str.Info.Insert("Error", "");
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");

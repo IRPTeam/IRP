@@ -6982,6 +6982,7 @@ Function GetDataByFilterSet_SO_ForSI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7011,6 +7012,7 @@ Function GetDataByFilterSet_SO_ForPRR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7040,6 +7042,7 @@ Function GetDataByFilterSet_SO_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7069,6 +7072,7 @@ Function GetDataByFilterSet_SO_ForRSC()
 		|	RowIDMovements.RowRef,
 		|	RowIDMovements.RowID,
 		|	RowIDMovements.Step,
+		|	Doc.Unit,
 		|	Doc.LineNumber
 		|FROM
 		|	Document.SalesOrder.ItemList AS Doc
@@ -7097,6 +7101,7 @@ Function GetDataByFilterSet_SO_ForPO_ForPI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7126,6 +7131,7 @@ Function GetDataByFilterSet_SO_ForWO()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7155,6 +7161,7 @@ Function GetDataByFilterSet_SO_ForWS()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7184,6 +7191,7 @@ Function GetDataByFilterSet_SO_ForRSR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesOrder.ItemList AS Doc
@@ -7451,6 +7459,7 @@ Function GetDataByFilterSet_SI_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesInvoice.ItemList AS Doc
@@ -7480,6 +7489,7 @@ Function GetDataByFilterSet_SI_ForSR_ForSRO()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesInvoice.ItemList AS Doc
@@ -7510,6 +7520,7 @@ Function GetDataByFilterSet_SI_ForWS()
 		|	RowIDMovements.RowRef,
 		|	RowIDMovements.RowID,
 		|	RowIDMovements.Step,
+		|	Doc.Unit,
 		|	Doc.LineNumber
 		|FROM
 		|	Document.SalesInvoice.ItemList AS Doc
@@ -7709,6 +7720,7 @@ Function GetDataByFilterSet_SC_ForSI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.ShipmentConfirmation.ItemList AS Doc
@@ -7738,6 +7750,7 @@ Function GetDataByFilterSet_SC_ForPR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.ShipmentConfirmation.ItemList AS Doc
@@ -7895,6 +7908,7 @@ Function GetDataByFilterSet_RSC_ForRSR()
 		|	RowIDMovements.RowRef,
 		|	RowIDMovements.RowID,
 		|	RowIDMovements.Step,
+		|	Doc.Unit,
 		|	Doc.LineNumber
 		|FROM
 		|	Document.RetailShipmentConfirmation.ItemList AS Doc
@@ -7925,6 +7939,7 @@ Function GetDataByFilterSet_RSC_ForRGR()
 		|	RowIDMovements.RowRef,
 		|	RowIDMovements.RowID,
 		|	RowIDMovements.Step,
+		|	Doc.Unit,
 		|	Doc.LineNumber
 		|FROM
 		|	Document.RetailShipmentConfirmation.ItemList AS Doc
@@ -8064,6 +8079,7 @@ Function GetDataByFilterSet_SRO_ForSR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesReturnOrder.ItemList AS Doc
@@ -8275,6 +8291,7 @@ Function GetDataByFilterSet_PO_ForPI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseOrder.ItemList AS Doc
@@ -8304,6 +8321,7 @@ Function GetDataByFilterSet_PO_ForGR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseOrder.ItemList AS Doc
@@ -8547,6 +8565,7 @@ Function GetDataByFilterSet_GR_ForSI_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS Doc
@@ -8576,6 +8595,7 @@ Function GetDataByFilterSet_GR_ForPI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS Doc
@@ -8605,6 +8625,7 @@ Function GetDataByFilterSet_GR_ForSR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS Doc
@@ -8750,6 +8771,7 @@ Function GetDataByFilterSet_RGR_ForRRR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.RetailGoodsReceipt.ItemList AS Doc
@@ -9007,6 +9029,7 @@ Function GetDataByFilterSet_PI_ForGR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS Doc
@@ -9036,6 +9059,7 @@ Function GetDataByFilterSet_PI_ForPR_ForPRO()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS Doc
@@ -9065,6 +9089,7 @@ Function GetDataByFilterSet_PI_ForSI_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS Doc
@@ -9178,6 +9203,7 @@ Function GetDataByFilterSet_ITO_ForIT()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.InventoryTransferOrder.ItemList AS Doc
@@ -9337,6 +9363,7 @@ Function GetDataByFilterSet_IT_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.InventoryTransfer.ItemList AS Doc
@@ -9366,6 +9393,7 @@ Function GetDataByFilterSet_IT_ForGR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.InventoryTransfer.ItemList AS Doc
@@ -9457,6 +9485,7 @@ Function GetDataByFilterSet_ISR_ForITO_ForPO_ForPI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.InternalSupplyRequest.ItemList AS Doc
@@ -9585,6 +9614,7 @@ Function GetDataByFilterSet_PR_ForSC()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseReturn.ItemList AS Doc
@@ -9712,6 +9742,7 @@ Function GetDataByFilterSet_SR_ForGR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.SalesReturn.ItemList AS Doc
@@ -9852,6 +9883,7 @@ Function GetDataByFilterSet_PRO_ForPR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PurchaseReturnOrder.ItemList AS Doc
@@ -10074,6 +10106,7 @@ Function GetDataByFilterSet_RSR_ForRRR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.RetailSalesReceipt.ItemList AS Doc
@@ -10104,6 +10137,7 @@ Function GetDataByFilterSet_RSR_ForRGR()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.RetailSalesReceipt.ItemList AS Doc
@@ -10248,6 +10282,7 @@ Function GetDataByFilterSet_PhysicalInventory_ForSurplus_ForWriteOff()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.PhysicalInventory.ItemList AS Doc
@@ -10451,6 +10486,7 @@ Function GetDataByFilterSet_WO_ForWS()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.WorkOrder.ItemList AS Doc
@@ -10480,6 +10516,7 @@ Function GetDataByFilterSet_WO_ForSI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.WorkOrder.ItemList AS Doc
@@ -10600,6 +10637,7 @@ Function GetDataByFilterSet_WS_ForSI()
 		   |	RowIDMovements.RowRef,
 		   |	RowIDMovements.RowID,
 		   |	RowIDMovements.Step,
+		   |	Doc.Unit,
 		   |	Doc.LineNumber
 		   |FROM
 		   |	Document.WorkSheet.ItemList AS Doc
@@ -10645,20 +10683,22 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	QueryArray = New Array();
 	QueryArray.Add(
 	"SELECT ALLOWED
-	|UNDEFINED AS ItemKey,
-	|UNDEFINED AS Item,
-	|UNDEFINED AS Store,
-	|UNDEFINED AS Basis,
-	|UNDEFINED AS Key,
-	|UNDEFINED AS BasisKey,
-	|UNDEFINED AS BasisUnit,
-	|UNDEFINED AS QuantityInBaseUnit,
-	|UNDEFINED AS RowRef,
-	|UNDEFINED AS RowID,
-	|UNDEFINED AS CurrentStep,
-	|UNDEFINED AS LineNumber
+	|	UNDEFINED AS ItemKey,
+	|	UNDEFINED AS Item,
+	|	UNDEFINED AS Store,
+	|	UNDEFINED AS Basis,
+	|	UNDEFINED AS Key,
+	|	UNDEFINED AS BasisKey,
+	|	UNDEFINED AS BasisUnit,
+	|	UNDEFINED AS QuantityInBaseUnit,
+	|	UNDEFINED AS RowRef,
+	|	UNDEFINED AS RowID,
+	|	UNDEFINED AS CurrentStep,
+	|	UNDEFINED AS Unit,
+	|	UNDEFINED AS LineNumber
 	|INTO AllData
-	|WHERE FALSE ");
+	|	WHERE FALSE 
+	|");
 
 	EnableRequiredFilterSets(FilterSets, Query, QueryArray);
 
@@ -10674,7 +10714,7 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|	AllData.Item,
 	|	AllData.Store,
 	|	AllData.Basis AS Basis,
-	|	UNDEFINED AS ParentBasis,
+//	|	UNDEFINED AS ParentBasis,
 	|	AllData.Key,
 	|	AllData.BasisKey,
 	|	AllData.BasisUnit,
@@ -10682,6 +10722,7 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|	AllData.RowRef,
 	|	AllData.RowID,
 	|	AllData.CurrentStep,
+	|	AllData.Unit,
 	|	AllData.LineNumber AS LineNumber
 	|FROM
 	|	AllData AS AllData
@@ -10692,7 +10733,7 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-
+	QueryTable.Columns.Add("ParentBasis", Documents.AllRefsType());
 	Return QueryTable;
 EndFunction
 

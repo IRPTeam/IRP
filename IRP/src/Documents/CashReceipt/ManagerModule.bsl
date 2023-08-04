@@ -364,7 +364,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.MoneyTransfer AS Basis,
-		   |	PaymentList.AccountTo AS Account,
+		   |	PaymentList.CashAccount AS Account,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key

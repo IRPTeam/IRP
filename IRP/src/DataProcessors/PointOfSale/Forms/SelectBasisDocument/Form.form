@@ -650,6 +650,54 @@
     <excludedCommands>UndoPosting</excludedCommands>
     <excludedCommands>CopyToClipboard</excludedCommands>
     <items xsi:type="form:FormField">
+      <name>RetailShipmentConfirmationDefaultPicture</name>
+      <id>119</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>RetailShipmentConfirmation.DefaultPicture</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>RetailShipmentConfirmationDefaultPictureExtendedTooltip</name>
+        <id>121</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>RetailShipmentConfirmationDefaultPictureContextMenu</name>
+        <id>120</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <width>1</width>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>RetailShipmentConfirmationNumber</name>
       <id>68</id>
       <visible>true</visible>
@@ -1458,10 +1506,13 @@ WHERE
     </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT ALLOWED DISTINCT
-	R4012B_StockReservationBalance.Order
+	R4012B_StockReservationBalanceAndTurnovers.Recorder
 INTO RSC
 FROM
-	AccumulationRegister.R4012B_StockReservation.Balance AS R4012B_StockReservationBalance
+	AccumulationRegister.R4012B_StockReservation.BalanceAndTurnovers(,, Recorder,,) AS
+		R4012B_StockReservationBalanceAndTurnovers
+WHERE
+	R4012B_StockReservationBalanceAndTurnovers.QuantityClosingBalance > 0
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1485,20 +1536,13 @@ SELECT
 	RetailShipmentConfirmation.Author,
 	RetailShipmentConfirmation.Branch,
 	RetailShipmentConfirmation.Description,
-	RetailShipmentConfirmation.SourceNodeID,
-	RetailShipmentConfirmation.ItemList.*,
-	RetailShipmentConfirmation.AddAttributes.*,
-	RetailShipmentConfirmation.RowIDInfo.*,
-	RetailShipmentConfirmation.SerialLotNumbers.*,
-	RetailShipmentConfirmation.ConsignorBatches.*,
-	RetailShipmentConfirmation.SourceOfOrigins.*,
-	RetailShipmentConfirmation.PointInTime
+	RetailShipmentConfirmation.SourceNodeID
 FROM
 	Document.RetailShipmentConfirmation AS RetailShipmentConfirmation
 WHERE
 	RetailShipmentConfirmation.Ref IN
 		(SELECT
-			T.Order
+			T.Recorder
 		FROM
 			RSC AS T)</queryText>
       <mainTable>Document.RetailShipmentConfirmation</mainTable>
@@ -1507,30 +1551,6 @@ WHERE
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>ItemList</dataPath>
-        <field>ItemList</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>AddAttributes</dataPath>
-        <field>AddAttributes</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>RowIDInfo</dataPath>
-        <field>RowIDInfo</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>SerialLotNumbers</dataPath>
-        <field>SerialLotNumbers</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>ConsignorBatches</dataPath>
-        <field>ConsignorBatches</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>SourceOfOrigins</dataPath>
-        <field>SourceOfOrigins</field>
-      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Ref</dataPath>
         <field>Ref</field>
@@ -1612,202 +1632,6 @@ WHERE
         <field>SourceNodeID</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Ref</dataPath>
-        <field>ItemList.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.LineNumber</dataPath>
-        <field>ItemList.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Key</dataPath>
-        <field>ItemList.Key</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Item</dataPath>
-        <field>ItemList.Item</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.ItemKey</dataPath>
-        <field>ItemList.ItemKey</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Store</dataPath>
-        <field>ItemList.Store</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Unit</dataPath>
-        <field>ItemList.Unit</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Quantity</dataPath>
-        <field>ItemList.Quantity</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.QuantityInBaseUnit</dataPath>
-        <field>ItemList.QuantityInBaseUnit</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.UseSerialLotNumber</dataPath>
-        <field>ItemList.UseSerialLotNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.SalesOrder</dataPath>
-        <field>ItemList.SalesOrder</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.QuantityIsFixed</dataPath>
-        <field>ItemList.QuantityIsFixed</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.InventoryOrigin</dataPath>
-        <field>ItemList.InventoryOrigin</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemList.Consignor</dataPath>
-        <field>ItemList.Consignor</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Ref</dataPath>
-        <field>AddAttributes.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.LineNumber</dataPath>
-        <field>AddAttributes.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Property</dataPath>
-        <field>AddAttributes.Property</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Value</dataPath>
-        <field>AddAttributes.Value</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.Ref</dataPath>
-        <field>RowIDInfo.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.LineNumber</dataPath>
-        <field>RowIDInfo.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.Key</dataPath>
-        <field>RowIDInfo.Key</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.RowID</dataPath>
-        <field>RowIDInfo.RowID</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.Quantity</dataPath>
-        <field>RowIDInfo.Quantity</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.Basis</dataPath>
-        <field>RowIDInfo.Basis</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.CurrentStep</dataPath>
-        <field>RowIDInfo.CurrentStep</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.NextStep</dataPath>
-        <field>RowIDInfo.NextStep</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.RowRef</dataPath>
-        <field>RowIDInfo.RowRef</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>RowIDInfo.BasisKey</dataPath>
-        <field>RowIDInfo.BasisKey</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers.Ref</dataPath>
-        <field>SerialLotNumbers.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers.LineNumber</dataPath>
-        <field>SerialLotNumbers.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers.Key</dataPath>
-        <field>SerialLotNumbers.Key</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers.SerialLotNumber</dataPath>
-        <field>SerialLotNumbers.SerialLotNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SerialLotNumbers.Quantity</dataPath>
-        <field>SerialLotNumbers.Quantity</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.Ref</dataPath>
-        <field>ConsignorBatches.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.LineNumber</dataPath>
-        <field>ConsignorBatches.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.Key</dataPath>
-        <field>ConsignorBatches.Key</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.ItemKey</dataPath>
-        <field>ConsignorBatches.ItemKey</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.SerialLotNumber</dataPath>
-        <field>ConsignorBatches.SerialLotNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.SourceOfOrigin</dataPath>
-        <field>ConsignorBatches.SourceOfOrigin</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.Store</dataPath>
-        <field>ConsignorBatches.Store</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.Batch</dataPath>
-        <field>ConsignorBatches.Batch</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches.Quantity</dataPath>
-        <field>ConsignorBatches.Quantity</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.Ref</dataPath>
-        <field>SourceOfOrigins.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.LineNumber</dataPath>
-        <field>SourceOfOrigins.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.Key</dataPath>
-        <field>SourceOfOrigins.Key</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.SerialLotNumber</dataPath>
-        <field>SourceOfOrigins.SerialLotNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.SourceOfOrigin</dataPath>
-        <field>SourceOfOrigins.SourceOfOrigin</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceOfOrigins.Quantity</dataPath>
-        <field>SourceOfOrigins.Quantity</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PointInTime</dataPath>
-        <field>PointInTime</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Store</dataPath>
         <field>Store</field>
       </fields>
@@ -1819,13 +1643,56 @@ WHERE
         <dataPath>Order</dataPath>
         <field>Order</field>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemList</dataPath>
+        <field>ItemList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RowIDInfo</dataPath>
+        <field>RowIDInfo</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SerialLotNumbers</dataPath>
+        <field>SerialLotNumbers</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ConsignorBatches</dataPath>
+        <field>ConsignorBatches</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SourceOfOrigins</dataPath>
+        <field>SourceOfOrigins</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
+      </fields>
       <parameters>
-        <name>Period</name>
+        <name>BeginOfPeriod</name>
         <title>
           <localValue>
             <content>
               <key>en</key>
-              <value>Period</value>
+              <value>Begin of period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+      </parameters>
+      <parameters>
+        <name>EndOfPeriod</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>End of period</value>
             </content>
           </localValue>
         </title>

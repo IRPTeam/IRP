@@ -839,7 +839,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForWriteOffBatches.Columns.Add("RowID"            , RegMetadata.Dimensions.RowID.Type);
 	//#2066
 	DataForWriteOffBatches.Columns.Add("InvoiceAmount"           , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForWriteOffBatches.Columns.Add("InvoiceTaxAmountTax"        , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForWriteOffBatches.Columns.Add("InvoiceTaxAmount"        , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
 	DataForWriteOffBatches.Columns.Add("IndirectCostAmount"   , RegMetadata.Resources.IndirectCostAmount.Type);
 	DataForWriteOffBatches.Columns.Add("IndirectCostTaxAmount"   , RegMetadata.Resources.IndirectCostTaxAmount.Type);
@@ -942,72 +942,90 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	Query.Text =
 	"SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	//#2066
+	|	//#2066
 	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
-	
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
-	|
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostTaxAmount) AS ExtraDirectCostTaxAmount,
-	|	
 	|	sum(T6020S_BatchKeysInfo.IndirectCostAmount) AS IndirectCostAmount,
 	|	sum(T6020S_BatchKeysInfo.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
-	|
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostAmount) AS AllocatedCostAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
-
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|//----------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	else T6020S_BatchKeysInfo.Recorder end AS Document,
-	|//----------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	else T6020S_BatchKeysInfo.Recorder.PointInTime end AS PointInTime,
-	|//----------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
-	|	then T6020S_BatchKeysInfo.ProductionDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	else T6020S_BatchKeysInfo.Period end AS Date,
-	|//----------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		else T6020S_BatchKeysInfo.Recorder
+	|	end AS Document,
+	|	//----------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		else T6020S_BatchKeysInfo.Recorder.PointInTime
+	|	end AS PointInTime,
+	|	//----------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		else T6020S_BatchKeysInfo.Period
+	|	end AS Date,
+	|	//----------------------------------------
 	|	T6020S_BatchKeysInfo.Company AS Company,
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ProfitLossCenter
+	|		else undefined
+	|	end AS ProfitLossCenter,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ExpenseType
+	|		else undefined
+	|	end AS ExpenseType,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end AS RowID,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Branch
+	|		else undefined
+	|	end AS Branch,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Currency
+	|		else undefined
+	|	end AS Currency,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
@@ -1024,54 +1042,76 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		ELSE TRUE
 	|	END
 	|GROUP BY
-	|
 	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|	
-	|	else T6020S_BatchKeysInfo.Recorder end,
-	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	else T6020S_BatchKeysInfo.Recorder.PointInTime end,
-	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
-	|	then T6020S_BatchKeysInfo.ProductionDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	else T6020S_BatchKeysInfo.Period end,
-	|//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		else T6020S_BatchKeysInfo.Recorder
+	|	end,
+	|	//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		else T6020S_BatchKeysInfo.Recorder.PointInTime
+	|	end,
+	|	//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		else T6020S_BatchKeysInfo.Period
+	|	end,
+	|	//--------------------------------------
 	|	T6020S_BatchKeysInfo.Company,
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ProfitLossCenter
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ExpenseType
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Branch
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Currency
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end,
 	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
@@ -1115,72 +1155,90 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	//#2066
+	|	//#2066
 	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
-	
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
-	|
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostTaxAmount) AS ExtraDirectCostTaxAmount,
-	|
 	|	sum(T6020S_BatchKeysInfo.IndirectCostAmount) AS IndirectCostAmount,
 	|	sum(T6020S_BatchKeysInfo.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
-	|
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostAmount) AS AllocatedCostAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
-	
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|//----------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument
-	|	
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	else T6020S_BatchKeysInfo.Recorder end AS Document,
-	|//-----------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|	
-	|	else T6020S_BatchKeysInfo.Recorder.PointInTime end AS PointInTime,
-	|//-----------------------------------
 	|	case
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
-	|	then T6020S_BatchKeysInfo.ProductionDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|	
-	|	else T6020S_BatchKeysInfo.Period end AS Date,
-	|//-----------------------------------
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		else T6020S_BatchKeysInfo.Recorder
+	|	end AS Document,
+	|	//-----------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		else T6020S_BatchKeysInfo.Recorder.PointInTime
+	|	end AS PointInTime,
+	|	//-----------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		else T6020S_BatchKeysInfo.Period
+	|	end AS Date,
+	|	//-----------------------------------
 	|	T6020S_BatchKeysInfo.Company AS Company,
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ProfitLossCenter
+	|		else undefined
+	|	end AS ProfitLossCenter,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ExpenseType
+	|		else undefined
+	|	end AS ExpenseType,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end AS RowID,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Branch
+	|		else undefined
+	|	end AS Branch,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Currency
+	|		else undefined
+	|	end AS Currency,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
@@ -1192,54 +1250,76 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		INNER JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		ON ReallocateDocumentOutPeriod.Ref = T6020S_BatchKeysInfo.Recorder
 	|GROUP BY
-	|
 	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
-	|
-	|	else T6020S_BatchKeysInfo.Recorder end,
-	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation 
-	|	then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation 
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
-	|
-	|	else T6020S_BatchKeysInfo.Recorder.PointInTime end,
-	|//--------------------------------------
-	|	case 
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
-	|	then T6020S_BatchKeysInfo.ProductionDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
-	|	then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
-	|
-	|	else T6020S_BatchKeysInfo.Period end,
-	|//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument
+	|		else T6020S_BatchKeysInfo.Recorder
+	|	end,
+	|	//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.PointInTime
+	|		else T6020S_BatchKeysInfo.Recorder.PointInTime
+	|	end,
+	|	//--------------------------------------
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+	|			then T6020S_BatchKeysInfo.ProductionDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalCostAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.AdditionalRevenueAllocation
+	|			then T6020S_BatchKeysInfo.PurchaseInvoiceDocument.Date
+	|		else T6020S_BatchKeysInfo.Period
+	|	end,
+	|	//--------------------------------------
 	|	T6020S_BatchKeysInfo.Company,
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ProfitLossCenter
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.ExpenseType
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Branch
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|			then T6020S_BatchKeysInfo.Currency
+	|		else undefined
+	|	end,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end,
 	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
@@ -1250,25 +1330,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysRegister.Quantity AS Quantity,
-	//#2066
+	|	//#2066
 	|	BatchKeysRegister.InvoiceAmount AS InvoiceAmount,
 	|	BatchKeysRegister.InvoiceTaxAmount AS InvoiceTaxAmount,
-	
 	|	BatchKeysRegister.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	BatchKeysRegister.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-	|
 	|	BatchKeysRegister.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 	|	BatchKeysRegister.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-	|
 	|	BatchKeysRegister.IndirectCostAmount AS IndirectCostAmount,
 	|	BatchKeysRegister.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-	|
 	|	BatchKeysRegister.AllocatedCostAmount AS AllocatedCostAmount,
 	|	BatchKeysRegister.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-	
 	|	BatchKeysRegister.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchKeysRegister.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|	BatchKeysRegister.Document AS Document,
 	|	BatchKeysRegister.PointInTime AS PointInTime,
 	|	BatchKeysRegister.Date AS Date,
@@ -1295,25 +1370,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|
 	|SELECT
 	|	BatchKeysRegisterOutPeriod.Quantity,
-	//#2066
+	|	//#2066
 	|	BatchKeysRegisterOutPeriod.InvoiceAmount,
-	|	BatchKeysRegisterOutPeriod.InvoiceAmountTax,
-	
+	|	BatchKeysRegisterOutPeriod.InvoiceTaxAmount,
 	|	BatchKeysRegisterOutPeriod.ExtraCostAmountByRatio,
 	|	BatchKeysRegisterOutPeriod.ExtraCostTaxAmountByRatio,
-	|
 	|	BatchKeysRegisterOutPeriod.ExtraDirectCostAmount,
 	|	BatchKeysRegisterOutPeriod.ExtraDirectCostTaxAmount,
-	|
 	|	BatchKeysRegisterOutPeriod.IndirectCostAmount,
 	|	BatchKeysRegisterOutPeriod.IndirectCostTaxAmount,
-	|
 	|	BatchKeysRegisterOutPeriod.AllocatedCostAmount,
 	|	BatchKeysRegisterOutPeriod.AllocatedCostTaxAmount,
-	
 	|	BatchKeysRegisterOutPeriod.AllocatedRevenueAmount,
 	|	BatchKeysRegisterOutPeriod.AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|	BatchKeysRegisterOutPeriod.Document,
 	|	BatchKeysRegisterOutPeriod.PointInTime,
 	|	BatchKeysRegisterOutPeriod.Date,
@@ -1340,26 +1410,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|SELECT
 	|	BatchKeys.Ref AS BatchKey,
 	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
-	//#2066
+	|	//#2066
 	|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
-	|	SUM(BatchKeysInfo.InvoiceAmountTax) AS InvoiceAmountTax,
-	
+	|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
 	|	SUM(BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
-	|
 	|	SUM(BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
 	|	SUM(BatchKeysInfo.ExtraDirectCostTaxAmount) AS ExtraDirectCostTaxAmount,
-	|
 	|	SUM(BatchKeysInfo.IndirectCostAmount) AS IndirectCostAmount,
 	|	SUM(BatchKeysInfo.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
-	|
 	|	SUM(BatchKeysInfo.AllocatedCostAmount) AS AllocatedCostAmount,
 	|	SUM(BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
-	
 	|	SUM(BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	SUM(BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
-	//--
-	|
+	|	//--
 	|	BatchKeysInfo.Document AS Document,
 	|	BatchKeysInfo.PointInTime AS PointInTime,
 	|	BatchKeysInfo.Date AS Date,
@@ -1406,25 +1470,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	FALSE AS IsOpeningBalance,
 	|	BatchKeys.BatchKey AS BatchKey,
 	|	BatchKeys.Quantity AS Quantity,
-	//#2066
+	|	//#2066
 	|	BatchKeys.InvoiceAmount AS InvoiceAmount,
 	|	BatchKeys.InvoiceTaxAmount AS InvoiceTaxAmount,
-	
 	|	BatchKeys.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	BatchKeys.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-	|
 	|	BatchKeys.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 	|	BatchKeys.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-	|
 	|	BatchKeys.IndirectCostAmount AS IndirectCostAmount,
 	|	BatchKeys.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-	|
 	|	BatchKeys.AllocatedCostAmount AS AllocatedCostAmount,
 	|	BatchKeys.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-	
 	|	BatchKeys.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchKeys.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|	BatchKeys.Document AS Document,
 	|	BatchKeys.PointInTime AS PointInTime,
 	|	BatchKeys.Date AS Date,
@@ -1449,81 +1508,68 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN 0
 	|		ELSE BatchKeys.InvoiceTaxAmount
 	|	END AS InvoiceTaxAmountBalance,
-	//#2066
+	|	//#2066
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraCostAmountByRatio
 	|	END AS ExtraCostAmountByRatioBalance,
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraCostTaxAmountByRatio
 	|	END AS ExtraCostTaxAmountByRatioBalance,
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraDirectCostAmount
 	|	END AS ExtraDirectCostAmountBalance,
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraDirectCostTaxAmount
 	|	END AS ExtraDirectCostTaxAmountBalance,
-	|
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.IndirectCostAmount
 	|	END AS IndirectCostAmountBalance,
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.IndirectCostTaxAmount
 	|	END AS IndirectCostTaxAmountBalance,
-	|
-	|
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedCostAmount
-	|	END AS AllocatedCostTaxAmountBalance,
-	
+	|	END AS AllocatedCostAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedCostTaxAmount
 	|	END AS AllocatedCostTaxAmountBalance,
-	
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedRevenueAmount
 	|	END AS AllocatedRevenueAmountBalance,
-	
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedRevenueTaxAmount
 	|	END AS AllocatedRevenueTaxAmountBalance,
-	//--
-	|
-	|
+	|	//--
 	|	BatchKeys.BatchDocument AS BatchDocument,
 	|	BatchKeys.SalesInvoice AS SalesInvoice,
 	|	BatchKeys.ProfitLossCenter AS ProfitLossCenter,
@@ -1560,34 +1606,29 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	0,
 	|	0,
 	|	0,
-	|
 	|	R6010B_BatchWiseBalance.Batch.Document,
 	|	R6010B_BatchWiseBalance.Batch.Document.PointInTime,
 	|	R6010B_BatchWiseBalance.Batch.Date,
 	|	R6010B_BatchWiseBalance.Batch.Company,
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	R6010B_BatchWiseBalance.Batch,
-	|
 	|	R6010B_BatchWiseBalance.QuantityBalance,
 	|	R6010B_BatchWiseBalance.InvoiceAmountBalance,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmountBalance,
-	//#2066
+	|	//#2066
 	|	R6010B_BatchWiseBalance.ExtraCostAmountByRatioBalance,
 	|	R6010B_BatchWiseBalance.ExtraCostTaxAmountByRatioBalance,
-	//#2066
+	|	//#2066
 	|	R6010B_BatchWiseBalance.ExtraDirectCostAmountBalance,
 	|	R6010B_BatchWiseBalance.ExtraDirectCostTaxAmountBalance,
-	//#2066
+	|	//#2066
 	|	R6010B_BatchWiseBalance.IndirectCostAmountBalance,
 	|	R6010B_BatchWiseBalance.IndirectCostTaxAmountBalance,
-	|
-	//#2066
+	|	//#2066
 	|	R6010B_BatchWiseBalance.AllocatedCostAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmountBalance,
-	|
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmountBalance,
-	|
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
@@ -1611,25 +1652,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.IsOpeningBalance AS IsOpeningBalance,
 	|	AllData.BatchKey AS BatchKey,
 	|	SUM(AllData.Quantity) AS Quantity,
-	//#2066
+	|	//#2066
 	|	SUM(AllData.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(AllData.InvoiceTaxAmount) AS InvoiceTaxAmount,
-	|
 	|	SUM(AllData.IndirectCostAmount) AS IndirectCostAmount,
 	|	SUM(AllData.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
-	|
 	|	SUM(AllData.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(AllData.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
-	|
 	|	SUM(AllData.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
 	|	SUM(AllData.ExtraDirectCostTaxAmount) AS ExtraDirectCostTaxAmount,
-	|
 	|	SUM(AllData.AllocatedCostAmount) AS AllocatedCostAmount,
 	|	SUM(AllData.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
-	|
 	|	SUM(AllData.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	SUM(AllData.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
-	//--
+	|	//--
 	|	AllData.Document AS Document,
 	|	AllData.Document.PointInTime AS PointInTime,
 	|	AllData.Date AS Date,
@@ -1637,26 +1673,20 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.Direction AS Direction,
 	|	AllData.Batch AS Batch,
 	|	SUM(AllData.QuantityBalance) AS QuantityBalance,
-	//#2066
+	|	//#2066
 	|	SUM(AllData.InvoiceAmountBalance) AS InvoiceAmountBalance,
 	|	SUM(AllData.InvoiceTaxAmountBalance) AS InvoiceTaxAmountBalance,
-	|
 	|	SUM(AllData.IndirectCostAmountBalance) AS IndirectCostAmountBalance,
 	|	SUM(AllData.IndirectCostTaxAmountBalance) AS IndirectCostTaxAmountBalance,
-	|
 	|	SUM(AllData.ExtraCostAmountByRatioBalance) AS ExtraCostAmountByRatioBalance,
 	|	SUM(AllData.ExtraCostTaxAmountByRatioBalance) AS ExtraCostTaxAmountByRatioBalance,
-	|
 	|	SUM(AllData.ExtraDirectCostAmountBalance) AS ExtraDirectCostAmountBalance,
 	|	SUM(AllData.ExtraDirectCostTaxAmountBalance) AS ExtraDirectCostTaxAmountBalance,
-	|
 	|	SUM(AllData.AllocatedCostAmountBalance) AS AllocatedCostAmountBalance,
 	|	SUM(AllData.AllocatedCostTaxAmountBalance) AS AllocatedCostTaxAmountBalance,
-	|
 	|	SUM(AllData.AllocatedRevenueAmountBalance) AS AllocatedRevenueAmountBalance,
 	|	SUM(AllData.AllocatedRevenueTaxAmountBalance) AS AllocatedRevenueTaxAmountBalance,
-	//--
-	|
+	|	//--
 	|	AllData.BatchDocument AS BatchDocument,
 	|	AllData.SalesInvoice AS SalesInvoice,
 	|	AllData.ProfitLossCenter AS ProfitLossCenter,
@@ -1694,51 +1724,40 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.IsOpeningBalance AS IsOpeningBalance,
 	|	AllDataGrouped.BatchKey AS BatchKey,
 	|	AllDataGrouped.Quantity AS Quantity,
-	//#2066
+	|	//#2066
 	|	AllDataGrouped.InvoiceAmount AS InvoiceAmount,
 	|	AllDataGrouped.InvoiceTaxAmount AS InvoiceTaxAmount,
-	|
 	|	AllDataGrouped.IndirectCostAmount AS IndirectCostAmount,
 	|	AllDataGrouped.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-	|
 	|	AllDataGrouped.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	AllDataGrouped.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-	|
 	|	AllDataGrouped.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 	|	AllDataGrouped.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-	|
 	|	AllDataGrouped.AllocatedCostAmount AS AllocatedCostAmount,
 	|	AllDataGrouped.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-	|
 	|	AllDataGrouped.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	AllDataGrouped.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--
-	|
+	|	//--
 	|	AllDataGrouped.Document AS Document,
 	|	AllDataGrouped.Date AS Date,
 	|	AllDataGrouped.Company AS Company,
 	|	AllDataGrouped.Direction AS Direction,
 	|	AllDataGrouped.Batch AS Batch,
 	|	AllDataGrouped.QuantityBalance AS QuantityBalance,
-	//#2066
+	|	//#2066
 	|	AllDataGrouped.InvoiceAmountBalance AS InvoiceAmountBalance,
 	|	AllDataGrouped.InvoiceTaxAmountBalance AS InvoiceTaxAmountBalance,
-	|
 	|	AllDataGrouped.IndirectCostAmountBalance AS IndirectCostAmountBalance,
 	|	AllDataGrouped.IndirectCostTaxAmountBalance AS IndirectCostTaxAmountBalance,
-	|
 	|	AllDataGrouped.ExtraCostAmountByRatioBalance AS ExtraCostAmountByRatioBalance,
 	|	AllDataGrouped.ExtraCostTaxAmountByRatioBalance AS ExtraCostTaxAmountByRatioBalance,
-	|
 	|	AllDataGrouped.ExtraDirectCostAmountBalance AS ExtraDirectCostAmountBalance,
 	|	AllDataGrouped.ExtraDirectCostTaxAmountBalance AS ExtraDirectCostTaxAmountBalance,
-	|
 	|	AllDataGrouped.AllocatedCostAmountBalance AS AllocatedCostAmountBalance,
 	|	AllDataGrouped.AllocatedCostTaxAmountBalance AS AllocatedCostTaxAmountBalance,
-	|
 	|	AllDataGrouped.AllocatedRevenueAmountBalance AS AllocatedRevenueAmountBalance,
 	|	AllDataGrouped.AllocatedRevenueTaxAmountBalance AS AllocatedRevenueTaxAmountBalance,
-	//--
+	|	//--
 	|	AllDataGrouped.BatchDocument AS BatchDocument,
 	|	AllDataGrouped.SalesInvoice AS SalesInvoice,
 	|	AllDataGrouped.ProfitLossCenter AS ProfitLossCenter,

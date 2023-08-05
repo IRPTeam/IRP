@@ -186,10 +186,25 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="5c1f70f6-27f7-4669-a4fe-db57cb516579">
-    <name>CostMultiplierRatio</name>
+    <name>ExtraCostAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Cost multiplier ratio</value>
+      <value>Extra cost amount by ratio</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typePercent</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="90722689-dc12-4450-8761-59114c4cec24">
+    <name>ExtraCostTaxAmountByRatio</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra cost tax amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typePercent</types>
@@ -220,10 +235,25 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="add9125f-2f85-42ca-b167-82de61604519">
-    <name>AdditionalCost</name>
+    <name>ExtraDirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Additional cost</value>
+      <value>Extra direct cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4f5a6c32-b4dc-4ce8-8ef9-c7ae0f683018">
+    <name>ExtraDirectCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra direct cost tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

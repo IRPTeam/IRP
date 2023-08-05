@@ -561,7 +561,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>CostMultiplierRatio</name>
+        <name>ExtraCostAmountByRatio</name>
         <id>129</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -569,10 +569,10 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.CostMultiplierRatio</segments>
+          <segments>Object.ExtraCostAmountByRatio</segments>
         </dataPath>
         <extendedTooltip>
-          <name>CostMultiplierRatioExtendedTooltip</name>
+          <name>ExtraCostAmountByRatioExtendedTooltip</name>
           <id>131</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -587,7 +587,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>CostMultiplierRatioContextMenu</name>
+          <name>ExtraCostAmountByRatioContextMenu</name>
           <id>130</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -611,7 +611,57 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>AdditionalCost</name>
+        <name>ExtraCostTaxAmountByRatio</name>
+        <id>140</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.ExtraCostTaxAmountByRatio</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>ExtraCostTaxAmountByRatioExtendedTooltip</name>
+          <id>142</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>ExtraCostTaxAmountByRatioContextMenu</name>
+          <id>141</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>ExtraDirectCostAmount</name>
         <id>137</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -619,10 +669,10 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.AdditionalCost</segments>
+          <segments>Object.ExtraDirectCostAmount</segments>
         </dataPath>
         <extendedTooltip>
-          <name>AdditionalCostExtendedTooltip</name>
+          <name>ExtraDirectCostAmountExtendedTooltip</name>
           <id>139</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -637,8 +687,58 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AdditionalCostContextMenu</name>
+          <name>ExtraDirectCostAmountContextMenu</name>
           <id>138</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>ExtraDirectCostTaxAmount</name>
+        <id>143</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.ExtraDirectCostTaxAmount</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>ExtraDirectCostTaxAmountExtendedTooltip</name>
+          <id>145</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>ExtraDirectCostTaxAmountContextMenu</name>
+          <id>144</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>

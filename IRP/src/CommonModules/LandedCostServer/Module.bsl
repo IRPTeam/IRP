@@ -2360,8 +2360,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("IndirectCostAmount");
 	TableOfNewReceivedBatches.Columns.Add("IndirectCostTaxAmount");
 	
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostAmountByRatioRatio");
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostTaxAmountByRatioRatio");
+	TableOfNewReceivedBatches.Columns.Add("ExtraCostAmountByRatio");
+	TableOfNewReceivedBatches.Columns.Add("ExtraCostTaxAmountByRatio");
 	
 	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostAmount");
 	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostTaxAmount");
@@ -3126,13 +3126,21 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		EndDo; // DataForExpense
 		//#@1
 		If TypeOf(Row_Receipt.Document) = Type("DocumentRef.Production") Then
-			CostMultiplierRatio = Row_Receipt.Document.CostMultiplierRatio;
-			If CostMultiplierRatio <> 0 Then
+			_ExtraCostAmountByRatio = Row_Receipt.Document.ExtraCostAmountByRatio;
+			If _ExtraCostAmountByRatio <> 0 Then
 				//#2066		
-				NewRow.ExtraCostAmountByRatio = (NewRow.Amount + NewRow.ExtraCostAmountByRatio) / 100 * CostMultiplierRatio;
+				NewRow.ExtraCostAmountByRatio = (NewRow.InvoiceAmount + NewRow.ExtraCostAmountByRatio) / 100 * _ExtraCostAmountByRatio;
 			EndIf;	
+			
+			_ExtraCostTaxAmountByRatio = Row_Receipt.Document.ExtraCostTaxAmountByRatio;
+			If _ExtraCostTaxAmountByRatio <> 0 Then
+				//#2066		
+				NewRow.ExtraCostTaxAmountByRatio = (NewRow.InvoiceTaxAmount + NewRow.ExtraCostTaxAmountByRatio) / 100 * _ExtraCostTaxAmountByRatio;
+			EndIf;	
+			
 			//#2066
-			NewRow.ExtraDirectCostAmount = Row_Receipt.Document.AdditionalCost;
+			NewRow.ExtraDirectCostAmount = Row_Receipt.Document.ExtraDirectCostAmount;
+			NewRow.ExtraDirectCostTaxAmount = Row_Receipt.Document.ExtraDirectCostTaxAmount;
 		EndIf;
 		
 		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();

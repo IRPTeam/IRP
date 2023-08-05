@@ -87,17 +87,20 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.PlanningPeriod.Visible = isProduce;
 	Form.Items.PlanningPeriodStartDate.Visible = isProduce;
-	Form.Items.PlanningPeriodEndDate.Visible = isProduce;
-	Form.Items.ProductionPlanning.Visible = isProduce;
+	Form.Items.PlanningPeriodEndDate.Visible   = isProduce;
+	Form.Items.ProductionPlanning.Visible      = isProduce;
 
-	Form.Items.BillOfMaterials.Visible = isProduce;
-	Form.Items.DurationOfProduction.Visible = isProduce;
-	Form.Items.CostMultiplierRatio.Visible = isProduce;
-	Form.Items.AdditionalCost.Visible = isProduce;
+	Form.Items.BillOfMaterials.Visible           = isProduce;
+	Form.Items.DurationOfProduction.Visible      = isProduce;
+	Form.Items.ExtraCostAmountByRatio.Visible    = isProduce;
+	Form.Items.ExtraCostTaxAmountByRatio.Visible = isProduce;
+	
+	Form.Items.ExtraDirectCostAmount.Visible    = isProduce;
+	Form.Items.ExtraDirectCostTaxAmount.Visible = isProduce;
 
-	Form.Items.MaterialsItemBOM.Visible = isProduce;
-	Form.Items.MaterialsItemKeyBOM.Visible = isProduce;
-	Form.Items.MaterialsUnitBOM.Visible = isProduce;
+	Form.Items.MaterialsItemBOM.Visible     = isProduce;
+	Form.Items.MaterialsItemKeyBOM.Visible  = isProduce;
+	Form.Items.MaterialsUnitBOM.Visible     = isProduce;
 	Form.Items.MaterialsQuantityBOM.Visible = isProduce;
 	
 	Form.Items.MaterialsUpdateByBillOfMaterials.Visible = isProduce;

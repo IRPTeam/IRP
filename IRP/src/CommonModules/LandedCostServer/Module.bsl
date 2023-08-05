@@ -3175,7 +3175,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		
 		//#2066
 		NewRowReceivedBatch.InvoiceAmountBalance    = NewRow.InvoiceAmount;
-		NewRowReceivedBatch.InoiceTaxAmountBalance = NewRow.InvoiceTaxAmount;
+		NewRowReceivedBatch.InvoiceTaxAmountBalance = NewRow.InvoiceTaxAmount;
 		
 		NewRowReceivedBatch.IndirectCostAmountBalance  = NewRow.IndirectCostAmount;
 		NewRowReceivedBatch.IndirectCostTaxAmountBalance  = NewRow.IndirectCostTaxAmount;

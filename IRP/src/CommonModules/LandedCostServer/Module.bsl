@@ -1885,7 +1885,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				// sales invoice with transaction type "shipment to trade agent" is multi direction document
 				And Not IsShipmentToTradeAgent(Document) Then
 				
-				If Row.Amount = 0 AND Row.Company.LandedCostFillEmptyAmount 
+				If Row.InvoiceAmount = 0 AND Row.Company.LandedCostFillEmptyAmount 
 					AND (TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus")
 					OR TypeOf(Document) = Type("DocumentRef.SalesReturn")) Then
 						Price = GetPriceForEmptyAmountFromDataForReceipt(Row.BatchKey.ItemKey, Row.Date, Tables.DataForReceipt);
@@ -1903,10 +1903,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 							Price = GetItemInfo.ItemPriceInfo(PriceSettings).Price;
 						EndIf;
 						
-						Row.Amount        = Price * Row.Quantity;
-						Row.AmountBalance = Price * Row.Quantity;
+						Row.InvoiceAmount        = Price * Row.Quantity;
+						Row.InvoiceAmountBalance = Price * Row.Quantity;
 						
-						NewRow.Amount = Price * Row.Quantity;
+						NewRow.InvoiceAmount = Price * Row.Quantity;
 				EndIf; // fill empty amount
 				
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);

@@ -2492,7 +2492,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		EndDo;
 		ArrayForDelete = New Array();
 		For Each Row In Rows Do
-			If Not ValueIsFilled(Row.AmountBalance) Then
+			If Not ValueIsFilled(Row.InvoiceAmountBalance) Then
 				ArrayForDelete.Add(Row);
 			EndIf;
 		EndDo;
@@ -2702,7 +2702,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		EndDo;
 		ArrayForDelete = New Array();
 		For Each Row In Rows Do
-			If Not ValueIsFilled(Row.AmountBalance) Then
+			If Not ValueIsFilled(Row.InvoiceAmountBalance) Then
 				ArrayForDelete.Add(Row);
 			EndIf;
 		EndDo;
@@ -2960,7 +2960,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 	EndDo;
 	ArrayForDelete = New Array();
 	For Each Row In Rows Do
-		If Not ValueIsFilled(Row.AmountBalance) Then
+		If Not ValueIsFilled(Row.InvoiceAmountBalance) Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
@@ -3200,12 +3200,12 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 
 	ArrayForDelete = New Array();
 	For Each Row In TableOfNewReceivedBatches Do
-		If ValueIsFilled(Row.AmountBalance) Then
+		If ValueIsFilled(Row.InvoiceAmountBalance) Then
 			For Each Row2 In Rows Do
 				If Row.Batch = Row2.Batch 
 					And Row.BatchKey = Row2.BatchKey 
 					And Row.Direction = Row2.Direction 
-					And Not ValueIsFilled(Row2.AmountBalance) 
+					And Not ValueIsFilled(Row2.InvoiceAmountBalance) 
 					And ArrayForDelete.Find(Row2) = Undefined Then
 
 					ArrayForDelete.Add(Row2);
@@ -3451,7 +3451,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 	EndDo;
 	ArrayForDelete = New Array();
 	For Each Row In Rows Do
-		If Not ValueIsFilled(Row.AmountBalance) Then
+		If Not ValueIsFilled(Row.InvoiceAmountBalance) Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;

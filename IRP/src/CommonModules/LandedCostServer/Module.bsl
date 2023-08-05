@@ -2754,7 +2754,7 @@ Function GetPriceForEmptyAmountFromDataForReceipt(ItemKey, Period, DataForReceip
 		"SELECT
 		|	TemporaryTable.BatchKey,
 		|	TemporaryTable.Period,
-		|	TemporaryTable.Amount,
+		|	TemporaryTable.InvoiceAmount,
 		|	TemporaryTable.Quantity
 		|INTO VT
 		|FROM
@@ -2765,12 +2765,12 @@ Function GetPriceForEmptyAmountFromDataForReceipt(ItemKey, Period, DataForReceip
 		|SELECT TOP 1
 		|	VT.BatchKey,
 		|	VT.Period AS Period,
-		|	VT.Amount,
+		|	VT.InvoiceAmount,
 		|	VT.Quantity,
 		|	CASE
 		|		WHEN VT.Quantity = 0
 		|			THEN 0
-		|		ELSE VT.Amount / VT.Quantity
+		|		ELSE VT.InvoiceAmount / VT.Quantity
 		|	END AS Price
 		|FROM
 		|	VT AS VT
@@ -2799,12 +2799,12 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 		"SELECT TOP 1
 		|	BatchBalance.BatchKey,
 		|	BatchBalance.Period AS Period,
-		|	BatchBalance.Amount,
+		|	BatchBalance.InvoiceAmount,
 		|	BatchBalance.Quantity,
 		|	CASE
 		|		WHEN BatchBalance.Quantity = 0
 		|			THEN 0
-		|		ELSE BatchBalance.Amount / BatchBalance.Quantity
+		|		ELSE BatchBalance.InvoiceAmount / BatchBalance.Quantity
 		|	END AS Price
 		|FROM
 		|	AccumulationRegister.R6020B_BatchBalance AS BatchBalance
@@ -2812,7 +2812,7 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 		|	BatchBalance.ItemKey = &ItemKey
 		|	AND BatchBalance.Period <= &Period
 		|	AND BatchBalance.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|	AND BatchBalance.Amount > 0
+		|	AND BatchBalance.InvoiceAmount > 0
 		|
 		|ORDER BY
 		|	Period DESC";
@@ -3225,7 +3225,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		NewRow = Tables.DataForReceipt.Add();
 		FillPropertyValues(NewRow, Row_Receipt);
 		For Each Row_Expense In DataForExpense Do
-			If Not ValueIsFilled(Row_Expense.Amount) Then
+			If Not ValueIsFilled(Row_Expense.InvoiceAmount) Then
 				Continue;
 			EndIf;
 			Query = New Query();

@@ -398,7 +398,6 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Left value'   |
 		| 'Recorder'     |
-	And I click Clear button of the attribute named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter"
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table

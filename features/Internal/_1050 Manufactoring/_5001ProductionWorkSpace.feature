@@ -109,7 +109,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "BillOfMaterials" became equal to "Стремянка номер 6 ступенчатая"
-		And the editing text of form attribute named "CostMultiplierRatio" became equal to "0,00"
+		And the editing text of form attribute named "ExtraCostAmountByRatio" became equal to "0,00"
 		Then the form attribute named "Unit" became equal to "pcs"
 		And the editing text of form attribute named "Quantity" became equal to "2,000"
 		And "Materials" table became equal
@@ -237,7 +237,7 @@ Scenario: _5005 create IT from Production Workspace (product)
 		Then the form attribute named "Item" became equal to "Копыта на стремянки Класс 20х20, черный"
 		Then the form attribute named "ItemKey" became equal to "Копыта на стремянки Класс 20х20, черный"
 		Then the form attribute named "BillOfMaterials" became equal to "01 Копыта на стремянки Класс 20х20"
-		And the editing text of form attribute named "CostMultiplierRatio" became equal to "0,00"
+		And the editing text of form attribute named "ExtraCostAmountByRatio" became equal to "0,00"
 		Then the form attribute named "Unit" became equal to "pcs"
 		And the editing text of form attribute named "Quantity" became equal to "2,000"
 		And "Materials" table became equal

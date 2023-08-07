@@ -824,6 +824,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
 	Strings.Insert("Add_Setiings_005", NStr("en = 'Documents'", Lang));
 	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
+	Strings.Insert("Add_Setiings_007", NStr("en = 'Link\Unlink document rows'", Lang));
+	Strings.Insert("Add_Setiings_008", NStr("en = 'Disable - Calculate rows on link rows'", Lang));
 #EndRegion
 
 #Region Mobile

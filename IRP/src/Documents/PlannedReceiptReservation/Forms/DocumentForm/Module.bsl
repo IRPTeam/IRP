@@ -332,7 +332,7 @@ EndProcedure
 &AtServer
 Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;

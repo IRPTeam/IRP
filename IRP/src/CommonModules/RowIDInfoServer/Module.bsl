@@ -10843,8 +10843,8 @@ Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties
 	EndIf;
 EndProcedure
 
-Function LinkUnlinkDocumentRows(Object, FillingValues) Export
-	
+Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Export
+		
 	// Tables with linked documents, will be cleaning on unlink
 	TableNames_LinkedDocuments = GetTableNames_LinkedDocuments();
 	
@@ -10874,7 +10874,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 		
 		// Link
 		LinkRows = GetLinkRows(Object, FillingValue);
-		Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, UpdatedRows);
+		Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, UpdatedRows, CalculateRows);
 
 		Object.RowIDInfo.Clear();
 		For Each Row In FillingValue.RowIDInfo Do
@@ -10882,7 +10882,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 		EndDo;
 	
 	EndIf;
-	
+		
 	Return New Structure("UpdatedProperties, Rows", StrConcat(UpdatedProperties, ","), UpdatedRows);
 EndFunction
 
@@ -10980,11 +10980,11 @@ EndProcedure
 
 #Region Link
 
-Procedure Link(Object, FillingValue, LinkRows, TableNames, UpdatedProperties, UpdatedRows)
+Procedure Link(Object, FillingValue, LinkRows, TableNames, UpdatedProperties, UpdatedRows, CalculateRows)
 	For Each LinkRow In LinkRows Do
 		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows, CalculateRows);
 		
 		// Update tables
 		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);
@@ -11055,7 +11055,7 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows, CalculateRows)
 	ArrayOfRefillColumns = New Array();
 	ArrayOfRefillColumns.Add(Upper("TotalAmount"));
 	ArrayOfRefillColumns.Add(Upper("NetAmount"));
@@ -11065,6 +11065,30 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 
 	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 
+	ArrayOfBasisDocumentNames = New Array();
+	
+	ArrayOfBasisDocumentNames.Add(Upper("SalesOrder"));
+	ArrayOfBasisDocumentNames.Add(Upper("WorkOrder"));
+	ArrayOfBasisDocumentNames.Add(Upper("UseShipmentConfirmation")); 
+	ArrayOfBasisDocumentNames.Add(Upper("UseWorkSheet"));
+	ArrayOfBasisDocumentNames.Add(Upper("ShipmentBasis")); 
+	ArrayOfBasisDocumentNames.Add(Upper("SalesInvoice"));
+	ArrayOfBasisDocumentNames.Add(Upper("InventoryTransferOrder")); 
+	ArrayOfBasisDocumentNames.Add(Upper("InventoryTransfer"));
+	ArrayOfBasisDocumentNames.Add(Upper("PurchaseReturnOrder"));
+	ArrayOfBasisDocumentNames.Add(Upper("PurchaseReturn"));
+	ArrayOfBasisDocumentNames.Add(Upper("PurchaseBasis"));
+	ArrayOfBasisDocumentNames.Add(Upper("InternalSupplyRequest"));
+	ArrayOfBasisDocumentNames.Add(Upper("ReceiptBasis"));
+	ArrayOfBasisDocumentNames.Add(Upper("PurchaseOrder"));
+	ArrayOfBasisDocumentNames.Add(Upper("PurchaseInvoice")); 
+	ArrayOfBasisDocumentNames.Add(Upper("SalesReturn"));
+	ArrayOfBasisDocumentNames.Add(Upper("SalesReturnOrder"));
+	ArrayOfBasisDocumentNames.Add(Upper("RetailSalesReceipt"));	
+	ArrayOfBasisDocumentNames.Add(Upper("UseGoodsReceipt"));
+	ArrayOfBasisDocumentNames.Add(Upper("BasisDocument"));
+	ArrayOfBasisDocumentNames.Add(Upper("PhysicalInventory"));
+	
 	For Each Row_ItemList In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
@@ -11076,8 +11100,19 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 			For Each KeyValue In Row_ItemList Do
 				PropertyName = TrimAll(KeyValue.Key);
 				PropertyValue = KeyValue.Value;
-				If Upper(PropertyName) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price)
-					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType Then
+				
+				If Not CalculateRows Then
+					If ArrayOfBasisDocumentNames.Find(Upper(PropertyName)) = Undefined Then
+						Continue;	
+					EndIf;
+				EndIf;
+				
+				If Upper(PropertyName) = Upper("Price") 
+					And Row.Property("Price") 
+					And ValueIsFilled(Row.Price)
+					And Row.Property("PriceType") 
+					And Row.PriceType = Catalogs.PriceTypes.ManualPriceType Then
+					
 					NeedRefillColumns = False;
 					ArrayOfExcludingKeys.Add(Row_ItemList.Key);
 					Continue;
@@ -11099,7 +11134,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
 					If Row.Property(RefillColumn) And Row_ItemList.Property(RefillColumn) Then
-						Row[RefillColumn] = Row_ItemList[RefillColumn]; // ???
+						Row[RefillColumn] = Row_ItemList[RefillColumn];
 						PropertyName = TrimAll(RefillColumn);
 						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
 						IsLinked = True;
@@ -12849,3 +12884,17 @@ Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
 		EndDo;
 	EndDo;
 EndProcedure
+
+Procedure RemoveRecalculatedFieldsFromFillinValues(FillingValues) Export
+	For Each FillingValue In FillingValues Do
+		For Each KeyValue In FillingValue Do
+			If Upper(KeyValue.Key) = Upper("RowIDInfo") Then
+				Continue;
+			EndIf;
+			FillingValue.Delete(KeyValue.Key);
+		EndDo;
+		FillingValue.Insert("ItemList", New Array());
+	EndDo;
+EndProcedure
+
+

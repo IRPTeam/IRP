@@ -14578,19 +14578,6 @@ Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
 		EndIf;
 	EndDo;
 	
-//	If Object.Ref.Metadata().TabularSections.Find(TableName).Attributes.Find("DontCalculateRow") <> Undefined Then
-//		PropertyName = TableName + ".DontCalculateRow";
-//		Property = New Structure("DataPath", TrimAll(PropertyName));
-//		FormParameters = GetFormParameters(Form);
-//		ServerParameters = GetServerParameters(Object);
-//		ServerParameters.TableName = TableName;
-//		ServerParameters.IsBasedOn = False;
-//		ServerParameters.ReadOnlyProperties = PropertyName;
-//		ServerParameters.Rows = LinkedResult.Rows;
-//		Parameters = GetParameters(ServerParameters, FormParameters);
-//		API_SetProperty(Parameters, Property, Undefined);
-//	EndIf;
-
 	Return Parameters.ExtractedData;
 EndFunction
 

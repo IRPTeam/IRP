@@ -108,7 +108,7 @@ Procedure CreateMetadataTree()
 	ArrayOfSavedAttributes = GetArrayOfSavedAttributes();
 	ExistPredefinedDataNames = GetExistPredefinedDataNames();
 	
-	// POS
+	// Additional settings
 	NewRow = New Structure();
 	NewRow.Insert("GroupName", R().Add_Setiings_001);
 	NewRow.Insert("PictureIndex", 10);
@@ -661,6 +661,31 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewSetting.Insert("Name", "DisableChangeAuthor");
 	NewSetting.Insert("FullName", FullName + ".DisableChangeAuthor");
 	NewSetting.Insert("Synonym" , R().Add_Setiings_006);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Documents.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_Documents);
+	
+	
+	// Link \ Unlink document rows
+	FullName = "Documents.LinkUnlinkDocumentRows.Settings";
+	
+	NewRow_Documents = New Structure();
+	NewRow_Documents.Insert("FullName"     , FullName);
+	NewRow_Documents.Insert("Name"         , "LinkUnlinkDocumentRows");
+	NewRow_Documents.Insert("Synonym"      , R().Add_Setiings_007);
+	NewRow_Documents.Insert("PictureIndex" , 1);
+	NewRow_Documents.Insert("Rows"         , New Array());
+	
+	// Calculate rows on link rows
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "DisableCalculateRowsOnLinkRows");
+	NewSetting.Insert("FullName", FullName + ".DisableCalculateRowsOnLinkRows");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_008);
 	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
 	NewSetting.Insert("SettingID"      , New UUID());

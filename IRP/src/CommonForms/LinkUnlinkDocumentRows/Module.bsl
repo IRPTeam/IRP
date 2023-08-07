@@ -39,6 +39,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
 		FillBasisesTree(Parameters.SelectedRowInfo);
 	EndIf;
+	
+	ThisObject.SettingKey = ThisObject.MainFilter.Ref.Metadata().Name;
+	
+	DisableCalculateRowsOnLinkRows = 
+		CommonSettingsStorage.Load("Documents.LinkUnlinkDocumentRows.Settings.DisableCalculateRowsOnLinkRows", ThisObject.SettingKey);
+	If DisableCalculateRowsOnLinkRows = Undefined Then
+		DisableCalculateRowsOnLinkRows = UserSettingsServer.LinkUnlinkDocumentRows_Settings_DisableCalculateRowsOnLinkRows();
+	EndIf;
+	
+	ThisObject.CalculateRows = Not DisableCalculateRowsOnLinkRows;
+	
 EndProcedure
 
 &AtClient
@@ -60,6 +71,17 @@ Procedure ExpandAllTrees() Export
 	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
 	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
+EndProcedure
+
+&AtClient
+Procedure CalculateRowsOnChange(Item)
+	SaveUserSettingAtServer();
+EndProcedure
+
+&AtServer
+Procedure SaveUserSettingAtServer()
+	CommonSettingsStorage.Save("Documents.LinkUnlinkDocumentRows.Settings.DisableCalculateRowsOnLinkRows", 
+		ThisObject.SettingKey, Not ThisObject.CalculateRows);
 EndProcedure
 
 &AtClient
@@ -229,7 +251,8 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	FillingValues = GetFillingValues();
-	Close(New Structure("Operation, FillingValues", "LinkUnlinkDocumentRows", FillingValues));
+	Close(New Structure("Operation, FillingValues, CalculateRows", 
+		"LinkUnlinkDocumentRows", FillingValues, ThisObject.CalculateRows));
 EndProcedure
 
 &AtServer

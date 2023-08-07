@@ -11,19 +11,20 @@
     <value>Equipment APIModule</value>
   </synonym>
   <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
+  <choiceMode>QuickChoice</choiceMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <enumValues uuid="adee1199-8ec8-4751-aa8f-b0acd0bc5154">
     <name>FiscalPrinter_CommonAPI</name>
     <synonym>
       <key>en</key>
-      <value>Common API</value>
+      <value>Fiscal printer Common API</value>
     </synonym>
   </enumValues>
   <enumValues uuid="7da43a3c-38c2-40b6-bcac-9a906f5b4774">
     <name>Acquiring_CommonAPI</name>
     <synonym>
       <key>en</key>
-      <value>Common API</value>
+      <value>Acquiring Common API</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

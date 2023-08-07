@@ -186,7 +186,7 @@
     <name>EquipmentAPIModule</name>
     <synonym>
       <key>en</key>
-      <value>Equipment APIModule</value>
+      <value>Equipment API module</value>
     </synonym>
     <type>
       <types>EnumRef.EquipmentAPIModule</types>

@@ -5,6 +5,9 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.PageExtensionsAttributes);
+	
+	Items.EquipmentAPIModule.ChoiceList.Clear();
+	Items.EquipmentAPIModule.ChoiceList.LoadValues(GetEquipmentAPIModules(Object.EquipmentType));	
 EndProcedure
 
 &AtServer
@@ -235,6 +238,8 @@ Procedure EquipmentTypeOnChange(Item)
 			Object.EquipmentAPIModule = Undefined;
 		EndIf;
 	EndIf;
+	Items.EquipmentAPIModule.ChoiceList.Clear();
+	Items.EquipmentAPIModule.ChoiceList.LoadValues(GetEquipmentAPIModules(Object.EquipmentType));
 EndProcedure
 
 #EndRegion

@@ -33,6 +33,94 @@ EndFunction
 
 #EndRegion
 	
+// Validate email.
+// @skip-check property-return-type, invocation-parameter-type-intersect
+// 
+// Parameters:
+//  Address - String - Address
+//  RaiseOnFalse - Boolean - Raise on false
+// 
+// Returns:
+//  Boolean - Validate email
+Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
+
+	
+	LatinCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    Digits = "0123456789";
+    ValidSymbols = "-._@";
+    
+    ErrorArray = New Array; // Array Of String
+
+	If IsBlankString(Address) Then
+		ErrorArray.Add(R().EmailIsEmpty);
+	EndIf;
+
+    PartMail = StrSplit(Address, "@", False);
+    If PartMail.Count() <> 2 Then
+    	ErrorArray.Add(R().Only1SymbolAtCanBeSet);
+    EndIf;
+    
+    If ErrorArray.Count() = 0 Then // Skip if we have error from top lvl
+        DomainPart = PartMail[1];
+	    LocalPart = PartMail[0];
+	
+	    If StrLen(LocalPart) < 1 OR StrLen(LocalPart) > 64 Then
+	        ErrorArray.Add(R().InvalidLengthOfLocalPart);
+	    EndIf;
+	
+	    If StrLen(DomainPart) < 1 OR StrLen(DomainPart) > 255 Then
+	        ErrorArray.Add(R().InvalidLengthOfDomainPart);
+	    EndIf;
+	                     
+	    If Left(LocalPart, 1) = "." OR Right(LocalPart, 1) = "." Then
+	        ErrorArray.Add(R().LocalPartStartEndDot);
+	    EndIf;
+	
+	    If Find(LocalPart, "..") > 0 Then
+	        ErrorArray.Add(R().LocalPartConsecutiveDots);
+	    EndIf;
+	
+	    If Left(DomainPart, 1) = "." Then
+	        ErrorArray.Add(R().DomainPartStartsWithDot);
+	    EndIf;
+	
+	    If Find(DomainPart, "..") > 0 Then
+	        ErrorArray.Add(R().DomainPartConsecutiveDots);
+	    EndIf; 
+	
+		If StrOccurrenceCount(DomainPart, ".") = 0 Then
+	        ErrorArray.Add(R().DomainPartMin1Dot);
+	    EndIf;
+	
+	    DomainPartIdentifiers = StrSplit(DomainPart, ".");
+	    For Each DomainIdentifier IN DomainPartIdentifiers Do
+	        If StrLen(DomainIdentifier) > 63 Then
+	            ErrorArray.Add(R().DomainIdentifierExceedsLength);
+	        EndIf;
+	    EndDo;
+    EndIf;
+    
+	For Index = 1 To StrLen(Address) Do
+		Symbol = Mid(Address, Index, 1);
+		If StrFind(LatinCharacters + Digits + ValidSymbols, Symbol) = 0 Then
+			ErrorArray.Add(StrTemplate(R().InvalidCharacterInAddress, Symbol));
+		EndIf;
+	EndDo;
+
+    If ErrorArray.Count() > 0 Then
+        ErrorMessage = StrConcat(ErrorArray, Chars.LF);
+        If RaiseOnFalse Then
+            Raise ErrorMessage;
+        Else
+            Message(ErrorMessage);
+            Return False;
+        EndIf;
+    EndIf;
+
+  	Return True;
+EndFunction
+	
+	
 // Sort array.
 // 
 // Parameters:

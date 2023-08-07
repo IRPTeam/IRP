@@ -869,7 +869,9 @@ Function CheckAllExpenses(Parameters, AddInfo = Undefined)
 	|			Records_Exists.Store AS Store,
 	|			Records_Exists.ItemKey AS ItemKey
 	|		FROM
-	|			Records_Exists AS Records_Exists)) AS ActualStocks
+	|			Records_Exists AS Records_Exists
+	|		WHERE
+	|			Records_Exists.Store.NegativeStockControl)) AS ActualStocks
 	|WHERE
 	|	ActualStocks.QuantityExpense > 0
 	|	and ActualStocks.QuantityClosingBalance < 0";

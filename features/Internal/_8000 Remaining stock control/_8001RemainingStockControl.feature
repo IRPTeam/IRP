@@ -2987,7 +2987,150 @@ Scenario:_800082 check of FreeStock balance control without date limitation
 		And I close all client application windows
 		
 						
+Scenario:_800083 check stock control in the IT (Store sender does not use stock control, Store receiver Use)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93"	
+		And I change checkbox "Negative stock control"
+		And I click "Save and close" button
+	* Create first IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 08'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 02'    |
+			And I select current line in "List" table
+		* Filling item list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "100,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '38/18SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "20,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I delete "$$InventoryTransfer11$$" variable
+			And I delete "$$NumberInventoryTransfer11$$" variable
+			And I save the window as "$$InventoryTransfer11$$"
+			And I save the value of "Number" field as "$$NumberInventoryTransfer11$$"
+			And I click the button named "FormPostAndClose"
+	* Create second IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 08'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 02'    |
+			And I select current line in "List" table
+		* Filling item list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "101,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '38/18SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "21,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I delete "$$InventoryTransfer12$$" variable
+			And I delete "$$NumberInventoryTransfer12$$" variable
+			And I save the window as "$$InventoryTransfer12$$"
+			And I save the value of "Number" field as "$$NumberInventoryTransfer12$$"
+			And I click the button named "FormPostAndClose"
+	* Try unpost first IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberInventoryTransfer11$$' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I close all client application windows
+		
+
 				
+
+
+
 							
 				
 

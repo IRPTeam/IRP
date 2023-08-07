@@ -1046,7 +1046,7 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -1115,7 +1115,7 @@ Scenario: _0260141 return from POS (without basis document)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |

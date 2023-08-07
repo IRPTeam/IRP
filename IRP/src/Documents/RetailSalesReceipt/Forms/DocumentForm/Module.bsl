@@ -84,7 +84,11 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.ReadOnly = DocConsolidatedRetailSalesServer.IsClosedRetailDocument(Object.Ref);
+	If Form.UnlockForm Then
+		Form.ReadOnly = False;
+	Else
+		Form.ReadOnly = DocConsolidatedRetailSalesServer.IsClosedRetailDocument(Object.Ref);
+	EndIf;
 	
 	Form.Items.EditCurrencies.Enabled           = Not Form.ReadOnly;
 	Form.Items.AddBasisDocuments.Enabled        = Not Form.ReadOnly;
@@ -125,6 +129,12 @@ EndProcedure
 &AtClient 
 Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
+Procedure UnlockForm(Command)
+	UnlockForm = Not UnlockForm;
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -802,7 +812,7 @@ Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;

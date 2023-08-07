@@ -736,7 +736,7 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
-		PrintSlip(PaymentSettings);
+		PrintSlip(PaymentRow.Hardware, PaymentSettings);
 	EndIf;
 	
 	Return Result;
@@ -765,7 +765,7 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
-		PrintSlip(PaymentSettings);
+		PrintSlip(PaymentRow.Hardware, PaymentSettings);
 	EndIf;
 	Return Result;
 EndFunction
@@ -806,7 +806,7 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 		EndIf;
 	EndIf;
 	
-	PrintSlip(PaymentSettings);
+	PrintSlip(PaymentRow.Hardware, PaymentSettings);
 		
 	Return Result;
 EndFunction
@@ -822,15 +822,10 @@ Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 EndProcedure
 
 &AtClient
-Function Cutter()
-	Return Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF;
-EndFunction
-
-&AtClient
-Async Procedure PrintSlip(PaymentSettings)
+Async Procedure PrintSlip(Hardware, PaymentSettings)
 	SlipInfo = PaymentSettings.Out.Slip;
-	SlipInfoTmp = StrReplace(SlipInfo, Cutter(), "⚪");       
-	SlipInfoTmp = StrReplace(SlipInfoTmp, "[cut]", "⚪");
+	Cutter = CommonFunctionsServer.GetRefAttribute(Hardware, "Cutter");
+	SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
 
 	For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
 		PaymentSettings.Out.Slip = SlipInfoPart;

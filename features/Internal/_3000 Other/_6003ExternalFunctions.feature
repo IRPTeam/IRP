@@ -121,20 +121,20 @@ Scenario: _602704 check function date as name
 			| 'Description'    | 'Reference'         |
 			| 'Date as name'   | '$CurrentDate1$'    |
 
-Scenario: _602706 check user message
-	Then I stop script execution "Skipped"
-	And I close all client application windows
-	* Open External functions
-		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
-	* Select function
-		And I go to line in "List" table
-			| 'Description'    | 'Enable'    |
-			| 'User message'   | 'Yes'       |
-		And I select current line in "List" table	
-	* Сheck for the current date update		
-		And I click the button named "Run"
-		Then there are lines in TestClient message log
-			| 'Some test'    |
+# Scenario: _602706 check user message
+# 	Then I stop script execution "Skipped"
+# 	And I close all client application windows
+# 	* Open External functions
+# 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
+# 	* Select function
+# 		And I go to line in "List" table
+# 			| 'Description'    | 'Enable'    |
+# 			| 'User message'   | 'Yes'       |
+# 		And I select current line in "List" table	
+# 	* Сheck for the current date update		
+# 		And I click the button named "Run"
+# 		Then there are lines in TestClient message log
+# 			| 'Some test'    |
 		
 
 // Scenario: _602710 sheduller settings (Normal test)

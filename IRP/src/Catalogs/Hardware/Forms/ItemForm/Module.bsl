@@ -225,6 +225,18 @@ Async Procedure GetLastError(Command)
 	CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription);
 EndProcedure
 
+&AtClient
+Procedure EquipmentTypeOnChange(Item)
+	EquipmentAPIModulesList = GetEquipmentAPIModules(Object.EquipmentType);
+	If EquipmentAPIModulesList.Find(Object.EquipmentAPIModule) = Undefined Then
+		If EquipmentAPIModulesList.Count() > 0 Then
+			Object.EquipmentAPIModule = EquipmentAPIModulesList[0];			
+		Else
+			Object.EquipmentAPIModule = Undefined;
+		EndIf;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region Internal
@@ -243,5 +255,17 @@ Procedure EndTestDevice(Result, OutParameters, AddInfo) Export
 		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServer
+Function GetEquipmentAPIModules(EquipmentType)
+	EqTypeName = MetadataInfo.EnumNameByRef(Object.EquipmentType);
+	Array = New Array; // Array Of EnumRef.EquipmentAPIModule
+	For Each EnumValues In Metadata.Enums.EquipmentAPIModule.EnumValues Do
+		If StrStartsWith(EnumValues.Name, EqTypeName) Then
+			Array.Add(Enums.EquipmentAPIModule[EnumValues.Name]);
+		EndIf;
+	EndDo;
+	Return Array;
+EndFunction
 
 #EndRegion

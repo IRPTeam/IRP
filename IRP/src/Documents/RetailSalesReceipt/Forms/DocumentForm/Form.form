@@ -8230,6 +8230,36 @@
    <placementArea>UserCmds</placementArea>
    <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
   </items>
+  <items xsi:type="form:Button">
+   <name>FormUnlockForm</name>
+   <id>1218</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>FormUnlockFormExtendedTooltip</name>
+    <id>1219</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <commandName>Form.Command.UnlockForm</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -8887,6 +8917,31 @@
    <itemValueType/>
   </extInfo>
  </attributes>
+ <attributes>
+  <name>UnlockForm</name>
+  <title>
+   <key>en</key>
+   <value>Unlock form</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Разблокировать форму</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Unlock form</value>
+  </title>
+  <id>175</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SetSpecialOffersAtRow</name>
   <title>
@@ -9269,6 +9324,34 @@
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>UnlockForm</name>
+  <title>
+   <key>en</key>
+   <value>Unlock form</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Разблокировать форму</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Unlock form</value>
+  </title>
+  <id>15</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Change</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>UnlockForm</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

@@ -1949,7 +1949,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 		And "ResultsTree" table became equal
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 052 dated 07.09.2021 21:06:20'        | ''         | ''     | ''       | ''         |
-			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07' | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07:30' | ''         | ''     | ''       | ''         |
 			| 'Scarf (XS/Red)'                                     | '99,000'   | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Scarf (XS/Red)'                                     | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Sales order 1 053 dated 07.09.2021 10:00:00'        | ''         | ''     | ''       | ''         |
@@ -1969,7 +1969,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 			| 'Sales order 1 053 dated 07.09.2021 10:00:00'        | ''         | ''     | ''       | ''         |
 			| 'Scarf (XS/Red)'                                     | '5,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Sales order 1 052 dated 07.09.2021 21:06:20'        | ''         | ''     | ''       | ''         |
-			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07' | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07:30' | ''         | ''     | ''       | ''         |
 			| 'Scarf (XS/Red)'                                     | '100,000'  | 'pcs'  | '100,00' | 'TRY'      |
 		And in the table "BasisesTree" I click "Auto link" button
 		And I click "Ok" button

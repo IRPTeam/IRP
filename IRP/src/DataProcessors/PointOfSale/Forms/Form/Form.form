@@ -534,6 +534,96 @@
         <items xsi:type="form:FormGroup">
          <name>ItemListPage</name>
          <id>975</id>
+         <items xsi:type="form:FormGroup">
+          <name>CommandBarItemList</name>
+          <id>1326</id>
+          <items xsi:type="form:Button">
+           <name>AddBasisDocuments</name>
+           <id>1322</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <extendedTooltip>
+            <name>AddBasisDocumentsExtendedTooltip</name>
+            <id>1323</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+             <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+             <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+           </extendedTooltip>
+           <commandName>Form.Command.AddBasisDocuments</commandName>
+           <representation>Auto</representation>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <placementArea>UserCmds</placementArea>
+           <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+          </items>
+          <items xsi:type="form:Button">
+           <name>LinkUnlinkBasisDocuments</name>
+           <id>1324</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <extendedTooltip>
+            <name>LinkUnlinkBasisDocumentsExtendedTooltip</name>
+            <id>1325</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+             <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+             <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+           </extendedTooltip>
+           <commandName>Form.Command.LinkUnlinkBasisDocuments</commandName>
+           <representation>Auto</representation>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <placementArea>UserCmds</placementArea>
+           <representationInContextMenu>Auto</representationInContextMenu>
+           <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+           <name>CommandBarItemListExtendedTooltip</name>
+           <id>1327</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <type>CommandBar</type>
+          <extInfo xsi:type="form:CommandBarExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+           <commandSource>Item.ItemList</commandSource>
+          </extInfo>
+         </items>
          <items xsi:type="form:Table">
           <name>ItemList</name>
           <id>606</id>
@@ -546,6 +636,18 @@
            <segments>Object.ItemList</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
+          <excludedCommands>Change</excludedCommands>
+          <excludedCommands>SortListDesc</excludedCommands>
+          <excludedCommands>Add</excludedCommands>
+          <excludedCommands>MoveDown</excludedCommands>
+          <excludedCommands>CopyToClipboard</excludedCommands>
+          <excludedCommands>Choose</excludedCommands>
+          <excludedCommands>OutputList</excludedCommands>
+          <excludedCommands>Copy</excludedCommands>
+          <excludedCommands>MoveUp</excludedCommands>
+          <excludedCommands>EndEdit</excludedCommands>
+          <excludedCommands>SortListAsc</excludedCommands>
+          <excludedCommands>ShowRowRearrangement</excludedCommands>
           <items xsi:type="form:FormGroup">
            <name>ItemListGroupItem</name>
            <id>857</id>
@@ -1502,6 +1604,7 @@
             <common>true</common>
            </userVisible>
            <horizontalAlign>Left</horizontalAlign>
+           <autoFill>true</autoFill>
           </autoCommandBar>
           <handlers>
            <event>OnActivateRow</event>
@@ -1800,50 +1903,6 @@
         </extendedTooltip>
         <type>Pages</type>
         <extInfo xsi:type="form:PagesGroupExtInfo">
-         <currentRowUse>Auto</currentRowUse>
-        </extInfo>
-       </items>
-       <items xsi:type="form:FormGroup">
-        <name>GroupBottom</name>
-        <id>1027</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <title>
-         <key>en</key>
-         <value>Group bottom</value>
-        </title>
-        <title>
-         <key>ru</key>
-         <value>Группа подвал</value>
-        </title>
-        <title>
-         <key>tr</key>
-         <value>Grup footer</value>
-        </title>
-        <extendedTooltip>
-         <name>GroupBottomExtendedTooltip</name>
-         <id>1028</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
-         <type>Label</type>
-         <autoMaxWidth>true</autoMaxWidth>
-         <autoMaxHeight>true</autoMaxHeight>
-         <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-         </extInfo>
-        </extendedTooltip>
-        <type>UsualGroup</type>
-        <extInfo xsi:type="form:UsualGroupExtInfo">
-         <group>HorizontalIfPossible</group>
-         <showLeftMargin>true</showLeftMargin>
-         <united>true</united>
-         <throughAlign>Auto</throughAlign>
          <currentRowUse>Auto</currentRowUse>
         </extInfo>
        </items>
@@ -2906,16 +2965,16 @@
          <name>GroupCommonButtons2</name>
          <id>905</id>
          <items xsi:type="form:Button">
-          <name>ItemListShowItems</name>
-          <id>661</id>
+          <name>SelectBasisDocument</name>
+          <id>1320</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
            <common>true</common>
           </userVisible>
           <extendedTooltip>
-           <name>ItemListShowItemsExtendedTooltip</name>
-           <id>662</id>
+           <name>SelectBasisDocumentExtendedTooltip</name>
+           <id>1321</id>
            <visible>true</visible>
            <enabled>true</enabled>
            <userVisible>
@@ -2929,16 +2988,16 @@
            </extInfo>
           </extendedTooltip>
           <type>UsualButton</type>
-          <commandName>Form.Command.ShowItems</commandName>
+          <commandName>Form.Command.SelectBasisDocument</commandName>
           <representation>Auto</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <placementArea>UserCmds</placementArea>
-          <borderColor xsi:type="core:ColorRef">
-           <color>Style.FormBackColor</color>
-          </borderColor>
+          <backColor xsi:type="core:ColorRef">
+           <color>Style.ButtonBackColor</color>
+          </backColor>
           <font xsi:type="core:FontRef">
            <font>Style.NormalTextFont</font>
           </font>
@@ -8286,115 +8345,6 @@ End</presentationExpression>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <formCommands>
-  <name>ShowPictures</name>
-  <title>
-   <key>en</key>
-   <value>Show pictures</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Показывать картинки</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Resimleri göster</value>
-  </title>
-  <id>6</id>
-  <toolTip>
-   <key>en</key>
-   <value>Show pictures</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Показывать картинки</value>
-  </toolTip>
-  <toolTip>
-   <key>tr</key>
-   <value>Resimleri göster</value>
-  </toolTip>
-  <use>
-   <common>true</common>
-  </use>
-  <picture xsi:type="core:PictureRef">
-   <picture>CommonPicture.EmptyPicture</picture>
-  </picture>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>ShowPictures</name>
-   </handler>
-  </action>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>ShowItems</name>
-  <title>
-   <key>en</key>
-   <value>Show
-items</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Товары
-</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Ürün
-seç</value>
-  </title>
-  <id>8</id>
-  <toolTip>
-   <key>en</key>
-   <value>Show items</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Показать товары</value>
-  </toolTip>
-  <toolTip>
-   <key>tr</key>
-   <value>Malzemeleri göster</value>
-  </toolTip>
-  <use>
-   <common>true</common>
-  </use>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>ShowItems</name>
-   </handler>
-  </action>
-  <representation>Text</representation>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>OpenPickupItems</name>
-  <title>
-   <key>en</key>
-   <value>Pickup</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подбор товара</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <id>9</id>
-  <use>
-   <common>true</common>
-  </use>
-  <picture xsi:type="core:PictureRef">
-   <picture>CommonPicture.ItemKeyPicture</picture>
-  </picture>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>OpenPickupItems</name>
-   </handler>
-  </action>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
   <name>SearchByBarcode</name>
   <title>
    <key>en</key>
@@ -9044,34 +8994,6 @@ elemanı seç</value>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <formCommands>
-  <name>OpenPickupItems1</name>
-  <title>
-   <key>en</key>
-   <value>Pickup</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Подбор товара</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Seç</value>
-  </title>
-  <id>34</id>
-  <use>
-   <common>true</common>
-  </use>
-  <picture xsi:type="core:PictureRef">
-   <picture>CommonPicture.ItemKeyPicture</picture>
-  </picture>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>OpenPickupItems</name>
-   </handler>
-  </action>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
   <name>UpdateOffersPreview</name>
   <title>
    <key>en</key>
@@ -9098,6 +9020,95 @@ elemanı seç</value>
    </handler>
   </action>
   <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>SelectBasisDocument</name>
+  <title>
+   <key>en</key>
+   <value>Select basis
+document</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать документ¶
+основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Select basis
+document</value>
+  </title>
+  <id>36</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Document</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SelectBasisDocument</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>AddBasisDocuments</name>
+  <title>
+   <key>en</key>
+   <value>Add basis documents</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить документы основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kaynak evrak ekle</value>
+  </title>
+  <id>37</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>AddBasisDocuments</name>
+   </handler>
+  </action>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>LinkUnlinkBasisDocuments</name>
+  <title>
+   <key>en</key>
+   <value>Link unlink basis documents</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Залинковать/разлинковать документы основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bağlı olmayan kaynak evrakı ile bağlantı kur</value>
+  </title>
+  <id>38</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.QueryWizardTempTableDescription</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>LinkUnlinkBasisDocuments</name>
+   </handler>
+  </action>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

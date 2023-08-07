@@ -241,4 +241,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="f5db3c2b-ca24-41a0-94a5-d1f8843aab20">
+  <name>SelectBasisDocument</name>
+  <synonym>
+   <key>en</key>
+   <value>Select basis document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выбрать документ основания</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Select basis document</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -427,11 +427,6 @@ EndProcedure
 #Region FormCommandsEventHandlers
 
 &AtClient
-Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
 	If ValueIsFilled(Object.Agreement) Then
@@ -657,8 +652,54 @@ Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 		Object.RetailCustomer = Value;
 		DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject,
 			ThisObject.Items.RetailCustomer);
+		
+	EndIf;
+	SetSelectBasisDocumentColor();
+EndProcedure
+
+&AtClient
+Procedure SetSelectBasisDocumentColor()
+	If Object.RetailCustomer.IsEmpty() Then
+		Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.WhenActive;
+		Items.SelectBasisDocument.BackColor = Items.SearchByBarcode.BackColor;
+	Else
+		IsRetailCustomerHasOrders = IsRetailCustomerHasOrders();
+		If IsRetailCustomerHasOrders Then
+			Items.SelectBasisDocument.BackColor = WebColors.GreenYellow;
+			Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.Always;
+		Else
+			Items.SelectBasisDocument.ShapeRepresentation = ButtonShapeRepresentation.WhenActive;
+			Items.SelectBasisDocument.BackColor = Items.SearchByBarcode.BackColor;
+		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServer
+Function IsRetailCustomerHasOrders()
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT ALLOWED DISTINCT
+		|	R2012B_SalesOrdersInvoiceClosingBalance.Order
+		|FROM
+		|	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order.RetailCustomer = &RetailCustomer) AS
+		|		R2012B_SalesOrdersInvoiceClosingBalance
+		|WHERE
+		|	R2012B_SalesOrdersInvoiceClosingBalance.QuantityBalance > 0
+		|
+		|UNION ALL
+		|
+		|SELECT DISTINCT
+		|	R4012B_StockReservationBalance.Order
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order.RetailCustomer = &RetailCustomer) AS
+		|		R4012B_StockReservationBalance";
+	
+	Query.SetParameter("RetailCustomer", Object.RetailCustomer);
+	
+	Return Not Query.Execute().IsEmpty();
+
+EndFunction
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
@@ -974,7 +1015,7 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	
 	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	For Each CreatedDocument In CreatedDocuments Do
-		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+		Await PrintFiscalReceipt(CreatedDocument);
 	EndDo;
 	
 	PaymentForm.Close();
@@ -1139,16 +1180,6 @@ Async Function PrintFiscalReceipt(DocumentRef)
 	Return EquipmentPrintFiscalReceiptResult.Success;
 EndFunction
 
-&AtClient
-Async Function PrintTextDocument(DocumentRef)
-	If Object.ConsolidatedRetailSales.IsEmpty() Then
-		Return True;
-	EndIf;
-	
-	EquipmentPrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, DocumentRef);
-	Return EquipmentPrintResult.Success;
-EndFunction
-
 &AtServer
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
@@ -1206,7 +1237,6 @@ Function WriteTransaction(Result)
 				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
 			EndIf;
 		EndDo;
-//		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum, RRNCode, PaymentInfo", "Amount,Commission");
 		
 		If ThisObject.RetailBasis.IsEmpty() Then
 			CreateReturnWithoutBase(PaymentsTable);
@@ -1245,17 +1275,6 @@ Function WriteTransaction(Result)
 	
 	Return CashbackAmount;
 EndFunction
-
-&AtClient
-Procedure ShowPictures()
-	Items.ItemListShowPictures.Check = Not Items.ItemPicture.Visible;
-	Items.ItemPicture.Visible = Items.ItemListShowPictures.Check;
-EndProcedure
-
-&AtClient
-Procedure ShowItems()
-	SetShowItems();
-EndProcedure
 
 &AtClient
 Procedure SetShowItems()
@@ -1329,6 +1348,7 @@ Procedure ClearRetailCustomer(Command)
 
 	ClearRetailCustomerAtServer();
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Items.RetailCustomer);
+	SetSelectBasisDocumentColor();
 EndProcedure
 
 &AtServer
@@ -1431,7 +1451,7 @@ EndProcedure
 Async Procedure PrintCashIn(CashIn)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashIn, "ConsolidatedRetailSales");
 	If ValueIsFilled(ConsolidatedRetailSales) Then
-		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
+		Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
 				, CashIn
 				, GetSumm(CashIn));
 	EndIf;
@@ -1503,7 +1523,7 @@ EndProcedure
 Async Procedure PrintCashOut(CashOut)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashOut, "ConsolidatedRetailSales");
 	If Not ConsolidatedRetailSales.IsEmpty() Then
-		EquipmentResult = Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
+		Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
 				, CashOut
 				, CommonFunctionsServer.GetRefAttribute(CashOut, "SendAmount"));
 	EndIf;
@@ -1965,6 +1985,126 @@ Procedure CheckByRetailBasisAtServer()
 		EndIf;
 	EndDo;
 
+EndProcedure
+
+#EndRegion
+
+#Region BasisDocument
+
+&AtClient
+Procedure SelectBasisDocument(Command)
+	OpenFormNotifyDescription = New NotifyDescription("SelectBasisDocumentClose", ThisObject);
+	FormParameters = New Structure();
+	FormParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+// Select basis document close.
+// 
+// Parameters:
+//  Result - DocumentRef.SalesOrder - Result
+//  AdditionalData - Structure - Additional data
+&AtClient
+Procedure SelectBasisDocumentClose(Result, AdditionalData) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	FillOnSelectBasisDocument(Result);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
+	ThisObject.Object.ControlCodeStrings.Clear();
+	ControlCodeStringsClient.UpdateState(ThisObject.Object);
+	FillSalesPersonInItemList();
+	EnabledPaymentButton();
+EndProcedure
+
+&AtServer
+Procedure FillOnSelectBasisDocument(BasisDocRef)
+	
+	NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	FillParameters = New Structure("Basises, Ref", New Array, NewDocRef);
+	FillParameters.Basises.Add(BasisDocRef);	
+	
+	BasisesTable = RowIDInfoPrivileged.GetBasises(NewDocRef, FillParameters);
+
+	If BasisesTable.Count() = 0 Then
+		Return;
+	EndIf;
+
+	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, BasisDocRef);
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(NewDocRef.Metadata(), ExtractedData);
+	
+	NewObj = Documents.RetailSalesReceipt.CreateDocument();
+	NewObj.Fill(FillingValues[0]);
+	ValueToFormAttribute(NewObj, "Object");
+	Taxes_CreateFormControls();
+	
+EndProcedure
+
+#EndRegion
+
+#Region LINKED_DOCUMENTS
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	ThisObject.Modified = True;
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+EndProcedure
+
+&AtServer
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
+	
+	ExtractedData = Undefined;
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+	LockLinkedRows();
+	Return ExtractedData;
+EndFunction
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 
 #EndRegion

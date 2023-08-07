@@ -576,7 +576,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -673,7 +673,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -751,7 +751,7 @@ Scenario: _0154139 check payments form in the Point of sale
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1321,7 +1321,7 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1363,7 +1363,7 @@ Scenario: _0154188 check customer on change in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add items and payment
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1429,7 +1429,7 @@ Scenario: _0154141 manual price adjustment in the POS
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -1483,7 +1483,7 @@ Scenario:  _0154142 change comment in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1523,7 +1523,7 @@ Scenario:  _0154143 change payment term in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -3794,7 +3794,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"	
 	* Add items and payment
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -3975,7 +3975,7 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |

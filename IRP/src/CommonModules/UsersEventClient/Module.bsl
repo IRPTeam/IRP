@@ -25,6 +25,8 @@ Procedure CloseChangePasswordForm(Result, AdditionalParameters) Export
 		Exit(False);
 	EndIf;
 
-	UsersEvent.DoneChangePasswordOnLogon(Result.Password);
+	If Not UsersEvent.DoneChangePasswordOnLogon(Result.Password) Then
+		OpenChangePasswordForm();
+	EndIf;
 	
 EndProcedure

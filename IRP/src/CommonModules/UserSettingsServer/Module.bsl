@@ -28,6 +28,15 @@ Function AllDocuments_AdditionalSettings_DisableChangeAuthor(val User = Undefine
 	Return False;	
 EndFunction
 
+Function LinkUnlinkDocumentRows_Settings_DisableCalculateRowsOnLinkRows(val User = Undefined) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"Documents.LinkUnlinkDocumentRows.Settings.DisableCalculateRowsOnLinkRows"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;	
+EndFunction
+
 #EndRegion
 
 Function GetPredefinedUserSettingNames() Export
@@ -248,9 +257,7 @@ EndProcedure
 
 Function GeneratePassword() Export
 
-	Var Alphabet, Index, NewPass, RNG;
-
-	Alphabet = "1234567890ABCDEFGHKLMNPRSTUVWXYZ";
+	Alphabet = "1234567890ABCDEFGHKLMNPRSTUVWXYZ!@#$%&";
 
 	RNG = New RandomNumberGenerator();
 	NewPass = "";

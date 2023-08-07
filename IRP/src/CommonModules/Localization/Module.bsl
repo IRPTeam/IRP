@@ -1603,6 +1603,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_006", NStr("en='Disable - Change author';
 		|ru='Отключить - Изменять автора';
 		|tr='Disable - Change author'", Lang));
+	Strings.Insert("Add_Setiings_007", NStr("en='Link\Unlink document rows';
+		|ru='Линковка\Разлинковать строки документов';
+		|tr='Link\Unlink document rows'", Lang));
+	Strings.Insert("Add_Setiings_008", NStr("en='Disable - Calculate rows on link rows';
+		|ru='Отключить - Расчитать строки при линковке';
+		|tr='Disable - Calculate rows on link rows'", Lang));
 #EndRegion
 
 #Region Mobile

@@ -134,6 +134,11 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(110).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1206).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create RetailGoodsReceipt objects with Retail return receipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailGoodsReceipt.FindByNumber(1204).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(2207).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 
 Scenario: _0425001 check preparation
@@ -814,6 +819,37 @@ Scenario: _042534 check Retail return receipt movements by the Register  "R3011 
 			| ''                                                      | '15.03.2021 16:01:25'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Outgoing'    | ''                          | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
 			| ''                                                      | '15.03.2021 16:01:25'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Outgoing'    | ''                          | ''                  | 'TRY'        | 'TRY'                            | 'No'                      |
 			| ''                                                      | '15.03.2021 16:01:25'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Outgoing'    | ''                          | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+		And I close all client application windows
+
+
+Scenario: _042535 check Retail return receipt movements absence by the Register  "R4011 Free stocks" (RGR exist) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 207'     |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R4011 Free stocks"    |
+		And I close all client application windows
+
+Scenario: _042536 check Retail return receipt movements absence by the Register  "R4010 Actual stocks" (RGR exist) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 207'     |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R4010 Actual stocks"    |
 		And I close all client application windows
 
 Scenario: _042530 Retail return receipt clear posting/mark for deletion

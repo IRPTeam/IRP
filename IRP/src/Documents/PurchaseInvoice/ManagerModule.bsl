@@ -1326,7 +1326,9 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*
+		   |	*,
+		   |	BatchKeysInfo.Amount AS InvoiceAmount, 
+		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo

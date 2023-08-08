@@ -263,8 +263,12 @@ EndProcedure
 
 &AtServer
 Function GetEquipmentAPIModules(EquipmentType)
-	EqTypeName = MetadataInfo.EnumNameByRef(Object.EquipmentType);
 	Array = New Array; // Array Of EnumRef.EquipmentAPIModule
+	If Object.EquipmentType.IsEmpty() Then
+		Return Array;
+	EndIf;
+	
+	EqTypeName = MetadataInfo.EnumNameByRef(Object.EquipmentType);
 	For Each EnumValues In Metadata.Enums.EquipmentAPIModule.EnumValues Do
 		If StrStartsWith(EnumValues.Name, EqTypeName) Then
 			Array.Add(Enums.EquipmentAPIModule[EnumValues.Name]);

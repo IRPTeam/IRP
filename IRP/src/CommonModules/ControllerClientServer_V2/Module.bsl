@@ -4278,7 +4278,8 @@ Function BindAgreement(Parameters)
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeRecordPurchasePricesByAgreement");
 		
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
@@ -4524,6 +4525,43 @@ Procedure StepChangePriceIncludeTaxByAgreement(Parameters, Chain) Export
 	Options.CurrentPriceIncludeTax = GetPriceIncludeTax(Parameters);
 	Options.StepName = "StepChangePriceIncludeTaxByAgreement";
 	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RECORD_PURCHASE_PRICES
+
+// RecordPurchasePrices.Set
+Procedure SetRecordPurchasePrices(Parameters, Results) Export
+	Binding = BindRecordPurchasePrices(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// RecordPurchasePrices.Get
+Function GetRecordPurchasePrices(Parameters)
+	Return GetPropertyObject(Parameters, "RecordPurchasePrices");
+EndFunction
+
+// RecordPurchasePrices.Bind
+Function BindRecordPurchasePrices(Parameters)
+	DataPath = "RecordPurchasePrices";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindRecordPurchasePrices");
+EndFunction
+
+// RecordPurchasePrices.ChangeRecordPurchasePricesByAgreement.Step
+Procedure StepChangeRecordPurchasePricesByAgreement(Parameters, Chain) Export
+	Chain.ChangeRecordPurchasePricesByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeRecordPurchasePricesByAgreement.Setter = "SetRecordPurchasePrices";
+	Options = ModelClientServer_V2.ChangeRecordPurchasePricesByAgreementOptions();
+	Options.Agreement = GetAgreement(Parameters);
+	Options.CurrentRecordPurchasePrices = GetRecordPurchasePrices(Parameters);
+	Options.StepName = "StepChangeRecordPurchasePricesByAgreement";
+	Chain.ChangeRecordPurchasePricesByAgreement.Options.Add(Options);
 EndProcedure
 
 #EndRegion

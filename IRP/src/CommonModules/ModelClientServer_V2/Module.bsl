@@ -276,6 +276,7 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByAgreement"             , GetChainLink("ChangeStoreByAgreementExecute"));
 	Chain.Insert("ChangeDeliveryDateByAgreement"      , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"   , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeRecordPurchasePricesByAgreement"   , GetChainLink("ChangeRecordPurchasePricesByAgreementExecute"));
 	Chain.Insert("ChangeBasisDocumentByAgreement"     , GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"             , GetChainLink("ChangeOrderByAgreementExecute"));
 	Chain.Insert("ChangeApArPostingDetailByAgreement" , GetChainLink("ChangeApArPostingDetailByAgreementExecute"));
@@ -1107,6 +1108,22 @@ Function ChangePriceIncludeTaxByAgreementExecute(Options) Export
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	Return AgreementInfo.PriceIncludeTax;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECORD_PURCHASE_PRICES_BY_AGREEMENT
+
+Function ChangeRecordPurchasePricesByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentRecordPurchasePrices");
+EndFunction
+
+Function ChangeRecordPurchasePricesByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentRecordPurchasePrices;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	Return AgreementInfo.RecordPurchasePrices;
 EndFunction
 
 #EndRegion

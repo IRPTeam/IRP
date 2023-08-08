@@ -1018,6 +1018,7 @@
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
   <informationRegisters>InformationRegister.JobQueue</informationRegisters>
+  <informationRegisters>InformationRegister.S1001L_VendorsPricesByItemKey</informationRegisters>
   <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>

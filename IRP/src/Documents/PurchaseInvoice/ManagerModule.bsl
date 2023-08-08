@@ -512,8 +512,10 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 		   |	PurchaseInvoiceItemList.TaxAmount AS TaxAmount,
 		   |	PurchaseInvoiceItemList.Key,
+		   |	PurchaseInvoiceItemList.PriceType,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
+		   |	PurchaseInvoiceItemList.Ref.RecordPurchasePrices AS RecordPurchasePrices,
 		   |	PurchaseInvoiceItemList.IsAdditionalItemCost,
 		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
 		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
@@ -727,6 +729,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	Return QueryArray;
 EndFunction
 
@@ -1476,6 +1479,51 @@ Function R8015T_ConsignorPrices()
 		   |	SourceOfOrigins.SerialLotNumberStock";
 EndFunction
 
+Function S1001L_VendorsPricesByItemKey()
+	Return "SELECT
+	|	PurchaseInvoiceItemList.Period,
+	|	PurchaseInvoiceItemList.PriceType,
+	|	PurchaseInvoiceItemList.Unit,
+	|	PurchaseInvoiceItemList.ItemKey,
+	|	PurchaseInvoiceItemList.Currency,
+	|	PurchaseInvoiceItemList.Partner,
+	|	SUM(PurchaseInvoiceItemList.Price * PurchaseInvoiceItemList.Quantity) AS SumPrice,
+	|	SUM(PurchaseInvoiceItemList.Quantity) AS SumQuantity,
+	|	SUM(PurchaseInvoiceItemList.Amount) AS Amount,
+	|	SUM(PurchaseInvoiceItemList.NetAmount) AS NetAmount
+	|INTO VTRecordPurchasePrices
+	|FROM
+	|	ItemList AS PurchaseInvoiceItemList
+	|WHERE
+	|	PurchaseInvoiceItemList.RecordPurchasePrices
+	|GROUP BY
+	|	PurchaseInvoiceItemList.Period,
+	|	PurchaseInvoiceItemList.Currency,
+	|	PurchaseInvoiceItemList.Partner,
+	|	PurchaseInvoiceItemList.ItemKey,
+	|	PurchaseInvoiceItemList.Unit,
+	|	PurchaseInvoiceItemList.PriceType
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VT.Period,
+	|	VT.PriceType,
+	|	VT.Partner,
+	|	VT.ItemKey,
+	|	VT.Unit,
+	|	VT.Currency,
+	|	VT.SumPrice / VT.SumQuantity AS Price,
+	|	VT.Amount / VT.SumQuantity AS TotalPrice,
+	|	VT.NetAmount / VT.SumQuantity AS NetPrice
+	|INTO S1001L_VendorsPricesByItemKey
+	|FROM
+	|	VTRecordPurchasePrices AS VT
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP VTRecordPurchasePrices";
+EndFunction
 #EndRegion
 
 #Region AccessObject

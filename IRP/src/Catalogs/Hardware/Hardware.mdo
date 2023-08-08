@@ -161,6 +161,37 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a7b5979a-509c-4c6e-9bf6-6e30ba7711e6">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IntegrationType</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.IntegrationType.EnumValue.Equipment</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="be92f354-e2f8-4cd0-a519-9cb6c38c396a">
+    <name>EquipmentAPIModule</name>
+    <synonym>
+      <key>en</key>
+      <value>Equipment API module</value>
+    </synonym>
+    <type>
+      <types>EnumRef.EquipmentAPIModule</types>
+    </type>
+  </attributes>
   <tabularSections uuid="fd9a6894-9c06-4625-91a4-5db398bbb9ac">
     <producedTypes>
       <objectType typeId="b8fed1f0-7596-48b4-9c7e-bbe156d72e69" valueTypeId="1acf60ec-ede0-41cf-8e2a-c53aee5f71c5"/>

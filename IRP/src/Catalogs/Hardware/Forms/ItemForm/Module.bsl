@@ -5,6 +5,9 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.PageExtensionsAttributes);
+	
+	Items.EquipmentAPIModule.ChoiceList.Clear();
+	Items.EquipmentAPIModule.ChoiceList.LoadValues(GetEquipmentAPIModules(Object.EquipmentType));	
 EndProcedure
 
 &AtServer
@@ -225,6 +228,20 @@ Async Procedure GetLastError(Command)
 	CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription);
 EndProcedure
 
+&AtClient
+Procedure EquipmentTypeOnChange(Item)
+	EquipmentAPIModulesList = GetEquipmentAPIModules(Object.EquipmentType);
+	If EquipmentAPIModulesList.Find(Object.EquipmentAPIModule) = Undefined Then
+		If EquipmentAPIModulesList.Count() > 0 Then
+			Object.EquipmentAPIModule = EquipmentAPIModulesList[0];			
+		Else
+			Object.EquipmentAPIModule = Undefined;
+		EndIf;
+	EndIf;
+	Items.EquipmentAPIModule.ChoiceList.Clear();
+	Items.EquipmentAPIModule.ChoiceList.LoadValues(GetEquipmentAPIModules(Object.EquipmentType));
+EndProcedure
+
 #EndRegion
 
 #Region Internal
@@ -243,5 +260,21 @@ Procedure EndTestDevice(Result, OutParameters, AddInfo) Export
 		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServer
+Function GetEquipmentAPIModules(EquipmentType)
+	Array = New Array; // Array Of EnumRef.EquipmentAPIModule
+	If Object.EquipmentType.IsEmpty() Then
+		Return Array;
+	EndIf;
+	
+	EqTypeName = MetadataInfo.EnumNameByRef(Object.EquipmentType);
+	For Each EnumValues In Metadata.Enums.EquipmentAPIModule.EnumValues Do
+		If StrStartsWith(EnumValues.Name, EqTypeName) Then
+			Array.Add(Enums.EquipmentAPIModule[EnumValues.Name]);
+		EndIf;
+	EndDo;
+	Return Array;
+EndFunction
 
 #EndRegion

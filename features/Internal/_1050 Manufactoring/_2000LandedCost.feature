@@ -588,7 +588,7 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost5" by template
 
-Scenario: _2020 check filling additional cost from bill of material
+Scenario: _2020 check filling extra direct cost from bill of material
 	And I close all client application windows
 	* Create production
 		Given I open hyperlink "e1cib/list/Document.Production"
@@ -602,7 +602,8 @@ Scenario: _2020 check filling additional cost from bill of material
 		And I select from the drop-down list named "Item" by "Product" string
 		And I move to the next attribute
 	* Check filling AdditionalCost
-		And the editing text of form attribute named "AdditionalCost" became equal to "100,00"
+		And the editing text of form attribute named "ExtraDirectCostAmount" became equal to "100,00"
+		And the editing text of form attribute named "ExtraDirectCostTaxAmount" became equal to "20,00"		
 	And I close all client application windows
 
 				

@@ -140,7 +140,6 @@ Function GetLinkedDocumentsFilter_RGR(Object) Export
 	Filter.Insert("Company"            , Object.Company);
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	Filter.Insert("TransactionType"    , Map.Get(Object.TransactionType));
-	//#2080
 	Filter.Insert("PartnerSales"       , Object.Partner);
 	Filter.Insert("LegalNameSales"     , Object.LegalName);
 	Filter.Insert("TransactionTypeRGR" , Object.TransactionType);
@@ -237,7 +236,6 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
-	//#2080
 	Filter.Insert("CompanyReturn"      , Object.Company);
 	Filter.Insert("BranchReturn"       , Object.Branch);
 	Filter.Insert("TransactionTypeRGR" , PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer"));

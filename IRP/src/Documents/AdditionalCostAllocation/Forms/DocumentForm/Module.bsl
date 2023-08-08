@@ -692,7 +692,7 @@ Function GetBatchKeyInfo(FilterTable)
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
 	|	FilterTable.Store,
-	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS Amount,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(CASE
 	|		WHEN T6020S_BatchKeysInfo.ItemKey.Weight <> 0

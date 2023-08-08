@@ -846,7 +846,7 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
 	|	sum(isnull(R6020B_BatchBalance.Quantity, 0)) AS QuantityBatchBalance,
-	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AmountCost, 0)) AS AmountBatchBalance,
+	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AllocatedCostAmount, 0)) AS AmountBatchBalance,
 	|	0 AS Amount
 	|FROM
 	|	ItemList AS ItemList

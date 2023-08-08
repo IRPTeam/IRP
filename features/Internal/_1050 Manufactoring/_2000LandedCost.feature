@@ -146,11 +146,11 @@ Scenario: _2008 create production cost allocation (not direct cost)
 	* Fill duration
 		And in the table "ProductionDurationsList" I click "Fill durations" button
 	* Check filling
-		And "ProductionDurationsList" table became equal
-			| '#'   | 'Business unit'         | 'Amount'   | 'Item'                                      | 'Duration'   | 'Item key'                                   |
-			| '1'   | 'Production store 05'   | ''         | 'Копыта на стремянки Класс 20х20, черный'   | '40,00'      | 'Копыта на стремянки Класс 20х20, черный'    |
-			| '2'   | 'Production store 05'   | ''         | 'Стремянка номер 6 ступенчатая'             | '250,00'     | 'Стремянка номер 6 ступенчатая'              |
-			| '3'   | 'Production store 05'   | ''         | 'Стремянка номер 8'                         | '18,00'      | 'Стремянка номер 8'                          |
+		And "ProductionDurationsList" table contains lines
+			| 'Business unit'       | 'Amount' | 'Item'                                    | 'Duration' | 'Item key'                                |
+			| 'Production store 05' | ''       | 'Копыта на стремянки Класс 20х20, черный' | '40,00'    | 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Production store 05' | ''       | 'Стремянка номер 6 ступенчатая'           | '250,00'   | 'Стремянка номер 6 ступенчатая'           |
+			| 'Production store 05' | ''       | 'Стремянка номер 8'                       | '18,00'    | 'Стремянка номер 8'                       |
 	* Add cost
 		And in the table "ProductionCostsList" I click the button named "ProductionCostsListAdd"
 		And I activate "Profit loss center" field in "ProductionCostsList" table

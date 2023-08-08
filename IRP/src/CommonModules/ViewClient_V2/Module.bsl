@@ -190,7 +190,15 @@ EndFunction
 
 // returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey, ShipmentToTradeAgent.ItemKey, ReceiptFromConsignor.ItemKey, ProductionDurationsList.ItemKey";
+	Return "ItemList.Store, 
+		|ItemList.DeliveryDate, 
+		|ItemList.ItemKey, 
+		|Inventory.ItemKey, 
+		|ShipmentToTradeAgent.ItemKey, 
+		|ReceiptFromConsignor.ItemKey, 
+		|ProductionDurationsList.ItemKey,
+		|Payments.BankTerm,
+		|Payments.PaymentType";
 EndFunction
 
 // returns list of Form attributes for get value before the change
@@ -218,21 +226,36 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+//		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+//		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
-		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
+		__tmp_CommonDocuments_OnChainComplete(Parameters, False);
 		Return;
 	EndIf;
 	
+	// SalesOrder
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		And Upper(Parameters.Form.FormName) = Upper("Document.SalesOrder.Form.DocumentForm") Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, True);
+			Return;
+	EndIf;
+	
+	// RetailReturnReceipt
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		And Upper(Parameters.Form.FormName) = Upper("Document.RetailReturnReceipt.Form.DocumentForm") Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, True);
+			Return;
+	EndIf;
+	
+	// RetailSalesReceipt
 	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		And Upper(Parameters.Form.FormName) = Upper("Document.RetailSalesReceipt.Form.DocumentForm") Then
-			__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
+			__tmp_CommonDocuments_OnChainComplete(Parameters, True);
 			Return;
 	EndIf;
 	
@@ -319,7 +342,7 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 	Return True;
 EndFunction
 
-Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
+Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 	
 	// ItemList.Store is changed
 	If Parameters.EventCaller = "ItemListStoreOnUserChange" Then
@@ -336,6 +359,8 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	ArrayOfEventCallers.Add("AgreementOnUserChange");
 	ArrayOfEventCallers.Add("StoreOnUserChange");
 	ArrayOfEventCallers.Add("RetailCustomerOnUserChange");
+	ArrayOfEventCallers.Add("PaymentsBankTermOnUserChange");
+	ArrayOfEventCallers.Add("PaymentsPaymentTypeOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
 		CommitChanges(Parameters);
@@ -344,6 +369,23 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	
 	QuestionsParameters = New Array();
 	ChangedPoints = New Structure();
+	
+	If IsRetail Then
+		Changes_Partner           = IsChangedProperty(Parameters, "Payments.PaymentAgentPartner");
+		Changes_LegalName         = IsChangedProperty(Parameters, "Payments.PaymentAgentLegalName");
+		Changes_PartnerTerms      = IsChangedProperty(Parameters, "Payments.PaymentAgentPartnerTerms");
+		Changes_LegalNameContract = IsChangedProperty(Parameters, "Payments.PaymentAgentLegalNameContract");
+		
+		If Changes_Partner.IsChanged 
+			Or Changes_LegalName.IsChanged
+			Or Changes_PartnerTerms.IsChanged 
+			Or Changes_LegalNameContract.IsChanged Then
+			
+			ChangedPoints.Insert("IsChangedPaymentsPaymentAgent");
+			QuestionsParameters.Add(New Structure("Action, QuestionText",
+				"PaymentAgent", R().QuestionToUser_026));
+		EndIf;
+	EndIf;
 	
 	Changes = IsChangedProperty(Parameters, "ItemList.Store");
 	If Changes.IsChanged Then // refill question ItemList.Store
@@ -699,6 +741,13 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		DataPaths = "Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt";
 		ArrayOfDataPaths.Add(DataPaths);
 		If Not Answer.Property("UpdateStores") Then
+			RemoveFromCache(DataPaths, Parameters);
+		EndIf;
+	EndIf;
+	
+	If ChangedPoints.Property("IsChangedPaymentsPaymentAgent") Then
+		DataPaths = "Payments.BankTerm, Payments.PaymentType";
+		If Not Answer.Property("UpdatePaymentAgent") Then
 			RemoveFromCache(DataPaths, Parameters);
 		EndIf;
 	EndIf;
@@ -3935,8 +3984,21 @@ EndProcedure
 // Payments.PaymentType
 Procedure PaymentsPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("Payments.PaymentType", FormParameters, Rows);
+	FormParameters.EventCaller = "PaymentsPaymentTypeOnUserChange";
+
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "Payments";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
+
+//	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+//	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
 EndProcedure
 
 // Payments.PaymentType.Set
@@ -3973,10 +4035,23 @@ EndProcedure
 #Region PAYMENTS_BANK_TERM
 
 // Payments.BankTerm
-Procedure PaymentsBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentsBankTermOnChange(Object, Form, CurrentData = Undefined) Export	
 	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("Payments.BankTerm", FormParameters, Rows);
+	FormParameters.EventCaller = "PaymentsBankTermOnUserChange";
+
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "Payments";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
+	
+//	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+//	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
 EndProcedure
 
 // Payments.BankTerm.Set

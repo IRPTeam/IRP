@@ -354,7 +354,12 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("GetCommissionPercent"	 , GetChainLink("GetCommissionPercentExecute"));
+	Chain.Insert("ChangePercentByBankTermAndPaymentType"	       , GetChainLink("ChangePercentByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangePartnerByBankTermAndPaymentType"	       , GetChainLink("ChangePartnerByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangePartnerTermsByBankTermAndPaymentType"	   , GetChainLink("ChangePartnerTermsByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeLegalNameContractByBankTermAndPaymentType" , GetChainLink("ChangeLegalNameContractByBankTermAndPaymentTypeExecute"));
+	
 	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
@@ -3873,14 +3878,62 @@ EndFunction
 
 #EndRegion
 
-#Region GET_COMMISSION_PERCENT
+#Region CHANGE_PERCENT_BY_BANK_TERM_AND_PAYMENT_TYPE
 
-Function GetCommissionPercentOptions() Export
+Function ChangePercentByBankTermAndPaymentTypeOptions() Export
 	Return GetChainLinkOptions("PaymentType, BankTerm");
 EndFunction
 
-Function GetCommissionPercentExecute(Options) Export
-	Return ModelServer_V2.GetCommissionPercentExecute(Options);
+Function ChangePercentByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangePartnerByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangePartnerByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LEGAL_NAME_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangeLegalNameByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangeLegalNameByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).LegalName;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_TERMS_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangePartnerTermsByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangePartnerTermsByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).PartnerTerms;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LEGAL_NAME_CONTRACT_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangeLegalNameContractByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangeLegalNameContractByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
 EndFunction
 
 #EndRegion

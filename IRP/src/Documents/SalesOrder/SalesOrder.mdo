@@ -1447,6 +1447,84 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="8ccc9ae2-b5c5-46eb-be53-a32f756cbba6">
+      <name>PaymentAgentPartner</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9ea4577f-6ae2-4c3d-9393-c84117ec4f99">
+      <name>PaymentAgentLegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.SalesOrder.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0ad3afe5-fce0-40f1-9b38-362fb5963f50">
+      <name>PaymentAgentPartnerTerms</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent partner terms</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.SalesOrder.TabularSection.Payments.Attribute.PaymentAgentPartner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Document.SalesOrder.TabularSection.Payments.Attribute.PaymentAgentLegalName</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.AgreementTypes.EnumValue.Other</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4661c294-c199-4a8d-a76e-43ae4064b216">
+      <name>PaymentAgentLegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment agent legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="dfd9e9d2-ee27-4ebe-9b6b-fe33040161c4">
     <producedTypes>

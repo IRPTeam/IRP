@@ -136,29 +136,37 @@ Function GetUnitFactor(FromUnit, ToUnit) Export
 	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
 EndFunction
 
-Function GetCommissionPercentExecute(Options) Export
+Function GetBankTermInfo(PaymentType, BankTerm) Export
+	Return ServerReuse.GetBankTermInfo(PaymentType, BankTerm);
+EndFunction
+
+Function _GetBankTermInfo(PaymentType, BankTerm) Export
+	Result = New Structure("Percent, Partner, LegalName, PartnerTerms, LegalNameContract",
+	0, Undefined, Undefined, Undefined, Undefined);
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	BankTermsPaymentTypes.Percent
+		|	BankTermsPaymentTypes.Percent AS Percent,
+		|	BankTermsPaymentTypes.Partner AS Partner,
+		|	BankTermsPaymentTypes.LegalName AS LegalName,
+		|	BankTermsPaymentTypes.PartnerTerms AS PartnerTerms,
+		|	BankTermsPaymentTypes.LegalNameContract AS LegalNameContract
 		|FROM
 		|	Catalog.BankTerms.PaymentTypes AS BankTermsPaymentTypes
 		|WHERE
 		|	BankTermsPaymentTypes.Ref = &Ref
 		|	AND BankTermsPaymentTypes.PaymentType = &PaymentType";
 	
-	Query.SetParameter("Ref", Options.BankTerm);
-	Query.SetParameter("PaymentType", Options.PaymentType);
+	Query.SetParameter("Ref", BankTerm);
+	Query.SetParameter("PaymentType", PaymentType);
 	
 	QueryResult = Query.Execute();
-	
-	SelectionDetailRecords = QueryResult.Select();
-	
-	While SelectionDetailRecords.Next() Do
-		Return SelectionDetailRecords.Percent;
-	EndDo;
-
-	Return 0;
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
 EndFunction
 
 Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export

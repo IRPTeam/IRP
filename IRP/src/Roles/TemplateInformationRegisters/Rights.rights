@@ -1290,7 +1290,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("PriceType", "Partner", "", "", "","")</condition>
+				<condition>#AccessRegisters("PriceType", "", "", "", "","")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>

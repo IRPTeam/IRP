@@ -1540,6 +1540,9 @@ Scenario:  _0154143 change payment term in POS
 			| 'Description'              |
 			| 'Retail partner term 2'    |
 			And I click the button named "FormCreate"
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I input "Retail partner term 2" text in "ENG" field
 			And I click Select button of "Multi currency movement type" field
 			Then "Multi currency movement types" window is opened
@@ -2401,6 +2404,9 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -2723,6 +2729,9 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |

@@ -1013,6 +1013,29 @@ Scenario: _0401034 check there is no Purchase invoice movements by the Register 
 			| 'Register  "R5010 Reconciliation statement"'    |
 		And I close all client application windows
 
+Scenario: _0401035 check Purchase invoice movements by the Register  "S1001L Vendors prices by item key" (record purchase prices)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '117'       |
+	* Check movements by the Register  "S1001L Vendors prices by item key" 
+		And I click "Registrations report" button
+		And I select "S1001L Vendors prices by item key" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| 'Document registrations records'                 | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| 'Register  "S1001L Vendors prices by item key"'  | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| ''                                               | 'Period'              | 'Resources' | ''            | ''          | 'Dimensions'              | ''          | ''          | ''     | ''         |
+			| ''                                               | ''                    | 'Price'     | 'Total price' | 'Net price' | 'Price type'              | 'Partner'   | 'Item key'  | 'Unit' | 'Currency' |
+			| ''                                               | '12.02.2021 15:12:15' | '100'       | '90'          | '76,27'     | 'en description is empty' | 'Ferron BP' | 'S/Yellow'  | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '100'       | '100'         | '84,75'     | 'en description is empty' | 'Ferron BP' | '37/18SD'   | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '150'       | '135'         | '114,41'    | 'en description is empty' | 'Ferron BP' | 'Internet'  | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '200'       | '180'         | '152,54'    | 'en description is empty' | 'Ferron BP' | '36/Yellow' | 'pcs'  | 'TRY'      |	
+		And I close all client application windows
+
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

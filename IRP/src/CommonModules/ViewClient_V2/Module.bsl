@@ -746,7 +746,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	If ChangedPoints.Property("IsChangedPaymentsPaymentAgent") Then
-		DataPaths = "Payments.BankTerm, Payments.PaymentType";
+		DataPaths = "Payments.PaymentAgentPartner, Payments.PaymentAgentLegalName, Payments.PaymentAgentPartnerTerms ,Payments.PaymentAgentLegalNameContract";
 		If Not Answer.Property("UpdatePaymentAgent") Then
 			RemoveFromCache(DataPaths, Parameters);
 		EndIf;

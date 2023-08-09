@@ -12239,11 +12239,7 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType,
-		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
-		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
-		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
-		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
+		"StepChangePercentByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
@@ -12323,11 +12319,7 @@ Function BindPaymentsBankTerm(Parameters)
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType,
-		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
-		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
-		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
-		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
+		"StepChangePercentByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsBankTerm");
 EndFunction

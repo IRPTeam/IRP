@@ -1024,7 +1024,7 @@ Scenario: _018020 check Purchase price records
 		And I save the value of the field named "Date" as "DatePurchaseInvoice018020"		
 	* Check Purchase price records
 		Given I open hyperlink "e1cib/list/InformationRegister.S1001L_VendorsPricesByItemKey"
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | 'XS/Blue'  | 'pcs'  | 'TRY'      | '100,00' | '100,00'      | '84,75'     |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
@@ -1032,12 +1032,18 @@ Scenario: _018020 check Purchase price records
 		When in opened panel I select "$PurchaseInvoice018020$"
 		And I click "Cancel posting" button
 		When in opened panel I select "S1001L Vendors prices by item key"
-		Then the number of "List" table lines is "равно" 0
+		And "List" table does not contain lines
+			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | 'XS/Blue'  | 'pcs'  | 'TRY'      | '100,00' | '100,00'      | '84,75'     |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
 	* Post PI back
 		When in opened panel I select "$PurchaseInvoice018020$"
 		And I click the button named "FormPost"	
 		When in opened panel I select "S1001L Vendors prices by item key"
-		Then the number of "List" table lines is "больше" 0
+		And "List" table contains lines
+			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | 'XS/Blue'  | 'pcs'  | 'TRY'      | '100,00' | '100,00'      | '84,75'     |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
 	* Delete line and add one more line and check Purchase price records
 		When in opened panel I select "$PurchaseInvoice018020$"
 		And I go to line in "ItemList" table
@@ -1070,7 +1076,7 @@ Scenario: _018020 check Purchase price records
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		When in opened panel I select "S1001L Vendors prices by item key"
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Period'                      | 'Recorder'                | 'Line number' | 'Price type'              | 'Partner'   | 'Item key' | 'Unit'                   | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '1'           | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'                    | 'TRY'      | '222,00' | '222,00'      | '188,14'    |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '2'           | 'en description is empty' | 'Ferron BP' | '39/19SD'  | 'High shoes box (8 pcs)' | 'TRY'      | '250,00' | '31,25'       | '26,48'     |

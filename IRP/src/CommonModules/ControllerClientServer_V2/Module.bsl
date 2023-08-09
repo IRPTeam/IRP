@@ -7169,7 +7169,7 @@ Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
 	EndIf;
 	Chain.GetCommissionPercent.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
@@ -7180,11 +7180,11 @@ EndProcedure
 
 // PaymentList.CommissionPercent.ChangePercentByAmount.Step
 Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
-	Chain.ChangeCommissionPercentByAmount.Enable = True;
+	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeCommissionPercentByAmount.Setter = "SetPaymentListCommissionPercent";
+	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options     = ModelClientServer_V2.CalculateCommissionPercentByAmountOptions();
 		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
@@ -7192,7 +7192,7 @@ Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
 		Options.DisableNextSteps = True;
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeCommissionPercentByAmount";
-		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
+		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
@@ -12544,7 +12544,7 @@ Procedure StepChangePaymentAgentPartnerByBankTermAndPaymentType(Parameters, Chai
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangePartnerByBankTermAndPaymentType.Setter = "SetPaymentsPartner";
+	Chain.ChangePartnerByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentPartner";
 	For Each Row In GetRows(Parameters, "Payments") Do
 		Options     = ModelClientServer_V2.ChangePartnerByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
@@ -12578,7 +12578,7 @@ Procedure StepChangePaymentAgentLegalNameByBankTermAndPaymentType(Parameters, Ch
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeLegalNameByBankTermAndPaymentType.Setter = "SetPaymentsLegalName";
+	Chain.ChangeLegalNameByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentLegalName";
 	For Each Row In GetRows(Parameters, "Payments") Do
 		Options     = ModelClientServer_V2.ChangeLegalNameByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
@@ -12612,7 +12612,7 @@ Procedure StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType(Parameters,
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangePartnerTermsByBankTermAndPaymentType.Setter = "SetPaymentsPartnerTerms";
+	Chain.ChangePartnerTermsByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentPartnerTerms";
 	For Each Row In GetRows(Parameters, "Payments") Do
 		Options     = ModelClientServer_V2.ChangePartnerTermsByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
@@ -12646,7 +12646,7 @@ Procedure StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType(Parame
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeLegalNameContractByBankTermAndPaymentType.Setter = "SetPaymentsLegalNameContract";
+	Chain.ChangeLegalNameContractByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentLegalNameContract";
 	For Each Row In GetRows(Parameters, "Payments") Do
 		Options     = ModelClientServer_V2.ChangeLegalNameContractByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);

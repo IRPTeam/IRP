@@ -194,6 +194,7 @@ Function _GetAgreementInfo(Agreement) Export
 	|	Table.CurrencyMovementType AS CurrencyMovementType,
 	|	Table.ApArPostingDetail,
 	|	Table.TradeAgentFeeType,
+	|	Table.RecordPurchasePrices,
 	|	Table.TradeAgentFeePercent
 	|FROM
 	|	Catalog.Agreements AS Table

@@ -772,6 +772,9 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 			And I input "Ferron, USD" text in the field named "Description_en"
 			And I change "Type" radio button value to "Customer"
 			And I change "AP/AR posting detail" radio button value to "By documents"
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I input "234" text in "Number" field
 			And I click Select button of "Company" field
 			And I go to line in "List" table

@@ -964,3 +964,129 @@ Scenario: _300503 check connection to Purchase invoice report "Related documents
 		And Delay 1
 	Then "* Related documents" window is opened
 	And I close all client application windows
+
+
+Scenario: _018020 check Purchase price records
+	And I close all client application windows
+	* Create new PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description'     |
+				| 'Ferron BP'       |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'            |
+				| 'Vendor Ferron, USD'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+				| Description     |
+				| Store 02        |
+		And I select current line in "List" table	
+	* Check filling attribute Record price from partner term
+		Then the form attribute named "RecordPurchasePrices" became equal to "No"
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'            |
+				| 'Vendor Ferron, TRY'     |
+		And I select current line in "List" table
+		Then the form attribute named "RecordPurchasePrices" became equal to "Yes"
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "XS/Blue" from "Item key" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "boots" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "37/18SD" from "Item key" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "221,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"	
+		And I save the window as "PurchaseInvoice018020"
+		And I save the value of "Number" field as "NumberPurchaseInvoice018020"
+		And I save the value of the field named "Date" as "DatePurchaseInvoice018020"		
+	* Check Purchase price records
+		Given I open hyperlink "e1cib/list/InformationRegister.S1001L_VendorsPricesByItemKey"
+		And "List" table became equal
+			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | 'XS/Blue'  | 'pcs'  | 'TRY'      | '100,00' | '100,00'      | '84,75'     |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
+	* Unpost PI and check price clearance
+		When in opened panel I select "$PurchaseInvoice018020$"
+		And I click "Cancel posting" button
+		When in opened panel I select "S1001L Vendors prices by item key"
+		Then the number of "List" table lines is "равно" 0
+	* Post PI back
+		When in opened panel I select "$PurchaseInvoice018020$"
+		And I click the button named "FormPost"	
+		When in opened panel I select "S1001L Vendors prices by item key"
+		Then the number of "List" table lines is "больше" 0
+	* Delete line and add one more line and check Purchase price records
+		When in opened panel I select "$PurchaseInvoice018020$"
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I delete a line in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "222,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "High shoes" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "39/19SD" from "Item key" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'            |
+			| 'High shoes box (8 pcs)' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "250,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		When in opened panel I select "S1001L Vendors prices by item key"
+		And "List" table became equal
+			| 'Period'                      | 'Recorder'                | 'Line number' | 'Price type'              | 'Partner'   | 'Item key' | 'Unit'                   | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '1'           | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'                    | 'TRY'      | '222,00' | '222,00'      | '188,14'    |
+			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '2'           | 'en description is empty' | 'Ferron BP' | '39/19SD'  | 'High shoes box (8 pcs)' | 'TRY'      | '250,00' | '31,25'       | '26,48'     |
+		And I close all client application windows
+		
+				
+				
+
+
+				
+				
+
+
+		
+						
+
+				
+		
+			

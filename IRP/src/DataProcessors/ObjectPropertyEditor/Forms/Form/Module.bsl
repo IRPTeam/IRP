@@ -755,6 +755,10 @@ Procedure SetNewTable()
 		ThisObject.isTableMode = True;
 		SetTableSettings(ThisObject);
 		SetSourceSettingsForTable(ThisObject);
+	ElsIf StrStartsWith(GetObjectTable(ThisObject), "InfoReg_") Then
+		ThisObject.isTableMode = False;
+		SetTableSettings(ThisObject);
+		SetSourceSettings(ThisObject);
 	Else
 		ThisObject.isTableMode = False;
 		SetTableSettings(ThisObject);
@@ -851,6 +855,15 @@ Function GetDCSchema(Form)
 	DataSet.Name = "DataSet";
 	DataSet.DataSource = "DataSources";
 	
+	If StrStartsWith(Table_String, "InfoReg_") Then
+		RegName = Mid(Table_String, 9);
+		MasterDimension = GetRegisterMasterDimension(Table_String);
+		SourceTable = "InformationRegister." + RegName;  
+	Else
+		MasterDimension = "Ref";
+		SourceTable = RootTable + "." + Table_String;
+	EndIf;
+	
 	PropertiesText = "";
 	SourcesText = "";
 	For Each ColumnKeyValue In FormCash.ColumnsData Do
@@ -861,14 +874,14 @@ Function GetDCSchema(Form)
 			|	, " + PropertyTable + "." + Table_String + ".(Ref as Ref, Value as Value, Property as Property) As " + ColumnKeyValue.Key;
 			SourcesText = SourcesText + "
 			|LEFT JOIN " + RootTable + " AS " + PropertyTable + "
-			|ON (Table.Ref = " + PropertyTable + "." + Table_String + ".Ref)
+			|ON (Table.Ref = " + PropertyTable + "." + Table_String + "." + MasterDimension + ")
 			|	AND (" + PropertyTable + "." + Table_String + ".Property = &" + ColumnKeyValue.Key + ")";
 		Else
 			PropertiesText = PropertiesText + "
 			|	, " + PropertyTable + ".Value" + " As " + ColumnKeyValue.Key;
 			SourcesText = SourcesText + "
-			|LEFT JOIN " + RootTable + "." + Table_String + " AS " + PropertyTable + "
-			|ON (Table.Ref = " + PropertyTable + ".Ref)
+			|LEFT JOIN " + SourceTable + " AS " + PropertyTable + "
+			|ON (Table.Ref = " + PropertyTable + "." + MasterDimension + ")
 			|	AND (" + PropertyTable + ".Property = &" + ColumnKeyValue.Key + ")";
 		EndIf;
 	EndDo;
@@ -1499,6 +1512,7 @@ Procedure LoadMetadata(FormCash)
 	
 	TypesWithProperties = GetTypesWithProperties();
 	HiddenTables = DocumentsClientServer.GetHiddenTables();
+	AddPropertyTables = GetAddPropertyTables();
 		
 	For Each TypeItem In TypeChoiceList Do
 		
@@ -1523,6 +1537,15 @@ Procedure LoadMetadata(FormCash)
 				EndTry;
 			EndIf;
 		EndIf;
+		
+		For Each ItemCharacteristic In MetaObject.Characteristics Do
+			If AddPropertyTables.Get(ItemCharacteristic.CharacteristicValues) <> Undefined Then
+				//@skip-check property-return-type
+				PropertyTables.Insert(
+					AddPropertyTables.Get(ItemCharacteristic.CharacteristicValues), 
+					ItemCharacteristic.CharacteristicValues.Synonym);
+			EndIf;
+		EndDo;
 		
 		PropertyTables.Insert("Ref", "Main attributes");
 		For Each TabularSection In MetaObject.TabularSections Do
@@ -1551,9 +1574,18 @@ Procedure LoadNewColumns(Form)
 	Table_String = GetObjectTable(Form); // String
 	
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
-	MetaCharacteristics = MetaObject["Characteristics"]; // CharacteristicsDescriptions 
-	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
-	TableDataPath = StrReplace(MetaObjectTable.FullName(), "TabularSection.", "");
+	MetaCharacteristics = MetaObject["Characteristics"]; // CharacteristicsDescriptions
+	
+	RegName = "";
+	//@skip-check statement-type-change
+	If StrStartsWith(Table_String, "InfoReg_") Then
+		RegName = Mid(Table_String, 9);
+		MetaObjectTable = Metadata.InformationRegisters[RegName]; // MetadataObjectInformationRegister
+		TableDataPath = MetaObjectTable.FullName();
+	Else
+		MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
+		TableDataPath = StrReplace(MetaObjectTable.FullName(), "TabularSection.", "");
+	EndIf;
 	
 	TypeOption_Table = Undefined; // MetadataObject
 	TypeOption_FieldRef = Undefined; // Field
@@ -1568,6 +1600,12 @@ Procedure LoadNewColumns(Form)
 			TypeOption_FilterValue = CharacteristicRecord.TypesFilterValue;
 		EndIf;
 	EndDo;
+	
+	PropertyCondition = "";
+	If Not IsBlankString(RegName) Then
+		RegObjectName = GetRegisterMasterDimension(Table_String);
+		PropertyCondition = "WHERE VALUETYPE(" + RegObjectName + ") = TYPE(" + MetaObject.FullName() + ")";
+	EndIf;
 	
 	AvailableItems = New Array; // Array of Arbitrary, Undefined 
 	If Not TypeOption_Table = Undefined Then
@@ -1600,7 +1638,7 @@ Procedure LoadNewColumns(Form)
 		|	Table.Property
 		|INTO tmpProperties
 		|FROM
-		|	%1 AS Table
+		|	%1 AS Table %2
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1614,7 +1652,7 @@ Procedure LoadNewColumns(Form)
 		|	tmpProperties AS tmpProperties
 		|
 		|ORDER BY
-		|	Property", TableDataPath);
+		|	Property", TableDataPath, PropertyCondition);
 	Else
 		AvailableItems_Table = New ValueTable;
 		ArrayType = New Array; // Array of Type
@@ -1638,7 +1676,7 @@ Procedure LoadNewColumns(Form)
 		|	Table.Property
 		|INTO tmpExistingItems
 		|FROM
-		|	%1 AS Table
+		|	%1 AS Table %2
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1655,7 +1693,7 @@ Procedure LoadNewColumns(Form)
 		|
 		|ORDER BY
 		|	Property,
-		|	isAvailable DESC", TableDataPath);
+		|	isAvailable DESC", TableDataPath, PropertyCondition);
 	EndIf;
 	
 	QuerySelection = Query.Execute().Select();
@@ -1974,6 +2012,37 @@ Procedure SaveAtServer()
 			
 			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
 			ModifiedObject.Write();
+
+		ElsIf StrStartsWith(GetObjectTable(ThisObject), "InfoReg_") Then
+			Table_String = GetObjectTable(ThisObject);
+			RegName = Mid(Table_String, 9);
+			MasterDimension = GetRegisterMasterDimension(Table_String);
+			
+			RecordSet = InformationRegisters[RegName].CreateRecordSet();
+			RecordSet.Filter[MasterDimension].Set(ObjectItem);
+			
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
+			ObjectLineRow = LineNumberRows[0];
+			For Each ColumndKeyValue In FormCash.ColumnsData Do
+				ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+				ColumnValue = ObjectLineRow[ColumndKeyValue.Key]; // Arbitrary
+				If TypeOf(ColumnValue) = Type("ValueList") And ColumnValue.Count() = 0 Then
+					ColumnValue = Undefined;
+				ElsIf TypeOf(ColumnValue) = Type("ValueList") Then
+					//@skip-check statement-type-change
+					ColumnValue = ColumnValue[0].Value;
+				EndIf;
+	
+				//@skip-check statement-type-change, property-return-type
+				If Not ColumnValue = Undefined Then
+					NewRecord = RecordSet.Add();
+					NewRecord[MasterDimension] = ObjectItem;
+					NewRecord.Property = ColumnDescription.Ref;
+					NewRecord.Value = ColumnValue;
+				EndIf;
+			EndDo;
+			
+			RecordSet.Write(True);
 				
 		Else
 
@@ -2188,6 +2257,37 @@ EndFunction
 &AtServerNoContext
 Function ContainsValuesCollection(Property, Form)
 	Return False;
+EndFunction
+
+// Get add property tables.
+// 
+// Returns:
+//  Map - Get add property tables:
+//	* Key - MetadataObjectInformationRegister -
+//	* Value - String - table identificator, must be called InfoReg_ and the name of the register
+&AtServerNoContext
+Function GetAddPropertyTables()
+	Result = New Map;
+	Result.Insert(Metadata.InformationRegisters.AddProperties, "InfoReg_AddProperties");
+	Return Result;
+EndFunction
+
+// Get register master dimension.
+// 
+// Parameters:
+//  RegisterName - String - Register name
+// 
+// Returns:
+//  String - Get register master dimension
+&AtClientAtServerNoContext
+Function GetRegisterMasterDimension(RegisterName)
+	
+	If RegisterName = "InfoReg_AddProperties" Then
+		Return "Object";
+	EndIf;
+	
+	Return "";
+	
 EndFunction
 
 #EndRegion

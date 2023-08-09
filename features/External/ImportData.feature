@@ -1101,6 +1101,16 @@ Scenario: Create catalog PriceTypes objects
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf118bdb7bb82'  | 'False'         | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 'e1cib/data/Catalog.ExternalDataProc?ref=aa78120ed92fbced11eaf118bdb7bb81'  | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | ''            | 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859'  | 'Dependent Price'             | ''                  | ''                | 'Dependent Price TR'           |
 
 
+Scenario: properties settings for items
+
+	And I check or create catalog "AddAttributeAndPropertySets" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_Items' | 'False'        | 'Items'          | ''                 | ''               | 'Items'          | ''             |
+
+	And I refill object tabular section "Properties":
+		| 'Ref'                                                                  | 'Property'                                                                                           | 'Condition'                             | 'IsConditionSet' | 'ShowInHTML' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_Items' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde918b7' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' |                  | 'False'      |
+
 
 Scenario: Create catalog Specifications objects
 

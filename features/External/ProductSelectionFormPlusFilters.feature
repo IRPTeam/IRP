@@ -1463,6 +1463,9 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 		And I click the button named "FormCreate"
 		And I input "Partner Kalipso Customer" text in the field named "Description_en"
 		And I change "Type" radio button value to "Customer"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "#1001" text in "Number" field
 		And I input "28.08.2019" text in "Date" field
 		And I click Select button of "Company" field
@@ -1494,6 +1497,9 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 		And I click the button named "FormCreate"
 		And I input "Partner Kalipso Vendor" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "#1001" text in "Number" field
 		And I input "28.08.2019" text in "Date" field
 		And I click Select button of "Company" field

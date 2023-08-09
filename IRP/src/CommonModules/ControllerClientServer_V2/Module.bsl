@@ -7161,30 +7161,30 @@ Function BindPaymentListCommissionPercent(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommissionPercent");
 EndFunction
 
-// PaymentList.CommissionPercent.GetCommissionPercent.Step
+// PaymentList.CommissionPercent.ChangePercentByBankTermAndPaymentType.Step
 Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
-	Chain.GetCommissionPercent.Enable = True;
+	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.GetCommissionPercent.Setter = "SetPaymentListCommissionPercent";
+	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListGetCommissionPercent";
-		Chain.GetCommissionPercent.Options.Add(Options);
+		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
 // PaymentList.CommissionPercent.ChangePercentByAmount.Step
 Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
-	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
+	Chain.ChangeCommissionPercentByAmount.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
+	Chain.ChangeCommissionPercentByAmount.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options     = ModelClientServer_V2.CalculateCommissionPercentByAmountOptions();
 		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
@@ -7192,7 +7192,7 @@ Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
 		Options.DisableNextSteps = True;
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeCommissionPercentByAmount";
-		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
+		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
 	EndDo;	
 EndProcedure
 

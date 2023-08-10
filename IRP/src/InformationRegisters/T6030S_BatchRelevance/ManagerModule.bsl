@@ -8,7 +8,7 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|	tmp.ItemKey AS ItemKey,
 	|	tmp.Period AS Date,
 	|	tmp.Quantity AS Quantity,
-	|	tmp.Amount AS Amount,
+	|	tmp.InvoiceAmount AS InvoiceAmount,
 	|	tmp.BatchDocument AS BatchDocument
 	|INTO TableForLoad
 	|FROM
@@ -22,7 +22,7 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|	TableForLoad.ItemKey,
 	|	SUM(TableForLoad.Quantity) AS Quantity,
 	|	TableForLoad.Date,
-	|	SUM(TableForLoad.Amount) AS Amount,
+	|	SUM(TableForLoad.InvoiceAmount) AS InvoiceAmount,
 	|	TableForLoad.BatchDocument
 	|INTO TableForLoadGrouped
 	|FROM
@@ -42,7 +42,7 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|	T6020S_BatchKeysInfo.ItemKey,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	T6020S_BatchKeysInfo.Period AS Date,
-	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument
 	|INTO TableFromRecordSetGrouped
 	|FROM
@@ -76,7 +76,7 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|		AND TableForLoadGrouped.ItemKey = TableFromRecordSetGrouped.ItemKey
 	|		AND TableForLoadGrouped.Quantity = TableFromRecordSetGrouped.Quantity
 	|		AND TableForLoadGrouped.Date = TableFromRecordSetGrouped.Date
-	|		AND TableForLoadGrouped.Amount = TableFromRecordSetGrouped.Amount
+	|		AND TableForLoadGrouped.InvoiceAmount = TableFromRecordSetGrouped.InvoiceAmount
 	|		AND TableForLoadGrouped.BatchDocument = TableFromRecordSetGrouped.BatchDocument
 	|;
 	|

@@ -1284,6 +1284,20 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.S1001L_VendorsPricesByItemKey</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("PriceType", "", "", "", "","")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
 		<condition>

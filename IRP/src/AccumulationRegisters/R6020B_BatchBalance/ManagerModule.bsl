@@ -105,15 +105,26 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.BatchKey.SourceOfOrigin AS SourceOfOrigin,
 	
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost,
-	|	R6010B_BatchWiseBalance.Amount AS Amount,
-	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
-	|	R6010B_BatchWiseBalance.NotDirectCosts AS NotDirectCosts,
-	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
-	|	R6010B_BatchWiseBalance.AmountCostAdditional AS AmountCostAdditional,
-	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
-	|	R6010B_BatchWiseBalance.AmountCostTax AS AmountCostTax,
-	|	R6010B_BatchWiseBalance.AmountRevenue AS AmountRevenue,
-	|	R6010B_BatchWiseBalance.AmountRevenueTax AS AmountRevenueTax
+	|
+	//#2066
+	|	R6010B_BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
+	|	R6010B_BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.IndirectCostAmount AS IndirectCostAmount,
+	|	R6010B_BatchWiseBalance.IndirectCostTaxAmount AS IndirectCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
+	|	R6010B_BatchWiseBalance.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
+	|
+	|	R6010B_BatchWiseBalance.ExtraDirectCostAmount AS ExtraDirectCostAmount,
+	|	R6010B_BatchWiseBalance.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.AllocatedCostAmount AS AllocatedCostAmount,
+	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
+	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount
+	//--
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
@@ -137,6 +148,9 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6030T_BatchShortageOutgoing.BatchKey.SerialLotNumber,
 	|	R6030T_BatchShortageOutgoing.BatchKey.SourceOfOrigin,
 	|	R6030T_BatchShortageOutgoing.Recorder,
+	|	0,
+	|	0,
+	|	0,
 	|	0,
 	|	0,
 	|	0,
@@ -169,6 +183,9 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6040T_BatchShortageIncoming.BatchKey.SerialLotNumber,
 	|	R6040T_BatchShortageIncoming.BatchKey.SourceOfOrigin,
 	|	R6040T_BatchShortageIncoming.Recorder,
+	|	0,
+	|	0,
+	|	0,
 	|	0,
 	|	0,
 	|	0,
@@ -229,15 +246,25 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
-	|	R6010B_BatchWiseBalance.Amount AS Amount,
-	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
-	|	R6010B_BatchWiseBalance.NotDirectCosts AS NotDirectCosts,
-	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
-	|	R6010B_BatchWiseBalance.AmountCostAdditional AS AmountCostAdditional,
-	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
-	|	R6010B_BatchWiseBalance.AmountCostTax AS AmountCostTax,
-	|	R6010B_BatchWiseBalance.AmountRevenue AS AmountRevenue,
-	|	R6010B_BatchWiseBalance.AmountRevenueTax AS AmountRevenueTax,
+	//#2066
+	|	R6010B_BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
+	|	R6010B_BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.IndirectCostAmount AS IndirectCostAmount,
+	|	R6010B_BatchWiseBalance.IndirectCostTaxAmount AS IndirectCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
+	|	R6010B_BatchWiseBalance.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
+	|
+	|	R6010B_BatchWiseBalance.ExtraDirectCostAmount AS ExtraDirectCostAmount,
+	|	R6010B_BatchWiseBalance.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.AllocatedCostAmount AS AllocatedCostAmount,
+	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
+	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	//--
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
@@ -332,6 +359,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
@@ -365,6 +395,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
 	|	R6040T_BatchShortageIncoming.BatchKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
@@ -389,15 +422,25 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.RecordType AS RecordType,
 	|	BatchBalance.Document AS Document,
 	|	BatchBalance.Quantity AS Quantity,
-	|	BatchBalance.Amount AS Amount,
-	|	BatchBalance.AmountTax AS AmountTax,
-	|	BatchBalance.NotDirectCosts AS NotDirectCosts,
-	|	BatchBalance.AmountCostRatio AS AmountCostRatio,
-	|	BatchBalance.AmountCostAdditional AS AmountCostAdditional,
-	|	BatchBalance.AmountCost AS AmountCost,
-	|	BatchBalance.AmountCostTax AS AmountCostTax,
-	|	BatchBalance.AmountRevenue AS AmountRevenue,
-	|	BatchBalance.AmountRevenueTax AS AmountRevenueTax,
+	//#2066
+	|	BatchBalance.InvoiceAmount AS InvoiceAmount,
+	|	BatchBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|
+	|	BatchBalance.IndirectCostAmount AS IndirectCostAmount,
+	|	BatchBalance.IndirectCostTaxAmount AS IndirectCostTaxAmount,
+	|
+	|	BatchBalance.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
+	|	BatchBalance.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
+	|
+	|	BatchBalance.ExtraDirectCostAmount AS ExtraDirectCostAmount,
+	|	BatchBalance.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
+	|
+	|	BatchBalance.AllocatedCostAmount AS AllocatedCostAmount,
+	|	BatchBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
+	|
+	|	BatchBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
+	|	BatchBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	//--
 	|	BatchBalance.Batch AS Batch,
 	|	BatchBalance.BatchKey AS BatchKey,
 	|	BatchBalance.ItemKey AS ItemKey,

@@ -286,8 +286,15 @@ Procedure RunExternalFunctions() Export
 			Job.Filter.Period.Set(JobsQueue.Period);
 			Job.Read();
 			JobRecord = Job[0];
+			If JobInProgress = Undefined Then
+				JobRecord.Finish = CommonFunctionsServer.GetCurrentSessionDate();
+				JobRecord.Status = Enums.JobStatus.Canceled;
+				Job.Write();
+				Continue;
+			EndIf;
+			
 			JobRecord.Finish = JobInProgress.End;
-			Messages = New Array;
+			Messages = New Array; // Array Of String
 			For Each Message In JobInProgress.GetUserMessages() Do
 				Messages.Add(Message.Text);
 			EndDo;
@@ -338,7 +345,7 @@ Procedure RunExternalFunctions() Export
 		JobRecord.Start = CommonFunctionsServer.GetCurrentSessionDate();
 		JobRecord.Status = Enums.JobStatus.Active;
 		
-		ParamArray = New Array;
+		ParamArray = New Array; // Array Of Structure
 		ParamArray.Add(JobStructure);
 		JobInfo = BackgroundJobs.Execute("ServiceSystemServer.RunJobExternalFunctions",
 				ParamArray, String(ExternalFunction.UUID()), ExternalFunction.Description);
@@ -381,7 +388,7 @@ Procedure RunJobExternalFunctions(JobStructure) Export
 	EndIf;
 	
 	JobTask = BackgroundJobs.FindByUUID(JobRecord.JobID);
-	Messages = New Array;
+	Messages = New Array; // Array of String
 	For Each Message In JobTask.GetUserMessages() Do
 		Messages.Add(Message.Text);
 	EndDo;

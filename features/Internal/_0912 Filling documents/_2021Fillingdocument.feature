@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -97,6 +97,9 @@ Scenario: _0154100 preparation ( filling documents)
 				| 'Currency'    | 'Source'          | 'Type'             |
 				| 'TRY'         | 'Forex Seling'    | 'Partner term'     |
 			And I select current line in "List" table
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Currency'    | 'Description'          |
@@ -133,6 +136,9 @@ Scenario: _0154100 preparation ( filling documents)
 				| 'Currency'    | 'Source'          | 'Type'             |
 				| 'TRY'         | 'Forex Seling'    | 'Partner term'     |
 			And I select current line in "List" table
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Currency'    | 'Description'          |
@@ -489,6 +495,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -931,6 +938,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1414,6 +1422,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1442,6 +1451,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| Partner Kalipso Vendor     |
 			And I select current line in "List" table
 			And I click Open button of "Partner term" field
+			And I expand "Price settings" group
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'                 |
@@ -1805,6 +1815,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -1832,6 +1843,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| Partner Kalipso Vendor     |
 			And I select current line in "List" table
 			And I click Open button of "Partner term" field
+			And I expand "Price settings" group
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 				| 'Description'                 |

@@ -940,10 +940,51 @@ Function globalEquipment_GetConnectionSettings(Hardware) Export
 	Return Str;
 EndFunction
 
+// Get APIModule.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware
+// 
+// Returns:
+//  CommonModule
+Function GetAPIModule(Hardware) Export
+	
+	EquipmentAPIModule = CommonFunctionsServer.GetRefAttribute(Hardware, "EquipmentAPIModule"); // EnumRef.EquipmentAPIModule
+	
+	APIModule = Undefined;
+	
+	If EquipmentAPIModule = PredefinedValue("Enum.EquipmentAPIModule.Acquiring_CommonAPI") Then
+		APIModule = EquipmentAcquiring_CommonAPI;
+	ElsIf EquipmentAPIModule = PredefinedValue("Enum.EquipmentAPIModule.FiscalPrinter_CommonAPI") Then
+		APIModule = EquipmentFiscalPrinter_CommonAPI;
+	EndIf;
+	
+	If APIModule = Undefined Then
+		APIModule = GetAPIModule_Extension(EquipmentAPIModule);
+	EndIf;
+	
+	If APIModule = Undefined Then
+		//@skip-check property-return-type
+		Raise R().Eq_CanNotFindAPIModule;
+	EndIf;
+	
+	Return APIModule;
+EndFunction
+
+// Get APIModule.
+// 
+// Parameters:
+//  EquipmentAPIModule - EnumRef.EquipmentAPIModule
+// 
+// Returns:
+//  CommonModule
+Function GetAPIModule_Extension(EquipmentAPIModule) Export
+	Return Undefined;
+EndFunction
+
 #EndRegion
 
 #Region Settings
-
 
 // Parameters driver description.
 // 

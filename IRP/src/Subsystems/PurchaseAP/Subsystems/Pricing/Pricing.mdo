@@ -9,5 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.PriceList</content>
   <content>Catalog.PriceTypes</content>
+  <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
   <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

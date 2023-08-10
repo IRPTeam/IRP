@@ -45,13 +45,27 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	|	T6095S_WriteOffBatchesInfo.ItemKey AS ItemKey,
 	|	T6095S_WriteOffBatchesInfo.Currency AS Currency,
 	|	T6095S_WriteOffBatchesInfo.RowID AS Key,
-	|	T6095S_WriteOffBatchesInfo.Amount 
-	|		+ T6095S_WriteOffBatchesInfo.AmountCostRatio
-	|		+ T6095S_WriteOffBatchesInfo.AmountCostAdditional AS Amount,
-	|	T6095S_WriteOffBatchesInfo.Amount 
-	|		+ T6095S_WriteOffBatchesInfo.AmountCostRatio 
-	|		+ T6095S_WriteOffBatchesInfo.AmountCostAdditional 
-	|		+ T6095S_WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
+	//#2066
+	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
+	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
+	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
+	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
+	|	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
+	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	|
+	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
+	|	+T6095S_WriteOffBatchesInfo.InvoiceTaxAmount
+	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
+	|	+T6095S_WriteOffBatchesInfo.IndirectCostTaxAmount
+	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
+	|	+T6095S_WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
+	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	|	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
+	|	+T6095S_WriteOffBatchesInfo.AllocatedCostTaxAmount
+	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount
+	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+	//--
 	|FROM
 	|	InformationRegister.T6095S_WriteOffBatchesInfo AS T6095S_WriteOffBatchesInfo
 	|WHERE
@@ -59,6 +73,7 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	|TOTALS
 	|BY
 	|	Document";
+
 	Query.SetParameter("Recorder", CalculationMovementCostRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select(QueryResultIteration.ByGroups);

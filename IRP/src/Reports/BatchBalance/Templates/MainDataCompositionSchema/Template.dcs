@@ -18,58 +18,6 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountOpeningBalance</dataPath>
-			<field>AmountOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group2</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountCostOpeningBalance</dataPath>
-			<field>AmountCostOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group3</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>Resources.OpeningBalance.QuantityOpeningBalance</dataPath>
 			<field>QuantityOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
@@ -80,7 +28,7 @@
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group</dcscom:balanceGroupName>
+				<dcscom:balanceGroupName>G_Quantity</dcscom:balanceGroupName>
 				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 			</role>
 			<appearance>
@@ -138,32 +86,6 @@
 			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountClosingBalance</dataPath>
-			<field>AmountClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group2</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>Store</dataPath>
 			<field>Store</field>
 			<role>
@@ -181,7 +103,7 @@
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group</dcscom:balanceGroupName>
+				<dcscom:balanceGroupName>G_Quantity</dcscom:balanceGroupName>
 				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 			</role>
 			<appearance>
@@ -191,27 +113,6 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=3</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountReceipt</dataPath>
-			<field>AmountReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -231,27 +132,6 @@
 				<dcscom:periodType>Main</dcscom:periodType>
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 			</role>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountCostReceipt</dataPath>
-			<field>AmountCostReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Item</dataPath>
@@ -296,262 +176,6 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountCostExpense</dataPath>
-			<field>AmountCostExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountExpense</dataPath>
-			<field>AmountExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountCostClosingBalance</dataPath>
-			<field>AmountCostClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group3</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountTaxOpeningBalance</dataPath>
-			<field>AmountTaxOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Tax</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group4</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountTaxReceipt</dataPath>
-			<field>AmountTaxReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Tax</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountTaxExpense</dataPath>
-			<field>AmountTaxExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Tax</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountTaxClosingBalance</dataPath>
-			<field>AmountTaxClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Tax</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group4</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountCostRatioOpeningBalance</dataPath>
-			<field>AmountCostRatioOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost ratio</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group5</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountCostRatioReceipt</dataPath>
-			<field>AmountCostRatioReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost ratio</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountCostRatioExpense</dataPath>
-			<field>AmountCostRatioExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost ratio</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountCostRatioClosingBalance</dataPath>
-			<field>AmountCostRatioClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost ratio</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group5</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>InventoryOrigin</dataPath>
 			<field>InventoryOrigin</field>
 			<role>
@@ -592,382 +216,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.NotDirectCostsOpeningBalance</dataPath>
-			<field>NotDirectCostsOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Not-direct costs</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group10</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.NotDirectCostsReceipt</dataPath>
-			<field>NotDirectCostsReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Not-direct costs</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.NotDirectCostsExpense</dataPath>
-			<field>NotDirectCostsExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Not-direct costs</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.NotDirectCostsClosingBalance</dataPath>
-			<field>NotDirectCostsClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Not-direct costs</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group10</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountCostTaxOpeningBalance</dataPath>
-			<field>AmountCostTaxOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost (tax)</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group20</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountCostTaxReceipt</dataPath>
-			<field>AmountCostTaxReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost (tax)</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountCostTaxExpense</dataPath>
-			<field>AmountCostTaxExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost (tax)</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountCostTaxClosingBalance</dataPath>
-			<field>AmountCostTaxClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Cost (tax)</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group20</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountRevenueOpeningBalance</dataPath>
-			<field>AmountRevenueOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group15</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountRevenueReceipt</dataPath>
-			<field>AmountRevenueReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountRevenueExpense</dataPath>
-			<field>AmountRevenueExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountRevenueClosingBalance</dataPath>
-			<field>AmountRevenueClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group15</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountRevenueTaxOpeningBalance</dataPath>
-			<field>AmountRevenueTaxOpeningBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue (tax)</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group16</dcscom:balanceGroupName>
-				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountRevenueTaxReceipt</dataPath>
-			<field>AmountRevenueTaxReceipt</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue (tax)</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountRevenueTaxExpense</dataPath>
-			<field>AmountRevenueTaxExpense</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue (tax)</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountRevenueTaxClosingBalance</dataPath>
-			<field>AmountRevenueTaxClosingBalance</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Revenue (tax)</v8:content>
-				</v8:item>
-			</title>
-			<role>
-				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group16</dcscom:balanceGroupName>
-				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>Format</dcscor:parameter>
-					<dcscor:value xsi:type="v8:LocalStringType">
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-					</dcscor:value>
-				</dcscor:item>
-			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldFolder">
 			<dataPath>Resources.OpeningBalance</dataPath>
@@ -1015,17 +263,17 @@
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dataPath>
-			<field>AmountCostAdditionalOpeningBalance</field>
+			<dataPath>Resources.OpeningBalance.InvoiceAmountOpeningBalance</dataPath>
+			<field>InvoiceAmountOpeningBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Invoice amount</v8:content>
 				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group6</dcscom:balanceGroupName>
+				<dcscom:balanceGroupName>G_InvoiceAmount</dcscom:balanceGroupName>
 				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 			</role>
 			<appearance>
@@ -1041,12 +289,12 @@
 			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Receipt.AmountCostAdditionalReceipt</dataPath>
-			<field>AmountCostAdditionalReceipt</field>
+			<dataPath>Resources.Receipt.InvoiceAmountReceipt</dataPath>
+			<field>InvoiceAmountReceipt</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Invoice amount</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1062,12 +310,12 @@
 			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.Expense.AmountCostAdditionalExpense</dataPath>
-			<field>AmountCostAdditionalExpense</field>
+			<dataPath>Resources.Expense.InvoiceAmountExpense</dataPath>
+			<field>InvoiceAmountExpense</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Invoice amount</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1083,17 +331,1051 @@
 			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dataPath>
-			<field>AmountCostAdditionalClosingBalance</field>
+			<dataPath>Resources.ClosingBalance.InvoiceAmountClosingBalance</dataPath>
+			<field>InvoiceAmountClosingBalance</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Cost (additional)</v8:content>
+					<v8:content>Invoice amount</v8:content>
 				</v8:item>
 			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
-				<dcscom:balanceGroupName>Group6</dcscom:balanceGroupName>
+				<dcscom:balanceGroupName>G_InvoiceAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance</dataPath>
+			<field>InvoiceTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_InvoiceTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.InvoiceTaxAmountReceipt</dataPath>
+			<field>InvoiceTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.InvoiceTaxAmountExpense</dataPath>
+			<field>InvoiceTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.InvoiceTaxAmountClosingBalance</dataPath>
+			<field>InvoiceTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_InvoiceTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.IndirectCostAmountOpeningBalance</dataPath>
+			<field>IndirectCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_IndirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.IndirectCostAmountReceipt</dataPath>
+			<field>IndirectCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.IndirectCostAmountExpense</dataPath>
+			<field>IndirectCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.IndirectCostAmountClosingBalance</dataPath>
+			<field>IndirectCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_IndirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.IndirectCostTaxAmountOpeningBalance</dataPath>
+			<field>IndirectCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_IndirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.IndirectCostTaxAmountReceipt</dataPath>
+			<field>IndirectCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.IndirectCostTaxAmountExpense</dataPath>
+			<field>IndirectCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.IndirectCostTaxAmountClosingBalance</dataPath>
+			<field>IndirectCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_IndirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.ExtraCostAmountByRatioOpeningBalance</dataPath>
+			<field>ExtraCostAmountByRatioOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraCostAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.ExtraCostAmountByRatioReceipt</dataPath>
+			<field>ExtraCostAmountByRatioReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.ExtraCostAmountByRatioExpense</dataPath>
+			<field>ExtraCostAmountByRatioExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.ExtraCostAmountByRatioClosingBalance</dataPath>
+			<field>ExtraCostAmountByRatioClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraCostAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+			<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.ExtraCostTaxAmountByRatioReceipt</dataPath>
+			<field>ExtraCostTaxAmountByRatioReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.ExtraCostTaxAmountByRatioExpense</dataPath>
+			<field>ExtraCostTaxAmountByRatioExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+			<field>ExtraCostTaxAmountByRatioClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost by ratio (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.ExtraDirectCostAmountOpeningBalance</dataPath>
+			<field>ExtraDirectCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraDirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.ExtraDirectCostAmountReceipt</dataPath>
+			<field>ExtraDirectCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.ExtraDirectCostAmountExpense</dataPath>
+			<field>ExtraDirectCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.ExtraDirectCostAmountClosingBalance</dataPath>
+			<field>ExtraDirectCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraDirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+			<field>ExtraDirectCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.ExtraDirectCostTaxAmountReceipt</dataPath>
+			<field>ExtraDirectCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.ExtraDirectCostTaxAmountExpense</dataPath>
+			<field>ExtraDirectCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dataPath>
+			<field>ExtraDirectCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.AllocatedCostAmountOpeningBalance</dataPath>
+			<field>AllocatedCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.AllocatedCostAmountReceipt</dataPath>
+			<field>AllocatedCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.AllocatedCostAmountExpense</dataPath>
+			<field>AllocatedCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.AllocatedCostAmountClosingBalance</dataPath>
+			<field>AllocatedCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.AllocatedCostTaxAmountOpeningBalance</dataPath>
+			<field>AllocatedCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.AllocatedCostTaxAmountReceipt</dataPath>
+			<field>AllocatedCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.AllocatedCostTaxAmountExpense</dataPath>
+			<field>AllocatedCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.AllocatedCostTaxAmountClosingBalance</dataPath>
+			<field>AllocatedCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.AllocatedRevenueAmountOpeningBalance</dataPath>
+			<field>AllocatedRevenueAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedRevenueAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.AllocatedRevenueAmountReceipt</dataPath>
+			<field>AllocatedRevenueAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.AllocatedRevenueAmountExpense</dataPath>
+			<field>AllocatedRevenueAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.AllocatedRevenueAmountClosingBalance</dataPath>
+			<field>AllocatedRevenueAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedRevenueAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+			<field>AllocatedRevenueTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.AllocatedRevenueTaxAmountReceipt</dataPath>
+			<field>AllocatedRevenueTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.AllocatedRevenueTaxAmountExpense</dataPath>
+			<field>AllocatedRevenueTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue (tax)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dataPath>
+			<field>AllocatedRevenueTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue (tax)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
 				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 			</role>
 			<appearance>
@@ -1119,10 +1401,6 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountReceipt</dataPath>
-				<field>AmountReceipt</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityReceipt</dataPath>
 				<field>QuantityReceipt</field>
 			</field>
@@ -1136,19 +1414,6 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostExpense</dataPath>
-				<field>AmountCostExpense</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountOpeningBalance</dataPath>
-				<field>AmountOpeningBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
-					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
 				<role>
@@ -1156,28 +1421,10 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountClosingBalance</dataPath>
-				<field>AmountClosingBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
-					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>BatchKey</dataPath>
 				<field>BatchKey</field>
 				<role>
 					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostOpeningBalance</dataPath>
-				<field>AmountCostOpeningBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCost</dcscom:balanceGroupName>
-					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1202,10 +1449,6 @@
 				<field>QuantityExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostReceipt</dataPath>
-				<field>AmountCostReceipt</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>Recorder</dataPath>
 				<field>Recorder</field>
 				<title xsi:type="v8:LocalStringType">
@@ -1227,10 +1470,6 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountExpense</dataPath>
-				<field>AmountExpense</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityOpeningBalance</dataPath>
 				<field>QuantityOpeningBalance</field>
 				<role>
@@ -1247,15 +1486,6 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostClosingBalance</dataPath>
-				<field>AmountCostClosingBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCost</dcscom:balanceGroupName>
-					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>IsRelevance</dataPath>
 				<field>IsRelevance</field>
 				<title xsi:type="v8:LocalStringType">
@@ -1264,58 +1494,6 @@
 						<v8:content>Is relevance</v8:content>
 					</v8:item>
 				</title>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTaxOpeningBalance</dataPath>
-				<field>AmountTaxOpeningBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountTax</dcscom:balanceGroupName>
-					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTaxReceipt</dataPath>
-				<field>AmountTaxReceipt</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTaxExpense</dataPath>
-				<field>AmountTaxExpense</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTaxClosingBalance</dataPath>
-				<field>AmountTaxClosingBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountTax</dcscom:balanceGroupName>
-					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostRatioOpeningBalance</dataPath>
-				<field>AmountCostRatioOpeningBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostRatio</dcscom:balanceGroupName>
-					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostRatioReceipt</dataPath>
-				<field>AmountCostRatioReceipt</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostRatioExpense</dataPath>
-				<field>AmountCostRatioExpense</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostRatioClosingBalance</dataPath>
-				<field>AmountCostRatioClosingBalance</field>
-				<role>
-					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostRatio</dcscom:balanceGroupName>
-					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
-				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>InventoryOrigin</dataPath>
@@ -1360,132 +1538,938 @@
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NotDirectCostsOpeningBalance</dataPath>
-				<field>NotDirectCostsOpeningBalance</field>
+				<dataPath>InvoiceAmountOpeningBalance</dataPath>
+				<field>InvoiceAmountOpeningBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>NotDirectCosts</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NotDirectCostsReceipt</dataPath>
-				<field>NotDirectCostsReceipt</field>
+				<dataPath>InvoiceAmountReceipt</dataPath>
+				<field>InvoiceAmountReceipt</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NotDirectCostsExpense</dataPath>
-				<field>NotDirectCostsExpense</field>
+				<dataPath>InvoiceAmountExpense</dataPath>
+				<field>InvoiceAmountExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NotDirectCostsClosingBalance</dataPath>
-				<field>NotDirectCostsClosingBalance</field>
+				<dataPath>InvoiceAmountClosingBalance</dataPath>
+				<field>InvoiceAmountClosingBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>NotDirectCosts</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostTaxOpeningBalance</dataPath>
-				<field>AmountCostTaxOpeningBalance</field>
+				<dataPath>InvoiceTaxAmountOpeningBalance</dataPath>
+				<field>InvoiceTaxAmountOpeningBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostTax</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostTaxReceipt</dataPath>
-				<field>AmountCostTaxReceipt</field>
+				<dataPath>InvoiceTaxAmountReceipt</dataPath>
+				<field>InvoiceTaxAmountReceipt</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostTaxExpense</dataPath>
-				<field>AmountCostTaxExpense</field>
+				<dataPath>InvoiceTaxAmountExpense</dataPath>
+				<field>InvoiceTaxAmountExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostTaxClosingBalance</dataPath>
-				<field>AmountCostTaxClosingBalance</field>
+				<dataPath>InvoiceTaxAmountClosingBalance</dataPath>
+				<field>InvoiceTaxAmountClosingBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostTax</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueOpeningBalance</dataPath>
-				<field>AmountRevenueOpeningBalance</field>
+				<dataPath>IndirectCostAmountOpeningBalance</dataPath>
+				<field>IndirectCostAmountOpeningBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountRevenue</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueReceipt</dataPath>
-				<field>AmountRevenueReceipt</field>
+				<dataPath>IndirectCostAmountReceipt</dataPath>
+				<field>IndirectCostAmountReceipt</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueExpense</dataPath>
-				<field>AmountRevenueExpense</field>
+				<dataPath>IndirectCostAmountExpense</dataPath>
+				<field>IndirectCostAmountExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueClosingBalance</dataPath>
-				<field>AmountRevenueClosingBalance</field>
+				<dataPath>IndirectCostAmountClosingBalance</dataPath>
+				<field>IndirectCostAmountClosingBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountRevenue</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueTaxOpeningBalance</dataPath>
-				<field>AmountRevenueTaxOpeningBalance</field>
+				<dataPath>IndirectCostTaxAmountOpeningBalance</dataPath>
+				<field>IndirectCostTaxAmountOpeningBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountRevenueTax</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueTaxReceipt</dataPath>
-				<field>AmountRevenueTaxReceipt</field>
+				<dataPath>IndirectCostTaxAmountReceipt</dataPath>
+				<field>IndirectCostTaxAmountReceipt</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueTaxExpense</dataPath>
-				<field>AmountRevenueTaxExpense</field>
+				<dataPath>IndirectCostTaxAmountExpense</dataPath>
+				<field>IndirectCostTaxAmountExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountRevenueTaxClosingBalance</dataPath>
-				<field>AmountRevenueTaxClosingBalance</field>
+				<dataPath>IndirectCostTaxAmountClosingBalance</dataPath>
+				<field>IndirectCostTaxAmountClosingBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountRevenueTax</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostAdditionalOpeningBalance</dataPath>
-				<field>AmountCostAdditionalOpeningBalance</field>
+				<dataPath>ExtraCostAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostAmountByRatioOpeningBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostAdditional</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
 					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostAdditionalReceipt</dataPath>
-				<field>AmountCostAdditionalReceipt</field>
+				<dataPath>ExtraCostAmountByRatioReceipt</dataPath>
+				<field>ExtraCostAmountByRatioReceipt</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostAdditionalExpense</dataPath>
-				<field>AmountCostAdditionalExpense</field>
+				<dataPath>ExtraCostAmountByRatioExpense</dataPath>
+				<field>ExtraCostAmountByRatioExpense</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountCostAdditionalClosingBalance</dataPath>
-				<field>AmountCostAdditionalClosingBalance</field>
+				<dataPath>ExtraCostAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostAmountByRatioClosingBalance</field>
 				<role>
 					<dcscom:balance>true</dcscom:balance>
-					<dcscom:balanceGroupName>AmountCostAdditional</dcscom:balanceGroupName>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioReceipt</dataPath>
+				<field>ExtraCostTaxAmountByRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioExpense</dataPath>
+				<field>ExtraCostTaxAmountByRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountReceipt</dataPath>
+				<field>ExtraDirectCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountExpense</dataPath>
+				<field>ExtraDirectCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountReceipt</dataPath>
+				<field>ExtraDirectCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountExpense</dataPath>
+				<field>ExtraDirectCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountOpeningBalance</dataPath>
+				<field>AllocatedCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountReceipt</dataPath>
+				<field>AllocatedCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountExpense</dataPath>
+				<field>AllocatedCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountClosingBalance</dataPath>
+				<field>AllocatedCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountReceipt</dataPath>
+				<field>AllocatedCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountExpense</dataPath>
+				<field>AllocatedCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountClosingBalance</dataPath>
+				<field>AllocatedCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountReceipt</dataPath>
+				<field>AllocatedRevenueAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountExpense</dataPath>
+				<field>AllocatedRevenueAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountReceipt</dataPath>
+				<field>AllocatedRevenueTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountExpense</dataPath>
+				<field>AllocatedRevenueTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountOpeningBalance</dataPath>
+				<field>InvoiceAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountReceipt</dataPath>
+				<field>InvoiceAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountExpense</dataPath>
+				<field>InvoiceAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountClosingBalance</dataPath>
+				<field>InvoiceAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountOpeningBalance</dataPath>
+				<field>InvoiceTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountReceipt</dataPath>
+				<field>InvoiceTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountExpense</dataPath>
+				<field>InvoiceTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountClosingBalance</dataPath>
+				<field>InvoiceTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountOpeningBalance</dataPath>
+				<field>IndirectCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountReceipt</dataPath>
+				<field>IndirectCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountExpense</dataPath>
+				<field>IndirectCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountClosingBalance</dataPath>
+				<field>IndirectCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountOpeningBalance</dataPath>
+				<field>IndirectCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountReceipt</dataPath>
+				<field>IndirectCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountExpense</dataPath>
+				<field>IndirectCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountClosingBalance</dataPath>
+				<field>IndirectCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostAmountByRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioReceipt</dataPath>
+				<field>ExtraCostAmountByRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioExpense</dataPath>
+				<field>ExtraCostAmountByRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostAmountByRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioReceipt</dataPath>
+				<field>ExtraCostTaxAmountByRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioExpense</dataPath>
+				<field>ExtraCostTaxAmountByRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountReceipt</dataPath>
+				<field>ExtraDirectCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountExpense</dataPath>
+				<field>ExtraDirectCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountReceipt</dataPath>
+				<field>ExtraDirectCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountExpense</dataPath>
+				<field>ExtraDirectCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountOpeningBalance</dataPath>
+				<field>AllocatedCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountReceipt</dataPath>
+				<field>AllocatedCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountExpense</dataPath>
+				<field>AllocatedCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountClosingBalance</dataPath>
+				<field>AllocatedCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountReceipt</dataPath>
+				<field>AllocatedCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountExpense</dataPath>
+				<field>AllocatedCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountClosingBalance</dataPath>
+				<field>AllocatedCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountReceipt</dataPath>
+				<field>AllocatedRevenueAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountExpense</dataPath>
+				<field>AllocatedRevenueAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountReceipt</dataPath>
+				<field>AllocatedRevenueTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountExpense</dataPath>
+				<field>AllocatedRevenueTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountOpeningBalance</dataPath>
+				<field>InvoiceAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountReceipt</dataPath>
+				<field>InvoiceAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountExpense</dataPath>
+				<field>InvoiceAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceAmountClosingBalance</dataPath>
+				<field>InvoiceAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountOpeningBalance</dataPath>
+				<field>InvoiceTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountReceipt</dataPath>
+				<field>InvoiceTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountExpense</dataPath>
+				<field>InvoiceTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InvoiceTaxAmountClosingBalance</dataPath>
+				<field>InvoiceTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountOpeningBalance</dataPath>
+				<field>IndirectCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountReceipt</dataPath>
+				<field>IndirectCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountExpense</dataPath>
+				<field>IndirectCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostAmountClosingBalance</dataPath>
+				<field>IndirectCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountOpeningBalance</dataPath>
+				<field>IndirectCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountReceipt</dataPath>
+				<field>IndirectCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountExpense</dataPath>
+				<field>IndirectCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>IndirectCostTaxAmountClosingBalance</dataPath>
+				<field>IndirectCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostAmountByRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioReceipt</dataPath>
+				<field>ExtraCostAmountByRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioExpense</dataPath>
+				<field>ExtraCostAmountByRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostAmountByRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioReceipt</dataPath>
+				<field>ExtraCostTaxAmountByRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioExpense</dataPath>
+				<field>ExtraCostTaxAmountByRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+				<field>ExtraCostTaxAmountByRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountReceipt</dataPath>
+				<field>ExtraDirectCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountExpense</dataPath>
+				<field>ExtraDirectCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountReceipt</dataPath>
+				<field>ExtraDirectCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountExpense</dataPath>
+				<field>ExtraDirectCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExtraDirectCostTaxAmountClosingBalance</dataPath>
+				<field>ExtraDirectCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountOpeningBalance</dataPath>
+				<field>AllocatedCostAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountReceipt</dataPath>
+				<field>AllocatedCostAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountExpense</dataPath>
+				<field>AllocatedCostAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostAmountClosingBalance</dataPath>
+				<field>AllocatedCostAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedCostTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountReceipt</dataPath>
+				<field>AllocatedCostTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountExpense</dataPath>
+				<field>AllocatedCostTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedCostTaxAmountClosingBalance</dataPath>
+				<field>AllocatedCostTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountReceipt</dataPath>
+				<field>AllocatedRevenueAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountExpense</dataPath>
+				<field>AllocatedRevenueAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountReceipt</dataPath>
+				<field>AllocatedRevenueTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountExpense</dataPath>
+				<field>AllocatedRevenueTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AllocatedRevenueTaxAmountClosingBalance</dataPath>
+				<field>AllocatedRevenueTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
@@ -1502,46 +2486,71 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.Partner,
 	R6020B_BatchBalanceBalanceAndTurnovers.Agreement,
 	R6020B_BatchBalanceBalanceAndTurnovers.LegalName,
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
+	// Quantity
+	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountOpeningBalance AS AmountOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostOpeningBalance AS AmountCostOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueOpeningBalance AS AmountRevenueOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueTaxOpeningBalance AS AmountRevenueTaxOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueTaxReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueTaxExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountRevenueTaxClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostTaxOpeningBalance AS AmountCostTaxOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostTaxReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostTaxExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostTaxClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxOpeningBalance AS AmountTaxOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsOpeningBalance AS NotDirectCostsOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioOpeningBalance AS AmountCostRatioOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalOpeningBalance AS AmountCostAdditionalOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostAdditionalClosingBalance,
+	// InvoiceAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountClosingBalance,
+	// InvoiceTaxAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountClosingBalance,
+	// IndirectCostAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountClosingBalance,
+	// IndirectCostTaxAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountClosingBalance,
+	// ExtraCostAmountByRatio
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioClosingBalance,
+	// ExtraCostTaxAmountByRatio
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioClosingBalance,
+	// ExtraDirectCostAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountClosingBalance,
+	// ExtraDirectCostTaxAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountClosingBalance,
+	// AllocatedCostAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountClosingBalance,
+	// AllocatedCostTaxAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountClosingBalance,
+	// AllocatedRevenueAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountClosingBalance,
+	// AllocatedRevenueTaxAmount
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountClosingBalance,
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
 			THEN NULL
@@ -1632,12 +2641,12 @@ ORDER BY
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountReceipt</dataPath>
-				<field>AmountReceipt</field>
+				<dataPath>QuantityExpense</dataPath>
+				<field>QuantityExpense</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Amount receipt</v8:content>
+						<v8:content>Quantity expense</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -1645,12 +2654,12 @@ ORDER BY
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>QuantityExpense</dataPath>
-				<field>QuantityExpense</field>
+				<dataPath>InvoiceAmountReceipt</dataPath>
+				<field>InvoiceAmountReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Quantity expense</v8:content>
+						<v8:content>Invoice amount receipt</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -1670,9 +2679,9 @@ ORDER BY
 	END AS QuantityReceipt,
 	CASE
 		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
-			THEN T6020S_BatchKeysInfo.Amount
+			THEN T6020S_BatchKeysInfo.InvoiceAmount
 		ELSE 0
-	END AS AmountReceipt,
+	END AS InvoiceAmountReceipt,
 	CASE
 		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Expense)
 			THEN T6020S_BatchKeysInfo.Quantity
@@ -1719,164 +2728,212 @@ WHERE
 		</item>
 	</dataSet>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.AllocatedCostAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.AllocatedCostAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountCostClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountCostClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.AllocatedCostTaxAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.AllocatedCostTaxAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountCostRatioClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountCostRatioClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.AllocatedRevenueAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.AllocatedRevenueAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountCostTaxClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountCostTaxClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.AllocatedRevenueTaxAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountRevenueClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountRevenueClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.ExtraCostAmountByRatioClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.ExtraCostAmountByRatioClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountRevenueTaxClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountRevenueTaxClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountTaxClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountTaxClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.ExtraDirectCostAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.ExtraDirectCostAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.ClosingBalance.NotDirectCostsClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.NotDirectCostsClosingBalance)</expression>
+		<dataPath>Resources.ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.ExtraDirectCostTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.IndirectCostAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.IndirectCostAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.IndirectCostTaxAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.IndirectCostTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.InvoiceAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.InvoiceAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.InvoiceTaxAmountClosingBalance</dataPath>
+		<expression>SUM(Resources.ClosingBalance.InvoiceTaxAmountClosingBalance)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Resources.ClosingBalance.QuantityClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.QuantityClosingBalance)</expression>
+		<expression>SUM(Resources.ClosingBalance.QuantityClosingBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountCostExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountCostExpense)</expression>
+		<dataPath>Resources.Expense.AllocatedCostAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.AllocatedCostAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountCostRatioExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountCostRatioExpense)</expression>
+		<dataPath>Resources.Expense.AllocatedCostTaxAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.AllocatedCostTaxAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountCostTaxExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountCostTaxExpense)</expression>
+		<dataPath>Resources.Expense.AllocatedRevenueAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.AllocatedRevenueAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountExpense)</expression>
+		<dataPath>Resources.Expense.AllocatedRevenueTaxAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.AllocatedRevenueTaxAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountRevenueExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountRevenueExpense)</expression>
+		<dataPath>Resources.Expense.ExtraCostAmountByRatioExpense</dataPath>
+		<expression>SUM(Resources.Expense.ExtraCostAmountByRatioExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountRevenueTaxExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountRevenueTaxExpense)</expression>
+		<dataPath>Resources.Expense.ExtraCostTaxAmountByRatioExpense</dataPath>
+		<expression>SUM(Resources.Expense.ExtraCostTaxAmountByRatioExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.AmountTaxExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountTaxExpense)</expression>
+		<dataPath>Resources.Expense.ExtraDirectCostAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.ExtraDirectCostAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Expense.NotDirectCostsExpense</dataPath>
-		<expression>sum(Resources.Expense.NotDirectCostsExpense)</expression>
+		<dataPath>Resources.Expense.ExtraDirectCostTaxAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.ExtraDirectCostTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.IndirectCostAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.IndirectCostAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.IndirectCostTaxAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.IndirectCostTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.InvoiceAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.InvoiceAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.InvoiceTaxAmountExpense</dataPath>
+		<expression>SUM(Resources.Expense.InvoiceTaxAmountExpense)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Resources.Expense.QuantityExpense</dataPath>
-		<expression>Sum(Resources.Expense.QuantityExpense)</expression>
+		<expression>SUM(Resources.Expense.QuantityExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountCostOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountCostOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.AllocatedCostAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.AllocatedCostAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountCostRatioOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountCostRatioOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.AllocatedCostTaxAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.AllocatedCostTaxAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountCostTaxOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountCostTaxOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.AllocatedRevenueAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.AllocatedRevenueAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountRevenueOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountRevenueOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.ExtraCostAmountByRatioOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.ExtraCostAmountByRatioOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountRevenueTaxOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountRevenueTaxOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountTaxOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountTaxOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.ExtraDirectCostAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.ExtraDirectCostAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.OpeningBalance.NotDirectCostsOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.NotDirectCostsOpeningBalance)</expression>
+		<dataPath>Resources.OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.IndirectCostAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.IndirectCostAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.IndirectCostTaxAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.IndirectCostTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.InvoiceAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.InvoiceAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance</dataPath>
+		<expression>SUM(Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Resources.OpeningBalance.QuantityOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.QuantityOpeningBalance)</expression>
+		<expression>SUM(Resources.OpeningBalance.QuantityOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountCostRatioReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountCostRatioReceipt)</expression>
+		<dataPath>Resources.Receipt.AllocatedCostAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.AllocatedCostAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountCostReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountCostReceipt)</expression>
+		<dataPath>Resources.Receipt.AllocatedCostTaxAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.AllocatedCostTaxAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountCostTaxReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountCostTaxReceipt)</expression>
+		<dataPath>Resources.Receipt.AllocatedRevenueAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.AllocatedRevenueAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountReceipt</dataPath>
-		<expression>Sum(Resources.Receipt.AmountReceipt)</expression>
+		<dataPath>Resources.Receipt.AllocatedRevenueTaxAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.AllocatedRevenueTaxAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountRevenueReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountRevenueReceipt)</expression>
+		<dataPath>Resources.Receipt.ExtraCostAmountByRatioReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.ExtraCostAmountByRatioReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountRevenueTaxReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountRevenueTaxReceipt)</expression>
+		<dataPath>Resources.Receipt.ExtraCostTaxAmountByRatioReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.ExtraCostTaxAmountByRatioReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.AmountTaxReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountTaxReceipt)</expression>
+		<dataPath>Resources.Receipt.ExtraDirectCostAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.ExtraDirectCostAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Resources.Receipt.NotDirectCostsReceipt</dataPath>
-		<expression>sum(Resources.Receipt.NotDirectCostsReceipt)</expression>
+		<dataPath>Resources.Receipt.ExtraDirectCostTaxAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.ExtraDirectCostTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.IndirectCostAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.IndirectCostAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.IndirectCostTaxAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.IndirectCostTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.InvoiceAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.InvoiceAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.InvoiceTaxAmountReceipt</dataPath>
+		<expression>SUM(Resources.Receipt.InvoiceTaxAmountReceipt)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Resources.Receipt.QuantityReceipt</dataPath>
-		<expression>Sum(Resources.Receipt.QuantityReceipt)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dataPath>
-		<expression>sum(Resources.ClosingBalance.AmountCostAdditionalClosingBalance)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>Resources.Expense.AmountCostAdditionalExpense</dataPath>
-		<expression>sum(Resources.Expense.AmountCostAdditionalExpense)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dataPath>
-		<expression>sum(Resources.OpeningBalance.AmountCostAdditionalOpeningBalance)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>Resources.Receipt.AmountCostAdditionalReceipt</dataPath>
-		<expression>sum(Resources.Receipt.AmountCostAdditionalReceipt)</expression>
+		<expression>SUM(Resources.Receipt.QuantityReceipt)</expression>
 	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
@@ -1947,93 +3004,42 @@ WHERE
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.OpeningBalance.QuantityOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Quantity</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Amount</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.InvoiceAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountTaxOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountCostOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.IndirectCostAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountCostTaxOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax (cost)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.IndirectCostTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountCostRatioOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost ratio</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.ExtraDirectCostAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountCostAdditionalOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.NotDirectCostsOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Not-direct costs</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.ExtraCostAmountByRatioOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountRevenueOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.OpeningBalance.AmountRevenueTaxOpeningBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue (tax)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.OpeningBalance.AllocatedRevenueAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.AllocatedCostAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.AllocatedCostTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
@@ -2046,93 +3052,42 @@ WHERE
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Receipt.QuantityReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Quantity</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Amount</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.InvoiceAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountTaxReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.InvoiceTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountCostReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.IndirectCostAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountCostTaxReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax (cost)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.IndirectCostTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountCostRatioReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost ratio</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.ExtraDirectCostAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountCostAdditionalReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.ExtraDirectCostTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.NotDirectCostsReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Not-direct costs</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.ExtraCostAmountByRatioReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountRevenueReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.ExtraCostTaxAmountByRatioReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Receipt.AmountRevenueTaxReceipt</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue (tax)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Receipt.AllocatedRevenueAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.AllocatedRevenueTaxAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.AllocatedCostAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.AllocatedCostTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
@@ -2145,93 +3100,42 @@ WHERE
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Expense.QuantityExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Quantity</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Amount</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.InvoiceAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountTaxExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.InvoiceTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountCostExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.IndirectCostAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountCostTaxExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax (cost)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.IndirectCostTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountCostRatioExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost ratio</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.ExtraDirectCostAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountCostAdditionalExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.ExtraDirectCostTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.NotDirectCostsExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Not-direct costs</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.ExtraCostAmountByRatioExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountRevenueExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.ExtraCostTaxAmountByRatioExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.Expense.AmountRevenueTaxExpense</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue (tax)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.Expense.AllocatedRevenueAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.AllocatedRevenueTaxAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.AllocatedCostAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.AllocatedCostTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
@@ -2244,93 +3148,42 @@ WHERE
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.ClosingBalance.QuantityClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Quantity</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Amount</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.InvoiceAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountTaxClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.InvoiceTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountCostClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.IndirectCostAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountCostTaxClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Tax (cost)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.IndirectCostTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountCostRatioClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost ratio</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.ExtraDirectCostAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountCostAdditionalClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Cost (additional)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.NotDirectCostsClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Not-direct costs</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.ExtraCostAmountByRatioClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountRevenueClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Resources.ClosingBalance.AmountRevenueTaxClosingBalance</dcsset:field>
-						<dcsset:lwsTitle>
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content>Revenue (tax)</v8:content>
-							</v8:item>
-						</dcsset:lwsTitle>
+						<dcsset:field>Resources.ClosingBalance.AllocatedRevenueAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.AllocatedCostAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.AllocatedCostTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>

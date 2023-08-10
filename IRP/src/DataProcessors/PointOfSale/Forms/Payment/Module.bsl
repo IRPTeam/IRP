@@ -826,8 +826,13 @@ Async Procedure PrintSlip(Hardware, PaymentSettings)
 	SlipInfo = PaymentSettings.Out.Slip;
 	Cutter = CommonFunctionsServer.GetRefAttribute(Hardware, "Cutter");
 	SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
-
-	For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
+	SlipArray = StrSplit(SlipInfoTmp, "⚪", False);
+	
+	If SlipArray.Count() = 1 And CommonFunctionsServer.GetRefAttribute(Hardware, "PrintCopyIfCutterNotFound") Then
+		SlipArray.Add(SlipArray[0]);
+	EndIf;
+	
+	For Each SlipInfoPart In SlipArray Do
 		PaymentSettings.Out.Slip = SlipInfoPart;
 		Str = New Structure("Payments", New Array);
 		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));

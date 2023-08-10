@@ -1019,7 +1019,6 @@ Function R4010B_ActualStocks()
 		   |		ON ItemList.Key = SerialLotNumbers.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   //#2080
 		   |	AND NOT ItemList.GoodsReceiptExists
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
@@ -1274,7 +1273,9 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*
+		   |	*,
+		   |	BatchKeysInfo.Amount AS InvoiceAmount,
+		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo

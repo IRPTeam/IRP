@@ -225,23 +225,6 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
- <forms uuid="90af586c-5571-464d-b871-177709a36299">
-  <name>RecordForm</name>
-  <synonym>
-   <key>en</key>
-   <value>Record form</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Форма записи</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
  <forms uuid="aaf89ea4-cf1f-46cb-a1c2-2ed28a1b7848">
   <name>ListForm</name>
   <synonym>
@@ -255,6 +238,23 @@
   <synonym>
    <key>tr</key>
    <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c11face1-72f0-4f2e-a014-741707416bb3">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

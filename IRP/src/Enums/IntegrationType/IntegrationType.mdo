@@ -125,4 +125,19 @@
    <value>SMS provider</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="95a80b3a-57fe-4cb5-9de1-76e407620220">
+  <name>Equipment</name>
+  <synonym>
+   <key>en</key>
+   <value>Equipment</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Оборудование</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Donanımlar</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

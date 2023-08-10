@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f816082-0fb9-4191-9c3d-65d63a57662b">
+ <name>EquipmentAcquiring_CommonAPI</name>
+ <synonym>
+  <key>en</key>
+  <value>Equipment acquiring Common API</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Общий API оборудование эквайринга</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Equipment acquiring Common API</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

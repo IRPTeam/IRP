@@ -46,39 +46,18 @@
   <fullTextSearch>Use</fullTextSearch>
  </resources>
  <resources uuid="6f5cc2a7-05c7-4d5c-b410-58c898dee672">
-  <name>Amount</name>
+  <name>InvoiceAmount</name>
   <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>Invoice amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма</value>
+   <value>Инвойсная стоимость сумма</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tutar</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeAmount</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
- </resources>
- <resources uuid="56b0cf04-89e5-4cea-ba36-4e9201eee698">
-  <name>AmountCost</name>
-  <synonym>
-   <key>en</key>
-   <value>Amount cost</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма доп. расходов</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Ek maliyet tutarı</value>
+   <value>Invoice amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -88,39 +67,18 @@
   <fullTextSearch>Use</fullTextSearch>
  </resources>
  <resources uuid="81c1550d-6205-4b46-8e91-a42bf5e7ddd9">
-  <name>AmountTax</name>
+  <name>InvoiceTaxAmount</name>
   <synonym>
    <key>en</key>
-   <value>Amount tax</value>
+   <value>Invoice tax amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма налогов</value>
+   <value>Сумма налогов инвойсной стоимости</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi tutarı</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeAmount</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
- </resources>
- <resources uuid="6301f3b7-f079-417e-a669-626548536100">
-  <name>AmountCostRatio</name>
-  <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Коеф. добавочной стоимости</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <value>Invoice tax amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -130,18 +88,18 @@
   <fullTextSearch>Use</fullTextSearch>
  </resources>
  <resources uuid="02ba10f3-49db-473b-a597-4a48e3eea264">
-  <name>NotDirectCosts</name>
+  <name>IndirectCostAmount</name>
   <synonym>
    <key>en</key>
-   <value>Not direct costs</value>
+   <value>Indirect cost amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Косвенная себестоимость</value>
+   <value>Сумма косвенных расходов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Not direct costs</value>
+   <value>Indirect cost amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -150,19 +108,19 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
- <resources uuid="c2f86bc2-55f2-4f3a-ac3b-4683da1de7e1">
-  <name>AmountCostTax</name>
+ <resources uuid="542214e1-a122-48aa-bcbe-4d19c93f7e3c">
+  <name>IndirectCostTaxAmount</name>
   <synonym>
    <key>en</key>
-   <value>Amount cost tax</value>
+   <value>Indirect cost tax amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Стоимость - Налоги</value>
+   <value>Сумма налогов косвенных расходов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount cost tax</value>
+   <value>Indirect cost tax amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -171,19 +129,19 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
- <resources uuid="39fe62df-c0c6-40ba-a5be-8f4f4854edae">
-  <name>AmountRevenue</name>
+ <resources uuid="6301f3b7-f079-417e-a669-626548536100">
+  <name>ExtraCostAmountByRatio</name>
   <synonym>
    <key>en</key>
-   <value>Amount revenue</value>
+   <value>Extra cost amount by ratio</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма доход</value>
+   <value>Доп. стоимость по коефф.</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount revenue</value>
+   <value>Extra cost amount by ratio</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -192,19 +150,19 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
- <resources uuid="f2d589c0-8559-40c1-b351-e4e57d266bed">
-  <name>AmountRevenueTax</name>
+ <resources uuid="ec9e4aed-91ed-4bb9-8d04-0bfabd4f4a90">
+  <name>ExtraCostTaxAmountByRatio</name>
   <synonym>
    <key>en</key>
-   <value>Amount revenue tax</value>
+   <value>Extra cost tax amount by ratio</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма доход налог</value>
+   <value>Сумма налогов доп. стоимости по коефф.</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount revenue tax</value>
+   <value>Extra cost tax amount by ratio</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -214,18 +172,123 @@
   <fullTextSearch>Use</fullTextSearch>
  </resources>
  <resources uuid="fa1a2b48-14ea-4176-8e50-14f4763feb37">
-  <name>AmountCostAdditional</name>
+  <name>ExtraDirectCostAmount</name>
   <synonym>
    <key>en</key>
-   <value>Amount cost additional</value>
+   <value>Extra direct cost amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма доп. стоимость </value>
+   <value>Сумма косвенной стоимости</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount cost additional</value>
+   <value>Extra direct cost amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="961d48c9-cf50-4912-995c-868f0913fef1">
+  <name>ExtraDirectCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Extra direct cost tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налоговой прямой стоимости</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Extra direct cost tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="56b0cf04-89e5-4cea-ba36-4e9201eee698">
+  <name>AllocatedCostAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Allocated cost amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Allocated cost amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="c2f86bc2-55f2-4f3a-ac3b-4683da1de7e1">
+  <name>AllocatedCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Allocated cost tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Allocated cost tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="39fe62df-c0c6-40ba-a5be-8f4f4854edae">
+  <name>AllocatedRevenueAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Allocated revenue amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. доходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Allocated revenue amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f2d589c0-8559-40c1-b351-e4e57d266bed">
+  <name>AllocatedRevenueTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Allocated revenue tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов доп. доходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Allocated revenue tax amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

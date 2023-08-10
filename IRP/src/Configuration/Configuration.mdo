@@ -482,10 +482,12 @@
  <commonModules>CommonModule.DocWorkSheetServer</commonModules>
  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
  <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
+ <commonModules>CommonModule.EquipmentAcquiring_CommonAPI</commonModules>
  <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
- <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
+ <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
+ <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
  <commonModules>CommonModule.ExtensionServer</commonModules>
  <commonModules>CommonModule.ExternalCommandsClient</commonModules>
@@ -1041,6 +1043,7 @@
  <enums>Enum.ProductionTransactionTypes</enums>
  <enums>Enum.OfferGroupType</enums>
  <enums>Enum.BankTermTypes</enums>
+ <enums>Enum.EquipmentAPIModule</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>
@@ -1098,6 +1101,7 @@
  <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
  <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
  <informationRegisters>InformationRegister.JobQueue</informationRegisters>
+ <informationRegisters>InformationRegister.S1001L_VendorsPricesByItemKey</informationRegisters>
  <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
  <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
  <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>

@@ -265,7 +265,7 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 			| '1' | '2,000'    | 'Shirt (38/Black)' | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Branch'  | 'Company'      | 'Row presentation'            |
-			| 'Shop 01' | 'Main Company' | 'Retail sales receipt 1 203 dated 02.08.2023 14:36:' |
+			| 'Shop 01' | 'Main Company' | 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)' | 'pcs'  |
@@ -308,13 +308,13 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 		And in the table "ItemList" I click "Goods receipts" button
 		And Delay 3
 		And "DocumentsTree" table became equal
-			| 'Presentation'                                         | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-			| 'Shirt (38/Black)'                                     | '2,000'   | '2,000'              | '2,000'    |
-			| 'Retail goods receipt 1 205 dated 03.08.2023 14:59:12' | ''        | '2,000'              | '2,000'    |
-			| 'Product 1 with SLN (PZU)'                             | '2,000'   | '2,000'              | '2,000'    |
-			| 'Retail goods receipt 1 205 dated 03.08.2023 14:59:12' | ''        | '2,000'              | '2,000'    |
-			| 'Dress (L/Green)'                                      | '1,000'   | '1,000'              | '1,000'    |
-			| 'Retail goods receipt 1 205 dated 03.08.2023 14:59:12' | ''        | '1,000'              | '1,000'    |
+			| 'Presentation'             | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Shirt (38/Black)'         | '2,000'   | '2,000'              | '2,000'    |
+			| '$$RGR1$$'                 | ''        | '2,000'              | '2,000'    |
+			| 'Product 1 with SLN (PZU)' | '2,000'   | '2,000'              | '2,000'    |
+			| '$$RGR1$$'                 | ''        | '2,000'              | '2,000'    |
+			| 'Dress (L/Green)'          | '1,000'   | '1,000'              | '1,000'    |
+			| '$$RGR1$$'                 | ''        | '1,000'              | '1,000'    |
 		And I close "Linked documents" window
 	* Payment
 		And I move to "Payments" tab

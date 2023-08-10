@@ -1635,8 +1635,7 @@ Function BindTransactionType(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeCourierByTransactionType");
-	
-	//#2080
+
 	Binding.Insert("RetailGoodsReceipt", 
 		"StepChangeCourierByTransactionType,	
 		|StepChangePartnerByRetailCustomerAndTransactionType,
@@ -3573,14 +3572,12 @@ Function BindRetailCustomer(Parameters)
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
 	
-	//#2080
 	Binding.Insert("RetailReturnReceipt",
 		"StepChangePartnerByRetailCustomer,
 		|StepChangeAgreementByRetailCustomer,
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
 		
-	//#2080
 	Binding.Insert("RetailGoodsReceipt",
 		"StepChangePartnerByRetailCustomerAndTransactionType,
 		|StepChangeLegalNameByRetailCustomerAndTransactionType");
@@ -4278,7 +4275,8 @@ Function BindAgreement(Parameters)
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeRecordPurchasePricesByAgreement");
 		
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
@@ -4524,6 +4522,43 @@ Procedure StepChangePriceIncludeTaxByAgreement(Parameters, Chain) Export
 	Options.CurrentPriceIncludeTax = GetPriceIncludeTax(Parameters);
 	Options.StepName = "StepChangePriceIncludeTaxByAgreement";
 	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RECORD_PURCHASE_PRICES
+
+// RecordPurchasePrices.Set
+Procedure SetRecordPurchasePrices(Parameters, Results) Export
+	Binding = BindRecordPurchasePrices(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// RecordPurchasePrices.Get
+Function GetRecordPurchasePrices(Parameters)
+	Return GetPropertyObject(Parameters, "RecordPurchasePrices");
+EndFunction
+
+// RecordPurchasePrices.Bind
+Function BindRecordPurchasePrices(Parameters)
+	DataPath = "RecordPurchasePrices";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindRecordPurchasePrices");
+EndFunction
+
+// RecordPurchasePrices.ChangeRecordPurchasePricesByAgreement.Step
+Procedure StepChangeRecordPurchasePricesByAgreement(Parameters, Chain) Export
+	Chain.ChangeRecordPurchasePricesByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeRecordPurchasePricesByAgreement.Setter = "SetRecordPurchasePrices";
+	Options = ModelClientServer_V2.ChangeRecordPurchasePricesByAgreementOptions();
+	Options.Agreement = GetAgreement(Parameters);
+	Options.CurrentRecordPurchasePrices = GetRecordPurchasePrices(Parameters);
+	Options.StepName = "StepChangeRecordPurchasePricesByAgreement";
+	Chain.ChangeRecordPurchasePricesByAgreement.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -4834,8 +4869,10 @@ Function BindBillOfMaterials(Parameters)
 	
 	Binding.Insert("Production",
 		"StepMaterialsCalculations,
-		|StepChangeCostMultiplierRatioByBillOfMaterials,
-		|StepChangeAdditionalCostByBillOfMaterials,
+		|StepChangeExtraCostAmountByRatioByBillOfMaterials,
+		|StepChangeExtraCostTaxAmountByRatioByBillOfMaterials,
+		|StepChangeExtraDirectCostAmountByBillOfMaterials,
+		|StepChangeExtraDirectCostTaxAmountByBillOfMaterials,
 		|StepChangeDurationOfProductionByBillOfMaterials");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBillOfMaterials");
@@ -4859,62 +4896,122 @@ EndProcedure
 
 #EndRegion
 
-#Region COST_MULTIPLIER_RATIO
+#Region EXTRA_COST_AMOUNT_BY_RATIO
 
-// CostMultiplierRatio.Set
-Procedure SetCostMultiplierRatio(Parameters, Results) Export
-	Binding = BindCostMultiplierRatio(Parameters);
+// ExtraCostAmountByRatio.Set
+Procedure SetExtraCostAmountByRatio(Parameters, Results) Export
+	Binding = BindExtraCostAmountByRatio(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// CostMultiplierRatio.Bind
-Function BindCostMultiplierRatio(Parameters)
-	DataPath = "CostMultiplierRatio";
+// ExtraCostAmountByRatio.Bind
+Function BindExtraCostAmountByRatio(Parameters)
+	DataPath = "ExtraCostAmountByRatio";
 	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCostMultiplierRatio");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindExtraCostAmountByRatio");
 EndFunction
 
-// CostMultiplierRatio.ChangeCostMultiplierRatioByBillOfMaterials.Step
-Procedure StepChangeCostMultiplierRatioByBillOfMaterials(Parameters, Chain) Export
-	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Enable = True;
+// ExtraCostAmountByRatio.ChangeExtraCostAmountByRatioByBillOfMaterials.Step
+Procedure StepChangeExtraCostAmountByRatioByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeExtraCostAmountByRatioByBillOfMaterials.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Setter = "SetCostMultiplierRatio";
-	Options = ModelClientServer_V2.ChangeCostMultiplierRatioByBillOfMaterialsOptions();
+	Chain.ChangeExtraCostAmountByRatioByBillOfMaterials.Setter = "SetExtraCostAmountByRatio";
+	Options = ModelClientServer_V2.ChangeExtraCostAmountByRatioByBillOfMaterialsOptions();
 	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
-	Options.StepName = "StepChangeCostMultiplierRatioByBillOfMaterials";
-	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Options.Add(Options);
+	Options.StepName = "StepChangeExtraCostAmountByRatioByBillOfMaterials";
+	Chain.ChangeExtraCostAmountByRatioByBillOfMaterials.Options.Add(Options);
 EndProcedure
 
 #EndRegion
 
-#Region ADDITIONAL_COST
+#Region EXTRA_COST_TAX_AMOUNT_BY_RATIO
 
-// AdditionalCost.Set
-Procedure SetAdditionalCost(Parameters, Results) Export
-	Binding = BindAdditionalCost(Parameters);
+// ExtraCostTaxAmountByRatio.Set
+Procedure SetExtraCostTaxAmountByRatio(Parameters, Results) Export
+	Binding = BindExtraCostTaxAmountByRatio(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// AdditionalCost.Bind
-Function BindAdditionalCost(Parameters)
-	DataPath = "AdditionalCost";
+// ExtraCostTaxAmountByRatio.Bind
+Function BindExtraCostTaxAmountByRatio(Parameters)
+	DataPath = "ExtraCostTaxAmountByRatio";
 	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAdditionalCost");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindExtraCostTaxAmountByRatio");
 EndFunction
 
-// AdditionalCost.ChangeAdditionalCostByBillOfMaterials.Step
-Procedure StepChangeAdditionalCostByBillOfMaterials(Parameters, Chain) Export
-	Chain.ChangeAdditionalCostByBillOfMaterials.Enable = True;
+// ExtraCostTaxAmountByRatio.ChangeExtraCostTaxAmountByRatioByBillOfMaterials.Step
+Procedure StepChangeExtraCostTaxAmountByRatioByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeExtraCostTaxAmountByRatioByBillOfMaterials.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeAdditionalCostByBillOfMaterials.Setter = "SetAdditionalCost";
-	Options = ModelClientServer_V2.ChangeAdditionalCostByBillOfMaterialsOptions();
+	Chain.ChangeExtraCostTaxAmountByRatioByBillOfMaterials.Setter = "SetExtraCostTaxAmountByRatio";
+	Options = ModelClientServer_V2.ChangeExtraCostTaxAmountByRatioByBillOfMaterialsOptions();
 	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
-	Options.StepName = "StepChangeAdditionalCostByBillOfMaterials";
-	Chain.ChangeAdditionalCostByBillOfMaterials.Options.Add(Options);
+	Options.StepName = "StepChangeExtraCostTaxAmountByRatioByBillOfMaterials";
+	Chain.ChangeExtraCostTaxAmountByRatioByBillOfMaterials.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EXTRA_DIRECT_COST_AMOUNT
+
+// ExtraDirectCostAmount.Set
+Procedure SetExtraDirectCostAmount(Parameters, Results) Export
+	Binding = BindExtraDirectCostAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ExtraDirectCostAmount.Bind
+Function BindExtraDirectCostAmount(Parameters)
+	DataPath = "ExtraDirectCostAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindExtraDirectCostAmount");
+EndFunction
+
+// ExtraDirectCostAmount.ChangeExtraDirectCostAmountByBillOfMaterials.Step
+Procedure StepChangeExtraDirectCostAmountByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeExtraDirectCostAmountByBillOfMaterials.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeExtraDirectCostAmountByBillOfMaterials.Setter = "SetExtraDirectCostAmount";
+	Options = ModelClientServer_V2.ChangeExtraDirectCostAmountByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeExtraDirectCostAmountByBillOfMaterials";
+	Chain.ChangeExtraDirectCostAmountByBillOfMaterials.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EXTRA_DIRECT_COST_TAX_AMOUNT
+
+// ExtraDirectCostTaxAmount.Set
+Procedure SetExtraDirectCostTaxAmount(Parameters, Results) Export
+	Binding = BindExtraDirectCostTaxAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ExtraDirectCostTaxAmount.Bind
+Function BindExtraDirectCostTaxAmount(Parameters)
+	DataPath = "ExtraDirectCostTaxAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindExtraDirectCostTaxAmount");
+EndFunction
+
+// ExtraDirectCostTaxAmount.ChangeExtraDirectCostTaxAmountByBillOfMaterials.Step
+Procedure StepChangeExtraDirectCostTaxAmountByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeExtraDirectCostTaxAmountByBillOfMaterials.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeExtraDirectCostTaxAmountByBillOfMaterials.Setter = "SetExtraDirectCostTaxAmount";
+	Options = ModelClientServer_V2.ChangeExtraDirectCostTaxAmountByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeExtraDirectCostTaxAmountByBillOfMaterials";
+	Chain.ChangeExtraDirectCostTaxAmountByBillOfMaterials.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -9818,7 +9915,6 @@ Function BindItemListSalesDocument(Parameters)
 	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
 	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
 	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
-	//#2080
 	DataPath.Insert("RetailGoodsReceipt"     , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();

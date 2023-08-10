@@ -83,6 +83,8 @@ Scenario: _604700 preparation (Object property editor)
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Properties settings for items
+		And properties settings for items
 	And I close all client application windows
 
 
@@ -471,6 +473,7 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced writing
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And Delay 2
 	And I close all client application windows
 	* Open Object property editor
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
@@ -515,6 +518,7 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
+		And Delay 2
 		And "PropertiesTable" table contains lines
 			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
@@ -560,6 +564,44 @@ Scenario: _604720 execute code (ObjectPropertyEditor)
 				
 				
 
+Scenario: _604722 change properties (ObjectPropertyEditor)	
+		And I close all client application windows			
+	* Open Object property editor
+		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
+	* Select document
+		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Add properties" exact value from "Table" drop-down list
+		And I click the button named "Refresh"
+		Then "Object property editor" window is opened
+		And I go to line in "PropertiesTable" table
+			| 'Object' |
+			| 'Boots'  |
+		And I activate "Test" field in "PropertiesTable" table
+		And in the table "PropertiesTable" I click "Edit" button
+		And I click choice button of "Test" attribute in "PropertiesTable" table
+		And I activate "Additional attribute" field in "List" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I click "Select" button
+		And I finish line editing in "PropertiesTable" table
+		And I click the button named "Save"
+	* Check
+		Given I open hyperlink "e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6"
+		And I click "Add properties" button
+		And "Properties" table contains lines
+			| 'Property' | 'Value'  |
+			| 'Test'     | 'Test 1' |
+	And I close all client application windows
+	
+		
+		
+				
+						
+				
+		
+				
+				
 				
 
 				

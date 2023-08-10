@@ -163,6 +163,9 @@ Scenario: _012004 create common Partner term
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "20" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -205,6 +208,9 @@ Scenario: _012004 create common Partner term
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "21" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -247,6 +253,9 @@ Scenario: _012004 create common Partner term
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "22" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -296,6 +305,9 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "31" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -340,6 +352,9 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Vendor"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "31" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -375,6 +390,9 @@ Scenario: _012005 creation of an individual Partner term in USD
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Vendor"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "31" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -417,6 +435,9 @@ Scenario: _012007 create common Partner term with Item Segment
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
 		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "23" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -463,6 +484,9 @@ Scenario: _012010 create Partner term without currency (negative test)
 	* Creating Partner term without currency
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "302" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -505,6 +529,9 @@ Scenario: _012011 create Partner term without price type (negative test)
 	* Creating Partner term without price type
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Customer"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "301" text in "Number" field
 		And I input "01.11.2018" text in "Date" field
 		And I click Select button of "Company" field
@@ -549,6 +576,9 @@ Scenario: _012012 create Partner term for other partners
 		And I click the button named "FormCreate"
 		And I change the radio button named "Type" value to "Other"
 		Then the form attribute named "ApArPostingDetail" became equal to "By agreements"
+		And I expand "Agreement info" group
+		And I expand "Price settings" group
+		And I expand "Store and delivery" group
 		And I input "30" text in "Number" field
 		And I input "01.11.2022" text in "Date" field
 		And I click Select button of "Company" field

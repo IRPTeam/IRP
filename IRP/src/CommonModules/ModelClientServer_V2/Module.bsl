@@ -276,6 +276,7 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByAgreement"             , GetChainLink("ChangeStoreByAgreementExecute"));
 	Chain.Insert("ChangeDeliveryDateByAgreement"      , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"   , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeRecordPurchasePricesByAgreement"   , GetChainLink("ChangeRecordPurchasePricesByAgreementExecute"));
 	Chain.Insert("ChangeBasisDocumentByAgreement"     , GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"             , GetChainLink("ChangeOrderByAgreementExecute"));
 	Chain.Insert("ChangeApArPostingDetailByAgreement" , GetChainLink("ChangeApArPostingDetailByAgreementExecute"));
@@ -376,8 +377,10 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
-	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials"  , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
-	Chain.Insert("ChangeAdditionalCostByBillOfMaterials"       , GetChainLink("ChangeAdditionalCostByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraCostAmountByRatioByBillOfMaterials"    , GetChainLink("ChangeExtraCostAmountByRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraCostTaxAmountByRatioByBillOfMaterials" , GetChainLink("ChangeExtraCostTaxAmountByRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraDirectCostAmountByBillOfMaterials"     , GetChainLink("ChangeExtraDirectCostAmountByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraDirectCostTaxAmountByBillOfMaterials"  , GetChainLink("ChangeExtraDirectCostTaxAmountByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeDurationOfProductionByBillOfMaterials" , GetChainLink("ChangeDurationOfProductionByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
@@ -838,7 +841,6 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	
-	//#2080
 	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery")
 		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
 		Return Undefined;
@@ -1107,6 +1109,22 @@ Function ChangePriceIncludeTaxByAgreementExecute(Options) Export
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	Return AgreementInfo.PriceIncludeTax;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECORD_PURCHASE_PRICES_BY_AGREEMENT
+
+Function ChangeRecordPurchasePricesByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentRecordPurchasePrices");
+EndFunction
+
+Function ChangeRecordPurchasePricesByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentRecordPurchasePrices;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	Return AgreementInfo.RecordPurchasePrices;
 EndFunction
 
 #EndRegion
@@ -1616,34 +1634,66 @@ EndFunction
 
 #EndRegion
 
-#Region CHANGE_COST_MULTIPLIERRATIO_BY_BILL_OF_MATERIALS		
+#Region CHANGE_EXTRA_COST_AMOUNT_BY_RATIO_BY_BILL_OF_MATERIALS		
 
-Function ChangeCostMultiplierRatioByBillOfMaterialsOptions() Export
+Function ChangeExtraCostAmountByRatioByBillOfMaterialsOptions() Export
 	Return GetChainLinkOptions("BillOfMaterials");
 EndFunction
 
-Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
+Function ChangeExtraCostAmountByRatioByBillOfMaterialsExecute(Options) Export
 	If Not ValueIsFilled(Options.BillOfMaterials) Then
 		Return 0;
 	EndIf;
 	
-	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraCostAmountByRatio");
 EndFunction
 
 #EndRegion
 
-#Region CHANGE_ADDITIONAL_COST_BY_BILL_OF_MATERIALS		
+#Region CHANGE_EXTRA_COST_TAX_AMOUNT_BY_RATIO_BY_BILL_OF_MATERIALS		
 
-Function ChangeAdditionalCostByBillOfMaterialsOptions() Export
+Function ChangeExtraCostTaxAmountByRatioByBillOfMaterialsOptions() Export
 	Return GetChainLinkOptions("BillOfMaterials");
 EndFunction
 
-Function ChangeAdditionalCostByBillOfMaterialsExecute(Options) Export
+Function ChangeExtraCostTaxAmountByRatioByBillOfMaterialsExecute(Options) Export
 	If Not ValueIsFilled(Options.BillOfMaterials) Then
 		Return 0;
 	EndIf;
 	
-	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "AdditionalCost");
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraCostTaxAmountByRatio");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXTRA_DIRECT_COST_AMOUNT_BY_BILL_OF_MATERIALS		
+
+Function ChangeExtraDirectCostAmountByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeExtraDirectCostAmountByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraDirectCostAmount");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXTRA_DIRECT_COST_TAX_AMOUNT_BY_BILL_OF_MATERIALS		
+
+Function ChangeExtraDirectCostTaxAmountByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeExtraDirectCostTaxAmountByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraDirectCostTaxAmount");
 EndFunction
 
 #EndRegion

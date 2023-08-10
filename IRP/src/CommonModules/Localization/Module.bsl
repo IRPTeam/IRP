@@ -17,6 +17,44 @@ Function Strings(Lang) Export
 		|tr='Can not create Access Key. Unknows value type.'", Lang));
 #EndRegion
 
+#Region Validation
+
+	Strings.Insert("EmailIsEmpty", NStr("en='Email is empty.';
+		|ru='Маил пустой.';
+		|tr='Email is empty.'", Lang));
+	Strings.Insert("Only1SymbolAtCanBeSet", NStr("en='Only 1 symbol @ can be set.';
+		|ru='Только один символ @ может быть установлен.';
+		|tr='Only 1 symbol @ can be set.'", Lang));
+	Strings.Insert("InvalidLengthOfLocalPart", NStr("en='Invalid length of the local part.';
+		|ru='Не корректная длинна левой части.';
+		|tr='Invalid length of the local part.'", Lang));
+	Strings.Insert("InvalidLengthOfDomainPart", NStr("en='Invalid length of the domain part.';
+		|ru='Не корректная длинна доменной части.';
+		|tr='Invalid length of the domain part.'", Lang));
+	Strings.Insert("LocalPartStartEndDot", NStr("en='The local part should not start or end with a dot.';
+		|ru='Левая часть не может начинаться или заканчиваться на точку.';
+		|tr='The local part should not start or end with a dot.'", Lang));
+	Strings.Insert("LocalPartConsecutiveDots", NStr("en='Local part contains consecutive dots.';
+		|ru='Левая часть содержит последовательные точки.';
+		|tr='Local part contains consecutive dots.'", Lang));
+	Strings.Insert("DomainPartStartsWithDot", NStr("en='Domain part starts with a dot.';
+		|ru='Доменная часть начинается с точки.';
+		|tr='Domain part starts with a dot.'", Lang));
+	Strings.Insert("DomainPartConsecutiveDots", NStr("en='Domain part contains consecutive dots.';
+		|ru='Доменная часть содержит последовательные точки.';
+		|tr='Domain part contains consecutive dots.'", Lang));
+	Strings.Insert("DomainPartMin1Dot", NStr("en='Domain part has to contain at least 1 dot.';
+		|ru='Доменная часть должна содержать хотя бы одну точку.';
+		|tr='Domain part has to contain at least 1 dot.'", Lang));
+	Strings.Insert("DomainIdentifierExceedsLength", NStr("en='Domain identifier exceeds the allowed length.';
+		|ru='Идентификатор домена превышает допустимую длинну';
+		|tr='Domain identifier exceeds the allowed length.'", Lang));
+	Strings.Insert("InvalidCharacterInAddress", NStr("en='Invalid character: ""%1""';
+		|ru='Не корректный символ: ""%1""';
+		|tr='Invalid character: ""%1""'", Lang));
+
+#EndRegion
+
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en='SMS sent successfully';
 		|ru='SMS удачно отправлена';
@@ -128,6 +166,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_012", NStr("en='Already disconnected';
 		|ru='Уже подключен';
 		|tr='Already disconnected'", Lang));
+	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en='Can not find API module. Check `Equipment API Module` in Hardware';
+		|ru='API модуль не найден. Проверьте ""Модуль API оборудования"" в торговом оборудовании';
+		|tr='Can not find API module. Check `Equipment API Module` in Hardware'", Lang));
 	
 	Strings.Insert("EqError_001", NStr("en='The device is connected. The device must be disabled before the operation.';
 		|ru='Устройство подключено. Устройство должно быть отключено перед началом работы.';

@@ -445,8 +445,7 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
 		And I expand "Additional info" group
-		And I input "Sale address" text in "Sale address" field
-		And I input "Sale location" text in "Sale location" field	
+		And I input "[cut]" text in the field named "Cutter"	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened

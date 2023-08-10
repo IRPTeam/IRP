@@ -2508,3 +2508,9 @@ Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
 	Then the number of "List" table lines is "равно" "520"	
+	* Check log records form
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "User" became equal to "CI"
+		Then the form attribute named "Hardware" became equal to "Fiscal printer"
+	And I close all client application windows

@@ -2103,7 +2103,6 @@ EndFunction
 
 &AtServer
 Procedure LockLinkedRows()
-	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
 	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 

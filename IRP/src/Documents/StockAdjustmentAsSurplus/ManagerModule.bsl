@@ -132,27 +132,33 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.Amount AS Amount,
-		   |	ItemList.AmountTax AS AmountTax,
-		   |	ItemList.Key
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.Store AS Store,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	CASE
+		|		WHEN ItemList.PhysicalInventory.Ref IS NULL
+		|			THEN ItemList.Ref
+		|		ELSE ItemList.PhysicalInventory
+		|	END AS AdjustmentBasis,
+		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+		|	ItemList.PhysicalInventory AS PhysicalInventory,
+		|	ItemList.Ref AS Basis,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.AmountTax AS AmountTax,
+		|	ItemList.Key
+		|INTO ItemList
+		|FROM
+		|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -226,7 +232,23 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	Return QueryArray;
+EndFunction
+
+Function R4031B_GoodsInTransitIncoming()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4031B_GoodsInTransitIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PhysicalInventoryExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -287,13 +309,15 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4052T_StockAdjustmentAsSurplus()
-	Return "SELECT
-		   |	*
-		   |INTO R4052T_StockAdjustmentAsSurplus
-		   |FROM
-		   |	ItemList
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists";
+	Return 
+		"SELECT
+		|	ItemList.AdjustmentBasis AS Basis,
+		|	*
+		|INTO R4052T_StockAdjustmentAsSurplus
+		|FROM
+		|	ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4050B_StockInventory()

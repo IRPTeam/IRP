@@ -183,8 +183,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
@@ -245,26 +245,34 @@ Function R4010B_ActualStocks()
 		   |	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
-Function R4052T_StockAdjustmentAsSurplus()
-	Return "SELECT
-		   |	ItemList.SurplusQuantity AS Quantity,
-		   |	*
-		   |INTO R4052T_StockAdjustmentAsSurplus
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.SurplusQuantity <> 0";
+Function R4031B_GoodsInTransitIncoming()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SurplusQuantity AS Quantity
+		|INTO R4031B_GoodsInTransitIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SurplusQuantity <> 0";
 EndFunction
 
-Function R4051T_StockAdjustmentAsWriteOff()
-	Return "SELECT
-		   |	ItemList.WriteOffQuantity AS Quantity,
-		   |	*
-		   |INTO R4051T_StockAdjustmentAsWriteOff
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.WriteOffQuantity <> 0";
+Function R4032B_GoodsInTransitOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.WriteOffQuantity AS Quantity
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
 Function T3010S_RowIDInfo()

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -77,6 +77,11 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document PhysicalInventory objects with StockAdjustmentAsWriteOff and StockAdjustmentAsSurplus (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1201).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0419001 check preparation
 	When check preparation	
@@ -161,6 +166,84 @@ Scenario: _041904 check Stock adjustment as write off with serial lot number mov
 			| ''                                                                | 'Expense'       | '24.05.2022 14:10:25'   | '5'           | 'Store 01'     | 'PZU'        | '8908899877'           |
 			| ''                                                                | 'Expense'       | '24.05.2022 14:10:25'   | '5'           | 'Store 01'     | 'PZU'        | '8908899879'           |
 		And I close all client application windows
+
+Scenario: _041905 check Stock adjustment as write off movements by the Register  "R4032 Goods in transit (outgoing)" (without PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)" 
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4032 Goods in transit (outgoing)"'    |
+	And I close all client application windows
+
+Scenario: _041906 check Stock adjustment as write off movements by the Register  "R4032 Goods in transit (outgoing)" (with PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 201'     |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)" 
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 1 201 dated 11.08.2023 12:20:03' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                                | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'                 | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                                              | 'Expense'     | '11.08.2023 12:20:03' | '2'         | 'Store 06'   | ''      | 'XS/Blue'  |		
+	And I close all client application windows
+
+
+Scenario: _041907 check Stock adjustment as write off movements by the Register  "R4051 Stock adjustment (Write off)" (with PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 201'     |
+	* Check movements by the Register  "R4051 Stock adjustment (Write off)" 
+		And I click "Registrations report" button
+		And I select "R4051 Stock adjustment (Write off)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 1 201 dated 11.08.2023 12:20:03' | ''                    | ''          | ''           | ''                                                 | ''         |
+			| 'Document registrations records'                                | ''                    | ''          | ''           | ''                                                 | ''         |
+			| 'Register  "R4051 Stock adjustment (Write off)"'                | ''                    | ''          | ''           | ''                                                 | ''         |
+			| ''                                                              | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''         |
+			| ''                                                              | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key' |
+			| ''                                                              | '11.08.2023 12:20:03' | '2'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | 'XS/Blue'  |		
+	And I close all client application windows
+
+Scenario: _041908 check Stock adjustment as write off movements by the Register  "R4051 Stock adjustment (Write off)" (without PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201'     |
+	* Check movements by the Register  "R4051 Stock adjustment (Write off)" 
+		And I click "Registrations report" button
+		And I select "R4051 Stock adjustment (Write off)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''                    | ''          | ''           | ''                                                            | ''          |
+			| 'Document registrations records'                              | ''                    | ''          | ''           | ''                                                            | ''          |
+			| 'Register  "R4051 Stock adjustment (Write off)"'              | ''                    | ''          | ''           | ''                                                            | ''          |
+			| ''                                                            | 'Period'              | 'Resources' | 'Dimensions' | ''                                                            | ''          |
+			| ''                                                            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                                       | 'Item key'  |
+			| ''                                                            | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | '38/Yellow' |
+			| ''                                                            | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | 'M/White'   |		
+	And I close all client application windows
+
 
 Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 	And I close all client application windows

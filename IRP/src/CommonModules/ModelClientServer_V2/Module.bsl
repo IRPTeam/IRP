@@ -35,14 +35,14 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 			Transfer.Form.BackgroundJobStorageAddress = RunResult.BackgroundJobStorageAddress;
 			Transfer.Form._AttachIdleHandler();
 		Else	
-			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, True);
 			TransferStructureToForm(Transfer, Parameters);
 		EndIf;
 
 #ELSE
 	
 		// Is server
-		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
+		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, False);
 	
 #ENDIF
 	
@@ -359,7 +359,9 @@ Function GetChain()
 	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangePartnerTermsByBankTermAndPaymentType"	   , GetChainLink("ChangePartnerTermsByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeLegalNameContractByBankTermAndPaymentType" , GetChainLink("ChangeLegalNameContractByBankTermAndPaymentTypeExecute"));
-	
+	Chain.Insert("ChangeBankTermByPaymentType" , GetChainLink("ChangeBankTermByPaymentTypeExecute"));
+	Chain.Insert("ChangePaymentTypeByBankTerm" , GetChainLink("ChangePaymentTypeByBankTermExecute"));
+		
 	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
@@ -3933,7 +3935,51 @@ Function ChangeLegalNameContractByBankTermAndPaymentTypeOptions() Export
 EndFunction
 
 Function ChangeLegalNameContractByBankTermAndPaymentTypeExecute(Options) Export
-	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).LegalNameContract;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BANK_TERM_BY_PAYMENT_TYPE
+
+Function ChangeBankTermByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("CurrentBankTerm, PaymentType, Branch");
+EndFunction
+
+Function ChangeBankTermByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Options.CurrentBankTerm;
+	EndIf;
+	ArrayOfRefs = ModelServer_V2.GetBankTermsByPaymentType(Options.PaymentType, Options.Branch);
+	If ArrayOfRefs.Count() = 1 Then
+		Return ArrayOfRefs[0];
+	EndIf;
+	If ArrayOfRefs.Find(Options.CurrentBankTerm) <> Undefined Then
+		Return Options.CurrentBankTerm;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PAYMENT_TYPE_BY_BANK_TERM
+	
+Function ChangePaymentTypeByBankTermOptions() Export
+	Return GetChainLinkOptions("CurrentPaymentType, BankTerm");
+EndFunction
+
+Function ChangePaymentTypeByBankTermExecute(Options) Export
+	If Not ValueIsFilled(Options.BankTerm) Then
+		Return Options.CurrentPaymentType;
+	EndIf;
+	ArrayOfRefs = ModelServer_V2.GetPaymentTypesByBankTerm(Options.BankTerm);
+	If ArrayOfRefs.Count() = 1 Then
+		Return ArrayOfRefs[0];
+	EndIf;
+	If ArrayOfRefs.Find(Options.CurrentPaymentType) <> Undefined Then
+		Return Options.CurrentPaymentType;
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion

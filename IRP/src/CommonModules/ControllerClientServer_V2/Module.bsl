@@ -2814,7 +2814,7 @@ EndFunction
 // Branch.OnChange
 Procedure BranchOnChange(Parameters) Export
 	AddViewNotify("OnSetBranchNotify", Parameters);
-	Binding = BindPartner(Parameters);
+	Binding = BindBranch(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
@@ -2833,8 +2833,13 @@ EndFunction
 Function BindBranch(Parameters)
 	DataPath = "Branch";
 	Binding = New Structure();
-	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
-	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
+	
+	Binding.Insert("RetailSalesReceipt", 
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+		
+	Binding.Insert("RetailReturnReceipt", 
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
 
@@ -12223,7 +12228,8 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("RetailSalesReceipt", 
-		"StepChangePercentByBankTermAndPaymentType,
+		"StepChangeBankTermByPaymentType,
+		|StepChangePercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -12231,7 +12237,8 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepChangePercentByBankTermAndPaymentType,
+		"StepChangeBankTermByPaymentType,
+		|StepChangePercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -12243,6 +12250,23 @@ Function BindPaymentsPaymentType(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
+
+// Payments.PaymentType.ChangePaymentTypeByBankTerm.Step
+Procedure StepChangePaymentTypeByBankTerm(Parameters, Chain) Export
+	Chain.ChangePaymentTypeByBankTerm.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePaymentTypeByBankTerm.Setter = "SetPaymentsPaymentType";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangePaymentTypeByBankTermOptions();
+		Options.CurrentPaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm           = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePaymentTypeByBankTerm";
+		Chain.ChangePaymentTypeByBankTerm.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -12304,15 +12328,17 @@ Function BindPaymentsBankTerm(Parameters)
 	DataPath = "Payments.BankTerm";
 	Binding = New Structure();
 
-	Binding.Insert("RetailSalesReceipt", 
-		"StepChangePercentByBankTermAndPaymentType,
+	Binding.Insert("RetailSalesReceipt",
+		"StepChangePaymentTypeByBankTerm, 
+		|StepChangePercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepChangePercentByBankTermAndPaymentType,
+		"StepChangePaymentTypeByBankTerm,
+		|StepChangePercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -12323,6 +12349,24 @@ Function BindPaymentsBankTerm(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsBankTerm");
 EndFunction
+
+// Payments.BankTerm.ChangeBankTermByPaymentType.Step
+Procedure StepChangeBankTermByPaymentType(Parameters, Chain) Export
+	Chain.ChangeBankTermByPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBankTermByPaymentType.Setter = "SetPaymentsBankTerm";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeBankTermByPaymentTypeOptions();
+		Options.CurrentBankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.PaymentType     = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Branch          = GetBranch(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeBankTermByPaymentType";
+		Chain.ChangeBankTermByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -12542,7 +12586,7 @@ Procedure StepChangePaymentAgentPartnerByBankTermAndPaymentType(Parameters, Chai
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
 		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepChangePartnerByBankTermAndPaymentType";
+		Options.StepName = "StepChangePaymentAgentPartnerByBankTermAndPaymentType";
 		Chain.ChangePartnerByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
@@ -14630,14 +14674,12 @@ Function SetProperty(Parameters, Cache, DataPath, _Key, _Value)
 		If Not Cache.Property(TableName) Then
 			AddTableToCache(Parameters, TableName);
 		EndIf;
-		IsRowExists = False;
+		
 		Row = GetRowFromTableCache(Parameters, TableName, _Key);
+	
 		If Row <> Undefined Then
 			Row.Insert(ColumnName, _Value);
-			IsRowExists = True;
-		EndIf;
-		
-		If Not IsRowExists Then
+		Else
 			NewRow = New Structure();
 			NewRow.Insert("Key"      , _Key);
 			NewRow.Insert(ColumnName , _Value);

@@ -34,14 +34,14 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("PaymetTypesWrite");	
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)	
-	IsPaymentAgent = Object.Type = PredefinedValue("Enum.PaymentTypes.PaymentAgent");
-	Form.Items.Partner.Visible = IsPaymentAgent;
-	Form.Items.LegalName.Visible = IsPaymentAgent;
-	Form.Items.Agreement.Visible = IsPaymentAgent;
-	Form.Items.LegalNameContract.Visible = IsPaymentAgent;
-	Form.Items.Branch.Visible = IsPaymentAgent;
+	Return;
 EndProcedure
 
 &AtClient

@@ -18,5 +18,6 @@
  </synonym>
  <type>
   <types>DocumentRef.PhysicalInventory</types>
+  <types>DocumentRef.StockAdjustmentAsWriteOff</types>
  </type>
 </mdclass:DefinedType>

@@ -259,4 +259,42 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="2ae02893-140c-4074-b87d-db379d9b78d9">
+  <name>LogAnalyze</name>
+  <synonym>
+   <key>en</key>
+   <value>Log analyze</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Анализ лога</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Log analyze</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="3c0d1b37-bfbb-400c-98fc-a190a12c339b">
+  <name>AnalyzeLog</name>
+  <synonym>
+   <key>en</key>
+   <value>Analyze log</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Анализировать лог</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Analyze log</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>CatalogRef.Hardware</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:InformationRegister>

@@ -211,20 +211,129 @@
      <textEdit>true</textEdit>
     </extInfo>
    </items>
-   <items xsi:type="form:FormField">
-    <name>Driver</name>
-    <id>37</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupConnectionType</name>
+    <id>168</id>
+    <items xsi:type="form:FormField">
+     <name>Driver</name>
+     <id>37</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Driver</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>DriverExtendedTooltip</name>
+      <id>39</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DriverContextMenu</name>
+      <id>38</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>IntegrationSettings</name>
+     <id>155</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.IntegrationSettings</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>IntegrationSettingsExtendedTooltip</name>
+      <id>157</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>IntegrationSettingsContextMenu</name>
+      <id>156</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
      <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-     <segments>Object.Driver</segments>
-    </dataPath>
+    <title>
+     <key>en</key>
+     <value>Connection type</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Тип подключения</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Connection type</value>
+    </title>
     <extendedTooltip>
-     <name>DriverExtendedTooltip</name>
-     <id>39</id>
+     <name>GroupConnectionTypeExtendedTooltip</name>
+     <id>169</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -237,28 +346,16 @@
       <horizontalAlign>Left</horizontalAlign>
      </extInfo>
     </extendedTooltip>
-    <contextMenu>
-     <name>DriverContextMenu</name>
-     <id>38</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <autoFill>true</autoFill>
-    </contextMenu>
-    <type>InputField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <wrap>true</wrap>
-     <chooseType>true</chooseType>
-     <typeDomainEnabled>true</typeDomainEnabled>
-     <textEdit>true</textEdit>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>Vertical</group>
+     <behavior>Auto</behavior>
+     <representation>WeakSeparation</representation>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <showTitle>true</showTitle>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
     </extInfo>
    </items>
    <items xsi:type="form:FormGroup">
@@ -2153,97 +2250,6 @@
    <extendedTooltip>
     <name>PageExtensionsAttributesExtendedTooltip</name>
     <id>137</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <type>Page</type>
-   <extInfo xsi:type="form:PageGroupExtInfo">
-    <group>Vertical</group>
-    <showTitle>true</showTitle>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormGroup">
-   <name>PageIntegaretionSettings</name>
-   <id>153</id>
-   <items xsi:type="form:FormField">
-    <name>IntegrationSettings</name>
-    <id>155</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-     <segments>Object.IntegrationSettings</segments>
-    </dataPath>
-    <extendedTooltip>
-     <name>IntegrationSettingsExtendedTooltip</name>
-     <id>157</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <type>Label</type>
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <extInfo xsi:type="form:LabelDecorationExtInfo">
-      <horizontalAlign>Left</horizontalAlign>
-     </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-     <name>IntegrationSettingsContextMenu</name>
-     <id>156</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <autoFill>true</autoFill>
-    </contextMenu>
-    <type>InputField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <wrap>true</wrap>
-     <chooseType>true</chooseType>
-     <typeDomainEnabled>true</typeDomainEnabled>
-     <textEdit>true</textEdit>
-    </extInfo>
-   </items>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <title>
-    <key>en</key>
-    <value>Integration settings</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Интеграционные настройки</value>
-   </title>
-   <title>
-    <key>tr</key>
-    <value>Entegrasyon ayarları</value>
-   </title>
-   <extendedTooltip>
-    <name>PageIntegaretionSettingsExtendedTooltip</name>
-    <id>154</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>

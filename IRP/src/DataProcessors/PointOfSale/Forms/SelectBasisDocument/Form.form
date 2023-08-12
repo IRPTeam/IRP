@@ -1530,10 +1530,10 @@ WHERE
   </notDefaultUseAlwaysAttributes>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT ALLOWED DISTINCT
-	R4012B_StockReservationBalanceAndTurnovers.Recorder
+	R4012B_StockReservationBalanceAndTurnovers.Basis
 INTO RSC
 FROM
-	AccumulationRegister.R4012B_StockReservation.BalanceAndTurnovers(,, Recorder,,) AS
+	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers() AS
 		R4012B_StockReservationBalanceAndTurnovers
 WHERE
 	R4012B_StockReservationBalanceAndTurnovers.QuantityClosingBalance &gt; 0
@@ -1566,7 +1566,7 @@ FROM
 WHERE
 	RetailShipmentConfirmation.Ref IN
 		(SELECT
-			T.Recorder
+			T.Basis
 		FROM
 			RSC AS T)</queryText>
    <mainTable>Document.RetailShipmentConfirmation</mainTable>
@@ -1664,8 +1664,8 @@ WHERE
     <field>ItemKey</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Order</dataPath>
-    <field>Order</field>
+    <dataPath>Basis</dataPath>
+    <field>Basis</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>

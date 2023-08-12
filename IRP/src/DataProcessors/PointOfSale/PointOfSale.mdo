@@ -258,4 +258,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="2aeb999f-b8c7-41bc-8beb-d218d80662bc">
+  <name>GetSettlement</name>
+  <synonym>
+   <key>en</key>
+   <value>Get settlement</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Получить расчет</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Get settlement</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

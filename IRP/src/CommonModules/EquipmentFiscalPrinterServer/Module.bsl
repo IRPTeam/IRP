@@ -597,11 +597,13 @@ EndFunction
 // * CashierINN - String -
 // * SaleAddress - String -
 // * SaleLocation - String -
+// @skip-check reading-attribute-from-database
 Function ShiftGetXMLOperationSettings(Ref) Export
 	Str = New Structure;
 	Str.Insert("CashierName", Ref.Author.Partner.Description_ru);
 	Str.Insert("CashierINN", Ref.Author.Partner.TaxID);
-	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales") Then
+	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales") 
+		OR (TypeOf(Ref) = Type("Structure")	AND Ref.Property("FiscalPrinter")) Then
 		Str.Insert("SaleAddress", Ref.FiscalPrinter.SaleAddress);
 		Str.Insert("SaleLocation", Ref.FiscalPrinter.SaleLocation);
 	Else

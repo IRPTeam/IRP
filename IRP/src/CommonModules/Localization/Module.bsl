@@ -211,6 +211,12 @@ Function Strings(Lang) Export
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
 		|tr='The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
+	Strings.Insert("EqAc_LastSettlementHasError", NStr("en='Last settlement has error. Try get new one.';
+		|ru='В последней сверке обнаружена ошибка. Попробуйте получить новую.';
+		|tr='Last settlement has error. Try get new one.'", Lang));
+	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en='Last settlement not found. Make sure that logging is enabled for this equipment.';
+		|ru='Последняя сверка не найдена. Убедитесь, что для этого оборудования включено ведение логов.';
+		|tr='Last settlement not found. Make sure that logging is enabled for this equipment.'", Lang));
 	
 	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='Can not open session registration KM.';
 		|ru='Не удалось открыть сессию регистрации кодов';

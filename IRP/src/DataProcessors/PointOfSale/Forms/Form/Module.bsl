@@ -684,10 +684,10 @@ Function IsRetailCustomerHasOrders()
 		|UNION ALL
 		|
 		|SELECT DISTINCT
-		|	R4012B_StockReservationBalance.Order
+		|	R4032B_GoodsInTransitOutgoing.Basis
 		|FROM
-		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order.RetailCustomer = &RetailCustomer) AS
-		|		R4012B_StockReservationBalance";
+		|	AccumulationRegister.R4032B_GoodsInTransitOutgoing.Balance(, Basis.RetailCustomer = &RetailCustomer) AS
+		|		R4032B_GoodsInTransitOutgoing";
 	
 	Query.SetParameter("RetailCustomer", Object.RetailCustomer);
 	SetPrivilegedMode(True);

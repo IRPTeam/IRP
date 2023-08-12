@@ -2444,7 +2444,7 @@
               </extendedTooltip>
               <type>CommandBar</type>
               <extInfo xsi:type="form:CommandBarExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
+                <horizontalAlign>Right</horizontalAlign>
               </extInfo>
             </items>
             <visible>true</visible>

@@ -21,7 +21,7 @@ EndProcedure
 
 &AtServer
 Procedure UpdateAtServer()
-	
+	TransactionList.Clear();
 	SkipMethods = GetListMethodForSkip();
 	
 	Query = New Query;

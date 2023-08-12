@@ -842,6 +842,22 @@ EndProcedure
 
 #EndRegion
 
+#Region Terminal
+
+&AtClient
+Procedure TerminalSettlement(Command)
+	//TODO: Insert the handler content
+EndProcedure
+
+&AtClient
+Procedure TerminalShowTransactions(Command)
+	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, PredefinedValue("Enum.EquipmentTypes.Acquiring"));
+	FormParameters = New Structure("Hardware, OpenAsLog", AcquiringList, False);
+	OpenForm("InformationRegister.HardwareLog.Form.LogAnalyze", FormParameters);
+EndProcedure
+
+#EndRegion
+
 #Region Private
 
 #Region SetDetailedInfo

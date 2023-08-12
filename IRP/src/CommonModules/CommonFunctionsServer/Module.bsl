@@ -120,6 +120,9 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
   	Return True;
 EndFunction
 	
+Function GetStandardTimeOffset() Export
+	Return StandardTimeOffset(SessionTimeZone(), CurrentUniversalDate()) / (60 * 60);
+EndFunction	
 	
 // Sort array.
 // 

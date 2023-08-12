@@ -25,6 +25,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	EndIf;
 			
 	DataKKTSettings = EquipmentFiscalPrinterAPIClient.GetDataKKTSettings();
+	DataKKTSettings.Info.CRS = ConsolidatedRetailSales;
 	If Not Await EquipmentFiscalPrinterAPIClient.GetDataKKT(CRS.FiscalPrinter, DataKKTSettings) Then
 		CommonFunctionsClientServer.ShowUsersMessage(DataKKTSettings.Info.Error);
 		Raise "Can not get data KKT";
@@ -137,41 +138,13 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
+		Result.Success = True;		
 		Return Result;
 	EndIf;
 		
 	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
 	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-#Region GetCurrentStatus	
-		
-	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
-	CurrentStatusSettings.In.InputParameters = InputParameters;
-	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
-		If ShiftData.ShiftState = 1 Then
-			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
-			Result.Status = "FiscalReturnedError";
-			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-			Return Result;
-		ElsIf ShiftData.ShiftState = 2 Then
-			
-		ElsIf ShiftData.ShiftState = 3 Then
-			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
-			Result.Status = "FiscalReturnedError";
-			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-			Return Result;
-		EndIf;
-	Else
-		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
-		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		Return Result;
-	EndIf;
-
-#EndRegion
-
 #Region PrintXReport
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
 	PrintXReportSettings.In.InputParameters = InputParameters;

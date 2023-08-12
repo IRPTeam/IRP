@@ -39,9 +39,11 @@ EndFunction
 // * EquipmentType - EnumRef.EquipmentTypes -
 // * AddInID - String -
 // * Driver - CatalogRef.EquipmentDrivers -
+// * IntegrationSettings - CatalogRef.IntegrationSettings -
 // * ConnectParameters - Structure:
 // ** EquipmentType - String -
 // * OldRevision - Boolean - Revision less then 3000
+// * UseIS - Boolean - Use IntegrationSettings. Driver not using.
 // * WriteLog - Boolean -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
@@ -52,6 +54,7 @@ Function GetConnectionSettings(HardwareRef) Export
 	|	Hardware.Driver,
 	|	Hardware.Driver.AddInID AS AddInID,
 	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision,
+	|	Hardware.IntegrationSettings,
 	|	Hardware.Log
 	|FROM
 	|	Catalog.Hardware AS Hardware
@@ -70,6 +73,8 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("OldRevision", SelectionDetailRecords.OldRevision);
 		Settings.Insert("ID", "");
 		Settings.Insert("WriteLog", SelectionDetailRecords.Log);
+		Settings.Insert("IntegrationSettings", SelectionDetailRecords.IntegrationSettings);
+		Settings.Insert("UseIS", Not SelectionDetailRecords.IntegrationSettings.IsEmpty());
 		
 		ConnectParameters = New Structure();
 		ConnectParameters.Insert("EquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
@@ -151,6 +156,17 @@ Function GetConnectionParameters(Hardware) Export
 EndFunction
 
 Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = False) Export
+	
+	If TypeOf(Data) = Type("Structure") Then
+		If Data.Property("Info") Then
+			For Each Prop In Data.Info Do
+				If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+					Data.Info[Prop.Key] = String(Prop.Value);
+				EndIf;
+			EndDo;
+		EndIf;
+	EndIf;
+	
 	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
 	Reg.Date = CurrentUniversalDateInMilliseconds();
 	Reg.Hardware = Hardware;

@@ -986,6 +986,10 @@ EndProcedure
 //   * Value - Arbitrary - property value
 Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	
+	If TypeOf(Ref) = Type("Structure") Then
+		Return Ref;
+	EndIf;
+	
 	Result = New Structure;
 	
 	AttributesStructure = New Structure;
@@ -1040,7 +1044,14 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 		EndDo;
 	EndDo;
 	
-	If Not ValueIsFilled(Ref) Or QueryFields.Count() = 0 Then
+	If QueryFields.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	If Ref.IsEmpty() Then
+		For Each Attr In CurrentResult Do
+			CurrentResult[Attr.Key] = Ref[Attr.Key];
+		EndDo;
 		Return Result;
 	EndIf;
 	
@@ -1066,6 +1077,10 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure 
 			EndDo;
 			CurrentResult[FieldParts[FieldParts.UBound()]] = SelectionDetailRecords[ItemAttribute.Key];
+		EndDo;
+	Else
+		For Each ItemAttribute In AttributesStructure Do
+			Result[FieldParts[FieldParts.UBound()]] = Ref[ItemAttribute.Key];
 		EndDo;
 	EndIf;
 	

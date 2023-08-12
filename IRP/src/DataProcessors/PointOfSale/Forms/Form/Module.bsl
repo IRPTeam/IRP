@@ -59,20 +59,22 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		SessionIsCreated = Not Object.ConsolidatedRetailSales.IsEmpty();
-		If SessionIsCreated Then
-			Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
-			Form.Items.OpenSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
-			Form.Items.CloseSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
-			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
-			Form.Items.GroupCommonCommands.Visible = True;
+		Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
+		SessionIsOpen = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
+		
+		If SessionIsOpen Then
+			Form.Items.GroupCashCommands.Enabled = True;
+			Form.Items.OpenSession.Enabled = False;
+			Form.Items.CloseSession.Enabled = True;
+			Form.Items.CancelSession.Enabled = False;
 		Else
-			Form.Items.OpenSession.Enabled = Not SessionIsCreated;
-			Form.Items.CloseSession.Enabled = SessionIsCreated;
-			Form.Items.CancelSession.Enabled = SessionIsCreated;
+			Form.Items.GroupCashCommands.Enabled = False;			
+			Form.Items.OpenSession.Enabled = True;
+			Form.Items.CloseSession.Enabled = False;
+			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
 		EndIf;
-		Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
-		Form.Items.GroupReports.Enabled = SessionIsCreated;
+		Form.Items.GroupCommonCommands.Visible = True;
+		Form.Items.GroupReports.Enabled = True;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
@@ -195,28 +197,8 @@ EndProcedure
 
 &AtClient
 Procedure CancelSession(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Currency", Object.Currency);
-	FormParameters.Insert("Store", ThisObject.Store);
-	FormParameters.Insert("Workstation", Object.Workstation);
-	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
-	
-	NotifyDescription = New NotifyDescription("CancelSessionFinish", ThisObject);
-	
-	OpenForm(
-		"DataProcessor.PointOfSale.Form.SessionClosing", 
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
-EndProcedure
-
-&AtClient
-Procedure CancelSessionFinish(Result, AddInfo) Export
-	If Not Result = DialogReturnCode.OK Then
-		Return;
-	EndIf;
-	
 	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
 	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
-	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
 EndProcedure
@@ -224,7 +206,19 @@ EndProcedure
 &AtClient
 Async Procedure PrintXReport(Command)
 	
-	EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Object.ConsolidatedRetailSales);
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		Settings = New Structure;
+		FP = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, PredefinedValue("Enum.EquipmentTypes.FiscalPrinter"));
+		If FP.Count() = 0 Then
+			Return;
+		Else
+			Settings.Insert("FiscalPrinter", FP[0]);
+			Settings.Insert("Author", SessionParametersServer.GetSessionParameter("CurrentUser"));
+			EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Settings);
+		EndIf;
+	Else
+		EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Object.ConsolidatedRetailSales);
+	EndIf;
 	If EquipmentResult.Success Then
 		
 	EndIf;
@@ -1304,7 +1298,8 @@ Procedure SetPaymentButtonOnServer()
 	Items.GroupPaymentButtons.Enabled = True;
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		If Not ValueIsFilled(Object.ConsolidatedRetailSales) Then
+		If Not ValueIsFilled(Object.ConsolidatedRetailSales) 
+			OR Object.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.New Then
 			Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
 			Items.qPayment.TextColor = ColorRed;
 			Items.qPayment.BorderColor = ColorRed;

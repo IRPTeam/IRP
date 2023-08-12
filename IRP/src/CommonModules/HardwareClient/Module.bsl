@@ -106,8 +106,13 @@ Async Function ConnectHardware(Hardware) Export
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
 			EndDo;
 			
-			Result = Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
-			
+			APIModule = HardwareClient.GetAPIModule(Hardware);
+			If APIModule = Undefined Then
+				Result = Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
+			Else
+				Result = APIModule.Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
+			EndIf;
+		
 			globalEquipment_SetHardwareID(Settings.Hardware, Settings.ConnectedDriver.ID);
 			
 			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
@@ -122,7 +127,7 @@ Async Function ConnectHardware(Hardware) Export
 			EndIf;
 		EndIf;
 	Else
-		If ConnectedDevice.Settings.DriverObject <> Undefined Then
+		If ConnectedDevice.Settings.DriverObject <> Undefined OR ConnectedDevice.Settings.UseIS Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
 			ErrorDescription = String(R().Eq_003);
 			ResultData.Result = True;
@@ -149,8 +154,13 @@ Async Function DisconnectHardware(Hardware) Export
 	
 	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
 	If ConnectedDevice.Connected Then
-
-		Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
+		APIModule = HardwareClient.GetAPIModule(Hardware);
+		If APIModule = Undefined Then
+			Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
+		Else
+			Result = APIModule.Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
+		EndIf;
+		
 		ResultData.Result = Result;
 		If Result Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
@@ -183,27 +193,30 @@ EndFunction
 // * AddInID - String, Arbitrary -
 // * OldRevision - Boolean - Driver revision less then 3000
 // * WriteLog - Boolean - Write log
+// * UseIS - Boolean - Use integration settings
+// * IntegrationSettings - CatalogRef.IntegrationSettings -
 Async Function GetDriverObject(DriverInfo) Export
 	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo.Hardware);
 	If ConnectionSettings.Connected Then
 		Return ConnectionSettings.Settings;
 	EndIf;
 	
-	ObjectName = StrSplit(DriverInfo.AddInID, ".");
-	ObjectName.Add(ObjectName[1]);
-
-	LinkOnDriver = GetURL(DriverInfo.Driver, "Driver");
-	Result = Await AttachAddInAsync(LinkOnDriver, ObjectName[1]);
-
-	If Not Result Then
-		Raise "Can not attach AddIn " + DriverInfo.Driver;
+	If Not DriverInfo.UseIS Then
+		ObjectName = StrSplit(DriverInfo.AddInID, ".");
+		ObjectName.Add(ObjectName[1]);
+	
+		LinkOnDriver = GetURL(DriverInfo.Driver, "Driver");
+		Result = Await AttachAddInAsync(LinkOnDriver, ObjectName[1]);
+	
+		If Not Result Then
+			Raise "Can not attach AddIn " + DriverInfo.Driver;
+		EndIf;
+	
+		DriverObject = New (StrConcat(ObjectName, ".")); // Arbitrary
+		If DriverObject = Undefined Then
+			Raise "Can not connect driver";
+		EndIf;
 	EndIf;
-
-	DriverObject = New (StrConcat(ObjectName, ".")); // Arbitrary
-	If DriverObject = Undefined Then
-		Raise "Can not connect driver";
-	EndIf;
-
 	DeviceConnection = New Structure;
 	DeviceConnection.Insert("ID", "");
 	DeviceConnection.Insert("DriverObject", DriverObject);
@@ -212,6 +225,8 @@ Async Function GetDriverObject(DriverInfo) Export
 	DeviceConnection.Insert("AddInID", DriverInfo.AddInID);
 	DeviceConnection.Insert("OldRevision", DriverInfo.OldRevision);
 	DeviceConnection.Insert("WriteLog", DriverInfo.WriteLog);
+	DeviceConnection.Insert("IntegrationSettings", DriverInfo.IntegrationSettings);
+	DeviceConnection.Insert("UseIS", DriverInfo.UseIS);
 	globalEquipment_AddConnectionSettings(DriverInfo.Hardware, DeviceConnection);
 	Return DeviceConnection;
 
@@ -525,7 +540,7 @@ EndProcedure
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_Open(Settings, DriverObject, ID)
+Function Device_Open(Settings, DriverObject, ID) Export
 	Structure = New Structure("Out", New Structure("ID", ID));
 	If Settings.WriteLog Then
 		HardwareServer.WriteLog(Settings.Hardware, "Open", True, Structure);
@@ -558,7 +573,7 @@ EndFunction
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_Close(Settings, DriverObject, ID)
+Function Device_Close(Settings, DriverObject, ID) Export
 	Structure = New Structure("In", New Structure("ID", ID));
 	If Settings.WriteLog Then
 		HardwareServer.WriteLog(Settings.Hardware, "Close", True, Structure);
@@ -702,6 +717,11 @@ EndFunction
 //  
 // @skip-check dynamic-access-method-not-found
 Function Device_SetParameter(Settings, DriverObject, Name, Value)
+	 
+	If Settings.UseIS Then
+		Return True;
+	EndIf;
+	
 	Structure = New Structure("In", New Structure("Name, Value", Name, Value));
 	If Settings.WriteLog Then
 		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", True, Structure);

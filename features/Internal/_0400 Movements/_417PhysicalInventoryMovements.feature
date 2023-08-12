@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -71,7 +71,7 @@ Scenario: _041700 preparation (Physical inventory)
 	* Tax settings
 		When filling in Tax settings for company
 	* Load Physical inventory
-		When Create document PhysicalInventory objects (check movements)
+		When Create document PhysicalInventory objects with StockAdjustmentAsWriteOff and StockAdjustmentAsSurplus (check movements)
 		When Create document PhysicalInventory objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -143,6 +143,44 @@ Scenario: _041703 check Physical inventory movements by the Register  "R4010 Act
 			| ''                                                     | 'Receipt'       | '20.05.2022 17:28:13'   | '20'          | 'Store 02'     | 'UNIQ'       | ''                     |
 		And I close all client application windows
 
+
+Scenario: _041704 check Physical inventory movements by the Register  "R4031 Goods in transit (incoming)"
+	* Select Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)"
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'    | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''          |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | ''      | '36/Yellow' |		
+		And I close all client application windows
+
+Scenario: _041705 check Physical inventory movements by the Register  "R4032 Goods in transit (outgoing)"
+	* Select Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | ''      | 'XS/Blue'  |		
+		And I close all client application windows
 
 Scenario: _041730 Physical inventory clear posting/mark for deletion
 	And I close all client application windows

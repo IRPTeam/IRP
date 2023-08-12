@@ -1,5 +1,38 @@
 // @strict-types
 
+#Region Stadard
+
+// Device open.
+// 
+// Parameters:
+//  Settings - See GetDriverObject
+//  DriverObject - Arbitrary - Driver object
+//  ID - String - ID
+// 
+// Returns:
+//  Boolean
+//  
+// @skip-check dynamic-access-method-not-found
+Function Device_Open(Settings, DriverObject, ID) Export
+	Return HardwareClient.Device_Open(Settings, DriverObject, ID)
+EndFunction
+
+// Device close.
+// 
+// Parameters:
+//  Settings - See GetDriverObject
+//  DriverObject - Arbitrary - Driver object
+//  ID - String - ID
+// 
+// Returns:
+//  Boolean
+//  
+// @skip-check dynamic-access-method-not-found
+Function Device_Close(Settings, DriverObject, ID) Export
+	Return HardwareClient.Device_Close(Settings, DriverObject, ID);
+EndFunction
+
+#EndRegion
 #Region Device
 
 // Terminal parameters.

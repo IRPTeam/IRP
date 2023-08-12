@@ -100,7 +100,8 @@ Function GetDocument(Company, Branch, Workstation) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
-		If 	QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.Open Then
+		If 	QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.Open
+			OR QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.New Then
 			Return QuerySelection.Ref
 		Else
 			Return Documents.ConsolidatedRetailSales.EmptyRef();
@@ -179,6 +180,7 @@ Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
 	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
+		
 	If SalesReturnData = Undefined Then
 		Return Result;
 	EndIf;

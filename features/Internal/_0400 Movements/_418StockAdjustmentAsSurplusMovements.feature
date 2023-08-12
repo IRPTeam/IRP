@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -77,6 +77,12 @@ Scenario: _041800 preparation (StockAdjustmentAsSurplus)
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document PhysicalInventory objects with StockAdjustmentAsWriteOff and StockAdjustmentAsSurplus (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1201).GetObject().Write(DocumentWriteMode.Posting);"    |	
+
 
 Scenario: _0418001 check preparation
 	When check preparation	
@@ -169,6 +175,84 @@ Scenario: _041804 check Stock adjustment as surplus movements by the Register  "
 			| ''                                                              | 'Receipt'       | '20.05.2022 17:19:31'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     |
 		And I close all client application windows
 
+
+Scenario: _041605 check Stock adjustment as surplus movements by the Register  "R4031 Goods in transit (incoming)" (without PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "RR4031 Goods in transit (incoming)"'    |
+	And I close all client application windows
+
+Scenario: _041606 check Stock adjustment as surplus movements by the Register  "R4031 Goods in transit (incoming)" (with PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 201'       |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 1 201 dated 11.08.2023 12:19:26' | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'               | ''            | ''                    | ''          | ''           | ''      | ''          |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''          |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
+			| ''                                                            | 'Expense'     | '11.08.2023 12:19:26' | '5'         | 'Store 06'   | ''      | '36/Yellow' |		
+	And I close all client application windows
+
+Scenario: _041607 check Stock adjustment as surplus movements by the Register  "R4052 Stock adjustment (Surplus)" (with PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 201'     |
+	* Check movements by the Register  "R4052 Stock adjustment (Surplus)" 
+		And I click "Registrations report" button
+		And I select "R4052 Stock adjustment (Surplus)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 1 201 dated 11.08.2023 12:19:26' | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Document registrations records'                              | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Register  "R4052 Stock adjustment (Surplus)"'                | ''                    | ''          | ''           | ''                                                 | ''          |
+			| ''                                                            | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''          |
+			| ''                                                            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key'  |
+			| ''                                                            | '11.08.2023 12:19:26' | '5'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | '36/Yellow' |		
+	And I close all client application windows
+
+Scenario: _041608 check Stock adjustment as surplus movements by the Register  "R4052 Stock adjustment (Surplus)" (without PhysicalInventory)
+	And I close all client application windows
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201'     |
+	* Check movements by the Register  "R4052 Stock adjustment (Surplus)" 
+		And I click "Registrations report" button
+		And I select "R4052 Stock adjustment (Surplus)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''                    | ''          | ''           | ''                                                          | ''         |
+			| 'Document registrations records'                            | ''                    | ''          | ''           | ''                                                          | ''         |
+			| 'Register  "R4052 Stock adjustment (Surplus)"'              | ''                    | ''          | ''           | ''                                                          | ''         |
+			| ''                                                          | 'Period'              | 'Resources' | 'Dimensions' | ''                                                          | ''         |
+			| ''                                                          | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                                     | 'Item key' |
+			| ''                                                          | '01.03.2021 12:00:00' | '4'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/18SD'  |
+			| ''                                                          | '01.03.2021 12:00:00' | '7'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/Red'   |
+			| ''                                                          | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'XS/Blue'  |
+			| ''                                                          | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'M/White'  |				
+	And I close all client application windows
 
 Scenario: _041830 Stock adjustment as surplus clear posting/mark for deletion
 	And I close all client application windows

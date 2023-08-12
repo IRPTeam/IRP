@@ -15,6 +15,12 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+
+&AtClient
+Procedure OnOpen(Cancel)
+	SetVisible();
+EndProcedure
+
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -240,11 +246,18 @@ Procedure EquipmentTypeOnChange(Item)
 	EndIf;
 	Items.EquipmentAPIModule.ChoiceList.Clear();
 	Items.EquipmentAPIModule.ChoiceList.LoadValues(GetEquipmentAPIModules(Object.EquipmentType));
+	SetVisible();
 EndProcedure
 
 #EndRegion
 
 #Region Internal
+
+&AtClient
+Procedure SetVisible()
+	Items.GroupFiscalPrinterSettings.Visible = Object.EquipmentType = PredefinedValue("Enum.EquipmentTypes.FiscalPrinter");
+	Items.GroupAcquiringSettings.Visible = Object.EquipmentType = PredefinedValue("Enum.EquipmentTypes.Acquiring");
+EndProcedure
 
 &AtClient
 Procedure EndTestDevice(Result, OutParameters, AddInfo) Export

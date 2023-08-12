@@ -696,7 +696,7 @@ Function IsRetailCustomerHasOrders()
 		|		R4012B_StockReservationBalance";
 	
 	Query.SetParameter("RetailCustomer", Object.RetailCustomer);
-	
+	SetPrivilegedMode(True);
 	Return Not Query.Execute().IsEmpty();
 
 EndFunction
@@ -2103,7 +2103,6 @@ EndFunction
 
 &AtServer
 Procedure LockLinkedRows()
-	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
 	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 

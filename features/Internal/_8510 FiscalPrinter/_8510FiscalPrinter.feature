@@ -445,8 +445,7 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
 		And I expand "Additional info" group
-		And I input "Sale address" text in "Sale address" field
-		And I input "Sale location" text in "Sale location" field	
+		And I input "[cut]" text in the field named "Cutter"	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -2509,3 +2508,9 @@ Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
 	Then the number of "List" table lines is "равно" "520"	
+	* Check log records form
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "User" became equal to "CI"
+		Then the form attribute named "Hardware" became equal to "Fiscal printer"
+	And I close all client application windows

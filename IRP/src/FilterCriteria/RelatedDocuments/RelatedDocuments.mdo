@@ -110,7 +110,6 @@
   <content>Document.BankReceipt.Attribute.ConsolidatedRetailSales</content>
   <content>Document.CashPayment.Attribute.ConsolidatedRetailSales</content>
   <content>Document.CashReceipt.Attribute.ConsolidatedRetailSales</content>
-  <content>Document.CashStatement.Attribute.BasisDocument</content>
   <content>Document.CashStatement.TabularSection.CashTransactionList.Attribute.Document</content>
   <content>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.Invoice</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ProductionPlanning</content>

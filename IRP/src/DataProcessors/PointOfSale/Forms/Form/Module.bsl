@@ -846,7 +846,9 @@ EndProcedure
 
 &AtClient
 Procedure TerminalSettlement(Command)
-	//TODO: Insert the handler content
+	OpenFormProperty = New Structure();
+	OpenFormProperty.Insert("Workstation", Workstation);
+	OpenForm("DataProcessor.PointOfSale.Form.GetSettlement", OpenFormProperty, ThisForm, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient

@@ -94,8 +94,6 @@ Procedure TransactionListOnActivateRow(Item)
 	Items.TransactionListPrintData.Enabled = Not IsBlankString(CurrentRow.PrintInfo);
 EndProcedure
 
-
-
 &AtServer
 Function GetListMethodForSkip()
 	SkipMethods = New Array; // Array Of String

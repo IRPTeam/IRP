@@ -133,6 +133,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			ThisObject.Company            = FillingData.Company;
 			ThisObject.StoreProduction    = FillingData.StoreProduction;
 			ThisObject.BusinessUnit       = FillingData.BusinessUnit;
+			ThisObject.Branch             = FillingData.BusinessUnit;
 			ThisObject.Item               = FillingData.Item;
 			ThisObject.ItemKey            = FillingData.ItemKey;
 			ThisObject.Unit               = FillingData.Unit;

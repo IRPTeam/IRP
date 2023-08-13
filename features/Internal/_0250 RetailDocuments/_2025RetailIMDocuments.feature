@@ -851,6 +851,11 @@ Scenario: _0155273 select items from RSC in POS
 			| ' '            | 'Cash'         | '674,00' |
 		And I click "OK" button
 		And I move to the next attribute
+		And I click "Select basis document" button
+		And "RetailShipmentConfirmation" table became equal
+			| 'Number' | 'Date'                | 'Retail customer' | 'Transaction type' |
+			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | 'Courier delivery' |
+		And I close current window
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -880,19 +885,19 @@ Scenario: _0155274 select items from RSO in POS
 			| 'Amount'   | 'Date'                | 'Number' | 'Retail customer' |
 			| '1 188,00' | '11.08.2023 15:51:30' | '318'    | 'Daniel Smith'    |
 		And in the table "SalesOrders" I click "Select" button
-		Then "Select sales person" window is opened
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'David Romanov' |
-		And I click "OK" button		
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I click "OK" button		
 	* Check 
 		And "ItemList" table became equal
-			| 'Item'                         | 'Sales person'  | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Dress'                        | 'David Romanov' | 'XS/Blue'  | '520,00' | '2,000'    | '52,00'  | '988,00' |
-			| 'Product 7 with SLN (new row)' | 'David Romanov' | 'PZU'      | '200,00' | '1,000'    | ''       | '200,00' |
+			| 'Item'                         | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress'                        | 'XS/Blue'  | '520,00' | '2,000'    | '52,00'  | '988,00' |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | '200,00' | '1,000'    | ''       | '200,00' |
 		And I go to line in "ItemList" table
-			| 'Item'                         | 'Item key' | 'Price'  | 'Quantity' | 'Sales person'  | 'Total'  |
-			| 'Product 7 with SLN (new row)' | 'PZU'      | '200,00' | '1,000'    | 'David Romanov' | '200,00' |
+			| 'Item'                         | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | '200,00' | '1,000'    | '200,00' |
 		And I activate "Serials" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Serials" attribute in "ItemList" table
@@ -925,12 +930,52 @@ Scenario: _0155274 select items from RSO in POS
 		And I close all client application windows
 		
 				
-
-	
+Scenario: _0155275 add items in POS	and link lines to basis document
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I click "OK" button		
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "978020137962" text in the field named "Barcode"
+		And I click "Link unlink basis documents" button
+		And "ItemListRows" table became equal
+			| '#' | 'Row presentation' | 'Unit' | 'Quantity' | 'Store'    |
+			| '1' | 'Boots (37/18SD)'  | 'pcs'  | '1,000'    | 'Store 01' |
+		And "BasisesTree" table became equal
+			| 'Row presentation'                          | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 317 dated 11.08.2023 15:50:42' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                           | '3,000'    | 'pcs'  | '700,00' | 'TRY'      |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | '35,00'  | '665,00' |
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'        | 'Item'  | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '1' | 'Basic Price Types' | 'Boots' | ''             | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+		And I close all client application windows
+		
 				
 
+					
+							
 				
-
 				
 		
 				

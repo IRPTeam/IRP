@@ -534,7 +534,128 @@ Scenario: _2060003 check auto link button in the SI
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 
+
+Scenario: _2060004 check button not calculate rows
+	And I close all client application windows
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Maxim'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+	* Add items	
+		* First item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "3" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Second item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Product 7 with SLN (new row)'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'                         | 'Item key' |
+				| 'Product 7 with SLN (new row)' | 'PZU'      |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "5" text in the field named "ItemListPrice" of "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click Choice button of the field named "SerialLotNumberSingle"
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number' |
+				| 'PZU'   | '9009099'       |
+			And I select current line in "List" table
+			And I click "Ok" button		
+			And I finish line editing in "ItemList" table
+			And "ItemList" table became equal
+				| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
+				| '1' | '1%'       | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |		
+	* Check not calculate row
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I remove checkbox "Calculate rows"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation'                             | 'Store'    | 'Unit' |
+			| '2' | '1,000'    | 'Product 7 with SLN (new row) (PZU) (9009099)' | 'Store 01' | 'pcs'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                            |
+			| 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                   | 'Unit' |
+			| 'TRY'      | '100,00' | '3,000'    | 'Product 7 with SLN (new row) (PZU)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+		And "ItemList" table became equal
+				| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
+				| '1' | '1%'       | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |		
+	* Not calculate row (auto link)
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		Then the form attribute named "CalculateRows" became equal to "No"
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+				| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
+				| '1' | '1%'       | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |		
+		And I close all client application windows
+					
+
+
+
 Scenario: _20600031 check Link unlink basis documents form
+		And I close all client application windows
 	* Open form for create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"

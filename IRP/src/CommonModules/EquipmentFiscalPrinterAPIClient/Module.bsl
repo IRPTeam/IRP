@@ -9,6 +9,7 @@
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** CRS - DocumentRef.ConsolidatedRetailSales - 
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -20,6 +21,7 @@ Function GetDataKKTSettings() Export
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetDataKKT");
+    Str.Info.Insert("CRS", PredefinedValue("Document.ConsolidatedRetailSales.EmptyRef"));
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");

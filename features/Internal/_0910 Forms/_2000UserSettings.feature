@@ -1760,5 +1760,61 @@ Scenario: _200052 check Disable - Change author
 		And I close all client application windows
 		
 								
+Scenario: _200054 check filling store from user settings when delete row from document (RSR)
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate" 
+	* Add row
+		And in the table "ItemList" I click "Add" button
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check Store
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Delete row and check store
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
+	
+Scenario: _200055 check filling store from user settings when delete row from document (RRR)
+	And I close all client application windows
+	* Open RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate" 
+	* Add row
+		And in the table "ItemList" I click "Add" button
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check Store
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Delete row and check store
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows						
+				
 
 				

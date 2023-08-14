@@ -534,7 +534,11 @@ Function ErrorNotFilledQuantityInSourceOfOrigins(Document, RowIDList)
 		EndIf;
 	EndDo;
 	
-	DocObject.Write(DocumentWriteMode.Posting);
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
 	
 	Return Result;
 EndFunction

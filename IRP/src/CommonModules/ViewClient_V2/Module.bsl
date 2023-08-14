@@ -2474,13 +2474,11 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
 	EndIf;
 	

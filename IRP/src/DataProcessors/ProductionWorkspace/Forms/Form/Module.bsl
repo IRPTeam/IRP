@@ -28,7 +28,8 @@ EndProcedure
 &AtServer
 Procedure PlanningRefreshRequestProcessingAtServer()
 	If ThisObject.ItemKey.IsEmpty() Then
-		ThisObject.Planning.Clear();
+		ThisObject.Planning.Clear(); 
+		ThisObject.PlanningPresentation.Clear();
 		Return;
 	EndIf;
 	Query = New Query;
@@ -273,16 +274,39 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	Query.SetParameter("ItemKey", ItemKey);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	ThisObject.Planning.Clear();
+	ThisObject.Planning.Clear(); 
+	
+	tmpPlanning = New ValueTable();
+	tmpPlanning.Columns.Add("PlanningPeriod");
+	tmpPlanning.Columns.Add("LeftToProduce");
+	tmpPlanning.Columns.Add("ProductionPlanning");
+		
 	While QuerySelection.Next() Do
 		NewRow = ThisObject.Planning.Add();
 		FillPropertyValues(NewRow, QuerySelection);
+		
+		tmpNewRow = tmpPlanning.Add();
+		FillPropertyValues(tmpNewRow, QuerySelection);
+	EndDo;
+	
+	tmpPlanning.GroupBy("PlanningPeriod, LeftToProduce, ProductionPlanning");
+	For Each Row In tmpPlanning Do
+		NewRow = ThisObject.PlanningPresentation.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.Key = String(New UUID());
+		Filter = New Structure("PlanningPeriod, LeftToProduce, ProductionPlanning");
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = ThisObject.Planning.FindRows(Filter);
+		For Each ItemOfArray In ArrayOfRows Do
+			ItemOfArray.Key = NewRow.Key;
+		EndDo;
 	EndDo;
 EndProcedure
 
 &AtServer
 Procedure Clear()
-	Planning.Clear();
+	ThisObject.Planning.Clear();
+	ThisObject.PlanningPresentation.Clear();
 	Item = Undefined;
 	ItemKey = Undefined;
 	Unit = Undefined;
@@ -337,104 +361,191 @@ EndProcedure
 
 &AtClient
 Procedure Productions(Command)
-	If Items.Planning.CurrentData = Undefined Then
+	If Items.PlanningPresentation.CurrentData = Undefined Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().MF_Error_010);
 		Return;
 	EndIf;
-	CreateDocuments(GetParametersForDocProduction(Items.Planning.CurrentData));
+	Parameters_Production = GetParametersForDocProduction(Items.PlanningPresentation.CurrentData.Key);
+	CreateDocuments(Parameters_Production);
 EndProcedure
 
 &AtClient
 Procedure InventoryTransfer(Command)	
-	If Items.Planning.CurrentData = Undefined Then
+	If Items.PlanningPresentation.CurrentData = Undefined Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().MF_Error_010);
 		Return;
 	EndIf;
-	CreateDocuments(Undefined, GetParametersForDocInventoryTransfer(Items.Planning.CurrentData));
+	Parameters_InventoryTransfer = GetParametersForDocInventoryTransfer(Items.PlanningPresentation.CurrentData.Key);
+	CreateDocuments(Undefined, Parameters_InventoryTransfer);
 EndProcedure
 
 &AtClient
 Procedure ProductionPlusInventoryTransfer(Command)
-	If Items.Planning.CurrentData = Undefined Then
+	If Items.PlanningPresentation.CurrentData = Undefined Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().MF_Error_010);
 		Return;
-	EndIf;
-	CreateDocuments(GetParametersForDocProduction(Items.Planning.CurrentData),
-		GetParametersForDocInventoryTransfer(Items.Planning.CurrentData));
+	EndIf;                                   
+	Parameters_Production = GetParametersForDocProduction(Items.PlanningPresentation.CurrentData.Key);
+	Parameters_InventoryTransfer = GetParametersForDocInventoryTransfer(Items.PlanningPresentation.CurrentData.Key);
+	CreateDocuments(Parameters_Production,Parameters_InventoryTransfer);
 EndProcedure
 
 &AtClient
-Function GetParametersForDocProduction(PlanningCurrentData)
-	Result = New Structure();
-	Result.Insert("Company"            , PlanningCurrentData.Company);
-	Result.Insert("PlanningPeriod"     , PlanningCurrentData.PlanningPeriod);
-	Result.Insert("ProductionPlanning" , PlanningCurrentData.ProductionPlanning);
-	Result.Insert("ItemKey"            , ThisObject.ItemKey);
-	Result.Insert("Unit"               , ThisObject.Unit);
-	Result.Insert("Quantity"           , ThisObject.Quantity);
-	Result.Insert("BillOfMaterials"    , PlanningCurrentData.BillOfMaterials);
-	Result.Insert("TotalQuantity"      , PlanningCurrentData.TotalQuantity);
-	Result.Insert("OutputID"           , PlanningCurrentData.OutputID);
-	Result.Insert("UniqueID"           , PlanningCurrentData.UniqueID);
-	Result.Insert("ProductionType"     , PlanningCurrentData.ProductionType);
-	Result.Insert("BusinessUnit"       , PlanningCurrentData.BusinessUnit);
-	Result.Insert("StoreProduction"    , PlanningCurrentData.StoreProduction);
-	Return Result;
+Function GetParametersForDocProduction(RowKey)
+	ArrayOfResults = New Array();
+	
+	Filter = New Structure("Key", RowKey);
+	ArrayOfRows = ThisObject.Planning.FindRows(Filter);
+	
+	TotalQuantity = 0;
+	LeftToProduce = 0;
+	For Each Row In ArrayOfRows Do
+		TotalQuantity = TotalQuantity + Row.TotalQuantity;
+		LeftToProduce = Row.LeftToProduce;
+	EndDo;	            	
+	AlredyProduce = TotalQuantity - LeftToProduce;
+	NeedProduce = ThisObject.Quantity;
+	
+	For Each ItemOfArray In ArrayOfRows Do
+		If NeedProduce <= 0 Then
+			Continue;
+		EndIf;
+		TotalQuantityByRow = ItemOfArray.TotalQuantity;                                  
+		AlredyProduceByRow = Min(TotalQuantityByRow, AlredyProduce);   
+		TotalQuantityByRow = TotalQuantityByRow - AlredyProduceByRow;
+		AlredyProduce = AlredyProduce - AlredyProduceByRow;
+		
+		If TotalQuantityByRow = 0 Then
+			Continue;
+		EndIf;
+		
+		CanProduce = Min(NeedProduce, TotalQuantityByRow);
+		NeedProduce = NeedProduce - CanProduce;
+
+		Result = New Structure();   
+		Result.Insert("Quantity"           , CanProduce);
+
+		Result.Insert("Company"            , ItemOfArray.Company);
+		Result.Insert("PlanningPeriod"     , ItemOfArray.PlanningPeriod);
+		Result.Insert("ProductionPlanning" , ItemOfArray.ProductionPlanning);
+		Result.Insert("ItemKey"            , ThisObject.ItemKey);
+		Result.Insert("Unit"               , ThisObject.Unit);		
+		Result.Insert("BillOfMaterials"    , ItemOfArray.BillOfMaterials);
+		Result.Insert("TotalQuantity"      , ItemOfArray.TotalQuantity);
+		Result.Insert("OutputID"           , ItemOfArray.OutputID);
+		Result.Insert("UniqueID"           , ItemOfArray.UniqueID);
+		Result.Insert("ProductionType"     , ItemOfArray.ProductionType);
+		Result.Insert("BusinessUnit"       , ItemOfArray.BusinessUnit);	
+		Result.Insert("StoreProduction"    , ItemOfArray.StoreProduction);
+		ArrayOfResults.Add(Result);
+	EndDo;
+	
+	Return ArrayOfResults;
 EndFunction
 
 &AtClient
-Function GetParametersForDocInventoryTransfer(PlanningCurrentData)
-	Result = New Structure("BasedOn", "ProductionPlanning");
-	Result.Insert("Company"            , PlanningCurrentData.Company);
-	Result.Insert("StoreSender"        , PlanningCurrentData.StoreProduction);
-	Result.Insert("Branch"             , 
-		CommonFunctionsServer.GetRefAttribute(PlanningCurrentData.ProductionPlanning, "BusinessUnit"));
+Function GetParametersForDocInventoryTransfer(RowKey)  
+	ArrayOfResults = New Array();
 	
-	Result.Insert("ItemList", New Array());
-	Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity, ProductionPlanning, InventoryOrigin", 
-		ThisObject.Item, ThisObject.ItemKey, ThisObject.Unit, ThisObject.Quantity, PlanningCurrentData.ProductionPlanning,
-		PredefinedValue("Enum.InventoryOriginTypes.OwnStocks")));
+	Filter = New Structure("Key", RowKey);
+	ArrayOfRows = ThisObject.Planning.FindRows(Filter);
 	
-	Return Result;
+	For Each ItemOfArray In ArrayOfRows Do
+		Result = New Structure("BasedOn", "ProductionPlanning");
+		Result.Insert("Company"            , ItemOfArray.Company);
+		Result.Insert("StoreSender"        , ItemOfArray.StoreProduction);
+		Result.Insert("Branch"             , 
+			CommonFunctionsServer.GetRefAttribute(ItemOfArray.ProductionPlanning, "BusinessUnit"));
+	
+		Result.Insert("ItemList", New Array());
+		Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity, ProductionPlanning, InventoryOrigin", 
+			ThisObject.Item, 
+			ThisObject.ItemKey, 
+			ThisObject.Unit, 
+			ThisObject.Quantity, 
+			ItemOfArray.ProductionPlanning,
+			PredefinedValue("Enum.InventoryOriginTypes.OwnStocks"))); 
+		
+	    ArrayOfResults.Add(Result);
+		Break;
+	EndDo;
+	
+	Return ArrayOfResults;
 EndFunction
 
 &AtServer
 Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_InventoryTransfer = Undefined)
-	Production_IsCreated = False;
-	NewProduction = Undefined;
-	
-	InventoryTransfer_IsCreated = False;
-	NewInventoryTransfer = Undefined;
+	ArrayOf_NewProduction = New Array();	
+	ArrayOf_NewInventoryTransfer = New Array();
 	
 	BeginTransaction();
 	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
+	
 	If Parameters_Production <> Undefined Then
-		NewProduction = Documents.Production.CreateDocument();
-		NewProduction.Date = CreationDate;
-		FillingData = ManufacturingServer.GetProductionFillingData(Parameters_Production);
-		NewProduction.Fill(FillingData);		
-		NewProduction.Write(DocumentWriteMode.Posting);
-		Production_IsCreated = True;
+		For Each ItemOfArray In Parameters_Production Do
+			NewProduction = Documents.Production.CreateDocument();
+			NewProduction.Date = CreationDate;
+			FillingData = ManufacturingServer.GetProductionFillingData(ItemOfArray);
+			NewProduction.Fill(FillingData);		
+			NewProduction.Write(DocumentWriteMode.Posting);
+			ArrayOf_NewProduction.Add(NewProduction.Ref);
+		EndDo;
 	EndIf;
 
-	If Parameters_InventoryTransfer <> Undefined Then
-		NewInventoryTransfer = Documents.InventoryTransfer.CreateDocument();
-		NewInventoryTransfer.Date = CreationDate +1;
-		NewInventoryTransfer.Fill(Parameters_InventoryTransfer);
-		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewInventoryTransfer);
-		NewInventoryTransfer.Write(DocumentWriteMode.Posting);
-		InventoryTransfer_IsCreated = True;
-	EndIf;
+	If Parameters_InventoryTransfer <> Undefined Then  
+		For Each ItemOfArray In Parameters_InventoryTransfer Do
+			NewInventoryTransfer = Documents.InventoryTransfer.CreateDocument();
+			NewInventoryTransfer.Date = CreationDate +1;
+			NewInventoryTransfer.Fill(ItemOfArray);
+			SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewInventoryTransfer);
+			NewInventoryTransfer.Write(DocumentWriteMode.Posting);
+			ArrayOf_NewInventoryTransfer.Add(NewInventoryTransfer.Ref);
+		EndDo;
+	EndIf;    
+	
 	CommitTransaction();
 
 	Clear();
 	
-	If Production_IsCreated Then
-		ThisObject.DocProduction = NewProduction.Ref;
-	EndIf;
+	NewAttributes = New Array();
+	AttributeValues = New Structure();
 	
-	If InventoryTransfer_IsCreated Then
-		ThisObject.DocInventoryTransfer = NewInventoryTransfer.Ref;
-	EndIf;	
+	For Each NewDoc In ArrayOf_NewProduction Do
+		AttrName = "_" + StrReplace(String(New UUID()),"-","");
+		NewAttr = New FormAttribute(AttrName, New TypeDescription("DocumentRef.Production"));
+		NewAttributes.Add(NewAttr);
+		
+		AttributeValues.Insert(AttrName, NewDoc);
+	EndDo;
+	
+	For Each NewDoc In ArrayOf_NewInventoryTransfer Do
+		AttrName = "_" + StrReplace(String(New UUID()),"-","");
+		NewAttr = New FormAttribute(AttrName, New TypeDescription("DocumentRef.InventoryTransfer"));
+		NewAttributes.Add(NewAttr);
+		
+		AttributeValues.Insert(AttrName, NewDoc);
+	EndDo;
+	
+	// change attributes
+	ThisObject.ChangeAttributes(NewAttributes, ThisObject.CreatedAttributes.UnloadValues());
+	
+	ThisObject.CreatedAttributes.Clear();  
+	For Each AttrName In NewAttributes Do
+		ThisObject.CreatedAttributes.Add(AttrName.Name);
+	EndDo;
+	
+	// fill attributes
+	For Each KeyValue In AttributeValues Do 
+		ThisObject[KeyValue.Key] = KeyValue.Value;
+	EndDo;
+	
+	For Each AttrName In ThisObject.CreatedAttributes Do
+		NewItem = ThisObject.Items.Add(AttrName, Type("FormField"), ThisObject.Items.GroupDocuments);
+		NewItem.Type = FormFieldType.LabelField;
+		NewItem.Hyperlink = True;     
+		NewItem.TitleLocation = FormItemTitleLocation.None;
+		NewItem.DataPath = AttrName;   
+	EndDo;
+
 	Items.ButtonPages.CurrentPage = Items.GroupDocuments;
 EndProcedure

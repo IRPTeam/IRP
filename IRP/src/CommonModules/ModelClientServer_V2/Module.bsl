@@ -2071,7 +2071,7 @@ Function FillStoresInListExecute(Options) Export
 EndFunction
 
 Function ChangeStoreInHeaderByStoresInListOptions() Export
-	Return GetChainLinkOptions("ArrayOfStoresInList");
+	Return GetChainLinkOptions("ArrayOfStoresInList, DocumentRef");
 EndFunction
 
 // change Store in document header, dependencies of tabular part ItemList.Store
@@ -2092,8 +2092,14 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	If ArrayOfStoresUnique.Count() = 1 Then
 		Return ArrayOfStoresUnique[0];
 	Else
-		Return Undefined;
-	EndIf;
+		UserSettings = UserSettingsServer.GetUserSettingsForClientModule(Options.DocumentRef);
+		For Each Setting In UserSettings Do
+			If Setting.AttributeName = "ItemList.Store" Then
+				Return Setting.Value; // store from UserSettings
+			EndIf;
+		EndDo;	
+	EndIf;  
+    Return Undefined;
 EndFunction
 	
 #EndRegion

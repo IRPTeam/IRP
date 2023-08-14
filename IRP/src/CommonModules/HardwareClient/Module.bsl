@@ -984,8 +984,7 @@ Function GetAPIModule(Hardware) Export
 	EndIf;
 	
 	If APIModule = Undefined Then
-		//@skip-check property-return-type
-		Raise R().Eq_CanNotFindAPIModule;
+		APIModule = HardwareClient;
 	EndIf;
 	
 	Return APIModule;

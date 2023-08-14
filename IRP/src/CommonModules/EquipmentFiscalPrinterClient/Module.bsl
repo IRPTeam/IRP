@@ -30,16 +30,15 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		CommonFunctionsClientServer.ShowUsersMessage(DataKKTSettings.Info.Error);
 		Raise "Can not get data KKT";
 	EndIf;
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
-	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-
+	
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 #Region GetCurrentStatus	
 	
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = 1 Then
 			
 		ElsIf ShiftData.ShiftState = 2 Then
@@ -87,16 +86,14 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 		Return Result;
 	EndIf;
 	
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
-	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 #Region GetCurrentStatus	
 		
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
@@ -142,8 +139,8 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 		Return Result;
 	EndIf;
 		
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(ConsolidatedRetailSales);
-	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 	
 #Region PrintXReport
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
@@ -187,16 +184,15 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		Return Result;
 	EndIf;
 		
-	XMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
-	InputParameters = ShiftGetXMLOperation(XMLOperationSettings);
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 	
 #Region GetCurrentStatus	
 		
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -251,17 +247,11 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 					Raise StrTemplate(R().EqFP_ErrorWhileConfirmCode, ApproveUUID);
 				EndIf;
 			EndDo;
-			
-//			CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
-//			If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(CRS.FiscalPrinter, CloseSessionRegistrationKMSettings) Then
-//				CommonFunctionsClientServer.ShowUsersMessage(CloseSessionRegistrationKMSettings.Info.Error);
-//				Raise R().EqFP_CanNotCloseSessionRegistrationKM;
-//			EndIf;
-			
 		EndIf;
 	EndIf;
 	
-	XMLOperationSettings = ReceiptGetXMLOperationSettings(DataSource);
+	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
+	XMLOperationSettings = EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
 	CheckPackage = ReceiptGetXMLOperation(XMLOperationSettings);
 	
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
@@ -347,16 +337,16 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Result.Success = True;
 		Return Result;
 	EndIf;
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
-	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 	
 #Region GetCurrentStatus	
 		
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -413,16 +403,15 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Return Result;
 	EndIf;
 	
-	ShiftGetXMLOperationSettings = EquipmentFiscalPrinterServer.ShiftGetXMLOperationSettings(DataSource);
-	InputParameters = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
 	
 #Region GetCurrentStatus	
 		
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CurrentStatusSettings.Out.OutputParameters);
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = 1 Then
 			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
 			Result.Status = "FiscalReturnedError";
@@ -762,10 +751,6 @@ Function PrintTextResultStructure()
 	Return ReturnValue;
 EndFunction
 
-Function ReceiptGetXMLOperationSettings(RSR)
-	Return EquipmentFiscalPrinterServer.PrepareReceiptData(RSR);
-EndFunction
-
 Function PrintTextGetXMLOperationSettings(RSR)
 	Return EquipmentFiscalPrinterServer.PreparePrintTextData(RSR);
 EndFunction
@@ -779,7 +764,7 @@ Function GetCountersOperationType()
 	Return ReturnData;
 EndFunction
 
-Procedure FillDataFromDeviceResponse(Data, DeviceResponse)
+Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export
 	Reader = New XMLReader();
 	Reader.SetString(DeviceResponse);
 	Result = XDTOFactory.ReadXML(Reader);
@@ -812,33 +797,6 @@ Function TransformToTypeBySource(Data, Source)
 	Else
 		Return Data;
 	EndIf;
-EndFunction
-
-Function ShiftGetXMLOperation(CommonParameters) Export
-	
-	XMLWriter = New XMLWriter();
-	XMLWriter.SetString("UTF-8");
-	XMLWriter.WriteXMLDeclaration();
-	XMLWriter.WriteStartElement("InputParameters");
-	
-	XMLWriter.WriteStartElement("Parameters");
-	//@skip-check Undefined function
-	XMLWriter.WriteAttribute("CashierName", ?(Not IsBlankString(CommonParameters.CashierName), ToXMLString(CommonParameters.CashierName), "Administrator"));
-	If Not IsBlankString(CommonParameters.CashierINN) Then
-		XMLWriter.WriteAttribute("CashierINN" , ToXMLString(CommonParameters.CashierINN));
-	EndIf;
-	If Not IsBlankString(CommonParameters.SaleAddress) Then   
-		XMLWriter.WriteAttribute("SaleAddress", ToXMLString(CommonParameters.SaleAddress));
-	EndIf;
-	If Not IsBlankString(CommonParameters.SaleLocation) Then  
-		XMLWriter.WriteAttribute("SaleLocation", ToXMLString(CommonParameters.SaleLocation));
-	EndIf;
-	XMLWriter.WriteEndElement();
-	
-	XMLWriter.WriteEndElement();
-	
-	Return XMLWriter.Close();
-	
 EndFunction
 
 // Receipt get XMLOperation.

@@ -51,14 +51,25 @@ Async Function GetDataKKT(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetDataKKT", True, Settings);
 	EndIf;
+	
+	TableParametersKKT = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.GetDataKKT(
 		ConnectParameters.ID,
-		Settings.Out.TableParametersKKT
+		TableParametersKKT
 	); // Boolean
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression
+		Settings.Out.TableParametersKKT = TableParametersKKT;
+	Else
+		TableParametersKKT = CommonFunctionsServer.GetXMLAsStructure(TableParametersKKT);
+		TableParametersKKTPrepared = EquipmentFiscalPrinterAPIClient.TableParametersKKT();
+		FillPropertyValues(TableParametersKKTPrepared, TableParametersKKT);
+		
+		Settings.Out.TableParametersKKT = TableParametersKKTPrepared;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -89,6 +100,7 @@ Async Function OperationFN(Hardware, Settings) Export
 		Settings.In.OperationType,
 		Settings.In.ParametersFiscal
 	); // Boolean
+	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
@@ -115,12 +127,14 @@ Async Function OpenShift(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "OpenShift", True, Settings);
 	EndIf;
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.OpenShift(
 		ConnectParameters.ID,
-		Settings.In.InputParameters,
+		InputParametersToXML(Settings.In.InputParameters),
 		Settings.Out.OutputParameters
 	); // Boolean
+	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
@@ -150,7 +164,7 @@ Async Function CloseShift(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.CloseShift(
 		ConnectParameters.ID,
-		Settings.In.InputParameters,
+		InputParametersToXML(Settings.In.InputParameters),
 		Settings.Out.OutputParameters
 	); // Boolean
 	If Not Result Then
@@ -279,7 +293,7 @@ Async Function CashInOutcome(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.CashInOutcome(
 		ConnectParameters.ID,
-		Settings.In.InputParameters,
+		InputParametersToXML(Settings.In.InputParameters),
 		Settings.In.Amount
 	); // Boolean
 	If Not Result Then
@@ -311,7 +325,7 @@ Async Function PrintXReport(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.PrintXReport(
 		ConnectParameters.ID,
-		Settings.In.InputParameters
+		InputParametersToXML(Settings.In.InputParameters)
 	); // Boolean
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
@@ -370,14 +384,24 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "GetCurrentStatus", True, Settings);
 	EndIf;
+	
+	OutputParameters = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.GetCurrentStatus(
 		ConnectParameters.ID,
-		Settings.In.InputParameters,
-		Settings.Out.OutputParameters
+		InputParametersToXML(Settings.In.InputParameters),
+		OutputParameters
 	); // Boolean
+	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression
+		Settings.Out.OutputParameters = OutputParameters;
+	Else
+		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
+		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -405,7 +429,7 @@ Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.ReportCurrentStatusOfSettlements(
 		ConnectParameters.ID,
-		Settings.In.InputParameters,
+		InputParametersToXML(Settings.In.InputParameters),
 		Settings.Out.OutputParameters
 	); // Boolean
 	If Not Result Then
@@ -641,5 +665,40 @@ Async Function ConfirmKM(Hardware, Settings) Export
 	Return Result;
 EndFunction
 
+#EndRegion
+
+#Region Private
+
+// Input parameters to XML.
+// 
+// Parameters:
+//  InputParameters - See EquipmentFiscalPrinterAPIClient.InputParameters
+// 
+// Returns:
+//  String - Input parameters to XML
+Function InputParametersToXML(InputParameters) Export
+	
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("InputParameters");
+	
+	XMLWriter.WriteStartElement("Parameters");
+	XMLWriter.WriteAttribute("CashierName", XMLString(InputParameters.CashierName));
+	If Not IsBlankString(InputParameters.CashierINN) Then
+		XMLWriter.WriteAttribute("CashierINN" , XMLString(InputParameters.CashierINN));
+	EndIf;
+	If Not IsBlankString(InputParameters.SaleAddress) Then   
+		XMLWriter.WriteAttribute("SaleAddress", XMLString(InputParameters.SaleAddress));
+	EndIf;
+	If Not IsBlankString(InputParameters.SaleLocation) Then  
+		XMLWriter.WriteAttribute("SaleLocation", XMLString(InputParameters.SaleLocation));
+	EndIf;
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteEndElement();
+	
+	Return XMLWriter.Close();
+EndFunction
 
 #EndRegion

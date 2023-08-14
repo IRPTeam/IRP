@@ -14,7 +14,7 @@
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
-// ** TableParametersKKT - String - Registration data of the fiscal memory module
+// ** TableParametersKKT - See TableParametersKKT
 Function GetDataKKTSettings() Export
     Str = New Structure;
     
@@ -29,7 +29,7 @@ Function GetDataKKTSettings() Export
     Str.Insert("InOut", New Structure);
     
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("TableParametersKKT", "");
+    Str.Out.Insert("TableParametersKKT", New Structure);
     
     Return Str;
 EndFunction
@@ -333,7 +333,7 @@ EndFunction
 // ** InputParameters - String - Input parameters of the operation
 // * InOut - Structure -
 // * Out - Structure:
-// ** OutputParameters - String - XML structure - description of status parameters.
+// ** OutputParameters - See OutputParameters
 Function GetCurrentStatusSettings() Export
     Str = New Structure;
     
@@ -348,7 +348,7 @@ Function GetCurrentStatusSettings() Export
     Str.Insert("InOut", New Structure);
     
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", "");
+    Str.Out.Insert("OutputParameters", New Structure);
     
     Return Str;
 EndFunction
@@ -602,6 +602,304 @@ EndFunction
 
 #EndRegion
 
+#Region Additional
+
+// Table parameters KKT. Registration data of the fiscal memory module.
+// 
+// Returns:
+//  Structure - Table parameters KKT:
+// * KKTNumber - String - Registration number of KKT
+// * KKTSerialNumber - String - Factory number of KKT
+// * FirmwareVersion - String - Firmware version
+// * Fiscal - Boolean - Registration sign of the fiscal accumulator
+// * FFDVersionFN - String - FFD version of FN
+// * FFDVersionKKT - String - FFD version of KKT
+// * FNSerialNumber - String - Factory number of FN
+// * DocumentNumber - String - Document number of fiscal accumulator registration
+// * DateTime - DateTime - Date and time of fiscal accumulator registration operation
+// * CompanyName - String - Organization name
+// * INN - String - Organization INN
+// * SaleAddress - String - Address of calculations
+// * SaleLocation - String - Place of calculations
+// * TaxationSystems - String - Taxation system codes
+// * IsOffline - Boolean - Offline mode sign
+// * IsEncrypted - Boolean - Data encryption sign
+// * IsService - Boolean - Service calculations sign
+// * IsExcisable - Boolean - Excisable goods sale sign
+// * IsGambling - Boolean - Gambling sign
+// * IsLottery - Boolean - Lottery sign
+// * BSOSing - Boolean - AS BSO formation sign
+// * IsOnline - Boolean - KKT for online calculations sign
+// * IsAutomaticPrinter - Boolean - Printer in automatic mode sign
+// * IsAutomatic - Boolean - Automatic mode sign
+// * IsMarking - Boolean - Marking sign for goods
+// * IsPawnshop - Boolean - Pawnshop lending sign
+// * IsAssurance - Boolean - Insurance activity sign
+// * AgentTypes - String - Agent signs codes
+// * AutomaticNumber - String - Automatic number for automatic mode
+// * OFDCompany - String - OFD organization name
+// * OFDCompanyINN - String - OFD organization INN
+// * FNSURL - String - FNS website address
+// * SenderEmail - String - Sender's email address for the check
+Function TableParametersKKT() Export
+	Str = New Structure;
+	Str.Insert("KKTNumber", "");
+	Str.Insert("KKTSerialNumber", "");
+	Str.Insert("FirmwareVersion", "");
+	Str.Insert("Fiscal", False);
+	Str.Insert("FFDVersionFN", "");
+	Str.Insert("FFDVersionKKT", "");
+	Str.Insert("FNSerialNumber", "");
+	Str.Insert("DocumentNumber", "");
+	Str.Insert("DateTime", "");
+	Str.Insert("CompanyName", "");
+	Str.Insert("INN", "");
+	Str.Insert("SaleAddress", "");
+	Str.Insert("SaleLocation", "");
+	Str.Insert("TaxationSystems", "");
+	Str.Insert("IsOffline", False);
+	Str.Insert("IsEncrypted", False);
+	Str.Insert("IsService", False);
+	Str.Insert("IsExcisable", False);
+	Str.Insert("IsGambling", False);
+	Str.Insert("IsLottery", False);
+	Str.Insert("BSOSing", False);
+	Str.Insert("IsOnline", False);
+	Str.Insert("IsAutomaticPrinter", False);
+	Str.Insert("IsAutomatic", False);
+	Str.Insert("IsMarking", False);
+	Str.Insert("IsPawnshop", False);
+	Str.Insert("IsAssurance", False);
+	Str.Insert("AgentTypes", "");
+	Str.Insert("AutomaticNumber", "");
+	Str.Insert("OFDCompany", "");
+	Str.Insert("OFDCompanyINN", "");
+	Str.Insert("FNSURL", "");
+	Str.Insert("SenderEmail", "");
+	Return Str;
+EndFunction
+
+// Input parameters.
+// 
+// Returns:
+//  Structure - Input parameters:
+// * CashierName - String - Full name and position of the authorized person for the operation
+// * CashierINN - String - INN of the authorized person for the operation
+// * SaleAddress - String - Address of calculations
+// * SaleLocation - String - Place of calculations
+Function InputParameters() Export
+	Str = New Structure;
+	Str.Insert("CashierName", "");
+	Str.Insert("CashierINN", "");
+	Str.Insert("SaleAddress", "");
+	Str.Insert("SaleLocation", "");
+	Return Str;
+EndFunction
+
+// Check package.
+//
+// Returns:
+//  Structure - Input parameters:
+// * Parameters - Structure:
+// ** CashierName - String - Full name and position of the authorized person for the operation
+// ** CashierINN - String - Taxpayer Identification Number of the authorized person
+// ** OperationType - Number - Type of operation
+// ** CorrectionData - Structure - Data for correction operation
+// ** TaxationSystem - Number - Taxation system code
+// ** CustomerDetail - Structure - Customer (client) details
+// ** CustomerEmail - String - Customer's email
+// ** CustomerPhone - String - Customer's phone number
+// ** SenderEmail - String - Sender's email address
+// ** SaleAddress - String - Sale address
+// ** SaleLocation - String - Sale location
+// ** AutomatNumber - String - Automat number
+// ** AgentType - Number - Agent type indicator
+// ** AgentData - Structure - Agent's data
+// ** VendorData - Structure - Vendor's data
+// ** UserAttribute - Structure - Additional user attribute
+// ** AdditionalAttribute - String - Additional check attribute
+// ** OperationalAttribute - Structure - Operational attribute of the check
+// ** IndustryAttribute - Structure - Industry attribute of the check
+//
+// * Positions - Structure:
+// ** FiscalString - Structure:
+// *** Name - String - Name of the product
+// *** Quantity - Number - Quantity of the product
+// *** PriceWithDiscount - Number - Price per product unit with discounts/surcharges
+// *** AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
+// *** DiscountAmount - Number - Amount of discounts and surcharges
+// *** Department - Number - Department where the sale is conducted
+// *** VATRate - String - VAT rate
+// *** VATAmount - Number - VAT amount for the item
+// *** PaymentMethod - Number - Payment method indicator
+// *** CalculationSubject - Number - Calculation subject indicator
+// *** CalculationAgent - Number - Calculation agent indicator
+// *** AgentData - Structure - Agent's data for the item
+// *** VendorData - Structure - Vendor's data for the item
+// *** MeasureOfQuantity - Number - Measure of quantity for the item
+// *** FractionalQuantity - Structure:
+// **** Numerator - Number - Fractional quantity of marked product (numerator)
+// **** Denominator - Number - Fractional quantity of marked product (denominator)
+// *** GoodCodeData - Structure - Data of the good code
+// *** MarkingCode - String - Control marking code
+// *** CountryOfOrigin - String - Digital code of the product's country of origin
+// *** CustomsDeclaration - String - Customs declaration registration number
+// *** AdditionalAttribute - String - Additional attribute of the item
+// *** ExciseAmount - Number - Excise amount included in the item's price
+// *** IndustryAttribute - Structure - Industry attribute of the item
+//
+// ** TextString - Structure:
+// *** Text - String - Arbitrary text string
+//
+// ** Barcode - Structure:
+// *** Type - String - String defining the barcode type
+// *** ValueBase64 - String - Barcode value encoded in Base64
+//
+// * Payments - Structure:
+// ** Cash - Number - Cash payment amount
+// ** ElectronicPayment - Number - Non-cash payment amount
+// ** PrePayment - Number - Amount of credited prepayment or advance
+// ** PostPayment - Number - Credit payment amount
+// ** Barter - Number - Payment amount by counter provision
+Function CheckPackage() Export
+    Str = New Structure;
+    
+    // Parameters section
+    Str.Insert("Parameters", New Structure);
+    Str.Parameters.Insert("CashierName", "");
+    Str.Parameters.Insert("CashierINN", "");
+    Str.Parameters.Insert("OperationType", 0);
+    Str.Parameters.Insert("CorrectionData", New Structure);
+    Str.Parameters.Insert("TaxationSystem", 0);
+    Str.Parameters.Insert("CustomerDetail", New Structure);
+    Str.Parameters.Insert("CustomerEmail", "");
+    Str.Parameters.Insert("CustomerPhone", "");
+    Str.Parameters.Insert("SenderEmail", "");
+    Str.Parameters.Insert("SaleAddress", "");
+    Str.Parameters.Insert("SaleLocation", "");
+    Str.Parameters.Insert("AutomatNumber", "");
+    Str.Parameters.Insert("AgentType", 0);
+    Str.Parameters.Insert("AgentData", New Structure);
+    Str.Parameters.Insert("VendorData", New Structure);
+    Str.Parameters.Insert("UserAttribute", New Structure);
+    Str.Parameters.Insert("AdditionalAttribute", "");
+    Str.Parameters.Insert("OperationalAttribute", New Structure);
+    Str.Parameters.Insert("IndustryAttribute", New Structure);
+    
+    // Positions section
+    Str.Insert("Positions", New Structure);
+    
+    Str.Positions.Insert("FiscalString", New Structure);
+    Str.Positions.FiscalString.Insert("Name", "");
+    Str.Positions.FiscalString.Insert("Quantity", 0);
+    Str.Positions.FiscalString.Insert("PriceWithDiscount", 0);
+    Str.Positions.FiscalString.Insert("AmountWithDiscount", 0);
+    Str.Positions.FiscalString.Insert("DiscountAmount", 0);
+    Str.Positions.FiscalString.Insert("Department", 0);
+    Str.Positions.FiscalString.Insert("VATRate", "");
+    Str.Positions.FiscalString.Insert("VATAmount", 0);
+    Str.Positions.FiscalString.Insert("PaymentMethod", 0);
+    Str.Positions.FiscalString.Insert("CalculationSubject", 0);
+    Str.Positions.FiscalString.Insert("CalculationAgent", 0);
+    Str.Positions.FiscalString.Insert("AgentData", New Structure);
+    Str.Positions.FiscalString.Insert("VendorData", New Structure);
+    Str.Positions.FiscalString.Insert("MeasureOfQuantity", 0);
+    Str.Positions.FiscalString.Insert("FractionalQuantity", New Structure);
+    Str.Positions.FiscalString.FractionalQuantity.Insert("Numerator", 0);
+    Str.Positions.FiscalString.FractionalQuantity.Insert("Denominator", 0);
+    Str.Positions.FiscalString.Insert("GoodCodeData", New Structure);
+    Str.Positions.FiscalString.Insert("MarkingCode", "");
+    Str.Positions.FiscalString.Insert("CountryOfOrigin", "");
+    Str.Positions.FiscalString.Insert("CustomsDeclaration", "");
+    Str.Positions.FiscalString.Insert("AdditionalAttribute", "");
+    Str.Positions.FiscalString.Insert("ExciseAmount", 0);
+    Str.Positions.FiscalString.Insert("IndustryAttribute", New Structure);
+    
+    Str.Positions.Insert("TextString", New Structure);
+    Str.Positions.TextString.Insert("Text", "");
+    
+    Str.Positions.Insert("Barcode", New Structure);
+    Str.Positions.Barcode.Insert("Type", "");
+    Str.Positions.Barcode.Insert("ValueBase64", "");
+    
+    // Payments section
+    Str.Insert("Payments", New Structure);
+    Str.Payments.Insert("Cash", 0);
+    Str.Payments.Insert("ElectronicPayment", 0);
+    Str.Payments.Insert("PrePayment", 0);
+    Str.Payments.Insert("PostPayment", 0);
+    Str.Payments.Insert("Barter", 0);
+    
+    Return Str;
+EndFunction
+
+// Builds a structure based on the provided shift information table.
+//
+// Returns:
+//  Structure - Input parameters:
+// * ShiftNumber - Number - Number of the opened/closed shift
+// * CheckNumber - Number - Number of the last fiscal document
+// * ShiftClosingCheckNumber - Number - Number of the last check for the shift
+// * DateTime - Date - Date and time of the fiscal document formation
+// * ShiftState - Number - Shift state (1 - Closed, 2 - Opened, 3 - Expired)
+// * CountersOperationType1 - See OperationCounters - Counters for "income" operation type
+// * CountersOperationType2 - See OperationCounters - Counters for "income return" operation type
+// * CountersOperationType3 - See OperationCounters - Counters for "expense" operation type
+// * CountersOperationType4 - See OperationCounters - Counters for "expense return" operation type
+// * CashBalance - Number - Cash balance in the cash register
+// * BacklogDocumentsCounter - Number - Number of undelivered documents
+// * BacklogDocumentFirstNumber - Number - Number of the first undelivered document
+// * BacklogDocumentFirstDateTime - Date - Date and time of the first undelivered document
+// * FNError - Boolean - Indicator of the urgent need to replace the FN
+// * FNOverflow - Boolean - FN memory overflow indicator
+// * FNFail - Boolean - Indicator of FN resource exhaustion
+Function OutputParameters() Export
+    Str = New Structure;
+    
+    // Parameters section
+    Str.Insert("ShiftNumber", 0);
+    Str.Insert("CheckNumber", 0);
+    Str.Insert("ShiftClosingCheckNumber", 0);
+    Str.Insert("DateTime", Date(1, 1, 1));
+    Str.Insert("ShiftState", 0);
+    Str.Insert("CountersOperationType1", OperationCounters());
+    Str.Insert("CountersOperationType2", OperationCounters());
+    Str.Insert("CountersOperationType3", OperationCounters());
+    Str.Insert("CountersOperationType4", OperationCounters());
+    Str.Insert("CashBalance", 0);
+    Str.Insert("BacklogDocumentsCounter", 0);
+    Str.Insert("BacklogDocumentFirstNumber", 0);
+    Str.Insert("BacklogDocumentFirstDateTime", Date(1, 1, 1));
+    Str.Insert("FNError", False);
+    Str.Insert("FNOverflow", False);
+    Str.Insert("FNFail", False);
+    
+    Return Str;
+EndFunction
+
+// Operation сounters.
+//
+// Returns:
+//  Structure - Input parameters:
+// * CheckCount - Number - Number of checks for the operation of this type
+// * TotalChecksAmount - Number - Total amount of checks for the operations of this type
+// * CorrectionCheckCount - Number - Number of correction checks for the operation of this type
+// * TotalCorrectionChecksAmount - Number - Total amount of correction checks for the operations of this type
+Function OperationCounters() Export
+    Str = New Structure;
+    
+    // OperationCounters section
+    Str.Insert("CheckCount", 0);
+    Str.Insert("TotalChecksAmount", 0);
+    Str.Insert("CorrectionCheckCount", 0);
+    Str.Insert("TotalCorrectionChecksAmount", 0);
+    
+    Return Str;
+EndFunction
+
+
+#EndRegion
+
 #Region Device
 
 // GetDataKKT.
@@ -850,6 +1148,5 @@ Async Function ConfirmKM(Hardware, Settings) Export
 	Return Await HardwareClient.GetAPIModule(Hardware)
 		.ConfirmKM(Hardware, Settings);
 EndFunction
-
 
 #EndRegion

@@ -310,7 +310,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:Table">
-   <name>Planning</name>
+   <name>PlanningPresentation</name>
    <id>17</id>
    <displayImportance>VeryHigh</displayImportance>
    <visible>true</visible>
@@ -319,7 +319,7 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>Planning</segments>
+    <segments>PlanningPresentation</segments>
    </dataPath>
    <titleLocation>None</titleLocation>
    <items xsi:type="form:FormGroup">
@@ -329,20 +329,19 @@
      <name>PlanningGroup</name>
      <id>39</id>
      <items xsi:type="form:FormField">
-      <name>PlanningPlanningPeriod</name>
-      <id>30</id>
-      <displayImportance>VeryHigh</displayImportance>
+      <name>PlanningPresentationPlanningPeriod</name>
+      <id>76</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-       <segments>Planning.PlanningPeriod</segments>
+       <segments>PlanningPresentation.PlanningPeriod</segments>
       </dataPath>
       <extendedTooltip>
-       <name>PlanningPlanningPeriodExtendedTooltip</name>
-       <id>32</id>
+       <name>PlanningPresentationPlanningPeriodExtendedTooltip</name>
+       <id>78</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -356,8 +355,8 @@
        </extInfo>
       </extendedTooltip>
       <contextMenu>
-       <name>PlanningPlanningPeriodContextMenu</name>
-       <id>31</id>
+       <name>PlanningPresentationPlanningPeriodContextMenu</name>
+       <id>77</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -380,20 +379,19 @@
       </extInfo>
      </items>
      <items xsi:type="form:FormField">
-      <name>PlanningLeftToProduce</name>
-      <id>33</id>
-      <displayImportance>VeryHigh</displayImportance>
+      <name>PlanningPresentationLeftToProduce</name>
+      <id>79</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
        <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-       <segments>Planning.LeftToProduce</segments>
+       <segments>PlanningPresentation.LeftToProduce</segments>
       </dataPath>
       <extendedTooltip>
-       <name>PlanningLeftToProduceExtendedTooltip</name>
-       <id>35</id>
+       <name>PlanningPresentationLeftToProduceExtendedTooltip</name>
+       <id>81</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -407,8 +405,8 @@
        </extInfo>
       </extendedTooltip>
       <contextMenu>
-       <name>PlanningLeftToProduceContextMenu</name>
-       <id>34</id>
+       <name>PlanningPresentationLeftToProduceContextMenu</name>
+       <id>80</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -468,20 +466,19 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>PlanningProductionPlanning</name>
-     <id>36</id>
-     <displayImportance>VeryHigh</displayImportance>
+     <name>PlanningPresentationProductionPlanning</name>
+     <id>82</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Planning.ProductionPlanning</segments>
+      <segments>PlanningPresentation.ProductionPlanning</segments>
      </dataPath>
      <extendedTooltip>
-      <name>PlanningProductionPlanningExtendedTooltip</name>
-      <id>38</id>
+      <name>PlanningPresentationProductionPlanningExtendedTooltip</name>
+      <id>84</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -495,8 +492,8 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>PlanningProductionPlanningContextMenu</name>
-      <id>37</id>
+      <name>PlanningPresentationProductionPlanningContextMenu</name>
+      <id>83</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -545,7 +542,7 @@
     </extInfo>
    </items>
    <autoCommandBar>
-    <name>PlanningCommandBar</name>
+    <name>PlanningPresentationCommandBar</name>
     <id>18</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -564,10 +561,10 @@
     <userVisible>
      <common>true</common>
     </userVisible>
-    <name>PlanningSearchString</name>
+    <name>PlanningPresentationSearchString</name>
     <id>21</id>
     <extendedTooltip>
-     <name>PlanningSearchStringExtendedTooltip</name>
+     <name>PlanningPresentationSearchStringExtendedTooltip</name>
      <id>23</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -582,7 +579,7 @@
      </extInfo>
     </extendedTooltip>
     <contextMenu>
-     <name>PlanningSearchStringContextMenu</name>
+     <name>PlanningPresentationSearchStringContextMenu</name>
      <id>22</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -591,7 +588,7 @@
      </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
-    <source>PlanningSearchString</source>
+    <source>PlanningPresentationSearchString</source>
     <extInfo xsi:type="form:SearchStringAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -602,10 +599,10 @@
     <userVisible>
      <common>true</common>
     </userVisible>
-    <name>PlanningViewStatus</name>
+    <name>PlanningPresentationViewStatus</name>
     <id>27</id>
     <extendedTooltip>
-     <name>PlanningViewStatusExtendedTooltip</name>
+     <name>PlanningPresentationViewStatusExtendedTooltip</name>
      <id>29</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -620,7 +617,7 @@
      </extInfo>
     </extendedTooltip>
     <contextMenu>
-     <name>PlanningViewStatusContextMenu</name>
+     <name>PlanningPresentationViewStatusContextMenu</name>
      <id>28</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -630,7 +627,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
-    <source>PlanningViewStatus</source>
+    <source>PlanningPresentationViewStatus</source>
     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -641,10 +638,10 @@
     <userVisible>
      <common>true</common>
     </userVisible>
-    <name>PlanningSearchControl</name>
+    <name>PlanningPresentationSearchControl</name>
     <id>24</id>
     <extendedTooltip>
-     <name>PlanningSearchControlExtendedTooltip</name>
+     <name>PlanningPresentationSearchControlExtendedTooltip</name>
      <id>26</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -659,7 +656,7 @@
      </extInfo>
     </extendedTooltip>
     <contextMenu>
-     <name>PlanningSearchControlContextMenu</name>
+     <name>PlanningPresentationSearchControlContextMenu</name>
      <id>25</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -669,13 +666,13 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>SearchControlAddition</type>
-    <source>PlanningSearchControl</source>
+    <source>PlanningPresentationSearchControl</source>
     <extInfo xsi:type="form:SearchControlAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
    </searchControlAddition>
    <extendedTooltip>
-    <name>PlanningExtendedTooltip</name>
+    <name>PlanningPresentationExtendedTooltip</name>
     <id>20</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -690,7 +687,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>PlanningContextMenu</name>
+    <name>PlanningPresentationContextMenu</name>
     <id>19</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -960,102 +957,6 @@
     <items xsi:type="form:FormGroup">
      <name>GroupDocuments</name>
      <id>68</id>
-     <items xsi:type="form:FormField">
-      <name>DocProduction</name>
-      <id>70</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-       <segments>DocProduction</segments>
-      </dataPath>
-      <titleLocation>None</titleLocation>
-      <extendedTooltip>
-       <name>DocProductionExtendedTooltip</name>
-       <id>72</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocProductionContextMenu</name>
-       <id>71</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>LabelField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <hyperlink>true</hyperlink>
-      </extInfo>
-     </items>
-     <items xsi:type="form:FormField">
-      <name>DocInventoryTransfer</name>
-      <id>73</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-       <segments>DocInventoryTransfer</segments>
-      </dataPath>
-      <titleLocation>None</titleLocation>
-      <extendedTooltip>
-       <name>DocInventoryTransferExtendedTooltip</name>
-       <id>75</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocInventoryTransferContextMenu</name>
-       <id>74</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>LabelField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <hyperlink>true</hyperlink>
-      </extInfo>
-     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1706,24 +1607,49 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>Key</name>
+   <title>
+    <key>en</key>
+    <value>Key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </title>
+   <id>20</id>
+   <valueType>
+    <types>DefinedType.typeRowID</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
-  <name>DocProduction</name>
+  <name>PlanningPresentation</name>
   <title>
    <key>en</key>
-   <value>Doc production</value>
+   <value>Planning presentation</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Документ производство</value>
+   <value>Презентация планирования</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Evrak üretim</value>
+   <value>Planning presentation</value>
   </title>
-  <id>7</id>
+  <id>19</id>
   <valueType>
-   <types>DocumentRef.Production</types>
+   <types>ValueTable</types>
   </valueType>
   <view>
    <common>true</common>
@@ -1731,31 +1657,106 @@
   <edit>
    <common>true</common>
   </edit>
- </attributes>
- <attributes>
-  <name>DocInventoryTransfer</name>
-  <title>
-   <key>en</key>
-   <value>Doc inventory transfer</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Документ перемещение товаров</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Evrak depo transfer fişi</value>
-  </title>
-  <id>8</id>
-  <valueType>
-   <types>DocumentRef.InventoryTransfer</types>
-  </valueType>
-  <view>
-   <common>true</common>
-  </view>
-  <edit>
-   <common>true</common>
-  </edit>
+  <columns>
+   <name>PlanningPeriod</name>
+   <title>
+    <key>en</key>
+    <value>Planning period</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Период планирования</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Planlama dönemi</value>
+   </title>
+   <id>21</id>
+   <valueType>
+    <types>CatalogRef.PlanningPeriods</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>LeftToProduce</name>
+   <title>
+    <key>en</key>
+    <value>Left to produce</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Осталось произвести</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Üretilecek</value>
+   </title>
+   <id>22</id>
+   <valueType>
+    <types>DefinedType.typeQuantity</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ProductionPlanning</name>
+   <title>
+    <key>en</key>
+    <value>Production planning</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Планирование производства</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Üretim planlama fişi</value>
+   </title>
+   <id>23</id>
+   <valueType>
+    <types>DocumentRef.ProductionPlanning</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Key</name>
+   <title>
+    <key>en</key>
+    <value>Key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </title>
+   <id>24</id>
+   <valueType>
+    <types>DefinedType.typeRowID</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <formCommands>
   <name>SearchByBarcode</name>

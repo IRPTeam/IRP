@@ -1816,5 +1816,45 @@ Scenario: _200055 check filling store from user settings when delete row from do
 		Then the form attribute named "Store" became equal to "Store 01"
 	And I close all client application windows						
 				
+Scenario: _200053 check Disable - Calculate rows on link rows
+	And I close all client application windows
+	* Disable - Calculate rows on link rows
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Calculate rows on link rows' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate" 
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then the form attribute named "CalculateRows" became equal to "No"
+		And I close all client application windows
+	* Enable - Change author	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Calculate rows on link rows' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate" 
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then the form attribute named "CalculateRows" became equal to "Yes"
+		And I close all client application windows
 
-				

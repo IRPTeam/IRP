@@ -487,6 +487,23 @@ Scenario: _0155268 create Retail GR based on Retail SC
 			| '3'   | 'Product 1 with SLN'             | 'ODS'        | '9090098908'           | 'pcs'    | '1,000'      | 'Store 01'   | ''                                             |
 			| '4'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '2,000'      | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
 			| '5'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '2,000'      | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+	* Change quantity and check shipment confirmation table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Show hidden tables" button
+		And I expand "ShipmentConfirmations [5]" group
+		And I move to "ShipmentConfirmations [5]" tab
+		And "ShipmentConfirmations" table became equal
+			| 'Quantity' | 'Quantity in shipment confirmation' |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '2,000'                             |
+			| '2,000'    | '2,000'                             |						
 		And I close all client application windows
 		
 Scenario: _0155269 create Retail sales receipt based on Retail SC

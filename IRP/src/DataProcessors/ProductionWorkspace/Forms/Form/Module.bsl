@@ -507,13 +507,45 @@ Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_Inventor
 
 	Clear();
 	
-	If ArrayOf_NewProduction.Count() Then
-		ThisObject.DocProduction.LoadValues(ArrayOf_NewProduction);
-	EndIf;
+	NewAttributes = New Array();
+	AttributeValues = New Structure();
 	
-	If ArrayOf_NewInventoryTransfer.Count() Then
-		ThisObject.DocInventoryTransfer = ArrayOf_NewInventoryTransfer[0];
-	EndIf;
+	For Each NewDoc In ArrayOf_NewProduction Do
+		AttrName = "_" + StrReplace(String(New UUID()),"-","");
+		NewAttr = New FormAttribute(AttrName, New TypeDescription("DocumentRef.Production"));
+		NewAttributes.Add(NewAttr);
+		
+		AttributeValues.Insert(AttrName, NewDoc);
+	EndDo;
 	
+	For Each NewDoc In ArrayOf_NewInventoryTransfer Do
+		AttrName = "_" + StrReplace(String(New UUID()),"-","");
+		NewAttr = New FormAttribute(AttrName, New TypeDescription("DocumentRef.InventoryTransfer"));
+		NewAttributes.Add(NewAttr);
+		
+		AttributeValues.Insert(AttrName, NewDoc);
+	EndDo;
+	
+	// change attributes
+	ThisObject.ChangeAttributes(NewAttributes, ThisObject.CreatedAttributes.UnloadValues());
+	
+	ThisObject.CreatedAttributes.Clear();  
+	For Each AttrName In NewAttributes Do
+		ThisObject.CreatedAttributes.Add(AttrName.Name);
+	EndDo;
+	
+	// fill attributes
+	For Each KeyValue In AttributeValues Do 
+		ThisObject[KeyValue.Key] = KeyValue.Value;
+	EndDo;
+	
+	For Each AttrName In ThisObject.CreatedAttributes Do
+		NewItem = ThisObject.Items.Add(AttrName, Type("FormField"), ThisObject.Items.GroupDocuments);
+		NewItem.Type = FormFieldType.LabelField;
+		NewItem.Hyperlink = True;     
+		NewItem.TitleLocation = FormItemTitleLocation.None;
+		NewItem.DataPath = AttrName;   
+	EndDo;
+
 	Items.ButtonPages.CurrentPage = Items.GroupDocuments;
 EndProcedure

@@ -11020,11 +11020,14 @@ EndProcedure
 
 Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows, CalculateRows)
 	ArrayOfRefillColumns = New Array();
-	ArrayOfRefillColumns.Add(Upper("TotalAmount"));
-	ArrayOfRefillColumns.Add(Upper("NetAmount"));
-	ArrayOfRefillColumns.Add(Upper("OffersAmount"));
-	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
-	ArrayOfRefillColumns.Add(Upper("PriceType"));
+	
+	If CalculateRows Then
+		ArrayOfRefillColumns.Add(Upper("TotalAmount"));
+		ArrayOfRefillColumns.Add(Upper("NetAmount"));
+		ArrayOfRefillColumns.Add(Upper("OffersAmount"));
+		ArrayOfRefillColumns.Add(Upper("TaxAmount"));
+		ArrayOfRefillColumns.Add(Upper("PriceType"));
+	EndIf;
 
 	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 

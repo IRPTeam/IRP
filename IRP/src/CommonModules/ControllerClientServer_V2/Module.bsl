@@ -3902,6 +3902,7 @@ Procedure StepChangeStoreInHeaderByStoresInList(Parameters, Chain) Export
 	EndIf;
 	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
 	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
+	Options.DocumentRef = Parameters.Object.Ref;
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
 		IsService = False;

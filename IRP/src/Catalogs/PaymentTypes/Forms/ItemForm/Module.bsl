@@ -55,48 +55,7 @@ EndProcedure
 
 &AtClient
 Procedure TypeOnChange(Item)
-	If Object.Type <> PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
-		Object.Partner = Undefined;
-		Object.LegalName = Undefined;
-		Object.Agreement = Undefined;
-		Object.LegalNameContract = Undefined;
-		Object.Branch = Undefined;
-	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, 
-		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing,
-		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
-EndProcedure
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.Partner);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, ThisObject, Item, Text, StandardProcessing, Object.Partner);
-EndProcedure
-
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, 
-		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, 
-		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
 EndProcedure
 
 #Region AddAttributes

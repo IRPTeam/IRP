@@ -155,8 +155,7 @@ Scenario: _0260102 сheck that the buttons in POS are inactive if session closed
 		| 'And I click "Create cash in" button'   |
 	When I Check the steps for Exception
 		| 'And I click "Create cash out" button'   |
-	When I Check the steps for Exception
-		| 'And I click "Print X Report" button'   |
+	And I click "Print X Report" button
 
 Scenario: _0260105 open session
 	And I close all client application windows

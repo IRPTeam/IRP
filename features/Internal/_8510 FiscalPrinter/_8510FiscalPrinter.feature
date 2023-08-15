@@ -444,6 +444,7 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'       |
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
+		And I set checkbox named "Log"		
 		And I expand "Additional info" group
 		And I input "[cut]" text in the field named "Cutter"	
 		And I click "Save" button		
@@ -2507,10 +2508,22 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "520"	
+	Then the number of "List" table lines is "равно" "516"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
 		Then the form attribute named "User" became equal to "CI"
 		Then the form attribute named "Hardware" became equal to "Fiscal printer"
 	And I close all client application windows
+
+Scenario: _0260182 check print X report when session closed
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check X report
+		Then "Point of sales" window is opened
+		And I click "Print X Report" button
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows				 

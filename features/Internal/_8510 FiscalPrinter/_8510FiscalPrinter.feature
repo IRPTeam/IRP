@@ -2508,7 +2508,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "516"	
+	Then the number of "List" table lines is "равно" "722"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -2524,6 +2524,36 @@ Scenario: _0260182 check print X report when session closed
 		Then "Point of sales" window is opened
 		And I click "Print X Report" button
 	* Check fiscal log
+		And Delay 3
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
 	And I close all client application windows				 
+
+Scenario: _0260185 print settlement from the terminal
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check settlement
+		And I click "Settlement (without shift close)" button
+		And I click "Get settlement" button
+		And I click "Print last settlement" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"	
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResultAcquiring"	
+		And I check "$ParsingResultAcquiring$" with "1" and method is "Settlement"
+
+
+Scenario: _0260186 check show fiscal transaction from POS
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Show transaction
+		And I click "Show transactions" button
+		Then the form attribute named "Period" became equal to "Today"
+		Then the form attribute named "TimeZone" became equal to "2"
+		Then the form attribute named "Hardware" became equal to "Acquiring terminal"
+		Then the form attribute named "FiscalPrinter" became equal to "Fiscal printer"
+		Then the number of "TransactionList" table lines is "больше" "0"
+	And I close all client application windows

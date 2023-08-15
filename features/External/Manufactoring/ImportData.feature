@@ -1002,3 +1002,10 @@ Scenario: Create catalog AddAttributeAndPropertySets objects (MF)
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_ItemKeys'   | 'MF_DefaultBillOfMaterials'                 | ''                | 'False'     | 'False'       | 'True'   |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Catalog_ItemKeys'   | 'MF_UseIncomingStockReservation'            | ''                | 'False'     | 'False'       | 'True'   |
 	
+
+Scenario: Create information register UserSettings records (store receiver in IT)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'             | 'AttributeName' | 'KindOfAttribute'                | 'Value'                                                          |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.InventoryTransfer' | 'StoreReceiver' | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' |
+

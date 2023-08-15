@@ -19,7 +19,7 @@
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>&lt;For this company is own goods&gt;</v8:content>
+						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

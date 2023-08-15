@@ -39,6 +39,7 @@ Scenario: _5001 preparation
 	When Create chart of characteristic types AddAttributeAndProperty objects
 	When update ItemKeys
 	When Create information register CurrencyRates records
+	When Create information register UserSettings records (store receiver in IT)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -79,7 +80,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 	* Check filling item info
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
-		And "Planning" table became equal
+		And "PlanningPresentation" table became equal
 			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
 			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '80,000'             |
 			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
@@ -87,17 +88,17 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 	* Create IT + PR
 		And I input "2,000" text in the field named "Quantity"
 		And I move to the next attribute
-		And "Planning" table became equal
+		And "PlanningPresentation" table became equal
 			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
 			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '80,000'             |
 			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		And I click "PR+IT" button
-		And field "DocProduction" is filled
-		And field "DocInventoryTransfer" is filled
-		And I save the value of the field named "DocProduction" as "Production01"
-		And I save the value of the field named "DocInventoryTransfer" as "InventoryTransfer01"
 	* Check creation Production
-		And I click the hyperlink named "DocProduction"
+		Given I open hyperlink "e1cib/list/Document.Production"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '13'     |
+		And I select current line in "List" table		
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Production store 05"
 		Then the form attribute named "Description" became equal to "Click to enter description"
@@ -125,17 +126,17 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 			| '9'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'pcs'          | '4,000'     | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Semiproduct'     | 'Store 04'         | 'pcs'    | '4,000'     |
 		Then the form attribute named "ProductionType" became equal to "Product"
 		Then the form attribute named "Finished" became equal to "Yes"
-		Then the form attribute named "Branch" became equal to ""
+		Then the form attribute named "Branch" became equal to "Production store 05"
 		And field "Author" is filled
 	* Check creation IT
-		When in opened panel I select "Production workspace"
-		Then "Production workspace" window is opened
-		And I click the hyperlink named "DocInventoryTransfer"
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"	
+		And I go to the last line in "List" table
+		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "StoreTransit" became equal to ""
-		Then the form attribute named "StoreReceiver" became equal to ""
+		Then the form attribute named "StoreReceiver" became equal to "Store 06"
 		And "ItemList" table became equal
 			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                |
 			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    |
@@ -158,15 +159,11 @@ Scenario: _5004 create IT from Production Workspace (product) and check filling 
 		And I input "2,000" text in the field named "Quantity"
 		And I select from the drop-down list named "Unit" by "pcs" string
 		And I move to the tab named "GroupInventoryTransfer"
-		And "Planning" table became equal
+		And "PlanningPresentation" table became equal
 			| 'Production planning'                               | 'Planning period'   | 'Left to produce'    |
 			| 'Production planning 1 dated 29.04.2022 09:40:47'   | 'First month'       | '78,000'             |
 			| 'Production planning 2 dated 29.04.2022 09:42:27'   | 'Second month'      | '122,000'            |
 		And I click "IT" button
-		When I Check the steps for Exception
-			| 'And field "DocProduction" is filled'    |
-		And field "DocInventoryTransfer" is filled
-		And I click the hyperlink named "DocInventoryTransfer"
 	* Check creation
 		* Set Use commission trading for inventory origin check 
 			Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
@@ -176,12 +173,14 @@ Scenario: _5004 create IT from Production Workspace (product) and check filling 
 			And I set "Use" checkbox in "FunctionalOptions" table
 			And I finish line editing in "FunctionalOptions" table
 			And I click "Save" button	
-		When in opened panel I select "Inventory transfer*"		
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"	
+		And I go to the last line in "List" table
+		And I select current line in "List" table	
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "StoreTransit" became equal to ""
-		Then the form attribute named "StoreReceiver" became equal to ""
+		Then the form attribute named "StoreReceiver" became equal to "Store 06"
 		And "ItemList" table became equal
 			| '#'   | 'Item'                            | 'Item key'                        | 'Serial lot numbers'   | 'Unit'   | 'Quantity'   | 'Inventory transfer order'   | 'Production planning'                                | 'Inventory origin'   |
 			| '1'   | 'Стремянка номер 6 ступенчатая'   | 'Стремянка номер 6 ступенчатая'   | ''                     | 'pcs'    | '2,000'      | ''                           | 'Production planning 1 dated 29.04.2022 09:40:47'    | 'Own stocks'         |
@@ -216,16 +215,17 @@ Scenario: _5005 create IT from Production Workspace (product)
 			| 'Description'    |
 			| 'pcs'            |
 		And I select current line in "List" table
-		And "Planning" table contains lines
+		And "PlanningPresentation" table contains lines
 			| 'Planning period'   | 'Left to produce'   | 'Production planning'                                |
 			| 'First month'       | '680,000'           | 'Production planning 1 dated 29.04.2022 09:40:47'    |
 	* Create PR and check
 		And I move to the tab named "GroupProductions"
 		And I click "PR" button
-		And field "DocProduction" is filled
-		When I Check the steps for Exception
-			| 'And field "DocInventoryTransfer" is filled'    |
-		And I click the hyperlink named "DocProduction"
+		Given I open hyperlink "e1cib/list/Document.Production"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '14'     |
+		And I select current line in "List" table	
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Production store 05"
 		Then the form attribute named "Description" became equal to "Click to enter description"
@@ -246,11 +246,11 @@ Scenario: _5005 create IT from Production Workspace (product)
 		
 		Then the form attribute named "ProductionType" became equal to "Semiproduct"
 		Then the form attribute named "Finished" became equal to "Yes"
-		Then the form attribute named "Branch" became equal to ""
+		Then the form attribute named "Branch" became equal to "Production store 05"
 		And field "Author" is filled
 	And I close all client application windows
 
-Scenario: _5006 check chenge item key if change unit in the Production workspace
+Scenario: _5006 check change item key if change unit in the Production workspace
 	And I close all client application windows
 	* Open Production workspace
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"

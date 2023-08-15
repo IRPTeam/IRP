@@ -40,4 +40,11 @@
       <value>Advance</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="d3e0207c-a9aa-45c5-ac94-2be02ce5b934">
+    <name>Certificate</name>
+    <synonym>
+      <key>en</key>
+      <value>Certificate</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

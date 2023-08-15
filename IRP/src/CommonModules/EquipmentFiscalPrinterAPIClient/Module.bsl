@@ -81,7 +81,7 @@ EndFunction
 // ** InputParameters - String - Input parameters of the operation
 // * InOut - Structure -
 // * Out - Structure:
-// ** OutputParameters - String - Output parameters of the operation
+// ** OutputParameters - See OutputParameters
 Function OpenShiftSettings() Export
     Str = New Structure;
     
@@ -96,7 +96,7 @@ Function OpenShiftSettings() Export
     Str.Insert("InOut", New Structure);
     
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", "");
+    Str.Out.Insert("OutputParameters", New Structure);
     
     Return Str;
 EndFunction
@@ -113,7 +113,7 @@ EndFunction
 // ** InputParameters - String - Input parameters of the operation
 // * InOut - Structure -
 // * Out - Structure:
-// ** OutputParameters - String - Output parameters of the operation
+// ** OutputParameters - See OutputParameters
 Function CloseShiftSettings() Export
     Str = New Structure;
     
@@ -128,7 +128,7 @@ Function CloseShiftSettings() Export
     Str.Insert("InOut", New Structure);
     
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", "");
+    Str.Out.Insert("OutputParameters", New Structure);
     
     Return Str;
 EndFunction
@@ -208,9 +208,9 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** DocumentPackage - String - XML structure - text document description.
+// ** DocumentPackage - See DocumentPackage
 // * InOut - Structure -
-// * Out - Structure:
+// * Out - Structure -
 Function PrintTextDocumentSettings() Export
     Str = New Structure;
     
@@ -220,7 +220,7 @@ Function PrintTextDocumentSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("DocumentPackage", "");
+    Str.In.Insert("DocumentPackage", New Structure);
     
     Str.Insert("InOut", New Structure);
     
@@ -714,47 +714,29 @@ EndFunction
 // ** SaleLocation - String - Sale location
 // ** AutomatNumber - String - Automat number
 // ** AgentType - Number - Agent type indicator
-// ** AgentData - Structure - Agent's data
-// ** VendorData - Structure - Vendor's data
+// ** AgentData - Structure - Agent's data for the item:
+// *** AgentOperation - String - Operation of the payment agent
+// *** AgentPhone - String - Phone of the payment agent. Multiple values allowed, separated by ","
+// *** PaymentProcessorPhone - String - Phone of the payment processor. Multiple values allowed, separated by ","
+// *** AcquirerOperatorPhone - String - Phone of the acquirer operator. Multiple values allowed, separated by ","
+// *** AcquirerOperatorName - String - Name of the acquirer operator
+// *** AcquirerOperatorAddress - String - Address of the acquirer operator
+// *** AcquirerOperatorINN - String - INN of the acquirer operator
+// ** VendorData - Structure - Vendor's data for the item:
+// *** VendorPhone - String - Phone of the vendor. Multiple values allowed, separated by ","
+// *** VendorName - String - Name of the vendor
+// *** VendorINN - String - INN of the vendor
 // ** UserAttribute - Structure - Additional user attribute
 // ** AdditionalAttribute - String - Additional check attribute
 // ** OperationalAttribute - Structure - Operational attribute of the check
 // ** IndustryAttribute - Structure - Industry attribute of the check
-//
 // * Positions - Structure:
-// ** FiscalString - Structure:
-// *** Name - String - Name of the product
-// *** Quantity - Number - Quantity of the product
-// *** PriceWithDiscount - Number - Price per product unit with discounts/surcharges
-// *** AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
-// *** DiscountAmount - Number - Amount of discounts and surcharges
-// *** Department - Number - Department where the sale is conducted
-// *** VATRate - String - VAT rate
-// *** VATAmount - Number - VAT amount for the item
-// *** PaymentMethod - Number - Payment method indicator
-// *** CalculationSubject - Number - Calculation subject indicator
-// *** CalculationAgent - Number - Calculation agent indicator
-// *** AgentData - Structure - Agent's data for the item
-// *** VendorData - Structure - Vendor's data for the item
-// *** MeasureOfQuantity - Number - Measure of quantity for the item
-// *** FractionalQuantity - Structure:
-// **** Numerator - Number - Fractional quantity of marked product (numerator)
-// **** Denominator - Number - Fractional quantity of marked product (denominator)
-// *** GoodCodeData - Structure - Data of the good code
-// *** MarkingCode - String - Control marking code
-// *** CountryOfOrigin - String - Digital code of the product's country of origin
-// *** CustomsDeclaration - String - Customs declaration registration number
-// *** AdditionalAttribute - String - Additional attribute of the item
-// *** ExciseAmount - Number - Excise amount included in the item's price
-// *** IndustryAttribute - Structure - Industry attribute of the item
-//
-// ** TextString - Structure:
-// *** Text - String - Arbitrary text string
-//
+// ** FiscalStrings - See CheckPackage_FiscalString
+// ** FiscalStringJSON - String - Serialazed for server call function CheckPackage_FiscalString
+// ** TextStrings - Array Of String - Additional non fiscal string for print
 // ** Barcode - Structure:
 // *** Type - String - String defining the barcode type
-// *** ValueBase64 - String - Barcode value encoded in Base64
-//
+// *** Value - String - Barcode value
 // * Payments - Structure:
 // ** Cash - Number - Cash payment amount
 // ** ElectronicPayment - Number - Non-cash payment amount
@@ -779,8 +761,21 @@ Function CheckPackage() Export
     Str.Parameters.Insert("SaleLocation", "");
     Str.Parameters.Insert("AutomatNumber", "");
     Str.Parameters.Insert("AgentType", 0);
+    
     Str.Parameters.Insert("AgentData", New Structure);
+    Str.Parameters.AgentData.Insert("AgentOperation", "");
+    Str.Parameters.AgentData.Insert("AgentPhone", "");
+    Str.Parameters.AgentData.Insert("PaymentProcessorPhone", "");
+    Str.Parameters.AgentData.Insert("AcquirerOperatorPhone", "");
+    Str.Parameters.AgentData.Insert("AcquirerOperatorName", "");
+    Str.Parameters.AgentData.Insert("AcquirerOperatorAddress", "");
+    Str.Parameters.AgentData.Insert("AcquirerOperatorINN", "");
+    
     Str.Parameters.Insert("VendorData", New Structure);
+    Str.Parameters.VendorData.Insert("VendorPhone", "");
+    Str.Parameters.VendorData.Insert("VendorName", "");
+    Str.Parameters.VendorData.Insert("VendorINN", "");
+    
     Str.Parameters.Insert("UserAttribute", New Structure);
     Str.Parameters.Insert("AdditionalAttribute", "");
     Str.Parameters.Insert("OperationalAttribute", New Structure);
@@ -789,38 +784,14 @@ Function CheckPackage() Export
     // Positions section
     Str.Insert("Positions", New Structure);
     
-    Str.Positions.Insert("FiscalString", New Structure);
-    Str.Positions.FiscalString.Insert("Name", "");
-    Str.Positions.FiscalString.Insert("Quantity", 0);
-    Str.Positions.FiscalString.Insert("PriceWithDiscount", 0);
-    Str.Positions.FiscalString.Insert("AmountWithDiscount", 0);
-    Str.Positions.FiscalString.Insert("DiscountAmount", 0);
-    Str.Positions.FiscalString.Insert("Department", 0);
-    Str.Positions.FiscalString.Insert("VATRate", "");
-    Str.Positions.FiscalString.Insert("VATAmount", 0);
-    Str.Positions.FiscalString.Insert("PaymentMethod", 0);
-    Str.Positions.FiscalString.Insert("CalculationSubject", 0);
-    Str.Positions.FiscalString.Insert("CalculationAgent", 0);
-    Str.Positions.FiscalString.Insert("AgentData", New Structure);
-    Str.Positions.FiscalString.Insert("VendorData", New Structure);
-    Str.Positions.FiscalString.Insert("MeasureOfQuantity", 0);
-    Str.Positions.FiscalString.Insert("FractionalQuantity", New Structure);
-    Str.Positions.FiscalString.FractionalQuantity.Insert("Numerator", 0);
-    Str.Positions.FiscalString.FractionalQuantity.Insert("Denominator", 0);
-    Str.Positions.FiscalString.Insert("GoodCodeData", New Structure);
-    Str.Positions.FiscalString.Insert("MarkingCode", "");
-    Str.Positions.FiscalString.Insert("CountryOfOrigin", "");
-    Str.Positions.FiscalString.Insert("CustomsDeclaration", "");
-    Str.Positions.FiscalString.Insert("AdditionalAttribute", "");
-    Str.Positions.FiscalString.Insert("ExciseAmount", 0);
-    Str.Positions.FiscalString.Insert("IndustryAttribute", New Structure);
+    Str.Positions.Insert("FiscalStrings", New Array);
+    Str.Positions.Insert("FiscalStringJSON", CommonFunctionsServer.SerializeJSON(CheckPackage_FiscalString()));
     
-    Str.Positions.Insert("TextString", New Structure);
-    Str.Positions.TextString.Insert("Text", "");
+    Str.Positions.Insert("TextStrings", New Array);
     
     Str.Positions.Insert("Barcode", New Structure);
-    Str.Positions.Barcode.Insert("Type", "");
-    Str.Positions.Barcode.Insert("ValueBase64", "");
+    Str.Positions.Barcode.Insert("Type", "QR");
+    Str.Positions.Barcode.Insert("Value", "");
     
     // Payments section
     Str.Insert("Payments", New Structure);
@@ -829,7 +800,88 @@ Function CheckPackage() Export
     Str.Payments.Insert("PrePayment", 0);
     Str.Payments.Insert("PostPayment", 0);
     Str.Payments.Insert("Barter", 0);
+    Return Str;
+EndFunction
+
+// Check package - Fiscal string.
+//
+// Returns:
+//  Structure - Fiscal string:
+// * Name - String - Name of the product
+// * Quantity - Number - Quantity of the product
+// * PriceWithDiscount - Number - Price per product unit with discounts/surcharges
+// * AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
+// * DiscountAmount - Number - Amount of discounts and surcharges
+// * Department - Number - Department where the sale is conducted
+// * VATRate - String - VAT rate
+// * VATAmount - Number - VAT amount for the item
+// * PaymentMethod - Number - Payment method indicator
+// * CalculationSubject - Number - Calculation subject indicator
+// * CalculationAgent - Number - Calculation agent indicator
+// * AgentData - Structure - Agent's data for the item:
+// ** AgentOperation - String - Operation of the payment agent
+// ** AgentPhone - String - Phone of the payment agent. Multiple values allowed, separated by ","
+// ** PaymentProcessorPhone - String - Phone of the payment processor. Multiple values allowed, separated by ","
+// ** AcquirerOperatorPhone - String - Phone of the acquirer operator. Multiple values allowed, separated by ","
+// ** AcquirerOperatorName - String - Name of the acquirer operator
+// ** AcquirerOperatorAddress - String - Address of the acquirer operator
+// ** AcquirerOperatorINN - String - INN of the acquirer operator
+// * VendorData - Structure - Vendor's data for the item:
+// ** VendorPhone - String - Phone of the vendor. Multiple values allowed, separated by ","
+// ** VendorName - String - Name of the vendor
+// ** VendorINN - String - INN of the vendor
+// * MeasureOfQuantity - Number - Measure of quantity for the item
+// * FractionalQuantity - Structure:
+// ** Numerator - Number - Fractional quantity of marked product (numerator)
+// ** Denominator - Number - Fractional quantity of marked product (denominator)
+// * GoodCodeData - Structure - Data of the good code
+// * MarkingCode - String - Control marking code
+// * CountryOfOrigin - String - Digital code of the product's country of origin
+// * CustomsDeclaration - String - Customs declaration registration number
+// * AdditionalAttribute - String - Additional attribute of the item
+// * ExciseAmount - Number - Excise amount included in the item's price
+// * IndustryAttribute - Structure - Industry attribute of the item
+Function CheckPackage_FiscalString() Export
+    Str = New Structure;
+
+    Str.Insert("Name", "");
+    Str.Insert("Quantity", 0);
+    Str.Insert("PriceWithDiscount", 0);
+    Str.Insert("AmountWithDiscount", 0);
+    Str.Insert("DiscountAmount", 0);
+    Str.Insert("Department", 0);
+    Str.Insert("VATRate", "");
+    Str.Insert("VATAmount", 0);
+    Str.Insert("PaymentMethod", 0);
+    Str.Insert("CalculationSubject", 0);
+    Str.Insert("CalculationAgent", 0);
     
+    Str.Insert("AgentData", New Structure);
+    Str.AgentData.Insert("AgentOperation", "");
+    Str.AgentData.Insert("AgentPhone", "");
+    Str.AgentData.Insert("PaymentProcessorPhone", "");
+    Str.AgentData.Insert("AcquirerOperatorPhone", "");
+    Str.AgentData.Insert("AcquirerOperatorName", "");
+    Str.AgentData.Insert("AcquirerOperatorAddress", "");
+    Str.AgentData.Insert("AcquirerOperatorINN", "");
+    
+    Str.Insert("VendorData", New Structure);
+    Str.VendorData.Insert("VendorPhone", "");
+    Str.VendorData.Insert("VendorName", "");
+    Str.VendorData.Insert("VendorINN", "");
+    
+    Str.Insert("MeasureOfQuantity", 0);
+    Str.Insert("FractionalQuantity", New Structure);
+    Str.FractionalQuantity.Insert("Numerator", 0);
+    Str.FractionalQuantity.Insert("Denominator", 0);
+    Str.Insert("GoodCodeData", New Structure);
+    Str.Insert("MarkingCode", "");
+    Str.Insert("CountryOfOrigin", "");
+    Str.Insert("CustomsDeclaration", "");
+    Str.Insert("AdditionalAttribute", "");
+    Str.Insert("ExciseAmount", 0);
+    Str.Insert("IndustryAttribute", New Structure);
+        
     Return Str;
 EndFunction
 
@@ -897,6 +949,27 @@ Function OperationCounters() Export
     Return Str;
 EndFunction
 
+// Document package.
+// 
+// Returns:
+//  Structure - Document package:
+// * TextString - Array Of String - Text for print 
+// * Barcode - Structure - Print barcode, if value is filled:
+// ** Type - String - EAN8, EAN13, CODE39, QR
+// ** Value - String - Barcode value
+Function DocumentPackage() Export
+    Str = New Structure;
+    
+    Str.Insert("TextString", New Array);
+    
+    Barcode = New Structure;
+    Barcode.Insert("Type", "QR");
+    Barcode.Insert("Value", "");
+    
+    Str.Insert("Barcode", Barcode);
+    
+    Return Str;
+EndFunction
 
 #EndRegion
 

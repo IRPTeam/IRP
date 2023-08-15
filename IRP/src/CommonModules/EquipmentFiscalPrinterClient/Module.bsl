@@ -63,9 +63,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 	OpenShiftSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.OpenShift(CRS.FiscalPrinter, OpenShiftSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, OpenShiftSettings.Out.OutputParameters);
-		FillPropertyValues(Result, ShiftData);
+		FillPropertyValues(Result, OpenShiftSettings.Out.OutputParameters);
 		Result.Success = True;
 	Else
 		Result.ErrorDescription = OpenShiftSettings.Info.Error;
@@ -116,9 +114,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 	CloseShiftSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.CloseShift(CRS.FiscalPrinter, CloseShiftSettings) Then
-		ShiftData = ShiftResultStructure();
-		FillDataFromDeviceResponse(ShiftData, CloseShiftSettings.Out.OutputParameters);
-		FillPropertyValues(Result, ShiftData);
+		FillPropertyValues(Result, CloseShiftSettings.Out.OutputParameters);
 		Result.Success = True;
 	Else
 		Result.ErrorDescription = CloseShiftSettings.Info.Error;
@@ -251,8 +247,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	EndIf;
 	
 	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
-	XMLOperationSettings = EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
-	CheckPackage = ReceiptGetXMLOperation(XMLOperationSettings);
+	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
 	
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
@@ -459,17 +454,17 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 		Return Result;
 	EndIf;
 	
-	XMLOperationSettings = PrintTextGetXMLOperationSettings(DataSource);
-	If Not XMLOperationSettings.TextStrings.Count() Then
+	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+	EquipmentFiscalPrinterServer.FillDocumentPackage(DataSource, DocumentPackage);
+
+	// If nothing to print - skip
+	If DocumentPackage.TextString.Count() = 0 And IsBlankString(DocumentPackage.Barcode.Value) Then
 		Result.Success = True;
 		Return Result;
 	EndIf;
 	
-	DocumentPackage = PrintTextGetXMLOperation(XMLOperationSettings);
-	
 	PrintTextDocumentSettings = EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings();
 	PrintTextDocumentSettings.In.DocumentPackage = DocumentPackage;
-																	
 	If Await EquipmentFiscalPrinterAPIClient.PrintTextDocument(CRS.FiscalPrinter, PrintTextDocumentSettings) Then
 		Result.Success = True;		
 	Else
@@ -751,10 +746,6 @@ Function PrintTextResultStructure()
 	Return ReturnValue;
 EndFunction
 
-Function PrintTextGetXMLOperationSettings(RSR)
-	Return EquipmentFiscalPrinterServer.PreparePrintTextData(RSR);
-EndFunction
-
 Function GetCountersOperationType()
 	ReturnData = New Structure();
 	ReturnData.Insert("CheckCount", 0);
@@ -799,98 +790,6 @@ Function TransformToTypeBySource(Data, Source)
 	EndIf;
 EndFunction
 
-// Receipt get XMLOperation.
-// 
-// Parameters:
-//  CommonParameters - See EquipmentFiscalPrinterServer.PrepareReceiptDataByRetailSalesReceipt
-// 
-// Returns:
-//  String - Receipt get XMLOperation
-Function ReceiptGetXMLOperation(CommonParameters) Export
-	
-	XMLWriter = New XMLWriter();
-	XMLWriter.SetString("UTF-8");
-	XMLWriter.WriteXMLDeclaration();
-	XMLWriter.WriteStartElement("CheckPackage");
-	
-	XMLWriter.WriteStartElement("Parameters");
-	XMLWriter.WriteAttribute("CashierName", ?(Not IsBlankString(CommonParameters.CashierName), ToXMLString(CommonParameters.CashierName), "Administrator"));
-	XMLWriter.WriteAttribute("CashierINN" , ToXMLString(CommonParameters.CashierINN));
-	XMLWriter.WriteAttribute("SaleAddress" , ToXMLString(CommonParameters.SaleAddress));
-	XMLWriter.WriteAttribute("SaleLocation" , ToXMLString(CommonParameters.SaleLocation));
-	XMLWriter.WriteAttribute("OperationType" , ToXMLString(CommonParameters.OperationType));
-	XMLWriter.WriteAttribute("TaxationSystem" , ToXMLString(CommonParameters.TaxationSystem));
-	XMLWriter.WriteEndElement();
-	
-	XMLWriter.WriteStartElement("Positions");
-	For Each Item In CommonParameters.FiscalStrings Do
-		XMLWriter.WriteStartElement("FiscalString");
-		XMLWriter.WriteAttribute("AmountWithDiscount", ToXMLString(Item.AmountWithDiscount));
-		XMLWriter.WriteAttribute("DiscountAmount", ToXMLString(Item.DiscountAmount));
-		If Item.Property("MarkingCode") Then
-			XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
-		EndIf;
-		XMLWriter.WriteAttribute("MeasureOfQuantity", ToXMLString(Item.MeasureOfQuantity));
-		XMLWriter.WriteAttribute("CalculationSubject", ToXMLString(Item.CalculationSubject));
-		XMLWriter.WriteAttribute("Name", ToXMLString(Item.Name));
-		XMLWriter.WriteAttribute("Quantity", ToXMLString(Item.Quantity));
-		XMLWriter.WriteAttribute("PaymentMethod", ToXMLString(Item.PaymentMethod));
-		XMLWriter.WriteAttribute("PriceWithDiscount", ToXMLString(Item.PriceWithDiscount));
-		XMLWriter.WriteAttribute("VATRate", ToXMLString(Item.VATRate));
-		XMLWriter.WriteAttribute("VATAmount", ToXMLString(Item.VATAmount));
-		If Item.Property("CalculationAgent") Then
-			XMLWriter.WriteAttribute("CalculationAgent", ToXMLString(Item.CalculationAgent));
-		EndIf;
-		If Item.Property("VendorData") Then
-			XMLWriter.WriteStartElement("VendorData");
-			XMLWriter.WriteAttribute("VendorINN", ToXMLString(Item.VendorData.VendorINN));
-			XMLWriter.WriteAttribute("VendorName", ToXMLString(Item.VendorData.VendorName));
-			XMLWriter.WriteAttribute("VendorPhone", ToXMLString(Item.VendorData.VendorPhone));
-			XMLWriter.WriteEndElement();
-		EndIf;
-		XMLWriter.WriteEndElement();
-	EndDo;
-	For Each Item In CommonParameters.TextStrings Do
-		XMLWriter.WriteStartElement("TextString");
-		XMLWriter.WriteAttribute("Text", ToXMLString(Item.Text));
-		XMLWriter.WriteEndElement();
-	EndDo;
-	XMLWriter.WriteEndElement();
-	
-	XMLWriter.WriteStartElement("Payments");
-	XMLWriter.WriteAttribute("Cash", ToXMLString(CommonParameters.Cash));
-	XMLWriter.WriteAttribute("ElectronicPayment", ToXMLString(CommonParameters.ElectronicPayment));
-	XMLWriter.WriteAttribute("PrePayment", ToXMLString(CommonParameters.PrePayment));
-	XMLWriter.WriteAttribute("PostPayment", ToXMLString(CommonParameters.PostPayment));
-	XMLWriter.WriteAttribute("Barter", ToXMLString(CommonParameters.Barter));
-	XMLWriter.WriteEndElement();
-	
-	XMLWriter.WriteEndElement();
-	
-	Return XMLWriter.Close();
-	
-EndFunction
-
-Function PrintTextGetXMLOperation(CommonParameters) Export
-	
-	XMLWriter = New XMLWriter();
-	XMLWriter.SetString("UTF-8");
-	XMLWriter.WriteXMLDeclaration();
-	XMLWriter.WriteStartElement("Document");
-	
-	XMLWriter.WriteStartElement("Positions");
-	For Each Item In CommonParameters.TextStrings Do
-		XMLWriter.WriteStartElement("TextString");
-		XMLWriter.WriteAttribute("Text", ToXMLString(Item.Text));
-		XMLWriter.WriteEndElement();
-	EndDo;
-	XMLWriter.WriteEndElement();
-	
-	XMLWriter.WriteEndElement();
-	
-	Return XMLWriter.Close();
-	
-EndFunction
 
 Function ToXMLString(Data)
 	// @skip-check Undefined function

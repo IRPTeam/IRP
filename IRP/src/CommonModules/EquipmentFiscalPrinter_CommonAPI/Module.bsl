@@ -1,3 +1,4 @@
+
 // @strict-types
 
 #Region Stadard
@@ -128,15 +129,23 @@ Async Function OpenShift(Hardware, Settings) Export
 		HardwareServer.WriteLog(Hardware, "OpenShift", True, Settings);
 	EndIf;
 	
+	OutputParameters = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.OpenShift(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters),
-		Settings.Out.OutputParameters
+		InputParameters_ToXML(Settings.In.InputParameters),
+		OutputParameters
 	); // Boolean
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression
+		Settings.Out.OutputParameters = OutputParameters;
+	Else
+		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
+		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -161,14 +170,24 @@ Async Function CloseShift(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CloseShift", True, Settings);
 	EndIf;
+	
+	OutputParameters = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.CloseShift(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters),
-		Settings.Out.OutputParameters
+		InputParameters_ToXML(Settings.In.InputParameters),
+		OutputParameters
 	); // Boolean
+
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression
+		Settings.Out.OutputParameters = OutputParameters;
+	Else
+		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
+		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -193,15 +212,22 @@ Async Function ProcessCheck(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCheck", True, Settings);
 	EndIf;
+	
+	DocumentOutputParameters = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.ProcessCheck(
 		ConnectParameters.ID,
 		Settings.In.Electronically,
-		Settings.In.CheckPackage,
-		Settings.Out.DocumentOutputParameters
+		CheckPackage_ToXML(Settings.In.CheckPackage),
+		DocumentOutputParameters
 	); // Boolean
+	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
+	Else
+		
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -258,11 +284,13 @@ Async Function PrintTextDocument(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "PrintTextDocument", True, Settings);
 	EndIf;
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.PrintTextDocument(
 		ConnectParameters.ID,
-		Settings.In.DocumentPackage
+		DocumentPackage_ToXML(Settings.In.DocumentPackage)
 	); // Boolean
+	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
@@ -293,7 +321,7 @@ Async Function CashInOutcome(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.CashInOutcome(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters),
+		InputParameters_ToXML(Settings.In.InputParameters),
 		Settings.In.Amount
 	); // Boolean
 	If Not Result Then
@@ -325,7 +353,7 @@ Async Function PrintXReport(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.PrintXReport(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters)
+		InputParameters_ToXML(Settings.In.InputParameters)
 	); // Boolean
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
@@ -390,7 +418,7 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.GetCurrentStatus(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters),
+		InputParameters_ToXML(Settings.In.InputParameters),
 		OutputParameters
 	); // Boolean
 	
@@ -429,7 +457,7 @@ Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.ReportCurrentStatusOfSettlements(
 		ConnectParameters.ID,
-		InputParametersToXML(Settings.In.InputParameters),
+		InputParameters_ToXML(Settings.In.InputParameters),
 		Settings.Out.OutputParameters
 	); // Boolean
 	If Not Result Then
@@ -676,7 +704,7 @@ EndFunction
 // 
 // Returns:
 //  String - Input parameters to XML
-Function InputParametersToXML(InputParameters) Export
+Function InputParameters_ToXML(InputParameters) Export
 	
 	XMLWriter = New XMLWriter();
 	XMLWriter.SetString("UTF-8");
@@ -684,21 +712,146 @@ Function InputParametersToXML(InputParameters) Export
 	XMLWriter.WriteStartElement("InputParameters");
 	
 	XMLWriter.WriteStartElement("Parameters");
-	XMLWriter.WriteAttribute("CashierName", XMLString(InputParameters.CashierName));
+	XMLWriter.WriteAttribute("CashierName", ToXMLString(InputParameters.CashierName));
 	If Not IsBlankString(InputParameters.CashierINN) Then
-		XMLWriter.WriteAttribute("CashierINN" , XMLString(InputParameters.CashierINN));
+		XMLWriter.WriteAttribute("CashierINN" , ToXMLString(InputParameters.CashierINN));
 	EndIf;
 	If Not IsBlankString(InputParameters.SaleAddress) Then   
-		XMLWriter.WriteAttribute("SaleAddress", XMLString(InputParameters.SaleAddress));
+		XMLWriter.WriteAttribute("SaleAddress", ToXMLString(InputParameters.SaleAddress));
 	EndIf;
 	If Not IsBlankString(InputParameters.SaleLocation) Then  
-		XMLWriter.WriteAttribute("SaleLocation", XMLString(InputParameters.SaleLocation));
+		XMLWriter.WriteAttribute("SaleLocation", ToXMLString(InputParameters.SaleLocation));
 	EndIf;
 	XMLWriter.WriteEndElement();
 	
 	XMLWriter.WriteEndElement();
 	
 	Return XMLWriter.Close();
+EndFunction
+
+// Print text get XMLOperation.
+// 
+// Parameters:
+//  DocumentPackage - See EquipmentFiscalPrinterAPIClient.DocumentPackage 
+// 
+// Returns:
+//  String - Print text get XMLOperation
+Function DocumentPackage_ToXML(DocumentPackage) Export
+	
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("Document");
+	
+	XMLWriter.WriteStartElement("Positions");
+	For Each Text In DocumentPackage.TextString Do
+		XMLWriter.WriteStartElement("TextString");
+		XMLWriter.WriteAttribute("Text", ToXMLString(Text));
+		XMLWriter.WriteEndElement();
+	EndDo;
+	
+	If Not IsBlankString(DocumentPackage.Barcode.Value) Then
+		XMLWriter.WriteStartElement("Barcode");
+		XMLWriter.WriteAttribute("Type", ToXMLString(DocumentPackage.Barcode.Type));
+		Base64 = GetBase64StringFromBinaryData(GetBinaryDataFromString(DocumentPackage.Barcode.Value));
+		Base64 = StrReplace(Base64, Chars.LF, "");
+		Base64 = StrReplace(Base64, Chars.CR, "");
+		XMLWriter.WriteAttribute("ValueBase64", Base64);
+		XMLWriter.WriteEndElement();
+	EndIf;
+	
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteEndElement();
+	
+	Return XMLWriter.Close();
+	
+EndFunction
+
+// Receipt get XMLOperation.
+// 
+// Parameters:
+//  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
+// 
+// Returns:
+//  String - Receipt get XMLOperation
+Function CheckPackage_ToXML(CheckPackage) Export
+	
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("CheckPackage");
+	
+	XMLWriter.WriteStartElement("Parameters");
+	XMLWriter.WriteAttribute("CashierName", ToXMLString(CheckPackage.Parameters.CashierName));
+	XMLWriter.WriteAttribute("CashierINN" , ToXMLString(CheckPackage.Parameters.CashierINN));
+	XMLWriter.WriteAttribute("SaleAddress" , ToXMLString(CheckPackage.Parameters.SaleAddress));
+	XMLWriter.WriteAttribute("SaleLocation" , ToXMLString(CheckPackage.Parameters.SaleLocation));
+	XMLWriter.WriteAttribute("OperationType" , ToXMLString(CheckPackage.Parameters.OperationType));
+	XMLWriter.WriteAttribute("TaxationSystem" , ToXMLString(CheckPackage.Parameters.TaxationSystem));
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteStartElement("Positions");
+	For Each Item In CheckPackage.Positions.FiscalStrings Do
+		XMLWriter.WriteStartElement("FiscalString");
+		XMLWriter.WriteAttribute("AmountWithDiscount", ToXMLString(Item.AmountWithDiscount));
+		XMLWriter.WriteAttribute("DiscountAmount", ToXMLString(Item.DiscountAmount));
+		If Item.Property("MarkingCode") Then
+			XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
+		EndIf;
+		XMLWriter.WriteAttribute("MeasureOfQuantity", ToXMLString(Item.MeasureOfQuantity));
+		XMLWriter.WriteAttribute("CalculationSubject", ToXMLString(Item.CalculationSubject));
+		XMLWriter.WriteAttribute("Name", ToXMLString(Item.Name));
+		XMLWriter.WriteAttribute("Quantity", ToXMLString(Item.Quantity));
+		XMLWriter.WriteAttribute("PaymentMethod", ToXMLString(Item.PaymentMethod));
+		XMLWriter.WriteAttribute("PriceWithDiscount", ToXMLString(Item.PriceWithDiscount));
+		XMLWriter.WriteAttribute("VATRate", ToXMLString(Item.VATRate));
+		XMLWriter.WriteAttribute("VATAmount", ToXMLString(Item.VATAmount));
+		If Item.Property("CalculationAgent") Then
+			XMLWriter.WriteAttribute("CalculationAgent", ToXMLString(Item.CalculationAgent));
+		EndIf;
+		If Item.Property("VendorData") Then
+			XMLWriter.WriteStartElement("VendorData");
+			XMLWriter.WriteAttribute("VendorINN", ToXMLString(Item.VendorData.VendorINN));
+			XMLWriter.WriteAttribute("VendorName", ToXMLString(Item.VendorData.VendorName));
+			XMLWriter.WriteAttribute("VendorPhone", ToXMLString(Item.VendorData.VendorPhone));
+			XMLWriter.WriteEndElement();
+		EndIf;
+		XMLWriter.WriteEndElement();
+	EndDo;
+	For Each Text In CheckPackage.Positions.TextStrings Do
+		XMLWriter.WriteStartElement("TextString");
+		XMLWriter.WriteAttribute("Text", ToXMLString(Text));
+		XMLWriter.WriteEndElement();
+	EndDo;
+	If Not IsBlankString(CheckPackage.Positions.Barcode.Value) Then
+		XMLWriter.WriteStartElement("Barcode");
+		XMLWriter.WriteAttribute("Type", ToXMLString(CheckPackage.Positions.Barcode.Type));
+		Base64 = GetBase64StringFromBinaryData(GetBinaryDataFromString(CheckPackage.Positions.Barcode.Value));
+		Base64 = StrReplace(Base64, Chars.LF, "");
+		Base64 = StrReplace(Base64, Chars.CR, "");
+		XMLWriter.WriteAttribute("ValueBase64", Base64);
+		XMLWriter.WriteEndElement();
+	EndIf;
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteStartElement("Payments");
+	XMLWriter.WriteAttribute("Cash", ToXMLString(CheckPackage.Payments.Cash));
+	XMLWriter.WriteAttribute("ElectronicPayment", ToXMLString(CheckPackage.Payments.ElectronicPayment));
+	XMLWriter.WriteAttribute("PrePayment", ToXMLString(CheckPackage.Payments.PrePayment));
+	XMLWriter.WriteAttribute("PostPayment", ToXMLString(CheckPackage.Payments.PostPayment));
+	XMLWriter.WriteAttribute("Barter", ToXMLString(CheckPackage.Payments.Barter));
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteEndElement();
+	
+	Return XMLWriter.Close();
+	
+EndFunction
+
+Function ToXMLString(Data)
+	// @skip-check Undefined function
+	Return XMLString(Data);
 EndFunction
 
 #EndRegion

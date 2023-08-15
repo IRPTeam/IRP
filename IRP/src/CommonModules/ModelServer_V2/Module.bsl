@@ -30,7 +30,7 @@ Procedure BackgroundJob(JobParameters, StorageAddress, ServiceParameters) Export
 			PutToTempStorage(ServiceParameters.Parameters_LoadData_Address);
 	EndIf;
 	
-	ServerEntryPoint(JobParameters.StepNames, JobParameters.Parameters, JobParameters.ExecuteLazySteps);
+	ServerEntryPoint(JobParameters.StepNames, JobParameters.Parameters, JobParameters.ExecuteLazySteps, True);
 	JobResult = New Structure();
 	JobResult.Insert("Parameters", JobParameters.Parameters);	
 	PutToTempStorage(JobResult, StorageAddress);
@@ -99,7 +99,22 @@ Function GetJobStatus(BackgroundJobUUID, BackgroundJobStorageAddress) Export
 	Return JobResult;
 EndFunction
 
-Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export	
+Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, UpdateCacheIndex) Export	
+	If UpdateCacheIndex And Parameters.Property("Cache") Then
+		For Each KeyValue In Parameters.Cache Do
+			If TypeOf(Parameters.Cache[KeyValue.Key]) <> Type("Array") Then
+				Continue;
+			EndIf;
+				
+			For Each Row In Parameters.Cache[KeyValue.Key] Do
+				If Not Row.Property("Key") Then
+					Continue;
+				EndIf;
+						
+				Parameters.CacheRowsMap.Insert(KeyValue.Key+":"+Row.Key, Row);
+			EndDo;
+		EndDo;					
+	EndIf;
 	ModelClientServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 EndProcedure
 
@@ -136,29 +151,37 @@ Function GetUnitFactor(FromUnit, ToUnit) Export
 	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
 EndFunction
 
-Function GetCommissionPercentExecute(Options) Export
+Function GetBankTermInfo(PaymentType, BankTerm) Export
+	Return ServerReuse.GetBankTermInfo(PaymentType, BankTerm);
+EndFunction
+
+Function _GetBankTermInfo(PaymentType, BankTerm) Export
+	Result = New Structure("Percent, Partner, LegalName, PartnerTerms, LegalNameContract",
+	0, Undefined, Undefined, Undefined, Undefined);
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	BankTermsPaymentTypes.Percent
+		|	BankTermsPaymentTypes.Percent AS Percent,
+		|	BankTermsPaymentTypes.Partner AS Partner,
+		|	BankTermsPaymentTypes.LegalName AS LegalName,
+		|	BankTermsPaymentTypes.PartnerTerms AS PartnerTerms,
+		|	BankTermsPaymentTypes.LegalNameContract AS LegalNameContract
 		|FROM
 		|	Catalog.BankTerms.PaymentTypes AS BankTermsPaymentTypes
 		|WHERE
 		|	BankTermsPaymentTypes.Ref = &Ref
 		|	AND BankTermsPaymentTypes.PaymentType = &PaymentType";
 	
-	Query.SetParameter("Ref", Options.BankTerm);
-	Query.SetParameter("PaymentType", Options.PaymentType);
+	Query.SetParameter("Ref", BankTerm);
+	Query.SetParameter("PaymentType", PaymentType);
 	
 	QueryResult = Query.Execute();
-	
-	SelectionDetailRecords = QueryResult.Select();
-	
-	While SelectionDetailRecords.Next() Do
-		Return SelectionDetailRecords.Percent;
-	EndDo;
-
-	Return 0;
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
 EndFunction
 
 Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
@@ -335,4 +358,45 @@ Function GetAgreementTypeByTransactionType(TransactionType) Export
 	EndIf;
 EndFunction	
 	
+Function GetBankTermsByPaymentType(PaymentType, Branch) Export
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	Table.Ref AS Ref
+	|FROM
+	|	Catalog.BankTerms AS Table
+	|		INNER JOIN Catalog.BankTerms.PaymentTypes AS TablePaymentTypes
+	|		ON Table.Ref = TablePaymentTypes.Ref
+	|		AND NOT Table.DeletionMark
+	|		AND TablePaymentTypes.PaymentType = &PaymentType
+	|		INNER JOIN InformationRegister.BranchBankTerms AS BranchBankTerms
+	|		ON BranchBankTerms.BankTerm = Table.Ref
+	|		AND BranchBankTerms.Branch = &Branch
+	|GROUP BY
+	|	Table.Ref";
 	
+	Query.SetParameter("PaymentType", PaymentType);
+	Query.SetParameter("Branch", Branch);
+	
+	QueryResult = Query.Execute();
+	ArrayOfRefs = QueryResult.Unload().UnloadColumn("Ref");
+	Return ArrayOfRefs;
+EndFunction
+
+Function GetPaymentTypesByBankTerm(BankTerm) Export
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	Table.PaymentType AS Ref
+	|FROM
+	|	Catalog.BankTerms.PaymentTypes AS Table
+	|WHERE
+	|	Table.Ref = &BankTerm
+	|	AND NOT Table.PaymentType.DeletionMark
+	|GROUP BY
+	|	Table.PaymentType";
+	Query.SetParameter("BankTerm", BankTerm);
+	QueryResult = Query.Execute();
+	ArrayOfRefs = QueryResult.Unload().UnloadColumn("Ref");
+	Return ArrayOfRefs;
+EndFunction

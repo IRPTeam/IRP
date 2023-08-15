@@ -23,6 +23,11 @@ Procedure OnOpen(Cancel)
 	SetVisible();
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("BankTermWrite");
+EndProcedure
+
 #EndRegion
 
 &AtClient

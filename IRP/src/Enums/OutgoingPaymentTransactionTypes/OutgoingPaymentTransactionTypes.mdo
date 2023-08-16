@@ -88,7 +88,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Возврат от покупателя по POS</value>
+   <value>Возврат от розничного покупателя по терминалу</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -133,7 +133,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Выдача подотчетнику</value>
+   <value>Подотчет сотрудника</value>
   </synonym>
   <synonym>
    <key>tr</key>

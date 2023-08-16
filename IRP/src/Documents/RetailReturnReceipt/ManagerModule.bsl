@@ -660,11 +660,6 @@ Function Payments()
 	|	Payments.PaymentTerminal AS PaymentTerminal,
 	|	Payments.Percent AS Percent,
 	|	Payments.Commission AS Commission,
-	|	CASE
-	|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN Payments.Ref
-	|		ELSE UNDEFINED
-	|	END AS BasisDocument,
 	|	Payments.PaymentAgentPartner AS Partner,
 	|	Payments.PaymentAgentLegalName AS LegalName,
 	|	Payments.PaymentAgentPartnerTerms AS Agreement,
@@ -1147,7 +1142,6 @@ Function R5015B_OtherPartnersTransactions()
 		   |	Payments.LegalName AS LegalName,
 		   |	Payments.Partner AS Partner,
 		   |	Payments.Agreement AS Agreement,
-		   |	Payments.BasisDocument AS Basis,
 		   |	-SUM(Payments.Amount) AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
 		   |INTO R5015B_OtherPartnersTransactions
@@ -1163,9 +1157,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	Payments.Currency,
 		   |	Payments.LegalName,
 		   |	Payments.Partner,
-		   |	Payments.Agreement,
-		   |	Payments.BasisDocument";
-
+		   |	Payments.Agreement";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

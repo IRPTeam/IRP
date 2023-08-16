@@ -103,6 +103,9 @@
     "reading-attribute-from-database": {
       "enabled": false
     },
+    "invocation-form-event-handler": {
+      "enabled": false
+    },
     "right-start-automation": {
       "enabled": false
     },

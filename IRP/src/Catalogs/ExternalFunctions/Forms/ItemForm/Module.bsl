@@ -280,7 +280,7 @@ EndProcedure
 
 &AtServer
 Function FillTypes()
-	ValueList = New ValueList();
+	ValueList = New ValueList(); // ValueList Of String
 	ValueList.Add("String", "String", , PictureLib.Rename);
 	ValueList.Add("Number", "Number", , PictureLib.Calculator);
 	ValueList.Add("Date", "Date", , PictureLib.Calendar);

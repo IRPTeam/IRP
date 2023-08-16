@@ -717,6 +717,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_023", NStr("en = 'Do you want to fill according to cash transfer order?'", Lang));
 	Strings.Insert("QuestionToUser_024", NStr("en = 'Change planning period?'", Lang));
 	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
+	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

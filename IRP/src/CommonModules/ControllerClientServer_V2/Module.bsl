@@ -2814,7 +2814,7 @@ EndFunction
 // Branch.OnChange
 Procedure BranchOnChange(Parameters) Export
 	AddViewNotify("OnSetBranchNotify", Parameters);
-	Binding = BindPartner(Parameters);
+	Binding = BindBranch(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
@@ -2833,8 +2833,13 @@ EndFunction
 Function BindBranch(Parameters)
 	DataPath = "Branch";
 	Binding = New Structure();
-	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
-	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
+	
+	Binding.Insert("RetailSalesReceipt", 
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+		
+	Binding.Insert("RetailReturnReceipt", 
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
 
@@ -7200,20 +7205,20 @@ Function BindPaymentListCommissionPercent(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommissionPercent");
 EndFunction
 
-// PaymentList.CommissionPercent.GetCommissionPercent.Step
+// PaymentList.CommissionPercent.ChangePercentByBankTermAndPaymentType.Step
 Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
-	Chain.GetCommissionPercent.Enable = True;
+	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.GetCommissionPercent.Setter = "SetPaymentListCommissionPercent";
+	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListGetCommissionPercent";
-		Chain.GetCommissionPercent.Options.Add(Options);
+		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
@@ -12240,6 +12245,7 @@ EndProcedure
 
 // Payments.PaymentType.OnChange
 Procedure PaymentsPaymentTypeOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_List(Parameters);
 	Binding = BindPaymentsPaymentType(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -12261,18 +12267,45 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsGetPercent,
+		"StepChangeBankTermByPaymentType,
+		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType,
 		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsGetPercent,
+		"StepChangeBankTermByPaymentType,
+		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType,
 		|StepChangeFinancialMovementTypeByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepPaymentsGetPercent");
+		"StepChangePercentByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
+
+// Payments.PaymentType.ChangePaymentTypeByBankTerm.Step
+Procedure StepChangePaymentTypeByBankTerm(Parameters, Chain) Export
+	Chain.ChangePaymentTypeByBankTerm.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePaymentTypeByBankTerm.Setter = "SetPaymentsPaymentType";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangePaymentTypeByBankTermOptions();
+		Options.CurrentPaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm           = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePaymentTypeByBankTerm";
+		Chain.ChangePaymentTypeByBankTerm.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -12313,6 +12346,7 @@ EndProcedure
 
 // Payments.BankTerm.OnChange
 Procedure PaymentsBankTermOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_List(Parameters);
 	Binding = BindPaymentsBankTerm(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -12333,17 +12367,45 @@ Function BindPaymentsBankTerm(Parameters)
 	DataPath = "Payments.BankTerm";
 	Binding = New Structure();
 
-	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsGetPercent");
+	Binding.Insert("RetailSalesReceipt",
+		"StepChangePaymentTypeByBankTerm, 
+		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsGetPercent");
+		"StepChangePaymentTypeByBankTerm,
+		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
+		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
+		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepPaymentsGetPercent");
+		"StepChangePercentByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsBankTerm");
 EndFunction
+
+// Payments.BankTerm.ChangeBankTermByPaymentType.Step
+Procedure StepChangeBankTermByPaymentType(Parameters, Chain) Export
+	Chain.ChangeBankTermByPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBankTermByPaymentType.Setter = "SetPaymentsBankTerm";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeBankTermByPaymentTypeOptions();
+		Options.CurrentBankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.PaymentType     = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Branch          = GetBranch(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeBankTermByPaymentType";
+		Chain.ChangeBankTermByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -12499,20 +12561,20 @@ Function BindPaymentsPercent(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPercent");
 EndFunction
 
-// Payments.Percent.GetPercent.Step
-Procedure StepPaymentsGetPercent(Parameters, Chain) Export
-	Chain.GetCommissionPercent.Enable = True;
+// Payments.Percent.ChangePercentByBankTermAndPaymentType.Step
+Procedure StepChangePercentByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.GetCommissionPercent.Setter = "SetPaymentsPercent";
+	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentsPercent";
 	For Each Row In GetRows(Parameters, "Payments") Do
-		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
-		Options.BankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepName = "StepPaymentsGetPercent";
-		Chain.GetCommissionPercent.Options.Add(Options);
+		Options.StepName = "StepChangePercentByBankTermAndPaymentType";
+		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
@@ -12531,6 +12593,142 @@ Procedure StepChangePercentByAmount(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangePercentByAmount";
 		Chain.ChangePercentByAmount.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PAYMENT_AGENT_PARTNER
+
+// Payments.PaymentAgentPartner.Set
+Procedure SetPaymentsPaymentAgentPartner(Parameters, Results) Export
+	Binding = BindPaymentsPaymentAgentPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentAgentPartner.Bind
+Function BindPaymentsPaymentAgentPartner(Parameters)
+	DataPath = "Payments.PaymentAgentPartner";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentAgentPartner");
+EndFunction
+
+// Payments.PaymentAgentPartner.ChangePaymentAgentPartnerByBankTermAndPaymentType.Step
+Procedure StepChangePaymentAgentPartnerByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangePartnerByBankTermAndPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentPartner";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangePartnerByBankTermAndPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePaymentAgentPartnerByBankTermAndPaymentType";
+		Chain.ChangePartnerByBankTermAndPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PAYMENT_AGENT_LEGAL_NAME
+
+// Payments.PaymentAgentLegalName.Set
+Procedure SetPaymentsPaymentAgentLegalName(Parameters, Results) Export
+	Binding = BindPaymentsPaymentAgentLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentAgentLegalName.Bind
+Function BindPaymentsPaymentAgentLegalName(Parameters)
+	DataPath = "Payments.PaymentAgentLegalName";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentAgentLegalName");
+EndFunction
+
+// Payments.PaymentAgentLegalName.ChangePaymentAgentLegalNameByBankTermAndPaymentType.Step
+Procedure StepChangePaymentAgentLegalNameByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangeLegalNameByBankTermAndPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentLegalName";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeLegalNameByBankTermAndPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeLegalNameByBankTermAndPaymentType";
+		Chain.ChangeLegalNameByBankTermAndPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PAYMENT_AGENT_PARTNER_TERMS
+
+// Payments.PaymentAgentPartnerTerms.Set
+Procedure SetPaymentsPaymentAgentPartnerTerms(Parameters, Results) Export
+	Binding = BindPaymentsPaymentAgentPartnerTerms(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentAgentPartnerTerms.Bind
+Function BindPaymentsPaymentAgentPartnerTerms(Parameters)
+	DataPath = "Payments.PaymentAgentPartnerTerms";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentAgentPartnerTerms");
+EndFunction
+
+// Payments.PaymentAgentPartnerTerms.ChangePaymentAgentPartnerTermsByBankTermAndPaymentType.Step
+Procedure StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangePartnerTermsByBankTermAndPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerTermsByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentPartnerTerms";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangePartnerTermsByBankTermAndPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePartnerTermsByBankTermAndPaymentType";
+		Chain.ChangePartnerTermsByBankTermAndPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PAYMENT_AGENT_LEGAL_NAME_CONTRACT
+
+// Payments.PaymentAgentLegalNameContract.Set
+Procedure SetPaymentsPaymentAgentLegalNameContract(Parameters, Results) Export
+	Binding = BindPaymentsPaymentAgentLegalNameContract(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentAgentLegalNameContract.Bind
+Function BindPaymentsPaymentAgentLegalNameContract(Parameters)
+	DataPath = "Payments.PaymentAgentLegalNameContract";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentAgentLegalNameContract");
+EndFunction
+
+// Payments.PaymentAgentLegalNameContract.ChangePaymentAgentLegalNameContractByBankTermAndPaymentType.Step
+Procedure StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangeLegalNameContractByBankTermAndPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameContractByBankTermAndPaymentType.Setter = "SetPaymentsPaymentAgentLegalNameContract";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeLegalNameContractByBankTermAndPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeLegalNameContractByBankTermAndPaymentType";
+		Chain.ChangeLegalNameContractByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
@@ -14515,14 +14713,12 @@ Function SetProperty(Parameters, Cache, DataPath, _Key, _Value)
 		If Not Cache.Property(TableName) Then
 			AddTableToCache(Parameters, TableName);
 		EndIf;
-		IsRowExists = False;
+		
 		Row = GetRowFromTableCache(Parameters, TableName, _Key);
+	
 		If Row <> Undefined Then
 			Row.Insert(ColumnName, _Value);
-			IsRowExists = True;
-		EndIf;
-		
-		If Not IsRowExists Then
+		Else
 			NewRow = New Structure();
 			NewRow.Insert("Key"      , _Key);
 			NewRow.Insert(ColumnName , _Value);

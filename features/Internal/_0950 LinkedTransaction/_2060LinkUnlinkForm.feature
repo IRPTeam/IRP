@@ -712,6 +712,7 @@ Scenario: _20600031 check Link unlink basis documents form
 	* Check Link unlink basis documents forms
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		Then "Link / unlink document row" window is opened
+		And I set checkbox "Calculate rows"
 		And "ItemListRows" table contains lines
 			| 'Row presentation' |
 			| 'Dress (XS/Blue)'  |

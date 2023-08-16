@@ -65,6 +65,7 @@
   <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="7baa8ab8-9eec-4b10-8816-49bd5db0db85">
     <name>BankTermType</name>
     <synonym>

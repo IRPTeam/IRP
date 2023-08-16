@@ -167,7 +167,9 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+				Str.PrePayment = Str.PrePayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;
 			Else
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
@@ -179,7 +181,9 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;				
+				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;				
 			Else
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;

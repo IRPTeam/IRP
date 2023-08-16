@@ -2403,6 +2403,46 @@ Scenario: _0260162 check button Print receipt (copy)
 		And I check "$ParsingResult$" with "0" and method is "PrintCheckCopy"	
 	And I close all client application windows
 
+Scenario: _0260163 payment by Certificate
+	And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
+	* Payment
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Certificate' |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "500,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "50,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button
+		And I click "Print receipt" button
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PrePayment="500"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="50"'
+				
+
+
 Scenario: _0260152 close session
 	And I close all client application windows
 	* Open POS		
@@ -2557,3 +2597,4 @@ Scenario: _0260186 check show fiscal transaction from POS
 		Then the form attribute named "FiscalPrinter" became equal to "Fiscal printer"
 		Then the number of "TransactionList" table lines is "больше" "0"
 	And I close all client application windows
+

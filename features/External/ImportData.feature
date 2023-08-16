@@ -516,11 +516,11 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 
 Scenario: Create catalog PaymentTypes objects
 	And I check or create catalog "PaymentTypes" objects:
-		| 'Ref'                                                                   | 'DeletionMark'  | 'Type'                    | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf'  | 'False'         | 'Enum.PaymentTypes.Cash'  | 'Cash'            | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0'  | 'False'         | 'Enum.PaymentTypes.Card'  | 'Card 01'         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1'  | 'False'         | 'Enum.PaymentTypes.Card'  | 'Card 02'         | ''                  | ''                | ''                 |
-
+		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Type'                          | 'Icon'                                  | 'isIconSet' | 'FinancialMovementType'                                                          | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b7a6804cd0be6fd011ee3c2c4abb0ba4' | 'False'        | ''       | 'Enum.PaymentTypes.Certificate' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'Certificate'    | ''                 | ''               | ''               | ''             |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf' | 'False'        | ''       | 'Enum.PaymentTypes.Cash'        | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''                                                                               | 'Cash'           | ''                 | ''               | ''               | ''             |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'False'        | ''       | 'Enum.PaymentTypes.Card'        | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''                                                                               | 'Card 01'        | ''                 | ''               | ''               | ''             |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'False'        | ''       | 'Enum.PaymentTypes.Card'        | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''                                                                               | 'Card 02'        | ''                 | ''               | ''               | ''             |
 
 
 

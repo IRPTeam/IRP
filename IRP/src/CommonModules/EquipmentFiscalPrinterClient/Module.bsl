@@ -6,15 +6,12 @@
 //  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales
 // 
 // Returns:
-//  See ShiftResultStructure
+//  See EquipmentFiscalPrinterAPIClient.OpenShiftSettings
 Async Function OpenShift(ConsolidatedRetailSales) Export
-	
-	Result = ShiftResultStructure();
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	//@skip-check module-unused-local-variable
@@ -33,106 +30,45 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
 	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
-#Region GetCurrentStatus	
 	
-	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
-	CurrentStatusSettings.In.InputParameters = InputParameters;
-	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = CurrentStatusSettings.Out.OutputParameters;
-		If ShiftData.ShiftState = 1 Then
-			
-		ElsIf ShiftData.ShiftState = 2 Then
-			Result.ErrorDescription = R().EqFP_ShiftAlreadyOpened;
-			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-			Return Result;
-		ElsIf ShiftData.ShiftState = 3 Then
-			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
-			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-			Return Result;
-		EndIf;
-	Else
-		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
-		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		Return Result;
+	CurrentStatus = Await GetCurrentStatus(CRS, InputParameters, 1);
+	If Not CurrentStatus.Info.Success Then
+		Return CurrentStatus;
 	EndIf;
 
-#EndRegion
-
-#Region OpenShift 
-	
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 	OpenShiftSettings.In.InputParameters = InputParameters;
-	If Await EquipmentFiscalPrinterAPIClient.OpenShift(CRS.FiscalPrinter, OpenShiftSettings) Then
-		FillPropertyValues(Result, OpenShiftSettings.Out.OutputParameters);
-		Result.Success = True;
-	Else
-		Result.ErrorDescription = OpenShiftSettings.Info.Error;
-		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		Return Result;
-	EndIf;
+	Await EquipmentFiscalPrinterAPIClient.OpenShift(CRS.FiscalPrinter, OpenShiftSettings);
 
-#EndRegion
-
-	Return Result;
+	Return OpenShiftSettings;
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
-	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
 	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
-#Region GetCurrentStatus	
-		
-	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
-	CurrentStatusSettings.In.InputParameters = InputParameters;
-	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
-		ShiftData = CurrentStatusSettings.Out.OutputParameters;
-		If ShiftData.ShiftState = 1 Then
-			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
-			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-			Return Result;
-		ElsIf ShiftData.ShiftState = 2 Then
-
-		ElsIf ShiftData.ShiftState = 3 Then
-			
-		EndIf;
-	Else
-		Result.ErrorDescription = CurrentStatusSettings.Info.Error;
-		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		Return Result;
-	EndIf;
-
-#EndRegion
 	
-#Region CloseShift
-
+	CurrentStatus = Await GetCurrentStatus(CRS, InputParameters, 4);
+	If Not CurrentStatus.Info.Success Then
+		Return CurrentStatus;
+	EndIf;
+	
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 	CloseShiftSettings.In.InputParameters = InputParameters;
-	If Await EquipmentFiscalPrinterAPIClient.CloseShift(CRS.FiscalPrinter, CloseShiftSettings) Then
-		FillPropertyValues(Result, CloseShiftSettings.Out.OutputParameters);
-		Result.Success = True;
-	Else
-		Result.ErrorDescription = CloseShiftSettings.Info.Error;
-		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
-		Return Result;
-	EndIf;
+	Await EquipmentFiscalPrinterAPIClient.CloseShift(CRS.FiscalPrinter, CloseShiftSettings);
 
-#EndRegion
-
-	Return Result;
+	Return CloseShiftSettings;
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
 	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;		
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 		
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -176,8 +112,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 		
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -253,7 +188,6 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
 		ReceiptData = ReceiptResultStructure();
-		FillDataFromDeviceResponse(ReceiptData, ProcessCheckSettings.Out.DocumentOutputParameters);
 		ReceiptData.Status = "Printed";
 		ReceiptData.DataPresentation = " " + Result.ShiftNumber + " " + Result.DateTime;
 		ReceiptData.FiscalResponse = ProcessCheckSettings.Out.DocumentOutputParameters;
@@ -299,8 +233,7 @@ Async Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
@@ -329,8 +262,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -394,8 +326,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -450,8 +381,7 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 	Result = PrintTextResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Result.Success = True;
-		Return Result;
+		Raise R().EqFP_FiscalDeviceIsEmpty;
 	EndIf;
 	
 	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
@@ -541,6 +471,41 @@ Function ProcessingKMResult() Export
 	
 	Return Str;
 EndFunction
+
+// Get current status.
+// 
+// Parameters:
+//  CRS - DocumentRef.ConsolidatedRetailSales
+//  InputParameters - See InputParameters
+//  WaitForStatus - Number -  Wait for status
+// 
+// Returns:
+//  See EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings
+Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
+	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
+	CurrentStatusSettings.In.InputParameters = InputParameters;
+	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
+		ShiftData = CurrentStatusSettings.Out.OutputParameters;
+		If ShiftData.ShiftState = WaitForStatus Then
+			CurrentStatusSettings.Info.Success = True;
+			Return CurrentStatusSettings;
+		ElsIf WaitForStatus = 4 Then
+			If ShiftData.ShiftState = 2 OR ShiftData.ShiftState = 3 Then
+				CurrentStatusSettings.Info.Success = True;
+				Return CurrentStatusSettings;
+			EndIf;
+		EndIf;
+		If ShiftData.ShiftState = 1 Then
+			CurrentStatusSettings.Info.Error = R().EqFP_ShiftAlreadyClosed;
+		ElsIf ShiftData.ShiftState = 2 Then
+			CurrentStatusSettings.Info.Error = R().EqFP_ShiftAlreadyOpened;
+		ElsIf ShiftData.ShiftState = 3 Then
+			CurrentStatusSettings.Info.Error = R().EqFP_ShiftIsExpired;
+		EndIf;
+	EndIf;
+	Return CurrentStatusSettings;
+EndFunction
+
 
 #EndRegion
 
@@ -691,68 +656,6 @@ Function ProcessingKMResultResponse(ResultXML)
 	
 	Return Result;
 	
-EndFunction
-
-Function ShiftResultStructure()
-	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", False);
-	ReturnValue.Insert("ErrorDescription", "");
-	ReturnValue.Insert("Status", "");
-	
-	ReturnValue.Insert("BacklogDocumentFirstDateTime", Date(1, 1, 1));
-	ReturnValue.Insert("BacklogDocumentFirstNumber", 0);
-	ReturnValue.Insert("BacklogDocumentsCounter", 0);
-	ReturnValue.Insert("CashBalance", 0);
-	ReturnValue.Insert("CheckNumber", 0);
-	ReturnValue.Insert("CountersOperationType1", GetCountersOperationType());
-	ReturnValue.Insert("CountersOperationType2", GetCountersOperationType());
-	ReturnValue.Insert("CountersOperationType3", GetCountersOperationType());
-	ReturnValue.Insert("CountersOperationType4", GetCountersOperationType());
-	ReturnValue.Insert("DateTime", CommonFunctionsServer.GetCurrentSessionDate());
-	ReturnValue.Insert("FNError", False);
-	ReturnValue.Insert("FNFail", False);
-	ReturnValue.Insert("FNOverflow", False);
-	ReturnValue.Insert("ShiftClosingCheckNumber", 0);
-	ReturnValue.Insert("ShiftNumber", 0);
-	ReturnValue.Insert("ShiftState", 0);	//1 closed, 2 opened, 3 expired
-	Return ReturnValue;
-EndFunction
-
-Function ReceiptResultStructure() Export
-	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", False);
-	ReturnValue.Insert("ErrorDescription", "");
-	ReturnValue.Insert("Status", "");
-	ReturnValue.Insert("FiscalResponse", "");
-	ReturnValue.Insert("DataPresentation", "");
-	
-	ReturnValue.Insert("AddressSiteInspections", "");
-	ReturnValue.Insert("CheckNumber", 0);
-	ReturnValue.Insert("DateTime", CommonFunctionsServer.GetCurrentSessionDate());
-	ReturnValue.Insert("FiscalSign", "");
-	ReturnValue.Insert("ShiftClosingCheckNumber", 0);
-	ReturnValue.Insert("ShiftNumber", 0);
-	
-	Return ReturnValue;
-EndFunction
-
-Function PrintTextResultStructure()
-	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", False);
-	ReturnValue.Insert("ErrorDescription", "");
-	ReturnValue.Insert("Status", "");
-	ReturnValue.Insert("FiscalResponse", "");
-	ReturnValue.Insert("DataPresentation", "");	
-	Return ReturnValue;
-EndFunction
-
-Function GetCountersOperationType()
-	ReturnData = New Structure();
-	ReturnData.Insert("CheckCount", 0);
-	ReturnData.Insert("TotalChecksAmount", 0);
-	ReturnData.Insert("CorrectionCheckCount", 0);
-	ReturnData.Insert("TotalCorrectionChecksAmount", 0);	
-	Return ReturnData;
 EndFunction
 
 Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export

@@ -134,16 +134,25 @@ EndProcedure
 
 &AtClient
 Async Procedure OpenSession(Command)
-	DocConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		DocConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	Else
+		DocConsolidatedRetailSales = Object.ConsolidatedRetailSales;
+	EndIf;
 
-	EquipmentOpenShiftResult = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
-	If EquipmentOpenShiftResult.Success Then
-		DocConsolidatedRetailSalesServer.DocumentOpenShift(DocConsolidatedRetailSales, EquipmentOpenShiftResult);
+	EquipmentOpenShiftResult = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales); // See EquipmentFiscalPrinterAPIClient.OpenShiftSettings
+	If EquipmentOpenShiftResult.Info.Success Then
+		DocConsolidatedRetailSalesServer.DocumentOpenShift(DocConsolidatedRetailSales, EquipmentOpenShiftResult.Out.OutputParameters);
 		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 		
 		SetVisibilityAvailability(Object, ThisObject);
 		EnabledPaymentButton();
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(EquipmentOpenShiftResult.Info.Error);
+		
+		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
+		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	EndIf;
 EndProcedure
 

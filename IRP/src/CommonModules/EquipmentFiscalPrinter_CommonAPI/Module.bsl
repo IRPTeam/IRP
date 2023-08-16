@@ -146,6 +146,7 @@ Async Function OpenShift(Hardware, Settings) Export
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
 		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
+		Settings.Info.Success = True;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -188,6 +189,7 @@ Async Function CloseShift(Hardware, Settings) Export
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
 		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
+		Settings.Info.Success = True;
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -225,9 +227,10 @@ Async Function ProcessCheck(Hardware, Settings) Export
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
 	Else
-		
+		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then
@@ -252,14 +255,22 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "ProcessCorrectionCheck", True, Settings);
 	EndIf;
+	
+	DocumentOutputParameters = "";
+	
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.ProcessCorrectionCheck(
 		ConnectParameters.ID,
 		Settings.In.CheckPackage,
-		Settings.Out.DocumentOutputParameters
+		DocumentOutputParameters
 	); // Boolean
+
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression, statement-type-change
+		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
+	Else
+		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 	
 	If ConnectParameters.WriteLog Then

@@ -76,6 +76,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -88,6 +89,7 @@ Function OpenShiftSettings() Export
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenShift");
+    Str.Info.Insert("Success", False);
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -108,6 +110,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -120,6 +123,7 @@ Function CloseShiftSettings() Export
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CloseShift");
+    Str.Info.Insert("Success", False);
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -143,10 +147,10 @@ EndFunction
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** Electronically - Boolean - Formation of a check only in electronic form. The check is not printed.
-// ** CheckPackage - String - XML structure - check description.
+// ** CheckPackage - See CheckPackage
 // * InOut - Structure -
 // * Out - Structure:
-// ** DocumentOutputParameters - String - Output parameters of the operation
+// ** DocumentOutputParameters - See DocumentOutputParameters
 Function ProcessCheckSettings() Export
     Str = New Structure;
     
@@ -157,12 +161,12 @@ Function ProcessCheckSettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("Electronically", False);
-    Str.In.Insert("CheckPackage", "");
+    Str.In.Insert("CheckPackage", New Structure());
     
     Str.Insert("InOut", New Structure);
     
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("DocumentOutputParameters", "");
+    Str.Out.Insert("DocumentOutputParameters", DocumentOutputParameters());
     
     Return Str;
 EndFunction
@@ -238,7 +242,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // ** Amount - Number - Deposit / withdrawal amount
 // * InOut - Structure -
 // * Out - Structure:
@@ -251,7 +255,7 @@ Function CashInOutcomeSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     Str.In.Insert("Amount", 0);
     
     Str.Insert("InOut", New Structure);
@@ -270,7 +274,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // * InOut - Structure -
 // * Out - Structure:
 Function PrintXReportSettings() Export
@@ -282,7 +286,7 @@ Function PrintXReportSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     
     Str.Insert("InOut", New Structure);
     
@@ -328,6 +332,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -340,7 +345,8 @@ Function GetCurrentStatusSettings() Export
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetCurrentStatus");
-    
+    Str.Info.Insert("Success", False);
+       
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
@@ -362,7 +368,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // * InOut - Structure -
 // * Out - Structure:
 // ** OutputParameters - String - Output parameters of the operation
@@ -375,7 +381,7 @@ Function ReportCurrentStatusOfSettlementsSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     
     Str.Insert("InOut", New Structure);
     
@@ -651,7 +657,7 @@ Function TableParametersKKT() Export
 	Str.Insert("FFDVersionKKT", "");
 	Str.Insert("FNSerialNumber", "");
 	Str.Insert("DocumentNumber", "");
-	Str.Insert("DateTime", "");
+	Str.Insert("DateTime", Date(1, 1, 1));
 	Str.Insert("CompanyName", "");
 	Str.Insert("INN", "");
 	Str.Insert("SaleAddress", "");
@@ -972,6 +978,27 @@ Function DocumentPackage() Export
     Str.Insert("Barcode", Barcode);
     
     Return Str;
+EndFunction
+
+// Document Output Parameters constructor.
+//
+// Returns:
+//  Structure - Document Output Parameters:
+// * ShiftNumber - Number - Number of the open shift/Number of the closed shift
+// * CheckNumber - Number - Number of the fiscal document
+// * ShiftClosingCheckNumber - Number - Check number for the shift
+// * AddressSiteInspections - String - Address of the inspection site
+// * FiscalSign - String - Fiscal sign
+// * DateTime - Date - Date and time of document creation
+Function DocumentOutputParameters() Export
+    DocumentOutputParameters = New Structure;
+    DocumentOutputParameters.Insert("ShiftNumber", 0);
+    DocumentOutputParameters.Insert("CheckNumber", 0);
+    DocumentOutputParameters.Insert("ShiftClosingCheckNumber", 0);
+    DocumentOutputParameters.Insert("AddressSiteInspections", "");
+    DocumentOutputParameters.Insert("FiscalSign", "");
+    DocumentOutputParameters.Insert("DateTime", Date(1, 1, 1));
+    Return DocumentOutputParameters;
 EndFunction
 
 #EndRegion

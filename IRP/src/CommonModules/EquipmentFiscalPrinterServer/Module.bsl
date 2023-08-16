@@ -187,11 +187,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 	EndDo;
 	
 	If SessionParametersServer.GetSessionParameter("Workstation").PrintBarcodeWithDocumentUUID Then
-		Str = New Structure();
-		Str.Insert("POS", New Structure);
-		Str.POS.Insert("Type", ?(CheckPackage.Parameters.OperationType = 1, "RSR", "RRR"));
-		Str.POS.Insert("Code", String(SourceData.UUID()));
-		CheckPackage.Positions.Barcode.Value = CommonFunctionsServer.SerializeJSON(Str);
+		CheckPackage.Positions.Barcode.Value = BarcodeServer.GetDocumentBarcode(DataSource);
 	EndIf;
 	
 	// TODO: Fix
@@ -601,4 +597,4 @@ Procedure FillInputParameters(Ref, InputParameters) Export
 EndProcedure
 
 #EndRegion
-	
+		

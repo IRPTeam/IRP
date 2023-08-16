@@ -328,6 +328,7 @@ EndProcedure
 
 #Region Terminals
 
+&AtServer
 Procedure ReadTerminalOperations()
 	TerminalTable.Clear();
 	

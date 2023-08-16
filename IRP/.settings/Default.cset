@@ -40,6 +40,9 @@
     "right-interactive-clear-deletion-mark-predefined-data": {
       "enabled": false
     },
+    "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
     "doc-comment-parameter-section": {
       "enabled": false
     },
@@ -90,9 +93,6 @@
     },
     "module-structure-method-in-regions": {
       "enabled": false
-    },
-    "doc-comment-description-ends-on-dot": {
-      "enabled": true
     },
     "common-module-name-server-call-cached": {
       "enabled": false

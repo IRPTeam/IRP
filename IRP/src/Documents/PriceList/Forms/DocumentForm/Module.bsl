@@ -753,6 +753,7 @@ Procedure LoadDataFromTableEnd(Result, AddInfo) Export
 	
 EndProcedure
 
+&AtServer
 Procedure LoadDataFromTableEndAtServer(TableAddress)
 	
 	DocumentTable = Object.ItemList;

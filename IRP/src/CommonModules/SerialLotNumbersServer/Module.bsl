@@ -127,7 +127,7 @@ EndFunction
 //  Options - See GetSeriallotNumerOptions
 // 
 // Returns:
-//  
+//  CatalogRef.SerialLotNumbers
 Function CreateNewSerialLotNumber(Options) Export
 	
 	NewSerial = Catalogs.SerialLotNumbers.CreateItem();

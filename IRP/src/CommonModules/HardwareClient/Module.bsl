@@ -106,7 +106,7 @@ Async Function ConnectHardware(Hardware) Export
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
 			EndDo;
 			
-			APIModule = HardwareClient.GetAPIModule(Hardware);
+			APIModule = GetAPIModule(Hardware);
 			If APIModule = Undefined Then
 				Result = Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
 			Else
@@ -154,7 +154,7 @@ Async Function DisconnectHardware(Hardware) Export
 	
 	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
 	If ConnectedDevice.Connected Then
-		APIModule = HardwareClient.GetAPIModule(Hardware);
+		APIModule = GetAPIModule(Hardware);
 		If APIModule = Undefined Then
 			Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
 		Else
@@ -797,6 +797,7 @@ Function Device_GetInterfaceRevision(Settings, DriverObject) Export
 EndFunction
 
 // Device get description 2000.
+// @skip-check dynamic-access-method-not-found
 // 
 // Parameters:
 //  Settings - See GetDriverObject
@@ -804,8 +805,6 @@ EndFunction
 // 
 // Returns:
 //  See ParametersDriverDescription
-//
-// @skip-check dynamic-access-method-not-found
 Function Device_GetDescription_2000(Settings, DriverObject) Export
 	SettingsDescription = ParametersDriverDescription();
 	Result = DriverObject.GetDescription(SettingsDescription.Name, SettingsDescription.Description, SettingsDescription.EquipmentType, 

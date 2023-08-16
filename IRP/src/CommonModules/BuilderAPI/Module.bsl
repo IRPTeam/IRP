@@ -148,7 +148,7 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 	For Each Table In DocMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
 		Wrapper.Tables.Insert(Table.Name, New Structure("_TableName_", Table.Name));
-		For Each Column In Table.StandardAttributes Do
+		For Each Column In Table.StandardAttributes Do // StandardAttributeDescriptions
 			//@skip-check invocation-parameter-type-intersect
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
 		EndDo;
@@ -156,7 +156,7 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
 		EndDo;
 		
-		For Each Row In DocObject[Table.Name] Do
+		For Each Row In DocObject[Table.Name] Do // ValueTableRow
 			//@skip-check dynamic-access-method-not-found
 			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
@@ -573,7 +573,7 @@ Procedure FillInitData(Wrapper, InitialData)
 		
 		If isValueExists And TypeOf(InitialData[KeyValue.Key]) = Type("Array") Then
 			Array = Wrapper.Object[KeyValue.Key]; // Array
-			For Each InitRow In InitialData[KeyValue.Key] Do
+			For Each InitRow In InitialData[KeyValue.Key] Do // Structure
 				FillPropertyValues(Array.Add(), InitRow);
 			EndDo;
 		Else

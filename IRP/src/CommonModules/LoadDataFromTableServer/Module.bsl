@@ -49,6 +49,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType, AddInfo = Undefined) Ex
 				DataPathParts = StrSplit(TableChildItem.DataPath, ".");
 				TableName = DataPathParts[1];
 				AttributeName = DataPathParts[2];
+				//@skip-check wrong-string-literal-content
 				TableAttributes = ObjectMetadata["TabularSections"][TableName]["Attributes"]; // MetadataObjectCollection
 				ItemAttribute = TableAttributes.Find(AttributeName); // MetadataObjectAttribute
 				If Not ItemAttribute = Undefined Then
@@ -60,6 +61,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType, AddInfo = Undefined) Ex
 				EndIf;
 			EndIf;
 		EndDo;
+		//@skip-check wrong-string-literal-content
 		Form["_FieldsForLoadData"] = FieldsForLoadData;
 	EndIf;
 	
@@ -82,6 +84,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType, AddInfo = Undefined) Ex
 					DataPathParts = StrSplit(TableChildItem.DataPath, ".");
 					TableName = DataPathParts[1];
 					AttributeName = DataPathParts[2];
+					//@skip-check wrong-string-literal-content
 					TableAttributes = ObjectMetadata["TabularSections"][TableName]["Attributes"]; // MetadataObjectCollection
 					ItemAttribute = TableAttributes.Find(AttributeName); // MetadataObjectAttribute
 					If Not ItemAttribute = Undefined Then
@@ -93,6 +96,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType, AddInfo = Undefined) Ex
 					EndIf;
 				EndIf;
 			EndDo;
+			//@skip-check wrong-string-literal-content
 			Form["_FieldsForLoadData_ItemKey"] = FieldsForLoadData;
 		EndIf;		
 	EndIf;

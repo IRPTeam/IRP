@@ -701,7 +701,9 @@ EndProcedure
 &AtClient
 Procedure BankPaymentTypeListDragStart(Item, DragParameters, Perform)
 	PaymentRow = DragParameters.Value;
-	Perform = Not BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRow)).Count() = 0
+	If Not BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRow)).Count() = 0 Then
+		Perform = False;
+	EndIf; 
 EndProcedure
 
 &AtClient

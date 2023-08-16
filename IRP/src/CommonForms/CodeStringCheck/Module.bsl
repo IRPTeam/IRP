@@ -14,10 +14,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
 EndProcedure
 
-&AtClient
 //@skip-check property-return-type, dynamic-access-method-not-found, statement-type-change
+&AtClient
 Procedure OnOpen(Cancel)
-	For Each Row In FormOwner.Object.ControlCodeStrings.FindRows(New Structure("Key", RowKey)) Do
+	For Each Row In FormOwner.Object.ControlCodeStrings.FindRows(New Structure("Key", RowKey)) Do // ValueTableRow
 		NewRow = CurrentCodes.Add();
 		NewRow.StringCode = Row.CodeString;
 		NewRow.CodeIsApproved = Row.CodeIsApproved;
@@ -71,7 +71,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			
 			//@skip-check property-return-type, dynamic-access-method-not-found, variable-value-type
 			dblRows = FormOwner.Object.ControlCodeStrings.FindRows(New Structure("CodeString", StrCode));
-			For Each dblCode In dblRows Do
+			For Each dblCode In dblRows Do // ValueTableRow 
 				//@skip-check property-return-type, dynamic-access-method-not-found, variable-value-type, structure-consructor-value-type
 				dblData = FormOwner.Object.ItemList.FindRows(New Structure("Key", dblCode.Key));
 				//@skip-check property-return-type, invocation-parameter-type-intersect

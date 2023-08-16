@@ -467,6 +467,6 @@ EndProcedure
 Function GetDocumentBarcode(Source) Export
 	Str = New Structure();
 	Str.Insert("Type", Source.Metadata().Name);
-	Str.Insert("Code", String(SourceData.UUID()));
+	Str.Insert("Code", String(Source.UUID()));
 	Return CommonFunctionsServer.SerializeJSON(Str);
 EndFunction

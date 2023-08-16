@@ -5,7 +5,7 @@
 // Fill data.
 // 
 // Parameters:
-//  SourceData - DocumentRefDocumentName -
+//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReturnReceipt -
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
 Procedure FillData(SourceData, CheckPackage) Export
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt")
@@ -48,7 +48,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
  		Else
  			CBRows = New Array;
  		EndIf;		
-		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentAcquiringAPIClient.CheckPackage_FiscalString
+		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = ItemRow.TotalAmount;
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
 		// TODO: Get from ItemType (or Item) CalculationSubject
@@ -73,7 +73,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		Else
 			FiscalStringData.CalculationSubject = 1;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
 		EndIf;
-		FiscalStringData.MeasureOfQuantity = "255";
+		FiscalStringData.MeasureOfQuantity = 255;
 		FiscalStringData.Name = String(ItemRow.Item) + " " + String(ItemRow.ItemKey);
 		FiscalStringData.Quantity = ItemRow.Quantity;
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
@@ -116,7 +116,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalName);
 				FiscalStringData.VendorData.VendorPhone = "";
 			EndIf;
-			FiscalStringData.CalculationAgent = "5";
+			FiscalStringData.CalculationAgent = 5;
 		EndIf;
 		
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
@@ -124,7 +124,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
 				FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
 				FiscalStringData.VendorData.VendorPhone = "";
-				FiscalStringData.CalculationAgent = "5";
+				FiscalStringData.CalculationAgent = 5;
 			EndIf;
 		EndIf; 
 		
@@ -150,9 +150,9 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			Else
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
@@ -164,9 +164,9 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;				
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;				
 			Else
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
@@ -174,7 +174,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 	EndDo;
 	
 	If SessionParametersServer.GetSessionParameter("Workstation").PrintBarcodeWithDocumentUUID Then
-		CheckPackage.Positions.Barcode.Value = BarcodeServer.GetDocumentBarcode(DataSource);
+		CheckPackage.Positions.Barcode.Value = BarcodeServer.GetDocumentBarcode(SourceData);
 	EndIf;
 	
 	// TODO: Fix
@@ -480,7 +480,7 @@ Procedure FillDocumentPackage(SourceData, DocumentPackage) Export
 			If IsBlankString(Payment.PaymentInfo) Then
 				Continue;
 			EndIf;
-			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo); // See EquipmentAcquiringAPIClient.SettlementSettings
 		Else 
 			PaymentInfo = Payment.PaymentInfo;
 		EndIf;
@@ -502,6 +502,13 @@ Procedure FillDocumentPackage(SourceData, DocumentPackage) Export
 	
 EndProcedure
 
+// Set fiscal status.
+// 
+// Parameters:
+//  DocumentRef - DocumentRefDocumentName - Document ref
+//  Status - String -  Status
+//  FiscalResponse - Undefined -  Fiscal response
+//  DataPresentation - String -  Data presentation
 Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = Undefined, DataPresentation = "") Export
 	
 	If FiscalResponse = Undefined Then

@@ -410,7 +410,7 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
 	        ErrorArray.Add(R().LocalPartStartEndDot);
 	    EndIf;
 	
-	    If Find(LocalPart, "..") > 0 Then
+	    If StrFind(LocalPart, "..") > 0 Then
 	        ErrorArray.Add(R().LocalPartConsecutiveDots);
 	    EndIf;
 	
@@ -418,7 +418,7 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
 	        ErrorArray.Add(R().DomainPartStartsWithDot);
 	    EndIf;
 	
-	    If Find(DomainPart, "..") > 0 Then
+	    If StrFind(DomainPart, "..") > 0 Then
 	        ErrorArray.Add(R().DomainPartConsecutiveDots);
 	    EndIf; 
 	
@@ -446,7 +446,7 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
         If RaiseOnFalse Then
             Raise ErrorMessage;
         Else
-            Message(ErrorMessage);
+            CommonFunctionsClientServer.ShowUsersMessage(ErrorMessage);
             Return False;
         EndIf;
     EndIf;

@@ -8,11 +8,13 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.GroupLogSettings.Visible = Parameters.OpenAsLog;
-	TimeZone = CommonFunctionsServer.GetStandardTimeOffset(); 
-	//@skip-check typed-value-adding-to-untyped-collection
-	Hardware.LoadValues(Parameters.Hardware);
+	TimeZone = CommonFunctionsServer.GetStandardTimeOffset();
+	//@skip-check property-return-type
+	HardwareArray = Parameters.Hardware; // Array Of CatalogRef.Hardware
+	Hardware.LoadValues(HardwareArray);
 	Period.Variant = StandardPeriodVariant.Today;
-	FiscalPrinterFind = HardwareServer.GetWorkstationHardwareByEquipmentType(SessionParametersServer.GetSessionParameter("Workstation"), Enums.EquipmentTypes.FiscalPrinter);
+	Workstation = SessionParametersServer.GetSessionParameter("Workstation"); // CatalogRef.Workstations
+	FiscalPrinterFind = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
 	If FiscalPrinterFind.Count() = 1 Then
 		FiscalPrinter = FiscalPrinterFind[0];
 	EndIf;
@@ -60,8 +62,8 @@ Procedure UpdateAtServer()
 			OR NewRow.Method = "ReturnPaymentByPaymentCard"
 			OR NewRow.Method = "CancelPaymentByPaymentCard"
 			OR NewRow.Method = "Settlement" Then
-				
-			NewRow.PrintInfo = CommonFunctionsServer.DeserializeJSON(NewRow.Data).Out.Slip;				
+				Payments = CommonFunctionsServer.DeserializeJSON(NewRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
+				NewRow.PrintInfo = Payments.Out.Slip;				
 		EndIf;
 	EndDo;
 	

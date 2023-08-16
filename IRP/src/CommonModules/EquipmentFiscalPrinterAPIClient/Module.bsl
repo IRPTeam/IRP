@@ -78,7 +78,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // * InOut - Structure -
 // * Out - Structure:
 // ** OutputParameters - See OutputParameters
@@ -91,7 +91,7 @@ Function OpenShiftSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     
     Str.Insert("InOut", New Structure);
     
@@ -110,7 +110,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // * InOut - Structure -
 // * Out - Structure:
 // ** OutputParameters - See OutputParameters
@@ -123,7 +123,7 @@ Function CloseShiftSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     
     Str.Insert("InOut", New Structure);
     
@@ -330,7 +330,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** InputParameters - String - Input parameters of the operation
+// ** InputParameters - See InputParameters
 // * InOut - Structure -
 // * Out - Structure:
 // ** OutputParameters - See OutputParameters
@@ -343,7 +343,7 @@ Function GetCurrentStatusSettings() Export
     
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("InputParameters", "");
+    Str.In.Insert("InputParameters", InputParameters());
     
     Str.Insert("InOut", New Structure);
     
@@ -616,7 +616,7 @@ EndFunction
 // * FFDVersionKKT - String - FFD version of KKT
 // * FNSerialNumber - String - Factory number of FN
 // * DocumentNumber - String - Document number of fiscal accumulator registration
-// * DateTime - DateTime - Date and time of fiscal accumulator registration operation
+// * DateTime - Date - Date and time of fiscal accumulator registration operation
 // * CompanyName - String - Organization name
 // * INN - String - Organization INN
 // * SaleAddress - String - Address of calculations
@@ -731,7 +731,7 @@ EndFunction
 // ** OperationalAttribute - Structure - Operational attribute of the check
 // ** IndustryAttribute - Structure - Industry attribute of the check
 // * Positions - Structure:
-// ** FiscalStrings - See CheckPackage_FiscalString
+// ** FiscalStrings - Array Of See CheckPackage_FiscalString
 // ** FiscalStringJSON - String - Serialazed for server call function CheckPackage_FiscalString
 // ** TextStrings - Array Of String - Additional non fiscal string for print
 // ** Barcode - Structure:
@@ -762,19 +762,21 @@ Function CheckPackage() Export
     Str.Parameters.Insert("AutomatNumber", "");
     Str.Parameters.Insert("AgentType", 0);
     
-    Str.Parameters.Insert("AgentData", New Structure);
-    Str.Parameters.AgentData.Insert("AgentOperation", "");
-    Str.Parameters.AgentData.Insert("AgentPhone", "");
-    Str.Parameters.AgentData.Insert("PaymentProcessorPhone", "");
-    Str.Parameters.AgentData.Insert("AcquirerOperatorPhone", "");
-    Str.Parameters.AgentData.Insert("AcquirerOperatorName", "");
-    Str.Parameters.AgentData.Insert("AcquirerOperatorAddress", "");
-    Str.Parameters.AgentData.Insert("AcquirerOperatorINN", "");
-    
-    Str.Parameters.Insert("VendorData", New Structure);
-    Str.Parameters.VendorData.Insert("VendorPhone", "");
-    Str.Parameters.VendorData.Insert("VendorName", "");
-    Str.Parameters.VendorData.Insert("VendorINN", "");
+    AgentData = New Structure;
+    AgentData.Insert("AgentOperation", "");
+    AgentData.Insert("AgentPhone", "");
+    AgentData.Insert("PaymentProcessorPhone", "");
+    AgentData.Insert("AcquirerOperatorPhone", "");
+    AgentData.Insert("AcquirerOperatorName", "");
+    AgentData.Insert("AcquirerOperatorAddress", "");
+    AgentData.Insert("AcquirerOperatorINN", "");
+    Str.Parameters.Insert("AgentData", AgentData);
+
+	VendorData = New Structure;    
+    VendorData.Insert("VendorPhone", "");
+    VendorData.Insert("VendorName", "");
+    VendorData.Insert("VendorINN", "");
+    Str.Parameters.Insert("VendorData", VendorData);
     
     Str.Parameters.Insert("UserAttribute", New Structure);
     Str.Parameters.Insert("AdditionalAttribute", "");
@@ -789,9 +791,10 @@ Function CheckPackage() Export
     
     Str.Positions.Insert("TextStrings", New Array);
     
-    Str.Positions.Insert("Barcode", New Structure);
-    Str.Positions.Barcode.Insert("Type", "QR");
-    Str.Positions.Barcode.Insert("Value", "");
+    Barcode = New Structure;
+    Barcode.Insert("Type", "QR");
+    Barcode.Insert("Value", "");
+    Str.Positions.Insert("Barcode", Barcode);
     
     // Payments section
     Str.Insert("Payments", New Structure);
@@ -854,7 +857,7 @@ Function CheckPackage_FiscalString() Export
     Str.Insert("VATAmount", 0);
     Str.Insert("PaymentMethod", 0);
     Str.Insert("CalculationSubject", 0);
-    Str.Insert("CalculationAgent", 0);
+    Str.Insert("CalculationAgent", -1);
     
     Str.Insert("AgentData", New Structure);
     Str.AgentData.Insert("AgentOperation", "");
@@ -894,10 +897,10 @@ EndFunction
 // * ShiftClosingCheckNumber - Number - Number of the last check for the shift
 // * DateTime - Date - Date and time of the fiscal document formation
 // * ShiftState - Number - Shift state (1 - Closed, 2 - Opened, 3 - Expired)
-// * CountersOperationType1 - See OperationCounters - Counters for "income" operation type
-// * CountersOperationType2 - See OperationCounters - Counters for "income return" operation type
-// * CountersOperationType3 - See OperationCounters - Counters for "expense" operation type
-// * CountersOperationType4 - See OperationCounters - Counters for "expense return" operation type
+// * CountersOperationType1 - See OperationCounters
+// * CountersOperationType2 - See OperationCounters
+// * CountersOperationType3 - See OperationCounters
+// * CountersOperationType4 - See OperationCounters
 // * CashBalance - Number - Cash balance in the cash register
 // * BacklogDocumentsCounter - Number - Number of undelivered documents
 // * BacklogDocumentFirstNumber - Number - Number of the first undelivered document

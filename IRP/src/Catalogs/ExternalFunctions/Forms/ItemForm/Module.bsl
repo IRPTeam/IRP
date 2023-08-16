@@ -92,7 +92,7 @@ EndProcedure
 
 &AtClient
 Async Procedure FindMatches()
-	Array = New Array;
+	Array = New Array; // Array Of String
 	For Each TestRexExpString In Object.TestRexExpStrings Do
 		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.RegExp); // Array of String
 		If ResultArray.Count() = 0 Then

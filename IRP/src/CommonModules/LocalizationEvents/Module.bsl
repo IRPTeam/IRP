@@ -28,6 +28,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	// enable search by code for all
+	//@skip-check empty-except-statement
 	Try
 		Settings.Insert("UseSearchByCode", MetadataObject.CodeLength > 0);
 	Except EndTry;

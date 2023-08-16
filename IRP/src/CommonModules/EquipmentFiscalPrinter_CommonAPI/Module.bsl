@@ -6,7 +6,7 @@
 // Device open.
 // 
 // Parameters:
-//  Settings - See GetDriverObject
+//  Settings - See HardwareClient.GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
 // 
@@ -21,7 +21,7 @@ EndFunction
 // Device close.
 // 
 // Parameters:
-//  Settings - See GetDriverObject
+//  Settings - See HardwareClient.GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
 // 
@@ -63,12 +63,12 @@ Async Function GetDataKKT(Hardware, Settings) Export
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
-		//@skip-check wrong-type-expression
+		//@skip-check statement-type-change, wrong-type-expression
 		Settings.Out.TableParametersKKT = TableParametersKKT;
 	Else
-		TableParametersKKT = CommonFunctionsServer.GetXMLAsStructure(TableParametersKKT);
+		TableParametersKKTStr = CommonFunctionsServer.GetXMLAsStructure(TableParametersKKT);
 		TableParametersKKTPrepared = EquipmentFiscalPrinterAPIClient.TableParametersKKT();
-		FillPropertyValues(TableParametersKKTPrepared, TableParametersKKT);
+		FillPropertyValues(TableParametersKKTPrepared, TableParametersKKTStr);
 		
 		Settings.Out.TableParametersKKT = TableParametersKKTPrepared;
 	EndIf;
@@ -140,7 +140,7 @@ Async Function OpenShift(Hardware, Settings) Export
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
-		//@skip-check wrong-type-expression
+		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
@@ -182,7 +182,7 @@ Async Function CloseShift(Hardware, Settings) Export
 
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
-		//@skip-check wrong-type-expression
+		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
@@ -424,7 +424,7 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 	
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
-		//@skip-check wrong-type-expression
+		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
@@ -792,11 +792,11 @@ Function CheckPackage_ToXML(CheckPackage) Export
 	XMLWriter.WriteEndElement();
 	
 	XMLWriter.WriteStartElement("Positions");
-	For Each Item In CheckPackage.Positions.FiscalStrings Do
+	For Each Item In CheckPackage.Positions.FiscalStrings Do // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		XMLWriter.WriteStartElement("FiscalString");
 		XMLWriter.WriteAttribute("AmountWithDiscount", ToXMLString(Item.AmountWithDiscount));
 		XMLWriter.WriteAttribute("DiscountAmount", ToXMLString(Item.DiscountAmount));
-		If Item.Property("MarkingCode") Then
+		If Not IsBlankString(Item.MarkingCode) Then
 			XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
 		EndIf;
 		XMLWriter.WriteAttribute("MeasureOfQuantity", ToXMLString(Item.MeasureOfQuantity));
@@ -807,10 +807,10 @@ Function CheckPackage_ToXML(CheckPackage) Export
 		XMLWriter.WriteAttribute("PriceWithDiscount", ToXMLString(Item.PriceWithDiscount));
 		XMLWriter.WriteAttribute("VATRate", ToXMLString(Item.VATRate));
 		XMLWriter.WriteAttribute("VATAmount", ToXMLString(Item.VATAmount));
-		If Item.Property("CalculationAgent") Then
+		If Not Item.CalculationAgent = -1 Then
 			XMLWriter.WriteAttribute("CalculationAgent", ToXMLString(Item.CalculationAgent));
 		EndIf;
-		If Item.Property("VendorData") Then
+		If Not IsBlankString(Item.VendorData.VendorINN) Then
 			XMLWriter.WriteStartElement("VendorData");
 			XMLWriter.WriteAttribute("VendorINN", ToXMLString(Item.VendorData.VendorINN));
 			XMLWriter.WriteAttribute("VendorName", ToXMLString(Item.VendorData.VendorName));

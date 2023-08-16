@@ -4,40 +4,13 @@
     "commit-transaction": {
       "enabled": true
     },
-    "manager-module-named-self-reference": {
+    "module-structure-method-in-regions": {
       "enabled": false
     },
-    "common-module-name-client-server": {
+    "export-method-in-command-form-module": {
       "enabled": false
     },
-    "right-administration": {
-      "enabled": false
-    },
-    "module-region-empty": {
-      "enabled": false
-    },
-    "ql-temp-table-index": {
-      "enabled": false
-    },
-    "db-object-ref-non-ref-type": {
-      "enabled": false
-    },
-    "right-configuration-extensions-administration": {
-      "enabled": false
-    },
-    "common-module-name-client-cached": {
-      "enabled": false
-    },
-    "module-consecutive-blank-lines": {
-      "enabled": true
-    },
-    "right-interactive-delete": {
-      "enabled": false
-    },
-    "right-data-administration": {
-      "enabled": false
-    },
-    "right-interactive-clear-deletion-mark-predefined-data": {
+    "export-procedure-missing-comment": {
       "enabled": false
     },
     "doc-comment-export-function-return-section": {
@@ -46,103 +19,16 @@
     "doc-comment-parameter-section": {
       "enabled": false
     },
-    "role-right-has-rls": {
-      "enabled": false
-    },
-    "method-too-many-params": {
-      "enabled": false
-    },
-    "right-active-users": {
-      "enabled": false
-    },
-    "module-structure-top-region": {
-      "enabled": false
-    },
-    "right-interactive-set-deletion-mark-predefined-data": {
-      "enabled": false
-    },
-    "right-output-to-printer-file-clipboard": {
-      "enabled": false
-    },
-    "right-start-thick-client": {
-      "enabled": false
-    },
-    "right-update-database-configuration": {
-      "enabled": false
-    },
-    "right-all-functions-mode": {
-      "enabled": false
-    },
-    "module-structure-var-in-region": {
-      "enabled": false
-    },
-    "common-module-name-server-call": {
-      "enabled": false
-    },
-    "right-start-web-client": {
-      "enabled": false
-    },
-    "common-module-named-self-reference": {
-      "enabled": false
-    },
-    "begin-transaction": {
-      "enabled": true
-    },
-    "right-interactive-open-external-data-processors": {
-      "enabled": false
-    },
-    "module-structure-method-in-regions": {
-      "enabled": false
-    },
-    "common-module-name-server-call-cached": {
-      "enabled": false
-    },
-    "common-module-type": {
-      "enabled": false
-    },
     "reading-attribute-from-database": {
       "enabled": false
     },
-    "invocation-form-event-handler": {
-      "enabled": false
-    },
-    "right-start-automation": {
-      "enabled": false
-    },
-    "common-module-name-client": {
-      "enabled": false
-    },
-    "right-delete": {
-      "enabled": false
-    },
-    "common-module-name-cached": {
-      "enabled": false
-    },
-    "common-module-name-full-access": {
-      "enabled": false
-    },
-    "right-view-event-log": {
-      "enabled": false
-    },
-    "right-interactive-delete-predefined-data": {
-      "enabled": false
-    },
-    "right-start-external-connection": {
-      "enabled": false
-    },
-    "common-module-name-global-client": {
-      "enabled": false
-    },
-    "right-interactive-delete-marked-predefined-data": {
-      "enabled": false
-    },
-    "db-object-anyref-type": {
-      "enabled": false
-    },
-    "right-start-thin-client": {
+    "bsl-variable-name-invalid": {
       "enabled": false
     },
     "module-structure-form-event-regions": {
+      "enabled": false
+    },
+    "invocation-form-event-handler": {
       "enabled": false
     },
     "rollback-transaction": {
@@ -151,19 +37,22 @@
     "query-in-loop": {
       "enabled": false
     },
+    "module-structure-top-region": {
+      "enabled": false
+    },
     "structure-consructor-too-many-keys": {
       "enabled": false
     },
-    "right-exclusive-mode": {
+    "data-composition-conditional-appearance-use": {
+      "enabled": false
+    },
+    "module-consecutive-blank-lines": {
+      "enabled": true
+    },
+    "unknown-form-parameter-access": {
       "enabled": false
     },
     "module-self-reference": {
-      "enabled": false
-    },
-    "right-save-user-data": {
-      "enabled": false
-    },
-    "right-interactive-open-external-reports": {
       "enabled": false
     }
   }

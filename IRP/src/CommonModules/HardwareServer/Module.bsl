@@ -87,6 +87,14 @@ Function GetConnectionSettings(HardwareRef) Export
 	Return Settings;
 EndFunction
 
+// Get workstation hardware by equipment type.
+// 
+// Parameters:
+//  Workstation - CatalogRef.Workstations - Workstation
+//  EquipmentType - EnumRef.EquipmentTypes - Equipment type
+// 
+// Returns:
+//  Array Of CatalogRef.Hardware -  Get workstation hardware by equipment type
 Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query();
 	Query.Text =

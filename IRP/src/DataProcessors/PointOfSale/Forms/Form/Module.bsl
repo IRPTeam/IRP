@@ -1455,7 +1455,7 @@ Async Procedure CreateAndPostCashIn(Command)
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
 	CashIn = CreateAndPostCashInAtServer(FillingData);
-	Message(CashIn);
+	CommonFunctionsClientServer.ShowUsersMessage(CashIn);
 	PrintCashIn(CashIn);
 	FillCashInList();
 EndProcedure

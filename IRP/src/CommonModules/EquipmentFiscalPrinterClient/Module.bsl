@@ -6,7 +6,7 @@
 //  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales
 // 
 // Returns:
-//  See OpenShiftResult
+//  See ShiftResultStructure
 Async Function OpenShift(ConsolidatedRetailSales) Export
 	
 	Result = ShiftResultStructure();

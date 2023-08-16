@@ -4,7 +4,7 @@
 // Set status.
 // 
 // Parameters:
-//  Document - DocumentRef.RetailSalesReceipt -
+//  Document - DocumentRefDocumentName -
 //  Status - EnumRef.DocumentFiscalStatuses
 //  FiscalResponse - Structure
 //  DataPresentation - String - Data presentation

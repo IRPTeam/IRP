@@ -7,37 +7,20 @@
 // Parameters:
 //  SourceData - DocumentRefDocumentName -
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
-// 
-// Returns:
-//  Structure - Fill data:
-// * Parameters - Structure -
-// * Positions - Structure -
-// * Payments - Structure -
-// * OperationType - Number -
-// * TaxationSystem - Number -
-// * FiscalStrings - Array -
-// * Cash - Number -
-// * ElectronicPayment - Number -
-// * PrePayment - Number -
-// * PostPayment - Number -
-// * Barter - Number -
-// * TextStrings - Array -
-Function FillData(SourceData, CheckPackage) Export
-	ReturnData = New Structure;
+Procedure FillData(SourceData, CheckPackage) Export
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt")
 		Or TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
 		FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashReceipt") Then
-		ReturnData = PrepareReceiptDataByCashReceipt(SourceData, CheckPackage);
+		PrepareReceiptDataByCashReceipt(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
-		ReturnData = PrepareReceiptDataByCashPayment(SourceData, CheckPackage);
+		PrepareReceiptDataByCashPayment(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankReceipt") Then
-		ReturnData = PrepareReceiptDataByBankReceipt(SourceData, CheckPackage);
+		PrepareReceiptDataByBankReceipt(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankPayment") Then
-		ReturnData = PrepareReceiptDataByBankPayment(SourceData, CheckPackage);
+		PrepareReceiptDataByBankPayment(SourceData, CheckPackage);
 	EndIf;
-	Return ReturnData;
-EndFunction
+EndProcedure
 
 // Prepare receipt data by retail sales receipt.
 // 
@@ -212,6 +195,7 @@ EndProcedure
 // 
 // Parameters:
 //  SourceData - DocumentRef.CashReceipt
+//  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
 // 
 // Returns:
 //  Structure - Prepare receipt data by cash receipt
@@ -569,19 +553,11 @@ Function GetStringCode(DocumentRef) Export
 	Return Array;
 EndFunction
 
-// Shift get XMLOperation settings.
+// Fill input parameters.
 // 
 // Parameters:
 //  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
-//  InputParameters - See EquipmentFiscalPrinterAPIClient.FillInputParameters
-// 
-// Returns:
-//  Structure - Shift get XMLOperation settings::
-// * CashierName - DefinedType.typeDescription -
-// * CashierINN - String -
-// * SaleAddress - String -
-// * SaleLocation - String -
-// @skip-check reading-attribute-from-database
+//  InputParameters - See EquipmentFiscalPrinterAPIClient.InputParameters
 Procedure FillInputParameters(Ref, InputParameters) Export
 	InputParameters.CashierName = Ref.Author.Partner.Description_ru;
 	

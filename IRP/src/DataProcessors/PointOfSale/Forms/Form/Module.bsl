@@ -848,7 +848,7 @@ EndProcedure
 Procedure TerminalSettlement(Command)
 	OpenFormProperty = New Structure();
 	OpenFormProperty.Insert("Workstation", Workstation);
-	OpenForm("DataProcessor.PointOfSale.Form.GetSettlement", OpenFormProperty, ThisForm, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.PointOfSale.Form.GetSettlement", OpenFormProperty, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient

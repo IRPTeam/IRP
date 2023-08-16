@@ -48,3 +48,10 @@ EndFunction
 Function GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString) Export
 	Return CommissionTradeServer._GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString);
 EndFunction
+
+// Other
+
+Function GetBankTermInfo(PaymentType, BankTerm) Export
+	Return ModelServer_V2._GetBankTermInfo(PaymentType, BankTerm);
+EndFunction
+

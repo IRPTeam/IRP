@@ -172,6 +172,7 @@
  <defaultObjectForm>Catalog.LegalNameContracts.Form.ItemForm</defaultObjectForm>
  <defaultListForm>Catalog.LegalNameContracts.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.LegalNameContracts.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="9ce2c4ca-3159-47b3-bb19-fb85e8acb098">
   <name>BeginDate</name>
   <synonym>

@@ -1366,6 +1366,9 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?';
 		|ru='Вы действительно хотите обновить заполненные налоговые ставки?';
 		|tr='Do you want to update filled tax rates?'", Lang));
+	Strings.Insert("QuestionToUser_026", NStr("en='Do you want to update payment agent?';
+		|ru='Вы хотите обновить платежного агента?';
+		|tr='Do you want to update payment agent?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

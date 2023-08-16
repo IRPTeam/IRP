@@ -230,6 +230,10 @@
    </userVisible>
    <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
+  <handlers>
+   <event>BeforeAddRow</event>
+   <name>ListBeforeAddRow</name>
+  </handlers>
   <searchStringAddition>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -424,6 +428,10 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <handlers>
+  <event>NotificationProcessing</event>
+  <name>NotificationProcessing</name>
+ </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
@@ -466,6 +474,31 @@ FROM
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
   </extInfo>
+ </attributes>
+ <attributes>
+  <name>FilterBankTerm</name>
+  <title>
+   <key>en</key>
+   <value>Filter bank term</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Фильтр банковского соглашения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Filter bank term</value>
+  </title>
+  <id>2</id>
+  <valueType>
+   <types>CatalogRef.BankTerms</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
  </attributes>
  <commandInterface>
   <navigationPanel/>

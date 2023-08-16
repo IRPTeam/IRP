@@ -192,6 +192,8 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Str.PostPayment = Str.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
 				Str.PrePayment = Str.PrePayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;
 			Else
 				Str.Cash = Str.Cash + Payment.Amount;
 			EndIf;
@@ -203,6 +205,8 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				Str.PostPayment = Str.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
 				Str.PrePayment = Str.PrePayment + Payment.Amount;				
 			Else
 				Str.Cash = Str.Cash + Payment.Amount;

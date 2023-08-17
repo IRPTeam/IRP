@@ -24,6 +24,7 @@ Function GetQuery(DocName) Export
 	
 	ErrorsArray = New Array; // Array of Structure
 	ErrorsArray.Add(ErrorItemList());
+	ErrorsArray.Add(ErrorHeaders(MetaDoc));
 	
 	If MetaDoc.TabularSections.Find("TaxList") = Undefined Then
 		Result.Tables.Insert("TaxList", TmplDoc.TaxList.Unload());
@@ -59,12 +60,14 @@ Function GetQuery(DocName) Export
 		ErrorsArray.Add(SourceOfOrigins());
 	EndIf;
 
-	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0);
-	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1);
+	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
+	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
+	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	
-	Result.Query = StrTemplate(CheckDocumentsQuery(), 
+	Result.Query = StrTemplate(CheckDocumentsQuery(MetaDoc), 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
-		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results
+		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results,
+		GetInfo_2.Fields, GetInfo_2.Filters, GetInfo_2.Results
 		);
 	Return Result;
 EndFunction
@@ -75,6 +78,7 @@ EndFunction
 //  Array - Get error list
 Function GetErrorList() Export
 	ErrorsArray = New Array; // Array of Structure
+	ErrorsArray.Add(ErrorHeaders());
 	ErrorsArray.Add(ErrorItemList());
 	ErrorsArray.Add(ErrorWithTax());
 	ErrorsArray.Add(ErrorWithOffers());
@@ -143,12 +147,21 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 			EndIf;
 			
 			Skip = False;
-			// @skip-check invocation-parameter-type-intersect, property-return-type
-			For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
-				If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
-					Skip = True;
-				EndIf;  
-			EndDo;
+			If QueryNumber = 2 Then
+				// @skip-check invocation-parameter-type-intersect, property-return-type
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			Else
+				// @skip-check invocation-parameter-type-intersect, property-return-type
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			EndIf;
 			
 			If Skip Then
 				Continue;
@@ -172,6 +185,51 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	Else
 		Str.Insert("Filters", StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
 		Str.Insert("Results", "Result." + StrConcat(ArrayOfFilter, "," + Chars.LF + "	Result."));
+	EndIf;
+	
+	Return Str;
+EndFunction
+
+Function ErrorHeaders(MetaDoc = Undefined)
+	Str = New Structure;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.RetailSalesReceipt
+			 OR MetaDoc = Metadata.Documents.RetailReturnReceipt Then
+		Str.Insert("ErrorNotFilledPaymentMethod", New Structure("Query, Fields, QueryNumber", 
+			"PaymentMethod = VALUE(ENUM.ReceiptPaymentMethods.EmptyRef)", 
+			"PaymentMethod",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.PurchaseInvoice
+			 OR MetaDoc = Metadata.Documents.PurchaseOrder
+			 OR MetaDoc = Metadata.Documents.PurchaseOrderClosing Then
+		Str.Insert("ErrorNotFilledPurchaseTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.PurchaseTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.SalesInvoice
+			 OR MetaDoc = Metadata.Documents.SalesOrder
+			 OR MetaDoc = Metadata.Documents.SalesOrderClosing Then
+		Str.Insert("ErrorNotFilledSalesTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.PurchaseReturn
+			 OR MetaDoc = Metadata.Documents.PurchaseReturnOrder
+			 OR MetaDoc = Metadata.Documents.PurchaseOrderClosing Then
+		Str.Insert("ErrorNotFilledPurchaseReturnTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
 	EndIf;
 	
 	Return Str;
@@ -225,6 +283,12 @@ Function ErrorItemList()
 	Str.Insert("ErrorNotFilledUnit",	New Structure("Query, Fields, QueryNumber",
 		"ItemList.Unit = VAlUE(Catalog.Units.EmptyRef)", 
 		"Unit",
+		0
+	));
+	
+	Str.Insert("ErrorNotFilledInventoryOrigin",	New Structure("Query, Fields, QueryNumber",
+		"ItemList.InventoryOrigin = VAlUE(Enum.InventoryOriginTypes.EmptyRef)", 
+		"InventoryOrigin",
 		0
 	));
 	
@@ -320,7 +384,7 @@ Function SourceOfOrigins()
 	Return Str;
 EndFunction
 
-Function CheckDocumentsQuery()
+Function CheckDocumentsQuery(MetaDoc)
 	Return 
 	"SELECT
 	|	ItemList.LineNumber,
@@ -503,7 +567,29 @@ Function CheckDocumentsQuery()
 	|	%6
 	|FROM
 	|	ResultSourceOfOrigins AS Result
-	|WHERE %5";
+	|WHERE %5
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Headers.Ref,
+	|	%7
+	|INTO Headers
+	|FROM
+	|	" + MetaDoc.FullName() + " AS Headers
+	|WHERE
+	|	Headers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	%9
+	|FROM
+	|	ResultSourceOfOrigins AS Result
+	|WHERE %8";
 EndFunction
 
 // Get query for documents array.
@@ -518,7 +604,8 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	MetaDoc = Metadata.Documents[MetaDocName];
 	ErrorsArray = New Array; // Array of Structure
 	
-	QueryText = "SELECT
+	QueryText = 
+	"SELECT
 	|	ItemList.Ref,
 	|	ItemList.LineNumber,
 	|	ItemList.Key,
@@ -529,6 +616,7 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|WHERE
 	|	ItemList.Ref IN (&Refs)
 	|;";
+	ErrorsArray.Add(ErrorHeaders(MetaDoc));
 	ErrorsArray.Add(ErrorItemList());
 	
 	If MetaDoc.TabularSections.Find("TaxList") <> Undefined Then
@@ -733,8 +821,9 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|	SourceOfOriginsTmp AS SourceOfOrigins
 	|;";	
 
-	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0);
-	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1);
+	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
+	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
+	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	
 	QueryText = QueryText + "
 	|////////////////////////////////////////////////////////////////////////////////
@@ -803,8 +892,84 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|FROM
 	|	ResultSourceOfOrigins AS Result
 	|WHERE " + GetInfo_1.Filters + "
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Headers.Ref,
+	|	" + GetInfo_2.Fields + "
+	|INTO Headers
+	|FROM
+	|	" + MetaDoc.FullName() + " AS Headers
+	|WHERE
+	|	Headers.Ref IN (&Refs)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	"""" AS Key,
+	|	0 AS LineNumber,
+	|	" + GetInfo_2.Results + "
+	|FROM
+	|	Headers AS Result
+	|WHERE " + GetInfo_2.Filters + "
 	|";
 	
 	Return QueryText;
 	
+EndFunction
+
+// Get all errors description.
+// 
+// Returns:
+//  Structure - Get all errors description:
+//	* Key - String - Error ID
+//	* Value - See GetErrorDescription
+Function GetAllErrorsDescription() Export
+	
+	Result = New Structure;
+	
+	ErrorList = GetErrorList();
+	For Each ErrorListItem In ErrorList Do
+		NewDescription = GetErrorDescription();
+		ErrorDescription = ErrorListItem.Presentation;
+		ErrorDescription = StrReplace(ErrorDescription, "%1", "<?>");
+		ErrorDescription = StrReplace(ErrorDescription, "%2", "<?>");
+		NewDescription.ErrorDescription = ErrorDescription;
+		NewDescription.FixDescription = GetFixErrorDescription(ErrorListItem.Value);
+		Result.Insert(ErrorListItem.Value, NewDescription);
+	EndDo;	
+	
+	Return Result;
+	
+EndFunction
+
+// Get error description.
+// 
+// Returns:
+//  Structure - Get error description:
+// * ErrorDescription - String -
+// * FixDescription - String -
+Function GetErrorDescription()
+	Result = New Structure;
+	Result.Insert("ErrorDescription", "");
+	Result.Insert("FixDescription", "");
+	Return Result;
+EndFunction
+
+// Get fix error description.
+// 
+// Parameters:
+//  ErrorID - String - Error ID
+// 
+// Returns:
+//  String
+Function GetFixErrorDescription(ErrorID)
+	ErrorKey = "ATC_FIX_" + ErrorID;
+	If R().Property(ErrorKey) Then
+		Return R()[ErrorKey];
+	EndIf;
+	Return R().ATC_NotSupported;
 EndFunction

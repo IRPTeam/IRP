@@ -9,7 +9,8 @@
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
-// ** CRS - DocumentRef.ConsolidatedRetailSales - 
+// ** Success - Boolean - Operation status
+// ** CRS - DocumentRef.ConsolidatedRetailSales -
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -17,20 +18,21 @@
 // ** TableParametersKKT - See TableParametersKKT
 Function GetDataKKTSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetDataKKT");
+    Str.Info.Insert("Success", False);
     Str.Info.Insert("CRS", PredefinedValue("Document.ConsolidatedRetailSales.EmptyRef"));
-    
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("TableParametersKKT", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -41,6 +43,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** OperationType - Number - Type of operation:
@@ -52,20 +55,21 @@ EndFunction
 // * Out - Structure:
 Function OperationFNSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OperationFN");
-    
+	Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("OperationType", 0);
     Str.In.Insert("ParametersFiscal", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -85,21 +89,21 @@ EndFunction
 // ** OutputParameters - See OutputParameters
 Function OpenShiftSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenShift");
     Str.Info.Insert("Success", False);
-    
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("OutputParameters", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -119,21 +123,21 @@ EndFunction
 // ** OutputParameters - See OutputParameters
 Function CloseShiftSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CloseShift");
     Str.Info.Insert("Success", False);
-    
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("OutputParameters", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -144,6 +148,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** Electronically - Boolean - Formation of a check only in electronic form. The check is not printed.
@@ -153,21 +158,22 @@ EndFunction
 // ** DocumentOutputParameters - See DocumentOutputParameters
 Function ProcessCheckSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ProcessCheck");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("Electronically", False);
     Str.In.Insert("CheckPackage", New Structure());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("DocumentOutputParameters", DocumentOutputParameters());
-    
+
     Return Str;
 EndFunction
 
@@ -178,6 +184,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckPackage - String - XML structure - correction check description.
@@ -186,20 +193,21 @@ EndFunction
 // ** DocumentOutputParameters - String - Output parameters of the operation
 Function ProcessCorrectionCheckSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ProcessCorrectionCheck");
-    
+   	Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckPackage", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("DocumentOutputParameters", "");
-    
+
     Return Str;
 EndFunction
 
@@ -210,6 +218,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** DocumentPackage - See DocumentPackage
@@ -217,19 +226,20 @@ EndFunction
 // * Out - Structure -
 Function PrintTextDocumentSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintTextDocument");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("DocumentPackage", New Structure);
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -240,6 +250,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -248,20 +259,21 @@ EndFunction
 // * Out - Structure:
 Function CashInOutcomeSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CashInOutcome");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
     Str.In.Insert("Amount", 0);
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -272,6 +284,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -279,19 +292,20 @@ EndFunction
 // * Out - Structure:
 Function PrintXReportSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintXReport");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -302,6 +316,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
@@ -309,19 +324,20 @@ EndFunction
 // * Out - Structure:
 Function PrintCheckCopySettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "PrintCheckCopy");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckNumber", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -341,21 +357,21 @@ EndFunction
 // ** OutputParameters - See OutputParameters
 Function GetCurrentStatusSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetCurrentStatus");
     Str.Info.Insert("Success", False);
-       
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("OutputParameters", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -366,6 +382,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -374,20 +391,21 @@ EndFunction
 // ** OutputParameters - String - Output parameters of the operation
 Function ReportCurrentStatusOfSettlementsSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ReportCurrentStatusOfSettlements");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("InputParameters", InputParameters());
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("OutputParameters", "");
-    
+
     Return Str;
 EndFunction
 
@@ -398,24 +416,26 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
 Function OpenCashDrawerSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenCashDrawer");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -426,6 +446,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -433,19 +454,20 @@ EndFunction
 // ** LineLength - Number - Line width in characters
 Function GetLineLengthSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetLineLength");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("LineLength", 0);
-    
+
     Return Str;
 EndFunction
 
@@ -456,24 +478,26 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
 Function OpenSessionRegistrationKMSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "OpenSessionRegistrationKM");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -484,24 +508,26 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
 Function CloseSessionRegistrationKMSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CloseSessionRegistrationKM");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -512,6 +538,7 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** RequestKM - String - Request data
@@ -520,20 +547,21 @@ EndFunction
 // ** RequestKMResult - String - Response data
 Function RequestKMSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "RequestKM");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("RequestKM", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("RequestKMResult", "");
-    
+
     Return Str;
 EndFunction
 
@@ -544,31 +572,33 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
 // ** ProcessingKMResult - String - Result of the request
-// ** RequestStatus - Number - Request status: 
-// 0 = result received, 
+// ** RequestStatus - Number - Request status:
+// 0 = result received,
 // 1 = result not yet received,
 // 2 = result cannot be received
 Function GetProcessingKMResultSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetProcessingKMResult");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
     Str.Out.Insert("ProcessingKMResult", "");
     Str.Out.Insert("RequestStatus", 0);
-    
+
     Return Str;
 EndFunction
 
@@ -579,30 +609,32 @@ EndFunction
 // * Info - Structure:
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
+// ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** GUID - String - Unique identifier of the KM request, which was previously made by the RequestKM method
-// ** ConfirmationType - Number - 
-// 	0 = KM will be implemented as part of a document on the sale of marked goods. 
+// ** ConfirmationType - Number -
+// 	0 = KM will be implemented as part of a document on the sale of marked goods.
 // 	1 = KM will not be implemented. Will NOT be included in the document on the sale of marked goods.
 // * InOut - Structure -
 // * Out - Structure:
 Function ConfirmKMSettings() Export
     Str = New Structure;
-    
+
     Str.Insert("Info", New Structure);
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ConfirmKM");
-    
+    Str.Info.Insert("Success", False);
+
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("GUID", "");
     Str.In.Insert("ConfirmationType", 0);
-    
+
     Str.Insert("InOut", New Structure);
-    
+
     Str.Insert("Out", New Structure);
-    
+
     Return Str;
 EndFunction
 
@@ -611,7 +643,7 @@ EndFunction
 #Region Additional
 
 // Table parameters KKT. Registration data of the fiscal memory module.
-// 
+//
 // Returns:
 //  Structure - Table parameters KKT:
 // * KKTNumber - String - Registration number of KKT
@@ -686,7 +718,7 @@ Function TableParametersKKT() Export
 EndFunction
 
 // Input parameters.
-// 
+//
 // Returns:
 //  Structure - Input parameters:
 // * CashierName - String - Full name and position of the authorized person for the operation
@@ -712,7 +744,14 @@ EndFunction
 // ** OperationType - Number - Type of operation
 // ** CorrectionData - Structure - Data for correction operation
 // ** TaxationSystem - Number - Taxation system code
-// ** CustomerDetail - Structure - Customer (client) details
+// ** CustomerDetail - Structure - Customer (client) details:
+// *** Info - String - Name of the organization or surname, name, patronymic (if available)
+// *** INN - String - INN of the organization or buyer (client)
+// *** DateOfBirth - String - Date of birth of the buyer (client) in the format "DD.MM.YYYY"
+// *** Citizenship - String - Numeric code of the country of which the buyer (client) is a citizen. The country code is specified in accordance with the All-Russian Classifier of Countries of the World OKSM.
+// *** DocumentTypeCode - Number - Numeric code of the type of identity document (FFD, Table 116)
+// *** DocumentData - String - Data of the identity document
+// *** Address - String - Address of the buyer (client)
 // ** CustomerEmail - String - Customer's email
 // ** CustomerPhone - String - Customer's phone number
 // ** SenderEmail - String - Sender's email address
@@ -751,7 +790,7 @@ EndFunction
 // ** Barter - Number - Payment amount by counter provision
 Function CheckPackage() Export
     Str = New Structure;
-    
+
     // Parameters section
     Str.Insert("Parameters", New Structure);
     Str.Parameters.Insert("CashierName", "");
@@ -759,7 +798,17 @@ Function CheckPackage() Export
     Str.Parameters.Insert("OperationType", 0);
     Str.Parameters.Insert("CorrectionData", New Structure);
     Str.Parameters.Insert("TaxationSystem", 0);
-    Str.Parameters.Insert("CustomerDetail", New Structure);
+
+    CustomerDetail = New Structure;
+    CustomerDetail.Insert("Info", "");
+    CustomerDetail.Insert("INN", "");
+    CustomerDetail.Insert("DateOfBirth", "");
+    CustomerDetail.Insert("Citizenship", "");
+    CustomerDetail.Insert("DocumentTypeCode", 0);
+    CustomerDetail.Insert("DocumentData", "");
+    CustomerDetail.Insert("Address", "");
+    Str.Parameters.Insert("CustomerDetail", CustomerDetail);
+
     Str.Parameters.Insert("CustomerEmail", "");
     Str.Parameters.Insert("CustomerPhone", "");
     Str.Parameters.Insert("SenderEmail", "");
@@ -767,7 +816,7 @@ Function CheckPackage() Export
     Str.Parameters.Insert("SaleLocation", "");
     Str.Parameters.Insert("AutomatNumber", "");
     Str.Parameters.Insert("AgentType", 0);
-    
+
     AgentData = New Structure;
     AgentData.Insert("AgentOperation", "");
     AgentData.Insert("AgentPhone", "");
@@ -778,30 +827,30 @@ Function CheckPackage() Export
     AgentData.Insert("AcquirerOperatorINN", "");
     Str.Parameters.Insert("AgentData", AgentData);
 
-	VendorData = New Structure;    
+	VendorData = New Structure;
     VendorData.Insert("VendorPhone", "");
     VendorData.Insert("VendorName", "");
     VendorData.Insert("VendorINN", "");
     Str.Parameters.Insert("VendorData", VendorData);
-    
+
     Str.Parameters.Insert("UserAttribute", New Structure);
     Str.Parameters.Insert("AdditionalAttribute", "");
     Str.Parameters.Insert("OperationalAttribute", New Structure);
     Str.Parameters.Insert("IndustryAttribute", New Structure);
-    
+
     // Positions section
     Str.Insert("Positions", New Structure);
-    
+
     Str.Positions.Insert("FiscalStrings", New Array);
     Str.Positions.Insert("FiscalStringJSON", CommonFunctionsServer.SerializeJSON(CheckPackage_FiscalString()));
-    
+
     Str.Positions.Insert("TextStrings", New Array);
-    
+
     Barcode = New Structure;
     Barcode.Insert("Type", "QR");
     Barcode.Insert("Value", "");
     Str.Positions.Insert("Barcode", Barcode);
-    
+
     // Payments section
     Str.Insert("Payments", New Structure);
     Str.Payments.Insert("Cash", 0);
@@ -864,7 +913,7 @@ Function CheckPackage_FiscalString() Export
     Str.Insert("PaymentMethod", 0);
     Str.Insert("CalculationSubject", 0);
     Str.Insert("CalculationAgent", -1);
-    
+
     Str.Insert("AgentData", New Structure);
     Str.AgentData.Insert("AgentOperation", "");
     Str.AgentData.Insert("AgentPhone", "");
@@ -873,12 +922,12 @@ Function CheckPackage_FiscalString() Export
     Str.AgentData.Insert("AcquirerOperatorName", "");
     Str.AgentData.Insert("AcquirerOperatorAddress", "");
     Str.AgentData.Insert("AcquirerOperatorINN", "");
-    
+
     Str.Insert("VendorData", New Structure);
     Str.VendorData.Insert("VendorPhone", "");
     Str.VendorData.Insert("VendorName", "");
     Str.VendorData.Insert("VendorINN", "");
-    
+
     Str.Insert("MeasureOfQuantity", 0);
     Str.Insert("FractionalQuantity", New Structure);
     Str.FractionalQuantity.Insert("Numerator", 0);
@@ -890,7 +939,7 @@ Function CheckPackage_FiscalString() Export
     Str.Insert("AdditionalAttribute", "");
     Str.Insert("ExciseAmount", 0);
     Str.Insert("IndustryAttribute", New Structure);
-        
+
     Return Str;
 EndFunction
 
@@ -916,7 +965,7 @@ EndFunction
 // * FNFail - Boolean - Indicator of FN resource exhaustion
 Function OutputParameters() Export
     Str = New Structure;
-    
+
     // Parameters section
     Str.Insert("ShiftNumber", 0);
     Str.Insert("CheckNumber", 0);
@@ -934,7 +983,7 @@ Function OutputParameters() Export
     Str.Insert("FNError", False);
     Str.Insert("FNOverflow", False);
     Str.Insert("FNFail", False);
-    
+
     Return Str;
 EndFunction
 
@@ -948,35 +997,35 @@ EndFunction
 // * TotalCorrectionChecksAmount - Number - Total amount of correction checks for the operations of this type
 Function OperationCounters() Export
     Str = New Structure;
-    
+
     // OperationCounters section
     Str.Insert("CheckCount", 0);
     Str.Insert("TotalChecksAmount", 0);
     Str.Insert("CorrectionCheckCount", 0);
     Str.Insert("TotalCorrectionChecksAmount", 0);
-    
+
     Return Str;
 EndFunction
 
 // Document package.
-// 
+//
 // Returns:
 //  Structure - Document package:
-// * TextString - Array Of String - Text for print 
+// * TextString - Array Of String - Text for print
 // * Barcode - Structure - Print barcode, if value is filled:
 // ** Type - String - EAN8, EAN13, CODE39, QR
 // ** Value - String - Barcode value
 Function DocumentPackage() Export
     Str = New Structure;
-    
+
     Str.Insert("TextString", New Array);
-    
+
     Barcode = New Structure;
     Barcode.Insert("Type", "QR");
     Barcode.Insert("Value", "");
-    
+
     Str.Insert("Barcode", Barcode);
-    
+
     Return Str;
 EndFunction
 
@@ -1006,11 +1055,11 @@ EndFunction
 #Region Device
 
 // GetDataKKT.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See GetDataKKTSettings 
-// 
+//  Settings - See GetDataKKTSettings
+//
 // Returns:
 //  Boolean - Getting data from the KKT for the registration of the fiscal memory and subsequent work
 Async Function GetDataKKT(Hardware, Settings) Export
@@ -1019,11 +1068,11 @@ Async Function GetDataKKT(Hardware, Settings) Export
 EndFunction
 
 // OperationFN.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See OperationFNSettings 
-// 
+//  Settings - See OperationFNSettings
+//
 // Returns:
 //  Boolean - Operation with the fiscal drive. After the operation, a report on the conduct of the corresponding operation is printed.
 Async Function OperationFN(Hardware, Settings) Export
@@ -1032,11 +1081,11 @@ Async Function OperationFN(Hardware, Settings) Export
 EndFunction
 
 // OpenShift.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See OpenShiftSettings 
-// 
+//  Settings - See OpenShiftSettings
+//
 // Returns:
 //  Boolean - Opening of the shift in the KKT. After the operation, a shift opening report is printed.
 Async Function OpenShift(Hardware, Settings) Export
@@ -1045,11 +1094,11 @@ Async Function OpenShift(Hardware, Settings) Export
 EndFunction
 
 // CloseShift.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See CloseShiftSettings 
-// 
+//  Settings - See CloseShiftSettings
+//
 // Returns:
 //  Boolean - Closing of the shift in the KKT. After the operation, a shift closing report is printed.
 Async Function CloseShift(Hardware, Settings) Export
@@ -1058,11 +1107,11 @@ Async Function CloseShift(Hardware, Settings) Export
 EndFunction
 
 // ProcessCheck.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See ProcessCheckSettings 
-// 
+//  Settings - See ProcessCheckSettings
+//
 // Returns:
 //  Boolean - Formation of a check (receipt) in the KKT. After the operation, a check (receipt) is printed.
 Async Function ProcessCheck(Hardware, Settings) Export
@@ -1071,11 +1120,11 @@ Async Function ProcessCheck(Hardware, Settings) Export
 EndFunction
 
 // ProcessCorrectionCheck.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See ProcessCorrectionCheckSettings 
-// 
+//  Settings - See ProcessCorrectionCheckSettings
+//
 // Returns:
 //  Boolean - Formation of a correction check in the KKT. After the operation, a correction check is printed.
 Async Function ProcessCorrectionCheck(Hardware, Settings) Export
@@ -1084,11 +1133,11 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 EndFunction
 
 // PrintTextDocument.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See PrintTextDocumentSettings 
-// 
+//  Settings - See PrintTextDocumentSettings
+//
 // Returns:
 //  Boolean - Printing a text document on the KKT.
 Async Function PrintTextDocument(Hardware, Settings) Export
@@ -1097,11 +1146,11 @@ Async Function PrintTextDocument(Hardware, Settings) Export
 EndFunction
 
 // CashInOutcome.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See CashInOutcomeSettings 
-// 
+//  Settings - See CashInOutcomeSettings
+//
 // Returns:
 //  Boolean - Printing a check of income or withdrawal of cash from the cash register.
 Async Function CashInOutcome(Hardware, Settings) Export
@@ -1110,11 +1159,11 @@ Async Function CashInOutcome(Hardware, Settings) Export
 EndFunction
 
 // PrintXReport.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See PrintXReportSettings 
-// 
+//  Settings - See PrintXReportSettings
+//
 // Returns:
 //  Boolean - Printing a report without resetting.
 Async Function PrintXReport(Hardware, Settings) Export
@@ -1123,11 +1172,11 @@ Async Function PrintXReport(Hardware, Settings) Export
 EndFunction
 
 // PrintCheckCopy.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See PrintCheckCopySettings 
-// 
+//  Settings - See PrintCheckCopySettings
+//
 // Returns:
 //  Boolean - Printing a copy of the check.
 Async Function PrintCheckCopy(Hardware, Settings) Export
@@ -1136,11 +1185,11 @@ Async Function PrintCheckCopy(Hardware, Settings) Export
 EndFunction
 
 // GetCurrentStatus.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See GetCurrentStatusSettings 
-// 
+//  Settings - See GetCurrentStatusSettings
+//
 // Returns:
 //  Boolean - Getting the current state of the KKT.
 Async Function GetCurrentStatus(Hardware, Settings) Export
@@ -1149,11 +1198,11 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 EndFunction
 
 // ReportCurrentStatusOfSettlements.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See ReportCurrentStatusOfSettlementsSettings 
-// 
+//  Settings - See ReportCurrentStatusOfSettlementsSettings
+//
 // Returns:
 //  Boolean - Getting a report on the current state of settlements.
 Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
@@ -1162,11 +1211,11 @@ Async Function ReportCurrentStatusOfSettlements(Hardware, Settings) Export
 EndFunction
 
 // OpenCashDrawer.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See OpenCashDrawerSettings 
-// 
+//  Settings - See OpenCashDrawerSettings
+//
 // Returns:
 //  Boolean - Opening the cash drawer.
 Async Function OpenCashDrawer(Hardware, Settings) Export
@@ -1175,11 +1224,11 @@ Async Function OpenCashDrawer(Hardware, Settings) Export
 EndFunction
 
 // GetLineLength.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See GetLineLengthSettings 
-// 
+//  Settings - See GetLineLengthSettings
+//
 // Returns:
 //  Boolean - Getting the line length for the KKT.
 Async Function GetLineLength(Hardware, Settings) Export
@@ -1188,11 +1237,11 @@ Async Function GetLineLength(Hardware, Settings) Export
 EndFunction
 
 // OpenSessionRegistrationKM.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See OpenSessionRegistrationKMSettings 
-// 
+//  Settings - See OpenSessionRegistrationKMSettings
+//
 // Returns:
 //  Boolean - Opening a registration session in the control module.
 Async Function OpenSessionRegistrationKM(Hardware, Settings) Export
@@ -1201,11 +1250,11 @@ Async Function OpenSessionRegistrationKM(Hardware, Settings) Export
 EndFunction
 
 // CloseSessionRegistrationKM.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See CloseSessionRegistrationKMSettings 
-// 
+//  Settings - See CloseSessionRegistrationKMSettings
+//
 // Returns:
 //  Boolean - Closing a registration session in the control module.
 Async Function CloseSessionRegistrationKM(Hardware, Settings) Export
@@ -1214,11 +1263,11 @@ Async Function CloseSessionRegistrationKM(Hardware, Settings) Export
 EndFunction
 
 // RequestKM.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See RequestKMSettings 
-// 
+//  Settings - See RequestKMSettings
+//
 // Returns:
 //  Boolean - Sending a request to the control module.
 Async Function RequestKM(Hardware, Settings) Export
@@ -1227,11 +1276,11 @@ Async Function RequestKM(Hardware, Settings) Export
 EndFunction
 
 // GetProcessingKMResult.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See GetProcessingKMResultSettings 
-// 
+//  Settings - See GetProcessingKMResultSettings
+//
 // Returns:
 //  Boolean - The method requests the results of the marking code check in the OISM.
 Async Function GetProcessingKMResult(Hardware, Settings) Export
@@ -1240,11 +1289,11 @@ Async Function GetProcessingKMResult(Hardware, Settings) Export
 EndFunction
 
 // ConfirmKM.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
-//  Settings - See ConfirmKMSettings 
-// 
+//  Settings - See ConfirmKMSettings
+//
 // Returns:
 //  Boolean - Confirms or cancels the previously checked KM as part of the document on the sale of marked goods. KM must have been previously checked by the RequestKM method.
 Async Function ConfirmKM(Hardware, Settings) Export

@@ -9,12 +9,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		FiscalPrinter = FiscalPrinterFind[0];
 	EndIf;
 	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.Acquiring);
-	
+
 	For Each Acquiring In AcquiringList Do
 		NewRow = HardwareList.Add();
 		NewRow.Hardware = Acquiring;
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
@@ -25,19 +25,29 @@ Async Procedure PrintLastSettlement(Command)
 	EndIf;
 
 	PaymentSettings = PrintLastSettlementAtServer(CurrentRow.Hardware);
-	
+
 	If PaymentSettings = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CRS = New Structure;
 	CRS.Insert("FiscalPrinter", FiscalPrinter);
-	Str = New Structure("Payments", New Array);
-	//@skip-check typed-value-adding-to-untyped-collection
-	Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-	Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, Str); 
+
+	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+	DocumentPackage.TextString = StrSplit(PaymentSettings.Out.Slip, Chars.LF + Chars.CR);
+	PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
+	If Not PrintResult.Info.Success Then
+		CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
+	EndIf;
 EndProcedure
 
+// Print last settlement at server.
+//
+// Parameters:
+//  Hardware - CatalogRef.Hardware -  Hardware
+//
+// Returns:
+//  See EquipmentAcquiringAPIClient.SettlementSettings
 &AtServer
 Function PrintLastSettlementAtServer(Hardware)
 	Query = New Query;
@@ -54,16 +64,18 @@ Function PrintLastSettlementAtServer(Hardware)
 		|
 		|ORDER BY
 		|	HardwareLogSliceLast.Date DESC";
-	
+
 	Query.SetParameter("Hardware", Hardware);
 	Query.SetParameter("Method", "Settlement");
-	
+
 	QueryResult = Query.Execute();
-	
+
 	SelectionDetailRecords = QueryResult.Select();
-	
+
 	If SelectionDetailRecords.Next() Then
+		//@skip-check invocation-parameter-type-intersect, property-return-type
 		DataStr = CommonFunctionsServer.DeserializeJSON(SelectionDetailRecords.Data);
+		//@skip-check property-return-type
 		If SelectionDetailRecords.Result Then
 			Return DataStr;
 		Else
@@ -77,22 +89,27 @@ EndFunction
 
 &AtClient
 Async Procedure GetSettlement(Command)
-	
+
 	CurrentRow = Items.HardwareList.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	SettlementSettings = EquipmentAcquiringAPIClient.SettlementSettings();
-	ResultSettlement = Await EquipmentAcquiringAPIClient.Settlement(CurrentRow.Hardware, SettlementSettings);
-	Str = New Structure("Payments", New Array);
-	//@skip-check typed-value-adding-to-untyped-collection
-	Str.Payments.Add(New Structure("PaymentInfo", SettlementSettings));
+
+	If Not Await EquipmentAcquiringAPIClient.Settlement(CurrentRow.Hardware, SettlementSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(SettlementSettings.Info.Error);
+		Return;
+	EndIf;
+
 	CRS = New Structure;
 	CRS.Insert("FiscalPrinter", FiscalPrinter);
-	If ResultSettlement Then
-		Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, Str);
+	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+	DocumentPackage.TextString = StrSplit(SettlementSettings.Out.Slip, Chars.LF + Chars.CR);
+	PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
+	If Not PrintResult.Info.Success Then
+		CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
 	EndIf;
-	
+
 EndProcedure
 

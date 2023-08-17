@@ -6,7 +6,7 @@
 // Parameters:
 //  Document - DocumentRefDocumentName -
 //  Status - EnumRef.DocumentFiscalStatuses
-//  FiscalResponse - Structure
+//  FiscalResponse - See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
 //  DataPresentation - String - Data presentation
 Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Export
 	NewRecord = CreateRecordManager();
@@ -15,9 +15,7 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	NewRecord.DataPresentation = DataPresentation;
 	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
 	If TypeOf(FiscalResponse) = Type("Structure") Then
-		If FiscalResponse.Property("CheckNumber") Then 
-			NewRecord.CheckNumber = FiscalResponse.CheckNumber;
-		EndIf;
+		NewRecord.CheckNumber = FiscalResponse.Out.DocumentOutputParameters.CheckNumber;
 	EndIf;
 	NewRecord.Write(True);
 EndProcedure
@@ -25,7 +23,7 @@ EndProcedure
 // Get status data.
 // 
 // Parameters:
-//  Document - DocumentRef.RetailSalesReceipt - Document
+//  Document - DocumentRefDocumentName - Document
 // 
 // Returns:
 //  Structure - Get status data:
@@ -33,7 +31,6 @@ EndProcedure
 // * FiscalResponse - String -
 // * DataPresentation - String -
 // * CheckNumber - Number -
-// * IsPrinted - Boolean -
 // * IsPrinted - Boolean -
 Function GetStatusData(Document) Export
 	StatusData = New Structure();
@@ -57,7 +54,7 @@ Function GetStatusData(Document) Export
 	If QuerySelection.Next() Then
 		FillPropertyValues(StatusData, QuerySelection);
 		If StatusData.Status = Enums.DocumentFiscalStatuses.Printed Then
-			StatusData.Insert("IsPrinted", True);
+			StatusData.IsPrinted = True;
 		EndIf;
 	EndIf;
 	Return StatusData;

@@ -1,11 +1,11 @@
 {
   "version": 1,
   "settings": {
-    "commit-transaction": {
-      "enabled": true
-    },
     "module-structure-method-in-regions": {
       "enabled": false
+    },
+    "commit-transaction": {
+      "enabled": true
     },
     "export-method-in-command-form-module": {
       "enabled": false
@@ -14,6 +14,9 @@
       "enabled": false
     },
     "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
+    "module-region-empty": {
       "enabled": false
     },
     "doc-comment-parameter-section": {
@@ -25,14 +28,14 @@
     "bsl-variable-name-invalid": {
       "enabled": false
     },
+    "rollback-transaction": {
+      "enabled": true
+    },
     "module-structure-form-event-regions": {
       "enabled": false
     },
     "invocation-form-event-handler": {
       "enabled": false
-    },
-    "rollback-transaction": {
-      "enabled": true
     },
     "query-in-loop": {
       "enabled": false

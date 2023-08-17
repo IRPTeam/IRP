@@ -785,23 +785,24 @@ Function FindRows(Object, Parameters, ScanDataItem)
 		EndIf;
 	EndIf;
 	
-	If Parameters.UseInventoryOrigin Then
-		ExistingRowsInfo = GetExistingRows_UseInventoryOrigin(Object, Parameters, ScanDataItem);
-		Result.InventoryOrigin = ExistingRowsInfo.InventoryOrigin;
-		Result.Consignor = ExistingRowsInfo.Consignor;
-		
-		If AlwaysAddNew Then
-			Return Result;
-		EndIf;
-		
-	Else
+	//#2093
+//	If Parameters.UseInventoryOrigin Then
+//		ExistingRowsInfo = GetExistingRows_UseInventoryOrigin(Object, Parameters, ScanDataItem);
+//		Result.InventoryOrigin = ExistingRowsInfo.InventoryOrigin;
+//		Result.Consignor = ExistingRowsInfo.Consignor;
+//		
+//		If AlwaysAddNew Then
+//			Return Result;
+//		EndIf;
+//		
+//	Else
 		
 		If AlwaysAddNew Then
 			Return Result;
 		EndIf;	
 		
 		ExistingRowsInfo = GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem);
-	EndIf;
+//	EndIf;
 	
 	// row exists increase quantity
 	If ExistingRowsInfo.ExistingRows.Count() Then
@@ -811,39 +812,40 @@ Function FindRows(Object, Parameters, ScanDataItem)
 	Return Result;
 EndFunction	
 
-Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem)
-	Result = New Structure("ExistingRows, InventoryOrigin, Consignor", New Array(), Undefined, Undefined);
-	
-	FilterStructureCopy = New Structure();
-	For Each KeyValue In Parameters.FilterStructure Do
-		FilterStructureCopy.Insert(KeyValue.Key, KeyValue.Value);
-	EndDo;
-		
-	ResultExistingRows = CommissionTradeServer.GetExistingRows(Object,
-				Parameters.ServerSideParameters, 
-				Parameters.StoreRef,
-				Parameters.StoreInItemList, 
-				FilterStructureCopy,
-				ScanDataItem, 
-				True);
-	
-	Parameters.ServerSideParameters.ServerParameters.Object = Object;
-			
-	If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
-		Result.InventoryOrigin = ResultExistingRows.InventoryOrigin;
-	EndIf;
-
-	If ResultExistingRows.Property("Consignor") And ValueIsFilled(ResultExistingRows.Consignor) Then
-		Result.Consignor = ResultExistingRows.Consignor;
-	EndIf;
-
-	For Each Row In Object.ItemList Do
-		If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
-			Result.ExistingRows.Add(Row);
-		EndIf;
-	EndDo;
-	Return Result;
-EndFunction
+//#2093
+//Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem)
+//	Result = New Structure("ExistingRows, InventoryOrigin, Consignor", New Array(), Undefined, Undefined);
+//	
+//	FilterStructureCopy = New Structure();
+//	For Each KeyValue In Parameters.FilterStructure Do
+//		FilterStructureCopy.Insert(KeyValue.Key, KeyValue.Value);
+//	EndDo;
+//		
+//	ResultExistingRows = CommissionTradeServer.GetExistingRows(Object,
+//				Parameters.ServerSideParameters, 
+//				Parameters.StoreRef,
+//				Parameters.StoreInItemList, 
+//				FilterStructureCopy,
+//				ScanDataItem, 
+//				True);
+//	
+//	Parameters.ServerSideParameters.ServerParameters.Object = Object;
+//			
+//	If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
+//		Result.InventoryOrigin = ResultExistingRows.InventoryOrigin;
+//	EndIf;
+//
+//	If ResultExistingRows.Property("Consignor") And ValueIsFilled(ResultExistingRows.Consignor) Then
+//		Result.Consignor = ResultExistingRows.Consignor;
+//	EndIf;
+//
+//	For Each Row In Object.ItemList Do
+//		If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
+//			Result.ExistingRows.Add(Row);
+//		EndIf;
+//	EndDo;
+//	Return Result;
+//EndFunction
 
 Function GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem)
 	Result = New Structure("ExistingRows", New Array());

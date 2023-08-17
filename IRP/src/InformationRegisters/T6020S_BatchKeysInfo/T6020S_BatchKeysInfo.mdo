@@ -452,10 +452,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="889ea06a-1f08-4723-b654-110a67835d56">
-    <name>BatchConsignor</name>
+    <name>DELETE_BatchConsignor</name>
     <synonym>
       <key>en</key>
-      <value>Batch consignor</value>
+      <value>DELETE batch consignor</value>
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>

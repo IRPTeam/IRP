@@ -808,7 +808,8 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
+	//#2093
+	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
 	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then

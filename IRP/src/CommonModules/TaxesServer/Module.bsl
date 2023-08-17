@@ -192,25 +192,26 @@ Function _GetTaxRateByCompany(Parameters) Export
 	Return Catalogs.TaxRates.EmptyRef();
 EndFunction
 
-Function GetTaxRateByConsignorBatch(Parameters) Export
-	ConsignorCompany = Catalogs.Companies.EmptyRef();
-	
-	If Parameters.ConsignorBatches.Count() Then
-		Row = Parameters.ConsignorBatches[0];
-		If TypeOf(Row.Batch) = Type("DocumentRef.OpeningEntry") Then
-			ConsignorCompany = Row.Batch.LegalNameConsignor;
-		Else
-			ConsignorCompany = Row.Batch.LegalName;
-		EndIf;
-	EndIf;
-	
-	QueryParameters = New Structure();
-	QueryParameters.Insert("Date"    , Parameters.Date);
-	QueryParameters.Insert("Tax"     , Parameters.Tax);
-	QueryParameters.Insert("Company" , ConsignorCompany);
-	
-	Return GetTaxRateByCompany(QueryParameters);	
-EndFunction
+//#2093
+//Function GetTaxRateByConsignorBatch(Parameters) Export
+//	ConsignorCompany = Catalogs.Companies.EmptyRef();
+//	
+//	If Parameters.ConsignorBatches.Count() Then
+//		Row = Parameters.ConsignorBatches[0];
+//		If TypeOf(Row.Batch) = Type("DocumentRef.OpeningEntry") Then
+//			ConsignorCompany = Row.Batch.LegalNameConsignor;
+//		Else
+//			ConsignorCompany = Row.Batch.LegalName;
+//		EndIf;
+//	EndIf;
+//	
+//	QueryParameters = New Structure();
+//	QueryParameters.Insert("Date"    , Parameters.Date);
+//	QueryParameters.Insert("Tax"     , Parameters.Tax);
+//	QueryParameters.Insert("Company" , ConsignorCompany);
+//	
+//	Return GetTaxRateByCompany(QueryParameters);	
+//EndFunction
 
 Procedure SetTaxRateQueryParameters(Query, Parameters)
 	Query.SetParameter("Agreements_EmptyRef", Catalogs.Agreements.EmptyRef());

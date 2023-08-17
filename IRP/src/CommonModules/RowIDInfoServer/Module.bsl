@@ -2908,23 +2908,24 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
-	|;
-	|///////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	ConsignorBatches.ItemKey,
-	|	ConsignorBatches.SerialLotNumber,
-	|	ConsignorBatches.SourceOfOrigin,
-	|	ConsignorBatches.Store,
-	|	ConsignorBatches.Batch,
-	|	ConsignorBatches.Quantity
-	|FROM
-	|	Document.RetailShipmentConfirmation.ConsignorBatches AS ConsignorBatches
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = ConsignorBatches.Ref
-	|		AND BasisesTable.BasisKey = ConsignorBatches.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	//#2093
+//	|;
+//	|///////////////////////////////////////////////////////////////////////////////
+//	|SELECT DISTINCT
+//	|	UNDEFINED AS Ref,
+//	|	BasisesTable.Key,
+//	|	ConsignorBatches.ItemKey,
+//	|	ConsignorBatches.SerialLotNumber,
+//	|	ConsignorBatches.SourceOfOrigin,
+//	|	ConsignorBatches.Store,
+//	|	ConsignorBatches.Batch,
+//	|	ConsignorBatches.Quantity
+//	|FROM
+//	|	Document.RetailShipmentConfirmation.ConsignorBatches AS ConsignorBatches
+//	|		INNER JOIN BasisesTable AS BasisesTable
+//	|		ON BasisesTable.Basis = ConsignorBatches.Ref
+//	|		AND BasisesTable.BasisKey = ConsignorBatches.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2934,7 +2935,8 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	TableSourceOfOrigins       = QueryResults[5].Unload();
-	TableConsignorBatches      = QueryResults[6].Unload();
+	//#2093
+	//TableConsignorBatches      = QueryResults[6].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
@@ -2946,7 +2948,8 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
-	Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
+	//#2093
+	//Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
 	
 	AddTables(Tables);
 
@@ -3091,23 +3094,24 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
-	|;
-	|///////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	ConsignorBatches.ItemKey,
-	|	ConsignorBatches.SerialLotNumber,
-	|	ConsignorBatches.SourceOfOrigin,
-	|	ConsignorBatches.Store,
-	|	ConsignorBatches.Batch,
-	|	ConsignorBatches.Quantity
-	|FROM
-	|	Document.RetailShipmentConfirmation.ConsignorBatches AS ConsignorBatches
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = ConsignorBatches.Ref
-	|		AND BasisesTable.BasisKey = ConsignorBatches.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	//#2093
+//	|;
+//	|///////////////////////////////////////////////////////////////////////////////
+//	|SELECT DISTINCT
+//	|	UNDEFINED AS Ref,
+//	|	BasisesTable.Key,
+//	|	ConsignorBatches.ItemKey,
+//	|	ConsignorBatches.SerialLotNumber,
+//	|	ConsignorBatches.SourceOfOrigin,
+//	|	ConsignorBatches.Store,
+//	|	ConsignorBatches.Batch,
+//	|	ConsignorBatches.Quantity
+//	|FROM
+//	|	Document.RetailShipmentConfirmation.ConsignorBatches AS ConsignorBatches
+//	|		INNER JOIN BasisesTable AS BasisesTable
+//	|		ON BasisesTable.Basis = ConsignorBatches.Ref
+//	|		AND BasisesTable.BasisKey = ConsignorBatches.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3119,7 +3123,8 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	TableSourceOfOrigins       = QueryResults[5].Unload();
-	TableConsignorBatches      = QueryResults[6].Unload();
+	//#2093
+	//TableConsignorBatches      = QueryResults[6].Unload();
 	
 	QueryItemList = New Query();
 	QueryItemList.Text = 
@@ -3188,7 +3193,8 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
-	Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
+	//#2093
+	//Tables.Insert("ConsignorBatches"      , TableConsignorBatches);
 
 	AddTables(Tables);
 
@@ -5244,9 +5250,10 @@ Procedure AddTables(Tables)
 		Tables.Insert("SourceOfOrigins", GetEmptyTable_SourceOfOrigins());
 	EndIf;
 	
-	If Not Tables.Property("ConsignorBatches") Then
-		Tables.Insert("ConsignorBatches", GetEmptyTable_ConsignorBatches());
-	EndIf;
+	//#2093
+//	If Not Tables.Property("ConsignorBatches") Then
+//		Tables.Insert("ConsignorBatches", GetEmptyTable_ConsignorBatches());
+//	EndIf;
 EndProcedure
 
 Function AddColumnsToItemList(TableItemList)
@@ -11393,7 +11400,8 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("Materials"             , GetEmptyTable_Materials());
 	Tables.Insert("SourceOfOrigins"       , GetEmptyTable_SourceOfOrigins());
 	Tables.Insert("ControlCodeStrings"    , GetEmptyTable_ControlCodeStrings());
-	Tables.Insert("ConsignorBatches"      , GetEmptyTable_ConsignorBatches());
+	//#2093
+	//Tables.Insert("ConsignorBatches"      , GetEmptyTable_ConsignorBatches());
 	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -11418,7 +11426,8 @@ Function GetTableNames_Refreshable(Excludings = "")
 	NamesArray.Add("Materials");
 	NamesArray.Add("SourceOfOrigins");
 	NamesArray.Add("ControlCodeStrings");
-	NamesArray.Add("ConsignorBatches");
+	//#2093
+	//NamesArray.Add("ConsignorBatches");
 	
 	If ValueIsFilled(Excludings) Then
 		ExcludingsArray = StrSplit(Excludings, ",");
@@ -11699,21 +11708,22 @@ EndFunction
 
 #EndRegion
 
-#Region EmptyTables_ConsignorBatches
-
-Function GetColumnNames_ConsignorBatches()
-	Return "Key, Ref, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch";
-EndFunction
-
-Function GetColumnNamesSum_ConsignorBatches()
-	Return "Quantity";
-EndFunction
-
-Function GetEmptyTable_ConsignorBatches()
-	Return GetEmptyTable(GetColumnNames_ConsignorBatches() + ", " + GetColumnNamesSum_ConsignorBatches());
-EndFunction
-
-#EndRegion
+//#2093
+//#Region EmptyTables_ConsignorBatches
+//
+//Function GetColumnNames_ConsignorBatches()
+//	Return "Key, Ref, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch";
+//EndFunction
+//
+//Function GetColumnNamesSum_ConsignorBatches()
+//	Return "Quantity";
+//EndFunction
+//
+//Function GetEmptyTable_ConsignorBatches()
+//	Return GetEmptyTable(GetColumnNames_ConsignorBatches() + ", " + GetColumnNamesSum_ConsignorBatches());
+//EndFunction
+//
+//#EndRegion
 
 #Region EmptyTables_Materials
 
@@ -12841,26 +12851,27 @@ Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Exp
 	Return SingleRowInfo;
 EndFunction
 
-Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
-	For Each Row1 In FillingValues Do
-		For Each Row2 In Row1.ItemList Do
-			If Row2.Property(FieldName) Then
-				Row2.Delete(FieldName);
-			EndIf;
-		EndDo;
-	EndDo;
-EndProcedure
+//#2093
+//Procedure RemoveFieldFormFillingValues(FillingValues, FieldName) Export
+//	For Each Row1 In FillingValues Do
+//		For Each Row2 In Row1.ItemList Do
+//			If Row2.Property(FieldName) Then
+//				Row2.Delete(FieldName);
+//			EndIf;
+//		EndDo;
+//	EndDo;
+//EndProcedure
 
-Procedure RemoveRecalculatedFieldsFromFillinValues(FillingValues) Export
-	For Each FillingValue In FillingValues Do
-		For Each KeyValue In FillingValue Do
-			If Upper(KeyValue.Key) = Upper("RowIDInfo") Then
-				Continue;
-			EndIf;
-			FillingValue.Delete(KeyValue.Key);
-		EndDo;
-		FillingValue.Insert("ItemList", New Array());
-	EndDo;
-EndProcedure
+//Procedure RemoveRecalculatedFieldsFromFillinValues(FillingValues) Export
+//	For Each FillingValue In FillingValues Do
+//		For Each KeyValue In FillingValue Do
+//			If Upper(KeyValue.Key) = Upper("RowIDInfo") Then
+//				Continue;
+//			EndIf;
+//			FillingValue.Delete(KeyValue.Key);
+//		EndDo;
+//		FillingValue.Insert("ItemList", New Array());
+//	EndDo;
+//EndProcedure
 
 

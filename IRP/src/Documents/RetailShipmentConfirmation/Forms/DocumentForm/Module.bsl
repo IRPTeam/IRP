@@ -525,8 +525,9 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
-	RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "Consignor");
+	//#2093
+	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
+	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "Consignor");
 	
 	For Each Row In Object.ConsignorBatches Do
 		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");

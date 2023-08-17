@@ -1,10 +1,10 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
-@CommissionTradeLandedCost
 
 
-Feature: landed cost commission trade
+
+Feature: consignment landed cost
 
 
 
@@ -18,7 +18,7 @@ Background:
 
 
 
-Scenario: _05702 preparation (landed cost commission trade)
+Scenario: _05602 preparation (consignment landed cost)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
 	And I close TestClient session
@@ -32,10 +32,10 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects
-		When Create catalog SourceOfOrigins objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
+		When Create catalog SourceOfOrigins objects
 		When Create catalog Specifications objects
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -43,16 +43,17 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
-		When Create catalog Companies objects (own Second company)
 		When Create catalog Stores objects
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog ReportOptions objects (landed cost)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
@@ -64,6 +65,7 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
+		When Create information register TaxSettings records (Concignor 1)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -74,14 +76,24 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create catalog Partners objects (Kalipso)
 	* Tax settings
 		When filling in Tax settings for company
-	* Load documents
-		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
-		When Create document InventoryTransfer objects (comission trade)
-		When Create document SalesInvoice and SalesReturn objects (comission trade)
-		When Create document SalesReportToConsignor objects (landed cost)
+	* Post document
+		And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);"     |
+	* Setting for Company
+		When settings for Company (commission trade)
+	And I close all client application windows
+	* LoadDocuments
+		When Create document PurchaseInvoice objects (comission trade, consignment)
+		When Create document AdditionalCostAllocation objects (comission trade, consignment)
+		When Create document SalesInvoice objects (comission trade, consignment)
+		When Create document SalesReturn objects (comission trade, consignment)
+		When Create document SalesReportFromTradeAgent objects (comission trade, consignment)
+		When Create document OpeningEntry objects (commission trade)
 		When Create document CalculationMovementCosts objects (comission trade, consignment)
-		When Create document OpeningEntry objects (comission trade, landed cost)
-		When Create document Retail sales receipt and RetailReturnReceipt objects (comission trade, landed cost)
 	* Post document
 		* Posting Opening entry
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -93,13 +105,17 @@ Scenario: _05702 preparation (landed cost commission trade)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
-		* Posting SalesInvoice
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		* Posting Purchase return
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+		* Posting AdditionalCostAllocation
+			Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
-		* Posting PurchaseReturn
-			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		* Posting SalesInvoice
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
@@ -108,23 +124,8 @@ Scenario: _05702 preparation (landed cost commission trade)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
-		* Posting Inventory transfer
-			Given I open hyperlink "e1cib/list/Document.SalesReturn"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
-		* Posting SalesReportToConsignor
-			Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
-		* Posting Retail sales receipt
-			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
-		* Posting Retail return receipt
-			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		* Posting SalesReportFromTradeAgent
+			Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
@@ -133,21 +134,37 @@ Scenario: _05702 preparation (landed cost commission trade)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
-		
 	And I close all client application windows
+	
 		
 
-Scenario: _05702 check preparation
+Scenario: _056002 check preparation
 	When check preparation
 
-Scenario: _057003 check batch balance
+Scenario: _056003 check batch balance
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	And I click "Select option..." button
+	And I move to "Custom" tab
+	And I activate field named "OptionsListReportOption" in "OptionsList" table
+	And I select current line in "OptionsList" table
+	* Select period
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "29.10.2022" text in the field named "DateBegin"
+		And I input "06.11.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+	And I click "Generate" button
+	And "Result" spreadsheet document contains "BathBalance_056_1" template lines by template
+	And I close all client application windows
+
+Scenario: _056004 check batch balance (Opening entry)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/app/Report.BatchBalance"
 	* Select period
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
-		And I input "01.11.2022" text in the field named "DateBegin"
-		And I input "04.11.2022" text in the field named "DateEnd"
+		And I input "01.12.2022" text in the field named "DateBegin"
+		And I input "01.12.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 	And I click "Generate" button
-	And "Result" spreadsheet document contains "BathBalance_057_1" template lines by template
+	And "Result" spreadsheet document contains "BathBalance_056_2" template lines by template
 	And I close all client application windows

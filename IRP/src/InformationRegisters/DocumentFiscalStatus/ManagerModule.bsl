@@ -2,7 +2,7 @@
 #Region Public
 
 // Set status.
-// 
+//
 // Parameters:
 //  Document - DocumentRefDocumentName -
 //  Status - EnumRef.DocumentFiscalStatuses
@@ -15,16 +15,18 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	NewRecord.DataPresentation = DataPresentation;
 	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
 	If TypeOf(FiscalResponse) = Type("Structure") Then
-		NewRecord.CheckNumber = FiscalResponse.Out.DocumentOutputParameters.CheckNumber;
+		If FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.Property.DocumentOutputParameters) = Type("Structure") Then
+			NewRecord.CheckNumber = FiscalResponse.Out.DocumentOutputParameters.CheckNumber;
+		EndIf;
 	EndIf;
 	NewRecord.Write(True);
 EndProcedure
 
 // Get status data.
-// 
+//
 // Parameters:
 //  Document - DocumentRefDocumentName - Document
-// 
+//
 // Returns:
 //  Structure - Get status data:
 // * Status - EnumRef.DocumentFiscalStatuses -
@@ -66,7 +68,7 @@ EndFunction
 
 // Get access key.
 // See Role.TemplateInformationRegisters
-// 
+//
 // Returns:
 //  Structure - Get access key:
 // * Company - CatalogRef.Companies -

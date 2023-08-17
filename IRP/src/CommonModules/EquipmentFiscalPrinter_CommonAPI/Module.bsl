@@ -33,6 +33,17 @@ Function Device_Close(Settings, DriverObject, ID) Export
 	Return HardwareClient.Device_Close(Settings, DriverObject, ID);
 EndFunction
 
+// Is code string approved.
+//
+// Parameters:
+//  GetProcessingKMResultSettings - See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+//
+// Returns:
+//  Boolean -  Is code string approved
+Function isCodeStringApproved(GetProcessingKMResultSettings) Export
+	Return GetProcessingKMResultSettings.Out.ProcessingKMResult.ResultCode = 15;
+EndFunction
+
 #EndRegion
 
 #Region Device
@@ -68,10 +79,8 @@ Async Function GetDataKKT(Hardware, Settings) Export
 		//@skip-check statement-type-change, wrong-type-expression
 		Settings.Out.TableParametersKKT = TableParametersKKT;
 	Else
-		TableParametersKKTStr = CommonFunctionsServer.GetXMLAsStructure(TableParametersKKT);
 		TableParametersKKTPrepared = EquipmentFiscalPrinterAPIClient.TableParametersKKT();
-		FillPropertyValues(TableParametersKKTPrepared, TableParametersKKTStr);
-
+		FillDataFromDeviceResponse(TableParametersKKTPrepared, TableParametersKKT);
 		Settings.Out.TableParametersKKT = TableParametersKKTPrepared;
 	EndIf;
 
@@ -150,7 +159,7 @@ Async Function OpenShift(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -194,7 +203,7 @@ Async Function CloseShift(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -238,7 +247,7 @@ Async Function ProcessCheck(Hardware, Settings) Export
 		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
 	Else
-		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
+		FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -280,7 +289,8 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
 	Else
-		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
+		//@skip-check invocation-parameter-type-intersect
+		FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -463,7 +473,7 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		EquipmentFiscalPrinterClient.FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -659,17 +669,23 @@ Async Function RequestKM(Hardware, Settings) Export
 		HardwareServer.WriteLog(Hardware, "RequestKM", True, Settings);
 	EndIf;
 
+	RequestKMResult = "";
+
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.RequestKM(
 		ConnectParameters.ID,
-		Settings.In.RequestKM,
-		Settings.Out.RequestKMResult
+		RequestXML_ToXML(Settings.In.RequestKM),
+		RequestKMResult
 	); // Boolean
 
 	Settings.Info.Success = Result;
 
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression, statement-type-change
+		Settings.Out.RequestKMResult = RequestKMResult;
+	Else
+		FillDataFromDeviceResponse(Settings.Out.RequestKMResult, RequestKMResult);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -695,10 +711,12 @@ Async Function GetProcessingKMResult(Hardware, Settings) Export
 		HardwareServer.WriteLog(Hardware, "GetProcessingKMResult", True, Settings);
 	EndIf;
 
+	ProcessingKMResult = "";
+
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.GetProcessingKMResult(
 		ConnectParameters.ID,
-		Settings.Out.ProcessingKMResult,
+		ProcessingKMResult,
 		Settings.Out.RequestStatus
 	); // Boolean
 
@@ -706,6 +724,10 @@ Async Function GetProcessingKMResult(Hardware, Settings) Export
 
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
+		//@skip-check wrong-type-expression, statement-type-change
+		Settings.Out.ProcessingKMResult = ProcessingKMResult;
+	Else
+		FillDataFromDeviceResponse(Settings.Out.ProcessingKMResult, ProcessingKMResult);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -755,6 +777,34 @@ EndFunction
 
 #Region Private
 
+// Request XML to XML.
+//
+// Parameters:
+//  RequestKMSettings - See EquipmentFiscalPrinterAPIClient.RequestKMInput
+//
+// Returns:
+//  String -  Request XML
+Function RequestXML_ToXML(RequestKMSettings)
+	CodeString = RequestKMSettings.MarkingCode;
+	If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
+		CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
+	EndIf;
+
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("RequestKM");
+	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
+	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(CodeString));
+	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
+	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettingsInfo.WaitForResult));
+	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettingsInfo.Quantity));
+	XMLWriter.WriteEndElement();
+
+	RequestXML = XMLWriter.Close();
+	Return RequestXML
+EndFunction
+
 // Input parameters to XML.
 //
 // Parameters:
@@ -762,7 +812,7 @@ EndFunction
 //
 // Returns:
 //  String - Input parameters to XML
-Function InputParameters_ToXML(InputParameters) Export
+Function InputParameters_ToXML(InputParameters)
 
 	XMLWriter = New XMLWriter();
 	XMLWriter.SetString("UTF-8");
@@ -794,7 +844,7 @@ EndFunction
 //
 // Returns:
 //  String - Print text get XMLOperation
-Function DocumentPackage_ToXML(DocumentPackage) Export
+Function DocumentPackage_ToXML(DocumentPackage)
 
 	XMLWriter = New XMLWriter();
 	XMLWriter.SetString("UTF-8");
@@ -833,7 +883,7 @@ EndFunction
 //
 // Returns:
 //  String - Receipt get XMLOperation
-Function CheckPackage_ToXML(CheckPackage) Export
+Function CheckPackage_ToXML(CheckPackage)
 
 	XMLWriter = New XMLWriter();
 	XMLWriter.SetString("UTF-8");
@@ -905,6 +955,63 @@ Function CheckPackage_ToXML(CheckPackage) Export
 
 	Return XMLWriter.Close();
 
+EndFunction
+
+// Fill data from device response.
+//
+// Parameters:
+//  Data - Structure
+//  DeviceResponse - String -  Device response
+Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export
+	Reader = New XMLReader();
+	Reader.SetString(DeviceResponse);
+	Result = XDTOFactory.ReadXML(Reader); // XDTODataObject
+	Reader.Close();
+	If Not Result.Properties().Get("Parameters") = Undefined Then
+		//@skip-check property-return-type
+		DeviceResponseParameters = Result.Parameters; // XDTODataObject
+	Else
+		DeviceResponseParameters = Result;
+	EndIf;
+
+	For Each DataItem In Data Do
+		If Not DeviceResponseParameters.Properties().Get(DataItem.Key) = Undefined Then
+			//@skip-check invocation-parameter-type-intersect
+			Data.Insert(DataItem.Key, TransformToTypeBySource(DeviceResponseParameters[DataItem.Key], DataItem.Value));
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Transform to type by source.
+// @skip-check property-return-type, dynamic-access-method-not-found, variable-value-type, invocation-parameter-type-intersect
+//
+// Parameters:
+//  Data - Boolean, Number, Date, Structure - Data
+//  Source - Arbitrary -  Source
+//
+// Returns:
+//  Boolean, Number, Date, Structure -  Transform to type by source
+Function TransformToTypeBySource(Data, Source)
+	If Data = "" Then
+		Return Data;
+	EndIf;
+	If TypeOf(Source) = Type("Boolean") Then
+		Return Boolean(Data);
+	ElsIf TypeOf(Source) = Type("Number") Then
+		Return Number(Data);
+	ElsIf TypeOf(Source) = Type("Date") Then
+		//@skip-check invocation-parameter-type-intersect
+		Return ReadJSONDate(Data, JSONDateFormat.ISO);
+	ElsIf TypeOf(Source) = Type("Structure") Then
+		Structure = New Structure();
+		For Each Item In Data.Parameters.Properties() Do
+			//@skip-check invocation-parameter-type-intersect
+			Structure.Insert(Item.Name, Data.Parameters[Item.Name]);
+		EndDo;
+		Return Structure;
+	Else
+		Return Data;
+	EndIf;
 EndFunction
 
 Function ToXMLString(Data)

@@ -120,11 +120,15 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 
 			ArrayForApprove = New Array; // Array Of String
 			For Each CodeString In EquipmentFiscalPrinterServer.GetStringCode(DataSource) Do
-				RequestKMSettings = RequestKMSettingsInfo(isReturn);
+				RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMInput(isReturn);
 				RequestKMSettings.MarkingCode = CodeString;
 				RequestKMSettings.Quantity = 1;
-				CheckResult = Await Device_CheckKM(CRS.FiscalPrinter, RequestKMSettings, False);
-				If Not CheckResult.Approved Then
+				CheckResult = Await CheckKM(CRS.FiscalPrinter, RequestKMSettings, False); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+				If Not CheckResult.Info.Success Then
+					Raise CheckResult.Info.Error;
+				EndIf;
+
+				If Not CheckResult.Info.Approved Then
 					Raise StrTemplate(R().EqFP_ProblemWhileCheckCodeString, GetStringFromBinaryData(Base64Value(RequestKMSettings.MarkingCode)));
 				EndIf;
 				ArrayForApprove.Add(RequestKMSettings.GUID);
@@ -148,7 +152,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
 		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource,PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), ProcessCheckSettings, DataPresentation);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), ProcessCheckSettings, DataPresentation);
 	Else
 		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.FiscalReturnedError"), ProcessCheckSettings);
 	EndIf;
@@ -213,9 +217,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	CashInOutcomeSettings.In.Amount = Amount;
 	CashInOutcomeSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.CashInOutcome(CRS.FiscalPrinter, CashInOutcomeSettings) Then
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource,
-						, PredefinedValue("Enum.DocumentFiscalStatuses.Printed")
-						, CashInOutcomeSettings);
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), CashInOutcomeSettings);
 	Else
 		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.FiscalReturnedError"), CashInOutcomeSettings);
 	EndIf;
@@ -290,70 +292,70 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DocumentPackage) Expor
 	Return PrintTextDocumentSettings;
 EndFunction
 
-// Request KM.
+// Check KM.
 //
 // Parameters:
 //  Hardware - CatalogRef.Hardware -
-//  RequestKMSettingsInfo - See RequestKMSettingsInfo
+//  RequestKMInput - See EquipmentFiscalPrinterAPIClient.RequestKMInput
 //
 // Returns:
-//  See EquipmentFiscalPrinterClient.ProcessingKMResult
-Async Function CheckKM(Hardware, RequestKMSettings) Export
-	Return Await Device_CheckKM(Hardware, RequestKMSettings);
-EndFunction
+//  See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 
-// Request KM settings.
-//
-// Returns:
-//  Structure - Request KMSettings:
-// * GUID - String -
-// * WaitForResult - Boolean -
-// * MarkingCode - String -
-// * PlannedStatus - Number -
-// * Quantity - Number -
-Function RequestKMSettingsInfo(isReturn = False) Export
-	Str = New Structure;
-	Str.Insert("GUID", String(New UUID()));
-	Str.Insert("WaitForResult", True);
-	Str.Insert("MarkingCode", "");
-	Str.Insert("PlannedStatus", ?(isReturn, 3, 1));
-	Str.Insert("Quantity", 1);
-	Return Str;
-EndFunction
+	If OpenAndClose Then
+		OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(Hardware, OpenSessionRegistrationKMSettings) Then
+			CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
+			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
+		EndIf;
+	EndIf;
+	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMSettings();
+	RequestKMSettings.In.RequestKM = RequestKM;
+	If Not Await EquipmentFiscalPrinterAPIClient.RequestKM(Hardware, RequestKMSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
+		Raise R().EqFP_CanNotRequestKM;
+	EndIf;
 
-// Request KMSettings result.
-//
-// Returns:
-//  Structure - Request KMSettings result:
-// * Checking - Boolean -
-// * CheckingResult - Boolean -
-Function RequestKMSettingsResult()
-	Str = New Structure;
-	Str.Insert("Checking", False);
-	Str.Insert("CheckingResult", False);
-	Return Str;
-EndFunction
+	ResultIsCorrect = False;
+	For Index = 0 To 5 Do
+		CommonFunctionsServer.Pause(2);
 
-// Processing KMResult.
-//
-// Returns:
-//  Structure - Processing KMResult:
-// * GUID - String -
-// * Result - Boolean -
-// * ResultCode - Number -
-// * StatusInfo - Number -
-// * HandleCode - Number -
-// * Approved - Boolean -
-Function ProcessingKMResult() Export
-	Str = New Structure;
-	Str.Insert("GUID", "");
-	Str.Insert("Result", False);
-	Str.Insert("ResultCode", -1);
-	Str.Insert("StatusInfo", 0);
-	Str.Insert("HandleCode", -1);
-	Str.Insert("Approved", False);
+		GetProcessingKMResultSettings = EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.GetProcessingKMResult(Hardware, GetProcessingKMResultSettings) Then
+			CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
+			Raise R().EqFP_CanNotGetProcessingKMResult;
+		EndIf;
 
-	Return Str;
+		If GetProcessingKMResultSettings.Out.RequestStatus = 2 Then
+			Raise R().EqFP_GetWrongAnswerFromProcessingKM;
+		EndIf;
+
+		If GetProcessingKMResultSettings.Out.RequestStatus = 1 Then
+			Continue;
+		EndIf;
+
+		If Not RequestKM.GUID = GetProcessingKMResultSettings.Out.ProcessingKMResult.GUID Then
+			Continue;
+		EndIf;
+
+		ResultIsCorrect = True;
+		Break;
+	EndDo;
+
+	If OpenAndClose Then
+		CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
+		If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(Hardware, CloseSessionRegistrationKMSettings) Then
+			Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+		EndIf;
+	EndIf;
+
+	If Not ResultIsCorrect Then
+		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
+	EndIf;
+
+	GetProcessingKMResultSettings.Info.Approved = HardwareClient.GetAPIModule(Hardware).isCodeStringApproved(GetProcessingKMResultSettings);
+
+	Return GetProcessingKMResultSettings;
 EndFunction
 
 // Get current status.
@@ -388,197 +390,6 @@ Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
 		EndIf;
 	EndIf;
 	Return CurrentStatusSettings;
-EndFunction
-
-#EndRegion
-
-#Region Check
-
-// Device request KM.
-//
-// Parameters:
-//  Hardware - CatalogRef.Hardware -
-//  RequestKMSettingsInfo - See RequestKMSettingsInfo
-//  OpenAndClose - Boolean -
-//
-// Returns:
-//  See ProcessingKMResult
-Async Function Device_CheckKM(Hardware, RequestKMData, OpenAndClose = True)
-
-	RequestXML = RequestXML(RequestKMData);
-	ProcessingKMResult = ProcessingKMResult();
-
-	If OpenAndClose Then
-		OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
-		If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(Hardware, OpenSessionRegistrationKMSettings) Then
-			CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
-			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
-		EndIf;
-	EndIf;
-
-	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMSettings();
-	RequestKMSettings.In.RequestKM = RequestXML;
-	If Not Await EquipmentFiscalPrinterAPIClient.RequestKM(Hardware, RequestKMSettings) Then
-		CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
-		Raise R().EqFP_CanNotRequestKM;
-	EndIf;
-
-	RequestKMResult = RequestXMLResponse(RequestKMSettings.Out.RequestKMResult);
-
-	ResultIsCorrect = False;
-	For Index = 0 To 5 Do
-		CommonFunctionsServer.Pause(2);
-
-		GetProcessingKMResultSettings = EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings();
-		If Not Await EquipmentFiscalPrinterAPIClient.GetProcessingKMResult(Hardware, GetProcessingKMResultSettings) Then
-			CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
-			Raise R().EqFP_CanNotGetProcessingKMResult;
-		EndIf;
-
-		If GetProcessingKMResultSettings.Out.RequestStatus = 2 Then
-			Raise R().EqFP_GetWrongAnswerFromProcessingKM;
-		EndIf;
-
-		If GetProcessingKMResultSettings.Out.RequestStatus = 1 Then
-			Continue;
-		EndIf;
-
-		If IsBlankString(GetProcessingKMResultSettings.Out.ProcessingKMResult) Then
-			Continue;
-		EndIf;
-
-		ProcessingKMResult = ProcessingKMResultResponse(GetProcessingKMResultSettings.Out.ProcessingKMResult);
-
-		If Not ProcessingKMResult.GUID = RequestKMData.GUID Then
-			Continue;
-		EndIf;
-
-		ResultIsCorrect = True;
-		Break;
-	EndDo;
-
-	If OpenAndClose Then
-		CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
-		If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(Hardware, CloseSessionRegistrationKMSettings) Then
-			Raise R().EqFP_CanNotCloseSessionRegistrationKM;
-		EndIf;
-	EndIf;
-
-	If Not ResultIsCorrect Then
-		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
-	EndIf;
-
-	ProcessingKMResult.Approved = isApproved(ProcessingKMResult);
-
-	Return ProcessingKMResult;
-
-EndFunction
-
-Function isApproved(ProcessingKMResult)
-	Return ProcessingKMResult.ResultCode = 15;
-EndFunction
-
-#EndRegion
-
-#Region Private
-
-Function RequestXML(RequestKMSettings)
-	CodeString = RequestKMSettings.MarkingCode;
-	If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
-		CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
-	EndIf;
-
-	XMLWriter = New XMLWriter();
-	XMLWriter.SetString("UTF-8");
-	XMLWriter.WriteXMLDeclaration();
-	XMLWriter.WriteStartElement("RequestKM");
-	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
-	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(CodeString));
-	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
-	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettingsInfo.WaitForResult));
-	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettingsInfo.Quantity));
-	XMLWriter.WriteEndElement();
-
-	RequestXML = XMLWriter.Close();
-	Return RequestXML
-EndFunction
-
-Function RequestXMLResponse(ResultXML)
-
-	Result = RequestKMSettingsResult();
-
-	Reader = New XMLReader();
-	Reader.SetString(ResultXML);
-	XDTO = XDTOFactory.ReadXML(Reader);
-	Reader.Close();
-
-	For Each DataItem In Result Do
-		If Not XDTO.Properties().Get(DataItem.Key) = Undefined Then
-			Result[DataItem.Key] = TransformToTypeBySource(XDTO[DataItem.Key], DataItem.Value);
-		EndIf;
-	EndDo;
-
-	Return Result;
-
-EndFunction
-
-Function ProcessingKMResultResponse(ResultXML)
-
-	Result = ProcessingKMResult();
-
-	Reader = New XMLReader();
-	Reader.SetString(ResultXML);
-	XDTO = XDTOFactory.ReadXML(Reader);
-	Reader.Close();
-
-	For Each DataItem In Result Do
-		If Not XDTO.Properties().Get(DataItem.Key) = Undefined Then
-			Result[DataItem.Key] = TransformToTypeBySource(XDTO[DataItem.Key], DataItem.Value);
-		EndIf;
-	EndDo;
-
-	Return Result;
-
-EndFunction
-
-Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export
-	Reader = New XMLReader();
-	Reader.SetString(DeviceResponse);
-	Result = XDTOFactory.ReadXML(Reader);
-	Reader.Close();
-	DeviceResponseParameters = Result.Parameters;
-
-	For Each DataItem In Data Do
-		If Not DeviceResponseParameters.Properties().Get(DataItem.Key) = Undefined Then
-			Data.Insert(DataItem.Key, TransformToTypeBySource(DeviceResponseParameters[DataItem.Key], DataItem.Value));
-		EndIf;
-	EndDo;
-EndProcedure
-
-Function TransformToTypeBySource(Data, Source)
-	If Data = "" Then
-		Return Data;
-	EndIf;
-	If TypeOf(Source) = Type("Boolean") Then
-		Return Boolean(Data);
-	ElsIf TypeOf(Source) = Type("Number") Then
-		Return Number(Data);
-	ElsIf TypeOf(Source) = Type("Date") Then
-		Return ReadJSONDate(Data, JSONDateFormat.ISO);
-	ElsIf TypeOf(Source) = Type("Structure") Then
-		Structure = New Structure();
-		For Each Item In Data.Parameters.Properties() Do
-			Structure.Insert(Item.Name, Data.Parameters[Item.Name]);
-		EndDo;
-		Return Structure;
-	Else
-		Return Data;
-	EndIf;
-EndFunction
-
-Function ToXMLString(Data)
-	// @skip-check Undefined function
-	Return XMLString(Data);
 EndFunction
 
 #EndRegion

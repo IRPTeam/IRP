@@ -541,10 +541,10 @@ EndFunction
 // ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** RequestKM - String - Request data
+// ** RequestKM - See RequestKMInput
 // * InOut - Structure -
 // * Out - Structure:
-// ** RequestKMResult - String - Response data
+// ** RequestKMResult - See RequestKMResult
 Function RequestKMSettings() Export
     Str = New Structure;
 
@@ -555,12 +555,12 @@ Function RequestKMSettings() Export
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("RequestKM", "");
+    Str.In.Insert("RequestKM", RequestKMInput());
 
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("RequestKMResult", "");
+    Str.Out.Insert("RequestKMResult", RequestKMResult());
 
     Return Str;
 EndFunction
@@ -573,11 +573,12 @@ EndFunction
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
+// ** Approved - Boolean - Is code string was approved
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
 // * Out - Structure:
-// ** ProcessingKMResult - String - Result of the request
+// ** ProcessingKMResult - See ProcessingKMResult
 // ** RequestStatus - Number - Request status:
 // 0 = result received,
 // 1 = result not yet received,
@@ -589,6 +590,7 @@ Function GetProcessingKMResultSettings() Export
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetProcessingKMResult");
     Str.Info.Insert("Success", False);
+    Str.Info.Insert("Approved", False);
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -596,7 +598,7 @@ Function GetProcessingKMResultSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("ProcessingKMResult", "");
+    Str.Out.Insert("ProcessingKMResult", ProcessingKMResult());
     Str.Out.Insert("RequestStatus", 0);
 
     Return Str;
@@ -641,6 +643,62 @@ EndFunction
 #EndRegion
 
 #Region Additional
+
+// Processing KM Result.
+//
+// Returns:
+//  Structure - Processing KM Result:
+// * GUID - String - Unique request identifier.
+// * Result - Boolean - True if the KP KM check result is positive. False if the KP KM check result is negative.
+// * ResultCode - Number - Result of checking information about the product, tag 2106, Table 110
+// * StatusInfo - Number - Value from 1 to 3 from table 106 (FFD). The product status is correct if the attribute has a value of 1.
+// * HandleCode - Number - Request processing code. Value from 0 to 2 from table 132.
+Function ProcessingKMResult() Export
+    ProcessingKMResult = New Structure;
+    ProcessingKMResult.Insert("GUID", "");
+    ProcessingKMResult.Insert("Result", False);
+    ProcessingKMResult.Insert("ResultCode", 0);
+    ProcessingKMResult.Insert("StatusInfo", 0);
+    ProcessingKMResult.Insert("HandleCode", 0);
+    Return ProcessingKMResult;
+EndFunction
+
+// Request KM.
+//
+// Parameters:
+//  isReturn - Boolean - Is return
+//
+// Returns:
+//  Structure - Request KM:
+// * GUID - String - Unique request identifier. Formed by 1C.
+// * WaitForResult - Boolean - Whether to wait for a response from OISM. True - wait, False - do not wait for a response.
+// * MarkingCode - String - Control marking code. Encoded in Base64.
+// * PlannedStatus - Number - Planned status of the product. Value from 1 to 5 from table 105 (FFD).
+// * Quantity - Number - Quantity
+// * MeasureOfQuantity - String - Measure of the quantity of the subject of calculation. Value from table 114 (FFD).
+Function RequestKMInput(isReturn = False) Export
+    RequestKM = New Structure;
+    RequestKM.Insert("GUID", String(New UUID()));
+    RequestKM.Insert("WaitForResult", True);
+    RequestKM.Insert("MarkingCode", "");
+    RequestKM.Insert("PlannedStatus", ?(isReturn, 3, 1));
+    RequestKM.Insert("Quantity", 1);
+    RequestKM.Insert("MeasureOfQuantity", "");
+    Return RequestKM;
+EndFunction
+
+// Request KM Result.
+//
+// Returns:
+//  Structure - Request KM Result:
+// * Checking - Boolean - True if the marking code has been checked by the fiscal accumulator using the KP verification key. False if the marking code cannot be checked by the fiscal accumulator using the KP verification key.
+// * CheckingResult - Boolean - True if the KP KM check result by the fiscal accumulator using the KP verification key is positive. False if the KP KM check result by the fiscal accumulator using the KP verification key is negative.
+Function RequestKMResult() Export
+    RequestKMResult = New Structure;
+    RequestKMResult.Insert("Checking", False);
+    RequestKMResult.Insert("CheckingResult", False);
+    Return RequestKMResult;
+EndFunction
 
 // Table parameters KKT. Registration data of the fiscal memory module.
 //

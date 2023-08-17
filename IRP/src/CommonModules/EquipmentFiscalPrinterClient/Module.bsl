@@ -65,7 +65,6 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
-	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
 		Raise R().EqFP_FiscalDeviceIsEmpty;

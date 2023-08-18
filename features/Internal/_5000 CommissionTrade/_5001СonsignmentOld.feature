@@ -1,7 +1,7 @@
 #language: en
 @tree
 @Positive
-@CommissionTrade
+
 
 
 Feature: consignment

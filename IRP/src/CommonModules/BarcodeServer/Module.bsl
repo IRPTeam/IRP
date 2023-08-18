@@ -456,3 +456,17 @@ Procedure UpdateBarcode(Barcode, Params = Undefined, AddInfo = Undefined) Export
 	EndIf;
 	NewBarcode.Write();
 EndProcedure
+
+// Get document barcode.
+// 
+// Parameters:
+//  Source - DocumentRefDocumentName - Source
+// 
+// Returns:
+//  String - Document barcode
+Function GetDocumentBarcode(Source) Export
+	Str = New Structure();
+	Str.Insert("Type", Source.Metadata().Name);
+	Str.Insert("Code", String(Source.UUID()));
+	Return CommonFunctionsServer.SerializeJSON(Str);
+EndFunction

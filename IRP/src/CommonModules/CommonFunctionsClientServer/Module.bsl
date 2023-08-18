@@ -1,4 +1,9 @@
 Procedure ShowUsersMessage(Text, Field = Undefined, Data = Undefined, AddInfo = Undefined) Export
+	
+	If IsBlankString(Text) Then
+		Return;
+	EndIf;
+	
 	Message = New UserMessage();
 	Message.Text = Text;
 	Message.Field = Field;

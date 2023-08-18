@@ -33,9 +33,11 @@ Function GetOrCreateDataBaseStatusInfo() Export
 	NewConnection = CreateItem();
 	If Not Select().Next() Then
 		NewConnection.isProduction = True;
+		NewConnection.SelectedStyle = "Auto";
+	Else
+		NewConnection.SelectedStyle = "TestDataBase";
 	EndIf;
 
-	NewConnection.SelectedStyle = "Auto";
 	For Each Lang In LocalizationReuse.AllDescription() Do
 		NewConnection[Lang] = ConnectionString;
 	EndDo;

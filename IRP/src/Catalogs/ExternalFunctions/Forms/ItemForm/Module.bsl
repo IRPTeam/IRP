@@ -92,7 +92,7 @@ EndProcedure
 
 &AtClient
 Async Procedure FindMatches()
-	Array = New Array;
+	Array = New Array; // Array Of String
 	For Each TestRexExpString In Object.TestRexExpStrings Do
 		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.RegExp); // Array of String
 		If ResultArray.Count() = 0 Then
@@ -280,7 +280,7 @@ EndProcedure
 
 &AtServer
 Function FillTypes()
-	ValueList = New ValueList();
+	ValueList = New ValueList(); // ValueList Of String
 	ValueList.Add("String", "String", , PictureLib.Rename);
 	ValueList.Add("Number", "Number", , PictureLib.Calculator);
 	ValueList.Add("Date", "Date", , PictureLib.Calendar);

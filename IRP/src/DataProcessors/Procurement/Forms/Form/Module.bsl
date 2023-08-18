@@ -452,12 +452,14 @@ EndProcedure
 Procedure CreateDocuments(Command)
 	CreatedDocuments = CreateDocumentsAtServer();
 	For Each Doc In CreatedDocuments.PurchaseOrders Do
+		//@skip-check use-non-recommended-method
 		DocForm = GetForm("Document.PurchaseOrder.ObjectForm", New Structure("Key", Doc));
 		DocPurchaseOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
 		DocForm.Write();
 	EndDo;
 
 	For Each Doc In CreatedDocuments.TransferOrders Do
+		//@skip-check use-non-recommended-method
 		DocForm = GetForm("Document.InventoryTransferOrder.ObjectForm", New Structure("Key", Doc));
 		DocInventoryTransferOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
 		DocForm.Write();

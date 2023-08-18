@@ -145,7 +145,7 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
 			NewRow = TableOfDifferenceFields.Add();
 			FillPropertyValues(NewRow, ItemOfDifferenceFields);
-			If Find(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
+			If StrFind(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
 				NewRow.LineNumber = 0;
 			EndIf;
 		EndDo;
@@ -153,7 +153,7 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	TableOfDifferenceFields.GroupBy("FieldName, DataPath, LineNumber, ValueBefore, ValueAfter");
 	For Each Difference In TableOfDifferenceFields Do
 		If ValueIsFilled(Difference.DataPath) Then
-			If Find(Difference.DataPath, "ItemList") <> 0 Then
+			If StrFind(Difference.DataPath, "ItemList") <> 0 Then
 				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
 					Difference.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
 					"ItemList[" + Format((Difference.LineNumber - 1), "NZ=0; NG=0;") + "]." 

@@ -5,6 +5,7 @@ Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, Ope
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;
 
+	//@skip-check use-non-recommended-method
 	ChoiceForm = GetForm(OpenSettings.FormName, OpenSettings.FormParameters, Item, Form.UUID, , Form.URL);
 	If OpenSettings.ArrayOfFilters = Undefined Then
 		OpenSettings.ArrayOfFilters = New Array();
@@ -19,6 +20,7 @@ EndProcedure
 Procedure OpenListForm(FormName, ArrayOfFilters, FormParameters, Source = Undefined, Uniqueness = Undefined,
 	Window = Undefined, URL = Undefined) Export
 
+	//@skip-check use-non-recommended-method
 	ListForm = GetForm(FormName, FormParameters, Source, Uniqueness, Window, URL);
 
 	For Each Filter In ArrayOfFilters Do

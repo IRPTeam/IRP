@@ -172,6 +172,12 @@ Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = F
 					Data.Info[Prop.Key] = String(Prop.Value);
 				EndIf;
 			EndDo;
+			
+			If Data.Info.Property("CRS") And TypeOf(Data.Info.CRS) = Type("Structure") Then
+				For Each Prop In Data.Info.CRS Do
+					Data.Info.CRS[Prop.Key] = String(Prop.Value);
+				EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 	

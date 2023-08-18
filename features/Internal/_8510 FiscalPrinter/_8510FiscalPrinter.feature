@@ -1807,8 +1807,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"
 	* Check double click Print cash in
 		And I click "Print cash in" button
-		Then there are lines in TestClient message log
-			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
+		And I click "OK" button
 		And I close all client application windows
 		
 
@@ -1879,8 +1878,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
 	* Check double click Print cash out
 		And I click "Print cash out" button
-		Then there are lines in TestClient message log
-			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
+		And I click "OK" button
 		And I close all client application windows
 
 

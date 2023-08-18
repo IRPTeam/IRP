@@ -31,7 +31,7 @@ Function GetDataKKTSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("TableParametersKKT", New Structure);
+    Str.Out.Insert("TableParametersKKT", TableParametersKKT());
 
     Return Str;
 EndFunction
@@ -102,7 +102,7 @@ Function OpenShiftSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", New Structure);
+    Str.Out.Insert("OutputParameters", OutputParameters());
 
     Return Str;
 EndFunction
@@ -136,7 +136,7 @@ Function CloseShiftSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", New Structure);
+    Str.Out.Insert("OutputParameters", OutputParameters());
 
     Return Str;
 EndFunction
@@ -167,7 +167,7 @@ Function ProcessCheckSettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("Electronically", False);
-    Str.In.Insert("CheckPackage", New Structure());
+    Str.In.Insert("CheckPackage", CheckPackage());
 
     Str.Insert("InOut", New Structure);
 
@@ -187,10 +187,10 @@ EndFunction
 // ** Success - Boolean - Operation status
 // * In - Structure:
 // ** DeviceID - String - Device ID
-// ** CheckPackage - String - XML structure - correction check description.
+// ** CheckPackage - See CheckPackage
 // * InOut - Structure -
 // * Out - Structure:
-// ** DocumentOutputParameters - String - Output parameters of the operation
+// ** DocumentOutputParameters - See DocumentOutputParameters
 Function ProcessCorrectionCheckSettings() Export
     Str = New Structure;
 
@@ -201,12 +201,12 @@ Function ProcessCorrectionCheckSettings() Export
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("CheckPackage", "");
+    Str.In.Insert("CheckPackage", CheckPackage());
 
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("DocumentOutputParameters", "");
+    Str.Out.Insert("DocumentOutputParameters", DocumentOutputParameters());
 
     Return Str;
 EndFunction
@@ -234,7 +234,7 @@ Function PrintTextDocumentSettings() Export
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
-    Str.In.Insert("DocumentPackage", New Structure);
+    Str.In.Insert("DocumentPackage", DocumentPackage());
 
     Str.Insert("InOut", New Structure);
 
@@ -370,7 +370,7 @@ Function GetCurrentStatusSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", New Structure);
+    Str.Out.Insert("OutputParameters", OutputParameters());
 
     Return Str;
 EndFunction
@@ -404,7 +404,7 @@ Function ReportCurrentStatusOfSettlementsSettings() Export
     Str.Insert("InOut", New Structure);
 
     Str.Insert("Out", New Structure);
-    Str.Out.Insert("OutputParameters", "");
+    Str.Out.Insert("OutputParameters", OutputParameters());
 
     Return Str;
 EndFunction

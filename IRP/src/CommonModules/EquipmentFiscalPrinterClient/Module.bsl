@@ -8,10 +8,12 @@
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.OpenShiftSettings
 Async Function OpenShift(ConsolidatedRetailSales) Export
+	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		OpenShiftSettings.Info.Success = True;
+		Return OpenShiftSettings;
 	EndIf;
 
 	//@skip-check module-unused-local-variable
@@ -36,7 +38,6 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		Return CurrentStatus;
 	EndIf;
 
-	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 	OpenShiftSettings.In.InputParameters = InputParameters;
 	Await EquipmentFiscalPrinterAPIClient.OpenShift(CRS.FiscalPrinter, OpenShiftSettings);
 
@@ -44,9 +45,13 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
+
+	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		CloseShiftSettings.Info.Success = True;
+		Return CloseShiftSettings;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -57,7 +62,6 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 		Return CurrentStatus;
 	EndIf;
 
-	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 	CloseShiftSettings.In.InputParameters = InputParameters;
 	Await EquipmentFiscalPrinterAPIClient.CloseShift(CRS.FiscalPrinter, CloseShiftSettings);
 
@@ -65,9 +69,13 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
+
+	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		PrintXReportSettings.Info.Success = True;
+		Return PrintXReportSettings;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -93,9 +101,13 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
+
+	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		ProcessCheckSettings.Info.Success = True;
+		Return ProcessCheckSettings;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -148,7 +160,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
 	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
 
-	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
+
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
 		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
@@ -174,12 +186,14 @@ Async Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 		Raise R().EqFP_DocumentNotPrintedOnFiscal;
 	EndIf;
 
+	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		PrintCheckCopySettings.Info.Success = True;
+		Return PrintCheckCopySettings;
 	EndIf;
 
-	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
 	PrintCheckCopySettings.In.CheckNumber = StatusData.CheckNumber;
 	Await EquipmentFiscalPrinterAPIClient.PrintCheckCopy(CRS.FiscalPrinter, PrintCheckCopySettings);
 
@@ -200,9 +214,13 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
+
+	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		CashInOutcomeSettings.Info.Success = True;
+		Return CashInOutcomeSettings;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -239,9 +257,13 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
+
+	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
+
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
+		CashInOutcomeSettings.Info.Success = True;
+		Return CashInOutcomeSettings;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -252,7 +274,6 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Return CurrentStatus;
 	EndIf;
 
-	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.In.Amount = -Amount;
 	CashInOutcomeSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.CashInOutcome(CRS.FiscalPrinter, CashInOutcomeSettings) Then
@@ -273,12 +294,15 @@ EndFunction
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
 Async Function PrintTextDocument(ConsolidatedRetailSales, DocumentPackage) Export
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter");
-	If CRS.FiscalPrinter.isEmpty() Then
-		Raise R().EqFP_FiscalDeviceIsEmpty;
-	EndIf;
 
 	PrintTextDocumentSettings = EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings();
+
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter");
+	If CRS.FiscalPrinter.isEmpty() Then
+		PrintTextDocumentSettings.Info.Success = True;
+		Return PrintTextDocumentSettings;
+	EndIf;
+
 	PrintTextDocumentSettings.In.DocumentPackage = DocumentPackage;
 
 	// If nothing to print - skip

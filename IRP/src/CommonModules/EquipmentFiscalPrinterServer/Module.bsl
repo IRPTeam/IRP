@@ -104,6 +104,8 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		Else
 			Raise("Tax isn't found!");
 		EndIf;
+
+
 		If CBRows.Count() > 0 Then
 			If TypeOf(CBRows[0].Batch) = Type("DocumentRef.OpeningEntry") Then
 				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalNameConsignor.TaxID;
@@ -123,6 +125,13 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
 				FiscalStringData.VendorData.VendorPhone = "";
 				FiscalStringData.CalculationAgent = 5;
+			EndIf;
+		EndIf;
+
+		If FiscalStringData.CalculationAgent = 5 Then
+			If IsBlankString(FiscalStringData.VendorData.VendorINN)
+				OR IsBlankString(FiscalStringData.VendorData.VendorName) Then
+					Raise StrTemplate(R().Error_047, "VendorINN, VendorName");
 			EndIf;
 		EndIf;
 
@@ -201,7 +210,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
 
 	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CustomerAdvance Then
-		CheckPackage.Parameters.OperationType = 1;
+		CheckPackage.Parameters.OperationType = 2;
 	ElsIf SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
 		CheckPackage.Parameters.OperationType = 1;
 	Else

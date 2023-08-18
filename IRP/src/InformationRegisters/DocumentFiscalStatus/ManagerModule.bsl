@@ -15,7 +15,7 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	NewRecord.DataPresentation = DataPresentation;
 	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
 	If TypeOf(FiscalResponse) = Type("Structure") Then
-		If FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.DocumentOutputParameters) = Type("Structure") Then
+		If FiscalResponse.Property("Out") And FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.DocumentOutputParameters) = Type("Structure") Then
 			NewRecord.CheckNumber = FiscalResponse.Out.DocumentOutputParameters.CheckNumber;
 		EndIf;
 	EndIf;

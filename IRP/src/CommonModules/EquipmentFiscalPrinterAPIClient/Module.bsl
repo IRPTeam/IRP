@@ -349,6 +349,7 @@ EndFunction
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
+// ** CRS - DocumentRef.ConsolidatedRetailSales - Current session 
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -362,6 +363,7 @@ Function GetCurrentStatusSettings() Export
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "GetCurrentStatus");
     Str.Info.Insert("Success", False);
+    Str.Info.Insert("CRS", PredefinedValue("Document.ConsolidatedRetailSales.EmptyRef"));
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -574,6 +576,7 @@ EndFunction
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
 // ** Approved - Boolean - Is code string was approved
+// ** GUID - String - GUID Request
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // * InOut - Structure -
@@ -591,6 +594,7 @@ Function GetProcessingKMResultSettings() Export
     Str.Info.Insert("Name", "GetProcessingKMResult");
     Str.Info.Insert("Success", False);
     Str.Info.Insert("Approved", False);
+    Str.Info.Insert("GUID", "");
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");

@@ -118,7 +118,7 @@ Async Function ConnectHardware(Hardware) Export
 			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
 			EndDo;
-			If Settings.ConnectedDriver.DriverObject <> Undefined Then
+			If Settings.ConnectedDriver.DriverObject <> Undefined OR Not Result Then
 				// @skip-check property-return-type, invocation-parameter-type-intersect
 				ErrorDescription = String(R().Eq_003);
 				ResultData.Result = Result;
@@ -201,7 +201,11 @@ Async Function GetDriverObject(DriverInfo) Export
 		Return ConnectionSettings.Settings;
 	EndIf;
 	
-	If Not DriverInfo.UseIS Then
+	If DriverInfo.UseIS Then
+		If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
+			Raise "Can not connect to hardware service."
+		EndIf;
+	Else
 		ObjectName = StrSplit(DriverInfo.AddInID, ".");
 		ObjectName.Add(ObjectName[1]);
 	

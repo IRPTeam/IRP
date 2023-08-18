@@ -9,7 +9,7 @@
 Async Function OpenShift(ConsolidatedRetailSales) Export
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		OpenShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		OpenShiftSettings.Info.Success = True;
@@ -48,7 +48,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CloseShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		CloseShiftSettings.Info.Success = True;
@@ -73,7 +73,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		PrintXReportSettings.Info.Success = True;
 		Return PrintXReportSettings;
@@ -105,7 +105,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		ProcessCheckSettings.Info.Success = True;
 		Return ProcessCheckSettings;
@@ -188,7 +188,7 @@ Async Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 
 	PrintCheckCopySettings = EquipmentFiscalPrinterAPIClient.PrintCheckCopySettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		PrintCheckCopySettings.Info.Success = True;
 		Return PrintCheckCopySettings;
@@ -217,7 +217,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;
 		Return CashInOutcomeSettings;
@@ -260,7 +260,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 
-	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;
 		Return CashInOutcomeSettings;
@@ -346,6 +346,7 @@ Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 		CommonFunctionsServer.Pause(2);
 
 		GetProcessingKMResultSettings = EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings();
+		GetProcessingKMResultSettings.Info.GUID = RequestKMSettings.In.RequestKM.GUID;
 		If Not Await EquipmentFiscalPrinterAPIClient.GetProcessingKMResult(Hardware, GetProcessingKMResultSettings) Then
 			CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
 			Raise R().EqFP_CanNotGetProcessingKMResult;
@@ -395,6 +396,7 @@ EndFunction
 Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
+	CurrentStatusSettings.Info.CRS = CRS;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = CurrentStatusSettings.Out.OutputParameters;
 		If ShiftData.ShiftState = WaitForStatus Then

@@ -68,13 +68,19 @@ Procedure FillCheckProcessing_ConsignorsInfo(Cancel, CatalogObject) Export
 	EndDo;
 EndProcedure
 
-Function GetItemListTable(DocObject) Export
+Function GetEmptyItemListTable()
 	ItemListTable = New ValueTable();
 	ItemListTable.Columns.Add("Company"    , New TypeDescription("CatalogRef.Companies"));
 	ItemListTable.Columns.Add("LegalName"  , New TypeDescription("CatalogRef.Companies"));
 	ItemListTable.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
 	ItemListTable.Columns.Add("ItemKey"    , New TypeDescription("CatalogRef.ItemKeys"));
 	ItemListTable.Columns.Add("LineNumber" , New TypeDescription("Number"));
+	
+	Return ItemListTable;
+EndFunction
+
+Function GetItemListTable(DocObject) Export
+	ItemListTable = GetEmptyItemListTable();
 	
 	For Each Row In DocObject.ItemList Do
 		NewRow = ItemListTable.Add();
@@ -139,6 +145,32 @@ Function GetConsignorsByItemList(ItemList)
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
+EndFunction
+
+Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
+	//Return ServerReuse.GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+	Return _GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+EndFunction
+
+Function _GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
+	ItemListTable = GetEmptyItemListTable();
+	NewRow = ItemListTable.Add();
+	NewRow.Company = Company;
+	NewRow.Item    = Item;
+	NewRow.ItemKey = ItemKey;
+	
+	ConsignorTable = GetConsignorsByItemList(ItemListTable);
+	
+	Result = New Structure();
+	Result.Insert("InventoryOrigin", Enums.InventoryOriginTypes.OwnStocks);
+	Result.Insert("Consignor", Undefined);
+	
+	If Not ConsignorTable[0].IsOwnStocks Then
+		Result.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks;
+		Result.Consignor       = ConsignorTable[0].Consignor;
+	EndIf;
+	
+	Return Result;
 EndFunction
 
 

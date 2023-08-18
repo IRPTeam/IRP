@@ -341,7 +341,8 @@ Function ItemList()
 		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
 		   |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
+		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		   |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList

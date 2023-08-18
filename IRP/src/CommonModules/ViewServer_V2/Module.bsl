@@ -243,10 +243,12 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
 	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
-	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
+	//#2093
+	//InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
-	ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
+	//#2093
+	//ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
 	isControlCodeStringIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "isControlCodeString");
 
 	If FillingValues.Property("Item") And ItemIsPresent Then
@@ -301,13 +303,15 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
-		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
-	EndIf;	
+	//#2093
+	//If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
+	//	ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
+	//EndIf;	
 	
-	If FillingValues.Property("Consignor") And ConsignorIsPresent Then
-		ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
-	EndIf;	
+	//#2093
+	//If FillingValues.Property("Consignor") And ConsignorIsPresent Then
+	//	ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
+	//EndIf;	
 	
 	If TableName = "TimeSheetList" Then
 		If FillingValues.Property("Employee") And EmployeeIsPresent Then

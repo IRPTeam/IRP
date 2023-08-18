@@ -412,6 +412,8 @@ Function GetChain()
 	
 	//#2093
 	//Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
+	Chain.Insert("ChangeInventoryOriginByItemKey" , GetChainLink("ChangeInventoryOriginByItemKeyExecute"));
+	Chain.Insert("ChangeConsignorByItemKey"       , GetChainLink("ChangeConsignorByItemKeyExecute"));
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
 	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
@@ -434,13 +436,39 @@ EndFunction
 
 Function DefaultInventoryOriginOptions() Export
 	Return GetChainLinkOptions("CurrentInventoryOrigin");
-EndFUnction
+EndFunction
 
 Function DefaultInventoryOriginExecute(Options) Export
 	InventoryOrigin = ?(ValueIsFilled(Options.CurrentInventoryOrigin), Options.CurrentInventoryOrigin, 
 		PredefinedValue("Enum.InventoryOriginTypes.OwnStocks"));
 	Return InventoryOrigin;
 EndFunction	
+
+#EndRegion
+
+#Region CHANGE_INVENTORY_ORIGIN_BY_ITEM_KEY
+
+Function ChangeInventoryOriginByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, Item, ItemKey");
+EndFunction
+
+Function ChangeInventoryOriginByItemKeyExecute(Options) Export
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	Return Result.InventoryOrigin;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CONSIGNOR_BY_ITEM_KEY
+
+Function ChangeConsignorByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, Item, ItemKey");
+EndFunction
+
+Function ChangeConsignorByItemKeyExecute(Options) Export
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	Return Result.Consignor;
+EndFunction
 
 #EndRegion
 

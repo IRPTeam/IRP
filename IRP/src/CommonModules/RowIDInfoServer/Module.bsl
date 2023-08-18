@@ -2431,7 +2431,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
+	//#2093
+	//|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
 	| 	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
@@ -2855,9 +2856,10 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.InventoryOrigin AS InventoryOrigin,
-	|	ItemList.Consignor AS Consignor
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	//#2093
+	//|	ItemList.InventoryOrigin AS InventoryOrigin,
+	//|	ItemList.Consignor AS Consignor
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
@@ -2953,7 +2955,9 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	
 	AddTables(Tables);
 
-	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit, InventoryOrigin, Consignor", AddInfo);
+	//#2093
+	//Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit, InventoryOrigin, Consignor", AddInfo);
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -3126,64 +3130,66 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	//#2093
 	//TableConsignorBatches      = QueryResults[6].Unload();
 	
-	QueryItemList = New Query();
-	QueryItemList.Text = 
-	"SELECT
-	|	BasisesTable.Basis,
-	|	BasisesTable.BasisKey
-	|INTO BasisesTable
-	|FROM
-	|	&BasisesTable AS BasisesTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SO_ItemLIst.Key
-//	|	SO_ItemLIst.Ref
-	|INTO SO_ItemList
-	|FROM
-	|	&SO_ItemList AS SO_ItemLIst
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT ALLOWED
-	|	ItemList.Key AS Key,
-	|	ItemList.Ref AS Ref,
-	|	ItemList.InventoryOrigin AS InventoryOrigin,
-	|	ItemList.Consignor AS Consignor
-	|INTO tmp_ItemList
-	|FROM
-	|	BasisesTable AS BasisesTable
-	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
-	|		ON BasisesTable.Basis = ItemList.Ref
-	|		AND BasisesTable.BasisKey = ItemList.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SO_ItemList.Key,
-	|	tmp_ItemList.Consignor,
-	|	tmp_ItemList.InventoryOrigin
-	|FROM
-	|	SO_ItemList AS SO_ItemList
-	|		INNER JOIN tmp_ItemList
-	|		ON tmp_ItemList.Key = SO_ItemList.Key";
-//	|		AND tmp_ItemList.Ref = SO_ItemList.Ref";
-	QueryItemList.SetParameter("SO_ItemList", TablesSO.ItemList);
-	QueryItemList.SetParameter("BasisesTable", BasisesTable);
-	
-	SO_ItemList = QueryItemList.Execute().Unload();
+	//#2093
+//	QueryItemList = New Query();
+//	QueryItemList.Text = 
+//	"SELECT
+//	|	BasisesTable.Basis,
+//	|	BasisesTable.BasisKey
+//	|INTO BasisesTable
+//	|FROM
+//	|	&BasisesTable AS BasisesTable
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SO_ItemLIst.Key
+////	|	SO_ItemLIst.Ref
+//	|INTO SO_ItemList
+//	|FROM
+//	|	&SO_ItemList AS SO_ItemLIst
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT ALLOWED
+//	|	ItemList.Key AS Key,
+//	|	ItemList.Ref AS Ref,
+//	|	ItemList.InventoryOrigin AS InventoryOrigin,
+//	|	ItemList.Consignor AS Consignor
+//	|INTO tmp_ItemList
+//	|FROM
+//	|	BasisesTable AS BasisesTable
+//	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
+//	|		ON BasisesTable.Basis = ItemList.Ref
+//	|		AND BasisesTable.BasisKey = ItemList.Key
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SO_ItemList.Key,
+//	|	tmp_ItemList.Consignor,
+//	|	tmp_ItemList.InventoryOrigin
+//	|FROM
+//	|	SO_ItemList AS SO_ItemList
+//	|		INNER JOIN tmp_ItemList
+//	|		ON tmp_ItemList.Key = SO_ItemList.Key";
+////	|		AND tmp_ItemList.Ref = SO_ItemList.Ref";
+//	QueryItemList.SetParameter("SO_ItemList", TablesSO.ItemList);
+//	QueryItemList.SetParameter("BasisesTable", BasisesTable);
+//	
+//	SO_ItemList = QueryItemList.Execute().Unload();
 	
 //	TablesSO.ItemList.Columns.Add("Consignor", New TypeDescription("CatalogRef.Companies"));
 //	TablesSO.ItemList.Columns.Add("InventoryOrigin", New TypeDescription("EnumRef.InventoryOriginTypes"));
-	
-	For Each Row In SO_ItemList Do
-		Rows = TablesSO.ItemList.FindRows(New Structure("Key", Row.Key));
-		If Rows.Count() Then
-			Rows[0].Consignor = Row.Consignor;
-			Rows[0].InventoryOrigin = Row.InventoryOrigin;
-		EndIf;
-	EndDo;
+
+//#2093	
+//	For Each Row In SO_ItemList Do
+//		Rows = TablesSO.ItemList.FindRows(New Structure("Key", Row.Key));
+//		If Rows.Count() Then
+//			Rows[0].Consignor = Row.Consignor;
+//			Rows[0].InventoryOrigin = Row.InventoryOrigin;
+//		EndIf;
+//	EndDo;
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
@@ -3198,7 +3204,9 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 
 	AddTables(Tables);
 
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey, InventoryOrigin, Consignor", AddInfo);
+	//#2093
+	//Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey, InventoryOrigin, Consignor", AddInfo);
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -4072,7 +4080,8 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
+	//#2093
+//	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -4735,7 +4744,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
 	|	VALUE(Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer) AS TransactionTypeRGR,
-	|	VALUE(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
+	//#2093
+//	|	VALUE(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
@@ -4921,7 +4931,8 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
+	//#2093
+//	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
@@ -8626,7 +8637,9 @@ Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
 	ElsIf InternalDocAliase = Aliases.RSR Then 
 
 		Result.Header   = "Company, Partner, LegalName, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, InventoryOrigin, RetailSalesReceipt";		
+		//#2093
+//		Result.ItemList = "Item, ItemKey, InventoryOrigin, RetailSalesReceipt";		
+		Result.ItemList = "Item, ItemKey, RetailSalesReceipt";		
 	Else
 		Raise StrTemplate("Not supported Internal link for [RGR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -8646,7 +8659,9 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.RRR Then 
 		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, InventoryOrigin, Store";
+		//#2093
+//		Result.ItemList = "Item, ItemKey, InventoryOrigin, Store";
+		Result.ItemList = "Item, ItemKey, Store";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "CompanyReturn     , Company,
@@ -11563,10 +11578,12 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypeSR,
 		   |TransactionTypePurchases,
 		   |TransactionTypePR,
-		   |InventoryOrigin,
+		   //#2093
+		   //|InventoryOrigin,
 		   |TransactionTypeRGR,
-		   |isControlCodeString,
-		   |Consignor";
+		   |isControlCodeString";
+		   //#2093
+		   //|Consignor";
 		
 EndFunction
 

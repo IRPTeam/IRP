@@ -2660,6 +2660,8 @@ Function BindCompany(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 		//#2093
 		//|StepConsignorBatchesFillBatches");
@@ -9646,6 +9648,10 @@ Function BindItemListItemKey(Parameters)
 	
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey,
+		|
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
@@ -10895,6 +10901,8 @@ Function BindItemListConsignor(Parameters)
 	Binding = New Structure();
 	
 	//#2093
+	Binding.Insert("SalesInvoice", "StepChangeTaxRate_AgreementInHeader");
+	
 //	Binding.Insert("SalesInvoice",
 //		"StepConsignorBatchesFillBatches");
 //		
@@ -10910,15 +10918,35 @@ Function BindItemListConsignor(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListConsignor");
 EndFunction
 
+//#2093
+// ItemList.Consignor.ChangeConsignorByItemKey
+Procedure StepItemListChangeConsignorByItemKey(Parameters, Chain) Export
+	Chain.ChangeConsignorByItemKey.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeConsignorByItemKey.Setter = "SetItemListConsignor";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeConsignorByItemKeyOptions();
+		Options.Item = GetItemListItem(Parameters, Row.Key);
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.Company = GetCompany(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeConsignorByItemKey";
+		Chain.ChangeConsignorByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_INVENTORY_ORIGIN
 
-// ItemList.InventoryOrigin.OnChange
-Procedure ItemListInventoryOriginOnChange(Parameters) Export
-	Binding = BindItemListInventoryOrigin(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
+//#2093
+//// ItemList.InventoryOrigin.OnChange
+//Procedure ItemListInventoryOriginOnChange(Parameters) Export
+//	Binding = BindItemListInventoryOrigin(Parameters);
+//	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+//EndProcedure
 
 // ItemList.InventoryOrigin.Set
 Procedure SetItemListInventoryOrigin(Parameters, Results) Export
@@ -10944,6 +10972,8 @@ Function BindItemListInventoryOrigin(Parameters)
 	Binding = New Structure();
 	
 	//#2093
+	Binding.Insert("SalesInvoice", "StepChangeTaxRate_AgreementInHeader");
+	
 //	Binding.Insert("SalesInvoice",
 //		"StepConsignorBatchesFillBatches");
 //		
@@ -10971,6 +11001,25 @@ Procedure StepItemListDefaultInventoryOrigin(Parameters, Chain) Export
 	Options.CurrentInventoryOrigin = GetItemListInventoryOrigin(Parameters, NewRow.Key);
 	Options.Key = NewRow.Key;
 	Chain.DefaultInventoryOrigin.Options.Add(Options);
+EndProcedure
+
+//#2093
+// ItemList.InventoryOrigin.ChangeInventoryOriginByItemKey
+Procedure StepItemListChangeInventoryOriginByItemKey(Parameters, Chain) Export
+	Chain.ChangeInventoryOriginByItemKey.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeInventoryOriginByItemKey.Setter = "SetItemListInventoryOrigin";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeInventoryOriginByItemKeyOptions();
+		Options.Item = GetItemListItem(Parameters, Row.Key);
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.Company = GetCompany(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeInventoryOriginByItemKey";
+		Chain.ChangeInventoryOriginByItemKey.Options.Add(Options);
+	EndDo;	
 EndProcedure
 
 #EndRegion

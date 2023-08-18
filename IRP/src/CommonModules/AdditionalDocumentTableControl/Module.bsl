@@ -403,6 +403,37 @@ Function ErrorItemTypeUseSerialNumbers(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error item type doesn't use serial numbers.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorItemTypeNotUseSerialNumbers(Document, RowIDList)
+	Result = New Array; // Array of String
+	If RowIDList.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
+	
+	For Each RowKey In RowIDList Do
+		Row = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
+		Row[0].UseSerialLotNumber = False;
+	EndDo;
+	
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 // Error use serial but serial not set.
 // 
 // Parameters:
@@ -600,8 +631,10 @@ Function ErrorNotFilledInventoryOrigin(Document, RowIDList)
 	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
 	
 	For Each RowKey In RowIDList Do
-		RowItemList = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
-		RowItemList.InventoryOrigin = Enums.InventoryOriginTypes.OwnStocks;
+		RowsItemList = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
+		For Each RowItemList In RowsItemList Do
+			RowItemList.InventoryOrigin = Enums.InventoryOriginTypes.OwnStocks;
+		EndDo;
 	EndDo;
 	
 	If DocObject.Posted Then

@@ -50,6 +50,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en = 'Row: %1. Offers amount in item list is not equal to offers amount in offers list'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en = 'Row: %1. Item type is not service'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en = 'Row: %1. Item type uses serial numbers'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en = 'Row: %1. Item type does not use serial numbers'", Lang));
 	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en = 'Row: %1. Serial is not set but is required'", Lang));
 	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en = 'Row: %1. Quantity in serial list table is not the same as quantity in item list'", Lang));
 	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en = 'Row: %1. Item is not equal to item in item key'", Lang));
@@ -68,6 +69,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Not filled Transaction type in Purchase Return'", Lang));
 	
 	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en = 'Setting the ""Use serial lot number"" flag in document lines.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en = 'Unchecking the ""Use serial lot number"" flag in document lines.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en = 'Instead of empty values, ""Own stocks"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en = 'Instead of empty values, ""Full calculation"" will be set.'", Lang));

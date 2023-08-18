@@ -335,7 +335,13 @@ Function ErrorWithSerialInTable()
 	Str = New Structure;
 	
 	Str.Insert("ErrorItemTypeUseSerialNumbers", New Structure("Query, Fields, QueryNumber", 
-		"Not ItemList.UseSerialLotNumber = ItemList.Item.ItemType.UseSerialLotNumber",
+		"ItemList.UseSerialLotNumber AND Not ItemList.Item.ItemType.UseSerialLotNumber",
+		"UseSerialLotNumber, Item",
+		0
+	));
+	
+	Str.Insert("ErrorItemTypeNotUseSerialNumbers", New Structure("Query, Fields, QueryNumber", 
+		"Not ItemList.UseSerialLotNumber AND ItemList.Item.ItemType.UseSerialLotNumber",
 		"UseSerialLotNumber, Item",
 		0
 	));

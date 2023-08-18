@@ -11,6 +11,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
+		OpenShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		OpenShiftSettings.Info.Success = True;
 		Return OpenShiftSettings;
 	EndIf;
@@ -49,6 +50,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
+		CloseShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		CloseShiftSettings.Info.Success = True;
 		Return CloseShiftSettings;
 	EndIf;

@@ -1,4 +1,3 @@
-#Region MainFunctions
 
 // Open shift.
 //
@@ -118,6 +117,9 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		Return CurrentStatus;
 	EndIf;
 
+	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
+	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
+
 	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
 		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
 		isReturn = TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt");
@@ -156,10 +158,6 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			EndDo;
 		EndIf;
 	EndIf;
-
-	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
-	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
-
 
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
@@ -333,6 +331,7 @@ Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
 		EndIf;
 	EndIf;
+
 	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMSettings();
 	RequestKMSettings.In.RequestKM = RequestKM;
 	If Not Await EquipmentFiscalPrinterAPIClient.RequestKM(Hardware, RequestKMSettings) Then
@@ -415,5 +414,3 @@ Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
 	EndIf;
 	Return CurrentStatusSettings;
 EndFunction
-
-#EndRegion

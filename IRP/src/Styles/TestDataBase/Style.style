@@ -23,7 +23,7 @@
   <items xsi:type="style:ColorStyleItem">
     <name>ImportantColor</name>
     <color xsi:type="core:ColorRef">
-      <color>Web.Black</color>
+      <color>Web.DarkSlateGray</color>
     </color>
   </items>
 </style:Style>

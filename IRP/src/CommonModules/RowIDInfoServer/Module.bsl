@@ -1432,13 +1432,13 @@ EndFunction
 
 Function GetNextStep_SI(Source, RowItemList, Row)
 	If RowItemList.UseShipmentConfirmation 
-		And Not RowItemList.IsSerice
+		And Not RowItemList.IsService
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.SC;
 	EndIf;
 	
 	If RowItemList.UseWorkSheet
-		And RowItemList.IsSerice
+		And RowItemList.IsService
 		And Not Source.WorkSheets.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.WS;
 	EndIf;

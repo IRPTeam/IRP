@@ -89,6 +89,7 @@ Function CheckItemListStores(Object) Export
 	|	Table.LineNumber,
 	|	Table.Store,
 	|	Table.ItemKey,
+	|	Table.IsServiceNotSet,
 	|	Table.IsService
 	|INTO ItemList
 	|FROM
@@ -102,10 +103,22 @@ Function CheckItemListStores(Object) Export
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
-	|	Not ItemList.IsService
+	|	CASE WHEN ItemList.IsServiceNotSet THEN
+	|		Not ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|	WHEN NOT ItemList.IsServiceNotSet THEN
+	|		Not ItemList.IsService
+	|	END
 	|	AND  ItemList.Store = Value(Catalog.Stores.EmptyRef)";
-
-	Query.SetParameter("ItemList", Object.ItemList.Unload());
+	ItemList = Object.ItemList.Unload(); // ValueTable
+	If ItemList.Columns.Find("IsService") = Undefined Then
+		ItemList.Columns.Add("IsService", New TypeDescription("Boolean"));
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+		ItemList.FillValues(True, "IsServiceNotSet");
+	Else
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+	EndIf;
+	
+	Query.SetParameter("ItemList", ItemList);
 	QueryResult = Query.Execute();
 
 	If QueryResult.IsEmpty() Then

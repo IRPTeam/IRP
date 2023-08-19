@@ -199,7 +199,7 @@ Function ErrorItemList()
 	));
 	
 	Str.Insert("ErrorItemTypeIsNotService",	New Structure("Query, Fields, QueryNumber",
-		"Not ItemList.IsService = (ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Service))", 
+		"Not ItemList.IsService = ((ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Certificate)) OR (ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Service)))", 
 		"IsService, Item",
 		0
 	));

@@ -88,7 +88,8 @@ Function CheckItemListStores(Object) Export
 	"SELECT
 	|	Table.LineNumber,
 	|	Table.Store,
-	|	Table.ItemKey
+	|	Table.ItemKey,
+	|	Table.IsService
 	|INTO ItemList
 	|FROM
 	|	&ItemList AS Table
@@ -101,7 +102,7 @@ Function CheckItemListStores(Object) Export
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
-	|	Not ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service)
+	|	Not ItemList.IsService
 	|	AND  ItemList.Store = Value(Catalog.Stores.EmptyRef)";
 
 	Query.SetParameter("ItemList", Object.ItemList.Unload());
@@ -599,7 +600,7 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result = New Structure();
 	Result.Insert("IsService", True);
 	If ValueIsFilled(ItemKey) Then
-		Result.IsService = (ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service);
+		Result.IsService = GetItemInfo.GetInfoByItemsKey(ItemKey)[0].isService;
 	EndIf;
 	Result.Insert("UseGoodsReceipt", Store.UseGoodsReceipt);
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);

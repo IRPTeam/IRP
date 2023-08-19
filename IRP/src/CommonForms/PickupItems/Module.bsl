@@ -138,7 +138,7 @@ Procedure ItemTypeAfterSelection()
 				|	&PriceType AS PriceType,
 				|	0 AS Price,
 				|	Items.Item.Description_en AS ItemPresentation,
-				|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR Items.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
 				|	CASE WHEN &IgnoreCodeStringControl THEN 
 				|		False 
 				|	ELSE 
@@ -258,7 +258,7 @@ Procedure ItemTypeAfterSelection()
 						|	Items.ItemKeyCount,
 						|	ISNULL(Prices.Price, 0) AS Price,
 						|	Items.Item.Description_en AS Title,
-						|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+						|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR Items.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
 						|	CASE WHEN &IgnoreCodeStringControl THEN 
 						|		False 
 						|	ELSE 
@@ -377,7 +377,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 				 |	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 				 |	NULL AS SerialLotNumber,
 				 |	PricesResult.Price,
-				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				 |		ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) OR ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 				 |	CASE WHEN &IgnoreCodeStringControl THEN 
 				 |		False 
 				 |	ELSE 

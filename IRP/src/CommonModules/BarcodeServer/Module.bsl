@@ -148,7 +148,7 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 		|	VTBarcode.Barcode AS Barcode,
 		|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
 		|	CASE WHEN &IgnoreCodeStringControl THEN 

@@ -159,7 +159,7 @@ Function ItemList()
 		   |	ISNULL(TableRowIDInfo.RowID, PurchaseOrderItems.Key)  AS RowKey,
 		   |	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
 		   |	PurchaseOrderItems.ExpenseType AS ExpenseType,
-		   |	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	PurchaseOrderItems.IsService AS IsService,
 		   |	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
 		   |	PurchaseOrderItems.InternalSupplyRequest AS InternalSupplyRequest,
 		   |	PurchaseOrderItems.SalesOrder AS SalesOrder,

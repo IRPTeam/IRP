@@ -219,6 +219,8 @@ Function isBase64Value(Value) Export
 		
 		ElsIf Code = 61 And StrLen - Index <= 2 Then // =
 		
+		ElsIf Code = 47 OR Code = 43 Then // /
+		
 		Else
 			Return False;		
 		EndIf;

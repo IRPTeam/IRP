@@ -148,8 +148,9 @@ Function GetConsignorsByItemList(ItemList)
 EndFunction
 
 Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
-	//Return ServerReuse.GetInventoryOriginAndConsignor(Company, Item, ItemKey);
-	Return _GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+	Return ServerReuse.GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+	//#2093
+//	Return _GetInventoryOriginAndConsignor(Company, Item, ItemKey);
 EndFunction
 
 Function _GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export

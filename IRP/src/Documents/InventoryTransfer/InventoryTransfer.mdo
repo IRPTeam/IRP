@@ -79,7 +79,6 @@
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -734,10 +733,10 @@
       <objectType typeId="14b7d4dc-ba5b-43d6-98ff-91cd732cac55" valueTypeId="efb3cc7f-22f6-4ce1-b0ed-b13a2a8570ee"/>
       <rowType typeId="e4b26ccd-7f88-4308-84c6-8f5de70a136a" valueTypeId="82f2d493-b81b-4eb8-b0b2-1e083aed6b61"/>
     </producedTypes>
-    <name>ConsignorBatches</name>
+    <name>DELETE_ConsignorBatches</name>
     <synonym>
       <key>en</key>
-      <value>Consignor batches</value>
+      <value>DELETE consignor batches</value>
     </synonym>
     <attributes uuid="c9fb00cc-2cdd-4577-b561-f0e61ac51c85">
       <name>Key</name>

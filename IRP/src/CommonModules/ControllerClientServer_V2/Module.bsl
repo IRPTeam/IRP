@@ -2662,6 +2662,8 @@ Function BindCompany(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		//#2093
 		|StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey,
+		|
 		|StepItemListChangeRevenueTypeByItemKey");
 		//#2093
 		//|StepConsignorBatchesFillBatches");
@@ -2670,12 +2672,17 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeConsolidatedRetailSalesByWorkstation");
+		|StepChangeConsolidatedRetailSalesByWorkstation,
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey");
+		
 		//#2093
 		//|StepConsignorBatchesFillBatches");
 
 	//#2093
 	//Binding.Insert("InventoryTransfer", "StepConsignorBatchesFillBatches_StoreSender");
+	Binding.Insert("InventoryTransfer", "StepItemListChangeInventoryOriginByItemKey");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -2782,6 +2789,9 @@ Function BindCompany(Parameters)
 	//#2093
 	//Binding.Insert("RetailShipmentConfirmation",
 	//	"StepConsignorBatchesFillBatches");
+	
+	Binding.Insert("RetailShipmentConfirmation", "StepItemListChangeInventoryOriginByItemKey");
+	Binding.Insert("RetailGoodsReceipt", "StepItemListChangeInventoryOriginByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
@@ -9599,13 +9609,19 @@ Function BindItemListItemKey(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
-		|StepItemListChangeUnitByItemKey");
+		|StepItemListChangeUnitByItemKey,
+		|
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey");
 		//#2093
 		//|StepConsignorBatchesFillBatches");
 		
 	Binding.Insert("RetailGoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
-		|StepItemListChangeUnitByItemKey");
+		|StepItemListChangeUnitByItemKey,
+		|
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepChangeUseSerialLotNumberByItemKey,
@@ -9682,6 +9698,10 @@ Function BindItemListItemKey(Parameters)
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeByAgreement,
+		//#2093
+		|StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey,
+		|
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUseSerialLotNumberByItemKey,
@@ -10902,6 +10922,7 @@ Function BindItemListConsignor(Parameters)
 	
 	//#2093
 	Binding.Insert("SalesInvoice", "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("RetailSalesReceipt", "StepChangeTaxRate_AgreementInHeader");
 	
 //	Binding.Insert("SalesInvoice",
 //		"StepConsignorBatchesFillBatches");
@@ -10973,6 +10994,7 @@ Function BindItemListInventoryOrigin(Parameters)
 	
 	//#2093
 	Binding.Insert("SalesInvoice", "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("RetailSalesReceipt", "StepChangeTaxRate_AgreementInHeader");
 	
 //	Binding.Insert("SalesInvoice",
 //		"StepConsignorBatchesFillBatches");

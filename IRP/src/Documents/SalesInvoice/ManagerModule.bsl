@@ -16,90 +16,91 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	ItemList.Key AS Key,
-	|	ItemList.InventoryOrigin AS InventoryOrigin,
-	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
-	|	ItemList.Store AS Store,
-	|	ItemList.QuantityInBaseUnit AS Quantity
-	|INTO tmpItemList
-	|FROM
-	|	Document.SalesInvoice.ItemList AS ItemList
-	|WHERE
-	|	ItemList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
-	|INTO tmpSerialLotNumbers
-	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SourceOfOrigins.Key,
-	|	SourceOfOrigins.SerialLotNumber,
-	|	SourceOfOrigins.SourceOfOrigin,
-	|	SourceOfOrigins.Quantity
-	|INTO tmpSourceOfOrigins
-	|FROM
-	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
-	|WHERE
-	|	SourceOfOrigins.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpItemList.Key,
-	|	tmpItemList.InventoryOrigin,
-	|	tmpItemList.Company,
-	|	tmpItemList.ItemKey,
-	|	tmpItemList.Store,
-	|	CASE
-	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
-	|			THEN tmpItemList.Quantity
-	|		ELSE tmpSerialLotNumbers.Quantity
-	|	END AS Quantity,
-	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
-	|INTO tmpItemList_1
-	|FROM
-	|	tmpItemList AS tmpItemList
-	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
-	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpItemList_1.Key,
-	|	tmpItemList_1.InventoryOrigin,
-	|	tmpItemList_1.Company,
-	|	tmpItemList_1.ItemKey,
-	|	tmpItemList_1.Store,
-	|	tmpItemList_1.SerialLotNumber,
-	|	CASE
-	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|		ELSE tmpItemList_1.Quantity
-	|	END AS Quantity,
-	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
-	|FROM
-	|	tmpItemList_1 AS tmpItemList_1
-	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
-	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
-
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	ItemListTable = QueryResult.Unload();
+	//#2093
+//	Query = New Query;
+//	Query.Text =
+//	"SELECT
+//	|	ItemList.Key AS Key,
+//	|	ItemList.InventoryOrigin AS InventoryOrigin,
+//	|	ItemList.Ref.Company AS Company,
+//	|	ItemList.ItemKey AS ItemKey,
+//	|	ItemList.Store AS Store,
+//	|	ItemList.QuantityInBaseUnit AS Quantity
+//	|INTO tmpItemList
+//	|FROM
+//	|	Document.SalesInvoice.ItemList AS ItemList
+//	|WHERE
+//	|	ItemList.Ref = &Ref
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SerialLotNumbers.Key,
+//	|	SerialLotNumbers.SerialLotNumber,
+//	|	SerialLotNumbers.Quantity
+//	|INTO tmpSerialLotNumbers
+//	|FROM
+//	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+//	|WHERE
+//	|	SerialLotNumbers.Ref = &Ref
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SourceOfOrigins.Key,
+//	|	SourceOfOrigins.SerialLotNumber,
+//	|	SourceOfOrigins.SourceOfOrigin,
+//	|	SourceOfOrigins.Quantity
+//	|INTO tmpSourceOfOrigins
+//	|FROM
+//	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
+//	|WHERE
+//	|	SourceOfOrigins.Ref = &Ref
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	tmpItemList.Key,
+//	|	tmpItemList.InventoryOrigin,
+//	|	tmpItemList.Company,
+//	|	tmpItemList.ItemKey,
+//	|	tmpItemList.Store,
+//	|	CASE
+//	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+//	|			THEN tmpItemList.Quantity
+//	|		ELSE tmpSerialLotNumbers.Quantity
+//	|	END AS Quantity,
+//	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+//	|INTO tmpItemList_1
+//	|FROM
+//	|	tmpItemList AS tmpItemList
+//	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+//	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	tmpItemList_1.Key,
+//	|	tmpItemList_1.InventoryOrigin,
+//	|	tmpItemList_1.Company,
+//	|	tmpItemList_1.ItemKey,
+//	|	tmpItemList_1.Store,
+//	|	tmpItemList_1.SerialLotNumber,
+//	|	CASE
+//	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+//	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
+//	|		ELSE tmpItemList_1.Quantity
+//	|	END AS Quantity,
+//	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
+//	|FROM
+//	|	tmpItemList_1 AS tmpItemList_1
+//	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
+//	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
+//	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
+//
+//	Query.SetParameter("Ref", Ref);
+//	QueryResult = Query.Execute();
+//	ItemListTable = QueryResult.Unload();
 
 	//#2093
 //	Query = New Query;

@@ -215,27 +215,16 @@ EndProcedure
 &AtClient
 Async Procedure Enter(Command)
 
-	If Not Payments.Count() And CashPaymentTypes.Count() Then
-		ButtonSettings = POSClient.ButtonSettings();
-		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
-		AdditionalParameters = New Structure();
-		FillPayments(ButtonSettings, AdditionalParameters);
-	EndIf;
-
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
 
-	Result = True;
 	For Each PaymentRow In Payments Do
 		If Not PaymentRow.Hardware.IsEmpty()
 			And PaymentRow.Amount > 0
 			And Not PaymentRow.PaymentDone Then
-			Result = Await DoPayment(PaymentRow);
-			PaymentRow.PaymentDone = Result;
-			If Not Result Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().EqAc_NotAllPaymentDone);
 				Return;
-			EndIf;
 		EndIf;
 	EndDo;
 
@@ -255,52 +244,6 @@ Async Procedure Enter(Command)
 	FormCanBeClosed = True;
 	ExecuteNotifyProcessing(OnCloseNotifyDescription, ReturnValue);
 EndProcedure
-
-// Do payment.
-//
-// Parameters:
-//  PaymentRow - FormDataCollectionItem - Payment row
-//
-// Returns:
-//  Boolean - Do payment
-&AtClient
-Async Function DoPayment(PaymentRow)
-	Result = True;
-	If isReturn And ReturnInTheSameConsolidateSales Then
-		Result = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-	ElsIf isReturn And Not ReturnInTheSameConsolidateSales Then
-		Result = Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
-	Else
-		Result = Await Payment_PayByPaymentCard(PaymentRow);
-	EndIf;
-
-	If Not Result Then
-		If Await DoQueryBoxAsync(StrTemplate(R().POS_Error_ErrorOnPayment, PaymentRow.Description), QuestionDialogMode.RetryCancel, , , , ) = DialogReturnCode.Retry Then
-			Result = DoPayment(PaymentRow);
-		Else
-			CancelAllDonePayment();
-		EndIf;
-	EndIf;
-	Return Result;
-EndFunction
-
-&AtClient
-Async Function CancelAllDonePayment()
-	Result = True;
-	For Each PaymentRow In Payments Do
-		If PaymentRow.PaymentDone Then
-			Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPayment, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-			CancelResult = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-			If Not CancelResult Then
-				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount) + Chars.LF + PaymentRow.PaymentInfo);
-				Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-				Return False;
-			EndIf;
-			PaymentRow.PaymentDone = False;
-		EndIf;
-	EndDo;
-	Return Result;
-EndFunction
 
 &AtClient
 Procedure CloseButton(Command)

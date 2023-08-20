@@ -532,6 +532,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
 	Strings.Insert("EqAc_LastSettlementHasError", NStr("en = 'Last settlement has error. Try get new one.'", Lang));
 	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en = 'Last settlement not found. Make sure that logging is enabled for this equipment.'", Lang));
+	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en = 'Not all payment done.'", Lang));
 	
 	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en = 'Can not open session registration KM.'", Lang));
 	Strings.Insert("EqFP_CanNotRequestKM", NStr("en = 'Can not request KM.'", Lang));

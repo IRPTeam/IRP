@@ -449,6 +449,24 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If Result.FoundedItems.Count() Then
+		
+		For Each Row In Result.FoundedItems Do
+			If Row.isCertificate And Not Row.SerialLotNumber.IsEmpty() Then
+				CertStatus = CertificateServer.GetCertificateStatus(Row.SerialLotNumber);
+				If isReturn Then
+					If Not CertStatus.CanBeUsed Then
+						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_CertAlreadyUsed, Row.SerialLotNumber));
+						Return;
+					EndIf; 
+				Else
+					If Not CertStatus.CanBeSold Then
+						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_CannotBeSold, Row.SerialLotNumber));
+						Return;
+					EndIf; 
+				EndIf;
+			EndIf;
+		EndDo;
+		
 		FillSalesPersonInItemList();
 
 		NotifyParameters = New Structure();

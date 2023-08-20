@@ -1494,6 +1494,7 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="fb2a0c13-7d6e-45c4-8c68-58f1b71d5f3e">
       <name>Certificate</name>
       <synonym>
         <key>en</key>

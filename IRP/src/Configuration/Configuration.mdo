@@ -230,6 +230,7 @@
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
+  <commonTemplates>CommonTemplate.HTMLPrintEmul</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
@@ -731,6 +732,7 @@
   <commonForms>CommonForm.CodeStringCheck</commonForms>
   <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <commonForms>CommonForm.BackgroundJobSplash</commonForms>
+  <commonForms>CommonForm.HTMLPrintForm</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

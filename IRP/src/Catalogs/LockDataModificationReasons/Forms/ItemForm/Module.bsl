@@ -228,7 +228,7 @@ Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
 	DataSources.DataSourceType = "Local";
 	DataSources.Name = "DataSource";
 	
-	AvailableField = New Array;
+	AvailableField = New Array; // Array Of String
 	For Each Row In ValueListAvailableField Do
 		AvailableField.Add("DS." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
 	EndDo;
@@ -282,7 +282,7 @@ Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
 		
 		QuerySchema = New QuerySchema();
 		QuerySchema.SetQueryText(QueryText);
-		FilterText = New Array;
+		FilterText = New Array; // Array Of QuerySchemaExpression
 		For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
 			FilterText.Add(Row);
 		EndDo;
@@ -331,6 +331,10 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+// Add attribute button click.
+// 
+// Parameters:
+//  Item - FormButton -Item
 &AtClient
 Procedure AddAttributeButtonClick(Item) Export
 	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
@@ -440,6 +444,7 @@ Procedure RuleListAttributeStartChoice(Item, ChoiceData, StandardProcessing)
 	ValueList = FillAttributeList(Items.RuleList.CurrentData.Type);
 	Items.RuleListAttribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.RuleListAttribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
@@ -455,6 +460,7 @@ Procedure AttributeStartChoice(Item, ChoiceData, StandardProcessing)
 	FillAttributeListHead(ValueList);
 	Items.Attribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.Attribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
@@ -489,15 +495,17 @@ Function FillAttributeListHead(ChoiceData = Undefined)
 	EndDo;
 	// Group all added fields
 	VT.GroupBy("Attribute", "Count");
-	Array = New Array;
+	Array = New Array; // Array Of Arbitrary
 	// get only fields, where Count the same as Count rows at RuleList. Other way - its not common attributes
 	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count() - Skip)) Do
 		//@skip-check property-return-type
 		//@skip-check statement-type-change
 		Row = ValueList.FindByValue(AttributeName.Attribute);
 		If ChoiceData = Undefined Then
+			//@skip-check typed-value-adding-to-untyped-collection
 			Array.Add(Row.Value);
 		Else
+			//@skip-check typed-value-adding-to-untyped-collection
 			ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
 		EndIf;
 	EndDo;

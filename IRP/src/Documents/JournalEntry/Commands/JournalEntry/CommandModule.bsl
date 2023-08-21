@@ -13,7 +13,7 @@ Procedure CommandProcessing(DocumentRef, CommandExecuteParameters)
 			DocumentRef, 
 			JournalEntryInfo.ArrayOfJournalEntries);
 	Else
-		Message(StrTemplate(R().Error_112, JournalEntryInfo.Company), MessageStatus.Information);
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_112, JournalEntryInfo.Company), MessageStatus.Information);
 	EndIf;
 EndProcedure
 

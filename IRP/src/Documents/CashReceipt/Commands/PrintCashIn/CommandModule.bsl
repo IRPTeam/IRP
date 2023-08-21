@@ -9,19 +9,18 @@ EndProcedure
 
 &AtClient
 Async Procedure PrintCashIn(CommandParameter)
-	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CommandParameter, "ConsolidatedRetailSales");
-	If Not IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales) Then
+	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CommandParameter, "ConsolidatedRetailSales"); // DocumentRef.ConsolidatedRetailSales
+	If Not ConsolidatedRetailSales.IsEmpty() Then
 		//@skip-check module-unused-local-variable
 		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
 				, CommandParameter
-				, GetSumm(CommandParameter));
+				, GetSumm(CommandParameter)); // See EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings
+
+		If Not EquipmentResult.Info.Success Then
+			CommonFunctionsClientServer.ShowUsersMessage(EquipmentResult.Info.Error);
+		EndIf;
 	EndIf;
 EndProcedure
-
-&AtServer
-Function IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales)
-	Return ConsolidatedRetailSales.IsEmpty();
-EndFunction
 
 &AtServer
 Function GetSumm(CommandParameter)

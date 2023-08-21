@@ -792,7 +792,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	NOT ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 	|	"""" AS Barcode,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
 	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 	|	False AS EachSerialLotNumberIsUnique,
 	|	CASE WHEN &IgnoreCodeStringControl THEN 

@@ -49,6 +49,10 @@
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Production planning</value>
+  </objectPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

@@ -3,30 +3,30 @@
 #Region Stadard
 
 // Device open.
-// 
+//
 // Parameters:
 //  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
-// 
+//
 // Returns:
 //  Boolean
-//  
+//
 // @skip-check dynamic-access-method-not-found
 Function Device_Open(Settings, DriverObject, ID) Export
 	Return HardwareClient.Device_Open(Settings, DriverObject, ID)
 EndFunction
 
 // Device close.
-// 
+//
 // Parameters:
 //  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
-// 
+//
 // Returns:
 //  Boolean
-//  
+//
 // @skip-check dynamic-access-method-not-found
 Function Device_Close(Settings, DriverObject, ID) Export
 	Return HardwareClient.Device_Close(Settings, DriverObject, ID);
@@ -36,11 +36,11 @@ EndFunction
 #Region Device
 
 // Terminal parameters.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.TerminalParametersSettings
-// 
+//
 // Returns:
 //  Boolean - Resturn result
 Function TerminalParameters(Hardware, Settings) Export
@@ -48,11 +48,11 @@ Function TerminalParameters(Hardware, Settings) Export
 EndFunction
 
 // Pay by payment card.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.PayByPaymentCardSettings
-// 
+//
 // Returns:
 //  Boolean
 Async Function PayByPaymentCard(Hardware, Settings) Export
@@ -95,24 +95,24 @@ Async Function PayByPaymentCard(Hardware, Settings) Export
 		EndIf;
 		If ConnectParameters.WriteLog Then
 			HardwareServer.WriteLog(Hardware, "PayByPaymentCard", False, Settings, Result);
-		EndIf;		
+		EndIf;
 		Connections = Await HardwareClient.DisconnectHardware(Hardware);
-		
+
 	Except
 		Error = ErrorInfo();
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
 	EndTry;
 	EquipmentAcquiringAPIClient.LockForm(LockData, False);
-	
+
 	Return Result;
 EndFunction
 
 // Return payment by payment card.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCardSettings
-// 
+//
 // Returns:
 //  Boolean
 Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
@@ -161,17 +161,17 @@ Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 		Error = ErrorInfo();
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
 	EndTry;
-	
+
 	EquipmentAcquiringAPIClient.LockForm(LockData, False);
 	Return Result;
 EndFunction
 
 // Cancel payment by payment card.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings
-// 
+//
 // Returns:
 //  Boolean
 Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
@@ -207,7 +207,7 @@ Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
-	
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "CancelPaymentByPaymentCard", False, Settings, Result);
 	EndIf;
@@ -216,11 +216,11 @@ Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 EndFunction
 
 // Emergency reversal.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.EmergencyReversalSettings
-// 
+//
 // Returns:
 //  Boolean
 Async Function EmergencyReversal(Hardware, Settings) Export
@@ -236,20 +236,20 @@ Async Function EmergencyReversal(Hardware, Settings) Export
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
-	
+
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "EmergencyReversal", False, Settings, Result);
-	EndIf;	
+	EndIf;
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction
 
 // Settlement.
-// 
+//
 // Parameters:
 //  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EquipmentAcquiringAPIClient.SettlementSettings
-// 
+//
 // Returns:
 //  Boolean
 Async Function Settlement(Hardware, Settings) Export
@@ -258,18 +258,20 @@ Async Function Settlement(Hardware, Settings) Export
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "Settlement", True, Settings);
 	EndIf;
+
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.Settlement(
 		ConnectParameters.ID,
 		Settings.Out.Slip
 	); // Boolean
+
 	If Not Result Then
 		Settings.Info.Error = Await HardwareClient.GetLastError(Hardware);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
 		HardwareServer.WriteLog(Hardware, "Settlement", False, Settings, Result);
-	EndIf;		
+	EndIf;
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction

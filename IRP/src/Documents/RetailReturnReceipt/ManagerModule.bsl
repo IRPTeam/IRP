@@ -607,6 +607,7 @@ Function ItemList()
 		   |	END AS RetailSalesReceipt,
 		   |	ItemList.Key AS RowKey,
 		   |	ItemList.IsService AS IsService,
+		   |	ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
 		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	ItemList.RevenueType AS RevenueType,
 		   |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -657,13 +658,15 @@ Function Payments()
 	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
 	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
 	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Certificate) AS IsCertificate,
 	|	Payments.PaymentTerminal AS PaymentTerminal,
 	|	Payments.Percent AS Percent,
 	|	Payments.Commission AS Commission,
 	|	Payments.PaymentAgentPartner AS Partner,
 	|	Payments.PaymentAgentLegalName AS LegalName,
 	|	Payments.PaymentAgentPartnerTerms AS Agreement,
-	|	Payments.PaymentAgentLegalNameContract AS LegalNameContract
+	|	Payments.PaymentAgentLegalNameContract AS LegalNameContract,
+	|	Payments.Certificate
 	|INTO Payments
 	|FROM
 	|	Document.RetailReturnReceipt.Payments AS Payments
@@ -857,6 +860,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
+	QueryArray.Add(R2006T_Certificates());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R3010B_CashOnHand());
@@ -942,6 +946,35 @@ Function R2005T_SalesSpecialOffers()
 		   |	OffersInfo AS OffersInfo
 		   |WHERE TRUE";
 
+EndFunction
+
+Function R2006T_Certificates()
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	ItemList.Currency,
+		   |	SerialLotNumbers.SerialLotNumber,
+		   |	- SerialLotNumbers.Quantity AS Quantity,
+		   |	- ItemList.TotalAmount AS Amount,
+		   |	""Return"" AS MovementType
+		   |INTO R2006T_Certificates
+		   |FROM
+		   |	ItemList AS ItemList
+		   |	LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		   |		ON ItemList.Key = SerialLotNumbers.Key
+		   |WHERE ItemList.IsCertificate
+		   |
+		   |UNION ALL
+		   |	
+		   |SELECT
+		   |	Payments.Period,
+		   |	Payments.Currency,
+		   |	Payments.Certificate,
+		   |	1,
+		   |	Payments.Amount,
+		   |	""ReturnUsed""
+		   |FROM
+		   |	Payments AS Payments
+		   |WHERE Payments.IsCertificate";
 EndFunction
 
 Function R3010B_CashOnHand()

@@ -304,6 +304,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button	
 		And I click the button named "Enter"
 	* Create second RSR (cash)
 		And I go to line in "ItemsPickup" table
@@ -319,6 +320,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"				
 	* Check filling field Consolidated retail sales and workstation in the RSR
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
@@ -927,6 +929,7 @@ Scenario: _0260139 create RRR from POS (first select basis document)
 		And I finish line editing in "ItemList" table
 	* Post return
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 	* Check return document
 		And I close current window

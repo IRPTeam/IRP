@@ -72,6 +72,32 @@ Function GetCashPaymentTypesValue(CashAccount) Export
 	Return Query.Execute().Unload();
 EndFunction
 
+// Get certificate payment types value.
+// 
+// Parameters:
+//  CashAccount - CatalogRef.CashAccounts
+// 
+// Returns:
+//  ValueTable - Get cash payment types value:
+//  *PaymentType - CatalogRef.PaymentTypes
+//  *Description - DefinedType.typeDescription
+//  *Account - CatalogRef.CashAccounts
+Function GetCertificatePaymentTypesValue(CashAccount) Export
+	Query = New Query();
+	Query.Text = "SELECT
+	|	PaymentTypes.Ref AS PaymentType,
+	|	PaymentTypes.Description_en AS Description,
+	|	&CashAccount AS Account,
+	|	VALUE(Enum.PaymentTypes.Certificate) AS PaymentTypeEnum
+	|FROM
+	|	Catalog.PaymentTypes AS PaymentTypes
+	|WHERE
+	|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.Certificate)
+	|	AND NOT PaymentTypes.DeletionMark";
+	Query.SetParameter("CashAccount", CashAccount);
+	Return Query.Execute().Unload();
+EndFunction
+
 // Get payment agent types value.
 // 
 // Parameters:

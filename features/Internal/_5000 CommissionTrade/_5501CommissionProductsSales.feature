@@ -1274,6 +1274,7 @@ Scenario: _050043 check filling source of origin in the RSR POS (consignors prod
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 	* Check filling source of origin
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
@@ -1468,6 +1469,7 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 	* Check filling consignor
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	

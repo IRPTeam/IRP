@@ -40,7 +40,7 @@ Procedure SetJobCompletePercent(Parameters, Total, Complete) Export
 	If Parameters.IsBackgroundJob Then
 		Msg = CommonFunctionsServer.SerializeJSON(New Structure("Total, Complete", Total, Complete));
 		Msg = "__complete__percent__" + Msg;
-		Message(Msg);
+		CommonFunctionsClientServer.ShowUsersMessage(Msg);
 	EndIf;
 EndProcedure
 

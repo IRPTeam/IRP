@@ -106,7 +106,7 @@ Async Function ConnectHardware(Hardware) Export
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
 			EndDo;
 			
-			APIModule = HardwareClient.GetAPIModule(Hardware);
+			APIModule = GetAPIModule(Hardware);
 			If APIModule = Undefined Then
 				Result = Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
 			Else
@@ -118,7 +118,7 @@ Async Function ConnectHardware(Hardware) Export
 			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
 			EndDo;
-			If Settings.ConnectedDriver.DriverObject <> Undefined Then
+			If Settings.ConnectedDriver.DriverObject <> Undefined OR Not Result Then
 				// @skip-check property-return-type, invocation-parameter-type-intersect
 				ErrorDescription = String(R().Eq_003);
 				ResultData.Result = Result;
@@ -154,7 +154,7 @@ Async Function DisconnectHardware(Hardware) Export
 	
 	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
 	If ConnectedDevice.Connected Then
-		APIModule = HardwareClient.GetAPIModule(Hardware);
+		APIModule = GetAPIModule(Hardware);
 		If APIModule = Undefined Then
 			Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
 		Else
@@ -201,7 +201,11 @@ Async Function GetDriverObject(DriverInfo) Export
 		Return ConnectionSettings.Settings;
 	EndIf;
 	
-	If Not DriverInfo.UseIS Then
+	If DriverInfo.UseIS Then
+		If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
+			Raise "Can not connect to hardware service."
+		EndIf;
+	Else
 		ObjectName = StrSplit(DriverInfo.AddInID, ".");
 		ObjectName.Add(ObjectName[1]);
 	
@@ -797,6 +801,7 @@ Function Device_GetInterfaceRevision(Settings, DriverObject) Export
 EndFunction
 
 // Device get description 2000.
+// @skip-check dynamic-access-method-not-found
 // 
 // Parameters:
 //  Settings - See GetDriverObject
@@ -804,8 +809,6 @@ EndFunction
 // 
 // Returns:
 //  See ParametersDriverDescription
-//
-// @skip-check dynamic-access-method-not-found
 Function Device_GetDescription_2000(Settings, DriverObject) Export
 	SettingsDescription = ParametersDriverDescription();
 	Result = DriverObject.GetDescription(SettingsDescription.Name, SettingsDescription.Description, SettingsDescription.EquipmentType, 
@@ -984,8 +987,7 @@ Function GetAPIModule(Hardware) Export
 	EndIf;
 	
 	If APIModule = Undefined Then
-		//@skip-check property-return-type
-		Raise R().Eq_CanNotFindAPIModule;
+		APIModule = HardwareClient;
 	EndIf;
 	
 	Return APIModule;

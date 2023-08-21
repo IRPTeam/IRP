@@ -15,7 +15,7 @@ SalesReceiptXML1 =
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 3 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
 	</Positions>
@@ -118,13 +118,13 @@ SalesReceiptXML9 =
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 1" VendorPhone=""/>
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
@@ -678,6 +678,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows
 	* Check fiscal log
@@ -889,7 +890,7 @@ Scenario: _0850017 payment by payment agent from POS
 			| 'Payment type'   | 'Amount'    |
 			| 'Bank credit'    | '118,00'    |
 		And I click the button named "Enter"
-		And Delay 3
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML5"
@@ -953,8 +954,13 @@ Scenario: _08500181 advance payment (card)
 		And I click "1" button
 		And I click "0" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I click "Pay" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
+		And I move to the next attribute
+		And I click the button named "Enter"				
 	* Check fiscal log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -1047,6 +1053,26 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I click the button named "Enter"
 		And I click "OK" button
 		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+			|'Not all payment done.'|
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '40,00'  | '⚪'            | 'Card 04'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '60,00'  | '⚪'            | 'Card 03'      |
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute	
+		And I click "OK" button	
 		And Delay 10
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -1165,7 +1191,16 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '40,00'  | '⚪'            | 'Card 03'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute		
 		And I click "OK" button
 	* Check acquiring log
 		And Delay 5
@@ -1284,7 +1319,16 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I select current line in "Payments" table
 		And I input "23457" text in "RRNCode" field of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click the button named "Enter"		
+		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '111,00'  | '⚪'            | 'Card 03'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button				
 		And I click "OK" button
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -1304,217 +1348,7 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '111.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '23457'	
 
-Scenario: _0850020 check auto card payment cancellation (acquiring)
-	And I close all client application windows
-	And In the command interface I select "Retail" "Point of sale"
-	* Select item
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-		And I finish line editing in "ItemList" table
-	* Card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "9" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment done'   | 'Payment type'    |
-			| '90,00'    | '⚪'              | 'Card 04'         |
-		And I activate "Payment type" field in "Payments" table
-	* Check auto card cancellation
-		And I click "Pay" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		* Check acquiring log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-			And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
-			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'
-		And I click the button named "Enter"
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		And I click "OK" button
-		And "Payments" table became equal
-			| 'Payment done'   | 'Payment type'   | 'Amount'    |
-			| '⚪'              | 'Card 04'        | '90,00'     |
-			| '⚪'              | 'Card 03'        | '430,00'    |
-	* Check acquiring log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'	
-	* Close payment form
-		Then "Payment" window is opened
-		And I click "X" button
-		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I close all client application windows
-						
-Scenario: _0850021 check the form of payment by card
-	And I close all client application windows
-	And In the command interface I select "Retail" "Point of sale"
-	* Select item
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-		And I finish line editing in "ItemList" table
-	* Card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "9" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-	* Close payment window
-		And I click "X" button
-		Then I wait "Payment" window closing in "5" seconds
-	* Add card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "5" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "4" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-	* Payment by first card
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment done'   | 'Payment type'    |
-			| '50,00'    | '⚪'              | 'Card 04'         |
-		And I activate "Payment type" field in "Payments" table
-		And I click "Pay" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-	* Check that the payment window will not close
-		And I click "X" button	
-		Then there are lines in TestClient message log
-			| 'Cancel all payment before close form.'    |
-	* Cancel payment
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment type'    |
-			| '50,00'    | 'Card 04'         |
-		And I click "Cancel" button
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
-	* Repayment in case of failure to pass
-		And I click the button named "Enter"
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "Retry" button
-		And I click "OK" button
-		And I click "OK" button
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 10
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '430.00'	
-		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '40.00'
-		And I check "$ParsingResult1$" with "9" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains '50.00'				
-	* Check fiscal log	
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
-		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "4" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '430.00'
-	And I close all client application windows
-	
-								
-Scenario: _0850027 check acquiring in BP
-	And I close all client application windows
-	* Create BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"	
-		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'POS Terminal 2'    |
-		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of "Partner" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Lomaniti'       |
-		And I select current line in "List" table
-		And I activate "Payment terminal" field in "PaymentList" table
-		And I click choice button of "Payment terminal" attribute in "PaymentList" table
-		And I select current line in "List" table
-		And I activate "Payment type" field in "PaymentList" table
-		And I click choice button of "Payment type" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Card 03'        |
-		And I select current line in "List" table
-		And I finish line editing in "PaymentList" table
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And I click "Post" button
-		And I click "Return to card" button
-		Then "Payment by acquiring" window is opened
-		And I input "9876655775" text in the field named "RRNCode"
-		And I click "Return" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 10
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
-		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '9876655775'	
-				
-
+		
 					
 Scenario: _0850028 check acquiring in BR
 	And I close all client application windows
@@ -1586,6 +1420,11 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I click "0" button
 			And I click "0" button
 			And I click the button named "Enter"
+			Then there are lines in TestClient message log
+				|'Not all payment done.'|
+			And I click "Return" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button					
 			And I click "OK" button			
 		* Check acquiring log
 			And Delay 10
@@ -1807,8 +1646,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"
 	* Check double click Print cash in
 		And I click "Print cash in" button
-		Then there are lines in TestClient message log
-			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
+		And I click "OK" button
 		And I close all client application windows
 		
 
@@ -1879,8 +1717,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
 	* Check double click Print cash out
 		And I click "Print cash out" button
-		Then there are lines in TestClient message log
-			| 'Operation cannot be completed because the document has already been printed. You can only print a copy.'    |
+		And I click "OK" button
 		And I close all client application windows
 
 
@@ -1908,6 +1745,7 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button		
 		And I click the button named "Enter"
 	* Check filling consignor
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
@@ -2338,6 +2176,7 @@ Scenario: _0260161 check return product control code string, without check
 		And I select current line in "ItemList" table
 		And I click "Code string is missing" button
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click "OK" button
 	* Check fiscal log
 		And Delay 5
@@ -2363,6 +2202,7 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I input "113,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button
 		And I click "OK" button
 	* Check fiscal log
 		And Delay 5
@@ -2381,6 +2221,7 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I select current line in "ItemList" table
 		And I click "Code string is missing" button
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click "OK" button	
 	* Check fiscal log
 		And Delay 5
@@ -2508,7 +2349,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "722"	
+	Then the number of "List" table lines is "равно" "620"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table

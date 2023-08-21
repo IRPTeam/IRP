@@ -328,6 +328,7 @@ EndProcedure
 
 #Region Terminals
 
+&AtServer
 Procedure ReadTerminalOperations()
 	TerminalTable.Clear();
 	
@@ -353,6 +354,7 @@ EndProcedure
 //  * PaymentType - CatalogRef.PaymentTypes
 //  * PaymentTerminal - CatalogRef.PaymentTerminals
 //  * Amount - Number
+&AtServer
 Function GetCurrentTerminalOperations()
 	Query = New Query;
 	Query.Text =

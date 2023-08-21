@@ -252,7 +252,6 @@ EndFunction
 // * isNew - Boolean -
 // * MetadataName - String -
 //  Rules - See GetRuleList
-//  CheckCurrent - Boolean - Check current
 //  AddInfo - Undefined - Add info
 // 
 // Returns:
@@ -368,7 +367,6 @@ EndFunction
 // Parameters:
 //  SourceParams - See FillLockDataSettings
 //  Rules - See GetRuleList
-//  CheckCurrent - Boolean - Check current
 //  AddInfo - Undefined - Add info
 // 
 // Returns:

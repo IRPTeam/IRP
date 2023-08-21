@@ -26,4 +26,11 @@
       <value>Product</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="53b457bc-5d47-4e8b-858f-a43c58bf269f">
+    <name>Certificate</name>
+    <synonym>
+      <key>en</key>
+      <value>Certificate</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

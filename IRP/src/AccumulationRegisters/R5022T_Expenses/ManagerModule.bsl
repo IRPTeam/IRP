@@ -45,7 +45,6 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	|	T6095S_WriteOffBatchesInfo.ItemKey AS ItemKey,
 	|	T6095S_WriteOffBatchesInfo.Currency AS Currency,
 	|	T6095S_WriteOffBatchesInfo.RowID AS Key,
-	//#2066
 	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
 	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
 	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
@@ -65,7 +64,6 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	|	+T6095S_WriteOffBatchesInfo.AllocatedCostTaxAmount
 	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount
 	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
-	//--
 	|FROM
 	|	InformationRegister.T6095S_WriteOffBatchesInfo AS T6095S_WriteOffBatchesInfo
 	|WHERE

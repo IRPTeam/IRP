@@ -1052,7 +1052,7 @@
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
   <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
-  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.T9010S_AccountsItemKey</informationRegisters>
   <informationRegisters>InformationRegister.T9011S_AccountsCashAccount</informationRegisters>
   <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>

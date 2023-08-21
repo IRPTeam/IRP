@@ -561,6 +561,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_130", NStr("en = 'Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks'", Lang));
 	Strings.Insert("Error_131", NStr("en = 'Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
 	Strings.Insert("Error_132", NStr("en = 'Company [%1] can only be specified once'", Lang));	
+	Strings.Insert("Error_133", NStr("en = 'Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks'", Lang));
+	Strings.Insert("Error_134", NStr("en = 'Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks'", Lang));
+	Strings.Insert("Error_135", NStr("en = 'Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

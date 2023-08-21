@@ -679,10 +679,10 @@
       <objectType typeId="08ae745a-6351-472f-aace-c1f6efdeafab" valueTypeId="c83cb6ec-29ea-4965-9ad5-c62f0981f56d"/>
       <rowType typeId="91dc7ce1-3d71-4f2e-a230-2deddbc0989b" valueTypeId="d36db238-2ecb-42e3-aeef-ff2a47242e6e"/>
     </producedTypes>
-    <name>ConsignorBatches</name>
+    <name>DELETE_ConsignorBatches</name>
     <synonym>
       <key>en</key>
-      <value>Consignor batches</value>
+      <value>DELETE consignor batches</value>
     </synonym>
     <attributes uuid="430d8d60-c3e1-4f76-82b7-8e10db6d787d">
       <name>Key</name>

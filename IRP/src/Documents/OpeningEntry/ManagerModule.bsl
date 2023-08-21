@@ -673,10 +673,11 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R8010B_TradeAgentInventory());
-	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
-	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
+	//#2093
+	//QueryArray.Add(R8010B_TradeAgentInventory());
+	//QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
+	//QueryArray.Add(R8012B_ConsignorInventory());
+	//QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(R9510B_SalaryPayment());
@@ -1445,75 +1446,79 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.ItemKey";
 EndFunction
 
-Function R8010B_TradeAgentInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Partner,
-		   |	ShipmentToTradeAgent.Agreement,
-		   |	ShipmentToTradeAgent.LegalName,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |INTO R8010B_TradeAgentInventory
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE";
-EndFunction
+//#2093
+//Function R8010B_TradeAgentInventory()
+//	Return "SELECT
+//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+//		   |	ShipmentToTradeAgent.Period,
+//		   |	ShipmentToTradeAgent.Company,
+//		   |	ShipmentToTradeAgent.Partner,
+//		   |	ShipmentToTradeAgent.Agreement,
+//		   |	ShipmentToTradeAgent.LegalName,
+//		   |	ShipmentToTradeAgent.ItemKey,
+//		   |	ShipmentToTradeAgent.Quantity
+//		   |INTO R8010B_TradeAgentInventory
+//		   |FROM
+//		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
+//		   |WHERE
+//		   |	TRUE";
+//EndFunction
 
-Function R8011B_TradeAgentSerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Partner,
-		   |	ShipmentToTradeAgent.Agreement,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.SerialLotNumber,
-		   |	ShipmentToTradeAgent.Quantity
-		   |INTO R8011B_TradeAgentSerialLotNumber
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	ShipmentToTradeAgent.isSerialLotNumberSet";
-EndFunction
+//#2093
+//Function R8011B_TradeAgentSerialLotNumber()
+//	Return "SELECT
+//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+//		   |	ShipmentToTradeAgent.Period,
+//		   |	ShipmentToTradeAgent.Company,
+//		   |	ShipmentToTradeAgent.Partner,
+//		   |	ShipmentToTradeAgent.Agreement,
+//		   |	ShipmentToTradeAgent.ItemKey,
+//		   |	ShipmentToTradeAgent.SerialLotNumber,
+//		   |	ShipmentToTradeAgent.Quantity
+//		   |INTO R8011B_TradeAgentSerialLotNumber
+//		   |FROM
+//		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
+//		   |WHERE
+//		   |	ShipmentToTradeAgent.isSerialLotNumberSet";
+//EndFunction
 
-Function R8012B_ConsignorInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	ReceiptFromConsignor.Company,
-		   |	ReceiptFromConsignor.Partner,
-		   |	ReceiptFromConsignor.Agreement,
-		   |	ReceiptFromConsignor.LegalName,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.SerialLotNumber,
-		   |	ReceiptFromConsignor.Quantity
-		   |INTO R8012B_ConsignorInventory
-		   |FROM
-		   |	ReceiptFromConsignor AS ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
-EndFunction
+//#2093
+//Function R8012B_ConsignorInventory()
+//	Return "SELECT
+//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+//		   |	ReceiptFromConsignor.Period,
+//		   |	ReceiptFromConsignor.Company,
+//		   |	ReceiptFromConsignor.Partner,
+//		   |	ReceiptFromConsignor.Agreement,
+//		   |	ReceiptFromConsignor.LegalName,
+//		   |	ReceiptFromConsignor.ItemKey,
+//		   |	ReceiptFromConsignor.SerialLotNumber,
+//		   |	ReceiptFromConsignor.Quantity
+//		   |INTO R8012B_ConsignorInventory
+//		   |FROM
+//		   |	ReceiptFromConsignor AS ReceiptFromConsignor
+//		   |WHERE
+//		   |	TRUE";
+//EndFunction
 
-Function R8013B_ConsignorBatchWiseBalance()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	ReceiptFromConsignor.Company,
-		   |	ReceiptFromConsignor.Store,
-		   |	ReceiptFromConsignor.Batch,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.SerialLotNumber,
-		   |	ReceiptFromConsignor.SourceOfOrigin,
-		   |	ReceiptFromConsignor.Quantity
-		   |INTO R8013B_ConsignorBatchWiseBalance
-		   |FROM
-		   |	ReceiptFromConsignor AS ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
-EndFunction
+//#2093
+//Function R8013B_ConsignorBatchWiseBalance()
+//	Return "SELECT
+//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+//		   |	ReceiptFromConsignor.Period,
+//		   |	ReceiptFromConsignor.Company,
+//		   |	ReceiptFromConsignor.Store,
+//		   |	ReceiptFromConsignor.Batch,
+//		   |	ReceiptFromConsignor.ItemKey,
+//		   |	ReceiptFromConsignor.SerialLotNumber,
+//		   |	ReceiptFromConsignor.SourceOfOrigin,
+//		   |	ReceiptFromConsignor.Quantity
+//		   |INTO R8013B_ConsignorBatchWiseBalance
+//		   |FROM
+//		   |	ReceiptFromConsignor AS ReceiptFromConsignor
+//		   |WHERE
+//		   |	TRUE";
+//EndFunction
 
 Function R8015T_ConsignorPrices()
 	Return "SELECT

@@ -17837,7 +17837,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T8010S_ConsignorBatches</name>
+		<name>InformationRegister.DELETE_T8010S_ConsignorBatches</name>
 		<right>
 			<name>Edit</name>
 			<value>true</value>

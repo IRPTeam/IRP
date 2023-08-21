@@ -68,7 +68,7 @@ Procedure FillCheckProcessing_ConsignorsInfo(Cancel, CatalogObject) Export
 	EndDo;
 EndProcedure
 
-Function GetEmptyItemListTable()
+Function GetEmptyItemListTable() Export
 	ItemListTable = New ValueTable();
 	ItemListTable.Columns.Add("Company"    , New TypeDescription("CatalogRef.Companies"));
 	ItemListTable.Columns.Add("LegalName"  , New TypeDescription("CatalogRef.Companies"));
@@ -92,7 +92,7 @@ Function GetItemListTable(DocObject) Export
 	Return ItemListTable;
 EndFunction
 
-Function GetConsignorsByItemList(ItemList)
+Function GetConsignorsByItemList(ItemList) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT

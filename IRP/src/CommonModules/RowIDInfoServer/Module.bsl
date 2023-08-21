@@ -4823,6 +4823,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.Commission,
 	|	Payments.BankTerm,
 	|	Payments.Key,
+	|	Payments.Certificate,
 	|	CAST("""" AS String(30)) AS RRNCode,
 	|	CAST("""" AS String(1024)) AS PaymentInfo
 	|FROM
@@ -4838,6 +4839,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.Commission,
 	|	Payments.PaymentTerminal,
 	|	Payments.PaymentType,
+	|	Payments.Certificate,
 	|	Payments.Percent
 	|;
 	|
@@ -11684,7 +11686,7 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Key, Ref, PaymentType, PaymentTerminal, Account, FinancialMovementType, Percent, BankTerm, RRNCode, PaymentInfo";
+	Return "Key, Ref, PaymentType, PaymentTerminal, Account, FinancialMovementType, Percent, BankTerm, RRNCode, PaymentInfo, Certificate";
 EndFunction
 
 Function GetColumnNamesSum_Payments()

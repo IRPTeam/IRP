@@ -8,6 +8,10 @@
 // Returns:
 //  Structure -  Strings:
 // * ACS_UnknownValueType - String - 
+// * CERT_OnlyProdOrCert - String - 
+// * CERT_CertAlreadyUsed - String - 
+// * CERT_CannotBeSold - String - 
+// * CERT_HasNotBeenUsed - String - 
 // * EmailIsEmpty - String - 
 // * Only1SymbolAtCanBeSet - String - 
 // * InvalidLengthOfLocalPart - String - 
@@ -68,6 +72,7 @@
 // * EqAc_AlreadyhasTransaction - String - 
 // * EqAc_LastSettlementHasError - String - 
 // * EqAc_LastSettlementNotFound - String - 
+// * EqAc_NotAllPaymentDone - String - 
 // * EqFP_CanNotOpenSessionRegistrationKM - String - 
 // * EqFP_CanNotRequestKM - String - 
 // * EqFP_CanNotGetProcessingKMResult - String - 

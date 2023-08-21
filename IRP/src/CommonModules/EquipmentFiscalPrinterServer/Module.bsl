@@ -69,10 +69,32 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
-			FiscalStringData.CalculationSubject = 1;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
+				FiscalStringData.CalculationSubject = 10;
+			Else
+				FiscalStringData.CalculationSubject = 1;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			EndIf;
 		EndIf;
 		FiscalStringData.MeasureOfQuantity = 255;
-		FiscalStringData.Name = String(ItemRow.Item) + " " + String(ItemRow.ItemKey);
+		
+#Region GenerateName		
+		Name = New Array; // Array Of String
+		Name.Add(String(ItemRow.Item));
+		If Not String(ItemRow.Item) = String(ItemRow.ItemKey) Then
+			Name.Add(String(ItemRow.ItemKey));
+		EndIf;
+		
+		SearchSerial = SourceData.SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+		If SearchSerial.Count() > 0 Then
+			SerialName = New Array; // Array Of String
+			For Each Serial In SearchSerial Do
+				SerialName.Add(String(Serial.SerialLotNumber));
+			EndDo;
+			Name.Add("[" + StrConcat(SerialName, ",") + "]");
+		EndIf;
+		FiscalStringData.Name = StrConcat(Name, " ");
+#EndRegion
+
 		FiscalStringData.Quantity = ItemRow.Quantity;
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			FiscalStringData.PaymentMethod = 1;
@@ -91,6 +113,11 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		Else
 			FiscalStringData.PaymentMethod = 4;
 		EndIf;
+		
+		If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
+			FiscalStringData.PaymentMethod = 3;
+		EndIf;
+		
 		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
 		If TaxRows.Count() > 0 Then
 			If TaxRows[0].TaxRate.NoRate Then

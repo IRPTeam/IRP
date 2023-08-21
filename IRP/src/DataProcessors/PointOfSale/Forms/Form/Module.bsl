@@ -235,8 +235,8 @@ Async Procedure PrintXReport(Command)
 	Else
 		EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Object.ConsolidatedRetailSales);
 	EndIf;
-	If EquipmentResult.Success Then
-
+	If Not EquipmentResult.Info.Success Then
+		CommonFunctionsClientServer.ShowUsersMessage(EquipmentResult.Info.Error);
 	EndIf;
 EndProcedure
 

@@ -368,7 +368,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			Else
 				CertStatus = CertificateServer.GetCertificateStatus(Row.SerialLotNumber);
 				If Not isReturn And Not CertStatus.CanBeUsed Then
-					CommonFunctionsClientServer.ShowUsersMessage(R().CERT_CertAlreadyUsed);
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_CertAlreadyUsed, Row.SerialLotNumber));
 					Return;
 				ElsIf isReturn And CertStatus.CanBeUsed Then
 					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_HasNotBeenUsed, Row.SerialLotNumber));
@@ -462,6 +462,13 @@ Procedure NumButtonPress(CommandName)
 		Return;
 	EndIf;
 
+	If Not CurrentData.Edited Then
+		CurrentData.Amount = 0;
+		CurrentData.Edited = True;
+		AmountDotIsActive = False;
+		AmountFractionDigitsCount = 0;
+	EndIf;
+
 	ButtonValue = StrReplace(CommandName, "Numpad", "");
 
 	If ButtonValue = "Dot" Then
@@ -482,13 +489,6 @@ EndProcedure
 
 &AtClient
 Procedure SetAmountInPaymentAndUpdate(CurrentData)
-
-	If Not CurrentData.Edited Then
-		CurrentData.Amount = 0;
-		CurrentData.Edited = True;
-		AmountDotIsActive = False;
-		AmountFractionDigitsCount = 0;
-	EndIf;
 
 	If AmountDotIsActive Then
 		If AmountFractionDigitsCount Then

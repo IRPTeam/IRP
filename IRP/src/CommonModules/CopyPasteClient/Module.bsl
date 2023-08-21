@@ -8,6 +8,7 @@
 //  Object - DocumentObjectDocumentName - Object
 //  Form - ClientApplicationForm - Form
 Procedure CopyToClipboard(Object, Form) Export
+	//@skip-check wrong-string-literal-content
 	Notify = New NotifyDescription("CopyToClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	OpenSettings.Insert("Ref", Object.Ref);
@@ -55,6 +56,7 @@ EndProcedure
 //  Object - DocumentObjectDocumentName - Object
 //  Form - ClientApplicationForm - Form
 Procedure PasteFromClipboard(Object, Form) Export
+	//@skip-check wrong-string-literal-content
 	Notify = New NotifyDescription("PasteFromClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	OpenSettings.Insert("Ref", Object.Ref);

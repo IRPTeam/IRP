@@ -52,7 +52,7 @@ EndFunction
 // Get additional settings.
 // 
 // Parameters:
-//  IntegrationSettings Integration settings
+//  IntegrationSettings - CatalogRef.IntegrationSettings - Integration settings
 // 
 // Returns:
 //  Structure - Get additional settings

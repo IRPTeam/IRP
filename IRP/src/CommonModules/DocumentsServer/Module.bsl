@@ -88,7 +88,9 @@ Function CheckItemListStores(Object) Export
 	"SELECT
 	|	Table.LineNumber,
 	|	Table.Store,
-	|	Table.ItemKey
+	|	Table.ItemKey,
+	|	Table.IsServiceNotSet,
+	|	Table.IsService
 	|INTO ItemList
 	|FROM
 	|	&ItemList AS Table
@@ -101,10 +103,22 @@ Function CheckItemListStores(Object) Export
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
-	|	Not ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service)
+	|	CASE WHEN ItemList.IsServiceNotSet THEN
+	|		Not ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|	WHEN NOT ItemList.IsServiceNotSet THEN
+	|		Not ItemList.IsService
+	|	END
 	|	AND  ItemList.Store = Value(Catalog.Stores.EmptyRef)";
-
-	Query.SetParameter("ItemList", Object.ItemList.Unload());
+	ItemList = Object.ItemList.Unload(); // ValueTable
+	If ItemList.Columns.Find("IsService") = Undefined Then
+		ItemList.Columns.Add("IsService", New TypeDescription("Boolean"));
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+		ItemList.FillValues(True, "IsServiceNotSet");
+	Else
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+	EndIf;
+	
+	Query.SetParameter("ItemList", ItemList);
 	QueryResult = Query.Execute();
 
 	If QueryResult.IsEmpty() Then
@@ -599,7 +613,7 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result = New Structure();
 	Result.Insert("IsService", True);
 	If ValueIsFilled(ItemKey) Then
-		Result.IsService = (ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service);
+		Result.IsService = GetItemInfo.GetInfoByItemsKey(ItemKey)[0].isService;
 	EndIf;
 	Result.Insert("UseGoodsReceipt", Store.UseGoodsReceipt);
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);

@@ -131,6 +131,7 @@ EndProcedure
 
 #Region Service
 
+&AtClient
 Procedure SetVisibleCodeString()
 	Items.CheckCodeString.Visible = Object.ControlCodeString;
 EndProcedure

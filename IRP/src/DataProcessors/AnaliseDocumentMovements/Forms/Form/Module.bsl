@@ -23,7 +23,7 @@ Procedure FillMovementsAtServer()
 
 		ParametersInfo = New Array();
 		For Each Param In ParametersStructure.QueryParameters Do
-			ParametersInfo.Add(Param.Key + ": " + TypeOf(Param.Value));
+			ParametersInfo.Add(Param.Key + ": " + String(TypeOf(Param.Value)));
 		EndDo;
 		ParametersInfo = StrConcat(ParametersInfo, Chars.LF);
 

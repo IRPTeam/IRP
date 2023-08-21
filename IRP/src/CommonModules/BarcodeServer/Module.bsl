@@ -148,7 +148,7 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 		|	VTBarcode.Barcode AS Barcode,
 		|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
 		|	CASE WHEN &IgnoreCodeStringControl THEN 
@@ -456,3 +456,17 @@ Procedure UpdateBarcode(Barcode, Params = Undefined, AddInfo = Undefined) Export
 	EndIf;
 	NewBarcode.Write();
 EndProcedure
+
+// Get document barcode.
+// 
+// Parameters:
+//  Source - DocumentRefDocumentName - Source
+// 
+// Returns:
+//  String - Document barcode
+Function GetDocumentBarcode(Source) Export
+	Str = New Structure();
+	Str.Insert("Type", Source.Metadata().Name);
+	Str.Insert("Code", String(Source.UUID()));
+	Return CommonFunctionsServer.SerializeJSON(Str);
+EndFunction

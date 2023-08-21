@@ -94,21 +94,24 @@ Function CopySelectedRows(Object, Form, CopySettings) Export
 			Continue;
 		EndIf;
 	
+		//@skip-check dynamic-access-method-not-found
 		Result.Data.Insert(TabularSection.Name, Object[TabularSection.Name].Unload(New Array));
 	EndDo;
 	
-	For Each RowIndex In Form.CurrentItem.SelectedRows Do
+	For Each RowIndex In Form.CurrentItem.SelectedRows Do // Number
 		RowKey = Form.Object.ItemList.FindByID(RowIndex).Key;
 		
 		For Each Table In Result.Data Do
 			
-			For Each TableRow In Object[Table.Key].FindRows(New Structure("Key", RowKey)) Do
+			//@skip-check dynamic-access-method-not-found
+			For Each TableRow In Object[Table.Key].FindRows(New Structure("Key", RowKey)) Do // ValueTableRow
 				FillPropertyValues(Table.Value.Add(), TableRow);
 			EndDo;
 		EndDo;
 	EndDo;
 	
 	// Rename Quantity column
+	//@skip-check property-return-type
 	Result.Data.ItemList.Columns[CopySettings.CopyQuantityAs].Name = "Quantity";
 	
 	Result.Message = StrTemplate(R().CP_006, Form.CurrentItem.SelectedRows.Count());	
@@ -166,7 +169,9 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 	SourceHasTableSLN = BufferData.Data.Property("SerialLotNumbers");
 	TargetHasTableSLN = Wrapper.Tables.Property("SerialLotNumbers");
 	
+	//@skip-check property-return-type, dynamic-access-method-not-found
 	SourceHasSLNInItemList = Not BufferData.Data.ItemList.Columns.Find("SerialLotNumber") = Undefined;
+	//@skip-check property-return-type, dynamic-access-method-not-found
 	TargetHasSLNInItemList = Wrapper.Tables.ItemList.Property("SerialLotNumber"); // Boolean
 	
 	For Each ItemRow In ItemList Do
@@ -200,13 +205,15 @@ Procedure SourceHasSLNInItemListAndTargetHasTableSLN(BufferData, ItemRow, Wrappe
 		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
 	EndDo;
 	
-	If Not ItemRow.SerialLotNumber.isEmpty() Then
+	//@skip-check property-return-type, unknown-method-property
+	SLN = ItemRow.SerialLotNumber; // CatalogRef.SerialLotNumbers
+	If Not SLN.isEmpty() Then
 		SerialSetting = SerialLotNumbersServer.FillSettingsAddNewSerial();
 		SerialSetting.Item = ItemRow.Item;
 		SerialSetting.ItemKey = ItemRow.ItemKey;
 		SerialSetting.RowKey = NewItemRow.Key;
 		NewSerial = New Structure;
-		NewSerial.Insert("SerialLotNumber", ItemRow.SerialLotNumber);
+		NewSerial.Insert("SerialLotNumber", SLN);
 		NewSerial.Insert("Quantity", ItemRow.Quantity);
 		SerialSetting.SerialLotNumbers.Add(NewSerial);
 		Result.SerialLotNumbers.Add(SerialSetting);
@@ -245,6 +252,7 @@ Procedure CopyAsIsItemListWithSLN(BufferData, ItemRow, Wrapper, PasteSettings)
 		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
 	EndDo;
 	BuilderAPI.SetRowProperty(Wrapper, NewItemRow, PasteSettings.PasteQuantityAs, ItemRow.Quantity, "ItemList");
+	//@skip-check property-return-type, unknown-method-property
 	BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "SerialLotNumber", ItemRow.SerialLotNumber, "ItemList");
 EndProcedure
 

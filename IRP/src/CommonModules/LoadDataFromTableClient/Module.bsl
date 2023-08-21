@@ -17,6 +17,7 @@ Procedure OpenFormForLoadData(FormObject, DocumentObject, AddInfo = Undefined) E
 	EndIf;
 	
 	If FieldsForLoadData = Undefined Then
+		//@skip-check wrong-string-literal-content
 		FieldsForLoadData = FormObject["_FieldsForLoadData"];
 	EndIf;
 	If EndNotify = Undefined Then

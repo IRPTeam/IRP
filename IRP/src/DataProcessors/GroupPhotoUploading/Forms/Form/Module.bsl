@@ -105,7 +105,7 @@ EndProcedure
 &AtClient
 Async Procedure Load(Command)
 	
-	ThisObject.Start = CurrentDate();
+	ThisObject.Start = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	ReadyRecord = New Array; // Array of FormDataCollectionItem
 	For Each FilesTableRecord In ThisObject.FilesTable Do
@@ -138,7 +138,7 @@ Async Procedure Load(Command)
 	
 	StartLoadingOnServer(FileAdrresses);
 	
-	ThisObject.Finish = CurrentDate();
+	ThisObject.Finish = CommonFunctionsServer.GetCurrentSessionDate();
 	
 EndProcedure
 

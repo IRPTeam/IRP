@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+        }
+        .receipts {
+            width: 300px;
+        }
+        .receipt {
+            border: 1px dashed black;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .separator {
+            height: 1px;
+            background-color: grey;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipts" id="receipts"></div>
+    <script>
+        function clearAll() {
+            document.getElementById('receipts').innerHTML = '';
+        }
+
+        function fillData(jsonData) {
+            let data = JSON.parse(jsonData);
+            let receiptDiv = document.createElement('div');
+            receiptDiv.className = 'receipt';
+            data.forEach(line => {
+                let div = document.createElement('div');
+                div.innerText = line;
+                receiptDiv.appendChild(div);
+            });
+            document.getElementById('receipts').appendChild(receiptDiv);
+            let separator = document.createElement('div');
+            separator.className = 'separator';
+            document.getElementById('receipts').appendChild(separator);
+        }
+    </script>
+</body>
+</html>

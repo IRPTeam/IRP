@@ -68,6 +68,7 @@ EndProcedure
 &AtClient
 Procedure UpdateTimeInfo()
 	UpdateTimeInfoAtServer();
+	//@skip-check use-non-recommended-method
 	CurrentUserPCTime = CurrentDate();
 EndProcedure
 
@@ -75,6 +76,7 @@ EndProcedure
 Procedure UpdateTimeInfoAtServer()
 	CurrentDatabaseTimeZone = GetInfoBaseTimeZone();
 	CurrentSessionTimeZone = SessionTimeZone();
+	//@skip-check use-non-recommended-method
 	CurrentDatabaseTime = CurrentDate();
 	CurrentSessionTime = CommonFunctionsServer.GetCurrentSessionDate();
 EndProcedure

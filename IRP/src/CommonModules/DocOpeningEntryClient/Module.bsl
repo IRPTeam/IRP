@@ -132,12 +132,10 @@ EndProcedure
 
 #Region CASH_IN_TRANSIT
 
-&AtClient
 Procedure CashInTransitBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
 	ViewClient_V2.CashInTransitBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
-&AtClient
 Procedure CashInTransitAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.CashInTransitAfterDeleteRow(Object, Form);
 EndProcedure
@@ -146,7 +144,6 @@ EndProcedure
 
 #Region RECEIPTING_ACCOUNT
 
-&AtClient
 Procedure CashInTransitReceiptingAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.CashInTransitReceiptingAccountOnChange(Object, Form, CurrentData);
 EndProcedure

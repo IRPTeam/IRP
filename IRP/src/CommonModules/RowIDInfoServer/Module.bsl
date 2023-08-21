@@ -145,7 +145,7 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
 			NewRow = TableOfDifferenceFields.Add();
 			FillPropertyValues(NewRow, ItemOfDifferenceFields);
-			If Find(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
+			If StrFind(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
 				NewRow.LineNumber = 0;
 			EndIf;
 		EndDo;
@@ -153,7 +153,7 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	TableOfDifferenceFields.GroupBy("FieldName, DataPath, LineNumber, ValueBefore, ValueAfter");
 	For Each Difference In TableOfDifferenceFields Do
 		If ValueIsFilled(Difference.DataPath) Then
-			If Find(Difference.DataPath, "ItemList") <> 0 Then
+			If StrFind(Difference.DataPath, "ItemList") <> 0 Then
 				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
 					Difference.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
 					"ItemList[" + Format((Difference.LineNumber - 1), "NZ=0; NG=0;") + "]." 
@@ -1420,7 +1420,7 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
 			NextStep = Catalogs.MovementRules.PO_PI;
 		Else
-			If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
+			If RowItemList.IsService Then
 				NextStep = Catalogs.MovementRules.SI_WO_WS;
 			Else
 				NextStep = Catalogs.MovementRules.SI_SC;
@@ -1431,16 +1431,14 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_SI(Source, RowItemList, Row)
-	ItemType_Type = RowItemList.ItemKey.Item.ItemType.Type;
-	
 	If RowItemList.UseShipmentConfirmation 
-		And ItemType_Type = Enums.ItemTypes.Product
+		And Not RowItemList.IsService
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.SC;
 	EndIf;
 	
 	If RowItemList.UseWorkSheet
-		And ItemType_Type = Enums.ItemTypes.Service
+		And RowItemList.IsService
 		And Not Source.WorkSheets.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.WS;
 	EndIf;
@@ -1468,7 +1466,7 @@ EndFunction
 
 Function GetNextStep_PO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
+	If RowItemList.IsService Then
 		NextStep = Catalogs.MovementRules.PI;
 	Else
 		NextStep = Catalogs.MovementRules.PI_GR;
@@ -1478,7 +1476,7 @@ EndFunction
 
 Function GetNextStep_PI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.UseGoodsReceipt And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
+	If RowItemList.UseGoodsReceipt And Not RowItemList.IsService
 		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		NextStep = Catalogs.MovementRules.GR;
 	EndIf;
@@ -2434,8 +2432,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
-	| 	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
-	| 	case when &IsPurchase	then 0 else ISNULL(ItemList.Price, 0) end AS Price,
+	|	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
+	|	case when &IsPurchase	then 0 else ISNULL(ItemList.Price, 0) end AS Price,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
@@ -2443,9 +2441,9 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Store.UseShipmentConfirmation
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+	|	AND NOT ItemList.IsService AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|	AND NOT ItemList.IsService AS UseGoodsReceipt,
 	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
@@ -2611,9 +2609,9 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Store.UseShipmentConfirmation
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+	|	AND NOT ItemList.IsService AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|	AND NOT ItemList.IsService AS UseGoodsReceipt,
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
@@ -3406,7 +3404,7 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ExpenseType AS ExpenseType,
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Store.UseGoodsReceipt
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|	AND NOT ItemList.IsService AS UseGoodsReceipt,
 	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
@@ -3522,9 +3520,9 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Store.UseShipmentConfirmation
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+	|	AND NOT ItemList.IsService AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|	AND NOT ItemList.IsService AS UseGoodsReceipt,
 	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
@@ -4314,7 +4312,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.ReturnReason AS ReturnReason,
 	|	ItemList.Store.UseShipmentConfirmation
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+	|	AND NOT ItemList.IsService AS UseShipmentConfirmation,
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseReturnTransactionTypes.ReturnToVendor)
 	|			then value(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor)
@@ -4526,7 +4524,7 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.Store.UseGoodsReceipt
-	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|	AND NOT ItemList.IsService AS UseGoodsReceipt,
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer)
 	|			then value(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)

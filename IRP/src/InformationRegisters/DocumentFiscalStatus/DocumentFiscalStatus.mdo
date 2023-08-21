@@ -17,6 +17,10 @@
   <editType>InDialog</editType>
   <defaultRecordForm>InformationRegister.DocumentFiscalStatus.Form.RecordForm</defaultRecordForm>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Document fiscal status</value>
+  </recordPresentation>
   <resources uuid="06a1ad82-83ab-4490-9370-1fb93414cfbd">
     <name>Status</name>
     <synonym>

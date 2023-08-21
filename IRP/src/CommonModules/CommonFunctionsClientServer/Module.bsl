@@ -1,4 +1,9 @@
 Procedure ShowUsersMessage(Text, Field = Undefined, Data = Undefined, AddInfo = Undefined) Export
+	
+	If IsBlankString(Text) Then
+		Return;
+	EndIf;
+	
 	Message = New UserMessage();
 	Message.Text = Text;
 	Message.Field = Field;
@@ -213,6 +218,8 @@ Function isBase64Value(Value) Export
 		ElsIf Code >= 97 And Code <= 122 Then // a-z
 		
 		ElsIf Code = 61 And StrLen - Index <= 2 Then // =
+		
+		ElsIf Code = 47 OR Code = 43 Then // /
 		
 		Else
 			Return False;		

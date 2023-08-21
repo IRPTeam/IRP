@@ -3948,7 +3948,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внешняя ссылка</value>
+     <value>Связан внешне</value>
     </title>
     <title>
      <key>tr</key>
@@ -3973,7 +3973,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренняя ссылка</value>
+     <value>Связан внутренне</value>
     </title>
     <title>
      <key>tr</key>
@@ -3998,7 +3998,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внешние ссылки</value>
+     <value>Внешние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -4024,7 +4024,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренние ссылки</value>
+     <value>Внутренние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -4284,7 +4284,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Документы, связанные с внешними ссылками</value>
+   <value>Внешние связки строк документов</value>
   </title>
   <title>
    <key>tr</key>

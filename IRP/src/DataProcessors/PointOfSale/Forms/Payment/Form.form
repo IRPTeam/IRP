@@ -16,6 +16,77 @@
   <name>GroupTitle</name>
   <id>33</id>
   <items xsi:type="form:Button">
+   <name>SearchByBarcode</name>
+   <id>305</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>SearchByBarcodeExtendedTooltip</name>
+    <id>306</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.Command.SearchByBarcode</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <height>2</height>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
+  <items xsi:type="form:Decoration">
+   <name>DecorationFreeSpace</name>
+   <id>307</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>DecorationFreeSpaceExtendedTooltip</name>
+    <id>309</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DecorationFreeSpaceContextMenu</name>
+    <id>308</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>Label</type>
+   <horizontalStretch>true</horizontalStretch>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </items>
+  <items xsi:type="form:Button">
    <name>FormCloseButton</name>
    <id>31</id>
    <visible>true</visible>
@@ -1728,6 +1799,7 @@
       <items xsi:type="form:Button">
        <name>Certificate</name>
        <id>136</id>
+       <enabled>true</enabled>
        <userVisible>
         <common>true</common>
        </userVisible>
@@ -1751,19 +1823,16 @@
        <representation>PictureAndText</representation>
        <width>5</width>
        <autoMaxWidth>true</autoMaxWidth>
-       <height>3</height>
+       <height>2</height>
        <autoMaxHeight>true</autoMaxHeight>
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
        <placementArea>UserCmds</placementArea>
-       <textColor xsi:type="core:ColorRef">
-        <color>Windows.ToolTip</color>
-       </textColor>
        <backColor xsi:type="core:ColorRef">
-        <color>Web.HoneyDew</color>
+        <color>Web.MintCream</color>
        </backColor>
        <font xsi:type="core:FontRef">
-        <font>Style.ExtraLargeTextFont</font>
+        <font>Style.LargeTextFont</font>
        </font>
        <representationInContextMenu>Auto</representationInContextMenu>
       </items>
@@ -1805,7 +1874,7 @@
        <representation>Auto</representation>
        <width>5</width>
        <autoMaxWidth>true</autoMaxWidth>
-       <height>3</height>
+       <height>2</height>
        <autoMaxHeight>true</autoMaxHeight>
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
@@ -3134,6 +3203,10 @@
   <event>BeforeClose</event>
   <name>BeforeClose</name>
  </handlers>
+ <handlers>
+  <event>NotificationProcessing</event>
+  <name>NotificationProcessing</name>
+ </handlers>
  <excludedCommands>CustomizeForm</excludedCommands>
  <excludedCommands>OK</excludedCommands>
  <excludedCommands>Abort</excludedCommands>
@@ -3641,6 +3714,56 @@
    <id>59</id>
    <valueType>
     <types>CatalogRef.Agreements</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Certificate</name>
+   <title>
+    <key>en</key>
+    <value>Certificate</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Сертификат</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Sertifika</value>
+   </title>
+   <id>62</id>
+   <valueType>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>CanBeDeleted</name>
+   <title>
+    <key>en</key>
+    <value>Can be deleted</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Может быть удалено</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Can be deleted</value>
+   </title>
+   <id>64</id>
+   <valueType>
+    <types>Boolean</types>
    </valueType>
    <view>
     <common>true</common>
@@ -4624,6 +4747,106 @@ WHERE
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>CertificatePaymentTypes</name>
+  <title>
+   <key>en</key>
+   <value>Certificate payment types</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Тип платежей по сертификатам</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Certificate payment types</value>
+  </title>
+  <id>63</id>
+  <valueType>
+   <types>ValueTable</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <columns>
+   <name>PaymentType</name>
+   <title>
+    <key>en</key>
+    <value>Payment type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
+   </title>
+   <id>10</id>
+   <valueType>
+    <types>CatalogRef.PaymentTypes</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Account</name>
+   <title>
+    <key>en</key>
+    <value>Account</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Касса/банк</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Hesap</value>
+   </title>
+   <id>26</id>
+   <valueType>
+    <types>CatalogRef.CashAccounts</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>PaymentTypeEnum</name>
+   <title>
+    <key>en</key>
+    <value>Payment type enum</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Тип вида оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ödeme türü sıralaması</value>
+   </title>
+   <id>29</id>
+   <valueType>
+    <types>EnumRef.PaymentTypes</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+ </attributes>
  <formCommands>
   <name>Card</name>
   <title>
@@ -5260,6 +5483,39 @@ WHERE
     <name>SetPaymentUncheck</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>SearchByBarcode</name>
+  <title>
+   <key>en</key>
+   <value>Search by
+barcode (F7)</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Поиск по
+ШК (F7)</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Barkod
+bul (F7)</value>
+  </title>
+  <id>33</id>
+  <use>
+   <common>true</common>
+  </use>
+  <shortcut>F7</shortcut>
+  <picture xsi:type="core:PictureRef">
+   <picture>CommonPicture.Barcode</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SearchByBarcode</name>
+   </handler>
+  </action>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <parameters>

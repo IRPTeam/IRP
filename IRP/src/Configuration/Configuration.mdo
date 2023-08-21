@@ -310,6 +310,7 @@
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
  <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
+ <commonTemplates>CommonTemplate.HTMLPrintEmul</commonTemplates>
  <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
  <commonModules>CommonModule.AccountingClient</commonModules>
  <commonModules>CommonModule.AccountingClientServer</commonModules>
@@ -578,6 +579,7 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
+ <commonModules>CommonModule.CertificateServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -811,6 +813,7 @@
  <commonForms>CommonForm.CodeStringCheck</commonForms>
  <commonForms>CommonForm.CheckPhoneNumber</commonForms>
  <commonForms>CommonForm.BackgroundJobSplash</commonForms>
+ <commonForms>CommonForm.HTMLPrintForm</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
  <catalogs>Catalog.AccountingOperations</catalogs>
@@ -975,6 +978,7 @@
  <enums>Enum.AllocationMethod</enums>
  <enums>Enum.AllocationMode</enums>
  <enums>Enum.ApArPostingDetail</enums>
+ <enums>Enum.BankTermTypes</enums>
  <enums>Enum.BatchDirection</enums>
  <enums>Enum.BatchType</enums>
  <enums>Enum.BillOfMaterialsTypes</enums>
@@ -991,6 +995,7 @@
  <enums>Enum.DataAreaStatus</enums>
  <enums>Enum.DocumentFiscalStatuses</enums>
  <enums>Enum.DocumentPostingTypes</enums>
+ <enums>Enum.EquipmentAPIModule</enums>
  <enums>Enum.EquipmentTypes</enums>
  <enums>Enum.ExpenseTypes</enums>
  <enums>Enum.ExternalFunctionType</enums>
@@ -1010,18 +1015,23 @@
  <enums>Enum.MaterialTypes</enums>
  <enums>Enum.MetadataSubtype</enums>
  <enums>Enum.MetadataTypes</enums>
+ <enums>Enum.OfferGroupType</enums>
  <enums>Enum.OffersDocumentTypes</enums>
  <enums>Enum.OutgoingPaymentTransactionTypes</enums>
  <enums>Enum.PaymentTypes</enums>
+ <enums>Enum.PayrollTypes</enums>
  <enums>Enum.PriceAssignment</enums>
  <enums>Enum.PriceListTypes</enums>
  <enums>Enum.PrintTemplateTypes</enums>
  <enums>Enum.ProcurementMethods</enums>
  <enums>Enum.ProductionPlanningTypes</enums>
+ <enums>Enum.ProductionTransactionTypes</enums>
  <enums>Enum.ProductionTypes</enums>
  <enums>Enum.PurchaseReturnTransactionTypes</enums>
  <enums>Enum.PurchaseTransactionTypes</enums>
  <enums>Enum.ReceiptPaymentMethods</enums>
+ <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
+ <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
  <enums>Enum.Rights</enums>
  <enums>Enum.SalesReturnTransactionTypes</enums>
  <enums>Enum.SalesTransactionTypes</enums>
@@ -1037,13 +1047,6 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
- <enums>Enum.PayrollTypes</enums>
- <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
- <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
- <enums>Enum.ProductionTransactionTypes</enums>
- <enums>Enum.OfferGroupType</enums>
- <enums>Enum.BankTermTypes</enums>
- <enums>Enum.EquipmentAPIModule</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>
@@ -1164,6 +1167,7 @@
  <accumulationRegisters>AccumulationRegister.R2001T_Sales</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R2002T_SalesReturns</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R2005T_SalesSpecialOffers</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R2006T_Certificates</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R2010T_SalesOrders</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R2011B_SalesOrdersShipment</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</accumulationRegisters>

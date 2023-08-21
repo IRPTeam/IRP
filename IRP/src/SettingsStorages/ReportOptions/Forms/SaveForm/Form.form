@@ -735,6 +735,9 @@
   <edit>
    <common>true</common>
   </edit>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>OptionsList.ReportOption</segments>
+  </notDefaultUseAlwaysAttributes>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT ALLOWED DISTINCT
 	ReportOptions.Ref As ReportOption,

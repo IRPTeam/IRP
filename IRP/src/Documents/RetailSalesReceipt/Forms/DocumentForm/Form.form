@@ -3154,7 +3154,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Залинкованные документы</value>
+       <value>Документы связанные по строкам</value>
       </title>
       <title>
        <key>tr</key>
@@ -4262,6 +4262,56 @@
      <contextMenu>
       <name>PaymentsPaymentAgentLegalNameContractContextMenu</name>
       <id>1207</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>PaymentsCertificate</name>
+     <id>1220</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Payments.Certificate</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>PaymentsCertificateExtendedTooltip</name>
+      <id>1222</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>PaymentsCertificateContextMenu</name>
+      <id>1221</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -8399,7 +8449,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внешняя ссылка</value>
+     <value>Связан внешне</value>
     </title>
     <title>
      <key>tr</key>
@@ -8424,7 +8474,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренняя ссылка</value>
+     <value>Связан внутренне</value>
     </title>
     <title>
      <key>tr</key>
@@ -8449,7 +8499,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внешние ссылки</value>
+     <value>Внешние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -8475,7 +8525,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренние ссылки</value>
+     <value>Внутренние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -8841,7 +8891,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Документы, связанные с внешними ссылками</value>
+   <value>Внешние связки строк документов</value>
   </title>
   <title>
    <key>tr</key>
@@ -9251,7 +9301,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Залинковать/разлинковать документы основания</value>
+   <value>Связать/отменить связку документов основания</value>
   </title>
   <title>
    <key>tr</key>

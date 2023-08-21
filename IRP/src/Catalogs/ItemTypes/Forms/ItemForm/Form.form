@@ -230,15 +230,238 @@
   <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>Service</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Отчеты</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Hizmet</value>
+    </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ItemTypes.EnumValue.Service</value>
     </value>
    </choiceList>
    <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>Product</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Товар</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Malzeme</value>
+    </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ItemTypes.EnumValue.Product</value>
     </value>
    </choiceList>
+   <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>Certificate</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Сертификат</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Sertifika</value>
+    </presentation>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.ItemTypes.EnumValue.Certificate</value>
+    </value>
+   </choiceList>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
+  <name>AlwaysAddNewRowAfterScan</name>
+  <id>86</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.AlwaysAddNewRowAfterScan</segments>
+  </dataPath>
+  <toolTip>
+   <key>en</key>
+   <value>After scanning, the product will always be added as a new line. However, in different places, it can still be grouped, for example, by series.</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>После сканирования товар всегда будет добавлен как новая строка. Однако в разных местах он все равно может быть сгруппирован, например, по серии.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>After scanning, the product will always be added as a new line. However, in different places, it can still be grouped, for example, by series.</value>
+  </toolTip>
+  <toolTipRepresentation>Button</toolTipRepresentation>
+  <handlers>
+   <event>OnChange</event>
+   <name>AlwaysAddNewRowAfterScanOnChange</name>
+  </handlers>
+  <extendedTooltip>
+   <name>AlwaysAddNewRowAfterScanExtendedTooltip</name>
+   <id>88</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>AlwaysAddNewRowAfterScanContextMenu</name>
+   <id>87</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+   <checkBoxType>Switcher</checkBoxType>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
+  <name>NotUseLineGrouping</name>
+  <id>100</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.NotUseLineGrouping</segments>
+  </dataPath>
+  <toolTip>
+   <key>en</key>
+   <value>When creating documents based on, when scanning, when uploading - the product will not be grouped, but will be loaded the same way as in the source.</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>При создании документов на основании, при сканировании, при загрузке - товар не будет сгруппирован, но будет загружен таким же образом, как в источнике.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>When creating documents based on, when scanning, when uploading - the product will not be grouped, but will be loaded the same way as in the source.</value>
+  </toolTip>
+  <toolTipRepresentation>Button</toolTipRepresentation>
+  <extendedTooltip>
+   <name>NotUseLineGroupingExtendedTooltip</name>
+   <id>102</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>NotUseLineGroupingContextMenu</name>
+   <id>101</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+   <checkBoxType>Switcher</checkBoxType>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
+  <name>UseSerialLotNumber</name>
+  <id>48</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.UseSerialLotNumber</segments>
+  </dataPath>
+  <toolTip>
+   <key>en</key>
+   <value>Enable tracking by serial numbers. In this case, the product series must be specified in all documents. This option should not be changed if there were previously created documents involving products of this type.</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Включите отслеживание по серийным номерам. В этом случае серия товара должна быть указана во всех документах. Этот параметр не следует изменять, если ранее были созданы документы с участием товаров этого типа.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Enable tracking by serial numbers. In this case, the product series must be specified in all documents. This option should not be changed if there were previously created documents involving products of this type.</value>
+  </toolTip>
+  <toolTipRepresentation>Button</toolTipRepresentation>
+  <handlers>
+   <event>OnChange</event>
+   <name>UseSerialLotNumberOnChange</name>
+  </handlers>
+  <extendedTooltip>
+   <name>UseSerialLotNumberExtendedTooltip</name>
+   <id>50</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>UseSerialLotNumberContextMenu</name>
+   <id>49</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+   <checkBoxType>Switcher</checkBoxType>
   </extInfo>
  </items>
  <items xsi:type="form:FormField">
@@ -289,149 +512,6 @@
    <chooseType>true</chooseType>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>AlwaysAddNewRowAfterScan</name>
-  <id>86</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.AlwaysAddNewRowAfterScan</segments>
-  </dataPath>
-  <handlers>
-   <event>OnChange</event>
-   <name>AlwaysAddNewRowAfterScanOnChange</name>
-  </handlers>
-  <extendedTooltip>
-   <name>AlwaysAddNewRowAfterScanExtendedTooltip</name>
-   <id>88</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>AlwaysAddNewRowAfterScanContextMenu</name>
-   <id>87</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>NotUseLineGrouping</name>
-  <id>100</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.NotUseLineGrouping</segments>
-  </dataPath>
-  <extendedTooltip>
-   <name>NotUseLineGroupingExtendedTooltip</name>
-   <id>102</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>NotUseLineGroupingContextMenu</name>
-   <id>101</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>UseSerialLotNumber</name>
-  <id>48</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.UseSerialLotNumber</segments>
-  </dataPath>
-  <handlers>
-   <event>OnChange</event>
-   <name>UseSerialLotNumberOnChange</name>
-  </handlers>
-  <extendedTooltip>
-   <name>UseSerialLotNumberExtendedTooltip</name>
-   <id>50</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>UseSerialLotNumberContextMenu</name>
-   <id>49</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
   </extInfo>
  </items>
  <items xsi:type="form:FormGroup">
@@ -905,6 +985,19 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.EachSerialLotNumberIsUnique</segments>
     </dataPath>
+    <toolTip>
+     <key>en</key>
+     <value>When this option is enabled, the system will ensure that each series is unique, meaning it can only be received and written off once. At the same time, the quantity in the series can be set to 1. For example, a phone's IMEI.</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Когда эта опция включена, система гарантирует, что каждая серия уникальна, то есть она может быть получена и списана только один раз, а количество в серии может быть равно только 1. Например, IMEI телефона.</value>
+    </toolTip>
+    <toolTip>
+     <key>tr</key>
+     <value>When this option is enabled, the system will ensure that each series is unique, meaning it can only be received and written off once. At the same time, the quantity in the series can be set to 1. For example, a phone's IMEI.</value>
+    </toolTip>
+    <toolTipRepresentation>Button</toolTipRepresentation>
     <extendedTooltip>
      <name>EachSerialLotNumberIsUniqueExtendedTooltip</name>
      <id>85</id>
@@ -950,6 +1043,19 @@
     <dataPath xsi:type="form:DataPath">
      <segments>Object.SingleRow</segments>
     </dataPath>
+    <toolTip>
+     <key>en</key>
+     <value>If you enable this option, then the system will have to specify each serial number in a separate line. That is, it will not be possible to specify more than one series in a single line.</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Если вы включите эту опцию, то каждый серийный номер будет в отдельной строке. То есть, невозможно будет указать более одной серии в одной строке.</value>
+    </toolTip>
+    <toolTip>
+     <key>tr</key>
+     <value>If you enable this option, then the system will have to specify each serial number in a separate line. That is, it will not be possible to specify more than one series in a single line.</value>
+    </toolTip>
+    <toolTipRepresentation>Button</toolTipRepresentation>
     <handlers>
      <event>OnChange</event>
      <name>SingleRowOnChange</name>

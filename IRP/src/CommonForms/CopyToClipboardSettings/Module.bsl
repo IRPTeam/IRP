@@ -18,9 +18,8 @@ Procedure FillSettingsAndClose()
 		
 	Settings = CopyPasteClient.CopySettings();
 	FillPropertyValues(Settings, ThisObject);
-	ExecuteNotifyProcessing(ThisObject.OnCloseNotifyDescription, Settings);
 	Close();
-	
+	ExecuteNotifyProcessing(ThisObject.OnCloseNotifyDescription, Settings);
 EndProcedure
 
 &AtClient

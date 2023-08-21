@@ -27,6 +27,18 @@
  <defaultRecordForm>InformationRegister.T9011S_AccountsCashAccount.Form.RecordForm</defaultRecordForm>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Accounts (Cash account)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Бух. счета (касса/банк)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Muh. hesaplar (kasa/banka)</value>
+ </recordPresentation>
  <resources uuid="65c87eb8-f642-4c30-b73d-1f3b08aff762">
   <name>Account</name>
   <synonym>

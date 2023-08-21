@@ -130,6 +130,12 @@ Function CreateDocument(Company, Branch, Workstation) Export
 	Return Doc.Ref;
 EndFunction
 
+// Document open shift.
+// 
+// Parameters:
+//  DocRef - DocumentRef.ConsolidatedRetailSales - Doc ref
+//  ShiftData - See EquipmentFiscalPrinterAPIClient.OutputParameters
+//  UserData - Undefined -  User data
 Procedure DocumentOpenShift(DocRef, ShiftData, UserData = Undefined) Export
 	DocObject = DocRef.GetObject();
 	DocObject.OpeningDate = ShiftData.DateTime;

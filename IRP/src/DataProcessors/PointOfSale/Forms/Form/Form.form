@@ -5336,7 +5336,7 @@
            <value>Miktar</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
-           <color>Web.DarkGreen</color>
+           <color>Style.AccentColor</color>
           </titleTextColor>
           <titleFont xsi:type="core:FontRef">
            <font>Style.LargeTextFont</font>
@@ -5385,7 +5385,7 @@
            <autoMaxHeight>true</autoMaxHeight>
            <horizontalStretch>true</horizontalStretch>
            <textColor xsi:type="core:ColorRef">
-            <color>Web.Green</color>
+            <color>Style.AccentColor</color>
            </textColor>
            <font xsi:type="core:FontRef">
             <font>Style.NormalTextFont</font>
@@ -5408,7 +5408,7 @@
            <value>Iskonto</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
-           <color>Web.DarkGreen</color>
+           <color>Style.AccentColor</color>
           </titleTextColor>
           <titleFont xsi:type="core:FontRef">
            <font>Style.LargeTextFont</font>
@@ -5457,7 +5457,7 @@
            <autoMaxHeight>true</autoMaxHeight>
            <horizontalStretch>true</horizontalStretch>
            <textColor xsi:type="core:ColorRef">
-            <color>Web.Green</color>
+            <color>Style.AccentColor</color>
            </textColor>
            <font xsi:type="core:FontRef">
             <font>Style.NormalTextFont</font>
@@ -5480,7 +5480,7 @@
            <value>Toplam</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
-           <color>Web.DarkGreen</color>
+           <color>Style.AccentColor</color>
           </titleTextColor>
           <titleFont xsi:type="core:FontRef">
            <font>Style.LargeTextFont</font>
@@ -5529,7 +5529,7 @@
            <autoMaxHeight>true</autoMaxHeight>
            <horizontalStretch>true</horizontalStretch>
            <textColor xsi:type="core:ColorRef">
-            <color>Web.Green</color>
+            <color>Style.AccentColor</color>
            </textColor>
            <font xsi:type="core:FontRef">
             <font>Style.LargeTextFont</font>
@@ -6926,6 +6926,18 @@ End</presentationExpression>
      </localValue>
     </title>
    </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalFullDescription</dataPath>
+    <field>LocalFullDescription</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ForeignFullDescription</dataPath>
+    <field>ForeignFullDescription</field>
+   </fields>
   </extInfo>
  </attributes>
  <attributes>
@@ -7136,7 +7148,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>ru</key>
-     <value>Внешняя ссылка</value>
+     <value>Связан внешне</value>
     </title>
     <title>
      <key>tr</key>
@@ -7161,7 +7173,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренняя ссылка</value>
+     <value>Связан внутренне</value>
     </title>
     <title>
      <key>tr</key>
@@ -7186,7 +7198,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>ru</key>
-     <value>Внешние ссылки</value>
+     <value>Внешние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -7212,7 +7224,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>ru</key>
-     <value>Внутренние ссылки</value>
+     <value>Внутренние связки строк</value>
     </title>
     <title>
      <key>tr</key>
@@ -7760,7 +7772,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>ru</key>
-   <value>Документы, связанные с внешними ссылками</value>
+   <value>Внешние связки строк документов</value>
   </title>
   <title>
    <key>tr</key>
@@ -9250,7 +9262,7 @@ document</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Залинковать/разлинковать документы основания</value>
+   <value>Связать/отменить связку документов основания</value>
   </title>
   <title>
    <key>tr</key>

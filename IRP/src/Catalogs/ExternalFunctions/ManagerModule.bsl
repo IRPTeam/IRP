@@ -27,6 +27,11 @@ Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	
 EndProcedure
 
+// Presentation fields get processing.
+// 
+// Parameters:
+//  Fields - Array Of String -  Fields
+//  StandardProcessing - Boolean -  Standard processing
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	StandardProcessing = False;
 	Fields.Add("ExternalFunctionType");

@@ -50,6 +50,18 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Address</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Адрес</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Adres</value>
+ </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>

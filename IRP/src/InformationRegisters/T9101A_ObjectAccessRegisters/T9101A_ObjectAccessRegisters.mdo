@@ -25,6 +25,18 @@
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>T9101A Object access registers</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>T9191A Реестр доступа к объектам </value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>T9101A Object access registers</value>
+ </recordPresentation>
  <resources uuid="b18e8245-63a5-4991-9348-6b1757327d82">
   <name>Value1</name>
   <synonym>

@@ -25,6 +25,18 @@
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>T8010 Consignor batches</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>T8010 Партии комитента</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>T8010 Konsinye partileri</value>
+ </recordPresentation>
  <resources uuid="8d0466c4-cd88-4a65-b9ba-a6592ac92d32">
   <name>Quantity</name>
   <synonym>

@@ -6,7 +6,447 @@
 //  Lang - String - Lang
 // 
 // Returns:
-// Structure
+//  Structure -  Strings:
+// * ACS_UnknownValueType - String - 
+// * CERT_OnlyProdOrCert - String - 
+// * CERT_CertAlreadyUsed - String - 
+// * CERT_CannotBeSold - String - 
+// * CERT_HasNotBeenUsed - String - 
+// * EmailIsEmpty - String - 
+// * Only1SymbolAtCanBeSet - String - 
+// * InvalidLengthOfLocalPart - String - 
+// * InvalidLengthOfDomainPart - String - 
+// * LocalPartStartEndDot - String - 
+// * LocalPartConsecutiveDots - String - 
+// * DomainPartStartsWithDot - String - 
+// * DomainPartConsecutiveDots - String - 
+// * DomainPartMin1Dot - String - 
+// * DomainIdentifierExceedsLength - String - 
+// * InvalidCharacterInAddress - String - 
+// * SMS_SendIsOk - String - 
+// * SMS_SendIsError - String - 
+// * SMS_WaitUntilNextSend - String - 
+// * SMS_SMSCodeWrong - String - 
+// * ATC_001 - String - 
+// * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
+// * ATC_ErrorNetAmountGreaterTotalAmount - String - 
+// * ATC_ErrorQuantityIsZero - String - 
+// * ATC_ErrorQuantityInBaseUnitIsZero - String - 
+// * ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList - String - 
+// * ATC_ErrorItemTypeIsNotService - String - 
+// * ATC_ErrorItemTypeUseSerialNumbers - String - 
+// * ATC_ErrorUseSerialButSerialNotSet - String - 
+// * ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList - String - 
+// * ATC_ErrorItemNotEqualItemInItemKey - String - 
+// * ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount - String - 
+// * ATC_ErrorQuantityInItemListNotEqualQuantityInRowID - String - 
+// * ATC_ErrorQuantityNotEqualQuantityInBaseUnit - String - 
+// * ATC_ErrorNotFilledQuantityInSourceOfOrigins - String - 
+// * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber - String - 
+// * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList - String - 
+// * ATC_ErrorNotFilledUnit - String - 
+// * Eq_001 - String - 
+// * Eq_002 - String - 
+// * Eq_003 - String - 
+// * Eq_004 - String - 
+// * Eq_005 - String - 
+// * Eq_006 - String - 
+// * Eq_007 - String - 
+// * Eq_008 - String - 
+// * Eq_009 - String - 
+// * Eq_010 - String - 
+// * Eq_011 - String - 
+// * Eq_012 - String - 
+// * Eq_CanNotFindAPIModule - String - 
+// * EqError_001 - String - 
+// * EqError_002 - String - 
+// * EqError_003 - String - 
+// * EqError_004 - String - 
+// * EqError_005 - String - 
+// * EqFP_ShiftAlreadyOpened - String - 
+// * EqFP_ShiftIsNotOpened - String - 
+// * EqFP_ShiftAlreadyClosed - String - 
+// * EqFP_DocumentAlreadyPrinted - String - 
+// * EqFP_DocumentNotPrintedOnFiscal - String - 
+// * EqFP_FiscalDeviceIsEmpty - String - 
+// * EqAc_AlreadyhasTransaction - String - 
+// * EqAc_LastSettlementHasError - String - 
+// * EqAc_LastSettlementNotFound - String - 
+// * EqAc_NotAllPaymentDone - String - 
+// * EqFP_CanNotOpenSessionRegistrationKM - String - 
+// * EqFP_CanNotRequestKM - String - 
+// * EqFP_CanNotGetProcessingKMResult - String - 
+// * EqFP_CanNotCloseSessionRegistrationKM - String - 
+// * EqFP_GetWrongAnswerFromProcessingKM - String - 
+// * EqFP_ScanedCodeStringAlreadyExists - String - 
+// * EqFP_ProblemWhileCheckCodeString - String - 
+// * EqFP_ErrorWhileConfirmCode - String - 
+// * EqFP_CashierNameCanNotBeEmpty - String - 
+// * POS_s1 - String - 
+// * POS_s2 - String - 
+// * POS_s3 - String - 
+// * POS_s4 - String - 
+// * POS_s5 - String - 
+// * POS_s6 - String - 
+// * POS_Error_ErrorOnClosePayment - String - 
+// * POS_Error_ErrorOnPayment - String - 
+// * POS_Error_CancelPayment - String - 
+// * POS_Error_CancelPaymentProblem - String - 
+// * POS_Error_ReturnAmountLess - String - 
+// * POS_Error_CannotFindUser - String - 
+// * POS_Error_ThisBarcodeFromAnotherItem - String - 
+// * POS_Error_ThisIsNotControleStringBarcode - String - 
+// * POS_Error_CheckFillingForAllCodes - String - 
+// * S_002 - String - 
+// * S_003 - String - 
+// * S_004 - String - 
+// * S_005 - String - 
+// * S_006 - String - 
+// * S_013 - String - 
+// * S_014 - String - 
+// * S_015 - String - 
+// * S_016 - String - 
+// * S_018 - String - 
+// * S_019 - String - 
+// * S_022 - String - 
+// * S_023 - String - 
+// * S_026 - String - 
+// * S_027 - String - 
+// * S_028 - String - 
+// * S_029 - String - 
+// * S_030 - String - 
+// * S_031 - String - 
+// * S_032 - String - 
+// * Form_001 - String - 
+// * Form_002 - String - 
+// * Form_003 - String - 
+// * Form_004 - String - 
+// * Form_005 - String - 
+// * Form_006 - String - 
+// * Form_007 - String - 
+// * Form_008 - String - 
+// * Form_009 - String - 
+// * Form_013 - String - 
+// * Form_014 - String - 
+// * Form_017 - String - 
+// * Form_018 - String - 
+// * Form_019 - String - 
+// * Form_022 - String - 
+// * Form_023 - String - 
+// * Form_024 - String - 
+// * Form_025 - String - 
+// * Form_026 - String - 
+// * Form_027 - String - 
+// * Form_028 - String - 
+// * Form_029 - String - 
+// * Form_030 - String - 
+// * Form_031 - String - 
+// * Form_032 - String - 
+// * Form_033 - String - 
+// * Form_034 - String - 
+// * Form_035 - String - 
+// * Form_036 - String - 
+// * Form_037 - String - 
+// * Form_038 - String - 
+// * Error_002 - String - 
+// * Error_003 - String - 
+// * Error_004 - String - 
+// * Error_005 - String - 
+// * Error_008 - String - 
+// * Error_009 - String - 
+// * Error_010 - String - 
+// * Error_011 - String - 
+// * Error_012 - String - 
+// * Error_013 - String - 
+// * Error_014 - String - 
+// * Error_015 - String - 
+// * Error_016 - String - 
+// * Error_017 - String - 
+// * Error_018 - String - 
+// * Error_019 - String - 
+// * Error_020 - String - 
+// * Error_021 - String - 
+// * Error_023 - String - 
+// * Error_028 - String - 
+// * Error_030 - String - 
+// * Error_031 - String - 
+// * Error_032 - String - 
+// * Error_033 - String - 
+// * Error_034 - String - 
+// * Error_035 - String - 
+// * Error_037 - String - 
+// * Error_040 - String - 
+// * Error_041 - String - 
+// * Error_042 - String - 
+// * Error_043 - String - 
+// * Error_044 - String - 
+// * Error_045 - String - 
+// * Error_047 - String - 
+// * Error_049 - String - 
+// * Error_050 - String - 
+// * Error_051 - String - 
+// * Error_052 - String - 
+// * Error_053 - String - 
+// * Error_054 - String - 
+// * Error_055 - String - 
+// * Error_056 - String - 
+// * Error_057 - String - 
+// * Error_058 - String - 
+// * Error_059 - String - 
+// * Error_060 - String - 
+// * Error_064 - String - 
+// * Error_065 - String - 
+// * Error_066 - String - 
+// * Error_067 - String - 
+// * Error_068 - String - 
+// * Error_068_2 - String - 
+// * Error_069 - String - 
+// * Error_069_2 - String - 
+// * Error_071 - String - 
+// * Error_072 - String - 
+// * Error_073 - String - 
+// * Error_074 - String - 
+// * Error_075 - String - 
+// * Error_077 - String - 
+// * Error_078 - String - 
+// * Error_079 - String - 
+// * Error_080 - String - 
+// * Error_081 - String - 
+// * Error_082 - String - 
+// * Error_083 - String - 
+// * Error_085 - String - 
+// * Error_086 - String - 
+// * Error_087 - String - 
+// * Error_088 - String - 
+// * Error_089 - String - 
+// * Error_090 - String - 
+// * Error_090_2 - String - 
+// * Error_091 - String - 
+// * Error_092 - String - 
+// * Error_093 - String - 
+// * Error_094 - String - 
+// * Error_095 - String - 
+// * Error_096 - String - 
+// * Error_097 - String - 
+// * Error_098 - String - 
+// * Error_099 - String - 
+// * Error_100 - String - 
+// * Error_101 - String - 
+// * Error_102 - String - 
+// * Error_103 - String - 
+// * Error_104 - String - 
+// * Error_105 - String - 
+// * Error_106 - String - 
+// * Error_107 - String - 
+// * Error_108 - String - 
+// * Error_109 - String - 
+// * Error_110 - String - 
+// * Error_111 - String - 
+// * Error_112 - String - 
+// * Error_113 - String - 
+// * Error_114 - String - 
+// * Error_115 - String - 
+// * Error_116 - String - 
+// * Error_117 - String - 
+// * Error_118 - String - 
+// * Error_119 - String - 
+// * Error_120 - String - 
+// * Error_121 - String - 
+// * Error_122 - String - 
+// * Error_123 - String - 
+// * Error_124 - String - 
+// * Error_125 - String - 
+// * Error_126 - String - 
+// * Error_127 - String - 
+// * Error_128 - String - 
+// * Error_FillTotalAmount - String - 
+// * MF_Error_001 - String - 
+// * MF_Error_002 - String - 
+// * MF_Error_003 - String - 
+// * MF_Error_004 - String - 
+// * MF_Error_005 - String - 
+// * MF_Error_006 - String - 
+// * MF_Error_007 - String - 
+// * MF_Error_008 - String - 
+// * MF_Error_009 - String - 
+// * MF_Error_010 - String - 
+// * Error_ChangeAttribute_RelatedDocsExist - String - 
+// * Error_AttributeDontMatchValueFromBasisDoc - String - 
+// * Error_AttributeDontMatchValueFromBasisDoc_Row - String - 
+// * Error_Store_Company - String - 
+// * Error_Store_Company_Row - String - 
+// * Error_MaximumAccessKey - String - 
+// * LC_Error_001 - String - 
+// * LC_Error_002 - String - 
+// * LC_Error_003 - String - 
+// * InfoMessage_001 - String - 
+// * InfoMessage_002 - String - 
+// * InfoMessage_003 - String - 
+// * InfoMessage_004 - String - 
+// * InfoMessage_005 - String - 
+// * InfoMessage_006 - String - 
+// * InfoMessage_007 - String - 
+// * InfoMessage_008 - String - 
+// * InfoMessage_009 - String - 
+// * InfoMessage_010 - String - 
+// * InfoMessage_011 - String - 
+// * InfoMessage_012 - String - 
+// * InfoMessage_013 - String - 
+// * InfoMessage_014 - String - 
+// * InfoMessage_015 - String - 
+// * InfoMessage_016 - String - 
+// * InfoMessage_017 - String - 
+// * InfoMessage_018 - String - 
+// * InfoMessage_019 - String - 
+// * InfoMessage_020 - String - 
+// * InfoMessage_021 - String - 
+// * InfoMessage_022 - String - 
+// * InfoMessage_023 - String - 
+// * InfoMessage_024 - String - 
+// * InfoMessage_025 - String - 
+// * InfoMessage_026 - String - 
+// * InfoMessage_027 - String - 
+// * InfoMessage_028 - String - 
+// * InfoMessage_029 - String - 
+// * InfoMessage_030 - String - 
+// * InfoMessage_031 - String - 
+// * InfoMessage_032 - String - 
+// * InfoMessage_033 - String - 
+// * InfoMessage_034 - String - 
+// * InfoMessage_035 - String - 
+// * InfoMessage_Payment - String - 
+// * InfoMessage_PaymentReturn - String - 
+// * InfoMessage_SessionIsClosed - String - 
+// * InfoMessage_Sales - String - 
+// * InfoMessage_Returns - String - 
+// * InfoMessage_ReturnTitle - String - 
+// * InfoMessage_POS_Title - String - 
+// * InfoMessage_NotProperty - String - 
+// * InfoMessage_DataUpdated - String - 
+// * InfoMessage_DataSaved - String - 
+// * InfoMessage_SettingsApplied - String - 
+// * InfoMessage_ImportError - String - 
+// * QuestionToUser_001 - String - 
+// * QuestionToUser_002 - String - 
+// * QuestionToUser_003 - String - 
+// * QuestionToUser_004 - String - 
+// * QuestionToUser_005 - String - 
+// * QuestionToUser_006 - String - 
+// * QuestionToUser_007 - String - 
+// * QuestionToUser_008 - String - 
+// * QuestionToUser_009 - String - 
+// * QuestionToUser_011 - String - 
+// * QuestionToUser_012 - String - 
+// * QuestionToUser_013 - String - 
+// * QuestionToUser_014 - String - 
+// * QuestionToUser_015 - String - 
+// * QuestionToUser_016 - String - 
+// * QuestionToUser_017 - String - 
+// * QuestionToUser_018 - String - 
+// * QuestionToUser_019 - String - 
+// * QuestionToUser_020 - String - 
+// * QuestionToUser_021 - String - 
+// * QuestionToUser_022 - String - 
+// * QuestionToUser_023 - String - 
+// * QuestionToUser_024 - String - 
+// * QuestionToUser_025 - String - 
+// * QuestionToUser_026 - String - 
+// * SuggestionToUser_1 - String - 
+// * SuggestionToUser_2 - String - 
+// * SuggestionToUser_3 - String - 
+// * SuggestionToUser_4 - String - 
+// * UsersEvent_001 - String - 
+// * UsersEvent_002 - String - 
+// * I_1 - String - 
+// * I_2 - String - 
+// * I_3 - String - 
+// * I_4 - String - 
+// * I_5 - String - 
+// * I_6 - String - 
+// * I_7 - String - 
+// * I_8 - String - 
+// * Exc_001 - String - 
+// * Exc_002 - String - 
+// * Exc_003 - String - 
+// * Exc_004 - String - 
+// * Exc_005 - String - 
+// * Exc_006 - String - 
+// * Exc_007 - String - 
+// * Exc_008 - String - 
+// * Exc_009 - String - 
+// * Exc_010 - String - 
+// * Saas_001 - String - 
+// * Saas_002 - String - 
+// * Saas_003 - String - 
+// * Saas_004 - String - 
+// * Class_001 - String - 
+// * Class_002 - String - 
+// * Class_003 - String - 
+// * Class_004 - String - 
+// * Class_005 - String - 
+// * Class_006 - String - 
+// * Class_007 - String - 
+// * Class_008 - String - 
+// * Title_00100 - String - 
+// * CLV_1 - String - 
+// * CLV_2 - String - 
+// * SOR_1 - String - 
+// * R_001 - String - 
+// * R_002 - String - 
+// * R_003 - String - 
+// * R_004 - String - 
+// * Default_001 - String - 
+// * Default_002 - String - 
+// * Default_003 - String - 
+// * Default_004 - String - 
+// * Default_005 - String - 
+// * Default_006 - String - 
+// * Default_007 - String - 
+// * Default_008 - String - 
+// * Default_009 - String - 
+// * Default_010 - String - 
+// * Default_011 - String - 
+// * Default_012 - String - 
+// * Str_Catalog - String - 
+// * Str_Catalogs - String - 
+// * Str_Document - String - 
+// * Str_Documents - String - 
+// * Str_Code - String - 
+// * Str_Description - String - 
+// * Str_Parent - String - 
+// * Str_Owner - String - 
+// * Str_DeletionMark - String - 
+// * Str_Number - String - 
+// * Str_Date - String - 
+// * Str_Posted - String - 
+// * Str_InformationRegister - String - 
+// * Str_InformationRegisters - String - 
+// * Str_AccumulationRegister - String - 
+// * Str_AccumulationRegisters - String - 
+// * Add_Setiings_001 - String - 
+// * Add_Setiings_002 - String - 
+// * Add_Setiings_003 - String - 
+// * Add_Setiings_004 - String - 
+// * Add_Setiings_005 - String - 
+// * Add_Setiings_006 - String - 
+// * Add_Setiings_007 - String - 
+// * Add_Setiings_008 - String - 
+// * Mob_001 - String - 
+// * CP_001 - String - 
+// * CP_002 - String - 
+// * CP_003 - String - 
+// * CP_004 - String - 
+// * CP_005 - String - 
+// * CP_006 - String - 
+// * LDT_Button_Title - String - 
+// * LDT_Button_ToolTip - String - 
+// * LDT_FailReading - String - 
+// * LDT_ValueNotFound - String - 
+// * LDT_TooMuchFound - String - 
+// * OpenSLNTree_Button_Title - String - 
+// * OpenSLNTree_Button_ToolTip - String - 
+// * BgJ_Title_001 - String - 
+// * BgJ_Title_002 - String - 
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -15,6 +455,23 @@ Function Strings(Lang) Export
 	Strings.Insert("ACS_UnknownValueType", NStr("en='Can not create Access Key. Unknows value type.';
 		|ru='Не удалось создать Ключ Доступа. Неизвестный тип значения';
 		|tr='Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
+#Region Certificates
+	
+	Strings.Insert("CERT_OnlyProdOrCert", NStr("en='In the document, there can be either goods or certificates.';
+		|ru='В документе могут быть либо товары, либо сертификаты.';
+		|tr='In the document, there can be either goods or certificates.'", Lang));
+	Strings.Insert("CERT_CertAlreadyUsed", NStr("en='Certificate %1 has already been used before and cannot be used again.';
+		|ru='Сертификат %1 уже использовался ранее и не может быть использован снова.';
+		|tr='Certificate %1 has already been used before and cannot be used again.'", Lang));
+	Strings.Insert("CERT_CannotBeSold", NStr("en='Certificate %1 cannot be issued again.';
+		|ru='Сертификат %1 не может быть выдан снова.';
+		|tr='Certificate %1 cannot be issued again.'", Lang));
+	Strings.Insert("CERT_HasNotBeenUsed", NStr("en='Certificate %1 has not been used before.';
+		|ru='Сертификат %1 не использовался ранее.';
+		|tr='Certificate %1 has not been used before.'", Lang));
+
 #EndRegion
 
 #Region Validation
@@ -207,6 +664,9 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='Document was not found on the fiscal device.';
 		|ru='Документ не был найден на фискальном регистраторе';
 		|tr='Document was not found on the fiscal device.'", Lang));
+	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en='Fiscal device not set.';
+		|ru='Фискальное устройство не установлено.';
+		|tr='Fiscal device not set.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
@@ -217,6 +677,9 @@ Function Strings(Lang) Export
 	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en='Last settlement not found. Make sure that logging is enabled for this equipment.';
 		|ru='Последняя сверка не найдена. Убедитесь, что для этого оборудования включено ведение логов.';
 		|tr='Last settlement not found. Make sure that logging is enabled for this equipment.'", Lang));
+	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en='Not all payment done.';
+		|ru='Не все платежи выполнены.';
+		|tr='Not all payment done.'", Lang));
 	
 	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='Can not open session registration KM.';
 		|ru='Не удалось открыть сессию регистрации кодов';
@@ -244,6 +707,10 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en='Error while confirm code on request: %1';
 		|ru='Ошибка при попытке запроса подтверждения: %1';
 		|tr='Error while confirm code on request: %1'", Lang));
+	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en='Cashier name can not be empty. Author -> Partner -> Description (lang)';
+		|ru='Имя кассира не может быть пустым. Автор -> Партнер -> Наименование (язык)';
+		|tr='Cashier name can not be empty. Author -> Partner -> Description (lang)'", Lang));
+
 #EndRegion
 
 #Region POS
@@ -917,14 +1384,14 @@ Function Strings(Lang) Export
 	// %2 - Boots
 	// %3 - Red XL
 	Strings.Insert("Error_096", NStr("en='Can not delete linked row [%1] [%2] [%3]';
-		|ru='Невозможно удалить залинкованную строку [%1] [%2] [%3]';
+		|ru='Невозможно удалить связанную строку [%1] [%2] [%3]';
 		|tr='Bağlantı sağlanmış satır silinemez [%1] [%2] [%3]'", Lang));
 
 	// %1 - 1
 	// %2 - Boots
 	// %3 - Red XL
 	Strings.Insert("Error_097", NStr("en='Wrong linked row [%1] [%2] [%3]';
-		|ru='Неверно залинкованна строка  [%1] [%2] [%3]';
+		|ru='Неверно связанная строка [%1] [%2] [%3]';
 		|tr='Yanlış bağlantı sağlanan satır [%1] [%2] [%3]'", Lang));
 	
 	// %1 - 1
@@ -932,20 +1399,20 @@ Function Strings(Lang) Export
 	// %3 - Store 01
 	// %4 - Store 02
 	Strings.Insert("Error_098", NStr("en='Wrong linked row [%1] for column [%2] used value [%3] wrong value [%4]';
-		|ru='Неверно залинкованна строка [%1] для столбца [%2] использованное значение [%3] неправильное значение [%4]';
+		|ru='Неверно связанна строка [%1] для столбца [%2] использованное значение [%3] неправильное значение [%4]';
 		|tr='Satır bağlatma hatası [%1] kolon [%2] kullanılan değer [%3] yanlış değer [%4]'", Lang));
 	
 	// %1 - Partner
 	// %2 - Partner 01
 	// %3 - Partner 02
 	Strings.Insert("Error_099", NStr("en='Wrong linked data [%1] used value [%2] wrong value [%3]';
-		|ru='Неверно залинкованны данные [%1] используемое значение [%2] неправильное значение [%3]';
+		|ru='Неверно связанные данные [%1] используемое значение [%2] неправильное значение [%3]';
 		|tr='Yanlış bağlantı verisi [%1] kullanılan değer [%2] yanlış değer [%3]'", Lang));
 	
 	// %1 - Value 01
 	// %2 - Value 02
 	Strings.Insert("Error_100", NStr("en='Wrong linked data, used value [%1] wrong value [%2]';
-		|ru='Неверно залинкованны данные, используемое значение [%1] неправильное значение [%2]';
+		|ru='Неверно связанные данные строк, используемое значение [%1] неправильное значение [%2]';
 		|tr='Yanlış bağlantı verisi, kullanılan değer [%1] yanlış değer [%2]'", Lang));
 	
 	Strings.Insert("Error_101", NStr("en='Select any document';
@@ -1654,10 +2121,10 @@ Function Strings(Lang) Export
 		|ru='Отключить - Изменять автора';
 		|tr='Disable - Change author'", Lang));
 	Strings.Insert("Add_Setiings_007", NStr("en='Link\Unlink document rows';
-		|ru='Линковка\Разлинковать строки документов';
+		|ru='Связать\отменить связку строки документов';
 		|tr='Link\Unlink document rows'", Lang));
 	Strings.Insert("Add_Setiings_008", NStr("en='Disable - Calculate rows on link rows';
-		|ru='Отключить - Расчитать строки при линковке';
+		|ru='Отключить - Расчет строки при связке строк';
 		|tr='Disable - Calculate rows on link rows'", Lang));
 #EndRegion
 

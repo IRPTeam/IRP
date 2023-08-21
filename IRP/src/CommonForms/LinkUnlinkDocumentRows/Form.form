@@ -4748,7 +4748,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Внешняя ссылка</value>
+    <value>Связан внешне</value>
    </title>
    <title>
     <key>tr</key>
@@ -5555,7 +5555,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Залинкованные</value>
+    <value>Связанные строки</value>
    </title>
    <title>
     <key>tr</key>
@@ -6216,7 +6216,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Залинкованные</value>
+    <value>Связанные строки</value>
    </title>
    <title>
     <key>tr</key>
@@ -6469,7 +6469,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Залинкованные  строки</value>
+   <value>Связанные строки</value>
   </title>
   <title>
    <key>tr</key>
@@ -6573,7 +6573,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Залинкованные документы</value>
+   <value>Документы связанные по строкам</value>
   </title>
   <title>
    <key>tr</key>
@@ -6700,7 +6700,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Линковать</value>
+   <value>Связать строку</value>
   </title>
   <title>
    <key>tr</key>
@@ -6729,7 +6729,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Разлинковать</value>
+   <value>Отменить связку строк</value>
   </title>
   <title>
    <key>tr</key>
@@ -6836,7 +6836,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Автоматическая ссылка</value>
+   <value>Связать строки автоматически</value>
   </title>
   <title>
    <key>tr</key>
@@ -6865,7 +6865,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Разлинковать все</value>
+   <value>Отменить все связки строк</value>
   </title>
   <title>
    <key>tr</key>

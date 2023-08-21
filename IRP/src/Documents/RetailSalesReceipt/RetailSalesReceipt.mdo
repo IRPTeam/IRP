@@ -124,6 +124,7 @@
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R2006T_Certificates</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2176,6 +2177,28 @@
    </synonym>
    <type>
     <types>CatalogRef.LegalNameContracts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a1ca2fb5-c0c9-4319-a14d-131c51726f33">
+   <name>Certificate</name>
+   <synonym>
+    <key>en</key>
+    <value>Certificate</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сертификат</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sertifika</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

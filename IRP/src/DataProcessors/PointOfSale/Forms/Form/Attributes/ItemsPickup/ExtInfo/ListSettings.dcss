@@ -6,6 +6,11 @@
 			<comparisonType>Equal</comparisonType>
 			<right xsi:type="xs:boolean">false</right>
 		</item>
+		<item xsi:type="FilterItemComparison">
+			<left xsi:type="dcscor:Field">Item.ItemType.Type</left>
+			<comparisonType>NotEqual</comparisonType>
+			<right xsi:type="dcscor:DesignTimeValue">Enum.ItemTypes.Certificate</right>
+		</item>
 		<viewMode>Normal</viewMode>
 		<userSettingID>dfcece9d-5077-440b-b6b3-45a5cb4538eb</userSettingID>
 	</filter>

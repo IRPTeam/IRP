@@ -87,6 +87,14 @@ Function GetConnectionSettings(HardwareRef) Export
 	Return Settings;
 EndFunction
 
+// Get workstation hardware by equipment type.
+// 
+// Parameters:
+//  Workstation - CatalogRef.Workstations - Workstation
+//  EquipmentType - EnumRef.EquipmentTypes - Equipment type
+// 
+// Returns:
+//  Array Of CatalogRef.Hardware -  Get workstation hardware by equipment type
 Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query();
 	Query.Text =
@@ -104,9 +112,9 @@ Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Expor
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
 	HardwareList = New Array();
-	If SelectionDetailRecords.Next() Then
+	While SelectionDetailRecords.Next() Do
 		HardwareList.Add(SelectionDetailRecords.Hardware);
-	EndIf;
+	EndDo;
 	Return HardwareList;
 EndFunction
 
@@ -164,6 +172,12 @@ Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = F
 					Data.Info[Prop.Key] = String(Prop.Value);
 				EndIf;
 			EndDo;
+			
+			If Data.Info.Property("CRS") And TypeOf(Data.Info.CRS) = Type("Structure") Then
+				For Each Prop In Data.Info.CRS Do
+					Data.Info.CRS[Prop.Key] = String(Prop.Value);
+				EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 	

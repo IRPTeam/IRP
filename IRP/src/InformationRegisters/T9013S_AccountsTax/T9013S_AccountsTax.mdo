@@ -27,6 +27,18 @@
  <defaultRecordForm>InformationRegister.T9013S_AccountsTax.Form.RecordForm</defaultRecordForm>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Accounts (Tax)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Бух. счета (налоги)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Muh. hesaplar (Vergi)</value>
+ </recordPresentation>
  <resources uuid="79e4eb7b-a808-4175-9b3a-699bac85e512">
   <name>Account</name>
   <synonym>

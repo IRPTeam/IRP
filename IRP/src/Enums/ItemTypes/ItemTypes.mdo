@@ -50,4 +50,19 @@
    <value>Malzeme</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="53b457bc-5d47-4e8b-858f-a43c58bf269f">
+  <name>Certificate</name>
+  <synonym>
+   <key>en</key>
+   <value>Certificate</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сертификат</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sertifika</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

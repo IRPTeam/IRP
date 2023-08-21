@@ -128,7 +128,8 @@ EndProcedure
 Procedure RefreshTemplate()
 	SelectRows = Items.PrintFormConfig.SelectedRows;
 	If SelectRows.Count() = 0 Then
-		SelectRows = New ValueList;
+		SelectRows = New Array;
+		//@skip-check typed-value-adding-to-untyped-collection
 		SelectRows.Add(PrintFormConfig.Get(ThisObject.IdResult));
 	EndIf; 	
 	For Each ItRow In SelectRows Do	
@@ -152,6 +153,7 @@ EndProcedure
 &AtServer
 Procedure SetResult()
 	CurrentData = PrintFormConfig.Get(ThisObject.IdResult);
+	//@skip-check property-return-type, statement-type-change
 	ThisObject.Result = CurrentData.SpreadsheetDoc; // SpreadsheetDocument
 EndProcedure
 

@@ -1,85 +1,54 @@
+// @strict-types
+
 #Region Public
 
-Function PrepareReceiptData(SourceData) Export
-	ReturnData = New Structure;
+// Fill data.
+//
+// Parameters:
+//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReturnReceipt, DocumentRef.CashReceipt -
+//  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
+Procedure FillData(SourceData, CheckPackage) Export
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt")
-		Or TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
-		ReturnData = PrepareReceiptDataByRetailSalesReceipt(SourceData);
-	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashReceipt") Then
-		ReturnData = PrepareReceiptDataByCashReceipt(SourceData);
-	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
-		ReturnData = PrepareReceiptDataByCashPayment(SourceData);
-	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankReceipt") Then
-		ReturnData = PrepareReceiptDataByBankReceipt(SourceData);
-	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankPayment") Then
-		ReturnData = PrepareReceiptDataByBankPayment(SourceData);
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
+		FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage);
+	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashReceipt")
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
+		FillCheckPackageByPayment(SourceData, CheckPackage, True);
+	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankReceipt")
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.BankPayment") Then
+		FillCheckPackageByPayment(SourceData, CheckPackage, False);
 	EndIf;
-	Return ReturnData;
-EndFunction
+EndProcedure
 
 // Prepare receipt data by retail sales receipt.
-// 
+//
 // Parameters:
 //  SourceData - DocumentRef.RetailSalesReceipt -
-// 
-// Returns:
-//  Structure - Prepare receipt data by retail sales receipt:
-// * CashierName - DefinedType.typeDescription -
-// * CashierINN  - String -
-// * SaleAddress  - String -
-// * SaleLocation  - String -
-// * OperationType - Number -
-// * TaxationSystem - Number -
-// * FiscalStrings - Array Of Structure:
-// ** AmountWithDiscount - Number -
-// ** DiscountAmount - Number -
-// ** CalculationSubject - Number -
-// ** MarkingCode - String -
-// ** MeasureOfQuantity - String -
-// ** Name - String -
-// ** Quantity - Number -
-// ** PaymentMethod - Number -
-// ** PriceWithDiscount - Number -
-// ** VATRate - String -
-// ** VATAmount - Number -
-// ** CalculationAgent - String -
-// ** VendorData - Structure:
-// *** VendorINN - String -
-// *** VendorName - String -
-// *** VendorPhone - String -
-// * Cash - Number -
-// * ElectronicPayment - Number -
-// * PrePayment - Number -
-// * PostPayment - Number -
-// * Barter - Number -
-// * Cash - Number -
-// * TextStrings - Array Of String -
-Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
-	Str = ShiftGetXMLOperationSettings(SourceData);
+//  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
+Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
+	FillInputParameters(SourceData, CheckPackage.Parameters);
+
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		Str.Insert("OperationType", 1);
+		CheckPackage.Parameters.OperationType = 1;
 	Else
-		Str.Insert("OperationType", 2);
+		CheckPackage.Parameters.OperationType = 2;
 	EndIf;
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice 
-	
-	FiscalStrings = New Array;
-	TextStrings = New Array;
-	
+	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
+
 	For Each ItemRow In SourceData.ItemList Do
 		RowFilter = New Structure();
 		RowFilter.Insert("Key", ItemRow.Key);
-		
+
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
  		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
  			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
  		Else
  			CBRows = New Array;
- 		EndIf;		
-		FiscalStringData = New Structure();
-		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
-		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
+ 		EndIf;
+		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
+		FiscalStringData.AmountWithDiscount = ItemRow.TotalAmount;
+		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
 		// TODO: Get from ItemType (or Item) CalculationSubject
 		If ItemRow.isControlCodeString Then
 			If CCSRows.Count() = 0 Then
@@ -90,532 +59,339 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows[0].NotCheck Then
 				// Not check an not send
-				FiscalStringData.Insert("CalculationSubject", 1);
+				FiscalStringData.CalculationSubject = 1;
 			Else
 				CodeString = CCSRows[0].CodeString;
 				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
 					CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
 				EndIf;
-				FiscalStringData.Insert("MarkingCode", CodeString);
-				FiscalStringData.Insert("CalculationSubject", 33);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+				FiscalStringData.MarkingCode = CodeString;
+				FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
-			FiscalStringData.Insert("CalculationSubject", 1);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
+				FiscalStringData.CalculationSubject = 10;
+			Else
+				FiscalStringData.CalculationSubject = 1;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			EndIf;
 		EndIf;
-		FiscalStringData.Insert("MeasureOfQuantity", "255");
-		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));
-		FiscalStringData.Insert("Quantity", ItemRow.Quantity);
+		FiscalStringData.MeasureOfQuantity = 255;
+		
+#Region GenerateName		
+		Name = New Array; // Array Of String
+		Name.Add(String(ItemRow.Item));
+		If Not String(ItemRow.Item) = String(ItemRow.ItemKey) Then
+			Name.Add(String(ItemRow.ItemKey));
+		EndIf;
+		
+		SearchSerial = SourceData.SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+		If SearchSerial.Count() > 0 Then
+			SerialName = New Array; // Array Of String
+			For Each Serial In SearchSerial Do
+				SerialName.Add(String(Serial.SerialLotNumber));
+			EndDo;
+			Name.Add("[" + StrConcat(SerialName, ",") + "]");
+		EndIf;
+		FiscalStringData.Name = StrConcat(Name, " ");
+#EndRegion
+
+		FiscalStringData.Quantity = ItemRow.Quantity;
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			FiscalStringData.Insert("PaymentMethod", 1);
+			FiscalStringData.PaymentMethod = 1;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			FiscalStringData.Insert("PaymentMethod", 2);
+			FiscalStringData.PaymentMethod = 2;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			FiscalStringData.Insert("PaymentMethod", 3);
+			FiscalStringData.PaymentMethod = 3;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
-			FiscalStringData.Insert("PaymentMethod", 4);
+			FiscalStringData.PaymentMethod = 4;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit Then
-			FiscalStringData.Insert("PaymentMethod", 5);
+			FiscalStringData.PaymentMethod = 5;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit Then
-			FiscalStringData.Insert("PaymentMethod", 6);
+			FiscalStringData.PaymentMethod = 6;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
-			FiscalStringData.Insert("PaymentMethod", 7);
+			FiscalStringData.PaymentMethod = 7;
 		Else
-			FiscalStringData.Insert("PaymentMethod", 4);
+			FiscalStringData.PaymentMethod = 4;
 		EndIf;
-		FiscalStringData.Insert("PriceWithDiscount", Round(ItemRow.TotalAmount / ItemRow.Quantity, 2));
+		
+		If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
+			FiscalStringData.PaymentMethod = 3;
+		EndIf;
+		
+		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
 		If TaxRows.Count() > 0 Then
 			If TaxRows[0].TaxRate.NoRate Then
-				FiscalStringData.Insert("VATRate", "none");
-				FiscalStringData.Insert("VATAmount", 0);  
+				FiscalStringData.VATRate = "none";
+				FiscalStringData.VATAmount = 0;
 			Else
-				FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-				FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
+				FiscalStringData.VATAmount = TaxRows[0].Amount;
 			EndIf;
-			
+
 		Else
 			Raise("Tax isn't found!");
 		EndIf;
+
+
 		If CBRows.Count() > 0 Then
-			VendorData = New Structure;
 			If TypeOf(CBRows[0].Batch) = Type("DocumentRef.OpeningEntry") Then
-				VendorData.Insert("VendorINN", CBRows[0].Batch.LegalNameConsignor.TaxID);
-				VendorData.Insert("VendorName", String(CBRows[0].Batch.LegalNameConsignor));
-				VendorData.Insert("VendorPhone", "");
+				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalNameConsignor.TaxID;
+				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalNameConsignor);
+				FiscalStringData.VendorData.VendorPhone = "";
 			Else
-				VendorData.Insert("VendorINN", CBRows[0].Batch.LegalName.TaxID);
-				VendorData.Insert("VendorName", String(CBRows[0].Batch.LegalName));
-				VendorData.Insert("VendorPhone", "");
+				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalName.TaxID;
+				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalName);
+				FiscalStringData.VendorData.VendorPhone = "";
 			EndIf;
-			FiscalStringData.Insert("CalculationAgent", "5");
-			FiscalStringData.Insert("VendorData", VendorData);
+			FiscalStringData.CalculationAgent = 5;
 		EndIf;
-		
+
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 			If Not ItemRow.Consignor.IsEmpty() Then
-				VendorData = New Structure;
-				VendorData.Insert("VendorINN", ItemRow.Consignor.TaxID);
-				VendorData.Insert("VendorName", String(ItemRow.Consignor));
-				VendorData.Insert("VendorPhone", "");
-				FiscalStringData.Insert("CalculationAgent", "5");
-				FiscalStringData.Insert("VendorData", VendorData);
+				FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
+				FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
+				FiscalStringData.VendorData.VendorPhone = "";
+				FiscalStringData.CalculationAgent = 5;
 			EndIf;
-		EndIf; 
-		
-		FiscalStrings.Add(FiscalStringData);
+		EndIf;
+
+		If FiscalStringData.CalculationAgent = 5 Then
+			If IsBlankString(FiscalStringData.VendorData.VendorINN)
+				OR IsBlankString(FiscalStringData.VendorData.VendorName) Then
+					Raise StrTemplate(R().Error_047, "VendorINN, VendorName");
+			EndIf;
+		EndIf;
+
+		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;
-	
-	Str.Insert("FiscalStrings", FiscalStrings);
-	
-	Str.Insert("Cash", 0);
-	Str.Insert("ElectronicPayment", 0);
-	Str.Insert("PrePayment", 0);
-	Str.Insert("PostPayment", 0);
-	Str.Insert("Barter", 0);
-	
+
 	For Each Payment In SourceData.Payments Do
 		If Payment.Amount < 0 Then
 			Continue;
 		EndIf;
-		
+
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			Str.PrePayment = Str.PrePayment + Payment.Amount;
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			Str.PrePayment = Str.PrePayment + Payment.Amount;
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			Str.PrePayment = Str.PrePayment + Payment.Amount;
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Cash = Str.Cash + Payment.Amount;
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
+				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.PostPayment = Str.PostPayment + Payment.Amount;
+				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			Else
-				Str.Cash = Str.Cash + Payment.Amount;
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
 		Else
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				Str.Cash = Str.Cash + Payment.Amount;
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				Str.ElectronicPayment = Str.ElectronicPayment + Payment.Amount;
+				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				Str.PostPayment = Str.PostPayment + Payment.Amount;
+				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				Str.PrePayment = Str.PrePayment + Payment.Amount;				
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			Else
-				Str.Cash = Str.Cash + Payment.Amount;
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
 		EndIf;
 	EndDo;
-	
-	Str.Insert("TextStrings", TextStrings);
-	
+
+	If SessionParameters.Workstation.PrintBarcodeWithDocumentUUID Then
+		CheckPackage.Positions.Barcode.Value = BarcodeServer.GetDocumentBarcode(SourceData);
+	EndIf;
+
 	// TODO: Fix
 	isEmulator = StrStartsWith(SourceData.ConsolidatedRetailSales.FiscalPrinter.Driver.AddInID, "AddIn.Modul_KKT");
 	If isEmulator Then
-		For Each Row In Str.FiscalStrings Do
+		For Each Row In CheckPackage.Positions.FiscalStrings Do
 			If Row.CalculationSubject = 33 Then
 				Row.CalculationSubject = 1;
 			EndIf;
 		EndDo;
 	EndIf;
-	
-	Return Str;
-EndFunction
 
-// Prepare receipt data by cash receipt.
-// 
-// Parameters:
-//  SourceData - DocumentRef.CashReceipt
-// 
-// Returns:
-//  Structure - Prepare receipt data by cash receipt
-Function PrepareReceiptDataByCashReceipt(SourceData) Export
-	
-	Str = ShiftGetXMLOperationSettings(SourceData);
-	Str.Insert("OperationType", 1);
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
-	
-	
-	If SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
-		PaymentListData = SourceData.PaymentList.Unload();
-		PaymentListData.GroupBy("RetailCustomer");
-		If PaymentListData.Count() > 1 Then
-			Raise("A few retail customer found!");
-		EndIf;
-		CustomerDetail = New Structure;
-		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
-		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
-		Str.Insert("CustomerDetail", CustomerDetail);	
-	
-		FiscalStrings = New Array;
-		For Each Item In SourceData.PaymentList Do
-			RowFilter = New Structure();
-			RowFilter.Insert("Key", Item.Key);
-			TaxRows = SourceData.TaxList.FindRows(RowFilter);
-			FiscalStringData = New Structure();
-			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
-			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
-			FiscalStringData.Insert("MeasureOfQuantity", "255");
-			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
-			FiscalStringData.Insert("Quantity", 1);
-			FiscalStringData.Insert("PaymentMethod", 3);
-			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
-			If TaxRows.Count() > 0 Then
-				If TaxRows[0].TaxRate.NoRate Then
-					FiscalStringData.Insert("VATRate", "none");
-					FiscalStringData.Insert("VATAmount", 0);  
-				Else
-					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
-				EndIf;
-			Else
-				//Raise("Tax isn't found!");
-				FiscalStringData.Insert("VATRate", "none");
-				FiscalStringData.Insert("VATAmount", 0);
-			EndIf;
-			FiscalStrings.Add(FiscalStringData);
-		EndDo;
-	EndIf; 
-	
-	Str.Insert("FiscalStrings", FiscalStrings);
-	Str.Insert("TextStrings", New Array);
-	
-	Str.Insert("Cash", SourceData.PaymentList.Total("TotalAmount"));
-	Str.Insert("ElectronicPayment", 0);
-	Str.Insert("PrePayment", 0);
-	Str.Insert("PostPayment", 0);
-	Str.Insert("Barter", 0);
-	
-	Return Str;
-EndFunction
+	CheckPackage.Positions.FiscalStringJSON = "";
 
-// Prepare receipt data by cash payment.
-// 
+EndProcedure
+
+// Fill check package by payment.
+//
 // Parameters:
-//  SourceData - DocumentRef.CashPayment
-// 
-// Returns:
-//  Structure - Prepare receipt data by cash payment
-Function PrepareReceiptDataByCashPayment(SourceData) Export
-	
-	Str = ShiftGetXMLOperationSettings(SourceData);
-	Str.Insert("OperationType", 2);
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
-	
-	
+//  SourceData - DocumentRef.CashPayment, DocumentRef.CashReceipt, DocumentRef.BankReceipt, DocumentRef.BankPayment -
+//  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
+//  isCash - Boolean - is cash payment
+Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
+
+	FillInputParameters(SourceData, CheckPackage.Parameters);
+	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
+
 	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CustomerAdvance Then
-		PaymentListData = SourceData.PaymentList.Unload();
-		PaymentListData.GroupBy("RetailCustomer");
-		If PaymentListData.Count() > 1 Then
-			Raise("A few retail customer found!");
-		EndIf;
-		CustomerDetail = New Structure;
-		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
-		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
-		Str.Insert("CustomerDetail", CustomerDetail);	
-	
-		FiscalStrings = New Array;
-		For Each Item In SourceData.PaymentList Do
-			RowFilter = New Structure();
-			RowFilter.Insert("Key", Item.Key);
-			TaxRows = SourceData.TaxList.FindRows(RowFilter);
-			FiscalStringData = New Structure();
-			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
-			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
-			FiscalStringData.Insert("MeasureOfQuantity", "255");
-			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
-			FiscalStringData.Insert("Quantity", 1);
-			FiscalStringData.Insert("PaymentMethod", 3);
-			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
-			If TaxRows.Count() > 0 Then
-				If TaxRows[0].TaxRate.NoRate Then
-					FiscalStringData.Insert("VATRate", "none");
-					FiscalStringData.Insert("VATAmount", 0);  
-				Else
-					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
-				EndIf;
-			Else
-				//Raise("Tax isn't found!");
-				FiscalStringData.Insert("VATRate", "none");
-				FiscalStringData.Insert("VATAmount", 0);
-			EndIf;
-			FiscalStrings.Add(FiscalStringData);
-		EndDo;
-	EndIf; 
-	
-	Str.Insert("FiscalStrings", FiscalStrings);
-	Str.Insert("TextStrings", New Array);
-	
-	Str.Insert("Cash", SourceData.PaymentList.Total("TotalAmount"));
-	Str.Insert("ElectronicPayment", 0);
-	Str.Insert("PrePayment", 0);
-	Str.Insert("PostPayment", 0);
-	Str.Insert("Barter", 0);
-	
-	Return Str;
-EndFunction
+		CheckPackage.Parameters.OperationType = 2;
+	ElsIf SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
+		CheckPackage.Parameters.OperationType = 1;
+	Else
+		Raise "Unknown transaction type";
+	EndIf;
 
-// Prepare receipt data by bank receipt.
-// 
+	PaymentListData = SourceData.PaymentList.Unload();
+	PaymentListData.GroupBy("RetailCustomer");
+	If PaymentListData.Count() > 1 Then
+		Raise("A few retail customer found!");
+	EndIf;
+	CheckPackage.Parameters.CustomerDetail.Info = String(SourceData.PaymentList[0].RetailCustomer);
+	CheckPackage.Parameters.CustomerDetail.INN = PaymentListData[0].RetailCustomer.TaxID;
+
+	For Each Item In SourceData.PaymentList Do
+		RowFilter = New Structure();
+		RowFilter.Insert("Key", Item.Key);
+		TaxRows = SourceData.TaxList.FindRows(RowFilter);
+		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
+		FiscalStringData.AmountWithDiscount = Item.TotalAmount;
+		FiscalStringData.DiscountAmount = 0;
+		FiscalStringData.CalculationSubject = 10;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+		FiscalStringData.MeasureOfQuantity = 255;
+		FiscalStringData.Name = String(SourceData.PaymentList[0].RetailCustomer);
+		FiscalStringData.Quantity = 1;
+		FiscalStringData.PaymentMethod = 3;
+		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
+		If TaxRows.Count() > 0 Then
+			If TaxRows[0].TaxRate.NoRate Then
+				FiscalStringData.VATRate =  "none";
+				FiscalStringData.VATAmount = 0;
+			Else
+				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
+				FiscalStringData.VATAmount = TaxRows[0].Amount;
+			EndIf;
+		Else
+			FiscalStringData.VATRate = "none";
+			FiscalStringData.VATAmount = 0;
+		EndIf;
+		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
+	EndDo;
+
+	If isCash Then
+		CheckPackage.Payments.Cash = SourceData.PaymentList.Total("TotalAmount");
+	Else
+		CheckPackage.Payments.ElectronicPayment = SourceData.PaymentList.Total("TotalAmount");
+	EndIf;
+EndProcedure
+
+// Fill document package.
+//
 // Parameters:
-//  SourceData - DocumentRef.BankReceipt
-// 
-// Returns:
-//  Structure - Prepare receipt data by bank receipt
-Function PrepareReceiptDataByBankReceipt(SourceData) Export
-	
-	Str = ShiftGetXMLOperationSettings(SourceData);
-	Str.Insert("OperationType", 1);
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
-	
-	
-	If SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
-		PaymentListData = SourceData.PaymentList.Unload();
-		PaymentListData.GroupBy("RetailCustomer");
-		If PaymentListData.Count() > 1 Then
-			Raise("A few retail customer found!");
-		EndIf;
-		CustomerDetail = New Structure;
-		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
-		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
-		Str.Insert("CustomerDetail", CustomerDetail);	
-	
-		FiscalStrings = New Array;
-		For Each Item In SourceData.PaymentList Do
-			RowFilter = New Structure();
-			RowFilter.Insert("Key", Item.Key);
-			TaxRows = SourceData.TaxList.FindRows(RowFilter);
-			FiscalStringData = New Structure();
-			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
-			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
-			FiscalStringData.Insert("MeasureOfQuantity", "255");
-			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
-			FiscalStringData.Insert("Quantity", 1);
-			FiscalStringData.Insert("PaymentMethod", 3);
-			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
-			If TaxRows.Count() > 0 Then
-				If TaxRows[0].TaxRate.NoRate Then
-					FiscalStringData.Insert("VATRate", "none");
-					FiscalStringData.Insert("VATAmount", 0);  
-				Else
-					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
-				EndIf;
-			Else
-				//Raise("Tax isn't found!");
-				FiscalStringData.Insert("VATRate", "none");
-				FiscalStringData.Insert("VATAmount", 0);
-			EndIf;
-			FiscalStrings.Add(FiscalStringData);
-		EndDo;
-	EndIf; 
-	
-	Str.Insert("FiscalStrings", FiscalStrings);
-	Str.Insert("TextStrings", New Array);
-	
-	Str.Insert("Cash", 0);
-	Str.Insert("ElectronicPayment", SourceData.PaymentList.Total("TotalAmount"));
-	Str.Insert("PrePayment", 0);
-	Str.Insert("PostPayment", 0);
-	Str.Insert("Barter", 0);
-	
-	Return Str;
-EndFunction
+//  SourceData - DocumentRef.RetailSalesReceipt - Source data
+//  DocumentPackage - See EquipmentFiscalPrinterAPIClient.DocumentPackage
+Procedure FillDocumentPackage(SourceData, DocumentPackage) Export
 
-// Prepare receipt data by bank payment.
-// 
-// Parameters:
-//  SourceData - DocumentRef.BankPayment
-// 
-// Returns:
-//  Structure - Prepare receipt data by bank payment
-Function PrepareReceiptDataByBankPayment(SourceData) Export
-	
-	Str = ShiftGetXMLOperationSettings(SourceData);
-	Str.Insert("OperationType", 2);
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
-	
-	
-	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CustomerAdvance Then
-		PaymentListData = SourceData.PaymentList.Unload();
-		PaymentListData.GroupBy("RetailCustomer");
-		If PaymentListData.Count() > 1 Then
-			Raise("A few retail customer found!");
-		EndIf;
-		CustomerDetail = New Structure;
-		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
-		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
-		Str.Insert("CustomerDetail", CustomerDetail);	
-	
-		FiscalStrings = New Array;
-		For Each Item In SourceData.PaymentList Do
-			RowFilter = New Structure();
-			RowFilter.Insert("Key", Item.Key);
-			TaxRows = SourceData.TaxList.FindRows(RowFilter);
-			FiscalStringData = New Structure();
-			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
-			FiscalStringData.Insert("DiscountAmount", 0);
-			FiscalStringData.Insert("CalculationSubject", 10);	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
-			FiscalStringData.Insert("MeasureOfQuantity", "255");
-			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
-			FiscalStringData.Insert("Quantity", 1);
-			FiscalStringData.Insert("PaymentMethod", 3);
-			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
-			If TaxRows.Count() > 0 Then
-				If TaxRows[0].TaxRate.NoRate Then
-					FiscalStringData.Insert("VATRate", "none");
-					FiscalStringData.Insert("VATAmount", 0);  
-				Else
-					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
-				EndIf;
-			Else
-				//Raise("Tax isn't found!");
-				FiscalStringData.Insert("VATRate", "none");
-				FiscalStringData.Insert("VATAmount", 0);
-			EndIf;
-			FiscalStrings.Add(FiscalStringData);
-		EndDo;
-	EndIf; 
-	
-	Str.Insert("FiscalStrings", FiscalStrings);
-	Str.Insert("TextStrings", New Array);
-	
-	Str.Insert("Cash", 0);
-	Str.Insert("ElectronicPayment", SourceData.PaymentList.Total("TotalAmount"));
-	Str.Insert("PrePayment", 0);
-	Str.Insert("PostPayment", 0);
-	Str.Insert("Barter", 0);
-	
-	Return Str;
-EndFunction
-
-Function PreparePrintTextData(SourceData) Export
-	Str = New Structure;
-	
-	TextStrings = New Array;
-	
 	For Each Payment In SourceData.Payments Do
 		TextString = "";
 		If TypeOf(Payment.PaymentInfo) = Type("String") Then
 			If IsBlankString(Payment.PaymentInfo) Then
 				Continue;
 			EndIf;
-			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
-		Else 
+			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo); // See EquipmentAcquiringAPIClient.SettlementSettings
+		Else
 			PaymentInfo = Payment.PaymentInfo;
 		EndIf;
 		If PaymentInfo.Property("Out")
-			And	PaymentInfo.Out.Property("Slip") Then			
+			And	PaymentInfo.Out.Property("Slip") Then
 			TextString = PaymentInfo.Out.Slip;
 		Else
 			Continue;
 		EndIf;
-		
+
 		If IsBlankString(TextString) Then
 			Continue;
 		EndIf;
-		
+
 		For Each Text In StrSplit(TextString, Chars.LF, True) Do
-			TextStringData = New Structure();
-			TextStringData.Insert("Text", Text);
-			TextStrings.Add(TextStringData);
+			DocumentPackage.TextString.Add(Text);
 		EndDo;
 	EndDo;
-	
-	Str.Insert("TextStrings", TextStrings);
-	
-	Return Str;
-EndFunction
 
-Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = Undefined, DataPresentation = "") Export
-	
-	If FiscalResponse = Undefined Then
-		FiscalResponse = New Structure;
-	EndIf;	
-	
-	If Status = "Prepaired" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Prepaired
-																, FiscalResponse);
-	ElsIf Status = "Printed" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Printed
-																, FiscalResponse
-																, DataPresentation);
-	ElsIf Status = "FiscalReturnedError" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.FiscalReturnedError
-																, FiscalResponse);
-	ElsIf Status = "NotPrinted" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.NotPrinted
-																, FiscalResponse);
-	EndIf;
 EndProcedure
 
+// Set fiscal status.
+//
+// Parameters:
+//  DocumentRef - DocumentRefDocumentName - Document ref
+//  Status - EnumRef.DocumentFiscalStatuses - Document status
+//  FiscalResponse - See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
+//  DataPresentation - String -  Data presentation
+Procedure SetFiscalStatus(DocumentRef, Status, FiscalResponse = Undefined, DataPresentation = "") Export
+
+	If FiscalResponse = Undefined Then
+		FiscalResponse = New Structure;
+	EndIf;
+
+	InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef, Status, FiscalResponse, DataPresentation);
+EndProcedure
+
+// Get status data.
+//
+// Parameters:
+//  DocumentRef - DocumentRefDocumentName - Document ref
+//
+// Returns:
+//  See InformationRegisterManager.DocumentFiscalStatus.GetStatusData
 Function GetStatusData(DocumentRef) Export
 	FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentRef);
 	Return FiscalStatus;
 EndFunction
 
 // Get string code.
-// 
+//
 // Parameters:
 //  DocumentRef - DocumentRef.RetailReturnReceipt, DocumentRef.RetailSalesReceipt -
-// 
+//
 // Returns:
 //  Array Of String
 Function GetStringCode(DocumentRef) Export
 	Array = New Array; // Array Of String
 	For Each Row In DocumentRef.ControlCodeStrings Do
-		
+
 		If Row.NotCheck Then
 			Continue;
 		EndIf;
-		
+
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;
 EndFunction
 
-// Shift get XMLOperation settings.
-// 
+// Fill input parameters.
+//
 // Parameters:
 //  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
-// 
-// Returns:
-//  Structure - Shift get XMLOperation settings:
-// * CashierName - DefinedType.typeDescription -
-// * CashierINN - String -
-// * SaleAddress - String -
-// * SaleLocation - String -
-// @skip-check reading-attribute-from-database
-Function ShiftGetXMLOperationSettings(Ref) Export
-	Str = New Structure;
-	Str.Insert("CashierName", Ref.Author.Partner.Description_ru);
-	Str.Insert("CashierINN", Ref.Author.Partner.TaxID);
-	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales") 
-		OR (TypeOf(Ref) = Type("Structure")	AND Ref.Property("FiscalPrinter")) Then
-		Str.Insert("SaleAddress", Ref.FiscalPrinter.SaleAddress);
-		Str.Insert("SaleLocation", Ref.FiscalPrinter.SaleLocation);
-	Else
-		Str.Insert("SaleAddress", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress);
-		Str.Insert("SaleLocation", Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation);
+//  InputParameters - See EquipmentFiscalPrinterAPIClient.InputParameters
+Procedure FillInputParameters(Ref, InputParameters) Export
+	InputParameters.CashierName = Ref.Author.Partner.Description_ru;
+
+	If IsBlankString(InputParameters.CashierName) Then
+		//@skip-check property-return-type
+		Raise R().EqFP_CashierNameCanNotBeEmpty;
 	EndIf;
-	Return Str;
-EndFunction
+
+	InputParameters.CashierINN = Ref.Author.Partner.TaxID;
+	If TypeOf(Ref) = Type("DocumentRef.ConsolidatedRetailSales")
+		OR (TypeOf(Ref) = Type("Structure")	AND Ref.Property("FiscalPrinter")) Then
+		InputParameters.SaleAddress = Ref.FiscalPrinter.SaleAddress;
+		InputParameters.SaleLocation = Ref.FiscalPrinter.SaleLocation;
+	Else
+		InputParameters.SaleAddress = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress;
+		InputParameters.SaleLocation = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation;
+	EndIf;
+EndProcedure
 
 #EndRegion
-	

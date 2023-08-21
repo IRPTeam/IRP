@@ -26,6 +26,18 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Work order closing</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Закрытие заказ наряда</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İş emri kapanışı</value>
+ </objectPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

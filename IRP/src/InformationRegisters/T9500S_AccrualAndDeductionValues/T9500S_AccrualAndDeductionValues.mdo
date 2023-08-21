@@ -26,6 +26,18 @@
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>T9500 Accrual and deduction values</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>T9500 Значения начислений и удержаний</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>T9500 Accrual and deduction values</value>
+ </recordPresentation>
  <resources uuid="b59ca333-121f-4f6b-8e16-8c8f767e566d">
   <name>Value</name>
   <synonym>

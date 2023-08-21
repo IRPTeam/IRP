@@ -24,6 +24,18 @@
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Data versions</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Версии данных</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Data versions</value>
+ </recordPresentation>
  <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
   <name>Data</name>
   <synonym>

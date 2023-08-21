@@ -736,8 +736,10 @@ Procedure LoadDataFromTable(Command)
 	AddInfo = New Structure;
 	AddInfo.Insert("TargetField", "Price");
 	If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItems") Then
+		//@skip-check wrong-string-literal-content
 		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData"]);
 	ElsIf Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
+		//@skip-check wrong-string-literal-content
 		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData_ItemKey"]);
 	EndIf;
 	AddInfo.Insert("EndNotify", New NotifyDescription("LoadDataFromTableEnd", ThisObject));
@@ -753,6 +755,7 @@ Procedure LoadDataFromTableEnd(Result, AddInfo) Export
 	
 EndProcedure
 
+&AtServer
 Procedure LoadDataFromTableEndAtServer(TableAddress)
 	
 	DocumentTable = Object.ItemList;

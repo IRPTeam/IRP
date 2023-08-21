@@ -57,6 +57,18 @@
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Production</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Производство</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Üretim</value>
+ </objectPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

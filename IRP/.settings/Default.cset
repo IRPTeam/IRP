@@ -22,6 +22,9 @@
     "doc-comment-parameter-section": {
       "enabled": false
     },
+    "method-too-many-params": {
+      "enabled": false
+    },
     "reading-attribute-from-database": {
       "enabled": false
     },

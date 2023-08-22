@@ -834,10 +834,6 @@ Function GetXMLAsStructure(XML) Export
 	Return Str;
 EndFunction
 
-Function GetXMLAsStructure_Recurse()
-	
-EndFunction
-
 // XDTOFactory object.
 // 
 // Parameters:

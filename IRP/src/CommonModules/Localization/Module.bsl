@@ -8,6 +8,10 @@
 // Returns:
 //  Structure -  Strings:
 // * ACS_UnknownValueType - String - 
+// * CERT_OnlyProdOrCert - String - 
+// * CERT_CertAlreadyUsed - String - 
+// * CERT_CannotBeSold - String - 
+// * CERT_HasNotBeenUsed - String - 
 // * EmailIsEmpty - String - 
 // * Only1SymbolAtCanBeSet - String - 
 // * InvalidLengthOfLocalPart - String - 
@@ -68,6 +72,7 @@
 // * EqAc_AlreadyhasTransaction - String - 
 // * EqAc_LastSettlementHasError - String - 
 // * EqAc_LastSettlementNotFound - String - 
+// * EqAc_NotAllPaymentDone - String - 
 // * EqFP_CanNotOpenSessionRegistrationKM - String - 
 // * EqFP_CanNotRequestKM - String - 
 // * EqFP_CanNotGetProcessingKMResult - String - 
@@ -448,6 +453,15 @@ Function Strings(Lang) Export
 
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
+#Region Certificates
+	
+	Strings.Insert("CERT_OnlyProdOrCert", NStr("en = 'In the document, there can be either goods or certificates.'", Lang));
+	Strings.Insert("CERT_CertAlreadyUsed", NStr("en = 'Certificate %1 has already been used before and cannot be used again.'", Lang));
+	Strings.Insert("CERT_CannotBeSold", NStr("en = 'Certificate %1 cannot be issued again.'", Lang));
+	Strings.Insert("CERT_HasNotBeenUsed", NStr("en = 'Certificate %1 has not been used before.'", Lang));
+
 #EndRegion
 
 #Region Validation

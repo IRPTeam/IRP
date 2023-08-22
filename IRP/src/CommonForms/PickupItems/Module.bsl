@@ -377,7 +377,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 				 |	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 				 |	NULL AS SerialLotNumber,
 				 |	PricesResult.Price,
-				 |		ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) OR ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) OR ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isCertificate,
 				 |	CASE WHEN &IgnoreCodeStringControl THEN 
 				 |		False 
 				 |	ELSE 
@@ -420,6 +421,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 			TransferParameters.Insert("UseSerialLotNumber", QuerySelection.UseSerialLotNumber);
 			TransferParameters.Insert("SerialLotNumber", QuerySelection.SerialLotNumber);
 			TransferParameters.Insert("isService", QuerySelection.isService);
+			TransferParameters.Insert("isCertificate", QuerySelection.isCertificate);
 			TransferParameters.Insert("ControlCodeString", QuerySelection.ControlCodeString);
 			TransferParameters.Insert("AlwaysAddNewRowAfterScan", QuerySelection.AlwaysAddNewRowAfterScan);
 			ItemKeyListSelectionAfter(TransferParameters);
@@ -436,6 +438,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 				NewRow.UseSerialLotNumber = QuerySelection.UseSerialLotNumber;
 				NewRow.SerialLotNumber = QuerySelection.SerialLotNumber;
 				NewRow.isService = QuerySelection.isService;
+				NewRow.isCertificate = QuerySelection.isCertificate;
 				NewRow.ControlCodeString = QuerySelection.ControlCodeString;
 				NewRow.AlwaysAddNewRowAfterScan = QuerySelection.AlwaysAddNewRowAfterScan;
 			EndDo;
@@ -461,7 +464,7 @@ EndProcedure
 Procedure CommandSaveAndClose(Command)
 	ArrayOfResults = New Array();
 	For Each Row In ThisObject.ItemTableValue Do
-		Result = New Structure("Item, ItemKey, Quantity, Unit, SerialLotNumber, UseSerialLotNumber, IsService, ControlCodeString, SourceOfOrigin, AlwaysAddNewRowAfterScan");
+		Result = New Structure("isCertificate, Item, ItemKey, Quantity, Unit, SerialLotNumber, UseSerialLotNumber, IsService, ControlCodeString, SourceOfOrigin, AlwaysAddNewRowAfterScan");
 		FillPropertyValues(Result, Row);
 		Result.Insert("PriceType", ThisObject.PriceType);
 		ArrayOfResults.Add(Result);
@@ -481,6 +484,7 @@ Procedure ItemKeyListSelection(Item, RowSelected, Field, StandardProcessing)
 	TransferParameters.Insert("UseSerialLotNumber", ItemKeyCurrentData.UseSerialLotNumber);
 	TransferParameters.Insert("SerialLotNumber", ItemKeyCurrentData.SerialLotNumber);
 	TransferParameters.Insert("isService", ItemKeyCurrentData.isService);
+	TransferParameters.Insert("isCertificate", ItemKeyCurrentData.isCertificate);
 	TransferParameters.Insert("ControlCodeString", ItemKeyCurrentData.ControlCodeString);
 	ItemKeyListSelectionAfter(TransferParameters);
 EndProcedure
@@ -504,6 +508,7 @@ Procedure ItemKeyListSelectionAfter(ParametersStructure)
 		ItemRow.Item = ParametersStructure.Item;
 		ItemRow.ItemKey = ParametersStructure.ItemKey;
 		ItemRow.isService = ParametersStructure.isService;
+		ItemRow.isCertificate = ParametersStructure.isCertificate;
 		ItemRow.ControlCodeString = ParametersStructure.ControlCodeString;
 		ItemRow.Quantity = 1;
 		ItemRow.Price = ParametersStructure.Price;

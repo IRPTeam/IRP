@@ -1472,15 +1472,26 @@ EndFunction
 // Pickup items end.
 // 
 // Parameters:
-//  ScanData - See BarcodeServer.FillFoundedItems
+//  ScanData - Array Of See BarcodeServer.FillFoundedItems
 //  AddInfo - See BarcodeClient.GetBarcodeSettings
 Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
 		Return;
 	EndIf;
 
-	Object 	= AddInfo.Object;
-	Form 	= AddInfo.Form;
+
+	Object 	= AddInfo.Object; // See Document.RetailSalesReceipt.Form.DocumentForm.Object
+	Form 	= AddInfo.Form; // See Document.RetailSalesReceipt.Form.DocumentForm
+	For Each ScanRow In ScanData Do
+		If ScanRow.isCertificate Then
+			For Each Row In Object.ItemList Do
+				If Not Row.IsService Then
+					CommonFunctionsClientServer.ShowUsersMessage(R().CERT_OnlyProdOrCert);
+					Return;
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
 	
 	Parameters = GetParametersPickupItems(Object, Form, AddInfo);
 	

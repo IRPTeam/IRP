@@ -758,6 +758,7 @@ EndFunction
 //  * Barcode - String -
 //  * UseSerialLotNumber - Boolean -
 //  * isService - Boolean -
+//  * isCertificate - Boolean -
 //  * AlwaysAddNewRowAfterScan - Boolean -
 //  * EachSerialLotNumberIsUnique - Boolean -
 //  * ControlCodeString - Boolean -
@@ -793,6 +794,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	"""" AS Barcode,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
 	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 	|	False AS EachSerialLotNumberIsUnique,
 	|	CASE WHEN &IgnoreCodeStringControl THEN 

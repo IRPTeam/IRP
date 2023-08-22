@@ -283,6 +283,15 @@ Scenario: _0051131 create Item type for Certificate
 		Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
 		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
 		Then the form attribute named "SingleRow" became equal to "Yes"
+	* Try modify settings
+		When I Check the steps for Exception
+			| 'And I remove checkbox named "AlwaysAddNewRowAfterScan"'    |
+		When I Check the steps for Exception
+			| 'And I remove checkbox named "NotUseLineGrouping"'    |
+		When I Check the steps for Exception
+			| 'And I remove checkbox named "UseSerialLotNumber"'    |
+		When I Check the steps for Exception
+			| 'And I remove checkbox named "EachSerialLotNumberIsUnique"'    |		
 		And I click the button named "FormWriteAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

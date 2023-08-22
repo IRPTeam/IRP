@@ -3107,11 +3107,14 @@ Scenario: Create Certificate
 	And I check or create catalog "SerialLotNumbers" objects:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | 'False'        | '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | 'False'        | '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
 
 
 	// InformationRegister.Barcodes
 
 	And I check or create information register "Barcodes" records:
 		| 'Barcode'     | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
 

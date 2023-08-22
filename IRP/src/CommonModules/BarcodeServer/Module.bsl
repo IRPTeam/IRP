@@ -79,6 +79,7 @@ EndFunction
 //   * Barcode - String -
 //   * UseSerialLotNumber - Boolean -
 //   * isService - Boolean -
+//   * isCertificate - Boolean -
 //   * AlwaysAddNewRowAfterScan - Boolean -
 //   * EachSerialLotNumberIsUnique - Boolean -
 //   * ControlCodeString - Boolean -
@@ -118,6 +119,7 @@ EndFunction
 //  * Barcode - String -
 //  * UseSerialLotNumber - Boolean -
 //  * isService - Boolean -
+//  * isCertificate - Boolean -
 //  * AlwaysAddNewRowAfterScan - Boolean -
 //  * EachSerialLotNumberIsUnique - Boolean -
 //  * ControlCodeString - Boolean -
@@ -149,6 +151,7 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	VTBarcode.Barcode AS Barcode,
 		|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
+		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isCertificate,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
 		|	CASE WHEN &IgnoreCodeStringControl THEN 

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Retail
@@ -146,6 +146,10 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I click "Return" button
 		And I click "Payment return" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Amount paid is less than amount of the document'|
+		And I click "Cash (/)" button
+		And I click the button named "Enter"		
 		Then the form attribute named "UserAdmin" became equal to ""
 	* Check the return of access rights
 		And I expand current line in "ItemsPickup" table
@@ -187,6 +191,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '2,000'      | ''         | '200,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Change price and return
@@ -201,6 +206,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '1,000'      | ''         | '100,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Check the return of access rights	

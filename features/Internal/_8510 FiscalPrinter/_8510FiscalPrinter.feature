@@ -2336,6 +2336,7 @@ Scenario: _0260164 payment by certificate (POS)
 		Then "Payment" window is opened
 		And I click the button named "SearchByBarcode"
 		And I input "99999999999" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Cash (/)" button
 		And I click "2" button
 		And I click "0" button
@@ -2387,6 +2388,7 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		And I select current line in "ItemList" table
 		And I click "Search by barcode" button
 		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And "Payments" table became equal
@@ -2397,9 +2399,6 @@ Scenario: _0260165 Return of a product paid for with a certificate
 			| 'Reference' |
 			| 'Card 03'   |
 		And I select current line in "BankPaymentTypeList" table
-		And I activate "Amount" field in "Payments" table
-		And I select current line in "Payments" table
-		And I select current line in "Payments" table
 		And I click "1" button
 		And I click "0" button
 		And I click "0" button
@@ -2560,7 +2559,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "620"	
+	Then the number of "List" table lines is "равно" "706"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table

@@ -1506,6 +1506,7 @@ Scenario: _005137 create certificate item and item key
 			| 'Description'    |
 			| 'pcs'            |
 		And I select current line in "List" table
+		And I expand "Purchase and production" group
 		And I click Select button of "Brand" field
 		And I go to line in "List" table
 			| 'Description'    |

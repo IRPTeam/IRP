@@ -90,6 +90,7 @@ Scenario: _0262100 certificate (POS)
 			| "CI"          |
 		And I select current line in "List" table
 		And I input "" text in "User group" field
+		And I click "Save" button
 		And I click "Settings" button
 		And I go to line in "MetadataTree" table
 			| 'Group name'             |

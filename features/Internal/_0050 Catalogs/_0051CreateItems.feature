@@ -1506,6 +1506,11 @@ Scenario: _005137 create certificate item and item key
 			| 'Description'    |
 			| 'pcs'            |
 		And I select current line in "List" table
+		And I click Select button of "Brand" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Gir'            |
+		And I select current line in "List" table
 		And I click "Save" button
 	* Create Certificate item key
 		And In this window I click command interface button "Item keys"

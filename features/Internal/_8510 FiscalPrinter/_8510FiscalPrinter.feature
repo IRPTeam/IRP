@@ -228,6 +228,42 @@ SalesReceiptXML17 =
 </CheckPackage>
 """
 
+SalesReceiptXML18 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+	</Positions>
+	<Payments Cash="20" ElectronicPayment="200" PrePayment="500" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+SalesReceiptXML19 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+	</Positions>
+	<Payments Cash="120" ElectronicPayment="100" PrePayment="500" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML20 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="10" Name="Certificate without denominal [99999999998]" Quantity="1" PaymentMethod="3" PriceWithDiscount="300" VATRate="18" VATAmount="45.76"/>
+	</Positions>
+	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -2283,12 +2319,94 @@ Scenario: _0260163 certificate sale (POS, without retail customer)
 Scenario: _0260164 payment by certificate (POS)
 		And I close all client application windows
 		And In the command interface I select "Retail" "Point of sale"	
-	* Certificate sale
+	* Select item
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
 	* Payment
 		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "SearchByBarcode"
+		And I input "99999999999" text in the field named "Barcode"
+		And I click "Cash (/)" button
+		And I click "2" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then "Payment" window is opened
+		And I move to the next attribute	
+		And I click "OK" button
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML18"
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+
+Scenario: _0260165 Return of a product paid for with a certificate
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select RSR for return
+		Then "Point of sales" window is opened
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'    | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress'              | ''             | 'XS/Blue'  | ''           | '520,00' | '1,000'    | ''       | '520,00' |
+			| 'Product 1 with SLN' | ''             | 'PZU'      | '8908899880' | '200,00' | '1,000'    | ''       | '200,00' |
+		And "BasisPayments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Certificate'  | '500,00' |
+			| 'Cash'         | '20,00'  |
+			| 'Card 03'      | '200,00' |
+		And I go to line in "ItemList" table
+			| 'Item'               |
+			| 'Product 1 with SLN' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I click "Payment Return" button
+		Then "Payment" window is opened
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
+			| ' '            | 'Certificate'  | '500,00' | ''        |
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I select current line in "Payments" table
+		And I click "1" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Cancel" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
 		And I click "Cash (/)" button
 		And I click "OK" button
 	* Check fiscal log			
@@ -2296,7 +2414,46 @@ Scenario: _0260164 payment by certificate (POS)
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML17"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML19"
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
+				
+		
+Scenario: _0260166 return certificate
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"	
+	* Sales
+		And I click "Search by barcode (F7)" button
+		And I input "99999999998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Return
+		And I click the button named "Return"
+		And I click "Search by barcode (F7)" button
+		And I input "99999999998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button				
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML20"	
+				
 
 Scenario: _0260152 close session
 	And I close all client application windows

@@ -1183,73 +1183,73 @@ EndFunction
 //	Return ConsignorBatchesTable;
 //EndFunction
 //
-//Function GetSalesReportToConsignorList() Export
-//	Return CommissionTradePrivileged.GetSalesReportToConsignorList();
-//EndFunction
-//	
-//Function __GetSalesReportToConsignorList() Export
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	PRESENTATION(SalesReportToConsignor.Company) AS CompanyPresentation,
-//	|	SalesReportToConsignor.Date,
-//	|	SalesReportToConsignor.Number,
-//	|	SalesReportToConsignor.StartDate,
-//	|	SalesReportToConsignor.EndDate,
-//	|	SalesReportToConsignor.Ref AS SalesReportRef,
-//	|	PRESENTATION(SalesReportToConsignor.Ref.LegalName) AS LegalNamePresentation,
-//	|	PRESENTATION(SalesReportToConsignor.Ref.Agreement) AS PartnerTermPresentation
-//	|FROM
-//	|	Document.SalesReportToConsignor AS SalesReportToConsignor
-//	|WHERE
-//	|	SalesReportToConsignor.Posted";
-//	QueryResult = Query.Execute();
-//	QueryTable = QueryResult.Unload();
-//	Return QueryTable;	
-//EndFunction
-//
-//Function GetFillingDataBySalesReportToConsignor(DocRef) Export
-//	Return CommissionTradePrivileged.GetFillingDataBySalesReportToConsignor(DocRef);
-//EndFunction	
-//
-//Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
-//	FillingData = New Structure("BasedOn", "SalesReportToConsignor");
-//	FillingData.Insert("ItemList"         , New Array());
-//	FillingData.Insert("TaxList"          , New Array());
-//	FillingData.Insert("SerialLotNumbers" , New Array());
-//	FillingData.Insert("SourceOfOrigins"  , New Array());
-//	
-//	FillingData.Insert("Partner", DocRef.Company.Partner);
-//	
-//	For Each Row In DocRef.ItemList Do
-//		NewRow = New Structure("Key, Item, ItemKey, Unit, Quantity, Price, PriceType, 
-//		|TaxAmount, TotalAmount, NetAmount, DontCalculateRow,
-//		|ConsignorPrice, TradeAgentFeePercent, TradeAgentFeeAmount");
-//		FillPropertyValues(NewRow, Row);
-//		FillingData.ItemList.Add(NewRow);
-//	EndDo;
-//	
-//	For Each Row In DocRef.TaxList Do
-//		NewRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-//		FillPropertyValues(NewRow, Row);
-//		FillingData.TaxList.Add(NewRow);
-//	EndDo;
-//	
-//	For Each Row In DocRef.SerialLotNumbers Do
-//		NewRow = New Structure("Key, SerialLotNumber, Quantity");
-//		FillPropertyValues(NewRow, Row);
-//		FillingData.SerialLotNumbers.Add(NewRow);
-//	EndDo;
-//	
-//	For Each Row In DocRef.SourceOfOrigins Do
-//		NewRow = New Structure("Key, SerialLotNumber, SourceOfOrigin, Quantity");
-//		FillPropertyValues(NewRow, Row);
-//		FillingData.SourceOfOrigins.Add(NewRow);
-//	EndDo;
-//	
-//	Return FillingData;
-//EndFunction	
-//
+Function GetSalesReportToConsignorList() Export
+	Return CommissionTradePrivileged.GetSalesReportToConsignorList();
+EndFunction
+	
+Function __GetSalesReportToConsignorList() Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PRESENTATION(SalesReportToConsignor.Company) AS CompanyPresentation,
+	|	SalesReportToConsignor.Date,
+	|	SalesReportToConsignor.Number,
+	|	SalesReportToConsignor.StartDate,
+	|	SalesReportToConsignor.EndDate,
+	|	SalesReportToConsignor.Ref AS SalesReportRef,
+	|	PRESENTATION(SalesReportToConsignor.Ref.LegalName) AS LegalNamePresentation,
+	|	PRESENTATION(SalesReportToConsignor.Ref.Agreement) AS PartnerTermPresentation
+	|FROM
+	|	Document.SalesReportToConsignor AS SalesReportToConsignor
+	|WHERE
+	|	SalesReportToConsignor.Posted";
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;	
+EndFunction
+
+Function GetFillingDataBySalesReportToConsignor(DocRef) Export
+	Return CommissionTradePrivileged.GetFillingDataBySalesReportToConsignor(DocRef);
+EndFunction	
+
+Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
+	FillingData = New Structure("BasedOn", "SalesReportToConsignor");
+	FillingData.Insert("ItemList"         , New Array());
+	FillingData.Insert("TaxList"          , New Array());
+	FillingData.Insert("SerialLotNumbers" , New Array());
+	FillingData.Insert("SourceOfOrigins"  , New Array());
+	
+	FillingData.Insert("Partner", DocRef.Company.Partner);
+	
+	For Each Row In DocRef.ItemList Do
+		NewRow = New Structure("Key, Item, ItemKey, Unit, Quantity, Price, PriceType, 
+		|TaxAmount, TotalAmount, NetAmount, DontCalculateRow,
+		|ConsignorPrice, TradeAgentFeePercent, TradeAgentFeeAmount");
+		FillPropertyValues(NewRow, Row);
+		FillingData.ItemList.Add(NewRow);
+	EndDo;
+	
+	For Each Row In DocRef.TaxList Do
+		NewRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
+		FillPropertyValues(NewRow, Row);
+		FillingData.TaxList.Add(NewRow);
+	EndDo;
+	
+	For Each Row In DocRef.SerialLotNumbers Do
+		NewRow = New Structure("Key, SerialLotNumber, Quantity");
+		FillPropertyValues(NewRow, Row);
+		FillingData.SerialLotNumbers.Add(NewRow);
+	EndDo;
+	
+	For Each Row In DocRef.SourceOfOrigins Do
+		NewRow = New Structure("Key, SerialLotNumber, SourceOfOrigin, Quantity");
+		FillPropertyValues(NewRow, Row);
+		FillingData.SourceOfOrigins.Add(NewRow);
+	EndDo;
+	
+	Return FillingData;
+EndFunction	
+
 //Function GetExistingRows(Object, 
 //						ServerSideParameters, 
 //						StoreRef, 

@@ -592,7 +592,7 @@ Function GetQueryTextsMasterTables()
 	//#2093
 	//QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	//#2093 ???????
-	//QueryArray.Add(R8014T_ConsignorSales());
+	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T1050T_AccountingQuantities());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -1363,7 +1363,32 @@ EndFunction
 //EndFunction
 
 //#2093 ??????????
-//Function R8014T_ConsignorSales()
+Function R8014T_ConsignorSales()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.PriceIncludeTax,
+		|	ItemList.Invoice AS SalesInvoice,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.Quantity,
+		|	SourceOfOrigins.SerialLotNumber,
+		|	SourceOfOrigins.SourceOfOrigin
+		|INTO R8014T_ConsignorSales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|WHERE
+		|	ItemList.IsConsignorStocks";
+EndFunction
+	
 //	Return "SELECT
 //		   |	ItemList.Key AS Key,
 //		   |	ItemList.Period,

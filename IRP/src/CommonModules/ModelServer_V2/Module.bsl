@@ -73,10 +73,12 @@ Function GetJobStatus(BackgroundJobUUID, BackgroundJobStorageAddress) Export
 		JobResult.Status = Enums.JobStatus.Active;
 	ElsIf Job.State = BackgroundJobState.Canceled Then
 		JobResult.Status = Enums.JobStatus.Canceled;
+		JobResult.SystemMessages.Add(R().Form_019);
 	ElsIf Job.State = BackgroundJobState.Completed Then
 		JobResult.Status = Enums.JobStatus.Completed;
 	ElsIf Job.State = BackgroundJobState.Failed Then
 		JobResult.Status = Enums.JobStatus.Failed;
+		JobResult.SystemMessages.Add(ErrorProcessing.DetailErrorDescription(Job.ErrorInfo));
 	EndIf;
 	
 	ArrayOfMsg = Job.GetUserMessages(True);

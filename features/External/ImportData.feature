@@ -3080,3 +3080,38 @@ Scenario: Create catalog SpecialOffers objects (Document discount for row)
 		| 'e1cib/data/Catalog.SpecialOffers?ref=b7a0d8de1a1c04c611ee171856ff2352' | 'False'        | 'e1cib/data/Catalog.SpecialOffers?ref=b7a0d8de1a1c04c611ee169ebe17a3a2' | 'False'    | 23     | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                 | 51         | 'True'     | '29.06.2023 00:00:00' | '01.01.0001 00:00:00' | 'False'  | 'True'             | 'Enum.SpecialOfferTypes.ForRow' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'False'                           | ''               | 'Document discount for row' | ''                 | ''               | 'Document discount TR' | ''         |
 
 
+Scenario: Create Certificate
+
+	// Catalog.ItemTypes
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                       | 'UseSerialLotNumber' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'AlwaysAddNewRowAfterScan' | 'SingleRow' | 'NotUseLineGrouping' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b7a6804cd0be6fd011ee40258580e604' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Certificate' | 'True'               | ''                   | 'True'                        | 'True'                     | 'True'      | 'True'               | 'Certificate'    | ''                 | ''               | ''               | '_40ec0930a6e948429cd7d347ed9d01f2' | ''             |
+
+	// Catalog.Items
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'ControlCodeString' | 'CheckCodeString' | 'Description_en'                | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee40258580e605' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b7a6804cd0be6fd011ee40258580e604' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'False'             | 'False'           | 'Certificate without denominal' | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
+
+	
+	// Catalog.ItemKeys
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'DefaultBillOfMaterials' | 'UseIncomingStockReservation' | 'PackageUnit' | 'Description_en'                | 'Description_hash'              | 'Description_ru'                | 'Description_tr'                | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'        | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee40258580e605' | ''     | ''              | ''                 | 'CE 52 F5 CB 91 FA 94 E7 C8 34 4B A3 FE 14 40 A5' | ''          | ''                       | 'False'                       | ''            | 'Certificate without denominal' | 'Certificate without denominal' | 'Certificate without denominal' | 'Certificate without denominal' |          |          |          |          |         | ''                     | ''                       | ''             |
+
+	
+	// Catalog.SerialLotNumbers
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | 'False'        | '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
+
+
+	// InformationRegister.Barcodes
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'     | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+

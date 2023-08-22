@@ -189,9 +189,7 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 Scenario: _005113 filling in the "Item types" catalog 
 	* Opening the form for filling in Item types
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
-		And Delay 2
 		And I click the button named "FormCreate"
-		And Delay 2
 	* Creating item types: TV (Product), Smartphones (Product), Rent (Service)
 		And I click Open button of the field named "Description_en"
 		And I input "Smartphones" text in the field named "Description_en"
@@ -268,10 +266,42 @@ Scenario: _005113 filling in the "Item types" catalog
 				| 'Earrings'         |
 			And I close all client application windows
 
+Scenario: _0051131 create Item type for Certificate
+	And I close all client application windows
+	* Opening Item types form
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I click the button named "FormCreate"
+	* Create Certificate item type
+		And I click Open button of the field named "Description_en"
+		And I input "Certificate" text in the field named "Description_en"
+		And I input "Certificate TR" text in the field named "Description_tr"
+		And I click "Ok" button 
+		And I change the radio button named "Type" value to "Certificate"		
+	* Check settings 
+		Then the form attribute named "AlwaysAddNewRowAfterScan" became equal to "Yes"
+		Then the form attribute named "NotUseLineGrouping" became equal to "Yes"
+		Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
+		Then the form attribute named "SingleRow" became equal to "Yes"
+		And I click the button named "FormWriteAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Certificate'    |
+		And I select current line in "List" table
+		Then the form attribute named "AlwaysAddNewRowAfterScan" became equal to "Yes"
+		Then the form attribute named "NotUseLineGrouping" became equal to "Yes"
+		Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
+		Then the form attribute named "SingleRow" became equal to "Yes"
+		Then the form attribute named "Description_en" became equal to "Certificate"
+				
 
 Scenario: _005114 filling in the settings for creating ItemKeys for Item type Coat and Jeans
 # for clothes specify the color, for shoes - season
 # It is indicated through the type of item with duplication in sets
+		And I close all client application windows
 	* Preparation
 		When Create catalog ItemTypes objects (Coat, Jeans)
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -1450,25 +1480,28 @@ Scenario: _005136 check add attribute set form
 		
 		
 				
-				
-				
-		
-
-				
-	
-				
-
-		
-				
-		
-		
-				
-										
-
-										
-
-
-
-		
-				
+Scenario: _005137 create certificate item and item key
+	And I close all client application windows
+	* Open item list
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+	* Create Certificate item
+		And I input "Certificate" text in the field named "Description_en"
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Certificate'           |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs'            |
+		And I select current line in "List" table
+		And I click "Save" button
+	* Create Certificate item key
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click "Save and close" button
+		And I wait "Item key (create)" window closing in 5 seconds
+	And I close all client application windows
 	

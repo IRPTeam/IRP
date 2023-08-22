@@ -515,6 +515,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en = 'Not filled Payment method'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Not filled Transaction type in Purchase'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en = 'Not filled Transaction type in Sale'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Not filled Transaction type in Sale Return'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Not filled Transaction type in Purchase Return'", Lang));
 	
 	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en = 'Setting the ""Use serial lot number"" flag in document lines.'", Lang));
@@ -524,6 +525,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en = 'Instead of empty values, ""Full calculation"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Instead of empty values, ""Purchase"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en = 'Instead of empty values, ""Sales"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
 #EndRegion

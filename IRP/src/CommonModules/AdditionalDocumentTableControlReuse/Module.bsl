@@ -222,6 +222,15 @@ Function ErrorHeaders(MetaDoc = Undefined)
 		));
 	EndIf;
 	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.SalesReturn
+			 OR MetaDoc = Metadata.Documents.SalesReturnOrder Then
+		Str.Insert("ErrorNotFilledSalesReturnTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesReturnTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
 	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.PurchaseReturn
 			 OR MetaDoc = Metadata.Documents.PurchaseReturnOrder
 			 OR MetaDoc = Metadata.Documents.PurchaseOrderClosing Then

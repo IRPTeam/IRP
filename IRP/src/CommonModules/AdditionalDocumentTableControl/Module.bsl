@@ -682,9 +682,21 @@ Function ErrorNotFilledSalesTransactionType(Document, RowIDList)
 	Return Result;
 EndFunction
 
+Function ErrorNotFilledSalesReturnTransactionType(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.SalesReturn
+	DocObject.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	Return Result;
+EndFunction
+
 Function ErrorNotFilledPurchaseReturnTransactionType(Document, RowIDList)
 	Result = New Array; // Array of String
-	DocObject = Document.GetObject(); // DocumentObject.PurchaseInvoice
+	DocObject = Document.GetObject(); // DocumentObject.PurchaseReturn
 	DocObject.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToVendor;
 	If DocObject.Posted Then
 		DocObject.Write(DocumentWriteMode.Posting);

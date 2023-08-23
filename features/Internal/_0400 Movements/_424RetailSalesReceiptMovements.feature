@@ -74,6 +74,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
+		When Create Certificate
 		When Create Document discount
 		* Add plugin for discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -132,7 +133,13 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create document Retail sales receipt (based on retail sales order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);"    |
-
+		When Create document Retail sales receipt and Retail return receipt (certificate)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -685,6 +692,77 @@ Scenario: _042428 check Retail sales receipt movements by the Register  "R3011 C
 			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
 			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'TRY'                            | 'No'                      |
 			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+		And I close all client application windows
+
+Scenario: _0424281 check Retail sales receipt movements by the Register  "R2006 Certificates" (Selling certificate)
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '15'       |
+	* Check movements by the Register  "R2006 Certificates"
+		And I click "Registrations report" button
+		And I select "R2006 Certificates" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 15 dated 22.08.2023 11:07:27' | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Document registrations records'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Register  "R2006 Certificates"'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| ''                                                  | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
+			| ''                                                  | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
+			| ''                                                  | '22.08.2023 11:07:27' | '1'         | '500'    | 'TRY'        | '99999999999'       | 'Sale'          |	
+		And I close all client application windows
+
+Scenario:_0424282 check absence Retail sales receipt movements by the Register  "R4010 Actual stocks" (Selling certificate)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '15'       |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R4010 Actual stocks"    |
+		And I close all client application windows
+
+Scenario:_0424283 check absence Retail sales receipt movements by the Register  "R4011 Free stocks" (Selling certificate)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '15'       |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R4011 Free stocks"    |
+		And I close all client application windows
+
+
+Scenario: _0424284 check Retail sales receipt movements by the Register  "R2006 Certificates" (Payment with a certificate)
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '16'       |
+	* Check movements by the Register  "R2006 Certificates"
+		And I click "Registrations report" button
+		And I select "R2006 Certificates" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 16 dated 22.08.2023 11:22:15' | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Document registrations records'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Register  "R2006 Certificates"'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| ''                                                  | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
+			| ''                                                  | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
+			| ''                                                  | '22.08.2023 11:22:15' | '-1'        | '-500'   | 'TRY'        | '99999999999'       | 'Used'          |	
 		And I close all client application windows
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion

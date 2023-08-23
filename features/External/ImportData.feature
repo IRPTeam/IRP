@@ -3101,20 +3101,16 @@ Scenario: Create Certificate
 		| 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'DefaultBillOfMaterials' | 'UseIncomingStockReservation' | 'PackageUnit' | 'Description_en'                | 'Description_hash'              | 'Description_ru'                | 'Description_tr'                | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'        | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee40258580e605' | ''     | ''              | ''                 | 'CE 52 F5 CB 91 FA 94 E7 C8 34 4B A3 FE 14 40 A5' | ''          | ''                       | 'False'                       | ''            | 'Certificate without denominal' | 'Certificate without denominal' | 'Certificate without denominal' | 'Certificate without denominal' |          |          |          |          |         | ''                     | ''                       | ''             |
 
-	
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'     | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
 	// Catalog.SerialLotNumbers
 
 	And I check or create catalog "SerialLotNumbers" objects:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | 'False'        | '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | 'False'        | '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
-
-
-	// InformationRegister.Barcodes
-
-	And I check or create information register "Barcodes" records:
-		| 'Barcode'     | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
-		| '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
-		| '99999999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40258580e607' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 
 

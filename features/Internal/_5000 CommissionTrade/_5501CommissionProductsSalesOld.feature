@@ -75,6 +75,7 @@ Scenario: _05502 preparation (commission products sales)
 			| 'Description'       |
 			| 'Workstation 01'    |
 		And I click "Set current workstation" button
+		When Create catalog Items objects (commission trade)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -83,8 +84,6 @@ Scenario: _05502 preparation (commission products sales)
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-		When Data preparation (comission stock)
-		When Data preparation (consignment from serial lot number)
 	* Tax settings
 		When filling in Tax settings for company
 	* Setting for Company

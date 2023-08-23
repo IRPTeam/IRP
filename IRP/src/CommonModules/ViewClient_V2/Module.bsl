@@ -4177,7 +4177,7 @@ Procedure ViewIdleHandler(Form, Object) Export
 		EndIf;
 	Else
 		// complete..
-		JobResult = GetFromTempStorage(JobStatus.StorageAddress);
+		JobResult = JobStatus.Result;
 		
 		If Not JobResult = Undefined Then
 			JobResult.Parameters.Object = Object;

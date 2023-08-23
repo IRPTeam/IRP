@@ -530,14 +530,14 @@ Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
 	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "Consignor");
 	
-	For Each Row In Object.ConsignorBatches Do
-		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
-		FillPropertyValues(NewRow, Row);
-		For Each RowFillingValues In Result.FillingValues Do
-			RowFillingValues.ConsignorBatches.Add(NewRow);
-		EndDo;
-	EndDo;
-	
+//	For Each Row In Object.ConsignorBatches Do
+//		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
+//		FillPropertyValues(NewRow, Row);
+//		For Each RowFillingValues In Result.FillingValues Do
+//			RowFillingValues.ConsignorBatches.Add(NewRow);
+//		EndDo;
+//	EndDo;
+//	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);

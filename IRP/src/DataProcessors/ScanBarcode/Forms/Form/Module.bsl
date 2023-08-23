@@ -313,13 +313,13 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				Row.CurrentQuantity = SearchInItemList[0].ScannedQuantity;
 				Row.Diff = Row.QuantityAtDocument - Row.CurrentQuantity;
 			EndIf;
+			If ThisObject.UseSerialLot And Row.UseSerialLotNumber And Not ValueIsFilled(Row.SerialLotNumber) Then
+				MobileSubsystem.Play(Sound.NeedSerialLot);
+			EndIf;
 			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
 			FormParameters = New Structure("FillingData, UseSerialLot", 
 				Row, ThisObject.UseSerialLot And Row.UseSerialLotNumber);
 			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
-			If ThisObject.UseSerialLot And Row.UseSerialLotNumber And Not ValueIsFilled(Row.SerialLotNumber) Then
-				MobileSubsystem.Play(Sound.NeedSerialLot);
-			EndIf;
 		Else
 			OnEditQuantityEnd(Row);
 		EndIf;

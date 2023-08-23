@@ -137,7 +137,7 @@ Function ItemList()
 		   |	DocItemList.Ref.Currency AS Currency,
 		   |	DocItemList.Unit AS Unit,
 		   |	DocItemList.Ref.Date AS Period,
-		   |	DocItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	DocItemList.IsService AS IsService,
 		   |	DocItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	DocItemList.RevenueType AS RevenueType,
 		   |	DocItemList.AdditionalAnalytic AS AdditionalAnalytic,

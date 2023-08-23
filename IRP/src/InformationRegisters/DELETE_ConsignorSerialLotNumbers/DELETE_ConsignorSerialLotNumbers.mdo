@@ -18,6 +18,10 @@
   <editType>InDialog</editType>
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Consignor serial lot numbers</value>
+  </recordPresentation>
   <resources uuid="eef806ba-7839-434d-aa01-def9be09bbd8">
     <name>Consignor</name>
     <synonym>

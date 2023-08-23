@@ -1720,6 +1720,13 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>AccumulationRegister.R2006T_Certificates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
 		<condition>

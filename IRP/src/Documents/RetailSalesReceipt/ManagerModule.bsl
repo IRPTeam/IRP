@@ -297,6 +297,7 @@ Function ItemList()
 		   |	ItemList.Ref.Date AS Period,
 		   |	ItemList.Ref AS RetailSalesReceipt,
 		   |	ItemList.IsService AS IsService,
+		   |	ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
 		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	ItemList.RevenueType AS RevenueType,
 		   |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -362,7 +363,9 @@ Function Payments()
 		   |	Payments.Percent AS Percent,
 		   |	Payments.Commission AS Commission,
 		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance,
-		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent
+		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
+		   |	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Certificate) AS IsCertificate,
+		   |	Payments.Certificate
 		   |INTO Payments
 		   |FROM
 		   |	Document.RetailSalesReceipt.Payments AS Payments
@@ -573,6 +576,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
+	QueryArray.Add(R2006T_Certificates());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
@@ -949,6 +953,36 @@ Function R2005T_SalesSpecialOffers()
 		   |	OffersInfo AS OffersInfo
 		   |WHERE TRUE";
 
+EndFunction
+
+Function R2006T_Certificates()
+	Return "SELECT
+	|	ItemList.Period,
+	|	ItemList.Currency,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity AS Quantity,
+	|	ItemList.TotalAmount AS Amount,
+	|	""Sale"" AS MovementType
+	|INTO R2006T_Certificates
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	ItemList.IsCertificate
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Payments.Period,
+	|	Payments.Currency,
+	|	Payments.Certificate,
+	|	- 1,
+	|	- Payments.Amount,
+	|	""Used""
+	|FROM
+	|	Payments AS Payments
+	|WHERE Payments.IsCertificate";
 EndFunction
 
 Function R2021B_CustomersTransactions()

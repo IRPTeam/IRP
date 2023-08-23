@@ -125,7 +125,7 @@ Function ItemList()
 		   |	ItemList.Unit AS Unit,
 		   |	ItemList.ItemKey.Item AS Item,
 		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	ItemList.IsService AS IsService,
 		   |	ItemList.NetAmount AS NetAmount,
 		   |	ItemList.TaxAmount AS TaxAmount,
 		   |	ItemList.Key,

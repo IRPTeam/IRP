@@ -2,11 +2,11 @@
 #Region Public
 
 // Set status.
-// 
+//
 // Parameters:
-//  Document - DocumentRef.RetailSalesReceipt -
+//  Document - DocumentRefDocumentName -
 //  Status - EnumRef.DocumentFiscalStatuses
-//  FiscalResponse - Structure
+//  FiscalResponse - See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
 //  DataPresentation - String - Data presentation
 Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Export
 	NewRecord = CreateRecordManager();
@@ -15,25 +15,24 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	NewRecord.DataPresentation = DataPresentation;
 	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
 	If TypeOf(FiscalResponse) = Type("Structure") Then
-		If FiscalResponse.Property("CheckNumber") Then 
-			NewRecord.CheckNumber = FiscalResponse.CheckNumber;
+		If FiscalResponse.Property("Out") And FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.DocumentOutputParameters) = Type("Structure") Then
+			NewRecord.CheckNumber = FiscalResponse.Out.DocumentOutputParameters.CheckNumber;
 		EndIf;
 	EndIf;
 	NewRecord.Write(True);
 EndProcedure
 
 // Get status data.
-// 
+//
 // Parameters:
-//  Document - DocumentRef.RetailSalesReceipt - Document
-// 
+//  Document - DocumentRefDocumentName - Document
+//
 // Returns:
 //  Structure - Get status data:
 // * Status - EnumRef.DocumentFiscalStatuses -
 // * FiscalResponse - String -
 // * DataPresentation - String -
 // * CheckNumber - Number -
-// * IsPrinted - Boolean -
 // * IsPrinted - Boolean -
 Function GetStatusData(Document) Export
 	StatusData = New Structure();
@@ -57,7 +56,7 @@ Function GetStatusData(Document) Export
 	If QuerySelection.Next() Then
 		FillPropertyValues(StatusData, QuerySelection);
 		If StatusData.Status = Enums.DocumentFiscalStatuses.Printed Then
-			StatusData.Insert("IsPrinted", True);
+			StatusData.IsPrinted = True;
 		EndIf;
 	EndIf;
 	Return StatusData;
@@ -69,7 +68,7 @@ EndFunction
 
 // Get access key.
 // See Role.TemplateInformationRegisters
-// 
+//
 // Returns:
 //  Structure - Get access key:
 // * Company - CatalogRef.Companies -

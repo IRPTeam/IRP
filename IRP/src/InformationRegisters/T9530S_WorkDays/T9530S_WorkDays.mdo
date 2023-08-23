@@ -17,6 +17,10 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>T9530 Work days</value>
+  </recordPresentation>
   <resources uuid="0495093c-858e-4535-bb67-2d11c590f85e">
     <name>CountDays</name>
     <synonym>

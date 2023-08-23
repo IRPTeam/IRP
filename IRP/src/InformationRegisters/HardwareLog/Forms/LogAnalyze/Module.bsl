@@ -8,11 +8,13 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.GroupLogSettings.Visible = Parameters.OpenAsLog;
-	TimeZone = CommonFunctionsServer.GetStandardTimeOffset(); 
-	//@skip-check typed-value-adding-to-untyped-collection
-	Hardware.LoadValues(Parameters.Hardware);
+	TimeZone = CommonFunctionsServer.GetStandardTimeOffset();
+	//@skip-check property-return-type
+	HardwareArray = Parameters.Hardware; // Array Of CatalogRef.Hardware
+	Hardware.LoadValues(HardwareArray);
 	Period.Variant = StandardPeriodVariant.Today;
-	FiscalPrinterFind = HardwareServer.GetWorkstationHardwareByEquipmentType(SessionParametersServer.GetSessionParameter("Workstation"), Enums.EquipmentTypes.FiscalPrinter);
+	Workstation = SessionParametersServer.GetSessionParameter("Workstation"); // CatalogRef.Workstations
+	FiscalPrinterFind = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
 	If FiscalPrinterFind.Count() = 1 Then
 		FiscalPrinter = FiscalPrinterFind[0];
 	EndIf;
@@ -23,7 +25,7 @@ EndProcedure
 Procedure UpdateAtServer()
 	TransactionList.Clear();
 	SkipMethods = GetListMethodForSkip();
-	
+
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -42,29 +44,29 @@ Procedure UpdateAtServer()
 		|
 		|ORDER BY
 		|	HardwareLog.Date";
-	
+
 	Query.SetParameter("StartDate", Period.StartDate);
 	Query.SetParameter("EndDate", Period.EndDate);
 	Query.SetParameter("SkipMethods", SkipMethods);
 	Query.SetParameter("Hardware", Hardware);
 	Query.SetParameter("TimeZone", TimeZone);
 	QueryResult = Query.Execute();
-	
+
 	SelectionDetailRecords = QueryResult.Select();
-	
+
 	While SelectionDetailRecords.Next() Do
 		NewRow = TransactionList.Add();
 		FillPropertyValues(NewRow, SelectionDetailRecords);
-		
+
 		If NewRow.Method = "PayByPaymentCard"
 			OR NewRow.Method = "ReturnPaymentByPaymentCard"
 			OR NewRow.Method = "CancelPaymentByPaymentCard"
 			OR NewRow.Method = "Settlement" Then
-				
-			NewRow.PrintInfo = CommonFunctionsServer.DeserializeJSON(NewRow.Data).Out.Slip;				
+				Payments = CommonFunctionsServer.DeserializeJSON(NewRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
+				NewRow.PrintInfo = Payments.Out.Slip;
 		EndIf;
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
@@ -73,15 +75,17 @@ Async Procedure PrintData(Command)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CRS = New Structure;
 	CRS.Insert("FiscalPrinter", FiscalPrinter);
-	
-	PaymentSettings = CommonFunctionsServer.DeserializeJSON(CurrentRow.Data);
-	Str = New Structure("Payments", New Array);
-	//@skip-check typed-value-adding-to-untyped-collection
-	Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-	Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, Str); 
+
+	PaymentSettings = CommonFunctionsServer.DeserializeJSON(CurrentRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
+	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+	DocumentPackage.TextString = StrSplit(PaymentSettings.Out.Slip, Chars.LF + Chars.CR);
+	PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
+	If Not PrintResult.Info.Success Then
+		CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
+	EndIf;
 EndProcedure
 
 &AtClient

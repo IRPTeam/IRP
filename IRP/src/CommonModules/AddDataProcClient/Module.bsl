@@ -22,6 +22,7 @@ Function GetFormAddDataProc(Info, Owner = Undefined, FormName = Undefined, AddIn
 		ExternalOrInternalDataProcessor = "ExternalDataProcessor";
 	EndIf;
 
+	//@skip-check use-non-recommended-method
 	ReceivedForm = GetForm(ExternalOrInternalDataProcessor + "." + Info.ExternalDataProcName + ".Form" + ?(
 		ValueIsFilled(FormName), "." + FormName, ""), Info, Owner);
 

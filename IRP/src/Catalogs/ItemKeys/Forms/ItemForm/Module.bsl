@@ -85,7 +85,8 @@ EndProcedure
 
 &AtClient
 Procedure OnChangeTypeOfItemType()
-	If GetTypeOfItemType(Object.Item) = PredefinedValue("Enum.ItemTypes.Service") Then
+	TypeOfItemType = GetTypeOfItemType(Object.Item);
+	If TypeOfItemType = PredefinedValue("Enum.ItemTypes.Service") OR TypeOfItemType = PredefinedValue("Enum.ItemTypes.Certificate") Then
 		Object.Specification = Undefined;
 		ThisObject.SpecificationMode = False;
 	EndIf;

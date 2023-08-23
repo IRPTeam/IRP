@@ -507,7 +507,7 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		   |	PurchaseInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
-		   |	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	PurchaseInvoiceItemList.IsService AS IsService,
 		   |	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 		   |	PurchaseInvoiceItemList.TaxAmount AS TaxAmount,

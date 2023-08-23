@@ -7,7 +7,7 @@
 //  LocalizationObject - CommonModule, ExternalDataProcessor -
 // 
 // Returns:
-//  see Localization.Strings
+//  See Localization.Strings
 Function LocalizationStrings(Val LangCode = "", LocalizationObject = Undefined) Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;

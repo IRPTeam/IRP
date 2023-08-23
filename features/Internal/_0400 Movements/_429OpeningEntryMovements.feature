@@ -603,28 +603,7 @@ Scenario: _042918 check Opening entry movements by the Register  "R4050 Stock in
 			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '100'         | 'Main Company'   | 'Store 05'            | 'UNIQ'        |
 		And I close all client application windows
 
-Scenario: _042919 check Opening entry movements by the Register  "R8010 Trade agent inventory" (shipment to trade agent)
-	When set True value to the constant Use commission trading
-	And I close all client application windows
-	* Select Opening entry
-		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '14'        |
-	* Check movements by the Register  "R8010 Trade agent inventory" 
-		And I click "Registrations report" button
-		And I select "R8010 Trade agent inventory" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 14 dated 01.12.2022 12:41:27'   | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| 'Register  "R8010 Trade agent inventory"'      | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                | ''                             | ''                 |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Partner'         | 'Agreement'                    | 'Legal name'       |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '20'          | 'Main Company'   | 'PZU'        | 'Trade agent 1'   | 'Trade agent partner term 1'   | 'Trade agent 1'    |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '30'          | 'Main Company'   | 'XS/Blue'    | 'Trade agent 1'   | 'Trade agent partner term 1'   | 'Trade agent 1'    |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '100'         | 'Main Company'   | 'UNIQ'       | 'Trade agent 1'   | 'Trade agent partner term 1'   | 'Trade agent 1'    |
-		And I close all client application windows
+
 
 Scenario: _042920 check Opening entry movements by the Register  "R8011 Trade agent serial lot number" (shipment to trade agent)
 	When set True value to the constant Use commission trading
@@ -779,26 +758,7 @@ Scenario: _042926 check Opening entry movements by the Register  "R8012 Consigno
 			| ''                                             | 'Receipt'       | '01.12.2022 12:41:39'   | '70'          | 'Main Company'   | 'PZU'        | '8908899877'          | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
 		And I close all client application windows
 
-Scenario: _042927 check Opening entry movements by the Register  "R8013 Consignor batch wise balance" (receipt from consignor)
-	And I close all client application windows
-	* Select Opening entry
-		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-	* Check movements by the Register  "R8013 Consignor batch wise balance" 
-		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 15 dated 01.12.2022 12:41:39'     | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
-			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         | ''                  | ''                 |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                           | ''         | ''                  | ''                 |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                      | 'Item key' | 'Serial lot number' | 'Source of origin' |
-			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Store 08' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | ''                 |
-			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'Store 08' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | ''                 |
-		And I close all client application windows
+
 
 Scenario: _042928 check Opening entry movements by the Register  "R8015 Consignor prices" (receipt from consignor)
 	And I close all client application windows

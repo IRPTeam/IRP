@@ -333,6 +333,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 			New Structure("CurrencyMovementType", CurrencyMovementType));
 		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock,
 											   |Quantity, Amount, AmountTax");
+	Else
+		BatchKeysInfo_DataTableGrouped.Columns.Add("CurrencyMovementType", New TypeDescription("ChartOfCharacteristicTypesRef.CurrencyMovementType"));
 	EndIf;
 
 //#2093

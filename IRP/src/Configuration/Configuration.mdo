@@ -1008,7 +1008,7 @@
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
-  <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
@@ -1148,10 +1148,10 @@
   <accumulationRegisters>AccumulationRegister.R7030T_ProductionPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8012B_ConsignorInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8014T_ConsignorSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8015T_ConsignorPrices</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9010B_SourceOfOriginStock</accumulationRegisters>

@@ -1054,16 +1054,16 @@
     <mdObject>AccumulationRegister.TM1030B_TransactionsKey</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R8010B_TradeAgentInventory</mdObject>
+    <mdObject>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</mdObject>
+    <mdObject>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R8012B_ConsignorInventory</mdObject>
+    <mdObject>AccumulationRegister.DELETE_R8012B_ConsignorInventory</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</mdObject>
+    <mdObject>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R8014T_ConsignorSales</mdObject>

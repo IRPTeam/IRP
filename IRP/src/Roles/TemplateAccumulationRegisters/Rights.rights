@@ -511,7 +511,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</name>
+		<name>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -626,7 +626,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8010B_TradeAgentInventory</name>
+		<name>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -668,7 +668,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</name>
+		<name>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1004,7 +1004,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8012B_ConsignorInventory</name>
+		<name>AccumulationRegister.DELETE_R8012B_ConsignorInventory</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

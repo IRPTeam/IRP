@@ -393,7 +393,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.ConsignorSerialLotNumbers</name>
+		<name>InformationRegister.DELETE_ConsignorSerialLotNumbers</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

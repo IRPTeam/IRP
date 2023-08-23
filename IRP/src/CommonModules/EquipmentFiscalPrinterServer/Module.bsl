@@ -41,11 +41,19 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
- 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
- 			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
- 		Else
- 			CBRows = New Array;
- 		EndIf;
+		
+		//#2093
+		_consignor = Undefined;
+		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+			_consignor = ItemRow.Consignor;
+		EndIf;
+		
+ //		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+ //			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
+ //		Else
+ //			CBRows = New Array;
+ //		EndIf;
+ 
 		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = ItemRow.TotalAmount;
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
@@ -132,28 +140,35 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			Raise("Tax isn't found!");
 		EndIf;
 
-
-		If CBRows.Count() > 0 Then
-			If TypeOf(CBRows[0].Batch) = Type("DocumentRef.OpeningEntry") Then
-				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalNameConsignor.TaxID;
-				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalNameConsignor);
-				FiscalStringData.VendorData.VendorPhone = "";
-			Else
-				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalName.TaxID;
-				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalName);
-				FiscalStringData.VendorData.VendorPhone = "";
-			EndIf;
+		//#2093
+		If ValueIsFilled(_consignor) Then
+			FiscalStringData.VendorData.VendorINN = _consignor.TaxID;
+			FiscalStringData.VendorData.VendorName = String(_consignor);
+			FiscalStringData.VendorData.VendorPhone = "";
 			FiscalStringData.CalculationAgent = 5;
 		EndIf;
-
-		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-			If Not ItemRow.Consignor.IsEmpty() Then
-				FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
-				FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
-				FiscalStringData.VendorData.VendorPhone = "";
-				FiscalStringData.CalculationAgent = 5;
-			EndIf;
-		EndIf;
+		
+//		If CBRows.Count() > 0 Then
+//			If TypeOf(CBRows[0].Batch) = Type("DocumentRef.OpeningEntry") Then
+//				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalNameConsignor.TaxID;
+//				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalNameConsignor);
+//				FiscalStringData.VendorData.VendorPhone = "";
+//			Else
+//				FiscalStringData.VendorData.VendorINN = CBRows[0].Batch.LegalName.TaxID;
+//				FiscalStringData.VendorData.VendorName = String(CBRows[0].Batch.LegalName);
+//				FiscalStringData.VendorData.VendorPhone = "";
+//			EndIf;
+//			FiscalStringData.CalculationAgent = 5;
+//		EndIf;
+//
+//		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+//			If Not ItemRow.Consignor.IsEmpty() Then
+//				FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
+//				FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
+//				FiscalStringData.VendorData.VendorPhone = "";
+//				FiscalStringData.CalculationAgent = 5;
+//			EndIf;
+//		EndIf;
 
 		If FiscalStringData.CalculationAgent = 5 Then
 			If IsBlankString(FiscalStringData.VendorData.VendorINN)

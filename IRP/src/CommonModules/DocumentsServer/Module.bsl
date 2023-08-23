@@ -680,7 +680,8 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("SourceOfOrigins");
-	ArrayOfTableNames.Add("ConsignorBatches");
+	//#2093
+//	ArrayOfTableNames.Add("ConsignorBatches");
 	ArrayOfTableNames.Add("TaxList");
 	
 	Result.Insert("ChoiceForms",
@@ -778,10 +779,10 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 				AddNewSourceOfOrigin(Object, RowKey, ScanDataItem);
 			EndIf;
 		EndIf;
-		
-		If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") Then
-			UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
-		EndIf;
+		//#2093
+//		If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") Then
+//			UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+//		EndIf;
 	EndDo; // ScanData
 	
 	Return FillCache(Object, ArrayOfTableNames, Result);
@@ -918,20 +919,21 @@ Function FillCache(Object, ArrayOfTableNames, Result)
 	Return Result;
 EndFunction
 
-Procedure UpdateConsignorBatches(Parameters, ProcessRow, ResultRow)
-	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
-	Parameters.ServerSideParameters.ServerParameters.Rows.Add(ProcessRow);
-			
-	TmpParameters = ControllerClientServer_V2.GetParameters(
-		Parameters.ServerSideParameters.ServerParameters, 
-		Parameters.ServerSideParameters.FormParameters);
-		
-	ControllerClientServer_V2.API_SetProperty(TmpParameters, New Structure("DataPath", "Command_UpdateConsignorBatches"), Undefined);
-	
-	If TmpParameters.Cache.Property("ItemList") And ResultRow.Cache.Property("ItemList") Then
-		ControllerServer_V2.UpdateArrayOfStructures(TmpParameters.Cache.ItemList, ResultRow.Cache.ItemList);
-	EndIf;
-EndProcedure
+//#2093
+//Procedure UpdateConsignorBatches(Parameters, ProcessRow, ResultRow)
+//	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
+//	Parameters.ServerSideParameters.ServerParameters.Rows.Add(ProcessRow);
+//			
+//	TmpParameters = ControllerClientServer_V2.GetParameters(
+//		Parameters.ServerSideParameters.ServerParameters, 
+//		Parameters.ServerSideParameters.FormParameters);
+//		
+//	ControllerClientServer_V2.API_SetProperty(TmpParameters, New Structure("DataPath", "Command_UpdateConsignorBatches"), Undefined);
+//	
+//	If TmpParameters.Cache.Property("ItemList") And ResultRow.Cache.Property("ItemList") Then
+//		ControllerServer_V2.UpdateArrayOfStructures(TmpParameters.Cache.ItemList, ResultRow.Cache.ItemList);
+//	EndIf;
+//EndProcedure
 
 Procedure AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	
 	_SerialLotNumbers = New Array();

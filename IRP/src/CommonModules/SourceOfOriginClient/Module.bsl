@@ -70,7 +70,8 @@ Procedure AddNewSourceOfOrigins(Result, Parameters) Export
 	
 	SourceOfOriginClientServer.AddNewSourceOfOrigins(Parameters.Object, Result.RowKey, Result.SourceOfOrigins);
 		
-	RecalculateConsignorBatches(Parameters.Object, Parameters.Form);
+	//#2093
+//	RecalculateConsignorBatches(Parameters.Object, Parameters.Form);
 	UpdateSourceOfOriginsPresentation(Parameters.Object);
 EndProcedure
 
@@ -97,15 +98,17 @@ EndProcedure
 
 Procedure DeleteUnusedSourceOfOrigins(Object, Form, KeyForDelete = Undefined) Export	
 	SourceOfOriginClientServer.DeleteUnusedSourceOfOrigins(Object, KeyForDelete);
-	RecalculateConsignorBatches(Object, Form);
+	//#2093
+//	RecalculateConsignorBatches(Object, Form);
 EndProcedure
 
-Procedure RecalculateConsignorBatches(Object, Form)
-	If Not Object.Property("ConsignorBatches") Then
-		Return;
-	EndIf;
-	ViewClient_V2.ExecuteCommand(Object, Form, "ItemList", "Command_UpdateConsignorBatches");
-EndProcedure
+//#2093
+//Procedure RecalculateConsignorBatches(Object, Form)
+//	If Not Object.Property("ConsignorBatches") Then
+//		Return;
+//	EndIf;
+//	ViewClient_V2.ExecuteCommand(Object, Form, "ItemList", "Command_UpdateConsignorBatches");
+//EndProcedure
 
 Procedure UpdateSourceOfOriginsPresentation(Object) Export
 	If Not CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then

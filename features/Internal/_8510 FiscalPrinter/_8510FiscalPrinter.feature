@@ -370,7 +370,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register TaxSettings records (Concignor 2)
 		When Create document PurchaseInvoice (comission trade, own Companies)
 		When Create document SalesInvoice (trade, own Companies)
-		When Data preparation (consignment from serial lot number)
+		// When Data preparation (consignment from serial lot number)
 		When Create information register Barcodes records (marking code)
 	* Post document
 		And I execute 1C:Enterprise script at server

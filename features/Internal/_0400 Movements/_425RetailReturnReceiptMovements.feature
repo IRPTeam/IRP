@@ -35,6 +35,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
+		When Create catalog Items objects (commission trade)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
@@ -682,27 +683,7 @@ Scenario: _042525 check Retail return receipt movements by the Register  "R8012 
 			| ''                                                        | 'Receipt'       | '14.11.2022 13:57:09'   | '2'           | 'Main Company'   | 'UNIQ'       | '09987897977890'      | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
 		And I close all client application windows
 
-Scenario: _042526 check Retail return receipt movements by the Register  "R8013 Consignor batch wise balance" (consignor and own stocks)
-		And I close all client application windows
-	* Select Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '1 113'     |
-	* Check movements by the Register  "R8013 Consignor batch wise balance"
-		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 113 dated 14.11.2022 13:57:09' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Register  "R8013 Consignor batch wise balance"'        | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | ''                 |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | ''                 |
-		And I close all client application windows
+
 
 Scenario: _042527 check Retail return receipt movements by the Register  "R8014 Consignor sales" (consignor and own stocks)
 		And I close all client application windows

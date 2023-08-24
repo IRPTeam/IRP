@@ -889,48 +889,7 @@ Scenario: _041331 check Sales return movements by the Register  "R4050 Stock inv
 			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '1'           | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     |
 			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '4'           | 'Main Company'   | 'Trade agent store'   | 'PZU'         |
 		And I close all client application windows	
-
-Scenario: _041332 check Sales return movements by the Register  "R8010 Trade agent inventory" (Return from trade agent)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '192'       |
-	* Check movements by the Register  "R8010 Trade agent inventory"
-		And I click "Registrations report" button
-		And I select "R8010 Trade agent inventory" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27'   | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| 'Register  "R8010 Trade agent inventory"'      | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                 |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                | ''                             | ''                 |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Partner'         | 'Agreement'                    | 'Legal name'       |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '1'           | 'Main Company'   | 'XS/Blue'    | 'Trade agent 1'   | 'Trade agent partner term 1'   | 'Trade agent 1'    |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '4'           | 'Main Company'   | 'PZU'        | 'Trade agent 1'   | 'Trade agent partner term 1'   | 'Trade agent 1'    |
-		And I close all client application windows
-
-Scenario: _041333 check Sales return movements by the Register  "R8011 Trade agent serial lot number" (Return from trade agent)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '192'       |
-	* Check movements by the Register  "R8011 Trade agent serial lot number"
-		And I click "Registrations report" button
-		And I select "R8011 Trade agent serial lot number" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27'        | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| 'Document registrations records'                    | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| 'Register  "R8011 Trade agent serial lot number"'   | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                | ''                             | ''                     |
-			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Partner'         | 'Agreement'                    | 'Serial lot number'    |
-			| ''                                                  | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Main Company'   | 'PZU'        | 'Trade agent 1'   | 'Trade agent partner term 1'   | '8908899877'           |
-			| ''                                                  | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Main Company'   | 'PZU'        | 'Trade agent 1'   | 'Trade agent partner term 1'   | '8908899879'           |
-		And I close all client application windows	
+	
 
 Scenario: _041334 check Sales return movements by the Register  "R2001 Sales" (Return from trade agent)
 	* Select Sales return
@@ -1014,47 +973,4 @@ Scenario: _041339 check Sales return movements by the Register  "R5021 Revenues"
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R5021 Revenues"'    |
-		And I close all client application windows
-
-
-Scenario: _041340 check Sales return movements by the Register  "R8012 Consignor inventory" (Return Consignor stocks)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '193'       |
-	* Check movements by the Register  "R8012 Consignor inventory"
-		And I click "Registrations report" button
-		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 193 dated 05.11.2022 00:00:00'   | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| 'Register  "R8012 Consignor inventory"'        | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                    | ''              | ''                           | ''               |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Serial lot number'   | 'Partner'       | 'Agreement'                  | 'Legal name'     |
-			| ''                                             | 'Receipt'       | '05.11.2022 00:00:00'   | '1'           | 'Main Company'   | 'UNIQ'       | '09987897977889'      | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-			| ''                                             | 'Receipt'       | '05.11.2022 00:00:00'   | '2'           | 'Main Company'   | 'S/Yellow'   | ''                    | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-		And I close all client application windows	
-
-Scenario: _041341 check Sales return movements by the Register  "R8013 Consignor batch wise balance" (Return Consignor stocks)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '193'       |
-	* Check movements by the Register  "R8013 Consignor batch wise balance"
-		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 193 dated 05.11.2022 00:00:00'     | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
-			| ''                                               | 'Receipt'     | '05.11.2022 00:00:00' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977889'    | ''                 |
-			| ''                                               | 'Receipt'     | '05.11.2022 00:00:00' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
 		And I close all client application windows

@@ -88,7 +88,9 @@ EndFunction
 // * DetailErrors - Array of See DetailResult
 Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 	
+	Exceptions = Constants.AdditionalTableControlExceptions.GetData();
 	Result = CheckDocumentsResult(Document, DocName);
+	
 	Errors = New Array; // Array of String
 	DetailErrors = New Array; //Array of See DetailResult
 	For Each Query In Result Do
@@ -98,6 +100,10 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 				If StrStartsWith(Column.Name, "Error") Then
 					
 					If ArrayOfErrors.Count() > 0 And Not ArrayOfErrors.Find(Column.Name) = Undefined Then
+						Continue;
+					EndIf;
+					
+					If Not Exceptions.Find(Column.Name) = Undefined Then
 						Continue;
 					EndIf;
 					
@@ -120,10 +126,12 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 			EndDo;
 		EndDo;
 	EndDo;
+	
 	ResultErrors = New Structure();
 	ResultErrors.Insert("Errors", Errors);
 	ResultErrors.Insert("DetailErrors", DetailErrors);
 	Return ResultErrors;
+	
 EndFunction
 
 // Additional table control for document array.

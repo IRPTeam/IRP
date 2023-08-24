@@ -694,6 +694,7 @@
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
+  <constants>Constant.AdditionalTableControlExceptions</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -734,6 +735,7 @@
   <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <commonForms>CommonForm.BackgroundJobSplash</commonForms>
   <commonForms>CommonForm.HTMLPrintForm</commonForms>
+  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

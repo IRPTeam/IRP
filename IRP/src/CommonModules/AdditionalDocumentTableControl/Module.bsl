@@ -110,7 +110,11 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 						DetailErrors.Add(Str);
 						
 						//	@skip-check invocation-parameter-type-intersect, property-return-type
-						Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.LineNumber));
+						If Row.LineNumber > 0 Then
+							Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.LineNumber));
+						Else
+							Errors.Add(R()["ATC_" + Column.Name]);
+						EndIf;
 					EndIf;
 				EndIf;
 			EndDo;
@@ -192,6 +196,7 @@ Function CheckDocumentsResult(Document, DocName)
 	Result = AdditionalDocumentTableControlReuse.GetQuery(DocName);
 	
 	Query = New Query(Result.Query);
+	Query.SetParameter("Headers", GetHeaderTable(Document));
 	Query.SetParameter("ItemList", Document.ItemList.Unload());
 	
 	If Result.Tables.RowIDInfo = Undefined Then
@@ -234,33 +239,64 @@ Function CheckResultForDocumentArray(DocumentArray)
  	Return Query.ExecuteBatch();
 EndFunction
 
+// Get header table.
+// 
+// Parameters:
+//  Document - DefinedType.AdditionalTableControlDocument -  Document
+// 
+// Returns:
+//  ValueTable -  Get header table
+Function GetHeaderTable(Document)
+	
+	Header = New ValueTable();
+	DocumentMetadata = Document.Metadata(); // MetadataObjectDocument
+	
+	For Each AttributeDescription In DocumentMetadata.StandardAttributes Do
+		Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+	EndDo;
+	For Each AttributeDescription In DocumentMetadata.Attributes Do
+		Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+	EndDo;
+	For Each AttributeDescription In Metadata.CommonAttributes Do
+		If Not AttributeDescription.Content.Find(DocumentMetadata) = Undefined 
+				AND AttributeDescription.Content.Find(DocumentMetadata).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+			Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+		EndIf;
+	EndDo;
+	
+	DocumentRecord = Header.Add();
+	FillPropertyValues(DocumentRecord, Document);
+	
+	Return Header;
+	
+EndFunction
+
 #Region EventHandler
 
-// Before write additional table control document before write.
+// Fill check processing additional table control document fill check processing.
 // 
 // Parameters:
 //  Source - DefinedType.AdditionalTableControlDocument - Source
-//  Cancel - Boolean - Cancel
-//  WriteMode - DocumentWriteMode - Write mode
-//  PostingMode - DocumentPostingMode - Posting mode
-Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
-	If WriteMode = DocumentWriteMode.Posting Then
-		If Not FOServer.isUseAdditionalTableControlDocument() Then
-			Return;
-		EndIf;
-		
-		Result = CheckDocument(Source, New Array);
-		If Result.Count() = 0 Then
-			Return;
-		EndIf;
-		Cancel = True;
-		
-		//@skip-check property-return-type, invocation-parameter-type-intersect
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
-		For Each ResultItem In Result Do
-			CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
-		EndDo;
+//  Cancel - Boolean -  Cancel
+//  CheckedAttributes - Array of String -  Checked attributes
+Procedure FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing(Source, Cancel, CheckedAttributes) Export
+	
+	If Not FOServer.isUseAdditionalTableControlDocument() Then
+		Return;
 	EndIf;
+	
+	Result = CheckDocument(Source, New Array);
+	If Result.Count() = 0 Then
+		Return;
+	EndIf;
+	Cancel = True;
+	
+	//@skip-check property-return-type, invocation-parameter-type-intersect
+	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
+	For Each ResultItem In Result Do
+		CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
+	EndDo;
+	
 EndProcedure
 
 #EndRegion

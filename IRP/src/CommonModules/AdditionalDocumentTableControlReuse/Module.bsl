@@ -64,7 +64,7 @@ Function GetQuery(DocName) Export
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	
-	Result.Query = StrTemplate(CheckDocumentsQuery(MetaDoc), 
+	Result.Query = StrTemplate(CheckDocumentsQuery(), 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
 		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results,
 		GetInfo_2.Fields, GetInfo_2.Filters, GetInfo_2.Results
@@ -399,7 +399,7 @@ Function SourceOfOrigins()
 	Return Str;
 EndFunction
 
-Function CheckDocumentsQuery(MetaDoc)
+Function CheckDocumentsQuery()
 	Return 
 	"SELECT
 	|	ItemList.LineNumber,
@@ -592,18 +592,17 @@ Function CheckDocumentsQuery(MetaDoc)
 	|	%7
 	|INTO Headers
 	|FROM
-	|	" + MetaDoc.FullName() + " AS Headers
-	|WHERE
-	|	Headers.Ref = &Ref
+	|	&Headers AS Headers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	Result.Key,
-	|	Result.LineNumber,
+	|	Result.Ref,
+	|	"""" AS Key,
+	|	0 AS LineNumber,
 	|	%9
 	|FROM
-	|	ResultSourceOfOrigins AS Result
+	|	Headers AS Result
 	|WHERE %8";
 EndFunction
 

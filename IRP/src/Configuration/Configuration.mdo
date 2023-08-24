@@ -521,7 +521,7 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
-  <eventSubscriptions>EventSubscription.BeforeWrite_AdditionalTableControlDocument</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>

@@ -1176,4 +1176,14 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.T1020S_Cache</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE User = &amp;CurrentUser</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
 </Rights>

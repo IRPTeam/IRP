@@ -31,9 +31,10 @@ Procedure BackgroundJob(JobParameters, StorageAddress, ServiceParameters) Export
 	EndIf;
 	
 	ServerEntryPoint(JobParameters.StepNames, JobParameters.Parameters, JobParameters.ExecuteLazySteps, True);
+	JobParameters.Parameters.Object = Undefined;
 	JobResult = New Structure();
 	JobResult.Insert("Parameters", JobParameters.Parameters);	
-	PutToTempStorage(JobResult, StorageAddress);
+	CommonFunctionsServer.PutToCache(JobResult, StorageAddress);
 EndProcedure
 
 Procedure SetJobCompletePercent(Parameters, Total, Complete) Export
@@ -58,6 +59,7 @@ Function GetJobStatus(BackgroundJobUUID, BackgroundJobStorageAddress) Export
 	JobResult.Insert("StorageAddress", BackgroundJobStorageAddress);
 	JobResult.Insert("CompletePercent", Undefined);
 	JobResult.Insert("SystemMessages", New Array);
+	JobResult.Insert("Result", Undefined);
 	
 	If Not ValueIsFilled(BackgroundJobUUID) Then
 		Return JobResult;
@@ -73,10 +75,13 @@ Function GetJobStatus(BackgroundJobUUID, BackgroundJobStorageAddress) Export
 		JobResult.Status = Enums.JobStatus.Active;
 	ElsIf Job.State = BackgroundJobState.Canceled Then
 		JobResult.Status = Enums.JobStatus.Canceled;
+		JobResult.SystemMessages.Add(R().Form_019);
 	ElsIf Job.State = BackgroundJobState.Completed Then
 		JobResult.Status = Enums.JobStatus.Completed;
+		JobResult.Result = CommonFunctionsServer.GetFromCache(BackgroundJobStorageAddress);
 	ElsIf Job.State = BackgroundJobState.Failed Then
 		JobResult.Status = Enums.JobStatus.Failed;
+		JobResult.SystemMessages.Add(ErrorProcessing.DetailErrorDescription(Job.ErrorInfo));
 	EndIf;
 	
 	ArrayOfMsg = Job.GetUserMessages(True);

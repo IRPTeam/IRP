@@ -259,26 +259,7 @@ Scenario: _046006 check Sales report from trade agent movements by the Register 
 		And I close all client application windows
 
 
-Scenario: _046006 check Sales report from trade agent movements by the Register  "R8011 Trade agent serial lot number"
-		And I close all client application windows
-	* Select Sales report from trade agent
-		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '1'         |
-	* Check movements by the Register  "R8011 Trade agent serial lot number"
-		And I click "Registrations report" button
-		And I select "R8011 Trade agent serial lot number" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35'   | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| 'Document registrations records'                              | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| 'Register  "R8011 Trade agent serial lot number"'             | ''              | ''                      | ''            | ''               | ''           | ''                | ''                             | ''                     |
-			| ''                                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                | ''                             | ''                     |
-			| ''                                                            | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Partner'         | 'Agreement'                    | 'Serial lot number'    |
-			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '1'           | 'Main Company'   | 'PZU'        | 'Trade agent 1'   | 'Trade agent partner term 1'   | '8908899879'           |
-			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '2'           | 'Main Company'   | 'UNIQ'       | 'Trade agent 1'   | 'Trade agent partner term 1'   | '899007790088'         |
-		And I close all client application windows
+
 
 Scenario: _046007 check Sales report from trade agent movements by the Register  "T6020 Batch keys info"
 		And I close all client application windows

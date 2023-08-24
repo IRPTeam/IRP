@@ -11014,6 +11014,7 @@ Function BindItemListInventoryOrigin(Parameters)
 	Binding.Insert("SalesInvoice", "StepChangeTaxRate_AgreementInHeader");
 	Binding.Insert("RetailSalesReceipt", "StepChangeTaxRate_AgreementInHeader");
 	Binding.Insert("SalesReturn", "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("RetailReturnReceipt", "StepChangeTaxRate_AgreementInHeader");
 	
 //	Binding.Insert("SalesInvoice",
 //		"StepConsignorBatchesFillBatches");

@@ -1314,15 +1314,38 @@ Function T6010S_BatchesInfo()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	*,
-		   |	BatchKeysInfo.Amount AS InvoiceAmount,
-		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	BatchKeysInfo
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	BatchKeysInfo.Company AS Company,
+		|	BatchKeysInfo.Currency AS Currency,
+		|	BatchKeysInfo.CurrencyMovementType AS CurrencyMovementType,
+		|	BatchKeysInfo.Direction AS Direction,
+		|	BatchKeysInfo.ItemKey AS ItemKey,
+		|	BatchKeysInfo.Period AS Period,
+		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+		|	BatchKeysInfo.SalesInvoice AS SalesInvoice,
+		|	BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
+		|	BatchKeysInfo.Store AS Store,
+		|	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo AS BatchKeysInfo
+		|WHERE
+		|	TRUE
+		|
+		|GROUP BY
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.CurrencyMovementType,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.SalesInvoice,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin,
+		|	BatchKeysInfo.Store";
 EndFunction
 
 Function R3022B_CashInTransitOutgoing()

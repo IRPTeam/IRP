@@ -1520,7 +1520,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListInventoryOrigin</name>
-          <id>1081</id>
+          <id>1223</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1531,7 +1531,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListInventoryOriginExtendedTooltip</name>
-            <id>1083</id>
+            <id>1225</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1546,7 +1546,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListInventoryOriginContextMenu</name>
-            <id>1082</id>
+            <id>1224</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

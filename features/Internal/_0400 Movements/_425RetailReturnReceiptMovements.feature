@@ -35,7 +35,6 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
-		When Create catalog Items objects (commission trade)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
@@ -65,6 +64,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog CashAccounts objects
 		When update ItemKeys
 		When Create Document discount
+		When Create catalog Items objects (commission trade)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

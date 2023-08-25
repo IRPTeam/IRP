@@ -641,10 +641,20 @@ Function CheckDocumentsQuery()
 	|SELECT
 	|	Payments.LineNumber,
 	|	Payments.Key,
+	|	Payments.*
+	|INTO tmpPayments
+	|FROM
+	|	&Payments AS Payments
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Payments.LineNumber,
+	|	Payments.Key,
 	|	%10
 	|INTO Payments
 	|FROM
-	|	&Payments AS Payments
+	|	tmpPayments AS Payments
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -862,6 +872,10 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 		|;";
 	EndIf;
 	
+	If MetaDoc.TabularSections.Find("Payments") <> Undefined Then
+		ErrorsArray.Add(Payments());
+	EndIf;
+	
 	QueryText = QueryText + "
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -997,35 +1011,18 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 		|	" + MetaDoc.FullName() + ".Payments AS Payments
 		|WHERE
 		|	Payments.Ref IN (&Refs)
-		|;";
-		ErrorsArray.Add(SourceOfOrigins());
-	Else
-		QueryText = QueryText + "
 		|;
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	Payments.Ref,
-		|	Payments.Key,
-		|	Payments.LineNumber,
-		|	" + GetInfo_3.Fields + "
-		|INTO Payments
+		|	Result.Ref,
+		|	Result.Key,
+		|	Result.LineNumber,
+		|	" + GetInfo_3.Results + "
 		|FROM
-		|	" + MetaDoc.FullName() + ".ItemList AS Payments
-		|WHERE FALSE
-		|;";
+		|	Payments AS Result
+		|WHERE " + GetInfo_3.Filters + "
+		|";
 	EndIf;
-	
-	QueryText = QueryText + "
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Result.Ref,
-	|	Result.Key,
-	|	Result.LineNumber,
-	|	" + GetInfo_3.Results + "
-	|FROM
-	|	Payments AS Result
-	|WHERE " + GetInfo_3.Filters + "
-	|";
 	
 	Return QueryText;
 	

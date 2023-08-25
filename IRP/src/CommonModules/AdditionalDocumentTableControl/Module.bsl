@@ -237,6 +237,12 @@ Function CheckDocumentsResult(Document, DocName)
 		Query.SetParameter("SourceOfOrigins", Result.Tables.SourceOfOrigins);
 	EndIf;
 	
+	If Result.Tables.Payments = Undefined Then
+		Query.SetParameter("Payments", Document.Payments.Unload());
+	Else
+		Query.SetParameter("Payments", Result.Tables.Payments);
+	EndIf;
+	
   	Return Query.ExecuteBatch();
 EndFunction
 

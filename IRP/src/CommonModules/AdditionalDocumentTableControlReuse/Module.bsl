@@ -13,6 +13,7 @@
 // ** SerialLotNumbers - Undefined
 // ** SourceOfOrigins - Undefined
 // ** RowIDInfo - Undefined
+// ** Payments - Undefined
 Function GetQuery(DocName) Export
 	
 	Result = New Structure;
@@ -20,7 +21,7 @@ Function GetQuery(DocName) Export
 	Result.Insert("Tables", New Structure);
 	MetaDoc = Metadata.Documents[DocName];
 	
-	TmplDoc = Documents.SalesInvoice.EmptyRef();
+	TmplDoc = Documents.RetailSalesReceipt.EmptyRef();
 	
 	ErrorsArray = New Array; // Array of Structure
 	ErrorsArray.Add(ErrorItemList());
@@ -60,11 +61,23 @@ Function GetQuery(DocName) Export
 		ErrorsArray.Add(SourceOfOrigins());
 	EndIf;
 
+	If MetaDoc.TabularSections.Find("Payments") = Undefined Then
+		Result.Tables.Insert("Payments", TmplDoc.Payments.Unload());
+	Else
+		Result.Tables.Insert("Payments", Undefined);
+		ErrorsArray.Add(Payments());
+	EndIf;
+
 	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
+	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
 	
-	Result.Query = StrTemplate(CheckDocumentsQuery(), 
+	TextQuery = CheckDocumentsQuery();
+	TextQuery = StrReplace(TextQuery, "%10", GetInfo_3.Fields);
+	TextQuery = StrReplace(TextQuery, "%11", GetInfo_3.Filters);
+	TextQuery = StrReplace(TextQuery, "%12", GetInfo_3.Results);
+	Result.Query = StrTemplate(TextQuery, 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
 		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results,
 		GetInfo_2.Fields, GetInfo_2.Filters, GetInfo_2.Results
@@ -84,6 +97,7 @@ Function GetErrorList() Export
 	ErrorsArray.Add(ErrorWithOffers());
 	ErrorsArray.Add(ErrorWithSerialInTable());
 	ErrorsArray.Add(SourceOfOrigins());
+	ErrorsArray.Add(Payments());
 	
 	ErrorList = New ValueList();
 	For Each Errors In ErrorsArray Do
@@ -147,15 +161,20 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 			EndIf;
 			
 			Skip = False;
-			If QueryNumber = 2 Then
-				// @skip-check invocation-parameter-type-intersect, property-return-type
+			// @skip-check invocation-parameter-type-intersect, property-return-type
+			If QueryNumber = 2 Then // headers of documents
 				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
 					If MetaDoc.Attributes.Find(Field) = Undefined Then
 						Skip = True;
 					EndIf;  
 				EndDo;
+			ElsIf QueryNumber = 3 Then // payments
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.Payments.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
 			Else
-				// @skip-check invocation-parameter-type-intersect, property-return-type
 				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
 					If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
 						Skip = True;
@@ -399,6 +418,18 @@ Function SourceOfOrigins()
 	Return Str;
 EndFunction
 
+Function Payments()
+	Str = New Structure;
+	
+	Str.Insert("ErrorPaymentsAmountIsZero", New Structure("Query, Fields, QueryNumber", 
+		"Payments.Amount = 0",
+		"Amount",
+		3
+	));
+	
+	Return Str;
+EndFunction
+
 Function CheckDocumentsQuery()
 	Return 
 	"SELECT
@@ -603,7 +634,27 @@ Function CheckDocumentsQuery()
 	|	%9
 	|FROM
 	|	Headers AS Result
-	|WHERE %8";
+	|WHERE %8
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Payments.LineNumber,
+	|	Payments.Key,
+	|	%10
+	|INTO Payments
+	|FROM
+	|	&Payments AS Payments
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	%12
+	|FROM
+	|	Payments AS Result
+	|WHERE %11";
 EndFunction
 
 // Get query for documents array.
@@ -838,6 +889,7 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
+	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
 	
 	QueryText = QueryText + "
 	|////////////////////////////////////////////////////////////////////////////////
@@ -929,6 +981,50 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|FROM
 	|	Headers AS Result
 	|WHERE " + GetInfo_2.Filters + "
+	|";
+	
+	If MetaDoc.TabularSections.Find("Payments") <> Undefined Then
+		QueryText = QueryText + "
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Payments.Ref,
+		|	Payments.Key,
+		|	Payments.LineNumber,
+		|	" + GetInfo_3.Fields + "
+		|INTO Payments
+		|FROM
+		|	" + MetaDoc.FullName() + ".Payments AS Payments
+		|WHERE
+		|	Payments.Ref IN (&Refs)
+		|;";
+		ErrorsArray.Add(SourceOfOrigins());
+	Else
+		QueryText = QueryText + "
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Payments.Ref,
+		|	Payments.Key,
+		|	Payments.LineNumber,
+		|	" + GetInfo_3.Fields + "
+		|INTO Payments
+		|FROM
+		|	" + MetaDoc.FullName() + ".ItemList AS Payments
+		|WHERE FALSE
+		|;";
+	EndIf;
+	
+	QueryText = QueryText + "
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	" + GetInfo_3.Results + "
+	|FROM
+	|	Payments AS Result
+	|WHERE " + GetInfo_3.Filters + "
 	|";
 	
 	Return QueryText;

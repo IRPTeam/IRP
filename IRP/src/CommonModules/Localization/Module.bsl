@@ -511,6 +511,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en = 'Row: %1. Not filled Unit'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en = 'Row: %1. Not filled Inventory origin'", Lang));
+	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en = 'Row: %1. Payment amount is zero'", Lang));
 	
 	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en = 'Not filled Payment method'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Not filled Transaction type in Purchase'", Lang));

@@ -157,6 +157,15 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesInvoice objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);"    |

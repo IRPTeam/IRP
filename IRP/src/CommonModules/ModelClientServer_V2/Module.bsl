@@ -410,8 +410,6 @@ Function GetChain()
 	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
 	Chain.Insert("ChangeFinancialMovementTypeByPaymentType" , GetChainLink("ChangeFinancialMovementTypeByPaymentTypeExecute"));
 	
-	//#2093
-	//Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	Chain.Insert("ChangeInventoryOriginByItemKey" , GetChainLink("ChangeInventoryOriginByItemKeyExecute"));
 	Chain.Insert("ChangeConsignorByItemKey"       , GetChainLink("ChangeConsignorByItemKeyExecute"));
 	
@@ -2194,8 +2192,6 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	//#2093
-	//Return GetChainLinkOptions("Date, Company, Consignor, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 	Return GetChainLinkOptions("Date, Company, Consignor, TransactionType, Agreement, ItemKey, InventoryOrigin, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
@@ -2246,23 +2242,7 @@ Function ChangeTaxRateExecute(Options) Export
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
 			Continue;
 		EndIf;
-				
-		//#2093
-//		// Tax rate from consignor batch
-//		If ValueIsFilled(Options.InventoryOrigin) 
-//			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
-//			And Options.ConsignorBatches.Count() Then
-//			
-//			Parameters = New Structure();
-//			Parameters = New Structure();
-//			Parameters.Insert("Date"      , Options.Date);
-//			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
-//			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-//			TaxRate = TaxesServer.GetTaxRateByConsignorBatch(Parameters);			
-//			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-//			Continue;
-//		EndIf;
-		
+						
 		If ValueIsFilled(Options.InventoryOrigin) 
 			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
 			And ValueIsFilled(Options.Consignor) Then
@@ -2293,40 +2273,6 @@ Function ChangeTaxRateExecute(Options) Export
 EndFunction
 
 #EndRegion
-
-//#2093
-//#Region CONSIGNOR_BATCHES
-//
-//Function ConsignorBatchesFillBatchesOptions() Export
-//	Return GetChainLinkOptions("Consignor, DontFill, DocObject, Table_ItemList, Table_SerialLotNumbers, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode");
-//EndFunction
-//
-//Function ConsignorBatchesFillBatchesExecute(Options) Export
-//	If Options.DontFill = True Then
-//		Return New Structure("ConsignorBatches, DontFill, Consignor", 
-//		New Array(), True, Options.Consignor);
-//	EndIf;
-//	
-//	SilentMode = False;
-//	If Options.SilentMode = True Then
-//		SilentMode = True;
-//	EndIf;
-//	
-//	SourceOfOrigins = SourceOfOriginServer.CalculateSourceOfOriginsTable(Options.Table_ItemList, 
-//		Options.Table_SerialLotNumbers, 
-//		Options.Table_SourceOfOrigins);
-//	
-//	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
-//		Options.Table_ItemList, 
-//		Options.Table_SerialLotNumbers, 
-//		SourceOfOrigins, 
-//		Options.Table_ConsignorBatches, 
-//		SilentMode);
-//	Return New Structure("ConsignorBatches, DontFill, Consignor", 
-//		ConsignorBatches, False, Undefined);	
-//EndFunction
-//
-//#EndRegion
 
 #Region BILL_OF_MATERIALS_CALCULATIONS
 

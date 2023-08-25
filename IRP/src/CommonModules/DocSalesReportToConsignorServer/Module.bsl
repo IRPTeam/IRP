@@ -126,37 +126,6 @@ Function GetConsignorSales(Parameters) Export
 	|WHERE
 	|	ConsignorSales.QuantityTurnover <> 0";
 	
-	//#2093
-//	"SELECT
-//	|	ConsignorSales.ItemKey.Item AS Item,
-//	|	ConsignorSales.ItemKey,
-//	|	ConsignorSales.Unit,
-//	|	ConsignorSales.PriceType,
-//	|	ConsignorSales.ConsignorPrice,
-//	|	ConsignorSales.Price,
-//	|	ConsignorSales.QuantityTurnover AS Quantity,
-//	|	ConsignorSales.NetAmountTurnover AS NetAmount,
-//	|	ConsignorSales.AmountTurnover AS TotalAmount,
-//	|	ConsignorSales.SalesInvoice,
-//	|	ConsignorSales.PurchaseInvoice,
-//	|	ConsignorSales.SerialLotNumber AS SerialLotNumber,
-//	|	ConsignorSales.SourceOfOrigin AS SourceOfOrigin,
-//	|	0 AS SumColumn,
-//	|	TRUE AS Use,
-//	|	CASE
-//	|		WHEN ConsignorSales.Agreement.TradeAgentFeeType = VALUE(Enum.TradeAgentFeeTypes.Percent)
-//	|			then ConsignorSales.Agreement.TradeAgentFeePercent
-//	|		ELSE 0
-//	|	END AS TradeAgentFeePercent
-//	|FROM
-//	|	AccumulationRegister.R8014T_ConsignorSales.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
-//	|		Company = &Company
-//	|	AND Partner = &Partner
-//	|	AND Agreement = &Agreement
-//	|	AND PriceIncludeTax = &PriceIncludeTax
-//	|	AND CurrencyMovementType = &CurrencyMovementType) AS ConsignorSales
-//	|WHERE
-//	|	ConsignorSales.QuantityTurnover <> 0";
 	Query.SetParameter("StartDate"       , Parameters.StartDate);
 	Query.SetParameter("EndDate"         , Parameters.EndDate);
 	Query.SetParameter("Company"         , Parameters.Company);

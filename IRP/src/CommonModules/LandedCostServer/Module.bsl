@@ -713,9 +713,6 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
-	//#2093
-//	EmptyTable_BatchWiseBalance.Columns.Add("IsSalesConsignorStocks" , RegMetadata.Attributes.IsSalesConsignorStocks.Type);
-	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
 	Tables.Insert("DataForReceipt"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -1011,8 +1008,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end AS ItemLinkID,
-	//#2093
-	//|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
@@ -1094,8 +1089,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end,
-	//#2093
-	//|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
@@ -1216,8 +1209,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end AS ItemLinkID,
-	//#2093
-	//|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
@@ -1294,8 +1285,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end,
-	//#2093
-	//|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
@@ -1330,8 +1319,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.Branch AS Branch,
 	|	BatchKeysRegister.Currency AS Currency,
 	|	BatchKeysRegister.ItemLinkID AS ItemLinkID,
-	//#2093
-	//|	BatchKeysRegister.BatchConsignor AS BatchConsignor,
 	|	BatchKeysRegister.Store AS Store,
 	|	BatchKeysRegister.SerialLotNumber AS SerialLotNumber,
 	|	BatchKeysRegister.SourceOfOrigin AS SourceOfOrigin,
@@ -1369,8 +1356,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.Branch,
 	|	BatchKeysRegisterOutPeriod.Currency,
 	|	BatchKeysRegisterOutPeriod.ItemLinkID,
-	//#2093
-	//|	BatchKeysRegisterOutPeriod.BatchConsignor,
 	|	BatchKeysRegisterOutPeriod.Store,
 	|	BatchKeysRegisterOutPeriod.SerialLotNumber,
 	|	BatchKeysRegisterOutPeriod.SourceOfOrigin,
@@ -1407,8 +1392,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID AS RowID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
-	//#2093
-	//|	BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	BatchKeysInfo.ItemLinkID AS ItemLinkID
 	|INTO BatchKeys
 	|FROM
@@ -1433,8 +1416,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
-	//#2093
-	//|	BatchKeysInfo.BatchConsignor,
 	|	BatchKeysInfo.ItemLinkID
 	|;
 	|
@@ -1546,8 +1527,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.RowID AS RowID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
-	//#2093
-	//|	BatchKeys.BatchConsignor AS BatchConsignor,
 	|	BatchKeys.ItemLinkID AS ItemLinkID
 	|INTO AllData
 	|FROM
@@ -1602,8 +1581,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
-	//#2093
-	//|	UNDEFINED,
 	|	UNDEFINED
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
@@ -1657,8 +1634,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID AS RowID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
-	//#2093
-	//|	AllData.BatchConsignor AS BatchConsignor,
 	|	AllData.ItemLinkID AS ItemLinkID
 	|INTO AllDataGrouped
 	|FROM
@@ -1679,8 +1654,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID,
 	|	AllData.Branch,
 	|	AllData.Currency,
-	//#2093
-	//|	AllData.BatchConsignor,
 	|	AllData.ItemLinkID
 	|;
 	|
@@ -1726,8 +1699,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.RowID AS RowID,
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
-	//#2093
-	//|	AllDataGrouped.BatchConsignor AS BatchConsignor,
 	|	AllDataGrouped.ItemLinkID AS ItemLinkID,
 	|	FALSE AS Skip,
 	|	0 AS Priority
@@ -1883,21 +1854,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					If NeedReceipt = 0 Then
 						Break;
 					EndIf;
-					
-					//#2093
-					// return consigner goods
-//					If ValueIsFilled(Row.BatchConsignor) Then
-//						If BatchBySales.Document <> Row.BatchConsignor Then
-//							Continue;
-//						EndIf;
-//					Else // is not consigner goods
-//						If TypeOf(BatchBySales.Document) = Type("DocumentRef.PurchaseInvoice") Then
-//							If BatchBySales.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
-//								Continue;
-//							EndIf;
-//						EndIf;
-//					EndIf;
-					
+										
 					ReceiptQuantity = Min(NeedReceipt, BatchBySales.Quantity); // how many can receipt (quantity)
 					
 					ReceiptInvoiceAmount           = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, "InvoiceAmount");
@@ -2076,48 +2033,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
-			
-			//#2093
-//			// sales - consignor/own stocks
-//			IsSales_ConsignorStocks = False; 
-//			IsSales_OwnStocks = False; 
-//			If TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") 
-//				Or TypeOf(Row.Document) = Type("DocumentRef.RetailSalesReceipt") Then
-//				If ValueIsFilled(Row.BatchConsignor) Then
-//					IsSales_ConsignorStocks = True;
-//				Else
-//					IsSales_OwnStocks = True;
-//				EndIf;
-//			EndIf;
-//			
-//			// transfer - consignor/own stocks
-//			IsTransfer_ConsignorStocks = False; 
-//			IsTransfer_OwnStocks = False; 
-//			If TypeOf(Row.Document) = Type("DocumentRef.InventoryTransfer") Then
-//				If ValueIsFilled(Row.BatchConsignor) Then
-//					IsTransfer_ConsignorStocks = True;
-//				Else
-//					IsTransfer_OwnStocks = True;
-//				EndIf;
-//			EndIf;
-//			
-//			// purchase return - consignor/own stocks
-//			IsPurchaseReturn_ConsignorStocks = False;
-//			IsPurchaseReturn_OwnStocks = False;
-//			If TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
-//				If ValueIsFilled(Row.BatchConsignor) Then
-//					IsPurchaseReturn_ConsignorStocks = True;
-//				Else
-//					IsPurchaseReturn_OwnStocks = True;
-//				EndIf;
-//			EndIf;
-//			
-//			// stock adjustment as writeoff - only own stocks
-//			IsOnlyOwnStocks = False;
-//			If TypeOf(Row.Document) = Type("DocumentRef.StockAdjustmentAsWriteOff") Then
-//				IsOnlyOwnStocks = True;
-//			EndIf;
-			
+						
 			For Each Row_Batch In FilteredRows Do
 
 				If Row_Batch.Date > Row.Date Then
@@ -2139,35 +2055,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				If Not ValueIsFilled(Row_Batch.Batch) Then
 					Continue;
 				EndIf;
-				
-				//#2093
-//				// is sales/transfer own stocks, expense only purchased batches
-//				If IsSales_OwnStocks Or IsTransfer_OwnStocks Or IsPurchaseReturn_OwnStocks Then
-//					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
-//						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
-//				
-//					If IsReceiptFromConsignor Then
-//						Continue;
-//					EndIf;
-//				EndIf;
-//				
-//				// is sales/transfer consignor stocks, expense only consignor batches
-//				If IsSales_ConsignorStocks Or IsTransfer_ConsignorStocks Or IsPurchaseReturn_ConsignorStocks Then
-//					If Row_Batch.Batch.Document <> Row.BatchConsignor Then
-//						Continue;
-//					EndIf;
-//				EndIf;
-//				
-//				// is write off - only own stocks
-//				If IsOnlyOwnStocks Then
-//					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
-//						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
-//				
-//					If IsReceiptFromConsignor Then
-//						Continue;
-//					EndIf;
-//				EndIf;
-				
+								
 				ExpenseQuantity = Min(NeedExpense, Row_Batch.QuantityBalance);
 
 				ExpenseInvoiceAmount           = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "InvoiceAmountBalance");
@@ -2236,10 +2124,6 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					
 					NewRow.AllocatedRevenueAmount    = ExpenseAllocatedRevenueAmount;
 					NewRow.AllocatedRevenueTaxAmount = ExpenseAllocatedRevenueTaxAmount;
-					//--
-					
-					//#2093
-//					NewRow.IsSalesConsignorStocks = IsSales_ConsignorStocks;
 					
 					NewRow_DataForExpense = DataForExpense.Add();
 					FillPropertyValues(NewRow_DataForExpense, NewRow);
@@ -2791,13 +2675,6 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				If Row.BatchKey.SourceOfOrigin <> Row_Expense.BatchKey.SourceOfOrigin Then
 					Continue;
 				EndIf;
-				
-				//#2093
-//				If ValueIsFilled(Row.BatchConsignor) Then
-//					If Row_Expense.Batch.Document <> Row.BatchConsignor Then
-//						Continue;
-//					EndIf;
-//				EndIf;
 				
 				NeedReceipt = NeedReceipt - Row_Expense.Quantity;
 				NewRow = Tables.DataForReceipt.Add();

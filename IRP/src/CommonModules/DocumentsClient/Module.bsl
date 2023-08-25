@@ -1421,23 +1421,7 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	EndIf;
 	FilterStructure = New Structure(FilterString);
 	Parameters.Insert("FilterStructure", FilterStructure);
-	
-	//#2093
-//	// UseInventoryOrigin
-//	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
-//			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
-//			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")
-//			Or ObjectRefType = Type("DocumentRef.RetailShipmentConfirmation")) 
-//			And FOServer.IsUseCommissionTrading();
-//	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);
-//
-//	// StoreInItemList
-//	StoreInItemList = True;
-//	If UseInventoryOrigin And ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
-//		StoreInItemList = False;
-//	EndIf;	
-//	Parameters.Insert("StoreInItemList", StoreInItemList);
-		
+			
 	// StoreRef	
 	StoreRef = Undefined;
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then

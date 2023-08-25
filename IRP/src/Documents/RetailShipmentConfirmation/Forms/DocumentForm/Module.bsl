@@ -229,16 +229,6 @@ EndProcedure
 
 #EndRegion
 
-//#2093
-//#Region INVENTORY_ORIGIN
-//
-//&AtClient
-//Procedure ItemListInventoryOriginOnChange(Item)
-//	DocRetailShipmentConfirmationClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
 #Region SOURCE_OF_ORIGINS
 
 &AtClient
@@ -526,18 +516,6 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	//#2093
-	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
-	//RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "Consignor");
-	
-//	For Each Row In Object.ConsignorBatches Do
-//		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
-//		FillPropertyValues(NewRow, Row);
-//		For Each RowFillingValues In Result.FillingValues Do
-//			RowFillingValues.ConsignorBatches.Add(NewRow);
-//		EndDo;
-//	EndDo;
-//	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);

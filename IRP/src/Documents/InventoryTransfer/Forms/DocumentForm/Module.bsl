@@ -278,16 +278,6 @@ EndProcedure
 
 #EndRegion
 
-//#2093
-//#Region INVENTORY_ORIGIN
-//
-//&AtClient
-//Procedure ItemListInventoryOriginOnChange(Item)
-//	DocInventoryTransferClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
 #EndRegion
 
 #EndRegion

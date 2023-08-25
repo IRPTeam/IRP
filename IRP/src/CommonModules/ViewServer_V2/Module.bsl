@@ -196,8 +196,6 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("WorkSheets");
 	AllDepTables.Add("RowIDInfo");
 	AllDepTables.Add("BillOfMaterialsList");
-	//#2093
-//	AllDepTables.Add("ConsignorBatches");
 	AllDepTables.Add("SourceOfOrigins");
 	AllDepTables.Add("ControlCodeStrings");
 	
@@ -244,12 +242,8 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
 	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
-	//#2093
-	//InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
-	//#2093
-	//ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
 	isControlCodeStringIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "isControlCodeString");
 
 	If FillingValues.Property("Item") And ItemIsPresent Then
@@ -303,17 +297,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("Cheque") And ChequeIsPresent Then
 		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
-	
-	//#2093
-	//If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
-	//	ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
-	//EndIf;	
-	
-	//#2093
-	//If FillingValues.Property("Consignor") And ConsignorIsPresent Then
-	//	ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
-	//EndIf;	
-	
+		
 	If TableName = "TimeSheetList" Then
 		If FillingValues.Property("Employee") And EmployeeIsPresent Then
 			ControllerClientServer_V2.SetTimeSheetListEmployee(Parameters, PrepareValue(FillingValues.Employee, Row.Key));

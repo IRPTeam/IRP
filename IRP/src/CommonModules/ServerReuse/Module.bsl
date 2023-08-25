@@ -45,15 +45,6 @@ Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
 	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey);
 EndFunction
 
-//#2093
-//Function GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString) Export
-//	Return CommissionTradeServer._GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString);
-//EndFunction
-//
-//Function GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString) Export
-//	Return CommissionTradeServer._GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString);
-//EndFunction
-
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

@@ -157,6 +157,12 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document ShipmentConfirmation objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -198,10 +204,6 @@ Scenario: _043300 preparation (Bank payment)
 		When create BankPayment (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1331).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document SalesReturn objects (check movements)
-		And I execute 1C:Enterprise script at server
-			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);"      |
-			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create BankPayment (Other expense)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1332).GetObject().Write(DocumentWriteMode.Posting);"    |

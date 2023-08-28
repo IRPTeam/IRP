@@ -144,9 +144,8 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	TransactionType = CommonFunctionsServer.GetRefAttribute(Ref, "TransactionType");
 	Tables = Parameters.DocumentDataTables;
-	QueryArray = GetQueryTextsMasterTables(TransactionType);
+	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -294,6 +293,7 @@ Function ItemList()
 		   |	END AS Agreement,
 		   |	ItemList.Ref.Currency AS Currency,
 		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.TransactionType AS TransactionType,
 		   |	ItemList.Ref AS RetailSalesReceipt,
 		   |	ItemList.IsService AS IsService,
 		   |	ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
@@ -348,6 +348,7 @@ EndFunction
 Function Payments()
 	Return "SELECT
 		   |	Payments.Ref.Date AS Period,
+		   |	Payments.Ref.TransactionType AS TransactionType,
 		   |	Payments.Ref.Company AS Company,
 		   |	Payments.Ref.Branch AS Branch,
 		   |	Payments.Ref.RetailCustomer AS RetailCustomer,
@@ -379,6 +380,7 @@ Function RetailSales()
 		   |	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
 		   |	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref.TransactionType AS TransactionType,
 		   |	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
 		   |	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
 		   |	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
@@ -402,6 +404,7 @@ Function RetailSales()
 		   |	RetailSalesReceiptItemList.Ref.Branch,
 		   |	RetailSalesReceiptItemList.ItemKey,
 		   |	RetailSalesReceiptItemList.Ref.Date,
+		   |	RetailSalesReceiptItemList.Ref.TransactionType,
 		   |	RetailSalesReceiptItemList.Ref,
 		   |	RetailSalesReceiptItemList.Key,
 		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
@@ -420,6 +423,7 @@ Function RetailSales()
 		   |		ELSE tmpRetailSales.QuantityBySerialLtNumbers
 		   |	END AS Quantity,
 		   |	tmpRetailSales.Period AS Period,
+		   |	tmpRetailSales.TransactionType AS TransactionType,
 		   |	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
 		   |	tmpRetailSales.RowKey AS RowKey,
 		   |	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
@@ -460,6 +464,7 @@ EndFunction
 Function OffersInfo()
 	Return "SELECT
 		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref.TransactionType AS TransactionType,
 		   |	RetailSalesReceiptItemList.Ref AS Invoice,
 		   |	TableRowIDInfo.RowID AS RowKey,
 		   |	RetailSalesReceiptItemList.ItemKey,
@@ -486,6 +491,7 @@ EndFunction
 Function SerialLotNumbers()
 	Return "SELECT
 		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.TransactionType AS TransactionType,
 		   |	SerialLotNumbers.Ref.Company AS Company,
 		   |	SerialLotNumbers.Ref.Branch AS Branch,
 		   |	SerialLotNumbers.Key,
@@ -506,6 +512,7 @@ EndFunction
 Function SourceOfOrigins()
 	Return "SELECT
 		   |	SourceOfOrigins.Key AS Key,
+		   |	SourceOfOrigins.Ref.TransactionType AS TransactionType,
 		   |	CASE
 		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
 		   |			THEN SourceOfOrigins.SerialLotNumber
@@ -526,6 +533,7 @@ Function SourceOfOrigins()
 		   |	SourceOfOrigins.Ref = &Ref
 		   |GROUP BY
 		   |	SourceOfOrigins.Key,
+		   |	SourceOfOrigins.Ref.TransactionType,
 		   |	CASE
 		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
 		   |			THEN SourceOfOrigins.SerialLotNumber
@@ -543,6 +551,7 @@ EndFunction
 Function PaymentAgent()
 	Return "SELECT
 		   |	Payments.Ref.Date AS Period,
+		   |	Payments.Ref.TransactionType AS TransactionType,
 		   |	Payments.Ref.Company AS Company,
 		   |	Payments.Ref.Branch AS Branch,
 		   |	Payments.Ref.Currency AS Currency,
@@ -570,43 +579,34 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables(TransactionType = Undefined)
+Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	
-	If TransactionType = Undefined Then
-		TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed;
-	EndIf;
-	If TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed Then
-		QueryArray.Add(R2001T_Sales());
-		QueryArray.Add(R2005T_SalesSpecialOffers());
-		QueryArray.Add(R2006T_Certificates());
-		QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
-		QueryArray.Add(R2021B_CustomersTransactions());
-		QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
-		QueryArray.Add(R2050T_RetailSales());
-		QueryArray.Add(R3010B_CashOnHand());
-		QueryArray.Add(R3011T_CashFlow());
-		QueryArray.Add(R3050T_PosCashBalances());
-		QueryArray.Add(R4010B_ActualStocks());
-		QueryArray.Add(R4011B_FreeStocks());
-		QueryArray.Add(R4012B_StockReservation());
-		QueryArray.Add(R4014B_SerialLotNumber());
-		QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-		QueryArray.Add(R5010B_ReconciliationStatement());
-		QueryArray.Add(R5021T_Revenues());
-		QueryArray.Add(R8012B_ConsignorInventory());
-		QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
-		QueryArray.Add(R8014T_ConsignorSales());
-		QueryArray.Add(R9010B_SourceOfOriginStock());
-		QueryArray.Add(T1050T_AccountingQuantities());
-		QueryArray.Add(T2015S_TransactionsInfo());
-		QueryArray.Add(T3010S_RowIDInfo());
-		QueryArray.Add(T6020S_BatchKeysInfo());
-		QueryArray.Add(R5015B_OtherPartnersTransactions());
-	ElsIf TransactionType = Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve Then
-		QueryArray.Add(R4012B_StockReservation());
-	EndIf;
-	
+	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2005T_SalesSpecialOffers());
+	QueryArray.Add(R2006T_Certificates());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R2050T_RetailSales());
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R8012B_ConsignorInventory());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
+	QueryArray.Add(R8014T_ConsignorSales());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -622,7 +622,8 @@ Function R2023B_AdvancesFromRetailCustomers()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	Payments.IsAdvance
+		   |	Payments.IsAdvance 
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	Payments.Period,
@@ -650,6 +651,7 @@ Function R9010B_SourceOfOriginStock()
 		   |		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
 		   |WHERE
 		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	ItemList.Period,
@@ -669,7 +671,10 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND SerialLotNumbers.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
+		   |";
+		   
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -686,7 +691,9 @@ Function R3010B_CashOnHand()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
+		   |";
 EndFunction
 
 Function R3011T_CashFlow()
@@ -704,7 +711,8 @@ Function R3011T_CashFlow()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -721,6 +729,8 @@ Function R4011B_FreeStocks()
 		   |Where
 		   |	NOT ItemList.IsService
 		   |	AND NOT ItemList.ShipmentConfirmationExists
+		   |	AND (ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
+		   |		OR ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.PostponedWithReserve))
 		   |GROUP BY
 		   |	ItemList.Period,
 		   |	ItemList.Store,
@@ -790,6 +800,8 @@ Function R4012B_StockReservation()
 		   |	NOT ItemList.IsService
 		   |	AND NOT ItemList.ShipmentConfirmationExists
 		   |	AND ItemList.SalesOrderExists
+		   |	AND (ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed) 
+		   |		OR ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.PostponedWithReserve))
 		   |GROUP BY
 		   |	ItemList.Period,
 		   |	ItemList.Store,
@@ -867,7 +879,8 @@ Function R4032B_GoodsInTransitOutgoing()
 		   |		ON ItemList.Key = ShipmentConfirmations.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   |	AND ItemList.ShipmentConfirmationExists";
+		   |	AND ItemList.ShipmentConfirmationExists
+		   |    AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -894,6 +907,7 @@ Function R4010B_ActualStocks()
 		   |WHERE
 		   |	NOT ItemList.IsService
 		   |	AND NOT ItemList.ShipmentConfirmationExists
+		   |    AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	ItemList.Period,
@@ -914,7 +928,8 @@ Function R3050T_PosCashBalances()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -924,7 +939,8 @@ Function R2050T_RetailSales()
 		   |FROM
 		   |	RetailSales AS RetailSales
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND RetailSales.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R5021T_Revenues()
@@ -936,7 +952,8 @@ Function R5021T_Revenues()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2001T_Sales()
@@ -947,7 +964,8 @@ Function R2001T_Sales()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -955,7 +973,9 @@ Function R2005T_SalesSpecialOffers()
 		   |INTO R2005T_SalesSpecialOffers
 		   |FROM
 		   |	OffersInfo AS OffersInfo
-		   |WHERE TRUE";
+		   |WHERE 
+		   |	TRUE
+		   |	AND OffersInfo.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 
 EndFunction
 
@@ -974,6 +994,7 @@ Function R2006T_Certificates()
 	|		ON ItemList.Key = SerialLotNumbers.Key
 	|WHERE
 	|	ItemList.IsCertificate
+	|   AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 	|
 	|UNION ALL
 	|
@@ -986,7 +1007,9 @@ Function R2006T_Certificates()
 	|	""Used""
 	|FROM
 	|	Payments AS Payments
-	|WHERE Payments.IsCertificate";
+	|WHERE 
+	|	Payments.IsCertificate
+	|	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2021B_CustomersTransactions()
@@ -1008,6 +1031,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -1038,6 +1062,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -1089,6 +1114,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	PaymentAgent.Period,
@@ -1118,6 +1144,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1142,6 +1169,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1166,6 +1194,7 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	PaymentAgent.Company,
@@ -1195,6 +1224,7 @@ Function T2015S_TransactionsInfo()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	PaymentAgent.Period,
 		   |	PaymentAgent.Company,
@@ -1258,6 +1288,7 @@ Function T6020S_BatchKeysInfo()
 		   |		ON ItemList.Key = ConsignorBatches.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |;
 		   |
 		   |////////////////////////////////////////////////////////////////////////////////
@@ -1344,7 +1375,8 @@ Function R8012B_ConsignorInventory()
 		   |		LEFT JOIN ConsignorBatches AS ConsignorBatches
 		   |		ON ItemList.Key = ConsignorBatches.Key
 		   |WHERE
-		   |	ItemList.IsConsignorStocks";
+		   |	ItemList.IsConsignorStocks
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R8013B_ConsignorBatchWiseBalance()
@@ -1365,6 +1397,8 @@ Function R8013B_ConsignorBatchWiseBalance()
 		   |		ON ItemList.IsConsignorStocks
 		   |		AND ItemList.Key = ConsignorBatches.Key
 		   |		AND NOT ItemList.ShipmentConfirmationExists
+		   |WHERE
+		   |	ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |;
 		   |
 		   |////////////////////////////////////////////////////////////////////////////////
@@ -1431,6 +1465,7 @@ Function R8014T_ConsignorSales()
 		   |		ON ItemList.Key = ConsignorBatches.Key
 		   |WHERE
 		   |	ItemList.IsConsignorStocks
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |;
 		   |
 		   |////////////////////////////////////////////////////////////////////////////////
@@ -1500,7 +1535,8 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.SalesOrderExists";
+		   |	ItemList.SalesOrderExists
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 #EndRegion

@@ -370,7 +370,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1a801042-da81-493d-a275-6544f1fea97a">
+  <attributes uuid="159fcfd0-5a0b-4205-b20a-9d01ca285932">
     <name>TransactionType</name>
     <synonym>
       <key>en</key>
@@ -382,9 +382,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.RetailSalesReceiptTransactionTypes.EnumValue.Completed</value>
-    </fillValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db59a2d1-115c-47e8-b9ed-b58c49f4a2e2">
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="41dc0184-e5f2-4024-81cc-3cc610a709aa">
   <producedTypes>
-    <refType typeId="e00772c2-7045-4bec-bb0f-fba10bbc70b8" valueTypeId="511088fe-8f2b-4139-92e0-e9e623107135"/>
-    <listType typeId="cd27cdfd-f1fe-4360-b893-9d2cfe165952" valueTypeId="88d852a6-a08e-4e00-8574-5a3135bc9bb8"/>
-    <managerType typeId="385c9ea6-bbdd-4fb6-8388-4c3d50eb5e25" valueTypeId="3607db98-004a-4c44-b51f-be20042622b4"/>
+    <refType typeId="ff26dd47-a500-4ca4-a902-c3d7d357087b" valueTypeId="6f2aa93f-1142-45bf-9e2d-e81e19b6cfca"/>
+    <listType typeId="4426fd46-bf6d-4d4a-b139-d0a74862b195" valueTypeId="33739eb6-a2d8-44b1-9764-6956e2ba0802"/>
+    <managerType typeId="7216c478-b2f4-4b72-90d2-0a73d6c407d6" valueTypeId="472de2a9-928d-400c-800f-7bf1b27c93df"/>
   </producedTypes>
   <name>RetailSalesReceiptTransactionTypes</name>
   <synonym>
@@ -12,28 +12,28 @@
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="6b62c4cb-75aa-4831-b2ac-5d4c7ea05ba7">
+  <enumValues uuid="fb121f4b-f6a7-4c35-91d7-fb78e03564d1">
     <name>Completed</name>
     <synonym>
       <key>en</key>
       <value>Completed</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="2f3bd257-3478-45af-bca3-c91388cef737">
+  <enumValues uuid="720f01c6-7145-42a0-88df-0dc8627873d5">
     <name>Canceled</name>
     <synonym>
       <key>en</key>
       <value>Canceled</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="d4bb1b6c-922c-46c2-bd57-1e28f145205e">
+  <enumValues uuid="058dc9ae-28ba-4b59-81a4-e26e27225be4">
     <name>Postponed</name>
     <synonym>
       <key>en</key>
       <value>Postponed</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="b89e3268-c8e0-4761-a0e7-052207f91250">
+  <enumValues uuid="214e36d1-e51a-4c74-a790-2bb6c47aafcb">
     <name>PostponedWithReserve</name>
     <synonym>
       <key>en</key>

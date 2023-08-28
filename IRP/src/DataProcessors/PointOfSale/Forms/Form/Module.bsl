@@ -81,6 +81,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	Form.Items.GroupCashCommands.Visible =
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
+	
+	PostponeWithReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithReserve");
+	PostponeWithoutReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithoutReserve");
+	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithReserve;
+	Form.Items.PostponeCurrentReceiptWithReserve.Visible = PostponeWithoutReserve;
+	Form.Items.OpenPostponedReceipt.Visible = PostponeWithReserve OR PostponeWithoutReserve;
 
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 

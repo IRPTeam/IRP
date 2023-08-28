@@ -1,5 +1,39 @@
 
 &AtClient
+Procedure SetItemKey(Command)
+	For Each _row In ThisObject.SerialLotNumbers Do
+		_row.NewItem = ThisObject.Item;
+		_row.NewItemKey = ThisObject.ItemKey;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure Load(Command)
+	_notify = New NotifyDescription("OnLoadContinue", ThisObject);
+	OpenForm("DataProcessor.ReplaceSerialLotNumber.Form.LoadSerialLotNumbers", , ThisObject, , , , _notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure OnLoadContinue(Result, AddPrams) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	ThisObject.SerialLotNumbers.Clear();
+	OnLoadContinueAtServer(Result.ArrayOfSerialLotNumbers);	
+EndProcedure
+
+&AtServer
+Procedure OnLoadContinueAtServer(_arrayOfSerialLotNumbers)
+	For Each _serialLotNumber In _arrayOfSerialLotNumbers Do
+		_serialLotNumberInfo = GetInfoBySerialLotNumber(_serialLotNumber);
+		_newRow = ThisObject.SerialLotNumbers.Add();
+		_newRow.SerialLotNumber = _serialLotNumber;
+		_newRow.Item    = _serialLotNumberInfo.Item;
+		_newRow.ItemKey = _serialLotNumberInfo.ItemKey;
+	EndDo;
+EndProcedure
+
+&AtClient
 Procedure SerialLotNumbersSerialLotNumberOnChange(Item)
 	_currentData = Items.SerialLotNumbers.CurrentData;
 	If _currentData = Undefined Then
@@ -9,7 +43,6 @@ Procedure SerialLotNumbersSerialLotNumberOnChange(Item)
 	_serialLotNumberInfo = GetInfoBySerialLotNumber(_currentData.SerialLotNumber);
 	_currentData.Item    = _serialLotNumberInfo.Item;
 	_currentData.ItemKey = _serialLotNumberInfo.ItemKey;
-	
 EndProcedure
 
 &AtServer

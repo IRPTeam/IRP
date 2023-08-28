@@ -2164,3 +2164,63 @@ Procedure LockLinkedRows()
 EndProcedure
 
 #EndRegion
+
+
+#Region Postponed
+
+&AtClient
+Procedure PostponeCurrentReceipt(Command)
+
+	If Object.ItemList.Count() = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_045);
+		Return;
+	EndIf;	
+
+	PostponeCurrentReceiptAtServer(False);
+	
+	NewTransaction();
+	Modified = False;
+	
+EndProcedure
+
+&AtClient
+Procedure PostponeCurrentReceiptWithReserve(Command)
+
+	If Object.ItemList.Count() = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_045);
+		Return;
+	EndIf;	
+
+	PostponeCurrentReceiptAtServer(True);
+	
+	NewTransaction();
+	Modified = False;
+	
+EndProcedure
+
+&AtServer
+Procedure PostponeCurrentReceiptAtServer(WithReserve)
+	
+	ObjectValue = FormAttributeToValue("Object");
+	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+	ObjectValue.Workstation = Workstation;
+	
+	If WithReserve Then
+		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve;
+	Else
+		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Postponed;
+	EndIf;
+	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
+
+	ObjectValue.Write(DocumentWriteMode.Posting);
+
+EndProcedure	
+
+&AtClient
+Procedure OpenPostponedReceipt(Command)
+	
+
+EndProcedure
+
+
+#EndRegion

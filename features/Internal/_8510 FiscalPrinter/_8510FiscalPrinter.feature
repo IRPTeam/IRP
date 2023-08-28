@@ -14,10 +14,12 @@ SalesReceiptXML1 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 12 with SLN (Main Company - different consignor for item key) PZU [8900008990900]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 3 with SLN UNIQ [09987897977893]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
 	</Positions>
 	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -115,20 +117,12 @@ SalesReceiptXML9 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS [09999900989900]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
-			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS [09999900989901]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 8 with SLN (new row) UNIQ [090998897898979998]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN ODS [899007790088]" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="442" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 11 with SLN (Main Company - Consignor 1) PZU [11111111111112]" Quantity="2" PaymentMethod="4" PriceWithDiscount="221" VATRate="18" VATAmount="67.42"/>
+		<FiscalString AmountWithDiscount="101" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 13 without SLN (Main Company - different consignor for item key) M/Black" Quantity="1" PaymentMethod="4" PriceWithDiscount="101" VATRate="18" VATAmount="15.41"/>
 	</Positions>
-	<Payments Cash="520" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+	<Payments Cash="543" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -328,6 +322,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create POS cash account objects
 		When Create catalog Countries objects
 		When Data preparation (comission stock)
+		When Create catalog Items objects (commission trade)
 		When Create Certificate
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -370,7 +365,6 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register TaxSettings records (Concignor 2)
 		When Create document PurchaseInvoice (comission trade, own Companies)
 		When Create document SalesInvoice (trade, own Companies)
-		// When Data preparation (consignment from serial lot number)
 		When Create information register Barcodes records (marking code)
 	* Post document
 		And I execute 1C:Enterprise script at server
@@ -705,7 +699,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "Barcode"
+		And I input "900999000009" text in the field named "Barcode"
 		And I move to the next attribute
 	* Scan control code
 		Then "Code string check" window is opened
@@ -719,7 +713,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "09987897977893" text in the field named "Barcode"
+		And I input "8900008990900" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1771,46 +1765,57 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I close all client application windows
 
 
-Scenario: _050055 check filling consignor from serial lot number in the RetailSalesReceipt from POS (scan barcode)
+Scenario: _050055 check filling consignor in the RetailReturnReceipt from POS (select items)
 		And I close all client application windows
-	* Preparation
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Open POS and create RSR
 		And In the command interface I select "Retail" "Point of sale"
-		Then "Point of sales" window is opened
+		And I click the button named "Return"		
 	* Add items
-		And I click "Search by barcode (F7)" button
-		And I input "09999900989900" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "09999900989901" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "090998897898979998" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "89900779008908" text in the field named "Barcode"
-		And I move to the next attribute
+		And I expand a line in "ItemsPickup" table
+			| 'Item'                                             |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                                                  |
+			| 'Product 11 with SLN (Main Company - Consignor 1), PZU' |
+		And I select current line in "ItemsPickup" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Code' | 'Owner' | 'Serial number'  |
+			| '32'   | 'PZU'   | '11111111111112' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "221,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
+		And I expand a line in "ItemsPickup" table
+			| 'Item'                                                                     |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                                                                              |
+			| 'Product 13 without SLN (Main Company - different consignor for item key), M/Black' |
+		And I select current line in "ItemsPickup" table
+		And I select current line in "ItemList" table
+		And I input "101,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
+		And I click "Payment Return" button
 		And I click "Cash (/)" button		
 		And I click the button named "Enter"
 	* Check filling consignor
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"	
 		And I go to line in "List" table
-			| 'Σ'         |
-			| '520,00'    |
+			| 'Amount'    |
+			| '543,00'    |
 		And I select current line in "List" table	
 		And I click "Show row key" button
-		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table became equal
-			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                           | 'Consignor'     | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Is service'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '15,25'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '84,75'        | '100,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '09999900989901'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '090998897898979998'   | 'pcs'    | 'Shop 02'              | 'UNIQ'       | 'No'           | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '4'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 4 with SLN'             | ''              | 'No'                   | '18,31'        | '899007790088'         | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '120,00'   | '18%'           | '101,69'       | '120,00'          |
+			| 'Item'                                                                     | 'Consignor'   | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'Consignor 1' | 'pcs'  | 'PZU'      | '2,000'    |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'M/Black'  | '1,000'    |
 		And I close all client application windows
 	* Check logs
 		And Delay 2

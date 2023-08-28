@@ -1386,6 +1386,8 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a6e' | 'False'        | 170    | 'e1cib/data/Catalog.ItemTypes?ref=b798d684e43e460511edc7cd0d4d1c08' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'False'             | 'False'           | 'Product 12 with SLN (Main Company - different consignor for item key)'      | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a73' | 'False'        | 171    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'False'             | 'False'           | 'Product 13 without SLN (Main Company - different consignor for item key)'   | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | 'False'        | 172    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'False'             | 'False'           | 'Product 14 without SLN (Second Company - different consignor for item key)' | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
+		| 'e1cib/data/Catalog.Items?ref=b7a78aa93c3f864f11ee456973542842' | 'False'        | 173    | 'e1cib/data/Catalog.ItemTypes?ref=b798d684e43e460511edc7cd0d4d1c08' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'True'              | 'True'            | 'Product 15 with SLN and code control (Main Company - Consignor 1)'          | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
+
 
 	And I refill object tabular section "ConsignorsInfo":
 		| 'Ref'                                                           | 'Company'                                                           | 'Consignor'                                                         |
@@ -1393,7 +1395,9 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a6e' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a73' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
 		| 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
-	
+		| 'e1cib/data/Catalog.Items?ref=b7a78aa93c3f864f11ee456973542842' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
+
+
 	// Catalog.ItemKeys
 
 	And I check or create for catalog "ItemKeys" objects with Data Exchange Load parameter set to true:
@@ -1415,6 +1419,7 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a7e' | 'False'        | 61     | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | ''     | ''              | ''                 | '73 CB 07 3E EA 5C B5 9C F3 E5 6A 7E 4C 25 0B E4' | ''          | ''                       | 'False'                       | ''            | 'S/Red'          | 'S/Red'            | 'S/Red'          | 'S/Red TR'       |          |          |          |          |         | ''                     | ''                       | ''             |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a7f' | 'False'        | 62     | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | ''     | ''              | ''                 | 'A5 FE 6E E7 BE 7C 7D 61 49 6C 46 1B 87 73 19 F3' | ''          | ''                       | 'False'                       | ''            | 'S/Brown'        | 'S/Brown'          | 'S/Brown'        | 'S/Brown TR'     |          |          |          |          |         | ''                     | ''                       | ''             |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a80' | 'False'        | 63     | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | ''     | ''              | ''                 | 'D7 D8 C5 7D 79 01 5B 79 2B 6F A9 D5 11 9B 69 14' | ''          | ''                       | 'False'                       | ''            | 'S/White'        | 'S/White'          | 'S/White'        | 'S/White TR'     |          |          |          |          |         | ''                     | ''                       | ''             |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7a78aa93c3f864f11ee456973542843' | 'False'        | 64     | 'e1cib/data/Catalog.Items?ref=b7a78aa93c3f864f11ee456973542842' | ''     | ''              | ''                 | '64 93 10 E5 17 CA 01 72 4D 02 6A B7 F4 6A 90 E1' | ''          | ''                       | 'False'                       | ''            | 'ODS'            | 'ODS'              | 'ODS'            | 'ODS'            |          |          |          |          |         | ''                     | ''                       | ''             |
 
 	
 	And I refill object tabular section "AddAttributes":
@@ -1447,6 +1452,8 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a7f' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5dd' | ''              |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a80' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef033' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf114c59ef038' | ''              |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a80' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5de' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7a78aa93c3f864f11ee456973542843' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5eb' | ''              |
+
 
 	And I refill object tabular section "ConsignorsInfo":
 		| 'Ref'                                                              | 'Company'                                                           | 'Consignor'                                                         |
@@ -1458,8 +1465,8 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a7b' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a78' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a7c' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' |
+		| 'e1cib/data/Catalog.Items?ref=b7a78aa93c3f864f11ee456973542842'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
 
-	
 	// InformationRegister.Barcodes
 	And I check or create information register "Barcodes" records:	
 		| 'Barcode'        | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin'                                                          | 'Unit'                                                          | 'Presentation' |
@@ -1468,6 +1475,9 @@ Scenario: Create catalog Items objects (commission trade)
 		| '1123'           | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a6f' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee3d9af9c11a70' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '234567'         | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a74' | ''                                                                         | ''                                                                        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '7899'           | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a77' | ''                                                                         | ''                                                                        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '900999000009'   | 'e1cib/data/Catalog.ItemKeys?ref=b7a78aa93c3f864f11ee456973542843' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a78aa93c3f864f11ee456973542844' | ''                                                                        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '8900008990900'  | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a72' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a78aa93c3f864f11ee456973542845' | ''                                                                        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
 
 	// Catalog.SerialLotNumbers
 
@@ -1478,6 +1488,11 @@ Scenario: Create catalog Items objects (commission trade)
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee3d9af9c11a71' | 'True'         | '11111111111112' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a6b' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           | ''             |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee3d9af9c11a70' | 'False'        | '1123'           | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a6f' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           | ''             |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | 'False'        | '0514'           | ''                                                                 | 'False'    | 'False'              | 'False'                       | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a78aa93c3f864f11ee456973542844' | 'False'        |  '900999000009'  | 'e1cib/data/Catalog.ItemKeys?ref=b7a78aa93c3f864f11ee456973542843' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a78aa93c3f864f11ee456973542845' | 'False'        | '8900008990900'  | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a72' | 'False'    | 'True'               | 'False'                       | 'False'              | ''           | ''             |
+
+
+
 	And I check or create catalog "SourceOfOrigins" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Description'           | 'CustomProductID' | 'CustomDeclarationID' | 'CountryOfOrigin'                                                   | 'SourceOfOriginOwner'                                              | 'BatchBalanceDetail' | 'Inactive' | 'SourceNodeID' |
 		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b7a78aa93c3f864f11ee41c362a75df0' | 'False'        | 'Source of origin 909'  | '2234'            | '5667'                | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee3d9af9c11a6a' | 'True'               | 'False'    | ''             |

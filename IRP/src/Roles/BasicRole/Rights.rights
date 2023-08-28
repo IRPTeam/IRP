@@ -1170,6 +1170,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.AdditionalTableControlExceptions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T1020S_Cache</name>
 		<right>
 			<name>Read</name>

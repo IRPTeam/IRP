@@ -240,6 +240,8 @@ EndProcedure
 Procedure CheckDocumentsAtServer()
 	
 	DocumentErrors = New Array;
+	ErrorsDescriptions = AdditionalDocumentTableControlReuse.GetAllErrorsDescription();
+	
 	ErrorsGroupsTable = ThisObject.ErrorsGroups.Unload();
 	CheckListTree = FormAttributeToValue("CheckList");
 	
@@ -269,6 +271,8 @@ Procedure CheckDocumentsAtServer()
 				If ErrorRecord = Undefined Then
 					ErrorRecord = ErrorsGroupsTable.Add();
 					ErrorRecord.ErrorID = NewRow.ErrorID;
+					ErrorRecord.ErrorDescription = ErrorsDescriptions[ErrorRecord.ErrorID].ErrorDescription;
+					ErrorRecord.FixDescription = ErrorsDescriptions[ErrorRecord.ErrorID].FixDescription;
 				EndIf;
 				
 				ErrorRecord.Cases = ErrorRecord.Cases + 1;
@@ -325,7 +329,7 @@ Procedure QuickFix(Command)
 		
 		Row = CheckList.FindByID(RowID);
 		
-		If Row.Fixed Then
+		If Row.Fixed Or IsBlankString(Row.ErrorID) Then
 			Continue;
 		EndIf;
 		
@@ -392,17 +396,17 @@ EndFunction
 Procedure SetFlagFixed(DocsData)
 	For Each DocumentData In DocsData Do
 		For Each ErrorRow In DocumentData.Value Do
-			If ErrorRow.Value.Result.Count() = 0 Then
-				FixedArray = New Array;
-				For Each RowKeyValue In ErrorRow.Value.RowKey Do
-					FixedArray.Add(RowKeyValue);
-				EndDo;
-				If FixedArray.Count() = 0 Then
-					Continue;
-				EndIf;
-				
-				For Each CheckRow In ThisObject.CheckList.GetItems() Do
-					If CheckRow.Ref = DocumentData.Key Then
+			FixedArray = New Array;
+			For Each RowKeyValue In ErrorRow.Value.RowKey Do
+				FixedArray.Add(RowKeyValue);
+			EndDo;
+			If FixedArray.Count() = 0 Then
+				Continue;
+			EndIf;
+			
+			For Each CheckRow In ThisObject.CheckList.GetItems() Do
+				If CheckRow.Ref = DocumentData.Key Then
+					If ErrorRow.Value.Result.Count() = 0 Then
 						AllFixed = True;
 						For Each CheckSubRow In CheckRow.GetItems() Do
 							If CheckSubRow.ErrorID = ErrorRow.Key And FixedArray.Find(CheckSubRow.RowKey) <> Undefined Then
@@ -411,10 +415,17 @@ Procedure SetFlagFixed(DocsData)
 							AllFixed = AllFixed And CheckSubRow.Fixed;
 						EndDo;
 						CheckRow.Fixed = AllFixed;
-						Break;
+					Else
+						ProblemWhileQuickFix = StrConcat(ErrorRow.Value.Result, Chars.CR);
+						For Each CheckSubRow In CheckRow.GetItems() Do
+							If CheckSubRow.ErrorID = ErrorRow.Key And FixedArray.Find(CheckSubRow.RowKey) <> Undefined Then
+								CheckSubRow.ProblemWhileQuickFix = ProblemWhileQuickFix;
+							EndIf;
+						EndDo;
 					EndIf;
-				EndDo;
-			EndIf;
+					Break;
+				EndIf;
+			EndDo;
 		EndDo;
 	EndDo;
 EndProcedure
@@ -429,4 +440,70 @@ Procedure DocumentListRefOnChange(Item)
 	Else
 		CurrentData.DocumentType = TypeOf(CurrentData.Ref);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SetFilterByError(Command)
+	CurrentErrorRow = Items.ErrorsGroups.CurrentRow;
+	If CurrentErrorRow = Undefined Then
+		Return;
+	EndIf;
+
+	ErrorRecord = ThisObject.ErrorsGroups.FindByID(CurrentErrorRow);
+	ErrorFilter = ErrorRecord.ErrorID;
+	
+	ErrorFilterOnChange(Undefined);
+EndProcedure
+
+&AtClient
+Procedure ErrorFilterOnChange(Item)
+	
+	If IsBlankString(ThisObject.ErrorFilter) Then
+		RestoreOriginCheckList();
+	Else
+		ApplyFilterToCheckList();
+	EndIf;
+
+EndProcedure
+
+&AtClient
+Procedure ApplyFilterToCheckList()
+	If ThisObject.FullCheckList.GetItems().Count() = 0 Then
+		CopyFormData(ThisObject.CheckList, ThisObject.FullCheckList);
+	Else
+		CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
+	EndIf;
+
+	HightRowsToDelete = new Array;
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		LowRowsToDelete = new Array;
+		For Each LowRow In HightRow.GetItems() Do
+			If LowRow.ErrorID <> ThisObject.ErrorFilter Then
+				LowRowsToDelete.Add(LowRow);
+			EndIf;
+		EndDo;
+		For Each LowRow In LowRowsToDelete Do
+			HightRow.GetItems().Delete(LowRow);
+		EndDo;
+		If HightRow.GetItems().Count() = 0 Then
+			HightRowsToDelete.Add(HightRow);
+		EndIf;
+	EndDo;
+	For Each HightRow In HightRowsToDelete Do
+		ThisObject.CheckList.GetItems().Delete(HightRow);
+	EndDo;
+
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		Items.CheckList.Expand(HightRow.GetID(), True);
+	EndDo;
+	
+EndProcedure
+
+&AtClient
+Procedure RestoreOriginCheckList()
+	CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
+	ThisObject.FullCheckList.GetItems().Clear();
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		Items.CheckList.Collapse(HightRow.GetID());
+	EndDo;
 EndProcedure

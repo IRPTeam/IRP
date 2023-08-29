@@ -88,7 +88,9 @@ EndFunction
 // * DetailErrors - Array of See DetailResult
 Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 	
+	Exceptions = Constants.AdditionalTableControlExceptions.GetData();
 	Result = CheckDocumentsResult(Document, DocName);
+	
 	Errors = New Array; // Array of String
 	DetailErrors = New Array; //Array of See DetailResult
 	For Each Query In Result Do
@@ -101,6 +103,10 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 						Continue;
 					EndIf;
 					
+					If Not Exceptions.Find(Column.Name) = Undefined Then
+						Continue;
+					EndIf;
+					
 					If Row[Column.Name] = True Then // Can be NULL
 						Str = DetailResult();
 						Str.Ref = Document;
@@ -110,16 +116,22 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 						DetailErrors.Add(Str);
 						
 						//	@skip-check invocation-parameter-type-intersect, property-return-type
-						Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.LineNumber));
+						If Row.LineNumber > 0 Then
+							Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.LineNumber));
+						Else
+							Errors.Add(R()["ATC_" + Column.Name]);
+						EndIf;
 					EndIf;
 				EndIf;
 			EndDo;
 		EndDo;
 	EndDo;
+	
 	ResultErrors = New Structure();
 	ResultErrors.Insert("Errors", Errors);
 	ResultErrors.Insert("DetailErrors", DetailErrors);
 	Return ResultErrors;
+	
 EndFunction
 
 // Additional table control for document array.
@@ -192,6 +204,7 @@ Function CheckDocumentsResult(Document, DocName)
 	Result = AdditionalDocumentTableControlReuse.GetQuery(DocName);
 	
 	Query = New Query(Result.Query);
+	Query.SetParameter("Headers", GetHeaderTable(Document));
 	Query.SetParameter("ItemList", Document.ItemList.Unload());
 	
 	If Result.Tables.RowIDInfo = Undefined Then
@@ -224,6 +237,12 @@ Function CheckDocumentsResult(Document, DocName)
 		Query.SetParameter("SourceOfOrigins", Result.Tables.SourceOfOrigins);
 	EndIf;
 	
+	If Result.Tables.Payments = Undefined Then
+		Query.SetParameter("Payments", Document.Payments.Unload());
+	Else
+		Query.SetParameter("Payments", Result.Tables.Payments);
+	EndIf;
+	
   	Return Query.ExecuteBatch();
 EndFunction
 
@@ -234,33 +253,64 @@ Function CheckResultForDocumentArray(DocumentArray)
  	Return Query.ExecuteBatch();
 EndFunction
 
+// Get header table.
+// 
+// Parameters:
+//  Document - DefinedType.AdditionalTableControlDocument -  Document
+// 
+// Returns:
+//  ValueTable -  Get header table
+Function GetHeaderTable(Document)
+	
+	Header = New ValueTable();
+	DocumentMetadata = Document.Metadata(); // MetadataObjectDocument
+	
+	For Each AttributeDescription In DocumentMetadata.StandardAttributes Do
+		Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+	EndDo;
+	For Each AttributeDescription In DocumentMetadata.Attributes Do
+		Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+	EndDo;
+	For Each AttributeDescription In Metadata.CommonAttributes Do
+		If Not AttributeDescription.Content.Find(DocumentMetadata) = Undefined 
+				AND AttributeDescription.Content.Find(DocumentMetadata).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+			Header.Columns.Add(AttributeDescription.Name, AttributeDescription.Type, AttributeDescription.Synonym);
+		EndIf;
+	EndDo;
+	
+	DocumentRecord = Header.Add();
+	FillPropertyValues(DocumentRecord, Document);
+	
+	Return Header;
+	
+EndFunction
+
 #Region EventHandler
 
-// Before write additional table control document before write.
+// Fill check processing additional table control document fill check processing.
 // 
 // Parameters:
 //  Source - DefinedType.AdditionalTableControlDocument - Source
-//  Cancel - Boolean - Cancel
-//  WriteMode - DocumentWriteMode - Write mode
-//  PostingMode - DocumentPostingMode - Posting mode
-Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
-	If WriteMode = DocumentWriteMode.Posting Then
-		If Not FOServer.isUseAdditionalTableControlDocument() Then
-			Return;
-		EndIf;
-		
-		Result = CheckDocument(Source, New Array);
-		If Result.Count() = 0 Then
-			Return;
-		EndIf;
-		Cancel = True;
-		
-		//@skip-check property-return-type, invocation-parameter-type-intersect
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
-		For Each ResultItem In Result Do
-			CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
-		EndDo;
+//  Cancel - Boolean -  Cancel
+//  CheckedAttributes - Array of String -  Checked attributes
+Procedure FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing(Source, Cancel, CheckedAttributes) Export
+	
+	If Not FOServer.isUseAdditionalTableControlDocument() Then
+		Return;
 	EndIf;
+	
+	Result = CheckDocument(Source, New Array);
+	If Result.Count() = 0 Then
+		Return;
+	EndIf;
+	Cancel = True;
+	
+	//@skip-check property-return-type, invocation-parameter-type-intersect
+	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
+	For Each ResultItem In Result Do
+		CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
+	EndDo;
+	
 EndProcedure
 
 #EndRegion
@@ -293,7 +343,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -308,7 +358,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorNetAmountGreaterTotalAmount(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -323,7 +373,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorQuantityIsZero(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -338,7 +388,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorQuantityInBaseUnitIsZero(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -353,7 +403,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -368,7 +418,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorItemTypeIsNotService(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -394,8 +444,42 @@ Function ErrorItemTypeUseSerialNumbers(Document, RowIDList)
 		Row[0].UseSerialLotNumber = True;
 	EndDo;
 	
-	DocObject.DataExchange.Load = True;
-	DocObject.Write();
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+// Error item type doesn't use serial numbers.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorItemTypeNotUseSerialNumbers(Document, RowIDList)
+	Result = New Array; // Array of String
+	If RowIDList.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
+	
+	For Each RowKey In RowIDList Do
+		Row = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
+		Row[0].UseSerialLotNumber = False;
+	EndDo;
+	
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
 	
 	Return Result;
 EndFunction
@@ -411,7 +495,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorUseSerialButSerialNotSet(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -426,7 +510,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorNotTheSameQuantityInSerialListTableAndInItemList(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -441,7 +525,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorItemNotEqualItemInItemKey(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -456,7 +540,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorTotalAmountMinusNetAmountNotEqualTaxAmount(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -471,7 +555,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorQuantityInItemListNotEqualQuantityInRowID(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -486,7 +570,7 @@ EndFunction
 //@skip-check module-unused-method
 Function ErrorQuantityNotEqualQuantityInBaseUnit(Document, RowIDList)
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -553,9 +637,8 @@ EndFunction
 //  Array of String
 //@skip-check module-unused-method
 Function ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber(Document, RowIDList)
-	Raise "Not supported";
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -569,9 +652,8 @@ EndFunction
 //  Array of String
 //@skip-check module-unused-method
 Function ErrorQuantityInSourceOfOriginsDiffQuantityInItemList(Document, RowIDList)
-	Raise "Not supported";
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 
@@ -585,9 +667,92 @@ EndFunction
 //  Array of String
 //@skip-check module-unused-method
 Function ErrorNotFilledUnit(Document, RowIDList)
-	Raise "Not supported";
 	Result = New Array; // Array of String
-	Result.Add("Not supported");
+	Result.Add(R().ATC_NotSupported);
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledInventoryOrigin(Document, RowIDList)
+	Result = New Array; // Array of String
+	If RowIDList.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
+	
+	For Each RowKey In RowIDList Do
+		RowsItemList = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
+		For Each RowItemList In RowsItemList Do
+			RowItemList.InventoryOrigin = Enums.InventoryOriginTypes.OwnStocks;
+		EndDo;
+	EndDo;
+	
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledPaymentMethod(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.RetailSalesReceipt
+	DocObject.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledPurchaseTransactionType(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.PurchaseInvoice
+	DocObject.TransactionType = Enums.PurchaseTransactionTypes.Purchase;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledSalesTransactionType(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
+	DocObject.TransactionType = Enums.SalesTransactionTypes.Sales;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledSalesReturnTransactionType(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.SalesReturn
+	DocObject.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function ErrorNotFilledPurchaseReturnTransactionType(Document, RowIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.PurchaseReturn
+	DocObject.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToVendor;
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
 	Return Result;
 EndFunction
 

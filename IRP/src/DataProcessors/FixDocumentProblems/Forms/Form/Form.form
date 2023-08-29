@@ -608,6 +608,60 @@
   <items xsi:type="form:FormGroup">
    <name>PageCheck</name>
    <id>40</id>
+   <items xsi:type="form:FormField">
+    <name>ErrorFilter</name>
+    <id>123</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>ErrorFilter</segments>
+    </dataPath>
+    <handlers>
+     <event>OnChange</event>
+     <name>ErrorFilterOnChange</name>
+    </handlers>
+    <extendedTooltip>
+     <name>ErrorFilterExtendedTooltip</name>
+     <id>125</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>ErrorFilterContextMenu</name>
+     <id>124</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <clearButton>true</clearButton>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
    <items xsi:type="form:Table">
     <name>CheckList</name>
     <id>42</id>
@@ -1300,6 +1354,106 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ErrorsGroupsErrorDescription</name>
+     <id>115</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>ErrorsGroups.ErrorDescription</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ErrorsGroupsErrorDescriptionExtendedTooltip</name>
+      <id>117</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ErrorsGroupsErrorDescriptionContextMenu</name>
+      <id>116</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ErrorsGroupsFixDescription</name>
+     <id>118</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>ErrorsGroups.FixDescription</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ErrorsGroupsFixDescriptionExtendedTooltip</name>
+      <id>120</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ErrorsGroupsFixDescriptionContextMenu</name>
+      <id>119</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ErrorsGroupsDocuments</name>
      <id>107</id>
      <visible>true</visible>
@@ -1542,6 +1696,36 @@
     <contextMenu>
      <name>ErrorsGroupsContextMenu</name>
      <id>93</id>
+     <items xsi:type="form:Button">
+      <name>ErrorsGroupsContextMenuSetFilterByError</name>
+      <id>121</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>ErrorsGroupsContextMenuSetFilterByErrorExtendedTooltip</name>
+       <id>122</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.SetFilterByError</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <items xsi:type="form:Button">
       <name>ErrorsGroupsContextMenuQuickFixError</name>
       <id>113</id>
@@ -2242,6 +2426,322 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>ErrorDescription</name>
+   <title>
+    <key>en</key>
+    <value>Description</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tanım</value>
+   </title>
+   <id>25</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>FixDescription</name>
+   <title>
+    <key>en</key>
+    <value>Fix description</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Исправить наименования</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Fix description</value>
+   </title>
+   <id>26</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+ </attributes>
+ <attributes>
+  <name>ErrorFilter</name>
+  <title>
+   <key>en</key>
+   <value>Error filter</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Фильтр ошибок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Error filter</value>
+  </title>
+  <id>27</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>FullCheckList</name>
+  <title>
+   <key>en</key>
+   <value>Full check list</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить список проверок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Full check list</value>
+  </title>
+  <id>28</id>
+  <valueType>
+   <types>ValueTree</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <settingsSavedData xsi:type="form:DataPath">
+   <segments>CheckList</segments>
+  </settingsSavedData>
+  <columns>
+   <name>Ref</name>
+   <title>
+    <key>en</key>
+    <value>Ref</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ref</value>
+   </title>
+   <id>10</id>
+   <valueType>
+    <types>DocumentRef</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ErrorID</name>
+   <title>
+    <key>en</key>
+    <value>Error ID</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>ID Ошибки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Error ID</value>
+   </title>
+   <id>11</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>RowKey</name>
+   <title>
+    <key>en</key>
+    <value>Row key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ строки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satır anahtarı</value>
+   </title>
+   <id>12</id>
+   <valueType>
+    <types>DefinedType.typeRowID</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>LineNumber</name>
+   <title>
+    <key>en</key>
+    <value>Line number</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Номер строки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satır numarası</value>
+   </title>
+   <id>13</id>
+   <valueType>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Fixed</name>
+   <title>
+    <key>en</key>
+    <value>Fixed</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Фиксированная</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Düzeltildi</value>
+   </title>
+   <id>14</id>
+   <valueType>
+    <types>Boolean</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ProblemWhileQuickFix</name>
+   <title>
+    <key>en</key>
+    <value>Problem while quick fix</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Проблемы при быстром исправлении</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Problem while quick fix</value>
+   </title>
+   <id>15</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Date</name>
+   <title>
+    <key>en</key>
+    <value>Date</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Дата</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tarih</value>
+   </title>
+   <id>16</id>
+   <valueType>
+    <types>Date</types>
+    <dateQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Picture</name>
+   <title>
+    <key>en</key>
+    <value>Picture</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Картинка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Resim</value>
+   </title>
+   <id>19</id>
+   <valueType>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>1</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <formCommands>
   <name>FillDocuments</name>
@@ -2342,6 +2842,35 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>QuickFixError</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>SetFilterByError</name>
+  <title>
+   <key>en</key>
+   <value>Set filter by error</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить отбор по ошибке</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Set filter by error</value>
+  </title>
+  <id>7</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.CustomizeList</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SetFilterByError</name>
    </handler>
   </action>
   <representation>TextPicture</representation>

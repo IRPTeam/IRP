@@ -34,6 +34,8 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 			Transfer.Form.BackgroundJobUUID            = RunResult.BackgroundJobUUID; 
 			Transfer.Form.BackgroundJobStorageAddress = RunResult.BackgroundJobStorageAddress;
 			Transfer.Form._AttachIdleHandler();
+			
+			Splash.JobUUID = RunResult.BackgroundJobUUID;
 		Else	
 			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, True);
 			TransferStructureToForm(Transfer, Parameters);

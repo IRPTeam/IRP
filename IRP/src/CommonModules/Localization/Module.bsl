@@ -532,6 +532,10 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1';
 		|ru='Неизвестный тип документа: %1';
 		|tr='Unknown document type: %1'", Lang));
+	Strings.Insert("ATC_NotSupported", NStr("en='Not supported. Documents need to be edited manually.';
+		|ru='Не поддерживается. Документы необходимо редактировать вручную.';
+		|tr='Not supported. Documents need to be edited manually.'", Lang));
+	
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list';
 		|ru='Строка: %1. Сумма налогов не равна общей сумме налогов в табличной части налогов';
 		|tr='Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
@@ -553,6 +557,9 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='Row: %1. Item type uses serial numbers';
 		|ru='Строка: %1. Вид номенклатуры использует серийные номера';
 		|tr='Row: %1. Item type uses serial numbers'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en='Row: %1. Item type does not use serial numbers';
+		|ru='Строка: %1. Тип элемента не использует серийные номера';
+		|tr='Row: %1. Item type does not use serial numbers'", Lang));
 	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='Row: %1. Serial is not set but is required';
 		|ru='Строка: %1. Серийные номера отсутствуют, но они обязательны к заполнению';
 		|tr='Row: %1. Serial is not set but is required'", Lang));
@@ -583,6 +590,56 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='Row: %1. Not filled Unit';
 		|ru='Строка: %1. Не заполненна единица измерений';
 		|tr='Row: %1. Not filled Unit'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en='Row: %1. Not filled Inventory origin';
+		|ru='Строка: %1. Не заполнен источник происождения';
+		|tr='Row: %1. Not filled Inventory origin'", Lang));
+	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en='Row: %1. Payment amount is zero';
+		|ru='Строка: %1. Сумма платежа равна нулю';
+		|tr='Row: %1. Payment amount is zero'", Lang));
+	
+	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en='Not filled Payment method';
+		|ru='Метод оплаты не заполнен';
+		|tr='Not filled Payment method'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en='Not filled Transaction type in Purchase';
+		|ru='Не заполнен тип транзакции в Покупке';
+		|tr='Not filled Transaction type in Purchase'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en='Not filled Transaction type in Sale';
+		|ru='Не заполнен тип транзакции в Продаже';
+		|tr='Not filled Transaction type in Sale'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en='Not filled Transaction type in Sale Return';
+		|ru='Не заполнен тип транзакции в Возврате продажи';
+		|tr='Not filled Transaction type in Sale Return'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Not filled Transaction type in Purchase Return';
+		|ru='Не заполнен тип транзакции в Возврате покупки';
+		|tr='Not filled Transaction type in Purchase Return'", Lang));
+	
+	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en='Setting the ""Use serial lot number"" flag in document lines.';
+		|ru='Установка флага ""Использовать серийный номер партии"" в строках документа.';
+		|tr='Setting the ""Use serial lot number"" flag in document lines.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en='Unchecking the ""Use serial lot number"" flag in document lines.';
+		|ru='Снятие флага ""Использовать серийный номер партии"" в строках документа.';
+		|tr='Unchecking the ""Use serial lot number"" flag in document lines.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""';
+		|ru='Добавляет или изменяет строки в табличной части ""Источнике происхождения"" для того что бы сопоставить их с табличной частью ""Товары""';
+		|tr='Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en='Instead of empty values, ""Own stocks"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Собственные запасы"".';
+		|tr='Instead of empty values, ""Own stocks"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en='Instead of empty values, ""Full calculation"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Полный расчет"".';
+		|tr='Instead of empty values, ""Full calculation"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en='Instead of empty values, ""Purchase"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Покупка"".';
+		|tr='Instead of empty values, ""Purchase"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en='Instead of empty values, ""Sales"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Продажи"".';
+		|tr='Instead of empty values, ""Sales"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en='Instead of empty values, ""Return from customer"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Возврат от клиента"".';
+		|tr='Instead of empty values, ""Return from customer"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Instead of empty values, ""Return to vendor"" will be set.';
+		|ru='Вместо пустых значений будет установлено ""Возврат поставщику"".';
+		|tr='Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
 #EndRegion
 
@@ -743,11 +800,11 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_CancelPayment", NStr("en='Operation with %1 by amount: %2 will be canceled.';
 		|ru='Операция с %1 на сумму: %2 будет отменена.';
 		|tr='Operation with %1 by amount: %2 will be canceled.'", Lang));
-	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='Cancle payment problem [%1: %2]. Payment not canceled.
+	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='Cancel payment problem [%1: %2]. Payment not canceled.
 		|Copy message and send it to administrator';
-		|ru='Проблемы с отменой оплаты [%1: %2]. Оплата не отменена.
-		|Сообщение необходимо скопировать и передать системному администратору.';
-		|tr='Cancle payment problem [%1: %2]. Payment not canceled.
+		|ru='Проблема отмены платежа [%1: %2]. Платеж не отменен.
+		|Скопируйте сообщение и отправьте его администратору';
+		|tr='Cancel payment problem [%1: %2]. Payment not canceled.
 		|Copy message and send it to administrator'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .';
 		|ru='Для документа возврата ""%4"" есть более подходящяя позиция %3, чем %2 из %1.';

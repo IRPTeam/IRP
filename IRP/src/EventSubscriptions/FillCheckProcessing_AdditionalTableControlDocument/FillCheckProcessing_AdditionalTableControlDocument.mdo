@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d17b36d9-4cd9-474b-ba5b-46b72f7efb54">
+ <name>FillCheckProcessing_AdditionalTableControlDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>Fill check processing additional table control document</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Проверка заполнения Проверка дополнительных таблиц документа</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fill check processing additional table control document</value>
+ </synonym>
+ <source>
+  <types>DefinedType.AdditionalTableControlDocumentObject</types>
+ </source>
+ <event>FillCheckProcessing</event>
+ <handler>CommonModule.AdditionalDocumentTableControl.FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing</handler>
+</mdclass:EventSubscription>

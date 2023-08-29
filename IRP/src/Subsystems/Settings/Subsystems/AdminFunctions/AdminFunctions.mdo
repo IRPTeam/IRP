@@ -28,5 +28,6 @@
  <content>Catalog.Extensions</content>
  <content>DataProcessor.ObjectPropertyEditor</content>
  <content>DataProcessor.FixDocumentProblems</content>
+ <content>CommonForm.AdditionalTableControlSettings</content>
  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

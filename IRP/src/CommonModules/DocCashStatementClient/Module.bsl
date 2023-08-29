@@ -28,17 +28,11 @@ EndProcedure
 
 Procedure CompanyOnChange(Object) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
-		DataCompositionComparisonType.Equal));
-	OpenSettings.FillingData = New Structure("OurCompany", True);
 
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure

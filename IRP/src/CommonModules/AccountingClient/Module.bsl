@@ -2,8 +2,8 @@
 Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export	
 	FormParameters = AccountingClientServer.GetParametersEditAccounting(Object, CurrentData, TableName);
 	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form"  , Form);
+	NotifyParameters.Insert("Object1", Object);
+	NotifyParameters.Insert("For1m"  , Form);
 	Notify = New NotifyDescription("EditAccounting", ThisObject, NotifyParameters);
 	OpenForm("CommonForm.EditAccounting", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

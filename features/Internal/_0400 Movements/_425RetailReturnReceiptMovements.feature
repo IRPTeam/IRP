@@ -139,6 +139,17 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailGoodsReceipt.FindByNumber(1204).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(2207).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document Retail sales receipt and Retail return receipt (certificate)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 
 Scenario: _0425001 check preparation
@@ -850,6 +861,46 @@ Scenario: _042536 check Retail return receipt movements absence by the Register 
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| Register  "R4010 Actual stocks"    |
+		And I close all client application windows
+
+Scenario: _042537 check Retail return receipt movements by the Register  "R2006 Certificates" (Return of a product paid for with a certificate)
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '12'       |
+	* Check movements by the Register  "R2006 Certificates"
+		And I click "Registrations report" button
+		And I select "R2006 Certificates" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 12 dated 22.08.2023 14:22:30' | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Document registrations records'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Register  "R2006 Certificates"'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| ''                                                   | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
+			| ''                                                   | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
+			| ''                                                   | '22.08.2023 14:22:30' | '1'         | '500'    | 'TRY'        | '99999999999'       | 'ReturnUsed'    |		
+		And I close all client application windows
+
+Scenario: _042538 check Retail return receipt movements by the Register  "R2006 Certificates" (Return of an unused certificate)
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '14'       |
+	* Check movements by the Register  "R2006 Certificates"
+		And I click "Registrations report" button
+		And I select "R2006 Certificates" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 14 dated 22.08.2023 14:57:38' | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Document registrations records'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| 'Register  "R2006 Certificates"'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
+			| ''                                                   | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
+			| ''                                                   | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
+			| ''                                                   | '22.08.2023 14:57:38' | '-1'        | '-300'   | 'TRY'        | '99999999998'       | 'Return'        |		
 		And I close all client application windows
 
 Scenario: _042530 Retail return receipt clear posting/mark for deletion

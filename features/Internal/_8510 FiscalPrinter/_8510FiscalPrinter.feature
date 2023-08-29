@@ -321,7 +321,6 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
 		When Create catalog Countries objects
-		When Data preparation (comission stock)
 		When Create catalog Items objects (commission trade)
 		When Create Certificate
 	* Add plugin for taxes calculation
@@ -370,8 +369,6 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -385,14 +382,6 @@ Scenario: _0850000 preparation (fiscal printer)
 			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -1781,8 +1770,8 @@ Scenario: _050055 check filling consignor in the RetailReturnReceipt from POS (s
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Serial number'  |
-			| '32'   | 'PZU'   | '11111111111112' |
+			| 'Owner' | 'Serial number'  |
+			| 'PZU'   | '11111111111112' |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -2564,7 +2553,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "706"	
+	Then the number of "List" table lines is "равно" "694"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table

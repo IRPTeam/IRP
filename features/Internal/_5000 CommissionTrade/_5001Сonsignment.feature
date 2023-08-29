@@ -81,7 +81,7 @@ Scenario: _05002 preparation (consignment)
 		When Create information register TaxSettings records (Concignor 2)
 	* Post document
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"     |
+				| "Documents.PurchaseInvoice.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Setting for Company
 		When settings for Company (commission trade)
 	And I close all client application windows
@@ -176,6 +176,10 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I activate "Serial number" field in "List" table
+		Then "Item serial/lot numbers" window is opened
+		And I go to line in "List" table
+			| 'Owner'              | 'Serial number' |
+			| 'Product 4 with SLN' | '899007790088'  |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -494,8 +498,10 @@ Scenario: _050019 check consignment fee calculation
 		Then "Item serial/lot numbers" window is opened
 		And I activate field named "Owner" in "List" table
 		And I activate "Serial number" field in "List" table
+		And I go to line in "List" table
+			| 'Owner'              | 'Serial number' |
+			| 'Product 4 with SLN' | '899007790088'  |
 		And I select current line in "List" table
-		Then "Select serial lot numbers *" window is opened
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table

@@ -599,12 +599,12 @@ Scenario: _041317 check Sales return movements by the Register  "R2031 Shipment 
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 103 dated 12.03.2021 08:59:52'   | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                              | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                              | ''            |
-			| 'Register  "R2031 Shipment invoicing"'         | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                              | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''           | ''                                              | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Store'      | 'Basis'                                         | 'Item key'    |
-			| ''                                             | 'Expense'       | '12.03.2021 08:59:52'   | '2'           | 'Main Company'   | 'Distribution department'   | 'Store 01'   | 'Goods receipt 125 dated 12.03.2021 08:56:32'   | 'XS/Blue'     |
+			| 'Sales return 103 dated 12.03.2021 08:59:52' | ''            | ''                    | ''          | ''             | ''       | ''         | ''                                            | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''         | ''                                            | ''         |
+			| 'Register  "R2031 Shipment invoicing"'       | ''            | ''                    | ''          | ''             | ''       | ''         | ''                                            | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                            | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Basis'                                       | 'Item key' |
+			| ''                                           | 'Expense'     | '12.03.2021 08:59:52' | '2'         | 'Main Company' | ''       | 'Store 02' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | 'XS/Blue'  |
 	And I close all client application windows
 
 Scenario: _041318 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (without SRO)
@@ -642,7 +642,7 @@ Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice c
 			| ''                                                    | 'Expense'       | '12.03.2021 09:20:35'   | '1'           | '95'       | '80,51'        | 'Main Company'   | 'Distribution department'   | 'Sales return order 102 dated 12.03.2021 09:19:54'   | 'TRY'        | 'Internet'   | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0'    |
 			| ''                                                    | 'Expense'       | '12.03.2021 09:20:35'   | '1'           | '494'      | '418,64'       | 'Main Company'   | 'Distribution department'   | 'Sales return order 102 dated 12.03.2021 09:19:54'   | 'TRY'        | 'XS/Blue'    | '0cb89084-5857-45fc-b333-4fbec2c2e90a'    |
 			| ''                                                    | 'Expense'       | '12.03.2021 09:20:35'   | '10'          | '3 325'    | '2 817,8'      | 'Main Company'   | 'Distribution department'   | 'Sales return order 102 dated 12.03.2021 09:19:54'   | 'TRY'        | '36/Red'     | '3a8fe357-b7bd-4d83-8816-c8348bbf4595'    |
-			| ''                                                    | 'Expense'       | '12.03.2021 09:20:35'   | '24'          | '15 960'   | '13 525,42'    | 'Main Company'   | 'Distribution department'   | 'Sales return order 102 dated 12.03.2021 09:19:54'   | 'TRY'        | '37/18SD'    | 'f06154aa-5906-4824-9983-19e2bc9ccb96'    |
+			| ''                                                    | 'Expense'       | '12.03.2021 09:20:35'   | '24'          | '15 960'   | '13 525,42'    | 'Main Company'   | 'Distribution department'   | 'Sales return order 102 dated 12.03.2021 09:19:54'   | 'TRY'        | '36/18SD'    | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff'    |
 	And I close all client application windows
 
 Scenario: _041320 check Sales return with serial lot numbers movements by the Register  "R4010 Actual stocks" (not use GR)

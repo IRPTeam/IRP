@@ -431,7 +431,6 @@ Function R5022T_Expenses()
 		   |	WriteOffBatchesInfo.Currency,
 		   |	WriteOffBatchesInfo.RowID AS Key,
 		   |	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-		   //#2066
 		   |	WriteOffBatchesInfo.InvoiceAmount
 		   |	+WriteOffBatchesInfo.IndirectCostAmount
 	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
@@ -451,7 +450,6 @@ Function R5022T_Expenses()
 	       |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
 	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount
 	       |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
-	       //--
 		   |INTO R5022T_Expenses
 		   |FROM
 		   |	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo

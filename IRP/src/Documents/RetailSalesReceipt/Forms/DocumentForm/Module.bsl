@@ -356,15 +356,6 @@ EndProcedure
 
 #EndRegion
 
-#Region INVENTORY_ORIGIN
-
-&AtClient
-Procedure ItemListInventoryOriginOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region PRICE_TYPE
 
 &AtClient
@@ -808,8 +799,6 @@ EndProcedure
 
 &AtServer
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	RowIDInfoServer.RemoveFieldFormFillingValues(Result.FillingValues, "InventoryOrigin");
-	
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);

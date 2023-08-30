@@ -190,4 +190,62 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
+	If Not Cancel = True Then
+		
+		// Shipment to trade agent
+		
+		ShipmentToTradeAgentTable = CommissionTradeServer.GetEmptyItemListTable();
+		For Each Row In ThisObject.ShipmentToTradeAgent Do
+			NewRow = ShipmentToTradeAgentTable.Add();
+			NewRow.Company   = ThisObject.Company;
+			NewRow.LegalName = ThisObject.LegalNameTradeAgent;
+			NewRow.Item      = Row.Item;
+			NewRow.ItemKey   = Row.ItemKey;
+			NewRow.LineNumber = Row.LineNumber;
+		EndDo;
+				
+		ConsignorsByItemListTable = CommissionTradeServer.GetConsignorsByItemList(ShipmentToTradeAgentTable);
+		Filter = New Structure("IsOwnStocks", False);
+		ErrorRows = ConsignorsByItemListTable.FindRows(Filter);
+		For Each ErrorRow In ErrorRows Do
+			ErrorMessage = StrTemplate(R().Error_133, ErrorRow.Item, ErrorRow.ItemKey, ErrorRow.Consignor);
+		
+			CommonFunctionsClientServer.ShowUsersMessage(
+				ErrorMessage, "Object.ShipmentToTradeAgent[" + (ErrorRow.LineNumber - 1) + "].ItemKey", "Object.ShipmentToTradeAgent");
+			Cancel = True;
+		EndDo;
+		
+		// Receipt from consignor
+		
+		ReceiptFromConsignorTable = CommissionTradeServer.GetEmptyItemListTable();
+		For Each Row In ThisObject.ReceiptFromConsignor Do
+			NewRow = ShipmentToTradeAgentTable.Add();
+			NewRow.Company   = ThisObject.Company;
+			NewRow.LegalName = ThisObject.LegalNameConsignor;
+			NewRow.Item      = Row.Item;
+			NewRow.ItemKey   = Row.ItemKey;
+			NewRow.LineNumber = Row.LineNumber;
+		EndDo;
+		
+		ConsignorsByItemListTable = CommissionTradeServer.GetConsignorsByItemList(ReceiptFromConsignorTable);
+		For Each Row In ConsignorsByItemListTable Do
+			ErrorMessage = "";
+			If Row.IsOwnStocks Then
+				ErrorMessage = StrTemplate(R().Error_134, Row.Item, Row.ItemKey);
+				Cancel = True;
+			Else
+				If Row.LegalName <> Row.Consignor Then
+					ErrorMessage = StrTemplate(R().Error_135, Row.Item, Row.ItemKey, Row.LegalName);
+					Cancel = True;
+				EndIf;
+			EndIf;
+		
+			If ValueIsFilled(ErrorMessage) Then
+				CommonFunctionsClientServer.ShowUsersMessage(
+					ErrorMessage, "Object.ReceiptFromConsignor[" + (Row.LineNumber - 1) + "].ItemKey", "Object.ReceiptFromConsignor");
+			EndIf;
+		EndDo;
+	EndIf;
+	
 EndProcedure
+

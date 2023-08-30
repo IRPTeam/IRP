@@ -525,7 +525,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
-		And I input "25,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I input "30,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
@@ -544,7 +544,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I close "Select serial lot numbers" window
 		And I activate field named "ItemListQuantity" in "ItemList" table
-		And I input "26,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "31,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -557,7 +557,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		Then "1C:Enterprise" window is opened
 		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 23 . Required: 25 . Lacking: 2 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 28 . Required: 30 . Lacking: 2 ." substring will appear in 10 seconds
 	* Change quantity and post document
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -2709,6 +2709,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.UndoPosting);"    |
 	* Try unpost Opening entry 
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
@@ -3125,28 +3127,3 @@ Scenario:_800083 check stock control in the IT (Store sender does not use stock 
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I close all client application windows
-		
-
-				
-
-
-
-							
-				
-
-
-				
-	
-					
-
-		
-		
-		
-		
-				
-		
-				
-		
-
-				
-		

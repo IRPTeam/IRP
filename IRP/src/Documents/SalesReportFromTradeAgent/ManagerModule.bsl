@@ -252,8 +252,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R8010B_TradeAgentInventory());
-	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
@@ -539,48 +537,6 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo_1.Direction,
 		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
-EndFunction
-
-Function R8010B_TradeAgentInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R8010B_TradeAgentInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName";
-EndFunction
-
-Function R8011B_TradeAgentSerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	SerialLotNumbers.Period,
-		   |	SerialLotNumbers.Company,
-		   |	SerialLotNumbers.ItemKey,
-		   |	SerialLotNumbers.Partner,
-		   |	SerialLotNumbers.Agreement,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity
-		   |INTO R8011B_TradeAgentSerialLotNumber
-		   |FROM
-		   |	SerialLotNumbers AS SerialLotNumbers
-		   |WHERE
-		   |	TRUE";
 EndFunction
 
 #EndRegion

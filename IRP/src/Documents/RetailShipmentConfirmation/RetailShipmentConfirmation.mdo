@@ -64,7 +64,6 @@
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -438,20 +437,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="77b48613-4aa0-4c2b-ae4b-4f07efc252a3">
-      <name>Consignor</name>
-      <synonym>
-        <key>en</key>
-        <value>Consignor</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Companies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
   </tabularSections>
   <tabularSections uuid="a99ce0cf-1956-4d49-a629-56149ba227a2">
     <producedTypes>
@@ -680,10 +665,10 @@
       <objectType typeId="08ae745a-6351-472f-aace-c1f6efdeafab" valueTypeId="c83cb6ec-29ea-4965-9ad5-c62f0981f56d"/>
       <rowType typeId="91dc7ce1-3d71-4f2e-a230-2deddbc0989b" valueTypeId="d36db238-2ecb-42e3-aeef-ff2a47242e6e"/>
     </producedTypes>
-    <name>ConsignorBatches</name>
+    <name>DELETE_ConsignorBatches</name>
     <synonym>
       <key>en</key>
-      <value>Consignor batches</value>
+      <value>DELETE consignor batches</value>
     </synonym>
     <attributes uuid="430d8d60-c3e1-4f76-82b7-8e10db6d787d">
       <name>Key</name>

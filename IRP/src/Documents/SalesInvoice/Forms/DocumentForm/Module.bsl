@@ -312,15 +312,6 @@ EndProcedure
 
 #EndRegion
 
-#Region INVENTORY_ORIGIN
-
-&AtClient
-Procedure ItemListInventoryOriginOnChange(Item)
-	DocSalesInvoiceClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region PRICE_TYPE
 
 &AtClient

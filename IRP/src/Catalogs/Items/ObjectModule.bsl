@@ -26,4 +26,8 @@ Procedure OnCopy(CopiedObject)
 	PackageUnit = Undefined;
 EndProcedure
 
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommissionTradeServer.FillCheckProcessing_ConsignorsInfo(Cancel, ThisObject);
+EndProcedure
+
 #EndRegion

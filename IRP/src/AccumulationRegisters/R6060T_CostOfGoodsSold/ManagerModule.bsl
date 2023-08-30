@@ -47,7 +47,6 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|			THEN -R6010B_BatchWiseBalance.Quantity
 	|		ELSE 0
 	|	END AS Quantity,
-	//#2066
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
@@ -195,7 +194,6 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|SELECT
 	|	BatchWiseBalance.Period AS Period,
 	|	BatchWiseBalance.Quantity AS Quantity,
-	//#2066
 	|	BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
 	|	BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -213,7 +211,6 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|
 	|	BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--	
 	|
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
@@ -233,7 +230,6 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|		AND BatchWiseBalance.ItemKey = T6020S_BatchKeysInfo.ItemKey
 	|WHERE
 	|	BatchWiseBalance.Quantity <> 0	
-	//#2066
 	|	AND (BatchWiseBalance.InvoiceAmount <> 0
 	|	OR BatchWiseBalance.InvoiceTaxAmount <> 0
 	|
@@ -299,7 +295,6 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|			THEN -R6010B_BatchWiseBalance.Quantity
 	|		ELSE 0
 	|	END AS Quantity,
-	|	//#2066
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
@@ -436,7 +431,6 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance.CalculationMovementCosts AS CalculationMovementCosts,
 	|	BatchWiseBalance.Document AS Document,
 	|	BatchWiseBalance.Quantity AS Quantity,
-	|	//#2066
 	|	BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
 	|	BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|	BatchWiseBalance.IndirectCostAmount AS IndirectCostAmount,
@@ -449,7 +443,6 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|	BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	|	//--
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
@@ -474,7 +467,6 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance_BatchKeysInfo.CalculationMovementCosts AS CalculationMovementCosts,
 	|	BatchWiseBalance_BatchKeysInfo.Document AS Document,
 	|	BatchWiseBalance_BatchKeysInfo.Quantity AS Quantity,
-	|	//#2066
 	|	BatchWiseBalance_BatchKeysInfo.InvoiceAmount AS InvoiceAmount,
 	|	BatchWiseBalance_BatchKeysInfo.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|	BatchWiseBalance_BatchKeysInfo.IndirectCostAmount AS IndirectCostAmount,
@@ -487,7 +479,6 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance_BatchKeysInfo.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|	BatchWiseBalance_BatchKeysInfo.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchWiseBalance_BatchKeysInfo.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	|	//--
 	|	BatchWiseBalance_BatchKeysInfo.ItemKey AS ItemKey,
 	|	BatchWiseBalance_BatchKeysInfo.Company AS Company,
 	|	BatchWiseBalance_BatchKeysInfo.SalesInvoice AS SalesInvoice,

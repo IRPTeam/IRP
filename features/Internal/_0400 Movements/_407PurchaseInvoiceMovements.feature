@@ -824,7 +824,8 @@ Scenario: _0401025 check Purchase invoice movements by the Register  "R4010 Actu
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
 			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      | '1123'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '4'         | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '0512'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  | ''                  |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   | ''                  |		
 		And I close all client application windows
@@ -847,7 +848,8 @@ Scenario: _0401026 check Purchase invoice movements by the Register  "R4011 Free
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '4'         | 'Store 02'   | 'UNIQ'     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   |		
 		And I close all client application windows
@@ -870,7 +872,9 @@ Scenario: _0401027 check Purchase invoice movements by the Register  "R4014 Seri
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
 			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
 			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '4'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |		
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '5'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '0512'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |		
 		And I close all client application windows
 
 

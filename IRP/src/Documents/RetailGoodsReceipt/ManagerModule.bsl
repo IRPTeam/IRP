@@ -13,31 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	ConsignorBatches.Key,
-	|	ConsignorBatches.ItemKey,
-	|	ConsignorBatches.SerialLotNumber,
-	|	ConsignorBatches.SourceOfOrigin,
-	|	ConsignorBatches.Store,
-	|	ConsignorBatches.Batch,
-	|	ConsignorBatches.Quantity
-	|FROM
-	|	Document.RetailGoodsReceipt.ConsignorBatches AS ConsignorBatches
-	|WHERE
-	|	ConsignorBatches.Ref = &Ref";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	ConsignorBatches = QueryResult.Unload();
-
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
-	Query.SetParameter("T1", ConsignorBatches);
-	Query.Execute();
-	
+		
 	Return Tables;
 EndFunction
 
@@ -270,7 +246,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	Return QueryArray;
 EndFunction
 
@@ -367,66 +342,6 @@ Function T3010S_RowIDInfo()
 		   |		AND ItemList.Ref = &Ref
 		   |		AND RowIDInfo.Key = ItemList.Key
 		   |		AND RowIDInfo.Ref = ItemList.Ref";
-EndFunction
-
-Function R8013B_ConsignorBatchWiseBalance()
-	Return 
-		"SELECT
-		|	ItemList.Key,
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ConsignorBatches.Batch,
-		|	ConsignorBatches.ItemKey,
-		|	ConsignorBatches.SerialLotNumber,
-		|	ConsignorBatches.Store AS Store,
-		|	ConsignorBatches.Quantity
-		|INTO ConsignorBatchWiseBalance
-		|FROM
-		|	ItemList AS ItemList
-		|		INNER JOIN ConsignorBatches AS ConsignorBatches
-		|		ON ItemList.IsConsignorStocks
-		|		AND ItemList.Key = ConsignorBatches.Key
-		|;
-		|//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ConsignorBatchWiseBalance.Period,
-		|	ConsignorBatchWiseBalance.Company,
-		|	ConsignorBatchWiseBalance.Batch,
-		|	ConsignorBatchWiseBalance.ItemKey,
-		|	ConsignorBatchWiseBalance.Store,
-		|	SUM(ISNULL(ConsignorBatchWiseBalance.Quantity, 0)) AS Quantity,
-		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
-		|	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
-		|INTO ConsignorBatchWiseBalance_1
-		|FROM
-		|	ConsignorBatchWiseBalance AS ConsignorBatchWiseBalance
-		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		|		ON ConsignorBatchWiseBalance.Key = SourceOfOrigins.Key
-		|		AND ConsignorBatchWiseBalance.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		|GROUP BY
-		|	ConsignorBatchWiseBalance.Period,
-		|	ConsignorBatchWiseBalance.Company,
-		|	ConsignorBatchWiseBalance.Batch,
-		|	ConsignorBatchWiseBalance.ItemKey,
-		|	ConsignorBatchWiseBalance.Store,
-		|	SourceOfOrigins.SourceOfOriginStock,
-		|	SourceOfOrigins.SerialLotNumberStock
-		|;
-		|
-		|//////////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ConsignorBatchWiseBalance_1.Period,
-		|	ConsignorBatchWiseBalance_1.Company,
-		|	ConsignorBatchWiseBalance_1.Batch,
-		|	ConsignorBatchWiseBalance_1.ItemKey,
-		|	ConsignorBatchWiseBalance_1.Store,
-		|	ConsignorBatchWiseBalance_1.SourceOfOrigin,
-		|	ConsignorBatchWiseBalance_1.SerialLotNumber,
-		|	ConsignorBatchWiseBalance_1.Quantity
-		|INTO R8013B_ConsignorBatchWiseBalance
-		|FROM
-		|	ConsignorBatchWiseBalance_1 AS ConsignorBatchWiseBalance_1";
 EndFunction
 
 #EndRegion

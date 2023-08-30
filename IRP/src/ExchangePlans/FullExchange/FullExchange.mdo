@@ -988,7 +988,7 @@
   <mdObject>InformationRegister.T9014S_AccountsExpenseRevenue</mdObject>
  </content>
  <content>
-  <mdObject>InformationRegister.T8010S_ConsignorBatches</mdObject>
+  <mdObject>InformationRegister.DELETE_T8010S_ConsignorBatches</mdObject>
  </content>
  <content>
   <mdObject>InformationRegister.T7051S_ProductionDurationDetails</mdObject>
@@ -1078,16 +1078,16 @@
   <mdObject>AccumulationRegister.TM1030B_TransactionsKey</mdObject>
  </content>
  <content>
-  <mdObject>AccumulationRegister.R8010B_TradeAgentInventory</mdObject>
+  <mdObject>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</mdObject>
  </content>
  <content>
-  <mdObject>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</mdObject>
+  <mdObject>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</mdObject>
  </content>
  <content>
-  <mdObject>AccumulationRegister.R8012B_ConsignorInventory</mdObject>
+  <mdObject>AccumulationRegister.DELETE_R8012B_ConsignorInventory</mdObject>
  </content>
  <content>
-  <mdObject>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</mdObject>
+  <mdObject>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</mdObject>
  </content>
  <content>
   <mdObject>AccumulationRegister.R8014T_ConsignorSales</mdObject>

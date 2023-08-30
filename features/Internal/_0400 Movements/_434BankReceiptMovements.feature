@@ -94,6 +94,7 @@ Scenario: _043400 preparation (Bank receipt)
 			| '1'         |
 			| '3'         |
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
+			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
@@ -118,6 +119,8 @@ Scenario: _043400 preparation (Bank receipt)
 			When Create document SalesInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
+			And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"     |
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"     |
 			And I execute 1C:Enterprise script at server

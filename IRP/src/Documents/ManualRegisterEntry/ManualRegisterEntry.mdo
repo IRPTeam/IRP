@@ -143,6 +143,10 @@
  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+ <registerRecords>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</registerRecords>
+ <registerRecords>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</registerRecords>
+ <registerRecords>AccumulationRegister.DELETE_R8012B_ConsignorInventory</registerRecords>
+ <registerRecords>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">

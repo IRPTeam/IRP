@@ -113,9 +113,7 @@
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
- <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
- <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
@@ -2802,18 +2800,18 @@
    <objectType typeId="25fdc586-f1b6-4522-9d58-c811ef5f1b7c" valueTypeId="8609bbbf-b2e7-4f0c-8c4b-303d3ffdc06d"/>
    <rowType typeId="9d85adef-bef3-4072-a712-c1877bbb9fbe" valueTypeId="ac84401d-d575-4942-943d-25b49edc9b3d"/>
   </producedTypes>
-  <name>ConsignorBatches</name>
+  <name>DELETE_ConsignorBatches</name>
   <synonym>
    <key>en</key>
-   <value>Consignor batches</value>
+   <value>DELETE consignor batches</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Партии комитента</value>
+   <value>УДАЛИТЬ партии комитента</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Konsinye partileri</value>
+   <value>DELETE consignor batches</value>
   </synonym>
   <attributes uuid="4ec573ef-6b75-4dfc-90c2-6e4783fc5433">
    <name>Key</name>

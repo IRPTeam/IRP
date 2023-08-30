@@ -99,10 +99,6 @@
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
- <registerRecords>AccumulationRegister.R8010B_TradeAgentInventory</registerRecords>
- <registerRecords>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</registerRecords>
- <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
- <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8015T_ConsignorPrices</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>

@@ -1292,55 +1292,6 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>ItemListConsignor</name>
-     <id>445</id>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.ItemList.Consignor</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>ItemListConsignorExtendedTooltip</name>
-      <id>447</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>ItemListConsignorContextMenu</name>
-      <id>446</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
      <name>ItemListItem</name>
      <id>47</id>
      <visible>true</visible>
@@ -1493,6 +1444,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
+     <readOnly>true</readOnly>
      <editMode>Enter</editMode>
      <showInHeader>true</showInHeader>
      <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4017,7 +3969,7 @@
      <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-     <segments>Object.ConsignorBatches</segments>
+     <segments>Object.DELETE_ConsignorBatches</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
@@ -4029,7 +3981,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.LineNumber</segments>
+      <segments>Object.DELETE_ConsignorBatches.LineNumber</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesLineNumberExtendedTooltip</name>
@@ -4079,7 +4031,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.Key</segments>
+      <segments>Object.DELETE_ConsignorBatches.Key</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesKeyExtendedTooltip</name>
@@ -4129,7 +4081,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.ItemKey</segments>
+      <segments>Object.DELETE_ConsignorBatches.ItemKey</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesItemKeyExtendedTooltip</name>
@@ -4179,7 +4131,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.SerialLotNumber</segments>
+      <segments>Object.DELETE_ConsignorBatches.SerialLotNumber</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesSerialLotNumberExtendedTooltip</name>
@@ -4229,7 +4181,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.SourceOfOrigin</segments>
+      <segments>Object.DELETE_ConsignorBatches.SourceOfOrigin</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesSourceOfOriginExtendedTooltip</name>
@@ -4279,7 +4231,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.Store</segments>
+      <segments>Object.DELETE_ConsignorBatches.Store</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesStoreExtendedTooltip</name>
@@ -4329,7 +4281,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.Batch</segments>
+      <segments>Object.DELETE_ConsignorBatches.Batch</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesBatchExtendedTooltip</name>
@@ -4379,7 +4331,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ConsignorBatches.Quantity</segments>
+      <segments>Object.DELETE_ConsignorBatches.Quantity</segments>
      </dataPath>
      <extendedTooltip>
       <name>ConsignorBatchesQuantityExtendedTooltip</name>

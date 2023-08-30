@@ -372,6 +372,80 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="bb95c32f-e729-46df-b7a6-1cfa820b04d3">
+  <producedTypes>
+   <objectType typeId="aa09b408-9b12-4479-811c-262ba4183087" valueTypeId="b634b242-f296-43eb-8244-fe12adc9b7ac"/>
+   <rowType typeId="47b1601b-4fb8-40db-ba7f-15c2f6794228" valueTypeId="1eff90f3-6fda-4c19-b85d-e833ce19ffe4"/>
+  </producedTypes>
+  <name>ConsignorsInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>Consignors info</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Информация о грузоотправителях</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Consignors info</value>
+  </synonym>
+  <attributes uuid="b3e741c5-882f-4843-abf9-66751c2aeba7">
+   <name>Company</name>
+   <synonym>
+    <key>en</key>
+    <value>Company</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Организация</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Şirket</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.OurCompany</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="919333dd-9e34-42c7-8f9c-c4d9ccbd1e8f">
+   <name>Consignor</name>
+   <synonym>
+    <key>en</key>
+    <value>Consignor</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Комитент</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Konsiyeye veren</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.OurCompany</name>
+    <value xsi:type="core:BooleanValue"/>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <forms uuid="c66d8de2-25be-4f7e-9861-2b2bc8ca43d8">
   <name>ItemForm</name>
   <synonym>

@@ -1556,6 +1556,29 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_128", NStr("en='Wrong data in basis document';
 		|ru='Не правильные данные в документе основания';
 		|tr='Wrong data in basis document'", Lang));
+	Strings.Insert("Error_129", NStr("en='Transaction type [%1] is available only for own stocks, [%2][%3] is [%4] stocks';
+		|ru='Тип транзакции [%1] доступен только для собственных запасов, [%2][%3] является запасами [%4]';
+		|tr='Transaction type [%1] is available only for own stocks, [%2][%3] is [%4] stocks'", Lang));
+	Strings.Insert("Error_130", NStr("en='Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks';
+		|ru='Тип транзакции [%1] доступен только для запасов комитента, [%2][%3] являются собственными запасами';
+		|tr='Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks'", Lang));
+	Strings.Insert("Error_131", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
+		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
+		|tr='Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	Strings.Insert("Error_132", NStr("en='Company [%1] can only be specified once';
+		|ru='Компания [%1] может быть указана только один раз';
+		|tr='Company [%1] can only be specified once'", Lang));	
+	Strings.Insert("Error_133", NStr("en='Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks';
+		|ru='Открытие записи [Отгрузка торговому агенту] доступно только для собственных запасов, [%1][%2] является запасами [%3]';
+		|tr='Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks'", Lang));
+	Strings.Insert("Error_134", NStr("en='Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks';
+		|ru='Тип транзакции [Получение от комитента] доступен только для запасов комитента, [%1][%2] являются собственными запасами';
+		|tr='Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks'", Lang));
+	Strings.Insert("Error_135", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
+		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
+		|tr='Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	
+	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
 		|tr='Fill total amount. Row: [%1]'", Lang));

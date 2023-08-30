@@ -831,7 +831,7 @@ Function R2031B_ShipmentInvoicing()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |		INNER JOIN GoodReceiptInfo AS GoodReceipts
-		   |		ON ItemList.RowKey = GoodReceipts.Key
+		   |		ON ItemList.Key = GoodReceipts.Key
 		   |WHERE
 		   |	TRUE";
 EndFunction

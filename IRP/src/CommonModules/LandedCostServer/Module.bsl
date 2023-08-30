@@ -2987,7 +2987,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance = NewRow.ExtraDirectCostTaxAmount;
 		
 		NewRowReceivedBatch.AllocatedCostAmountBalance       = NewRow.AllocatedCostAmount;
-		NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = NewRow.AllocatedCostAmount;
+		NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = NewRow.AllocatedCostTaxAmount;
 		
 		NewRowReceivedBatch.AllocatedRevenueAmountBalance    = NewRow.AllocatedRevenueAmount;
 		NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = NewRow.AllocatedRevenueTaxAmount;

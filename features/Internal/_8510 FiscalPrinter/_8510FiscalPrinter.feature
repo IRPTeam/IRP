@@ -2609,3 +2609,20 @@ Scenario: _0260186 check show fiscal transaction from POS
 		Then the number of "TransactionList" table lines is "больше" "0"
 	And I close all client application windows
 
+
+Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
+	And I close all client application windows
+	* Create Consolidated retail sales with status New
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		
+		
+				
+
+
+// Scenario: _0260187 add one more Acquiring terminal and check open and close session
+// 	And I close all client application windows
+// 	* Create Acquiring terminal

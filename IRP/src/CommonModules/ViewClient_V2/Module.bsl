@@ -2154,26 +2154,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_INVENTORY_ORIGIN
-
-// ItemList.InventiryOrigin
-Procedure ItemListInventoryOriginOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListInventoryOriginOnChange(Parameters);
-EndProcedure
-
-// ItemList.InventoryOrigin.Set
-Procedure SetItemListInventoryOrigin(Object, Form, Row, Value) Export
-	Row.InventoryOrigin = Value;
-	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgramChange", True);
-	ControllerClientServer_V2.ItemListInventoryOriginOnChange(Parameters);
-EndProcedure
-
-#EndRegion
-
 #Region ITEM_LIST_BILL_OF_MATERIALS
 
 // ItemList.BillOfMaterials
@@ -4132,8 +4112,16 @@ Procedure ViewIdleHandler(Form, Object) Export
 		Return;
 	EndIf;
 	
+	OpenedSplashForm = GetSplashByUUID(Form.BackgroundJobSplash); // See CommonForm.BackgroundJobSplash
+	
 	If JobStatus.Status = PredefinedValue("Enum.JobStatus.Canceled") 
 		Or JobStatus.Status = PredefinedValue("Enum.JobStatus.Failed") Then
+			
+			For Each Msg In JobStatus.SystemMessages Do
+				NewMsg = OpenedSplashForm.SystemMessages.Add();
+				NewMsg.Message = Msg;
+			EndDo;
+			
 			CancelIdleHandler(Form);
 			Return;
 	EndIf;
@@ -4147,8 +4135,7 @@ Procedure ViewIdleHandler(Form, Object) Export
 		If Form.BackgroundJobSplash = Undefined Then
 			Return;
 		EndIf;
-
-		OpenedSplashForm = GetSplashByUUID(Form.BackgroundJobSplash); // See CommonForm.BackgroundJobSplash
+		
 		If OpenedSplashForm <> Undefined And OpenedSplashForm.IsOpen() Then
 			If Not JobStatus.CompletePercent = Undefined Then
 				OpenedSplashForm.Items.Percent.MaxValue = JobStatus.CompletePercent.Total;
@@ -4170,12 +4157,14 @@ Procedure ViewIdleHandler(Form, Object) Export
 		EndIf;
 	Else
 		// complete..
-		JobResult = GetFromTempStorage(JobStatus.StorageAddress);
-		JobResult.Parameters.Object = Object;
-		JobResult.Parameters.Form   = Form;
-		ControllerClientServer_V2.OnChainComplete(JobResult.Parameters);
-		ModelClientServer_V2.DestroyEntryPoint(JobResult.Parameters);
+		JobResult = JobStatus.Result;
 		
+		If Not JobResult = Undefined Then
+			JobResult.Parameters.Object = Object;
+			JobResult.Parameters.Form   = Form;
+			ControllerClientServer_V2.OnChainComplete(JobResult.Parameters);
+			ModelClientServer_V2.DestroyEntryPoint(JobResult.Parameters);
+		EndIf;
 		CancelIdleHandler(Form);
 	EndIf;
 EndProcedure	
@@ -4191,6 +4180,12 @@ Procedure CancelIdleHandler(Form)
 			OpenedSplashForm.FormCanBeClose = True;
 			OpenedSplashForm.CommandBar.ChildItems.FormOK.Visible = True;
 			OpenedSplashForm.Items.Decoration.Visible = False;
+			
+			If OpenedSplashForm.SystemMessages.Count() And Not OpenedSplashForm.Items.GroupMessages.Visible Then
+				OpenedSplashForm.Items.GroupMessages.Visible = True;
+				OpenedSplashForm.DoNotCloseOnFinish = True;
+			EndIf;
+			
 			If Not OpenedSplashForm.DoNotCloseOnFinish Then
 				OpenedSplashForm.Close();
 			EndIf;

@@ -521,7 +521,7 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
-  <eventSubscriptions>EventSubscription.BeforeWrite_AdditionalTableControlDocument</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
@@ -694,6 +694,7 @@
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
+  <constants>Constant.AdditionalTableControlExceptions</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -734,6 +735,7 @@
   <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <commonForms>CommonForm.BackgroundJobSplash</commonForms>
   <commonForms>CommonForm.HTMLPrintForm</commonForms>
+  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -1011,7 +1013,7 @@
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
-  <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
@@ -1055,7 +1057,7 @@
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
   <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
-  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.T9010S_AccountsItemKey</informationRegisters>
   <informationRegisters>InformationRegister.T9011S_AccountsCashAccount</informationRegisters>
   <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>
@@ -1071,6 +1073,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1152,10 +1155,10 @@
   <accumulationRegisters>AccumulationRegister.R7030T_ProductionPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8012B_ConsignorInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8014T_ConsignorSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8015T_ConsignorPrices</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9010B_SourceOfOriginStock</accumulationRegisters>

@@ -284,14 +284,6 @@ EndProcedure
 
 #EndRegion
 
-#Region INVENTORY_ORIGIN
-
-Procedure ItemListInventoryOriginOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListInventoryOriginOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
 #Region PRICE_TYPE
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export

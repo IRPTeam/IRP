@@ -241,17 +241,17 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Ferron BP'      |
+			| 'Nicoletta'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| 'Description'          |
-			| 'Company Ferron BP'    |
+			| 'Company Nicoletta'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                         |
-			| 'Basic Partner terms, without VAT'    |
+			| 'Description'                               |
+			| 'Posting by Standard Partner term Customer' |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table

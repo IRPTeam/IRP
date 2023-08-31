@@ -55,10 +55,10 @@
     <maxValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="26864409-ac72-4801-abf2-d914600cb272">
-    <name>RowKey</name>
+    <name>DELETE_RowKey</name>
     <synonym>
       <key>en</key>
-      <value>Row key</value>
+      <value>DELETE row key</value>
     </synonym>
     <type>
       <types>DefinedType.typeRowID</types>
@@ -84,10 +84,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="51f7e1a2-7d67-4b84-901f-472b3ec50e43">
-    <name>Partner</name>
+    <name>DELETE_Partner</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>DELETE partner</value>
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
@@ -99,10 +99,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="3a614bbc-d100-4af6-8655-9fc760ebc365">
-    <name>Agreement</name>
+    <name>DELETE_Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Partner term</value>
+      <value>DELETE Partner term</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>
@@ -128,10 +128,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="ead31481-b7bd-43e7-af4c-5d3520c4b182">
-    <name>PurchaseInvoice</name>
+    <name>DELETE_PurchaseInvoice</name>
     <synonym>
       <key>en</key>
-      <value>Purchase invoice</value>
+      <value>DELETE purchase invoice</value>
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>
@@ -210,10 +210,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="fef065f6-26c0-42e7-9dd9-33ce06afc188">
-    <name>DontCalculateRow</name>
+    <name>DELETE_DontCalculateRow</name>
     <synonym>
       <key>en</key>
-      <value>Dont calculate row</value>
+      <value>DELETE dont calculate row</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -263,10 +263,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="51d89aa3-a27f-40ad-8f73-21321be24ba3">
-    <name>ConsignorPrice</name>
+    <name>DELETE_ConsignorPrice</name>
     <synonym>
       <key>en</key>
-      <value>Consignor price</value>
+      <value>DELETE consignor price</value>
     </synonym>
     <type>
       <types>DefinedType.typePrice</types>

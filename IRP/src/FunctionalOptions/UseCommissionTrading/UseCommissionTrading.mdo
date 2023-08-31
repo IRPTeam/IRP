@@ -27,4 +27,5 @@
   <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.InventoryOrigin</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.InventoryOrigin</content>
   <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.InventoryOrigin</content>
+  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.InventoryOrigin</content>
 </mdclass:FunctionalOption>

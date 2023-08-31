@@ -39,6 +39,7 @@ Scenario: _04022 preparation (Inventory transfer)
 		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
+		When Create catalog Items objects (commission trade)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -530,16 +531,17 @@ Scenario: _0402431 check Inventory transfer movements by the Register  "R4010 Ac
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                    | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '3'           | 'Store 01'     | 'ODS'        | ''                     |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '4'           | 'Store 01'     | 'S/Yellow'   | ''                     |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '3'           | 'Store 02'     | 'ODS'        | ''                     |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '4'           | 'Store 02'     | 'S/Yellow'   | ''                     |
-						
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Store 01'   | 'PZU'      | ''                  |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'PZU'      | '0512'              |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Store 02'   | 'PZU'      | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'PZU'      | '0512'              |		
 		And I close all client application windows
 
 Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Free stocks" (transfer commission products)
@@ -554,17 +556,17 @@ Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Fr
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35'   | ''              | ''                      | ''            | ''             | ''            |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''             | ''            |
-			| 'Register  "R4011 Free stocks"'                      | ''              | ''                      | ''            | ''             | ''            |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            |
-			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '2'           | 'Store 01'     | 'S/Yellow'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '2'           | 'Store 01'     | 'S/Yellow'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '3'           | 'Store 01'     | 'ODS'         |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Store 02'     | 'S/Yellow'    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Store 02'     | 'S/Yellow'    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '3'           | 'Store 02'     | 'ODS'         |
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                    | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Store 01'   | 'PZU'      |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'PZU'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Store 02'   | 'PZU'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'PZU'      |		
 		And I close all client application windows
 
 Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
@@ -588,30 +590,6 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Store 02'   | 'S/Yellow'    |
 		And I close all client application windows
 
-Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Consignor batch wise balance" (transfer commission products)
-	* Select Inventory transfer
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '192'       |
-	* Check movements by the Register  "R8013 Consignor batch wise balance"
-		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Register  "R8013 Consignor batch wise balance"'   | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Store 01' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 01' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 01' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'ODS'      | '899007790088'      | ''                 |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'ODS'      | '899007790088'      | ''                 |
-		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 	* Select Inventory transfer

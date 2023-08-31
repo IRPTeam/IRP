@@ -9,10 +9,10 @@
     <recordType typeId="098c2b81-7d1d-46dd-86d9-981692cf8257" valueTypeId="879bd9d7-723c-4e38-995c-0e502fc4f245"/>
     <recordManagerType typeId="1ab89f12-786f-4063-8925-7b8865146350" valueTypeId="9467d40d-52a5-47a7-918c-c9793c03a335"/>
   </producedTypes>
-  <name>ConsignorSerialLotNumbers</name>
+  <name>DELETE_ConsignorSerialLotNumbers</name>
   <synonym>
     <key>en</key>
-    <value>Consignor serial lot numbers</value>
+    <value>DELETE consignor serial lot numbers</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

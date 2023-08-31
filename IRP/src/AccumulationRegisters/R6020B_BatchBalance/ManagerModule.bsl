@@ -106,7 +106,6 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost,
 	|
-	//#2066
 	|	R6010B_BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -124,7 +123,6 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount
-	//--
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
@@ -246,7 +244,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
-	//#2066
 	|	R6010B_BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -264,7 +261,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
@@ -422,7 +418,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.RecordType AS RecordType,
 	|	BatchBalance.Document AS Document,
 	|	BatchBalance.Quantity AS Quantity,
-	//#2066
 	|	BatchBalance.InvoiceAmount AS InvoiceAmount,
 	|	BatchBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -440,7 +435,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|
 	|	BatchBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	//--
 	|	BatchBalance.Batch AS Batch,
 	|	BatchBalance.BatchKey AS BatchKey,
 	|	BatchBalance.ItemKey AS ItemKey,

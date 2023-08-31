@@ -84,8 +84,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	PostponeWithReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithReserve");
 	PostponeWithoutReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithoutReserve");
-	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithReserve;
-	Form.Items.PostponeCurrentReceiptWithReserve.Visible = PostponeWithoutReserve;
+	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithReserve OR (PostponeWithoutReserve AND Form.isReturn);
+	Form.Items.PostponeCurrentReceiptWithReserve.Visible = PostponeWithoutReserve AND NOT Form.isReturn;
 	Form.Items.OpenPostponedReceipt.Visible = PostponeWithReserve OR PostponeWithoutReserve;
 
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
@@ -930,6 +930,7 @@ Procedure UpdateHTMLPictures() Export
 	EndIf;
 
 	If CurrentRow = Undefined Then
+		ItemPicture = Undefined;
 		Return;
 	EndIf;
 
@@ -1032,16 +1033,21 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	PaymentForm = Result.PaymentForm; // See DataProcessor.PointOfSale.Form.Payment
 	Result.PaymentForm = Undefined;
 
-	CashbackAmount = WriteTransaction(Result);
-	ResultPrint = Await PrintFiscalReceipt(DocRef);
+	TransactionResult = WriteTransaction(Result);
+	
+	ResultPrint = True;
+	For Each DocRef In TransactionResult.Refs Do
+		ResultPrint = ResultPrint AND Await PrintFiscalReceipt(DocRef);
+	EndDo;
 
 	If Not ResultPrint Then
+		ReceiptsCanceling(TransactionResult.Refs);
 		Return;
 	EndIf;
 
 	PaymentForm.Close();
 
-	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
+	DetailedInformation = R().S_030 + ": " + Format(TransactionResult.CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 
 	DPPointOfSaleClient.BeforeStartNewTransaction(Object, ThisObject, DocRef);
@@ -1240,6 +1246,7 @@ Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	ObjectValue.Fill(Undefined);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+	ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed;
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
@@ -1256,15 +1263,29 @@ Procedure NewTransactionAtServer()
 	SalesPersonByDefault = Undefined;
 	ThisObject.RetailBasis = Undefined;
 	ThisObject.isReturn = False;
+	ThisObject.PostponedReceipt = Undefined;
 EndProcedure
 
+// Write transaction.
+// 
+// Parameters:
+//  PaymentResult - Structure - Payment result
+// 
+// Returns:
+//  Structure -  Write transaction:
+// * Refs - Array of DocumentRef - refs of documents 
+// * CashbackAmount - Number - 
 &AtServer
-Function WriteTransaction(Result)
+Function WriteTransaction(PaymentResult)
+	Result = New Structure;
+	Result.Insert("Refs", New Array);
+	Result.Insert("CashbackAmount", 0);
+	
 	OneHundred = 100;
-	If Result = Undefined Or Not Result.Payments.Count() Then
-		Return 0;
+	If PaymentResult = Undefined Or Not PaymentResult.Payments.Count() Then
+		Return Result;
 	EndIf;
-	Payments = Result.Payments.Unload();
+	Payments = PaymentResult.Payments.Unload();
 	ZeroAmountFilter = New Structure();
 	ZeroAmountFilter.Insert("Amount", 0);
 	ZeroAmountFoundRows = Payments.FindRows(ZeroAmountFilter);
@@ -1286,7 +1307,7 @@ Function WriteTransaction(Result)
 
 	If ThisObject.isReturn Then
 
-		PaymentsTable = Result.Payments.Unload(); // ValueTable
+		PaymentsTable = PaymentResult.Payments.Unload(); // ValueTable
 		For Each PaymentsItem In PaymentsTable Do
 			If PaymentsItem.Amount < 0 Then
 				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
@@ -1294,29 +1315,39 @@ Function WriteTransaction(Result)
 		EndDo;
 
 		If ThisObject.RetailBasis.IsEmpty() Then
-			CreateReturnWithoutBase(PaymentsTable);
+			DocRef = CreateReturnWithoutBase(PaymentsTable, Enums.RetailSalesReceiptTransactionTypes.Completed);
+			Result.Refs.Add(DocRef);
 		Else
-			CreateReturnOnBase(PaymentsTable);
+			DocRefs = CreateReturnOnBase(PaymentsTable, Enums.RetailSalesReceiptTransactionTypes.Completed);
+			For Each DocRef In DocRefs Do
+				Result.Refs.Add(DocRef);
+			EndDo;
 		EndIf;
 
 	Else
 
-		ObjectValue = FormAttributeToValue("Object");
+		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailSalesReceipt") Then
+			ObjectValue = ThisObject.PostponedReceipt.GetObject();
+			ThisObject.PostponedReceipt = Undefined;
+		Else
+			ObjectValue = FormAttributeToValue("Object");
+		EndIf;
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed;
 		ObjectValue.Payments.Load(Payments);
 		For Each Row In ObjectValue.Payments Do
 			If ValueIsFilled(Row.PaymentType) Then
 				Row.FinancialMovementType = Row.PaymentType.FinancialMovementType;
 			EndIf;
 		EndDo;
-		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
+		ObjectValue.PaymentMethod = PaymentResult.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 
 		ObjectValue.Write(DocumentWriteMode.Posting);
 
 		DocRef = ObjectValue.Ref;
 		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-		ValueToFormAttribute(ObjectValue, "Object");
+		Result.Refs.Add(DocRef);
 	EndIf;
 
 	CashAmountFilter = New Structure();
@@ -1327,8 +1358,9 @@ Function WriteTransaction(Result)
 			CashbackAmount = CashbackAmount + Row.Amount * (-1);
 		EndIf;
 	EndDo;
+	Result.CashbackAmount = CashbackAmount; 
 
-	Return CashbackAmount;
+	Return Result;
 EndFunction
 
 &AtClient
@@ -1870,7 +1902,7 @@ Function GetBasisResultTable(Val BasisesTable)
 EndFunction
 
 &AtServer
-Procedure CreateReturnOnBase(PaymentData)
+Function CreateReturnOnBase(PaymentData, TransactionType)
 
 	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
 
@@ -1919,24 +1951,35 @@ Procedure CreateReturnOnBase(PaymentData)
 	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(
 		PredefinedValue("Document.RetailReturnReceipt.EmptyRef").Metadata(), ExtractedData);
 
-	NewDoc = Undefined;
+	DocRefs = New Array;
+//	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
-		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
+			NewDoc = ThisObject.PostponedReceipt.GetObject();
+			ThisObject.PostponedReceipt = Undefined;
+		Else
+			NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+		EndIf;
 		NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		NewDoc.TransactionType = TransactionType;
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
-		NewDoc.Write();
-	EndDo;
-	If Not NewDoc = Undefined Then
 		NewDoc.Write(DocumentWriteMode.Posting);
-		DocRef = NewDoc.Ref;
-		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-	EndIf;
+		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		DocRefs.Add(NewDoc.Ref);
+	EndDo;
+//	If Not NewDoc = Undefined Then
+//		NewDoc.Write(DocumentWriteMode.Posting);
+//		DocRef = NewDoc.Ref;
+//		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+//	EndIf;
+	
+	Return DocRefs;
 
-EndProcedure
+EndFunction
 
 &AtServer
-Procedure CreateReturnWithoutBase(PaymentData)
+Function CreateReturnWithoutBase(PaymentData, TransactionType)
 
 	FillingData = New Structure();
 	FillingData.Insert("BasedOn"                , "RetailReturnReceipt");
@@ -1960,8 +2003,14 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	FillingData.Insert("SerialLotNumbers", Object.SerialLotNumbers.Unload());
 	FillingData.Insert("ControlCodeStrings", Object.ControlCodeStrings.Unload());
 
-	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+	If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
+		NewDoc = ThisObject.PostponedReceipt.GetObject();
+		ThisObject.PostponedReceipt = Undefined;
+	Else
+		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+	EndIf;
 	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
+	NewDoc.TransactionType = TransactionType;
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
 	NewDoc.Write(DocumentWriteMode.Posting);
@@ -1969,7 +2018,9 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	DocRef = NewDoc.Ref;
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);
 
-EndProcedure
+	Return DocRef;
+
+EndFunction
 
 &AtServer
 Function GetItemListForReturn()
@@ -2171,8 +2222,17 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Postponed
+
+&AtClient
+Procedure ClearCurrentReceipt(Command)
+	NewTransaction();
+	SetShowItems();
+	SetDetailedInfo("");
+	UpdateHTMLPictures();
+	BuildDetailedInformation(Undefined);
+	ThisObject.Modified = False;
+EndProcedure
 
 &AtClient
 Procedure PostponeCurrentReceipt(Command)
@@ -2207,26 +2267,164 @@ EndProcedure
 &AtServer
 Procedure PostponeCurrentReceiptAtServer(WithReserve)
 	
-	ObjectValue = FormAttributeToValue("Object");
-	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	ObjectValue.Workstation = Workstation;
+	If Not ThisObject.isReturn Then
+		ObjectValue = FormAttributeToValue("Object");
+		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		ObjectValue.Workstation = Workstation;
+		
+		If WithReserve Then
+			ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve;
+		Else
+			ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Postponed;
+		EndIf;
+		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
-	If WithReserve Then
-		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve;
+		ObjectValue.Write(DocumentWriteMode.Posting);
+	ElsIf ThisObject.RetailBasis.IsEmpty() Then
+		CreateReturnWithoutBase(New Array, Enums.RetailSalesReceiptTransactionTypes.Postponed);
 	Else
-		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Postponed;
+		CreateReturnOnBase(New Array, Enums.RetailSalesReceiptTransactionTypes.Postponed);
 	EndIf;
-	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
-
-	ObjectValue.Write(DocumentWriteMode.Posting);
 
 EndProcedure	
 
 &AtClient
 Procedure OpenPostponedReceipt(Command)
 	
+	If Object.ItemList.Count() > 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6);
+		Return;
+	EndIf;	
+	
+	Notification = New NotifyDescription("SelectPostonedReceiptNotify", ThisObject);
+	OpenForm("DataProcessor.PointOfSale.Form.SelectPostonedReceipt", , , , , , 
+		Notification, FormWindowOpeningMode.LockWholeInterface);
 
 EndProcedure
 
+&AtClient
+Procedure SelectPostonedReceiptNotify(SelectedReceipt, AddInfo) Export
+	If SelectedReceipt = Undefined Then
+		Return;
+	EndIf;
+	
+	OpenPostponedReceiptAtServer(SelectedReceipt);
+	
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	ControlCodeStringsClient.UpdateState(ThisObject.Object);
+	
+	EnabledPaymentButton();
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
+
+	If isReturn Then
+		Items.PageButtons.CurrentPage = Items.ReturnPage;
+	Else
+		SetShowItems();
+	EndIf;
+	
+	SetDetailedInfo("");
+	CurrentData = Items.ItemList.CurrentData;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));	
+	
+	ThisObject.Modified = True;
+EndProcedure
+
+// Open postponed receipt at server.
+// 
+// Parameters:
+//  Receipt - DocumentRef.RetailReturnReceipt - Receipt
+&AtServer
+Procedure OpenPostponedReceiptAtServer(Receipt)
+	ThisObject.PostponedReceipt = Receipt;
+	ThisObject.RetailBasis = Undefined;
+	
+	ReceiptObject = Receipt.GetObject();
+	If TypeOf(Receipt) = Type("DocumentRef.RetailSalesReceipt") Then
+		ThisObject.isReturn = False;
+		ValueToFormAttribute(ReceiptObject, "Object");
+	Else
+		ThisObject.isReturn = True;
+		FillPropertyValues(ThisObject.Object, ReceiptObject,, 
+			"Ref,AddAttributes,ItemList,SpecialOffers,TaxList,Currencies,Payments,
+			|SerialLotNumbers,RowIDInfo,SourceOfOrigins,ControlCodeStrings");
+		
+		ItemListTable = ReceiptObject.ItemList.Unload();
+		SpecialOffersTable = ReceiptObject.SpecialOffers.Unload();
+		TaxListTable = ReceiptObject.TaxList.Unload();
+		SerialLotNumbersTable = ReceiptObject.SerialLotNumbers.Unload();
+		RowIDInfoTable = ReceiptObject.RowIDInfo.Unload();
+		SourceOfOriginsTable = ReceiptObject.SourceOfOrigins.Unload();
+		ControlCodeStringsTable = ReceiptObject.ControlCodeStrings.Unload();
+		
+		For Each ItemListRow In ItemListTable Do
+			NewRecord = ThisObject.Object.ItemList.Add();
+			FillPropertyValues(NewRecord, ItemListRow);
+			If Not ItemListRow.RetailSalesReceipt.IsEmpty() Then
+				NewRecord.RetailBasis = ItemListRow.RetailSalesReceipt;
+				ThisObject.RetailBasis = NewRecord.RetailBasis;
+				
+				CurrentKey = ItemListRow.Key;
+				KeyRow = RowIDInfoTable.Find(CurrentKey, "Key");
+				If KeyRow = Undefined Then
+					Continue;
+				EndIf;
+				BasisKey = KeyRow.BasisKey;
+				KeyRow.Key = BasisKey;
+				KeyRow.RowID = BasisKey;
+				KeyRow.BasisKey = "";
+				KeyRow.Basis = Undefined;
+				
+				NewRecord.Key = BasisKey;
+				TableRows = SpecialOffersTable.FindRows(New Structure("Key", CurrentKey));
+				For Each TableRow In TableRows Do
+					TableRow.Key = BasisKey;
+				EndDo;
+				TableRows = TaxListTable.FindRows(New Structure("Key", CurrentKey));
+				For Each TableRow In TableRows Do
+					TableRow.Key = BasisKey;
+				EndDo;
+				TableRows = SerialLotNumbersTable.FindRows(New Structure("Key", CurrentKey));
+				For Each TableRow In TableRows Do
+					TableRow.Key = BasisKey;
+				EndDo;
+				TableRows = SourceOfOriginsTable.FindRows(New Structure("Key", CurrentKey));
+				For Each TableRow In TableRows Do
+					TableRow.Key = BasisKey;
+				EndDo;
+				TableRows = ControlCodeStringsTable.FindRows(New Structure("Key", CurrentKey));
+				For Each TableRow In TableRows Do
+					TableRow.Key = BasisKey;
+				EndDo;
+			EndIf;
+		EndDo;
+		
+		ThisObject.Object.SpecialOffers.Load(SpecialOffersTable);
+		ThisObject.Object.TaxList.Load(TaxListTable);
+		ThisObject.Object.Currencies.Load(ReceiptObject.Currencies.Unload());
+		ThisObject.Object.SerialLotNumbers.Load(SerialLotNumbersTable);
+		ThisObject.Object.RowIDInfo.Load(RowIDInfoTable);
+		ThisObject.Object.SourceOfOrigins.Load(SourceOfOriginsTable);
+		ThisObject.Object.ControlCodeStrings.Load(ControlCodeStringsTable);
+	EndIf;
+EndProcedure
+
+// Receipts canceling.
+// 
+// Parameters:
+//  Refs - Array of DocumentRef.RetailSalesReceipt - Refs
+&AtServer
+Procedure ReceiptsCanceling(Refs)
+	For Each Ref In Refs Do
+		ThisObject.PostponedReceipt = Ref;
+		RefObject = Ref.GetObject();
+		If RefObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled Then
+			Continue;
+		EndIf;
+		RefObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled;
+		RefObject.Write(DocumentWriteMode.Posting);
+	EndDo;
+EndProcedure
 
 #EndRegion

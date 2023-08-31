@@ -3,11 +3,13 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Payments_Amount = ThisObject.Payments.Total("Amount");
-	ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");
-	If ItemList_Amount <> Payments_Amount Then
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ItemList_Amount));
+	If ThisObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed Then
+		Payments_Amount = ThisObject.Payments.Total("Amount");
+		ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");
+		If ItemList_Amount <> Payments_Amount Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ItemList_Amount));
+		EndIf;
 	EndIf;
 	
 	If Cancel Then
@@ -62,7 +64,8 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
-	If ThisObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled Then
+	If ThisObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Postponed
+			OR ThisObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled Then
 		UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 		RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
 		Return;

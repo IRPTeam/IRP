@@ -600,6 +600,7 @@ Function ItemList()
 		   |	END AS Agreement,
 		   |	ISNULL(ItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
 		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.TransactionType AS TransactionType,
 		   |	CASE
 		   |		WHEN ItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
 		   |			THEN ItemList.Ref
@@ -643,6 +644,7 @@ EndFunction
 Function Payments()
 	Return "SELECT
 	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.TransactionType AS TransactionType,
 	|	Payments.Ref.Company AS Company,
 	|	Payments.Ref AS Basis,
 	|	Payments.Account AS Account,
@@ -677,6 +679,7 @@ EndFunction
 Function OffersInfo()
 	Return "SELECT
 		   |	RetailReturnReceiptItemList.Ref.Date AS Period,
+		   |	RetailReturnReceiptItemList.Ref.TransactionType AS TransactionType,
 		   |	RetailReturnReceiptItemList.RetailSalesReceipt AS Invoice,
 		   |	TableRowIDInfo.RowID AS RowKey,
 		   |	RetailReturnReceiptItemList.ItemKey,
@@ -708,6 +711,7 @@ Function RetailReturn()
 		   |	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
 		   |	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 		   |	RetailReturnReceiptItemList.Ref.Date AS Period,
+		   |	RetailReturnReceiptItemList.Ref.TransactionType AS TransactionType,
 		   |	CASE
 		   |		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
 		   |			THEN RetailReturnReceiptItemList.Ref
@@ -735,6 +739,7 @@ Function RetailReturn()
 		   |	RetailReturnReceiptItemList.Ref.Company,
 		   |	RetailReturnReceiptItemList.ItemKey,
 		   |	RetailReturnReceiptItemList.Ref.Date,
+		   |	RetailReturnReceiptItemList.Ref.TransactionType,
 		   |	CASE
 		   |		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
 		   |			THEN RetailReturnReceiptItemList.Ref
@@ -757,6 +762,7 @@ Function RetailReturn()
 		   |		ELSE -tmpRetailReturn.QuantityBySerialLtNumbers
 		   |	END AS Quantity,
 		   |	tmpRetailReturn.Period AS Period,
+		   |	tmpRetailReturn.TransactionType AS TransactionType,
 		   |	tmpRetailReturn.RetailSalesReceipt AS RetailSalesReceipt,
 		   |	tmpRetailReturn.RowKey AS RowKey,
 		   |	tmpRetailReturn.SerialLotNumber AS SerialLotNumber,
@@ -797,6 +803,7 @@ EndFunction
 Function SerialLotNumbers()
 	Return "SELECT
 		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.TransactionType AS TransactionType,
 		   |	SerialLotNumbers.Ref.Company AS Company,
 		   |	SerialLotNumbers.Ref.Branch AS Branch,
 		   |	SerialLotNumbers.Key,
@@ -902,6 +909,7 @@ Function R9010B_SourceOfOriginStock()
 		   |		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
 		   |WHERE
 		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,
@@ -921,7 +929,8 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND SerialLotNumbers.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2001T_Sales()
@@ -936,7 +945,8 @@ Function R2001T_Sales()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -944,7 +954,8 @@ Function R2005T_SalesSpecialOffers()
 		   |INTO R2005T_SalesSpecialOffers
 		   |FROM
 		   |	OffersInfo AS OffersInfo
-		   |WHERE TRUE";
+		   |WHERE TRUE
+		   |	AND OffersInfo.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 
 EndFunction
 
@@ -962,6 +973,7 @@ Function R2006T_Certificates()
 		   |	LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 		   |		ON ItemList.Key = SerialLotNumbers.Key
 		   |WHERE ItemList.IsCertificate
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |
 		   |UNION ALL
 		   |	
@@ -974,7 +986,8 @@ Function R2006T_Certificates()
 		   |	""ReturnUsed""
 		   |FROM
 		   |	Payments AS Payments
-		   |WHERE Payments.IsCertificate";
+		   |WHERE Payments.IsCertificate
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -991,7 +1004,8 @@ Function R3010B_CashOnHand()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsPostponedPayment
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R3011T_CashFlow()
@@ -1009,7 +1023,8 @@ Function R3011T_CashFlow()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsPostponedPayment
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -1021,7 +1036,8 @@ Function R4011B_FreeStocks()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.GoodsReceiptExists";
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -1048,6 +1064,7 @@ Function R4010B_ActualStocks()
 		   |WHERE
 		   |	NOT ItemList.IsService
 		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,
@@ -1069,7 +1086,8 @@ Function R3050T_PosCashBalances()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	NOT Payments.IsPaymentAgent";
+		   |	NOT Payments.IsPaymentAgent
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -1079,7 +1097,8 @@ Function R2050T_RetailSales()
 		   |FROM
 		   |	RetailReturn AS RetailReturn
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND RetailReturn.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R5021T_Revenues()
@@ -1091,7 +1110,8 @@ Function R5021T_Revenues()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2002T_SalesReturns()
@@ -1102,7 +1122,8 @@ Function R2002T_SalesReturns()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2021B_CustomersTransactions()
@@ -1123,6 +1144,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -1152,6 +1174,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -1182,6 +1205,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	Payments.IsPaymentAgent
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	Payments.Period,
@@ -1208,6 +1232,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1232,6 +1257,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1256,6 +1282,7 @@ Function R5010B_ReconciliationStatement()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	Payments.IsPaymentAgent
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	Payments.Company,
@@ -1323,7 +1350,8 @@ Function R3022B_CashInTransitOutgoing()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	Payments.IsPostponedPayment";
+		   |	Payments.IsPostponedPayment
+		   |	AND Payments.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R8013B_ConsignorBatchWiseBalance()

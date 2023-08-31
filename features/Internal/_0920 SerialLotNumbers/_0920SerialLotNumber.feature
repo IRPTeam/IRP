@@ -4192,12 +4192,13 @@ Scenario: _092092 replace sln
 	* Open replace serial lot number data proc
 		Given I open hyperlink "e1cib/app/DataProcessor.ReplaceSerialLotNumber"
 	* Select sln (owner not item key)
-		And I select from the drop-down list named "SerialLotNumber" by "0514" string
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "0514" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then the form attribute named "Item" became equal to ""
 	* Select sln (owner item key)
-		And I select from the drop-down list named "SerialLotNumber" by "9009099" string
+		And I select "9009099" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I click Select button of "New item" field
 		And I go to line in "List" table
 			| 'Description'                     |
@@ -4265,7 +4266,8 @@ Scenario: _092093 try replace sln (2 sln in one line)
 	* Open replace serial lot number data proc
 		Given I open hyperlink "e1cib/app/DataProcessor.ReplaceSerialLotNumber"
 	* Select sln (owner not item key)
-		And I select from the drop-down list named "SerialLotNumber" by "9009100" string
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "9009100" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I click Select button of "New item" field
 		And I go to line in "List" table
 			| 'Description'                     |
@@ -4298,3 +4300,52 @@ Scenario: _092093 try replace sln (2 sln in one line)
 			| 'Yes'     | '1'                 | 'Document.ShipmentConfirmation'        | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'         | 'ItemList'          | '4'             | 'Product 7 with SLN (new row)'   | 'ODS'        | 'No'           | ''                          | ''                | ''            | 'No'             | ''                          | ''               | '9009100'             | 'SerialLotNumbers'      | '3'                  |
 			| 'Yes'     | '1'                 | 'Document.StockAdjustmentAsWriteOff'   | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31'   | 'ItemList'          | '1'             | 'Product 7 with SLN (new row)'   | 'ODS'        | 'No'           | ''                          | ''                | ''            | 'No'             | ''                          | ''               | '9009100'             | 'SerialLotNumbers'      | '1'                  |
 		And I close all client application windows
+
+Scenario: _092095 load sln in DataProcessor Replace Serial Lot Number
+	And I close all client application windows
+	* Open replace serial lot number data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.ReplaceSerialLotNumber"
+	* Load sln
+		And I click the button named "Load"
+		And in "TableDoc" spreadsheet document I move to "R2C1" cell
+		And in "TableDoc" spreadsheet document I double-click the current cell
+		And in "TableDoc" spreadsheet document I input text "8908899880"
+		And in "TableDoc" spreadsheet document I move to "R3C1" cell
+		And in "TableDoc" spreadsheet document I double-click the current cell
+		And in "TableDoc" spreadsheet document I input text "8908899879"
+		And in "TableDoc" spreadsheet document I move to "R4C1" cell
+		And in "TableDoc" spreadsheet document I double-click the current cell
+		And in "TableDoc" spreadsheet document I input text "890889987911"
+		And I click "Find serial lot numbers" button
+		And I click "Ok" button
+	* Check filling SerialLotNumbers table
+		And "SerialLotNumbers" table became equal
+			| 'Key SLN' | 'Serial lot number' | 'Item'               | 'Item key' | 'New item' | 'New item key' |
+			| ''        | '8908899880'        | 'Product 1 with SLN' | 'PZU'      | ''         | ''             |
+			| ''        | '8908899879'        | 'Product 1 with SLN' | 'PZU'      | ''         | ''             |
+	* Filling item and item key
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 2 with SLN' |
+		And I select current line in "List" table
+		And I select from the drop-down list named "ItemKey" by "UNIQ" string
+		And I click "Find refs" button
+		Then there are lines in TestClient message log
+			|'New Item is required field'|
+			|'New Item key is required field'|
+		And I click "Set item key" button
+	* Check filling item and item key
+		And I click "Find refs" button
+		And I click the button named "Replace"
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Item'               | 'Item key' | 'New item'           | 'New item key' |
+			| '8908899880'        | 'Product 2 with SLN' | 'UNIQ'     | 'Product 2 with SLN' | 'UNIQ'         |
+			| '8908899879'        | 'Product 2 with SLN' | 'UNIQ'     | 'Product 2 with SLN' | 'UNIQ'         |
+	* Check replace
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And "List" table contains lines
+			| 'Owner' | 'Serial number' |
+			| 'UNIQ'  | '8908899879'    |
+			| 'UNIQ'  | '8908899880'    |
+		And I close all client application windows					

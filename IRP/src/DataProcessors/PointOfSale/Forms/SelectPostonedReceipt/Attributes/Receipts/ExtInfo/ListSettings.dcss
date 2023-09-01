@@ -3,6 +3,14 @@
 	<filter>
 	</filter>
 	<order>
+		<item xsi:type="OrderItemField">
+			<field>Date</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Ref</field>
+			<orderType>Asc</orderType>
+		</item>
 	</order>
 	<conditionalAppearance>
 	</conditionalAppearance>

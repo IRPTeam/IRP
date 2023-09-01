@@ -1340,8 +1340,7 @@ Function WriteTransaction(PaymentResult)
 	Else
 
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailSalesReceipt") Then
-			ObjectValue = ThisObject.PostponedReceipt.GetObject();
-			ThisObject.PostponedReceipt = Undefined;
+			ObjectValue = GetClearPostponedObject();
 		Else
 			ObjectValue = FormAttributeToValue("Object");
 		EndIf;
@@ -1968,8 +1967,7 @@ Function CreateReturnOnBase(PaymentData, TransactionType)
 //	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
-			NewDoc = ThisObject.PostponedReceipt.GetObject();
-			ThisObject.PostponedReceipt = Undefined;
+			NewDoc = GetClearPostponedObject();
 		Else
 			NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 		EndIf;
@@ -2017,8 +2015,7 @@ Function CreateReturnWithoutBase(PaymentData, TransactionType)
 	FillingData.Insert("ControlCodeStrings", Object.ControlCodeStrings.Unload());
 
 	If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
-		NewDoc = ThisObject.PostponedReceipt.GetObject();
-		ThisObject.PostponedReceipt = Undefined;
+		NewDoc = GetClearPostponedObject();
 	Else
 		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	EndIf;
@@ -2555,5 +2552,26 @@ Procedure QuestionForCancelPostponedFinish(Answer, AddInfo) Export
 		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServer
+Function GetClearPostponedObject()
+	If ThisObject.PostponedReceipt = Undefined Then
+		Return Undefined;
+	EndIf;
+	
+	ReceiptObject = ThisObject.PostponedReceipt.GetObject(); // DocumentObject.RetailSalesReceipt
+	ReceiptObject.ItemList.Clear();
+	ReceiptObject.TaxList.Clear();
+	ReceiptObject.SpecialOffers.Clear();
+	ReceiptObject.Currencies.Clear();
+	ReceiptObject.SerialLotNumbers.Clear();
+	ReceiptObject.RowIDInfo.Clear();
+	ReceiptObject.SourceOfOrigins.Clear();
+	ReceiptObject.ControlCodeStrings.Clear();
+	
+	ThisObject.PostponedReceipt = Undefined;
+	
+	Return ReceiptObject;
+EndFunction
 	
 #EndRegion

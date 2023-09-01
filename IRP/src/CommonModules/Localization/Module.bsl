@@ -605,6 +605,10 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en = 'Scan control string barcode. Wrong barcode %1'", Lang));
 	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en = 'Scan control string for each item.'", Lang));
 	
+	Strings.Insert("POS_ClearAllItems", NStr("en = 'Clear all items before continuing'", Lang));
+	Strings.Insert("POS_CancelPostponed", NStr("en = '%1 postponed receipts cancelled'", Lang));
+	Strings.Insert("POS_QuestionForCancelPostponed", NStr("en = 'There are %1 postponed receipts in the Session. Cancel all of them?'", Lang));
+	
 #EndRegion
 
 #Region Service

@@ -164,6 +164,14 @@ EndProcedure
 
 &AtClient
 Procedure CloseSession(Command)
+	CountPostponedReceipts = GetCountPostponedReceipts(Object.ConsolidatedRetailSales);
+	If CountPostponedReceipts > 0 Then
+		NotifyDescription = New NotifyDescription("QuestionForCancelPostponedFinish", ThisObject);
+		TextQuestion = StrTemplate(R().POS_QuestionForCancelPostponed, CountPostponedReceipts);
+		ShowQueryBox(NotifyDescription, TextQuestion, QuestionDialogMode.YesNo, , DialogReturnCode.No);
+		Return;
+	EndIf;
+	
 	FormParameters = New Structure();
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
@@ -219,6 +227,11 @@ EndProcedure
 
 &AtClient
 Procedure CancelSession(Command)
+	NumberOfCanceled = CancelingPostponedReceipts(Object.ConsolidatedRetailSales);
+	If NumberOfCanceled > 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_CancelPostponed, NumberOfCanceled));
+	EndIf;
+	
 	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
 	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	SetVisibilityAvailability(Object, ThisObject);
@@ -2290,7 +2303,7 @@ EndProcedure
 Procedure OpenPostponedReceipt(Command)
 	
 	If Object.ItemList.Count() > 0 Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6);
+		CommonFunctionsClientServer.ShowUsersMessage(R().POS_ClearAllItems);
 		Return;
 	EndIf;	
 	
@@ -2425,4 +2438,122 @@ Procedure ReceiptsCanceling(Refs)
 	EndDo;
 EndProcedure
 
+&AtServerNoContext
+Function CancelingPostponedReceipts(ConsolidatedRetailSales)
+	Result = 0;
+	If Not ValueIsFilled(ConsolidatedRetailSales) Then
+		Return Result;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	RetailSalesReceipt.Ref
+	|FROM
+	|	Document.RetailSalesReceipt AS RetailSalesReceipt
+	|WHERE
+	|	NOT RetailSalesReceipt.DeletionMark
+	|	AND RetailSalesReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
+	|	AND RetailSalesReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RetailReturnReceipt.Ref
+	|FROM
+	|	Document.RetailReturnReceipt AS RetailReturnReceipt
+	|WHERE
+	|	NOT RetailReturnReceipt.DeletionMark
+	|	AND RetailReturnReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
+	|	AND RetailReturnReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)";
+	
+	Query.SetParameter("ConsolidatedRetailSales", ConsolidatedRetailSales);
+	Query.SetParameter("PostponedWithReserve", Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve);
+	Query.SetParameter("Postponed", Enums.RetailSalesReceiptTransactionTypes.Postponed);
+	
+	QuerySelection = Query.Execute().Select();
+	While QuerySelection.Next() Do
+		ReceiptObject = QuerySelection.Ref.GetObject(); // DocumentObject.RetailSalesReceipt
+		ReceiptObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled;
+		//@skip-check empty-except-statement
+		Try
+			ReceiptObject.Write(DocumentWriteMode.Posting);
+			Result = Result + 1;
+		Except EndTry;
+	EndDo;
+	
+	Return Result;
+EndFunction
+
+// Get count postponed receipts.
+// 
+// Parameters:
+//  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales -  Consolidated retail sales
+// 
+// Returns:
+//  Number -  Get count postponed receipts
+&AtServerNoContext
+Function GetCountPostponedReceipts(ConsolidatedRetailSales)
+	Result = 0;
+	If Not ValueIsFilled(ConsolidatedRetailSales) Then
+		Return Result;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	RetailSalesReceipt.ConsolidatedRetailSales AS ConsolidatedRetailSales,
+	|	RetailSalesReceipt.Ref
+	|INTO tmpAllReceipts
+	|FROM
+	|	Document.RetailSalesReceipt AS RetailSalesReceipt
+	|WHERE
+	|	NOT RetailSalesReceipt.DeletionMark
+	|	AND RetailSalesReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
+	|	AND RetailSalesReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RetailReturnReceipt.ConsolidatedRetailSales,
+	|	RetailReturnReceipt.Ref
+	|FROM
+	|	Document.RetailReturnReceipt AS RetailReturnReceipt
+	|WHERE
+	|	NOT RetailReturnReceipt.DeletionMark
+	|	AND RetailReturnReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
+	|	AND RetailReturnReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpAllReceipts.ConsolidatedRetailSales,
+	|	COUNT(tmpAllReceipts.Ref) AS CountPostponedReceipts
+	|FROM
+	|	tmpAllReceipts AS tmpAllReceipts
+	|GROUP BY
+	|	tmpAllReceipts.ConsolidatedRetailSales";
+	
+	Query.SetParameter("ConsolidatedRetailSales", ConsolidatedRetailSales);
+	Query.SetParameter("PostponedWithReserve", Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve);
+	Query.SetParameter("Postponed", Enums.RetailSalesReceiptTransactionTypes.Postponed);
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Result = QuerySelection.CountPostponedReceipts;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+&AtClient
+Procedure QuestionForCancelPostponedFinish(Answer, AddInfo) Export
+	If Answer = DialogReturnCode.Yes Then
+		NumberOfCanceled = CancelingPostponedReceipts(Object.ConsolidatedRetailSales);
+		If NumberOfCanceled > 0 Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_CancelPostponed, NumberOfCanceled));
+		EndIf;
+	EndIf;
+EndProcedure
+	
 #EndRegion

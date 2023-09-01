@@ -1380,7 +1380,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	"SELECT
 	|	TrnInfo.Date,
 	|	TrnInfo.Recorder AS Document,
-	|	TrnInfo.Amount,
+	|	SUM(TrnInfo.Amount) AS Amount,
 	|	TrnInfo.IsDue,
 	|	TrnInfo.IsPaid,
 	|	TrnInfo.Company,
@@ -1410,7 +1410,6 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|GROUP BY
 	|	TrnInfo.Date,
 	|	TrnInfo.Recorder,
-	|	TrnInfo.Amount,
 	|	TrnInfo.IsDue,
 	|	TrnInfo.IsPaid,
 	|	TrnInfo.Company,
@@ -1437,7 +1436,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	tmp_TrnInfo.Document,
 	|	tmp_TrnInfo.Date,
 	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.Amount,
+	|	SUM(tmp_TrnInfo.Amount) AS Amount,
 	|	tmp_TrnInfo.IsDue,
 	|	tmp_TrnInfo.IsPaid
 	|FROM
@@ -1473,7 +1472,6 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	tmp_TrnInfo.Date,
 	|	tmp_TrnInfo.Document,
 	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.Amount,
 	|	tmp_TrnInfo.IsDue,
 	|	tmp_TrnInfo.IsPaid";
 

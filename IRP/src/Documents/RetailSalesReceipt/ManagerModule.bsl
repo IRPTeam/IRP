@@ -1195,6 +1195,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		|	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1266,7 +1267,8 @@ Function R8014T_ConsignorSales()
 		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
-		|	ItemList.IsConsignorStocks";
+		|	ItemList.IsConsignorStocks
+		|	AND ItemList.TransactionType = VALUE(ENUM.RetailSalesReceiptTransactionTypes.Completed)";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()

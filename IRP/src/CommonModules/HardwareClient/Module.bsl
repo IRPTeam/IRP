@@ -118,7 +118,7 @@ Async Function ConnectHardware(Hardware) Export
 			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
 				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
 			EndDo;
-			If Settings.ConnectedDriver.DriverObject <> Undefined OR Not Result Then
+			If Settings.ConnectedDriver.DriverObject <> Undefined OR Result Then
 				// @skip-check property-return-type, invocation-parameter-type-intersect
 				ErrorDescription = String(R().Eq_003);
 				ResultData.Result = Result;

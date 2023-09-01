@@ -1223,7 +1223,7 @@ Async Function PrintFiscalReceipt(DocumentRef)
 	EndIf;
 
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocumentRef); // See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
-	If EquipmentPrintFiscalReceiptResult.Info.Success Then
+	If Not EquipmentPrintFiscalReceiptResult.Info.Success Then
 		CommonFunctionsClientServer.ShowUsersMessage(EquipmentPrintFiscalReceiptResult.Info.Error);
 	EndIf;
 	Return EquipmentPrintFiscalReceiptResult.Info.Success;

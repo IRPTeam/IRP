@@ -104,7 +104,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	EndIf;
 
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
-
+	ProcessCheckSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		ProcessCheckSettings.Info.Success = True;
@@ -216,7 +216,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
-
+	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;
@@ -259,7 +259,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
-
+	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;

@@ -177,6 +177,106 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
+   <name>CheckNumber</name>
+   <id>49</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.CheckNumber</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CheckNumberExtendedTooltip</name>
+    <id>51</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CheckNumberContextMenu</name>
+    <id>50</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>Status</name>
+   <id>52</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Status</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>StatusExtendedTooltip</name>
+    <id>54</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>StatusContextMenu</name>
+    <id>53</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>Company</name>
    <id>34</id>
    <title>
@@ -854,13 +954,19 @@
 	RetailSalesReceipt.DocumentAmount,
 	RetailSalesReceipt.RetailCustomer,
 	RetailSalesReceipt.ConsolidatedRetailSales,
-	CASE WHEN COUNT(DISTINCT RetailSalesReceiptItemList.Store) = 1 THEN
-		MAX(RetailSalesReceiptItemList.Store)
-	ELSE UNDEFINED END AS Store
+	CASE
+		WHEN COUNT(DISTINCT RetailSalesReceiptItemList.Store) = 1
+			THEN MAX(RetailSalesReceiptItemList.Store)
+		ELSE UNDEFINED
+	END AS Store,
+	DocumentFiscalStatus.Status,
+	DocumentFiscalStatus.CheckNumber
 FROM
 	Document.RetailSalesReceipt AS RetailSalesReceipt
 		LEFT JOIN Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
 		ON RetailSalesReceiptItemList.Ref = RetailSalesReceipt.Ref
+		LEFT JOIN InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
+		ON DocumentFiscalStatus.Document = RetailSalesReceipt.Ref
 GROUP BY
 	RetailSalesReceipt.Ref,
 	RetailSalesReceipt.DeletionMark,
@@ -877,7 +983,10 @@ GROUP BY
 	RetailSalesReceipt.Branch,
 	RetailSalesReceipt.Description,
 	RetailSalesReceipt.DocumentAmount,
-	RetailSalesReceipt.RetailCustomer</queryText>
+	RetailSalesReceipt.RetailCustomer,
+	RetailSalesReceipt.ConsolidatedRetailSales,
+	DocumentFiscalStatus.Status,
+	DocumentFiscalStatus.CheckNumber</queryText>
    <mainTable>Document.RetailSalesReceipt</mainTable>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
@@ -902,6 +1011,178 @@ GROUP BY
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Partner</dataPath>
+    <field>Partner</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LegalName</dataPath>
+    <field>LegalName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currency</dataPath>
+    <field>Currency</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Manager</dataPath>
+    <field>Manager</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>BasisDocument</dataPath>
+    <field>BasisDocument</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Author</dataPath>
+    <field>Author</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentAmount</dataPath>
+    <field>DocumentAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RetailCustomer</dataPath>
+    <field>RetailCustomer</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ConsolidatedRetailSales</dataPath>
+    <field>ConsolidatedRetailSales</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Status</dataPath>
+    <field>Status</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CheckNumber</dataPath>
+    <field>CheckNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Agreement</dataPath>
+    <field>Agreement</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DateOfShipment</dataPath>
+    <field>DateOfShipment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManagerSegment</dataPath>
+    <field>ManagerSegment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PriceIncludeTax</dataPath>
+    <field>PriceIncludeTax</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UsePartnerTransactions</dataPath>
+    <field>UsePartnerTransactions</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LegalNameContract</dataPath>
+    <field>LegalNameContract</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Workstation</dataPath>
+    <field>Workstation</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PaymentMethod</dataPath>
+    <field>PaymentMethod</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemList</dataPath>
+    <field>ItemList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SpecialOffers</dataPath>
+    <field>SpecialOffers</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxList</dataPath>
+    <field>TaxList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currencies</dataPath>
+    <field>Currencies</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Payments</dataPath>
+    <field>Payments</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SerialLotNumbers</dataPath>
+    <field>SerialLotNumbers</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RowIDInfo</dataPath>
+    <field>RowIDInfo</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AccountingRowAnalytics</dataPath>
+    <field>AccountingRowAnalytics</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AccountingExtDimensions</dataPath>
+    <field>AccountingExtDimensions</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DELETE_ConsignorBatches</dataPath>
+    <field>DELETE_ConsignorBatches</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceOfOrigins</dataPath>
+    <field>SourceOfOrigins</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ControlCodeStrings</dataPath>
+    <field>ControlCodeStrings</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ShipmentConfirmations</dataPath>
+    <field>ShipmentConfirmations</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
    </fields>
   </extInfo>
  </attributes>

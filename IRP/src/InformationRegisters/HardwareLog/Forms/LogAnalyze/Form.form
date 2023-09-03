@@ -1315,6 +1315,32 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>URL</name>
+   <title>
+    <key>en</key>
+    <value>URL</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>URL</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>URL</value>
+   </title>
+   <id>14</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>FiscalPrinter</name>

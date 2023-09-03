@@ -702,4 +702,52 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <commands uuid="f5c52a47-5766-4a54-af41-a76240501674">
+  <name>OpenSession</name>
+  <synonym>
+   <key>en</key>
+   <value>Open session</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Открыть смену</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seans aç</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.ConsolidatedRetailSales</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
+  <representation>Auto</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceCircleGreen</picture>
+  </picture>
+ </commands>
+ <commands uuid="e88c1fd4-7fcb-4c37-9641-7d4390da4d7c">
+  <name>CloseSession</name>
+  <synonym>
+   <key>en</key>
+   <value>Close session</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрыть кассовую смену</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seans kapat</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.ConsolidatedRetailSales</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
+  <representation>Auto</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceCircleRed</picture>
+  </picture>
+ </commands>
 </mdclass:Document>

@@ -310,7 +310,8 @@
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
  <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
- <commonTemplates>CommonTemplate.HTMLPrintEmul</commonTemplates>
+ <commonTemplates>CommonTemplate.HTMLPrintEmulHTML</commonTemplates>
+ <commonTemplates>CommonTemplate.HTMLPrintEmulJSON</commonTemplates>
  <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
  <commonModules>CommonModule.AccountingClient</commonModules>
  <commonModules>CommonModule.AccountingClientServer</commonModules>

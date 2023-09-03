@@ -1818,6 +1818,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_POS_Title", NStr("en='Point of sales';
 		|ru='Рабочее место кассира';
 		|tr='Satış ekranı'", Lang));
+	Strings.Insert("InfoMessage_CanOpenOnlyNewStatus", NStr("en='Cash shift can only be opened for a document with the status ""New"".';
+		|ru='Кассовую смену можно открыть только для документа со статусом ""Новый"".';
+		|tr='Cash shift can only be opened for a document with the status ""New"".'", Lang));
+	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en='Cash shift can only be closed for a document with the status ""Open"".';
+		|ru='Кассовую смену можно закрыть только для документа со статусом ""Открыто"".';
+		|tr='Cash shift can only be closed for a document with the status ""Open"".'", Lang));
 	
 	Strings.Insert("InfoMessage_NotProperty", NStr("en='The object has no properties for editing';
 		|ru='У объекта нет свойств для редактирования';

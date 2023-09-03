@@ -57,14 +57,26 @@ Procedure UpdateAtServer()
 	While SelectionDetailRecords.Next() Do
 		NewRow = TransactionList.Add();
 		FillPropertyValues(NewRow, SelectionDetailRecords);
-
-		If NewRow.Method = "PayByPaymentCard"
-			OR NewRow.Method = "ReturnPaymentByPaymentCard"
-			OR NewRow.Method = "CancelPaymentByPaymentCard"
-			OR NewRow.Method = "Settlement" Then
-				Payments = CommonFunctionsServer.DeserializeJSON(NewRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
-				NewRow.PrintInfo = Payments.Out.Slip;
-		EndIf;
+		Try
+			PrintInfo = CommonFunctionsServer.DeserializeJSON(NewRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
+			If PrintInfo.Property("Out") Then
+				If PrintInfo.Out.Property("Slip") Then
+					PrintInfoData = PrintInfo.Out.Slip; // Array Of String
+					If TypeOf(PrintInfoData) = Type("String") Then
+						NewRow.PrintInfo = PrintInfoData;
+					Else
+						NewRow.PrintInfo = StrConcat(PrintInfoData, Chars.LF);
+					EndIf;
+				EndIf;
+				If PrintInfo.Out.Property("URL") Then
+					//@skip-check property-return-type, statement-type-change
+					NewRow.URL = PrintInfo.Out.URL; // String
+				EndIf;
+				
+			EndIf;
+		Except
+			Continue;
+		EndTry;
 	EndDo;
 
 EndProcedure
@@ -75,16 +87,18 @@ Async Procedure PrintData(Command)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-
-	CRS = New Structure;
-	CRS.Insert("FiscalPrinter", FiscalPrinter);
-
-	PaymentSettings = CommonFunctionsServer.DeserializeJSON(CurrentRow.Data); // See EquipmentAcquiringAPIClient.SettlementSettings
-	DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
-	DocumentPackage.TextString = StrSplit(PaymentSettings.Out.Slip, Chars.LF + Chars.CR);
-	PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
-	If Not PrintResult.Info.Success Then
-		CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
+	If Not IsBlankString(CurrentRow.URL) Then
+		OpenForm("CommonForm.HTMLField", New Structure("HTML", CurrentRow.URL));
+	Else
+		CRS = New Structure;
+		CRS.Insert("FiscalPrinter", FiscalPrinter);
+	
+		DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+		DocumentPackage.TextString = StrSplit(CurrentRow.PrintInfo, Chars.LF + Chars.CR);
+		PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(CRS, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
+		If Not PrintResult.Info.Success Then
+			CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -95,7 +109,7 @@ Procedure TransactionListOnActivateRow(Item)
 		Items.TransactionListPrintData.Enabled = False;
 		Return;
 	EndIf;
-	Items.TransactionListPrintData.Enabled = Not IsBlankString(CurrentRow.PrintInfo);
+	Items.TransactionListPrintData.Enabled = Not IsBlankString(CurrentRow.PrintInfo) OR Not IsBlankString(CurrentRow.URL);
 EndProcedure
 
 &AtServer

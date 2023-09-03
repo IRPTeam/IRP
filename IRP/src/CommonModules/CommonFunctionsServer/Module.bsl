@@ -821,6 +821,17 @@ Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
 	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction
 
+// Get UUID.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+// 
+// Returns:
+//  UUID
+Function GetUUID(Ref) Export
+	Return Ref.UUID();
+EndFunction
+
 #EndRegion
 
 #Region XDTO

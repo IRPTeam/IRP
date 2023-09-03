@@ -1159,6 +1159,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_Returns", NStr("en = 'Returns'", Lang));
 	Strings.Insert("InfoMessage_ReturnTitle", NStr("en = 'Return'", Lang));
 	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
+	Strings.Insert("InfoMessage_CanOpenOnlyNewStatus", NStr("en = 'Cash shift can only be opened for a document with the status ""New"".'", Lang));
+	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en = 'Cash shift can only be closed for a document with the status ""Open"".'", Lang));
 	
 	Strings.Insert("InfoMessage_NotProperty", NStr("en = 'The object has no properties for editing'", Lang));
 	Strings.Insert("InfoMessage_DataUpdated", NStr("en = 'The data has been updated'", Lang));

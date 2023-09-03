@@ -7,7 +7,7 @@
             white-space: pre;
         }
         .receipts {
-            width: 300px;
+            width: auto;
         }
         .receipt {
             border: 1px dashed black;
@@ -32,12 +32,36 @@
             let data = JSON.parse(jsonData);
             let receiptDiv = document.createElement('div');
             receiptDiv.className = 'receipt';
+
+            let maxLength = 0;
+            data.forEach(line => {
+                if (line.length > maxLength) {
+                    maxLength = line.length;
+                }
+            });
+
             data.forEach(line => {
                 let div = document.createElement('div');
-                div.innerText = line;
+
+                if (line === "") {
+                    div.innerHTML = "&nbsp;";
+                } else if (line.includes(':') && line[line.indexOf(':') + 1] === ' ') {
+                    let parts = line.split(':');
+                    let left = parts[0] + ':';
+                    let right = parts.slice(1).join(':').trim();
+
+                    let dotsCount = maxLength - (left.length + right.length);
+                    let dots = '.'.repeat(dotsCount);
+                    div.innerText = left + dots + right;
+                } else {
+                    div.innerText = line;
+                }
+                
                 receiptDiv.appendChild(div);
             });
+
             document.getElementById('receipts').appendChild(receiptDiv);
+            
             let separator = document.createElement('div');
             separator.className = 'separator';
             document.getElementById('receipts').appendChild(separator);

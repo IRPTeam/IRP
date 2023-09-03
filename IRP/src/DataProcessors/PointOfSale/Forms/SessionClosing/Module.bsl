@@ -5,9 +5,12 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	ThisObject.Currency = Parameters.Currency;
-	ThisObject.Store = Parameters.Store;
 	ThisObject.Workstation = Parameters.Workstation;
+	
+	If ThisObject.Workstation.IsEmpty() Then
+		ThisObject.Workstation = SessionParameters.Workstation;
+	EndIf;
+	
 	ThisObject.ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales;
 	ThisObject.AutoCreateMoneyTransfer = Parameters.AutoCreateMoneyTransfer; 
 	
@@ -110,6 +113,7 @@ EndProcedure
 Procedure CloseSession(Command)
 	ClosingData = New Structure;
 	
+	ClosingData.Insert("ConsolidatedRetailSales", ThisObject.ConsolidatedRetailSales);
 	ClosingData.Insert("BalanceConfirm", ThisObject.BalanceConfirm);
 	ClosingData.Insert("CashConfirm", ThisObject.CashConfirm);
 	ClosingData.Insert("TerminalConfirm", ThisObject.TerminalConfirm);
@@ -122,6 +126,7 @@ Procedure CloseSession(Command)
 	ClosingData.Insert("BalanceReal", ThisObject.BalanceReal);
 	
 	ClosingData.Insert("AutoCreateMoneyTransfer", ThisObject.AutoCreateMoneyTransfer);
+	ClosingData.Insert("Workstation", ThisObject.Workstation);
 	
 	PaymentList = New Array(); // Array of Structure
 	For Each TableItem In ThisObject.CashTable Do
@@ -475,14 +480,12 @@ Function GetCurrentbalance()
 	|	AccumulationRegister.R3010B_CashOnHand.BalanceAndTurnovers(&OpeningDate,,,, Company = &Company
 	|	AND Branch = &Branch
 	|	AND Account = &Account
-	|	AND Currency = &Currency
 	|	AND CurrencyMovementType = &CurrencyMovementType) AS R3010B_CashOnHandBalanceAndTurnovers";
 	
 	Query.SetParameter("OpeningDate", ThisObject.OpeningDate);
 	Query.SetParameter("Company", ThisObject.Company);
 	Query.SetParameter("Branch", ThisObject.Branch);
 	Query.SetParameter("Account", ThisObject.CashAccount);
-	Query.SetParameter("Currency", ThisObject.Currency);
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	
 	QuerySelection = Query.Execute().Select();

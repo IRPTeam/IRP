@@ -1010,7 +1010,11 @@ Function CheckPackage_FiscalString() Export
 EndFunction
 
 // Builds a structure based on the provided shift information table.
-//
+//	CountersOperationType1 - Income
+//	CountersOperationType2 - Return income
+//	CountersOperationType3 - Outcome
+//	CountersOperationType4 - Return outcome
+//	
 // Returns:
 //  Structure - Input parameters:
 // * ShiftNumber - Number - Number of the opened/closed shift

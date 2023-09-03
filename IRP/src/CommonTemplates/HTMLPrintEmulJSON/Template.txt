@@ -7,7 +7,7 @@
             white-space: pre;
         }
         .receipts {
-            width: 300px;
+            width: 400px;
         }
         .receipt {
             border: 1px dashed black;
@@ -18,6 +18,18 @@
             height: 1px;
             background-color: grey;
             margin: 10px 0;
+        }
+        .colon-line {
+            display: flex;
+            justify-content: space-between;
+        }
+        .dotted-line {
+            flex-grow: 1;
+            height: 1px;
+            background-image: linear-gradient(to right, transparent 70%, black 70%);
+            background-size: 10px 1px;
+            align-self: flex-end;
+            margin: 0 5px;
         }
     </style>
 </head>
@@ -34,7 +46,21 @@
             receiptDiv.className = 'receipt';
             data.forEach(line => {
                 let div = document.createElement('div');
-                div.innerText = line;
+                if (line.includes(':')) {
+                    div.className = 'colon-line';
+                    let parts = line.split(':');
+                    let leftSpan = document.createElement('span');
+                    let rightSpan = document.createElement('span');
+                    let dottedLine = document.createElement('div');
+                    dottedLine.className = 'dotted-line';
+                    leftSpan.innerText = parts[0] + ':';
+                    rightSpan.innerText = parts[1];
+                    div.appendChild(leftSpan);
+                    div.appendChild(dottedLine);
+                    div.appendChild(rightSpan);
+                } else {
+                    div.innerText = line;
+                }
                 receiptDiv.appendChild(div);
             });
             document.getElementById('receipts').appendChild(receiptDiv);

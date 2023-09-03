@@ -818,7 +818,22 @@
   </attributes>
   <commandInterface>
     <navigationPanel/>
-    <commandBar/>
+    <commandBar>
+      <cmiFragmentRecord>
+        <command>Document.ConsolidatedRetailSales.Command.OpenSession</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Items.List.CurrentData</segments>
+        </commandParameter>
+        <userVisible/>
+      </cmiFragmentRecord>
+      <cmiFragmentRecord>
+        <command>Document.ConsolidatedRetailSales.Command.CloseSession</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Items.List.CurrentData</segments>
+        </commandParameter>
+        <userVisible/>
+      </cmiFragmentRecord>
+    </commandBar>
   </commandInterface>
   <extInfo xsi:type="form:DynamicListFormExtInfo"/>
 </form:Form>

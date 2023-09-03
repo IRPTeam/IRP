@@ -159,8 +159,6 @@ EndProcedure
 &AtClient
 Procedure CloseSession(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Currency", Object.Currency);
-	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);
 	FormParameters.Insert("AutoCreateMoneyTransfer"
 		, CommonFunctionsServer.GetRefAttribute(Object.Workstation, "AutoCreateMoneyTransferAtSessionClosing"));

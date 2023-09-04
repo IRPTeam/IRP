@@ -130,7 +130,8 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			EndIf;
 
 		Else
-			Raise("Tax isn't found!");
+			FiscalStringData.VATRate = "none";
+			FiscalStringData.VATAmount = 0;
 		EndIf;
 
 		If ValueIsFilled(_consignor) Then

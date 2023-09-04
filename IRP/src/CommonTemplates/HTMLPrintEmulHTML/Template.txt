@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+        }
+        .receipts {
+            width: 300px;
+        }
+        .receipt {
+            border: 1px dashed black;
+        }
+        .separator {
+            height: 1px;
+            background-color: grey;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipts" id="receipts"></div>
+    <script>
+        function clearAll() {
+            document.getElementById('receipts').innerHTML = '';
+        }
+        
+        function fillData(htmlString) {
+            let receiptDiv = document.createElement('div');
+            receiptDiv.className = 'receipt';
+            receiptDiv.innerHTML = htmlString;
+            document.getElementById('receipts').appendChild(receiptDiv);
+            let separator = document.createElement('div');
+            separator.className = 'separator';
+            document.getElementById('receipts').appendChild(separator);
+        }
+    </script>
+</body>
+</html>

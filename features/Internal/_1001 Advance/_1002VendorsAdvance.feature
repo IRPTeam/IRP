@@ -49,6 +49,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog SerialLotNumbers objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -75,6 +76,9 @@ Scenario: _1002000 preparation (vendors advances closing)
 			| "Documents.BankPayment.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		* Load PO
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)

@@ -757,706 +757,700 @@ Scenario: _050025 create Sales report co consignor
 				| 'Yes' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | '11111111111111'    | 'Source of origin 909' | '-2,000'    | 'en description is empty' | 'pcs'  | '100,00'          | '200,00' | '-400,00'     | '-400,00'      | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Sales invoice 194 dated 04.11.2022 16:33:38' |
 			And I click "Ok" button	
 			And "ItemList" table became equal
-				| '#' | 'Price type'              | 'Item'                                             | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
-				| '1' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
+				| 'Price type'              | 'Item'                                             | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
 			And the editing text of form attribute named "EndDate" became equal to "05.11.2022"
 			And the editing text of form attribute named "StartDate" became equal to "05.11.2022"						
 		* Filling sales (previous period return and sale)
 			And in the table "ItemList" I click "Fill sales" button
 			And I click Select button of "Sales period" field
 			Then "Select period" window is opened
+			And I input "05.11.2022" text in the field named "DateBegin"
 			And I input current date in the field named "DateEnd"
 			And I click the button named "Select"
 			And in the table "Sales" I click "Fill sales" button
 			And I click "Ok" button
 			And "ItemList" table became equal
-				| '#' | 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
-				| '1' | 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
-				| '2' | 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | 'Purchase invoice 204 dated 30.08.2023 16:27:58' | '338,98'     | '400,00'       |
-				| '3' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
-				| '4' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
-				| '5' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | 'Purchase invoice 204 dated 30.08.2023 16:27:58' | '406,79'     | '480,00'       |
+				| 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | '$$PI3$$'                                        | '338,98'     | '400,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | '$$PI3$$'                                        | '406,79'     | '480,00'       |
 			Then the number of "ItemList" table lines is "равно" "5"
-		// * Change period and update sales
-		// 	And I input "01.11.2022" text in "Start date" field
-		// 	And in the table "ItemList" I click "Fill sales" button
-		// 	And in the table "Sales" I click "Fill sales" button
-		// 	And I click "Ok" button
-		// 	And "ItemList" table became equal
-		// 		| 'Item'                                                                     | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '1,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '20,00'                  | '200,00' | '169,49'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '200,00'       |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price without VAT' | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
-		// 	And I input "05.11.2022" text in "Start date" field
-		// 	And in the table "ItemList" I click "Fill sales" button
-		// 	And in the table "Sales" I click "Fill sales" button
-		// 	And I click "Ok" button	
-		// 	And "ItemList" table contains lines
-		// 		| 'Item'                                                                     | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price without VAT' | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price Types'       | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-		// 	Then the number of "ItemList" table lines is "равно" "4"
-		// * Update sales
-		// 	And in the table "ItemList" I click "Fill sales" button
-		// 	And in the table "Sales" I click "Fill sales" button
-		// 	And in the table "Sales" I click "Uncheck all" button
-		// 	And "Sales" table became equal
-		// 		| 'Use' | 'Item'                                                                     |
-		// 		| 'No'  | 'Product 11 with SLN (Main Company - Consignor 1)'                         |
-		// 		| 'No'  | 'Product 13 without SLN (Main Company - different consignor for item key)' |
-		// 		| 'No'  | 'Product 11 with SLN (Main Company - Consignor 1)'                         |
-		// 		| 'No'  | 'Product 13 without SLN (Main Company - different consignor for item key)' |
-		// 	And in the table "Sales" I click "Check all" button
-		// 	And "Sales" table became equal
-		// 		| 'Use'    | 'Item'                   |
-		// 		| 'Yes'    | 'Product 11 with SLN (Main Company - Consignor 1)'     |
-		// 		| 'Yes'    | 'Product 13 without SLN (Main Company - different consignor for item key)'                  |
-		// 		| 'Yes'    | 'Product 11 with SLN (Main Company - Consignor 1)'     |
-		// 		| 'Yes'    | 'Product 13 without SLN (Main Company - different consignor for item key)'                  |
-		// 	And I click "Ok" button
-		// 	And "ItemList" table contains lines
-		// 		| 'Item'                                                                     | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price without VAT' | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price Types'       | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-		// 	Then the number of "ItemList" table lines is "равно" "4"
-		// * Check currency form
-		// 	And in the table "ItemList" I click "Edit currencies" button
-		// 	And "CurrenciesTable" table became equal
-		// 		| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
-		// 		| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '-1,34'  |
-		// 		| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '-7,8'   |
-		// 		| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '-7,8'   |
-		// 	And I click "Ok" button	
-		// * Post with a negative amount
-		// 	And I click "Post" button
-		// 	Then user message window does not contain messages
-		// 	And I delete "$$NumberSRC1$$" variable
-		// 	And I delete "$$SRC1$$" variable
-		// 	And I delete "$$DateSRC1$$" variable
-		// 	And I delete "$$EndDateSRC1$$" variable
-		// 	And I save the value of "Number" field as "$$NumberSRC1$$"
-		// 	And I save the window as "$$SRC1$$"
-		// 	And I save the value of the field named "Date" as "$$DateSRC1$$"
-		// 	And I save the value of the field named "EndDate" as "$$EndDateSRC1$$"
-		// 	And I click "Post and close" button 
-		// * Check creation
-		// 	And I go to line in "List" table
-		// 		| 'Number'             |
-		// 		| '$$NumberSRC1$$'     |
-		// 	And I select current line in "List" table
-		// * Check filling
-		// 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		// 	Then the form attribute named "Partner" became equal to "Consignor 1"
-		// 	Then the form attribute named "LegalName" became equal to "Consignor 1"
-		// 	Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
-		// 	Then the form attribute named "LegalNameContract" became equal to ""
-		// 	Then the form attribute named "Company" became equal to "Main Company"
-		// 	Then the form attribute named "TradeAgentFeeType" became equal to "Percent"
-		// 	And the editing text of form attribute named "StartDate" became equal to "05.11.2022"	
-		// 	And the editing text of form attribute named "EndDate" became equal to "$$EndDateSRC1$$"
-		// 	And "ItemList" table contains lines
-		// 		| 'Item'                                                                     | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price without VAT' | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'en description is empty' | 'UNIQ'     | '100,00'          | '11111111111111'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
-		// 		| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Basic Price Types'       | 'M/Black'  | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-		// 	Then the number of "ItemList" table lines is "равно" "4"
-		// 	And in the table "ItemList" I click "Open serial lot number tree" button
-		// 	And "SerialLotNumbersTree" table contains lines
-		// 		| 'Item'                                             | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                  | '3,000'             | '3,000'    |
-		// 		| ''                                                 | ''         | '11111111111111'    | ''                  | '3,000'    |
-		// 		| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                  | '-1,000'            | '-1,000'   |
-		// 		| ''                                                 | ''         | '11111111111111'    | ''                  | '-1,000'   |
-		// 	Then the number of "SerialLotNumbersTree" table lines is "равно" "4"
-		// 	And I close "Serial lot numbers tree" window
-		// 	Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		// 	Then the form attribute named "Currency" became equal to "TRY"
-		// 	Then the form attribute named "Branch" became equal to ""
-		// 	Then the form attribute named "Author" became equal to "CI"
-		// 	Then the form attribute named "ItemListTotalTradeAgentFeeAmount" became equal to "-0,78"
-		// 	Then the form attribute named "ItemListTotalNetAmount" became equal to "-6,60"
-		// 	Then the form attribute named "ItemListTotalTaxAmount" became equal to "-1,19"
-		// 	Then the form attribute named "ItemListTotalTotalAmount" became equal to "-7,80"
-		// 	Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		* Change period and update sales
+			And I input "01.11.2022" text in "Start date" field
+			And in the table "ItemList" I click "Fill sales" button
+			And in the table "Sales" I click "Fill sales" button
+			And I click "Ok" button
+			And "ItemList" table became equal
+				| 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '167,80'     | ''                     | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '2,000'    | '10,00'                   | '110,00'                 | '550,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'     | '1 100,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | '$$PI3$$'                                        | '338,98'     | '400,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | '$$PI3$$'                                        | '406,79'     | '480,00'       |
+			And I input "05.11.2022" text in "Start date" field
+			And in the table "ItemList" I click "Fill sales" button
+			And in the table "Sales" I click "Fill sales" button
+			And I click "Ok" button	
+			And "ItemList" table contains lines
+				| 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | '$$PI3$$'                                        | '338,98'     | '400,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | '$$PI3$$'                                        | '406,79'     | '480,00'       |
+			Then the number of "ItemList" table lines is "равно" "5"
+		* Update sales
+			And in the table "ItemList" I click "Fill sales" button
+			And in the table "Sales" I click "Fill sales" button
+			And in the table "Sales" I click "Uncheck all" button
+			And "Sales" table became equal
+				| 'Use' | 'Item'                                                                     | 'Item key' | 'Serial lot number' | 'Source of origin'     | 'Quantity' | 'Price type'              | 'Unit' | 'Consignor price' | 'Price'  | 'Net amount' | 'Total amount' | 'Purchase invoice'                               | 'Sales invoice'                               |
+				| 'No'  | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | 'Source of origin 909' | '3,000'    | 'en description is empty' | 'pcs'  | '100,00'          | '112,00' | '284,76'     | '336,00'       | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Sales invoice 195 dated 19.12.2022 19:26:35' |
+				| 'No'  | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | 'Source of origin 909' | '-2,000'   | 'en description is empty' | 'pcs'  | '100,00'          | '200,00' | '-400,00'    | '-400,00'      | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Sales invoice 194 dated 04.11.2022 16:33:38' |
+				| 'No'  | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | ''                     | '4,000'    | 'en description is empty' | 'pcs'  | '100,00'          | '120,00' | '406,79'     | '480,00'       | '$$PI3$$'                                        | '$$SI10$$'                                    |
+				| 'No'  | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | ''                  | ''                     | '3,000'    | 'en description is empty' | 'pcs'  | '650,00'          | '400,00' | '1 016,94'   | '1 200,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '$$SI10$$'                                    |
+				| 'No'  | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | ''                  | ''                     | '1,000'    | 'en description is empty' | 'pcs'  | '550,00'          | '400,00' | '338,98'     | '400,00'       | '$$PI3$$'                                        | '$$SI10$$'                                    |
+			And in the table "Sales" I click "Check all" button
+			And "Sales" table became equal
+				| 'Use' | 'Item'                                                                     | 'Item key' | 'Serial lot number' | 'Source of origin'     | 'Quantity' | 'Price type'              | 'Unit' | 'Consignor price' | 'Price'  | 'Net amount' | 'Total amount' | 'Purchase invoice'                               | 'Sales invoice'                               |
+				| 'Yes' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | 'Source of origin 909' | '3,000'    | 'en description is empty' | 'pcs'  | '100,00'          | '112,00' | '284,76'     | '336,00'       | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Sales invoice 195 dated 19.12.2022 19:26:35' |
+				| 'Yes' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | 'Source of origin 909' | '-2,000'   | 'en description is empty' | 'pcs'  | '100,00'          | '200,00' | '-400,00'    | '-400,00'      | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Sales invoice 194 dated 04.11.2022 16:33:38' |
+				| 'Yes' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '11111111111111'    | ''                     | '4,000'    | 'en description is empty' | 'pcs'  | '100,00'          | '120,00' | '406,79'     | '480,00'       | '$$PI3$$'                                        | '$$SI10$$'                                    |
+				| 'Yes' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | ''                  | ''                     | '3,000'    | 'en description is empty' | 'pcs'  | '650,00'          | '400,00' | '1 016,94'   | '1 200,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '$$SI10$$'                                    |
+				| 'Yes' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | ''                  | ''                     | '1,000'    | 'en description is empty' | 'pcs'  | '550,00'          | '400,00' | '338,98'     | '400,00'       | '$$PI3$$'                                        | '$$SI10$$'                                    |
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | '$$PI3$$'                                        | '338,98'     | '400,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | '$$PI3$$'                                        | '406,79'     | '480,00'       |
+			Then the number of "ItemList" table lines is "равно" "5"
+		* Check currency form
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '345,14' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 016'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 016'  |			
+			And I click "Ok" button	
+		* Post
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I delete "$$NumberSRC1$$" variable
+			And I delete "$$SRC1$$" variable
+			And I delete "$$DateSRC1$$" variable
+			And I delete "$$EndDateSRC1$$" variable
+			And I save the value of "Number" field as "$$NumberSRC1$$"
+			And I save the window as "$$SRC1$$"
+			And I save the value of the field named "Date" as "$$DateSRC1$$"
+			And I save the value of the field named "EndDate" as "$$EndDateSRC1$$"
+			And I click "Post and close" button 
+		* Check creation
+			And I go to line in "List" table
+				| 'Number'             |
+				| '$$NumberSRC1$$'     |
+			And I select current line in "List" table
+		* Check filling
+			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+			Then the form attribute named "Partner" became equal to "Consignor 1"
+			Then the form attribute named "LegalName" became equal to "Consignor 1"
+			Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
+			Then the form attribute named "LegalNameContract" became equal to ""
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the form attribute named "TradeAgentFeeType" became equal to "Percent"
+			And the editing text of form attribute named "StartDate" became equal to "05.11.2022"	
+			And the editing text of form attribute named "EndDate" became equal to "$$EndDateSRC1$$"
+			And "ItemList" table contains lines
+				| 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'    | 'Sales invoice'                               | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice'                               | 'Net amount' | 'Total amount' |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '650,00'          | 'No'                 | ''                   | 'pcs'  | '183,05'     | ''                     | '$$SI10$$'                                    | '3,000'    | '10,00'                   | '120,00'                 | '400,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 016,94'   | '1 200,00'     |
+				| 'en description is empty' | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '550,00'          | 'No'                 | ''                   | 'pcs'  | '61,02'      | ''                     | '$$SI10$$'                                    | '1,000'    | '10,00'                   | '40,00'                  | '400,00' | '18%' | '$$PI3$$'                                        | '338,98'     | '400,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '51,25'      | 'Source of origin 909' | 'Sales invoice 195 dated 19.12.2022 19:26:35' | '3,000'    | '10,00'                   | '33,60'                  | '112,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '284,76'     | '336,00'       |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '-61,02'     | 'Source of origin 909' | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '-2,000'   | '10,00'                   | '-40,00'                 | '200,00' | '18%' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-400,00'    | '-400,00'      |
+				| 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '100,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '73,22'      | ''                     | '$$SI10$$'                                    | '4,000'    | '10,00'                   | '48,00'                  | '120,00' | '18%' | '$$PI3$$'                                        | '406,79'     | '480,00'       |
+			Then the number of "ItemList" table lines is "равно" "5"
+			And in the table "ItemList" I click "Open serial lot number tree" button
+			And "SerialLotNumbersTree" table contains lines
+				| 'Item'                                             | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
+				| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                  | '3,000'    | '3,000'             |
+				| ''                                                 | ''         | '11111111111111'    | '3,000'    | ''                  |
+				| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                  | '-2,000'   | '-2,000'            |
+				| ''                                                 | ''         | '11111111111111'    | '-2,000'   | ''                  |
+				| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                  | '4,000'    | '4,000'             |
+				| ''                                                 | ''         | '11111111111111'    | '4,000'    | ''                  |		
+			Then the number of "SerialLotNumbersTree" table lines is "равно" "6"
+			And I close "Serial lot numbers tree" window
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+			Then the form attribute named "Currency" became equal to "TRY"
+			Then the form attribute named "Branch" became equal to ""
+			Then the form attribute named "Author" became equal to "CI"
+			Then the form attribute named "ItemListTotalTradeAgentFeeAmount" became equal to "201,60"
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 647,47"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "307,52"
+			Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 016,00"
+			Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 			And I close all client application windows
 			
 						
-// Scenario: _050026 check trade agent fee calculation
-// 	And I close all client application windows
-// 	* Open Sales report co consignor form
-// 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
-// 		And I click the button named "FormCreate"	
-// 	* Create Sales report co consignor for Concignor 1
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Consignor 1'    |
-// 		And I select current line in "List" table
-// 		Then the form attribute named "LegalName" became equal to "Consignor 1"
-// 		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		And I input "01.11.2022" text in "Start date" field
-// 		And I input "04.11.2022" text in "End date" field
-// 	* Add items
-// 		And in the table "ItemList" I click the button named "ItemListAdd"
-// 		And I activate field named "ItemListItem" in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-// 		And I go to line in "List" table
-// 			| 'Description'           |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'    |
-// 		And I select current line in "List" table
-// 		And I activate field named "ItemListItemKey" in "ItemList" table
-// 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-// 		And I go to line in "List" table
-// 			| 'Item'                 | 'Item key'    |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'        |
-// 		And I select current line in "List" table
-// 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
-// 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
-// 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
-// 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
-// 		And I activate field named "Owner" in "List" table
-// 		And I go to line in "List" table
-// 			| 'Owner'   | 'Serial number'     |
-// 			| 'UNIQ'    | '11111111111111'    |
-// 		And I select current line in "List" table
-// 		And I activate "Quantity" field in "SerialLotNumbers" table
-// 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
-// 		And I finish line editing in "SerialLotNumbers" table
-// 		And I click "Ok" button
-// 		And I finish line editing in "ItemList" table
-// 		And in the table "ItemList" I click the button named "ItemListAdd"
-// 		And I activate field named "ItemListItem" in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-// 		And I go to line in "List" table
-// 			| 'Description'   |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'         |
-// 		And I select current line in "List" table
-// 		And I activate field named "ItemListItemKey" in "ItemList" table
-// 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-// 		And I go to line in "List" table
-// 			| 'Item'    | 'Item key'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'   | 'M/Black'    |
-// 		And I select current line in "List" table
-// 		And I go to line in "ItemList" table
-// 			| 'Item'                 | 'Item key'    |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'        |
-// 		And I activate "Price" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "200,00" text in "Price" field of "ItemList" table
-// 		And I activate "Consignor price" field in "ItemList" table
-// 		And I input "190,00" text in "Consignor price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I go to line in "ItemList" table
-// 			| 'Item'    | 'Item key'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'   | 'M/Black'    |
-// 		And I select current line in "ItemList" table
-// 		And I input "400,00" text in "Consignor price" field of "ItemList" table
-// 		And I activate "Trade agent fee percent" field in "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I go to line in "ItemList" table
-// 			| 'Item'                 | 'Item key'    |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'        |
-// 		And I click Select button of "Partner term" field
-// 		And I go to line in "List" table
-// 			| 'Description'                 |
-// 			| 'Consignor partner term 1'    |
-// 		And I select current line in "List" table
-// 	* Check filling trade agent fee
-// 		And "ItemList" table became equal
-// 			| '#'   | 'Item'                 | 'Price type'                | 'Item key'   | 'Consignor price'   | 'Serial lot numbers'   | 'Unit'   | 'Dont calculate row'   | 'Quantity'   | 'Sales invoice'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'    | 'Net amount'   | 'Purchase invoice'   | 'Total amount'    |
-// 			| '1'   | 'Product 11 with SLN (Main Company - Consignor 1)'   | 'en description is empty'   | 'UNIQ'       | '190,00'            | '11111111111111'       | 'pcs'    | 'No'                   | '2,000'      | ''                | '10,00'                     | '40,00'                    | '200,00'   | '338,98'       | ''                   | '400,00'          |
-// 			| '2'   | 'Product 13 without SLN (Main Company - different consignor for item key)'                | 'Basic Price Types'         | 'M/Black'   | '400,00'            | ''                     | 'pcs'    | 'No'                   | '1,000'      | ''                | '10,00'                     | '55,00'                    | '550,00'   | '466,10'       | ''                   | '550,00'          |
-// 	* Change price
-// 		And I activate "Price" field in "ItemList" table
-// 		And I go to line in "ItemList" table
-// 			| 'Item'    | 'Item key'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'   | 'M/Black'    |
-// 		And I select current line in "ItemList" table
-// 		And I input "560,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And "ItemList" table became equal
-// 			| 'Item'                 | 'Item key'   | 'Consignor price'   | 'Quantity'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'     |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'       | '190,00'            | '2,000'      | '10,00'                     | '40,00'                    | '200,00'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'                | 'M/Black'   | '400,00'            | '1,000'      | '10,00'                     | '56,00'                    | '560,00'    |
-// 	* Change quantity
-// 		And I go to line in "ItemList" table
-// 			| 'Item'    | 'Item key'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'   | 'M/Black'    |
-// 		And I select current line in "ItemList" table
-// 		And I input "3,00" text in "Quantity" field of "ItemList" table	
-// 		And I finish line editing in "ItemList" table
-// 		And "ItemList" table became equal
-// 			| 'Item'                 | 'Item key'   | 'Consignor price'   | 'Quantity'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'     |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'       | '190,00'            | '2,000'      | '10,00'                     | '40,00'                    | '200,00'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'                | 'M/Black'   | '400,00'            | '3,000'      | '10,00'                     | '168,00'                   | '560,00'    |
-// 	* Change trade agent fee percent
-// 		And I go to line in "ItemList" table
-// 			| 'Item'    | 'Item key'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'   | 'M/Black'    |
-// 		And I select current line in "ItemList" table	
-// 		And I input "20,00" text in "Trade agent fee percent" field of "ItemList" table	
-// 		And I finish line editing in "ItemList" table
-// 		And "ItemList" table became equal
-// 			| 'Item'                 | 'Item key'   | 'Consignor price'   | 'Quantity'   | 'Trade agent fee percent'   | 'Trade agent fee amount'   | 'Price'     |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'       | '190,00'            | '2,000'      | '10,00'                     | '40,00'                    | '200,00'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'                | 'M/Black'   | '400,00'            | '3,000'      | '20,00'                     | '336,00'                   | '560,00'    |
-// 	* Change trade agent fee type
-// 		And I select "Difference price consignor price" exact value from "Trade agent fee type" drop-down list
-// 		And "ItemList" table became equal
-// 			| 'Item'                 | 'Item key'   | 'Consignor price'   | 'Quantity'   | 'Trade agent fee amount'   | 'Price'     |
-// 			| 'Product 11 with SLN (Main Company - Consignor 1)'   | 'UNIQ'       | '190,00'            | '2,000'      | '20,00'                    | '200,00'    |
-// 			| 'Product 13 without SLN (Main Company - different consignor for item key)'                | 'M/Black'   | '400,00'            | '3,000'      | '480,00'                   | '560,00'    |
-// 		And I close all client application windows
+Scenario: _050026 check trade agent fee calculation
+	And I close all client application windows
+	* Open Sales report co consignor form
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"	
+	* Create Sales report co consignor for Concignor 1
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Consignor 1'    |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Consignor 1"
+		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And I input "01.11.2022" text in "Start date" field
+		And I input "04.11.2022" text in "End date" field
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                                      |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner'   | 'Serial number'     |
+			| 'UNIQ'    | '11111111111111'    |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                                                              |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                                                                     | 'Item key' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I activate "Consignor price" field in "ItemList" table
+		And I input "190,00" text in "Consignor price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                                                     | 'Item key' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  |
+		And I select current line in "ItemList" table
+		And I input "400,00" text in "Consignor price" field of "ItemList" table
+		And I activate "Trade agent fee percent" field in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     |
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'Consignor partner term 1'    |
+		And I select current line in "List" table
+	* Check filling trade agent fee
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Sales invoice' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' |
+			| '1' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '61,02'      | ''                  | ''              | '2,000'    | '10,00'                   | '40,00'                  | '200,00' | '18%' | ''                 | '338,98'     | '400,00'       |
+			| '2' | 'Basic Price Types'       | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | 'No'                 | ''                   | 'pcs'  | ''           | ''                  | ''              | '1,000'    | '10,00'                   | ''                       | ''       | '18%' | ''                 | ''           | ''             |
+	* Change price
+		And I activate "Price" field in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                                                     | 'Item key' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  |
+		And I select current line in "ItemList" table
+		And I input "560,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | '2,000'    | '10,00'                   | '40,00'                  | '200,00' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | '1,000'    | '10,00'                   | '56,00'                  | '560,00' |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| 'Item'                                                                     | 'Item key' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  |
+		And I select current line in "ItemList" table
+		And I input "3,00" text in "Quantity" field of "ItemList" table	
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | '2,000'    | '10,00'                   | '40,00'                  | '200,00' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | '3,000'    | '10,00'                   | '168,00'                 | '560,00' |
+	* Change trade agent fee percent
+		And I go to line in "ItemList" table
+			| 'Item'                                                                     | 'Item key' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  |
+		And I select current line in "ItemList" table	
+		And I input "20,00" text in "Trade agent fee percent" field of "ItemList" table	
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | '2,000'    | '10,00'                   | '40,00'                  | '200,00' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | '3,000'    | '20,00'                   | '336,00'                 | '560,00' |
+	* Change trade agent fee type
+		And I select "Difference price consignor price" exact value from "Trade agent fee type" drop-down list
+		And "ItemList" table became equal
+			| 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Quantity' | 'Trade agent fee amount' | 'Price'  |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | '2,000'    | '20,00'                  | '200,00' |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | '3,000'    | '480,00'                 | '560,00' |
+		And I close all client application windows
 		
 		
 				
-// Scenario: _050028 check Sales invoice generate for trade agent fee (based on Sales report co consignor)
-// 	And I close all client application windows
-// 	* Create SRC
-// 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
-// 		And I click the button named "FormCreate"
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Consignor 1'    |
-// 		And I select current line in "List" table
-// 		Then the form attribute named "LegalName" became equal to "Consignor 1"
-// 		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		And I input "01.11.2022" text in "Start date" field
-// 		And I input "04.11.2022" text in "End date" field
-// 		* Filling sales (sales and return)
-// 			And in the table "ItemList" I click "Fill sales" button
-// 			Then the form attribute named "SalesPeriod" became equal to "01.11.2022 - 04.11.2022"
-// 			And in the table "Sales" I click "Fill sales" button
-// 			And I click "Ok" button
-// 			And I click "Post" button			
-// 	* Create SI
-// 		And Delay 3
-// 		And I click "Sales invoice" button
-// 		Then the form attribute named "Partner" became equal to "Consignor 1"
-// 		Then the form attribute named "LegalName" became equal to "Consignor 1"
-// 		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
-// 		Then the form attribute named "LegalNameContract" became equal to ""
-// 		Then the form attribute named "Description" became equal to "Click to enter description"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		Then the form attribute named "TransactionType" became equal to "Sales"
-// 		Then the form attribute named "Store" became equal to "Store 02"
-// 		And "ItemList" table became equal
-// 			| '#'   | 'Inventory origin'   | 'Sales person'   | 'Price type'          | 'Item'   | 'Item key'   | 'Profit loss center'        | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Use work sheet'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'   | 'Revenue type'    |
-// 			| '1'   | 'Own stocks'         | ''               | 'Basic Price Types'   | 'Fee'    | 'Fee'        | 'Distribution department'   | 'No'                   | '22,88'        | 'pcs'    | ''                     | '1,000'      | '150,00'   | '18%'   | ''                | '127,12'       | '150,00'         | 'No'               | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | ''             | 'Expense'         |
-// 		Then the form attribute named "Currency" became equal to "TRY"
-// 		Then the form attribute named "ItemListTotalNetAmount" became equal to "127,12"
-// 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "22,88"
-// 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "150,00"
-// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-// 	* Post SI 
-// 		And I click "Post" button 
-// 		Then user message window does not contain messages
-// 		And I delete "$$NumberSIFee1$$" variable
-// 		And I delete "$$SIFee1$$" variable
-// 		And I delete "$$DateSIFee1$$" variable
-// 		And I save the value of "Number" field as "$$NumberSIFee1$$"
-// 		And I save the window as "$$SIFee1$$"
-// 		And I save the value of the field named "Date" as "$$DateSIFee1$$"
-// 		And I click "Post and close" button 
-// 	* Check creation
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"			
-// 		And "List" table contains lines
-// 			| 'Number'              |
-// 			| '$$NumberSIFee1$$'    |
-// 		And I close all client application windows			
+Scenario: _050028 check Sales invoice generate for trade agent fee (based on Sales report co consignor)
+	And I close all client application windows
+	* Create SRC
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Consignor 1'    |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Consignor 1"
+		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And I input "01.11.2022" text in "Start date" field
+		And I input "04.11.2022" text in "End date" field
+		* Filling sales (sales and return)
+			And in the table "ItemList" I click "Fill sales" button
+			Then the form attribute named "SalesPeriod" became equal to "01.11.2022 - 04.11.2022"
+			And in the table "Sales" I click "Fill sales" button
+			And I click "Ok" button
+			And I click "Post" button			
+	* Create SI
+		And Delay 3
+		And I click "Sales invoice" button
+		Then the form attribute named "Partner" became equal to "Consignor 1"
+		Then the form attribute named "LegalName" became equal to "Consignor 1"
+		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
+		Then the form attribute named "LegalNameContract" became equal to ""
+		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Sales"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table became equal
+			| '#'   | 'Inventory origin'   | 'Sales person'   | 'Price type'          | 'Item'   | 'Item key'   | 'Profit loss center'        | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Use work sheet'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'   | 'Revenue type'    |
+			| '1'   | 'Own stocks'         | ''               | 'Basic Price Types'   | 'Fee'    | 'Fee'        | 'Distribution department'   | 'No'                   | '22,88'        | 'pcs'    | ''                     | '1,000'      | '150,00'   | '18%'   | ''                | '127,12'       | '150,00'         | 'No'               | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | ''             | 'Expense'         |
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "127,12"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "22,88"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "150,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post SI 
+		And I click "Post" button 
+		Then user message window does not contain messages
+		And I delete "$$NumberSIFee1$$" variable
+		And I delete "$$SIFee1$$" variable
+		And I delete "$$DateSIFee1$$" variable
+		And I save the value of "Number" field as "$$NumberSIFee1$$"
+		And I save the window as "$$SIFee1$$"
+		And I save the value of the field named "Date" as "$$DateSIFee1$$"
+		And I click "Post and close" button 
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"			
+		And "List" table contains lines
+			| 'Number'              |
+			| '$$NumberSIFee1$$'    |
+		And I close all client application windows			
 
 				
-// Scenario: _050041 check filling source of origin in the SI (consignors products)
-// 	And I close all client application windows
-// 	* Open SI form
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I click the button named "FormCreate"
-// 	* Filling in the details
-// 		And I activate field named "ItemListLineNumber" in "ItemList" table
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Kalipso'        |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Agreement"
-// 		And I go to line in "List" table
-// 			| 'Description'                         |
-// 			| 'Basic Partner terms, without VAT'    |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Store"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Store 02'       |
-// 		And I select current line in "List" table
-// 		And I move to "Other" tab	
-// 	* Add items	
-// 		And I move to "Item list" tab
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "890086768" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 	* Check filling
-// 		And "ItemList" table contains lines
-// 			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'     | 'Quantity'   | 'Price'   | 'VAT'           | 'Total amount'   | 'Use work sheet'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Detail'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | 'pcs'    | '57897909799'          | 'Source of origin 9'    | '2,000'      | ''        | 'Without VAT'   | ''               | 'No'               | 'No'                           | ''                      | 'Store 02'   | ''                | ''          |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | 'pcs'    | '57897909799'          | 'Source of origin 10'   | '1,000'      | ''        | 'Without VAT'   | ''               | 'No'               | 'No'                           | ''                      | 'Store 02'   | ''                | ''          |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Bag'                  | 'ODS'        | 'No'                   | 'pcs'    | ''                     | 'Source of origin 11'   | '1,000'      | ''        | 'Without VAT'   | ''               | 'No'               | 'No'                           | ''                      | 'Store 02'   | ''                | ''          |
-// 	* Add one more item and check filling
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "89088088989" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And "ItemList" table contains lines
-// 			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'         | 'Source of origins'                          | 'Quantity'   | 'Price'   | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Store'       |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '57897909799'                | 'Source of origin 10'                         | '1,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'No'                           | 'Store 02'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '57897909799; 89088088989'   | 'Source of origin 9; Source of origin 9'     | '3,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'No'                           | 'Store 02'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Bag'                  | 'ODS'        | 'No'                   | ''             | 'pcs'    | ''                           | 'Source of origin 11'                        | '1,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'No'                           | 'Store 02'    |
-// 		And I close all client application windows
+Scenario: _050041 check filling source of origin in the SI (consignors products)
+	And I close all client application windows
+	* Open SI form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 02'       |
+		And I select current line in "List" table
+		And I move to "Other" tab	
+	* Add items	
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111112" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "9000009" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check filling
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                             | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '11111111111111'     | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''            | ''           | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '11111111111111'     | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''            | ''           | ''             |
+			| '3' | 'Own stocks'       | ''             | 'Basic Price without VAT' | 'Product 6 with SLN'                               | 'PZU'      | ''                   | 'No'                 | ''           | 'pcs'  | '57897909799'        | ''                    | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''            | ''           | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'PZU'      | ''                   | 'No'                 | ''           | 'pcs'  | '11111111111112'     | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''            | ''           | ''             |
+			| '5' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 16 with SLN (Main Company - Consignor 2)' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '9000009'            | 'Source of origin 9'  | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''            | ''           | ''             |		
+		And I close all client application windows
 		
 				
 		
 		
-// Scenario: _050042 check filling source of origin in the RSR (consignors products)
-// 	And I close all client application windows
-// 	* Open RSR form
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I click the button named "FormCreate"
-// 	* Filling in the details
-// 		And I activate field named "ItemListLineNumber" in "ItemList" table
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Kalipso'        |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Agreement"
-// 		And I go to line in "List" table
-// 			| 'Description'                         |
-// 			| 'Basic Partner terms, without VAT'    |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Store"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Store 02'       |
-// 		And I select current line in "List" table
-// 		And I move to "Other" tab	
-// 	* Add items	
-// 		And I move to "Item list" tab
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "890086768" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 	* Check filling
-// 		And "ItemList" table contains lines
-// 			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'     | 'Quantity'   | 'Price'   | 'VAT'           | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Detail'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | 'pcs'    | '57897909799'          | 'Source of origin 9'    | '2,000'      | ''        | 'Without VAT'   | ''               | ''                      | 'Store 02'   | ''          |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | 'pcs'    | '57897909799'          | 'Source of origin 10'   | '1,000'      | ''        | 'Without VAT'   | ''               | ''                      | 'Store 02'   | ''          |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Bag'                  | 'ODS'        | 'No'                   | 'pcs'    | ''                     | 'Source of origin 11'   | '1,000'      | ''        | 'Without VAT'   | ''               | ''                      | 'Store 02'   | ''          |
-// 	* Add one more item and check filling
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "89088088989" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And "ItemList" table contains lines
-// 			| 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'         | 'Source of origins'                          | 'Quantity'   | 'Price'   | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '57897909799'                | 'Source of origin 10'                        | '1,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'Store 02'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 6 with SLN'   | 'PZU'        | 'No'                   | ''             | 'pcs'    | '57897909799; 89088088989'   | 'Source of origin 9; Source of origin 9'     | '3,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'Store 02'    |
-// 			| 'Consignor stocks'   | 'Basic Price without VAT'   | 'Bag'                  | 'ODS'        | 'No'                   | ''             | 'pcs'    | ''                           | 'Source of origin 11'                        | '1,000'      | ''        | 'Without VAT'   | ''                | ''             | ''               | 'Store 02'    |
-// 		And I close all client application windows
+Scenario: _050042 check filling source of origin in the RSR (consignors products)
+	And I close all client application windows
+	* Open RSR form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 02'       |
+		And I select current line in "List" table
+		And I move to "Other" tab	
+	* Add items	
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111112" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "9000009" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check filling
+		And "ItemList" table contains lines
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                             | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '11111111111111'     | 'pcs'  | ''           | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | ''                    | 'Store 02' | ''       | ''            | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '11111111111111'     | 'pcs'  | ''           | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | ''                    | 'Store 02' | ''       | ''            | ''             |
+			| '3' | 'Own stocks'       | ''             | 'Basic Price without VAT' | 'Product 6 with SLN'                               | 'PZU'      | 'Shop 02'            | 'No'                 | '57897909799'        | 'pcs'  | ''           | ''                    | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | ''                    | 'Store 02' | ''       | ''            | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '11111111111112'     | 'pcs'  | ''           | 'Source of origin 10' | '1,000'    | ''      | '18%'         | ''              | ''           | ''             | ''                    | 'Store 02' | ''       | ''            | ''             |
+			| '5' | 'Consignor stocks' | ''             | 'Basic Price without VAT' | 'Product 16 with SLN (Main Company - Consignor 2)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000009'            | 'pcs'  | ''           | 'Source of origin 9'  | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | ''                    | 'Store 02' | ''       | ''            | ''             |
+		And I close all client application windows
+		
+				
 		
 				
 
-// Scenario: _050043 check filling source of origin in the RSR POS (consignors products)
-// 	And I close all client application windows
-// 	* Preparation
-// 		And I execute 1C:Enterprise script at server
-// 				| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);"     |
-// 	* Open POS and create RSR
-// 		And In the command interface I select "Retail" "Point of sale"
-// 		Then "Point of sales" window is opened
-// 	* Scan items
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "57897909799" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "89088088989" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "890086768" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I go to line in "ItemList" table
-// 			| 'Item'                 | 'Item key'   | 'Quantity'   | 'Serials'                     |
-// 			| 'Product 6 with SLN'   | 'PZU'        | '2,000'      | '57897909799; 89088088989'    |
-// 		And I activate "Price" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "100,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I go to line in "ItemList" table
-// 			| 'Item'   | 'Item key'   | 'Quantity'    |
-// 			| 'Bag'    | 'ODS'        | '1,000'       |
-// 		And I select current line in "ItemList" table
-// 		And I input "120,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I click "Payment (+)" button
-// 		Then "Payment" window is opened
-// 		And I click "Cash (/)" button
-// 		And I click the button named "Enter"
-// 	* Check filling source of origin
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
-// 		And I go to line in "List" table
-// 			| 'Σ'         |
-// 			| '320,00'    |
-// 		And I select current line in "List" table
-// 		And "ItemList" table became equal
-// 			| 'Store'      | 'Inventory origin'   | 'Price type'                | 'Item'                 | 'Serial lot numbers'         | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Source of origins'                        | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-// 			| 'Store 01'   | 'Consignor stocks'   | 'en description is empty'   | 'Product 6 with SLN'   | '57897909799; 89088088989'   | 'pcs'    | 'Shop 02'              | 'PZU'        | 'Source of origin 9; Source of origin 9'   | '2,000'      | '100,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-// 			| 'Store 01'   | 'Consignor stocks'   | 'en description is empty'   | 'Bag'                  | ''                           | 'pcs'    | 'Shop 02'              | 'ODS'        | 'Source of origin 11'                      | '1,000'      | '120,00'   | 'Without VAT'   | '120,00'       | '120,00'          |
-// 		And I close all client application windows
+Scenario: _050043 check filling source of origin in the RSR POS (consignors products)
+	And I close all client application windows
+	* Open POS and create RSR
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+	* Scan items
+		And I click "Search by barcode (F7)" button
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "9000009" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click "Cash (/)" button
+		And I click the button named "Enter"
+	* Check filling source of origin
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I go to line in "List" table
+			| 'Σ'         |
+			| '300,00'    |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'                                             | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins'   | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '11111111111111'     | 'pcs'  | '15,25'      | 'Source of origin 10' | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000009'            | 'pcs'  | ''           | 'Source of origin 9'  | '1,000'    | '100,00' | 'Without VAT' | '100,00'     | '100,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '11111111111111'     | 'pcs'  | '15,25'      | 'Source of origin 10' | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       | 'Store 01' |	
+		And I close all client application windows
 		
 				
 						
-// Scenario: _050053 check filling consignor from serial lot number in the RetailSalesReceipt (scan barcode)
-// 	And I close all client application windows
-// 	* Create RSR and filling main details
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I click the button named "FormCreate"
-// 	* Filling in the details
-// 		And I activate field named "ItemListLineNumber" in "ItemList" table
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Kalipso'        |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Agreement"
-// 		And I go to line in "List" table
-// 			| 'Description'                         |
-// 			| 'Basic Partner terms, without VAT'    |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Store"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Store 02'       |
-// 		And I select current line in "List" table
-// 	* Add items
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989900" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989901" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "090998897898979998" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989900" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "89900779008908" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I finish line editing in "ItemList" table
-// 	* Check consignor
-// 		And I click "Show row key" button
-// 		And in the table "ItemList" I click "Edit quantity in base unit" button	
-// 		And "ItemList" table became equal
-// 			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'                | 'Item'                           | 'Consignor'     | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Is service'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '18,00'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '09999900989901'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '090998897898979998'   | 'pcs'    | 'Shop 02'              | 'UNIQ'       | 'No'           | ''                    | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '4'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '18,00'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '5'   | 'Own stocks'         | 'Basic Price without VAT'   | 'Product 12 with SLN (Main Company - different consignor for item key)'             | ''              | 'No'                   | ''             | '899007790088'         | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | ''                    | '1,000'      | ''         | '18%'           | ''             | ''                |
-// 	* Post document and check consignor
-// 		And I go to line in "ItemList" table
-// 			| 'Item'                 | 'Item key'    |
-// 			| 'Product 12 with SLN (Main Company - different consignor for item key)'   | 'ODS'         |
-// 		And I activate "Price" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "200,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I move to "Payments" tab
-// 		And in the table "Payments" I click the button named "PaymentsAdd"
-// 		And I activate "Payment type" field in "Payments" table
-// 		And I click choice button of "Payment type" attribute in "Payments" table
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Cash'           |
-// 		And I select current line in "List" table
-// 		And I activate field named "PaymentsAmount" in "Payments" table
-// 		And I input "772,00" text in the field named "PaymentsAmount" of "Payments" table
-// 		And I finish line editing in "Payments" table
-// 		And I activate "Account" field in "Payments" table
-// 		And I select current line in "Payments" table
-// 		And I click choice button of "Account" attribute in "Payments" table
-// 		And I go to line in "List" table
-// 			| 'Description'     |
-// 			| 'Cash desk №4'    |
-// 		And I select current line in "List" table
-// 		And I finish line editing in "Payments" table
-// 		And I click "Post" button
-// 		And in the table "ItemList" I click "Edit quantity in base unit" button
-// 		And "ItemList" table became equal
-// 			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'                | 'Item'                           | 'Consignor'     | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Is service'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | '18,00'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | ''             | '09999900989901'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | ''             | '090998897898979998'   | 'pcs'    | 'Shop 02'              | 'UNIQ'       | 'No'           | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '4'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | '18,00'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '5'   | 'Own stocks'         | 'en description is empty'   | 'Product 12 with SLN (Main Company - different consignor for item key)'             | ''              | '36,00'        | '899007790088'         | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '200,00'   | '18%'           | '200,00'       | '236,00'          |
-// 		And I close all client application windows
+Scenario: _050053 check filling consignor from serial lot number in the RetailSalesReceipt
+	And I close all client application windows
+	* Create RSR and filling main details
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 02'       |
+		And I select current line in "List" table
+	* Add items (scan barcode)
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+	* Add items (input by line)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Product 12 with SLN (Main Company - different consignor for item key)" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Serial number' |
+			| '1123'          |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button			
+	* Select from list
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                                      |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number'   |
+			| 'PZU'   | '900889900900777' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button	
+	* Check consignor
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Item key' | 'VAT'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
+			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | 'PZU'      | '18%'         |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'ODS'      | '18%'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | 'PZU'      | 'Without VAT' |
+	* Post document and check consignor
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Cash'           |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "572,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I activate "Account" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Cash desk №4'    |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button
+		And "ItemList" table became equal
+			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Tax amount' | 'Item key' | 'VAT'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
+			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | '18,00'      | 'PZU'      | '18%'         |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | '18,00'      | 'ODS'      | '18%'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | ''           | 'PZU'      | 'Without VAT' |
+		And I close all client application windows
 
 		
-// Scenario: _050054 check filling consignor from serial lot number in the SalesInvoice (scan barcode)
-// 	And I close all client application windows
-// 	* Create SI and filling main details
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I click the button named "FormCreate"
-// 	* Filling in the details
-// 		And I activate field named "ItemListLineNumber" in "ItemList" table
-// 		And I click Choice button of the field named "Partner"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Kalipso'        |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Agreement"
-// 		And I go to line in "List" table
-// 			| 'Description'                         |
-// 			| 'Basic Partner terms, without VAT'    |
-// 		And I select current line in "List" table
-// 		And I click Choice button of the field named "Store"
-// 		And I go to line in "List" table
-// 			| 'Description'    |
-// 			| 'Store 02'       |
-// 		And I select current line in "List" table
-// 	* Add items
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989900" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989901" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "090998897898979998" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "09999900989900" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And in the table "ItemList" I click the button named "SearchByBarcode"
-// 		And I input "89900779008908" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I finish line editing in "ItemList" table
-// 	* Check consignor
-// 		And I click "Show row key" button
-// 		And in the table "ItemList" I click "Edit quantity in base unit" button	
-// 		And "ItemList" table became equal
-// 			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'                | 'Item'                           | 'Consignor'     | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Item key'   | 'Is service'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '18,00'        | '09999900989900'       | 'pcs'    | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '09999900989901'       | 'pcs'    | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '090998897898979998'   | 'pcs'    | 'UNIQ'       | 'No'           | ''                    | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '4'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '18,00'        | '09999900989900'       | 'pcs'    | 'ODS'        | 'No'           | ''                    | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '5'   | 'Own stocks'         | 'Basic Price without VAT'   | 'Product 12 with SLN (Main Company - different consignor for item key)'             | ''              | 'No'                   | ''             | '899007790088'         | 'pcs'    | 'ODS'        | 'No'           | ''                    | '1,000'      | ''         | '18%'           | ''             | ''                |
-// 	* Post document and check consignor
-// 		And I go to line in "ItemList" table
-// 			| 'Item'                 | 'Item key'    |
-// 			| 'Product 12 with SLN (Main Company - different consignor for item key)'   | 'ODS'         |
-// 		And I activate "Price" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "200,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I click "Post" button
-// 		And in the table "ItemList" I click "Edit quantity in base unit" button
-// 		And "ItemList" table became equal
-// 			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'                | 'Item'                           | 'Consignor'     | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Item key'   | 'Is service'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | '18,00'        | '09999900989900'       | 'pcs'    | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | ''             | '09999900989901'       | 'pcs'    | 'ODS'        | 'No'           | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | ''             | '090998897898979998'   | 'pcs'    | 'UNIQ'       | 'No'           | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '4'   | 'Consignor stocks'   | 'Basic Price without VAT'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | '18,00'        | '09999900989900'       | 'pcs'    | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '100,00'       | '118,00'          |
-// 			| 'Store 02'   | '1,000'            | 'Yes'                     | '5'   | 'Own stocks'         | 'en description is empty'   | 'Product 12 with SLN (Main Company - different consignor for item key)'             | ''              | '36,00'        | '899007790088'         | 'pcs'    | 'ODS'        | 'No'           | '1,000'      | '200,00'   | '18%'           | '200,00'       | '236,00'          |
-// 		And I close all client application windows
-		
-						
-		
-// Scenario: _050055 check filling consignor from serial lot number in the RetailSalesReceipt from POS (scan barcode)
-// 		And I close all client application windows
-// 	* Open POS and create RSR
-// 		And In the command interface I select "Retail" "Point of sale"
-// 		Then "Point of sales" window is opened
-// 	* Add items
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "09999900989900" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "09999900989901" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "090998897898979998" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "89900779008908" text in the field named "Barcode"
-// 		And I move to the next attribute
-// 		And I finish line editing in "ItemList" table
-// 		And I click "Payment (+)" button
-// 		Then "Payment" window is opened
-// 		And I click "Cash (/)" button
-// 		And I click the button named "Enter"
-// 	* Check filling consignor
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
-// 		And I go to line in "List" table
-// 			| 'Σ'         |
-// 			| '520,00'    |
-// 		And I select current line in "List" table		
-// 		And "ItemList" table became equal
-// 			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                           | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
-// 			| '1'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'ODS'        | 'Shop 02'              | 'No'                   | '09999900989900'       | 'pcs'    | '15,25'        | ''                    | '1,000'      | '100,00'   | '18%'           | ''                | '84,75'        | '100,00'         | 'Store 01'    |
-// 			| '2'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'ODS'        | 'Shop 02'              | 'No'                   | '09999900989901'       | 'pcs'    | ''             | ''                    | '1,000'      | '100,00'   | 'Without VAT'   | ''                | '100,00'       | '100,00'         | 'Store 01'    |
-// 			| '3'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 8 with SLN (new row)'   | 'UNIQ'       | 'Shop 02'              | 'No'                   | '090998897898979998'   | 'pcs'    | ''             | ''                    | '1,000'      | '200,00'   | 'Without VAT'   | ''                | '200,00'       | '200,00'         | 'Store 01'    |
-// 			| '4'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 12 with SLN (Main Company - different consignor for item key)'             | 'ODS'        | 'Shop 02'              | 'No'                   | '899007790088'         | 'pcs'    | '18,31'        | ''                    | '1,000'      | '120,00'   | '18%'           | ''                | '101,69'       | '120,00'         | 'Store 01'    |
-// 		And I close all client application windows
-		
-			
-							
-						
-							
-			
-						
-						
-			
-						
-							
-						
-						
-
-						
-						
-						
-
-						
-			
-						
-			
-			
-						
-						
-						
-						
-										
+Scenario: _050054 check filling consignor from serial lot number in the SalesInvoice (scan barcode)
+	And I close all client application windows
+	* Create SI and filling main details
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'                         |
+			| 'Basic Partner terms, without VAT'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 02'       |
+		And I select current line in "List" table
+	* Add items (scan barcode)
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+	* Add items (input by line)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Product 12 with SLN (Main Company - different consignor for item key)" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Serial number'   |
+			| '1123' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button			
+	* Select from list
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                                      |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      |
+		And I select current line in "List" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number'   |
+			| 'PZU'   | '900889900900777' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button	
+	* Check consignor
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Item key' | 'VAT'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
+			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | 'PZU'      | '18%'         |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'ODS'      | '18%'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | 'PZU'      | 'Without VAT' |
+	* Post document and check consignor
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And "ItemList" table became equal
+			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Tax amount' | 'Item key' | 'VAT'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
+			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | '18,00'      | 'PZU'      | '18%'         |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | '18,00'      | 'ODS'      | '18%'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | ''           | 'PZU'      | 'Without VAT' |
+		And I close all client application windows

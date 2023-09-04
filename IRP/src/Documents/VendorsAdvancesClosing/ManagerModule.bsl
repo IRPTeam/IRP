@@ -1381,7 +1381,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	"SELECT
 	|	TrnInfo.Date,
 	|	TrnInfo.Recorder AS Document,
-	|	SUM(TrnInfo.Amount) AS Amount,
+	|	TrnInfo.Amount AS Amount,
 	|	TrnInfo.IsDue,
 	|	TrnInfo.IsPaid,
 	|	TrnInfo.Company,
@@ -1408,36 +1408,15 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	AND TrnInfo.Company = &Company
 	|	AND TrnInfo.Branch = &Branch
 	|	AND TrnInfo.IsVendorTransaction
-	|GROUP BY
-	|	TrnInfo.Date,
-	|	TrnInfo.Recorder,
-	|	TrnInfo.IsDue,
-	|	TrnInfo.IsPaid,
-	|	TrnInfo.Company,
-	|	TrnInfo.Branch,
-	|	TrnInfo.Currency,
-	|	TrnInfo.Partner,
-	|	TrnInfo.LegalName,
-	|	TrnInfo.Agreement,
-	|	CASE
-	|		WHEN TrnInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.Order
-	|	END,
-	|	CASE
-	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.TransactionBasis
-	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	MAX(TrnKeys.Ref) AS TransactionKey,
+	|	TrnKeys.Ref AS TransactionKey,
 	|	tmp_TrnInfo.Document,
 	|	tmp_TrnInfo.Date,
 	|	tmp_TrnInfo.Company,
-	|	SUM(tmp_TrnInfo.Amount) AS Amount,
+	|	tmp_TrnInfo.Amount AS Amount,
 	|	tmp_TrnInfo.IsDue,
 	|	tmp_TrnInfo.IsPaid
 	|FROM
@@ -1468,13 +1447,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|				THEN UNDEFINED
 	|			ELSE TrnKeys.TransactionBasis
 	|		END
-	|		AND TrnKeys.IsVendorTransaction
-	|GROUP BY
-	|	tmp_TrnInfo.Date,
-	|	tmp_TrnInfo.Document,
-	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.IsDue,
-	|	tmp_TrnInfo.IsPaid";
+	|		AND TrnKeys.IsVendorTransaction";
 
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod", Parameters.Object.EndOfPeriod);

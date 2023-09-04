@@ -10,6 +10,11 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
+	If Not CRS.Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New") Then
+		OpenShiftSettings.Info.Error = R().InfoMessage_CanOpenOnlyNewStatus;
+		Return OpenShiftSettings;
+	EndIf;
+	
 	If CRS.FiscalPrinter.isEmpty() Then
 		OpenShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		OpenShiftSettings.Info.Success = True;
@@ -45,10 +50,14 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
-
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
+	If Not CRS.Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open") Then
+		CloseShiftSettings.Info.Error = R().InfoMessage_CanCloseOnlyOpenStatus;
+		Return CloseShiftSettings;
+	EndIf;
+
 	If CRS.FiscalPrinter.isEmpty() Then
 		CloseShiftSettings.Out.OutputParameters.DateTime = CommonFunctionsServer.GetCurrentSessionDate();
 		CloseShiftSettings.Info.Success = True;
@@ -104,7 +113,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	EndIf;
 
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
-
+	ProcessCheckSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		ProcessCheckSettings.Info.Success = True;
@@ -216,7 +225,7 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
-
+	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;
@@ -259,7 +268,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	EndIf;
 
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
-
+	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If CRS.FiscalPrinter.isEmpty() Then
 		CashInOutcomeSettings.Info.Success = True;

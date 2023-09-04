@@ -145,6 +145,106 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>CheckNumber</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.CheckNumber</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CheckNumberExtendedTooltip</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CheckNumberContextMenu</name>
+        <id>50</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Status</name>
+      <id>52</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Status</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StatusExtendedTooltip</name>
+        <id>54</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StatusContextMenu</name>
+        <id>53</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>28</id>
       <visible>true</visible>
@@ -894,11 +994,15 @@
 			THEN MAX(RetailReturnReceiptItemList.Store)
 		ELSE UNDEFINED
 	END AS Store,
-	RetailReturnReceipt.StatusType
+	RetailReturnReceipt.StatusType,
+	DocumentFiscalStatus.Status,
+	DocumentFiscalStatus.CheckNumber
 FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
 		LEFT JOIN Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 		ON RetailReturnReceiptItemList.Ref = RetailReturnReceipt.Ref
+		LEFT JOIN InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
+		ON DocumentFiscalStatus.Document = RetailReturnReceipt.Ref
 GROUP BY
 	RetailReturnReceipt.Ref,
 	RetailReturnReceipt.DeletionMark,
@@ -917,7 +1021,9 @@ GROUP BY
 	RetailReturnReceipt.Branch,
 	RetailReturnReceipt.Description,
 	RetailReturnReceipt.DocumentAmount,
-	RetailReturnReceipt.StatusType</queryText>
+	RetailReturnReceipt.StatusType,
+	DocumentFiscalStatus.Status,
+	DocumentFiscalStatus.CheckNumber</queryText>
       <mainTable>Document.RetailReturnReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -1007,6 +1113,14 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DocumentAmount</dataPath>
         <field>DocumentAmount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Status</dataPath>
+        <field>Status</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CheckNumber</dataPath>
+        <field>CheckNumber</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>UsePartnerTransactions</dataPath>

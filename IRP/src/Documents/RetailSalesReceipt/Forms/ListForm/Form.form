@@ -461,7 +461,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TransactionType</name>
+      <name>StatusType</name>
       <id>49</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -469,10 +469,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.TransactionType</segments>
+        <segments>List.StatusType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TransactionTypeExtendedTooltip</name>
+        <name>StatusTypeExtendedTooltip</name>
         <id>51</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -487,7 +487,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TransactionTypeContextMenu</name>
+        <name>StatusTypeContextMenu</name>
         <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -861,7 +861,7 @@
 			THEN MAX(RetailSalesReceiptItemList.Store)
 		ELSE UNDEFINED
 	END AS Store,
-	RetailSalesReceipt.TransactionType
+	RetailSalesReceipt.StatusType
 FROM
 	Document.RetailSalesReceipt AS RetailSalesReceipt
 		LEFT JOIN Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
@@ -884,7 +884,7 @@ GROUP BY
 	RetailSalesReceipt.DocumentAmount,
 	RetailSalesReceipt.RetailCustomer,
 	RetailSalesReceipt.ConsolidatedRetailSales,
-	RetailSalesReceipt.TransactionType</queryText>
+	RetailSalesReceipt.StatusType</queryText>
       <mainTable>Document.RetailSalesReceipt</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

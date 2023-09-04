@@ -1259,7 +1259,7 @@ Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	ObjectValue.Fill(Undefined);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed;
+	ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Completed;
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
@@ -1328,10 +1328,10 @@ Function WriteTransaction(PaymentResult)
 		EndDo;
 
 		If ThisObject.RetailBasis.IsEmpty() Then
-			DocRef = CreateReturnWithoutBase(PaymentsTable, Enums.RetailSalesReceiptTransactionTypes.Completed);
+			DocRef = CreateReturnWithoutBase(PaymentsTable, Enums.RetailReceiptStatusTypes.Completed);
 			Result.Refs.Add(DocRef);
 		Else
-			DocRefs = CreateReturnOnBase(PaymentsTable, Enums.RetailSalesReceiptTransactionTypes.Completed);
+			DocRefs = CreateReturnOnBase(PaymentsTable, Enums.RetailReceiptStatusTypes.Completed);
 			For Each DocRef In DocRefs Do
 				Result.Refs.Add(DocRef);
 			EndDo;
@@ -1345,7 +1345,7 @@ Function WriteTransaction(PaymentResult)
 			ObjectValue = FormAttributeToValue("Object");
 		EndIf;
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-		ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Completed;
+		ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Completed;
 		ObjectValue.Payments.Load(Payments);
 		For Each Row In ObjectValue.Payments Do
 			If ValueIsFilled(Row.PaymentType) Then
@@ -1914,7 +1914,7 @@ Function GetBasisResultTable(Val BasisesTable)
 EndFunction
 
 &AtServer
-Function CreateReturnOnBase(PaymentData, TransactionType)
+Function CreateReturnOnBase(PaymentData, StatusType)
 
 	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
 
@@ -1972,7 +1972,7 @@ Function CreateReturnOnBase(PaymentData, TransactionType)
 			NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 		EndIf;
 		NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
-		NewDoc.TransactionType = TransactionType;
+		NewDoc.StatusType = StatusType;
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
 		NewDoc.Write(DocumentWriteMode.Posting);
@@ -1990,7 +1990,7 @@ Function CreateReturnOnBase(PaymentData, TransactionType)
 EndFunction
 
 &AtServer
-Function CreateReturnWithoutBase(PaymentData, TransactionType)
+Function CreateReturnWithoutBase(PaymentData, StatusType)
 
 	FillingData = New Structure();
 	FillingData.Insert("BasedOn"                , "RetailReturnReceipt");
@@ -2020,7 +2020,7 @@ Function CreateReturnWithoutBase(PaymentData, TransactionType)
 		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	EndIf;
 	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	NewDoc.TransactionType = TransactionType;
+	NewDoc.StatusType = StatusType;
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
 	NewDoc.Write(DocumentWriteMode.Posting);
@@ -2281,17 +2281,17 @@ Procedure PostponeCurrentReceiptAtServer(WithReserve)
 		ObjectValue.Workstation = Workstation;
 		
 		If WithReserve Then
-			ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve;
+			ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.PostponedWithReserve;
 		Else
-			ObjectValue.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Postponed;
+			ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Postponed;
 		EndIf;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
 		ObjectValue.Write(DocumentWriteMode.Posting);
 	ElsIf ThisObject.RetailBasis.IsEmpty() Then
-		CreateReturnWithoutBase(New Array, Enums.RetailSalesReceiptTransactionTypes.Postponed);
+		CreateReturnWithoutBase(New Array, Enums.RetailReceiptStatusTypes.Postponed);
 	Else
-		CreateReturnOnBase(New Array, Enums.RetailSalesReceiptTransactionTypes.Postponed);
+		CreateReturnOnBase(New Array, Enums.RetailReceiptStatusTypes.Postponed);
 	EndIf;
 
 EndProcedure	
@@ -2427,10 +2427,10 @@ Procedure ReceiptsCanceling(Refs)
 	For Each Ref In Refs Do
 		ThisObject.PostponedReceipt = Ref;
 		RefObject = Ref.GetObject();
-		If RefObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled Then
+		If RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled Then
 			Continue;
 		EndIf;
-		RefObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled;
+		RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled;
 		RefObject.Write(DocumentWriteMode.Posting);
 	EndDo;
 EndProcedure
@@ -2451,7 +2451,7 @@ Function CancelingPostponedReceipts(ConsolidatedRetailSales)
 	|WHERE
 	|	NOT RetailSalesReceipt.DeletionMark
 	|	AND RetailSalesReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
-	|	AND RetailSalesReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|	AND RetailSalesReceipt.StatusType IN (&Postponed, &PostponedWithReserve)
 	|
 	|UNION ALL
 	|
@@ -2462,16 +2462,16 @@ Function CancelingPostponedReceipts(ConsolidatedRetailSales)
 	|WHERE
 	|	NOT RetailReturnReceipt.DeletionMark
 	|	AND RetailReturnReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
-	|	AND RetailReturnReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)";
+	|	AND RetailReturnReceipt.StatusType IN (&Postponed, &PostponedWithReserve)";
 	
 	Query.SetParameter("ConsolidatedRetailSales", ConsolidatedRetailSales);
-	Query.SetParameter("PostponedWithReserve", Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve);
-	Query.SetParameter("Postponed", Enums.RetailSalesReceiptTransactionTypes.Postponed);
+	Query.SetParameter("PostponedWithReserve", Enums.RetailReceiptStatusTypes.PostponedWithReserve);
+	Query.SetParameter("Postponed", Enums.RetailReceiptStatusTypes.Postponed);
 	
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		ReceiptObject = QuerySelection.Ref.GetObject(); // DocumentObject.RetailSalesReceipt
-		ReceiptObject.TransactionType = Enums.RetailSalesReceiptTransactionTypes.Canceled;
+		ReceiptObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled;
 		//@skip-check empty-except-statement
 		Try
 			ReceiptObject.Write(DocumentWriteMode.Posting);
@@ -2507,7 +2507,7 @@ Function GetCountPostponedReceipts(ConsolidatedRetailSales)
 	|WHERE
 	|	NOT RetailSalesReceipt.DeletionMark
 	|	AND RetailSalesReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
-	|	AND RetailSalesReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|	AND RetailSalesReceipt.StatusType IN (&Postponed, &PostponedWithReserve)
 	|
 	|UNION ALL
 	|
@@ -2519,7 +2519,7 @@ Function GetCountPostponedReceipts(ConsolidatedRetailSales)
 	|WHERE
 	|	NOT RetailReturnReceipt.DeletionMark
 	|	AND RetailReturnReceipt.ConsolidatedRetailSales = &ConsolidatedRetailSales
-	|	AND RetailReturnReceipt.TransactionType IN (&Postponed, &PostponedWithReserve)
+	|	AND RetailReturnReceipt.StatusType IN (&Postponed, &PostponedWithReserve)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2532,8 +2532,8 @@ Function GetCountPostponedReceipts(ConsolidatedRetailSales)
 	|	tmpAllReceipts.ConsolidatedRetailSales";
 	
 	Query.SetParameter("ConsolidatedRetailSales", ConsolidatedRetailSales);
-	Query.SetParameter("PostponedWithReserve", Enums.RetailSalesReceiptTransactionTypes.PostponedWithReserve);
-	Query.SetParameter("Postponed", Enums.RetailSalesReceiptTransactionTypes.Postponed);
+	Query.SetParameter("PostponedWithReserve", Enums.RetailReceiptStatusTypes.PostponedWithReserve);
+	Query.SetParameter("Postponed", Enums.RetailReceiptStatusTypes.Postponed);
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then

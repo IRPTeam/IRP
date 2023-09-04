@@ -5160,7 +5160,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.TransactionType</segments>
+            <segments>Object.StatusType</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionTypeExtendedTooltip</name>

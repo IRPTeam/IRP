@@ -613,7 +613,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>ReceiptsTransactionType</name>
+      <name>ReceiptsStatusType</name>
       <id>44</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -621,10 +621,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Receipts.TransactionType</segments>
+        <segments>Receipts.StatusType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>ReceiptsTransactionTypeExtendedTooltip</name>
+        <name>ReceiptsStatusTypeExtendedTooltip</name>
         <id>46</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -639,7 +639,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ReceiptsTransactionTypeContextMenu</name>
+        <name>ReceiptsStatusTypeContextMenu</name>
         <id>45</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1529,7 +1529,7 @@
 	RetailSalesReceipt.Currency,
 	RetailSalesReceipt.RetailCustomer,
 	RetailSalesReceipt.Workstation,
-	RetailSalesReceipt.TransactionType,
+	RetailSalesReceipt.StatusType,
 	RetailSalesReceipt.PointInTime,
 	RetailSalesReceipt.Presentation,
 	RetailSalesReceipt.ConsolidatedRetailSales,
@@ -1540,8 +1540,8 @@
 FROM
 	Document.RetailSalesReceipt AS RetailSalesReceipt
 WHERE
-	RetailSalesReceipt.TransactionType IN (Value(Enum.RetailSalesReceiptTransactionTypes.Postponed),
-		Value(Enum.RetailSalesReceiptTransactionTypes.PostponedWithReserve))
+	RetailSalesReceipt.StatusType IN (Value(Enum.RetailReceiptStatusTypes.Postponed),
+		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))
 
 UNION ALL
 
@@ -1556,7 +1556,7 @@ SELECT
 	RetailReturnReceipt.Currency,
 	RetailReturnReceipt.RetailCustomer,
 	RetailReturnReceipt.Workstation,
-	RetailReturnReceipt.TransactionType,
+	RetailReturnReceipt.StatusType,
 	RetailReturnReceipt.PointInTime,
 	RetailReturnReceipt.Presentation,
 	RetailReturnReceipt.ConsolidatedRetailSales,
@@ -1567,8 +1567,8 @@ SELECT
 FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
 WHERE
-	RetailReturnReceipt.TransactionType IN (Value(Enum.RetailSalesReceiptTransactionTypes.Postponed),
-		Value(Enum.RetailSalesReceiptTransactionTypes.PostponedWithReserve))</queryText>
+	RetailReturnReceipt.StatusType IN (Value(Enum.RetailReceiptStatusTypes.Postponed),
+		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

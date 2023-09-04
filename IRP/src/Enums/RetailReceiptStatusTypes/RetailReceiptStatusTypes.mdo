@@ -5,10 +5,10 @@
     <listType typeId="4426fd46-bf6d-4d4a-b139-d0a74862b195" valueTypeId="33739eb6-a2d8-44b1-9764-6956e2ba0802"/>
     <managerType typeId="7216c478-b2f4-4b72-90d2-0a73d6c407d6" valueTypeId="472de2a9-928d-400c-800f-7bf1b27c93df"/>
   </producedTypes>
-  <name>RetailSalesReceiptTransactionTypes</name>
+  <name>RetailReceiptStatusTypes</name>
   <synonym>
     <key>en</key>
-    <value>Retail sales receipt transaction types</value>
+    <value>Retail receipt status types</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

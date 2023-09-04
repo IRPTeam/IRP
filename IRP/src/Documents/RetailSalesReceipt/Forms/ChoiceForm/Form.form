@@ -424,7 +424,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TransactionType</name>
+      <name>StatusType</name>
       <id>46</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -432,10 +432,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.TransactionType</segments>
+        <segments>List.StatusType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TransactionTypeExtendedTooltip</name>
+        <name>StatusTypeExtendedTooltip</name>
         <id>48</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -450,7 +450,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TransactionTypeContextMenu</name>
+        <name>StatusTypeContextMenu</name>
         <id>47</id>
         <visible>true</visible>
         <enabled>true</enabled>

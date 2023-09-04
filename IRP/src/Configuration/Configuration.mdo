@@ -969,7 +969,7 @@
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.RetailSalesReceiptTransactionTypes</enums>
+  <enums>Enum.RetailReceiptStatusTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

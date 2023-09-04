@@ -545,7 +545,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TransactionType</name>
+      <name>StatusType</name>
       <id>49</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -553,10 +553,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.TransactionType</segments>
+        <segments>List.StatusType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TransactionTypeExtendedTooltip</name>
+        <name>StatusTypeExtendedTooltip</name>
         <id>51</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -571,7 +571,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TransactionTypeContextMenu</name>
+        <name>StatusTypeContextMenu</name>
         <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -894,7 +894,7 @@
 			THEN MAX(RetailReturnReceiptItemList.Store)
 		ELSE UNDEFINED
 	END AS Store,
-	RetailReturnReceipt.TransactionType
+	RetailReturnReceipt.StatusType
 FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
 		LEFT JOIN Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
@@ -917,7 +917,7 @@ GROUP BY
 	RetailReturnReceipt.Branch,
 	RetailReturnReceipt.Description,
 	RetailReturnReceipt.DocumentAmount,
-	RetailReturnReceipt.TransactionType</queryText>
+	RetailReturnReceipt.StatusType</queryText>
       <mainTable>Document.RetailReturnReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

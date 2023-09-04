@@ -369,19 +369,19 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="159fcfd0-5a0b-4205-b20a-9d01ca285932">
-    <name>TransactionType</name>
+    <name>StatusType</name>
     <synonym>
       <key>en</key>
-      <value>Transaction type</value>
+      <value>Status type</value>
     </synonym>
     <type>
-      <types>EnumRef.RetailSalesReceiptTransactionTypes</types>
+      <types>EnumRef.RetailReceiptStatusTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.RetailSalesReceiptTransactionTypes.EnumValue.Completed</value>
+      <value>Enum.RetailReceiptStatusTypes.EnumValue.Completed</value>
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

@@ -2604,6 +2604,82 @@ Scenario: _0260186 check show fiscal transaction from POS
     And I close all client application windows
 
 
+
+				
+Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
+	And I close all client application windows
+	* Open RSR list form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And "List" table contains lines 
+			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '118,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '210,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '620,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '112,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '113,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '520,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+	* Open RRR list form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And "List" table contains lines
+			| 'Partner'         | 'Amount' | 'Company'      | 'Check number' | 'Status'  | 'Legal name'              | 'Currency' | 'Store'    | 'Author' |
+			| 'Retail customer' | '100,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '200,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '111,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '210,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Customer'        | '118,00' | 'Main Company' | '*'            | 'Printed' | 'Customer'                | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '543,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '112,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '113,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '720,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '300,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+		And I close all client application windows
+		
+				
+Scenario: _0260191 check session open and close from CRS
+	And I close all client application windows
+	* Create CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "open" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormPost"
+	* Open session
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		And I select from the drop-down list named "Status" by "new" string
+		And I click "Open session" button	
+		And I click "Reread" button
+		Then the form attribute named "Status" became equal to "Open"
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
+	* Close session
+		And I click "Close session" button	
+		And I set checkbox "I confirm the difference between actual data and accounting."
+		And I move to the next attribute
+		And I click "Close session" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CloseShift"
+	And I close all client application windows
+	
 // Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
 // 	And I close all client application windows
 // 	* Create Consolidated retail sales with status New

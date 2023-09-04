@@ -76,6 +76,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 			| "Documents.BankPayment.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document BankPayment (advance)
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -645,7 +646,28 @@ Scenario: _1002062 generate Offset of advance report based on VendorsAdvancesClo
 		And I close all client application windows
 		
 				
-				
+Scenario: _1002064 check advance closing when PI has two same strings
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.VendorsAdvancesClosing.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"     |
+	* Check advance closing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '7'        |
+		And I click "Offset of advances" button
+	* Check
+		And "Doc" spreadsheet document contains "OffsetOfAdvanceVendorMaxim" template lines by template
+	And I close all client application windows				
 		
 							
 	

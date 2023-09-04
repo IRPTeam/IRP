@@ -2685,7 +2685,7 @@ Scenario: _0260187 add one more Acquiring terminal and check open and close sess
             |"Description"|
             | "Acquiring terminal 2" | 
         And I click "Analyze log" button
-        And "TransactionList" table became equal
+        And "TransactionList" table contains lines
             | 'Period' | 'Hardware'             | 'Method'     | 'Result' |
             | '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
             | '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |

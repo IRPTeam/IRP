@@ -166,9 +166,7 @@ EndProcedure
 Procedure CloseSession(Command)
 	CountPostponedReceipts = GetCountPostponedReceipts(Object.ConsolidatedRetailSales);
 	If CountPostponedReceipts > 0 Then
-		NotifyDescription = New NotifyDescription("QuestionForCancelPostponedFinish", ThisObject);
-		TextQuestion = StrTemplate(R().POS_QuestionForCancelPostponed, CountPostponedReceipts);
-		ShowQueryBox(NotifyDescription, TextQuestion, QuestionDialogMode.YesNo, , DialogReturnCode.No);
+		OpenPostponedReceipt(Command);
 		Return;
 	EndIf;
 	
@@ -2303,7 +2301,8 @@ Procedure OpenPostponedReceipt(Command)
 	EndIf;	
 	
 	Notification = New NotifyDescription("SelectPostonedReceiptNotify", ThisObject);
-	OpenForm("DataProcessor.PointOfSale.Form.SelectPostonedReceipt", , , , , , 
+	OpenForm("DataProcessor.PointOfSale.Form.SelectPostponedReceipt", 
+		New Structure("Branch", Object.Branch), , , , , 
 		Notification, FormWindowOpeningMode.LockWholeInterface);
 
 EndProcedure
@@ -2540,16 +2539,6 @@ Function GetCountPostponedReceipts(ConsolidatedRetailSales)
 	
 	Return Result;
 EndFunction
-
-&AtClient
-Procedure QuestionForCancelPostponedFinish(Answer, AddInfo) Export
-	If Answer = DialogReturnCode.Yes Then
-		NumberOfCanceled = CancelingPostponedReceipts(Object.ConsolidatedRetailSales);
-		If NumberOfCanceled > 0 Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_CancelPostponed, NumberOfCanceled));
-		EndIf;
-	EndIf;
-EndProcedure
 
 &AtServer
 Function GetClearPostponedObject()

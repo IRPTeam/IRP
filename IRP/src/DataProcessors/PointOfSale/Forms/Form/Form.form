@@ -2018,36 +2018,6 @@
             <items xsi:type="form:FormGroup">
               <name>GroupCommonCommands</name>
               <id>1128</id>
-              <items xsi:type="form:Button">
-                <name>ClearCurrentReceipt</name>
-                <id>1345</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <extendedTooltip>
-                  <name>ClearCurrentReceiptExtendedTooltip</name>
-                  <id>1346</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <commandName>Form.Command.ClearCurrentReceipt</commandName>
-                <representation>Picture</representation>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <placementArea>UserCmds</placementArea>
-                <representationInContextMenu>Auto</representationInContextMenu>
-              </items>
               <items xsi:type="form:FormGroup">
                 <name>SubmenuCommonCommands</name>
                 <id>1130</id>
@@ -2159,6 +2129,65 @@
                   <extendedTooltip>
                     <name>GroupSessionComandsExtendedTooltip</name>
                     <id>1133</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <extInfo xsi:type="form:ButtonGroupExtInfo"/>
+                </items>
+                <items xsi:type="form:FormGroup">
+                  <name>ClearReceiptGroup</name>
+                  <id>1349</id>
+                  <items xsi:type="form:Button">
+                    <name>ClearCurrentReceipt</name>
+                    <id>1345</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <extendedTooltip>
+                      <name>ClearCurrentReceiptExtendedTooltip</name>
+                      <id>1346</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.ClearCurrentReceipt</commandName>
+                    <representation>Picture</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <title>
+                    <key>en</key>
+                    <value>Group of clearing receipt</value>
+                  </title>
+                  <extendedTooltip>
+                    <name>ClearReceiptGroupExtendedTooltip</name>
+                    <id>1350</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>

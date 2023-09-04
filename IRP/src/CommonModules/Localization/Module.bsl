@@ -607,7 +607,6 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("POS_ClearAllItems", NStr("en = 'Clear all items before continuing'", Lang));
 	Strings.Insert("POS_CancelPostponed", NStr("en = '%1 postponed receipts cancelled'", Lang));
-	Strings.Insert("POS_QuestionForCancelPostponed", NStr("en = 'There are %1 postponed receipts in the Session. Cancel all of them?'", Lang));
 	
 #EndRegion
 

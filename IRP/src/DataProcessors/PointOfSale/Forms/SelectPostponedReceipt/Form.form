@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+  <title>
+    <key>en</key>
+    <value>Select postponed receipt</value>
+  </title>
   <items xsi:type="form:Table">
     <name>Receipts</name>
     <id>1</id>
@@ -860,6 +864,36 @@
     <contextMenu>
       <name>ReceiptsContextMenu</name>
       <id>3</id>
+      <items xsi:type="form:Button">
+        <name>ReceiptsContextMenuCancelReceipts</name>
+        <id>108</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>ReceiptsContextMenuCancelReceiptsExtendedTooltip</name>
+          <id>109</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.CancelReceipts</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -1492,6 +1526,10 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -1542,6 +1580,7 @@ FROM
 WHERE
 	RetailSalesReceipt.StatusType IN (Value(Enum.RetailReceiptStatusTypes.Postponed),
 		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))
+	AND RetailSalesReceipt.Branch = &amp;Branch
 
 UNION ALL
 
@@ -1622,10 +1661,6 @@ WHERE
         <field>Workstation</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>TransactionType</dataPath>
-        <field>TransactionType</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>PointInTime</dataPath>
         <field>PointInTime</field>
       </fields>
@@ -1657,6 +1692,30 @@ WHERE
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>StatusType</dataPath>
+        <field>StatusType</field>
+      </fields>
+      <parameters>
+        <name>Branch</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Branch</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.BusinessUnits</types>
+        </valueType>
+        <values xsi:type="core_1:DesignTimeValueValue">
+          <value>
+            <value>Catalog.BusinessUnits.EmptyRef</value>
+          </value>
+        </values>
+        <useRestriction>true</useRestriction>
+      </parameters>
       <keyField>Ref</keyField>
     </extInfo>
   </attributes>
@@ -1830,6 +1889,50 @@ WHERE
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>CurrentBranch</name>
+    <title>
+      <key>en</key>
+      <value>Current branch</value>
+    </title>
+    <id>12</id>
+    <valueType>
+      <types>CatalogRef.BusinessUnits</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <formCommands>
+    <name>CancelReceipts</name>
+    <title>
+      <key>en</key>
+      <value>Cancel receipts</value>
+    </title>
+    <id>1</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCross</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>CancelReceipts</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <parameters>
+    <name>Branch</name>
+    <valueType>
+      <types>CatalogRef.BusinessUnits</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

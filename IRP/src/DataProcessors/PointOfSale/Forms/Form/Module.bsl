@@ -84,8 +84,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	PostponeWithReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithReserve");
 	PostponeWithoutReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithoutReserve");
-	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithReserve OR (PostponeWithoutReserve AND Form.isReturn);
-	Form.Items.PostponeCurrentReceiptWithReserve.Visible = PostponeWithoutReserve AND NOT Form.isReturn;
+	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithoutReserve OR (PostponeWithReserve AND Form.isReturn);
+	Form.Items.PostponeCurrentReceiptWithReserve.Visible = PostponeWithReserve AND NOT Form.isReturn;
 	Form.Items.OpenPostponedReceipt.Visible = PostponeWithReserve OR PostponeWithoutReserve;
 
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
@@ -2248,8 +2248,7 @@ Procedure PostponeCurrentReceipt(Command)
 
 	PostponeCurrentReceiptAtServer(False);
 	
-	NewTransaction();
-	Modified = False;
+	ClearCurrentReceipt(Command);
 	
 EndProcedure
 
@@ -2263,9 +2262,8 @@ Procedure PostponeCurrentReceiptWithReserve(Command)
 
 	PostponeCurrentReceiptAtServer(True);
 	
-	NewTransaction();
-	Modified = False;
-	
+	ClearCurrentReceipt(Command);
+		
 EndProcedure
 
 &AtServer

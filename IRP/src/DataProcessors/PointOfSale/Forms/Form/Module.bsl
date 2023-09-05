@@ -2300,7 +2300,7 @@ Procedure OpenPostponedReceipt(Command)
 		Return;
 	EndIf;	
 	
-	Notification = New NotifyDescription("SelectPostonedReceiptNotify", ThisObject);
+	Notification = New NotifyDescription("SelectPostponedReceiptNotify", ThisObject);
 	OpenForm("DataProcessor.PointOfSale.Form.SelectPostponedReceipt", 
 		New Structure("Branch", Object.Branch), , , , , 
 		Notification, FormWindowOpeningMode.LockWholeInterface);
@@ -2308,7 +2308,7 @@ Procedure OpenPostponedReceipt(Command)
 EndProcedure
 
 &AtClient
-Procedure SelectPostonedReceiptNotify(SelectedReceipt, AddInfo) Export
+Procedure SelectPostponedReceiptNotify(SelectedReceipt, AddInfo) Export
 	If SelectedReceipt = Undefined Then
 		Return;
 	EndIf;

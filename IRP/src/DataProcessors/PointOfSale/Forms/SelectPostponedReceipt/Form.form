@@ -1556,7 +1556,7 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT
+      <queryText>SELECT ALLOWED
 	RetailSalesReceipt.Ref,
 	RetailSalesReceipt.DataVersion,
 	RetailSalesReceipt.Date,

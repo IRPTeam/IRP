@@ -2632,7 +2632,7 @@ Function CalculationsExecute(Options) Export
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-				Result.TotalAmount / Options.PriceOptions.Quantity);  
+					(Result.TotalAmount / Options.PriceOptions.Quantity) + Result.OffersAmount);  
 			EndIf;
 			
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -2657,7 +2657,7 @@ Function CalculationsExecute(Options) Export
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-				(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
+				((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity)  + Result.OffersAmount);
 			EndIf;
 			
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2683,7 +2683,7 @@ Function CalculationsExecute(Options) Export
 		
 		If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 			Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-			(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
+			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) + Result.OffersAmount);
 		EndIf;
 		
 		If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
@@ -2746,7 +2746,7 @@ Function CalculateNetAmount_PriceNotIncludeTax(PriceOptions, Result)
 EndFunction
 
 Function CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(PriceOptions, Result)
-	Return Result.TotalAmount - Result.TaxAmount - Result.OffersAmount;
+	Return Result.TotalAmount - Result.TaxAmount;
 EndFunction
 
 Function _CalculateAmount(PriceOptions, Result)

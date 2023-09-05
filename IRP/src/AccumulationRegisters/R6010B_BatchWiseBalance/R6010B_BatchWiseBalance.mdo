@@ -185,6 +185,45 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="ac518c85-f87d-47d8-a26b-0a59e7796d6b">
+    <name>TotalAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="da495d59-083b-4f69-a11e-9b0a8bdf039d">
+    <name>TotalNetAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total net amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="dca3b895-6225-4ec9-ac76-e01a0be3e014">
+    <name>TotalTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="51729166-c0ca-4937-a8ab-2b8b560c18ba">
     <name>Document</name>
     <synonym>

@@ -646,10 +646,40 @@ Scenario: _024007 create SI based on SC	without SO
 			| 'Dress (L/Green)'                                      | '8,000'     | '8,000'                | '8,000'       |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''          | '8,000'                | '8,000'       |
 		And I close all client application windows
-				
+	* Select items in SI from SC and check filling inventory origin
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+		And I select from "Branch" drop-down list by "Distribution department" string
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                                   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Post" button
+		And I delete "$$SalesInvoice024007$$" variable
+		And I save the window as "$$SalesInvoice024007$$"
+		When set True value to the constant Use commission trading
+		And "ItemList" table became equal
+			| 'Inventory origin' |
+			| 'Own stocks'       |
+			| 'Own stocks'       |
+		When set False value to the constant Use commission trading
+		And I close all client application windows
+		
+			
 
 
 Scenario: _024025 create document Sales Invoice without Sales order and check Row ID (SI-SC)
+	When set False value to the constant Use commission trading
 	When create SalesInvoice024025
 	* Check Row Id
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -745,6 +775,7 @@ Scenario: _024028 create SI based on SC with two same items (creation based on)
 			| '#'   | 'Price type'          | 'Item'    | 'Item key'   | 'Profit loss center'        | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                   | 'Revenue type'    |
 			| '1'   | 'Basic Price Types'   | 'Dress'   | 'XS/Blue'    | 'Distribution department'   | 'No'                   | '1 507,12'     | ''                     | '19,000'     | 'pcs'    | '520,00'   | '18%'   | ''                | '8 372,88'     | '9 880,00'       | 'No'                           | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 1 111 dated 15.02.2022 11:03:38'   | 'Revenue'         |
 			| '2'   | 'Basic Price Types'   | 'Dress'   | 'M/White'    | 'Distribution department'   | 'No'                   | '793,22'       | ''                     | '10,000'     | 'pcs'    | '520,00'   | '18%'   | ''                | '4 406,78'     | '5 200,00'       | 'No'                           | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 1 111 dated 15.02.2022 11:03:38'   | 'Revenue'         |
+		
 		And I close all client application windows
 		
 Scenario: _024029 create SI based on SC with two same items (link items)

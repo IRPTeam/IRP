@@ -169,7 +169,7 @@ Scenario: _0263101 check preparation
 	When check preparation
 
 
-Scenario: _0263102 create postponed RSR with a reservation and the use of CRS
+Scenario: _0263102 create postponed RSR with a reservation (CRS used)
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
@@ -183,6 +183,13 @@ Scenario: _0263102 create postponed RSR with a reservation and the use of CRS
 		And I click "OK" button	
 	* Add items
 		When add different items in POS
+		* Add one more Service
+			And I click "Search by barcode (F7)" button
+			And I input "89908" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt with reserve" button
 		Then the number of "ItemList" table lines is "равно" "0"
@@ -204,14 +211,15 @@ Scenario: _0263102 create postponed RSR with a reservation and the use of CRS
 			| '3' | 'en description is empty' | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '999999999'          | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
 			| '4' | 'Basic Price Types'       | 'Dress'                                                   | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
 			| '5' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |		
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
 		Then the form attribute named "Author" became equal to "CI"
 		Then the form attribute named "StatusType" became equal to "Postponed with reserve"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "779,68"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "140,32"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "920,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "864,43"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "155,57"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 020,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I delete "$$NumberPostponedRSR1$$" variable
 		And I delete "$$PostponedRSR1$$" variable
@@ -237,7 +245,7 @@ Scenario: _0263102 create postponed RSR with a reservation and the use of CRS
 		
 			
 				
-Scenario: _0263103 create postponed RSR without a reservation and the use of CRS
+Scenario: _0263103 create postponed RSR without a reservation (CRS used)
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
@@ -283,11 +291,13 @@ Scenario: _0263103 create postponed RSR without a reservation and the use of CRS
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I delete "$$NumberPostponedRSR2$$" variable
 		And I delete "$$PostponedRSR2$$" variable
-		And I delete "$$DatePostponedRSR1$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I delete "$$ConsolidatedRetailSales1$$" variable
 		And I save the value of "Number" field as "$$NumberPostponedRSR2$$"
 		And I save the window as "$$PostponedRSR2$$"
 		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
 		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+		And I save the value of the field named "ConsolidatedRetailSales" as "$$ConsolidatedRetailSales1$$"
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
@@ -296,27 +306,185 @@ Scenario: _0263103 create postponed RSR without a reservation and the use of CRS
 			| 'Document registrations records' |
 		And I close current window
 
-
-
-// Scenario: _0263104 try close session with deferred receipts
-// 	And I close all client application windows
-// 	* Open POS
-// 		And In the command interface I select "Retail" "Point of sale"
-// 	* Try close session
-// 		And I click "Close session" button
-// 	* Check postponed list form
-// 		And "Receipts" table became equal
-// 			| 'Type'         | 'Branch'  | 'Date'                | 'Amount' | 'Fiscal printer' | 'Company'      | 'Number' | 'Currency' | 'Retail customer' | 'Workstation'    | 'Consolidated retail sales' | 'Receipt'                                          | 'Author' | 'Status type'            |
-// 			| 'Retail sales' | 'Shop 02' | '05.09.2023 16:00:59' | '920,00' | ''               | 'Main Company' | '1'      | 'TRY'      | 'Sam Jons'        | 'Workstation 01' | '*'                         | 'Retail sales receipt 1 dated 05.09.2023 16:00:59' | 'CI'     | 'Postponed with reserve' |
-// 			| 'Retail sales' | 'Shop 02' | '05.09.2023 16:10:46' | '920,00' | ''               | 'Main Company' | '2'      | 'TRY'      | 'Sam Jons'        | 'Workstation 01' | '*'                         | 'Retail sales receipt 2 dated 05.09.2023 16:10:46' | 'CI'     | 'Postponed'              |
-// 		And "ItemList" table became equal
-// 			| 'Item'                                                    | 'Item key' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' |
-// 			| 'Product 1 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
-// 			| 'Product 6 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
-// 			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
-// 			| 'Dress'                                                   | 'XS/Blue'  | 'pcs'  | '79,32'      | '1,000'    | '520,00' | '440,68'     | '520,00'       |
-// 			| 'Service'                                                 | 'Rent'     | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
 		
+Scenario: _0263104 create postponed RRR without a reservation and without bases (CRS used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+		And I click the button named "Return"		
+	* Add items
+		When add different items in POS
+		* Product without SLN
+			And I click "Search by barcode (F7)" button
+			And I input "2202283705" text in the field named "Barcode"
+			And I move to the next attribute
+	* Postponed RSR without a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the field named "ConsolidatedRetailSales" is filled
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Item'                                                    | 'Sales person' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Revenue type' |
+			| '1' | 'Product 1 with SLN'                                      | ''             | 'PZU'      | 'No'                 | '8908899877'         | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''             |
+			| '2' | 'Product 6 with SLN'                                      | ''             | 'PZU'      | 'No'                 | '57897909799'        | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''             |
+			| '3' | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | 'No'                 | '999999999'          | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''             |
+			| '4' | 'Dress'                                                   | ''             | 'XS/Blue'  | 'No'                 | ''                   | 'pcs'  | '158,64'     | ''                  | '2,000'    | '520,00' | '18%' | ''              | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''       | ''             |
+			| '5' | 'Service'                                                 | ''             | 'Rent'     | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''             |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,36"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "219,64"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 440,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRRR1$$" variable
+		And I delete "$$PostponedRRR1$$" variable
+		And I delete "$$DatePostponedRRR1$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRRR1$$"
+		And I save the window as "$$PostponedRRR1$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRRR1$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRRR1$$"
+	* Check 
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRRR1$$'              |
+			| 'Document registrations records' |
+		And I close current window
+
+
+Scenario: _0263104 postponed list form (POS)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed list form
+		And I click "Open postponed receipt" button
+	* Check postponed list form
+		And "Receipts" table became equal
+			| 'Type'                 | 'Date'                  | 'Number'                  | 'Amount'   | 'Currency' | 'Retail customer' | 'Workstation'    | 'Fiscal printer' | 'Company'      | 'Consolidated retail sales'    | 'Branch'  | 'Author' | 'Status type'            | 'Receipt'           |
+			| 'Retail sales'         | '$$DatePostponedRSR1$$' | '$$NumberPostponedRSR1$$' | '1 020,00' | 'TRY'      | 'Sam Jons'        | 'Workstation 01' | ''               | 'Main Company' | '$$ConsolidatedRetailSales1$$' | 'Shop 02' | 'CI'     | 'Postponed with reserve' | '$$PostponedRSR1$$' |
+			| 'Retail sales'         | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '920,00'   | 'TRY'      | 'Sam Jons'        | 'Workstation 01' | ''               | 'Main Company' | '$$ConsolidatedRetailSales1$$' | 'Shop 02' | 'CI'     | 'Postponed'              | '$$PostponedRSR2$$' |
+			| 'Return from customer' | '$$DatePostponedRRR1$$' | '$$NumberPostponedRRR1$$' | '1 440,00' | 'TRY'      | 'Sam Jons'        | 'Workstation 01' | ''               | 'Main Company' | '$$ConsolidatedRetailSales1$$' | 'Shop 02' | 'CI'     | 'Postponed'              | '$$PostponedRRR1$$' |
+		And "ItemList" table became equal
+			| 'Item'                                                    | 'Item key' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' |
+			| 'Product 1 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Product 6 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Dress'                                                   | 'XS/Blue'  | 'pcs'  | '79,32'      | '1,000'    | '520,00' | '440,68'     | '520,00'       |
+			| 'Service'                                                 | 'Rent'     | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Service'                                                 | 'Rent'     | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+		Then "Select postponed receipt" window is opened
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR2$$' |
+		And "ItemList" table became equal
+			| 'Item'                                                    | 'Item key' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' |
+			| 'Product 1 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Product 6 with SLN'                                      | 'PZU'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |
+			| 'Dress'                                                   | 'XS/Blue'  | 'pcs'  | '79,32'      | '1,000'    | '520,00' | '440,68'     | '520,00'       |
+			| 'Service'                                                 | 'Rent'     | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '84,75'      | '100,00'       |	
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRRR1$$' |	
+		And "ItemList" table became equal
+			| 'Item'                                                    | 'Item key' | 'Unit' | 'Quantity' | 'Price'  | 'Net amount' | 'Tax amount' | 'Total amount' |
+			| 'Product 1 with SLN'                                      | 'PZU'      | 'pcs'  | '1,000'    | '100,00' | '84,75'      | '15,25'      | '100,00'       |
+			| 'Product 6 with SLN'                                      | 'PZU'      | 'pcs'  | '1,000'    | '100,00' | '84,75'      | '15,25'      | '100,00'       |
+			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      | 'pcs'  | '1,000'    | '100,00' | '84,75'      | '15,25'      | '100,00'       |
+			| 'Dress'                                                   | 'XS/Blue'  | 'pcs'  | '2,000'    | '520,00' | '881,36'     | '158,64'     | '1 040,00'     |
+			| 'Service'                                                 | 'Rent'     | 'pcs'  | '1,000'    | '100,00' | '84,75'      | '15,25'      | '100,00'       |		
+	* Select postponed receipt
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR2$$' |
+		And I click "Select" button
+		And "ItemList" table became equal
+			| 'Item'                                                    | 'Sales person' | 'Item key' | 'Serials'     | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Product 1 with SLN'                                      | ''             | 'PZU'      | '8908899877'  | '100,00' | '1,000'    | ''       | '100,00' |
+			| 'Product 6 with SLN'                                      | ''             | 'PZU'      | '57897909799' | '100,00' | '1,000'    | ''       | '100,00' |
+			| 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | '999999999'   | '100,00' | '1,000'    | ''       | '100,00' |
+			| 'Dress'                                                   | ''             | 'XS/Blue'  | ''            | '520,00' | '1,000'    | ''       | '520,00' |
+			| 'Service'                                                 | ''             | 'Rent'     | ''            | '100,00' | '1,000'    | ''       | '100,00' |
+		And I go to line in "ItemList" table
+			| 'Item'               |
+			| 'Product 6 with SLN' |
+		And I select current line in "ItemList" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I press keyboard shortcut "Enter"
+		And "CurrentCodes" table became equal
+			| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
+			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              | 'Yes'       |
+		And I close current window
+		And I go to line in "ItemList" table
+			| 'Item'               |
+			| 'Product 9 with SLN (control code string, without check)' |
+		And I select current line in "ItemList" table
+		And I press keyboard shortcut "Enter"
+		And "CurrentCodes" table became equal
+			| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
+			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'              | 'Yes'       |
+		And I close current window
+		And I click "Clear current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+
+				
+Scenario: _0263105 open RSR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I go to line in "List" table
+		| 'Number'               |
+		| '1' |		
+	And I select current line in "List" table	
+	And I close current window
+	And I go to line in "List" table
+		| 'Number'               |
+		| '2' |		
+	And I select current line in "List" table	
+	And I close current window
+	And I go to line in "List" table
+		| 'Number'               |
+		| '1' |		
+	And I select current line in "List" table	
+	And I close current window
+	And I go to line in "List" table
+		| 'Number'               |
+		| '2' |		
+	And I select current line in "List" table	
+	And I close current window
+	
+				
+				
+		
+				
+				
+				
+		
+
+	
+		
+
+				
+			
 				
 								
 		

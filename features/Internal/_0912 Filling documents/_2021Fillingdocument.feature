@@ -65,6 +65,13 @@ Scenario: _0154100 preparation ( filling documents)
 			When add Plugin for tax calculation
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
+	* Add plugin for discount
+		When Create Document discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description"          |
+				| "DocumentDiscount"     |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax
@@ -6774,6 +6781,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 	* Add discount (sum), change total amount and check recalculation Net amount and Tax amount (price include tax)
 		And in the table "ItemList" I click "% Offers" button
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Amount"		
 		And I input "101,51" text in the field named "Amount"
 		And I click the button named "Ok"
 		And in the table "Offers" I click "OK" button
@@ -6805,6 +6813,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 	* Change discount and check Net amount, Tax amount and Total cmount (price include tax)
 		And in the table "ItemList" I click "% Offers" button
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Amount"
 		And I input "120" text in the field named "Amount"
 		And I click the button named "Ok"
 		And in the table "Offers" I click "OK" button
@@ -6834,6 +6843,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 	* Change discount and check Net amount, Tax amount and Total cmount (price not include tax)
 		And in the table "ItemList" I click "% Offers" button
 		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Amount"
 		And I input "120" text in the field named "Amount"
 		And I click the button named "Ok"
 		And in the table "Offers" I click "OK" button

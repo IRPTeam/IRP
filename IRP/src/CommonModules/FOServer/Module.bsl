@@ -81,6 +81,10 @@ Function IsUseSimpleMode() Export
 	Return GetFunctionalOption("UseSimpleMode");
 EndFunction
 
+Function IsUseMultiTaxes() Export
+	Return Not GetFunctionalOption("UseMultiTaxes");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

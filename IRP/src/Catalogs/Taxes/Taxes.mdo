@@ -112,6 +112,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="d0d10b49-51a4-4777-9c07-d1c50a15d9f6">
+    <name>Kind</name>
+    <synonym>
+      <key>en</key>
+      <value>Kind</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TaxKind</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="cdc68f49-26d5-42c6-aacd-85fe929d386e">
     <producedTypes>
       <objectType typeId="f0cf4f9b-1f4c-4400-9d90-2509369a03d3" valueTypeId="6f43b356-5cc3-4de7-853c-2fa728fd6452"/>

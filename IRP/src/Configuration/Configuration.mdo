@@ -500,6 +500,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.CertificateServer</commonModules>
+  <commonModules>CommonModule.FOClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -591,6 +592,7 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
+  <functionalOptions>FunctionalOption.UseMultiTaxes</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -694,6 +696,7 @@
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
+  <constants>Constant.UseMultiTaxes</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -967,6 +970,7 @@
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.TaxKind</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

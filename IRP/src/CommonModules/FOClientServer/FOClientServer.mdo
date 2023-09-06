@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f3377689-ad52-4d80-a24e-b4ec1b83b848">
+  <name>FOClientServer</name>
+  <synonym>
+    <key>en</key>
+    <value>FOClient server</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+  <returnValuesReuse>DuringRequest</returnValuesReuse>
+</mdclass:CommonModule>

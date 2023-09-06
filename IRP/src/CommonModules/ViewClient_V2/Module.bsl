@@ -815,12 +815,15 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 EndProcedure
 
 Function IsChangedTaxRates(Parameters)
-	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-		Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
-		If Result.IsChanged Then
-			Return Result;
-		EndIf;
-	EndDo;
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+			Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
+			If Result.IsChanged Then
+				Return Result;
+			EndIf;
+		EndDo;
+	EndIf;
 	Return New Structure("IsChanged", False);
 EndFunction
 

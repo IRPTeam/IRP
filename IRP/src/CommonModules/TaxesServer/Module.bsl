@@ -216,10 +216,12 @@ Function GetRequiredTaxesForDocument(Date, Company, DocumentName, TransactionTyp
 EndFunction
 
 Function GetTaxesInfo(Date, Company, DocumentName, TransactionType)
-	Return ServerReuse.GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+	//#@2094
+	//Return ServerReuse.GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+	Return _GetTaxesInfo(Date, Company, DocumentName, TransactionType);
 EndFunction
 
-Function _GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
+Function _GetTaxesInfo(Date, Company, DocumentName, TransactionType, TaxKind = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT

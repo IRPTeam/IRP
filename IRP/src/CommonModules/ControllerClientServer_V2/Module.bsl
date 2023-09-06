@@ -26,10 +26,13 @@ Function GetFormParameters(Form) Export
 	Result.Insert("ViewClientModuleName", "ViewClient_V2");
 	Result.Insert("ViewServerModuleName", "ViewServer_V2");
 	Result.Insert("EventCaller", "");
-	Result.Insert("TaxesCache", "");
 	
-	If Form <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
-		Result.TaxesCache = Form.TaxesCache;
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		Result.Insert("TaxesCache", "");
+		If Form <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
+			Result.TaxesCache = Form.TaxesCache;
+		EndIf;
 	EndIf;
 	
 	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
@@ -73,15 +76,20 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	// parameters for Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
 	Parameters.Insert("FormIsExists"     , FormParameters.Form <> Undefined);
-	Parameters.Insert("FormTaxColumnsExists", FormParameters.Form <> Undefined 
-		And ValueIsFilled(FormParameters.TaxesCache));
+	
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		Parameters.Insert("FormTaxColumnsExists", 
+			FormParameters.Form <> Undefined And ValueIsFilled(FormParameters.TaxesCache));
+		Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
+	EndIf;
+	
 	Parameters.Insert("FormModificators" , New Array());
 	Parameters.Insert("CacheForm"        , New Structure()); // cache for form attributes
 	Parameters.Insert("ViewNotify"       , New Array());
 	Parameters.Insert("ViewClientModuleName"   , FormParameters.ViewClientModuleName);
 	Parameters.Insert("ViewServerModuleName"   , FormParameters.ViewServerModuleName);
 	Parameters.Insert("EventCaller"      , FormParameters.EventCaller);
-	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	Parameters.Insert("ChangedData"      , New Map());
 	Parameters.Insert("ExtractedData"    , New Structure());
 	Parameters.Insert("LoadData"         , New Structure());
@@ -123,7 +131,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
-	ArrayOfTableNames.Add("TaxList");
+	
 	ArrayOfTableNames.Add("SpecialOffers");
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("BillOfMaterialsList");
@@ -131,15 +139,26 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("SourceOfOrigins");
 	ArrayOfTableNames.Add("RowIDInfo");
 	ArrayOfTableNames.Add("ControlCodeStrings");
+	
+	//#@2094
+	_TaxesCache = Undefined;
+	_FormTaxColumnsExists = Undefined;
+	If FOClientServer.IsUseMultiTaxes() Then
+		ArrayOfTableNames.Add("TaxList");
+		_FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
+		_TaxesCache = Parameters.TaxesCache;
+	EndIf;
 		
 	// MetadataName
 	// Tables.TableName.Columns
 	// DependentTables
+	
+	//#@2094	
 	ServerData = ControllerServer_V2.GetServerData(ServerParameters.Object, 
-												   ArrayOfTableNames,
-												   Parameters.FormTaxColumnsExists, 
-												   Parameters.TaxesCache,
-												   Parameters.LoadData);
+												   ArrayOfTableNames, 
+												   Parameters.LoadData,
+												   _TaxesCache,
+												   _FormTaxColumnsExists);
 	
 	Parameters.Insert("NewRowsByScan", ServerParameters.NewRowsByScan);
 	Parameters.Insert("UpdatedRowsByScan", ServerParameters.UpdatedRowsByScan);
@@ -151,8 +170,13 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		
 	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
 	
-	Parameters.Insert("TaxListIsExists"        , 
-		ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		Parameters.Insert("TaxListIsExists", 
+			ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
+		Parameters.Insert("ArrayOfTaxInfo", ServerData.ArrayOfTaxInfo);
+	EndIf;
+		
 	Parameters.Insert("SpecialOffersIsExists"  , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers") And IsItemList);
 	Parameters.Insert("SerialLotNumbersExists" , 
@@ -165,8 +189,6 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		ServerData.ObjectMetadataInfo.Tables.Property("RowIDInfo") And IsItemList);
 	Parameters.Insert("ControlCodeStringsExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") And IsItemList);	
-	
-	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
 	Parameters.Insert("SourceTableMap" , New Map());
 	Parameters.Insert("SourceTables"   , New Structure());
@@ -217,10 +239,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
-	
-//	WrappedRows = WrapRows(Parameters, RowsConsignorStocks);
-//	Parameters.Insert("RowsConsignorStocks", WrappedRows);
-	
+		
 	Parameters.Insert("NextSteps"    , New Array());
 	Parameters.Insert("CacheRowsMap" , New Map());
 	Parameters.Insert("TableRowsMap" , New Map());
@@ -266,39 +285,42 @@ Function WrapRows(Parameters, Rows) Export
 		ArrayOfRows.Add(NewRow);
 
 		FilterByKey = New Structure("Key", Row.Key);
-
-		ArrayOfRowsTaxList = New Array();
-		TaxRates = New Structure();
-		If Parameters.TaxListIsExists Then
-			// TaxList
-			For Each TaxRow In Parameters.Object.TaxList.FindRows(FilterByKey) Do
-				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
-				FillPropertyValues(NewRowTaxList, TaxRow);
-				ArrayOfRowsTaxList.Add(NewRowTaxList);
-			EndDo;
 		
-			// TaxRates
+		//#@2094
+		If FOClientServer.IsUseMultiTaxes() Then
+			ArrayOfRowsTaxList = New Array();
+			TaxRates = New Structure();
+			If Parameters.TaxListIsExists Then
+				// TaxList
+				For Each TaxRow In Parameters.Object.TaxList.FindRows(FilterByKey) Do
+					NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
+					FillPropertyValues(NewRowTaxList, TaxRow);
+					ArrayOfRowsTaxList.Add(NewRowTaxList);
+				EndDo;
 		
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				// when there is no form, then there is no column created programmatically
-				If Parameters.FormTaxColumnsExists Then
-					TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
-				Else
-					// create pseudo columns for tax rates
-					NewRow.Insert(ItemOfTaxInfo.Name);
+				// TaxRates
+		
+				For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+					// when there is no form, then there is no column created programmatically
+					If Parameters.FormTaxColumnsExists Then
+						TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+					Else
+						// create pseudo columns for tax rates
+						NewRow.Insert(ItemOfTaxInfo.Name);
 				
-					// tax rates are taken from the TaxList table
-					TaxRate = Undefined;
-					For Each TaxRow In ArrayOfRowsTaxList Do
-						If TaxRow.Tax = ItemOfTaxInfo.Tax Then
-							TaxRate = TaxRow.TaxRate;
-							Break;
-						EndIf;
-					EndDo;
-					TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
-				EndIf;
-			EndDo;
-		EndIf; // TaxListIsExists
+						// tax rates are taken from the TaxList table
+						TaxRate = Undefined;
+						For Each TaxRow In ArrayOfRowsTaxList Do
+							If TaxRow.Tax = ItemOfTaxInfo.Tax Then
+								TaxRate = TaxRow.TaxRate;
+								Break;
+							EndIf;
+						EndDo;
+						TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
+					EndIf;
+				EndDo;
+			EndIf; // TaxListIsExists
+		EndIf;
 		
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
@@ -340,9 +362,13 @@ Function WrapRows(Parameters, Rows) Export
 			EndDo;
 		EndIf; // RowIDInfoExeists
 
-		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
-		NewRow.Insert("TaxRates"               , TaxRates);
-		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
+		//#@2094
+		If FOClientServer.IsUseMultiTaxes() Then
+			NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
+			NewRow.Insert("TaxRates"               , TaxRates);
+			NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
+		EndIf;
+		
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
 		NewRow.Insert("BillOfMaterialsList"    , ArrayOfRowsBillOfMaterialsList);
@@ -398,7 +424,7 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("LegalName"       , "SetLegalName");
 	EventHandlerMap.Insert("Agreement"       , "SetAgreement");
 	EventHandlerMap.Insert("ManagerSegment"  , "SetManagerSegment");
-	EventHandlerMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
+	EventHandlerMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax"); //#@2094
 	EventHandlerMap.Insert("StoreSender"     , "SetStoreSender");
 	EventHandlerMap.Insert("StoreReceiver"   , "SetStoreReceiver");
 	EventHandlerMap.Insert("Workstation"     , "SetWorkstation");
@@ -438,11 +464,15 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 													|StepItemListCalculations_IsTotalAmountChanged");
 	EndIf;
 	
-	EventHandlerMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
-	EventHandlerMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
-	If IsBuilder Then
-		EventHandlerMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		EventHandlerMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
+		EventHandlerMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
+		If IsBuilder Then
+			EventHandlerMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
+		EndIf;
 	EndIf;
+	
 	EventHandlerMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
 	
 	// Materials
@@ -629,7 +659,10 @@ EndFunction
 
 Function GetAllCommandsByDefault(Parameters)
 	ArrayOfCommands = New Array();
-	ArrayOfCommands.Add("CommandDefaultTaxRate");	
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		ArrayOfCommands.Add("CommandDefaultTaxRate");
+	EndIf;
 	Return ArrayOfCommands;
 EndFunction
 
@@ -706,8 +739,11 @@ EndProcedure
 
 // Form.RequireCallCreateTaxesFormControls.Step
 Procedure StepRequireCallCreateTaxesFormControls(Parameters, Chain) Export
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	If Chain.Idle Then
+	//#@2094
+	//Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Enable = FOClientServer.IsUseMultiTaxes();
+	
+	If Chain.Idle Or Not Chain.RequireCallCreateTaxesFormControls.Enable Then
 		Return;
 	EndIf;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
@@ -1123,7 +1159,7 @@ Function BindCommandRecalculateWhenTaxsesContentChanged(Parameters)
 	Binding.Insert("SalesReturnOrder" , "StepItemListCalculations_IsTaxRateChanged");
 	Binding.Insert("WorkOrder"        , "StepItemListCalculations_IsTaxRateChanged");
 	
-	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandDefaultTaxRate");
+	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandRecalculateWhenTaxsesContentChanged");
 EndFunction
 
 #EndRegion
@@ -5340,12 +5376,14 @@ Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain);
 EndProcedure
 
-//Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False, ConsignorBatches = False)
 Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
-	Chain.ChangeTaxRate.Enable = True;
-	If Chain.Idle Then
+	//#@2094
+//	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Enable = FOClientServer.IsUseMultiTaxes();
+	If Chain.Idle Or Not  Chain.ChangeTaxRate.Enable Then
 		Return;
 	EndIf;
+	
 	Chain.ChangeTaxRate.Setter = "Set" + Parameters.TableName + "TaxRate";
 	
 	Options_Date            = GetDate(Parameters);
@@ -6707,10 +6745,13 @@ EndFunction
 
 // PaymentList.TaxAmount.ChangeTaxAmountAsManualAmount.Step
 Procedure StepPaymentListChangeTaxAmountAsManualAmount(Parameters, Chain) Export
-	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
-	If Chain.Idle Then
+	//#@2094
+//	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
+	Chain.ChangeTaxAmountAsManualAmount.Enable = FOClientServer.IsUseMultiTaxes();
+	If Chain.Idle Or Not Chain.ChangeTaxAmountAsManualAmount.Enable Then
 		Return;
 	EndIf;
+	
 	Chain.ChangeTaxAmountAsManualAmount.Setter = "SetPaymentListTaxAmount";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangeTaxAmountAsManualAmountOptions();
@@ -6829,7 +6870,10 @@ EndFunction
 Procedure SetPaymentListCalculations(Parameters, Results) Export
 	Binding = BindPaymentListCalculations(Parameters);
 	SetterObject(Undefined, "PaymentList.NetAmount"   , Parameters, Results, , "NetAmount");
-	SetterObject(Undefined, "PaymentList.TaxAmount"   , Parameters, Results, , "TaxAmount");
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		SetterObject(Undefined, "PaymentList.TaxAmount"   , Parameters, Results, , "TaxAmount");
+	EndIf;
 	SetterObject(Binding.StepsEnabler, "PaymentList.TotalAmount" , Parameters, Results, , "TotalAmount");
 	SetTaxList(Parameters, Results);
 EndProcedure
@@ -6891,7 +6935,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		Options.Ref = Parameters.Object.Ref;
 		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
-		If     WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow" Then
+		If WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
@@ -11268,8 +11312,10 @@ EndFunction
 
 // ItemList.TaxAmount.ChangeTaxAmountAsManualAmount.Step
 Procedure StepItemListChangeTaxAmountAsManualAmount(Parameters, Chain) Export
-	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
-	If Chain.Idle Then
+	//#@2094
+//	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
+	Chain.ChangeTaxAmountAsManualAmount.Enable = FOClientServer.IsUseMultiTaxes();
+	If Chain.Idle Or Not Chain.ChangeTaxAmountAsManualAmount.Enable Then
 		Return;
 	EndIf;
 	Chain.ChangeTaxAmountAsManualAmount.Setter = "SetItemListTaxAmount";
@@ -11469,7 +11515,10 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
-	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
+	//#@2094
+	If FOClientServer.IsUseMultiTaxes() Then
+		SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
+	EndIf;
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
 	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" , NotifyAnyway);
@@ -11686,12 +11735,15 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		
-		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
-		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
-		Options.TaxOptions.TaxList          = Row.TaxList;
-		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
-			
+		//#@2094
+		If FOClientServer.IsUseMultiTaxes() Then
+			Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
+			Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+			Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
+			Options.TaxOptions.TaxList          = Row.TaxList;
+			Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
+		EndIf;
+		
 		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
 		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
 
@@ -11766,11 +11818,14 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		
-		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
-		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
-		Options.TaxOptions.TaxList          = Row.TaxList;
-		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
+		//#@2094
+		If FOClientServer.IsUseMultiTaxes() Then
+			Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
+			Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+			Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
+			Options.TaxOptions.TaxList          = Row.TaxList;
+			Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
+		EndIf;
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

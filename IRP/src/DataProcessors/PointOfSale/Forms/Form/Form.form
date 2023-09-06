@@ -3559,6 +3559,7 @@
                     </userVisible>
                     <autoFill>true</autoFill>
                   </contextMenu>
+                  <source>BasisPaymentsSearchString</source>
                   <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -3597,6 +3598,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>ViewStatusAddition</type>
+                  <source>BasisPaymentsViewStatus</source>
                   <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -3635,6 +3637,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>SearchControlAddition</type>
+                  <source>BasisPaymentsSearchControl</source>
                   <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -3681,6 +3684,7 @@
                 <horizontalStretch>true</horizontalStretch>
                 <verticalStretch>true</verticalStretch>
                 <fileDragMode>AsFileRef</fileDragMode>
+                <rowFilter xsi:type="core:UndefinedValue"/>
               </items>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -4987,6 +4991,7 @@
                     </userVisible>
                     <autoFill>true</autoFill>
                   </contextMenu>
+                  <source>SpecialOffersSearchString</source>
                   <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -5025,6 +5030,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>ViewStatusAddition</type>
+                  <source>SpecialOffersViewStatus</source>
                   <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -5063,6 +5069,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>SearchControlAddition</type>
+                  <source>SpecialOffersSearchControl</source>
                   <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -5111,6 +5118,7 @@
                 <horizontalStretch>true</horizontalStretch>
                 <verticalStretch>true</verticalStretch>
                 <fileDragMode>AsFileRef</fileDragMode>
+                <rowFilter xsi:type="core:UndefinedValue"/>
               </items>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -6416,7 +6424,7 @@
     </extInfo>
   </items>
   <autoCommandBar>
-    <name>ФормаКоманднаяПанель</name>
+    <name>FormCommandBar</name>
     <id>-1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -8442,15 +8450,7 @@ document</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>
-    <navigationPanel>
-      <cmiFragmentRecord>
-        <command>InformationRegister.DocumentFiscalStatus.StandardCommand.OpenByValue.Document</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
-        <userVisible/>
-      </cmiFragmentRecord>
-    </navigationPanel>
+    <navigationPanel/>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">

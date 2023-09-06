@@ -1336,7 +1336,15 @@ Function WriteTransaction(PaymentResult)
 	Else
 
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailSalesReceipt") Then
-			ObjectValue = GetClearPostponedObject();
+			ObjectValue = GetClearPostponedObject(); // DocumentObject.RetailSalesReceipt
+			ObjectValue.ItemList.Load(Object.ItemList.Unload());
+			ObjectValue.TaxList.Load(Object.TaxList.Unload());
+			ObjectValue.SpecialOffers.Load(Object.SpecialOffers.Unload());
+			ObjectValue.Currencies.Load(Object.Currencies.Unload());
+			ObjectValue.SerialLotNumbers.Load(Object.SerialLotNumbers.Unload());
+			ObjectValue.RowIDInfo.Load(Object.RowIDInfo.Unload());
+			ObjectValue.SourceOfOrigins.Load(Object.SourceOfOrigins.Unload());
+			ObjectValue.ControlCodeStrings.Load(Object.ControlCodeStrings.Unload());
 		Else
 			ObjectValue = FormAttributeToValue("Object");
 		EndIf;
@@ -2545,6 +2553,7 @@ Function GetClearPostponedObject()
 	EndIf;
 	
 	ReceiptObject = ThisObject.PostponedReceipt.GetObject(); // DocumentObject.RetailSalesReceipt
+	
 	ReceiptObject.ItemList.Clear();
 	ReceiptObject.TaxList.Clear();
 	ReceiptObject.SpecialOffers.Clear();
@@ -2553,6 +2562,7 @@ Function GetClearPostponedObject()
 	ReceiptObject.RowIDInfo.Clear();
 	ReceiptObject.SourceOfOrigins.Clear();
 	ReceiptObject.ControlCodeStrings.Clear();
+	ReceiptObject.Payments.Clear();
 	
 	ThisObject.PostponedReceipt = Undefined;
 	

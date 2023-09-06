@@ -447,33 +447,152 @@ Scenario: _0263104 postponed list form (POS)
 		And I click "Clear current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"
 
-				
-Scenario: _0263105 open RSR
+
+Scenario: _0263105 processing a postponed RSR with a reservation	
 	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-	And I go to line in "List" table
-		| 'Number'               |
-		| '1' |		
-	And I select current line in "List" table	
-	And I close current window
-	And I go to line in "List" table
-		| 'Number'               |
-		| '2' |		
-	And I select current line in "List" table	
-	And I close current window
-	And I go to line in "List" table
-		| 'Number'               |
-		| '1' |		
-	And I select current line in "List" table	
-	And I close current window
-	And I go to line in "List" table
-		| 'Number'               |
-		| '2' |		
-	And I select current line in "List" table	
-	And I close current window
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed list form
+		And I click "Open postponed receipt" button
+	* Select postponed receipt
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR1$$' |
+		And I click "Select" button	
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR1$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'                                                    | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'en description is empty' | 'Product 1 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '8908899877'         | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'en description is empty' | 'Product 6 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '57897909799'        | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'en description is empty' | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '999999999'          | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Basic Price Types'       | 'Dress'                                                   | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |		
+		Then the form attribute named "StatusType" became equal to "Completed"
+		And "Payments" table became equal
+			| '#' | 'Amount'   | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'            | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '1 020,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Pos cash account 1' | ''        | ''         | ''                      | ''                         | ''                            |
+		And I delete "$$PostponedRSR1$$" variable
+		And I delete "$$DatePostponedRSR1$$" variable
+		And I save the window as "$$PostponedRSR1$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR1$$"
+	* Check stock reservation
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR1$$'              |
+			| 'Document registrations records' |
+		And I close current window
 	
 				
+
+Scenario: _0263105 processing a postponed RSR without a reservation	
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed list form
+		And I click "Open postponed receipt" button
+	* Select postponed receipt
+		And "Receipts" table does not contain lines
+			| 'Number'                  | 'Receipt'           |
+			| '$$NumberPostponedRSR1$$' | '$$PostponedRSR1$$' |
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR2$$' |
+		And I click "Select" button	
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'                  |
+			| '$$NumberPostponedRSR2$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'                                                    | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'en description is empty' | 'Product 1 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '8908899877'         | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'en description is empty' | 'Product 6 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '57897909799'        | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'en description is empty' | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '999999999'          | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Basic Price Types'       | 'Dress'                                                   | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+		Then the form attribute named "StatusType" became equal to "Completed"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'            | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '920,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Pos cash account 1' | ''        | ''         | ''                      | ''                         | ''                            |
+		And I delete "$$PostponedRSR2$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I save the window as "$$PostponedRSR2$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+	* Check movements
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R2001 Sales"'             |
+			| 'Register  "R2050 Retail sales"'      |
+			| 'Register  "R3010 Cash on hand"'      |
+			| 'Register  "R3011 Cash flow"'         |
+			| 'Register  "R3050 Pos cash balances"' |
+			| 'Register  "R4010 Actual stocks"'     |
+			| 'Register  "R4011 Free stocks"'       |
+		And I close current window				
+		
 				
+			
+Scenario: _0263106 processing a postponed RRR
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed list form
+		And I click "Open postponed receipt" button
+	* Select postponed receipt
+		And I go to line in "Receipts" table
+			| 'Number'                  |
+			| '$$NumberPostponedRRR1$$' |
+		And I click "Select" button	
+	* Payment
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'                  |
+			| '$$NumberPostponedRRR1$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt' | 'Item'                                                    | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
+			| '1' | ''                     | 'Product 1 with SLN'                                      | ''             | 'PZU'      | ''                   | 'No'                 | '15,25'      | '8908899877'         | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '2' | ''                     | 'Product 6 with SLN'                                      | ''             | 'PZU'      | ''                   | 'No'                 | '15,25'      | '57897909799'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '3' | ''                     | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '999999999'          | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '4' | ''                     | 'Dress'                                                   | ''             | 'XS/Blue'  | ''                   | 'No'                 | '158,64'     | ''                   | 'pcs'  | ''              | ''                  | '2,000'    | '520,00' | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '5' | ''                     | 'Service'                                                 | ''             | 'Rent'     | ''                   | 'No'                 | '15,25'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+		Then the form attribute named "StatusType" became equal to "Completed"
+	* Check movements
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R2001 Sales"'             |
+			| 'Register  "R2050 Retail sales"'      |
+			| 'Register  "R3010 Cash on hand"'      |
+			| 'Register  "R3011 Cash flow"'         |
+			| 'Register  "R3050 Pos cash balances"' |
+			| 'Register  "R4010 Actual stocks"'     |
+			| 'Register  "R4011 Free stocks"'       |
+		And I close current window			
+				
+
 		
 				
 				

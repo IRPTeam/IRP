@@ -6,7 +6,7 @@
 Feature: check filling in and refilling in documents forms + currency form connection
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

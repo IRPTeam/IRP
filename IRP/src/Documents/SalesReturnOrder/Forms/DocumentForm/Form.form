@@ -3653,7 +3653,7 @@
         <value>Other</value>
       </title>
       <extendedTooltip>
-        <name>GroupInfoExtendedTooltip</name>
+        <name>GroupOtherExtendedTooltip</name>
         <id>41</id>
         <visible>true</visible>
         <enabled>true</enabled>

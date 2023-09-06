@@ -562,7 +562,7 @@
     </items>
     <items xsi:type="form:FormField">
       <name>StatusType</name>
-      <id>49</id>
+      <id>55</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -573,7 +573,7 @@
       </dataPath>
       <extendedTooltip>
         <name>StatusTypeExtendedTooltip</name>
-        <id>51</id>
+        <id>57</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -588,7 +588,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>StatusTypeContextMenu</name>
-        <id>50</id>
+        <id>56</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

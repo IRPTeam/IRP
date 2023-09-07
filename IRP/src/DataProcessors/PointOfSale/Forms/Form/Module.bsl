@@ -2419,6 +2419,18 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 		ThisObject.Object.SourceOfOrigins.Load(SourceOfOriginsTable);
 		ThisObject.Object.ControlCodeStrings.Load(ControlCodeStringsTable);
 	EndIf;
+	
+	SavedDataStructure = TaxesClientServer.GetTaxesCache(ThisObject);
+	For Each TaxInfo In SavedDataStructure.ArrayOfTaxInfo Do
+		For Each ItemRow In ThisObject.Object.ItemList Do
+			Filter = New Structure("Key, Tax", ItemRow.Key, TaxInfo.Tax);
+			TaxRows = ThisObject.Object.TaxList.FindRows(Filter);
+			If TaxRows.Count() Then
+				ItemRow[TaxInfo.Name] = TaxRows[0].TaxRate;
+			EndIf;
+		EndDo;
+	EndDo;
+	
 EndProcedure
 
 // Receipts canceling.

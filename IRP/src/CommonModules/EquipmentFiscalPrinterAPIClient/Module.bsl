@@ -149,6 +149,7 @@ EndFunction
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
+// ** Document - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReturnReceipt - Basis document
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** Electronically - Boolean - Formation of a check only in electronic form. The check is not printed.
@@ -163,6 +164,7 @@ Function ProcessCheckSettings() Export
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "ProcessCheck");
     Str.Info.Insert("Success", False);
+    Str.Info.Insert("Document", Undefined);
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -251,6 +253,7 @@ EndFunction
 // ** Name - String - Function name
 // ** Error - String - Error, if result false
 // ** Success - Boolean - Operation status
+// ** Document - DocumentRef.CashReceipt, DocumentRef.CashExpense - Basis
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** InputParameters - See InputParameters
@@ -264,6 +267,7 @@ Function CashInOutcomeSettings() Export
     Str.Info.Insert("Error", "");
     Str.Info.Insert("Name", "CashInOutcome");
     Str.Info.Insert("Success", False);
+    Str.Info.Insert("Document", Undefined);
 
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
@@ -1006,7 +1010,11 @@ Function CheckPackage_FiscalString() Export
 EndFunction
 
 // Builds a structure based on the provided shift information table.
-//
+//	CountersOperationType1 - Income
+//	CountersOperationType2 - Return income
+//	CountersOperationType3 - Outcome
+//	CountersOperationType4 - Return outcome
+//	
 // Returns:
 //  Structure - Input parameters:
 // * ShiftNumber - Number - Number of the opened/closed shift

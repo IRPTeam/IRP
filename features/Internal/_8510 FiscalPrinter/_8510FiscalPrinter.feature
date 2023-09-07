@@ -2553,7 +2553,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "692"	
+	Then the number of "List" table lines is "равно" "694"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -2603,3 +2603,168 @@ Scenario: _0260186 check show fiscal transaction from POS
 		Then the number of "TransactionList" table lines is "больше" "0"
 	And I close all client application windows
 
+
+
+				
+Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
+	And I close all client application windows
+	* Open RSR list form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And "List" table contains lines 
+			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '118,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '210,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '620,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '112,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '113,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+	* Open RRR list form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And "List" table contains lines
+			| 'Partner'         | 'Amount' | 'Company'      | 'Check number' | 'Status'  | 'Legal name'              | 'Currency' | 'Store'    | 'Author' |
+			| 'Retail customer' | '100,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '200,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '111,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '210,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Customer'        | '118,00' | 'Main Company' | '*'            | 'Printed' | 'Customer'                | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '543,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '112,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '113,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '720,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '300,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+		And I close all client application windows
+		
+				
+Scenario: _0260191 check session open and close from CRS
+	And I close all client application windows
+	* Create CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "open" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormPost"
+	* Open session
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		And I select from the drop-down list named "Status" by "new" string
+		And I click "Open session" button	
+		And I click "Reread" button
+		Then the form attribute named "Status" became equal to "Open"
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
+	* Close session
+		And I click "Close session" button	
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I click "Close session" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CloseShift"
+	And I close all client application windows
+	
+// Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
+// 	And I close all client application windows
+// 	* Create Consolidated retail sales with status New
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And I click the button named "FormCreate"	
+// 		And I select from the drop-down list named "Company" by "Main Company" string
+// 		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+// 		And I select "New" exact value from the drop-down list named "Status"
+// 		And I input current date in "Opening date" field
+// 		And I select "Fiscal printer" exact value from "Fiscal printer" drop-down list
+// 		And I move to "Other" tab
+// 		And I click Choice button of the field named "Branch"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Shop 01'     |
+// 		And I select current line in "List" table
+// 		And I click the button named "FormPost"
+// 		And I delete "$$NumberNumberCSR88$$" variable
+// 		And I save the value of "Number" field as "$$NumberCSR88$$"
+// 		And I click "Post and close" button
+// 		And I close all client application windows
+// 	* Try open cash session and check retrieving the previous consolidated sales
+// 		And In the command interface I select "Retail" "Point of sale"
+// 		And I click "Open session" button
+// 	* Check 
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And "List" table contains lines
+// 			| 'Number'          | 'Status' |
+// 			| '$$NumberCSR88$$' | 'Open'   |
+		
+
+
+Scenario: _0260187 add one more Acquiring terminal and check open and close session
+	And I close all client application windows
+	* Create one more Acquiring terminal
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        | 'Equipment API module' | 'Types of Equipment' |
+			| 'Acquiring terminal' | 'Acquiring Common API' | 'Acquiring'          |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I input "Acquiring terminal 2" text in the field named "Description"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+	* Add one more Acquiring terminal to the workstation 1
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"        
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And in the table "HardwareList" I click "Add" button
+		And I click choice button of "Hardware" attribute in "HardwareList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+		And I select current line in "List" table
+		And I set "Enable" checkbox in "HardwareList" table
+		And I finish line editing in "HardwareList" table
+		And I click "Save and close" button
+		And I wait "Workstation * (Workstation) *" window closing in 5 seconds
+	* Open session
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+	* Close session
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+	* Check log
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I go to line in "List" table and invert selection:
+			|"Description"|
+			| "Acquiring terminal 2" | 
+		And I click "Analyze log" button
+		And "TransactionList" table contains lines
+			| 'Period' | 'Hardware'             | 'Method'     | 'Result' |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+	And I close all client application windows

@@ -1247,9 +1247,9 @@ Scenario: _0401345 check Sales invoice movements by the Register  "R4010 Actual 
 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
 			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'XS/Blue'  | ''                  |
 			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'UNIQ'     | ''                  |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'UNIQ'     | '0512'              |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
 			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'M/Black'  | ''                  |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Store 02'   | 'PZU'      | ''                  |		
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Store 02'   | 'PZU'      | ''                  |
 		And I close all client application windows	
 
 Scenario: _0401346 check Sales invoice movements by the Register  "R4011 Free stocks" (consignor and own stocks)
@@ -1312,8 +1312,8 @@ Scenario: _0401348 check Sales invoice movements by the Register  "R4014 Serial 
 			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
 			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '09987897977889'    |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '0512'              |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Distribution department' | ''      | 'PZU'      | '0514'              |		
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Distribution department' | ''      | 'PZU'      | '0514'              |
 		And I close all client application windows
 
 

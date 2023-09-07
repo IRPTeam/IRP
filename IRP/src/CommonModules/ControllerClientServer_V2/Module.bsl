@@ -14909,6 +14909,11 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		EndDo;
 		RowIndex = RowIndex + 1;
 		
+		IndexStoreHeader = Parameters.NextSteps.Find("StepChangeStoreInHeaderByStoresInList");
+		If Not IndexStoreHeader = Undefined Then
+			Parameters.NextSteps.Delete(IndexStoreHeader);
+		EndIf; 
+		
 		LaunchNextSteps(Parameters);
 				
 	EndDo;

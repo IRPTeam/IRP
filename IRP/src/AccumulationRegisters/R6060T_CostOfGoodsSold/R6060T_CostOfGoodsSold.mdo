@@ -186,6 +186,45 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="3401dda5-30d0-4ff4-bb21-eca685d8e050">
+    <name>TotalAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="3f432477-9cbc-40ce-a315-8cd0da17c90d">
+    <name>TotalNetAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total net amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="0f7edb72-de01-4509-bbed-67b4e0b1bcdf">
+    <name>TotalTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
     <name>CalculationMovementCost</name>
     <synonym>

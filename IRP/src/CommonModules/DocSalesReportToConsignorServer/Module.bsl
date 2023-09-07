@@ -70,17 +70,29 @@ Function GetConsignorSales(Parameters) Export
 	|	ConsignorSales.PriceType AS PriceType,
 	|	ConsignorPrices.Price AS ConsignorPrice,
 	|	ConsignorSales.Price AS Price,
-	|	BatchBalance.Quantity AS Quantity,
-	|	CASE
+	|	SUM(CASE
+	|		WHEN ConsignorSales.QuantityTurnover < 0
+	|			THEN -BatchBalance.Quantity
+	|		ELSE BatchBalance.Quantity
+	|	END) AS Quantity,
+	|	SUM(CASE
 	|		WHEN ConsignorSales.QuantityTurnover = 0
 	|			THEN 0
-	|		ELSE ConsignorSales.NetAmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity
-	|	END AS NetAmount,
-	|	CASE
+	|		ELSE CASE
+	|			WHEN ConsignorSales.QuantityTurnover < 0
+	|				THEN -(ConsignorSales.NetAmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity)
+	|			ELSE ConsignorSales.NetAmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity
+	|		END
+	|	END) AS NetAmount,
+	|	SUM(CASE
 	|		WHEN ConsignorSales.QuantityTurnover = 0
 	|			THEN 0
-	|		ELSE ConsignorSales.AmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity
-	|	END AS TotalAmount,
+	|		ELSE CASE
+	|			WHEN ConsignorSales.QuantityTurnover < 0
+	|				THEN -(ConsignorSales.AmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity)
+	|			ELSE ConsignorSales.AmountTurnover / ConsignorSales.QuantityTurnover * BatchBalance.Quantity
+	|		END
+	|	END) AS TotalAmount,
 	|	ConsignorSales.SalesInvoice AS SalesInvoice,
 	|	BatchBalance.Batch.Document AS PurchaseInvoice,
 	|	ConsignorSales.SerialLotNumber AS SerialLotNumber,
@@ -93,38 +105,51 @@ Function GetConsignorSales(Parameters) Export
 	|		ELSE 0
 	|	END AS TradeAgentFeePercent
 	|FROM
-	|	AccumulationRegister.R8014T_ConsignorSales.Turnovers(
-	|			BEGINOFPERIOD(&StartDate, DAY),
-	|			ENDOFPERIOD(&EndDate, DAY),
-	|			,
-	|			Company = &Company
-	|				AND PriceIncludeTax = &PriceIncludeTax
-	|				AND CurrencyMovementType = &CurrencyMovementType) AS ConsignorSales
+	|	AccumulationRegister.R8014T_ConsignorSales.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
+	|		Company = &Company
+	|	AND PriceIncludeTax = &PriceIncludeTax
+	|	AND CurrencyMovementType = &CurrencyMovementType) AS ConsignorSales
 	|		INNER JOIN AccumulationRegister.R6020B_BatchBalance AS BatchBalance
 	|		ON (BatchBalance.Company = ConsignorSales.Company)
-	|			AND (BatchBalance.ItemKey = ConsignorSales.ItemKey)
-	|			AND (BatchBalance.Recorder = ConsignorSales.SalesInvoice)
-	|			AND (BatchBalance.SourceOfOrigin = ConsignorSales.SourceOfOrigin)
-	|			AND (CASE
-	|				WHEN ConsignorSales.SerialLotNumber.BatchBalanceDetail
-	|					THEN BatchBalance.SerialLotNumber = ConsignorSales.SerialLotNumber
-	|				ELSE TRUE
-	|			END)
-	|			AND (BatchBalance.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks))
-	|			AND (BatchBalance.RecordType = VALUE(AccumulationRecordType.Expense))
-	|			AND (BatchBalance.Partner = &Partner)
-	|			AND (BatchBalance.Agreement = &Agreement)
+	|		AND (BatchBalance.ItemKey = ConsignorSales.ItemKey)
+	|		AND (BatchBalance.Recorder = ConsignorSales.SalesInvoice)
+	|		AND (BatchBalance.SourceOfOrigin = ConsignorSales.SourceOfOrigin)
+	|		AND (CASE
+	|			WHEN ConsignorSales.SerialLotNumber.BatchBalanceDetail
+	|				THEN BatchBalance.SerialLotNumber = ConsignorSales.SerialLotNumber
+	|			ELSE TRUE
+	|		END)
+	|		AND (BatchBalance.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks))
+	|		AND (BatchBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+	|		AND (BatchBalance.Partner = &Partner)
+	|		AND (BatchBalance.Agreement = &Agreement)
 	|		INNER JOIN AccumulationRegister.R8015T_ConsignorPrices AS ConsignorPrices
 	|		ON (ConsignorPrices.Company = ConsignorSales.Company)
-	|			AND (ConsignorPrices.Partner = &Partner)
-	|			AND (ConsignorPrices.Agreement = &Agreement)
-	|			AND (ConsignorPrices.ItemKey = ConsignorSales.ItemKey)
-	|			AND (ConsignorPrices.SourceOfOrigin = ConsignorSales.SourceOfOrigin)
-	|			AND (ConsignorPrices.SerialLotNumber = ConsignorSales.SerialLotNumber)
-	|			AND (ConsignorPrices.CurrencyMovementType = &CurrencyMovementType)
-	|			AND (ConsignorPrices.Recorder = BatchBalance.Batch.Document)
+	|		AND (ConsignorPrices.Partner = &Partner)
+	|		AND (ConsignorPrices.Agreement = &Agreement)
+	|		AND (ConsignorPrices.ItemKey = ConsignorSales.ItemKey)
+	|		AND (ConsignorPrices.SourceOfOrigin = ConsignorSales.SourceOfOrigin)
+	|		AND (ConsignorPrices.SerialLotNumber = ConsignorSales.SerialLotNumber)
+	|		AND (ConsignorPrices.CurrencyMovementType = &CurrencyMovementType)
+	|		AND (ConsignorPrices.Recorder = BatchBalance.Batch.Document)
 	|WHERE
-	|	ConsignorSales.QuantityTurnover <> 0";
+	|	ConsignorSales.QuantityTurnover <> 0
+	|GROUP BY
+	|	ConsignorSales.ItemKey.Item,
+	|	ConsignorSales.ItemKey,
+	|	ConsignorSales.Unit,
+	|	ConsignorSales.PriceType,
+	|	ConsignorPrices.Price,
+	|	ConsignorSales.Price,
+	|	ConsignorSales.SalesInvoice,
+	|	BatchBalance.Batch.Document,
+	|	ConsignorSales.SerialLotNumber,
+	|	ConsignorSales.SourceOfOrigin,
+	|	CASE
+	|		WHEN BatchBalance.Agreement.TradeAgentFeeType = VALUE(Enum.TradeAgentFeeTypes.Percent)
+	|			THEN BatchBalance.Agreement.TradeAgentFeePercent
+	|		ELSE 0
+	|	END";
 	
 	Query.SetParameter("StartDate"       , Parameters.StartDate);
 	Query.SetParameter("EndDate"         , Parameters.EndDate);

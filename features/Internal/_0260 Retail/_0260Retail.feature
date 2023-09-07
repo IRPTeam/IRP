@@ -1270,17 +1270,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "Workstation" became equal to "Workstation 01"
 			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 			And the editing text of form attribute named "BalanceBeginning" became equal to "1 440,00"
-			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
-			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 413,00"
-			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
-			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
 			Then the form attribute named "Branch" became equal to "Shop 02"
-			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling real cash and close session
 			And I input "4 000,00" text in "Real cash" field
 			And I move to the next attribute

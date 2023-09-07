@@ -2932,18 +2932,35 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		EndDo; // DataForExpense
 
 		If TypeOf(Row_Receipt.Document) = Type("DocumentRef.Production") Then
+
+			NewRow.ExtraDirectCostAmount    = NewRow.ExtraDirectCostAmount + Row_Receipt.Document.ExtraDirectCostAmount;
+			NewRow.ExtraDirectCostTaxAmount = NewRow.ExtraDirectCostTaxAmount + Row_Receipt.Document.ExtraDirectCostTaxAmount;
+			
 			_ExtraCostAmountByRatio = Row_Receipt.Document.ExtraCostAmountByRatio;
 			If _ExtraCostAmountByRatio <> 0 Then
-				NewRow.ExtraCostAmountByRatio = (NewRow.InvoiceAmount + NewRow.ExtraCostAmountByRatio) / 100 * _ExtraCostAmountByRatio;
+				_totalAmount = 
+					NewRow.InvoiceAmount 
+					+ NewRow.IndirectCostAmount
+					+ NewRow.ExtraCostAmountByRatio 
+					+ NewRow.ExtraDirectCostAmount
+					+ NewRow.AllocatedCostAmount
+					+ NewRow.AllocatedRevenueAmount;
+								
+				NewRow.ExtraCostAmountByRatio = (_totalAmount / 100 * _ExtraCostAmountByRatio) + NewRow.ExtraCostAmountByRatio;
 			EndIf;	
 			
 			_ExtraCostTaxAmountByRatio = Row_Receipt.Document.ExtraCostTaxAmountByRatio;
-			If _ExtraCostTaxAmountByRatio <> 0 Then	
-				NewRow.ExtraCostTaxAmountByRatio = (NewRow.InvoiceTaxAmount + NewRow.ExtraCostTaxAmountByRatio) / 100 * _ExtraCostTaxAmountByRatio;
+			If _ExtraCostTaxAmountByRatio <> 0 Then	  
+				_totalTaxAmount = 
+					NewRow.InvoiceTaxAmount
+					+NewRow.IndirectCostTaxAmount
+					+NewRow.ExtraCostTaxAmountByRatio 
+					+NewRow.ExtraDirectCostTaxAmount 
+					+NewRow.AllocatedCostTaxAmount 
+					+NewRow.AllocatedRevenueTaxAmount; 
+
+                NewRow.ExtraCostTaxAmountByRatio = (_totalTaxAmount / 100 * _ExtraCostTaxAmountByRatio) + NewRow.ExtraCostTaxAmountByRatio;
 			EndIf;	
-			
-			NewRow.ExtraDirectCostAmount = Row_Receipt.Document.ExtraDirectCostAmount;
-			NewRow.ExtraDirectCostTaxAmount = Row_Receipt.Document.ExtraDirectCostTaxAmount;
 		EndIf;
 		
 		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();

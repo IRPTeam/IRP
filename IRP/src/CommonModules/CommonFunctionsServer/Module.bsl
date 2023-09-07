@@ -821,10 +821,28 @@ Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
 	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction
 
+// Get UUID.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+// 
+// Returns:
+//  UUID
+Function GetUUID(Ref) Export
+	Return Ref.UUID();
+EndFunction
+
 #EndRegion
 
 #Region XDTO
 
+// Get XMLAs structure.
+// 
+// Parameters:
+//  XML - String - XML
+// 
+// Returns:
+//  Structure -  Get XMLAs structure
 Function GetXMLAsStructure(XML) Export
 	XDTO = DeserializeXMLUseXDTOFactory(XML);
 	Str = New Structure;
@@ -1196,4 +1214,61 @@ Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 	EndDo;
 EndProcedure
 
+#EndRegion
+
+#Region Cache
+
+// Put to Cache.
+// 
+// Parameters:
+//  Data - Arbitrary - Data
+//  ID - String - ID
+// 
+// Returns:
+//  String
+Function PutToCache(Data, ID = "") Export
+	
+	If IsBlankString(ID) Then
+		ID = String(New UUID);
+	EndIf;
+	
+	Reg = InformationRegisters.T1020S_Cache.CreateRecordManager();
+	ArchiveData = New ValueStorage(Data, New Deflation(9));
+	Reg.Data = ArchiveData;
+	Reg.Created = GetCurrentSessionDate();
+	Reg.UUID = ID;
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Size = StrLen(SerializeXMLUseXDTO(ArchiveData));
+	Reg.Write(True);
+	Return ID;
+EndFunction
+
+// Get from Cache.
+// 
+// Parameters:
+//  ID - String - ID
+//  Delete - Boolean -  Delete
+// 
+// Returns:
+//  Arbitrary
+Function GetFromCache(ID, Delete = True) Export
+	Reg = InformationRegisters.T1020S_Cache.CreateRecordManager();
+	Reg.UUID = ID;
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Read();
+	Data = Reg.Data;
+	
+	If Delete Then
+		Reg.Delete();
+	Else
+		Reg.LastGet = GetCurrentSessionDate();
+		Reg.Write();
+	EndIf;
+	
+	If Not Data = Undefined Then
+		// @skip-check statement-type-change
+		Data = Data.Get();
+	EndIf;
+	Return Data;
+EndFunction
 #EndRegion

@@ -230,7 +230,8 @@
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
-  <commonTemplates>CommonTemplate.HTMLPrintEmul</commonTemplates>
+  <commonTemplates>CommonTemplate.HTMLPrintEmulHTML</commonTemplates>
+  <commonTemplates>CommonTemplate.HTMLPrintEmulJSON</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
@@ -522,7 +523,7 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
-  <eventSubscriptions>EventSubscription.BeforeWrite_AdditionalTableControlDocument</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
@@ -697,6 +698,7 @@
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
   <constants>Constant.UseMultiTaxes</constants>
+  <constants>Constant.AdditionalTableControlExceptions</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -737,6 +739,7 @@
   <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <commonForms>CommonForm.BackgroundJobSplash</commonForms>
   <commonForms>CommonForm.HTMLPrintForm</commonForms>
+  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -1075,6 +1078,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

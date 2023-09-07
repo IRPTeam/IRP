@@ -362,7 +362,6 @@ Scenario: _0263104 create postponed RRR without a reservation and without bases 
 		And I save the value of "Number" field as "$$NumberPostponedRRR1$$"
 		And I save the window as "$$PostponedRRR1$$"
 		And I save the value of the field named "Date" as  "$$DatePostponedRRR1$$"
-		And I save the value of the field named "Date" as  "$$DatePostponedRRR1$$"
 	* Check 
 		And I click "Registrations report" button
 		And I click "Generate report" button
@@ -430,6 +429,7 @@ Scenario: _0263104 postponed list form (POS)
 			| 'Product 6 with SLN' |
 		And I select current line in "ItemList" table
 		And I activate "Control code string state" field in "ItemList" table
+		And Delay 1
 		And I press keyboard shortcut "Enter"
 		And "CurrentCodes" table became equal
 			| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
@@ -594,22 +594,91 @@ Scenario: _0263106 processing a postponed RRR
 				
 
 		
-				
-				
-				
+Scenario: _0263110 cancel postponed RSR
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Create Postponed RSR with reserve (without price)
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "0,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt with reserve" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Create Postponed RSR without reserve
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And I finish line editing in "ItemList" table	
+	* Postponed RSR without reserve	
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Create Postponed RRR
+		And I click the button named "Return"
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And I finish line editing in "ItemList" table	
+	* Postponed RRR
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Open postponed list form
+		And I click "Open postponed receipt" button	
+	* Cancel Postponed RSR and RRR
+		And I select all lines of "Receipts" table
+		And in the table "Receipts" I click "Cancel receipts" button
+		Then the number of "Receipts" table lines is "равно" "0"
+		Then there are lines in TestClient message log
+			|'3 postponed receipts cancelled'|
+		And I close all client application windows
 		
 
-	
-		
-
-				
-			
-				
-								
-		
-				
-				
-		
-		
-				
-
+Scenario: _0263115 сheck the display of deferred receipt commands in POS depending on the settings in Workstation
+	And I close all client application windows
+	* Disabling the ability to create deferred receipts with reservations
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I remove checkbox "Postpone with reserve"
+		And I set checkbox "Postpone without reserve"
+		And I click "Save and close" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		When I Check the steps for Exception
+			| 'And I click "Postpone current receipt with reserve" button'    |
+		And I close current window
+	* Disabling the ability to create deferred receipts without reservations
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I remove checkbox "Postpone without reserve"
+		And I click "Save and close" button	
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		When I Check the steps for Exception
+			| 'And I click "Postpone without reserve" button'    |
+		When I Check the steps for Exception
+			| 'And I click "Postpone current receipt with reserve" button'    |
+		And I close current window
+	* Enable ability to create deferred receipts with reserve
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I set checkbox "Postpone with reserve"
+		And I click "Save and close" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"	
+		And I click "Postpone current receipt with reserve" button
+		Then there are lines in TestClient message log
+			|'Document is empty.'|
+		And I close all client application windows

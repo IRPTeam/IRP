@@ -77,6 +77,14 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog BankTerms objects (for retail)	
 	* Workstation
 		When create Workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I change checkbox "Postpone with reserve"
+		And I change checkbox "Postpone without reserve"
+		And I click "Save and close" button				
 	* Load RSR
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -4394,4 +4402,237 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 		And I close all client application windows		
 			
 		
-			
+
+Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Select sales person
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I select current line in "" table		
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt with reserve" button
+		Then the number of "ItemList" table lines is "равно" "0"			
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed with reserve"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR1$$" variable
+		And I delete "$$PostponedRSR1$$" variable
+		And I delete "$$DatePostponedRSR1$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR1$$"
+		And I save the window as "$$PostponedRSR1$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR1$$"
+	* Check reservation
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR1$$'                   | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'      | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4012 Stock Reservation"' | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| ''                                    | 'Record type' | 'Period'                | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                    | ''            | ''                      | 'Quantity'  | 'Store'      | 'Item key' | 'Order'             |
+			| ''                                    | 'Receipt'     | '$$DatePostponedRSR1$$' | '1'         | 'Store 01'   | 'XS/Blue'  | '$$PostponedRSR1$$' |
+		And I close all client application windows
+
+Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Select sales person
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I select current line in "" table		
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt without reserve" button
+		Then the number of "ItemList" table lines is "равно" "0"	
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR2$$" variable
+		And I delete "$$PostponedRSR2$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR2$$"
+		And I save the window as "$$PostponedRSR2$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+	* Check 
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR2$$'              |
+			| 'Document registrations records' |
+		And I close current window
+
+
+Scenario: _0154202 create postponed RRR (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Select sales person
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I select current line in "" table		
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"	
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR2$$" variable
+		And I delete "$$PostponedRSR2$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR2$$"
+		And I save the window as "$$PostponedRSR2$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+	* Check 
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR2$$'              |
+			| 'Document registrations records' |
+		And I close current window
+
+Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+		And I click the button named "Return"		
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Postponed RSR without a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+	And I close all client application windows
+	

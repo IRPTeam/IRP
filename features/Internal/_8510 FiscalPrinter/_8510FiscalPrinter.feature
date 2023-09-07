@@ -2553,7 +2553,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "694"	
+	Then the number of "List" table lines is "равно" "692"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -2625,6 +2625,7 @@ Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
 			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '520,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 	* Open RRR list form
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And "List" table contains lines
@@ -2670,9 +2671,8 @@ Scenario: _0260191 check session open and close from CRS
 		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
 	* Close session
 		And I click "Close session" button	
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
+		And I set checkbox "I confirm the difference between actual data and accounting."
+		And I move to the next attribute
 		And I click "Close session" button
 	* Check log
 		And Delay 3

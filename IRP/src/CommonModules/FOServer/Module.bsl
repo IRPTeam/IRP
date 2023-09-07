@@ -82,7 +82,7 @@ Function IsUseSimpleMode() Export
 EndFunction
 
 Function IsUseMultiTaxes() Export
-	Return Not GetFunctionalOption("UseMultiTaxes");
+	Return True;//Not GetFunctionalOption("UseMultiTaxes");
 EndFunction
 
 #EndRegion

@@ -111,7 +111,23 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
-
+	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
+		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+	
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
+		
+		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
+			Raise R().EqFP_CanPintOnlyComplete;
+		EndIf;
+	Else
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	EndIf;
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
 	ProcessCheckSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -224,6 +240,12 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
 
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -266,7 +288,13 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
-
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");

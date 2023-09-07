@@ -73,11 +73,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.OpenSession.Enabled = False;
 			Form.Items.CloseSession.Enabled = True;
 			Form.Items.CancelSession.Enabled = False;
+			Form.Items.GroupPostponed.Enabled = True;
 		Else
 			Form.Items.GroupCashCommands.Enabled = False;
 			Form.Items.OpenSession.Enabled = True;
 			Form.Items.CloseSession.Enabled = False;
 			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.GroupPostponed.Enabled = False;
 		EndIf;
 	Else
 		Form.Items.GroupSessionComands.Visible = False;
@@ -1047,6 +1049,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	Result.PaymentForm = Undefined;
 
 	TransactionResult = WriteTransaction(Result);
+	DPPointOfSaleClient.AfterWriteTransaction(TransactionResult.Refs, ThisObject);
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do

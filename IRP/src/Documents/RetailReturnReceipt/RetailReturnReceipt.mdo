@@ -1970,7 +1970,7 @@
       <key>en</key>
       <value>Print receipt</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.RetailReturnReceipt</types>
     </commandParameterType>

@@ -118,7 +118,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
 		
 		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
-			Raise R().EqFP_CanPintOnlyComplete;
+			Raise R().EqFP_CanPrintOnlyComplete;
 		EndIf;
 	Else
 		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");

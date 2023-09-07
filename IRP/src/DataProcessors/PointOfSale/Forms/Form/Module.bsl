@@ -1051,9 +1051,10 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 
 	If Not ResultPrint Then
 		ReceiptsCanceling(TransactionResult.Refs);
+		PaymentForm.Items.Enter.Enabled = True;
 		Return;
 	EndIf;
-
+	
 	PaymentForm.Close();
 
 	DetailedInformation = R().S_030 + ": " + Format(TransactionResult.CashbackAmount, "NFD=2; NZ=0;");

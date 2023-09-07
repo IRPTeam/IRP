@@ -468,7 +468,7 @@
       <key>en</key>
       <value>Open session</value>
     </synonym>
-    <group>CommandGroup.Service</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.ConsolidatedRetailSales</types>
     </commandParameterType>
@@ -484,7 +484,7 @@
       <key>en</key>
       <value>Close session</value>
     </synonym>
-    <group>CommandGroup.Service</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.ConsolidatedRetailSales</types>
     </commandParameterType>

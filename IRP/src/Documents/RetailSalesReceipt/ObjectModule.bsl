@@ -3,6 +3,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	If DeletionMark Then
+		StatusType = Enums.RetailReceiptStatusTypes.Canceled;
+	EndIf;
+
 	If ThisObject.StatusType = Enums.RetailReceiptStatusTypes.Completed Then
 		Payments_Amount = ThisObject.Payments.Total("Amount");
 		ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");

@@ -62,26 +62,32 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
 		SessionIsOpen = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
 
+		Form.Items.GroupSessionComands.Visible = True;
+		Form.Items.GroupCashCommands.Visible = True;
+		Form.Items.GroupReports.Visible = True;
+		Form.Items.GroupCashCommands.Visible =
+			CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
+
 		If SessionIsOpen Then
 			Form.Items.GroupCashCommands.Enabled = True;
 			Form.Items.OpenSession.Enabled = False;
 			Form.Items.CloseSession.Enabled = True;
 			Form.Items.CancelSession.Enabled = False;
+			Form.Items.GroupPostponed.Enabled = True;
 		Else
 			Form.Items.GroupCashCommands.Enabled = False;
 			Form.Items.OpenSession.Enabled = True;
 			Form.Items.CloseSession.Enabled = False;
 			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.GroupPostponed.Enabled = False;
 		EndIf;
-		Form.Items.GroupCommonCommands.Visible = True;
-		Form.Items.GroupReports.Enabled = True;
 	Else
-		Form.Items.GroupCommonCommands.Visible = False;
+		Form.Items.GroupSessionComands.Visible = False;
+		Form.Items.GroupCashCommands.Visible = False;
+		Form.Items.GroupReports.Visible = False;
+		Form.Items.GroupCashCommands.Visible = False;
 	EndIf;
 
-	Form.Items.GroupCashCommands.Visible =
-		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-	
 	PostponeWithReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithReserve");
 	PostponeWithoutReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithoutReserve");
 	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithoutReserve OR (PostponeWithReserve AND Form.isReturn);
@@ -1043,6 +1049,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	Result.PaymentForm = Undefined;
 
 	TransactionResult = WriteTransaction(Result);
+	DPPointOfSaleClient.AfterWriteTransaction(TransactionResult.Refs, ThisObject);
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
@@ -2420,6 +2427,18 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 		ThisObject.Object.SourceOfOrigins.Load(SourceOfOriginsTable);
 		ThisObject.Object.ControlCodeStrings.Load(ControlCodeStringsTable);
 	EndIf;
+	
+	SavedDataStructure = TaxesClientServer.GetTaxesCache(ThisObject);
+	For Each TaxInfo In SavedDataStructure.ArrayOfTaxInfo Do
+		For Each ItemRow In ThisObject.Object.ItemList Do
+			Filter = New Structure("Key, Tax", ItemRow.Key, TaxInfo.Tax);
+			TaxRows = ThisObject.Object.TaxList.FindRows(Filter);
+			If TaxRows.Count() Then
+				ItemRow[TaxInfo.Name] = TaxRows[0].TaxRate;
+			EndIf;
+		EndDo;
+	EndDo;
+	
 EndProcedure
 
 // Receipts canceling.

@@ -3,6 +3,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	If DeletionMark Then
+		StatusType = Enums.RetailReceiptStatusTypes.Canceled;
+	EndIf;
+
 	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);

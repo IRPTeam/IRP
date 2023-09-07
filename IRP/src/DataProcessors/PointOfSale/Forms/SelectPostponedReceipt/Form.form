@@ -1581,6 +1581,7 @@ WHERE
 	RetailSalesReceipt.StatusType IN (Value(Enum.RetailReceiptStatusTypes.Postponed),
 		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))
 	AND RetailSalesReceipt.Branch = &amp;Branch
+	AND NOT RetailSalesReceipt.DeletionMark
 
 UNION ALL
 
@@ -1607,7 +1608,9 @@ FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
 WHERE
 	RetailReturnReceipt.StatusType IN (Value(Enum.RetailReceiptStatusTypes.Postponed),
-		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))</queryText>
+		Value(Enum.RetailReceiptStatusTypes.PostponedWithReserve))
+	AND RetailReturnReceipt.Branch = &amp;Branch
+	AND NOT RetailReturnReceipt.DeletionMark</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

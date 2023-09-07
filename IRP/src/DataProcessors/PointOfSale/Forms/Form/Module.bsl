@@ -62,6 +62,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
 		SessionIsOpen = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
 
+		Form.Items.GroupSessionComands.Visible = True;
+		Form.Items.GroupCashCommands.Visible = True;
+		Form.Items.GroupReports.Visible = True;
+		Form.Items.GroupCashCommands.Visible =
+			CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
+
 		If SessionIsOpen Then
 			Form.Items.GroupCashCommands.Enabled = True;
 			Form.Items.OpenSession.Enabled = False;
@@ -73,15 +79,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.CloseSession.Enabled = False;
 			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
 		EndIf;
-		Form.Items.GroupCommonCommands.Visible = True;
-		Form.Items.GroupReports.Enabled = True;
 	Else
-		Form.Items.GroupCommonCommands.Visible = False;
+		Form.Items.GroupSessionComands.Visible = False;
+		Form.Items.GroupCashCommands.Visible = False;
+		Form.Items.GroupReports.Visible = False;
+		Form.Items.GroupCashCommands.Visible = False;
 	EndIf;
 
-	Form.Items.GroupCashCommands.Visible =
-		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-	
 	PostponeWithReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithReserve");
 	PostponeWithoutReserve = CommonFunctionsServer.GetRefAttribute(Form.Workstation, "PostponeWithoutReserve");
 	Form.Items.PostponeCurrentReceipt.Visible = PostponeWithoutReserve OR (PostponeWithReserve AND Form.isReturn);

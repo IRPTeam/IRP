@@ -494,4 +494,20 @@
       <picture>StdPicture.AppearanceCircleRed</picture>
     </picture>
   </commands>
+  <commands uuid="7fc844c7-4732-4cd9-9880-4db29c327bb1">
+    <name>XReport</name>
+    <synonym>
+      <key>en</key>
+      <value>X report</value>
+    </synonym>
+    <group>CommandGroup.Fiscalization</group>
+    <commandParameterType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleYellow</picture>
+    </picture>
+  </commands>
 </mdclass:Document>

@@ -346,10 +346,11 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+//#@2094
+#Region VAT_RATE
 
-Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListTaxRateOnChange(Object, Form);
+Procedure ItemListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListVatRateOnChange(Object, Form);
 EndProcedure
 
 #EndRegion

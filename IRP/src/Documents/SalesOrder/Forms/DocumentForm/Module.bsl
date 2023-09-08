@@ -74,10 +74,11 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
-EndProcedure
+//#@2094
+//&AtServer
+//Procedure Taxes_CreateFormControls() Export
+//	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+//EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -143,12 +144,14 @@ Procedure UpdateTotalAmounts() Export
 		EndIf;
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
 		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
-
-		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
-		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
-		EndDo;
-
+		
+		//#@2094
+		//ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+		//For Each RowTax In ArrayOfTaxesRows Do
+		//	ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
+		//EndDo;
+		ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + Row.TaxAmount;
+		
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		For Each RowOffer In ArrayOfOffersRows Do
 			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
@@ -467,11 +470,12 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+//#@2094
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocSalesOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure ItemListVatRateOnChange(Item) Export
+	DocSalesOrderClient.ItemListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

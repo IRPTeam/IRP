@@ -98,13 +98,14 @@ Function GetDeliveryDateFromItemList(Object)
 	EndIf;
 EndFunction
 
-#Region FORM_MODIFICATOR
-
-Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
-	Parameters.Form.Taxes_CreateFormControls();
-EndProcedure
-
-#EndRegion
+//#@2094
+//#Region FORM_MODIFICATOR
+//
+//Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
+//	Parameters.Form.Taxes_CreateFormControls();
+//EndProcedure
+//
+//#EndRegion
 
 #Region COMMANDS
 
@@ -143,7 +144,9 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 		EndIf;
 	EndDo;
 	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
-		Property = New Structure("DataPath", "ItemList.<tax_rate>");
+		//#@2094
+//		Property = New Structure("DataPath", "ItemList.<tax_rate>");
+		Property = New Structure("DataPath", "ItemList.VatRate");
 		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 	EndIf;
 EndProcedure
@@ -188,7 +191,8 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	
 	AllDepTables = New Array();
 	AllDepTables.Add("SpecialOffers");
-	AllDepTables.Add("TaxList");
+	//#@2094
+//	AllDepTables.Add("TaxList");
 	AllDepTables.Add("Currencies");
 	AllDepTables.Add("SerialLotNumbers");
 	AllDepTables.Add("ShipmentConfirmations");

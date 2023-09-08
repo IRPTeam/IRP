@@ -9,16 +9,21 @@ Function GetTaxRateByCompany(Parameters) Export
 	Return TaxesServer._GetTaxRateByCompany(Parameters);
 EndFunction
 
-Function GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
-	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+Function GetTaxesInfo(Date, Company, DocumentName, TransactionType, TaxKind) Export
+	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType, TaxKind);
 EndFunction
 
 Function GetTaxRatesByTax(Tax) Export
 	Return TaxesServer._GetTaxRatesByTax(Tax);
 EndFunction
 
-Function CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
-	Return TaxesServer._CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse);
+//#@2094
+//Function CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
+//	Return TaxesServer._CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse);
+//EndFunction
+
+Function GetVatRef() Export
+	Return TaxesServer._GetVatRef();
 EndFunction
 
 // Get item info

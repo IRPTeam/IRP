@@ -222,12 +222,19 @@ EndFunction
 #Region ON_CHAIN_COMPLETE
 
 Procedure OnChainComplete(Parameters) Export
+	//#@2094
+	//VatRate visible
+	If Parameters.TaxVisible <> Undefined Then
+		TaxesClientServer.ChangeVsible(Parameters.Form, Parameters.TaxVisible);
+		If Parameters.TaxVisible = True Then
+			TaxesClientServer.LoadChoiceList(Parameters.Form, Parameters.TaxChoiceList);
+		EndIf;
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-//		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-//		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
@@ -297,7 +304,7 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
-	CommitChanges(Parameters);
+	CommitChanges(Parameters);	
 EndProcedure
 
 Procedure CommitChanges(Parameters)
@@ -415,7 +422,9 @@ Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 			"PaymentTerm", R().QuestionToUser_019));
 	EndIf;
 	
-	Changes = IsChangedTaxRates(Parameters);
+	//#@2094
+	//Changes = IsChangedTaxRates(Parameters);
+	Changes = IsChangedProperty(Parameters, "ItemList.VatRate");
 	If Changes.IsChanged And Not Parameters.EventCaller = "CompanyOnUserChange" Then
 		// refill question TaxRates
 		ChangedPoints.Insert("IsChangedTaxRates");
@@ -599,7 +608,9 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 
 		ElsIf Parameters.EventCaller = "DateOnUserChange" Then
 		// refill question tax rate
-		If IsChangedTaxRates(Parameters).IsChanged 
+		//#@2094
+		//If IsChangedTaxRates(Parameters).IsChanged 
+		If IsChangedProperty(Parameters, "PaymentList.VatRate").IsChanged 
 			And Parameters.Object.PaymentList.Count() Then
 			NotifyParameters = New Structure("Parameters", Parameters);
 			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_DateOnUserChangeContinue", ThisObject, NotifyParameters), 
@@ -622,14 +633,17 @@ Procedure __tmp_CashExpenseRevenue_DateOnUserChangeContinue(Answer, NotifyParame
 	If Answer = DialogReturnCode.Yes Then
 		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
 	Else
-		DataPaths = "PaymentList.NetAmount, PaymentList.TaxAmount, PaymentList.TotalAmount";
+		//#@2094
+		//DataPaths = "PaymentList.NetAmount, PaymentList.TaxAmount, PaymentList.TotalAmount";
+		DataPaths = "PaymentList.VatRate, PaymentList.NetAmount, PaymentList.TaxAmount, PaymentList.TotalAmount";
 		RemoveFromCache(DataPaths, NotifyParameters.Parameters, False);
-		// remove tax rate from cache
-		DynamicDataPaths = New Array();
-		For Each TaxInfo In NotifyParameters.Parameters.ArrayOfTaxInfo Do
-			DynamicDataPaths.Add(NotifyParameters.Parameters.TableName + "." + TaxInfo.Name);
-		EndDo;
-		RemoveFromCache(StrConcat(DynamicDataPaths, ","), NotifyParameters.Parameters);
+		
+//		// remove tax rate from cache
+//		DynamicDataPaths = New Array();
+//		For Each TaxInfo In NotifyParameters.Parameters.ArrayOfTaxInfo Do
+//			DynamicDataPaths.Add(NotifyParameters.Parameters.TableName + "." + TaxInfo.Name);
+//		EndDo;
+//		RemoveFromCache(StrConcat(DynamicDataPaths, ","), NotifyParameters.Parameters);
 		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure
@@ -781,11 +795,13 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	If ChangedPoints.Property("IsChangedTaxRates") Then
-		DynamicDataPaths = New Array();
-		For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-			DynamicDataPaths.Add("ItemList." + TaxInfo.Name);
-		EndDo;
-		DataPaths = StrConcat(DynamicDataPaths, ",");
+		//#@2094
+//		DynamicDataPaths = New Array();
+//		For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+//			DynamicDataPaths.Add("ItemList." + TaxInfo.Name);
+//		EndDo;
+//		DataPaths = StrConcat(DynamicDataPaths, ",");
+		DataPaths = "ItemList.VatRate";
 		ArrayOfDataPaths.Add(DataPaths);
 		If Not Answer.Property("UpdateTaxRates") Then
 			RemoveFromCache(DataPaths, Parameters);
@@ -801,9 +817,10 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		RemoveFromCache(DataPaths, Parameters, False);
 	EndIf;
 	
-	If ArrayOfDataPaths.Count() Then
-		RemoveFromCache("TaxList", Parameters);
-	EndIf;
+	//#@2094
+//	If ArrayOfDataPaths.Count() Then
+//		RemoveFromCache("TaxList", Parameters);
+//	EndIf;
 	
 	CommitChanges(Parameters);
 	
@@ -814,18 +831,16 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	UpdateTotalAmounts(Parameters);
 EndProcedure
 
-Function IsChangedTaxRates(Parameters)
-	//#@2094
-	If FOClientServer.IsUseMultiTaxes() Then
-		For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-			Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
-			If Result.IsChanged Then
-				Return Result;
-			EndIf;
-		EndDo;
-	EndIf;
-	Return New Structure("IsChanged", False);
-EndFunction
+//#@2094
+//Function IsChangedTaxRates(Parameters)
+//	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+//		Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
+//		If Result.IsChanged Then
+//			Return Result;
+//		EndIf;
+//	EndDo;
+//	Return New Structure("IsChanged", False);
+//EndFunction
 
 Function IsChangedProperty(Parameters, DataPath)
 	Return	ControllerClientServer_V2.IsChangedProperty(Parameters, DataPath);
@@ -863,7 +878,8 @@ EndProcedure
 #Region _LIST
 
 Procedure ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing)
-	TaxesClient.ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+	//#@2094
+//	TaxesClient.ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
@@ -1032,13 +1048,14 @@ EndProcedure
 
 #EndRegion
 
-#Region FORM_MODIFICATOR
-
-Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
-	Parameters.Form.Taxes_CreateFormControls();
-EndProcedure
-
-#EndRegion
+//#@2094
+//#Region FORM_MODIFICATOR
+//
+//Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
+//	Parameters.Form.Taxes_CreateFormControls();
+//EndProcedure
+//
+//#EndRegion
 
 #Region COMMANDS
 
@@ -2219,13 +2236,25 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_TAX_RATE
+//#@2094
+//#Region ITEM_LIST_TAX_RATE
+//
+//// ItemList.TaxRate
+//Procedure ItemListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+//	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+//	ControllerClientServer_V2.ItemListTaxRateOnChange(Parameters);
+//EndProcedure
+//
+//#EndRegion
 
-// ItemList.TaxRate
-Procedure ItemListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+#Region ITEM_LIST_VAT_RATE
+
+// ItemList.VatRate
+Procedure ItemListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListTaxRateOnChange(Parameters);
+	ControllerClientServer_V2.ItemListVatRateOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -2303,15 +2332,16 @@ Procedure ItemListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Expor
 	ControllerClientServer_V2.ItemListTaxAmountOnChange(Parameters);
 EndProcedure
 
-// ItemList.TaxAmount.UserForm
-Procedure ItemListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	For Each Row In Parameters.Rows Do
-		Row.TaxIsAlreadyCalculated = True;
-	EndDo;
-	ControllerClientServer_V2.ItemListTaxAmountUserFormOnChange(Parameters);
-EndProcedure
+//#@2094
+//// ItemList.TaxAmount.UserForm
+//Procedure ItemListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
+//	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+//	For Each Row In Parameters.Rows Do
+//		Row.TaxIsAlreadyCalculated = True;
+//	EndDo;
+//	ControllerClientServer_V2.ItemListTaxAmountUserFormOnChange(Parameters);
+//EndProcedure
 
 Procedure OnSetItemListTaxAmountNotify(Parameters) Export
 	UpdateTotalAmounts(Parameters);
@@ -2708,12 +2738,13 @@ Procedure SetPaymentListOrder(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.PaymentListOrderOnChange(Parameters);
 EndProcedure
 
-// PaymentList.TaxRate
-Procedure PaymentListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
-	ControllerClientServer_V2.PaymentListTaxRateOnChange(Parameters);
-EndProcedure
+//#@2094
+//// PaymentList.TaxRate
+//Procedure PaymentListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+//	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+//	ControllerClientServer_V2.PaymentListTaxRateOnChange(Parameters);
+//EndProcedure
 
 // PaymentList.DontCalculateRow
 Procedure PaymentListDontCalculateRowOnChange(Object, Form, CurrentData = Undefined) Export
@@ -2729,15 +2760,16 @@ Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Ex
 	ControllerClientServer_V2.PaymentListTaxAmountOnChange(Parameters);
 EndProcedure
 
-// PaymentList.TaxAmount.UserForm
-Procedure PaymentListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
-	For Each Row In Parameters.Rows Do
-		Row.TaxIsAlreadyCalculated = True;
-	EndDo;
-	ControllerClientServer_V2.PaymentListTaxAmountUserFormOnChange(Parameters);
-EndProcedure
+//#@2094
+//// PaymentList.TaxAmount.UserForm
+//Procedure PaymentListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
+//	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+//	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+//	For Each Row In Parameters.Rows Do
+//		Row.TaxIsAlreadyCalculated = True;
+//	EndDo;
+//	ControllerClientServer_V2.PaymentListTaxAmountUserFormOnChange(Parameters);
+//EndProcedure
 
 // PaymentList.NetAmount
 Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
@@ -3182,13 +3214,15 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 					
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
-			Parameters.Form.Taxes_CreateFormControls();
+			//#@2094
+//			Parameters.Form.Taxes_CreateFormControls();
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-			Parameters.Form.Taxes_CreateFormControls();
+			//#@2094
+//			Parameters.Form.Taxes_CreateFormControls();
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 		EndIf;
 	EndDo;

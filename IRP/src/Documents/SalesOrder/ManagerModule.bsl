@@ -45,6 +45,7 @@ Function SalesOrderPrint(Ref, Param)
 	|	SalesOrderItemList.Quantity AS Quantity,
 	|	SalesOrderItemList.Unit.Description_en AS Unit,
 	|	SalesOrderItemList.Price AS Price,
+	|	SalesOrderItemList.VatRate AS VatRate,
 	|	SalesOrderItemList.TaxAmount AS TaxAmount,
 	|	SalesOrderItemList.TotalAmount AS TotalAmount,
 	|	SalesOrderItemList.NetAmount AS NetAmount,
@@ -66,6 +67,7 @@ Function SalesOrderPrint(Ref, Param)
 	|	Items.Quantity AS Quantity,
 	|	Items.Unit AS Unit,
 	|	Items.Price AS Price,
+	|	Items.VatRate AS VatRate,
 	|	Items.TaxAmount AS TaxAmount,
 	|	Items.TotalAmount AS TotalAmount,
 	|	Items.NetAmount AS NetAmount,
@@ -73,48 +75,49 @@ Function SalesOrderPrint(Ref, Param)
 	|	Items.Ref AS Ref,
 	|	Items.Key AS Key
 	|FROM
-	|	Items AS Items
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SalesOrderTaxList.Ref AS Ref,
-	|	SalesOrderTaxList.Tax AS Tax,
-	|	MIN(SalesOrderTaxList.LineNumber) AS LineNumber
-	|FROM
-	|	Document.SalesOrder.TaxList AS SalesOrderTaxList
-	|WHERE
-	|	SalesOrderTaxList.Ref = &Ref
-	|	AND SalesOrderTaxList.Key IN
-	|			(SELECT
-	|				Items.Key AS Key
-	|			FROM
-	|				Items AS Items)
-	|
-	|GROUP BY
-	|	SalesOrderTaxList.Ref,
-	|	SalesOrderTaxList.Tax
-	|
-	|ORDER BY
-	|	LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SalesOrderTaxList.Ref AS Ref,
-	|	SalesOrderTaxList.LineNumber AS LineNumber,
-	|	SalesOrderTaxList.Key AS Key,
-	|	SalesOrderTaxList.Tax AS Tax,
-	|	SalesOrderTaxList.TaxRate AS TaxRate
-	|FROM
-	|	Document.SalesOrder.TaxList AS SalesOrderTaxList
-	|WHERE
-	|	SalesOrderTaxList.Ref = &Ref
-	|	AND SalesOrderTaxList.Key IN
-	|			(SELECT
-	|				Items.Key AS Key
-	|			FROM
-	|				Items AS Items)";
+	|	Items AS Items";
+	//#@2094
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SalesOrderTaxList.Ref AS Ref,
+//	|	SalesOrderTaxList.Tax AS Tax,
+//	|	MIN(SalesOrderTaxList.LineNumber) AS LineNumber
+//	|FROM
+//	|	Document.SalesOrder.TaxList AS SalesOrderTaxList
+//	|WHERE
+//	|	SalesOrderTaxList.Ref = &Ref
+//	|	AND SalesOrderTaxList.Key IN
+//	|			(SELECT
+//	|				Items.Key AS Key
+//	|			FROM
+//	|				Items AS Items)
+//	|
+//	|GROUP BY
+//	|	SalesOrderTaxList.Ref,
+//	|	SalesOrderTaxList.Tax
+//	|
+//	|ORDER BY
+//	|	LineNumber
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	SalesOrderTaxList.Ref AS Ref,
+//	|	SalesOrderTaxList.LineNumber AS LineNumber,
+//	|	SalesOrderTaxList.Key AS Key,
+//	|	SalesOrderTaxList.Tax AS Tax,
+//	|	SalesOrderTaxList.TaxRate AS TaxRate
+//	|FROM
+//	|	Document.SalesOrder.TaxList AS SalesOrderTaxList
+//	|WHERE
+//	|	SalesOrderTaxList.Ref = &Ref
+//	|	AND SalesOrderTaxList.Key IN
+//	|			(SELECT
+//	|				Items.Key AS Key
+//	|			FROM
+//	|				Items AS Items)";
 
 	LCode = Param.DataLang;
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Company", LCode);
@@ -130,8 +133,8 @@ Function SalesOrderPrint(Ref, Param)
 	SelectionHeader = Selection[0].Select();
 	SelectionItems = Selection[2].Unload();
 	SelectionItems.Indexes.Add("Ref");
-	SelectionHeaderTAX = Selection[3].Unload();
-	SelectionPercentTAX = Selection[4].Unload();
+//	SelectionHeaderTAX = Selection[3].Unload();
+//	SelectionPercentTAX = Selection[4].Unload();
 
 	AreaCaption = Template.GetArea("Caption");
 	AreaHeader = Template.GetArea("Header");
@@ -144,6 +147,8 @@ Function SalesOrderPrint(Ref, Param)
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
 
+	TaxVat = TaxesServer.GetVatRef();
+	
 	While SelectionHeader.Next() Do
 		AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);
@@ -152,12 +157,16 @@ Function SalesOrderPrint(Ref, Param)
 		Spreadsheet.Put(AreaHeader);
 
 		Spreadsheet.Put(AreaItemListHeader);
-		For It = 0 To SelectionHeaderTAX.Count() - 1 Do
-			AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(
-				SelectionHeaderTAX[It].Tax, Spreadsheet.LanguageCode);
-			Spreadsheet.Join(AreaListHeaderTAX);
-		EndDo;
-
+		//#@2094
+//		For It = 0 To SelectionHeaderTAX.Count() - 1 Do
+//			AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(
+//				SelectionHeaderTAX[It].Tax, Spreadsheet.LanguageCode);
+//			Spreadsheet.Join(AreaListHeaderTAX);
+//		EndDo;
+		AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(TaxVat, Spreadsheet.LanguageCode);
+		Spreadsheet.Join(AreaListHeaderTAX);
+		
+		
 		Choice	= New Structure("Ref", SelectionHeader.Ref);
 		FindRow = SelectionItems.FindRows(Choice);
 
@@ -172,15 +181,19 @@ Function SalesOrderPrint(Ref, Param)
 			AreaItemList.Parameters.Number = Number;
 			Spreadsheet.Put(AreaItemList);
 
-			For ItTax = 0 To SelectionHeaderTAX.Count() - 1 Do
-				Tax = SelectionHeaderTAX[ItTax].Tax;
-				ChoiceTax = New Structure("Ref, Key, Tax", SelectionHeader.Ref, It.Key, Tax);
-				FindRowTax = SelectionPercentTAX.FindRows(ChoiceTax);
-				For Each ItPercent In FindRowTax Do
-					AreaListTAX.Parameters.PercentTax = ItPercent.TaxRate;
-					Spreadsheet.Join(AreaListTAX);
-				EndDo;
-			EndDo;
+			//#@2094
+//			For ItTax = 0 To SelectionHeaderTAX.Count() - 1 Do
+//				Tax = SelectionHeaderTAX[ItTax].Tax;
+//				ChoiceTax = New Structure("Ref, Key, Tax", SelectionHeader.Ref, It.Key, Tax);
+//				FindRowTax = SelectionPercentTAX.FindRows(ChoiceTax);
+//				For Each ItPercent In FindRowTax Do
+//					AreaListTAX.Parameters.PercentTax = ItPercent.TaxRate;
+//					Spreadsheet.Join(AreaListTAX);
+//				EndDo;
+//			EndDo;
+			AreaListTAX.Parameters.PercentTax = It.VatRate;
+			Spreadsheet.Join(AreaListTAX);
+			
 			TotalSum = TotalSum + It.TotalAmount;
 			TotalTax = TotalTax + It.TaxAmount;
 			TotalOffers	= TotalOffers + It.OffersAmount;

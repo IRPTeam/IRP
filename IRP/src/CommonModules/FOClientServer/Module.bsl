@@ -1,4 +1,4 @@
 
-Function IsUseMultiTaxes() Export
-	Return FOServer.IsUseMultiTaxes();
-EndFunction
+//Function IsUseMultiTaxes() Export
+//	Return FOServer.IsUseMultiTaxes();
+//EndFunction

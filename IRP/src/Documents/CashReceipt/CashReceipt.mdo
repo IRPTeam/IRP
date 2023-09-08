@@ -827,7 +827,7 @@
       <key>en</key>
       <value>Print cash in</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.CashReceipt</types>
     </commandParameterType>

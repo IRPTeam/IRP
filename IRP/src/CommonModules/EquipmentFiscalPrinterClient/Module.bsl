@@ -91,10 +91,11 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
-
-	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
-	If Not StatusData.Posted Then
-		Raise R().EqFP_CannotPrintNotPosted;
+	If TypeOf(ConsolidatedRetailSales) = Type("DocumentRef.ConsolidatedRetailSales") Then
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+		If Not StatusData.Posted Then
+			Raise R().EqFP_CannotPrintNotPosted;
+		EndIf;
 	EndIf;
 
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
@@ -447,12 +448,13 @@ EndFunction
 //
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings
-Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
+Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus) Export
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	CurrentStatusSettings.Info.CRS = CRS;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = CurrentStatusSettings.Out.OutputParameters;
+		CurrentStatusSettings.Info.Success = False;
 		If ShiftData.ShiftState = WaitForStatus Then
 			CurrentStatusSettings.Info.Success = True;
 			Return CurrentStatusSettings;

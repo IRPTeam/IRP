@@ -91,10 +91,11 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
-
-	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
-	If Not StatusData.Posted Then
-		Raise R().EqFP_CannotPrintNotPosted;
+	If TypeOf(ConsolidatedRetailSales) = Type("DocumentRef.ConsolidatedRetailSales") Then
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+		If Not StatusData.Posted Then
+			Raise R().EqFP_CannotPrintNotPosted;
+		EndIf;
 	EndIf;
 
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();

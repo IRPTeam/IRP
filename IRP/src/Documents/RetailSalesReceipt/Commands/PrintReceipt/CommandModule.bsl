@@ -12,7 +12,7 @@ Async Procedure PrintReceipt(CommandParameter)
 	EndIf;
 	
 	StatusType = CommonFunctionsServer.GetRefAttribute(CommandParameter, "StatusType");
-	If StatusType <> Enums.RetailReceiptStatusTypes.Completed Then
+	If StatusType <> PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
 		Return;
 	EndIf;
 	

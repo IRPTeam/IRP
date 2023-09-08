@@ -583,7 +583,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 
 
 Scenario:_800011 check remaining stock control in the Retail sales receipt					
-	And I close all client application windows
+			And I close all client application windows
 		* Create Retail sales receipt
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I click the button named "FormCreate"

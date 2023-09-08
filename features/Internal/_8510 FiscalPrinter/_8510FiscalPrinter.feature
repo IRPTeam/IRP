@@ -1423,8 +1423,9 @@ Scenario: _0850028 check acquiring in BR
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormWrite"
 		And I click "Pay by card" button
+		* Check logs
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to "Other" tab
@@ -1723,7 +1724,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
-		And I click "FormWrite" button
+		And I click the button named "FormWrite"
 	* Try Print cash in (CR unposted)
 		And I click "Print cash in" button
 		Then "1C:Enterprise" window is opened
@@ -1732,7 +1733,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			And Delay 2
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			When I Check the steps for Exception
-				| 'And I check "$ParsingResult$" with "0" and method is "CashInOutcome"'    |
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Try Print cash in (CR with deletion mark)
 		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
@@ -1744,7 +1745,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			And Delay 2
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			When I Check the steps for Exception
-				| 'And I check "$ParsingResult$" with "0" and method is "CashInOutcome"'    |
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Check Print cash in (CR posted)
 		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
@@ -1828,7 +1829,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			And Delay 2
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			When I Check the steps for Exception
-				| 'And I check "$ParsingResult$" with "0" and method is "CashInOutcome"'    |
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Try Print cash out (MT with deletion mark)
 		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
@@ -1840,7 +1841,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			And Delay 2
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			When I Check the steps for Exception
-				| 'And I check "$ParsingResult$" with "0" and method is "CashInOutcome"'    |
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Check Print cash out (MT posted)
 		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
@@ -2813,10 +2814,13 @@ Scenario: _0260191 check session open and close from CRS
 		And I click the button named "FormWrite"	
 	* Try open session (CRS unpost)
 		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "CloseShift"
+			When I Check the steps for Exception
+			| 'And I check "$ParsingResult$" with "0" and method is "OpenShift"'    |
 	* Post CRS
 		And I click the button named "FormPost"
 	* Try Close session
@@ -2825,6 +2829,10 @@ Scenario: _0260191 check session open and close from CRS
 			|'Cash shift can only be closed for a document with the status "Open".'|
 		And I select from the drop-down list named "Status" by "open" string
 		And I click "Close session" button
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute
 		Then there are lines in TestClient message log
 			|'Fiscal printer: Смена еще не открыта!'|		
 		* Check log

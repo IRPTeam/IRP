@@ -860,6 +860,13 @@ Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 		And I go to line in "List" table
 			| 'Number'    |
 			| '201'       |
+		And I select current line in "List" table
+		And I select "Completed" exact value from "Status type" drop-down list
+		And I click the button named "FormWrite"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				

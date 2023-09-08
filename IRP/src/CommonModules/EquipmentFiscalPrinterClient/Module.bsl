@@ -7,6 +7,12 @@
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.OpenShiftSettings
 Async Function OpenShift(ConsolidatedRetailSales) Export
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -50,6 +56,12 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -79,6 +91,11 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
+
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
 
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
 

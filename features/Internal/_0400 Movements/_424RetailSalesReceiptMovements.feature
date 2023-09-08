@@ -787,6 +787,7 @@ Scenario: _0424285 check postponed Retail sales receipt movements
 			| ''                                                     | 'Expense'     | '07.09.2023 16:01:50' | '2'         | 'Store 01'   | '37/18SD'  |
 		And I close all client application windows
 	* Change status (Canceled)
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '1 314'     |

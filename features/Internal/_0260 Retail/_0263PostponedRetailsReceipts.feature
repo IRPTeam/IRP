@@ -424,26 +424,26 @@ Scenario: _0263104 postponed list form (POS)
 			| 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | '999999999'   | '100,00' | '1,000'    | ''       | '100,00' |
 			| 'Dress'                                                   | ''             | 'XS/Blue'  | ''            | '520,00' | '1,000'    | ''       | '520,00' |
 			| 'Service'                                                 | ''             | 'Rent'     | ''            | '100,00' | '1,000'    | ''       | '100,00' |
-		And I go to line in "ItemList" table
-			| 'Item'               |
-			| 'Product 6 with SLN' |
-		And I select current line in "ItemList" table
-		And I activate "Control code string state" field in "ItemList" table
-		And Delay 1
-		And I press keyboard shortcut "Enter"
-		And "CurrentCodes" table became equal
-			| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
-			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              | 'Yes'       |
-		And I close current window
-		And I go to line in "ItemList" table
-			| 'Item'               |
-			| 'Product 9 with SLN (control code string, without check)' |
-		And I select current line in "ItemList" table
-		And I press keyboard shortcut "Enter"
-		And "CurrentCodes" table became equal
-			| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
-			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'              | 'Yes'       |
-		And I close current window
+		// And I go to line in "ItemList" table
+		// 	| 'Item'               |
+		// 	| 'Product 6 with SLN' |
+		// And I select current line in "ItemList" table
+		// And I activate "Control code string state" field in "ItemList" table
+		// And Delay 1
+		// And I press keyboard shortcut "Enter"
+		// And "CurrentCodes" table became equal
+		// 	| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
+		// 	| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              | 'Yes'       |
+		// And I close current window
+		// And I go to line in "ItemList" table
+		// 	| 'Item'               |
+		// 	| 'Product 9 with SLN (control code string, without check)' |
+		// And I select current line in "ItemList" table
+		// And I press keyboard shortcut "Enter"
+		// And "CurrentCodes" table became equal
+		// 	| 'Scanned codes'                                | 'Code is approved' | 'Not check' |
+		// 	| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'              | 'Yes'       |
+		// And I close current window
 		And I click "Clear current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"
 

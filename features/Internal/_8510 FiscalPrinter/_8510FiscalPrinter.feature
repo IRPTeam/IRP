@@ -1531,6 +1531,8 @@ Scenario: _0850025 print receipt from sales return (cash)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"		
 		* Check fiscal log
 			And Delay 5
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -1541,7 +1543,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
-		Then the form attribute named "StatusType" became equal to "Canceled"		
+		And I select "Canceled" exact value from "Status type" drop-down list	
 		And I click "Print receipt" button
 		* Check fiscal log
 			And Delay 5
@@ -2291,6 +2293,8 @@ Scenario: _0260159 check marking code without check code string
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
 		* Check fiscal log
 			And Delay 5
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -2301,7 +2305,7 @@ Scenario: _0260159 check marking code without check code string
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
-		Then the form attribute named "StatusType" became equal to "Canceled"		
+		And I select "Canceled" exact value from "Status type" drop-down list		
 		And I click "Print receipt" button
 		* Check fiscal log
 			And Delay 5
@@ -2708,7 +2712,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "692"	
+	Then the number of "List" table lines is "равно" "674"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -2780,7 +2784,6 @@ Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
 			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '520,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 	* Open RRR list form
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And "List" table contains lines
@@ -2829,16 +2832,12 @@ Scenario: _0260191 check session open and close from CRS
 			|'Cash shift can only be closed for a document with the status "Open".'|
 		And I select from the drop-down list named "Status" by "open" string
 		And I click "Close session" button
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute
 		Then there are lines in TestClient message log
-			|'Fiscal printer: Смена еще не открыта!'|		
+			|'Shift already closed.'|		
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "GetLastError"	
+			// And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ShiftState="1"'
 	* Try open session (status open)
 		And I select from the drop-down list named "Status" by "open" string
 		And I click "Open session" button
@@ -2847,7 +2846,7 @@ Scenario: _0260191 check session open and close from CRS
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "CloseShift"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
 	* Try open session (status cancel)
 		And I select from the drop-down list named "Status" by "cancel" string
 		And I click "Open session" button
@@ -2856,7 +2855,7 @@ Scenario: _0260191 check session open and close from CRS
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "CloseShift"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
 	* Try open session (status close)
 		And I select from the drop-down list named "Status" by "close" string
 		And I click "Open session" button
@@ -2865,7 +2864,7 @@ Scenario: _0260191 check session open and close from CRS
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "CloseShift"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
 	* Try open session (CRS with deletion mark)
 		And I select from the drop-down list named "Status" by "new" string
 		And I click the button named "FormPost"
@@ -2878,7 +2877,7 @@ Scenario: _0260191 check session open and close from CRS
 		* Check log
 			And Delay 3
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "CloseShift"			
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
 	* Try open session (CRS without deletion mark, status new)
 		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened

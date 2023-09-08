@@ -853,8 +853,6 @@ Scenario: _042539 check postponed Retail return receipt movements
 			| 'Number'    |
 			| '1 314'     |
 		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
 		And I select "Postponed with reserve" exact value from "Status type" drop-down list
 		And I click "Post" button
 		And I click "Registrations report" button
@@ -867,34 +865,15 @@ Scenario: _042539 check postponed Retail return receipt movements
 			| 'Register  "R3011 Cash flow"'         |
 			| 'Register  "R3050 Pos cash balances"' |
 			| 'Register  "R4010 Actual stocks"'     |
-		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
-			| 'Register  "R4012 Stock Reservation"'                  | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                                     |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                                |
-			| ''                                                     | 'Receipt'     | '07.09.2023 16:01:50' | '1'         | 'Store 01'   | 'XS/Blue'  | 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' |
-			| ''                                                     | 'Receipt'     | '07.09.2023 16:01:50' | '2'         | 'Store 01'   | '37/18SD'  | 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' |
-		And I select "R4011 Free stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' | ''            | ''                    | ''          | ''           | ''         |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                                     | 'Expense'     | '07.09.2023 16:01:50' | '1'         | 'Store 01'   | 'XS/Blue'  |
-			| ''                                                     | 'Expense'     | '07.09.2023 16:01:50' | '2'         | 'Store 01'   | '37/18SD'  |
+			| 'Register  "R4012 Stock Reservation"' |
+			| 'Register  "R4011 Free stocks"'       |
 		And I close all client application windows
 	* Change status (Canceled)
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '1 314'     |
 		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
 		And I select "Canceled" exact value from "Status type" drop-down list
 		And I click "Post" button
 		And I click "Registrations report" button

@@ -4418,13 +4418,7 @@ Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
 	* Add items
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-	* Select sales person
-		Then "Select sales person" window is opened
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'David Romanov' |
-		And I select current line in "" table		
+		And I move to the next attribute	
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt with reserve" button
 		Then the number of "ItemList" table lines is "равно" "0"			
@@ -4439,8 +4433,8 @@ Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -4485,14 +4479,8 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-	* Select sales person
-		Then "Select sales person" window is opened
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'David Romanov' |
-		And I select current line in "" table		
 	* Postponed RSR with a reservation
-		And I click "Postpone current receipt without reserve" button
+		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"	
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -4505,8 +4493,8 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -4546,13 +4534,7 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 	* Add items
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-	* Select sales person
-		Then "Select sales person" window is opened
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'David Romanov' |
-		And I select current line in "" table		
+		And I move to the next attribute	
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"	
@@ -4567,8 +4549,8 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -4632,7 +4614,7 @@ Scenario: _0154203 create postponed RRR without a reservation and without bases 
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And "ItemList" table became equal
-			| 'Price type'        | 'Item'  | 'Sales person'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Basic Price Types' | 'Dress' | 'David Romanov' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+			| 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
 	And I close all client application windows
 	

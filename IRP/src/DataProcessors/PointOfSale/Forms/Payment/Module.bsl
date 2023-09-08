@@ -285,6 +285,7 @@ Async Procedure Enter(Command)
 	ReturnValue.Insert("PaymentForm", ThisObject);
 
 	FormCanBeClosed = True;
+	Items.Enter.Enabled = False;
 	ExecuteNotifyProcessing(OnCloseNotifyDescription, ReturnValue);
 EndProcedure
 
@@ -789,6 +790,8 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
 		PrintSlip(PaymentRow.Hardware, PaymentSettings);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
 	EndIf;
 
 	Return Result;
@@ -818,6 +821,8 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
 		PrintSlip(PaymentRow.Hardware, PaymentSettings);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
 	EndIf;
 	Return Result;
 EndFunction
@@ -857,7 +862,11 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 			PaymentRow.PaymentDone = False;
 		EndIf;
 	EndIf;
-
+	
+	If Not Result Then
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
+	EndIf;
+	
 	PrintSlip(PaymentRow.Hardware, PaymentSettings);
 
 	Return Result;

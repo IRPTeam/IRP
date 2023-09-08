@@ -2190,7 +2190,7 @@
       <key>en</key>
       <value>Print receipt</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
@@ -2203,7 +2203,7 @@
       <key>en</key>
       <value>Print copy receipt</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>

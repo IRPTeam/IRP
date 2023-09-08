@@ -564,7 +564,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en = 'Document was not found on the fiscal device.'", Lang));
 	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en = 'Fiscal device not set.'", Lang));
 	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en = 'Document in not posted.'", Lang));
-	Strings.Insert("EqFP_CanPintOnlyComplete", NStr("en = 'Document can be printed only in Complete status.'", Lang));
+	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en = 'Document can be printed only in Complete status.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
 	Strings.Insert("EqAc_LastSettlementHasError", NStr("en = 'Last settlement has error. Try get new one.'", Lang));

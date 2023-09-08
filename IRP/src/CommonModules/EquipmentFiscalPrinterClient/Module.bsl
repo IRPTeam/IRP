@@ -448,12 +448,13 @@ EndFunction
 //
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings
-Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
+Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus) Export
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	CurrentStatusSettings.Info.CRS = CRS;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = CurrentStatusSettings.Out.OutputParameters;
+		CurrentStatusSettings.Info.Success = False;
 		If ShiftData.ShiftState = WaitForStatus Then
 			CurrentStatusSettings.Info.Success = True;
 			Return CurrentStatusSettings;

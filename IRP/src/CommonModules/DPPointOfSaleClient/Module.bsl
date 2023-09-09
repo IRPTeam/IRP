@@ -47,4 +47,9 @@ Procedure SearchCustomer(Object, Form) Export
 	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), Form, , ,
 		, Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+Procedure AfterWriteTransaction(DocRefsArray, Form) Export
+	Return;
+EndProcedure
+
 #EndRegion

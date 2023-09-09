@@ -1726,6 +1726,10 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<restrictionTemplate>
 		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>

@@ -1,8 +1,7 @@
-
 #Region AccessObject
 
 // Get access key.
-// See Role.TemplateInformationRegisters
+// See Role.TemplateAccumulationRegisters - Parameters orders has to be the same
 // 
 // Returns:
 //  Structure - Get access key:

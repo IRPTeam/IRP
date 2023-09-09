@@ -4124,8 +4124,7 @@ Scenario: _0154195 set sales person from POS
 				| 'Item'     | 'Sales person'     | 'Item key'    | 'Serials'    | 'Price'     | 'Quantity'    | 'Offers'    | 'Total'      |
 				| 'Shirt'    | 'Anna Petrova'     | '38/Black'    | ''           | '350,00'    | '1,000'       | ''          | '350,00'     |
 				| 'Dress'    | 'David Romanov'    | 'L/Green'     | ''           | '550,00'    | '1,000'       | ''          | '550,00'     |
-			And I click "Payment (+)" button
-			And I click the button named "Enter"
+			And I click "Clear current receipt" button
 			And I close all client application windows
 
 Scenario: _0154196 check comission calculation in the Retail sales receipt
@@ -4345,6 +4344,7 @@ Scenario: _0154198 copy line in Payment tab in the Retail return receipt
 			| '1'   | '100,33'   | '1,00'         | 'Card 01'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '1,00'       |
 		And I close all client application windows
 		
+	
 
 Scenario: _0154199 copy line in Payment tab in the Retail sales receipt	
 	And I close all client application windows
@@ -4399,8 +4399,8 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'             | 'Percent'    |
 			| '1'   | '100,33'   | '1,00'         | 'Card 01'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '1,00'       |
-		And I close all client application windows		
-			
+		And I close all client application windows
+		
 		
 
 Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
@@ -4419,6 +4419,11 @@ Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute	
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table	
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt with reserve" button
 		Then the number of "ItemList" table lines is "равно" "0"			
@@ -4479,6 +4484,11 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"	
@@ -4534,7 +4544,12 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 	* Add items
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute	
+		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table	
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"	
@@ -4591,6 +4606,11 @@ Scenario: _0154203 create postponed RRR without a reservation and without bases 
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table
 	* Postponed RSR without a reservation
 		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"

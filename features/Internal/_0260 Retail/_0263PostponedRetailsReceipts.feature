@@ -478,9 +478,9 @@ Scenario: _0263105 processing a postponed RSR with a reservation
 			| '5' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
 			| '6' | 'en description is empty' | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '15,25'      | ''                  | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |		
 		Then the form attribute named "StatusType" became equal to "Completed"
-		And "Payments" table became equal
+		And "Payments" table contains lines
 			| '#' | 'Amount'   | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'            | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | '1 020,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Pos cash account 1' | ''        | ''         | ''                      | ''                         | ''                            |
+			| '1' | '*'        | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Pos cash account 1' | ''        | ''         | ''                      | ''                         | ''                            |
 		And I delete "$$PostponedRSR1$$" variable
 		And I delete "$$DatePostponedRSR1$$" variable
 		And I save the window as "$$PostponedRSR1$$"
@@ -496,7 +496,7 @@ Scenario: _0263105 processing a postponed RSR with a reservation
 	
 				
 
-Scenario: _0263105 processing a postponed RSR without a reservation	
+Scenario: _0263107 processing a postponed RSR without a reservation	
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"

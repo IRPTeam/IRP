@@ -7,6 +7,12 @@
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.OpenShiftSettings
 Async Function OpenShift(ConsolidatedRetailSales) Export
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	OpenShiftSettings = EquipmentFiscalPrinterAPIClient.OpenShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -50,6 +56,12 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CloseShiftSettings = EquipmentFiscalPrinterAPIClient.CloseShiftSettings();
 
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -79,6 +91,12 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
+	If TypeOf(ConsolidatedRetailSales) = Type("DocumentRef.ConsolidatedRetailSales") Then
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "Posted");
+		If Not StatusData.Posted Then
+			Raise R().EqFP_CannotPrintNotPosted;
+		EndIf;
+	EndIf;
 
 	PrintXReportSettings = EquipmentFiscalPrinterAPIClient.PrintXReportSettings();
 
@@ -111,7 +129,23 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
-
+	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
+		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+	
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
+		
+		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
+			Raise R().EqFP_CanPrintOnlyComplete;
+		EndIf;
+	Else
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	EndIf;
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
 	ProcessCheckSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -224,6 +258,12 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
 
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -266,7 +306,13 @@ Async Function CashOutCome(ConsolidatedRetailSales, DataSource, Amount) Export
 	If StatusData.IsPrinted Then
 		Raise R().EqFP_DocumentAlreadyPrinted;
 	EndIf;
-
+	
+	StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+	
 	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.Info.Document = DataSource;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
@@ -402,12 +448,13 @@ EndFunction
 //
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings
-Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus)
+Async Function GetCurrentStatus(CRS, Val InputParameters, WaitForStatus) Export
 	CurrentStatusSettings = EquipmentFiscalPrinterAPIClient.GetCurrentStatusSettings();
 	CurrentStatusSettings.In.InputParameters = InputParameters;
 	CurrentStatusSettings.Info.CRS = CRS;
 	If Await EquipmentFiscalPrinterAPIClient.GetCurrentStatus(CRS.FiscalPrinter, CurrentStatusSettings) Then
 		ShiftData = CurrentStatusSettings.Out.OutputParameters;
+		CurrentStatusSettings.Info.Success = False;
 		If ShiftData.ShiftState = WaitForStatus Then
 			CurrentStatusSettings.Info.Success = True;
 			Return CurrentStatusSettings;

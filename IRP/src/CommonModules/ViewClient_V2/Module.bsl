@@ -2472,7 +2472,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 		If Not Parameters.isRowsAddByScan Then 
-			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.Rows);
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.UpdatedRowsByScan);
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 	EndIf;

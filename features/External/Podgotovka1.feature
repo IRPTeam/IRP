@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
@@ -1894,3 +1894,46 @@ Scenario: check filling expense type (from item key)
 		And "ItemList" table became equal
 			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |
+
+Scenario: add different items in POS
+		* Product with SLN without marking code
+			And I click "Search by barcode (F7)" button
+			And I input "23455677788976667" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Products with SLN and marking code
+			And I click "Search by barcode (F7)" button
+			And I input "57897909799" text in the field named "Barcode"
+			And I move to the next attribute
+			Then "Code string check" window is opened
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"	
+			And I move to the next attribute
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Search by barcode (F7)" button	
+			And I input "999999999" text in the field named "Barcode"	
+			And I move to the next attribute
+			Then "Code string check" window is opened
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Product without SLN
+			And I click "Search by barcode (F7)" button
+			And I input "2202283705" text in the field named "Barcode"
+			And I move to the next attribute	
+		* Service
+			And I click "Search by barcode (F7)" button
+			And I input "89908" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table

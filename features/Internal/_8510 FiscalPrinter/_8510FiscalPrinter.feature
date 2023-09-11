@@ -3022,6 +3022,12 @@ Scenario: _0260189 print X report from CRS
 		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
 	* Close session and check print X report
 		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
 		And I click "X report" button
 	* Check log
 		And Delay 3

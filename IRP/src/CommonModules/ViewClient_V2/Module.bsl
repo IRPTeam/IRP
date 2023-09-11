@@ -2822,6 +2822,13 @@ Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undef
 	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
 EndProcedure
 
+// PaymentList.VatRate
+Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListVatRateOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _TRANSACTIONS_LIST

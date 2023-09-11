@@ -712,9 +712,28 @@ EndFunction
 Function GetDocumentsWithTax() Export
 	List = New ValueList();
 	For Each Document In Metadata.Documents Do
-		If Not Document.TabularSections.Find("TaxList") = Undefined Then
-			List.Add(Document.Name, Document.Synonym);
+		//#@2094
+		//If Not Document.TabularSections.Find("TaxList") = Undefined Then
+		//	List.Add(Document.Name, Document.Synonym);
+		//EndIf;
+		If Document.TabularSections.Find("PaymentList") <> Undefined Then
+			For Each _column In Document.TabularSections.PaymentList.Attributes Do
+				If Upper(_column.Name) = Upper("VatRate") Then
+					List.Add(Document.Name, Document.Synonym);
+					Break;
+				EndIf;
+			EndDo;					
 		EndIf;
+		
+		If Document.TabularSections.Find("ItemList") <> Undefined Then
+			For Each _column In Document.TabularSections.ItemList.Attributes Do
+				If Upper(_column.Name) = Upper("VatRate") Then
+					List.Add(Document.Name, Document.Synonym);
+					Break;
+				EndIf;
+			EndDo;					
+		EndIf;
+		
 	EndDo;
 	Return List;
 EndFunction

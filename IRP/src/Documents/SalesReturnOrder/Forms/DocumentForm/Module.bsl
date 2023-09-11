@@ -73,10 +73,11 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
-EndProcedure
+//#@2094
+//&AtServer
+//Procedure Taxes_CreateFormControls() Export
+//	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+//EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export

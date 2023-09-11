@@ -14,7 +14,8 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	Form.Taxes_CreateFormControls();
+	//#@2094
+//	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
@@ -24,7 +25,8 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	Form.Taxes_CreateFormControls();
+	//#@2094
+//	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);

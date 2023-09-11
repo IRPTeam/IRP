@@ -495,6 +495,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="bb5e9b08-a7a9-46e9-9237-2b6bbcd73354">
+      <name>VatRate</name>
+      <synonym>
+        <key>en</key>
+        <value>VAT</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="eaf31d05-7f0d-4841-9fa3-9ab9aa12e70d">
     <producedTypes>
@@ -682,10 +696,10 @@
       <objectType typeId="2eb9f307-8741-4ca4-b627-43942b6c9d8c" valueTypeId="030c0b8b-7c4b-4779-b1b3-35447b5a73b2"/>
       <rowType typeId="38f1d504-4f3a-41c9-90f7-9d025c08344b" valueTypeId="88605f8a-6822-469d-96ad-5f1758421863"/>
     </producedTypes>
-    <name>TaxList</name>
+    <name>DELETE_TaxList</name>
     <synonym>
       <key>en</key>
-      <value>Tax list</value>
+      <value>DELETE tax list</value>
     </synonym>
     <attributes uuid="8a3db9c7-9829-45e6-9069-e97d0db9f5ef">
       <name>Key</name>
@@ -808,7 +822,7 @@
       <key>en</key>
       <value>Print cash out</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.CashPayment</types>
     </commandParameterType>

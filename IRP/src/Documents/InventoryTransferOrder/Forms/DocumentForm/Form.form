@@ -2185,7 +2185,7 @@
         <value>Other</value>
       </title>
       <extendedTooltip>
-        <name>GroupInfoExtendedTooltip</name>
+        <name>GroupOtherExtendedTooltip</name>
         <id>44</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3499,6 +3499,9 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>InformationRegister.CreatedProcurementOrders.StandardCommand.OpenByValue.Order</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

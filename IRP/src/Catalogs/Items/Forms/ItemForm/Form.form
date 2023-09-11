@@ -168,7 +168,7 @@
             <segments>Object.ItemID</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ExtendedTooltip</name>
+            <name>ItemIDExtendedTooltip</name>
             <id>135</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -183,7 +183,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ContextMenu</name>
+            <name>ItemIDContextMenu</name>
             <id>134</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1121,6 +1121,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
+              <source>ConsignorsInfoSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1159,6 +1160,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
+              <source>ConsignorsInfoViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1197,6 +1199,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
+              <source>ConsignorsInfoSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1244,6 +1247,7 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1793,27 +1797,42 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>Catalog.ItemKeys.Command.OpenItemKeysList</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.Barcodes.Command.ShowBarcodeList</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>1</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.PricesByItems.StandardCommand.OpenByValue.Item</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>4</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.BarcodeScanInfoCheck.StandardCommand.OpenByValue.Item</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

@@ -7,22 +7,19 @@
     "commit-transaction": {
       "enabled": true
     },
-    "export-method-in-command-form-module": {
+    "module-accessibility-at-client": {
       "enabled": false
     },
     "export-procedure-missing-comment": {
       "enabled": false
     },
-    "doc-comment-export-function-return-section": {
+    "common-module-name-server-call-cached": {
       "enabled": false
     },
     "module-region-empty": {
       "enabled": false
     },
-    "doc-comment-parameter-section": {
-      "enabled": false
-    },
-    "method-too-many-params": {
+    "common-module-type": {
       "enabled": false
     },
     "reading-attribute-from-database": {
@@ -31,13 +28,52 @@
     "bsl-variable-name-invalid": {
       "enabled": false
     },
+    "invocation-form-event-handler": {
+      "enabled": false
+    },
+    "doc-comment-collection-item-type": {
+      "enabled": false
+    },
+    "common-module-name-client": {
+      "enabled": false
+    },
+    "module-consecutive-blank-lines": {
+      "enabled": true
+    },
+    "common-module-name-full-access": {
+      "enabled": false
+    },
+    "common-module-name-cached": {
+      "enabled": false
+    },
+    "unknown-form-parameter-access": {
+      "enabled": false
+    },
+    "md-object-attribute-comment-not-exist": {
+      "enabled": false
+    },
+    "export-method-in-command-form-module": {
+      "enabled": false
+    },
+    "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
+    "doc-comment-parameter-section": {
+      "enabled": false
+    },
+    "common-module-name-global-client": {
+      "enabled": false
+    },
+    "db-object-anyref-type": {
+      "enabled": false
+    },
+    "method-too-many-params": {
+      "enabled": false
+    },
     "rollback-transaction": {
       "enabled": true
     },
     "module-structure-form-event-regions": {
-      "enabled": false
-    },
-    "invocation-form-event-handler": {
       "enabled": false
     },
     "query-in-loop": {
@@ -52,10 +88,7 @@
     "data-composition-conditional-appearance-use": {
       "enabled": false
     },
-    "module-consecutive-blank-lines": {
-      "enabled": true
-    },
-    "unknown-form-parameter-access": {
+    "common-module-name-server-call": {
       "enabled": false
     },
     "module-self-reference": {

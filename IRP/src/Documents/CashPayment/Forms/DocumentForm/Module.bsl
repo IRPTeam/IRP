@@ -37,10 +37,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndProcedure
+//#@2094
+//&AtServer
+//Procedure Taxes_CreateFormControls() Export
+//	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
+//EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -405,11 +406,12 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+//#@2094
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocCashPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocCashPaymentClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

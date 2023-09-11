@@ -350,6 +350,13 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I change checkbox "Postpone with reserve"
+		And I change checkbox "Postpone without reserve"
+		And I click "Save and close" button				
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Workstation 01'    |
 		And I click "Set current workstation" button
@@ -761,7 +768,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table	
-	* Change quantity and check marking data clean
+	* Change quantity and check marking data
 		And I go to line in "ItemList" table
 			| 'Item'                 | 'Item key'   | 'Price'    | 'Quantity'   | 'Serials'      | 'Total'     |
 			| 'Product 1 with SLN'   | 'PZU'        | '100,00'   | '1,000'      | '8908899877'   | '100,00'    |
@@ -780,21 +787,23 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I click "Ok" button
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-		And I move to the next attribute
-		Then there are lines in TestClient message log
-			| 'Current barcode already use at document line: 3'    |
-			| 'Current barcode already use at document line: 3'    |
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Current row will decode to base64" text in the field named "Barcode"
-		And I move to the next attribute
+		* Check previous marking code
+			And "CurrentCodes" table became equal
+				| 'Scanned codes'                     | 'Code is approved' | 'Not check' |
+				| 'Current row will decode to base64' | 'Yes'              | 'No'        |
+		* Scan marking data that already used	
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			Then there are lines in TestClient message log
+				| 'Current barcode already use at document line: 3'    |
+				| 'Current barcode already use at document line: 3'    |
+			And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                 | 'Item key'    |
 			| 'Product 1 with SLN'   | 'PZU'         |
@@ -805,12 +814,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I select current line in "SerialLotNumbers" table
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
-		And I click "Ok" button
-		And I click "Payment (+)" button
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Current row will decode to base64" text in the field named "Barcode"
-		And I move to the next attribute											
+		And I click "Ok" button										
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
@@ -1415,8 +1419,9 @@ Scenario: _0850028 check acquiring in BR
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormWrite"
 		And I click "Pay by card" button
+		* Check logs
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to "Other" tab
@@ -1496,7 +1501,7 @@ Scenario: _0850030 return retail customer advanve from POS (cash)
 			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
 			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
-Scenario: _0850025 sales return (cash)
+Scenario: _0850025 print receipt from sales return (cash)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
@@ -1506,7 +1511,59 @@ Scenario: _0850025 sales return (cash)
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
-		And I click "Post" button
+		Then the form attribute named "StatusType" became equal to "Completed"		
+		And I click the button named "FormWrite"
+	* Try print receipt (RRR unpost)
+		And I click "Print receipt" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Try Print receipt (RRR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"		
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Canceled)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
+		And I select "Canceled" exact value from "Status type" drop-down list	
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Postponed)
+		And I select "Postponed" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Postponed with reserve)
+		And I select "Postponed with reserve" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Completed)
+		And I select "Completed" exact value from "Status type" drop-down list			
 		And I click "Print receipt" button
 	* Check fiscal log
 		And Delay 5
@@ -1665,8 +1722,33 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
-		And I click "Post" button
-	* Check Print cash in
+		And I click the button named "FormWrite"
+	* Try Print cash in (CR unposted)
+		And I click "Print cash in" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
+	* Try Print cash in (CR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print cash in" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
+	* Check Print cash in (CR posted)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
 		And I click "Print cash in" button
 	* Check fiscal log
 		And Delay 2
@@ -1677,7 +1759,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I click "Print cash in" button
 		And I click "OK" button
 		And I close all client application windows
-		
+
 
 Scenario: _0260151 check print cash out from Money transfer form
 	And I close all client application windows
@@ -1736,8 +1818,33 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Status'    |
 			| 'Open'      |
 		And I select current line in "List" table
-		And I click "Post" button
-	* Check Print cash out
+		And I click the button named "FormWrite"
+	* Try Print cash out (MT unposted)
+		And I click "Print cash out" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
+	* Try Print cash out (MT with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print cash out" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
+	* Check Print cash out (MT posted)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
 		And I click "Print cash out" button
 	* Check fiscal log
 		And Delay 2
@@ -2019,7 +2126,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I close all client application windows
 		
 
-Scenario: _0260157 check marking code clean when change item key in the RSR
+Scenario: _0260157 check marking code when change item key in the RSR
 		And I close all client application windows
 	* Create RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2051,7 +2158,7 @@ Scenario: _0260157 check marking code clean when change item key in the RSR
 		And I move to "ControlCodeStrings [0]" tab		
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
-	* Check clean marking code when change quantity
+	* Check marking code when change quantity
 		And I delete all lines of "ItemList" table
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
 		And I input "8908899880" text in the field named "Barcode"
@@ -2065,14 +2172,14 @@ Scenario: _0260157 check marking code clean when change item key in the RSR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
-		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window
 				
 
 
-Scenario: _0260158 check marking code clean when change item key in the RRR
+Scenario: _0260158 check marking code when change item key in the RRR
 		And I close all client application windows
 	* Create RRR
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2118,9 +2225,9 @@ Scenario: _0260158 check marking code clean when change item key in the RRR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
-		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window	
 		And I close all client application windows	
 
@@ -2129,6 +2236,7 @@ Scenario: _0260159 check marking code without check code string
 	* Create 
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"
+		Then the form attribute named "StatusType" became equal to "Completed"	
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
 		And I input "999999999" text in the field named "Barcode"
 		And I move to the next attribute
@@ -2166,7 +2274,58 @@ Scenario: _0260159 check marking code without check code string
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "100,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Post" button
+		And I click the button named "FormWrite"
+	* Try print receipt (RSR unpost)
+		And I click "Print receipt" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Try Print receipt (RSR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Canceled)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
+		And I select "Canceled" exact value from "Status type" drop-down list		
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Postponed)
+		And I select "Postponed" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Postponed with reserve)
+		And I select "Postponed with reserve" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Completed)
+		And I select "Completed" exact value from "Status type" drop-down list			
 		And I click "Print receipt" button
 	* Check fiscal log
 		And Delay 5
@@ -2549,7 +2708,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "694"	
+	Then the number of "List" table lines is "равно" "676"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -2647,15 +2806,79 @@ Scenario: _0260191 check session open and close from CRS
 		And I click the button named "FormCreate"
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from "Cash account" drop-down list by "Pos cash account 1" string
-		And I select from the drop-down list named "Status" by "open" string
+		And I select from the drop-down list named "Status" by "new" string
 		And I input current date in "Opening date" field
 		And I select from "Fiscal printer" drop-down list by "fiscal" string
 		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormWrite"	
+	* Try open session (CRS unpost)
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+			| 'And I check "$ParsingResult$" with "0" and method is "OpenShift"'    |
+	* Post CRS
 		And I click the button named "FormPost"
-	* Open session
+	* Try Close session
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be closed for a document with the status "Open".'|
+		And I select from the drop-down list named "Status" by "open" string
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Shift already closed.'|		
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			// And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ShiftState="1"'
+	* Try open session (status open)
+		And I select from the drop-down list named "Status" by "open" string
 		And I click "Open session" button
 		Then there are lines in TestClient message log
 			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status cancel)
+		And I select from the drop-down list named "Status" by "cancel" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status close)
+		And I select from the drop-down list named "Status" by "close" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (CRS with deletion mark)
+		And I select from the drop-down list named "Status" by "new" string
+		And I click the button named "FormPost"
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
+	* Try open session (CRS without deletion mark, status new)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"
 		And I select from the drop-down list named "Status" by "new" string
 		And I click "Open session" button	
 		And I click "Reread" button
@@ -2669,6 +2892,7 @@ Scenario: _0260191 check session open and close from CRS
 		And I set checkbox named "CashConfirm"
 		And I set checkbox named "TerminalConfirm"
 		And I set checkbox named "CashConfirm"
+		And I move to the next attribute
 		And I click "Close session" button
 	* Check log
 		And Delay 3
@@ -2764,3 +2988,12 @@ Scenario: _0260187 add one more Acquiring terminal and check open and close sess
 			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
 			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
 	And I close all client application windows
+
+
+		
+				
+				
+
+				
+
+

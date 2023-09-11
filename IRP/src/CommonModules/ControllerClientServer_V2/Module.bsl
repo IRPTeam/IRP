@@ -649,7 +649,8 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("ItemList.InventoryOrigin", BindDefaultItemListInventoryOrigin(Parameters));
 	
 	//#@2094
-	Binding.Insert("ItemList.VatRate", BindDefaultItemListVatRate(Parameters));
+	Binding.Insert("ItemList.VatRate"    , BindDefaultItemListVatRate(Parameters));
+	Binding.Insert("PaymentList.VatRate" , BindDefaultPaymentListVatRate(Parameters));
 	
 	Binding.Insert("PaymentList.Currency"  , BindDefaultPaymentListCurrency(Parameters));
 	
@@ -1662,39 +1663,39 @@ Function BindTransactionType(Parameters)
 		//#@2094
 		//|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxVisible,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("BankReceipt",
 		"StepChangeTransitAccountByAccount,
 		|StepClearByTransactionTypeBankReceipt,
 		//|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashPayment", 
 		"StepClearByTransactionTypeCashPayment,
 		//|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType,
 		//|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxVisible,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashExpense", 
 		"StepClearByTransactionTypeCashExpense,
 		//|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxVisible, 
-		|StepChangeTaxRate_WithoutAgreement");
+		|StepChangeVatRate_WithoutAgreement");
 		
 	Binding.Insert("CashRevenue", 
 		"StepClearByTransactionTypeCashRevenue,
 		//|StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxVisible,
-		|StepChangeTaxRate_WithoutAgreement");
+		|StepChangeVatRate_WithoutAgreement");
 		
 	Binding.Insert("OutgoingPaymentOrder",
 		"StepClearByTransactionTypeOutgoingPaymentOrder");
@@ -2823,37 +2824,37 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("BankPayment",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList,
+		|StepChangeVatRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("BankReceipt",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList,
+		|StepChangeVatRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("CashPayment",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList,
+		|StepChangeVatRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
 	Binding.Insert("CashReceipt",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_AgreementInList,
+		|StepChangeVatRate_AgreementInList,
 		|StepChangeCashAccountByCompany_CashReceipt");
 	
 	Binding.Insert("CashExpense",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_WithoutAgreement,
+		|StepChangeVatRate_WithoutAgreement,
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 
 	Binding.Insert("CashRevenue",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_WithoutAgreement,
+		|StepChangeVatRate_WithoutAgreement,
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
 	Binding.Insert("EmployeeCashAdvance",
 		"StepChangeTaxVisible, 
-		|StepChangeTaxRate_WithoutAgreement");
+		|StepChangeVatRate_WithoutAgreement");
 	
 	Binding.Insert("MoneyTransfer",
 		"StepChangeAccountSenderByCompany,
@@ -6041,25 +6042,25 @@ Function BindPaymentListAgreement(Parameters)
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 	
 	Binding.Insert("BankReceipt",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 	
 	Binding.Insert("CashPayment",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 	
 	Binding.Insert("CashReceipt",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeVatRate_AgreementInList");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters, "BindPaymentListAgreement");
 EndFunction
 
@@ -6768,36 +6769,131 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYMENT_LIST_TAX_RATE
+//#@2094
+#Region PAYMENT_LIST_VAT_RATE
 
-// PaymentList.TaxRate.OnChange
-Procedure PaymentListTaxRateOnChange(Parameters) Export
-	Binding = BindPaymentListTaxRate(Parameters);
+// PaymentList.VatRate.OnChange
+Procedure PaymentListVatRateOnChange(Parameters) Export
+	Binding = BindPaymentListVatRate(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// PaymentList.TaxRate.Set
-Procedure SetPaymentListTaxRate(Parameters, Results) Export
-	Binding = BindPaymentListTaxRate(Parameters);
-	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
-	For Each Result In Results Do
-		For Each TaxRate In Result.Value Do
-			TaxRateResult = New Array();
-			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
-			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
-				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
-		EndDo;
+// PaymentList.VatRate.Set
+Procedure SetPaymentListVatRate(Parameters, Results) Export
+	Binding = BindPaymentListVatRate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.VatRate.Get
+Function GetPaymentListVatRate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListVatRate(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.VatRate.Default.Bind
+Function BindDefaultPaymentListVatRate(Parameters)
+	DataPath = "PaymentList.VatRate";
+	Binding = New Structure();
+	Return BindSteps("StepPaymentListDefaultVatRateInList", DataPath, Binding, Parameters, "BindDefaultPaymentListVatRate");
+EndFunction
+
+// PaymentList.VatRate.Bind
+Function BindPaymentListVatRate(Parameters)
+	DataPath = "PaymentList.VatRate";
+	Binding = New Structure();	
+	Return BindSteps("StepPaymentListCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindPaymentListVatRate");
+EndFunction
+
+// PaymentList.VatRate.DefaultVatRateInList.Step
+Procedure StepPaymentListDefaultVatRateInList(Parameters, Chain) Export
+	Chain.DefaultVatRateInList.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.DefaultVatRateInList.Setter = "SetPaymentListVatRate";
+	Options = ModelClientServer_V2.DefaultVatRateInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentVatRate  = GetPaymentListVatRate(Parameters, NewRow.Key);
+	Options.Date            = GetDate(Parameters);
+	Options.Company         = GetCompany(Parameters);
+	Options.Agreement       = GetPaymentListAgreement(Parameters, NewRow.Key);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.Key = NewRow.Key;
+	Chain.DefaultVatRateInList.Options.Add(Options);
+EndProcedure
+
+// ItemList.VatRate.ChangeVatRate_AgreementInList.Step
+Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
+	Chain.ChangeVatRate.Enable = True;
+	
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	
+	Chain.ChangeVatRate.Setter = "SetPaymentListVatRate";
+	
+	Options_Date            = GetDate(Parameters);
+	Options_Company         = GetCompany(Parameters);
+	Options_TransactionType = GetTransactionType(Parameters);
+	//Options_Agreement       = GetAgreement(Parameters);
+	
+	TableRows = GetRows(Parameters, Parameters.TableName);
+		
+	For Each Row In TableRows Do
+		Options = ModelClientServer_V2.ChangeVatRateOptions();
+		
+//		If Row.Property("InventoryOrigin") Then
+//			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
+//			Options.Consignor = GetItemListConsignor(Parameters, Row.Key);
+//		EndIf;
+//		
+//		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		
+		Options.Date            = Options_Date;
+		Options.Company         = Options_Company;
+		Options.TransactionType = Options_TransactionType;		
+		Options.Agreement       = GetPaymentListAgreement(Parameters, Row.Key);		
+		
+		Options.DocumentName = Parameters.ObjectMetadataInfo.MetadataName;
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeVatRate_AgreementInList";
+		Chain.ChangeVatRate.Options.Add(Options);
 	EndDo;
 EndProcedure
 
-// PaymentList.TaxRate.Bind
-Function BindPaymentListTaxRate(Parameters)
-	DataPath = "PaymentList.";
-	Binding = New Structure();
-	Return BindSteps("StepPaymentListCalculations_IsTaxRateChanged", DataPath, Binding, Parameters, "BindPaymentListTaxRate");
-EndFunction
-
 #EndRegion
+
+//#@2094
+//#Region PAYMENT_LIST_TAX_RATE
+//
+//// PaymentList.TaxRate.OnChange
+//Procedure PaymentListTaxRateOnChange(Parameters) Export
+//	Binding = BindPaymentListTaxRate(Parameters);
+//	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+//EndProcedure
+//
+//// PaymentList.TaxRate.Set
+//Procedure SetPaymentListTaxRate(Parameters, Results) Export
+//	Binding = BindPaymentListTaxRate(Parameters);
+//	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
+//	For Each Result In Results Do
+//		For Each TaxRate In Result.Value Do
+//			TaxRateResult = New Array();
+//			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
+//			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
+//				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
+//		EndDo;
+//	EndDo;
+//EndProcedure
+//
+//// PaymentList.TaxRate.Bind
+//Function BindPaymentListTaxRate(Parameters)
+//	DataPath = "PaymentList.";
+//	Binding = New Structure();
+//	Return BindSteps("StepPaymentListCalculations_IsTaxRateChanged", DataPath, Binding, Parameters, "BindPaymentListTaxRate");
+//EndFunction
+//
+//#EndRegion
 
 #Region PAYMENT_LIST_DONTCALCULATEROW
 
@@ -7009,10 +7105,11 @@ Procedure StepPaymentListCalculations_IsCopyRow(Parameters, Chain) Export
 	StepPaymentListCalculations(Parameters, Chain, "IsCopyRow");
 EndProcedure
 
-//// PaymentList.Calculations.[IsTaxRateChanged].Step
-//Procedure StepPaymentListCalculations_IsTaxRateChanged(Parameters, Chain) Export
-//	StepPaymentListCalculations(Parameters, Chain, "IsTaxRateChanged");
-//EndProcedure
+//#@2094
+// PaymentList.Calculations.[IsVatRateChanged].Step
+Procedure StepPaymentListCalculations_IsVatRateChanged(Parameters, Chain) Export
+	StepPaymentListCalculations(Parameters, Chain, "IsVatRateChanged");
+EndProcedure
 
 // PaymentList.Calculations.[IsTaxAmountChanged].Step
 Procedure StepPaymentListCalculations_IsTaxAmountChanged(Parameters, Chain) Export
@@ -7047,7 +7144,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		Options.Ref = Parameters.Object.Ref;
 		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
-		If WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow" Then
+		If WhoIsChanged = "IsVatRateChanged" Or WhoIsChanged = "IsCopyRow" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
@@ -7059,7 +7156,9 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 			
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
-			Options.TaxOptions.UseManualAmount = True;
+		
+			//#@2094
+			//Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -7085,9 +7184,13 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		Options.AmountOptions.TaxAmount        = GetPaymentListTaxAmount(Parameters, Row.Key);
 		Options.AmountOptions.TotalAmount      = GetPaymentListTotalAmount(Parameters, Row.Key);
 		
-		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
-		Options.TaxOptions.TaxList          = Row.TaxList;
+		//#@2094
+		//Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+		//Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
+		//Options.TaxOptions.TaxList          = Row.TaxList;
+		
+		Options.TaxOptions.VatRate = GetPaymentListVatRate(Parameters, Row.Key);
+		
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListCalculations" + WhoIsChanged;

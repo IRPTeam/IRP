@@ -77,7 +77,6 @@ Scenario: _0263100 preparation postponed retails receipts
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Delete CI from manager group

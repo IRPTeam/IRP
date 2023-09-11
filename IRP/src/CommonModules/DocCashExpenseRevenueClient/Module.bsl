@@ -142,10 +142,11 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+//#@2094
+#Region VAY_RATE
 
-Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListTaxRateOnChange(Object, Form, CurrentData);
+Procedure PaymentListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListVatRateOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

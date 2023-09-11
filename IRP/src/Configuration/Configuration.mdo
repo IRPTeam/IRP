@@ -647,6 +647,7 @@
   <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
+  <commandGroups>CommandGroup.Fiscalization</commandGroups>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.DefaultSMSProvider</constants>
@@ -974,6 +975,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.TaxKind</enums>
+  <enums>Enum.RetailReceiptStatusTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

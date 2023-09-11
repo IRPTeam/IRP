@@ -18,8 +18,9 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	ProcSettings = FormAttributeToValue("Object").ExternalDataProcSettings.Get();
-	ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
+	//#@2094
+	//ProcSettings = FormAttributeToValue("Object").ExternalDataProcSettings.Get();
+	//ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
@@ -46,8 +47,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	UseTaxRate = Object.Type = PredefinedValue("Enum.TaxType.Rate");
 	Form.Items.TaxRates.Visible = UseTaxRate;
 	Form.Items.GroupTaxRates.Visible = UseTaxRate;
-	Form.Items.ExternalDataProc.Visible = UseTaxRate;
-	Form.Items.ExternalDataProcSettings.Visible = UseTaxRate;
+	//#@2094
+	//Form.Items.ExternalDataProc.Visible = UseTaxRate;
+	//#@2094
+	//Form.Items.ExternalDataProcSettings.Visible = UseTaxRate;
 	
 	For Each Row In Form.Object.UseDocuments Do
 		ArrayOfTransactionTypes = Object.TransactionTypes.FindRows(New Structure("DocumentName", Row.DocumentName));
@@ -78,42 +81,43 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-#Region ExternalDataProc
+//#@2094
+//#Region ExternalDataProc
+//
+//&AtClient
+//Procedure ExternalDataProcSettings(Command)
+//	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
+//	Info.Insert("Settings", ThisObject.AddressResult);
+//	CallMethodAddDataProc(Info);
+//
+//	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
+//	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
+//EndProcedure
 
-&AtClient
-Procedure ExternalDataProcSettings(Command)
-	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
-	Info.Insert("Settings", ThisObject.AddressResult);
-	CallMethodAddDataProc(Info);
+//&AtServerNoContext
+//Procedure CallMethodAddDataProc(Info)
+//	AddDataProcServer.CallMethodAddDataProc(Info);
+//EndProcedure
 
-	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
-EndProcedure
+//&AtClient
+//Procedure OpenFormProcSettingsEnd(Result, AdditionalParameters) Export
+//	If Result = Undefined Then
+//		Return;
+//	EndIf;
+//	Modified = True;
+//	OpenFormProcSettingsEndServer(Result);
+//EndProcedure
 
-&AtServerNoContext
-Procedure CallMethodAddDataProc(Info)
-	AddDataProcServer.CallMethodAddDataProc(Info);
-EndProcedure
+//&AtServer
+//Procedure OpenFormProcSettingsEndServer(Result)
+//	Obj = FormAttributeToValue("Object");
+//	Obj.ExternalDataProcSettings = New ValueStorage(Result, New Deflation(9));
+//	Obj.Write();
+//	PutToTempStorage(Result, ThisObject.AddressResult);
+//	ValueToFormAttribute(Obj, "Object");
+//EndProcedure
 
-&AtClient
-Procedure OpenFormProcSettingsEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	Modified = True;
-	OpenFormProcSettingsEndServer(Result);
-EndProcedure
-
-&AtServer
-Procedure OpenFormProcSettingsEndServer(Result)
-	Obj = FormAttributeToValue("Object");
-	Obj.ExternalDataProcSettings = New ValueStorage(Result, New Deflation(9));
-	Obj.Write();
-	PutToTempStorage(Result, ThisObject.AddressResult);
-	ValueToFormAttribute(Obj, "Object");
-EndProcedure
-
-#EndRegion
+//#EndRegion
 
 &AtClient
 Procedure SetTransactionTypes(Command)

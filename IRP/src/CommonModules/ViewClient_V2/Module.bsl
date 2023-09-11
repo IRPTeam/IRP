@@ -2505,7 +2505,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 		If Not Parameters.isRowsAddByScan Then 
-			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.Rows);
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.UpdatedRowsByScan);
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 	EndIf;
@@ -2820,6 +2820,13 @@ Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undef
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
+EndProcedure
+
+// PaymentList.VatRate
+Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListVatRateOnChange(Parameters);
 EndProcedure
 
 #EndRegion

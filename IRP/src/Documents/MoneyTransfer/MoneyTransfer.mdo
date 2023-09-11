@@ -551,7 +551,7 @@
       <key>en</key>
       <value>Print cash out</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.MoneyTransfer</types>
     </commandParameterType>

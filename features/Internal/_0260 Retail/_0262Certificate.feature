@@ -14,7 +14,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _0262100 certificate (POS)
+Scenario: _0262100 preparation certificate (POS)
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
 	And I close TestClient session

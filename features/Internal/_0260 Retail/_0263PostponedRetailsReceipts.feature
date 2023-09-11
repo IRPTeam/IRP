@@ -738,18 +738,6 @@ Scenario: _0263113 check filter by branch in the Postponed receipt form in POS
 			| 'Item'                                                    | 'Item key' |
 			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      |
 		And I delete a line in "ItemList" table
-		And I move to "Payments" tab
-		And I activate field named "PaymentsAmount" in "Payments" table
-		And I select current line in "Payments" table
-		And I input "720,00" text in the field named "PaymentsAmount" of "Payments" table
-		And I finish line editing in "Payments" table
-		And I activate "Account" field in "Payments" table
-		And I select current line in "Payments" table
-		And I click choice button of "Account" attribute in "Payments" table
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Pos cash account 2' |
-		And I select current line in "List" table
 		And I select from the drop-down list named "Branch" by "01" string
 		And I select from the drop-down list named "Workstation" by "02" string
 		And I select "Postponed" exact value from "Status type" drop-down list

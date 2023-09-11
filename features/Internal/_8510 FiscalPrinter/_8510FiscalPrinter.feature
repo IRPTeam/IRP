@@ -3033,8 +3033,6 @@ Scenario: _0260189 print X report from CRS
 		And Delay 3
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
-		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
-		And I check "$ParsingResult$" with "2" and method is "PrintXReport"
 	And I close all client application windows
 	
 

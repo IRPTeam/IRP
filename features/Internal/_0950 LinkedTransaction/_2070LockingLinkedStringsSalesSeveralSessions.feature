@@ -59,11 +59,6 @@ Scenario: _2070001 preparation (locking linked strings)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	When Create Item with SerialLotNumbers (Phone)
 	* Document Discount 
 		When Create Document discount (for row)

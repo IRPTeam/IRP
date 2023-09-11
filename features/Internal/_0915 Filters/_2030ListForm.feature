@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Filters
@@ -57,11 +57,6 @@ Scenario: _203000 preparation (List forms)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 
 Scenario: _2030001 check preparation
 	When check preparation

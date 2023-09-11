@@ -57,12 +57,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When create items for work order
 		When Create catalog BillOfMaterials objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
 	* Add plugin for discount
@@ -72,13 +66,6 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 	* For the test of completing the purchase documents
 		* Preparation: creating a vendor partner term for NDB

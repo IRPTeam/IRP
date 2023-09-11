@@ -78,9 +78,6 @@ Scenario: _0262100 certificate (POS)
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Delete CI from manager group

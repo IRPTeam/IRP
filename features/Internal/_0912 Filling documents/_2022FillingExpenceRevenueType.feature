@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -63,11 +63,6 @@ Scenario: _0202100 preparation (filling expence, revenue)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 
 Scenario: _02021001 check preparation

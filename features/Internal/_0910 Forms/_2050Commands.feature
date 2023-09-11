@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -63,11 +63,6 @@ Scenario: _0205001 preparation (commands)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Add test plugin
 		* Open form to add plugin
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

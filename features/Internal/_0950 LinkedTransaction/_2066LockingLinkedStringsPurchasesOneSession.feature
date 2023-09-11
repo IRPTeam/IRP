@@ -66,11 +66,6 @@ Scenario: _2066001 preparation (locking linked strings)
 			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	When Create Item with SerialLotNumbers (Phone)
 	When Create PO,PI,GR,PRO,PR (locking linked strings)
 	And I execute 1C:Enterprise script at server

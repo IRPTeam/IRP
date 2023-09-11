@@ -1465,8 +1465,8 @@ Scenario: Create catalog SourceOfOrigins objects
 Scenario: Create catalog Taxes objects
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 'ValueStorage'              | ''                  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
+		| 'Ref'                                                            | 'DeletionMark'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Kind'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 | 'Enum.TaxKind.VAT' |
 	
 
 	And I refill object tabular section "TaxRates":
@@ -1498,8 +1498,8 @@ Scenario: Create catalog Taxes objects
 Scenario: Create catalog Taxes objects (with transaction type)
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'ExternalDataProcSettings'               | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 1       | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | ''                  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
+		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Kind'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 1       | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 | 'Enum.TaxKind.VAT' |
 
 	And I refill object tabular section "TaxRates":
 		| 'Ref'                                                            | 'TaxRate'                                                            |
@@ -1599,21 +1599,6 @@ Scenario: Create catalog Taxes objects (for commission trade)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
 
 
-Scenario: Create catalog Taxes objects (Sales tax)
-	
-	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'False'         | 'ValueStorage'              | ''                  | 'Enum.TaxType.Rate'  | 'SalesTax'        | ''                  | ''                | ''                 |
-
-	And I refill object tabular section "TaxRates":
-		| 'Ref'                                                            | 'TaxRate'                                                            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013'   |
-
-	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesOrder'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesInvoice'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesOrderClosing'   |
 
 Scenario: Create information register TaxSettings records
 

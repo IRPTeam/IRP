@@ -71,11 +71,6 @@ Scenario: 950400 preparation
 		When Create catalog Taxes objects
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 	* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"

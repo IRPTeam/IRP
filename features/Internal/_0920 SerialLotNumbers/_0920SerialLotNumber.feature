@@ -73,11 +73,6 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Load documents
 		When Create Physical inventory and Stock adjustment as write-off for link
 		And I execute 1C:Enterprise script at server

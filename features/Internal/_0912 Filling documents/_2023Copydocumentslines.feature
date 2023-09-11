@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -70,11 +70,6 @@ Scenario: _0155100 preparation ( filling documents)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 		When Create document SalesInvoice objects (for copy lines)
 		When Create document PhysicalInventory objects (for copy lines)

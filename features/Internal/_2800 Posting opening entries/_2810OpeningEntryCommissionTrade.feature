@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @OpeningEntries
@@ -71,11 +71,6 @@ Scenario: _410010 preparation (Opening entries)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Company settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"	
 		And I go to line in "List" table

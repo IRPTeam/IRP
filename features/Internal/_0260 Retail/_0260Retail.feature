@@ -1768,8 +1768,13 @@ Scenario: _0260171 check filling payment agent in RRR
 			| 'Bank term 02' |
 	And I close all client application windows					
 		
+	
+
+		
 				
-					
+		
+				
+						
 				
 				
 

@@ -698,6 +698,68 @@ Scenario: _0263111 create postponed return with basis document
 	
 		
 
+Scenario: _0263112 check open Postponed receipt form in POS when close session
+		And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		When add different items in POS
+	* Postponed RSR without a reservation
+		And I click "Postpone current receipt with reserve" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Close session
+		And I click "Close session" button
+		Then the number of "Receipts" table lines is "равно" "1"
+	And I close all client application windows
+	
+	
+
+Scenario: _0263113 check filter by branch in the Postponed receipt form in POS	
+	And I close all client application windows
+	* Create Postponed RSR for Shop 01
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And in the table "List" I click "Copy" button
+		And I click "Uncheck all" button
+		And I click "OK" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 6 with SLN' | 'PZU'      |
+		And I delete a line in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                                    | 'Item key' |
+			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      |
+		And I delete a line in "ItemList" table
+		And I move to "Payments" tab
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "720,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I activate "Account" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Pos cash account 2' |
+		And I select current line in "List" table
+		And I select from the drop-down list named "Branch" by "01" string
+		And I select from the drop-down list named "Workstation" by "02" string
+		And I select "Postponed" exact value from "Status type" drop-down list
+		And I click "Post" button
+	* Check filter by branch
+		And In the command interface I select "Retail" "Point of sale"	
+		And I click "Open postponed receipt" button	
+		Then the number of "Receipt" table lines is "равно" "1"
+	And I close all client application windows
+
 
 Scenario: _0263115 сheck the display of deferred receipt commands in POS depending on the settings in Workstation
 	And I close all client application windows
@@ -744,3 +806,6 @@ Scenario: _0263115 сheck the display of deferred receipt commands in POS depend
 		Then there are lines in TestClient message log
 			|'Document is empty.'|
 		And I close all client application windows
+
+
+	

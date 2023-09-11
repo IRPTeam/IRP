@@ -563,6 +563,8 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en = 'Operation cannot be completed because the document has already been printed. You can only print a copy.'", Lang));
 	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en = 'Document was not found on the fiscal device.'", Lang));
 	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en = 'Fiscal device not set.'", Lang));
+	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en = 'Document in not posted.'", Lang));
+	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en = 'Document can be printed only in Complete status.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
 	Strings.Insert("EqAc_LastSettlementHasError", NStr("en = 'Last settlement has error. Try get new one.'", Lang));
@@ -604,6 +606,9 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en = 'This is barcode used for %1'", Lang));
 	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en = 'Scan control string barcode. Wrong barcode %1'", Lang));
 	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en = 'Scan control string for each item.'", Lang));
+	
+	Strings.Insert("POS_ClearAllItems", NStr("en = 'Clear all items before continuing'", Lang));
+	Strings.Insert("POS_CancelPostponed", NStr("en = '%1 postponed receipts cancelled'", Lang));
 	
 #EndRegion
 

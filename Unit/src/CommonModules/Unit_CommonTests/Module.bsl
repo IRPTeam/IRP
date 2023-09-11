@@ -322,8 +322,14 @@ Function CommonFunctionsClientServer_isBase64Value() Export
 	TestString = "";
 	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
 
-	TestString = "ASD/";
+	TestString = "ЫDDDDDD";
 	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
+
+	TestString = "AA SS";
+	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
+
+	TestString = "ASD/";
+	Unit_Service.isEqual(True, CommonFunctionsClientServer.isBase64Value(TestString));
 
 	TestString = "====";
 	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));

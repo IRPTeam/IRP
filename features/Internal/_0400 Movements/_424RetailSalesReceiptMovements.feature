@@ -141,6 +141,10 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document Retail sales receipt (postponed)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1314).GetObject().Write(DocumentWriteMode.Posting);"    |
+
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -728,6 +732,86 @@ Scenario: _0424284 check Retail sales receipt movements by the Register  "R2006 
 			| ''                                                  | '22.08.2023 11:22:15' | '-1'        | '-500'   | 'TRY'        | '99999999999'       | 'Used'          |	
 		And I close all client application windows
 
+Scenario: _0424285 check postponed Retail sales receipt movements
+	And I close all client application windows
+	* Select postponed Retail sales receipt (without reserve)
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 314'     |
+	* Check movements
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' |
+			| 'Document registrations records'                       |
+		And I close current window
+	* Change status (Postponed with reserve)
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 314'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select "Postponed with reserve" exact value from "Status type" drop-down list
+		And I click "Post" button
+		And I click "Registrations report" button
+		And I click "Generate report" button
+	* Check movements
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2001 Sales"'             |
+			| 'Register  "R2050 Retail sales"'      |
+			| 'Register  "R3010 Cash on hand"'      |
+			| 'Register  "R3011 Cash flow"'         |
+			| 'Register  "R3050 Pos cash balances"' |
+			| 'Register  "R4010 Actual stocks"'     |
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
+			| 'Register  "R4012 Stock Reservation"'                  | ''            | ''                    | ''          | ''           | ''         | ''                                                     |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                                     |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                                |
+			| ''                                                     | 'Receipt'     | '07.09.2023 16:01:50' | '1'         | 'Store 01'   | 'XS/Blue'  | 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' |
+			| ''                                                     | 'Receipt'     | '07.09.2023 16:01:50' | '2'         | 'Store 01'   | '37/18SD'  | 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' |
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                     | 'Expense'     | '07.09.2023 16:01:50' | '1'         | 'Store 01'   | 'XS/Blue'  |
+			| ''                                                     | 'Expense'     | '07.09.2023 16:01:50' | '2'         | 'Store 01'   | '37/18SD'  |
+		And I close all client application windows
+	* Change status (Canceled)
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 314'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select "Canceled" exact value from "Status type" drop-down list
+		And I click "Post" button
+		And I click "Registrations report" button
+		And I click "Generate report" button
+	* Check movements
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2001 Sales"'             |
+			| 'Register  "R2050 Retail sales"'      |
+			| 'Register  "R3010 Cash on hand"'      |
+			| 'Register  "R3011 Cash flow"'         |
+			| 'Register  "R3050 Pos cash balances"' |
+			| 'Register  "R4010 Actual stocks"'     |
+			| 'Register  "R4011 Free stocks"'       |
+			| 'Register  "R4012 Stock Reservation"' |
+	And I close all client application windows
+	
+
+
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Retail sales receipt
@@ -774,6 +858,13 @@ Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+		And I select current line in "List" table
+		And I select "Completed" exact value from "Status type" drop-down list
+		And I click the button named "FormWrite"
+		And I close current window
 		And I go to line in "List" table
 			| 'Number'    |
 			| '201'       |

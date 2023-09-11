@@ -181,6 +181,7 @@ Function ItemList()
 		   |	END AS Agreement,
 		   |	ItemList.Ref.Currency AS Currency,
 		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.StatusType AS StatusType,
 		   |	ItemList.Ref AS RetailSalesReceipt,
 		   |	ItemList.IsService AS IsService,
 		   |	ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
@@ -236,6 +237,7 @@ EndFunction
 Function Payments()
 	Return "SELECT
 		   |	Payments.Ref.Date AS Period,
+		   |	Payments.Ref.StatusType AS StatusType,
 		   |	Payments.Ref.Company AS Company,
 		   |	Payments.Ref.Branch AS Branch,
 		   |	Payments.Ref.RetailCustomer AS RetailCustomer,
@@ -267,6 +269,7 @@ Function RetailSales()
 		   |	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
 		   |	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref.StatusType AS StatusType,
 		   |	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
 		   |	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
 		   |	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
@@ -290,6 +293,7 @@ Function RetailSales()
 		   |	RetailSalesReceiptItemList.Ref.Branch,
 		   |	RetailSalesReceiptItemList.ItemKey,
 		   |	RetailSalesReceiptItemList.Ref.Date,
+		   |	RetailSalesReceiptItemList.Ref.StatusType,
 		   |	RetailSalesReceiptItemList.Ref,
 		   |	RetailSalesReceiptItemList.Key,
 		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
@@ -308,6 +312,7 @@ Function RetailSales()
 		   |		ELSE tmpRetailSales.QuantityBySerialLtNumbers
 		   |	END AS Quantity,
 		   |	tmpRetailSales.Period AS Period,
+		   |	tmpRetailSales.StatusType AS StatusType,
 		   |	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
 		   |	tmpRetailSales.RowKey AS RowKey,
 		   |	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
@@ -348,6 +353,7 @@ EndFunction
 Function OffersInfo()
 	Return "SELECT
 		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref.StatusType AS StatusType,
 		   |	RetailSalesReceiptItemList.Ref AS Invoice,
 		   |	TableRowIDInfo.RowID AS RowKey,
 		   |	RetailSalesReceiptItemList.ItemKey,
@@ -374,6 +380,7 @@ EndFunction
 Function SerialLotNumbers()
 	Return "SELECT
 		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.StatusType AS StatusType,
 		   |	SerialLotNumbers.Ref.Company AS Company,
 		   |	SerialLotNumbers.Ref.Branch AS Branch,
 		   |	SerialLotNumbers.Key,
@@ -394,6 +401,7 @@ EndFunction
 Function SourceOfOrigins()
 	Return "SELECT
 		   |	SourceOfOrigins.Key AS Key,
+		   |	SourceOfOrigins.Ref.StatusType AS StatusType,
 		   |	CASE
 		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
 		   |			THEN SourceOfOrigins.SerialLotNumber
@@ -414,6 +422,7 @@ Function SourceOfOrigins()
 		   |	SourceOfOrigins.Ref = &Ref
 		   |GROUP BY
 		   |	SourceOfOrigins.Key,
+		   |	SourceOfOrigins.Ref.StatusType,
 		   |	CASE
 		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
 		   |			THEN SourceOfOrigins.SerialLotNumber
@@ -431,6 +440,7 @@ EndFunction
 Function PaymentAgent()
 	Return "SELECT
 		   |	Payments.Ref.Date AS Period,
+		   |	Payments.Ref.StatusType AS StatusType,
 		   |	Payments.Ref.Company AS Company,
 		   |	Payments.Ref.Branch AS Branch,
 		   |	Payments.Ref.Currency AS Currency,
@@ -499,7 +509,8 @@ Function R2023B_AdvancesFromRetailCustomers()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	Payments.IsAdvance
+		   |	Payments.IsAdvance 
+		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	Payments.Period,
@@ -527,6 +538,7 @@ Function R9010B_SourceOfOriginStock()
 		   |		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
 		   |WHERE
 		   |	TRUE
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	ItemList.Period,
@@ -546,7 +558,10 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND SerialLotNumbers.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		   |";
+		   
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -563,7 +578,9 @@ Function R3010B_CashOnHand()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		   |";
 EndFunction
 
 Function R3011T_CashFlow()
@@ -581,146 +598,186 @@ Function R3011T_CashFlow()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R4011B_FreeStocks()
 	Return "SELECT
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.SalesOrder AS SalesOrder,
-		   |	ItemList.SalesOrderExists AS SalesOrderExists,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO ItemListGroup
-		   |FROM
-		   |	ItemList AS ItemList
-		   |Where
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.ShipmentConfirmationExists
-		   |GROUP BY
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.SalesOrder,
-		   |	ItemList.SalesOrderExists
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	StockReservation.Store AS Store,
-		   |	StockReservation.Order AS Basis,
-		   |	StockReservation.ItemKey AS ItemKey,
-		   |	StockReservation.QuantityBalance AS Quantity
-		   |INTO TmpStockReservation
-		   |FROM
-		   |	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
-		   |		(SELECT
-		   |			ItemList.Store,
-		   |			ItemList.ItemKey,
-		   |			ItemList.SalesOrder
-		   |		FROM
-		   |			ItemList AS ItemList)) AS StockReservation
-		   |WHERE
-		   |	StockReservation.QuantityBalance > 0
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemListGroup.Period AS Period,
-		   |	ItemListGroup.Store AS Store,
-		   |	ItemListGroup.ItemKey AS ItemKey,
-		   |	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	ItemListGroup AS ItemListGroup
-		   |		LEFT JOIN TmpStockReservation AS TmpStockReservation
-		   |		ON (ItemListGroup.Store = TmpStockReservation.Store)
-		   |		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
-		   |		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
-		   |WHERE
-		   |	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
-		   |
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |DROP ItemListGroup
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |DROP TmpStockReservation";
+	|	ItemList.Period AS Period,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	ItemList.SalesOrderExists AS SalesOrderExists,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO ItemListGroup
+	|FROM
+	|	ItemList AS ItemList
+	|Where
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.ShipmentConfirmationExists
+	|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.SalesOrder,
+	|	ItemList.SalesOrderExists
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	StockReservation.Store AS Store,
+	|	StockReservation.Order AS Basis,
+	|	StockReservation.ItemKey AS ItemKey,
+	|	StockReservation.QuantityBalance AS Quantity
+	|INTO TmpStockReservation
+	|FROM
+	|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+	|		(SELECT
+	|			ItemList.Store,
+	|			ItemList.ItemKey,
+	|			ItemList.SalesOrder
+	|		FROM
+	|			ItemList AS ItemList)) AS StockReservation
+	|WHERE
+	|	StockReservation.QuantityBalance > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemListGroup.Period AS Period,
+	|	ItemListGroup.Store AS Store,
+	|	ItemListGroup.ItemKey AS ItemKey,
+	|	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
+	|INTO R4011B_FreeStocks
+	|FROM
+	|	ItemListGroup AS ItemListGroup
+	|		LEFT JOIN TmpStockReservation AS TmpStockReservation
+	|		ON (ItemListGroup.Store = TmpStockReservation.Store)
+	|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
+	|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
+	|WHERE
+	|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity)
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.PostponedWithReserve)
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP ItemListGroup
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP TmpStockReservation";
 EndFunction
 
 Function R4012B_StockReservation()
 	Return "SELECT
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.SalesOrder AS SalesOrder,
-		   |	SUM(ItemList.Quantity) AS Quantity,
-		   |	ItemList.ShipmentConfirmationExists AS ShipmentConfirmationExists
-		   |INTO TmpItemListGroup
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.ShipmentConfirmationExists
-		   |	AND ItemList.SalesOrderExists
-		   |GROUP BY
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.SalesOrder,
-		   |	ItemList.ShipmentConfirmationExists
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	R4012B_StockReservationBalance.Store AS Store,
-		   |	R4012B_StockReservationBalance.ItemKey AS ItemKey,
-		   |	R4012B_StockReservationBalance.Order AS Order,
-		   |	R4012B_StockReservationBalance.QuantityBalance AS QuantityBalance
-		   |INTO TmpStockReservation
-		   |FROM
-		   |	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
-		   |		(SELECT
-		   |			ItemList.Store,
-		   |			ItemList.ItemKey,
-		   |			ItemList.SalesOrder
-		   |		FROM
-		   |			TmpItemListGroup AS ItemList)) AS R4012B_StockReservationBalance
-		   |WHERE
-		   |	R4012B_StockReservationBalance.QuantityBalance > 0
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemListGroup.Period AS Period,
-		   |	ItemListGroup.SalesOrder AS Order,
-		   |	ItemListGroup.ItemKey AS ItemKey,
-		   |	ItemListGroup.Store AS Store,
-		   |	CASE
-		   |		WHEN StockReservation.QuantityBalance > ItemListGroup.Quantity
-		   |			THEN ItemListGroup.Quantity
-		   |		ELSE StockReservation.QuantityBalance
-		   |	END AS Quantity
-		   |INTO R4012B_StockReservation
-		   |FROM
-		   |	TmpItemListGroup AS ItemListGroup
-		   |		INNER JOIN TmpStockReservation AS StockReservation
-		   |		ON ItemListGroup.SalesOrder = StockReservation.Order
-		   |		AND ItemListGroup.ItemKey = StockReservation.ItemKey
-		   |		AND ItemListGroup.Store = StockReservation.Store
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |DROP TmpItemListGroup
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |DROP TmpStockReservation";
+	|	ItemList.Period AS Period,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	ItemList.ShipmentConfirmationExists AS ShipmentConfirmationExists
+	|INTO TmpItemListGroup
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.ShipmentConfirmationExists
+	|	AND ItemList.SalesOrderExists
+	|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.SalesOrder,
+	|	ItemList.ShipmentConfirmationExists
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R4012B_StockReservationBalance.Store AS Store,
+	|	R4012B_StockReservationBalance.ItemKey AS ItemKey,
+	|	R4012B_StockReservationBalance.Order AS Order,
+	|	R4012B_StockReservationBalance.QuantityBalance AS QuantityBalance
+	|INTO TmpStockReservation
+	|FROM
+	|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+	|		(SELECT
+	|			ItemList.Store,
+	|			ItemList.ItemKey,
+	|			ItemList.SalesOrder
+	|		FROM
+	|			TmpItemListGroup AS ItemList)) AS R4012B_StockReservationBalance
+	|WHERE
+	|	R4012B_StockReservationBalance.QuantityBalance > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemListGroup.Period AS Period,
+	|	ItemListGroup.SalesOrder AS Order,
+	|	ItemListGroup.ItemKey AS ItemKey,
+	|	ItemListGroup.Store AS Store,
+	|	CASE
+	|		WHEN StockReservation.QuantityBalance > ItemListGroup.Quantity
+	|			THEN ItemListGroup.Quantity
+	|		ELSE StockReservation.QuantityBalance
+	|	END AS Quantity
+	|INTO R4012B_StockReservation
+	|FROM
+	|	TmpItemListGroup AS ItemListGroup
+	|		INNER JOIN TmpStockReservation AS StockReservation
+	|		ON ItemListGroup.SalesOrder = StockReservation.Order
+	|		AND ItemListGroup.ItemKey = StockReservation.ItemKey
+	|		AND ItemListGroup.Store = StockReservation.Store
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Invoice,
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	SUM(ItemList.Quantity)
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.PostponedWithReserve)
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Invoice,
+	|	ItemList.ItemKey,
+	|	ItemList.Store
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP TmpItemListGroup
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP TmpStockReservation";
 EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
@@ -744,7 +801,8 @@ Function R4032B_GoodsInTransitOutgoing()
 		   |		ON ItemList.Key = ShipmentConfirmations.Key
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   |	AND ItemList.ShipmentConfirmationExists";
+		   |	AND ItemList.ShipmentConfirmationExists
+		   |    AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -771,6 +829,7 @@ Function R4010B_ActualStocks()
 		   |WHERE
 		   |	NOT ItemList.IsService
 		   |	AND NOT ItemList.ShipmentConfirmationExists
+		   |    AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Expense),
 		   |	ItemList.Period,
@@ -791,7 +850,8 @@ Function R3050T_PosCashBalances()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsAdvance
-		   |	OR Payments.IsPaymentAgent)";
+		   |	OR Payments.IsPaymentAgent)
+		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -801,7 +861,8 @@ Function R2050T_RetailSales()
 		   |FROM
 		   |	RetailSales AS RetailSales
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND RetailSales.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R5021T_Revenues()
@@ -813,7 +874,8 @@ Function R5021T_Revenues()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2001T_Sales()
@@ -824,7 +886,8 @@ Function R2001T_Sales()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -832,7 +895,9 @@ Function R2005T_SalesSpecialOffers()
 		   |INTO R2005T_SalesSpecialOffers
 		   |FROM
 		   |	OffersInfo AS OffersInfo
-		   |WHERE TRUE";
+		   |WHERE 
+		   |	TRUE
+		   |	AND OffersInfo.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 
 EndFunction
 
@@ -851,6 +916,7 @@ Function R2006T_Certificates()
 	|		ON ItemList.Key = SerialLotNumbers.Key
 	|WHERE
 	|	ItemList.IsCertificate
+	|   AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 	|
 	|UNION ALL
 	|
@@ -863,7 +929,9 @@ Function R2006T_Certificates()
 	|	""Used""
 	|FROM
 	|	Payments AS Payments
-	|WHERE Payments.IsCertificate";
+	|WHERE 
+	|	Payments.IsCertificate
+	|	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2021B_CustomersTransactions()
@@ -885,6 +953,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -915,6 +984,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
@@ -966,6 +1036,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	PaymentAgent.Period,
@@ -995,6 +1066,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1019,6 +1091,7 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.UsePartnerTransactions
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
@@ -1043,6 +1116,7 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	PaymentAgent.Company,
@@ -1072,6 +1146,7 @@ Function T2015S_TransactionsInfo()
 		   |	PaymentAgent AS PaymentAgent
 		   |WHERE
 		   |	TRUE
+		   |	AND PaymentAgent.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	PaymentAgent.Period,
 		   |	PaymentAgent.Company,
@@ -1120,6 +1195,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1191,7 +1267,8 @@ Function R8014T_ConsignorSales()
 		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
-		|	ItemList.IsConsignorStocks";
+		|	ItemList.IsConsignorStocks
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
@@ -1211,7 +1288,8 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.SalesOrderExists";
+		   |	ItemList.SalesOrderExists
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 #EndRegion

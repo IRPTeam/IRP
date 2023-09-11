@@ -368,6 +368,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="159fcfd0-5a0b-4205-b20a-9d01ca285932">
+    <name>StatusType</name>
+    <synonym>
+      <key>en</key>
+      <value>Status type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RetailReceiptStatusTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.RetailReceiptStatusTypes.EnumValue.Completed</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="e0f081d4-5d22-4460-ba59-2f55d8d61e66">
     <name>DocumentForm</name>
     <synonym>
@@ -1952,7 +1970,7 @@
       <key>en</key>
       <value>Print receipt</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
+    <group>CommandGroup.Fiscalization</group>
     <commandParameterType>
       <types>DocumentRef.RetailReturnReceipt</types>
     </commandParameterType>

@@ -4426,7 +4426,7 @@ Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
 			And I select current line in "" table	
 	* Postponed RSR with a reservation
 		And I click "Postpone current receipt with reserve" button
-		Then the number of "ItemList" table lines is "равно" "0"			
+		Then the number of "ItemList" table lines is "равно" "0"		
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -4589,7 +4589,7 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 			| 'Document registrations records' |
 		And I close current window
 
-Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS used)
+Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS not used)
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
@@ -4637,4 +4637,20 @@ Scenario: _0154203 create postponed RRR without a reservation and without bases 
 			| 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
 	And I close all client application windows
+
+
+Scenario: _0154205 cancel postponed receipt (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed receipt
+		And I click "Open postponed receipt" button
+	* Cancel postponed receipt
+		And I select all lines of "Receipts" table
+		And in the table "Receipts" I click "Cancel receipts" button
+		Then the number of "Receipts" table lines is "равно" "0"
+		Then in the TestClient message log contains lines by template:
+			|'* postponed receipts cancelled'|
+	And I close all client application windows
 	
+		

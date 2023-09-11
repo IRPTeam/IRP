@@ -1049,7 +1049,6 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	Result.PaymentForm = Undefined;
 
 	TransactionResult = WriteTransaction(Result);
-	DPPointOfSaleClient.AfterWriteTransaction(TransactionResult.Refs, ThisObject);
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
@@ -1067,6 +1066,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	DetailedInformation = R().S_030 + ": " + Format(TransactionResult.CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 
+	DPPointOfSaleClient.AfterWriteTransaction(TransactionResult.Refs, ThisObject);
 	DPPointOfSaleClient.BeforeStartNewTransaction(Object, ThisObject, DocRef);
 
 	NewTransaction();

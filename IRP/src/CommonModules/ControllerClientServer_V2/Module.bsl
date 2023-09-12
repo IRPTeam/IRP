@@ -14423,8 +14423,9 @@ EndProcedure
 
 Function IsFullTransferTabularSection(Parameters, PropertyName)
 	_PropertyName = Upper(PropertyName);
-	If _PropertyName = Upper("TaxList") 
-		Or _PropertyName = Upper("SerialLotNumbers") 
+	//#@2094
+//	If _PropertyName = Upper("TaxList") 
+	If _PropertyName = Upper("SerialLotNumbers") 
 		Or _PropertyName = Upper("SpecialOffers")
 		Or _PropertyName = Upper("BillOfMaterialsList") Then
 		Return True;

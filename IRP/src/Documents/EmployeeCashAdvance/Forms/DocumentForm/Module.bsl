@@ -282,7 +282,8 @@ EndProcedure
 &AtClient
 Procedure FillByAdvances(Command)
 	Result = FillByAdvancesAtServer();
-	Object.TaxList.Clear();
+	//#@2094
+	//Object.TaxList.Clear();
 	Object.PaymentList.Clear();	
 	ViewClient_V2.PaymentListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
 EndProcedure

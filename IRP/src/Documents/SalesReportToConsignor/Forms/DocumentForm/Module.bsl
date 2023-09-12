@@ -632,7 +632,8 @@ EndProcedure
 Procedure FillSalesEnd(Result, AdditionalParameters) Export
 	If Result <> Undefined Then
 		Object.SerialLotNumbers.Clear();
-		Object.TaxList.Clear();
+		//#@2094
+//		Object.TaxList.Clear();
 		Object.ItemList.Clear();
 		
 		Object.StartDate = Result.StartDate;

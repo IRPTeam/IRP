@@ -88,6 +88,8 @@ When Create information register Taxes records (test data base)
 						| 'Tax'       |
 						| 'VAT'       |
 		And I select current line in "CompanyTaxes" table
+		And I click Open button of "Tax" field
+		And I select "VAT" exact value from the drop-down list named "Kind"
 		And I click "Save and close" button
 		And I close all client application windows
 When Create catalog InterfaceGroups objects (test data base)

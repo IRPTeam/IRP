@@ -501,7 +501,6 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.CertificateServer</commonModules>
-  <commonModules>CommonModule.FOClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -593,7 +592,6 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
-  <functionalOptions>FunctionalOption.UseMultiTaxes</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -698,7 +696,6 @@
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
-  <constants>Constant.UseMultiTaxes</constants>
   <constants>Constant.AdditionalTableControlExceptions</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

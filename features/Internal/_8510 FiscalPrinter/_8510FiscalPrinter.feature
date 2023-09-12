@@ -2990,7 +2990,48 @@ Scenario: _0260187 add one more Acquiring terminal and check open and close sess
 	And I close all client application windows
 
 
-		
+Scenario: _0260189 print X report from CRS
+	And I close all client application windows
+	* Create CRS and open session
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "new" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormPost"
+		And I click "Open session" button
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
+	* Close session and check print X report
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows
+	
+
 				
 				
 

@@ -741,7 +741,7 @@ Scenario: _0263113 check filter by branch in the Postponed receipt form in POS
 	* Check filter by branch
 		And In the command interface I select "Retail" "Point of sale"	
 		And I click "Open postponed receipt" button	
-		Then the number of "Receipt" table lines is "равно" "1"
+		Then the number of "Receipts" table lines is "равно" "1"
 	And I close all client application windows
 
 
@@ -790,6 +790,3 @@ Scenario: _0263115 сheck the display of deferred receipt commands in POS depend
 		Then there are lines in TestClient message log
 			|'Document is empty.'|
 		And I close all client application windows
-
-
-	

@@ -127,87 +127,8 @@ Scenario: _0902000 preparation
 Scenario: _09020001 check preparation
 	When check preparation
 
-Scenario: _090201 activating Sales Tax calculation in the Sales order and Sales invoice documents
-	* Opening a tax creation form
-		Given I open hyperlink "e1cib/list/Catalog.Taxes"
-		If "List" table does not contain lines Then
-				| "Description"     |
-				| "SalesTax"        |
-			And I click the button named "FormCreate"
-		* Filling in Sales Tax rate settings
-			And I input "SalesTax" text in the field named "Description_en"
-			And I click Select button of "Plugins" field
-			And I go to line in "List" table
-				| 'Description'            |
-				| 'TaxCalculateVAT_TR'     |
-			And I select current line in "List" table
-			And in the table "TaxRates" I click the button named "TaxRatesAdd"
-			And I click choice button of "Tax rate" attribute in "TaxRates" table
-			And I click the button named "FormCreate"
-			Then "Tax rate (create)" window is opened
-			And I input "1%" text in "ENG" field
-			And I input "1,000000000000" text in "Rate" field
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description'     |
-				| '1%'              |
-			And I click the button named "FormChoose"
-			And I finish line editing in "TaxRates" table
-			And I click "Save" button
-			And I click "Settings" button
-			And I click "Ok" button
-			And I move to "Use documents" tab
-			And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-			And I select "Sales order" exact value from "Document name" drop-down list in "UseDocuments" table
-			And I finish line editing in "UseDocuments" table
-			And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-			And I select "Sales invoice" exact value from "Document name" drop-down list in "UseDocuments" table
-			And I finish line editing in "UseDocuments" table
-			And I click "Save and close" button
-	Given I open hyperlink "e1cib/list/InformationRegister.Taxes"
-	If "List" table does not contain lines Then
-		| 'Tax'        |
-		| 'SalesTax'   |
-		And I click the button named "FormCreate"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I input "01.01.2020" text in "Period" field
-		And I click Select button of "Tax" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'SalesTax'       |
-		And I select current line in "List" table
-		And I set checkbox "Use"
-		And I input "8" text in "Priority" field
-		And I click "Save and close" button
-	Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
-	If "List" table does not contain lines Then
-				| "Tax"          |
-				| "SalesTax"     |
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'      |
-				| 'Main Company'     |
-			And I select current line in "List" table
-			And I click Select button of "Tax" field
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'SalesTax'        |
-			And I select current line in "List" table
-			And I click Select button of "Tax rate" field
-			And I select "1%" exact value from "Tax rate" drop-down list	
-			And I click "Save and close" button
-	
-		
 
-
-
-
-Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price includes tax box is set)
+Scenario: _090202 VAT calculation in Sales order (Price includes tax box is set)
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"

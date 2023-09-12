@@ -6815,8 +6815,12 @@ Procedure StepPaymentListDefaultVatRateInList(Parameters, Chain) Export
 	Options.CurrentVatRate  = GetPaymentListVatRate(Parameters, NewRow.Key);
 	Options.Date            = GetDate(Parameters);
 	Options.Company         = GetCompany(Parameters);
-	Options.Agreement       = GetPaymentListAgreement(Parameters, NewRow.Key);
-	Options.TransactionType = GetTransactionType(Parameters);
+	If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "Agreement") Then
+		Options.Agreement       = GetPaymentListAgreement(Parameters, NewRow.Key);
+	EndIf;
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
+		Options.TransactionType = GetTransactionType(Parameters);
+	EndIf;
 	Options.Key = NewRow.Key;
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
@@ -6857,6 +6861,41 @@ Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeVatRate_AgreementInList";
+		Chain.ChangeVatRate.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.VatRate.ChangeVatRate_WithoutAgreement.Step
+Procedure StepChangeVatRate_WithoutAgreement(Parameters, Chain) Export
+	Chain.ChangeVatRate.Enable = True;
+	
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	
+	Chain.ChangeVatRate.Setter = "SetPaymentListVatRate";
+	
+	Options_Date            = GetDate(Parameters);
+	Options_Company         = GetCompany(Parameters);
+	Options_TransactionType = Undefined;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
+		Options_TransactionType = GetTransactionType(Parameters);
+	EndIf;
+		
+	TableRows = GetRows(Parameters, Parameters.TableName);
+		
+	For Each Row In TableRows Do
+		Options = ModelClientServer_V2.ChangeVatRateOptions();
+				
+		Options.Date            = Options_Date;
+		Options.Company         = Options_Company;
+		Options.TransactionType = Options_TransactionType;		
+		
+		Options.DocumentName = Parameters.ObjectMetadataInfo.MetadataName;
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeVatRate_WithoutAgreement";
 		Chain.ChangeVatRate.Options.Add(Options);
 	EndDo;
 EndProcedure

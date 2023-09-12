@@ -48,15 +48,7 @@ Scenario: _602700 preparation (data history)
 		When Create information register CurrencyRates records
 		When Create information register Barcodes records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 
 Scenario: _6027001 check preparation

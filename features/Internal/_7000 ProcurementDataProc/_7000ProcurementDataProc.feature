@@ -53,15 +53,7 @@ Scenario:_700000 preparation (procurement data proccessor)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)	
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document InternalSupplyRequest objects (for procurement)
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Change procurement date

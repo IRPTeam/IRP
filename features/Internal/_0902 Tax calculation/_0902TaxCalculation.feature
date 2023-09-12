@@ -52,18 +52,10 @@ Scenario: _0902000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects
 		When Create catalog BusinessUnits objects 
-	* Tax settings
-		When filling in Tax settings for company
 	* Filling tax rates for Item key in the register
 		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
 		And I click the button named "FormCreate"

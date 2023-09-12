@@ -30,15 +30,7 @@ Scenario: _7001 Production planning closing
 	When Create catalog IntegrationSettings objects
 	When Create catalog Companies objects (Main company)
 	When Create information register CurrencyRates records
-	* Add plugin for taxes calculation
-			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-			If "List" table does not contain lines Then
-					| "Description"             |
-					| "TaxCalculateVAT_TR"      |
-				When add Plugin for tax calculation
-			When Create information register Taxes records (VAT)
-		* Tax settings
-			When filling in Tax settings for company
+	When Create information register Taxes records (VAT)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one

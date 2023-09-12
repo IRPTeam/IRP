@@ -50,15 +50,7 @@ Scenario: _2050001 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |

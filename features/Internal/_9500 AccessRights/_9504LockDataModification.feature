@@ -60,17 +60,9 @@ Scenario: 950400 preparation
 		And I input "4" text in "REP_Attribute1" field
 		And I click "Save and close" button
 		And I close all client application windows
-	* Tax
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog CancelReturnReasons objects
 	* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"

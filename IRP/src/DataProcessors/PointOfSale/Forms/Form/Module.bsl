@@ -1753,6 +1753,7 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 	EndIf;
 
 	ThisObject.RetailBasis = Result;
+	
 	RetailBasisData = GetRetailBasisData();
 
 	ThisObject.BasisPayments.Clear();
@@ -1760,36 +1761,13 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		FillPropertyValues(ThisObject.BasisPayments.Add(), PaymentItem);
 	EndDo;
 
-	ThisObject.Object.ItemList.Clear();
-	For Each ListItem In RetailBasisData.ItemList Do
-		Row = ViewClient_V2.ItemListAddFilledRow(ThisObject.Object, ThisObject, ListItem);
-		Row.Key = ListItem.Key;
-		Row.RetailBasis = ThisObject.RetailBasis;
-		Row.RetailBasisQuantity = ListItem.Quantity;
-	EndDo;
-
-	ThisObject.Object.SpecialOffers.Clear();
-	ThisObject.RetailBasisSpecialOffers.Clear();
-	For Each OffersItem In RetailBasisData.SpecialOffers Do
-		FillPropertyValues(ThisObject.Object.SpecialOffers.Add(), OffersItem);
-		FillPropertyValues(ThisObject.RetailBasisSpecialOffers.Add(), OffersItem);
-	EndDo;
-	If ThisObject.Object.SpecialOffers.Count() Then
-		ViewClient_V2.OffersOnChange(Object, ThisObject);
-	EndIf;
-
-	ThisObject.Object.SerialLotNumbers.Clear();
-	For Each SerialLotNumberItem In RetailBasisData.SerialLotNumbers Do
-		Row = ThisObject.Object.SerialLotNumbers.Add();
-		Row.Key = SerialLotNumberItem.Key;
-		Row.SerialLotNumber = SerialLotNumberItem.SerialLotNumber;
-		Row.Quantity = SerialLotNumberItem.Quantity;
-	EndDo;
+	FillOnSelectBasisDocument(Result);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
-
-	EnabledPaymentButton();
+	FillSalesPersonInItemList();
+	EnabledPaymentButton();	
+	
 EndProcedure
 
 &AtServer
@@ -2157,7 +2135,12 @@ EndProcedure
 &AtServer
 Procedure FillOnSelectBasisDocument(BasisDocRef)
 
-	NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	If ThisObject.isReturn Then
+		NewDocRef = Documents.RetailReturnReceipt.EmptyRef();
+	Else
+		NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	EndIf;
+	
 	FillParameters = New Structure("Basises, Ref", New Array, NewDocRef);
 	FillParameters.Basises.Add(BasisDocRef);
 
@@ -2174,6 +2157,13 @@ Procedure FillOnSelectBasisDocument(BasisDocRef)
 	NewObj.Fill(FillingValues[0]);
 	ValueToFormAttribute(NewObj, "Object");
 	Taxes_CreateFormControls();
+
+	If ThisObject.isReturn Then
+		For Each ItemListRow In Object.ItemList Do
+			ItemListRow.RetailBasis = BasisDocRef;
+			ItemListRow.RetailBasisQuantity = ItemListRow.Quantity; 
+		EndDo;
+	EndIf;
 
 EndProcedure
 

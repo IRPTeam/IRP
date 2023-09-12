@@ -641,14 +641,15 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
 		EndDo;
 		
-		If TabularSections.Find("TaxList") <> Undefined Then
-			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
-			TaxInfo = New Structure();
-			For Each Column In TabularSections["TaxList"].Attributes Do
-				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
-			EndDo;
-			Result.RowData.Insert("TaxInfo", TaxInfo);
-		EndIf;
+		//#@2094
+//		If TabularSections.Find("TaxList") <> Undefined Then
+//			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
+//			TaxInfo = New Structure();
+//			For Each Column In TabularSections["TaxList"].Attributes Do
+//				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
+//			EndDo;
+//			Result.RowData.Insert("TaxInfo", TaxInfo);
+//		EndIf;
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;

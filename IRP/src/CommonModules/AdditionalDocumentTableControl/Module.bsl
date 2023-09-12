@@ -213,11 +213,12 @@ Function CheckDocumentsResult(Document, DocName)
 		Query.SetParameter("RowIDInfo", Result.Tables.RowIDInfo);
 	EndIf;
 	
-	If Result.Tables.TaxList = Undefined Then
-		Query.SetParameter("TaxList", Document.TaxList.Unload());
-	Else
-		Query.SetParameter("TaxList", Result.Tables.TaxList);
-	EndIf;
+	//#@2094
+//	If Result.Tables.TaxList = Undefined Then
+//		Query.SetParameter("TaxList", Document.TaxList.Unload());
+//	Else
+//		Query.SetParameter("TaxList", Result.Tables.TaxList);
+//	EndIf;
 	
 	If Result.Tables.SpecialOffers = Undefined Then
 		Query.SetParameter("SpecialOffers", Document.SpecialOffers.Unload());
@@ -341,11 +342,13 @@ EndFunction
 // Returns:
 //  Array of String
 //@skip-check module-unused-method
-Function ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList(Document, RowIDList)
-	Result = New Array; // Array of String
-	Result.Add(R().ATC_NotSupported);
-	Return Result;
-EndFunction
+
+//#@2094
+//Function ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList(Document, RowIDList)
+//	Result = New Array; // Array of String
+//	Result.Add(R().ATC_NotSupported);
+//	Return Result;
+//EndFunction
 
 // Error net amount greater total amount.
 // 

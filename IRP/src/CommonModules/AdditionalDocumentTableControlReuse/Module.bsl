@@ -27,12 +27,13 @@ Function GetQuery(DocName) Export
 	ErrorsArray.Add(ErrorItemList());
 	ErrorsArray.Add(ErrorHeaders(MetaDoc));
 	
-	If MetaDoc.TabularSections.Find("TaxList") = Undefined Then
-		Result.Tables.Insert("TaxList", TmplDoc.TaxList.Unload());
-	Else
-		Result.Tables.Insert("TaxList", Undefined);
-		ErrorsArray.Add(ErrorWithTax());
-	EndIf;
+	//#@2094
+//	If MetaDoc.TabularSections.Find("TaxList") = Undefined Then
+//		Result.Tables.Insert("TaxList", TmplDoc.TaxList.Unload());
+//	Else
+//		Result.Tables.Insert("TaxList", Undefined);
+//		ErrorsArray.Add(ErrorWithTax());
+//	EndIf;
 	
 	If MetaDoc.TabularSections.Find("RowIDInfo") = Undefined Then
 		Result.Tables.Insert("RowIDInfo", TmplDoc.RowIDInfo.Unload());
@@ -93,6 +94,7 @@ Function GetErrorList() Export
 	ErrorsArray = New Array; // Array of Structure
 	ErrorsArray.Add(ErrorHeaders());
 	ErrorsArray.Add(ErrorItemList());
+	//#@2094
 	ErrorsArray.Add(ErrorWithTax());
 	ErrorsArray.Add(ErrorWithOffers());
 	ErrorsArray.Add(ErrorWithSerialInTable());
@@ -133,11 +135,12 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
 		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
 	
-	Exceptions.Insert("SalesReturnOrder"    , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("SalesReturn"         , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("RetailSalesReceipt"  , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("PurchaseReturnOrder" , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("PurchaseReturn"      , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+	//#@2094
+//	Exceptions.Insert("SalesReturnOrder"    , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+//	Exceptions.Insert("SalesReturn"         , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+//	Exceptions.Insert("RetailSalesReceipt"  , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+//	Exceptions.Insert("PurchaseReturnOrder" , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
+//	Exceptions.Insert("PurchaseReturn"      , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
 	
 	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do
@@ -326,11 +329,12 @@ EndFunction
 Function ErrorWithTax()
 	Str = New Structure;
 	
-	Str.Insert("ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", New Structure("Query, Fields, QueryNumber", 
-		"Not ItemList.TaxAmount = isNull(TaxList.Amount, 0)",
-		"TaxAmount",
-		0
-	));
+	//#@2094
+//	Str.Insert("ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", New Structure("Query, Fields, QueryNumber", 
+//		"Not ItemList.TaxAmount = isNull(TaxList.Amount, 0)",
+//		"TaxAmount",
+//		0
+//	));
 	
 	Str.Insert("ErrorNetAmountGreaterTotalAmount", New Structure("Query, Fields, QueryNumber", 
 		"ItemList.NetAmount > ItemList.TotalAmount",
@@ -462,25 +466,26 @@ Function CheckDocumentsQuery()
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	TaxList.Amount,
-	|	TaxList.ManualAmount
-	|INTO TaxListTmp
-	|FROM
-	|	&TaxList AS TaxList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	SUM(TaxList.ManualAmount) AS Amount
-	|INTO TaxList
-	|FROM
-	|	TaxListTmp AS TaxList
-	|GROUP BY
-	|	TaxList.Key
-	|;
+	//#@2094
+//	|SELECT
+//	|	TaxList.Key,
+//	|	TaxList.Amount,
+//	|	TaxList.ManualAmount
+//	|INTO TaxListTmp
+//	|FROM
+//	|	&TaxList AS TaxList
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	TaxList.Key,
+//	|	SUM(TaxList.ManualAmount) AS Amount
+//	|INTO TaxList
+//	|FROM
+//	|	TaxListTmp AS TaxList
+//	|GROUP BY
+//	|	TaxList.Key
+//	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -574,8 +579,9 @@ Function CheckDocumentsQuery()
 	|		ON ItemList.Key = RowIDInfo.Key
 	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 	|		ON ItemList.Key = SerialLotNumbers.Key
-	|		LEFT JOIN TaxList AS TaxList
-	|		ON ItemList.Key = TaxList.Key
+	//#@2094
+//	|		LEFT JOIN TaxList AS TaxList
+//	|		ON ItemList.Key = TaxList.Key
 	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 	|		ON ItemList.Key = SourceOfOrigins.Key
 	|;
@@ -694,36 +700,37 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	ErrorsArray.Add(ErrorHeaders(MetaDoc));
 	ErrorsArray.Add(ErrorItemList());
 	
-	If MetaDoc.TabularSections.Find("TaxList") <> Undefined Then
-		QueryText = QueryText + "
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	TaxList.Ref,
-		|	TaxList.Key,
-		|	SUM(TaxList.ManualAmount) As Amount
-		|INTO TaxList
-		|FROM
-		|	" + MetaDoc.FullName() + ".TaxList AS TaxList
-		|WHERE
-		|	TaxList.Ref IN (&Refs)
-		|GROUP BY
-		|	TaxList.Ref,
-		|	TaxList.Key
-		|;";
-		ErrorsArray.Add(ErrorWithTax());
-	Else
-		QueryText = QueryText + "
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemList.Ref,
-		|	ItemList.Key,
-		|	0 As Amount
-		|INTO TaxList
-		|FROM
-		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
-		|WHERE FALSE
-		|;";
-	EndIf;
+	//#@2094
+//	If MetaDoc.TabularSections.Find("TaxList") <> Undefined Then
+//		QueryText = QueryText + "
+//		|////////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	TaxList.Ref,
+//		|	TaxList.Key,
+//		|	SUM(TaxList.ManualAmount) As Amount
+//		|INTO TaxList
+//		|FROM
+//		|	" + MetaDoc.FullName() + ".TaxList AS TaxList
+//		|WHERE
+//		|	TaxList.Ref IN (&Refs)
+//		|GROUP BY
+//		|	TaxList.Ref,
+//		|	TaxList.Key
+//		|;";
+//		ErrorsArray.Add(ErrorWithTax());
+//	Else
+//		QueryText = QueryText + "
+//		|////////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	ItemList.Ref,
+//		|	ItemList.Key,
+//		|	0 As Amount
+//		|INTO TaxList
+//		|FROM
+//		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
+//		|WHERE FALSE
+//		|;";
+//	EndIf;
 	
 	If MetaDoc.TabularSections.Find("RowIDInfo") <> Undefined Then
 		QueryText = QueryText + "
@@ -924,9 +931,10 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 	|		ON ItemList.Ref = SerialLotNumbers.Ref
 	|			AND ItemList.Key = SerialLotNumbers.Key
-	|		LEFT JOIN TaxList AS TaxList
-	|		ON ItemList.Ref = TaxList.Ref
-	|			AND ItemList.Key = TaxList.Key
+	//#@2094
+//	|		LEFT JOIN TaxList AS TaxList
+//	|		ON ItemList.Ref = TaxList.Ref
+//	|			AND ItemList.Key = TaxList.Key
 	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 	|		ON ItemList.Ref = SourceOfOrigins.Ref
 	|			AND ItemList.Key = SourceOfOrigins.Key
@@ -1052,7 +1060,7 @@ Function GetAllErrorsDescription() Export
 	Return Result;
 	
 EndFunction
-
+ 
 // Get error description.
 // 
 // Returns:

@@ -109,6 +109,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -122,7 +123,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ShipmentConfirmationsInfo());
-	QueryArray.Add(Taxes());
+	//#@2094
+//	QueryArray.Add(Taxes());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -210,7 +212,9 @@ Function ItemList()
 		   |	PurchaseReturnItemList.OffersAmount,
 		   |	PurchaseReturnItemList.Detail AS Detail,
 		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
-		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor
+		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor,
+		   |	PurchaseReturnItemList.VatRate AS VatRate,
+		   |	PurchaseReturnItemList.TaxAmount AS TaxAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -279,29 +283,30 @@ Function ShipmentConfirmationsInfo()
 		   |	PurchaseReturnShipmentConfirmations.Ref = &Ref";
 EndFunction
 
-Function Taxes()
-	Return "SELECT
-		   |	TaxList.Ref.Date AS Period,
-		   |	TaxList.Ref.Company AS Company,
-		   |	TaxList.Tax AS Tax,
-		   |	TaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN TaxList.ManualAmount = 0
-		   |			THEN TaxList.Amount
-		   |		ELSE TaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	ItemList.NetAmount AS TaxableAmount,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
-		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor
-		   |INTO Taxes
-		   |FROM
-		   |	Document.PurchaseReturn.ItemList AS ItemList
-		   |		INNER JOIN Document.PurchaseReturn.TaxList AS TaxList
-		   |		ON ItemList.Key = TaxList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |		AND TaxList.Ref = &Ref";
-EndFunction
+//#@2094
+//Function Taxes()
+//	Return "SELECT
+//		   |	TaxList.Ref.Date AS Period,
+//		   |	TaxList.Ref.Company AS Company,
+//		   |	TaxList.Tax AS Tax,
+//		   |	TaxList.TaxRate AS TaxRate,
+//		   |	CASE
+//		   |		WHEN TaxList.ManualAmount = 0
+//		   |			THEN TaxList.Amount
+//		   |		ELSE TaxList.ManualAmount
+//		   |	END AS TaxAmount,
+//		   |	ItemList.NetAmount AS TaxableAmount,
+//		   |	ItemList.Ref.Branch AS Branch,
+//		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
+//		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor
+//		   |INTO Taxes
+//		   |FROM
+//		   |	Document.PurchaseReturn.ItemList AS ItemList
+//		   |		INNER JOIN Document.PurchaseReturn.TaxList AS TaxList
+//		   |		ON ItemList.Key = TaxList.Key
+//		   |		AND ItemList.Ref = &Ref
+//		   |		AND TaxList.Ref = &Ref";
+//EndFunction
 
 Function SourceOfOrigins()
 	Return "SELECT
@@ -576,16 +581,32 @@ Function R1031B_ReceiptInvoicing()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	-Taxes.TaxableAmount,
-		   |	-Taxes.TaxAmount,
-		   |	*
-		   |INTO R1040B_TaxesOutgoing
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	Taxes.IsReturnToVendor";
+	//#@2094
+//	Return "SELECT
+//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+//		   |	-Taxes.TaxableAmount,
+//		   |	-Taxes.TaxAmount,
+//		   |	*
+//		   |INTO R1040B_TaxesOutgoing
+//		   |FROM
+//		   |	Taxes AS Taxes
+//		   |WHERE
+//		   |	Taxes.IsReturnToVendor";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	-ItemList.NetAmount AS TaxableAmount,
+		|	-ItemList.TaxAmount AS TaxAmount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	ItemList AS ItemLIst
+		|WHERE
+		|	ItemList.IsReturnToVendor";	
 EndFunction
 
 Function R4010B_ActualStocks()

@@ -2638,26 +2638,26 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click "Select" button	
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "984,66"		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "980,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Total amount'   |
 		| '50,00'          |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "934,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "930,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 014,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 010,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
 			| 'Total amount'   | 'Partner'   | 'Partner term'                       | 'Payer'              |
-			| '554,66'         | 'Kalipso'   | 'Basic Partner terms, without VAT'   | 'Company Kalipso'    |
+			| '550,00'         | 'Kalipso'   | 'Basic Partner terms, without VAT'   | 'Company Kalipso'    |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 569,32"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 560,00"
 		And I close all client application windows
 		
 		

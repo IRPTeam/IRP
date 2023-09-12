@@ -143,12 +143,12 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
+//	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
 		//#@2094
 //		Property = New Structure("DataPath", "ItemList.<tax_rate>");
-		Property = New Structure("DataPath", "ItemList.VatRate");
-		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-	EndIf;
+//		Property = New Structure("DataPath", "ItemList.VatRate");
+//		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+//	EndIf;
 EndProcedure
 
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export

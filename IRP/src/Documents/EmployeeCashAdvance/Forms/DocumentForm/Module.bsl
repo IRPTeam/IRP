@@ -174,11 +174,12 @@ EndProcedure
 
 #EndRegion
 
+//#@2094
 #Region TAX_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocEmployeeCashAdvanceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocEmployeeCashAdvanceClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -413,11 +413,12 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+//#@2094
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure ItemListVatRateOnChange(Item) Export
+	DocPurchaseInvoiceClient.ItemListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

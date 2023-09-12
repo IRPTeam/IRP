@@ -70,8 +70,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create catalog BillOfMaterials objects
 	When Create information register TaxSettings records
 	When Create information register Taxes records (VAT)
-	When Create information register TaxSettings (Sales tax)
-	When Create information register Taxes records (Sales tax)
 	When Create information register PricesByItemKeys records
 	When Create information register PricesByProperties records
 	When Create catalog IntegrationSettings objects

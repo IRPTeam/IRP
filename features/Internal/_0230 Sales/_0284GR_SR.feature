@@ -43,17 +43,9 @@ Scenario: _028400 preparation (GR-SR)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog BusinessUnits objects
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesInvoice objects
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |

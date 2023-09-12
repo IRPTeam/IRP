@@ -50,12 +50,6 @@ Scenario: _028000 preparation (Sales return order)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
@@ -67,8 +61,6 @@ Scenario: _028000 preparation (Sales return order)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |

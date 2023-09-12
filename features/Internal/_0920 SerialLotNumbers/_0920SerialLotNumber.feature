@@ -64,15 +64,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load documents
 		When Create Physical inventory and Stock adjustment as write-off for link
 		And I execute 1C:Enterprise script at server

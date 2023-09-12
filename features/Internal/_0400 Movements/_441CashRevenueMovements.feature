@@ -55,15 +55,7 @@ Scenario: _044100 preparation (Cash revenue)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog CashAccounts objects (Second Company)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

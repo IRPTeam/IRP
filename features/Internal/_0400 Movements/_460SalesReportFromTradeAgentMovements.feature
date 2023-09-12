@@ -59,16 +59,8 @@ Scenario: _046000 preparation (sales report from trade agent)
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		When Create catalog Companies objects (own Second company)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 	* Post document
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"     |

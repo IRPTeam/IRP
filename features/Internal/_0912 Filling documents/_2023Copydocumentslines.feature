@@ -60,16 +60,8 @@ Scenario: _0155100 preparation ( filling documents)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog CancelReturnReasons objects
 		When Create document SalesInvoice objects (for copy lines)
 		When Create document PhysicalInventory objects (for copy lines)

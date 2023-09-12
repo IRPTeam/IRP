@@ -1651,17 +1651,6 @@ Scenario: Create information register Taxes records (VAT)
 		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'Use'   | 'Priority'   |
 		| '01.01.2020 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'True'  | '5'          |
 
-Scenario: Create information register TaxSettings (Sales tax)
-	
-	And I check or create information register "TaxSettings" records:
-		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'ItemKey'  | 'Item'  | 'ItemType'  | 'Agreement'  | 'TaxRate'                                                            |
-		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | ''         | ''      | ''          | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013'   |
-
-Scenario: Create information register Taxes records (Sales tax)
-
-	And I check or create information register "Taxes" records:
-		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'Use'   | 'Priority'   |
-		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'True'  | '2'          |
 
 Scenario: Create information register PricesByItemKeys records
 

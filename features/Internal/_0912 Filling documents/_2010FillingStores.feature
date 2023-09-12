@@ -49,15 +49,8 @@ Scenario: _201000 preparation ( filling stores)
 		When Create information register CurrencyRates records
 		When Create information register UserSettings records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+
 	
 Scenario: _2010001 check preparation
 	When check preparation

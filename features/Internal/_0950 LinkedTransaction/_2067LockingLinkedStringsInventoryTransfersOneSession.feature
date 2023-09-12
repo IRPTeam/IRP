@@ -47,17 +47,9 @@ Scenario: _2067001 preparation (locking linked strings)
 		When Create information register CurrencyRates records
 		When Create catalog CancelReturnReasons objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Item with SerialLotNumbers (Phone)
 	When Create ISR,ITO,IT,SC (locking linked strings)
 	And I execute 1C:Enterprise script at server

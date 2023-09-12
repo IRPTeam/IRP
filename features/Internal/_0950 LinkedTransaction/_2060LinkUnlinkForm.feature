@@ -63,17 +63,9 @@ Scenario: _2060001 preparation
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Item with SerialLotNumbers (Phone)
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)

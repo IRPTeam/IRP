@@ -77,16 +77,8 @@ Scenario: _05502 preparation (commission products sales)
 			| 'Workstation 01'    |
 		And I click "Set current workstation" button
 		When Create catalog Items objects (commission trade)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 	* Setting for Company
 		When settings for Company (commission trade)
 	* Load documents

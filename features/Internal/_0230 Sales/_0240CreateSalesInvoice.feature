@@ -56,12 +56,6 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Partners objects
 		When Create Document discount
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -69,8 +63,6 @@ Scenario: _024000 preparation (Sales invoice)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount	
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 	When Create document SalesOrder objects (SC before SI, creation based on)
 	And I execute 1C:Enterprise script at server

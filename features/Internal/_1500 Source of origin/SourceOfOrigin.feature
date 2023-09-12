@@ -63,12 +63,6 @@ Scenario: _150041 preparation
 		When Create catalog SourceOfOrigins objects
 		When Create catalog PaymentTypes objects
 		When Create catalog BankTerms objects (for Shop 02)	
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Landed cost settings for company	
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -101,8 +95,6 @@ Scenario: _150041 preparation
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Second Company (Company) *" window closing in 20 seconds
-	* Tax settings
-		When filling in Tax settings for company
 	And I close all client application windows
 
 Scenario: _150042 check preparation

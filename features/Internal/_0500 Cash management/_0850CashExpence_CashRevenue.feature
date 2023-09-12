@@ -46,15 +46,7 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create document CashRevenue objects
 		When Create catalog Partners objects
 		When Create catalog CashAccounts objects (Second Company)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Post
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |

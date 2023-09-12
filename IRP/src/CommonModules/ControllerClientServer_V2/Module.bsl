@@ -830,6 +830,11 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("CashPayment", "StepChangeTaxVisible");
 	Binding.Insert("CashReceipt", "StepChangeTaxVisible");
 	
+	Binding.Insert("EmployeeCashAdvance"       , "StepChangeTaxVisible");
+	Binding.Insert("SalesReportFromTradeAgent" , "StepChangeTaxVisible");
+	Binding.Insert("SalesReportToConsignor"    , "StepChangeTaxVisible");
+	Binding.Insert("WorkOrder"                 , "StepChangeTaxVisible");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFormOnOpen");
 EndFunction
 
@@ -12135,7 +12140,7 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged"
+			Or WhoIsChanged = "IsVatRateChanged"
 			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable     = True;
@@ -12155,7 +12160,8 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculatePriceByTotalAmount.Enable = True;
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
-			Options.TaxOptions.UseManualAmount = True;
+			//#@2094
+//			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;

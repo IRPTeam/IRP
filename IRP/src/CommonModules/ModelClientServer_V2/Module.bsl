@@ -483,22 +483,36 @@ EndFunction
 #Region ITEM_LIST_VAT_RATE
 
 Function DefaultVatRateInListOptions() Export
-	Return GetChainLinkOptions("CurrentVatRate, Date, Company, ItemKey, Agreement, TransactionType");
+	Return GetChainLinkOptions("CurrentVatRate, Date, Company, ItemKey, Agreement, TransactionType, DocumentName");
 EndFunction
 
 Function DefaultVatRateInListExecute(Options) Export
-		If ValueIsFilled(Options.CurrentVatRate) Then
-			Return Options.CurrentVatRate;
-		EndIf;
+	
+	
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
+	
+	_visible = _arrayOfTaxes.Count() <> 0;
+	If Not _visible Then
+		Return Undefined;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentVatRate) Then
+		Return Options.CurrentVatRate;
+	EndIf;
 		
-		Parameters = New Structure();
-		Parameters.Insert("Date"    , Options.Date);
-		Parameters.Insert("Company" , Options.Company);
-		Parameters.Insert("ItemKey"         , Options.ItemKey);
-		Parameters.Insert("Agreement"       , Options.Agreement);
-		Parameters.Insert("TransactionType" , Options.TransactionType);
-		
-		Return TaxesServer.GetVatRateByPriority(Parameters);
+	Parameters = New Structure();
+	Parameters.Insert("Date"    , Options.Date);
+	Parameters.Insert("Company" , Options.Company);
+	Parameters.Insert("ItemKey"         , Options.ItemKey);
+	Parameters.Insert("Agreement"       , Options.Agreement);
+	Parameters.Insert("TransactionType" , Options.TransactionType);
+	TaxRate = TaxesServer.GetVatRateByPriority(Parameters); 
+	Return TaxRate;
 EndFunction
 
 #EndRegion
@@ -2559,7 +2573,7 @@ Function CalculationsOptions() Export
 	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
 	//TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount, IsAlreadyCalculated");
 	//TaxOptions.Insert("TaxList", New Array());
-	TaxOptions = New Structure("PriceIncludeTax, VatRate");
+	TaxOptions = New Structure("PriceIncludeTax, VatRate, UseManualAmount");
 	Options.Insert("TaxOptions", TaxOptions);
 	
 	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit, QuantityIsFixed");
@@ -2737,7 +2751,11 @@ Function CalculationsExecute(Options) Export
 			
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, True);
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
 				//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
@@ -2754,7 +2772,11 @@ Function CalculationsExecute(Options) Export
 			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
 				//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
@@ -2769,7 +2791,11 @@ Function CalculationsExecute(Options) Export
 		Else
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, True);
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
 				//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
@@ -2790,19 +2816,27 @@ Function CalculationsExecute(Options) Export
 			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
 				//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
 
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
-				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 			EndIf;
 		EndIf;
 	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, True);
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
 			//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 		EndIf;
@@ -2815,25 +2849,38 @@ Function CalculationsExecute(Options) Export
 		//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
 			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
 		EndIf;
 
 		If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
-			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
 
 		If Options.CalculateTaxAmountByNetAmount.Enable And IsCalculatedRow Then
 			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-			Result.TaxAmount =  CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
+			Result.TaxAmount =  CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
 			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
 		EndIf;
 
 		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
 			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
-			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, True, UserManualAmountsFromBasisDocument);
 		EndIf;
 
@@ -2846,7 +2893,7 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 
 		If Options.CalculateTotalAmountByNetAmount.Enable And IsCalculatedRow Then
-			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
 	EndIf;
 	Return Result;
@@ -2860,7 +2907,10 @@ Function CalculateTotalAmount_PriceIncludeTax(PriceOptions, Result)
 	EndIf;
 EndFunction
 
-Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, Result)
+Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, TaxOptions, AmountOptions, Result)
+	If Not ValueIsFilled(TaxOptions.VatRate) Then
+		Return AmountOptions.TotalAmount;
+	EndIf;
 	Return Result.NetAmount + Result.TaxAmount;
 EndFunction
 
@@ -2891,7 +2941,11 @@ Function _CalculateAmount(PriceOptions, Result)
 	Return Result.TotalAmount;
 EndFunction
 
-Function CalculateTaxAmount(RateRef, PriceIncludeTax, TotalAmount, NetAmount, Reverse)
+Function CalculateTaxAmount(RateRef, PriceIncludeTax, TotalAmount, NetAmount, Reverse, UseManualAmount, ManualTaxAmount)
+	If UseManualAmount = True Then
+		Return ManualTaxAmount;
+	EndIf;
+	
 	If Not ValueIsFilled(RateRef) Then
 		Rate = 0;
 	Else	

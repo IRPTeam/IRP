@@ -6826,6 +6826,7 @@ Procedure StepPaymentListDefaultVatRateInList(Parameters, Chain) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
 		Options.TransactionType = GetTransactionType(Parameters);
 	EndIf;
+	Options.DocumentName = Parameters.ObjectMetadataInfo.MetadataName;
 	Options.Key = NewRow.Key;
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
@@ -7202,7 +7203,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		// enable use ManualAmount when calculating TaxAmount
 		
 			//#@2094
-			//Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -10898,6 +10899,7 @@ Procedure StepItemListDefaultVatRateInList(Parameters, Chain) Export
 	Options.Agreement       = GetAgreement(Parameters);
 	Options.TransactionType = GetTransactionType(Parameters);
 	Options.ItemKey         = GetItemListItemKey(Parameters, NewRow.Key);
+	Options.DocumentName    = Parameters.ObjectMetadataInfo.MetadataName;
 	Options.Key = NewRow.Key;
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
@@ -12076,7 +12078,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
 			//#@2094
-			//Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -12161,7 +12163,7 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
 			//#@2094
-//			Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;

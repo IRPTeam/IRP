@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="183bc5bc-c629-4713-9d56-044a0410d957">
+ <name>Document_ReconciliationStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Reconciliation statement"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Reconciliation statement"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Reconciliation statement"</value>
+ </synonym>
+</mdclass:Role>

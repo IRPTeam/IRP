@@ -319,6 +319,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>BankPaymentTypeListSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -357,6 +358,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>BankPaymentTypeListViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -395,6 +397,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>BankPaymentTypeListSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2076,7 +2079,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__7РасширеннаяПодсказка</name>
+         <name>__7ExtendedTooltip</name>
          <id>62</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2126,7 +2129,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__4РасширеннаяПодсказка</name>
+         <name>__4ExtendedTooltip</name>
          <id>64</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2176,7 +2179,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__1РасширеннаяПодсказка</name>
+         <name>__1ExtendedTooltip</name>
          <id>66</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2226,7 +2229,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__0РасширеннаяПодсказка</name>
+         <name>__0ExtendedTooltip</name>
          <id>68</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2325,7 +2328,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__8РасширеннаяПодсказка</name>
+         <name>__8ExtendedTooltip</name>
          <id>74</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2375,7 +2378,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__5РасширеннаяПодсказка</name>
+         <name>__5ExtendedTooltip</name>
          <id>76</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2425,7 +2428,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__2РасширеннаяПодсказка</name>
+         <name>__2ExtendedTooltip</name>
          <id>78</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2577,7 +2580,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__9РасширеннаяПодсказка</name>
+         <name>__9ExtendedTooltip</name>
          <id>86</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2627,7 +2630,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__6РасширеннаяПодсказка</name>
+         <name>__6ExtendedTooltip</name>
          <id>88</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -2677,7 +2680,7 @@
          <common>true</common>
         </userVisible>
         <extendedTooltip>
-         <name>__3РасширеннаяПодсказка</name>
+         <name>__3ExtendedTooltip</name>
          <id>90</id>
          <visible>true</visible>
          <enabled>true</enabled>

@@ -1202,6 +1202,7 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
+   <source>SalesSearchString</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1240,6 +1241,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
+   <source>SalesViewStatus</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1278,6 +1280,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
+   <source>SalesSearchControl</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1325,6 +1328,7 @@
   <horizontalStretch>true</horizontalStretch>
   <verticalStretch>true</verticalStretch>
   <fileDragMode>AsFileRef</fileDragMode>
+  <rowFilter xsi:type="core:UndefinedValue"/>
  </items>
  <autoCommandBar>
   <name>FormCommandBar</name>

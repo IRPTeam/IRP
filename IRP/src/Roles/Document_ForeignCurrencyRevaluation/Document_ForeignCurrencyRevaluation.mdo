@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="335ef4eb-0cd0-432f-993a-386759c85c47">
+ <name>Document_ForeignCurrencyRevaluation</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Foreign currency revaluation"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Foreign currency revaluation"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Foreign currency revaluation"</value>
+ </synonym>
+</mdclass:Role>

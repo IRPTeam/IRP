@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6a0e0fc8-bce1-401f-a0bc-3cd454b1ff4f">
+ <name>Document_GoodsReceipt</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Goods receipt"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Goods receipt"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Goods receipt"</value>
+ </synonym>
+</mdclass:Role>

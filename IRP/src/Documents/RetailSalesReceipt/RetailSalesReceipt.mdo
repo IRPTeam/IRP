@@ -527,6 +527,32 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="f7f30a31-5078-436b-b7ec-39d64a799150">
+  <name>StatusType</name>
+  <synonym>
+   <key>en</key>
+   <value>Status type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип статуса</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Statü tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.RetailReceiptStatusTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.RetailReceiptStatusTypes.EnumValue.Completed</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="ade3ff64-36f9-4345-b026-7e6083d5c4c0">
   <name>DocumentForm</name>
   <synonym>
@@ -3348,7 +3374,7 @@
    <key>tr</key>
    <value>Fiş yazdır</value>
   </synonym>
-  <group>FormCommandBarImportant</group>
+  <group>CommandGroup.Fiscalization</group>
   <commandParameterType>
    <types>DocumentRef.RetailSalesReceipt</types>
   </commandParameterType>
@@ -3369,7 +3395,7 @@
    <key>tr</key>
    <value>Print copy receipt</value>
   </synonym>
-  <group>FormCommandBarImportant</group>
+  <group>CommandGroup.Fiscalization</group>
   <commandParameterType>
    <types>DocumentRef.RetailSalesReceipt</types>
   </commandParameterType>

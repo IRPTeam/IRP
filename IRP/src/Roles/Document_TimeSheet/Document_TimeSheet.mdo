@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4148d127-4da6-461a-825b-b3f077b6d7c5">
+ <name>Document_TimeSheet</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Time sheet"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Time sheet"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Time sheet"</value>
+ </synonym>
+</mdclass:Role>

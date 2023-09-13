@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="786913e6-98d7-4c86-917b-de662e704721">
+ <name>Document_SalesReturnOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Sales return order"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Sales return order"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Sales return order"</value>
+ </synonym>
+</mdclass:Role>

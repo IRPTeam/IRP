@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b3f23163-6159-48c1-b017-4f49a173e123">
+ <name>Document_VendorsAdvancesClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Vendors advances closing"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Vendors advances closing"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Vendors advances closing"</value>
+ </synonym>
+</mdclass:Role>

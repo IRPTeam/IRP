@@ -304,6 +304,76 @@
  <roles>Role.UseExternalReports</roles>
  <roles>Role.UseOutput</roles>
  <roles>Role.UseGroupEditingProperties</roles>
+ <roles>Role.Document_AdditionalCostAllocation</roles>
+ <roles>Role.Document_AdditionalRevenueAllocation</roles>
+ <roles>Role.Document_BankPayment</roles>
+ <roles>Role.Document_BankReceipt</roles>
+ <roles>Role.Document_BatchReallocateIncoming</roles>
+ <roles>Role.Document_BatchReallocateOutgoing</roles>
+ <roles>Role.Document_Bundling</roles>
+ <roles>Role.Document_CalculationMovementCosts</roles>
+ <roles>Role.Document_CashExpense</roles>
+ <roles>Role.Document_CashPayment</roles>
+ <roles>Role.Document_CashReceipt</roles>
+ <roles>Role.Document_CashRevenue</roles>
+ <roles>Role.Document_CashStatement</roles>
+ <roles>Role.Document_CashTransferOrder</roles>
+ <roles>Role.Document_ChequeBondTransaction</roles>
+ <roles>Role.Document_ChequeBondTransactionItem</roles>
+ <roles>Role.Document_ConsolidatedRetailSales</roles>
+ <roles>Role.Document_CreditNote</roles>
+ <roles>Role.Document_CustomersAdvancesClosing</roles>
+ <roles>Role.Document_DebitNote</roles>
+ <roles>Role.Document_EmployeeCashAdvance</roles>
+ <roles>Role.Document_ForeignCurrencyRevaluation</roles>
+ <roles>Role.Document_GoodsReceipt</roles>
+ <roles>Role.Document_IncomingPaymentOrder</roles>
+ <roles>Role.Document_InternalSupplyRequest</roles>
+ <roles>Role.Document_InventoryTransfer</roles>
+ <roles>Role.Document_InventoryTransferOrder</roles>
+ <roles>Role.Document_ItemStockAdjustment</roles>
+ <roles>Role.Document_JournalEntry</roles>
+ <roles>Role.Document_Labeling</roles>
+ <roles>Role.Document_ManualRegisterEntry</roles>
+ <roles>Role.Document_MoneyTransfer</roles>
+ <roles>Role.Document_OpeningEntry</roles>
+ <roles>Role.Document_OutgoingPaymentOrder</roles>
+ <roles>Role.Document_Payroll</roles>
+ <roles>Role.Document_PhysicalCountByLocation</roles>
+ <roles>Role.Document_PhysicalInventory</roles>
+ <roles>Role.Document_PlannedReceiptReservation</roles>
+ <roles>Role.Document_PriceList</roles>
+ <roles>Role.Document_Production</roles>
+ <roles>Role.Document_ProductionCostsAllocation</roles>
+ <roles>Role.Document_ProductionPlanning</roles>
+ <roles>Role.Document_ProductionPlanningClosing</roles>
+ <roles>Role.Document_ProductionPlanningCorrection</roles>
+ <roles>Role.Document_PurchaseInvoice</roles>
+ <roles>Role.Document_PurchaseOrder</roles>
+ <roles>Role.Document_PurchaseOrderClosing</roles>
+ <roles>Role.Document_PurchaseReturn</roles>
+ <roles>Role.Document_PurchaseReturnOrder</roles>
+ <roles>Role.Document_ReconciliationStatement</roles>
+ <roles>Role.Document_RetailGoodsReceipt</roles>
+ <roles>Role.Document_RetailReturnReceipt</roles>
+ <roles>Role.Document_RetailSalesReceipt</roles>
+ <roles>Role.Document_RetailShipmentConfirmation</roles>
+ <roles>Role.Document_SalesInvoice</roles>
+ <roles>Role.Document_SalesOrder</roles>
+ <roles>Role.Document_SalesOrderClosing</roles>
+ <roles>Role.Document_SalesReportFromTradeAgent</roles>
+ <roles>Role.Document_SalesReportToConsignor</roles>
+ <roles>Role.Document_SalesReturn</roles>
+ <roles>Role.Document_SalesReturnOrder</roles>
+ <roles>Role.Document_ShipmentConfirmation</roles>
+ <roles>Role.Document_StockAdjustmentAsSurplus</roles>
+ <roles>Role.Document_StockAdjustmentAsWriteOff</roles>
+ <roles>Role.Document_TimeSheet</roles>
+ <roles>Role.Document_Unbundling</roles>
+ <roles>Role.Document_VendorsAdvancesClosing</roles>
+ <roles>Role.Document_WorkOrder</roles>
+ <roles>Role.Document_WorkOrderClosing</roles>
+ <roles>Role.Document_WorkSheet</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -725,6 +795,7 @@
  <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
  <commandGroups>CommandGroup.Service</commandGroups>
  <commandGroups>CommandGroup.Print</commandGroups>
+ <commandGroups>CommandGroup.Fiscalization</commandGroups>
  <constants>Constant.DefaultFilesStorageVolume</constants>
  <constants>Constant.DefaultPictureStorageVolume</constants>
  <constants>Constant.DefaultSMSProvider</constants>
@@ -1050,6 +1121,7 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
+ <enums>Enum.RetailReceiptStatusTypes</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>

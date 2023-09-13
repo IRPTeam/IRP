@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57f81998-6812-44b6-b621-10b5bcf214cf">
+ <name>Document_RetailShipmentConfirmation</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Retail shipment confirmation"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Retail shipment confirmation"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Retail shipment confirmation"</value>
+ </synonym>
+</mdclass:Role>

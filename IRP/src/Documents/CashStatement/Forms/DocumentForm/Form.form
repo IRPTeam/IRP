@@ -2863,7 +2863,7 @@
     <value>Diğer</value>
    </title>
    <extendedTooltip>
-    <name>Group1ExtendedTooltip2</name>
+    <name>GroupOtherExtendedTooltip</name>
     <id>112</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2904,7 +2904,7 @@
    <value>Satırlar</value>
   </title>
   <extendedTooltip>
-   <name>Group1ExtendedTooltip</name>
+   <name>PagesExtendedTooltip</name>
    <id>108</id>
    <visible>true</visible>
    <enabled>true</enabled>

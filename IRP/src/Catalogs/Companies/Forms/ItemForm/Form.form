@@ -416,7 +416,7 @@
      <name>OurOnChange</name>
     </handlers>
     <extendedTooltip>
-     <name>OurExtendedTooltip</name>
+     <name>OurCompanyExtendedTooltip</name>
      <id>17</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -431,7 +431,7 @@
      </extInfo>
     </extendedTooltip>
     <contextMenu>
-     <name>OurContextMenu</name>
+     <name>OurCompanyContextMenu</name>
      <id>16</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -2593,16 +2593,25 @@
   <navigationPanel>
    <cmiFragmentRecord>
     <command>InformationRegister.Taxes.StandardCommand.OpenByValue.Company</command>
+    <commandParameter xsi:type="form:DataPath">
+     <segments>Object.Ref</segments>
+    </commandParameter>
     <group>FormNavigationPanelGoTo</group>
     <index>2</index>
     <userVisible/>
    </cmiFragmentRecord>
    <cmiFragmentRecord>
     <command>Form.StandardCommand.RestoreValues</command>
+    <commandParameter xsi:type="form:DataPath">
+     <segments>Object.Ref</segments>
+    </commandParameter>
     <userVisible/>
    </cmiFragmentRecord>
    <cmiFragmentRecord>
     <command>InformationRegister.CompanyLedgerTypes.StandardCommand.OpenByValue.Company</command>
+    <commandParameter xsi:type="form:DataPath">
+     <segments>Object.Ref</segments>
+    </commandParameter>
     <group>FormNavigationPanelGoTo</group>
     <index>3</index>
     <userVisible/>

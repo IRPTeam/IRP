@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5d7750a6-b383-4988-beaa-2c32b65d776f">
+ <name>Document_IncomingPaymentOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Incoming payment order"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Incoming payment order"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Incoming payment order"</value>
+ </synonym>
+</mdclass:Role>

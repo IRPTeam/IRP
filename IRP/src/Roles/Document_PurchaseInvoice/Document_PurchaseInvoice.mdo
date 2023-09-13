@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="92bd84c8-fc57-43b5-8cab-a2a2c7150085">
+ <name>Document_PurchaseInvoice</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Purchase invoice"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Purchase invoice"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Purchase invoice"</value>
+ </synonym>
+</mdclass:Role>

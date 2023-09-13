@@ -294,6 +294,7 @@ Veri düzeltilmelidir!</value>
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>ListOfWarningDocumentsSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -332,6 +333,7 @@ Veri düzeltilmelidir!</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>ListOfWarningDocumentsViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -370,6 +372,7 @@ Veri düzeltilmelidir!</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>ListOfWarningDocumentsSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -823,6 +826,7 @@ Take X-reports and compare with the data below.</value>
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>CashTableSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -861,6 +865,7 @@ Take X-reports and compare with the data below.</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>CashTableViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -899,6 +904,7 @@ Take X-reports and compare with the data below.</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>CashTableSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -944,6 +950,7 @@ Take X-reports and compare with the data below.</value>
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <items xsi:type="form:FormField">
     <name>CashConfirm</name>
@@ -1438,6 +1445,7 @@ Take X-reports and compare with the data below.</value>
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>TerminalTableSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1476,6 +1484,7 @@ Take X-reports and compare with the data below.</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>TerminalTableViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1514,6 +1523,7 @@ Take X-reports and compare with the data below.</value>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>TerminalTableSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1559,6 +1569,7 @@ Take X-reports and compare with the data below.</value>
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <items xsi:type="form:FormField">
     <name>TerminalConfirm</name>

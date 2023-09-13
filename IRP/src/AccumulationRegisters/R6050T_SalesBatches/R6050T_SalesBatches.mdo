@@ -298,6 +298,69 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="ed2cd482-1d4d-4069-b087-a176f25e3e18">
+  <name>TotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Total amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Общая сумма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="15e6709c-5b05-4500-97c9-c246b9935733">
+  <name>TotalNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Total net amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam net tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="bb958b81-0d3c-4f03-9e01-71a88595b760">
+  <name>TotalTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Total tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Налоги</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam vergi tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
   <name>Batch</name>
   <synonym>

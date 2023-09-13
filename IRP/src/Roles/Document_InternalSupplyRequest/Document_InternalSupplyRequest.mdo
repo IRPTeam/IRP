@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38a848bd-c887-4f72-beee-c4828c72c1f9">
+ <name>Document_InternalSupplyRequest</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Internal supply request"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Internal supply request"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Internal supply request"</value>
+ </synonym>
+</mdclass:Role>

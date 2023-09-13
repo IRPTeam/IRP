@@ -1062,6 +1062,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>StaffingSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1100,6 +1101,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>StaffingViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1138,6 +1140,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>StaffingSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1478,6 +1481,9 @@ WHERE
   <navigationPanel>
    <cmiFragmentRecord>
     <command>InformationRegister.PartnerSegments.StandardCommand.OpenByValue.Partner</command>
+    <commandParameter xsi:type="form:DataPath">
+     <segments>Object.Ref</segments>
+    </commandParameter>
     <group>FormNavigationPanelSeeAlso</group>
     <index>0</index>
     <userVisible>

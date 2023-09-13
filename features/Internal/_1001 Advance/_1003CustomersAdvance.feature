@@ -553,17 +553,25 @@ Scenario: _1003062 generate Offset of advance report based on CustomersAdvancesC
 		And I close all client application windows
 						
 	
-
-
-	
-		
-
-	
-		
-	
-	
-		
-
-
-
-
+Scenario: _1003064 check advance closing when SI has two same strings
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CustomersAdvancesClosing.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"     |
+	* Check advance closing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '21'        |
+		And I click "Offset of advances" button
+	* Check
+		And "Doc" spreadsheet document contains "OffsetOfAdvanceCustomerLunch" template lines by template
+	And I close all client application windows

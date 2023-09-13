@@ -434,6 +434,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>DocumentListSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -472,6 +473,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>DocumentListViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -510,6 +512,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>DocumentListSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -563,6 +566,7 @@
     <rowsPicture xsi:type="core:PictureRef">
      <picture>CommonPicture.DocumentStatuses</picture>
     </rowsPicture>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1158,6 +1162,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>CheckListSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1196,6 +1201,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>CheckListViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1234,6 +1240,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>CheckListSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1598,6 +1605,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>ErrorsGroupsSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1636,6 +1644,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>ErrorsGroupsViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1674,6 +1683,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>ErrorsGroupsSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1780,6 +1790,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>

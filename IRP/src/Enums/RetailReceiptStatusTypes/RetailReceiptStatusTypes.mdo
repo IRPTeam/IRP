@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="41dc0184-e5f2-4024-81cc-3cc610a709aa">
+ <producedTypes>
+  <refType typeId="ff26dd47-a500-4ca4-a902-c3d7d357087b" valueTypeId="6f2aa93f-1142-45bf-9e2d-e81e19b6cfca"/>
+  <listType typeId="4426fd46-bf6d-4d4a-b139-d0a74862b195" valueTypeId="33739eb6-a2d8-44b1-9764-6956e2ba0802"/>
+  <managerType typeId="7216c478-b2f4-4b72-90d2-0a73d6c407d6" valueTypeId="472de2a9-928d-400c-800f-7bf1b27c93df"/>
+ </producedTypes>
+ <name>RetailReceiptStatusTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>Retail receipt status types</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы статусов розничных чеков</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Retail receipt status types</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="fb121f4b-f6a7-4c35-91d7-fb78e03564d1">
+  <name>Completed</name>
+  <synonym>
+   <key>en</key>
+   <value>Completed</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Завершен</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tamamlandı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="720f01c6-7145-42a0-88df-0dc8627873d5">
+  <name>Canceled</name>
+  <synonym>
+   <key>en</key>
+   <value>Canceled</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Canceled</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Canceled</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="058dc9ae-28ba-4b59-81a4-e26e27225be4">
+  <name>Postponed</name>
+  <synonym>
+   <key>en</key>
+   <value>Postponed</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отложен</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelendi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="214e36d1-e51a-4c74-a790-2bb6c47aafcb">
+  <name>PostponedWithReserve</name>
+  <synonym>
+   <key>en</key>
+   <value>Postponed with reserve</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отложен с резервированием</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Postponed with reserve</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

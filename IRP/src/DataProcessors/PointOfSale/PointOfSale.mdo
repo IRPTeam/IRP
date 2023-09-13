@@ -275,4 +275,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="3c9fcf58-7924-4e6f-afba-0db5708c8823">
+  <name>SelectPostponedReceipt</name>
+  <synonym>
+   <key>en</key>
+   <value>Select postponed receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выбор отложенного чека</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Select postponed receipt</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

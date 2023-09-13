@@ -831,7 +831,7 @@
    <key>tr</key>
    <value>Nakit çıkışı yazdır</value>
   </synonym>
-  <group>FormCommandBarImportant</group>
+  <group>CommandGroup.Fiscalization</group>
   <commandParameterType>
    <types>DocumentRef.MoneyTransfer</types>
   </commandParameterType>

@@ -724,6 +724,12 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en='Fiscal device not set.';
 		|ru='Фискальное устройство не установлено.';
 		|tr='Fiscal device not set.'", Lang));
+	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en='Document in not posted.';
+		|ru='Документ не проведен.';
+		|tr='Document in not posted.'", Lang));
+	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en='Document can be printed only in Complete status.';
+		|ru='Документ может быть напечатан только в статусе Завершено.';
+		|tr='Document can be printed only in Complete status.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
@@ -822,6 +828,13 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en='Scan control string for each item.';
 		|ru='Сканировать котнрольные коды для каждого элемента';
 		|tr='Scan control string for each item.'", Lang));
+	
+	Strings.Insert("POS_ClearAllItems", NStr("en='Clear all items before continuing';
+		|ru='Очистите все элементы перед продолжением';
+		|tr='Clear all items before continuing'", Lang));
+	Strings.Insert("POS_CancelPostponed", NStr("en='%1 postponed receipts cancelled';
+		|ru='%1 отложенных чеков отменено';
+		|tr='%1 postponed receipts cancelled'", Lang));
 	
 #EndRegion
 

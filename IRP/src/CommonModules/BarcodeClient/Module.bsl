@@ -15,8 +15,6 @@
 // * Filter - Structure:
 // ** DisableIfIsService - Boolean
 Function GetBarcodeSettings() Export
-	Settings = New Structure();
-	Settings.Insert("Form", Undefined);
 	Settings.Insert("Object", Undefined);
 	Settings.Insert("AddInfo", New Structure());
 	Settings.Insert("ReturnCallToModule", DocumentsClient);

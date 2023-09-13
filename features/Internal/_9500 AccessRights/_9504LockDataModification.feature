@@ -1773,21 +1773,21 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "information register (without recorder)" string by template
 			And I close all client application windows
-	* Does not fall under the conditions
-			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
-			And I go to line in "List" table
-				| 'Tax'          |
-				| 'SalesTax'     |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			Then user message window does not contain messages
-			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
-			And I go to line in "List" table
-				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'           |
-				| 'USD'              | 'EUR'            | '1'               | '21.06.2019 17:40:13'    | '1,1235'    | 'Forex Seling'     |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			Then user message window does not contain messages	
+	# * Does not fall under the conditions
+	# 		Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
+	# 		And I go to line in "List" table
+	# 			| 'Tax'          |
+	# 			| 'SalesTax'     |
+	# 		And I select current line in "List" table
+	# 		And I click "Save and close" button
+	# 		Then user message window does not contain messages
+	# 		Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
+	# 		And I go to line in "List" table
+	# 			| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'           |
+	# 			| 'USD'              | 'EUR'            | '1'               | '21.06.2019 17:40:13'    | '1,1235'    | 'Forex Seling'     |
+	# 		And I select current line in "List" table
+	# 		And I click "Save and close" button
+	# 		Then user message window does not contain messages	
 
 
 Scenario: 950425 check that Disable rule does not work

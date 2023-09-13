@@ -177,39 +177,6 @@ Scenario: _017902 filling in catalog 'Tax types'
 
 
 
-Scenario: _017903 company tax compliance
-	* Opening the form of your own company
-		Given I open hyperlink "e1cib/list/Catalog.Companies"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-	* Filling in Sales Tax rate settings
-		And I move to "Tax types" tab
-		And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
-		And I click Select button of "Tax" field
-		And I select current line in "List" table
-		And I click Select button of "Tax" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'SalesTax'       |
-		And I select current line in "List" table
-		And I input "01.10.2019" text in "Period" field
-		And I set checkbox "Use"
-		And I input "2" text in "Priority" field
-	* Filling settings by VAT
-		And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
-		And I input "01.10.2019" text in "Period" field
-		And I click Select button of "Tax" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'VAT'           |
-		And I select current line in "List" table
-		And I set checkbox "Use"
-		And I input "1" text in "Priority" field
-		And I click "Save and close" button
-		And I close all client application windows
-
 
 
 

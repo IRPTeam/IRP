@@ -1034,8 +1034,7 @@ Scenario: Create catalog Taxes objects (LC)
 	And I check or create catalog "Taxes" objects:
 		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'                                                          | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'No'            | '0'     | 'ValueStorage'              | 'e1cib/data/Catalog.ExternalDataProc?ref=86ffd69b4676df1211ea9f6a798343c3'  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c'  | 'No'            | '0'     | 'ValueStorage'              | 'e1cib/data/Catalog.ExternalDataProc?ref=86ffd69b4676df1211ea9f6a798343c3'  | 'Enum.TaxType.Rate'  | 'SalesTax'        | ''                  | ''                | ''                 |
-
+		
 	And I refill object tabular section "TaxRates":
 		| 'Ref'                                                            | 'TaxRate'                                                            |
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f6519d5c878'   |

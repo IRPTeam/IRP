@@ -650,6 +650,14 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 //			EndDo;
 //			Result.RowData.Insert("TaxInfo", TaxInfo);
 //		EndIf;
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "VatRate") Then
+			TaxInfo = New Structure();
+			TaxInfo.Insert("Key", TableRow.Key);
+			TaxInfo.Insert("Tax", TaxesServer.GetVatRef());
+			Result.RowData.Insert("TaxInfo", TaxInfo);
+		EndIf;
+		
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;

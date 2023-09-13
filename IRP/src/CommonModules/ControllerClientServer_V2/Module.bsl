@@ -6826,11 +6826,12 @@ Procedure StepPaymentListDefaultVatRateInList(Parameters, Chain) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
 		Options.TransactionType = GetTransactionType(Parameters);
 	EndIf;
+	Options.DocumentName = Parameters.ObjectMetadataInfo.MetadataName;
 	Options.Key = NewRow.Key;
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
 
-// ItemList.VatRate.ChangeVatRate_AgreementInList.Step
+// PaymentList.VatRate.ChangeVatRate_AgreementInList.Step
 Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	Chain.ChangeVatRate.Enable = True;
 	
@@ -6870,7 +6871,7 @@ Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-// ItemList.VatRate.ChangeVatRate_WithoutAgreement.Step
+// PaymentList.VatRate.ChangeVatRate_WithoutAgreement.Step
 Procedure StepChangeVatRate_WithoutAgreement(Parameters, Chain) Export
 	Chain.ChangeVatRate.Enable = True;
 	
@@ -7202,7 +7203,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		// enable use ManualAmount when calculating TaxAmount
 		
 			//#@2094
-			//Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -10898,6 +10899,7 @@ Procedure StepItemListDefaultVatRateInList(Parameters, Chain) Export
 	Options.Agreement       = GetAgreement(Parameters);
 	Options.TransactionType = GetTransactionType(Parameters);
 	Options.ItemKey         = GetItemListItemKey(Parameters, NewRow.Key);
+	Options.DocumentName    = Parameters.ObjectMetadataInfo.MetadataName;
 	Options.Key = NewRow.Key;
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
@@ -12076,7 +12078,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
 			//#@2094
-			//Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -12161,7 +12163,7 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount
 			//#@2094
-//			Options.TaxOptions.UseManualAmount = True;
+			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
@@ -12193,6 +12195,9 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 //		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 //		Options.TaxOptions.TaxList          = Row.TaxList;
 //		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
+		
+		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
+		Options.TaxOptions.VatRate = GetItemListVatRate(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

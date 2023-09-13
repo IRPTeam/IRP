@@ -1,10 +1,18 @@
 
 &AtClient
-Procedure CommandProcessing(ConsolidatedRetailSales, CommandExecuteParameters)
+Async Procedure CommandProcessing(ConsolidatedRetailSales, CommandExecuteParameters)
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
 	If Not CRS.Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open") Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_CanCloseOnlyOpenStatus);
+		Return;
+	EndIf;
+	
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
+	CurrentStatus = Await EquipmentFiscalPrinterClient.GetCurrentStatus(CRS, InputParameters, 4);
+	If Not CurrentStatus.Info.Success Then
+		CommonFunctionsClientServer.ShowUsersMessage(CurrentStatus.Info.Error);
 		Return;
 	EndIf;
 	

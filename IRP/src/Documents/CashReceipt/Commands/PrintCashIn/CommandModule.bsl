@@ -2,9 +2,6 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	PrintCashIn(CommandParameter);
-	//TODO: Paste handler content.
-	//FormParameters = New Structure("", );
-	//OpenForm("Document.Document.ListForm", FormParameters, CommandExecuteParameters.Source, CommandExecuteParameters.Uniqueness, CommandExecuteParameters.Window, CommandExecuteParameters.URL);
 EndProcedure
 
 &AtClient

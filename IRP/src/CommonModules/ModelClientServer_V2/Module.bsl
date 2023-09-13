@@ -2751,7 +2751,8 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
 				
@@ -2786,7 +2787,8 @@ Function CalculationsExecute(Options) Export
 				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
 				
@@ -2810,7 +2812,8 @@ Function CalculationsExecute(Options) Export
 			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);
 		EndIf;
 		
-		If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+		//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
+		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
 			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, Options.TaxOptions.PriceIncludeTax, Result.TotalAmount, Result.NetAmount, False);
 			

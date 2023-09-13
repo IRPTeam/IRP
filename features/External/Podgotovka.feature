@@ -1661,23 +1661,6 @@ Scenario: set True value to the constant UseSimpleMode
 		And I execute 1C:Enterprise script at server
 				| "Constants.UseSimpleMode.Set(True);"     |
 
-Scenario: add sales tax settings 
-		Given I open hyperlink "e1cib/list/Catalog.Taxes"
-		And I go to line in "List" table
-				| 'Description'     |
-				| 'SalesTax'        |
-		And I select current line in "List" table
-		And I click Select button of "Plugins" field
-		And I go to line in "List" table
-				| 'Description'            |
-				| 'TaxCalculateVAT_TR'     |
-		And I select current line in "List" table
-		And I click "Settings" button
-		And I click "Ok" button
-		And I click "Save and close" button
-		And I close all client application windows
-		
-
 
 
 Scenario: add Additional Functionality extension

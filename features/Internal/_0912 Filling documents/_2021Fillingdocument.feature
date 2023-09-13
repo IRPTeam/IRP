@@ -5963,8 +5963,8 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 		* Check filling in prices
 			And "ItemList" table contains lines
 				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
-				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,95'        | '2,000'       | 'pcs'     | 'No'                    | '670,05'        | '800,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
+				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '122,03'        | '2,000'       | 'pcs'     | 'No'                    | '677,97'        | '800,00'          | 'Store 01'     |
+				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '419,49'        | '5,000'       | 'pcs'     | 'No'                    | '2 330,51'      | '2 750,00'        | 'Store 01'     |
 		* Check function DontCalculateRow 
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'     | 'Quantity'     |
@@ -5974,18 +5974,8 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And I finish line editing in "ItemList" table
 			And I activate "Tax amount" field in "ItemList" table
 			And I select current line in "ItemList" table
-			Then "Edit tax" window is opened
-			And I activate "Manual amount" field in "TaxTree" table
-			And I select current line in "TaxTree" table
-			And I input "8,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I go to line in "TaxTree" table
-				| 'Amount'    | 'Row presentation'     |
-				| '122,03'    | 'VAT - TRY - 18%'      |
-			And I select current line in "TaxTree" table
-			And I input "122,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I click "Ok" button
+			And I input "129,92" text in "Tax amount" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'     | 'Quantity'     |
 				| 'Trousers'    | '38/Yellow'    | '2,000'        |
@@ -5996,14 +5986,14 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And "ItemList" table contains lines
 				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,92'        | '2,000'       | ''                 | 'pcs'     | 'Yes'                   | '670,00'        | '801,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
+				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '419,49'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 330,51'      | '2 750,00'        | 'Store 01'     |
 			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,92'        | '2,000'       | ''                 | 'pcs'     | 'Yes'                   | '670,00'        | '801,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "576,64"
+				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '419,49'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 000,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "549,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"
 		* Change tax amount
 			And I go to line in "ItemList" table
@@ -6011,23 +6001,14 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| 'Trousers'    | '38/Yellow'    | '2,000'        |
 			And I activate "Tax amount" field in "ItemList" table
 			And I select current line in "ItemList" table		
-			And I activate "Manual amount" field in "TaxTree" table
-			And I select current line in "TaxTree" table
-			And I input "8,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I go to line in "TaxTree" table
-				| 'Amount'    | 'Row presentation'     |
-				| '122,03'    | 'VAT - TRY - 18%'      |
-			And I select current line in "TaxTree" table
-			And I input "121,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I click "Ok" button
+			And I input "128,92" text in "Tax amount" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '670,00'        | '801,00'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 000,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"			
 		* Change net amount
 			And I go to line in "ItemList" table
@@ -6037,9 +6018,9 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '801,00'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 001,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00""
 		* Change total amount
 			And I go to line in "ItemList" table
@@ -6050,9 +6031,9 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 001,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 550,50""
 		* Add new line and check calculation
 			And in the table "ItemList" I click the button named "ItemListAdd"	
@@ -6072,8 +6053,8 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'           |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'         |
-				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '84,47'         | '435,53'        | '520,00'           |
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'         |
+				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '79,32'         | '440,68'        | '520,00'           |
 		* Check calculation when remove "Price includes tax" checkbox
 			And I move to "Other" tab
 			And I remove checkbox "Price includes tax"	
@@ -6081,11 +6062,11 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'           |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '522,50'        | '2 750,00'      | '3 272,50'         |
-				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '98,80'         | '520,00'        | '618,80'           |
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
+				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '93,60'         | '520,00'        | '613,60'           |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,22"
-			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "717,52"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 659,10"
 			And I click the button named "FormPostAndClose"
 	* Check filling the recalculation check box when creating Sales invoice bases on Sales order
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
@@ -6093,7 +6074,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 		And "ItemList" table contains lines
 			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Net amount'   | 'Total amount'    |
 			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '2,000'      | 'pcs'    | 'Yes'                  | '128,92'       | '671,00'       | '800,50'          |
-			| '550,00'   | 'Dress'      | '18%'   | 'L/Green'     | '5,000'      | 'pcs'    | 'No'                   | '522,50'       | '2 750,00'     | '3 272,50'        |
+			| '550,00'   | 'Dress'      | '18%'   | 'L/Green'     | '5,000'      | 'pcs'    | 'No'                   | '495,00'       | '2 750,00'     | '3 245,00'        |
 		And I close all client application windows
 
 Scenario: _0154155 check function DontCalculateRow in the Sales invoice
@@ -6152,11 +6133,6 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And I select current line in "List" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Check filling in prices
-			And "ItemList" table contains lines
-				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
-				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,95'        | '2,000'       | 'pcs'     | 'No'                    | '670,05'        | '800,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
 		* Check function DontCalculateRow 
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'     | 'Quantity'     |
@@ -6166,18 +6142,8 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And I finish line editing in "ItemList" table
 			And I activate "Tax amount" field in "ItemList" table
 			And I select current line in "ItemList" table
-			Then "Edit tax" window is opened
-			And I activate "Manual amount" field in "TaxTree" table
-			And I select current line in "TaxTree" table
-			And I input "8,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I go to line in "TaxTree" table
-				| 'Amount'    | 'Row presentation'     |
-				| '122,03'    | 'VAT - TRY - 18%'      |
-			And I select current line in "TaxTree" table
-			And I input "122,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I click "Ok" button
+			And I input "129,92" text in "Tax amount" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'     | 'Quantity'     |
 				| 'Trousers'    | '38/Yellow'    | '2,000'        |
@@ -6188,14 +6154,14 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And "ItemList" table contains lines
 				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,92'        | '2,000'       | ''                 | 'pcs'     | 'Yes'                   | '670,00'        | '801,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
+				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '419,49'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 330,51'      | '2 750,00'        | 'Store 01'     |
 			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'VAT'    | 'Item'        | 'Price'     | 'Item key'     | 'Price type'           | 'Tax amount'    | 'Quantity'    | 'Offers amount'    | 'Unit'    | 'Dont calculate row'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '18%'    | 'Trousers'    | '400,00'    | '38/Yellow'    | 'Basic Price Types'    | '129,92'        | '2,000'       | ''                 | 'pcs'     | 'Yes'                   | '670,00'        | '801,00'          | 'Store 01'     |
-				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '446,72'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "576,64"
+				| '18%'    | 'Dress'       | '550,00'    | 'L/Green'      | 'Basic Price Types'    | '419,49'        | '5,000'       | ''                 | 'pcs'     | 'No'                    | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 000,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "549,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"
 		* Change tax amount
 			And I go to line in "ItemList" table
@@ -6203,23 +6169,14 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 				| 'Trousers'    | '38/Yellow'    | '2,000'        |
 			And I activate "Tax amount" field in "ItemList" table
 			And I select current line in "ItemList" table		
-			And I activate "Manual amount" field in "TaxTree" table
-			And I select current line in "TaxTree" table
-			And I input "8,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I go to line in "TaxTree" table
-				| 'Amount'    | 'Row presentation'     |
-				| '122,03'    | 'VAT - TRY - 18%'      |
-			And I select current line in "TaxTree" table
-			And I input "121,00" text in "Manual amount" field of "TaxTree" table
-			And I finish line editing in "TaxTree" table
-			And I click "Ok" button
+			And I input "128,92" text in "Tax amount" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '670,00'        | '801,00'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 000,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"			
 		* Change net amount
 			And I go to line in "ItemList" table
@@ -6229,9 +6186,9 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '801,00'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 001,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00""
 		* Change total amount
 			And I go to line in "ItemList" table
@@ -6242,9 +6199,9 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'    | 'Store'        |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'          | 'Store 01'     |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'        | 'Store 01'     |
-			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,64"
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'        | 'Store 01'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 001,51"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "548,41"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 550,50""
 		* Add new line and check calculation
 			And in the table "ItemList" I click the button named "ItemListAdd"	
@@ -6264,21 +6221,21 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'           |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '446,72'        | '2 303,28'      | '2 750,00'         |
-				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '84,47'         | '435,53'        | '520,00'           |
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '419,49'        | '2 330,51'      | '2 750,00'         |
+				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '79,32'         | '440,68'        | '520,00'           |
 		* Check calculation when remove "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I remove checkbox "Price includes tax"		
+			And I remove checkbox "Price includes tax"	
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
 				| '400,00'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'Yes'                   | '128,92'        | '671,00'        | '800,50'           |
-				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '522,50'        | '2 750,00'      | '3 272,50'         |
-				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '98,80'         | '520,00'        | '618,80'           |
+				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
+				| '520,00'    | 'Dress'       | '18%'    | 'M/White'      | '1,000'       | 'pcs'     | 'No'                    | '93,60'         | '520,00'        | '613,60'           |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
-			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,22"
-			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
-			And I click the button named "FormPost"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "717,52"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 659,10"
+			And I click the button named "FormPostAndClose"
 	* Check filling the recalculation check box when creating Sales return / Sales return order bases on Sales invoice
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		And I click "OK" button

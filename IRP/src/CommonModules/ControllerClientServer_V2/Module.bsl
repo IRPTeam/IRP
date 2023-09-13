@@ -6830,7 +6830,7 @@ Procedure StepPaymentListDefaultVatRateInList(Parameters, Chain) Export
 	Chain.DefaultVatRateInList.Options.Add(Options);
 EndProcedure
 
-// ItemList.VatRate.ChangeVatRate_AgreementInList.Step
+// PaymentList.VatRate.ChangeVatRate_AgreementInList.Step
 Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	Chain.ChangeVatRate.Enable = True;
 	
@@ -6870,7 +6870,7 @@ Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-// ItemList.VatRate.ChangeVatRate_WithoutAgreement.Step
+// PaymentList.VatRate.ChangeVatRate_WithoutAgreement.Step
 Procedure StepChangeVatRate_WithoutAgreement(Parameters, Chain) Export
 	Chain.ChangeVatRate.Enable = True;
 	
@@ -12193,6 +12193,9 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 //		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 //		Options.TaxOptions.TaxList          = Row.TaxList;
 //		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
+		
+		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
+		Options.TaxOptions.VatRate = GetItemListVatRate(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

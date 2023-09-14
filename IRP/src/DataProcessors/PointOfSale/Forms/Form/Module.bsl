@@ -2371,7 +2371,7 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 		FillPropertyValues(ThisObject.Object, ReceiptObject,, 
 			//#@2094
 //			"Ref,AddAttributes,ItemList,SpecialOffers,TaxList,Currencies,Payments,
-			"Ref,AddAttributes,ItemList,SpecialOffers,Currencies,Payments,
+			"Ref,AddAttributes,ItemList,SpecialOffers,Currencies,Payments, DELETE_TaxList,
 			|SerialLotNumbers,RowIDInfo,SourceOfOrigins,ControlCodeStrings");
 		
 		ItemListTable = ReceiptObject.ItemList.Unload();

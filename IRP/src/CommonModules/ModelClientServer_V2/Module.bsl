@@ -2896,6 +2896,19 @@ Function CalculationsExecute(Options) Export
 			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
 	EndIf;
+	
+	If TypeOf(Result.NetAmount) = Type("Number") Then
+		Result.NetAmount = Int(Result.NetAmount *100)/100;
+	EndIf;
+	
+	If TypeOf(Result.TaxAmount) = Type("Number") Then
+		Result.TaxAmount = Int(Result.TaxAmount *100)/100;
+	EndIf;
+	
+	If TypeOf(Result.TotalAmount) = Type("Number") Then
+		Result.TotalAmount = Int(Result.TotalAmount *100)/100;
+	EndIf;
+	
 	Return Result;
 EndFunction
 

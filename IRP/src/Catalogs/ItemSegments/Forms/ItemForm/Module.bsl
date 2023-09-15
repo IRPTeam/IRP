@@ -48,6 +48,52 @@ EndProcedure
 
 #EndRegion
 
+#Region LOAD_DATA_FROM_TABLE
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	AddInfo = New Structure;
+	AddInfo.Insert("FieldsForLoadData", "ContentSegment");
+	AddInfo.Insert("EndNotify", New NotifyDescription("LoadDataFromTableEnd", ThisObject));
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object, AddInfo);
+EndProcedure
+
+&AtClient
+Procedure LoadDataFromTableEnd(Result, AddInfo) Export
+	If Not Result = Undefined Then
+		LoadDataFromTableEndAtServer(Result.Address);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure LoadDataFromTableEndAtServer(TableAddress)
+	
+	ItemArray = New Array;
+	ItemKeyArray = New Array;
+	
+	DataTable = GetFromTempStorage(TableAddress);
+	For Each TableRow In DataTable Do
+		If Not TableRow.ItemKey.IsEmpty() Then
+			ItemKeyArray.Add(TableRow.ItemKey);
+		ElsIf Not TableRow.Item.IsEmpty() Then
+			ItemKeyArray.Add(TableRow.Item);
+		EndIf;
+	EndDo;
+	
+	If ItemArray.Count() > 0 Then
+		Catalogs.ItemSegments.SaveItemsToSegment(Object.Ref, ItemArray);
+	EndIf;
+	If ItemKeyArray.Count() > 0 Then
+		Catalogs.ItemSegments.SaveItemsToSegment(Object.Ref, ItemKeyArray);
+	EndIf;
+	Catalogs.ItemSegments.CheckContent(Object.Ref);
+	
+	Items.ContentSegment.Refresh();
+	
+EndProcedure	
+
+#EndRegion
+
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);

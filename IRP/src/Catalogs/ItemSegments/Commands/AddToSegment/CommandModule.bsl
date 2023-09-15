@@ -36,7 +36,6 @@ Procedure ChoiceSegmentEnd(SelectedSegment, AddInfo) Export
 	If SelectedSegment = Undefined Then
 		Return;
 	EndIf;
-	
 	SaveToSegmentAtServer(SelectedSegment, AddInfo.Items);
 EndProcedure
 
@@ -47,49 +46,6 @@ EndProcedure
 //  Refs - Array of CatalogRef.ItemKeys - Refs
 &AtServer
 Procedure SaveToSegmentAtServer(Segment, Refs)
-	
-	Query = New Query;
-	Query.SetParameter("Refs", Refs);
-	Query.SetParameter("Segment", Segment);
-	
-	If Refs.Count() > 0 And TypeOf(Refs[0]) = Type("CatalogRef.ItemKeys") Then
-		Query.Text =
-		"SELECT
-		|	&Segment,
-		|	ItemKeys.Ref AS ItemKey,
-		|	ItemKeys.Item
-		|FROM
-		|	Catalog.ItemKeys AS ItemKeys
-		|		LEFT JOIN InformationRegister.ItemSegments AS ItemSegments
-		|		ON ItemSegments.Segment = &Segment
-		|		AND ItemKeys.Ref = ItemSegments.ItemKey
-		|WHERE
-		|	ItemKeys.Ref IN (&Refs)
-		|	AND ItemSegments.Segment IS NULL";
-	Else
-		Query.Text =
-		"SELECT
-		|	&Segment,
-		|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
-		|	Items.Ref AS Item
-		|FROM
-		|	Catalog.Items AS Items
-		|		LEFT JOIN InformationRegister.ItemSegments AS ItemSegments
-		|		ON ItemSegments.Segment = &Segment
-		|		AND Items.Ref = ItemSegments.Item
-		|		AND ItemSegments.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
-		|WHERE
-		|	Items.Ref IN (&Refs)
-		|	AND ItemSegments.Segment IS NULL";
-	EndIf;
-	
-	QuerySelection = Query.Execute().Select();
-	While QuerySelection.Next() Do
-		Record = InformationRegisters.ItemSegments.CreateRecordManager();
-		FillPropertyValues(Record, QuerySelection);
-		Record.Write();
-	EndDo;
-	
+	Catalogs.ItemSegments.SaveItemsToSegment(Segment, Refs);
 	Catalogs.ItemSegments.CheckContent(Segment);
-	
 EndProcedure

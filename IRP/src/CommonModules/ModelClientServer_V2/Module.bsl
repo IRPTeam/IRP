@@ -1282,6 +1282,9 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	EndIf;
 	
 	Price = ModelServer_V2.ConvertPriceByCurrency(Period, Options.PriceType, Options.Currency, PriceInfo.Price);
+	If TypeOf(Price) = Type("Number") Then
+		Price = Int(Price *100)/100;
+	EndIf;
 	
 	Return Price;
 EndFunction
@@ -2895,18 +2898,6 @@ Function CalculationsExecute(Options) Export
 		If Options.CalculateTotalAmountByNetAmount.Enable And IsCalculatedRow Then
 			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
-	EndIf;
-	
-	If TypeOf(Result.NetAmount) = Type("Number") Then
-		Result.NetAmount = Int(Result.NetAmount *100)/100;
-	EndIf;
-	
-	If TypeOf(Result.TaxAmount) = Type("Number") Then
-		Result.TaxAmount = Int(Result.TaxAmount *100)/100;
-	EndIf;
-	
-	If TypeOf(Result.TotalAmount) = Type("Number") Then
-		Result.TotalAmount = Int(Result.TotalAmount *100)/100;
 	EndIf;
 	
 	Return Result;

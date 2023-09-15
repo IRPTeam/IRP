@@ -40,9 +40,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		RowFilter.Insert("Key", ItemRow.Key);
 
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
-		//#@2094
-		//TaxRows = SourceData.TaxList.FindRows(RowFilter);
-		
 		_consignor = Undefined;
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 			_consignor = ItemRow.Consignor;
@@ -122,7 +119,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		
 		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
 		
-		//#@2094
 		If ValueIsFilled(ItemRow.VatRate) Then
 			If ItemRow.VatRate.NoRate Then
 				FiscalStringData.VATRate = "none";
@@ -136,20 +132,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			FiscalStringData.VATAmount = 0;
 		EndIf;
 		
-//		If TaxRows.Count() > 0 Then
-//			If TaxRows[0].TaxRate.NoRate Then
-//				FiscalStringData.VATRate = "none";
-//				FiscalStringData.VATAmount = 0;
-//			Else
-//				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
-//				FiscalStringData.VATAmount = TaxRows[0].Amount;
-//			EndIf;
-//
-//		Else
-//			FiscalStringData.VATRate = "none";
-//			FiscalStringData.VATAmount = 0;
-//		EndIf;
-
 		If ValueIsFilled(_consignor) Then
 			FiscalStringData.VendorData.VendorINN = _consignor.TaxID;
 			FiscalStringData.VendorData.VendorName = String(_consignor);
@@ -257,8 +239,6 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	For Each Item In SourceData.PaymentList Do
 		RowFilter = New Structure();
 		RowFilter.Insert("Key", Item.Key);
-		//#@2094
-		//TaxRows = SourceData.TaxList.FindRows(RowFilter);
 		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = Item.TotalAmount;
 		FiscalStringData.DiscountAmount = 0;
@@ -269,7 +249,6 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
 		
-		//#@2094
 		If ValueIsFilled(Item.VatRate) Then
 			If Item.VatRate.NoRate Then
 				FiscalStringData.VATRate = "none";
@@ -282,19 +261,6 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 			FiscalStringData.VATRate = "none";
 			FiscalStringData.VATAmount = 0;
 		EndIf;
-		
-//		If TaxRows.Count() > 0 Then
-//			If TaxRows[0].TaxRate.NoRate Then
-//				FiscalStringData.VATRate =  "none";
-//				FiscalStringData.VATAmount = 0;
-//			Else
-//				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
-//				FiscalStringData.VATAmount = TaxRows[0].Amount;
-//			EndIf;
-//		Else
-//			FiscalStringData.VATRate = "none";
-//			FiscalStringData.VATAmount = 0;
-//		EndIf;
 		
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;

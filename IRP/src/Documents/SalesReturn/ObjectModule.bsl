@@ -53,8 +53,6 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
-	//#@2094
-//	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);

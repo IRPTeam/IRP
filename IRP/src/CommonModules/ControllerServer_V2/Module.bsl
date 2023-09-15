@@ -4,23 +4,6 @@ Function GetServerData(Object, ArrayOfTableNames, LoadParameters) Export
 	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(Object, StrConcat(ArrayOfTableNames, ","));
 	ServerData.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
 	
-	//#@2094
-//	If FOClientServer.IsUseMultiTaxes() Then
-//		ServerData.Insert("ArrayOfTaxInfo", New Array());
-//		If ServerData.ObjectMetadataInfo.Tables.Property("TaxList") Then
-//			If FormTaxColumnsExists Then
-//				DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(TaxesCache);
-//				ServerData.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
-//			Else
-//				TransactionType = Undefined;
-//				If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
-//					TransactionType = Object.TransactionType;
-//				EndIf;
-//				ServerData.ArrayOfTaxInfo = TaxesServer.GetArrayOfTaxInfo(Object, Object.Date, Object.Company, TransactionType);
-//			EndIf;
-//		EndIf;
-//	EndIf;
-	
 	ServerData.Insert("LoadData", New Structure());
 	ServerData.LoadData.Insert("SourceColumnsGroupBy", "");
 	ServerData.LoadData.Insert("SourceColumnsSumBy"  , "");

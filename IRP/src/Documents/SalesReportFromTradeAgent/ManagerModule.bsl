@@ -101,7 +101,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
-	//#@2094
 	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
@@ -113,8 +112,6 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	//#@2094
-	//QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	Return QueryArray;
@@ -163,29 +160,6 @@ Function ItemList()
 		   |WHERE
 		   |	DocItemList.Ref = &Ref";
 EndFunction
-
-//#@2094
-//Function Taxes()
-//	Return "SELECT
-//		   |	DocTaxList.Ref.Date AS Period,
-//		   |	DocTaxList.Ref.Company AS Company,
-//		   |	DocTaxList.Tax AS Tax,
-//		   |	DocTaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN DocTaxList.ManualAmount = 0
-//		   |			THEN DocTaxList.Amount
-//		   |		ELSE DocTaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	DocItemList.NetAmount AS TaxableAmount,
-//		   |	DocItemList.Ref.Branch AS Branch
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
-//		   |		INNER JOIN Document.SalesReportFromTradeAgent.TaxList AS DocTaxList
-//		   |		ON DocItemList.Key = DocTaxList.Key
-//		   |		AND DocItemList.Ref = &Ref
-//		   |		AND DocTaxList.Ref = &Ref";
-//EndFunction
 
 Function SerialLotNumbers()
 	Return "SELECT
@@ -303,7 +277,6 @@ Function R2001T_Sales()
 EndFunction
 
 Function R2040B_TaxesIncoming()
-		//#@2094
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -319,15 +292,6 @@ Function R2040B_TaxesIncoming()
 		|	ItemList AS ItemList
 		|WHERE
 		|	TRUE";
-	
-//	Return "SELECT
-//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		   |	*
-//		   |INTO R2040B_TaxesIncoming
-//		   |FROM
-//		   |	Taxes AS Taxes
-//		   |WHERE
-//		   |	TRUE";
 EndFunction
 
 Function R4050B_StockInventory()

@@ -142,7 +142,6 @@ EndProcedure
 
 #EndRegion
 
-//#@2094
 #Region VAY_RATE
 
 Procedure PaymentListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export

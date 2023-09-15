@@ -73,12 +73,6 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
-//#@2094
-//&AtServer
-//Procedure Taxes_CreateFormControls() Export
-//	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
-//EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -140,11 +134,6 @@ Procedure UpdateTotalAmounts() Export
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
 		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
 
-		//#@2094
-		//ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
-		//For Each RowTax In ArrayOfTaxesRows Do
-		//	ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
-		//EndDo;
 		ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + Row.TaxAmount;
 
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
@@ -465,7 +454,6 @@ EndProcedure
 
 #EndRegion
 
-//#@2094
 #Region VAT_RATE
 
 &AtClient

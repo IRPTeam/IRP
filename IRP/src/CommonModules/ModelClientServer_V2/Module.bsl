@@ -335,15 +335,10 @@ Function GetChain()
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
-	//#@2094
-	//Chain.Insert("RequireCallCreateTaxesFormControls", GetChainLink("RequireCallCreateTaxesFormControlsExecute"));
 	Chain.Insert("ChangeTaxVisible", GetChainLink("ChangeTaxVisibleExecute"));
 	
 	Chain.Insert("ChangeVatRate", GetChainLink("ChangeVatRateExecute"));
-	
-	//#@2094
-	//Chain.Insert("ChangeTaxAmountAsManualAmount", GetChainLink("ChangeTaxAmountAsManualAmountExecute"));
-	
+		
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("SimpleCalculations" , GetChainLink("SimpleCalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
@@ -479,7 +474,6 @@ EndFunction
 
 #EndRegion
 
-//#@2094
 #Region ITEM_LIST_VAT_RATE
 
 Function DefaultVatRateInListOptions() Export
@@ -2195,8 +2189,6 @@ EndFunction
 
 #Region TAXES
 
-//#@2094
-
 Function ChangeTaxVisibleOptions() Export
 	Return GetChainLinkOptions("Date, Company, DocumentName, TransactionType");
 EndFunction
@@ -2219,56 +2211,6 @@ Function ChangeTaxVisibleExecute(Options) Export
 	Return New Structure("TaxVisible, TaxChoiceList", _visible, _choiceList);
 EndFunction
 
-//
-////
-//
-//Function ChangeTaxAmountAsManualAmountOptions() Export
-//	Return GetChainLinkOptions("TaxAmount, TaxList");
-//EndFunction
-//
-//Function ChangeTaxAmountAsManualAmountExecute(Options) Export
-//	For Each Row In Options.TaxList Do
-//		Row.ManualAmount = Options.TaxAmount;
-//	EndDo;
-//	Return Options.TaxAmount;
-//EndFunction
-
-//// TaxesCache - XML string from form attribute
-//Function RequireCallCreateTaxesFormControlsOptions() Export
-//	Return GetChainLinkOptions("Ref, Date, Company, TransactionType, ArrayOfTaxInfo, FormTaxColumnsExists");
-//EndFunction
-//
-//// return true if need create form controls for taxes
-//Function RequireCallCreateTaxesFormControlsExecute(Options) Export
-//	If Not Options.FormTaxColumnsExists = True Then
-//		Return True; // controls is not created yet
-//	EndIf;
-//	If Not Options.ArrayOfTaxInfo.Count() Then
-//		Return True; // cache is empty
-//	EndIf;
-//	// compares required taxes and taxes in cache, if they match return false
-//	TaxesInCache = New Array();
-//	For Each TaxInfo In Options.ArrayOfTaxInfo Do
-//		TaxesInCache.Add(TaxInfo.Tax);
-//	EndDo;
-//	
-//	DocumentName = Options.Ref.Metadata().Name;
-//	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
-//	
-//	For Each Tax In RequiredTaxes Do
-//		If TaxesInCache.Find(Tax) = Undefined Then
-//			Return True; // not all required taxes in cache
-//		EndIf;
-//	EndDo;
-//	For Each Tax In TaxesInCache Do
-//		If RequiredTaxes.Find(Tax) = Undefined Then
-//			Return True; // extra taxes in cache
-//		EndIf;
-//	EndDo;
-//	Return False; // full match cache and required taxes
-//EndFunction
-
-//#@2094
 Function ChangeVatRateOptions() Export
 	Return GetChainLinkOptions("Date, 
 		|Company, 
@@ -2280,7 +2222,6 @@ Function ChangeVatRateOptions() Export
 		|DocumentName");
 EndFunction
 
-//#@2094
 Function ChangeVatRateExecute(Options) Export
 	
 	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
@@ -2316,83 +2257,6 @@ Function ChangeVatRateExecute(Options) Export
 	Parameters.Insert("TransactionType" , Options.TransactionType);		
 	TaxRate = TaxesServer.GetVatRateByPriority(Parameters);
 	Return TaxRate;
-	
-//	
-//	//----
-//	Result = New Structure();
-//	For Each TaxRate In Options.TaxRates Do
-//		Result.Insert(TaxRate.Key, TaxRate.Value);
-//	EndDo;
-//	
-//	// when BasedOn = True and TaxList is filled, do not recalculate
-//	// tax rates get from TaxList 
-//	If Options.IsBasedOn = True And Options.TaxList.Count() Then
-//		For Each KeyValue In Result Do
-//			TaxRef = Undefined;
-//			For Each RowInfo In Options.ArrayOfTaxInfo Do
-//				If KeyValue.Key = RowInfo.Name Then
-//					TaxRef = RowInfo.Tax;
-//					Break;
-//				EndIf;
-//			EndDo;
-//			If TaxRef = Undefined Then
-//				Result[KeyValue.Key] = Undefined;
-//				Continue;
-//			EndIf;
-//			TaxRateValue = Undefined;
-//			For Each RowTaxList In Options.TaxList Do
-//				If RowTaxList.Tax = TaxRef Then
-//						TaxRateValue = RowTaxList.TaxRate;
-//					Break;
-//				EndIf;
-//			EndDo;
-//			Result[KeyValue.Key] = TaxRateValue;
-//		EndDo;
-//		Return Result;
-//	EndIf;
-//		
-//	// taxes when have in company by document date
-//	DocumentName = Options.Ref.Metadata().Name;
-//	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
-//	
-//	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
-//		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
-//			Continue;
-//		EndIf;
-//		
-//		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
-//		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
-//			Result.Insert(ItemOfTaxInfo.Name, Undefined);
-//			Continue;
-//		EndIf;
-//						
-//		If ValueIsFilled(Options.InventoryOrigin) 
-//			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
-//			And ValueIsFilled(Options.Consignor) Then
-//			
-//			Parameters = New Structure();
-//			Parameters = New Structure();
-//			Parameters.Insert("Date"    , Options.Date);
-//			Parameters.Insert("Company" , Options.Consignor);
-//			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-//			TaxRate = TaxesServer.GetTaxRateByCompany(Parameters);			
-//			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-//			Continue;
-//		EndIf;
-//		
-//		Parameters = New Structure();
-//		Parameters.Insert("Date"    , Options.Date);
-//		Parameters.Insert("Company" , Options.Company);
-//		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-//		Parameters.Insert("ItemKey"         , Options.ItemKey);
-//		Parameters.Insert("Agreement"       , Options.Agreement);
-//		Parameters.Insert("TransactionType" , Options.TransactionType);
-//			
-//		TaxRate = TaxesServer.GetTaxRateByPriority(Parameters);
-//		Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-//	EndDo;
-//		
-//	Return Result;
 EndFunction
 
 #EndRegion
@@ -2572,10 +2436,6 @@ Function CalculationsOptions() Export
 	PriceOptions = New Structure("PriceType, Price, Quantity, QuantityInBaseUnit");
 	Options.Insert("PriceOptions", PriceOptions);
 	
-	//#@2094
-	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
-	//TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount, IsAlreadyCalculated");
-	//TaxOptions.Insert("TaxList", New Array());
 	TaxOptions = New Structure("PriceIncludeTax, VatRate, UseManualAmount");
 	Options.Insert("TaxOptions", TaxOptions);
 	
@@ -2618,11 +2478,6 @@ Function CalculationsOptions() Export
 	Return Options;
 EndFunction
 
-//#@2094
-//Function CalculationsOptions_TaxOptions_TaxList() Export
-//	Return New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-//EndFunction
-
 Function CalculationsExecute(Options) Export
 	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
 
@@ -2633,8 +2488,6 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
-	//Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
-	//Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
 	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
@@ -2674,26 +2527,6 @@ Function CalculationsExecute(Options) Export
 					Result.OffersAmount = TotalOffers;
 					Result.OffersBonus = TotalBonus;
 				EndIf; // Offers
-				
-				//#@2094
-//				// Taxes
-//				If Options.CalculateTaxAmount.Enable Then
-//					For Each RowTaxList In Options.TaxOptions.TaxList Do	
-//						For Each BasisRow In DataFromBasis[0].TaxList Do
-//							If BasisRow.Amount = BasisRow.ManualAmount Then
-//								Continue;
-//							EndIf;
-//							
-//							If  RowTaxList.Tax = BasisRow.Tax 
-//								And RowTaxList.Analytics = BasisRow.Analytics Then
-//								NewTaxRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-//								FillPropertyValues(NewTaxRow, BasisRow);
-//								NewTaxRow.Key = RowTaxList.Key;
-//								UserManualAmountsFromBasisDocument.Add(NewTaxRow);
-//							EndIf;
-//						EndDo;
-//					EndDo;
-//				EndIf; // Taxes
 				
 			EndIf;
 		EndDo;
@@ -2742,25 +2575,17 @@ Function CalculationsExecute(Options) Export
 		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	
-	//#@2094
-//	If Not IsCalculatedRow Then
-//		For Each Row In Options.TaxOptions.TaxList Do
-//			Result.TaxList.Add(Row);
-//		EndDo;
-//	EndIf;
-	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
 		If Options.TaxOptions.PriceIncludeTax Then
 			
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+				
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 					Options.TaxOptions.PriceIncludeTax, 
 					Result.TotalAmount, 
 					Result.NetAmount, 
 					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
-				//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -2772,16 +2597,14 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+				
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 					Options.TaxOptions.PriceIncludeTax, 
 					Result.TotalAmount, 
 					Result.NetAmount, 
 					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
-				//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
 
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2793,14 +2616,13 @@ Function CalculationsExecute(Options) Export
 			EndIf;
 		Else
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+				
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 					Options.TaxOptions.PriceIncludeTax, 
 					Result.TotalAmount, 
 					Result.NetAmount, 
 					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
-				//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -2816,16 +2638,14 @@ Function CalculationsExecute(Options) Export
 				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-				//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+				
 				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 					Options.TaxOptions.PriceIncludeTax, 
 					Result.TotalAmount, 
 					Result.NetAmount, 
 					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
-				//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
 			EndIf;
 
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -2834,14 +2654,13 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+			
 			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 				Options.TaxOptions.PriceIncludeTax, 
 				Result.TotalAmount, 
 				Result.NetAmount, 
 				True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
-			//CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
 		EndIf;
 		
 		If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -2849,16 +2668,14 @@ Function CalculationsExecute(Options) Export
 			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);
 		EndIf;
 		
-		//If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+			
 			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 				Options.TaxOptions.PriceIncludeTax, 
 				Result.TotalAmount, 
 				Result.NetAmount, 
 				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
-			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
 		EndIf;
 
 		If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -2866,25 +2683,23 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 
 		If Options.CalculateTaxAmountByNetAmount.Enable And IsCalculatedRow Then
-			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+
 			Result.TaxAmount =  CalculateTaxAmount(Options.TaxOptions.VatRate, 
 				Options.TaxOptions.PriceIncludeTax, 
 				Result.TotalAmount, 
 				Result.NetAmount, 
 				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 			
-			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
 		EndIf;
 
 		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
-			//Rate, PriceIncludeTax, TotalAmount, NetAmount, Reverse
+			
 			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
 				Options.TaxOptions.PriceIncludeTax, 
 				Result.TotalAmount, 
 				Result.NetAmount, 
 				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
 				
-			//CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, True, UserManualAmountsFromBasisDocument);
 		EndIf;
 
 		If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2913,7 +2728,6 @@ EndFunction
 
 Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, TaxOptions, AmountOptions, Result)
 	If Not ValueIsFilled(TaxOptions.VatRate) Then
-//		Return AmountOptions.TotalAmount;
 		Return AmountOptions.NetAmount;
 	EndIf;
 	Return Result.NetAmount + Result.TaxAmount;
@@ -2970,132 +2784,6 @@ Function CalculateTaxAmount(RateRef, PriceIncludeTax, TotalAmount, NetAmount, Re
 	EndIf;
 	Return TaxAmount;
 EndFunction
-
-
-//#@2094
-//Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority, PriceIncludeTax, UserManualAmountsFromBasisDocument)
-//	
-//	// TaxOptions.IsAlreadyCalculated - deprecated (tax calculated always)
-//	If TaxOptions.IsAlreadyCalculated = True Then
-//		TaxAmount = 0;
-//		For Each Row In TaxOptions.TaxList Do
-//			ResultRowIsExists = False;
-//			For Each ResultRow In Result.TaxList Do
-//				If ResultRow.Key = Row.Key And ResultRow.Tax = Row.Tax Then
-//					ResultRowIsExists = True;
-//					Break;
-//				EndIf;
-//			EndDo;
-//			If Not ResultRowIsExists Then
-//				Result.TaxList.Add(Row);
-//			EndIf;
-//			If Row.IncludeToTotalAmount Then
-//				TaxAmount = Round(TaxAmount + Row.ManualAmount, 2);
-//			EndIf;
-//		EndDo;
-//		Result.TaxAmount = TaxAmount;
-//		Return;
-//	EndIf; // IsAlreadyCalculated
-//	
-//	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
-//	If TaxOptions.ArrayOfTaxInfo = Undefined Then
-//		Return;
-//	EndIf;
-//	
-//	TaxAmount = 0;
-//	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-//		If Not Result.TaxRates.Property(ItemOfTaxInfo.Name) Then
-//			Continue;
-//		EndIf;
-//		
-//		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") 
-//			And Not ValueIsFilled(Result.TaxRates[ItemOfTaxInfo.Name]) Then
-//			// tax rate in row is not filled
-//			Continue;
-//		EndIf;
-//		
-//			
-//		TaxParameters = New Structure();
-//		TaxParameters.Insert("Tax"             , ItemOfTaxInfo.Tax);
-//		TaxParameters.Insert("TaxRateOrAmount" , Result.TaxRates[ItemOfTaxInfo.Name]);
-//		If TaxOptions.PriceIncludeTax = Undefined Then
-//			TaxParameters.Insert("PriceIncludeTax" , PriceIncludeTax);
-//		Else
-//			TaxParameters.Insert("PriceIncludeTax" , TaxOptions.PriceIncludeTax);
-//		EndIf;
-//		TaxParameters.Insert("Key"             , Options.Key);
-//		TaxParameters.Insert("TotalAmount"     , Result.TotalAmount);
-//		TaxParameters.Insert("NetAmount"       , Result.NetAmount);
-//		TaxParameters.Insert("Ref"             , Options.Ref);
-//		TaxParameters.Insert("Reverse"         , IsReverse);
-//		
-//		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
-//		
-//		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
-//			NewTax = New Structure();
-//			NewTax.Insert("Key", Options.Key);
-//			NewTax.Insert("Tax", ?(ValueIsFilled(RowOfResult.Tax), 
-//				RowOfResult.Tax, PredefinedValue("Catalog.Taxes.EmptyRef")));
-//			NewTax.Insert("Analytics", ?(ValueIsFilled(RowOfResult.Analytics), 
-//				RowOfResult.Analytics, PredefinedValue("Catalog.TaxAnalytics.EmptyRef")));
-//			NewTax.Insert("TaxRate", ?(ValueIsFilled(RowOfResult.TaxRate), 
-//				RowOfResult.TaxRate, PredefinedValue("Catalog.TaxRates.EmptyRef")));
-//			NewTax.Insert("Amount", ?(ValueIsFilled(RowOfResult.Amount),
-//				RowOfResult.Amount, 0));
-//			NewTax.Insert("IncludeToTotalAmount" , ?(ValueIsFilled(RowOfResult.IncludeToTotalAmount),
-//				RowOfResult.IncludeToTotalAmount, False));
-//			
-//			RowFromBasisDocument = False;
-//			For Each RowBasis In UserManualAmountsFromBasisDocument Do
-//				If RowBasis.Key = NewTax.Key
-//					And RowBasis.Tax = NewTax.Tax
-//					And RowBasis.Analytics = NewTax.Analytics
-//					And RowBasis.TaxRate = NewTax.TaxRate Then
-//					
-//					NewTax.Amount = RowBasis.Amount;
-//					NewTax.Insert("ManualAmount", Round(RowBasis.ManualAmount, 2));
-//					RowFromBasisDocument = True;
-//					Break;	
-//				EndIf;
-//			EndDo;
-//			
-//			If Not RowFromBasisDocument Then
-//				ManualAmount = 0;
-//				IsRowExists = False;
-//				For Each RowTaxList In TaxOptions.TaxList Do
-//					If RowTaxList.Key = NewTax.Key
-//						And RowTaxList.Tax = NewTax.Tax 
-//						And RowTaxList.Analytics = NewTax.Analytics
-//						And RowTaxList.TaxRate = NewTax.TaxRate Then
-//					
-//						RowTaxList_ManualAmount = Round(RowTaxList.ManualAmount, 2);
-//						RowTaxList_Amount       = Round(RowTaxList.Amount, 2);
-//						NewTax_Amount           = Round(NewTax.Amount, 2);
-//					
-//						IsRowExists = True;
-//						If IsManualPriority Then
-//							ManualAmount = ?(RowTaxList_ManualAmount = RowTaxList_Amount, NewTax_Amount, RowTaxList_ManualAmount);
-//						Else
-//							ManualAmount = ?(RowTaxList_Amount = NewTax_Amount And TaxOptions.UseManualAmount = True
-//								, RowTaxList_ManualAmount, NewTax_Amount);
-//						EndIf;
-//					EndIf;
-//				EndDo;
-//				If Not IsRowExists Then
-//					ManualAmount = Round(NewTax.Amount, 2);
-//				EndIf;
-//				NewTax.Insert("ManualAmount", ManualAmount);
-//			EndIf;
-//			
-//			Result.TaxList.Add(NewTax);
-//			If RowOfResult.IncludeToTotalAmount Then
-//				TaxAmount = Round(TaxAmount + NewTax.ManualAmount, 2);
-//			EndIf;
-//		EndDo;
-//	EndDo;
-//
-//	Result.TaxAmount = TaxAmount;
-//EndProcedure
 
 Function SimpleCalculationsOptions() Export
 	Options = GetChainLinkOptions("Ref");

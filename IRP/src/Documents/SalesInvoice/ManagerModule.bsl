@@ -144,8 +144,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(OffersInfo());
-	//#@2094
-//	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -307,33 +305,6 @@ Function OffersInfo()
 		   |		INNER JOIN TableRowIDInfo AS TableRowIDInfo
 		   |		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key";
 EndFunction
-
-//#@2094
-//Function Taxes()
-//	Return "SELECT
-//		   |	SalesInvoiceTaxList.Ref.Date AS Period,
-//		   |	SalesInvoiceTaxList.Ref.Company AS Company,
-//		   |	SalesInvoiceTaxList.Tax AS Tax,
-//		   |	SalesInvoiceTaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN SalesInvoiceTaxList.ManualAmount = 0
-//		   |			THEN SalesInvoiceTaxList.Amount
-//		   |		ELSE SalesInvoiceTaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	SalesInvoiceItemList.NetAmount AS TaxableAmount,
-//		   |	SalesInvoiceItemList.Ref.Branch AS Branch,
-//		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-//		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-//		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-//		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-//		   |		INNER JOIN Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
-//		   |		ON SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-//		   |		AND SalesInvoiceItemList.Ref = &Ref
-//		   |		AND SalesInvoiceTaxList.Ref = &Ref";
-//EndFunction
 
 Function SerialLotNumbers()
 	Return "SELECT
@@ -571,7 +542,6 @@ Function R2031B_ShipmentInvoicing()
 EndFunction
 
 Function R2040B_TaxesIncoming()	
-	//#@2094
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,

@@ -98,7 +98,6 @@ Function GetTransactionTypeEnumTypes()
 	ArrayOfTypes = New Array();
 	For Each DocMetadata In Metadata.Documents Do
 		Attr    = DocMetadata.Attributes.Find("TransactionType");
-		//#@2094
 		TaxesExists = False;
 		If DocMetadata.TabularSections.Find("ItemList") <> Undefined Then
 			If DocMetadata.TabularSections.ItemList.Attributes.Find("VatRate") <> Undefined Then
@@ -112,9 +111,6 @@ Function GetTransactionTypeEnumTypes()
 			EndIf;
 		EndIf;
 		
-		//TaxList = DocMetadata.TabularSections.Find("TaxList");
-		
-		//If Attr = Undefined Or TaxList = Undefined Then
 		If Attr = Undefined Or TaxesExists Then
 			Continue;
 		EndIf;

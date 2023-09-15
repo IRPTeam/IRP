@@ -554,7 +554,6 @@
   <commonModules>CommonModule.SourceOfOriginClient</commonModules>
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginServer</commonModules>
-  <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>
   <commonModules>CommonModule.UndopostingServer</commonModules>

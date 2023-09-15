@@ -1346,8 +1346,6 @@ Function WriteTransaction(PaymentResult)
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailSalesReceipt") Then
 			ObjectValue = GetClearPostponedObject(); // DocumentObject.RetailSalesReceipt
 			ObjectValue.ItemList.Load(Object.ItemList.Unload());
-			//#@2094
-//			ObjectValue.TaxList.Load(Object.TaxList.Unload());
 			ObjectValue.SpecialOffers.Load(Object.SpecialOffers.Unload());
 			ObjectValue.Currencies.Load(Object.Currencies.Unload());
 			ObjectValue.SerialLotNumbers.Load(Object.SerialLotNumbers.Unload());
@@ -1486,23 +1484,6 @@ Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
 EndProcedure
 
 #EndRegion
-
-//#@2094
-//#Region Taxes
-//
-//&AtClient
-//Procedure TaxValueOnChange(Item) Export
-//	Return;
-//EndProcedure
-//
-//&AtServer
-//Procedure Taxes_CreateFormControls() Export
-//	FieldProperty = New Structure("Visible", False);
-//	CustomTaxParameters = New Structure("FieldProperty, HiddenFormItemsIfNotTaxes", FieldProperty, "");
-//	TaxesServer.CreateFormControls_ItemList(Object, ThisObject, CustomTaxParameters);
-//EndProcedure
-//
-//#EndRegion
 
 #EndRegion
 
@@ -2175,9 +2156,6 @@ Procedure FillOnSelectBasisDocument(BasisDocRef)
 	NewObj = Documents.RetailSalesReceipt.CreateDocument();
 	NewObj.Fill(FillingValues[0]);
 	ValueToFormAttribute(NewObj, "Object");
-	//#@2094
-//	Taxes_CreateFormControls();
-
 EndProcedure
 
 #EndRegion
@@ -2369,15 +2347,11 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 	Else
 		ThisObject.isReturn = True;
 		FillPropertyValues(ThisObject.Object, ReceiptObject,, 
-			//#@2094
-//			"Ref,AddAttributes,ItemList,SpecialOffers,TaxList,Currencies,Payments,
 			"Ref,AddAttributes,ItemList,SpecialOffers,Currencies,Payments, DELETE_TaxList,
 			|SerialLotNumbers,RowIDInfo,SourceOfOrigins,ControlCodeStrings");
 		
 		ItemListTable = ReceiptObject.ItemList.Unload();
 		SpecialOffersTable = ReceiptObject.SpecialOffers.Unload();
-		//#@2094
-//		TaxListTable = ReceiptObject.TaxList.Unload();
 		SerialLotNumbersTable = ReceiptObject.SerialLotNumbers.Unload();
 		RowIDInfoTable = ReceiptObject.RowIDInfo.Unload();
 		SourceOfOriginsTable = ReceiptObject.SourceOfOrigins.Unload();
@@ -2406,11 +2380,6 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 				For Each TableRow In TableRows Do
 					TableRow.Key = BasisKey;
 				EndDo;
-				//#@2094
-//				TableRows = TaxListTable.FindRows(New Structure("Key", CurrentKey));
-//				For Each TableRow In TableRows Do
-//					TableRow.Key = BasisKey;
-//				EndDo;
 				TableRows = SerialLotNumbersTable.FindRows(New Structure("Key", CurrentKey));
 				For Each TableRow In TableRows Do
 					TableRow.Key = BasisKey;
@@ -2427,26 +2396,12 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 		EndDo;
 		
 		ThisObject.Object.SpecialOffers.Load(SpecialOffersTable);
-		//#@2094
-//		ThisObject.Object.TaxList.Load(TaxListTable);
 		ThisObject.Object.Currencies.Load(ReceiptObject.Currencies.Unload());
 		ThisObject.Object.SerialLotNumbers.Load(SerialLotNumbersTable);
 		ThisObject.Object.RowIDInfo.Load(RowIDInfoTable);
 		ThisObject.Object.SourceOfOrigins.Load(SourceOfOriginsTable);
 		ThisObject.Object.ControlCodeStrings.Load(ControlCodeStringsTable);
 	EndIf;
-	
-	//#@2094
-//	SavedDataStructure = TaxesClientServer.GetTaxesCache(ThisObject);
-//	For Each TaxInfo In SavedDataStructure.ArrayOfTaxInfo Do
-//		For Each ItemRow In ThisObject.Object.ItemList Do
-//			Filter = New Structure("Key, Tax", ItemRow.Key, TaxInfo.Tax);
-//			TaxRows = ThisObject.Object.TaxList.FindRows(Filter);
-//			If TaxRows.Count() Then
-//				ItemRow[TaxInfo.Name] = TaxRows[0].TaxRate;
-//			EndIf;
-//		EndDo;
-//	EndDo;
 	
 EndProcedure
 
@@ -2584,8 +2539,6 @@ Function GetClearPostponedObject()
 	ReceiptObject = ThisObject.PostponedReceipt.GetObject(); // DocumentObject.RetailSalesReceipt
 	
 	ReceiptObject.ItemList.Clear();
-	//#@2094
-//	ReceiptObject.TaxList.Clear();
 	ReceiptObject.SpecialOffers.Clear();
 	ReceiptObject.Currencies.Clear();
 	ReceiptObject.SerialLotNumbers.Clear();

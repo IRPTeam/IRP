@@ -72,12 +72,6 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
-//#@2094
-//&AtServer
-//Procedure Taxes_CreateFormControls() Export
-//	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
-//EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -447,7 +441,6 @@ EndProcedure
 
 #EndRegion
 
-//#@2094
 #Region VAT_RATE
 
 &AtClient

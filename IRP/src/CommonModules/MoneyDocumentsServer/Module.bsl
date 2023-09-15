@@ -17,16 +17,12 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-//	Taxes_CreateFormControls(Form, Is);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	Is = Is(Object);
 	FillPaymentList(Object, Is);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-//	Taxes_CreateFormControls(Form, Is);
 EndProcedure
 
 Procedure FillPaymentList(Object, Is)
@@ -36,13 +32,6 @@ Procedure FillPaymentList(Object, Is)
 		EndDo;
 	EndIf;
 EndProcedure
-
-//#@2094
-//Procedure Taxes_CreateFormControls(Form, Is)
-//	If IsSupportTaxes(Is) Then
-//		Form.Taxes_CreateFormControls();
-//	EndIf;
-//EndProcedure
 
 Procedure SetGroupItemsList(Object, Form)
 	AllAttributes = StrSplit("Company, Account, CashAccount, Currency, PlanningPeriod, Status, TransactionType", ",");
@@ -58,13 +47,6 @@ Procedure SetGroupItemsList(Object, Form)
 			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
-
-//#@2094
-//Function IsSupportTaxes(Is)
-//	Return Is.CashExpense Or Is.CashRevenue 
-//		Or Is.BankPayment Or Is.BankReceipt 
-//		Or Is.CashPayment Or Is.CashReceipt;
-//EndFunction
 
 Function Is(Object)
 	Result = New Structure();

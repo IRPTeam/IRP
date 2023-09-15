@@ -17,11 +17,6 @@ Function GetTaxRatesByTax(Tax) Export
 	Return TaxesServer._GetTaxRatesByTax(Tax);
 EndFunction
 
-//#@2094
-//Function CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
-//	Return TaxesServer._CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse);
-//EndFunction
-
 Function GetVatRef() Export
 	Return TaxesServer._GetVatRef();
 EndFunction

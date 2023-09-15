@@ -18,9 +18,6 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	//#@2094
-	//ProcSettings = FormAttributeToValue("Object").ExternalDataProcSettings.Get();
-	//ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
@@ -47,10 +44,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	UseTaxRate = Object.Type = PredefinedValue("Enum.TaxType.Rate");
 	Form.Items.TaxRates.Visible = UseTaxRate;
 	Form.Items.GroupTaxRates.Visible = UseTaxRate;
-	//#@2094
-	//Form.Items.ExternalDataProc.Visible = UseTaxRate;
-	//#@2094
-	//Form.Items.ExternalDataProcSettings.Visible = UseTaxRate;
 	
 	For Each Row In Form.Object.UseDocuments Do
 		ArrayOfTransactionTypes = Object.TransactionTypes.FindRows(New Structure("DocumentName", Row.DocumentName));

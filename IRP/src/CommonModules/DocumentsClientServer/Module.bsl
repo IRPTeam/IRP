@@ -250,8 +250,6 @@ Function GetHiddenTables() Export
 	
 	HiddenTables.Add("RowIDInfo");
 	HiddenTables.Add("Currencies");
-	//#@2094
-//	HiddenTables.Add("TaxList");
 	HiddenTables.Add("DELETE_TaxList");
 	HiddenTables.Add("SpecialOffers");
 	HiddenTables.Add("SerialLotNumbers");

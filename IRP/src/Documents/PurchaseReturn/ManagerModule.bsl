@@ -124,8 +124,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ShipmentConfirmationsInfo());
-	//#@2094
-//	QueryArray.Add(Taxes());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -283,31 +281,6 @@ Function ShipmentConfirmationsInfo()
 		   |WHERE
 		   |	PurchaseReturnShipmentConfirmations.Ref = &Ref";
 EndFunction
-
-//#@2094
-//Function Taxes()
-//	Return "SELECT
-//		   |	TaxList.Ref.Date AS Period,
-//		   |	TaxList.Ref.Company AS Company,
-//		   |	TaxList.Tax AS Tax,
-//		   |	TaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN TaxList.ManualAmount = 0
-//		   |			THEN TaxList.Amount
-//		   |		ELSE TaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	ItemList.NetAmount AS TaxableAmount,
-//		   |	ItemList.Ref.Branch AS Branch,
-//		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
-//		   |	TaxList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.PurchaseReturn.ItemList AS ItemList
-//		   |		INNER JOIN Document.PurchaseReturn.TaxList AS TaxList
-//		   |		ON ItemList.Key = TaxList.Key
-//		   |		AND ItemList.Ref = &Ref
-//		   |		AND TaxList.Ref = &Ref";
-//EndFunction
 
 Function SourceOfOrigins()
 	Return "SELECT
@@ -582,17 +555,6 @@ Function R1031B_ReceiptInvoicing()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	//#@2094
-//	Return "SELECT
-//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		   |	-Taxes.TaxableAmount,
-//		   |	-Taxes.TaxAmount,
-//		   |	*
-//		   |INTO R1040B_TaxesOutgoing
-//		   |FROM
-//		   |	Taxes AS Taxes
-//		   |WHERE
-//		   |	Taxes.IsReturnToVendor";
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,

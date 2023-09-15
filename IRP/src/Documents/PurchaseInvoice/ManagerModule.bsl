@@ -159,68 +159,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	EndIf;
 	
 	// AmountTax to T6020S_BatchKeysInfo
-	Query = New Query;
-	//#@2094
-//	Query.Text =
-//	"SELECT
-//	|	TaxList.Key,
-//	|	TaxList.Ref.Company,
-//	|	TaxList.Tax,
-//	|	TaxList.ManualAmount AS AmountTax
-//	|INTO TaxList
-//	|FROM
-//	|	Document.PurchaseInvoice.TaxList AS TaxList
-//	|WHERE
-//	|	TaxList.Ref = &Ref
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	TaxList.Key,
-//	|	SUM(TaxList.AmountTax) AS AmountTax
-//	|INTO TaxListAmounts
-//	|FROM
-//	|	TaxList AS TaxList
-//	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
-//	|			(SELECT
-//	|				TaxList.Company,
-//	|				TaxList.Tax
-//	|			FROM
-//	|				TaxList AS TaxList)) AS TaxesSliceLast
-//	|		ON TaxesSliceLast.Company = TaxList.Company
-//	|		AND TaxesSliceLast.Tax = TaxList.Tax
-//	|WHERE
-//	|	TaxesSliceLast.Use
-//	|	AND TaxesSliceLast.IncludeToLandedCost
-//	|GROUP BY
-//	|	TaxList.Key
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	BatchKeysInfo.Key,
-//	|	BatchKeysInfo.TotalQuantity,
-//	|	BatchKeysInfo.Quantity,
-//	|	*
-//	|INTO BatchKeysInfo
-//	|FROM
-//	|	&BatchKeysInfo AS BatchKeysInfo
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	BatchKeysInfo.Key,
-//	|	case
-//	|		when BatchKeysInfo.TotalQuantity <> 0
-//	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
-//	|		else 0
-//	|	end as AmountTax,
-//	|	BatchKeysInfo.*
-//	|FROM
-//	|	BatchKeysInfo AS BatchKeysInfo
-//	|		LEFT JOIN TaxListAmounts AS TaxListAmounts
-//	|		ON BatchKeysInfo.Key = TaxListAmounts.Key";
-	
+	Query = New Query;	
 	Query.Text =
 	"SELECT
 	|	Taxes.Key,
@@ -607,32 +546,6 @@ Function ItemList()
 		   |	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
 		   |WHERE
 		   |	PurchaseInvoiceGoodsReceipts.Ref = &Ref";
-		   //#@2094
-//		   |;
-//		   |
-//		   |////////////////////////////////////////////////////////////////////////////////
-//		   |SELECT
-//		   |	PurchaseInvoiceTaxList.Ref.Date AS Period,
-//		   |	PurchaseInvoiceTaxList.Ref.Company AS Company,
-//		   |	PurchaseInvoiceTaxList.Tax AS Tax,
-//		   |	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN PurchaseInvoiceTaxList.ManualAmount = 0
-//		   |			THEN PurchaseInvoiceTaxList.Amount
-//		   |		ELSE PurchaseInvoiceTaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
-//		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
-//		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
-//		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-//		   |		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
-//		   |		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key
-//		   |WHERE
-//		   |	PurchaseInvoiceItemList.Ref = &Ref
-//		   |	AND PurchaseInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -1029,7 +942,6 @@ Function R1031B_ReceiptInvoicing()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	//#@2094
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,

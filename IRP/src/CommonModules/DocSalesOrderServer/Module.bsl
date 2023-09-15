@@ -1,35 +1,17 @@
 #Region FORM
 
-//Function GetVatPropertiesParameters(Object, Form)
-//	_params = TaxesClientServer.GetTaxVisibleParameters();
-//	_params.Object = Object;
-//	_params.Form = Form;
-//	_params.DocumentName = "SalesOrder";
-//	_params.TransactionType = Object.TransactionType;
-//	Return _params;
-//EndFunction
-
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	//#@2094
-	// VAT visible
-	//TaxesClientServer.SetTaxVisible(GetVatPropertiesParameters(Object, Form));
-	
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-	//Form.Taxes_CreateFormControls();
-	// VAT
-	///TaxesClientServer.SetTaxVisible(GetVatPropertiesParameters(Object, Form));
-		
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -38,11 +20,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-	//Form.Taxes_CreateFormControls();
-	// VAT visible
-	//TaxesClientServer.SetTaxVisible(GetVatPropertiesParameters(Object, Form));
-	
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure

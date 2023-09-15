@@ -11,8 +11,6 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-//	Form.Taxes_CreateFormControls();
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -20,8 +18,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	//#@2094
-//	Form.Taxes_CreateFormControls();
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
 EndProcedure

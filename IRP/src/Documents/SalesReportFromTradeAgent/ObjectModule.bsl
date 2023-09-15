@@ -35,8 +35,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") Then
 			If FillingData.BasedOn = "SalesReportToConsignor" Then 
-				//#@2094
-				//ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData, "TaxList, SerialLotNumbers, SourceOfOrigins");
 				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData, "SerialLotNumbers, SourceOfOrigins");
 				Filling_BasedOn(FillingData);
 			EndIf;
@@ -60,13 +58,7 @@ Procedure Filling_BasedOn(FillingData)
 	For Each Row In FillingData.SourceOfOrigins Do
 		NewRow = ThisObject.SourceOfOrigins.Add();
 		FillPropertyValues(NewRow, Row);
-	EndDo;
-	
-	//#@2094
-//	For Each Row In FillingData.TaxList Do
-//		NewRow = ThisObject.TaxList.Add();
-//		FillPropertyValues(NewRow, Row);
-//	EndDo;
+	EndDo;	
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

@@ -274,7 +274,6 @@ EndProcedure
 
 #EndRegion
 
-//#@2094
 #Region VAT_RATE
 
 Procedure ItemListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export

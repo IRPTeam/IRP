@@ -37,12 +37,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-//#@2094
-//&AtServer
-//Procedure Taxes_CreateFormControls() Export
-//	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-//EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -237,7 +231,6 @@ EndProcedure
 
 #EndRegion
 
-//#@2094
 #Region VAT_RATE
 
 &AtClient

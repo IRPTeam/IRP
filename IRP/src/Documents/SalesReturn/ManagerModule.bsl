@@ -372,8 +372,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(GoodReceiptInfo());
-	//#@2094
-//	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -543,31 +541,6 @@ Function SerialLotNumbers()
 		   |WHERE
 		   |	SerialLotNumbers.Ref = &Ref";
 EndFunction
-
-//#@2094
-//Function Taxes()
-//	Return "SELECT
-//		   |	TaxList.Ref.Date AS Period,
-//		   |	TaxList.Ref.Company AS Company,
-//		   |	TaxList.Ref.Branch AS Branch,
-//		   |	TaxList.Tax AS Tax,
-//		   |	TaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN TaxList.ManualAmount = 0
-//		   |			THEN TaxList.Amount
-//		   |		ELSE TaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	ItemList.NetAmount AS TaxableAmount,
-//		   |	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent,
-//		   |	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer) AS IsReturnFromCustomer
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.SalesReturn.ItemList AS ItemList
-//		   |		INNER JOIN Document.SalesReturn.TaxList AS TaxList
-//		   |		ON ItemList.Key = TaxList.Key
-//		   |		AND ItemList.Ref = &Ref
-//		   |		AND TaxList.Ref = &Ref";
-//EndFunction
 
 Function SourceOfOrigins()
 	Return "SELECT
@@ -842,7 +815,6 @@ Function R2031B_ShipmentInvoicing()
 EndFunction
 
 Function R2040B_TaxesIncoming()
-	//#@2094
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -858,17 +830,6 @@ Function R2040B_TaxesIncoming()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.IsReturnFromCustomer";
-	
-//	Return "SELECT
-//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		   |	-Taxes.TaxableAmount,
-//		   |	-Taxes.TaxAmount,
-//		   |	*
-//		   |INTO R2040B_TaxesIncoming
-//		   |FROM
-//		   |	Taxes AS Taxes
-//		   |WHERE
-//		   |	Taxes.IsReturnFromCustomer";
 EndFunction
 
 #Region Stock

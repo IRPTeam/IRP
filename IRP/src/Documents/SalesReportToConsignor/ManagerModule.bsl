@@ -139,29 +139,6 @@ Function ItemList()
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.Ref = &Ref";
-		   //#@2094
-//		   |;
-//		   |
-//		   |////////////////////////////////////////////////////////////////////////////////
-//		   |SELECT
-//		   |	TaxList.Ref.Date AS Period,
-//		   |	TaxList.Ref.Company AS Company,
-//		   |	TaxList.Tax AS Tax,
-//		   |	TaxList.TaxRate AS TaxRate,
-//		   |	CASE
-//		   |		WHEN TaxList.ManualAmount = 0
-//		   |			THEN TaxList.Amount
-//		   |		ELSE TaxList.ManualAmount
-//		   |	END AS TaxAmount,
-//		   |	ItemList.NetAmount AS TaxableAmount,
-//		   |	ItemList.Ref.Branch AS Branch
-//		   |INTO Taxes
-//		   |FROM
-//		   |	Document.SalesReportToConsignor.ItemList AS ItemList
-//		   |		INNER JOIN Document.SalesReportToConsignor.TaxList AS TaxList
-//		   |		ON ItemList.Key = TaxList.Key
-//		   |		AND ItemList.Ref = &Ref
-//		   |		AND TaxList.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -241,16 +218,6 @@ Function R1021B_VendorsTransactions()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	//#@2094
-//	Return "SELECT
-//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		   |	*
-//		   |INTO R1040B_TaxesOutgoing
-//		   |FROM
-//		   |	Taxes AS Taxes
-//		   |WHERE
-//		   |	TRUE";
-
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,

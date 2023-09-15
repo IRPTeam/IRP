@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4b8bd3f5-9c53-471d-bade-c721c2ac8115">
+  <name>Document_SalesReportToConsignor</name>
+  <synonym>
+    <key>en</key>
+    <value>Document &quot;Sales report to consignor&quot;</value>
+  </synonym>
+</mdclass:Role>

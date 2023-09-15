@@ -48,7 +48,7 @@ Procedure ChangeVsible(Form, Visible) Export
 	
 	For Each _item In _arrayOfFormItems Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, _item) Then
-			Form.Items[_item].Visible = True;//Visible;
+			Form.Items[_item].Visible = Visible;
 		EndIf;
 	EndDo;
 EndProcedure

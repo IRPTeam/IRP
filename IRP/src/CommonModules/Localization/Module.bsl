@@ -1218,6 +1218,9 @@ Function Strings(Lang) Export
 #Region UsersEvent
 	Strings.Insert("UsersEvent_001", NStr("en = 'User not found by UUID %1 and name %2.'", Lang));
 	Strings.Insert("UsersEvent_002", NStr("en = 'User found by UUID %1 and name %2.'", Lang));
+	Strings.Insert("UsersEvent_003", NStr("en = 'Only Administrator can launch another user.'", Lang));
+	Strings.Insert("UsersEvent_004", NStr("en = 'Infobase user not found.'", Lang));
+	Strings.Insert("UsersEvent_005", NStr("en = 'Very long launch. Password returned without confirmation.'", Lang));
 #EndRegion
 
 #Region Items

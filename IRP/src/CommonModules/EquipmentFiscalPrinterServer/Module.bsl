@@ -246,15 +246,15 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	If PaymentListData.Count() > 1 Then
 		Raise("A few retail customer found!");
 	EndIf;
-	
-	If Not SourceData.RetailCustomer.IsEmpty() Then
+	RetailCustomer = PaymentListData[0].RetailCustomer;
+	If Not RetailCustomer.IsEmpty() Then
 
-		CheckPackage.Parameters.CustomerEmail = SourceData.RetailCustomer.Email;
-		CheckPackage.Parameters.CustomerPhone = SourceData.RetailCustomer.Code;
+		CheckPackage.Parameters.CustomerEmail = RetailCustomer.Email;
+		CheckPackage.Parameters.CustomerPhone = RetailCustomer.Code;
 	
-		CheckPackage.Parameters.CustomerDetail.DateOfBirth = Format(SourceData.RetailCustomer.BirthDate, "DF=dd.MM.yyyy;");
-		CheckPackage.Parameters.CustomerDetail.Info = String(SourceData.RetailCustomer);
-		CheckPackage.Parameters.CustomerDetail.INN = SourceData.RetailCustomer.TaxID;
+		CheckPackage.Parameters.CustomerDetail.DateOfBirth = Format(RetailCustomer.BirthDate, "DF=dd.MM.yyyy;");
+		CheckPackage.Parameters.CustomerDetail.Info = String(RetailCustomer);
+		CheckPackage.Parameters.CustomerDetail.INN = RetailCustomer.TaxID;
 		
 	EndIf;
 
@@ -267,7 +267,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.DiscountAmount = 0;
 		FiscalStringData.CalculationSubject = 10;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 		FiscalStringData.MeasureOfQuantity = 255;
-		FiscalStringData.Name = String(SourceData.PaymentList[0].RetailCustomer);
+		FiscalStringData.Name = String(RetailCustomer);
 		FiscalStringData.Quantity = 1;
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;

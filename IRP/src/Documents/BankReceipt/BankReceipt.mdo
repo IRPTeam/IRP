@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Платежное поручение входящее</value>
+  <value>Поступление на расчетный счет</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -80,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Платежные поручения входящие</value>
+  <value>Поступления на расчетный счет</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
@@ -1506,7 +1506,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Платежное поручение входящее</value>
+   <value>Поступление на расчетный счет</value>
   </synonym>
   <synonym>
    <key>tr</key>

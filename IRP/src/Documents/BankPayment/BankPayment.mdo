@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Платежное поручение исходящие</value>
+  <value>Списание с расчетного счета</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -80,7 +80,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Платежное поручение исходящие</value>
+  <value>Списание с расчетного счета</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -92,7 +92,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Платежные поручения исходящие</value>
+  <value>Списания с расчетного счета</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
@@ -1764,7 +1764,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Платежное поручение исходящие</value>
+   <value>Списание с расчетного счета</value>
   </synonym>
   <synonym>
    <key>tr</key>

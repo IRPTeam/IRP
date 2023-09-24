@@ -299,7 +299,9 @@ EndProcedure
 Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 	If Object.ItemList.Count() Then
 		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6, "Object.ItemList[0].Item", "Object.ItemList");
+		If Not Exit Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6, "Object.ItemList[0].Item", "Object.ItemList");
+		EndIf;
 	EndIf;
 EndProcedure
 

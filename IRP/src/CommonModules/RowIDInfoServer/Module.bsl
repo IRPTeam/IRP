@@ -2477,7 +2477,12 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
 	|	ItemList.SalesPerson,
-	|	ItemList.VatRate
+	|	ItemList.VatRate,
+	|	CASE WHEN &IgnoreCodeStringControl THEN 
+	|		False 
+	|	ELSE 
+	|		ItemList.Item.ControlCodeString 
+	|	END AS isControlCodeString
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesOrder.ItemList AS ItemList
@@ -2540,6 +2545,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TablePayments.FillValues(PaymentType, "PaymentType");
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
+	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	DataReceiver_Is = Is(DataReceiver);
 	Query.SetParameter("IsPurchase", DataReceiver_Is.PO Or DataReceiver_Is.PI );
 	QueryResults = Query.ExecuteBatch();

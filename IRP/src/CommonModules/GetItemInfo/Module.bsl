@@ -809,6 +809,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	
 	Try
 		Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	Except

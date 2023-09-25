@@ -55,7 +55,6 @@ Scenario: _001 test data
 		When Create catalog PriceTypes objects (LC)
 		When Create catalog Specifications objects (LC)
 		When Create catalog Stores objects (LC)
-		When Create catalog TaxAnalytics objects (LC)
 		When Create catalog TaxRates objects (LC)
 		When Create catalog Taxes objects (LC)
 		When Create catalog InterfaceGroups objects (LC)

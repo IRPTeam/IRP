@@ -135,4 +135,18 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="1890fc74-7967-4b8d-928f-3b4d8e37a171">
+    <name>AddToSegment</name>
+    <synonym>
+      <key>en</key>
+      <value>Add to segment</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>CatalogRef.ItemKeys</types>
+      <types>CatalogRef.Items</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Catalog>

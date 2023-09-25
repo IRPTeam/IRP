@@ -25,7 +25,7 @@ Procedure SaveDataPackage(DataPackage) Export
 		NewRecord.Author = Author;
 		NewRecord.Created = CreationDate;
 		
-		NewRecord.Data = New ValueStorage(getDataDescription(DataRef));
+		NewRecord.Data = New ValueStorage(getDataDescription(DataRef), New Deflation(9));
 		NewRecord.Write();
 	EndDo;
 	

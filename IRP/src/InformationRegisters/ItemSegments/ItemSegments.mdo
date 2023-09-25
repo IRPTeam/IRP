@@ -23,6 +23,7 @@
   <value>Malzeme segmentlerinin içeriği</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
+ <defaultRecordForm>InformationRegister.ItemSegments.Form.RecordForm</defaultRecordForm>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
   <key>en</key>
@@ -95,11 +96,54 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <indexing>Index</indexing>
   <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <master>true</master>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="0df05573-2b69-4d78-ab71-71f134e25f14">
+  <name>Item</name>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="4aa1fa94-5f82-4bc2-b7cb-0c31b116b349">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

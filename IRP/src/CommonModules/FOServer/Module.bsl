@@ -81,6 +81,10 @@ Function IsUseSimpleMode() Export
 	Return GetFunctionalOption("UseSimpleMode");
 EndFunction
 
+Function IsUseFixedAssets() Export
+	Return GetFunctionalOption("UseFixedAsstes");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

@@ -7818,4 +7818,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>CommonCommand.OpenFixedAssets</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

@@ -133,5 +133,9 @@
     <types>CatalogRef.Addresses</types>
     <types>DocumentRef.RetailGoodsReceipt</types>
     <types>DocumentRef.RetailShipmentConfirmation</types>
+    <types>CatalogRef.FixedAssets</types>
+    <types>CatalogRef.FixedAssetsLedgerTypes</types>
+    <types>CatalogRef.DepreciationSchedules</types>
+    <types>DocumentRef.CommissioningOfFixedAsset</types>
   </type>
 </mdclass:DefinedType>

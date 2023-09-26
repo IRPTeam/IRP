@@ -118,6 +118,7 @@
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
+  <subsystems>Subsystem.FixedAssets</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -570,6 +571,8 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.CertificateServer</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -661,6 +664,7 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
+  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -712,6 +716,7 @@
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
+  <commonCommands>CommonCommand.OpenFixedAssets</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>
@@ -766,6 +771,7 @@
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
   <constants>Constant.AdditionalTableControlExceptions</constants>
+  <constants>Constant.UseFixedAssets</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -890,6 +896,9 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.FixedAssets</catalogs>
+  <catalogs>Catalog.DepreciationSchedules</catalogs>
+  <catalogs>Catalog.FixedAssetsLedgerTypes</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -960,6 +969,8 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.CommissioningOfFixedAsset</documents>
+  <documents>Document.DepreciationCalculation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1041,6 +1052,8 @@
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.TaxKind</enums>
   <enums>Enum.RetailReceiptStatusTypes</enums>
+  <enums>Enum.FixedAssetTypes</enums>
+  <enums>Enum.DepreciationMethods</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1146,6 +1159,7 @@
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
+  <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1241,6 +1255,7 @@
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

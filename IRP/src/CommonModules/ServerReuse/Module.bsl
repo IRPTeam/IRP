@@ -45,6 +45,12 @@ Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
 	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey);
 EndFunction
 
+// Currencies
+
+Function GetLandedCostCurrency(Company) Export
+	Return CurrenciesServer._GetLandedCostCurrency(Company);	
+EndFunction
+
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

@@ -235,6 +235,7 @@
     <type>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.WorkSheet</types>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

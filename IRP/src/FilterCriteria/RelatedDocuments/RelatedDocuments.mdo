@@ -181,6 +181,7 @@
       <types>DocumentRef.ProductionCostsAllocation</types>
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.RetailShipmentConfirmation</types>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

@@ -101,6 +101,8 @@
       <types>DocumentRef.ForeignCurrencyRevaluation</types>
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.RetailShipmentConfirmation</types>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
+      <types>DocumentRef.DepreciationCalculation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

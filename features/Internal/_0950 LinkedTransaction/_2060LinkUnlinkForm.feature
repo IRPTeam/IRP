@@ -600,8 +600,8 @@ Scenario: _2060004 check button not calculate rows
 			And I finish line editing in "ItemList" table
 			And "ItemList" table became equal
 				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
-				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
-				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
 	* Check not calculate row
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I remove checkbox "Calculate rows"
@@ -623,8 +623,8 @@ Scenario: _2060004 check button not calculate rows
 		And I click "Ok" button
 		And "ItemList" table became equal
 				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
-				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
-				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
 	* Not calculate row (auto link)
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
@@ -634,8 +634,8 @@ Scenario: _2060004 check button not calculate rows
 		And I click "Ok" button
 		And "ItemList" table became equal
 				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
-				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,98'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,02'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
-				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,81'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,19'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
+				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | 'No'                         | 'Store 01' | 'No'                        |
 		And I close all client application windows
 					
 

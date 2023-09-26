@@ -11,4 +11,5 @@
   <content>Enum.FixedAssetTypes</content>
   <content>Document.CommissioningOfFixedAsset</content>
   <content>Catalog.FixedAssetsLedgerTypes</content>
+  <content>Document.DecommissioningOfFixedAsset</content>
 </mdclass:FunctionalOption>

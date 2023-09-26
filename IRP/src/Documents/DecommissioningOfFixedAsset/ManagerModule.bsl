@@ -10,7 +10,10 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
+	Parameters.IsReposting = False;
+
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
@@ -22,7 +25,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
 	EndIf;
 
-	Parameters.IsReposting = False;
 	Return Tables;
 EndFunction
 
@@ -35,9 +37,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
-
-	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -82,7 +81,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.StockAdjustmentAsSurplus.ItemList");
+		"Document.DecommissioningOfFixedAsset.ItemList");
 
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
 
@@ -94,8 +93,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 EndProcedure
 
 Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsSurplus.ItemList",
-		AddInfo);
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.DecommissioningOfFixedAsset.ItemList", AddInfo);
 EndProcedure
 
 #EndRegion
@@ -113,6 +111,9 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("FixedAsset", Ref.FixedAsset);
+	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	StrParams.Insert("Period", Ref.Date);
 	Return StrParams;
 EndFunction
 
@@ -133,13 +134,10 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	Return QueryArray;
 EndFunction
 
@@ -153,217 +151,168 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Ref.Store AS Store,
-		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.FixedAsset AS FixedAsset,
+		|	ItemList.Ref AS Ref,
+		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		|	ItemList.RevenueType AS RevenueType,
-		|	CASE
-		|		WHEN ItemList.PhysicalInventory.Ref IS NULL
-		|			THEN ItemList.Ref
-		|		ELSE ItemList.PhysicalInventory
-		|	END AS AdjustmentBasis,
-		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		|	ItemList.PhysicalInventory AS PhysicalInventory,
-		|	ItemList.Ref AS Basis,
 		|	ItemList.QuantityInBaseUnit AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.AmountTax AS AmountTax,
+		|	ItemList.Amount,
+		|	ItemList.AmountTax,
 		|	ItemList.Key
 		|INTO ItemList
 		|FROM
-		|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
+		|	Document.DecommissioningOfFixedAsset.ItemList AS ItemList
 		|WHERE
 		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
-	Return "SELECT
-		   |	SerialLotNumbers.Ref.Date AS Period,
-		   |	SerialLotNumbers.Ref.Company AS Company,
-		   |	SerialLotNumbers.Ref.Branch AS Branch,
-		   |	SerialLotNumbers.Key,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-		   |	SerialLotNumbers.Quantity,
-		   |	ItemList.ItemKey AS ItemKey
-		   |INTO SerialLotNumbers
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |		ON SerialLotNumbers.Key = ItemList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |WHERE
-		   |	SerialLotNumbers.Ref = &Ref";
+	Return 
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.DecommissioningOfFixedAsset.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.DecommissioningOfFixedAsset.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function SourceOfOrigins()
-	Return "SELECT
-		   |	SourceOfOrigins.Key AS Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
-		   |	SUM(SourceOfOrigins.Quantity) AS Quantity
-		   |INTO SourceOfOrigins
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.SourceOfOrigins AS SourceOfOrigins
-		   |WHERE
-		   |	SourceOfOrigins.Ref = &Ref
-		   |GROUP BY
-		   |	SourceOfOrigins.Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END,
-		   |	SourceOfOrigins.SourceOfOrigin";
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.DecommissioningOfFixedAsset.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin";
 EndFunction
 
 #EndRegion
 
 #Region Posting_MainTables
 
-Function R4031B_GoodsInTransitIncoming()
+Function R4014B_SerialLotNumber()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	ItemList.Quantity
-		|INTO R4031B_GoodsInTransitIncoming
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
 		|FROM
-		|	ItemList AS ItemList
+		|	SerialLotNumbers AS QueryTable
 		|WHERE
-		|	ItemList.PhysicalInventoryExists";
-EndFunction
+		|	TRUE";
 
-Function R4014B_SerialLotNumber()
-	Return "SELECT 
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4014B_SerialLotNumber
-		   |FROM
-		   |	SerialLotNumbers AS QueryTable
-		   |WHERE 
-		   |	TRUE";
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists";
-EndFunction
-
-Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END";
-EndFunction
-
-Function R4052T_StockAdjustmentAsSurplus()
 	Return 
 		"SELECT
-		|	ItemList.AdjustmentBasis AS Basis,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
-		|INTO R4052T_StockAdjustmentAsSurplus
+		|INTO R4011B_FreeStocks
 		|FROM
-		|	ItemList
+		|	ItemList AS ItemList
 		|WHERE
 		|	TRUE";
 EndFunction
 
-Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey";
+Function R4010B_ActualStocks()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
-Function T3010S_RowIDInfo()
-	Return "SELECT
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS Basis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |INTO T3010S_RowIDInfo
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |		INNER JOIN Document.StockAdjustmentAsSurplus.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Ref
-		   |		AND ItemList.Ref = &Ref
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref";
+Function R4050B_StockInventory()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey";
 EndFunction
 
 Function T6010S_BatchesInfo()
 	Return "SELECT
-		   |	ItemList.Basis AS Document,
+		   |	ItemList.Ref AS Document,
 		   |	ItemList.Company,
 		   |	ItemList.Period
 		   |INTO T6010S_BatchesInfo
@@ -372,7 +321,7 @@ Function T6010S_BatchesInfo()
 		   |WHERE
 		   |	TRUE
 		   |GROUP BY
-		   |	ItemList.Basis,
+		   |	ItemList.Ref,
 		   |	ItemList.Company,
 		   |	ItemList.Period";
 EndFunction
@@ -465,50 +414,54 @@ Function T6020S_BatchKeysInfo()
 		|	TRUE";
 EndFunction
 
-Function R5021T_Revenues()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.ProfitLossCenter,
-		   |	ItemList.RevenueType,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Currency,
-		   |	ItemList.Amount,
-		   |	ItemList.Key
-		   |INTO R5021T_Revenues
-		   |FROM
-		   |	ItemList AS ItemList";
+Function R9010B_SourceOfOriginStock()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO R9010B_SourceOfOriginStock
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SourceOfOrigins.SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
-Function R9010B_SourceOfOriginStock()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
-		   |	SourceOfOrigins.SerialLotNumber,
-		   |	SUM(SourceOfOrigins.Quantity) AS Quantity
-		   |INTO R9010B_SourceOfOriginStock
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		INNER JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON ItemList.Key = SourceOfOrigins.Key
-		   |		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SourceOfOrigins.SourceOfOriginStock,
-		   |	SourceOfOrigins.SerialLotNumber";
+Function R8510B_BookValueOfFixedAsset()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	&Period AS Period,
+		|	R8510B_BookValueOfFixedAssetBalance.Company,
+		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
+		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
+		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
+		|	R8510B_BookValueOfFixedAssetBalance.Currency,
+		|	-R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
+		|INTO R8510B_BookValueOfFixedAsset
+		|FROM
+		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, FixedAsset = &FixedAsset
+		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+		|		R8510B_BookValueOfFixedAssetBalance";
 EndFunction
 
 #EndRegion
@@ -526,7 +479,9 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
-	AccessKeyMap.Insert("Store", Obj.Store);
+	CopyTable = Obj.ItemList.Unload(, "Store");
+	CopyTable.GroupBy("Store");
+	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
 

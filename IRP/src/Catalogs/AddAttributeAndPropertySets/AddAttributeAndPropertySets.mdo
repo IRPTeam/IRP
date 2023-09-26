@@ -900,6 +900,13 @@
         <value>132</value>
       </code>
     </items>
+    <items id="aec62e32-2676-4925-9943-3c69b00ddb4a">
+      <name>Document_DecommissioningOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>133</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

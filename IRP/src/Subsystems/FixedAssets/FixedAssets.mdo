@@ -12,4 +12,5 @@
   <content>Document.CommissioningOfFixedAsset</content>
   <content>Document.DepreciationCalculation</content>
   <content>Catalog.FixedAssetsLedgerTypes</content>
+  <content>Document.DecommissioningOfFixedAsset</content>
 </mdclass:Subsystem>

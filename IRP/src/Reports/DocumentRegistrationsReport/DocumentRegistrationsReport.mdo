@@ -103,6 +103,7 @@
       <types>DocumentRef.RetailShipmentConfirmation</types>
       <types>DocumentRef.CommissioningOfFixedAsset</types>
       <types>DocumentRef.DepreciationCalculation</types>
+      <types>DocumentRef.DecommissioningOfFixedAsset</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

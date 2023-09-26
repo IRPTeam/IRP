@@ -144,6 +144,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	ArrayOfTypes.Add(Type("DocumentRef.SalesReportFromTradeAgent"));
 	ArrayOfTypes.Add(Type("DocumentRef.CommissioningOfFixedAsset"));
+	ArrayOfTypes.Add(Type("DocumentRef.DecommissioningOfFixedAsset"));
 	Return ArrayOfTypes;
 EndFunction
 

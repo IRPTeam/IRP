@@ -37,7 +37,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&Period, Company = &Company
 	|	AND Branch = &Branch
 	|	AND LedgerType.CalculateDepreciation
-	|	AND LedgerType.StartDate <= &StartDate) AS T";
+	|	AND LedgerType.StartDate <= &StartDate
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T";
 	
 	Query.SetParameter("Period"    , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Query.SetParameter("StartDate" , Ref.Date);

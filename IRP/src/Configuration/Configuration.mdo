@@ -573,6 +573,8 @@
   <commonModules>CommonModule.CertificateServer</commonModules>
   <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -970,6 +972,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.CommissioningOfFixedAsset</documents>
+  <documents>Document.DecommissioningOfFixedAsset</documents>
   <documents>Document.DepreciationCalculation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>

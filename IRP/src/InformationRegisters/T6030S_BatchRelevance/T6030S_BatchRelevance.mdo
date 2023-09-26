@@ -51,6 +51,7 @@
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
       <types>DocumentRef.CommissioningOfFixedAsset</types>
+      <types>DocumentRef.DecommissioningOfFixedAsset</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

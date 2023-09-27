@@ -68,9 +68,10 @@ Scenario:_800020 preparation (remaining stock control)
 		| 'Bank term 01'   |
 			When create bank terms
 	* Workstation
-		If "List" table does not contain lines Then
+	Given I open hyperlink "e1cib/list/Catalog.Workstations"	
+	If "List" table does not contain lines Then
 			| 'Description'     |
-			| 'Bank term 01'    |
+			| 'Workstation 01'    |
 			When create Workstation
 	When Create catalog SerialLotNumbers objects (for Phone)
 	When Create Item with SerialLotNumbers (Phone)

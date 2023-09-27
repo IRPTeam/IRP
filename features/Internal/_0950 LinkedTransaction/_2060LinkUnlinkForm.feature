@@ -923,6 +923,9 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1,000'    | 'Boots (37/18SD)'  | 'Store 01' | 'pcs'  |
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''         | ''     | ''       | ''         |
@@ -1085,6 +1088,9 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1,000'    | 'Boots (37/18SD)'  | 'Store 01' | 'pcs'  |
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''         | ''     | ''       | ''         |
@@ -1427,6 +1433,9 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I click the button named "LinkUnlinkBasisDocuments"	
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '10,000'   | 'Dress (M/White)'  | 'Store 02' | 'pcs'  |
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''         | ''     | ''       | ''         |
@@ -1587,6 +1596,9 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click the button named "LinkUnlinkBasisDocuments"	
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '10,000'   | 'Dress (M/White)'  | 'Store 02' | 'pcs'  |
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''         | ''     | ''       | ''         |
@@ -1842,7 +1854,7 @@ Scenario: _2060015 check price in the SI when link document with different price
 	* Check item tab
 		And "ItemList" table contains lines
 			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
-			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | '1,000'    | 'pcs'  | '81,22'      | '500,00' | '18%' | '418,78'     | '500,00'       | 'Store 01' | 'No'                        | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
+			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | '1,000'    | 'pcs'  | '76,27'      | '500,00' | '18%' | '423,73'     | '500,00'       | 'Store 01' | 'No'                        | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 			| '2' | 'Basic Price Types'       | 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Store 01' | 'No'                        | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 		And I close all client application windows
 

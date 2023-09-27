@@ -2315,7 +2315,11 @@ EndProcedure
 
 // Date.Get
 Function GetDate(Parameters)
-	Return GetPropertyObject(Parameters, BindDate(Parameters).DataPath);
+	DocDate = GetPropertyObject(Parameters, BindDate(Parameters).DataPath);
+	If Not ValueIsFilled(DocDate) Then
+		DocDate = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	Return DocDate; 
 EndFunction
 
 // Date.Bind

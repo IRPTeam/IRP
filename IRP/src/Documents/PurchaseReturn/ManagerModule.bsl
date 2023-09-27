@@ -563,8 +563,8 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Branch,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	-ItemList.NetAmount AS TaxableAmount,
-		|	-ItemList.TaxAmount AS TaxAmount
+		|	ItemList.NetAmount AS TaxableAmount,
+		|	ItemList.TaxAmount AS TaxAmount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst

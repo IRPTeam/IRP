@@ -1194,62 +1194,6 @@
                         </font>
                       </extInfo>
                     </items>
-                    <items xsi:type="form:FormField">
-                      <name>ItemListTaxAmount</name>
-                      <id>797</id>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>Object.ItemList.TaxAmount</segments>
-                      </dataPath>
-                      <titleBackColor xsi:type="core:ColorRef">
-                        <color>Style.FormBackColor</color>
-                      </titleBackColor>
-                      <extendedTooltip>
-                        <name>ItemListTaxAmountExtendedTooltip</name>
-                        <id>799</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>ItemListTaxAmountContextMenu</name>
-                        <id>798</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <width>10</width>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                        <font xsi:type="core:FontDef">
-                          <height>18.0</height>
-                        </font>
-                      </extInfo>
-                    </items>
                     <items xsi:type="form:FormGroup">
                       <name>ItemListGroupTotal</name>
                       <id>1032</id>

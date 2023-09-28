@@ -86,7 +86,6 @@ Function GetErrorList() Export
 	ErrorsArray = New Array; // Array of Structure
 	ErrorsArray.Add(ErrorHeaders());
 	ErrorsArray.Add(ErrorItemList());
-	ErrorsArray.Add(ErrorWithTax());
 	ErrorsArray.Add(ErrorWithOffers());
 	ErrorsArray.Add(ErrorWithSerialInTable());
 	ErrorsArray.Add(SourceOfOrigins());
@@ -282,19 +281,7 @@ Function ErrorItemList()
 		"Item, ItemKey",
 		0
 	));
-	
-//	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-//		"Not ItemList.QuantityInBaseUnit <= isNull(RowIDInfo.Quantity, 0)",
-//		"Quantity",
-//		0
-//	));
-	
-//	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-//		"Not Cancel AND Not ItemList.QuantityInBaseUnit = isNull(RowIDInfo.Quantity, 0)",
-//		"Quantity, Cancel",
-//		0
-//	));
-	
+		
 	Str.Insert("ErrorNotFilledUnit",	New Structure("Query, Fields, QueryNumber",
 		"ItemList.Unit = VAlUE(Catalog.Units.EmptyRef)", 
 		"Unit",
@@ -306,13 +293,7 @@ Function ErrorItemList()
 		"InventoryOrigin",
 		0
 	));
-	
-	Return Str;
-EndFunction
-
-Function ErrorWithTax()
-	Str = New Structure;
-	
+		
 	Str.Insert("ErrorNetAmountGreaterTotalAmount", New Structure("Query, Fields, QueryNumber", 
 		"ItemList.NetAmount > ItemList.TotalAmount",
 		"NetAmount, TotalAmount",

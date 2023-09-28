@@ -434,7 +434,7 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 			| 'TRY'      | 'Cash desk №4' |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "1 374,55" text in the field named "PaymentsAmount" of "Payments" table
+		And I input "1 277,35" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table	
 	* Filling landed cost
 		And for each line of "ItemList" table I do

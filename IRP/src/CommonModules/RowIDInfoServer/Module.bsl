@@ -10892,7 +10892,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 				+ ?(NameAsAlias, ", TransactionTypePR", ", TransactionType");
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkOrder Then

@@ -595,7 +595,9 @@ Scenario: 950407 create rules for accumulation register
 			And I go to line in "List" table
 				| 'Number'     |
 				| '2'          |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button			
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "lock accumulation register" string by template
 		* Create new
@@ -739,7 +741,9 @@ Scenario: 950409 create rules for information register (with recorder)
 			And I go to line in "List" table
 				| 'Number'     |
 				| '2'          |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button			
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "lock information register" string by template
 		* Create new

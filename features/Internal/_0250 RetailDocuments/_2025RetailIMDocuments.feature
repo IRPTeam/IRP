@@ -63,17 +63,9 @@ Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -524,12 +516,12 @@ Scenario: _0155269 create Retail sales receipt based on Retail SC
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Price type'          | 'Item'                           | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'                                  |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| ''                    | 'Product 1 with SLN'             | 'ODS'        | '9090098908'           | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| 'Basic Price Types'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '150,71'       | '2,000'      | '520,00'   | '18%'   | '52,00'           | '837,29'       | '988,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
-			| 'Basic Price Types'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '202,88'       | '2,000'      | '700,00'   | '18%'   | '70,00'           | '1 127,12'     | '1 330,00'       | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+			| 'Price type'        | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '150,71'     | '2,000'    | '520,00' | '18%' | '52,00'         | '837,29'     | '988,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
+			| 'Basic Price Types' | 'Boots'                        | '37/18SD'  | ''                   | 'pcs'  | '202,88'     | '2,000'    | '700,00' | '18%' | '70,00'         | '1 127,12'   | '1 330,00'     | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -645,10 +637,10 @@ Scenario: _0155271 create Retail sales receipt based on RSC with GR
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Price type'          | 'Item'                           | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'                                  |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| 'Basic Price Types'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '75,36'        | '1,000'      | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
-			| 'Basic Price Types'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '101,44'       | '1,000'      | '700,00'   | '18%'   | '35,00'           | '563,56'       | '665,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+			| 'Price type'        | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '75,36'      | '1,000'    | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
+			| 'Basic Price Types' | 'Boots'                        | '37/18SD'  | ''                   | 'pcs'  | '101,44'     | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"

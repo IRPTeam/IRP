@@ -359,6 +359,7 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Period", Ref.Date);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -371,7 +372,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(GoodReceiptInfo());
-	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -469,7 +469,9 @@ Function ItemList()
 		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-		   |	ItemList.InventoryOrigin AS InventoryOrigin
+		   |	ItemList.InventoryOrigin AS InventoryOrigin,
+		   |	ItemList.VatRate AS VatRate,
+		   |	ItemList.TaxAmount AS TaxAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReturn.ItemList AS ItemList
@@ -538,30 +540,6 @@ Function SerialLotNumbers()
 		   |		AND ItemList.Ref = &Ref
 		   |WHERE
 		   |	SerialLotNumbers.Ref = &Ref";
-EndFunction
-
-Function Taxes()
-	Return "SELECT
-		   |	TaxList.Ref.Date AS Period,
-		   |	TaxList.Ref.Company AS Company,
-		   |	TaxList.Ref.Branch AS Branch,
-		   |	TaxList.Tax AS Tax,
-		   |	TaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN TaxList.ManualAmount = 0
-		   |			THEN TaxList.Amount
-		   |		ELSE TaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	ItemList.NetAmount AS TaxableAmount,
-		   |	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent,
-		   |	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer) AS IsReturnFromCustomer
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesReturn.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesReturn.TaxList AS TaxList
-		   |		ON ItemList.Key = TaxList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |		AND TaxList.Ref = &Ref";
 EndFunction
 
 Function SourceOfOrigins()
@@ -837,16 +815,21 @@ Function R2031B_ShipmentInvoicing()
 EndFunction
 
 Function R2040B_TaxesIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	-Taxes.TaxableAmount,
-		   |	-Taxes.TaxAmount,
-		   |	*
-		   |INTO R2040B_TaxesIncoming
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	Taxes.IsReturnFromCustomer";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemLIst.NetAmount AS TaxableAmount
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 #Region Stock

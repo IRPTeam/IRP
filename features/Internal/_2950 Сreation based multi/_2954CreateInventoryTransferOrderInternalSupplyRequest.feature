@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CreationBasedMulti
@@ -51,20 +51,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Create first Internal supply request from Store 02
 		* Open a creation form Internal Supply Request
 			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

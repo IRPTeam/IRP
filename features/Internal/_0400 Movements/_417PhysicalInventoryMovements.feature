@@ -61,15 +61,7 @@ Scenario: _041700 preparation (Physical inventory)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load Physical inventory
 		When Create document PhysicalInventory objects with StockAdjustmentAsWriteOff and StockAdjustmentAsSurplus (check movements)
 		When Create document PhysicalInventory objects (stock control serial lot numbers)

@@ -47,16 +47,8 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Partners objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 	* Create test SO
 		When Create document SalesOrder objects (SI before SC for check closing)
 		And I execute 1C:Enterprise script at server

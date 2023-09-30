@@ -1557,6 +1557,7 @@ Function BindTransactionType(Parameters)
 	DataPath.Insert("RetailShipmentConfirmation", "TransactionType");
 	DataPath.Insert("RetailGoodsReceipt",         "TransactionType");
 	DataPath.Insert("Production", "TransactionType");
+	DataPath.Insert("PhysicalCountByLocation", "TransactionType");
 		
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
@@ -1651,6 +1652,9 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("Production", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit,
 		|StepChangeBillOfMaterialsByItemKey");
+
+	Binding.Insert("PhysicalCountByLocation", 
+		"BindVoid");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTransactionType");
 EndFunction

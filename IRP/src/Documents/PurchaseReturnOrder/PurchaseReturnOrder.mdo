@@ -645,6 +645,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="55b23d87-bd81-41cb-a790-b0d9eb3a6bd9">
+      <name>VatRate</name>
+      <synonym>
+        <key>en</key>
+        <value>VAT</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="f4b0b2f9-fdd1-4699-9ee2-7cd32661044e">
     <producedTypes>
@@ -750,10 +764,10 @@
       <objectType typeId="80b34f1b-266f-4c3f-970b-b516e4cd0418" valueTypeId="fe0739d4-40f1-40f4-b423-6a009d752088"/>
       <rowType typeId="9a0e8cbc-4158-4d5c-839e-6ee72e103530" valueTypeId="881b2dde-80e9-40b2-a3f4-4732e85585de"/>
     </producedTypes>
-    <name>TaxList</name>
+    <name>DELETE_TaxList</name>
     <synonym>
       <key>en</key>
-      <value>Tax list</value>
+      <value>DELETE tax list</value>
     </synonym>
     <standardAttributes>
       <dataHistory>Use</dataHistory>

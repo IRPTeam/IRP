@@ -50,15 +50,7 @@ Scenario: _2000 preparation (landed cost)
 	When Create information register CurrencyRates records
 	When Create catalog PriceTypes objects
 	When Create catalog Companies objects (own Second company)	
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
-		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+	When Create information register Taxes records (VAT)
 	* Landed cost currency movement type for company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table

@@ -1465,8 +1465,8 @@ Scenario: Create catalog SourceOfOrigins objects
 Scenario: Create catalog Taxes objects
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 'ValueStorage'              | ''                  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
+		| 'Ref'                                                            | 'DeletionMark'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Kind'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 | 'Enum.TaxKind.VAT' |
 	
 
 	And I refill object tabular section "TaxRates":
@@ -1498,8 +1498,8 @@ Scenario: Create catalog Taxes objects
 Scenario: Create catalog Taxes objects (with transaction type)
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'ExternalDataProcSettings'               | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 1       | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'  | ''                  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
+		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Kind'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'False'         | 1       | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 | 'Enum.TaxKind.VAT' |
 
 	And I refill object tabular section "TaxRates":
 		| 'Ref'                                                            | 'TaxRate'                                                            |
@@ -1599,28 +1599,12 @@ Scenario: Create catalog Taxes objects (for commission trade)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
 
 
-Scenario: Create catalog Taxes objects (Sales tax)
-	
-	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'  | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'False'         | 'ValueStorage'              | ''                  | 'Enum.TaxType.Rate'  | 'SalesTax'        | ''                  | ''                | ''                 |
-
-	And I refill object tabular section "TaxRates":
-		| 'Ref'                                                            | 'TaxRate'                                                            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013'   |
-
-	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesOrder'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesInvoice'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'SalesOrderClosing'   |
 
 Scenario: Create information register TaxSettings records
 
 	And I check or create information register "TaxSettings" records:
 		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'ItemKey'  | 'Item'  | 'ItemType'  | 'Agreement'                                                           | 'TaxRate'                                                            |
 		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''         | ''      | ''          | ''                                                                    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'   |
-		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | ''         | ''      | ''          | ''                                                                    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013'   |
 		| '01.01.2021 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''         | ''      | ''          | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf134a6a4759f'  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012'   |
 
 Scenario: Create information register TaxSettings records with transaction type
@@ -1666,17 +1650,6 @@ Scenario: Create information register Taxes records (VAT)
 		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'Use'   | 'Priority'   |
 		| '01.01.2020 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'True'  | '5'          |
 
-Scenario: Create information register TaxSettings (Sales tax)
-	
-	And I check or create information register "TaxSettings" records:
-		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'ItemKey'  | 'Item'  | 'ItemType'  | 'Agreement'  | 'TaxRate'                                                            |
-		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | ''         | ''      | ''          | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013'   |
-
-Scenario: Create information register Taxes records (Sales tax)
-
-	And I check or create information register "Taxes" records:
-		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'Use'   | 'Priority'   |
-		| '01.10.2019 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5'  | 'True'  | '2'          |
 
 Scenario: Create information register PricesByItemKeys records
 
@@ -2503,16 +2476,10 @@ Scenario: Create document PurchaseInvoice objects (for procurement)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f15'  | 'False'         | '3'       | '11.12.2020 13:13:15'  | 'False'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '01.01.0001 00:00:00'  | ''           | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870'  | 'True'             | '$$IdCI$$'  | ''             | '1 000'           | ''        | 'Enum.PurchaseTransactionTypes.Purchase'   |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                       | 'Key'                                   | 'PurchaseOrder'  | 'ItemKey'                                                           | 'Store'                                                           | 'Unit'                                                           | 'Quantity'  | 'Price'  | 'PriceType'                                                           | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'         | 'SalesOrder'  | 'Detail'  | 'AdditionalAnalytic'  | 'DontCalculateRow'   |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f12'  | '23beb275-5b37-4e0f-b2bf-b72d12dc02ea'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '20'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '305,08'     | '2 000'        | '1 694,92'   | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f13'  | '3bbee1c5-93f2-4bdc-aca1-e6d91fa24a34'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '20'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '305,08'     | '2 000'        | '1 694,92'   | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f15'  | '611ec8d0-c455-4dbd-96f7-ab6aa18e62d1'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '10'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '152,54'     | '1 000'        | '847,46'     | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |
-
-	And I refill object tabular section "TaxList":
-		| 'Ref'                                                                       | 'Key'                                   | 'Tax'                                                            | 'Analytics'  | 'TaxRate'                                                           | 'Amount'  | 'IncludeToTotalAmount'  | 'ManualAmount'   |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f12'  | '23beb275-5b37-4e0f-b2bf-b72d12dc02ea'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'  | '152,54'  | 'True'                  | '152,54'         |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f13'  | '3bbee1c5-93f2-4bdc-aca1-e6d91fa24a34'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'  | '305,08'  | 'True'                  | '305,08'         |
-		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f15'  | '611ec8d0-c455-4dbd-96f7-ab6aa18e62d1'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'  | '152,54'  | 'True'                  | '152,54'         |
+		| 'Ref'                                                                       | 'Key'                                   | 'PurchaseOrder'  | 'ItemKey'                                                           | 'Store'                                                           | 'Unit'                                                           | 'Quantity'  | 'Price'  | 'PriceType'                                                           | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'         | 'SalesOrder'  | 'Detail'  | 'AdditionalAnalytic'  | 'DontCalculateRow'   |'VatRate'                                                         |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f12'  | '23beb275-5b37-4e0f-b2bf-b72d12dc02ea'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '20'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '305,08'     | '2 000'        | '1 694,92'   | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'|
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f13'  | '3bbee1c5-93f2-4bdc-aca1-e6d91fa24a34'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '20'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '305,08'     | '2 000'        | '1 694,92'   | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'|
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb3b8b5ffd2f15'  | '611ec8d0-c455-4dbd-96f7-ab6aa18e62d1'  | ''               | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '10'        | '100'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | '152,54'     | '1 000'        | '847,46'     | '0'             | ''                  | ''             | '11.12.2020 00:00:00'  | ''            | ''        | ''                    | 'False'              |'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'|
 
 	And I refill object tabular section "Currencies":
 		| 'Ref'                                                                       | 'Key'                                   | 'CurrencyFrom'                                                        | 'Rate'    | 'ReverseRate'  | 'ShowReverseRate'  | 'Multiplicity'  | 'MovementType'                                                                                     | 'Amount'   |
@@ -2534,12 +2501,8 @@ Scenario: Create document PurchaseOrder objects (for procurement)
 		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16'  | 'False'         | '1'       | '11.12.2020 13:15:10'  | 'False'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | 'False'                              | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870'  | 'True'             | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf114c59ef01d'  | '$$IdCI$$'  | ''             | '900'             | ''         |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                     | 'Key'                                   | 'ItemKey'                                                           | 'Store'                                                           | 'Unit'                                                           | 'Quantity'  | 'PurchaseBasis'  | 'Price'  | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'PriceType'                                                           | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'         | 'Detail'  | 'DontCalculateRow'   |
-		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16'  | '1a0154f7-0b79-438a-80b3-56f95abb73a2'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '9'         | ''               | '100'    | '137,29'     | '900'          | '762,71'     | '0'             | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | ''                  | ''             | '11.12.2020 00:00:00'  | ''        | 'False'              |
-
-	And I refill object tabular section "TaxList":
-		| 'Ref'                                                                     | 'Key'                                   | 'Tax'                                                            | 'Analytics'  | 'TaxRate'                                                           | 'Amount'  | 'IncludeToTotalAmount'  | 'ManualAmount'   |
-		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16'  | '1a0154f7-0b79-438a-80b3-56f95abb73a2'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | ''           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'  | '137,29'  | 'True'                  | '137,29'         |
+		| 'Ref'                                                                     | 'Key'                                   | 'ItemKey'                                                           | 'Store'                                                           | 'Unit'                                                           | 'Quantity'  | 'PurchaseBasis'  | 'Price'  | 'TaxAmount'  | 'TotalAmount'  | 'NetAmount'  | 'OffersAmount'  | 'PriceType'                                                           | 'ProfitLossCenter'  | 'ExpenseType'  | 'DeliveryDate'         | 'Detail'  | 'DontCalculateRow'   |'VatRate'                                                         |
+		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16'  | '1a0154f7-0b79-438a-80b3-56f95abb73a2'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | '9'         | ''               | '100'    | '137,29'     | '900'          | '762,71'     | '0'             | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005'  | ''                  | ''             | '11.12.2020 00:00:00'  | ''        | 'False'              |'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'|
 
 	And I refill object tabular section "Currencies":
 		| 'Ref'                                                                     | 'Key'                                   | 'CurrencyFrom'                                                        | 'Rate'    | 'ReverseRate'  | 'ShowReverseRate'  | 'Multiplicity'  | 'MovementType'                                                                                     | 'Amount'   |

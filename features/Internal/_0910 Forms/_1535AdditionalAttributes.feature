@@ -75,15 +75,7 @@ Scenario: _0153500 preparation
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load additional attribute hyperlink
 		When Create catalog AddAttributeAndProperty (hyperlink)
 

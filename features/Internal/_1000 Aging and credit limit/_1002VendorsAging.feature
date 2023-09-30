@@ -50,15 +50,7 @@ Scenario: _1002000 preparation (vendors aging)
 		When Create information register CurrencyRates records
 		When Create catalog PaymentSchedules objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load vendors advance closing document
 		When Create document VendorsAdvancesClosing objects (without branch)
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'

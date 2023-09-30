@@ -212,13 +212,7 @@ Function CheckDocumentsResult(Document, DocName)
 	Else
 		Query.SetParameter("RowIDInfo", Result.Tables.RowIDInfo);
 	EndIf;
-	
-	If Result.Tables.TaxList = Undefined Then
-		Query.SetParameter("TaxList", Document.TaxList.Unload());
-	Else
-		Query.SetParameter("TaxList", Result.Tables.TaxList);
-	EndIf;
-	
+		
 	If Result.Tables.SpecialOffers = Undefined Then
 		Query.SetParameter("SpecialOffers", Document.SpecialOffers.Unload());
 	Else
@@ -329,21 +323,6 @@ EndProcedure
 Function QuickFix(Document, RowIDList, ErrorID) Export
 	SetSafeMode(True);
 	Result = Eval(ErrorID + "(Document, RowIDList)");
-	Return Result;
-EndFunction
-
-// Error tax amount in item list not equal tax amount in tax list.
-// 
-// Parameters:
-//  Document - DocumentRefDocumentName - Document
-//  RowIDList - Array Of String - Row IDList
-// 
-// Returns:
-//  Array of String
-//@skip-check module-unused-method
-Function ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList(Document, RowIDList)
-	Result = New Array; // Array of String
-	Result.Add(R().ATC_NotSupported);
 	Return Result;
 EndFunction
 

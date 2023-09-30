@@ -65,21 +65,9 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal

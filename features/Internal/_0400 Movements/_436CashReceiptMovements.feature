@@ -59,15 +59,7 @@ Scenario: _043600 preparation (Cash receipt)
 		When Create POS cash account objects
 		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 		When Create OtherPartners objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	When Create catalog LegalNameContracts objects
 	* Add plugin for discount

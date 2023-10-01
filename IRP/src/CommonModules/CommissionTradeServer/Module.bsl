@@ -204,7 +204,6 @@ EndFunction
 Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 	FillingData = New Structure("BasedOn", "SalesReportToConsignor");
 	FillingData.Insert("ItemList"         , New Array());
-	FillingData.Insert("TaxList"          , New Array());
 	FillingData.Insert("SerialLotNumbers" , New Array());
 	FillingData.Insert("SourceOfOrigins"  , New Array());
 	
@@ -212,16 +211,10 @@ Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 	
 	For Each Row In DocRef.ItemList Do
 		NewRow = New Structure("Key, Item, ItemKey, Unit, Quantity, Price, PriceType, 
-		|TaxAmount, TotalAmount, NetAmount, DontCalculateRow,
+		|VatRate, TaxAmount, TotalAmount, NetAmount, DontCalculateRow,
 		|ConsignorPrice, TradeAgentFeePercent, TradeAgentFeeAmount");
 		FillPropertyValues(NewRow, Row);
 		FillingData.ItemList.Add(NewRow);
-	EndDo;
-	
-	For Each Row In DocRef.TaxList Do
-		NewRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-		FillPropertyValues(NewRow, Row);
-		FillingData.TaxList.Add(NewRow);
 	EndDo;
 	
 	For Each Row In DocRef.SerialLotNumbers Do

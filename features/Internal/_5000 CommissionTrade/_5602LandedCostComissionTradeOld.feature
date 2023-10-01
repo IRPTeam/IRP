@@ -64,16 +64,8 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load documents
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document InventoryTransfer objects (comission trade)

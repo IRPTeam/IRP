@@ -64,6 +64,9 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+		If FillingData.PriceIncludeTax = Undefined Then
+			PropertiesHeader = StrReplace(PropertiesHeader, "PriceIncludeTax,", "");
+		EndIf;
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
@@ -73,7 +76,6 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
-	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);

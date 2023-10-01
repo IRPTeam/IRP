@@ -999,10 +999,6 @@ GROUP BY
     <field>ItemList</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>TaxList</dataPath>
-    <field>TaxList</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Currencies</dataPath>
     <field>Currencies</field>
    </fields>
@@ -1017,6 +1013,22 @@ GROUP BY
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PointInTime</dataPath>
     <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TradeAgentFeeType</dataPath>
+    <field>TradeAgentFeeType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DELETE_TaxList</dataPath>
+    <field>DELETE_TaxList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceOfOrigins</dataPath>
+    <field>SourceOfOrigins</field>
    </fields>
   </extInfo>
  </attributes>

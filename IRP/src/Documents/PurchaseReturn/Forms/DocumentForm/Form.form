@@ -1895,6 +1895,61 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListVatRate</name>
+     <id>805</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.VatRate</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListVatRateOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>ItemListVatRateExtendedTooltip</name>
+      <id>807</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListVatRateContextMenu</name>
+      <id>806</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <listChoiceMode>true</listChoiceMode>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListOffersAmount</name>
      <id>105</id>
      <visible>true</visible>
@@ -2037,7 +2092,6 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
-     <readOnly>true</readOnly>
      <editMode>Enter</editMode>
      <showInHeader>true</showInHeader>
      <headerHorizontalAlign>Left</headerHorizontalAlign>

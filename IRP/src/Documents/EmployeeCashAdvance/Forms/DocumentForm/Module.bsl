@@ -37,11 +37,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -176,8 +171,8 @@ EndProcedure
 #Region TAX_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocEmployeeCashAdvanceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocEmployeeCashAdvanceClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -280,7 +275,6 @@ EndProcedure
 &AtClient
 Procedure FillByAdvances(Command)
 	Result = FillByAdvancesAtServer();
-	Object.TaxList.Clear();
 	Object.PaymentList.Clear();	
 	ViewClient_V2.PaymentListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
 EndProcedure

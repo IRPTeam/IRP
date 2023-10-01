@@ -680,7 +680,6 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("SourceOfOrigins");
-	ArrayOfTableNames.Add("TaxList");
 	
 	Result.Insert("ChoiceForms",
 		New Structure("PresentationStartChoice_Counter, 

@@ -1081,6 +1081,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="7d3f8cce-e399-4ae6-880d-aaeb9e6e3802">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>VAT</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="ac00141f-4b12-42db-89ae-027748ad95d2">
   <producedTypes>
@@ -1238,18 +1260,18 @@
    <objectType typeId="f5334ddc-8674-4d70-aa5e-4531528bc426" valueTypeId="cede9964-9720-4320-95fd-8edba5f7e5b6"/>
    <rowType typeId="c8a86dbb-8ac0-4a41-bdb4-e09ae45d93ae" valueTypeId="3936115a-f23e-4da1-ad6c-c0f0095e8862"/>
   </producedTypes>
-  <name>TaxList</name>
+  <name>DELETE_TaxList</name>
   <synonym>
    <key>en</key>
-   <value>Tax list</value>
+   <value>DELETE tax list</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Налоги</value>
+   <value>УДАЛИТЬ Налоги</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesi</value>
+   <value>DELETE tax list</value>
   </synonym>
   <attributes uuid="45260113-6472-42b8-a417-6d2b2894b6f8">
    <name>Key</name>

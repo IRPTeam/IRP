@@ -83,15 +83,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 					| "Description"           |
 					| "DocumentDiscount"      |
 				When add Plugin for document discount
-		* Add plugin for taxes calculation
-			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-			If "List" table does not contain lines Then
-					| "Description"             |
-					| "TaxCalculateVAT_TR"      |
-				When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load PI
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		And I execute 1C:Enterprise script at server

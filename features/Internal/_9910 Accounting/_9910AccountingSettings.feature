@@ -57,15 +57,7 @@ Scenario: _099100 preparation
 		When Create catalog LedgerTypeVariants objects
 		When Create information register LedgerTypeOperations records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects
 	
 Scenario: _0991001 check preparation

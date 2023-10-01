@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7fb9180f-31c0-47af-9b43-be21bdf6207f">
+ <producedTypes>
+  <refType typeId="f242eb4d-eb74-466e-942f-131a01b42301" valueTypeId="e0d630b3-9933-489e-8f5d-5445bbcd6730"/>
+  <listType typeId="42415650-b772-40dd-8d44-82aa17025e3f" valueTypeId="bec7db80-9a01-48d1-8f3b-d2bb8c2ae1f4"/>
+  <managerType typeId="b12bfe00-f10f-430a-a21c-46a490b8e913" valueTypeId="a0199083-9be4-4779-826a-2d0024a702a0"/>
+ </producedTypes>
+ <name>TaxKind</name>
+ <synonym>
+  <key>en</key>
+  <value>Tax kind</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Вид налога</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tax kind</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="835d8115-280b-4e3b-b7ac-aa22a9e8ba77">
+  <name>VAT</name>
+  <synonym>
+   <key>en</key>
+   <value>VAT</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>НДС</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>VAT</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

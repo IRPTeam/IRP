@@ -131,6 +131,7 @@ Function GetAdditionalQueryParameters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -143,7 +144,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(OffersInfo());
-	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -229,7 +229,9 @@ Function ItemList()
 		   |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
 		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-		   |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin
+		   |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin,
+		   |	SalesInvoiceItemList.VatRate AS VatRate,
+		   |	SalesInvoiceItemList.TaxAmount AS TaxAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -302,32 +304,6 @@ Function OffersInfo()
 		   |		AND SalesInvoiceSpecialOffers.Ref = &Ref
 		   |		INNER JOIN TableRowIDInfo AS TableRowIDInfo
 		   |		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key";
-EndFunction
-
-Function Taxes()
-	Return "SELECT
-		   |	SalesInvoiceTaxList.Ref.Date AS Period,
-		   |	SalesInvoiceTaxList.Ref.Company AS Company,
-		   |	SalesInvoiceTaxList.Tax AS Tax,
-		   |	SalesInvoiceTaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN SalesInvoiceTaxList.ManualAmount = 0
-		   |			THEN SalesInvoiceTaxList.Amount
-		   |		ELSE SalesInvoiceTaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	SalesInvoiceItemList.NetAmount AS TaxableAmount,
-		   |	SalesInvoiceItemList.Ref.Branch AS Branch,
-		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-		   |		INNER JOIN Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
-		   |		ON SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-		   |		AND SalesInvoiceItemList.Ref = &Ref
-		   |		AND SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -565,15 +541,22 @@ Function R2031B_ShipmentInvoicing()
 		   |	TRUE";
 EndFunction
 
-Function R2040B_TaxesIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R2040B_TaxesIncoming
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	Taxes.IsSales";
+Function R2040B_TaxesIncoming()	
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	ItemList.TaxAmount,
+		|	ItemLIst.NetAmount AS TaxableAmount
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsSales";
 EndFunction
 
 Function R4010B_ActualStocks()

@@ -61,7 +61,6 @@ Scenario: 950100 Basic role
 	When Create information register PartnerSegments records
 	When Create catalog TaxRates objects
 	When Create catalog Taxes objects
-	When Create catalog Taxes objects (Sales tax)
 	When Create catalog PaymentTerminals objects
 	When Create catalog BankTerms objects
 	When Create catalog CashStatementStatuses objects (Test)
@@ -69,8 +68,6 @@ Scenario: 950100 Basic role
 	When Create catalog Workstations objects  (Test)
 	When Create information register TaxSettings records
 	When Create information register Taxes records (VAT)
-	When Create information register TaxSettings (Sales tax)
-	When Create information register Taxes records (Sales tax)
 	When Create information register PricesByItemKeys records
 	When Create information register PricesByProperties records
 	When Create catalog IntegrationSettings objects

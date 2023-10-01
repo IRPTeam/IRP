@@ -65,12 +65,6 @@ Scenario: _0206000 preparation (checks data)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
 	* Add plugin for discount
@@ -80,8 +74,6 @@ Scenario: _0206000 preparation (checks data)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Users objects
 		When Create document RetailSalesReceipt objects (wrong data)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
   <id>1</id>
@@ -461,6 +461,94 @@ FROM
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Description</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Наименование</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tanım</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Predefined</dataPath>
+    <field>Predefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PredefinedDataName</dataPath>
+    <field>PredefinedDataName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Code</dataPath>
+    <field>Code</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExternalDataProcSettings</dataPath>
+    <field>ExternalDataProcSettings</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExternalDataProc</dataPath>
+    <field>ExternalDataProc</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Type</dataPath>
+    <field>Type</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Definition</dataPath>
+    <field>Definition</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_hash</dataPath>
+    <field>Description_hash</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_ru</dataPath>
+    <field>Description_ru</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_tr</dataPath>
+    <field>Description_tr</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxRates</dataPath>
+    <field>TaxRates</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UseDocuments</dataPath>
+    <field>UseDocuments</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TransactionTypes</dataPath>
+    <field>TransactionTypes</field>
+   </fields>
   </extInfo>
  </attributes>
  <commandInterface>

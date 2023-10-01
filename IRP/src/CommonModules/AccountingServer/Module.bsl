@@ -640,15 +640,14 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 		For Each Column In TabularSections[MainTableName].Attributes Do
 			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
 		EndDo;
-		
-		If TabularSections.Find("TaxList") <> Undefined Then
-			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
+				
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "VatRate") Then
 			TaxInfo = New Structure();
-			For Each Column In TabularSections["TaxList"].Attributes Do
-				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
-			EndDo;
+			TaxInfo.Insert("Key", TableRow.Key);
+			TaxInfo.Insert("Tax", TaxesServer.GetVatRef());
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
+		
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;

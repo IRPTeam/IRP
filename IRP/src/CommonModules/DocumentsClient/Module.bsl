@@ -1048,7 +1048,6 @@ Function GetFormItemNames()
 				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,
 				|AllocationDocumentsKey, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
 				|PaymentListKey, PaymentsKey,
-				|TaxList,
 				|ItemListInternalLinks, ItemListExternalLinks, InternalLinkedDocs, ExternalLinkedDocs,
 				|Currencies, CurrenciesTableKey,
 				|InventoryKey, AccountBalanceKey, AdvanceFromCustomersKey, AdvanceToSuppliersKey,

@@ -2477,6 +2477,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
 	|	ItemList.SalesPerson,
+	|	ItemList.VatRate,
 	|	CASE WHEN &IgnoreCodeStringControl THEN 
 	|		False 
 	|	ELSE 
@@ -2490,23 +2491,6 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.SalesOrder.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2568,13 +2552,11 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
 	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
 	Tables.Insert("Payments"      , TablePayments);
 
@@ -2645,7 +2627,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
@@ -2654,23 +2637,6 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.SalesInvoice.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2721,15 +2687,13 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo        = QueryResults[1].Unload();
 	TableItemList         = QueryResults[2].Unload();
-	TableTaxList          = QueryResults[3].Unload();
-	TableSpecialOffers    = QueryResults[4].Unload();
-	TableSerialLotNumbers = QueryResults[5].Unload();
-	TableSourceOfOrigins  = QueryResults[6].Unload();
+	TableSpecialOffers    = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	TableSourceOfOrigins  = QueryResults[5].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 	Tables.Insert("SourceOfOrigins" , TableSourceOfOrigins);
@@ -3001,7 +2965,6 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
@@ -3090,7 +3053,6 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
@@ -3166,7 +3128,6 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSI.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesSI.TaxList);
 	Tables.Insert("SpecialOffers", TablesSI.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
@@ -3241,7 +3202,6 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPIGRSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesPIGRSO.TaxList);
 	Tables.Insert("SpecialOffers", TablesPIGRSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
@@ -3278,7 +3238,6 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = U
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesSO.TaxList);
 	Tables.Insert("SpecialOffers", TablesSO.SpecialOffers);
 
 	AddTables(Tables);
@@ -3335,7 +3294,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.PurchaseOrder.ItemList AS ItemList
@@ -3346,22 +3306,6 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	LineNumber
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.PurchaseOrder.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
-	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
@@ -3383,13 +3327,11 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 
 	AddTables(Tables);
@@ -3460,7 +3402,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
@@ -3471,22 +3414,6 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.LineNumber
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.PurchaseInvoice.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
-	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
@@ -3535,15 +3462,13 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo        = QueryResults[1].Unload();
 	TableItemList         = QueryResults[2].Unload();
-	TableTaxList          = QueryResults[3].Unload();
-	TableSpecialOffers    = QueryResults[4].Unload();
-	TableSerialLotNumbers = QueryResults[5].Unload();
-	TableSourceOfOrigins  = QueryResults[6].Unload();
+	TableSpecialOffers    = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	TableSourceOfOrigins  = QueryResults[5].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 	Tables.Insert("SourceOfOrigins" , TableSourceOfOrigins);
@@ -3715,7 +3640,6 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesPO.TaxList);
 	Tables.Insert("SpecialOffers", TablesPO.SpecialOffers);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
@@ -3791,7 +3715,6 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPI.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesPI.TaxList);
 	Tables.Insert("SpecialOffers", TablesPI.SpecialOffers);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
@@ -3939,7 +3862,6 @@ Function ExtractData_FromRGR_ThenFromRSR(BasisesTable, DataReceiver, AddInfo = U
 	QueryResults = Query.ExecuteBatch();
 
 	TablesRSR = ExtractData_FromRSR(QueryResults[2].Unload(), DataReceiver);
-//	TablesPI.ItemList.FillValues(True, "UseGoodsReceipt");
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
@@ -3948,7 +3870,6 @@ Function ExtractData_FromRGR_ThenFromRSR(BasisesTable, DataReceiver, AddInfo = U
 	Tables = New Structure();
 	Tables.Insert("ItemList"         , TablesRSR.ItemList);
 	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
-	Tables.Insert("TaxList"          , TablesRSR.TaxList);
 	Tables.Insert("SpecialOffers"    , TablesRSR.SpecialOffers);
 	Tables.Insert("GoodsReceipts"    , TableGoodsReceipts);
 	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
@@ -4239,7 +4160,8 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.PurchaseReturn.ItemList AS ItemList
@@ -4248,23 +4170,6 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.PurchaseReturn.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4287,13 +4192,11 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 
 	AddTables(Tables);
@@ -4340,7 +4243,8 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.PurchaseReturnOrder.ItemList AS ItemList
@@ -4349,23 +4253,6 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.PurchaseReturnOrder.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4388,13 +4275,11 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 
 	AddTables(Tables);
@@ -4452,7 +4337,8 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
@@ -4461,23 +4347,6 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.SalesReturn.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4500,13 +4369,11 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 
 	AddTables(Tables);
@@ -4554,7 +4421,8 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesReturnOrder.ItemList AS ItemList
@@ -4563,23 +4431,6 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.SalesReturnOrder.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4602,13 +4453,11 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableSpecialOffers = QueryResults[3].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 
 	AddTables(Tables);
@@ -4661,7 +4510,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
 	|	ItemList.SalesPerson,
-	|	ISNULL(ItemList.isControlCodeString, False) AS isControlCodeString
+	|	ISNULL(ItemList.isControlCodeString, False) AS isControlCodeString,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
@@ -4670,23 +4520,6 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.RetailSalesReceipt.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4781,17 +4614,15 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo        = QueryResults[1].Unload();
 	TableItemList         = QueryResults[2].Unload();
-	TableTaxList          = QueryResults[3].Unload();
-	TableSpecialOffers    = QueryResults[4].Unload();
-	TableSerialLotNumbers = QueryResults[5].Unload();
-	TablePayments         = QueryResults[6].Unload();
-	TableSourceOfOrigins  = QueryResults[7].Unload();
-	TableControlCodeStrings  = QueryResults[8].Unload();
+	TableSpecialOffers    = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	TablePayments         = QueryResults[5].Unload();
+	TableSourceOfOrigins  = QueryResults[6].Unload();
+	TableControlCodeStrings  = QueryResults[7].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList"         , TableItemList);
 	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
-	Tables.Insert("TaxList"          , TableTaxList);
 	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 	Tables.Insert("Payments"         , TablePayments);
@@ -4838,7 +4669,8 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.WorkOrder.ItemList AS ItemList
@@ -4847,23 +4679,6 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|ORDER BY
 	|	ItemList.LineNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	BasisesTable.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount,
-	|	TaxList.ManualAmount
-	|FROM
-	|	Document.WorkOrder.TaxList AS TaxList
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.BasisKey = TaxList.Key
-	|		AND BasisesTable.Basis = TaxList.Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -4908,14 +4723,12 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo        = QueryResults[1].Unload();
 	TableItemList         = QueryResults[2].Unload();
-	TableTaxList          = QueryResults[3].Unload();
-	TableSpecialOffers    = QueryResults[4].Unload();
-	Materials             = QueryResults[5].Unload();
+	TableSpecialOffers    = QueryResults[3].Unload();
+	Materials             = QueryResults[4].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TableItemList);
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
 	Tables.Insert("Materials"     , Materials);
 
@@ -5041,7 +4854,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesWO.ItemList);
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TablesWO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesWO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
 
@@ -5099,7 +4911,6 @@ Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesSO.ItemList);
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesSO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
 
@@ -5116,11 +4927,7 @@ Procedure AddTables(Tables)
 	Else
 		Tables.Insert("ItemList", GetEmptyTable_ItemList());
 	EndIf;
-
-	If Not Tables.Property("TaxList") Then
-		Tables.Insert("TaxList", GetEmptyTable_TaxList());
-	EndIf;
-
+	
 	If Not Tables.Property("SpecialOffers") Then
 		Tables.Insert("SpecialOffers", GetEmptyTable_SpecialOffers());
 	EndIf;
@@ -5184,22 +4991,7 @@ Procedure RecalculateAmounts(Tables)
 		EndIf;
 
 		Filter = New Structure("Ref, Key", RowItemList.Ref, RowItemList.Key);
-		
-		// TaxList
-		If Tables.Property("TaxList") Then
-			For Each RowTaxList In Tables.TaxList.FindRows(Filter) Do
-				If RowItemList.OriginalQuantity = 0 Then
-					RowTaxList.Amount       = 0;
-					RowTaxList.ManualAmount = 0;
-				Else
-					RowTaxList.Amount       = RowTaxList.Amount / RowItemList.OriginalQuantity
-						* RowItemList.QuantityInBaseUnit;
-					RowTaxList.ManualAmount = RowTaxList.ManualAmount / RowItemList.OriginalQuantity
-						* RowItemList.QuantityInBaseUnit;
-				EndIf;
-			EndDo;
-		EndIf;
-		
+				
 		// SpecialOffers
 		If Tables.Property("SpecialOffers") Then
 			For Each RowSpecialOffers In Tables.SpecialOffers.FindRows(Filter) Do
@@ -5277,10 +5069,6 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 				Row.Key = NewKey;
 			EndDo;
 
-			For Each Row In Tables.TaxList.FindRows(Filter) Do
-				Row.Key = NewKey;
-			EndDo;
-
 			For Each Row In Tables.SpecialOffers.FindRows(Filter) Do
 				Row.Key = NewKey;
 			EndDo;
@@ -5312,7 +5100,6 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 		NewRow.Key = NewKey;
 	EndDo;
 
-	Tables.TaxList.GroupBy(GetColumnNames_TaxList()                             , GetColumnNamesSum_TaxList());
 	Tables.SpecialOffers.GroupBy(GetColumnNames_SpecialOffers()                 , GetColumnNamesSum_SpecialOffers());
 	Tables.ShipmentConfirmations.GroupBy(GetColumnNames_ShipmentConfirmations() , GetColumnNamesSum_ShipmentConfirmations());
 	Tables.GoodsReceipts.GroupBy(GetColumnNames_GoodsReceipts()                 , GetColumnNamesSum_GoodsReceipts());
@@ -10880,7 +10667,7 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 		If Object.Property(TableName) Then
 			If Object[TableName].Count() And CommonFunctionsClientServer.ObjectHasProperty(Object[TableName][0], "Key") Then
 				For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-					If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+					If Upper(TableName) = Upper("SpecialOffers") Then
 						If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
 							Object[TableName].Delete(DeletionRow);
 						EndIf;
@@ -10908,7 +10695,7 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 			If Row.Key <> LinkRow.Key Then
 				Continue;
 			EndIf;
-			If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+			If Upper(TableName) = Upper("SpecialOffers") Then
 				If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
 					FillPropertyValues(Object[TableName].Add(), Row);
 				EndIf;
@@ -11105,7 +10892,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 				+ ?(NameAsAlias, ", TransactionTypePR", ", TransactionType");
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkOrder Then
@@ -11284,7 +11071,6 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , GetEmptyTable_ItemList());
 	Tables.Insert("RowIDInfo"             , GetEmptyTable_RowIDInfo());
-	Tables.Insert("TaxList"               , GetEmptyTable_TaxList());
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
@@ -11307,7 +11093,6 @@ EndFunction
 Function GetTableNames_Refreshable(Excludings = "")
 	NamesArray = New Array();
 	NamesArray.Add("RowIDInfo");
-	NamesArray.Add("TaxList");
 	NamesArray.Add("SpecialOffers");
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
@@ -11452,7 +11237,8 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypePurchases,
 		   |TransactionTypePR,
 		   |TransactionTypeRGR,
-		   |isControlCodeString";		
+		   |isControlCodeString,
+		   |VatRate";		
 EndFunction
 
 Function GetEmptyTable_ItemList()
@@ -11477,22 +11263,6 @@ EndFunction
 
 Function GetEmptyTable_RowIDInfo()
 	Return GetEmptyTable(GetColumnNames_RowIDInfo() + ", " + GetColumnNamesSum_RowIDInfo());
-EndFunction
-
-#EndRegion
-
-#Region EmptyTables_TaxList
-
-Function GetColumnNames_TaxList()
-	Return "Ref, Key, Tax, Analytics, TaxRate, IncludeToTotalAmount";
-EndFunction
-
-Function GetColumnNamesSum_TaxList()
-	Return "Amount, ManualAmount";
-EndFunction
-
-Function GetEmptyTable_TaxList()
-	Return GetEmptyTable(GetColumnNames_TaxList() + ", " + GetColumnNamesSum_TaxList());
 EndFunction
 
 #EndRegion

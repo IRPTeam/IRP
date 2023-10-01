@@ -55,7 +55,6 @@ Scenario: _001 test data
 		When Create catalog PriceTypes objects (LC)
 		When Create catalog Specifications objects (LC)
 		When Create catalog Stores objects (LC)
-		When Create catalog TaxAnalytics objects (LC)
 		When Create catalog TaxRates objects (LC)
 		When Create catalog Taxes objects (LC)
 		When Create catalog InterfaceGroups objects (LC)
@@ -80,10 +79,6 @@ Scenario: _001 test data
 		When Create catalog BillOfMaterials objects (LC)
 		And Delay 10
 		When update ItemKeys (LC)
-	* Add plugin for taxes calculation
-			When add Plugin for tax calculation (LC)
-		When update tax settings (LC)
-
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"

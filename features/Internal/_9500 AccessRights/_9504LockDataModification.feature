@@ -60,22 +60,9 @@ Scenario: 950400 preparation
 		And I input "4" text in "REP_Attribute1" field
 		And I click "Save and close" button
 		And I close all client application windows
-	* Tax
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 	* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"
@@ -223,9 +210,6 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'     |
 				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button		
 			And I move to "Other" tab
 			And I input "07.10.2020 00:00:00" text in "Date" field
 			And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -257,9 +241,6 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'     |
 				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button		
 			And I click "Save" button
 			And I click "Post and close" button
 			And "List" table contains lines
@@ -283,9 +264,6 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'     |
 				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -310,9 +288,6 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'     |
 				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button	
 			And I click "Save" button
 			And I click "Post and close" button
 			Then user message window does not contain messages
@@ -344,9 +319,6 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 					| 'Number'      |
 					| '15'          |
 				And in the table "List" I click the button named "ListContextMenuCopy"
-				Then "Update item list info" window is opened
-				And I change checkbox "Do you want to change tax rates according to the partner term?"
-				And I click "OK" button	
 				And I move to "Other" tab
 				And I input "0" text in "Number" field
 				Then "1C:Enterprise" window is opened
@@ -623,9 +595,9 @@ Scenario: 950407 create rules for accumulation register
 			And I go to line in "List" table
 				| 'Number'     |
 				| '2'          |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
-			And I click "OK" button
+			And I click "OK" button			
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "lock accumulation register" string by template
 		* Create new
@@ -633,9 +605,6 @@ Scenario: 950407 create rules for accumulation register
 				| 'Number'     |
 				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -679,9 +648,6 @@ Scenario: 950407 create rules for accumulation register
 				| 'Number'     |
 				| '15'         |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -775,9 +741,9 @@ Scenario: 950409 create rules for information register (with recorder)
 			And I go to line in "List" table
 				| 'Number'     |
 				| '2'          |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
-			And I click "OK" button
+			And I click "OK" button			
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "lock information register" string by template
 		* Create new
@@ -785,9 +751,6 @@ Scenario: 950409 create rules for information register (with recorder)
 				| 'Number'     |
 				| '1'          |
 			And in the table "List" I click the button named "ListContextMenuCopy"
-			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to change tax rates according to the partner term?"
-			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -1786,21 +1749,21 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "information register (without recorder)" string by template
 			And I close all client application windows
-	* Does not fall under the conditions
-			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
-			And I go to line in "List" table
-				| 'Tax'          |
-				| 'SalesTax'     |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			Then user message window does not contain messages
-			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
-			And I go to line in "List" table
-				| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'           |
-				| 'USD'              | 'EUR'            | '1'               | '21.06.2019 17:40:13'    | '1,1235'    | 'Forex Seling'     |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			Then user message window does not contain messages	
+	# * Does not fall under the conditions
+	# 		Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
+	# 		And I go to line in "List" table
+	# 			| 'Tax'          |
+	# 			| 'SalesTax'     |
+	# 		And I select current line in "List" table
+	# 		And I click "Save and close" button
+	# 		Then user message window does not contain messages
+	# 		Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
+	# 		And I go to line in "List" table
+	# 			| 'Currency from'    | 'Currency to'    | 'Multiplicity'    | 'Period'                 | 'Rate'      | 'Source'           |
+	# 			| 'USD'              | 'EUR'            | '1'               | '21.06.2019 17:40:13'    | '1,1235'    | 'Forex Seling'     |
+	# 		And I select current line in "List" table
+	# 		And I click "Save and close" button
+	# 		Then user message window does not contain messages	
 
 
 Scenario: 950425 check that Disable rule does not work

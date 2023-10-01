@@ -51,15 +51,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesOrder objects (check SalesOrderProcurement)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(501).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -582,7 +574,7 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		* Check ItemList tab
 			And "ItemList" table contains lines
 				| 'Key'                           | 'Store'       | 'Additional analytic'    | 'Stock quantity'    | '#'    | 'Profit loss center'    | 'Price type'                 | 'Item'        | 'Item key'     | 'Dont calculate row'    | 'Serial lot numbers'    | 'Quantity'    | 'Unit'    | 'Tax amount'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Use shipment confirmation'    | 'Detail'    | 'Sales order'                                  | 'Revenue type'     |
-				| '$$Rov1SalesInvoice029203$$'    | 'Store 01'    | ''                       | '2,000'             | '1'    | ''                      | 'en description is empty'    | 'Service'     | 'Internet'     | 'No'                    | ''                      | '2,000'       | 'pcs'     | '30,51'         | '100,00'    | '18%'    | ''                 | '169,49'        | '200,00'          | 'No'                           | ''          | 'Sales order 502 dated 30.03.2021 11:56:28'    | ''                 |
+				| '$$Rov1SalesInvoice029203$$'    | ''            | ''                       | '2,000'             | '1'    | ''                      | 'en description is empty'    | 'Service'     | 'Internet'     | 'No'                    | ''                      | '2,000'       | 'pcs'     | '30,51'         | '100,00'    | '18%'    | ''                 | '169,49'        | '200,00'          | 'No'                           | ''          | 'Sales order 502 dated 30.03.2021 11:56:28'    | ''                 |
 				| '$$Rov2SalesInvoice029203$$'    | 'Store 01'    | ''                       | '8,000'             | '2'    | ''                      | 'Basic Price Types'          | 'Trousers'    | '38/Yellow'    | 'No'                    | ''                      | '8,000'       | 'pcs'     | '488,14'        | '400,00'    | '18%'    | ''                 | '2 711,86'      | '3 200,00'        | 'No'                           | ''          | 'Sales order 502 dated 30.03.2021 11:56:28'    | ''                 |
 				| '$$Rov3SalesInvoice029203$$'    | 'Store 01'    | ''                       | '11,000'            | '3'    | ''                      | 'Basic Price Types'          | 'Shirt'       | '38/Black'     | 'No'                    | ''                      | '11,000'      | 'pcs'     | '587,29'        | '350,00'    | '18%'    | ''                 | '3 262,71'      | '3 850,00'        | 'Yes'                          | ''          | 'Sales order 502 dated 30.03.2021 11:56:28'    | ''                 |
 			Then the number of "ItemList" table lines is "равно" "3"

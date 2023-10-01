@@ -64,20 +64,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Load documents
 		When Create Physical inventory and Stock adjustment as write-off for link
 		And I execute 1C:Enterprise script at server
@@ -748,9 +735,9 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And the editing text of form attribute named "SelectedCount" became equal to "4,000"
 			And I click "Ok" button
 			And "ItemList" table became equal
-				| '#'    | 'SalesTax'    | 'Revenue type'    | 'Price type'           | 'Item'        | 'Item key'     | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Serial lot numbers'                | 'Unit'    | 'Quantity'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Is additional item revenue'    | 'Additional analytic'    | 'Store'       | 'Delivery date'    | 'Use shipment confirmation'    | 'Detail'    | 'Sales order'    | 'Sales person'     |
-				| '1'    | '1%'          | ''                | 'Basic Price Types'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '259,91'        | '99098809009910; 99098809009911'    | 'pcs'     | '4,000'       | '400,00'    | '18%'    | ''                 | '1 340,09'      | '1 600,00'        | 'No'                            | ''                       | 'Store 01'    | ''                 | 'No'                           | ''          | ''               | ''                 |
-				| '2'    | '1%'          | ''                | 'Basic Price Types'    | 'Boots'       | '38/18SD'      | ''                      | 'No'                    | '105,59'        | ''                                  | 'pcs'     | '1,000'       | '650,00'    | '18%'    | ''                 | '544,41'        | '650,00'          | 'No'                            | ''                       | 'Store 01'    | ''                 | 'No'                           | ''          | ''               | ''                 |
+				| '#'    | 'Revenue type'    | 'Price type'           | 'Item'        | 'Item key'     | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Serial lot numbers'                | 'Unit'    | 'Quantity'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Net amount'    | 'Total amount'    | 'Is additional item revenue'    | 'Additional analytic'    | 'Store'       | 'Delivery date'    | 'Use shipment confirmation'    | 'Detail'    | 'Sales order'    | 'Sales person'     |
+				| '1'    | ''                | 'Basic Price Types'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '244,07'        | '99098809009910; 99098809009911'    | 'pcs'     | '4,000'       | '400,00'    | '18%'    | ''                 | '1 355,93'      | '1 600,00'        | 'No'                            | ''                       | 'Store 01'    | ''                 | 'No'                           | ''          | ''               | ''                 |
+				| '2'    | ''                | 'Basic Price Types'    | 'Boots'       | '38/18SD'      | ''                      | 'No'                    | '99,15'         | ''                                  | 'pcs'     | '1,000'       | '650,00'    | '18%'    | ''                 | '550,85'        | '650,00'          | 'No'                            | ''                       | 'Store 01'    | ''                 | 'No'                           | ''          | ''               | ''                 |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |

@@ -1,8 +1,13 @@
 
-
 &AtClient
 Procedure OnOpen(Cancel)
-	FillSettingsAndClose()
+	FillSettingsAndClose();
+	If TypeOf(SourceRef) = Type("DocumentRef.PhysicalCountByLocation") Then
+		If FormOwner.Object.TransactionType = PredefinedValue("Enum.PhysicalCountByLocationTransactionType.Package") Then
+			ThisObject.CopyQuantityAs = "PhysCount";
+			FillSettingsAndClose();
+		EndIf; 
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -31,9 +36,10 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FillPropertyValues(ThisObject, Parameters.CopySettings);
+	SourceRef = Parameters.Ref;
 	
-	If TypeOf(Parameters.Ref) = Type("DocumentRef.PhysicalInventory")
-		Or TypeOf(Parameters.Ref) = Type("DocumentRef.PhysicalCountByLocation") Then
+	If TypeOf(SourceRef) = Type("DocumentRef.PhysicalInventory")
+		Or TypeOf(SourceRef) = Type("DocumentRef.PhysicalCountByLocation") Then
 	
 		ThisObject.CopyQuantityAs = "";
 	EndIf;

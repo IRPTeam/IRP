@@ -51,8 +51,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		RowFilter.Insert("Key", ItemRow.Key);
 
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
-		TaxRows = SourceData.TaxList.FindRows(RowFilter);
-		
 		_consignor = Undefined;
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 			_consignor = ItemRow.Consignor;
@@ -131,20 +129,20 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		EndIf;
 		
 		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
-		If TaxRows.Count() > 0 Then
-			If TaxRows[0].TaxRate.NoRate Then
+		
+		If ValueIsFilled(ItemRow.VatRate) Then
+			If ItemRow.VatRate.NoRate Then
 				FiscalStringData.VATRate = "none";
 				FiscalStringData.VATAmount = 0;
 			Else
-				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
-				FiscalStringData.VATAmount = TaxRows[0].Amount;
+				FiscalStringData.VATRate = Format(ItemRow.VatRate.Rate, "NZ=0; NG=0;");
+				FiscalStringData.VATAmount = ItemRow.TaxAmount;
 			EndIf;
-
 		Else
 			FiscalStringData.VATRate = "none";
 			FiscalStringData.VATAmount = 0;
 		EndIf;
-
+		
 		If ValueIsFilled(_consignor) Then
 			FiscalStringData.VendorData.VendorINN = _consignor.TaxID;
 			FiscalStringData.VendorData.VendorName = String(_consignor);
@@ -246,43 +244,44 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	If PaymentListData.Count() > 1 Then
 		Raise("A few retail customer found!");
 	EndIf;
-	
-	If Not SourceData.RetailCustomer.IsEmpty() Then
+	RetailCustomer = PaymentListData[0].RetailCustomer;
+	If Not RetailCustomer.IsEmpty() Then
 
-		CheckPackage.Parameters.CustomerEmail = SourceData.RetailCustomer.Email;
-		CheckPackage.Parameters.CustomerPhone = SourceData.RetailCustomer.Code;
+		CheckPackage.Parameters.CustomerEmail = RetailCustomer.Email;
+		CheckPackage.Parameters.CustomerPhone = RetailCustomer.Code;
 	
-		CheckPackage.Parameters.CustomerDetail.DateOfBirth = Format(SourceData.RetailCustomer.BirthDate, "DF=dd.MM.yyyy;");
-		CheckPackage.Parameters.CustomerDetail.Info = String(SourceData.RetailCustomer);
-		CheckPackage.Parameters.CustomerDetail.INN = SourceData.RetailCustomer.TaxID;
+		CheckPackage.Parameters.CustomerDetail.DateOfBirth = Format(RetailCustomer.BirthDate, "DF=dd.MM.yyyy;");
+		CheckPackage.Parameters.CustomerDetail.Info = String(RetailCustomer);
+		CheckPackage.Parameters.CustomerDetail.INN = RetailCustomer.TaxID;
 		
 	EndIf;
 
 	For Each Item In SourceData.PaymentList Do
 		RowFilter = New Structure();
 		RowFilter.Insert("Key", Item.Key);
-		TaxRows = SourceData.TaxList.FindRows(RowFilter);
 		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = Item.TotalAmount;
 		FiscalStringData.DiscountAmount = 0;
 		FiscalStringData.CalculationSubject = 10;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 		FiscalStringData.MeasureOfQuantity = 255;
-		FiscalStringData.Name = String(SourceData.PaymentList[0].RetailCustomer);
+		FiscalStringData.Name = String(RetailCustomer);
 		FiscalStringData.Quantity = 1;
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
-		If TaxRows.Count() > 0 Then
-			If TaxRows[0].TaxRate.NoRate Then
-				FiscalStringData.VATRate =  "none";
+		
+		If ValueIsFilled(Item.VatRate) Then
+			If Item.VatRate.NoRate Then
+				FiscalStringData.VATRate = "none";
 				FiscalStringData.VATAmount = 0;
 			Else
-				FiscalStringData.VATRate = Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;");
-				FiscalStringData.VATAmount = TaxRows[0].Amount;
+				FiscalStringData.VATRate = Format(Item.VatRate.Rate, "NZ=0; NG=0;");
+				FiscalStringData.VATAmount = Item.TaxAmount;
 			EndIf;
 		Else
 			FiscalStringData.VATRate = "none";
 			FiscalStringData.VATAmount = 0;
 		EndIf;
+		
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;
 

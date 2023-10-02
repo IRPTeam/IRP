@@ -46,15 +46,7 @@ Scenario: _0201000 preparation
 		When Create information register TaxSettings records
 		When Create catalog Vehicles objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load InventoryTransferOrder
 		When Create document InventoryTransferOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server

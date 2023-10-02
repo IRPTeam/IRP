@@ -64,15 +64,7 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then

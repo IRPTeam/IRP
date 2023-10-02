@@ -43,15 +43,7 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog PlanningPeriods objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Create Planning period
 		Given I open hyperlink "e1cib/list/Catalog.PlanningPeriods"
 		And I click the button named "FormCreate"

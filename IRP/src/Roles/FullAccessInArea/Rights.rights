@@ -2512,13 +2512,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.EditTax</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonAttribute.Height</name>
 		<right>
 			<name>View</name>

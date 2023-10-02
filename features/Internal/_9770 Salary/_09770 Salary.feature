@@ -66,15 +66,8 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create information register T9530S_WorkDays records
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+	
 
 
 Scenario: _097705 create accrual and deduction values

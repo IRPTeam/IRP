@@ -53,15 +53,7 @@ Scenario: _042700 preparation (Unbundling)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 		When Create document Unbundling objects
 		And I execute 1C:Enterprise script at server
 			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |

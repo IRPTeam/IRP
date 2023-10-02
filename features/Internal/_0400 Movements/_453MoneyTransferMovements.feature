@@ -60,15 +60,7 @@ Scenario: _045300 preparation (Cash transfer order)
 		When Create catalog CancelReturnReasons objects
 		When Create catalog PlanningPeriods objects
 		When Create POS cash account objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load Money transfer order
 		When Create document MoneyTransfer objects (check movements)
 		And I execute 1C:Enterprise script at server

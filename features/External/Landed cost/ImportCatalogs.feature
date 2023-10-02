@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @IgnoreOnCIMainBuild
 @ExportScenarios
@@ -1013,12 +1013,6 @@ Scenario: Create catalog Stores objects (LC)
 		| 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9fcfb5c9e071'  | 'No'            | '0'     | 'No'               | 'No'                       | 'No'       | 'Store 06'        | ''                  | ''                | 'Store 06 TR'      |
 		| 'e1cib/data/Catalog.Stores?ref=aa6f120ed92fbced11eaeb5cc4ba3dbe'  | 'No'            | '0'     | 'No'               | 'No'                       | 'No'       | 'Store 10'        | ''                  | ''                | 'Store 06 TR'      |
 
-Scenario: Create catalog TaxAnalytics objects (LC)
-
-	And I check or create catalog "TaxAnalytics" objects:
-		| 'Ref'                                                                   | 'DeletionMark'  | 'Code'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'    |
-		| 'e1cib/data/Catalog.TaxAnalytics?ref=86ffd69b4676df1211ea9f66023c6458'  | 'No'            | '0'     | 'Analytics 01'    | ''                  | ''                | 'Analytics 01 TR'   |
-
 Scenario: Create catalog TaxRates objects (LC)
 
 	And I check or create catalog "TaxRates" objects:
@@ -1032,10 +1026,9 @@ Scenario: Create catalog TaxRates objects (LC)
 Scenario: Create catalog Taxes objects (LC)
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'                                                          | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'No'            | '0'     | 'ValueStorage'              | 'e1cib/data/Catalog.ExternalDataProc?ref=86ffd69b4676df1211ea9f6a798343c3'  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c'  | 'No'            | '0'     | 'ValueStorage'              | 'e1cib/data/Catalog.ExternalDataProc?ref=86ffd69b4676df1211ea9f6a798343c3'  | 'Enum.TaxType.Rate'  | 'SalesTax'        | ''                  | ''                | ''                 |
-
+		| 'Ref'                                                            | 'DeletionMark'  | 'Code'  | 'ExternalDataProcSettings'  | 'ExternalDataProc'                                                          | 'Type'               | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Kind'             |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'No'            | '0'     | 'ValueStorage'              | 'e1cib/data/Catalog.ExternalDataProc?ref=86ffd69b4676df1211ea9f6a798343c3'  | 'Enum.TaxType.Rate'  | 'VAT'             | ''                  | ''                | ''                 | 'Enum.TaxKind.VAT' |
+		
 	And I refill object tabular section "TaxRates":
 		| 'Ref'                                                            | 'TaxRate'                                                            |
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f6519d5c878'   |

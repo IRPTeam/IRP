@@ -44,16 +44,8 @@ Scenario: _0242000 preparation (planned receipt reservation)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 		When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Write);"    |

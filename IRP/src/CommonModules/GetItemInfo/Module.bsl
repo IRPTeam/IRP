@@ -809,6 +809,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	
 	Try
 		Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	Except
@@ -1485,14 +1486,37 @@ Function isItemKeyInItemSegments(Val ItemKey, Val ItemSegments) Export
 	
 	Query = New Query;
 	Query.Text =
-		"SELECT
-		|	ItemSegments.Segment,
-		|	ItemSegments.ItemKey
-		|FROM
-		|	InformationRegister.ItemSegments AS ItemSegments
-		|WHERE
-		|	ItemSegments.Segment IN (&Segments)
-		|	AND ItemSegments.ItemKey = &ItemKey";
+	"SELECT
+	|	ItemKeys.Item,
+	|	ItemKeys.Ref AS ItemKey
+	|INTO tmpItems
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Ref = &ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemSegments.Segment,
+	|	ItemSegments.ItemKey
+	|FROM
+	|	InformationRegister.ItemSegments AS ItemSegments
+	|		INNER JOIN tmpItems AS tmpItems
+	|		ON ItemSegments.Segment IN (&Segments)
+	|		AND ItemSegments.ItemKey = tmpItems.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ItemSegments.Segment,
+	|	ItemSegments.ItemKey
+	|FROM
+	|	InformationRegister.ItemSegments AS ItemSegments
+	|		INNER JOIN tmpItems AS tmpItems
+	|		ON ItemSegments.Segment IN (&Segments)
+	|		AND ItemSegments.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|		AND ItemSegments.Item = tmpItems.Item";
 	
 	Query.SetParameter("ItemKey", ItemKey);
 	Query.SetParameter("Segments", ItemSegments);

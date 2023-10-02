@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @OpeningEntries
@@ -62,20 +62,7 @@ Scenario: _410010 preparation (Opening entries)
 		When Create catalog Agreements objects (commision trade, own companies)
 		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	* Company settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"	
 		And I go to line in "List" table

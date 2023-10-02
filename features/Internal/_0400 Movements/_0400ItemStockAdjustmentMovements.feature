@@ -59,15 +59,7 @@ Scenario: _040001 preparation (item stock adjustment movements)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load item stock adjustment document
 		When Create document item stock adjustment (check movements)
 		When Create document ItemStockAdjustment objects (stock control serial lot numbers)

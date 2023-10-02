@@ -13,6 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;
 
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
 
@@ -88,6 +89,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -130,34 +132,13 @@ Function ItemList()
 		   |	ItemList.TaxAmount AS TaxAmount,
 		   |	ItemList.Key,
 		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.LegalNameContract AS LegalNameContract
+		   |	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		   |	ItemList.VatRate AS VatRate
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.Ref = &Ref
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	TaxList.Ref.Date AS Period,
-		   |	TaxList.Ref.Company AS Company,
-		   |	TaxList.Tax AS Tax,
-		   |	TaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN TaxList.ManualAmount = 0
-		   |			THEN TaxList.Amount
-		   |		ELSE TaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	ItemList.NetAmount AS TaxableAmount,
-		   |	ItemList.Ref.Branch AS Branch
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesReportToConsignor.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesReportToConsignor.TaxList AS TaxList
-		   |		ON ItemList.Key = TaxList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |		AND TaxList.Ref = &Ref";
+		   |	ItemList.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -237,15 +218,21 @@ Function R1021B_VendorsTransactions()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R1040B_TaxesOutgoing
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	TRUE";
-
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	-ItemList.NetAmount AS TaxableAmount,
+		|	-ItemList.TaxAmount AS TaxAmount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	ItemList AS ItemLIst
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

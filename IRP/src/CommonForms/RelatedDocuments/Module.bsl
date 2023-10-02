@@ -5,6 +5,7 @@ Var CurrentDocument;
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("DocumentRef") Then
 		ThisObject.DocumentRef = Parameters.DocumentRef;
+		Title = String(Parameters.DocumentRef);
 	Else
 		Cancel = True;
 	EndIf;
@@ -199,6 +200,7 @@ Procedure GenerateForCurrent(Command)
 	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
 	If Not CurrentData = Undefined And ValueIsFilled(CurrentData.Ref) Then
 		ThisObject.DocumentRef = CurrentData.Ref;
+		Title = String(CurrentData.Ref);
 		GenerateTree();
 		ExpandDocumentsTree();
 	EndIf;

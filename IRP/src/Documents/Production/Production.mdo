@@ -49,6 +49,10 @@
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Production</value>
+  </objectPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
@@ -313,10 +317,25 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="149a81ae-7a01-4dca-91f6-2f51e85bd25e">
-    <name>CostMultiplierRatio</name>
+    <name>ExtraCostAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Cost multiplier ratio</value>
+      <value>Extra cost amount by ratio</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typePercent</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="479dec26-fe5f-4c36-af79-6a6aeba63426">
+    <name>ExtraCostTaxAmountByRatio</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra cost tax amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typePercent</types>
@@ -363,10 +382,25 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="5495c450-50ba-48e4-bc56-66aec29477a9">
-    <name>AdditionalCost</name>
+    <name>ExtraDirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Additional cost</value>
+      <value>Extra direct cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5adffab3-fca7-4b6e-b30a-013fa9a1f8f8">
+    <name>ExtraDirectCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra direct cost tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

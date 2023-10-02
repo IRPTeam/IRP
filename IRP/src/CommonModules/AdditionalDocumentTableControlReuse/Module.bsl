@@ -13,6 +13,7 @@
 // ** SerialLotNumbers - Undefined
 // ** SourceOfOrigins - Undefined
 // ** RowIDInfo - Undefined
+// ** Payments - Undefined
 Function GetQuery(DocName) Export
 	
 	Result = New Structure;
@@ -20,18 +21,12 @@ Function GetQuery(DocName) Export
 	Result.Insert("Tables", New Structure);
 	MetaDoc = Metadata.Documents[DocName];
 	
-	TmplDoc = Documents.SalesInvoice.EmptyRef();
+	TmplDoc = Documents.RetailSalesReceipt.EmptyRef();
 	
 	ErrorsArray = New Array; // Array of Structure
 	ErrorsArray.Add(ErrorItemList());
-	
-	If MetaDoc.TabularSections.Find("TaxList") = Undefined Then
-		Result.Tables.Insert("TaxList", TmplDoc.TaxList.Unload());
-	Else
-		Result.Tables.Insert("TaxList", Undefined);
-		ErrorsArray.Add(ErrorWithTax());
-	EndIf;
-	
+	ErrorsArray.Add(ErrorHeaders(MetaDoc));
+		
 	If MetaDoc.TabularSections.Find("RowIDInfo") = Undefined Then
 		Result.Tables.Insert("RowIDInfo", TmplDoc.RowIDInfo.Unload());
 	Else
@@ -59,12 +54,26 @@ Function GetQuery(DocName) Export
 		ErrorsArray.Add(SourceOfOrigins());
 	EndIf;
 
-	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0);
-	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1);
+	If MetaDoc.TabularSections.Find("Payments") = Undefined Then
+		Result.Tables.Insert("Payments", TmplDoc.Payments.Unload());
+	Else
+		Result.Tables.Insert("Payments", Undefined);
+		ErrorsArray.Add(Payments());
+	EndIf;
+
+	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
+	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
+	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
+	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
 	
-	Result.Query = StrTemplate(CheckDocumentsQuery(), 
+	TextQuery = CheckDocumentsQuery();
+	TextQuery = StrReplace(TextQuery, "%10", GetInfo_3.Fields);
+	TextQuery = StrReplace(TextQuery, "%11", GetInfo_3.Filters);
+	TextQuery = StrReplace(TextQuery, "%12", GetInfo_3.Results);
+	Result.Query = StrTemplate(TextQuery, 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
-		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results
+		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results,
+		GetInfo_2.Fields, GetInfo_2.Filters, GetInfo_2.Results
 		);
 	Return Result;
 EndFunction
@@ -75,11 +84,12 @@ EndFunction
 //  Array - Get error list
 Function GetErrorList() Export
 	ErrorsArray = New Array; // Array of Structure
+	ErrorsArray.Add(ErrorHeaders());
 	ErrorsArray.Add(ErrorItemList());
-	ErrorsArray.Add(ErrorWithTax());
 	ErrorsArray.Add(ErrorWithOffers());
 	ErrorsArray.Add(ErrorWithSerialInTable());
 	ErrorsArray.Add(SourceOfOrigins());
+	ErrorsArray.Add(Payments());
 	
 	ErrorList = New ValueList();
 	For Each Errors In ErrorsArray Do
@@ -115,12 +125,6 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
 		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
 	
-	Exceptions.Insert("SalesReturnOrder"    , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("SalesReturn"         , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("RetailSalesReceipt"  , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("PurchaseReturnOrder" , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	Exceptions.Insert("PurchaseReturn"      , "ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList");
-	
 	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do
 		For Each Filter In Row Do
@@ -144,11 +148,25 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 			
 			Skip = False;
 			// @skip-check invocation-parameter-type-intersect, property-return-type
-			For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
-				If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
-					Skip = True;
-				EndIf;  
-			EndDo;
+			If QueryNumber = 2 Then // headers of documents
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			ElsIf QueryNumber = 3 Then // payments
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.Payments.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			Else
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			EndIf;
 			
 			If Skip Then
 				Continue;
@@ -177,6 +195,60 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	Return Str;
 EndFunction
 
+Function ErrorHeaders(MetaDoc = Undefined)
+	Str = New Structure;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.RetailSalesReceipt
+			 OR MetaDoc = Metadata.Documents.RetailReturnReceipt Then
+		Str.Insert("ErrorNotFilledPaymentMethod", New Structure("Query, Fields, QueryNumber", 
+			"PaymentMethod = VALUE(ENUM.ReceiptPaymentMethods.EmptyRef)", 
+			"PaymentMethod",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.PurchaseInvoice
+			 OR MetaDoc = Metadata.Documents.PurchaseOrder
+			 OR MetaDoc = Metadata.Documents.PurchaseOrderClosing Then
+		Str.Insert("ErrorNotFilledPurchaseTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.PurchaseTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.SalesInvoice
+			 OR MetaDoc = Metadata.Documents.SalesOrder
+			 OR MetaDoc = Metadata.Documents.SalesOrderClosing Then
+		Str.Insert("ErrorNotFilledSalesTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.SalesReturn
+			 OR MetaDoc = Metadata.Documents.SalesReturnOrder Then
+		Str.Insert("ErrorNotFilledSalesReturnTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesReturnTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	If MetaDoc = Undefined OR MetaDoc = Metadata.Documents.PurchaseReturn
+			 OR MetaDoc = Metadata.Documents.PurchaseReturnOrder
+			 OR MetaDoc = Metadata.Documents.PurchaseOrderClosing Then
+		Str.Insert("ErrorNotFilledPurchaseReturnTransactionType", New Structure("Query, Fields, QueryNumber", 
+			"TransactionType = VALUE(ENUM.SalesTransactionTypes.EmptyRef)", 
+			"TransactionType",
+			2
+		));
+	EndIf;
+	
+	Return Str;
+EndFunction
+
 Function ErrorItemList()
 	Str = New Structure;
 	
@@ -199,7 +271,7 @@ Function ErrorItemList()
 	));
 	
 	Str.Insert("ErrorItemTypeIsNotService",	New Structure("Query, Fields, QueryNumber",
-		"Not ItemList.IsService = (ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Service))", 
+		"Not ItemList.IsService = ((ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Certificate)) OR (ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Service)))", 
 		"IsService, Item",
 		0
 	));
@@ -209,37 +281,19 @@ Function ErrorItemList()
 		"Item, ItemKey",
 		0
 	));
-	
-//	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-//		"Not ItemList.QuantityInBaseUnit <= isNull(RowIDInfo.Quantity, 0)",
-//		"Quantity",
-//		0
-//	));
-	
-//	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-//		"Not Cancel AND Not ItemList.QuantityInBaseUnit = isNull(RowIDInfo.Quantity, 0)",
-//		"Quantity, Cancel",
-//		0
-//	));
-	
+		
 	Str.Insert("ErrorNotFilledUnit",	New Structure("Query, Fields, QueryNumber",
 		"ItemList.Unit = VAlUE(Catalog.Units.EmptyRef)", 
 		"Unit",
 		0
 	));
 	
-	Return Str;
-EndFunction
-
-Function ErrorWithTax()
-	Str = New Structure;
-	
-	Str.Insert("ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", New Structure("Query, Fields, QueryNumber", 
-		"Not ItemList.TaxAmount = isNull(TaxList.Amount, 0)",
-		"TaxAmount",
+	Str.Insert("ErrorNotFilledInventoryOrigin",	New Structure("Query, Fields, QueryNumber",
+		"ItemList.InventoryOrigin = VAlUE(Enum.InventoryOriginTypes.EmptyRef)", 
+		"InventoryOrigin",
 		0
 	));
-	
+		
 	Str.Insert("ErrorNetAmountGreaterTotalAmount", New Structure("Query, Fields, QueryNumber", 
 		"ItemList.NetAmount > ItemList.TotalAmount",
 		"NetAmount, TotalAmount",
@@ -271,7 +325,13 @@ Function ErrorWithSerialInTable()
 	Str = New Structure;
 	
 	Str.Insert("ErrorItemTypeUseSerialNumbers", New Structure("Query, Fields, QueryNumber", 
-		"Not ItemList.UseSerialLotNumber = ItemList.Item.ItemType.UseSerialLotNumber",
+		"Not ItemList.UseSerialLotNumber AND ItemList.Item.ItemType.UseSerialLotNumber",
+		"UseSerialLotNumber, Item",
+		0
+	));
+	
+	Str.Insert("ErrorItemTypeNotUseSerialNumbers", New Structure("Query, Fields, QueryNumber", 
+		"ItemList.UseSerialLotNumber AND Not ItemList.Item.ItemType.UseSerialLotNumber",
 		"UseSerialLotNumber, Item",
 		0
 	));
@@ -320,6 +380,18 @@ Function SourceOfOrigins()
 	Return Str;
 EndFunction
 
+Function Payments()
+	Str = New Structure;
+	
+	Str.Insert("ErrorPaymentsAmountIsZero", New Structure("Query, Fields, QueryNumber", 
+		"Payments.Amount = 0",
+		"Amount",
+		3
+	));
+	
+	Return Str;
+EndFunction
+
 Function CheckDocumentsQuery()
 	Return 
 	"SELECT
@@ -349,27 +421,6 @@ Function CheckDocumentsQuery()
 	|	SpecialOffersTmp AS SpecialOffers
 	|GROUP BY
 	|	SpecialOffers.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	TaxList.Amount,
-	|	TaxList.ManualAmount
-	|INTO TaxListTmp
-	|FROM
-	|	&TaxList AS TaxList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	SUM(TaxList.ManualAmount) AS Amount
-	|INTO TaxList
-	|FROM
-	|	TaxListTmp AS TaxList
-	|GROUP BY
-	|	TaxList.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -464,8 +515,6 @@ Function CheckDocumentsQuery()
 	|		ON ItemList.Key = RowIDInfo.Key
 	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 	|		ON ItemList.Key = SerialLotNumbers.Key
-	|		LEFT JOIN TaxList AS TaxList
-	|		ON ItemList.Key = TaxList.Key
 	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 	|		ON ItemList.Key = SourceOfOrigins.Key
 	|;
@@ -503,7 +552,58 @@ Function CheckDocumentsQuery()
 	|	%6
 	|FROM
 	|	ResultSourceOfOrigins AS Result
-	|WHERE %5";
+	|WHERE %5
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Headers.Ref,
+	|	%7
+	|INTO Headers
+	|FROM
+	|	&Headers AS Headers
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	"""" AS Key,
+	|	0 AS LineNumber,
+	|	%9
+	|FROM
+	|	Headers AS Result
+	|WHERE %8
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Payments.LineNumber,
+	|	Payments.Key,
+	|	Payments.*
+	|INTO tmpPayments
+	|FROM
+	|	&Payments AS Payments
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Payments.LineNumber,
+	|	Payments.Key,
+	|	%10
+	|INTO Payments
+	|FROM
+	|	tmpPayments AS Payments
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Key,
+	|	Result.LineNumber,
+	|	%12
+	|FROM
+	|	Payments AS Result
+	|WHERE %11";
 EndFunction
 
 // Get query for documents array.
@@ -518,7 +618,8 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	MetaDoc = Metadata.Documents[MetaDocName];
 	ErrorsArray = New Array; // Array of Structure
 	
-	QueryText = "SELECT
+	QueryText = 
+	"SELECT
 	|	ItemList.Ref,
 	|	ItemList.LineNumber,
 	|	ItemList.Key,
@@ -529,39 +630,9 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|WHERE
 	|	ItemList.Ref IN (&Refs)
 	|;";
+	ErrorsArray.Add(ErrorHeaders(MetaDoc));
 	ErrorsArray.Add(ErrorItemList());
-	
-	If MetaDoc.TabularSections.Find("TaxList") <> Undefined Then
-		QueryText = QueryText + "
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	TaxList.Ref,
-		|	TaxList.Key,
-		|	SUM(TaxList.ManualAmount) As Amount
-		|INTO TaxList
-		|FROM
-		|	" + MetaDoc.FullName() + ".TaxList AS TaxList
-		|WHERE
-		|	TaxList.Ref IN (&Refs)
-		|GROUP BY
-		|	TaxList.Ref,
-		|	TaxList.Key
-		|;";
-		ErrorsArray.Add(ErrorWithTax());
-	Else
-		QueryText = QueryText + "
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemList.Ref,
-		|	ItemList.Key,
-		|	0 As Amount
-		|INTO TaxList
-		|FROM
-		|	" + MetaDoc.FullName() + ".ItemList AS ItemList
-		|WHERE FALSE
-		|;";
-	EndIf;
-	
+		
 	If MetaDoc.TabularSections.Find("RowIDInfo") <> Undefined Then
 		QueryText = QueryText + "
 		|////////////////////////////////////////////////////////////////////////////////
@@ -709,6 +780,10 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 		|;";
 	EndIf;
 	
+	If MetaDoc.TabularSections.Find("Payments") <> Undefined Then
+		ErrorsArray.Add(Payments());
+	EndIf;
+	
 	QueryText = QueryText + "
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -733,8 +808,10 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|	SourceOfOriginsTmp AS SourceOfOrigins
 	|;";	
 
-	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0);
-	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1);
+	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
+	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
+	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
+	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
 	
 	QueryText = QueryText + "
 	|////////////////////////////////////////////////////////////////////////////////
@@ -755,9 +832,6 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 	|		ON ItemList.Ref = SerialLotNumbers.Ref
 	|			AND ItemList.Key = SerialLotNumbers.Key
-	|		LEFT JOIN TaxList AS TaxList
-	|		ON ItemList.Ref = TaxList.Ref
-	|			AND ItemList.Key = TaxList.Key
 	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 	|		ON ItemList.Ref = SourceOfOrigins.Ref
 	|			AND ItemList.Key = SourceOfOrigins.Key
@@ -803,8 +877,111 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	|FROM
 	|	ResultSourceOfOrigins AS Result
 	|WHERE " + GetInfo_1.Filters + "
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Headers.Ref,
+	|	" + GetInfo_2.Fields + "
+	|INTO Headers
+	|FROM
+	|	" + MetaDoc.FullName() + " AS Headers
+	|WHERE
+	|	Headers.Ref IN (&Refs)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.Ref,
+	|	"""" AS Key,
+	|	0 AS LineNumber,
+	|	" + GetInfo_2.Results + "
+	|FROM
+	|	Headers AS Result
+	|WHERE " + GetInfo_2.Filters + "
 	|";
+	
+	If MetaDoc.TabularSections.Find("Payments") <> Undefined Then
+		QueryText = QueryText + "
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Payments.Ref,
+		|	Payments.Key,
+		|	Payments.LineNumber,
+		|	" + GetInfo_3.Fields + "
+		|INTO Payments
+		|FROM
+		|	" + MetaDoc.FullName() + ".Payments AS Payments
+		|WHERE
+		|	Payments.Ref IN (&Refs)
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Result.Ref,
+		|	Result.Key,
+		|	Result.LineNumber,
+		|	" + GetInfo_3.Results + "
+		|FROM
+		|	Payments AS Result
+		|WHERE " + GetInfo_3.Filters + "
+		|";
+	EndIf;
 	
 	Return QueryText;
 	
+EndFunction
+
+// Get all errors description.
+// 
+// Returns:
+//  Structure - Get all errors description:
+//	* Key - String - Error ID
+//	* Value - See GetErrorDescription
+Function GetAllErrorsDescription() Export
+	
+	Result = New Structure;
+	
+	ErrorList = GetErrorList();
+	For Each ErrorListItem In ErrorList Do
+		NewDescription = GetErrorDescription();
+		ErrorDescription = ErrorListItem.Presentation;
+		ErrorDescription = StrReplace(ErrorDescription, "%1", "<?>");
+		ErrorDescription = StrReplace(ErrorDescription, "%2", "<?>");
+		NewDescription.ErrorDescription = ErrorDescription;
+		NewDescription.FixDescription = GetFixErrorDescription(ErrorListItem.Value);
+		Result.Insert(ErrorListItem.Value, NewDescription);
+	EndDo;	
+	
+	Return Result;
+	
+EndFunction
+ 
+// Get error description.
+// 
+// Returns:
+//  Structure - Get error description:
+// * ErrorDescription - String -
+// * FixDescription - String -
+Function GetErrorDescription()
+	Result = New Structure;
+	Result.Insert("ErrorDescription", "");
+	Result.Insert("FixDescription", "");
+	Return Result;
+EndFunction
+
+// Get fix error description.
+// 
+// Parameters:
+//  ErrorID - String - Error ID
+// 
+// Returns:
+//  String
+Function GetFixErrorDescription(ErrorID)
+	ErrorKey = "ATC_FIX_" + ErrorID;
+	If R().Property(ErrorKey) Then
+		Return R()[ErrorKey];
+	EndIf;
+	Return R().ATC_NotSupported;
 EndFunction

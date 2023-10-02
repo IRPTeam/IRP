@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 
@@ -60,15 +60,7 @@ Scenario: _200000 preparation (user settings)
 		When Create information register UserSettings records (Retail document)
 		When update ItemKeys
 		When Create catalog UserGroups objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Workstation
 		When create Workstation
 	
@@ -1605,4 +1597,256 @@ Scenario: _200045 check time zone for user settings
 		
 
 				
+Scenario: _200050 check Disable - Change price in POS
+	And I close all client application windows
+	* Disable - Change price in POS
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Disable - Change price' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And "ItemList" table contains lines
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | ''       | '700,00' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I input "100,00" text in "Price" field of "ItemList" table'    |
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+		And I close all client application windows
+	* Enable - Change price in POS	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Disable - Change price' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And "ItemList" table contains lines
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | ''       | '700,00' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '100,00' | '1,000'    | ''       | '100,00' |
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Delete" button	
+		
+
+Scenario: _200051 check Disable - Create return
+	And I close all client application windows
+	* Disable - Create return
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Create return' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		When I Check the steps for Exception
+			| 'And I click the button named "Return"'    |	
+		And I close all client application windows
+	* Enable - Change price in POS	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Create return' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		And In the command interface I select "Retail" "Point of sale"
+		And I click the button named "Return"
+		
+
+
+Scenario: _200052 check Disable - Change author
+	And I close all client application windows
+	* Disable - Change author
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Change author' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate" 
+		When I Check the steps for Exception
+			| 'And I click Select button of "Author" field'    |		
+		And I close all client application windows
+	* Enable - Change author	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Change author' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate" 
+		And I click Select button of "Author" field
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Arina Brown (Financier 3)' |
+		And I select current line in "List" table
+		Then the form attribute named "Author" became equal to "Arina Brown (Financier 3)"
+		And I close all client application windows
+		
+								
+Scenario: _200054 check filling store from user settings when delete row from document (RSR)
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate" 
+	* Add row
+		And in the table "ItemList" I click "Add" button
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check Store
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Delete row and check store
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
+	
+Scenario: _200055 check filling store from user settings when delete row from document (RRR)
+	And I close all client application windows
+	* Open RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate" 
+	* Add row
+		And in the table "ItemList" I click "Add" button
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check Store
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Delete row and check store
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows						
+				
+Scenario: _200053 check Disable - Calculate rows on link rows
+	And I close all client application windows
+	* Disable - Calculate rows on link rows
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Calculate rows on link rows' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate" 
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then the form attribute named "CalculateRows" became equal to "No"
+		And I close all client application windows
+	* Enable - Change author	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Disable - Calculate rows on link rows' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate" 
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then the form attribute named "CalculateRows" became equal to "Yes"
+		And I close all client application windows
 

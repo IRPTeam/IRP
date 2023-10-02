@@ -19,7 +19,7 @@ Var FormCanBeClosed; // Boolean
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	
+
 	Object.Amount = Parameters.Amount;
 	Object.Branch = Parameters.Branch;
 	Object.Workstation = Parameters.Workstation;
@@ -28,28 +28,28 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales;
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
-	
+
 	If Not ConsolidatedRetailSales.IsEmpty()
 		And ConsolidatedRetailSales = RetailBasis.ConsolidatedRetailSales Then
 		ReturnInTheSameConsolidateSales = True;
 	EndIf;
-	
+
 	Items.PaymentsRRNCode.Visible = isReturn;
-	
+
 	FillPaymentTypes();
 	FillPaymentMethods();
-	
+
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
-	
+
 	Items.Cashback.Visible = Not (ThisObject.IsAdvance And isReturn);
 	Items.Advance.Visible = ThisObject.IsAdvance And isReturn;
-	
+
 	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 		If ValueIsFilled(AdvanceAmount) Then
 			AdvancePaymentType = GetAdvancePaymentType();
-			If ValueIsFilled(AdvancePaymentType) Then	
+			If ValueIsFilled(AdvancePaymentType) Then
 				AdvancePayment = ThisObject.Payments.Add();
 				AdvancePayment.Amount = Min(AdvanceAmount, Parameters.Amount);
 				AdvancePayment.Description     = String(AdvancePaymentType);
@@ -58,22 +58,58 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			EndIf;
 		EndIf;
 	EndIf;
-	
+
 	If ThisObject.IsAdvance And isReturn And ValueIsFilled(Parameters.RetailCustomer) Then
 		ThisObject.AdvanceBalance = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 	EndIf;
+	
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
+	
+	If isReturn Then
+		For Each Row In GetPaymentWithCert() Do
+			FillPayments(Row.ButtonSettings, Row.ChoiceEndAdditionalParameters);
+		EndDo;
+	EndIf;
 EndProcedure
+
+&AtServer
+Function GetPaymentWithCert()
+	Array = New Array;
+	For Each Row In RetailBasis.Payments Do
+		If Row.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+			
+			ButtonSettings = New Structure(); // See POSClient.ButtonSettings()
+			ButtonSettings.Insert("PaymentType", Row.PaymentType);
+			ButtonSettings.Insert("BankTerm", Row.BankTerm);
+			ButtonSettings.Insert("PaymentTypeEnum", Row.PaymentType.Type);
+			
+			CertStatus = New Structure;
+			CertStatus.Insert("CanBeDeleted", False);
+			CertStatus.Insert("Certificate", Row.Certificate);
+			CertStatus.Insert("Amount", Row.Amount);
+			
+			ChoiceEndAdditionalParameters = New Structure();
+			ChoiceEndAdditionalParameters.Insert("CertStatus", CertStatus);
+			
+			Str = New Structure();
+			Str.Insert("ButtonSettings", ButtonSettings);
+			Str.Insert("ChoiceEndAdditionalParameters", ChoiceEndAdditionalParameters);
+			
+			Array.Add(Str);
+		EndIf;
+	EndDo;
+	Return Array;
+EndFunction
 
 &AtServer
 Function GetAdvanceByRetailCustomer(_Company, _Branch, _RetailCustomer)
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	R2023B_AdvancesFromRetailCustomersBalance.AmountBalance AS Amount
 	|FROM
@@ -90,11 +126,11 @@ Function GetAdvanceByRetailCustomer(_Company, _Branch, _RetailCustomer)
 	EndIf;
 	Return 0;
 EndFunction
-	
+
 &AtServer
 Function GetAdvancePaymentType()
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	PaymentTypes.Ref
 	|FROM
@@ -108,37 +144,37 @@ Function GetAdvancePaymentType()
 		Return QuerySelection.Ref;
 	EndIf;
 	Return Undefined;
-EndFunction	
-	
+EndFunction
+
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array();
-	
+
 	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
-	
+
 	If Not IsIncomingOutgoingAdvance Then
 		If ThisObject.PaymentsAmountTotal < Object.Amount Then
 			ErrorMessages.Add(R().POS_s1);
 		EndIf;
 	EndIf;
-	
+
 	PaymentsValue = FormAttributeToValue("Payments");
-	
+
 	CashPaymentFilter = New Structure();
 	CashPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Cash);
 	CashAmounts = PaymentsValue.Copy(CashPaymentFilter, "Amount");
 	CashAmount = CashAmounts.Total("Amount");
-	
+
 	CardPaymentFilter = New Structure();
 	CardPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Card);
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
-	
+
 	If Not IsIncomingOutgoingAdvance Then
 		If CardAmount > Object.Amount Then
 			ErrorMessages.Add(R().POS_s2);
 		EndIf;
-		
+
 		If CardAmount = Object.Amount And CashAmount Then
 			ErrorMessages.Add(R().POS_s3);
 		EndIf;
@@ -147,7 +183,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 			ErrorMessages.Add(R().POS_s4);
 		EndIf;
 	EndIf;
-	
+
 	If ErrorMessages.Count() Then
 		Cancel = True;
 		For Each ErrorMessage In ErrorMessages Do
@@ -168,33 +204,40 @@ Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+		If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region FormTableItemsEventHandlers
 
 &AtClient
 Procedure PaymentsOnChange(Item)
-	
+
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
-	
+
 EndProcedure
 
 &AtClient
 Procedure PaymentsOnActivateRow(Item)
-	
+
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData = Undefined Then
 		Items.GroupPaymentByAcquiring.Visible = False;
 		Return;
 	EndIf;
-	
+
 	CurrentData.Edited = False;
 	CurrentData.AmountString = GetAmountString(CurrentData.Amount);
 	Items.GroupPaymentByAcquiring.Visible = Not CurrentData.Hardware.isEmpty();
-	
+
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
-	
+
 	If ReturnInTheSameConsolidateSales Then
 		Items.Payment_ReturnPaymentByPaymentCard.Enabled = False;
 	Else
@@ -205,7 +248,7 @@ Procedure PaymentsOnActivateRow(Item)
 	Else
 		Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
 	EndIf;
-	
+
 EndProcedure
 
 #EndRegion
@@ -214,31 +257,20 @@ EndProcedure
 
 &AtClient
 Async Procedure Enter(Command)
-	
-	If Not Payments.Count() And CashPaymentTypes.Count() Then
-		ButtonSettings = POSClient.ButtonSettings();
-		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
-		AdditionalParameters = New Structure();
-		FillPayments(ButtonSettings, AdditionalParameters);
-	EndIf;
-	
+
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
-	
-	Result = True;
+
 	For Each PaymentRow In Payments Do
-		If Not PaymentRow.Hardware.IsEmpty() 
-			And PaymentRow.Amount > 0 
+		If Not PaymentRow.Hardware.IsEmpty()
+			And PaymentRow.Amount > 0
 			And Not PaymentRow.PaymentDone Then
-			Result = Await DoPayment(PaymentRow);
-			PaymentRow.PaymentDone = Result;
-			If Not Result Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().EqAc_NotAllPaymentDone);
 				Return;
-			EndIf;	
 		EndIf;
 	EndDo;
-	
+
 	If Object.Cashback Then
 		Row = Payments.Add();
 		Row.PaymentType = CashPaymentTypes[0].PaymentType;
@@ -246,59 +278,16 @@ Async Procedure Enter(Command)
 		Row.Account = CashPaymentTypes[0].Account;
 		Row.Amount = -Object.Cashback;
 	EndIf;
-	
+
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
 	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
+	ReturnValue.Insert("PaymentForm", ThisObject);
+
 	FormCanBeClosed = True;
-	Close(ReturnValue);
+	Items.Enter.Enabled = False;
+	ExecuteNotifyProcessing(OnCloseNotifyDescription, ReturnValue);
 EndProcedure
-
-// Do payment.
-// 
-// Parameters:
-//  PaymentRow - FormDataCollectionItem - Payment row
-// 
-// Returns:
-//  Boolean - Do payment
-&AtClient
-Async Function DoPayment(PaymentRow)
-	Result = True;
-	If isReturn And ReturnInTheSameConsolidateSales Then
-		Result = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-	ElsIf isReturn And Not ReturnInTheSameConsolidateSales Then
-		Result = Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
-	Else
-		Result = Await Payment_PayByPaymentCard(PaymentRow);
-	EndIf;
-	
-	If Not Result Then
-		If Await DoQueryBoxAsync(StrTemplate(R().POS_Error_ErrorOnPayment, PaymentRow.Description), QuestionDialogMode.RetryCancel, , , , ) = DialogReturnCode.Retry Then
-			Result = DoPayment(PaymentRow);
-		Else
-			CancelAllDonePayment();
-		EndIf;
-	EndIf;
-	Return Result;
-EndFunction
-
-&AtClient
-Async Function CancelAllDonePayment()
-	Result = True;
-	For Each PaymentRow In Payments Do
-		If PaymentRow.PaymentDone Then
-			Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPayment, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-			CancelResult = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-			If Not CancelResult Then
-				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount) + Chars.LF + PaymentRow.PaymentInfo);
-				Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-				Return False;
-			EndIf;
-			PaymentRow.PaymentDone = False;
-		EndIf;
-	EndDo;
-	Return Result;
-EndFunction
 
 &AtClient
 Procedure CloseButton(Command)
@@ -324,7 +313,8 @@ EndProcedure
 
 &AtClient
 Procedure Certificate(Command)
-	Return;
+	OpenPaymentForm(ThisObject.CertificatePaymentTypes, PredefinedValue("Enum.PaymentTypes.Certificate"));
+	Items.GroupBankTypeList.Visible = False;
 EndProcedure
 
 &AtClient
@@ -334,7 +324,7 @@ EndProcedure
 
 &AtClient
 Procedure NumPress(Command)
-	
+
 	PaymentsCount = 0;
 	For Each Row In ThisObject.Payments Do
 		If Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Advance") Then
@@ -342,28 +332,68 @@ Procedure NumPress(Command)
 		EndIf;
 		PaymentsCount = PaymentsCount + 1;
 	EndDo;
-	
+
 	If Not PaymentsCount And CashPaymentTypes.Count() Then
 		ButtonSettings = POSClient.ButtonSettings();
 		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
 		AdditionalParameters = New Structure();
 		FillPayments(ButtonSettings, AdditionalParameters);
 	EndIf;
-	
+
 	NumButtonPress(Command.Name);
 	CurrentItem = Items.Enter;
-	
+
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 #EndRegion
 
 #Region Private
 
+// Search by barcode end.
+// 
+// Parameters:
+//  Result - See BarcodeServer.SearchByBarcodes
+//  AdditionalParameters - Structure - Additional parameters
 &AtClient
-Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+
+	If Result.FoundedItems.Count() Then
+		For Each Row In Result.FoundedItems Do
+			If Not Row.isCertificate Then
+				Return;
+			Else
+				CertStatus = CertificateServer.GetCertificateStatus(Row.SerialLotNumber);
+				If Not isReturn And Not CertStatus.CanBeUsed Then
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_CertAlreadyUsed, Row.SerialLotNumber));
+					Return;
+				ElsIf isReturn And CertStatus.CanBeUsed Then
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().CERT_HasNotBeenUsed, Row.SerialLotNumber));
+					Return;
+				Else
+					CertStatus.Insert("CanBeDeleted", True);
+					OpenPaymentForm(ThisObject.CertificatePaymentTypes, PredefinedValue("Enum.PaymentTypes.Certificate"), CertStatus);
+					Items.GroupBankTypeList.Visible = False;					
+				EndIf;
+			EndIf; 
+		EndDo;
+	EndIf;
+
+	If Result.Barcodes.Count() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Result.Barcodes, ",")));
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OpenPaymentForm(PaymentTypesTable, PaymentType, CertStatus = Undefined)
 
 	If PaymentTypesTable.Count() > 1 Then
 		NotifyParameters = New Structure();
+		NotifyParameters.Insert("CertStatus", CertStatus);
 		NotifyDescription = New NotifyDescription("FillPayments", ThisObject, NotifyParameters);
 		PayButtons = New Array();
 		For Each CollectionItem In PaymentTypesTable Do
@@ -372,7 +402,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 			ButtonSettings.PaymentTypeEnum = PaymentType;
 			PayButtons.Add(ButtonSettings);
 		EndDo;
-		
+
 		OpeningFormParameters = New Structure();
 		OpeningFormParameters.Insert("PayButtons", PayButtons);
 		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes", OpeningFormParameters, ThisObject, UUID, , ,
@@ -383,46 +413,47 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 		FillPropertyValues(ButtonSettings, PaymentTypesTable[0]);
 		ButtonSettings.PaymentTypeEnum = PaymentType;
 		ChoiceEndAdditionalParameters = New Structure();
+		ChoiceEndAdditionalParameters.Insert("CertStatus", CertStatus);
 		FillPayments(ButtonSettings, ChoiceEndAdditionalParameters);
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
 Procedure CalculatePaymentsAmountTotal()
 	ThisObject.PaymentsAmountTotal = Payments.Total("Amount");
-	
+
 	CashFilter = New Structure();
 	CashFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashRows = Payments.FindRows(CashFilter);
-	
+
 	PaymentCashAmount = 0;
 	For Each CashRow In CashRows Do
 		PaymentCashAmount = PaymentCashAmount + CashRow.Amount;
 	EndDo;
-	
-	If ThisObject.PaymentsAmountTotal > Object.Amount 
+
+	If ThisObject.PaymentsAmountTotal > Object.Amount
 		And ThisObject.PaymentsAmountTotal - Object.Amount <= PaymentCashAmount Then
 		CashbackValue = ThisObject.PaymentsAmountTotal - Object.Amount;
 	Else
 		CashbackValue = 0;
 	EndIf;
-	
+
 	Object.Cashback = CashbackValue;
 EndProcedure
 
 &AtClient
 Procedure FormatPaymentsAmountStringRows()
-	
+
 	For Each Row In Payments Do
 		Row.AmountString = GetAmountString(Row.Amount);
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
 Procedure NumButtonPress(CommandName)
-	
+
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -453,6 +484,13 @@ Procedure NumButtonPress(CommandName)
 		ProcessDigitButtonPress(CurrentData, ButtonValue);
 	EndIf;
 
+	SetAmountInPaymentAndUpdate(CurrentData);
+
+EndProcedure
+
+&AtClient
+Procedure SetAmountInPaymentAndUpdate(CurrentData)
+
 	If AmountDotIsActive Then
 		If AmountFractionDigitsCount Then
 			NFDValue = "NFD=" + String(AmountFractionDigitsCount) + ";";
@@ -465,7 +503,6 @@ Procedure NumButtonPress(CommandName)
 	EndIf;
 	CurrentData.AmountString = AmountString;
 	CalculatePaymentsAmountTotal();
-	
 EndProcedure
 
 &AtClient
@@ -475,23 +512,25 @@ Procedure PaymentsBeforeDeleteRow(Item, Cancel)
 		Return;
 	EndIf;
 	If CurrentData.PaymentDone Then
-		Cancel = True;
+		If Not CurrentData.CanBeDeleted Then
+			Cancel = True;
+		EndIf;
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ProcessDotButtonPress(CurrentData)
-	
+
 	If Not AmountDotIsActive Then
 		AmountDotIsActive = True;
 		AmountFractionDigitsCount = 0;
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
 Procedure ProcessZeroButtonPress(CurrentData)
-	
+
 	Ten = 10;
 	If AmountDotIsActive Then
 		If (AmountFractionDigitsCount + 1) < AmountFractionDigitsMaxCount Then
@@ -500,12 +539,12 @@ Procedure ProcessZeroButtonPress(CurrentData)
 	Else
 		CurrentData.Amount = CurrentData.Amount * Ten;
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
 Procedure ProcessBackspaceButtonPress(CurrentData)
-	
+
 	Ten = 10;
 	If AmountDotIsActive Then
 		If AmountFractionDigitsCount Then
@@ -524,22 +563,22 @@ Procedure ProcessBackspaceButtonPress(CurrentData)
 			CurrentData.Amount = 0;
 		EndIf;
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
 Procedure ProcessClearButtonPress(CurrentData)
-	
+
 	CurrentData.Amount = 0;
 	CurrentData.Edited = False;
 	AmountDotIsActive = False;
 	AmountFractionDigitsCount = 0;
-	
+
 EndProcedure
 
 &AtClient
 Procedure ProcessDigitButtonPress(CurrentData, Val ButtonValue)
-	
+
 	Ten = 10;
 	CurrentAmountValue = CurrentData.Amount;
 	If AmountDotIsActive Then
@@ -553,14 +592,14 @@ Procedure ProcessDigitButtonPress(CurrentData, Val ButtonValue)
 			CurrentData.Amount = CurrentAmountValue;
 		EndIf;
 	EndIf;
-	
+
 EndProcedure
 
 &AtServer
 Procedure FillPaymentTypes()
-	
+
 	FillPaymentsAtServer();
-	
+
 EndProcedure
 
 &AtServer
@@ -571,13 +610,16 @@ Procedure FillPaymentsAtServer()
 	BankPaymentTypesValue = POSServer.GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
+	CertificatePaymentTypesValue = POSServer.GetCertificatePaymentTypesValue(Object.Workstation.CashAccount);
+	ValueToFormAttribute(CertificatePaymentTypesValue, "CertificatePaymentTypes");
+
 	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
-	
+
 	If Not IsIncomingOutgoingAdvance Then
 		PaymentAgentValue = POSServer.GetPaymentAgentTypesValue(Object.Branch);
 		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 	EndIf;
-	
+
 	BankPaymentTypeList.Parameters.SetParameterValue("Branch", Object.Branch);
 	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
 	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
@@ -586,13 +628,13 @@ EndProcedure
 
 &AtServer
 Procedure FillPaymentMethods()
-	
+
 	ReceiptPaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
-	
+
 EndProcedure
 
 // Fill payments
-// 
+//
 // Parameters:
 //  Result - See POSClient.ButtonSettings
 //  AdditionalParameters - Arbitrary - Additional parameters
@@ -611,20 +653,20 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 		Row.PaymentType = Result.PaymentType;
 		Row.BankTerm = Result.BankTerm;
 		Row.PaymentTypeEnum = Result.PaymentTypeEnum;
-		
+
 		DefaultPaymentFilter = New Structure;
 		DefaultPaymentFilter.Insert("PaymentType", Result.PaymentType);
-		
+
 		If Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
 			DefaultPaymentFilter.Insert("BankTerm", Result.BankTerm);
 			DefaultPayment = BankPaymentTypes.FindRows(DefaultPaymentFilter);
 			Row.Percent = DefaultPayment[0].Percent;
 			Row.Account = DefaultPayment[0].Account;
-			
+
 			If isReturn Then
 				Row.RRNCode = GetRRNCode(Row.PaymentType); // String
 			EndIf;
-			
+
 		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
 			PaymentAgentInfo = PaymentAgentTypes.FindRows(New Structure("PaymentType", Result.PaymentType));
@@ -634,20 +676,31 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 			Row.PaymentAgentPartnerTerms = PaymentAgentInfo[0].PartnerTerms;
 			Row.BankTerm = PaymentAgentInfo[0].BankTerm;
 			Row.Percent = PaymentAgentInfo[0].Percent;
+		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Certificate") Then
+			Row.Certificate = AdditionalParameters.CertStatus.Certificate;
+			If AdditionalParameters.CertStatus.Amount > Object.Amount - Payments.Total("Amount") Then
+				Row.Amount = Object.Amount - Payments.Total("Amount");
+			Else
+				Row.Amount = AdditionalParameters.CertStatus.Amount; 
+			EndIf;
+			Row.Edited = False;		
+			Row.CanBeDeleted = AdditionalParameters.CertStatus.CanBeDeleted;	
+			Row.PaymentDone = True;
 		Else
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
 			Row.Account = DefaultPayment[0].Account;
 		EndIf;
 	EndIf;
-	
-	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
-		RemainingAmount = 0;
-	Else
-		RemainingAmount = Object.Amount - Payments.Total("Amount");
+
+	If Row.Amount = 0 Then
+		If (Object.Amount - Payments.Total("Amount")) <= 0 Then
+			RemainingAmount = 0;
+		Else
+			RemainingAmount = Object.Amount - Payments.Total("Amount");
+		EndIf;
+		Row.Amount = RemainingAmount;
 	EndIf;
-	
-	Row.Amount = RemainingAmount;
-	
+
 	If Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash") Then
 		Row.AmountString = GetAmountString(Row.Amount);
 	ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
@@ -655,27 +708,27 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 		Settings.Account = Row.Account;
 		Row.Hardware = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
 	EndIf;
-	
+
 	Items.Payments.CurrentRow = Row.GetID();
 	Items.Payments.CurrentData.Edited = False;
 	CurrentItem = Items.Enter;
-	
+
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
 EndProcedure
 
 &AtClient
 Function GetAmountString(Val AmountValue)
-	
+
 	Return Format(AmountValue, "NFD=" + Format(AmountFractionDigitsMaxCount, "NG=0;"));
-	
+
 EndFunction
 
 &AtServerNoContext
 Function GetFractionDigitsMaxCount()
-	
+
 	Return Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits;
-	
+
 EndFunction
 
 #EndRegion
@@ -699,7 +752,9 @@ EndProcedure
 &AtClient
 Procedure BankPaymentTypeListDragStart(Item, DragParameters, Perform)
 	PaymentRow = DragParameters.Value;
-	Perform = Not BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRow)).Count() = 0
+	If Not BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRow)).Count() = 0 Then
+		Perform = False;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -725,18 +780,20 @@ EndProcedure
 
 &AtClient
 Async Function Payment_PayByPaymentCard(PaymentRow)
-	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
+	PaymentSettings = EquipmentAcquiringAPIClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	PaymentSettings.Form.ElementToHideAndShow = Items.GroupWait;
-	Result = Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
-		PrintSlip(PaymentSettings);
+		PrintSlip(PaymentRow.Hardware, PaymentSettings);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
 	EndIf;
-	
+
 	Return Result;
 EndFunction
 
@@ -746,24 +803,26 @@ Async Procedure Payment_PayByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_PayByPaymentCard(PaymentRow);      
+	Await Payment_PayByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 &AtClient
 Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
-	
-	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
+
+	PaymentSettings = EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	PaymentSettings.InOut.RRNCode = PaymentRow.RRNCode;
 	PaymentSettings.Form.ElementToLock = ThisObject;
 	PaymentSettings.Form.ElementToHideAndShow = Items.GroupWait;
-	Result = Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
-	
+	Result = Await EquipmentAcquiringAPIClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
-		PrintSlip(PaymentSettings);
+		PrintSlip(PaymentRow.Hardware, PaymentSettings);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
 	EndIf;
 	Return Result;
 EndFunction
@@ -780,22 +839,22 @@ EndProcedure
 
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
-	
-	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
+
+	PaymentSettings = EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings();
     If PaymentRow.PaymentDone Then
 		PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
-		
+
 		PaymentSettings.In.Amount = PaymentInfo.In.Amount;
 		If isReturn Then
 			PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
 		Else
 			PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
-		EndIf;         
-	Else                        
+		EndIf;
+	Else
 		PaymentSettings.In.Amount = PaymentRow.Amount;
 	   	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
 	EndIf;
-	Result = Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	Result = Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
 		If ReturnInTheSameConsolidateSales Then
 			PaymentRow.PaymentDone = True;
@@ -804,8 +863,12 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 		EndIf;
 	EndIf;
 	
-	PrintSlip(PaymentSettings);
-		
+	If Not Result Then
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
+	EndIf;
+	
+	PrintSlip(PaymentRow.Hardware, PaymentSettings);
+
 	Return Result;
 EndFunction
 
@@ -815,36 +878,39 @@ Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_CancelPaymentByPaymentCard(PaymentRow);     
+	Await Payment_CancelPaymentByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 &AtClient
-Function Cutter()
-	Return Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF;
-EndFunction
-
-&AtClient
-Async Procedure PrintSlip(PaymentSettings)
+Async Procedure PrintSlip(Hardware, PaymentSettings)
 	SlipInfo = PaymentSettings.Out.Slip;
-	SlipInfoTmp = StrReplace(SlipInfo, Cutter(), "⚪");       
-	SlipInfoTmp = StrReplace(SlipInfoTmp, "[cut]", "⚪");
+	Cutter = CommonFunctionsServer.GetRefAttribute(Hardware, "Cutter");
+	SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
+	SlipArray = StrSplit(SlipInfoTmp, "⚪", False);
 
-	For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
+	If SlipArray.Count() = 1 And CommonFunctionsServer.GetRefAttribute(Hardware, "PrintCopyIfCutterNotFound") Then
+		SlipArray.Add(SlipArray[0]);
+	EndIf;
+
+	For Each SlipInfoPart In SlipArray Do
 		PaymentSettings.Out.Slip = SlipInfoPart;
-		Str = New Structure("Payments", New Array);
-		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
-	EndDo; 
+		DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
+		DocumentPackage.TextString = StrSplit(SlipInfoPart, Chars.LF + Chars.CR);
+		PrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, DocumentPackage); // See EquipmentFiscalPrinterAPIClient.PrintTextDocumentSettings
+		If Not PrintResult.Info.Success Then
+			CommonFunctionsClientServer.ShowUsersMessage(PrintResult.Info.Error);
+		EndIf;
+	EndDo;
 	PaymentSettings.Out.Slip = SlipInfo;
 EndProcedure
 
 // Get RRNCode.
-// 
+//
 // Parameters:
 //  PaymentType - CatalogRef.PaymentTypes - Payment type
 //  OnlyFirst - Boolean - Only first
-// 
+//
 // Returns:
 //  String - Get RRNCode
 &AtServer
@@ -880,4 +946,3 @@ AmountFractionDigitsCount = 0;
 AmountDotIsActive = False;
 AmountFractionDigitsMaxCount = GetFractionDigitsMaxCount();
 FormCanBeClosed = False;
-	

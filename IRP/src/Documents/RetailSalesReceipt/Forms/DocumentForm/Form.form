@@ -1520,7 +1520,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListInventoryOrigin</name>
-          <id>1081</id>
+          <id>1223</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1529,13 +1529,9 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.InventoryOrigin</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>ItemListInventoryOriginOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>ItemListInventoryOriginExtendedTooltip</name>
-            <id>1083</id>
+            <id>1225</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1550,7 +1546,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListInventoryOriginContextMenu</name>
-            <id>1082</id>
+            <id>1224</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1559,6 +1555,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2092,6 +2089,61 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListVatRate</name>
+          <id>1229</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.VatRate</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListVatRateOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListVatRateExtendedTooltip</name>
+            <id>1231</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListVatRateContextMenu</name>
+            <id>1230</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <listChoiceMode>true</listChoiceMode>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListOffersAmount</name>
           <id>72</id>
           <visible>true</visible>
@@ -2234,7 +2286,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>EnterOnInput</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4243,6 +4294,56 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>PaymentsCertificate</name>
+          <id>1220</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Payments.Certificate</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PaymentsCertificateExtendedTooltip</name>
+            <id>1222</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentsCertificateContextMenu</name>
+            <id>1221</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>PaymentsCommandBar</name>
           <id>778</id>
@@ -5105,6 +5206,56 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>StatusType</name>
+          <id>1226</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.StatusType</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>StatusTypeExtendedTooltip</name>
+            <id>1228</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>StatusTypeContextMenu</name>
+            <id>1227</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>PriceIncludeTax</name>
           <id>234</id>
           <visible>true</visible>
@@ -5930,6 +6081,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>SourceOfOriginsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -5968,6 +6120,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>SourceOfOriginsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -6006,6 +6159,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>SourceOfOriginsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -6053,6 +6207,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -6859,7 +7014,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.ConsignorBatches</segments>
+          <segments>Object.DELETE_ConsignorBatches</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
@@ -6871,7 +7026,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.LineNumber</segments>
+            <segments>Object.DELETE_ConsignorBatches.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesLineNumberExtendedTooltip</name>
@@ -6921,7 +7076,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Key</segments>
+            <segments>Object.DELETE_ConsignorBatches.Key</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesKeyExtendedTooltip</name>
@@ -6971,7 +7126,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.ItemKey</segments>
+            <segments>Object.DELETE_ConsignorBatches.ItemKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesItemKeyExtendedTooltip</name>
@@ -7021,7 +7176,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.SerialLotNumber</segments>
+            <segments>Object.DELETE_ConsignorBatches.SerialLotNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesSerialLotNumberExtendedTooltip</name>
@@ -7071,7 +7226,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.SourceOfOrigin</segments>
+            <segments>Object.DELETE_ConsignorBatches.SourceOfOrigin</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesSourceOfOriginExtendedTooltip</name>
@@ -7121,7 +7276,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Store</segments>
+            <segments>Object.DELETE_ConsignorBatches.Store</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesStoreExtendedTooltip</name>
@@ -7171,7 +7326,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Batch</segments>
+            <segments>Object.DELETE_ConsignorBatches.Batch</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesBatchExtendedTooltip</name>
@@ -7221,7 +7376,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Quantity</segments>
+            <segments>Object.DELETE_ConsignorBatches.Quantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesQuantityExtendedTooltip</name>
@@ -7306,6 +7461,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ConsignorBatchesSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7344,6 +7500,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ConsignorBatchesViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7382,6 +7539,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ConsignorBatchesSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7429,6 +7587,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -8086,6 +8245,36 @@
       <placementArea>UserCmds</placementArea>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
+    <items xsi:type="form:Button">
+      <name>FormUnlockForm</name>
+      <id>1218</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormUnlockFormExtendedTooltip</name>
+        <id>1219</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.UnlockForm</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -8279,6 +8468,7 @@
         <edit>
           <common>true</common>
         </edit>
+        <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
       </columns>
       <columns>
         <name>ControlCodeStringState</name>
@@ -8558,6 +8748,23 @@
       <itemValueType/>
     </extInfo>
   </attributes>
+  <attributes>
+    <name>UnlockForm</name>
+    <title>
+      <key>en</key>
+      <value>Unlock form</value>
+    </title>
+    <id>175</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>SetSpecialOffersAtRow</name>
     <title>
@@ -8836,6 +9043,26 @@
       </handler>
     </action>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnlockForm</name>
+    <title>
+      <key>en</key>
+      <value>Unlock form</value>
+    </title>
+    <id>15</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Change</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnlockForm</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

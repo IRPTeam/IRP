@@ -63,15 +63,7 @@ Scenario:_800000 preparation (remaining stock control)
 		When create items for work order
 		When Create catalog BillOfMaterials objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)	
-	* Tax settings
-		When filling in Tax settings for company
 	* Stock remaining settings
 		When Create information register UserSettings records (remaining stock control)
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -525,7 +517,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 			| 'PZU'   | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
-		And I input "25,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I input "30,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
@@ -544,7 +536,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I close "Select serial lot numbers" window
 		And I activate field named "ItemListQuantity" in "ItemList" table
-		And I input "26,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "31,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -557,7 +549,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		Then "1C:Enterprise" window is opened
 		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 23 . Required: 25 . Lacking: 2 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 28 . Required: 30 . Lacking: 2 ." substring will appear in 10 seconds
 	* Change quantity and post document
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -583,7 +575,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 
 
 Scenario:_800011 check remaining stock control in the Retail sales receipt					
-	And I close all client application windows
+			And I close all client application windows
 		* Create Retail sales receipt
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I click the button named "FormCreate"
@@ -2709,6 +2701,8 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 	* Preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.UndoPosting);"    |
 	* Try unpost Opening entry 
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
@@ -2718,8 +2712,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Try unpost Purchase invoice 
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -2730,8 +2723,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows	
 	* Try unpost Stock Adjustment as surplus 
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
@@ -2742,8 +2734,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Try unpost Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -2754,8 +2745,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Try unpost Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -2766,7 +2756,6 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2] [Product 1 with SLN PZU] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
 		Then I wait that in user messages the "Line No. [3] [Product 3 with SLN UNIQ] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Try unpost Inventory transfer
@@ -2778,8 +2767,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -2907,15 +2895,227 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 
 
 
-
+Scenario:_800082 check of FreeStock balance control without date limitation
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"	
+	* Filling main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Partner term DFC' |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I input "31.08.2020 12:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I select from the drop-down list named "Store" by "Store 01" string
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "Dress/A-8" from "Item key" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "93,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Product 3 with SLN" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "UNIQ" from "Item key" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "11,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check free stock control
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Dress Dress/A-8] R4011B_FreeStocks remaining: 92 . Required: 93 . Lacking: 1 .'|
+		* Change quantity (more then free stock in the second line, first line is the same as quantity in the free stock)
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'Dress/A-8' |
+			And I select current line in "ItemList" table
+			And I input "92,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "ItemList" table
+			And I input "11,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Line No. [2] [Product 3 with SLN UNIQ] R4011B_FreeStocks remaining: 10 . Required: 11 . Lacking: 1 .'|
+		* Change qauntity (less then free stock)	
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'Dress/A-8' |
+			And I select current line in "ItemList" table
+			And I input "92,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I click "Cancel posting" button
+		And I close all client application windows
 		
-		
-		
-		
-				
-		
-				
-		
-
-				
-		
+						
+Scenario:_800083 check stock control in the IT (Store sender does not use stock control, Store receiver Use)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93"	
+		And I change checkbox "Negative stock control"
+		And I click "Save and close" button
+	* Create first IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 08'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 02'    |
+			And I select current line in "List" table
+		* Filling item list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "100,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '38/18SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "20,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I delete "$$InventoryTransfer11$$" variable
+			And I delete "$$NumberInventoryTransfer11$$" variable
+			And I save the window as "$$InventoryTransfer11$$"
+			And I save the value of "Number" field as "$$NumberInventoryTransfer11$$"
+			And I click the button named "FormPostAndClose"
+	* Create second IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 08'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Company'                  | 'Description' |
+				| 'Shared for all companies' | 'Store 02'    |
+			And I select current line in "List" table
+		* Filling item list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "101,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '38/18SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "21,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then user message window does not contain messages
+			And I delete "$$InventoryTransfer12$$" variable
+			And I delete "$$NumberInventoryTransfer12$$" variable
+			And I save the window as "$$InventoryTransfer12$$"
+			And I save the value of "Number" field as "$$NumberInventoryTransfer12$$"
+			And I click the button named "FormPostAndClose"
+	* Try unpost first IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberInventoryTransfer11$$' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I close all client application windows

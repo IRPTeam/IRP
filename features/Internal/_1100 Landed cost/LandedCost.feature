@@ -55,7 +55,6 @@ Scenario: _001 test data
 		When Create catalog PriceTypes objects (LC)
 		When Create catalog Specifications objects (LC)
 		When Create catalog Stores objects (LC)
-		When Create catalog TaxAnalytics objects (LC)
 		When Create catalog TaxRates objects (LC)
 		When Create catalog Taxes objects (LC)
 		When Create catalog InterfaceGroups objects (LC)
@@ -80,10 +79,6 @@ Scenario: _001 test data
 		When Create catalog BillOfMaterials objects (LC)
 		And Delay 10
 		When update ItemKeys (LC)
-	* Add plugin for taxes calculation
-			When add Plugin for tax calculation (LC)
-		When update tax settings (LC)
-
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -2291,7 +2286,6 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 			| 'Number'    |
 			| '1'         |
 		And I click "Registrations report" button
-		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -2318,7 +2312,6 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 			| 'Number'    |
 			| '1'         |
 		And I click "Registrations report" button
-		Then "Document registrations report" window is opened
 		And in "ResultTable" spreadsheet document I move to "R1C1" cell
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button

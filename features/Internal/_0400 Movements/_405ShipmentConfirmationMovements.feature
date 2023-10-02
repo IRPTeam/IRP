@@ -69,15 +69,7 @@ Scenario: _040170 preparation (Shipment confirmation)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -185,13 +177,13 @@ Scenario: _040173 check Shipment confirmation movements by the Register  "R2011 
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Register  "R2011 Shipment of sales orders"'          | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'      |
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Register  "R2011 Shipment of sales orders"'        | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '1'         | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
 		And I close all client application windows
 		
 Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SO-SC-SI)
@@ -322,14 +314,14 @@ Scenario: _040178 check Shipment confirmation movements by the Register  "R2031 
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05'   | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                            | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                            | ''            |
-			| 'Register  "R2031 Shipment invoicing"'                | ''              | ''                      | ''            | ''               | ''                          | ''           | ''                                            | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''           | ''                                            | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Store'      | 'Basis'                                       | 'Item key'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '1'           | 'Main Company'   | 'Distribution department'   | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | 'XS/Blue'     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '10'          | 'Main Company'   | 'Distribution department'   | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | '36/Red'      |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '24'          | 'Main Company'   | 'Distribution department'   | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | '37/18SD'     |
+			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| 'Register  "R2031 Shipment invoicing"'              | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                          | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                     | 'Item key' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '10'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '24'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/18SD'  |		
 		And I close all client application windows
 
 Scenario: _0401781 check Shipment confirmation movements by the Register  "R2031 Shipment invoicing" (SI not exists)
@@ -386,13 +378,12 @@ Scenario: _040181 check Shipment confirmation movements by the Register  "R4011 
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05'   | ''              | ''                      | ''            | ''             | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''            |
-			| 'Register  "R4011 Free stocks"'                       | ''              | ''                      | ''            | ''             | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '10'          | 'Store 02'     | '36/Red'      |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '24'          | 'Store 02'     | '37/18SD'     |
+			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                     | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '10'        | 'Store 02'   | '36/Red'   |		
 		And I close all client application windows
 
 Scenario: _040182 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC)
@@ -407,12 +398,13 @@ Scenario: _040182 check Shipment confirmation movements by the Register  "R4012 
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05'   | ''              | ''                      | ''            | ''             | ''           | ''                                           |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                                           |
-			| 'Register  "R4012 Stock Reservation"'                 | ''              | ''                      | ''            | ''             | ''           | ''                                           |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                                           |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Order'                                      |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:52:05'   | '1'           | 'Store 02'     | 'XS/Blue'    | 'Sales order 3 dated 27.01.2021 19:50:45'    |
+			| 'Shipment confirmation 3 dated 28.01.2021 18:52:05' | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| 'Register  "R4012 Stock Reservation"'               | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                        |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                   |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '1'         | 'Store 02'   | 'XS/Blue'  | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '24'        | 'Store 02'   | '36/18SD'  | 'Sales order 3 dated 27.01.2021 19:50:45' |		
 		And I close all client application windows
 
 

@@ -61,6 +61,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.Company            = FillingData.Company;
 			ThisObject.BusinessUnit       = FillingData.BusinessUnit;
+			ThisObject.Branch       	  = FillingData.Branch;
 		EndIf;
 	EndIf;
 EndProcedure

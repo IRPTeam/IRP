@@ -673,10 +673,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R8010B_TradeAgentInventory());
-	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
-	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(R9510B_SalaryPayment());
@@ -1194,193 +1190,194 @@ Function T6010S_BatchesInfo()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
-		   |	ItemList.CurrencyMovementType,
-		   |	ItemList.Currency,
-		   |	CASE
-		   |		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ItemList.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ItemList.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SUM(ItemList.Quantity) AS Quantity,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	SUM(ItemList.AmountTax) AS AmountTax
-		   |INTO tmp_T6020S_BatchKeysInfo
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Currency,
-		   |	ItemList.CurrencyMovementType,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	VALUE(Enum.BatchDirection.Receipt),
-		   |	CASE
-		   |		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ItemList.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ItemList.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	VALUE(Enum.BatchDirection.Expense),
-		   |	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		   |	Value(Catalog.Currencies.EmptyRef),
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SUM(ShipmentToTradeAgent.Quantity),
-		   |	0,
-		   |	0
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	VALUE(Enum.BatchDirection.Expense),
-		   |	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		   |	Value(Catalog.Currencies.EmptyRef),
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	VALUE(Enum.BatchDirection.Receipt),
-		   |	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		   |	Value(Catalog.Currencies.EmptyRef),
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SUM(ShipmentToTradeAgent.Quantity),
-		   |	0,
-		   |	0
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	VALUE(Enum.BatchDirection.Receipt),
-		   |	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		   |	Value(Catalog.Currencies.EmptyRef),
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	BatchKeysInfo.Period,
-		   |	BatchKeysInfo.Company,
-		   |	BatchKeysInfo.Store,
-		   |	BatchKeysInfo.ItemKey,
-		   |	BatchKeysInfo.Direction,
-		   |	BatchKeysInfo.CurrencyMovementType,
-		   |	BatchKeysInfo.Currency,
-		   |	BatchKeysInfo.SerialLotNumber,
-		   |	BatchKeysInfo.SourceOfOrigin,
-		   |	SUM(BatchKeysInfo.Quantity) AS Quantity,
-		   |	SUM(BatchKeysInfo.Amount) AS Amount,
-		   |	SUM(BatchKeysInfo.AmountTax) AS AmountTax
-		   |FROM
-		   |	BatchKeysInfo AS BatchKeysInfo
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	BatchKeysInfo.Period,
-		   |	BatchKeysInfo.Company,
-		   |	BatchKeysInfo.Store,
-		   |	BatchKeysInfo.ItemKey,
-		   |	BatchKeysInfo.Direction,
-		   |	BatchKeysInfo.CurrencyMovementType,
-		   |	BatchKeysInfo.Currency,
-		   |	BatchKeysInfo.SerialLotNumber,
-		   |	BatchKeysInfo.SourceOfOrigin
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Store,
-		   |	Table.ItemKey,
-		   |	Table.Direction,
-		   |	Table.CurrencyMovementType,
-		   |	Table.Currency,
-		   |	Table.SerialLotNumber,
-		   |	Table.SourceOfOrigin,
-		   |	Table.Quantity,
-		   |	Table.Amount,
-		   |	Table.AmountTax
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	tmp_T6020S_BatchKeysInfo AS Table
-		   |WHERE
-		   |	Table.Quantity > 0"
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		|	ItemList.CurrencyMovementType,
+		|	ItemList.Currency,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	SUM(ItemList.Amount) AS InvoiceAmount,
+		|	SUM(ItemList.AmountTax) AS InvoiceTaxAmount
+		|INTO tmp_T6020S_BatchKeysInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.CurrencyMovementType,
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SUM(ShipmentToTradeAgent.Quantity),
+		|	0,
+		|	0
+		|FROM
+		|	ShipmentToTradeAgent AS ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SUM(ShipmentToTradeAgent.Quantity),
+		|	0,
+		|	0
+		|FROM
+		|	ShipmentToTradeAgent AS ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ShipmentToTradeAgent.Period,
+		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.CurrencyMovementType,
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin,
+		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+		|	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount
+		|FROM
+		|	BatchKeysInfo AS BatchKeysInfo
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.CurrencyMovementType,
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Store,
+		|	Table.ItemKey,
+		|	Table.Direction,
+		|	Table.CurrencyMovementType,
+		|	Table.Currency,
+		|	Table.SerialLotNumber,
+		|	Table.SourceOfOrigin,
+		|	Table.Quantity,
+		|	Table.InvoiceAmount,
+		|	Table.InvoiceTaxAmount
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	tmp_T6020S_BatchKeysInfo AS Table
+		|WHERE
+		|	Table.Quantity > 0"
 EndFunction
 
 Function R4050B_StockInventory()
@@ -1442,76 +1439,6 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
 		   |	ShipmentToTradeAgent.ItemKey";
-EndFunction
-
-Function R8010B_TradeAgentInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Partner,
-		   |	ShipmentToTradeAgent.Agreement,
-		   |	ShipmentToTradeAgent.LegalName,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |INTO R8010B_TradeAgentInventory
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE";
-EndFunction
-
-Function R8011B_TradeAgentSerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	ShipmentToTradeAgent.Company,
-		   |	ShipmentToTradeAgent.Partner,
-		   |	ShipmentToTradeAgent.Agreement,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.SerialLotNumber,
-		   |	ShipmentToTradeAgent.Quantity
-		   |INTO R8011B_TradeAgentSerialLotNumber
-		   |FROM
-		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
-		   |WHERE
-		   |	ShipmentToTradeAgent.isSerialLotNumberSet";
-EndFunction
-
-Function R8012B_ConsignorInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	ReceiptFromConsignor.Company,
-		   |	ReceiptFromConsignor.Partner,
-		   |	ReceiptFromConsignor.Agreement,
-		   |	ReceiptFromConsignor.LegalName,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.SerialLotNumber,
-		   |	ReceiptFromConsignor.Quantity
-		   |INTO R8012B_ConsignorInventory
-		   |FROM
-		   |	ReceiptFromConsignor AS ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
-EndFunction
-
-Function R8013B_ConsignorBatchWiseBalance()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	ReceiptFromConsignor.Company,
-		   |	ReceiptFromConsignor.Store,
-		   |	ReceiptFromConsignor.Batch,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.SerialLotNumber,
-		   |	ReceiptFromConsignor.SourceOfOrigin,
-		   |	ReceiptFromConsignor.Quantity
-		   |INTO R8013B_ConsignorBatchWiseBalance
-		   |FROM
-		   |	ReceiptFromConsignor AS ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
 EndFunction
 
 Function R8015T_ConsignorPrices()

@@ -63,17 +63,9 @@ Scenario: _050000 preparation (Retail shipment confirmation movements)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -120,13 +112,13 @@ Scenario: _050002 check Retail shipment confirmation movements by the Register  
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''               | ''         | ''                                            | ''            |
-			| 'Document registrations records'                               | ''              | ''                      | ''            | ''               | ''         | ''                                            | ''            |
-			| 'Register  "R2011 Shipment of sales orders"'                   | ''              | ''                      | ''            | ''               | ''         | ''                                            | ''            |
-			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''         | ''                                            | ''            |
-			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'   | 'Order'                                       | 'Item key'    |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Main Company'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | 'XS/Blue'     |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Main Company'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | '37/18SD'     |
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''            | ''                    | ''          | ''             | ''       | ''                                          | ''         | ''                                     |
+			| 'Document registrations records'                             | ''            | ''                    | ''          | ''             | ''       | ''                                          | ''         | ''                                     |
+			| 'Register  "R2011 Shipment of sales orders"'                 | ''            | ''                    | ''          | ''             | ''       | ''                                          | ''         | ''                                     |
+			| ''                                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                                          | ''         | ''                                     |
+			| ''                                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                                     | 'Item key' | 'Row key'                              |
+			| ''                                                           | 'Expense'     | '24.05.2023 14:43:31' | '2'         | 'Main Company' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | 'XS/Blue'  | '23b88999-d27d-462f-94f4-fa7b09b4b20c' |
+			| ''                                                           | 'Expense'     | '24.05.2023 14:43:31' | '2'         | 'Main Company' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | '37/18SD'  | '5bdde23c-effa-4551-9989-3e2d76766c28' |
 		
 		
 Scenario: _050003 check Retail shipment confirmation movements by the Register  "R4010 Actual stocks"

@@ -148,7 +148,7 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 	For Each Table In DocMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
 		Wrapper.Tables.Insert(Table.Name, New Structure("_TableName_", Table.Name));
-		For Each Column In Table.StandardAttributes Do
+		For Each Column In Table.StandardAttributes Do // StandardAttributeDescriptions
 			//@skip-check invocation-parameter-type-intersect
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
 		EndDo;
@@ -156,7 +156,7 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
 		EndDo;
 		
-		For Each Row In DocObject[Table.Name] Do
+		For Each Row In DocObject[Table.Name] Do // ValueTableRow
 			//@skip-check dynamic-access-method-not-found
 			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
@@ -293,13 +293,14 @@ EndFunction
 //  WriteMode - DocumentWriteMode - Write mode
 //  PostingMode - DocumentPostingMode - Posting mode
 //  Object - DocumentObjectDocumentName - Update current object
+//  CheckFilling - Boolean - 
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
 // * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined) Export
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False) Export
 	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
@@ -325,6 +326,13 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
+			
+			If CheckFilling Then
+				If Not Doc.CheckFilling() Then
+					Raise "Error on posting document";
+				EndIf;
+			EndIf;
+			
 			Doc.Write(
 				?(
 					WriteMode = Undefined, 
@@ -361,6 +369,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
+			If CheckFilling Then
+				If Not Ctlg.CheckFilling() Then
+					Raise "Error on posting document";
+				EndIf;
+			EndIf;
 			Ctlg.Write();
 			WrapperObject.Ref = Ctlg.Ref;
 		Else
@@ -560,7 +573,7 @@ Procedure FillInitData(Wrapper, InitialData)
 		
 		If isValueExists And TypeOf(InitialData[KeyValue.Key]) = Type("Array") Then
 			Array = Wrapper.Object[KeyValue.Key]; // Array
-			For Each InitRow In InitialData[KeyValue.Key] Do
+			For Each InitRow In InitialData[KeyValue.Key] Do // Structure
 				FillPropertyValues(Array.Add(), InitRow);
 			EndDo;
 		Else

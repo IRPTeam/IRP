@@ -14,10 +14,12 @@ SalesReceiptXML1 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 3 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 12 with SLN (Main Company - different consignor for item key) PZU [8900008990900]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
+			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
+		</FiscalString>
 	</Positions>
 	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -29,9 +31,9 @@ SalesReceiptXML2 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899877]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN ODS [345]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="720" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -43,10 +45,10 @@ SalesReceiptXML3 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899877]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN UNIQ [899007790088]" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
 	<Payments Cash="440" ElectronicPayment="400" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -58,7 +60,7 @@ SalesReceiptXML4 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -69,7 +71,7 @@ SalesReceiptXML5 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -81,7 +83,7 @@ SalesReceiptXML6 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
+		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
 	</Positions>
 	<Payments Cash="10" ElectronicPayment="0" PrePayment="200" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -93,7 +95,7 @@ SalesReceiptXML7 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -115,20 +117,12 @@ SalesReceiptXML9 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 1" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
-			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
-		</FiscalString>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="442" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 11 with SLN (Main Company - Consignor 1) PZU [11111111111112]" Quantity="2" PaymentMethod="4" PriceWithDiscount="221" VATRate="18" VATAmount="67.42"/>
+		<FiscalString AmountWithDiscount="101" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 13 without SLN (Main Company - different consignor for item key) M/Black" Quantity="1" PaymentMethod="4" PriceWithDiscount="101" VATRate="18" VATAmount="15.41"/>
 	</Positions>
-	<Payments Cash="520" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+	<Payments Cash="543" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -138,7 +132,7 @@ SalesReceiptXML10 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899877]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="620" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -151,7 +145,7 @@ SalesReceiptXML11 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899877]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="200" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -163,7 +157,7 @@ SalesReceiptXML12 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 9 with SLN (control code string, without check) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 9 with SLN (control code string, without check) ODS [999999999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 	</Positions>
 	<Payments Cash="100" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -175,7 +169,7 @@ SalesReceiptXML13 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
+		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
 	</Positions>
 	<Payments Cash="120" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -187,7 +181,7 @@ SalesReceiptXML14 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
+		<FiscalString AmountWithDiscount="112" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="112" VATRate="18" VATAmount="17.08"/>
 	</Positions>
 	<Payments Cash="112" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -198,7 +192,7 @@ SalesReceiptXML15 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
 	</Positions>
 	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -210,9 +204,58 @@ SalesReceiptXML16 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
+		<FiscalString AmountWithDiscount="113" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="113" VATRate="18" VATAmount="17.24"/>
 	</Positions>
 	<Payments Cash="113" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML17 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="500" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="10" Name="Certificate without denominal [99999999999]" Quantity="1" PaymentMethod="3" PriceWithDiscount="500" VATRate="18" VATAmount="76.27"/>
+	</Positions>
+	<Payments Cash="500" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML18 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+	</Positions>
+	<Payments Cash="20" ElectronicPayment="200" PrePayment="500" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+SalesReceiptXML19 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 1 with SLN PZU [8908899880]" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+	</Positions>
+	<Payments Cash="120" ElectronicPayment="100" PrePayment="500" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML20 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="10" Name="Certificate without denominal [99999999998]" Quantity="1" PaymentMethod="3" PriceWithDiscount="300" VATRate="18" VATAmount="45.76"/>
+	</Positions>
+	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -278,22 +321,11 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
 		When Create catalog Countries objects
-		When Data preparation (comission stock)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
+		When Create catalog Items objects (commission trade)
+		When Create Certificate
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -310,6 +342,13 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I change checkbox "Postpone with reserve"
+		And I change checkbox "Postpone without reserve"
+		And I click "Save and close" button				
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Workstation 01'    |
 		And I click "Set current workstation" button
@@ -320,13 +359,10 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register TaxSettings records (Concignor 2)
 		When Create document PurchaseInvoice (comission trade, own Companies)
 		When Create document SalesInvoice (trade, own Companies)
-		When Data preparation (consignment from serial lot number)
 		When Create information register Barcodes records (marking code)
 	* Post document
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -341,14 +377,6 @@ Scenario: _0850000 preparation (fiscal printer)
 			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -411,6 +439,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I click the button named "FormCreate"
 		And I input "Fiscal printer" text in "Description" field
 		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
+		And I set checkbox named "Log"	
 		And I click Select button of "Driver" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -443,9 +472,9 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description'       |
 			| 'Acquiring_3007'    |
 		And I select current line in "List" table
+		And I set checkbox named "Log"		
 		And I expand "Additional info" group
-		And I input "Sale address" text in "Sale address" field
-		And I input "Sale location" text in "Sale location" field	
+		And I input "[cut]" text in the field named "Cutter"	
 		And I click "Save" button		
 		And I click "Save and close" button
 		Then "Hardware" window is opened
@@ -654,7 +683,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "Barcode"
+		And I input "900999000009" text in the field named "Barcode"
 		And I move to the next attribute
 	* Scan control code
 		Then "Code string check" window is opened
@@ -668,7 +697,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "09987897977893" text in the field named "Barcode"
+		And I input "8900008990900" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -677,6 +706,7 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows
 	* Check fiscal log
@@ -730,7 +760,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table	
-	* Change quantity and check marking data clean
+	* Change quantity and check marking data
 		And I go to line in "ItemList" table
 			| 'Item'                 | 'Item key'   | 'Price'    | 'Quantity'   | 'Serials'      | 'Total'     |
 			| 'Product 1 with SLN'   | 'PZU'        | '100,00'   | '1,000'      | '8908899877'   | '100,00'    |
@@ -749,21 +779,23 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I click "Ok" button
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-		And I move to the next attribute
-		Then there are lines in TestClient message log
-			| 'Current barcode already use at document line: 3'    |
-			| 'Current barcode already use at document line: 3'    |
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Current row will decode to base64" text in the field named "Barcode"
-		And I move to the next attribute
+		* Check previous marking code
+			And "CurrentCodes" table became equal
+				| 'Scanned codes'                     | 'Code is approved' | 'Not check' |
+				| 'Current row will decode to base64' | 'Yes'              | 'No'        |
+		* Scan marking data that already used	
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			Then there are lines in TestClient message log
+				| 'Current barcode already use at document line: 3'    |
+				| 'Current barcode already use at document line: 3'    |
+			And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                 | 'Item key'    |
 			| 'Product 1 with SLN'   | 'PZU'         |
@@ -774,12 +806,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I select current line in "SerialLotNumbers" table
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
-		And I click "Ok" button
-		And I click "Payment (+)" button
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "Current row will decode to base64" text in the field named "Barcode"
-		And I move to the next attribute											
+		And I click "Ok" button										
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
@@ -888,7 +915,7 @@ Scenario: _0850017 payment by payment agent from POS
 			| 'Payment type'   | 'Amount'    |
 			| 'Bank credit'    | '118,00'    |
 		And I click the button named "Enter"
-		And Delay 3
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML5"
@@ -952,8 +979,13 @@ Scenario: _08500181 advance payment (card)
 		And I click "1" button
 		And I click "0" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I click "Pay" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
+		And I move to the next attribute
+		And I click the button named "Enter"				
 	* Check fiscal log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -1046,6 +1078,26 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I click the button named "Enter"
 		And I click "OK" button
 		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+			|'Not all payment done.'|
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '40,00'  | '⚪'            | 'Card 04'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '60,00'  | '⚪'            | 'Card 03'      |
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute	
+		And I click "OK" button	
 		And Delay 10
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -1164,7 +1216,16 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '40,00'  | '⚪'            | 'Card 03'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute		
 		And I click "OK" button
 	* Check acquiring log
 		And Delay 5
@@ -1283,7 +1344,16 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I select current line in "Payments" table
 		And I input "23457" text in "RRNCode" field of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click the button named "Enter"		
+		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '111,00'  | '⚪'            | 'Card 03'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button				
 		And I click "OK" button
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -1303,217 +1373,7 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '111.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '23457'	
 
-Scenario: _0850020 check auto card payment cancellation (acquiring)
-	And I close all client application windows
-	And In the command interface I select "Retail" "Point of sale"
-	* Select item
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-		And I finish line editing in "ItemList" table
-	* Card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "9" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment done'   | 'Payment type'    |
-			| '90,00'    | '⚪'              | 'Card 04'         |
-		And I activate "Payment type" field in "Payments" table
-	* Check auto card cancellation
-		And I click "Pay" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		* Check acquiring log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-			And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
-			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'
-		And I click the button named "Enter"
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		And I click "OK" button
-		And "Payments" table became equal
-			| 'Payment done'   | 'Payment type'   | 'Amount'    |
-			| '⚪'              | 'Card 04'        | '90,00'     |
-			| '⚪'              | 'Card 03'        | '430,00'    |
-	* Check acquiring log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'	
-	* Close payment form
-		Then "Payment" window is opened
-		And I click "X" button
-		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I close all client application windows
-						
-Scenario: _0850021 check the form of payment by card
-	And I close all client application windows
-	And In the command interface I select "Retail" "Point of sale"
-	* Select item
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-		And I finish line editing in "ItemList" table
-	* Card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "9" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-	* Close payment window
-		And I click "X" button
-		Then I wait "Payment" window closing in "5" seconds
-	* Add card payment
-		And I click "Payment (+)" button
-		And I click "Card (*)" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "5" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 03'      |
-		And I select current line in "BankPaymentTypeList" table
-		And I click "4" button
-		And I click "0" button
-		And I go to line in "BankPaymentTypeList" table
-			| 'Reference'    |
-			| 'Card 04'      |
-		And I select current line in "BankPaymentTypeList" table
-	* Payment by first card
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment done'   | 'Payment type'    |
-			| '50,00'    | '⚪'              | 'Card 04'         |
-		And I activate "Payment type" field in "Payments" table
-		And I click "Pay" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-	* Check that the payment window will not close
-		And I click "X" button	
-		Then there are lines in TestClient message log
-			| 'Cancel all payment before close form.'    |
-	* Cancel payment
-		And I go to line in "Payments" table
-			| 'Amount'   | 'Payment type'    |
-			| '50,00'    | 'Card 04'         |
-		And I click "Cancel" button
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
-	* Repayment in case of failure to pass
-		And I click the button named "Enter"
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "1C:Enterprise" window is opened
-		And I click "Retry" button
-		And I click "OK" button
-		And I click "OK" button
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 10
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '430.00'	
-		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '40.00'
-		And I check "$ParsingResult1$" with "9" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains '50.00'				
-	* Check fiscal log	
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
-		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "4" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '430.00'
-	And I close all client application windows
-	
-								
-Scenario: _0850027 check acquiring in BP
-	And I close all client application windows
-	* Create BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"	
-		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'POS Terminal 2'    |
-		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of "Partner" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Lomaniti'       |
-		And I select current line in "List" table
-		And I activate "Payment terminal" field in "PaymentList" table
-		And I click choice button of "Payment terminal" attribute in "PaymentList" table
-		And I select current line in "List" table
-		And I activate "Payment type" field in "PaymentList" table
-		And I click choice button of "Payment type" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Card 03'        |
-		And I select current line in "List" table
-		And I finish line editing in "PaymentList" table
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And I click "Post" button
-		And I click "Return to card" button
-		Then "Payment by acquiring" window is opened
-		And I input "9876655775" text in the field named "RRNCode"
-		And I click "Return" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-	* Check acquiring log
-		And Delay 10
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
-		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '9876655775'	
-				
-
+		
 					
 Scenario: _0850028 check acquiring in BR
 	And I close all client application windows
@@ -1551,8 +1411,9 @@ Scenario: _0850028 check acquiring in BR
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormWrite"
 		And I click "Pay by card" button
+		* Check logs
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to "Other" tab
@@ -1585,6 +1446,11 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I click "0" button
 			And I click "0" button
 			And I click the button named "Enter"
+			Then there are lines in TestClient message log
+				|'Not all payment done.'|
+			And I click "Return" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button					
 			And I click "OK" button			
 		* Check acquiring log
 			And Delay 10
@@ -1627,7 +1493,7 @@ Scenario: _0850030 return retail customer advanve from POS (cash)
 			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
 			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
-Scenario: _0850025 sales return (cash)
+Scenario: _0850025 print receipt from sales return (cash)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
@@ -1637,7 +1503,59 @@ Scenario: _0850025 sales return (cash)
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
-		And I click "Post" button
+		Then the form attribute named "StatusType" became equal to "Completed"		
+		And I click the button named "FormWrite"
+	* Try print receipt (RRR unpost)
+		And I click "Print receipt" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Try Print receipt (RRR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"		
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Canceled)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
+		And I select "Canceled" exact value from "Status type" drop-down list	
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Postponed)
+		And I select "Postponed" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Postponed with reserve)
+		And I select "Postponed with reserve" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
+	* Check Print receipt (RRR posted, status Completed)
+		And I select "Completed" exact value from "Status type" drop-down list			
 		And I click "Print receipt" button
 	* Check fiscal log
 		And Delay 5
@@ -1796,8 +1714,33 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			| 'Movement type 1'    |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
-		And I click "Post" button
-	* Check Print cash in
+		And I click the button named "FormWrite"
+	* Try Print cash in (CR unposted)
+		And I click "Print cash in" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
+	* Try Print cash in (CR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print cash in" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
+	* Check Print cash in (CR posted)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
 		And I click "Print cash in" button
 	* Check fiscal log
 		And Delay 2
@@ -1806,10 +1749,9 @@ Scenario: _0260150 check print cash in from Cash receipt form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"
 	* Check double click Print cash in
 		And I click "Print cash in" button
-		Then there are lines in TestClient message log
-			| 'The document is already printed.'    |
+		And I click "OK" button
 		And I close all client application windows
-		
+
 
 Scenario: _0260151 check print cash out from Money transfer form
 	And I close all client application windows
@@ -1868,8 +1810,33 @@ Scenario: _0260151 check print cash out from Money transfer form
 			| 'Status'    |
 			| 'Open'      |
 		And I select current line in "List" table
-		And I click "Post" button
-	* Check Print cash out
+		And I click the button named "FormWrite"
+	* Try Print cash out (MT unposted)
+		And I click "Print cash out" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
+	* Try Print cash out (MT with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print cash out" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 2
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
+	* Check Print cash out (MT posted)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
 		And I click "Print cash out" button
 	* Check fiscal log
 		And Delay 2
@@ -1878,50 +1845,61 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
 	* Check double click Print cash out
 		And I click "Print cash out" button
-		Then there are lines in TestClient message log
-			| 'The document is already printed.'    |
+		And I click "OK" button
 		And I close all client application windows
 
 
-Scenario: _050055 check filling consignor from serial lot number in the RetailSalesReceipt from POS (scan barcode)
+Scenario: _050055 check filling consignor in the RetailReturnReceipt from POS (select items)
 		And I close all client application windows
-	* Preparation
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Open POS and create RSR
 		And In the command interface I select "Retail" "Point of sale"
-		Then "Point of sales" window is opened
+		And I click the button named "Return"		
 	* Add items
-		And I click "Search by barcode (F7)" button
-		And I input "09999900989900" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "09999900989901" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "090998897898979998" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "89900779008908" text in the field named "Barcode"
-		And I move to the next attribute
+		And I expand a line in "ItemsPickup" table
+			| 'Item'                                             |
+			| 'Product 11 with SLN (Main Company - Consignor 1)' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                                                  |
+			| 'Product 11 with SLN (Main Company - Consignor 1), PZU' |
+		And I select current line in "ItemsPickup" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number'  |
+			| 'PZU'   | '11111111111112' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "221,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
+		And I expand a line in "ItemsPickup" table
+			| 'Item'                                                                     |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                                                                              |
+			| 'Product 13 without SLN (Main Company - different consignor for item key), M/Black' |
+		And I select current line in "ItemsPickup" table
+		And I select current line in "ItemList" table
+		And I input "101,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
+		And I click "Payment Return" button
+		And I click "Cash (/)" button		
 		And I click the button named "Enter"
 	* Check filling consignor
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"	
 		And I go to line in "List" table
-			| 'Σ'         |
-			| '520,00'    |
+			| 'Amount'    |
+			| '543,00'    |
 		And I select current line in "List" table	
 		And I click "Show row key" button
-		And in the table "ItemList" I click "Edit quantity in base unit" button	
 		And "ItemList" table became equal
-			| 'Store'      | 'Stock quantity'   | 'Use serial lot number'   | '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                           | 'Consignor'     | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Unit'   | 'Profit loss center'   | 'Item key'   | 'Is service'   | 'Quantity'   | 'Price'    | 'VAT'           | 'Net amount'   | 'Total amount'    |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '1'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 1'   | 'No'                   | '15,25'        | '09999900989900'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | '18%'           | '84,75'        | '100,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '2'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '09999900989901'       | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '100,00'   | 'Without VAT'   | '100,00'       | '100,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '3'   | 'Consignor stocks'   | 'Basic Price Types'   | 'Product 8 with SLN (new row)'   | 'Consignor 2'   | 'No'                   | ''             | '090998897898979998'   | 'pcs'    | 'Shop 02'              | 'UNIQ'       | 'No'           | '1,000'      | '200,00'   | 'Without VAT'   | '200,00'       | '200,00'          |
-			| 'Store 01'   | '1,000'            | 'Yes'                     | '4'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 4 with SLN'             | ''              | 'No'                   | '18,31'        | '899007790088'         | 'pcs'    | 'Shop 02'              | 'ODS'        | 'No'           | '1,000'      | '120,00'   | '18%'           | '101,69'       | '120,00'          |
+			| 'Item'                                                                     | 'Consignor'   | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'Consignor 1' | 'pcs'  | 'PZU'      | '2,000'    |
+			| 'Product 13 without SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'M/Black'  | '1,000'    |
 		And I close all client application windows
 	* Check logs
 		And Delay 2
@@ -2140,7 +2118,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I close all client application windows
 		
 
-Scenario: _0260157 check marking code clean when change item key in the RSR
+Scenario: _0260157 check marking code when change item key in the RSR
 		And I close all client application windows
 	* Create RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2172,7 +2150,7 @@ Scenario: _0260157 check marking code clean when change item key in the RSR
 		And I move to "ControlCodeStrings [0]" tab		
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
-	* Check clean marking code when change quantity
+	* Check marking code when change quantity
 		And I delete all lines of "ItemList" table
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
 		And I input "8908899880" text in the field named "Barcode"
@@ -2186,14 +2164,14 @@ Scenario: _0260157 check marking code clean when change item key in the RSR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
-		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window
 				
 
 
-Scenario: _0260158 check marking code clean when change item key in the RRR
+Scenario: _0260158 check marking code when change item key in the RRR
 		And I close all client application windows
 	* Create RRR
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2239,9 +2217,9 @@ Scenario: _0260158 check marking code clean when change item key in the RRR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
-		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window	
 		And I close all client application windows	
 
@@ -2250,6 +2228,7 @@ Scenario: _0260159 check marking code without check code string
 	* Create 
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"
+		Then the form attribute named "StatusType" became equal to "Completed"	
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
 		And I input "999999999" text in the field named "Barcode"
 		And I move to the next attribute
@@ -2287,7 +2266,58 @@ Scenario: _0260159 check marking code without check code string
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "100,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Post" button
+		And I click the button named "FormWrite"
+	* Try print receipt (RSR unpost)
+		And I click "Print receipt" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Try Print receipt (RSR with deletion mark)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button	
+		And I click "Print receipt" button	
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Canceled)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"	
+		And I select "Canceled" exact value from "Status type" drop-down list		
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Postponed)
+		And I select "Postponed" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Postponed with reserve)
+		And I select "Postponed with reserve" exact value from "Status type" drop-down list			
+		And I click "Print receipt" button
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
+	* Check Print receipt (RSR posted, status Completed)
+		And I select "Completed" exact value from "Status type" drop-down list			
 		And I click "Print receipt" button
 	* Check fiscal log
 		And Delay 5
@@ -2337,6 +2367,7 @@ Scenario: _0260161 check return product control code string, without check
 		And I select current line in "ItemList" table
 		And I click "Code string is missing" button
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click "OK" button
 	* Check fiscal log
 		And Delay 5
@@ -2362,6 +2393,7 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I input "113,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button
 		And I click "OK" button
 	* Check fiscal log
 		And Delay 5
@@ -2380,6 +2412,7 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I select current line in "ItemList" table
 		And I click "Code string is missing" button
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click "OK" button	
 	* Check fiscal log
 		And Delay 5
@@ -2388,6 +2421,179 @@ Scenario: _0260162 receipt with marking code, return without marking code
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML16"
 
+Scenario: _0260162 check button Print receipt (copy)
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I click "Print copy receipt" button
+	* Check
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintCheckCopy"	
+	And I close all client application windows
+
+Scenario: _0260163 certificate sale (POS, without retail customer)
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"	
+	* Certificate sale
+		And I click "Search by barcode (F7)" button
+		And I input "99999999999" text in the field named "Barcode"
+		And I move to the next attribute
+		And I select current line in "ItemList" table
+		And I input "500,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML17"
+
+
+Scenario: _0260164 payment by certificate (POS)
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"	
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "SearchByBarcode"
+		And I input "99999999999" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Cash (/)" button
+		And I click "2" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then "Payment" window is opened
+		And I move to the next attribute	
+		And I click "OK" button
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML18"
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+
+Scenario: _0260165 Return of a product paid for with a certificate
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select RSR for return
+		Then "Point of sales" window is opened
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'    | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress'              | ''             | 'XS/Blue'  | ''           | '520,00' | '1,000'    | ''       | '520,00' |
+			| 'Product 1 with SLN' | ''             | 'PZU'      | '8908899880' | '200,00' | '1,000'    | ''       | '200,00' |
+		And "BasisPayments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Certificate'  | '500,00' |
+			| 'Cash'         | '20,00'  |
+			| 'Card 03'      | '200,00' |
+		And I go to line in "ItemList" table
+			| 'Item'               |
+			| 'Product 1 with SLN' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Payment Return" button
+		Then "Payment" window is opened
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
+			| ' '            | 'Certificate'  | '500,00' | ''        |
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I click "1" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Cancel" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML19"
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
+				
+		
+Scenario: _0260166 return certificate
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"	
+	* Sales
+		And I click "Search by barcode (F7)" button
+		And I input "99999999998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Return
+		And I click the button named "Return"
+		And I click "Search by barcode (F7)" button
+		And I input "99999999998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button				
+	* Check fiscal log			
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML20"	
+				
 
 Scenario: _0260152 close session
 	And I close all client application windows
@@ -2475,4 +2681,352 @@ Scenario: _0260153 check hardware parameter saving
 			And I close all client application windows
 				
 					
+Scenario: _0260160 check Get Last Error button
+	And I close all client application windows
+	* Open hardware
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+	* Check button Get Last Error	
+		And I click "Get last error" button
+		Then there are lines in TestClient message log
+			|'Fiscal printer: '|
+		And I close all client application windows
+												
+
+
+Scenario: _0260180 check fiscal logs
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
+	Then the number of "List" table lines is "равно" "676"	
+	* Check log records form
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "User" became equal to "CI"
+		Then the form attribute named "Hardware" became equal to "Fiscal printer"
+	And I close all client application windows
+
+Scenario: _0260182 check print X report when session closed
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check X report
+		Then "Point of sales" window is opened
+		And I click "Print X Report" button
+	* Check fiscal log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows				 
+
+Scenario: _0260185 print settlement from the terminal
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check settlement
+		And I click "Settlement (without shift close)" button
+		And I click "Get settlement" button
+		And I click "Print last settlement" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"	
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResultAcquiring"	
+		And I check "$ParsingResultAcquiring$" with "1" and method is "Settlement"
+
+
+Scenario: _0260186 check show fiscal transaction from POS
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Show transaction
+		And I click "Show transactions" button
+		Then the form attribute named "Period" became equal to "Today"
+		Then the form attribute named "TimeZone" became equal to "2"
+		Then the form attribute named "Hardware" became equal to "Acquiring terminal"
+		Then the form attribute named "FiscalPrinter" became equal to "Fiscal printer"
+		Then the number of "TransactionList" table lines is "больше" "0"
+	And I close all client application windows
+
+
+
 				
+Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
+	And I close all client application windows
+	* Open RSR list form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And "List" table contains lines 
+			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '118,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '210,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '620,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '112,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '113,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+	* Open RRR list form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And "List" table contains lines
+			| 'Partner'         | 'Amount' | 'Company'      | 'Check number' | 'Status'  | 'Legal name'              | 'Currency' | 'Store'    | 'Author' |
+			| 'Retail customer' | '100,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '200,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '111,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '210,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Customer'        | '118,00' | 'Main Company' | '*'            | 'Printed' | 'Customer'                | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '543,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '112,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '113,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '720,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '300,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+		And I close all client application windows
+		
+				
+Scenario: _0260191 check session open and close from CRS
+	And I close all client application windows
+	* Create CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "new" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormWrite"	
+	* Try open session (CRS unpost)
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+			| 'And I check "$ParsingResult$" with "0" and method is "OpenShift"'    |
+	* Post CRS
+		And I click the button named "FormPost"
+	* Try Close session
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be closed for a document with the status "Open".'|
+		And I select from the drop-down list named "Status" by "open" string
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Shift already closed.'|		
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			// And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ShiftState="1"'
+	* Try open session (status open)
+		And I select from the drop-down list named "Status" by "open" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status cancel)
+		And I select from the drop-down list named "Status" by "cancel" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status close)
+		And I select from the drop-down list named "Status" by "close" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (CRS with deletion mark)
+		And I select from the drop-down list named "Status" by "new" string
+		And I click the button named "FormPost"
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
+	* Try open session (CRS without deletion mark, status new)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"
+		And I select from the drop-down list named "Status" by "new" string
+		And I click "Open session" button	
+		And I click "Reread" button
+		Then the form attribute named "Status" became equal to "Open"
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
+	* Close session
+		And I click "Close session" button	
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute
+		And I click "Close session" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CloseShift"
+	And I close all client application windows
+	
+// Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
+// 	And I close all client application windows
+// 	* Create Consolidated retail sales with status New
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And I click the button named "FormCreate"	
+// 		And I select from the drop-down list named "Company" by "Main Company" string
+// 		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+// 		And I select "New" exact value from the drop-down list named "Status"
+// 		And I input current date in "Opening date" field
+// 		And I select "Fiscal printer" exact value from "Fiscal printer" drop-down list
+// 		And I move to "Other" tab
+// 		And I click Choice button of the field named "Branch"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Shop 01'     |
+// 		And I select current line in "List" table
+// 		And I click the button named "FormPost"
+// 		And I delete "$$NumberNumberCSR88$$" variable
+// 		And I save the value of "Number" field as "$$NumberCSR88$$"
+// 		And I click "Post and close" button
+// 		And I close all client application windows
+// 	* Try open cash session and check retrieving the previous consolidated sales
+// 		And In the command interface I select "Retail" "Point of sale"
+// 		And I click "Open session" button
+// 	* Check 
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And "List" table contains lines
+// 			| 'Number'          | 'Status' |
+// 			| '$$NumberCSR88$$' | 'Open'   |
+		
+
+
+Scenario: _0260187 add one more Acquiring terminal and check open and close session
+	And I close all client application windows
+	* Create one more Acquiring terminal
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        | 'Equipment API module' | 'Types of Equipment' |
+			| 'Acquiring terminal' | 'Acquiring Common API' | 'Acquiring'          |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I input "Acquiring terminal 2" text in the field named "Description"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+	* Add one more Acquiring terminal to the workstation 1
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"        
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And in the table "HardwareList" I click "Add" button
+		And I click choice button of "Hardware" attribute in "HardwareList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+		And I select current line in "List" table
+		And I set "Enable" checkbox in "HardwareList" table
+		And I finish line editing in "HardwareList" table
+		And I click "Save and close" button
+		And I wait "Workstation * (Workstation) *" window closing in 5 seconds
+	* Open session
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+	* Close session
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+	* Check log
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I go to line in "List" table and invert selection:
+			|"Description"|
+			| "Acquiring terminal 2" | 
+		And I click "Analyze log" button
+		And "TransactionList" table contains lines
+			| 'Period' | 'Hardware'             | 'Method'     | 'Result' |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+	And I close all client application windows
+
+
+Scenario: _0260189 print X report from CRS
+	And I close all client application windows
+	* Create CRS and open session
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "new" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormPost"
+		And I click "Open session" button
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
+	* Close session and check print X report
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows
+	
+
+				
+				
+
+				
+
+

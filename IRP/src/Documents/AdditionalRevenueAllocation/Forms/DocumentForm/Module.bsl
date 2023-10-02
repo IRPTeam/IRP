@@ -58,6 +58,21 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 EndProcedure
 
 &AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
 Procedure SetVisibilityAllocations() Export
 	If Object.AllocationMode = PredefinedValue("Enum.AllocationMode.ByDocuments") Then
 		CurrentData = ThisObject.Items.RevenueDocuments.CurrentData;
@@ -672,7 +687,7 @@ Function GetBatchKeyInfo(FilterTable)
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
 	|	FilterTable.Store,
-	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS Amount,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(CASE
 	|		WHEN T6020S_BatchKeysInfo.ItemKey.Weight <> 0

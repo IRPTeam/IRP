@@ -123,3 +123,7 @@ EndProcedure
 Procedure SetSpecificationAffectPricingMD5(TableOfAffectPricingMD5)
 	ThisObject.SpecificationAffectPricingMD5.Load(TableOfAffectPricingMD5);
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommissionTradeServer.FillCheckProcessing_ConsignorsInfo(Cancel, ThisObject);
+EndProcedure

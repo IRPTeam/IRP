@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Movements3
 @RetailGoodsReceiptMovements
@@ -63,17 +63,9 @@ Scenario: _050000 preparation (Retail goods receipt movements movements)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -107,6 +99,9 @@ Scenario: _050000 preparation (Retail goods receipt movements movements)
 		When create RetailGoodsReceipt
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailGoodsReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create RetailGoodsReceipt objects with Retail return receipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailGoodsReceipt.FindByNumber(1204).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _051001 check preparation
 	When check preparation	
@@ -216,4 +211,50 @@ Scenario: _051005 check Retail goods receipt movements by the Register  "T3010S 
 			| ''                                                     | '6aa911bd-d4ff-42e6-ab59-fc9936af589f'   | ''        | ''           | 'pcs'    | '0228da79-bf4c-4579-bb75-a9cca4cb3e56'   | '6aa911bd-d4ff-42e6-ab59-fc9936af589f'   | '*'           | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | '6aa911bd-d4ff-42e6-ab59-fc9936af589f'    |
 		
 				
-				
+Scenario: _051010 check Retail goods receipt movements by the Register  "R4010 Actual stocks" (return from customer)
+	And I close all client application windows
+	* Select Retail goods receipt
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '1 204'       |
+	* Check movements by the Register "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'L/Green'  | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'UNIQ'     | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | '38/Black' | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'PZU'      | '8908899879'        |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'UNIQ'     | '09987897977891'    |
+		
+Scenario: _051012 check Retail goods receipt movements by the Register  "R4011 Free stocks" (return from customer)
+	And I close all client application windows
+	* Select Retail goods receipt
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '1 204'       |
+	* Check movements by the Register "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'L/Green'  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'UNIQ'     |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | '38/Black' |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'PZU'      |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'UNIQ'     |
+		And I close all client application windows
+												

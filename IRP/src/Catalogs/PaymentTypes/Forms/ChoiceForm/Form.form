@@ -214,6 +214,10 @@
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
+    <handlers>
+      <event>BeforeAddRow</event>
+      <name>ListBeforeAddRow</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -394,7 +398,7 @@
     </extInfo>
   </items>
   <autoCommandBar>
-    <name></name>
+    <name>FormCommandBar</name>
     <id>-1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -407,6 +411,10 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -450,6 +458,23 @@ FROM
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>FilterBankTerm</name>
+    <title>
+      <key>en</key>
+      <value>Filter bank term</value>
+    </title>
+    <id>2</id>
+    <valueType>
+      <types>CatalogRef.BankTerms</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <commandInterface>
     <navigationPanel/>

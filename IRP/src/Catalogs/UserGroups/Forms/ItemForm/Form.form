@@ -519,15 +519,18 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>Users.Ref</segments>
+    </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	Users.Description_en AS Description,
-	Users.Description AS Login,
-	Users.Partner
+	Table.Description_en AS Description,
+	Table.Description AS Login,
+	Table.Partner
 FROM
-	Catalog.Users AS Users
+	Catalog.Users AS Table
 WHERE
-	Users.UserGroup = &amp;UserGroup</queryText>
+	Table.UserGroup = &amp;UserGroup</queryText>
       <mainTable>Catalog.Users</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

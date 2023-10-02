@@ -64,15 +64,7 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then
@@ -639,6 +631,11 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			| Description          |
 			| Bank account, TRY    |
 		And I select current line in "List" table
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| Description     |
+			| Front office    |
+		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
 		And I set "Commission is separate" checkbox in "PaymentList" table
@@ -664,17 +661,17 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 |
-			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | ''         | '150,00'           | '1,50'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
 		And in the table "List" I click the button named "ListSetDateInterval"
 		Then "Select period" window is opened
 		And I input "07.07.2022" text in the field named "DateBegin"
 		And I input "07.07.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '200,00'           | '2,00'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
 		And in the table "List" I click the button named "ListChoose"
 		And I finish line editing in "PaymentList" table
 	* Check creation
@@ -709,6 +706,11 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			| Description          |
 			| Bank account, TRY    |
 		And I select current line in "List" table
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| Description     |
+			| Front office    |
+		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
 		And I set "Commission is separate" checkbox in "PaymentList" table
@@ -734,9 +736,9 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number'   | 'Date'                  | 'Company'        | 'Amount'   | 'Commission'   | 'Branch'   | 'Amount Balance'   | 'Commission Balance'   |
-			| '104'      | '07.07.2022 16:33:55'   | 'Main Company'   | '200,00'   | '2,00'         | ''         | '100,00'           | '2,00'                 |
-			| '105'      | '08.07.2022 10:47:16'   | 'Main Company'   | '150,00'   | '1,50'         | ''         | '150,00'           | '1,50'                 |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
 		And I go to line in "List" table
 			| 'Amount'   | 'Amount Balance'   | 'Commission'   | 'Commission Balance'   | 'Company'        | 'Date'                  | 'Number'   |
 			| '200,00'   | '100,00'           | '2,00'         | '2,00'                 | 'Main Company'   | '07.07.2022 16:33:55'   | '104'      |
@@ -791,5 +793,49 @@ Scenario: _300515 check connection to BankReceipt report "Related documents"
 		| $$NumberBankReceipt0520011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
+
+
+Scenario: _300516 try post Bank receipt with empty amount
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
+			| Code    | Description      |
+			| TRY     | Turkish lira     |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description      |
+			| Main Company     |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description           |
+			| Bank account, TRY     |
+		And I select current line in "List" table
+	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	* Filling in partners in a tabular part
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| Description |
+			| Kalipso     |
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| Description     |
+			| Company Kalipso |
+		And I select current line in "List" table
+	* Try post and check message
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Fill total amount. Row: [1]'|
+		And I close all client application windows
+		
+				
+				

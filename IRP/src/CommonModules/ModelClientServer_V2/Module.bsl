@@ -5,21 +5,52 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
+	If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
-	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	TransferFormToStructure(Transfer, Parameters);
-#ENDIF
+		Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+		TransferFormToStructure(Transfer, Parameters);
+	
+		If Parameters.IsBackgroundJob = True Then
+			
+			If Parameters.ShowBackgroundJobSplash = True Then
+				
+				Splash = OpenForm("CommonForm.BackgroundJobSplash",
+					New Structure("BackgroundJobTitle", Parameters.BackgroundJobTitle),
+					Transfer.Form, 
+					New UUID(),,,,
+					FormWindowOpeningMode.LockOwnerWindow);
+				Transfer.Form.BackgroundJobSplash = Splash.UUID;
+			EndIf;
+					
+			// run background task
+			JobParameters = New Structure();
+			JobParameters.Insert("FormUUID"         , Transfer.Form.UUID);
+			JobParameters.Insert("StepNames"        , StepNames);
+			JobParameters.Insert("Parameters"       , Parameters);
+			JobParameters.Insert("ExecuteLazySteps" , ExecuteLazySteps);
+	
+			RunResult = ModelServer_V2.RunBackgroundJob(JobParameters);
+			Transfer.Form.BackgroundJobUUID            = RunResult.BackgroundJobUUID; 
+			Transfer.Form.BackgroundJobStorageAddress = RunResult.BackgroundJobStorageAddress;
+			Transfer.Form._AttachIdleHandler();
+			
+			Splash.JobUUID = RunResult.BackgroundJobUUID;
+		Else	
+			ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, True);
+			TransferStructureToForm(Transfer, Parameters);
+		EndIf;
 
-	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-
-#IF Client THEN
-	TransferStructureToForm(Transfer, Parameters);
+#ELSE
+	
+		// Is server
+		ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps, False);
+	
 #ENDIF
 	
-EndIf;
+	EndIf;
 
+	
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
 		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
@@ -27,8 +58,10 @@ EndIf;
 			Parameters.ModelEnvironment.ArrayOfLazySteps.Clear();
 			EntryPoint(LazyStepNames, Parameters, True);
 		Else	
-			ControllerClientServer_V2.OnChainComplete(Parameters);
-			DestroyEntryPoint(Parameters);
+			If Parameters.IsBackgroundJob = False Then
+				ControllerClientServer_V2.OnChainComplete(Parameters);
+				DestroyEntryPoint(Parameters);
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure
@@ -213,6 +246,7 @@ Function GetChain()
 	Chain.Insert("DefaultQuantityInList"     , GetChainLink("DefaultQuantityInListExecute"));
 	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
 	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
+	Chain.Insert("DefaultVatRateInList"      , GetChainLink("DefaultVatRateInListExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -245,6 +279,7 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByAgreement"             , GetChainLink("ChangeStoreByAgreementExecute"));
 	Chain.Insert("ChangeDeliveryDateByAgreement"      , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"   , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeRecordPurchasePricesByAgreement"   , GetChainLink("ChangeRecordPurchasePricesByAgreementExecute"));
 	Chain.Insert("ChangeBasisDocumentByAgreement"     , GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"             , GetChainLink("ChangeOrderByAgreementExecute"));
 	Chain.Insert("ChangeApArPostingDetailByAgreement" , GetChainLink("ChangeApArPostingDetailByAgreementExecute"));
@@ -300,9 +335,10 @@ Function GetChain()
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
-	Chain.Insert("RequireCallCreateTaxesFormControls", GetChainLink("RequireCallCreateTaxesFormControlsExecute"));
-	Chain.Insert("ChangeTaxRate", GetChainLink("ChangeTaxRateExecute"));
-	Chain.Insert("ChangeTaxAmountAsManualAmount", GetChainLink("ChangeTaxAmountAsManualAmountExecute"));
+	Chain.Insert("ChangeTaxVisible", GetChainLink("ChangeTaxVisibleExecute"));
+	
+	Chain.Insert("ChangeVatRate", GetChainLink("ChangeVatRateExecute"));
+		
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("SimpleCalculations" , GetChainLink("SimpleCalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
@@ -311,6 +347,8 @@ Function GetChain()
 	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
 	Chain.Insert("ChangeLegalNameByRetailCustomer" , GetChainLink("ChangeLegalNameByRetailCustomerExecute"));
 	Chain.Insert("ChangeUsePartnerTransactionsByRetailCustomer" , GetChainLink("ChangeUsePartnerTransactionsByRetailCustomerExecute"));
+	Chain.Insert("ChangePartnerByRetailCustomerAndTransactionType"   , GetChainLink("ChangePartnerByRetailCustomerAndTransactionTypeExecute"));
+	Chain.Insert("ChangeLegalNameByRetailCustomerAndTransactionType" , GetChainLink("ChangeLegalNameByRetailCustomerAndTransactionTypeExecute"));
 
 	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
 	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
@@ -321,7 +359,14 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("GetCommissionPercent"	 , GetChainLink("GetCommissionPercentExecute"));
+	Chain.Insert("ChangePercentByBankTermAndPaymentType"	       , GetChainLink("ChangePercentByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangePartnerByBankTermAndPaymentType"	       , GetChainLink("ChangePartnerByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangePartnerTermsByBankTermAndPaymentType"	   , GetChainLink("ChangePartnerTermsByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeLegalNameContractByBankTermAndPaymentType" , GetChainLink("ChangeLegalNameContractByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeBankTermByPaymentType" , GetChainLink("ChangeBankTermByPaymentTypeExecute"));
+	Chain.Insert("ChangePaymentTypeByBankTerm" , GetChainLink("ChangePaymentTypeByBankTermExecute"));
+		
 	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
@@ -343,8 +388,10 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
-	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials"  , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
-	Chain.Insert("ChangeAdditionalCostByBillOfMaterials"       , GetChainLink("ChangeAdditionalCostByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraCostAmountByRatioByBillOfMaterials"    , GetChainLink("ChangeExtraCostAmountByRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraCostTaxAmountByRatioByBillOfMaterials" , GetChainLink("ChangeExtraCostTaxAmountByRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraDirectCostAmountByBillOfMaterials"     , GetChainLink("ChangeExtraDirectCostAmountByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExtraDirectCostTaxAmountByBillOfMaterials"  , GetChainLink("ChangeExtraDirectCostTaxAmountByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeDurationOfProductionByBillOfMaterials" , GetChainLink("ChangeDurationOfProductionByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
@@ -367,7 +414,8 @@ Function GetChain()
 	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
 	Chain.Insert("ChangeFinancialMovementTypeByPaymentType" , GetChainLink("ChangeFinancialMovementTypeByPaymentTypeExecute"));
 	
-	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
+	Chain.Insert("ChangeInventoryOriginByItemKey" , GetChainLink("ChangeInventoryOriginByItemKeyExecute"));
+	Chain.Insert("ChangeConsignorByItemKey"       , GetChainLink("ChangeConsignorByItemKeyExecute"));
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
 	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
@@ -390,13 +438,76 @@ EndFunction
 
 Function DefaultInventoryOriginOptions() Export
 	Return GetChainLinkOptions("CurrentInventoryOrigin");
-EndFUnction
+EndFunction
 
 Function DefaultInventoryOriginExecute(Options) Export
 	InventoryOrigin = ?(ValueIsFilled(Options.CurrentInventoryOrigin), Options.CurrentInventoryOrigin, 
 		PredefinedValue("Enum.InventoryOriginTypes.OwnStocks"));
 	Return InventoryOrigin;
 EndFunction	
+
+#EndRegion
+
+#Region CHANGE_INVENTORY_ORIGIN_BY_ITEM_KEY
+
+Function ChangeInventoryOriginByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, Item, ItemKey");
+EndFunction
+
+Function ChangeInventoryOriginByItemKeyExecute(Options) Export
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	Return Result.InventoryOrigin;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CONSIGNOR_BY_ITEM_KEY
+
+Function ChangeConsignorByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, Item, ItemKey");
+EndFunction
+
+Function ChangeConsignorByItemKeyExecute(Options) Export
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	Return Result.Consignor;
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_VAT_RATE
+
+Function DefaultVatRateInListOptions() Export
+	Return GetChainLinkOptions("CurrentVatRate, Date, Company, ItemKey, Agreement, TransactionType, DocumentName");
+EndFunction
+
+Function DefaultVatRateInListExecute(Options) Export
+	
+	
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
+	
+	_visible = _arrayOfTaxes.Count() <> 0;
+	If Not _visible Then
+		Return Undefined;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentVatRate) Then
+		Return Options.CurrentVatRate;
+	EndIf;
+		
+	Parameters = New Structure();
+	Parameters.Insert("Date"    , Options.Date);
+	Parameters.Insert("Company" , Options.Company);
+	Parameters.Insert("ItemKey"         , Options.ItemKey);
+	Parameters.Insert("Agreement"       , Options.Agreement);
+	Parameters.Insert("TransactionType" , Options.TransactionType);
+	TaxRate = TaxesServer.GetVatRateByPriority(Parameters); 
+	Return TaxRate;
+EndFunction
 
 #EndRegion
 
@@ -758,6 +869,22 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_LEGAL_NAME_BY_RETAIL_CUSTOMER_AND_TRANSACTION_TYPE
+
+Function ChangeLegalNameByRetailCustomerAndTransactionTypeOptions() Export
+	Return GetChainLinkOptions("RetailCustomer, TransactionType");
+EndFunction
+
+Function ChangeLegalNameByRetailCustomerAndTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+		Return RetailCustomerInfo.LegalName;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_PARTNER_BY_LEGAL_NAME
 
 Function ChangePartnerByLegalNameOptions() Export
@@ -789,6 +916,13 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
+		Return Undefined;
+	ElsIf Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		Return Options.Partner;
+	EndIf;
+	
 	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 	
 	If PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
@@ -813,9 +947,25 @@ Function ChangePartnerByRetailCustomerOptions() Export
 	Return GetChainLinkOptions("RetailCustomer");
 EndFunction
 
-Function ChangePartnerByRetailCustomerExecute(Options) Export
+Function ChangePartnerByRetailCustomerExecute(Options) Export	
 	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
 	Return RetailCustomerInfo.Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_RETAIL_CUSTOMER_AND_TRANSACTION_TYPE
+
+Function ChangePartnerByRetailCustomerAndTransactionTypeOptions() Export
+	Return GetChainLinkOptions("RetailCustomer, TransactionType");
+EndFunction
+
+Function ChangePartnerByRetailCustomerAndTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer") Then	
+		RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+		Return RetailCustomerInfo.Partner;
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion
@@ -1038,6 +1188,22 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_RECORD_PURCHASE_PRICES_BY_AGREEMENT
+
+Function ChangeRecordPurchasePricesByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentRecordPurchasePrices");
+EndFunction
+
+Function ChangeRecordPurchasePricesByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentRecordPurchasePrices;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	Return AgreementInfo.RecordPurchasePrices;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_PRICE_TYPE_BY_AGREEMENT
 
 Function ChangePriceTypeByAgreementOptions() Export
@@ -1110,6 +1276,9 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	EndIf;
 	
 	Price = ModelServer_V2.ConvertPriceByCurrency(Period, Options.PriceType, Options.Currency, PriceInfo.Price);
+	If TypeOf(Price) = Type("Number") Then
+		Price = Int(Price *100)/100;
+	EndIf;
 	
 	Return Price;
 EndFunction
@@ -1543,34 +1712,66 @@ EndFunction
 
 #EndRegion
 
-#Region CHANGE_COST_MULTIPLIERRATIO_BY_BILL_OF_MATERIALS		
+#Region CHANGE_EXTRA_COST_AMOUNT_BY_RATIO_BY_BILL_OF_MATERIALS		
 
-Function ChangeCostMultiplierRatioByBillOfMaterialsOptions() Export
+Function ChangeExtraCostAmountByRatioByBillOfMaterialsOptions() Export
 	Return GetChainLinkOptions("BillOfMaterials");
 EndFunction
 
-Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
+Function ChangeExtraCostAmountByRatioByBillOfMaterialsExecute(Options) Export
 	If Not ValueIsFilled(Options.BillOfMaterials) Then
 		Return 0;
 	EndIf;
 	
-	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraCostAmountByRatio");
 EndFunction
 
 #EndRegion
 
-#Region CHANGE_ADDITIONAL_COST_BY_BILL_OF_MATERIALS		
+#Region CHANGE_EXTRA_COST_TAX_AMOUNT_BY_RATIO_BY_BILL_OF_MATERIALS		
 
-Function ChangeAdditionalCostByBillOfMaterialsOptions() Export
+Function ChangeExtraCostTaxAmountByRatioByBillOfMaterialsOptions() Export
 	Return GetChainLinkOptions("BillOfMaterials");
 EndFunction
 
-Function ChangeAdditionalCostByBillOfMaterialsExecute(Options) Export
+Function ChangeExtraCostTaxAmountByRatioByBillOfMaterialsExecute(Options) Export
 	If Not ValueIsFilled(Options.BillOfMaterials) Then
 		Return 0;
 	EndIf;
 	
-	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "AdditionalCost");
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraCostTaxAmountByRatio");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXTRA_DIRECT_COST_AMOUNT_BY_BILL_OF_MATERIALS		
+
+Function ChangeExtraDirectCostAmountByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeExtraDirectCostAmountByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraDirectCostAmount");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXTRA_DIRECT_COST_TAX_AMOUNT_BY_BILL_OF_MATERIALS		
+
+Function ChangeExtraDirectCostTaxAmountByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeExtraDirectCostTaxAmountByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "ExtraDirectCostTaxAmount");
 EndFunction
 
 #EndRegion
@@ -1941,7 +2142,7 @@ Function FillStoresInListExecute(Options) Export
 EndFunction
 
 Function ChangeStoreInHeaderByStoresInListOptions() Export
-	Return GetChainLinkOptions("ArrayOfStoresInList");
+	Return GetChainLinkOptions("ArrayOfStoresInList, DocumentRef");
 EndFunction
 
 // change Store in document header, dependencies of tabular part ItemList.Store
@@ -1962,8 +2163,14 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	If ArrayOfStoresUnique.Count() = 1 Then
 		Return ArrayOfStoresUnique[0];
 	Else
-		Return Undefined;
-	EndIf;
+		UserSettings = UserSettingsServer.GetUserSettingsForClientModule(Options.DocumentRef);
+		For Each Setting In UserSettings Do
+			If Setting.AttributeName = "ItemList.Store" Then
+				Return Setting.Value; // store from UserSettings
+			EndIf;
+		EndDo;	
+	EndIf;  
+    Return Undefined;
 EndFunction
 	
 #EndRegion
@@ -1982,179 +2189,74 @@ EndFunction
 
 #Region TAXES
 
-Function ChangeTaxAmountAsManualAmountOptions() Export
-	Return GetChainLinkOptions("TaxAmount, TaxList");
+Function ChangeTaxVisibleOptions() Export
+	Return GetChainLinkOptions("Date, Company, DocumentName, TransactionType");
 EndFunction
 
-Function ChangeTaxAmountAsManualAmountExecute(Options) Export
-	For Each Row In Options.TaxList Do
-		Row.ManualAmount = Options.TaxAmount;
-	EndDo;
-	Return Options.TaxAmount;
-EndFunction
-
-// TaxesCache - XML string from form attribute
-Function RequireCallCreateTaxesFormControlsOptions() Export
-	Return GetChainLinkOptions("Ref, Date, Company, TransactionType, ArrayOfTaxInfo, FormTaxColumnsExists");
-EndFunction
-
-// return true if need create form controls for taxes
-Function RequireCallCreateTaxesFormControlsExecute(Options) Export
-	If Not Options.FormTaxColumnsExists = True Then
-		Return True; // controls is not created yet
-	EndIf;
-	If Not Options.ArrayOfTaxInfo.Count() Then
-		Return True; // cache is empty
-	EndIf;
-	// compares required taxes and taxes in cache, if they match return false
-	TaxesInCache = New Array();
-	For Each TaxInfo In Options.ArrayOfTaxInfo Do
-		TaxesInCache.Add(TaxInfo.Tax);
-	EndDo;
+Function ChangeTaxVisibleExecute(Options) Export
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
 	
-	DocumentName = Options.Ref.Metadata().Name;
-	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
+	_visible = _arrayOfTaxes.Count() <> 0;
+	_choiceList = New Array();
 	
-	For Each Tax In RequiredTaxes Do
-		If TaxesInCache.Find(Tax) = Undefined Then
-			Return True; // not all required taxes in cache
-		EndIf;
-	EndDo;
-	For Each Tax In TaxesInCache Do
-		If RequiredTaxes.Find(Tax) = Undefined Then
-			Return True; // extra taxes in cache
-		EndIf;
-	EndDo;
-	Return False; // full match cache and required taxes
-EndFunction
-
-Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Consignor, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
-EndFunction
-
-Function ChangeTaxRateExecute(Options) Export
-	Result = New Structure();
-	For Each TaxRate In Options.TaxRates Do
-		Result.Insert(TaxRate.Key, TaxRate.Value);
-	EndDo;
-	
-	// when BasedOn = True and TaxList is filled, do not recalculate
-	// tax rates get from TaxList 
-	If Options.IsBasedOn = True And Options.TaxList.Count() Then
-		For Each KeyValue In Result Do
-			TaxRef = Undefined;
-			For Each RowInfo In Options.ArrayOfTaxInfo Do
-				If KeyValue.Key = RowInfo.Name Then
-					TaxRef = RowInfo.Tax;
-					Break;
-				EndIf;
-			EndDo;
-			If TaxRef = Undefined Then
-				Result[KeyValue.Key] = Undefined;
-				Continue;
-			EndIf;
-			TaxRateValue = Undefined;
-			For Each RowTaxList In Options.TaxList Do
-				If RowTaxList.Tax = TaxRef Then
-						TaxRateValue = RowTaxList.TaxRate;
-					Break;
-				EndIf;
-			EndDo;
-			Result[KeyValue.Key] = TaxRateValue;
-		EndDo;
-		Return Result;
+	If _visible Then
+		_choiceList = TaxesServer.GetTaxRatesByTax(_arrayOfTaxes[0].Tax); 
 	EndIf;
+	
+	Return New Structure("TaxVisible, TaxChoiceList", _visible, _choiceList);
+EndFunction
+
+Function ChangeVatRateOptions() Export
+	Return GetChainLinkOptions("Date, 
+		|Company, 
+		|Consignor, 
+		|TransactionType, 
+		|Agreement, 
+		|ItemKey, 
+		|InventoryOrigin,
+		|DocumentName");
+EndFunction
+
+Function ChangeVatRateExecute(Options) Export
+	
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
 		
-	// taxes when have in company by document date
-	DocumentName = Options.Ref.Metadata().Name;
-	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
+	If _arrayOfTaxes.Count() = 0 Then
+		Return Undefined;
+	EndIf;
 	
-	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
-		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
-			Continue;
-		EndIf;
-		
-		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
-		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
-			Result.Insert(ItemOfTaxInfo.Name, Undefined);
-			Continue;
-		EndIf;
-				
-		// Tax rate from consignor batch
-		If ValueIsFilled(Options.InventoryOrigin) 
-			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
-			And Options.ConsignorBatches.Count() Then
+	_vat = TaxesServer.GetVatRef();
+	If ValueIsFilled(Options.InventoryOrigin) 
+		And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
+		And ValueIsFilled(Options.Consignor) Then
 			
-			Parameters = New Structure();
-			Parameters = New Structure();
-			Parameters.Insert("Date"      , Options.Date);
-			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
-			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			TaxRate = TaxesServer.GetTaxRateByConsignorBatch(Parameters);			
-			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-			Continue;
-		EndIf;
-		
-		If ValueIsFilled(Options.InventoryOrigin) 
-			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
-			And ValueIsFilled(Options.Consignor) Then
-			
-			Parameters = New Structure();
-			Parameters = New Structure();
-			Parameters.Insert("Date"    , Options.Date);
-			Parameters.Insert("Company" , Options.Consignor);
-			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-			TaxRate = TaxesServer.GetTaxRateByCompany(Parameters);			
-			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-			Continue;
-		EndIf;
-		
 		Parameters = New Structure();
 		Parameters.Insert("Date"    , Options.Date);
-		Parameters.Insert("Company" , Options.Company);
-		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-		Parameters.Insert("ItemKey"         , Options.ItemKey);
-		Parameters.Insert("Agreement"       , Options.Agreement);
-		Parameters.Insert("TransactionType" , Options.TransactionType);
-			
-		TaxRate = TaxesServer.GetTaxRateByPriority(Parameters);
-		Result.Insert(ItemOfTaxInfo.Name, TaxRate);
-	EndDo;
+		Parameters.Insert("Company" , Options.Consignor);
+		Parameters.Insert("Tax"     , _vat);
+		TaxRate = TaxesServer.GetTaxRateByCompany(Parameters);			
+		Return TaxRate;
+	EndIf;
 		
-	Return Result;
-EndFunction
-
-#EndRegion
-
-#Region CONSIGNOR_BATCHES
-
-Function ConsignorBatchesFillBatchesOptions() Export
-	Return GetChainLinkOptions("Consignor, DontFill, DocObject, Table_ItemList, Table_SerialLotNumbers, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode");
-EndFunction
-
-Function ConsignorBatchesFillBatchesExecute(Options) Export
-	If Options.DontFill = True Then
-		Return New Structure("ConsignorBatches, DontFill, Consignor", 
-		New Array(), True, Options.Consignor);
-	EndIf;
-	
-	SilentMode = False;
-	If Options.SilentMode = True Then
-		SilentMode = True;
-	EndIf;
-	
-	SourceOfOrigins = SourceOfOriginServer.CalculateSourceOfOriginsTable(Options.Table_ItemList, 
-		Options.Table_SerialLotNumbers, 
-		Options.Table_SourceOfOrigins);
-	
-	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
-		Options.Table_ItemList, 
-		Options.Table_SerialLotNumbers, 
-		SourceOfOrigins, 
-		Options.Table_ConsignorBatches, 
-		SilentMode);
-	Return New Structure("ConsignorBatches, DontFill, Consignor", 
-		ConsignorBatches, False, Undefined);	
+	Parameters = New Structure();
+	Parameters.Insert("Date"    , Options.Date);
+	Parameters.Insert("Company" , Options.Company);
+	Parameters.Insert("Tax"     , _vat);
+	Parameters.Insert("ItemKey"         , Options.ItemKey);
+	Parameters.Insert("Agreement"       , Options.Agreement);
+	Parameters.Insert("TransactionType" , Options.TransactionType);		
+	TaxRate = TaxesServer.GetVatRateByPriority(Parameters);
+	Return TaxRate;
 EndFunction
 
 #EndRegion
@@ -2334,9 +2436,7 @@ Function CalculationsOptions() Export
 	PriceOptions = New Structure("PriceType, Price, Quantity, QuantityInBaseUnit");
 	Options.Insert("PriceOptions", PriceOptions);
 	
-	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
-	TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount, IsAlreadyCalculated");
-	TaxOptions.Insert("TaxList", New Array());
+	TaxOptions = New Structure("PriceIncludeTax, VatRate, UseManualAmount");
 	Options.Insert("TaxOptions", TaxOptions);
 	
 	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit, QuantityIsFixed");
@@ -2378,10 +2478,6 @@ Function CalculationsOptions() Export
 	Return Options;
 EndFunction
 
-Function CalculationsOptions_TaxOptions_TaxList() Export
-	Return New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-EndFunction
-
 Function CalculationsExecute(Options) Export
 	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
 
@@ -2392,8 +2488,6 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
-	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
-	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
 	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
@@ -2433,25 +2527,6 @@ Function CalculationsExecute(Options) Export
 					Result.OffersAmount = TotalOffers;
 					Result.OffersBonus = TotalBonus;
 				EndIf; // Offers
-				
-				// Taxes
-				If Options.CalculateTaxAmount.Enable Then
-					For Each RowTaxList In Options.TaxOptions.TaxList Do	
-						For Each BasisRow In DataFromBasis[0].TaxList Do
-							If BasisRow.Amount = BasisRow.ManualAmount Then
-								Continue;
-							EndIf;
-							
-							If  RowTaxList.Tax = BasisRow.Tax 
-								And RowTaxList.Analytics = BasisRow.Analytics Then
-								NewTaxRow = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
-								FillPropertyValues(NewTaxRow, BasisRow);
-								NewTaxRow.Key = RowTaxList.Key;
-								UserManualAmountsFromBasisDocument.Add(NewTaxRow);
-							EndIf;
-						EndDo;
-					EndDo;
-				EndIf; // Taxes
 				
 			EndIf;
 		EndDo;
@@ -2500,30 +2575,36 @@ Function CalculationsExecute(Options) Export
 		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	
-	If Not IsCalculatedRow Then
-		For Each Row In Options.TaxOptions.TaxList Do
-			Result.TaxList.Add(Row);
-		EndDo;
-	EndIf;
-	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
 		If Options.TaxOptions.PriceIncludeTax Then
 			
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
+				
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-				Result.TotalAmount / Options.PriceOptions.Quantity);  
+					(Result.TotalAmount / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);  
 			EndIf;
 			
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
-				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+				
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 			EndIf;
 
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2535,12 +2616,18 @@ Function CalculationsExecute(Options) Export
 			EndIf;
 		Else
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
+				
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-				(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
+				((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity)  + Result.OffersAmount / Options.PriceOptions.Quantity);
 			EndIf;
 			
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2551,38 +2638,68 @@ Function CalculationsExecute(Options) Export
 				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
-				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False, False, UserManualAmountsFromBasisDocument);
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+				
+				Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+					Options.TaxOptions.PriceIncludeTax, 
+					Result.TotalAmount, 
+					Result.NetAmount, 
+					False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 			EndIf;
 
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
-				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 			EndIf;
 		EndIf;
 	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False, False, UserManualAmountsFromBasisDocument);
+			
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				True, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+			
 		EndIf;
 		
 		If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 			Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-			(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
+			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);
 		EndIf;
 		
-		If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
-			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
+		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+			
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+			
 		EndIf;
 
 		If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
-			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
 
 		If Options.CalculateTaxAmountByNetAmount.Enable And IsCalculatedRow Then
-			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, False, UserManualAmountsFromBasisDocument);
+
+			Result.TaxAmount =  CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+			
 		EndIf;
 
 		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
-			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, True, UserManualAmountsFromBasisDocument);
+			
+			Result.TaxAmount = CalculateTaxAmount(Options.TaxOptions.VatRate, 
+				Options.TaxOptions.PriceIncludeTax, 
+				Result.TotalAmount, 
+				Result.NetAmount, 
+				False, Options.TaxOptions.UseManualAmount, Result.TaxAmount);
+				
 		EndIf;
 
 		If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -2594,9 +2711,10 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 
 		If Options.CalculateTotalAmountByNetAmount.Enable And IsCalculatedRow Then
-			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Options.TaxOptions, Options.AmountOptions, Result);
 		EndIf;
 	EndIf;
+	
 	Return Result;
 EndFunction
 
@@ -2608,7 +2726,10 @@ Function CalculateTotalAmount_PriceIncludeTax(PriceOptions, Result)
 	EndIf;
 EndFunction
 
-Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, Result)
+Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, TaxOptions, AmountOptions, Result)
+	If Not ValueIsFilled(TaxOptions.VatRate) Then
+		Return Result.NetAmount;
+	EndIf;
 	Return Result.NetAmount + Result.TaxAmount;
 EndFunction
 
@@ -2629,7 +2750,7 @@ Function CalculateNetAmount_PriceNotIncludeTax(PriceOptions, Result)
 EndFunction
 
 Function CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(PriceOptions, Result)
-	Return Result.TotalAmount - Result.TaxAmount - Result.OffersAmount;
+	Return Result.TotalAmount - Result.TaxAmount;
 EndFunction
 
 Function _CalculateAmount(PriceOptions, Result)
@@ -2639,129 +2760,30 @@ Function _CalculateAmount(PriceOptions, Result)
 	Return Result.TotalAmount;
 EndFunction
 
-Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority, PriceIncludeTax, UserManualAmountsFromBasisDocument)
+Function CalculateTaxAmount(RateRef, PriceIncludeTax, TotalAmount, NetAmount, Reverse, UseManualAmount, ManualTaxAmount)
+	If UseManualAmount = True Then
+		Return ManualTaxAmount;
+	EndIf;
 	
-	// TaxOptions.IsAlreadyCalculated - deprecated (tax calculated always)
-	If TaxOptions.IsAlreadyCalculated = True Then
-		TaxAmount = 0;
-		For Each Row In TaxOptions.TaxList Do
-			ResultRowIsExists = False;
-			For Each ResultRow In Result.TaxList Do
-				If ResultRow.Key = Row.Key And ResultRow.Tax = Row.Tax Then
-					ResultRowIsExists = True;
-					Break;
-				EndIf;
-			EndDo;
-			If Not ResultRowIsExists Then
-				Result.TaxList.Add(Row);
-			EndIf;
-			If Row.IncludeToTotalAmount Then
-				TaxAmount = Round(TaxAmount + Row.ManualAmount, 2);
-			EndIf;
-		EndDo;
-		Result.TaxAmount = TaxAmount;
-		Return;
-	EndIf; // IsAlreadyCalculated
-	
-	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
-	If TaxOptions.ArrayOfTaxInfo = Undefined Then
-		Return;
+	If Not ValueIsFilled(RateRef) Then
+		Rate = 0;
+	Else	
+		Rate = CommonFunctionsServer.GetRefAttribute(RateRef, "Rate");
 	EndIf;
 	
 	TaxAmount = 0;
-	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-		If Not Result.TaxRates.Property(ItemOfTaxInfo.Name) Then
-			Continue;
-		EndIf;
-		
-		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") 
-			And Not ValueIsFilled(Result.TaxRates[ItemOfTaxInfo.Name]) Then
-			// tax rate in row is not filled
-			Continue;
-		EndIf;
-		
-			
-		TaxParameters = New Structure();
-		TaxParameters.Insert("Tax"             , ItemOfTaxInfo.Tax);
-		TaxParameters.Insert("TaxRateOrAmount" , Result.TaxRates[ItemOfTaxInfo.Name]);
-		If TaxOptions.PriceIncludeTax = Undefined Then
-			TaxParameters.Insert("PriceIncludeTax" , PriceIncludeTax);
+	TaxRate = Rate / 100;
+	If Reverse Then
+		TaxAmount = TotalAmount * TaxRate / (TaxRate + 1);
+	Else
+		If PriceIncludeTax = True Then
+			TaxAmount = TotalAmount * TaxRate / (TaxRate + 1);
 		Else
-			TaxParameters.Insert("PriceIncludeTax" , TaxOptions.PriceIncludeTax);
+			TaxAmount = NetAmount * TaxRate;
 		EndIf;
-		TaxParameters.Insert("Key"             , Options.Key);
-		TaxParameters.Insert("TotalAmount"     , Result.TotalAmount);
-		TaxParameters.Insert("NetAmount"       , Result.NetAmount);
-		TaxParameters.Insert("Ref"             , Options.Ref);
-		TaxParameters.Insert("Reverse"         , IsReverse);
-		
-		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
-		
-		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
-			NewTax = New Structure();
-			NewTax.Insert("Key", Options.Key);
-			NewTax.Insert("Tax", ?(ValueIsFilled(RowOfResult.Tax), 
-				RowOfResult.Tax, PredefinedValue("Catalog.Taxes.EmptyRef")));
-			NewTax.Insert("Analytics", ?(ValueIsFilled(RowOfResult.Analytics), 
-				RowOfResult.Analytics, PredefinedValue("Catalog.TaxAnalytics.EmptyRef")));
-			NewTax.Insert("TaxRate", ?(ValueIsFilled(RowOfResult.TaxRate), 
-				RowOfResult.TaxRate, PredefinedValue("Catalog.TaxRates.EmptyRef")));
-			NewTax.Insert("Amount", ?(ValueIsFilled(RowOfResult.Amount),
-				RowOfResult.Amount, 0));
-			NewTax.Insert("IncludeToTotalAmount" , ?(ValueIsFilled(RowOfResult.IncludeToTotalAmount),
-				RowOfResult.IncludeToTotalAmount, False));
-			
-			RowFromBasisDocument = False;
-			For Each RowBasis In UserManualAmountsFromBasisDocument Do
-				If RowBasis.Key = NewTax.Key
-					And RowBasis.Tax = NewTax.Tax
-					And RowBasis.Analytics = NewTax.Analytics
-					And RowBasis.TaxRate = NewTax.TaxRate Then
-					
-					NewTax.Amount = RowBasis.Amount;
-					NewTax.Insert("ManualAmount", Round(RowBasis.ManualAmount, 2));
-					RowFromBasisDocument = True;
-					Break;	
-				EndIf;
-			EndDo;
-			
-			If Not RowFromBasisDocument Then
-				ManualAmount = 0;
-				IsRowExists = False;
-				For Each RowTaxList In TaxOptions.TaxList Do
-					If RowTaxList.Key = NewTax.Key
-						And RowTaxList.Tax = NewTax.Tax 
-						And RowTaxList.Analytics = NewTax.Analytics
-						And RowTaxList.TaxRate = NewTax.TaxRate Then
-					
-						RowTaxList_ManualAmount = Round(RowTaxList.ManualAmount, 2);
-						RowTaxList_Amount       = Round(RowTaxList.Amount, 2);
-						NewTax_Amount           = Round(NewTax.Amount, 2);
-					
-						IsRowExists = True;
-						If IsManualPriority Then
-							ManualAmount = ?(RowTaxList_ManualAmount = RowTaxList_Amount, NewTax_Amount, RowTaxList_ManualAmount);
-						Else
-							ManualAmount = ?(RowTaxList_Amount = NewTax_Amount And TaxOptions.UseManualAmount = True
-								, RowTaxList_ManualAmount, NewTax_Amount);
-						EndIf;
-					EndIf;
-				EndDo;
-				If Not IsRowExists Then
-					ManualAmount = Round(NewTax.Amount, 2);
-				EndIf;
-				NewTax.Insert("ManualAmount", ManualAmount);
-			EndIf;
-			
-			Result.TaxList.Add(NewTax);
-			If RowOfResult.IncludeToTotalAmount Then
-				TaxAmount = Round(TaxAmount + NewTax.ManualAmount, 2);
-			EndIf;
-		EndDo;
-	EndDo;
-
-	Result.TaxAmount = TaxAmount;
-EndProcedure
+	EndIf;
+	Return TaxAmount;
+EndFunction
 
 Function SimpleCalculationsOptions() Export
 	Options = GetChainLinkOptions("Ref");
@@ -3767,14 +3789,106 @@ EndFunction
 
 #EndRegion
 
-#Region GET_COMMISSION_PERCENT
+#Region CHANGE_PERCENT_BY_BANK_TERM_AND_PAYMENT_TYPE
 
-Function GetCommissionPercentOptions() Export
+Function ChangePercentByBankTermAndPaymentTypeOptions() Export
 	Return GetChainLinkOptions("PaymentType, BankTerm");
 EndFunction
 
-Function GetCommissionPercentExecute(Options) Export
-	Return ModelServer_V2.GetCommissionPercentExecute(Options);
+Function ChangePercentByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangePartnerByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangePartnerByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LEGAL_NAME_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangeLegalNameByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangeLegalNameByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).LegalName;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_TERMS_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangePartnerTermsByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangePartnerTermsByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).PartnerTerms;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LEGAL_NAME_CONTRACT_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangeLegalNameContractByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function ChangeLegalNameContractByBankTermAndPaymentTypeExecute(Options) Export
+	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).LegalNameContract;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BANK_TERM_BY_PAYMENT_TYPE
+
+Function ChangeBankTermByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("CurrentBankTerm, PaymentType, Branch");
+EndFunction
+
+Function ChangeBankTermByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Options.CurrentBankTerm;
+	EndIf;
+	ArrayOfRefs = ModelServer_V2.GetBankTermsByPaymentType(Options.PaymentType, Options.Branch);
+	If ArrayOfRefs.Count() = 1 Then
+		Return ArrayOfRefs[0];
+	EndIf;
+	If ArrayOfRefs.Find(Options.CurrentBankTerm) <> Undefined Then
+		Return Options.CurrentBankTerm;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PAYMENT_TYPE_BY_BANK_TERM
+	
+Function ChangePaymentTypeByBankTermOptions() Export
+	Return GetChainLinkOptions("CurrentPaymentType, BankTerm");
+EndFunction
+
+Function ChangePaymentTypeByBankTermExecute(Options) Export
+	If Not ValueIsFilled(Options.BankTerm) Then
+		Return Options.CurrentPaymentType;
+	EndIf;
+	ArrayOfRefs = ModelServer_V2.GetPaymentTypesByBankTerm(Options.BankTerm);
+	If ArrayOfRefs.Count() = 1 Then
+		Return ArrayOfRefs[0];
+	EndIf;
+	If ArrayOfRefs.Find(Options.CurrentPaymentType) <> Undefined Then
+		Return Options.CurrentPaymentType;
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion
@@ -3818,8 +3932,15 @@ Function ChangeisControlCodeStringByItemOptions() Export
 	Return GetChainLinkOptions("Item");
 EndFunction
 
-Function ChangeisControlCodeStringByItemExecute(Options) Export
-	If CommonFunctionsServer.GetRefAttribute(SessionParametersServer.GetSessionParameter("Workstation"), "IgnoreCodeStringControl") Then
+Function ChangeisControlCodeStringByItemExecute(Options) Export  
+	Try
+		Workstation = SessionParametersServer.GetSessionParameter("Workstation");
+	Except
+		Workstation = Undefined;
+	EndTry;
+	
+	
+	If ValueIsFilled(Workstation) And CommonFunctionsServer.GetRefAttribute(Workstation, "IgnoreCodeStringControl") Then
 		Return False;
 	Else
 		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
@@ -3884,7 +4005,7 @@ Procedure InitEntryPoint(StepNames, Parameters)
 	EndIf;
 EndProcedure
 
-Procedure DestroyEntryPoint(Parameters)
+Procedure DestroyEntryPoint(Parameters) Export
 	If Parameters.Property("ModelEnvironment") Then
 		Parameters.Delete("ModelEnvironment");
 	EndIf;

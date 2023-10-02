@@ -65,21 +65,9 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -155,8 +143,7 @@ Scenario: _0260102 сheck that the buttons in POS are inactive if session closed
 		| 'And I click "Create cash in" button'   |
 	When I Check the steps for Exception
 		| 'And I click "Create cash out" button'   |
-	When I Check the steps for Exception
-		| 'And I click "Print X Report" button'   |
+	And I click "Print X Report" button
 
 Scenario: _0260105 open session
 	And I close all client application windows
@@ -305,6 +292,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button	
 		And I click the button named "Enter"
 	* Create second RSR (cash)
 		And I go to line in "ItemsPickup" table
@@ -320,6 +308,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"				
 	* Check filling field Consolidated retail sales and workstation in the RSR
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
@@ -928,6 +917,7 @@ Scenario: _0260139 create RRR from POS (first select basis document)
 		And I finish line editing in "ItemList" table
 	* Post return
 		And I click "Payment Return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 	* Check return document
 		And I close current window
@@ -1046,7 +1036,7 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -1115,7 +1105,7 @@ Scenario: _0260141 return from POS (without basis document)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -1268,17 +1258,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "Workstation" became equal to "Workstation 01"
 			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 			And the editing text of form attribute named "BalanceBeginning" became equal to "1 440,00"
-			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
-			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 413,00"
-			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
-			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
 			Then the form attribute named "Branch" became equal to "Shop 02"
-			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling real cash and close session
 			And I input "4 000,00" text in "Real cash" field
 			And I move to the next attribute
@@ -1321,7 +1306,30 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '4'   | '4 770,00'   | 'No'          | 'Card 02'        | ''                   | '4 770,00'       |
 			| '5'   | '2 790,00'   | 'Yes'         | 'Card 01'        | ''                   | ''               |
 			| '6'   | '550,00'     | 'Yes'         | 'Card 02'        | ''                   | '550,00'         |
-		And I close all client application windows		
+		And I delete "$$NumberConsolidatedRetailSales0260135$$" variable
+		And I save the value of "Number" field as "$$NumberConsolidatedRetailSales0260135$$"
+		And I close all client application windows	
+
+Scenario: _0260137 check connection to Consolidated retail sales report "Related documents"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	And I go to line in "List" table
+		| 'Number'                                   |
+		| '$$NumberConsolidatedRetailSales0260135$$' |
+	And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+	And Delay 1
+	And "DocumentsTree" table contains lines
+		| 'Presentation'           |
+		| 'Cash receipt*'          |
+		| 'Retail sales receipt*'  |
+		| 'Retail return receipt*' |
+		| 'Money transfer*'        |
+		| 'Bank receipt*'          |
+		| 'Cash payment*'          |
+		| 'Bank payment*'          |
+	And I close all client application windows
+	
+
 
 Scenario: _0260145 check block RSR form if Consolidated retail sales is closed
 	And I close all client application windows	
@@ -1659,6 +1667,103 @@ Scenario: _0260169 check RRR deletion mark if Consolidated retail sales is unpos
 		And the current row in "List" table is marked for deletion
 		Then user message window does not contain messages
 		And I close all client application windows	
+				
+Scenario: _0260170 check filling payment agent in RSR
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling bank term (payment agent)
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Payment agent' |
+		And I select current line in "List" table
+		And I click "OK" button
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'     | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Bank credit'  | ''                        | ''                                  | ''                 | 'Payment agent' | ''        | '10,00'   | ''         | 'Bank 1'                | 'Bank 1'                   | 'Bank 1'                      |
+	* Check filter payment type
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Bank credit' |
+		And I close current window
+	* Check filter by bank term
+		And I delete all lines of "Payments" table
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Bank term 02' |
+	And I close all client application windows
+		
+				
+				
+Scenario: _0260171 check filling payment agent in RRR
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling bank term (payment agent)
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Payment agent' |
+		And I select current line in "List" table
+		And I click "OK" button
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'     | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Bank credit'  | ''                        | ''                                  | ''                 | 'Payment agent' | ''        | '10,00'   | ''         | 'Bank 1'                | 'Bank 1'                   | 'Bank 1'                      |
+	* Check filter payment type
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Bank credit' |
+		And I close current window
+	* Check filter by bank term
+		And I delete all lines of "Payments" table
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And "List" table became equal
+			| 'Description' |
+			| 'Bank term 02' |
+	And I close all client application windows					
+		
+	
+
+		
+				
+		
+				
+						
+				
 				
 
 				

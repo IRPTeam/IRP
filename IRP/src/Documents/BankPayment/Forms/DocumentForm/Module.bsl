@@ -37,11 +37,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -193,6 +188,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListChoiceByAccrual.Enabled = Not Form.ReadOnly;
 	
 	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
+EndProcedure
+
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
 EndProcedure
 
 #EndRegion
@@ -442,11 +452,11 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocBankPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocBankPaymentClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -618,7 +628,7 @@ Procedure ReturnToCard(Command)
 	
 	Hardware = CommonFunctionsServer.GetRefAttribute(Object.Account, "Acquiring");
 	
-	Settings = EquipmentAcquiringClient.OpenPaymentFormSettings();
+	Settings = EquipmentAcquiringAPIClient.OpenPaymentFormSettings();
 	Settings.Amount = Object.DocumentAmount;
 	Settings.Hardware = Hardware;
 	Settings.Interactive = True;
@@ -631,7 +641,7 @@ EndProcedure
 // Pay by card end.
 // 
 // Parameters:
-//  Result - See EquipmentAcquiringClient.PayByPaymentCardSettings
+//  Result - See EquipmentAcquiringAPIClient.PayByPaymentCardSettings
 //  AddInfo - Undefined - Add info
 &AtClient
 Procedure PayByCardEnd(Result, AddInfo) Export

@@ -167,13 +167,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.EditTax</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonAttribute.Description_ru</name>
 		<right>
 			<name>View</name>
@@ -1153,6 +1146,37 @@
 		<right>
 			<name>Edit</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.DisableLinkedRowsIntegrity</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseSourceOfOrigin</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.AdditionalTableControlExceptions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T1020S_Cache</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE User = &amp;CurrentUser</condition>
+			</restrictionByCondition>
 		</right>
 	</object>
 </Rights>

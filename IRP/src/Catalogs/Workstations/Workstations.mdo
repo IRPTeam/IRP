@@ -174,6 +174,51 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e5b230eb-6f9e-40d6-aa42-461463a06ae6">
+    <name>PrintBarcodeWithDocumentUUID</name>
+    <synonym>
+      <key>en</key>
+      <value>Print barcode with document UUID</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="10569d4b-48cc-4edd-9cac-7b67f7a65376">
+    <name>PostponeWithReserve</name>
+    <synonym>
+      <key>en</key>
+      <value>Postpone with reserve</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1a5e2075-e9dc-42f0-ba3b-5ca298431aef">
+    <name>PostponeWithoutReserve</name>
+    <synonym>
+      <key>en</key>
+      <value>Postpone without reserve</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
     <producedTypes>
       <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>

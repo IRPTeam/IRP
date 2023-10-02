@@ -1,7 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("Document") Then
-		ThisObject.Document = Parameters.Document;
+		ThisObject.Document = Parameters.Document;		
 		DocumentRegisterRecords = Parameters.Document.Metadata().RegisterRecords;
 		For Each RegisterRecord In DocumentRegisterRecords Do
 			Items.FilterRegister.ChoiceList.Add(RegisterRecord.FullName(), RegisterRecord.Synonym);
@@ -15,6 +15,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
+EndProcedure
+
+&AtClient
+Procedure DocumentOnChange(Item)
+	GenerateReportAtServer(ThisObject.ResultTable);
 EndProcedure
 
 &AtClient
@@ -92,7 +97,7 @@ EndFunction
 
 &AtServer
 Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleArea)
-
+	Title = String(DocumentRef);
 	MainTitleArea.Parameters.Document = String(DocumentRef);
 	Result.Put(MainTitleArea);
 
@@ -234,6 +239,8 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		Template = Reports.DocumentRegistrationsReport.GetTemplate("Template");
 		TitleArea = Template.GetArea("Title");
 		TitleArea.Parameters.RegisterName = ObjectProperty.Synonym;
+		TitleArea.Areas.Title.DetailsUse = SpreadsheetDocumentDetailUse.Cell;
+		TitleArea.Area(1, 1).Details = RegisterName;
 		Result.Put(TitleArea);
 		Result.StartRowGroup();
 
@@ -267,6 +274,14 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	Result.ReadOnly = True;
 	Result.FitToPage = True;
 
+EndProcedure
+
+&AtClient
+Procedure ResultTableDetailProcessing(Item, Details, StandardProcessing, AdditionalParameters)
+	If ValueIsFilled(Details) Then
+		StandardProcessing = False;
+		OpenForm(Details + ".ListForm");
+	EndIf;
 EndProcedure
 
 &AtServer

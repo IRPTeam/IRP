@@ -287,9 +287,7 @@
       <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
+      <userVisible/>
       <dataPath xsi:type="form:DataPath">
         <segments>List.Ref</segments>
       </dataPath>
@@ -559,17 +557,20 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.Ref</segments>
+    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	CurrencyMovementType.Currency,
-	CurrencyMovementType.Source,
-	CurrencyMovementType.Type,
-	CurrencyMovementType.DeferredCalculation,
-	CurrencyMovementType.Description_en AS Description,
-	CurrencyMovementType.Ref
+	Table.Currency,
+	Table.Source,
+	Table.Type,
+	Table.DeferredCalculation,
+	Table.Description_en AS Description,
+	Table.Ref
 FROM
-	ChartOfCharacteristicTypes.CurrencyMovementType AS CurrencyMovementType</queryText>
+	ChartOfCharacteristicTypes.CurrencyMovementType AS Table</queryText>
       <mainTable>ChartOfCharacteristicTypes.CurrencyMovementType</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

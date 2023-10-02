@@ -32,62 +32,8 @@ Function RegExpFindMatch(String, Facet) Export
 EndFunction
 
 #EndRegion
-	
-// Is primitive value.
-// 
-// Parameters:
-//  Value - Arbitrary - Value
-// 
-// Returns:
-//  Boolean - Is primitive value
-Function IsPrimitiveValue(Value) Export
-	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
-EndFunction
 
-// Is document ref.
-// 
-// Parameters:
-//  Value - Arbitrary -  Value
-// 
-// Returns:
-//  Boolean - Is document ref
-Function IsDocumentRef(Value) Export
-	Return Documents.AllRefsType().ContainsType(TypeOf(Value));
-EndFunction
-
-// Get common template by name.
-// 
-// Parameters:
-//  Name - String - Name
-//  GetFromStorage - Boolean - Get from storage
-// 
-// Returns:
-//  COMObject, DataCompositionParameterValue, DataCompositionSettingsParameterValue, SpreadsheetDocument, TextDocument, ActiveDocumentShell, HTMLDocumentShell, BinaryData, GeographicalSchema, GraphicalSchema, DataCompositionSchema, DataCompositionAppearanceTemplate - Get common template by name
-Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
-	If GetFromStorage Then
-		Return GetCommonTemplate(Name).Get();
-	Else
-		Return GetCommonTemplate(Name);
-	EndIf;
-EndFunction
-
-// Get ref attribute.
-// 
-// Parameters:
-//  Ref - AnyRef - Ref
-//  Name - String - Name
-// 
-// Returns:
-//   Arbitrary
-Function GetRefAttribute(Ref, Name) Export
-	Parts = StrSplit(Name, ".");
-	Data = Ref;
-	For Each Attr In Parts Do
-		//@skip-check statement-type-change
-		Data = Data[Attr];
-	EndDo;
-	Return Data;
-EndFunction
+#Region JSON
 
 // Prepare JSON for XDTOReader:
 //  Remove all empty arrays ex. []
@@ -163,22 +109,6 @@ Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
-// Serialize XMLUse XDTO.
-// 
-// Parameters:
-//  Value - Arbitrary -  Value
-//  AddInfo - Undefined - Add info
-// 
-// Returns:
-//  String - Serialize XMLUse XDTO
-Function SerializeXMLUseXDTO(Value, AddInfo = Undefined) Export
-	Writer = New XMLWriter();
-	Writer.SetString();
-	XDTOSerializer.WriteXML(Writer, Value);
-	Result = Writer.Close();
-	Return Result;
-EndFunction
-
 // Deserialize JSONUse XDTO.
 // 
 // Parameters:
@@ -212,45 +142,6 @@ Function SerializeJSONUseXDTOFactory(Value, AddInfo = Undefined) Export
 	LenValuePart = 14;
 	Result = Mid(ResultTmp, LenValuePart, StrLen(ResultTmp) - LenValuePart - 1);
 	Return Result;
-EndFunction
-
-// Serialize XMLUse XDTOFactory.
-// 
-// Parameters:
-//  Value - Arbitrary - Value
-//  LocalName - String - Local name
-//  URI - String - URI
-//  AddInfo - Structure - Add info
-//  WSName - String, WSDefinitions - WSName
-// 
-// Returns:
-//  String - Serialize XMLUse XDTOFactory
-Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined,
-	WSName = Undefined) Export
-	Writer = New XMLWriter();
-	Writer.SetString();
-	XDTOFactoryObject(WSName).WriteXML(Writer, Value, LocalName, URI);
-	Result = Writer.Close();
-	Return Result;
-EndFunction
-
-// XDTOFactory object.
-// 
-// Parameters:
-//  WSName - Undefined, WSDefinitions, String - WSName
-// 
-// Returns:
-//  XDTOFactory - XDTOFactory object
-Function XDTOFactoryObject(WSName = Undefined) Export
-	If IsBlankString(WSName) Then
-		Return XDTOFactory;
-	Else
-		If TypeOf(WSName) = Type("String") Then
-			Return WSReferences[WSName].GetWSDefinitions().XDTOFactory;
-		Else
-			Return WSName.XDTOFactory;
-		EndIf;
-	EndIf;
 EndFunction
 
 // Deserialize JSON.
@@ -288,6 +179,45 @@ Function DeserializeJSONUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefi
 	Reader.SetString(ValueTmp);
 	Result = XDTOFactory.ReadJSON(Reader, Type); // XDTODataObject
 	Reader.Close();
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region XML
+// Serialize XMLUse XDTO.
+// 
+// Parameters:
+//  Value - Arbitrary -  Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize XMLUse XDTO
+Function SerializeXMLUseXDTO(Value, AddInfo = Undefined) Export
+	Writer = New XMLWriter();
+	Writer.SetString();
+	XDTOSerializer.WriteXML(Writer, Value);
+	Result = Writer.Close();
+	Return Result;
+EndFunction
+
+// Serialize XMLUse XDTOFactory.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+//  LocalName - String - Local name
+//  URI - String - URI
+//  AddInfo - Structure - Add info
+//  WSName - String, WSDefinitions - WSName
+// 
+// Returns:
+//  String - Serialize XMLUse XDTOFactory
+Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined,
+	WSName = Undefined) Export
+	Writer = New XMLWriter();
+	Writer.SetString();
+	XDTOFactoryObject(WSName).WriteXML(Writer, Value, LocalName, URI);
+	Result = Writer.Close();
 	Return Result;
 EndFunction
 
@@ -357,20 +287,193 @@ Function DeserializeXML(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
-// Get current universal date.
+#EndRegion
+
+#Region ValidateAndCheck
+
+// Is metadata available by current functional options.
+// 
+// Parameters:
+//  ValidatedMetadata - MetadataObjectAttribute, MetadataObjectCommonAttribute - Validated metadata
+//  hasType - Boolean - has type
 // 
 // Returns:
-//  Date - Get current universal date
-Function GetCurrentUniversalDate() Export
-	Return CurrentUniversalDate();
+//  Boolean - Is metadata available by current functional options
+Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasType = False) Export
+	
+	MetadataByType = Undefined;
+	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
+		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
+	EndIf;
+	If MetadataByType = Undefined Then
+		MetadataByType = ValidatedMetadata;
+	EndIf;
+	
+	UsedInFunctionalOptions = False;
+    
+    For Each FunctionalOption In Metadata.FunctionalOptions Do
+        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
+            UsedInFunctionalOptions = True;
+            If GetFunctionalOption(FunctionalOption.Name) = True Then
+                Return True;
+            EndIf;
+        EndIf;
+    EndDo;
+    
+    Return Not UsedInFunctionalOptions;
+    	
+EndFunction	
+
+// Is common attribute use for metadata.
+// 
+// Parameters:
+//  Name - String - Name of common attribute
+//  MetadataFullName - MetadataObject - Metadata full name
+// 
+// Returns:
+//  Boolean - Is common attribute use for metadata
+Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
+	If Metadata.CommonAttributes.Find(Name) = Undefined Then
+		Return False;
+	EndIf;
+	
+	Attr = Metadata.CommonAttributes[Name];
+	Content = Attr.Content.Find(MetadataFullName);
+	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
+	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
+		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
+	NotSeparate = Attr.DataSeparation = Metadata.ObjectProperties.CommonAttributeDataSeparation.DontUse;
+		
+	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
 EndFunction
 
-// Get current session date.
+// Check HASH is changed.
+// 
+// Parameters:
+//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName, DocumentObjectDocumentName -
 // 
 // Returns:
-//  Date - Get current session date
-Function GetCurrentSessionDate() Export
-	Return CurrentSessionDate();
+//  Boolean - Object has difference
+Function CheckHASHisChanged(Object, AttrHashName = "HASH") Export
+	CurrentHASH = Object[AttrHashName]; // String
+	Object[AttrHashName] = "";
+	HASH = GetMD5(Object, True, True);
+	
+	If Not HASH = CurrentHASH Then
+		Object[AttrHashName] = HASH;
+		Return True;
+	Else
+		Return False
+	EndIf;
+EndFunction
+
+// Validate email.
+// @skip-check property-return-type, invocation-parameter-type-intersect
+// 
+// Parameters:
+//  Address - String - Address
+//  RaiseOnFalse - Boolean - Raise on false
+// 
+// Returns:
+//  Boolean - Validate email
+Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
+
+	
+	LatinCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    Digits = "0123456789";
+    ValidSymbols = "-._@";
+    
+    ErrorArray = New Array; // Array Of String
+
+	If IsBlankString(Address) Then
+		ErrorArray.Add(R().EmailIsEmpty);
+	EndIf;
+
+    PartMail = StrSplit(Address, "@", False);
+    If PartMail.Count() <> 2 Then
+    	ErrorArray.Add(R().Only1SymbolAtCanBeSet);
+    EndIf;
+    
+    If ErrorArray.Count() = 0 Then // Skip if we have error from top lvl
+        DomainPart = PartMail[1];
+	    LocalPart = PartMail[0];
+	
+	    If StrLen(LocalPart) < 1 OR StrLen(LocalPart) > 64 Then
+	        ErrorArray.Add(R().InvalidLengthOfLocalPart);
+	    EndIf;
+	
+	    If StrLen(DomainPart) < 1 OR StrLen(DomainPart) > 255 Then
+	        ErrorArray.Add(R().InvalidLengthOfDomainPart);
+	    EndIf;
+	                     
+	    If Left(LocalPart, 1) = "." OR Right(LocalPart, 1) = "." Then
+	        ErrorArray.Add(R().LocalPartStartEndDot);
+	    EndIf;
+	
+	    If StrFind(LocalPart, "..") > 0 Then
+	        ErrorArray.Add(R().LocalPartConsecutiveDots);
+	    EndIf;
+	
+	    If Left(DomainPart, 1) = "." Then
+	        ErrorArray.Add(R().DomainPartStartsWithDot);
+	    EndIf;
+	
+	    If StrFind(DomainPart, "..") > 0 Then
+	        ErrorArray.Add(R().DomainPartConsecutiveDots);
+	    EndIf; 
+	
+		If StrOccurrenceCount(DomainPart, ".") = 0 Then
+	        ErrorArray.Add(R().DomainPartMin1Dot);
+	    EndIf;
+	
+	    DomainPartIdentifiers = StrSplit(DomainPart, ".");
+	    For Each DomainIdentifier IN DomainPartIdentifiers Do
+	        If StrLen(DomainIdentifier) > 63 Then
+	            ErrorArray.Add(R().DomainIdentifierExceedsLength);
+	        EndIf;
+	    EndDo;
+    EndIf;
+    
+	For Index = 1 To StrLen(Address) Do
+		Symbol = Mid(Address, Index, 1);
+		If StrFind(LatinCharacters + Digits + ValidSymbols, Symbol) = 0 Then
+			ErrorArray.Add(StrTemplate(R().InvalidCharacterInAddress, Symbol));
+		EndIf;
+	EndDo;
+
+    If ErrorArray.Count() > 0 Then
+        ErrorMessage = StrConcat(ErrorArray, Chars.LF);
+        If RaiseOnFalse Then
+            Raise ErrorMessage;
+        Else
+            CommonFunctionsClientServer.ShowUsersMessage(ErrorMessage);
+            Return False;
+        EndIf;
+    EndIf;
+
+  	Return True;
+EndFunction
+
+// Is primitive value.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+// 
+// Returns:
+//  Boolean - Is primitive value
+Function IsPrimitiveValue(Value) Export
+	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
+EndFunction
+
+// Is document ref.
+// 
+// Parameters:
+//  Value - Arbitrary -  Value
+// 
+// Returns:
+//  Boolean - Is document ref
+Function IsDocumentRef(Value) Export
+	Return Documents.AllRefsType().ContainsType(TypeOf(Value));
 EndFunction
 
 // Form have attribute.
@@ -390,18 +493,119 @@ Function FormHaveAttribute(Form, AttributeName) Export
 	Return False;
 EndFunction
 
-// XSLTransformation.
-// 
-// Parameters:
-//  XML - String - XML
-//  XSLT - String - XSLT
+#EndRegion
+
+#Region WorkWithDate
+
+Function GetStandardTimeOffset() Export
+	Return StandardTimeOffset(SessionTimeZone(), CurrentUniversalDate()) / (60 * 60);
+EndFunction	
+
+// Get current universal date.
 // 
 // Returns:
-//  String - XSLTransformation
-Function XSLTransformation(XML, XSLT) Export
-	XSLTransform = New XSLTransform();
-	XSLTransform.LoadFromString(XSLT);
-	Return XSLTransform.TransformFromString(XML);
+//  Date - Get current universal date
+Function GetCurrentUniversalDate() Export
+	Return CurrentUniversalDate();
+EndFunction
+
+// Get current session date.
+// 
+// Returns:
+//  Date - Get current session date
+Function GetCurrentSessionDate() Export
+	Return CurrentSessionDate();
+EndFunction
+
+#EndRegion
+
+#Region Common
+
+// Sort array.
+// 
+// Parameters:
+//  Array - Array - Array
+// 
+// Returns:
+//  Array - Sort array
+Function SortArray(Array) Export
+	VL = New ValueList();
+	VL.LoadValues(Array);
+	VL.SortByValue();
+	Return VL.UnloadValues();
+EndFunction	
+
+// Delete from array if present.
+// 
+// Parameters:
+//  Array - Array
+//  Value - Arbitrary
+Procedure DeleteFormArrayIfPresent(Array, Value) Export
+	Index = Array.Find(Value);
+	If Index <> Undefined Then
+		Array.Delete(Index);
+	EndIf;
+EndProcedure	
+
+// Pause.
+// 
+// Parameters:
+//  Time - Number - Time in second
+Procedure Pause(Time) Export
+
+    If Time < 1 Then
+    	Return;
+    EndIf;
+
+    Job = GetCurrentInfoBaseSession().GetBackgroundJob();
+
+    If Job = Undefined Then
+        Params = New Array; // Array Of Number
+        Params.Add(Time);
+        MethodName = "CommonFunctionsServer.Pause";
+        Job = ConfigurationExtensions.ExecuteBackgroundJobWithoutExtensions(MethodName, Params);
+    EndIf;
+
+    Job.WaitForExecutionCompletion(Time);
+
+EndProcedure
+
+#EndRegion
+
+#Region GetData
+
+// Get common template by name.
+// 
+// Parameters:
+//  Name - String - Name
+//  GetFromStorage - Boolean - Get from storage
+// 
+// Returns:
+//  COMObject, DataCompositionParameterValue, DataCompositionSettingsParameterValue, SpreadsheetDocument, TextDocument, ActiveDocumentShell, HTMLDocumentShell, BinaryData, GeographicalSchema, GraphicalSchema, DataCompositionSchema, DataCompositionAppearanceTemplate - Get common template by name
+Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
+	If GetFromStorage Then
+		Return GetCommonTemplate(Name).Get();
+	Else
+		Return GetCommonTemplate(Name);
+	EndIf;
+EndFunction
+
+// Get ref attribute.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  Name - String - Name
+// 
+// Returns:
+//   Arbitrary
+Function GetRefAttribute(Ref, Name) Export
+	Parts = StrSplit(Name, ".");
+	Data = Ref;
+	For Each Attr In Parts Do
+		//@skip-check statement-type-change
+		Data = Data[Attr];
+	EndDo;
+	Return Data;
 EndFunction
 
 // Get style by name.
@@ -450,49 +654,6 @@ Function GetMD5(Object, ReturnAsGUID = True, UseXML = False) Export
 	Return Upper(HashSumStringUUID);
 EndFunction
 
-// Check HASH is changed.
-// 
-// Parameters:
-//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName, DocumentObjectDocumentName -
-// 
-// Returns:
-//  Boolean - Object has difference
-Function CheckHASHisChanged(Object, AttrHashName = "HASH") Export
-	CurrentHASH = Object[AttrHashName]; // String
-	Object[AttrHashName] = "";
-	HASH = GetMD5(Object, True, True);
-	
-	If Not HASH = CurrentHASH Then
-		Object[AttrHashName] = HASH;
-		Return True;
-	Else
-		Return False
-	EndIf;
-EndFunction
-
-// Pause.
-// 
-// Parameters:
-//  Time - Number - Time in second
-Procedure Pause(Time) Export
-
-    If Time < 1 Then
-    	Return;
-    EndIf;
-
-    Job = GetCurrentInfoBaseSession().GetBackgroundJob();
-
-    If Job = Undefined Then
-        Params = New Array; // Array Of Number
-        Params.Add(Time);
-        MethodName = "CommonFunctionsServer.Pause";
-        Job = ConfigurationExtensions.ExecuteBackgroundJobWithoutExtensions(MethodName, Params);
-    EndIf;
-
-    Job.WaitForExecutionCompletion(Time);
-
-EndProcedure
-
 // Get URLFrom navigation link.
 // 
 // Parameters:
@@ -522,28 +683,211 @@ Function GetURLFromNavigationLink(Link) Export
     Return ValueFromStringInternal(LinkValue);    
 EndFunction
 
-// Is common attribute use for metadata.
+// Get attributes from ref. If there is no attribute, or there is no access, 
+// then the structure key will be Undefined, otherwise the required value.
 // 
 // Parameters:
-//  Name - String - Name of common attribute
-//  MetadataFullName - MetadataObject - Metadata full name
+//  Ref - AnyRef - Ref to get properties
+//  Attributes - String, FixedStructure, Structure, FixedArray, Array of String - List of attributes
+//  OnlyAllowed - Boolean - Requesting the value of attributes, taking into account rights at the record level
 // 
 // Returns:
-//  Boolean - Is common attribute use for metadata
-Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
-	If Metadata.CommonAttributes.Find(Name) = Undefined Then
-		Return False;
+//   Structure - response description:
+//   * Key - String - property name
+//   * Value - Arbitrary - property value
+Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
+	
+	If TypeOf(Ref) = Type("Structure") Then
+		Return Ref;
 	EndIf;
 	
-	Attr = Metadata.CommonAttributes[Name];
-	Content = Attr.Content.Find(MetadataFullName);
-	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
-	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
-		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
-	NotSeparate = Attr.DataSeparation = Metadata.ObjectProperties.CommonAttributeDataSeparation.DontUse;
+	Result = New Structure;
+	
+	AttributesStructure = New Structure;
+	If TypeOf(Attributes) = Type("String") Then
+		If IsBlankString(Attributes) Then
+			Return Result;
+		EndIf;
+		Attributes = StrReplace(Attributes, " ", "");
+		Attributes = StrReplace(Attributes, Chars.LF, "");
+		AttributeParts = StrSplit(Attributes, ",");
+		For Each AttributPart In AttributeParts Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, AttributPart);
+		EndDo; 
+	ElsIf TypeOf(Attributes) = Type("Array") Or TypeOf(Attributes) = Type("FixedArray") Then
+		For Each AttributPart In Attributes Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, AttributPart);
+		EndDo;
+	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
+		AttributesStructure = Attributes;
+	Else
+		//@skip-check property-return-type
+		Raise R().Error_004;
+	EndIf;
+	
+	If AttributesStructure.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	FullTableName = Ref.Metadata().FullName();
+	
+	QueryFields = New Array; // Array of String
+	For Each ItemAttribute In AttributesStructure Do
 		
-	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
+		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+		FieldAlias = ItemAttribute.Key;
+		QueryFields.Add(FieldName + " AS " + FieldAlias);
+		
+		CurrentResult = Result;
+		FieldParts = StrSplit(FieldName, ".");
+		For Index = 0 To FieldParts.UBound() Do
+			If Not CurrentResult.Property(FieldParts[Index]) Then
+				CurrentResult.Insert(FieldParts[Index], Undefined);
+			EndIf;
+			If Index < FieldParts.UBound() Then
+				If CurrentResult[FieldParts[Index]] = Undefined Then
+					CurrentResult[FieldParts[Index]] = New Structure;
+				EndIf; 
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If QueryFields.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	If Ref.IsEmpty() Then
+		For Each Attr In CurrentResult Do
+			CurrentResult[Attr.Key] = Ref[Attr.Key];
+		EndDo;
+		Return Result;
+	EndIf;
+	
+	Query = New Query;
+	Query.Parameters.Insert("Ref", Ref);
+	Query.Text = StrTemplate(
+		"SELECT %1
+			|	%2
+			|FROM %3 AS Table
+			|WHERE Table.Ref = &Ref", 
+		?(OnlyAllowed, "ALLOWED", ""), 
+		StrConcat(QueryFields, "," + Chars.CR + Chars.Tab),
+		FullTableName
+	);
+	
+	SelectionDetailRecords = Query.Execute().Select();
+	If SelectionDetailRecords.Next() Then
+		For Each ItemAttribute In AttributesStructure Do
+			CurrentResult = Result;
+			FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+			FieldParts = StrSplit(FieldName, ".");
+			For Index = 0 To FieldParts.UBound() - 1 Do
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure 
+			EndDo;
+			CurrentResult[FieldParts[FieldParts.UBound()]] = SelectionDetailRecords[ItemAttribute.Key];
+		EndDo;
+	Else
+		For Each ItemAttribute In AttributesStructure Do
+			Result[FieldParts[FieldParts.UBound()]] = Ref[ItemAttribute.Key];
+		EndDo;
+	EndIf;
+	
+	//@skip-check constructor-function-return-section
+	Return Result;
+	
 EndFunction
+
+// Get related documents.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef - ref to document
+//  WithoutDeleted - Boolean - without documents marked for deletion
+// 
+// Returns:
+//  Array of DocumentRef - Get related documents
+Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
+	Query = New Query();
+	Query.SetParameter("DocumentRef", DocumentRef);
+	Query.Text =
+	"SELECT Ref
+	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
+	If WithoutDeleted Then
+		Query.Text = Query.Text + "
+		|WHERE NOT Ref.DeletionMark";
+	EndIf;
+	Return Query.Execute().Unload().UnloadColumn(0);
+EndFunction
+
+// Get UUID.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+// 
+// Returns:
+//  UUID
+Function GetUUID(Ref) Export
+	Return Ref.UUID();
+EndFunction
+
+#EndRegion
+
+#Region XDTO
+
+// Get XMLAs structure.
+// 
+// Parameters:
+//  XML - String - XML
+// 
+// Returns:
+//  Structure -  Get XMLAs structure
+Function GetXMLAsStructure(XML) Export
+	XDTO = DeserializeXMLUseXDTOFactory(XML);
+	Str = New Structure;
+	For Each Prop In XDTO.Properties() Do
+		Str.Insert(Prop.Name, XDTO[Prop.Name]);
+	EndDo;
+	Return Str;
+EndFunction
+
+// XDTOFactory object.
+// 
+// Parameters:
+//  WSName - Undefined, WSDefinitions, String - WSName
+// 
+// Returns:
+//  XDTOFactory - XDTOFactory object
+Function XDTOFactoryObject(WSName = Undefined) Export
+	If IsBlankString(WSName) Then
+		Return XDTOFactory;
+	Else
+		If TypeOf(WSName) = Type("String") Then
+			Return WSReferences[WSName].GetWSDefinitions().XDTOFactory;
+		Else
+			Return WSName.XDTOFactory;
+		EndIf;
+	EndIf;
+EndFunction
+
+// XSLTransformation.
+// 
+// Parameters:
+//  XML - String - XML
+//  XSLT - String - XSLT
+// 
+// Returns:
+//  String - XSLTransformation
+Function XSLTransformation(XML, XSLT) Export
+	XSLTransform = New XSLTransform();
+	XSLTransform.LoadFromString(XSLT);
+	Return XSLTransform.TransformFromString(XML);
+EndFunction
+
+#EndRegion
+
+#Region Base64
 
 // Base64 from string.
 // 
@@ -601,21 +945,26 @@ EndFunction
 // 
 // Parameters:
 //  Base64Zip - String - Base64 zip
-//  FileName - String - File name
+//  FileName - String - File name. If empty - return first file
 // 
 // Returns:
 //  BinaryData - String from base64 ZIP
-Function StringFromBase64ZIP(Base64Zip, FileName) Export
+Function StringFromBase64ZIP(Base64Zip, FileName = Undefined) Export
 	MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
 	ZIP = New ZipFileReader(MStream);
 	TmpFileName = TempFilesDir();
 	ZIP.Extract(ZIP.Items[0], TmpFileName);
+	If FileName = Undefined Then
+		FileName = ZIP.Items[0].FullName;
+	EndIf;
 	Zip.Close();
 	MStream.CloseAndGetBinaryData();
 	BD = New BinaryData(TmpFileName + FileName);
 	DeleteFiles(TmpFileName + FileName);
 	Return BD;
 EndFunction
+
+#EndRegion
 
 #Region EvalExpression
 
@@ -867,170 +1216,59 @@ EndProcedure
 
 #EndRegion
 
-// Get attributes from ref. If there is no attribute, or there is no access, 
-// then the structure key will be Undefined, otherwise the required value.
+#Region Cache
+
+// Put to Cache.
 // 
 // Parameters:
-//  Ref - AnyRef - Ref to get properties
-//  Attributes - String, FixedStructure, Structure, FixedArray, Array of String - List of attributes
-//  OnlyAllowed - Boolean - Requesting the value of attributes, taking into account rights at the record level
+//  Data - Arbitrary - Data
+//  ID - String - ID
 // 
 // Returns:
-//   Structure - response description:
-//   * Key - String - property name
-//   * Value - Arbitrary - property value
-Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
+//  String
+Function PutToCache(Data, ID = "") Export
 	
-	Result = New Structure;
+	If IsBlankString(ID) Then
+		ID = String(New UUID);
+	EndIf;
 	
-	AttributesStructure = New Structure;
-	If TypeOf(Attributes) = Type("String") Then
-		If IsBlankString(Attributes) Then
-			Return Result;
-		EndIf;
-		Attributes = StrReplace(Attributes, " ", "");
-		Attributes = StrReplace(Attributes, Chars.LF, "");
-		AttributeParts = StrSplit(Attributes, ",");
-		For Each AttributPart In AttributeParts Do
-			Alias = StrReplace(AttributPart, ".", "");
-			AttributesStructure.Insert(Alias, AttributPart);
-		EndDo; 
-	ElsIf TypeOf(Attributes) = Type("Array") Or TypeOf(Attributes) = Type("FixedArray") Then
-		For Each AttributPart In Attributes Do
-			Alias = StrReplace(AttributPart, ".", "");
-			AttributesStructure.Insert(Alias, AttributPart);
-		EndDo;
-	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
-		AttributesStructure = Attributes;
+	Reg = InformationRegisters.T1020S_Cache.CreateRecordManager();
+	ArchiveData = New ValueStorage(Data, New Deflation(9));
+	Reg.Data = ArchiveData;
+	Reg.Created = GetCurrentSessionDate();
+	Reg.UUID = ID;
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Size = StrLen(SerializeXMLUseXDTO(ArchiveData));
+	Reg.Write(True);
+	Return ID;
+EndFunction
+
+// Get from Cache.
+// 
+// Parameters:
+//  ID - String - ID
+//  Delete - Boolean -  Delete
+// 
+// Returns:
+//  Arbitrary
+Function GetFromCache(ID, Delete = True) Export
+	Reg = InformationRegisters.T1020S_Cache.CreateRecordManager();
+	Reg.UUID = ID;
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Read();
+	Data = Reg.Data;
+	
+	If Delete Then
+		Reg.Delete();
 	Else
-		//@skip-check property-return-type
-		Raise R().Error_004;
+		Reg.LastGet = GetCurrentSessionDate();
+		Reg.Write();
 	EndIf;
 	
-	If AttributesStructure.Count() = 0 Then
-		Return Result;
+	If Not Data = Undefined Then
+		// @skip-check statement-type-change
+		Data = Data.Get();
 	EndIf;
-	
-	FullTableName = Ref.Metadata().FullName();
-	
-	QueryFields = New Array; // Array of String
-	For Each ItemAttribute In AttributesStructure Do
-		
-		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
-		FieldAlias = ItemAttribute.Key;
-		QueryFields.Add(FieldName + " AS " + FieldAlias);
-		
-		CurrentResult = Result;
-		FieldParts = StrSplit(FieldName, ".");
-		For Index = 0 To FieldParts.UBound() Do
-			If Not CurrentResult.Property(FieldParts[Index]) Then
-				CurrentResult.Insert(FieldParts[Index], Undefined);
-			EndIf;
-			If Index < FieldParts.UBound() Then
-				If CurrentResult[FieldParts[Index]] = Undefined Then
-					CurrentResult[FieldParts[Index]] = New Structure;
-				EndIf; 
-				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure
-			EndIf;
-		EndDo;
-	EndDo;
-	
-	If Not ValueIsFilled(Ref) Or QueryFields.Count() = 0 Then
-		Return Result;
-	EndIf;
-	
-	Query = New Query;
-	Query.Parameters.Insert("Ref", Ref);
-	Query.Text = StrTemplate(
-		"SELECT %1
-			|	%2
-			|FROM %3 AS Table
-			|WHERE Table.Ref = &Ref", 
-		?(OnlyAllowed, "ALLOWED", ""), 
-		StrConcat(QueryFields, "," + Chars.CR + Chars.Tab),
-		FullTableName
-	);
-	
-	SelectionDetailRecords = Query.Execute().Select();
-	If SelectionDetailRecords.Next() Then
-		For Each ItemAttribute In AttributesStructure Do
-			CurrentResult = Result;
-			FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
-			FieldParts = StrSplit(FieldName, ".");
-			For Index = 0 To FieldParts.UBound() - 1 Do
-				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure 
-			EndDo;
-			CurrentResult[FieldParts[FieldParts.UBound()]] = SelectionDetailRecords[ItemAttribute.Key];
-		EndDo;
-	EndIf;
-	
-	//@skip-check constructor-function-return-section
-	Return Result;
-	
+	Return Data;
 EndFunction
-
-// Get related documents.
-// 
-// Parameters:
-//  DocumentRef - DocumentRef - ref to document
-//  WithoutDeleted - Boolean - without documents marked for deletion
-// 
-// Returns:
-//  Array of DocumentRef - Get related documents
-Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
-	Query = New Query();
-	Query.SetParameter("DocumentRef", DocumentRef);
-	Query.Text =
-	"SELECT Ref
-	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
-	If WithoutDeleted Then
-		Query.Text = Query.Text + "
-		|WHERE NOT Ref.DeletionMark";
-	EndIf;
-	Return Query.Execute().Unload().UnloadColumn(0);
-EndFunction
-
-// Delete from array if present.
-// 
-// Parameters:
-//  Array - Array
-//  Value - Arbitrary
-Procedure DeleteFormArrayIfPresent(Array, Value) Export
-	Index = Array.Find(Value);
-	If Index <> Undefined Then
-		Array.Delete(Index);
-	EndIf;
-EndProcedure	
-
-// Is metadata available by current functional options.
-// 
-// Parameters:
-//  ValidatedMetadata - MetadataObjectAttribute - Validated metadata
-//  hasType - Boolean - has type
-// 
-// Returns:
-//  Boolean - Is metadata available by current functional options
-Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasType = False) Export
-	
-	MetadataByType = Undefined;
-	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
-		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
-	EndIf;
-	If MetadataByType = Undefined Then
-		MetadataByType = ValidatedMetadata;
-	EndIf;
-	
-	UsedInFunctionalOptions = False;
-    
-    For Each FunctionalOption In Metadata.FunctionalOptions Do
-        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
-            UsedInFunctionalOptions = True;
-            If GetFunctionalOption(FunctionalOption.Name) = True Then
-                Return True;
-            EndIf;
-        EndIf;
-    EndDo;
-    
-    Return Not UsedInFunctionalOptions;
-    	
-EndFunction	
+#EndRegion

@@ -56,15 +56,7 @@ Scenario: _051001 preparation (Cash payment)
 		When Create catalog Partners objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -625,5 +617,5 @@ Scenario: _300512 check connection to CashPayment report "Related documents"
 		| $$NumberCashPayment0510011$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

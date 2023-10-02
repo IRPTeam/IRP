@@ -38,6 +38,14 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export

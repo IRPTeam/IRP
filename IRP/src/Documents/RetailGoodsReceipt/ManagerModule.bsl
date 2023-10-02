@@ -13,6 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+		
 	Return Tables;
 EndFunction
 
@@ -112,6 +113,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(ShipmentConfirmations());
+	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -119,45 +121,48 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Ref,
-		   |	RowIDInfo.Key AS Key,
-		   |	MAX(RowIDInfo.RowID) AS RowID
-		   |INTO TableRowIDInfo
-		   |FROM
-		   |	Document.RetailGoodsReceipt.RowIDInfo AS RowIDInfo
-		   |WHERE
-		   |	RowIDInfo.Ref = &Ref
-		   |GROUP BY
-		   |	RowIDInfo.Ref,
-		   |	RowIDInfo.Key
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.Quantity AS UnitQuantity,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.Unit,
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref AS GoodsReceipt,
-		   |	TableRowIDInfo.RowID AS RowKey,
-		   |	ItemList.SalesOrder AS SalesOrder,
-		   |	NOT ItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery) AS
-		   |		IsTransaction_CourierDelivery,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.RetailGoodsReceiptTransactionTypes.Pickup) AS IsTransaction_Pickup,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Key
-		   |INTO ItemList
-		   |FROM
-		   |	Document.RetailGoodsReceipt.ItemList AS ItemList
-		   |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-		   |		ON ItemList.Key = TableRowIDInfo.Key
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.RetailGoodsReceipt.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS UnitQuantity,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Unit,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref AS GoodsReceipt,
+		|	TableRowIDInfo.RowID AS RowKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	NOT ItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery) AS
+		|		IsTransaction_CourierDelivery,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.RetailGoodsReceiptTransactionTypes.Pickup) AS IsTransaction_Pickup,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Key,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
+		|INTO ItemList
+		|FROM
+		|	Document.RetailGoodsReceipt.ItemList AS ItemList
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -190,6 +195,44 @@ Function ShipmentConfirmations()
 		   |	Document.RetailGoodsReceipt.ShipmentConfirmations AS ShipmentConfirmations
 		   |WHERE
 		   |	ShipmentConfirmations.Ref = &Ref";
+EndFunction
+
+Function SourceOfOrigins()
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.RetailGoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion

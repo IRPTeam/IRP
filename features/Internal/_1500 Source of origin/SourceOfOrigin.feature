@@ -63,12 +63,6 @@ Scenario: _150041 preparation
 		When Create catalog SourceOfOrigins objects
 		When Create catalog PaymentTypes objects
 		When Create catalog BankTerms objects (for Shop 02)	
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Landed cost settings for company	
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -101,8 +95,6 @@ Scenario: _150041 preparation
 			Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 			And I click "Save and close" button
 			And I wait "Second Company (Company) *" window closing in 20 seconds
-	* Tax settings
-		When filling in Tax settings for company
 	And I close all client application windows
 
 Scenario: _150042 check preparation
@@ -351,7 +343,7 @@ Scenario: _150047 check filling source of origin in the PI
 	* Select PI
 		And I go to line in "List" table
 			| 'Number'    |
-			| '192'       |
+			| '202'       |
 		And I select current line in "List" table	
 	* Filling in source of origin
 		* For Product 4 with SLN
@@ -443,7 +435,7 @@ Scenario: _150047 check filling source of origin in the PI
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number'    |
-			| '192'       |
+			| '202'       |
 		And I select current line in "List" table	
 	* Filling source of origin from barcode
 		And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1263,7 +1255,7 @@ Scenario: _150056 check filling source of origin in the PR
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#'   | 'Dont calculate row'   | 'Item'                 | 'Item key'   | 'Net amount'   | 'Price'    | 'Purchase invoice'                                 | 'Quantity'   | 'Serial lot numbers'   | 'Source of origins'    | 'Store'      | 'Tax amount'   | 'Total amount'   | 'Unit'   | 'Use shipment confirmation'   | 'VAT'    |
-			| '2'   | 'No'                   | 'Product 3 with SLN'   | 'UNIQ'       | '847,46'       | '100,00'   | 'Purchase invoice 192 dated 30.10.2022 12:00:00'   | '10,000'     | '09987897977889'       | 'Source of origin 4'   | 'Store 01'   | '152,54'       | '1 000,00'       | 'pcs'    | 'No'                          | '18%'    |
+			| '2'   | 'No'                   | 'Product 3 with SLN'   | 'UNIQ'       | '847,46'       | '100,00'   | 'Purchase invoice 202 dated 30.10.2022 12:00:00'   | '10,000'     | '09987897977889'       | 'Source of origin 4'   | 'Store 01'   | '152,54'       | '1 000,00'       | 'pcs'    | 'No'                          | '18%'    |
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -1293,8 +1285,8 @@ Scenario: _150056 check filling source of origin in the PR
 			And I select current line in "List" table	
 			And "ItemList" table became equal
 				| 'Item'                  | 'Item key'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'    | 'Return reason'    | 'Source of origins'     | 'Price'     | 'VAT'    | 'Total amount'    | 'Store'       | 'Quantity'    | 'Use shipment confirmation'    | 'Purchase invoice'                                  | 'Net amount'     |
-				| 'Dress'                 | 'XS/Blue'     | '30,51'         | 'pcs'     | ''                      | ''                 | 'Source of origin 5'    | '100,00'    | '18%'    | '200,00'          | 'Store 01'    | '2,000'       | 'No'                           | 'Purchase invoice 192 dated 30.10.2022 12:00:00'    | '169,49'         |
-				| 'Product 3 with SLN'    | 'UNIQ'        | '30,51'         | 'pcs'     | '09987897977889'        | ''                 | 'Source of origin 4'    | '100,00'    | '18%'    | '200,00'          | 'Store 01'    | '2,000'       | 'No'                           | 'Purchase invoice 192 dated 30.10.2022 12:00:00'    | '169,49'         |
+				| 'Dress'                 | 'XS/Blue'     | '30,51'         | 'pcs'     | ''                      | ''                 | 'Source of origin 5'    | '100,00'    | '18%'    | '200,00'          | 'Store 01'    | '2,000'       | 'No'                           | 'Purchase invoice 202 dated 30.10.2022 12:00:00'    | '169,49'         |
+				| 'Product 3 with SLN'    | 'UNIQ'        | '30,51'         | 'pcs'     | '09987897977889'        | ''                 | 'Source of origin 4'    | '100,00'    | '18%'    | '200,00'          | 'Store 01'    | '2,000'       | 'No'                           | 'Purchase invoice 202 dated 30.10.2022 12:00:00'    | '169,49'         |
 			And I click "Show row key" button			
 			And "SourceOfOrigins" table became equal
 				| '#'    | 'Key'    | 'Serial lot number'    | 'Source of origin'      | 'Quantity'     |

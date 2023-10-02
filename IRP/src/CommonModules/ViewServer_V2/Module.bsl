@@ -7,6 +7,15 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "IsCopyingInteractive") Then
 		ArrayOfNewAttribute.Add(New FormAttribute("IsCopyingInteractive", New TypeDescription("Boolean")));
 	EndIf;
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobStorageAddress") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobStorageAddress", New TypeDescription("String")));
+	EndIf;
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobUUID") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobUUID", New TypeDescription("UUID")));
+	EndIf;	
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "BackgroundJobSplash") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("BackgroundJobSplash", New TypeDescription("UUID")));
+	EndIf;
 	
 	If ArrayOfNewAttribute.Count() Then
 		Form.ChangeAttributes(ArrayOfNewAttribute);
@@ -89,14 +98,6 @@ Function GetDeliveryDateFromItemList(Object)
 	EndIf;
 EndFunction
 
-#Region FORM_MODIFICATOR
-
-Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
-	Parameters.Form.Taxes_CreateFormControls();
-EndProcedure
-
-#EndRegion
-
 #Region COMMANDS
 
 Procedure ExecuteCommandAtServer(Object, TableName, CommandName) Export
@@ -133,10 +134,6 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
-		Property = New Structure("DataPath", "ItemList.<tax_rate>");
-		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-	EndIf;
 EndProcedure
 
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
@@ -179,7 +176,6 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	
 	AllDepTables = New Array();
 	AllDepTables.Add("SpecialOffers");
-	AllDepTables.Add("TaxList");
 	AllDepTables.Add("Currencies");
 	AllDepTables.Add("SerialLotNumbers");
 	AllDepTables.Add("ShipmentConfirmations");
@@ -187,7 +183,6 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("WorkSheets");
 	AllDepTables.Add("RowIDInfo");
 	AllDepTables.Add("BillOfMaterialsList");
-	AllDepTables.Add("ConsignorBatches");
 	AllDepTables.Add("SourceOfOrigins");
 	AllDepTables.Add("ControlCodeStrings");
 	
@@ -234,10 +229,8 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
 	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
-	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
-	ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
 	isControlCodeStringIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "isControlCodeString");
 
 	If FillingValues.Property("Item") And ItemIsPresent Then
@@ -291,15 +284,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("Cheque") And ChequeIsPresent Then
 		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
-	
-	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
-		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
-	EndIf;	
-	
-	If FillingValues.Property("Consignor") And ConsignorIsPresent Then
-		ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
-	EndIf;	
-	
+		
 	If TableName = "TimeSheetList" Then
 		If FillingValues.Property("Employee") And EmployeeIsPresent Then
 			ControllerClientServer_V2.SetTimeSheetListEmployee(Parameters, PrepareValue(FillingValues.Employee, Row.Key));

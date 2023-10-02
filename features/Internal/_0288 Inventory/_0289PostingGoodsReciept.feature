@@ -53,12 +53,6 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create catalog Partners objects
 		When Create catalog Taxes objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Document Discount 
 		When Create Document discount (for row)
@@ -68,8 +62,6 @@ Scenario: _028900 preparation (Goods receipt)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document PurchaseOrder objects (creation based on)
 	When Create document PurchaseOrder and Purchase invoice objects (creation based on, PI >PO)
 	And I execute 1C:Enterprise script at server
@@ -601,5 +593,5 @@ Scenario: _300507 check connection to GoodsReceipt report "Related documents"
 		| '$$NumberGoodsReceipt028901$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

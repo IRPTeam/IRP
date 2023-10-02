@@ -67,6 +67,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot;
 EndProcedure
 
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
 #EndRegion
 
 #Region STORE
@@ -275,6 +290,7 @@ EndProcedure
 
 #Region COPY_PASTE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure CopyToClipboard(Command)
 	CopyPasteClient.CopyToClipboard(Object, ThisObject);
@@ -295,6 +311,7 @@ Function CopyToClipboardServer(CopySettings)
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
 &AtClient
 Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
@@ -344,6 +361,7 @@ EndProcedure
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);

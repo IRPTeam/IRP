@@ -56,12 +56,6 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Partners objects
 		When Create Document discount
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -69,8 +63,6 @@ Scenario: _024000 preparation (Sales invoice)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount	
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 	When Create document SalesOrder objects (SC before SI, creation based on)
 	And I execute 1C:Enterprise script at server
@@ -530,7 +522,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| '#'   | 'Profit loss center'        | 'Price type'                | 'Item'      | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                | 'Revenue type'   | 'Sales person'       |
-			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | 'Store 02'   | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
+			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
 			| '2'   | 'Distribution department'   | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '1,000'      | 'pcs'    | '75,36'        | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Anna Petrova'       |
 			| '3'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | '507,20'       | '350,00'   | '18%'   | '175,00'          | '2 817,80'     | '3 325,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
 			| '4'   | 'Distribution department'   | 'en description is empty'   | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '2,000'      | 'pcs'    | '152,54'       | '500,00'   | '18%'   | ''                | '847,46'       | '1 000,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
@@ -544,7 +536,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#'   | 'Profit loss center'        | 'Price type'                | 'Item'      | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                | 'Revenue type'   | 'Sales person'       |
-			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | 'Store 02'   | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
+			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
 			| '2'   | ''                          | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '10,000'     | 'pcs'    | '793,22'       | '520,00'   | '18%'   | ''                | '4 406,78'     | '5 200,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | ''               | ''                   |
 			| '3'   | 'Distribution department'   | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '1,000'      | 'pcs'    | '75,36'        | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Anna Petrova'       |
 			| '4'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | '507,20'       | '350,00'   | '18%'   | '175,00'          | '2 817,80'     | '3 325,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
@@ -582,8 +574,8 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And "ItemList" table contains lines
 			| '#'   | 'Profit loss center'        | 'Price type'                | 'Item'      | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                | 'Revenue type'    |
 			| '1'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '5,000'      | 'pcs'    | '253,60'       | '350,00'   | '18%'   | '87,50'           | '1 408,90'     | '1 662,50'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 3 dated 27.01.2021 19:50:45'    | 'Revenue'         |
-			| '2'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | 'Store 02'   | '27.01.2021'      | 'No'                          | ''         | 'Sales order 3 dated 27.01.2021 19:50:45'    | 'Revenue'         |
-			| '3'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | 'Store 02'   | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'         |
+			| '2'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 3 dated 27.01.2021 19:50:45'    | 'Revenue'         |
+			| '3'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'         |
 			| '4'   | ''                          | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '10,000'     | 'pcs'    | '793,22'       | '520,00'   | '18%'   | ''                | '4 406,78'     | '5 200,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | ''                |
 			| '5'   | 'Distribution department'   | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '1,000'      | 'pcs'    | '75,36'        | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'         |
 			| '6'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | '507,20'       | '350,00'   | '18%'   | '175,00'          | '2 817,80'     | '3 325,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'         |
@@ -646,10 +638,40 @@ Scenario: _024007 create SI based on SC	without SO
 			| 'Dress (L/Green)'                                      | '8,000'     | '8,000'                | '8,000'       |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''          | '8,000'                | '8,000'       |
 		And I close all client application windows
-				
+	* Select items in SI from SC and check filling inventory origin
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+		And I select from "Branch" drop-down list by "Distribution department" string
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                                   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Post" button
+		And I delete "$$SalesInvoice024007$$" variable
+		And I save the window as "$$SalesInvoice024007$$"
+		When set True value to the constant Use commission trading
+		And "ItemList" table became equal
+			| 'Inventory origin' |
+			| 'Own stocks'       |
+			| 'Own stocks'       |
+		When set False value to the constant Use commission trading
+		And I close all client application windows
+		
+			
 
 
 Scenario: _024025 create document Sales Invoice without Sales order and check Row ID (SI-SC)
+	When set False value to the constant Use commission trading
 	When create SalesInvoice024025
 	* Check Row Id
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -745,6 +767,7 @@ Scenario: _024028 create SI based on SC with two same items (creation based on)
 			| '#'   | 'Price type'          | 'Item'    | 'Item key'   | 'Profit loss center'        | 'Dont calculate row'   | 'Tax amount'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                   | 'Revenue type'    |
 			| '1'   | 'Basic Price Types'   | 'Dress'   | 'XS/Blue'    | 'Distribution department'   | 'No'                   | '1 507,12'     | ''                     | '19,000'     | 'pcs'    | '520,00'   | '18%'   | ''                | '8 372,88'     | '9 880,00'       | 'No'                           | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 1 111 dated 15.02.2022 11:03:38'   | 'Revenue'         |
 			| '2'   | 'Basic Price Types'   | 'Dress'   | 'M/White'    | 'Distribution department'   | 'No'                   | '793,22'       | ''                     | '10,000'     | 'pcs'    | '520,00'   | '18%'   | ''                | '4 406,78'     | '5 200,00'       | 'No'                           | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 1 111 dated 15.02.2022 11:03:38'   | 'Revenue'         |
+		
 		And I close all client application windows
 		
 Scenario: _024029 create SI based on SC with two same items (link items)
@@ -913,6 +936,6 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 		| '$$NumberSalesInvoice024008$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 

@@ -640,15 +640,14 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 		For Each Column In TabularSections[MainTableName].Attributes Do
 			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
 		EndDo;
-		
-		If TabularSections.Find("TaxList") <> Undefined Then
-			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
+				
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "VatRate") Then
 			TaxInfo = New Structure();
-			For Each Column In TabularSections["TaxList"].Attributes Do
-				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
-			EndDo;
+			TaxInfo.Insert("Key", TableRow.Key);
+			TaxInfo.Insert("Tax", TaxesServer.GetVatRef());
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
+		
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
@@ -846,7 +845,7 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
 	|	sum(isnull(R6020B_BatchBalance.Quantity, 0)) AS QuantityBatchBalance,
-	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AmountCost, 0)) AS AmountBatchBalance,
+	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AllocatedCostAmount, 0)) AS AmountBatchBalance,
 	|	0 AS Amount
 	|FROM
 	|	ItemList AS ItemList

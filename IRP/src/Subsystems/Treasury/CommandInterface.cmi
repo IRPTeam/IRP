@@ -13,11 +13,13 @@
     </orderFragments>
   </commandsOrder>
   <subsystemsOrder>
-    <subsystems>Subsystem.Treasury.Subsystem.Cash</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.Bank</subsystems>
-    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.Cash</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.CashTransactions</subsystems>
-    <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.Retail</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.Transfer</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.SchedulingOfPaymentDeadlines</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

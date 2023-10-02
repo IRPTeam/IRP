@@ -44,15 +44,7 @@ Scenario: _022500 preparation (SC-PR)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 		When Create document PurchaseInvoice objects
 		When Create catalog PriceTypes objects
 		When Create document ShipmentConfirmation objects (check movements, SC-PR)
@@ -305,7 +297,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		And I set checkbox "Linked documents"
 		And I expand a line in "ResultsTree" table
 			| 'Row presentation'                                      |
-			| 'Shipment confirmation 233 dated 14.03.2021 19:22:5'    |
+			| 'Shipment confirmation 233 dated 14.03.2021 19:22:58'    |
 		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table	
 		And I go to line in "ResultsTree" table
 			| 'Quantity'   | 'Row presentation'   | 'Unit'    |

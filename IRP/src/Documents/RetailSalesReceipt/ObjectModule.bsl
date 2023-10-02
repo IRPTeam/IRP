@@ -3,11 +3,13 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Payments_Amount = ThisObject.Payments.Total("Amount");
-	ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");
-	If ItemList_Amount <> Payments_Amount Then
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ItemList_Amount));
+	If ThisObject.StatusType = Enums.RetailReceiptStatusTypes.Completed Then
+		Payments_Amount = ThisObject.Payments.Total("Amount");
+		ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");
+		If ItemList_Amount <> Payments_Amount Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ItemList_Amount));
+		EndIf;
 	EndIf;
 	
 	If Cancel Then
@@ -62,6 +64,12 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
+	If ThisObject.StatusType = Enums.RetailReceiptStatusTypes.Postponed
+			OR ThisObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled Then
+		UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+		RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
+		Return;
+	EndIf;
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
 EndProcedure
@@ -74,6 +82,24 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+		ArrayOfProperties = StrSplit(PropertiesHeader, ",");
+						
+		If FillingData.Property("PriceIncludeTax") And FillingData.PriceIncludeTax = Undefined Then
+			FillingData.Delete("PriceIncludeTax");
+				
+			Index = 0;
+			For Each Property In ArrayOfProperties Do
+				If Upper(TrimAll(Property)) = Upper("PriceIncludeTax") Then
+					ArrayOfProperties.Delete(Index);
+					Break;
+				EndIf;
+				Index = Index + 1;
+			EndDo;
+					
+		EndIf;
+		
+		PropertiesHeader = StrConcat(ArrayOfProperties, ",");
+		
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
@@ -83,7 +109,6 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
-	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);

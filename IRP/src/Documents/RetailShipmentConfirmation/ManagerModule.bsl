@@ -14,6 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+		
 	Return Tables;
 EndFunction
 
@@ -120,6 +121,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -158,7 +160,9 @@ Function ItemList()
 		|	Value(Document.RetailSalesReceipt.EmptyRef) AS RetailSalesReceipt,
 		|	FALSE AS RetailSalesReceiptExists,
 		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Key
+		|	ItemList.Key,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.RetailShipmentConfirmation.ItemList AS ItemList
@@ -190,6 +194,44 @@ Function SerialLotNumbers()
 		|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
+Function SourceOfOrigins()
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -215,6 +257,7 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList.Branch AS Branch,
 		|	ItemList.SalesOrder AS Order,
 		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.RowKey AS RowKey,
 		|	ItemList.Quantity AS Quantity
 		|INTO R2011B_SalesOrdersShipment
 		|FROM

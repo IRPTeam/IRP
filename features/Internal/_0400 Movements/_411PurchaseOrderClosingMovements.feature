@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -52,15 +52,7 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -205,13 +197,13 @@ Scenario: _041162 check Purchase order closing movements by the Register  "R1011
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PurchaseOrderClosing37$$'                     | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| 'Document registrations records'                 | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| 'Register  "R1011 Receipt of purchase orders"'   | ''              | ''                                 | ''            | ''               | ''               | ''                                              | ''            |
-			| ''                                               | 'Record type'   | 'Period'                           | 'Resources'   | 'Dimensions'     | ''               | ''                                              | ''            |
-			| ''                                               | ''              | ''                                 | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                         | 'Item key'    |
-			| ''                                               | 'Receipt'       | '$$DatePurchaseOrderClosing37$$'   | '-64'         | 'Main Company'   | 'Front office'   | 'Purchase order 37 dated 09.03.2021 14:29:00'   | 'XS/Blue'     |
-			| ''                                               | 'Receipt'       | '$$DatePurchaseOrderClosing37$$'   | '1'           | 'Main Company'   | 'Front office'   | 'Purchase order 37 dated 09.03.2021 14:29:00'   | '38/Black'    |
+			| '$$PurchaseOrderClosing37$$'                   | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| 'Document registrations records'               | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                               | ''          | ''             | ''             | ''                                            | ''         | ''                                     |
+			| ''                                             | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''             | ''                                            | ''         | ''                                     |
+			| ''                                             | ''            | ''                               | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                       | 'Item key' | 'Row key'                              |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 		
 		

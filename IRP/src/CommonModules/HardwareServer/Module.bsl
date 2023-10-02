@@ -39,9 +39,11 @@ EndFunction
 // * EquipmentType - EnumRef.EquipmentTypes -
 // * AddInID - String -
 // * Driver - CatalogRef.EquipmentDrivers -
+// * IntegrationSettings - CatalogRef.IntegrationSettings -
 // * ConnectParameters - Structure:
 // ** EquipmentType - String -
 // * OldRevision - Boolean - Revision less then 3000
+// * UseIS - Boolean - Use IntegrationSettings. Driver not using.
 // * WriteLog - Boolean -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
@@ -52,6 +54,7 @@ Function GetConnectionSettings(HardwareRef) Export
 	|	Hardware.Driver,
 	|	Hardware.Driver.AddInID AS AddInID,
 	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision,
+	|	Hardware.IntegrationSettings,
 	|	Hardware.Log
 	|FROM
 	|	Catalog.Hardware AS Hardware
@@ -70,6 +73,8 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("OldRevision", SelectionDetailRecords.OldRevision);
 		Settings.Insert("ID", "");
 		Settings.Insert("WriteLog", SelectionDetailRecords.Log);
+		Settings.Insert("IntegrationSettings", SelectionDetailRecords.IntegrationSettings);
+		Settings.Insert("UseIS", Not SelectionDetailRecords.IntegrationSettings.IsEmpty());
 		
 		ConnectParameters = New Structure();
 		ConnectParameters.Insert("EquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
@@ -82,6 +87,14 @@ Function GetConnectionSettings(HardwareRef) Export
 	Return Settings;
 EndFunction
 
+// Get workstation hardware by equipment type.
+// 
+// Parameters:
+//  Workstation - CatalogRef.Workstations - Workstation
+//  EquipmentType - EnumRef.EquipmentTypes - Equipment type
+// 
+// Returns:
+//  Array Of CatalogRef.Hardware -  Get workstation hardware by equipment type
 Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query();
 	Query.Text =
@@ -99,9 +112,9 @@ Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Expor
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
 	HardwareList = New Array();
-	If SelectionDetailRecords.Next() Then
+	While SelectionDetailRecords.Next() Do
 		HardwareList.Add(SelectionDetailRecords.Hardware);
-	EndIf;
+	EndDo;
 	Return HardwareList;
 EndFunction
 
@@ -151,10 +164,27 @@ Function GetConnectionParameters(Hardware) Export
 EndFunction
 
 Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = False) Export
+	
+	If TypeOf(Data) = Type("Structure") Then
+		If Data.Property("Info") Then
+			For Each Prop In Data.Info Do
+				If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+					Data.Info[Prop.Key] = String(Prop.Value);
+				EndIf;
+			EndDo;
+			
+			If Data.Info.Property("CRS") And TypeOf(Data.Info.CRS) = Type("Structure") Then
+				For Each Prop In Data.Info.CRS Do
+					Data.Info.CRS[Prop.Key] = String(Prop.Value);
+				EndDo;
+			EndIf;
+		EndIf;
+	EndIf;
+	
 	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
 	Reg.Date = CurrentUniversalDateInMilliseconds();
 	Reg.Hardware = Hardware;
-	Reg.Period = CurrentDate();
+	Reg.Period = CurrentUniversalDate();
 	Reg.User = SessionParameters.CurrentUser;
 	Reg.Method = Method;
 	Reg.Request = isRequest;

@@ -22,7 +22,7 @@ Function GetChoiceDataTable(Parameters)
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
-	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters, Metadata.Catalogs.ItemKeys);
 	
 	Query = QueryBuilder.GetQuery();
 

@@ -88,7 +88,9 @@ Function CheckItemListStores(Object) Export
 	"SELECT
 	|	Table.LineNumber,
 	|	Table.Store,
-	|	Table.ItemKey
+	|	Table.ItemKey,
+	|	Table.IsServiceNotSet,
+	|	Table.IsService
 	|INTO ItemList
 	|FROM
 	|	&ItemList AS Table
@@ -101,10 +103,22 @@ Function CheckItemListStores(Object) Export
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
-	|	Not ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service)
+	|	CASE WHEN ItemList.IsServiceNotSet THEN
+	|		Not ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|	WHEN NOT ItemList.IsServiceNotSet THEN
+	|		Not ItemList.IsService
+	|	END
 	|	AND  ItemList.Store = Value(Catalog.Stores.EmptyRef)";
-
-	Query.SetParameter("ItemList", Object.ItemList.Unload());
+	ItemList = Object.ItemList.Unload(); // ValueTable
+	If ItemList.Columns.Find("IsService") = Undefined Then
+		ItemList.Columns.Add("IsService", New TypeDescription("Boolean"));
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+		ItemList.FillValues(True, "IsServiceNotSet");
+	Else
+		ItemList.Columns.Add("IsServiceNotSet", New TypeDescription("Boolean"));
+	EndIf;
+	
+	Query.SetParameter("ItemList", ItemList);
 	QueryResult = Query.Execute();
 
 	If QueryResult.IsEmpty() Then
@@ -599,7 +613,7 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result = New Structure();
 	Result.Insert("IsService", True);
 	If ValueIsFilled(ItemKey) Then
-		Result.IsService = (ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service);
+		Result.IsService = GetItemInfo.GetInfoByItemsKey(ItemKey)[0].isService;
 	EndIf;
 	Result.Insert("UseGoodsReceipt", Store.UseGoodsReceipt);
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);
@@ -666,8 +680,6 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("SourceOfOrigins");
-	ArrayOfTableNames.Add("ConsignorBatches");
-	ArrayOfTableNames.Add("TaxList");
 	
 	Result.Insert("ChoiceForms",
 		New Structure("PresentationStartChoice_Counter, 
@@ -764,10 +776,6 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 				AddNewSourceOfOrigin(Object, RowKey, ScanDataItem);
 			EndIf;
 		EndIf;
-		
-		If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") Then
-			UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
-		EndIf;
 	EndDo; // ScanData
 	
 	Return FillCache(Object, ArrayOfTableNames, Result);
@@ -784,24 +792,12 @@ Function FindRows(Object, Parameters, ScanDataItem)
 			AlwaysAddNew = True;
 		EndIf;
 	EndIf;
-	
-	If Parameters.UseInventoryOrigin Then
-		ExistingRowsInfo = GetExistingRows_UseInventoryOrigin(Object, Parameters, ScanDataItem);
-		Result.InventoryOrigin = ExistingRowsInfo.InventoryOrigin;
-		Result.Consignor = ExistingRowsInfo.Consignor;
+			
+	If AlwaysAddNew Then
+		Return Result;
+	EndIf;	
 		
-		If AlwaysAddNew Then
-			Return Result;
-		EndIf;
-		
-	Else
-		
-		If AlwaysAddNew Then
-			Return Result;
-		EndIf;	
-		
-		ExistingRowsInfo = GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem);
-	EndIf;
+	ExistingRowsInfo = GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem);
 	
 	// row exists increase quantity
 	If ExistingRowsInfo.ExistingRows.Count() Then
@@ -810,40 +806,6 @@ Function FindRows(Object, Parameters, ScanDataItem)
 	EndIf;
 	Return Result;
 EndFunction	
-
-Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem)
-	Result = New Structure("ExistingRows, InventoryOrigin, Consignor", New Array(), Undefined, Undefined);
-	
-	FilterStructureCopy = New Structure();
-	For Each KeyValue In Parameters.FilterStructure Do
-		FilterStructureCopy.Insert(KeyValue.Key, KeyValue.Value);
-	EndDo;
-		
-	ResultExistingRows = CommissionTradeServer.GetExistingRows(Object,
-				Parameters.ServerSideParameters, 
-				Parameters.StoreRef,
-				Parameters.StoreInItemList, 
-				FilterStructureCopy,
-				ScanDataItem, 
-				True);
-	
-	Parameters.ServerSideParameters.ServerParameters.Object = Object;
-			
-	If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
-		Result.InventoryOrigin = ResultExistingRows.InventoryOrigin;
-	EndIf;
-
-	If ResultExistingRows.Property("Consignor") And ValueIsFilled(ResultExistingRows.Consignor) Then
-		Result.Consignor = ResultExistingRows.Consignor;
-	EndIf;
-
-	For Each Row In Object.ItemList Do
-		If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
-			Result.ExistingRows.Add(Row);
-		EndIf;
-	EndDo;
-	Return Result;
-EndFunction
 
 Function GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem)
 	Result = New Structure("ExistingRows", New Array());
@@ -901,21 +863,6 @@ Function FillCache(Object, ArrayOfTableNames, Result)
 	Result.Insert("ArrayOfTableNames", ArrayOfExistsTables);
 	Return Result;
 EndFunction
-
-Procedure UpdateConsignorBatches(Parameters, ProcessRow, ResultRow)
-	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
-	Parameters.ServerSideParameters.ServerParameters.Rows.Add(ProcessRow);
-			
-	TmpParameters = ControllerClientServer_V2.GetParameters(
-		Parameters.ServerSideParameters.ServerParameters, 
-		Parameters.ServerSideParameters.FormParameters);
-		
-	ControllerClientServer_V2.API_SetProperty(TmpParameters, New Structure("DataPath", "Command_UpdateConsignorBatches"), Undefined);
-	
-	If TmpParameters.Cache.Property("ItemList") And ResultRow.Cache.Property("ItemList") Then
-		ControllerServer_V2.UpdateArrayOfStructures(TmpParameters.Cache.ItemList, ResultRow.Cache.ItemList);
-	EndIf;
-EndProcedure
 
 Procedure AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	
 	_SerialLotNumbers = New Array();

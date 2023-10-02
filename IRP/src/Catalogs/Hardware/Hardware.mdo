@@ -66,6 +66,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Hardware.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Hardware.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Hardware.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="9753667e-e27e-4c25-afad-8cd1ef0e0961">
     <name>EquipmentType</name>
     <synonym>
@@ -91,7 +93,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -136,6 +137,70 @@
     <type>
       <types>String</types>
       <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6f3d30d9-37f2-4adc-8561-307d06e629d3">
+    <name>Cutter</name>
+    <synonym>
+      <key>en</key>
+      <value>Cutter</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>200</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a7b5979a-509c-4c6e-9bf6-6e30ba7711e6">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IntegrationType</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.IntegrationType.EnumValue.Equipment</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="be92f354-e2f8-4cd0-a519-9cb6c38c396a">
+    <name>EquipmentAPIModule</name>
+    <synonym>
+      <key>en</key>
+      <value>Equipment API module</value>
+    </synonym>
+    <type>
+      <types>EnumRef.EquipmentAPIModule</types>
+    </type>
+  </attributes>
+  <attributes uuid="6b341bb3-ed70-477f-85f8-bf71ea5b2bed">
+    <name>PrintCopyIfCutterNotFound</name>
+    <synonym>
+      <key>en</key>
+      <value>Print copy if cutter not found</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -246,6 +311,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a7ae260f-ae67-448f-8dd2-6905d423d0e9">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="576b733a-f7ce-437e-8408-c2b697fb0626">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -56,17 +56,9 @@ Scenario: _0154100 preparation ( filling documents)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -77,6 +69,14 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog BankTerms objects (for retail)	
 	* Workstation
 		When create Workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I change checkbox "Postpone with reserve"
+		And I change checkbox "Postpone without reserve"
+		And I click "Save and close" button				
 	* Load RSR
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -421,9 +421,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
@@ -448,10 +448,10 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And I click "Post" button	
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
-			| '3'   | '$$Rov3RetailReturnReceipt1$$'   | ''                                                     | '$$Rov3RetailReturnReceipt1$$'           | ''            | '8,000'      | '                                    '   | ''               | '$$Rov3RetailReturnReceipt1$$'            |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| '3' | '$$Rov3RetailReturnReceipt1$$' | ''                                                   | '$$Rov3RetailReturnReceipt1$$'         | ''          | '8,000'    | '                                    ' | ''             | '$$Rov3RetailReturnReceipt1$$'         |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                            | 'Quantity'    |
@@ -464,9 +464,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And in the table "ItemList" I click "Delete" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '2,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
@@ -479,9 +479,9 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 		And I finish line editing in "ItemList" table			
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'                            | 'Basis'                                                | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | ''            | '1,000'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'   | 'RRR'            | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55'    |
-			| '2'   | '$$Rov2RetailReturnReceipt1$$'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | ''            | '1,000'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'   | 'RRR'            | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd'    |
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '1,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
 		And I click "Cancel posting" button	
 		And I close all client application windows
 
@@ -557,9 +557,9 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 	* Check RowIDInfo
 		And I click "Show row key" button		
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''            | '1,000'      | 'RRR'             |
-			| '2'   | 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''            | '2,000'      | 'RRR'             |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '1,000'    | 'RRR&RGR'      |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '2,000'    | 'RRR&RGR'      |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
 		And I close all client application windows					
@@ -576,7 +576,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -673,7 +673,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -751,7 +751,7 @@ Scenario: _0154139 check payments form in the Point of sale
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1321,7 +1321,7 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1363,7 +1363,7 @@ Scenario: _0154188 check customer on change in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add items and payment
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1429,7 +1429,7 @@ Scenario: _0154141 manual price adjustment in the POS
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    | 'Offers'   | 'Total'     |
 			| 'Dress'   | 'L/Green'    | '1,000'      | '550,00'   | ''         | '550,00'    |
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -1483,7 +1483,7 @@ Scenario:  _0154142 change comment in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1523,7 +1523,7 @@ Scenario:  _0154143 change payment term in POS
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add products
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -1540,6 +1540,9 @@ Scenario:  _0154143 change payment term in POS
 			| 'Description'              |
 			| 'Retail partner term 2'    |
 			And I click the button named "FormCreate"
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I input "Retail partner term 2" text in "ENG" field
 			And I click Select button of "Multi currency movement type" field
 			Then "Multi currency movement types" window is opened
@@ -2296,6 +2299,11 @@ Scenario:  _0154149 create Cash statement
 				| 'Movement type 1'     |
 			And I select current line in "List" table		
 			And I set "Use basis document" checkbox in "PaymentList" table
+			And I click choice button of "Receipting account" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Bank account, TRY'   |
+			And I select current line in "List" table
 			And I finish line editing in "PaymentList" table
 			And I go to the last line in "PaymentList" table
 			And I set "Use basis document" checkbox in "PaymentList" table
@@ -2340,25 +2348,25 @@ Scenario:  _0154149 create Cash statement
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'                    | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| 'Document registrations records'               | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                              | ''          | ''           | ''             | ''       | ''        | ''                             | ''         | ''                     | ''                          | ''                     |
-			| ''                                             | 'Record type' | 'Period'                        | 'Resources' | ''           | 'Dimensions'   | ''       | ''        | ''                             | ''         | ''                     | ''                          | 'Attributes'           |
-			| ''                                             | ''            | ''                              | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Account' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                     | 'Deferred calculation' |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | '2,21'       | 'Main Company' | ''       | ''        | 'Reporting currency'           | 'USD'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | ''       | ''        | 'Local currency'               | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
-			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | ''       | ''        | 'en description is empty'      | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| '$$CashStatement01541491$$'                    | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| 'Document registrations records'               | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                              | ''          | ''           | ''             | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | ''                     |
+			| ''                                             | 'Record type' | 'Period'                        | 'Resources' | ''           | 'Dimensions'   | ''                   | ''                  | ''                             | ''         | ''                     | ''                          | 'Attributes'           |
+			| ''                                             | ''            | ''                              | 'Amount'    | 'Commission' | 'Company'      | 'Branch'             | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                     | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | '2,21'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'Reporting currency'           | 'USD'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'Local currency'               | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Front office'       | 'Bank account, TRY' | 'en description is empty'      | 'TRY'      | 'TRY'                  | '$$CashStatement01541491$$' | 'No'                   |
 		And I select "Cash in transit" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'        | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| 'Document registrations records'   | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| 'Register  "Cash in transit"'      | ''              | ''                                | ''            | ''               | ''                            | ''               | ''             | ''           | ''                               | ''                        |
-			| ''                                 | 'Record type'   | 'Period'                          | 'Resources'   | 'Dimensions'     | ''                            | ''               | ''             | ''           | ''                               | 'Attributes'              |
-			| ''                                 | ''              | ''                                | 'Amount'      | 'Company'        | 'Basis document'              | 'From account'   | 'To account'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '68,48'       | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '400'         | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                 | 'Receipt'       | '$$DateCashStatement01541491$$'   | '400'         | 'Main Company'   | '$$CashStatement01541491$$'   | 'Transit Main'   | ''             | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records' | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "Cash in transit"'    | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''             | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'From account' | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 		
 		
@@ -2396,6 +2404,9 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -2718,6 +2729,9 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
 			And I click Open button of "Partner term" field
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I click Select button of "Store" field
 			And I go to line in "List" table
 				| 'Description'     |
@@ -3550,7 +3564,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
-				| '400,43'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'No'                    | '144,15'        | '800,85'        | '945,00'           |
+				| '400,42'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'No'                    | '144,15'        | '800,85'        | '945,00'           |
 				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -3560,7 +3574,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
-				| '400,43'    | 'Trousers'    | '18%'    | '38/Yellow'    | '3,000'       | 'pcs'     | 'No'                    | '216,23'        | '1 201,29'      | '1 417,52'         |
+				| '400,42'    | 'Trousers'    | '18%'    | '38/Yellow'    | '3,000'       | 'pcs'     | 'No'                    | '216,23'        | '1 201,26'      | '1 417,49'         |
 				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
 		* Change total amount and check tax and net amount calculation (Price does not include tax)
 			And I go to line in "ItemList" table
@@ -3676,7 +3690,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
-				| '400,43'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'No'                    | '144,15'        | '800,85'        | '945,00'           |
+				| '400,42'    | 'Trousers'    | '18%'    | '38/Yellow'    | '2,000'       | 'pcs'     | 'No'                    | '144,15'        | '800,85'        | '945,00'           |
 				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -3686,7 +3700,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'     | 'Item'        | 'VAT'    | 'Item key'     | 'Quantity'    | 'Unit'    | 'Dont calculate row'    | 'Tax amount'    | 'Net amount'    | 'Total amount'     |
-				| '400,43'    | 'Trousers'    | '18%'    | '38/Yellow'    | '3,000'       | 'pcs'     | 'No'                    | '216,23'        | '1 201,29'      | '1 417,52'         |
+				| '400,42'    | 'Trousers'    | '18%'    | '38/Yellow'    | '3,000'       | 'pcs'     | 'No'                    | '216,23'        | '1 201,26'      | '1 417,49'         |
 				| '550,00'    | 'Dress'       | '18%'    | 'L/Green'      | '5,000'       | 'pcs'     | 'No'                    | '495,00'        | '2 750,00'      | '3 245,00'         |
 		* Change total amount and check tax and net amount calculation (Price does not include tax)
 			And I go to line in "ItemList" table
@@ -3789,7 +3803,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"	
 	* Add items and payment
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -3970,7 +3984,7 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (pick up)
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
 			| '(10002) Trousers'    |
@@ -4102,8 +4116,7 @@ Scenario: _0154195 set sales person from POS
 				| 'Item'     | 'Sales person'     | 'Item key'    | 'Serials'    | 'Price'     | 'Quantity'    | 'Offers'    | 'Total'      |
 				| 'Shirt'    | 'Anna Petrova'     | '38/Black'    | ''           | '350,00'    | '1,000'       | ''          | '350,00'     |
 				| 'Dress'    | 'David Romanov'    | 'L/Green'     | ''           | '550,00'    | '1,000'       | ''          | '550,00'     |
-			And I click "Payment (+)" button
-			And I click the button named "Enter"
+			And I click "Clear current receipt" button
 			And I close all client application windows
 
 Scenario: _0154196 check comission calculation in the Retail sales receipt
@@ -4323,6 +4336,7 @@ Scenario: _0154198 copy line in Payment tab in the Retail return receipt
 			| '1'   | '100,33'   | '1,00'         | 'Card 01'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '1,00'       |
 		And I close all client application windows
 		
+	
 
 Scenario: _0154199 copy line in Payment tab in the Retail sales receipt	
 	And I close all client application windows
@@ -4377,7 +4391,258 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'             | 'Percent'    |
 			| '1'   | '100,33'   | '1,00'         | 'Card 01'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '1,00'       |
-		And I close all client application windows		
-			
+		And I close all client application windows
 		
-			
+		
+
+Scenario: _0154200 create postponed RSR with a reservation (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute	
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table	
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt with reserve" button
+		Then the number of "ItemList" table lines is "равно" "0"		
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed with reserve"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR1$$" variable
+		And I delete "$$PostponedRSR1$$" variable
+		And I delete "$$DatePostponedRSR1$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR1$$"
+		And I save the window as "$$PostponedRSR1$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR1$$"
+	* Check reservation
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR1$$'                   | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'      | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4012 Stock Reservation"' | ''            | ''                      | ''          | ''           | ''         | ''                  |
+			| ''                                    | 'Record type' | 'Period'                | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                    | ''            | ''                      | 'Quantity'  | 'Store'      | 'Item key' | 'Order'             |
+			| ''                                    | 'Receipt'     | '$$DatePostponedRSR1$$' | '1'         | 'Store 01'   | 'XS/Blue'  | '$$PostponedRSR1$$' |
+		And I close all client application windows
+
+Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"	
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR2$$" variable
+		And I delete "$$PostponedRSR2$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR2$$"
+		And I save the window as "$$PostponedRSR2$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+	* Check 
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR2$$'              |
+			| 'Document registrations records' |
+		And I close current window
+
+
+Scenario: _0154202 create postponed RRR (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table	
+	* Postponed RSR with a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"	
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I delete "$$NumberPostponedRSR2$$" variable
+		And I delete "$$PostponedRSR2$$" variable
+		And I delete "$$DatePostponedRSR2$$" variable
+		And I save the value of "Number" field as "$$NumberPostponedRSR2$$"
+		And I save the window as "$$PostponedRSR2$$"
+		And I save the value of the field named "Date" as  "$$DatePostponedRSR2$$"
+	* Check 
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PostponedRSR2$$'              |
+			| 'Document registrations records' |
+		And I close current window
+
+Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Sam Jons'       |
+		And I select current line in "List" table
+		And I click "OK" button	
+		And I click the button named "Return"		
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table
+	* Postponed RSR without a reservation
+		And I click "Postpone current receipt" button
+		Then the number of "ItemList" table lines is "равно" "0"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "StatusType" became equal to "Postponed"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | 'pcs'  | '79,32'      | ''                  | '1,000'    | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | 'Store 01' |
+	And I close all client application windows
+
+
+Scenario: _0154205 cancel postponed receipt (CRS not used)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Open postponed receipt
+		And I click "Open postponed receipt" button
+	* Cancel postponed receipt
+		And I select all lines of "Receipts" table
+		And in the table "Receipts" I click "Cancel receipts" button
+		Then the number of "Receipts" table lines is "равно" "0"
+		Then in the TestClient message log contains lines by template:
+			|'* postponed receipts cancelled'|
+	And I close all client application windows
+	
+		

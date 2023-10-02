@@ -284,14 +284,6 @@ EndProcedure
 
 #EndRegion
 
-#Region INVENTORY_ORIGIN
-
-Procedure ItemListInventoryOriginOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListInventoryOriginOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
 #Region PRICE_TYPE
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -372,10 +364,10 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+#Region VAT_RATE
 
-Procedure ItemListTaxValueOnChange(Object, Form, Item) Export
-	ViewClient_V2.ItemListTaxRateOnChange(Object, Form);
+Procedure ItemListVatRateOnChange(Object, Form, Item) Export
+	ViewClient_V2.ItemListVatRateOnChange(Object, Form);
 EndProcedure
 
 #EndRegion

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @RetailDocuments
@@ -63,17 +63,9 @@ Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -97,6 +89,21 @@ Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create RetailSalesOrder, RetailGoodsReceipt, RetailShipmentConfirmation, BR and CR objects for check links IM documents in POS
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(318).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailShipmentConfirmation.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailShipmentConfirmation.FindByNumber(318).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailGoodsReceipt.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
 		
 	
 Scenario: _01551001 check preparation
@@ -472,6 +479,23 @@ Scenario: _0155268 create Retail GR based on Retail SC
 			| '3'   | 'Product 1 with SLN'             | 'ODS'        | '9090098908'           | 'pcs'    | '1,000'      | 'Store 01'   | ''                                             |
 			| '4'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '2,000'      | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
 			| '5'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '2,000'      | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+	* Change quantity and check shipment confirmation table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Show hidden tables" button
+		And I expand "ShipmentConfirmations [5]" group
+		And I move to "ShipmentConfirmations [5]" tab
+		And "ShipmentConfirmations" table became equal
+			| 'Quantity' | 'Quantity in shipment confirmation' |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '1,000'                             |
+			| '1,000'    | '2,000'                             |
+			| '2,000'    | '2,000'                             |						
 		And I close all client application windows
 		
 Scenario: _0155269 create Retail sales receipt based on Retail SC
@@ -492,12 +516,12 @@ Scenario: _0155269 create Retail sales receipt based on Retail SC
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Price type'          | 'Item'                           | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'                                  |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| ''                    | 'Product 1 with SLN'             | 'ODS'        | '9090098908'           | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| 'Basic Price Types'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '150,71'       | '2,000'      | '520,00'   | '18%'   | '52,00'           | '837,29'       | '988,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
-			| 'Basic Price Types'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '202,88'       | '2,000'      | '700,00'   | '18%'   | '70,00'           | '1 127,12'     | '1 330,00'       | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+			| 'Price type'        | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '150,71'     | '2,000'    | '520,00' | '18%' | '52,00'         | '837,29'     | '988,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
+			| 'Basic Price Types' | 'Boots'                        | '37/18SD'  | ''                   | 'pcs'  | '202,88'     | '2,000'    | '700,00' | '18%' | '70,00'         | '1 127,12'   | '1 330,00'     | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -595,7 +619,7 @@ Scenario: _0155270 create Retail GR	(link)
 		And I close all client application windows
 				
 				
-Scenario: _0155271 create Retail sales reeipt based on RSC with GR
+Scenario: _0155271 create Retail sales receipt based on RSC with GR
 	And I close all client application windows
 	* Select Retail SC
 		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"									
@@ -613,10 +637,10 @@ Scenario: _0155271 create Retail sales reeipt based on RSC with GR
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Price type'          | 'Item'                           | 'Item key'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'                                  |
-			| ''                    | 'Product 7 with SLN (new row)'   | 'PZU'        | '9009099'              | 'pcs'    | ''             | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | 'Store 01'   | ''                                             |
-			| 'Basic Price Types'   | 'Dress'                          | 'XS/Blue'    | ''                     | 'pcs'    | '75,36'        | '1,000'      | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
-			| 'Basic Price Types'   | 'Boots'                          | '37/18SD'    | ''                     | 'pcs'    | '101,44'       | '1,000'      | '700,00'   | '18%'   | '35,00'           | '563,56'       | '665,00'         | 'Store 01'   | 'Sales order 315 dated 09.01.2023 13:02:11'    |
+			| 'Price type'        | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
+			| 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | ''           | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'Store 01' | ''                                          |
+			| 'Basic Price Types' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '75,36'      | '1,000'    | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
+			| 'Basic Price Types' | 'Boots'                        | '37/18SD'  | ''                   | 'pcs'  | '101,44'     | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | 'Store 01' | 'Sales order 315 dated 09.01.2023 13:02:11' |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -791,7 +815,190 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 	And I close all client application windows
 	
 				
+Scenario: _0155273 select items from RSC in POS
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I click "OK" button
+	* Select RSC with RGR based on RSO
+		And I click "Select basis document" button
+		And "SalesOrders" table became equal
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
+			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       | ''            |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+		And "RetailShipmentConfirmation" table became equal
+			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
+			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+		And I go to line in "RetailShipmentConfirmation" table
+			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
+			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+		And I activate field named "SalesOrdersDate" in "SalesOrders" table
+		And I activate field named "RetailShipmentConfirmationDate" in "RetailShipmentConfirmation" table
+		And in the table "SalesOrders" I click "Select" button
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I click "OK" button		
+	* Check
+		And "ItemList" table became equal
+			| 'Item'                         | 'Sales person'  | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress'                        | 'David Romanov' | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '26,00'  | '494,00' |
+			| 'Product 7 with SLN (new row)' | 'David Romanov' | 'PZU'      | '9009099' | '200,00' | '1,000'    | ''       | '200,00' |		
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' |
+			| ' '            | 'Advance'      | '20,00'  |
+			| ' '            | 'Cash'         | '674,00' |
+		And I click "OK" button
+		And I move to the next attribute
+		And I click "Select basis document" button
+		And "RetailShipmentConfirmation" table became equal
+			| 'Number' | 'Date'                | 'Retail customer' | 'Transaction type' |
+			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | 'Courier delivery' |
+		And I close current window
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'                         | 'Sales person'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '1' | 'Basic Price Types'       | 'Dress'                        | 'David Romanov' | 'XS/Blue'  | ''                   | 'No'                 | ''                   | 'pcs'  | '76,46'      | ''                  | '1,000'    | '520,00' | '18%' | '18,78'         | '424,76'     | '501,22'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+			| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'David Romanov' | 'PZU'      | ''                   | 'No'                 | '9009099'            | 'pcs'  | '29,41'      | ''                  | '1,000'    | '200,00' | '18%' | '7,22'          | '163,37'     | '192,78'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+	And I close all client application windows
+	
+
+
+Scenario: _0155274 select items from RSO in POS		
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I click "OK" button		
+	* Select RSO
+		And I click "Select basis document" button
+		And I go to line in "SalesOrders" table
+			| 'Amount'   | 'Date'                | 'Number' | 'Retail customer' |
+			| '1 188,00' | '11.08.2023 15:51:30' | '318'    | 'Daniel Smith'    |
+		And in the table "SalesOrders" I click "Select" button
+		If "Select sales person" window is opened Then
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I click "OK" button		
+	* Check 
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress'                        | 'XS/Blue'  | '520,00' | '2,000'    | '52,00'  | '988,00' |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | '200,00' | '1,000'    | ''       | '200,00' |
+		And I go to line in "ItemList" table
+			| 'Item'                         | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | '200,00' | '1,000'    | '200,00' |
+		And I activate "Serials" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Serials" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '9009099'       |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check RSO is not displayed again
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I click "OK" button	
+		And I click "Select basis document" button
+		And "SalesOrders" table does not contain lines
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+		And I close all client application windows
+		
 				
+Scenario: _0155275 add items in POS	and link lines to basis document
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I click "OK" button		
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "978020137962" text in the field named "Barcode"
+		And I click "Link unlink basis documents" button
+		And "ItemListRows" table became equal
+			| '#' | 'Row presentation' | 'Unit' | 'Quantity' | 'Store'    |
+			| '1' | 'Boots (37/18SD)'  | 'pcs'  | '1,000'    | 'Store 01' |
+		And "BasisesTree" table became equal
+			| 'Row presentation'                          | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 317 dated 11.08.2023 15:50:42' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                           | '3,000'    | 'pcs'  | '700,00' | 'TRY'      |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | '35,00'  | '665,00' |
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'        | 'Item'  | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '1' | 'Basic Price Types' | 'Boots' | ''             | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+		And I close all client application windows
+		
+				
+
+					
+							
+				
+				
+		
+				
+		
+						
+				
+						
+				
+				
+				
+		
+		
+
+							
 			
 						
 

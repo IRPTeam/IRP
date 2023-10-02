@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CreationBasedMulti
@@ -53,20 +53,9 @@ Scenario: _0295200 preparation (creation mechanism based on for sales documents)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
+
+
 
 Scenario: _02952001 check preparation
 	When check preparation
@@ -1010,10 +999,10 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'VAT'  | 'Item'      | 'Price'   | 'Item key'   | 'Tax amount'  | 'SalesTax'  | 'Quantity'  | 'Price type'         | 'Unit'  | 'Dont calculate row'  | 'Net amount'  | 'Total amount'  | 'Store'     | 'Sales order'            |
-		| '18%'  | 'Dress'     | '520,00'  | 'M/White'    | '1 689,41'    | '1%'        | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '8 710,59'    | '10 400,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
-		| '18%'  | 'Dress'     | '550,00'  | 'L/Green'    | '1 786,88'    | '1%'        | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '9 213,12'    | '11 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
-		| '18%'  | 'Trousers'  | '400,00'  | '36/Yellow'  | '1 949,32'    | '1%'        | '30,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '10 050,68'   | '12 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
+		| 'VAT'  | 'Item'      | 'Price'   | 'Item key'   | 'Tax amount'  | 'Quantity'  | 'Price type'         | 'Unit'  | 'Dont calculate row'  | 'Net amount'  | 'Total amount'  | 'Store'     | 'Sales order'            |
+		| '18%'  | 'Dress'     | '520,00'  | 'M/White'    | '1 586,44'    | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '8 813,56'    | '10 400,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
+		| '18%'  | 'Dress'     | '550,00'  | 'L/Green'    | '1 677,97'    | '20,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '9 322,03'    | '11 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
+		| '18%'  | 'Trousers'  | '400,00'  | '36/Yellow'  | '1 830,51'    | '30,000'    | 'Basic Price Types'  | 'pcs'   | 'No'                  | '10 169,49'   | '12 000,00'     | 'Store 02'  | '$$SalesOrder090408$$'   |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice0904083$$" variable
 		And I delete "$$SalesInvoice0904083$$" variable

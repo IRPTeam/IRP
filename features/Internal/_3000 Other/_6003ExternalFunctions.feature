@@ -54,15 +54,7 @@ Scenario: _602700 preparation (external function)
 		When Create information register Barcodes records
 		When update ItemKeys
 		When Create catalog ExternalFunctions objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
@@ -121,20 +113,20 @@ Scenario: _602704 check function date as name
 			| 'Description'    | 'Reference'         |
 			| 'Date as name'   | '$CurrentDate1$'    |
 
-Scenario: _602706 check user message
-	Then I stop script execution "Skipped"
-	And I close all client application windows
-	* Open External functions
-		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
-	* Select function
-		And I go to line in "List" table
-			| 'Description'    | 'Enable'    |
-			| 'User message'   | 'Yes'       |
-		And I select current line in "List" table	
-	* Сheck for the current date update		
-		And I click the button named "Run"
-		Then there are lines in TestClient message log
-			| 'Some test'    |
+# Scenario: _602706 check user message
+# 	Then I stop script execution "Skipped"
+# 	And I close all client application windows
+# 	* Open External functions
+# 		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
+# 	* Select function
+# 		And I go to line in "List" table
+# 			| 'Description'    | 'Enable'    |
+# 			| 'User message'   | 'Yes'       |
+# 		And I select current line in "List" table	
+# 	* Сheck for the current date update		
+# 		And I click the button named "Run"
+# 		Then there are lines in TestClient message log
+# 			| 'Some test'    |
 		
 
 // Scenario: _602710 sheduller settings (Normal test)

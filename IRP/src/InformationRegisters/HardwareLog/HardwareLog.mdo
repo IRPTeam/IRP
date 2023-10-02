@@ -92,6 +92,22 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
+    <name>User</name>
+    <synonym>
+      <key>en</key>
+      <value>User</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="08be0c27-f6ba-4fd9-ad3b-b17d813e8e48">
     <name>Hardware</name>
     <synonym>
@@ -108,22 +124,6 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="7945b88b-3c6c-49dd-bae0-073f7b49761a">
@@ -145,15 +145,6 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <forms uuid="90af586c-5571-464d-b871-177709a36299">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="aaf89ea4-cf1f-46cb-a1c2-2ed28a1b7848">
     <name>ListForm</name>
     <synonym>
@@ -163,4 +154,35 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="c11face1-72f0-4f2e-a014-741707416bb3">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2ae02893-140c-4074-b87d-db379d9b78d9">
+    <name>LogAnalyze</name>
+    <synonym>
+      <key>en</key>
+      <value>Log analyze</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <commands uuid="3c0d1b37-bfbb-400c-98fc-a190a12c339b">
+    <name>AnalyzeLog</name>
+    <synonym>
+      <key>en</key>
+      <value>Analyze log</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>CatalogRef.Hardware</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:InformationRegister>

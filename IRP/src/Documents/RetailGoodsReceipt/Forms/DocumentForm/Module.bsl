@@ -67,10 +67,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
-	IsCourierDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"));
-	IsPickupDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"));
+	IsCourierDelivery    = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"));
+	IsPickupDelivery     = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"));
+	IsReturnFromCustomer = (Object.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	
 	Form.Items.Courier.Visible = IsCourierDelivery;
+			
+	Form.Items.LegalName.Enabled = IsReturnFromCustomer And ValueIsFilled(Object.Partner);
+	Form.Items.Partner.Visible   = IsReturnFromCustomer;
+	Form.Items.LegalName.Visible = IsReturnFromCustomer;
 	
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
@@ -82,6 +87,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+EndProcedure
+
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
 EndProcedure
 
 #EndRegion
@@ -101,6 +121,44 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocRetailGoodsReceiptClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocRetailGoodsReceiptClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailGoodsReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocRetailGoodsReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocRetailGoodsReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailGoodsReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocRetailGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -263,6 +321,20 @@ EndProcedure
 
 #EndRegion
 
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	SourceOfOriginClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
+	SourceOfOriginClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion
@@ -346,6 +418,7 @@ EndProcedure
 
 #Region COPY_PASTE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure CopyToClipboard(Command)
 	CopyPasteClient.CopyToClipboard(Object, ThisObject);
@@ -366,6 +439,7 @@ Function CopyToClipboardServer(CopySettings)
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
 &AtClient
 Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
@@ -390,6 +464,7 @@ EndFunction
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -419,6 +494,7 @@ Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
@@ -469,7 +545,7 @@ EndProcedure
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");

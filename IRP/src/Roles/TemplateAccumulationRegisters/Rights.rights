@@ -12,6 +12,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit</name>
@@ -25,6 +29,10 @@
 )</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R8015T_ConsignorPrices</name>
@@ -34,6 +42,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -45,6 +57,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R7030T_ProductionPlanning</name>
@@ -54,6 +70,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -65,6 +85,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R1031B_ReceiptInvoicing</name>
@@ -74,6 +98,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -85,6 +113,10 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3027B_EmployeeCashAdvance</name>
@@ -94,6 +126,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -105,6 +141,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.T1050T_AccountingQuantities</name>
@@ -114,6 +154,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -125,6 +169,10 @@
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4010B_ActualStocks</name>
@@ -134,6 +182,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -145,6 +197,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R5021T_Revenues</name>
@@ -154,6 +210,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -165,6 +225,10 @@
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2020B_AdvancesFromCustomers</name>
@@ -174,6 +238,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -185,6 +253,10 @@
 				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.TM1010T_RowIDMovements</name>
@@ -194,6 +266,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -205,6 +281,10 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R5010B_ReconciliationStatement</name>
@@ -214,6 +294,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -225,6 +309,10 @@
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4032B_GoodsInTransitOutgoing</name>
@@ -234,6 +322,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -245,6 +337,10 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3015B_CashAdvance</name>
@@ -254,6 +350,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -265,6 +365,10 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R5041B_TaxesPayable</name>
@@ -274,6 +378,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -285,6 +393,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2013T_SalesOrdersProcurement</name>
@@ -294,6 +406,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -305,6 +421,10 @@
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4015T_InternalSupplyRequests</name>
@@ -314,6 +434,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -325,6 +449,10 @@
 				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R1002T_PurchaseReturns</name>
@@ -334,6 +462,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -345,6 +477,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2010T_SalesOrders</name>
@@ -354,6 +490,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -365,15 +505,23 @@
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</name>
+		<name>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -388,6 +536,10 @@
 )</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2002T_SalesReturns</name>
@@ -397,6 +549,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -408,6 +564,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.TM1010B_RowIDMovements</name>
@@ -417,6 +577,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -428,6 +592,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</name>
@@ -437,6 +605,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -448,15 +620,23 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8010B_TradeAgentInventory</name>
+		<name>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -468,6 +648,10 @@
 				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3010B_CashOnHand</name>
@@ -478,15 +662,23 @@
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</name>
+		<name>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -498,6 +690,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3024B_SalesOrdersToBePaid</name>
@@ -507,6 +703,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -518,6 +718,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R5012B_VendorsAging</name>
@@ -527,6 +731,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -538,6 +746,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2022B_CustomersPaymentPlanning</name>
@@ -547,6 +759,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -558,6 +774,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R9010B_SourceOfOriginStock</name>
@@ -567,6 +787,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -578,6 +802,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4021B_StockTransferOrdersReceipt</name>
@@ -587,6 +815,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -598,6 +830,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3011T_CashFlow</name>
@@ -607,6 +843,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -618,6 +858,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R6030T_BatchShortageOutgoing</name>
@@ -627,6 +871,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -638,6 +886,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4035B_IncomingStocks</name>
@@ -647,6 +899,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -658,6 +914,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R1020B_AdvancesToVendors</name>
@@ -667,6 +927,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -678,6 +942,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3050T_PosCashBalances</name>
@@ -687,6 +955,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -698,6 +970,10 @@
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</name>
@@ -707,6 +983,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "Account", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -718,15 +998,23 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8012B_ConsignorInventory</name>
+		<name>AccumulationRegister.DELETE_R8012B_ConsignorInventory</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -738,6 +1026,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R6010B_BatchWiseBalance</name>
@@ -748,6 +1040,10 @@
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R1005T_PurchaseSpecialOffers</name>
@@ -757,6 +1053,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -771,6 +1071,10 @@
 )</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R1021B_VendorsTransactions</name>
@@ -780,6 +1084,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -791,6 +1099,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R6050T_SalesBatches</name>
@@ -800,6 +1112,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -811,6 +1127,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R4022B_StockTransferOrdersShipment</name>
@@ -820,6 +1140,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -831,6 +1155,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2014T_CanceledSalesOrders</name>
@@ -840,6 +1168,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -851,6 +1183,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R7010T_DetailingSupplies</name>
@@ -860,6 +1196,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -871,6 +1211,10 @@
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</name>
@@ -880,6 +1224,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -891,6 +1239,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R6060T_CostOfGoodsSold</name>
@@ -900,6 +1252,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -911,6 +1267,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "Store", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R6020B_BatchBalance</name>
@@ -920,6 +1280,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -931,6 +1295,10 @@
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2005T_SalesSpecialOffers</name>
@@ -940,6 +1308,10 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -951,13 +1323,13 @@
 				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.CurrencyMovementType</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -966,20 +1338,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.FromAccount</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.StandardAttribute.Recorder</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -988,20 +1352,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.Company</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.ToAccount</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1010,20 +1366,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.StandardAttribute.LineNumber</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.BasisDocument</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1032,20 +1380,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.Dimension.Currency</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.Resource.Amount</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1054,20 +1394,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.Attribute.DeferredCalculation</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.StandardAttribute.RecordType</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1076,20 +1408,12 @@
 	<object>
 		<name>AccumulationRegister.CashInTransit.StandardAttribute.Active</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.CashInTransit.StandardAttribute.Period</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1098,20 +1422,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.StandardAttribute.Recorder</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.Store</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1120,20 +1436,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.Branch</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.ItemKey</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1142,20 +1450,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Resource.OffersAmount</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.StandardAttribute.LineNumber</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1164,20 +1464,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.RowKey</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1186,20 +1478,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.Company</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.StandardAttribute.Active</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1208,20 +1492,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.RetailSalesReceipt</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Resource.Quantity</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1230,20 +1506,12 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Resource.NetAmount</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.StandardAttribute.Period</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1252,10 +1520,6 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Resource.Amount</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -1263,12 +1527,211 @@
 	<object>
 		<name>AccumulationRegister.R2050T_RetailSales.Dimension.SalesPerson</name>
 		<right>
-			<name>View</name>
+			<name>Edit</name>
 			<value>false</value>
 		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.StandardAttribute.Active</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.FinancialMovementType</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.Branch</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Resource.Amount</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Attribute.DeferredCalculation</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.StandardAttribute.Recorder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.PlanningPeriod</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.Direction</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.CurrencyMovementType</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.StandardAttribute.Period</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.Currency</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.StandardAttribute.LineNumber</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.Account</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3011T_CashFlow.Dimension.Company</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.StandardAttribute.RecordType</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.StandardAttribute.Recorder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.Partner</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.Branch</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Attribute.DeferredCalculation</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Resource.Amount</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.Currency</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.StandardAttribute.Active</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.Company</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.StandardAttribute.LineNumber</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.TransactionCurrency</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.Dimension.CurrencyMovementType</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R3027B_EmployeeCashAdvance.StandardAttribute.Period</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R2006T_Certificates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<restrictionTemplate>

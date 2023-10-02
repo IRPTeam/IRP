@@ -9,16 +9,16 @@ Function GetTaxRateByCompany(Parameters) Export
 	Return TaxesServer._GetTaxRateByCompany(Parameters);
 EndFunction
 
-Function GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
-	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+Function GetTaxesInfo(Date, Company, DocumentName, TransactionType, TaxKind) Export
+	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType, TaxKind);
 EndFunction
 
 Function GetTaxRatesByTax(Tax) Export
 	Return TaxesServer._GetTaxRatesByTax(Tax);
 EndFunction
 
-Function CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
-	Return TaxesServer._CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse);
+Function GetVatRef() Export
+	Return TaxesServer._GetVatRef();
 EndFunction
 
 // Get item info
@@ -41,10 +41,13 @@ EndFunction
 
 // Commission trade
 
-Function GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString) Export
-	Return CommissionTradeServer._GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString);
+Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
+	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey);
 EndFunction
 
-Function GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString) Export
-	Return CommissionTradeServer._GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString);
+// Other
+
+Function GetBankTermInfo(PaymentType, BankTerm) Export
+	Return ModelServer_V2._GetBankTermInfo(PaymentType, BankTerm);
 EndFunction
+

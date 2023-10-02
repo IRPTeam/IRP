@@ -109,7 +109,7 @@ Procedure FillTables_ByDocuments()
 	|		ELSE T6020S_BatchKeysInfo.ItemKey.Item.Weight
 	|	END AS Weight,
 	|	T6020S_BatchKeysInfo.Quantity,
-	|	T6020S_BatchKeysInfo.Amount
+	|	T6020S_BatchKeysInfo.InvoiceAmount AS Amount
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		INNER JOIN AllocationDocuments AS AllocationDocuments

@@ -2008,6 +2008,61 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListVatRate</name>
+          <id>955</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.VatRate</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListVatRateOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListVatRateExtendedTooltip</name>
+            <id>957</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListVatRateContextMenu</name>
+            <id>956</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <listChoiceMode>true</listChoiceMode>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListOffersAmount</name>
           <id>222</id>
           <visible>true</visible>
@@ -2150,7 +2205,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>EnterOnInput</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -3734,6 +3788,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>PaymentsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3772,6 +3827,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>PaymentsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3810,6 +3866,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>PaymentsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3857,6 +3914,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -5325,7 +5383,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>Autor</name>
+        <name>Author</name>
         <id>31</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -5336,7 +5394,7 @@
           <segments>Object.Author</segments>
         </dataPath>
         <extendedTooltip>
-          <name>AutorExtendedTooltip</name>
+          <name>AuthorExtendedTooltip</name>
           <id>33</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -5351,7 +5409,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AutorContextMenu</name>
+          <name>AuthorContextMenu</name>
           <id>32</id>
           <visible>true</visible>
           <enabled>true</enabled>

@@ -309,8 +309,15 @@ EndFunction
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
-	AccessKeyMap.Insert("Branch", Obj.ReceiveBranch);
+	BranchArray = New Array;
+	BranchArray.Add(Obj.Branch);
+	BranchArray.Add(Obj.ReceiveBranch);
+	AccessKeyMap.Insert("Branch", BranchArray);
+	
+	AccountArray = New Array;
+	AccountArray.Add(Obj.Receiver);
+	AccountArray.Add(Obj.Sender);
+	AccessKeyMap.Insert("Account", AccountArray);
 	Return AccessKeyMap;
 EndFunction
 

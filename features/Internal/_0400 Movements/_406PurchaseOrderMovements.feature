@@ -53,15 +53,7 @@ Scenario: _040115 preparation (Purchase order)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -266,13 +258,13 @@ Scenario: _040123 check Purchase order movements by the Register  "R1011 Receipt
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| 'Register  "R1011 Receipt of purchase orders"'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''             |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''             |
-			| ''                                               | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                          | 'Item key'     |
-			| ''                                               | 'Receipt'       | '12.02.2021 12:44:43'   | '5'           | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'    |
-			| ''                                               | 'Receipt'       | '12.02.2021 12:44:43'   | '10'          | 'Main Company'   | 'Front office'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'     |
+			| 'Purchase order 115 dated 12.02.2021 12:44:43' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          | ''                                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''          | ''                                     |
+			| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                        | 'Item key'  | 'Row key'                              |
+			| ''                                             | 'Receipt'     | '12.02.2021 12:44:43' | '5'         | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
+			| ''                                             | 'Receipt'     | '12.02.2021 12:44:43' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
 		And I close all client application windows
 	
 

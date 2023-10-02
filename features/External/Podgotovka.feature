@@ -1578,6 +1578,16 @@ Scenario: set True value to the constant Use commission trading
 		And I click "Save" button
 		And I close current window
 
+Scenario: set True value to the constant Use object access
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                    |
+			| 'Use object access'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set True value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
@@ -1651,23 +1661,6 @@ Scenario: set True value to the constant UseSimpleMode
 		And I execute 1C:Enterprise script at server
 				| "Constants.UseSimpleMode.Set(True);"     |
 
-Scenario: add sales tax settings 
-		Given I open hyperlink "e1cib/list/Catalog.Taxes"
-		And I go to line in "List" table
-				| 'Description'     |
-				| 'SalesTax'        |
-		And I select current line in "List" table
-		And I click Select button of "Plugins" field
-		And I go to line in "List" table
-				| 'Description'            |
-				| 'TaxCalculateVAT_TR'     |
-		And I select current line in "List" table
-		And I click "Settings" button
-		And I click "Ok" button
-		And I click "Save and close" button
-		And I close all client application windows
-		
-
 
 
 Scenario: add Additional Functionality extension
@@ -1696,17 +1689,20 @@ Scenario: add VAExtension
 
 Scenario: create Workstation
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
-		And I click the button named "FormCreate"
-		And I input "Workstation 01" text in "Description" field
-		And I click Select button of "Cash account" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Cash desk №2'    |
-		And I select current line in "List" table
-		And I click "Set current" button
-		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		If "List" table does not contain lines Then
+			| 'Description'       |
+			| 'Workstation 01'    |
+			And I click the button named "FormCreate"
+			And I input "Workstation 01" text in "Description" field
+			And I click Select button of "Cash account" field
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Cash desk №2'    |
+			And I select current line in "List" table
+			And I click "Set current" button
+			And I click "Save and close" button
+			And I close TestClient session
+			Given I open new TestClient session or connect the existing one
 
 
 Scenario: auto filling Configuration metadata catalog
@@ -2055,3 +2051,20 @@ Scenario: settings for Company (commission trade)
 		
 		
 
+Scenario: set False value to the constant Use source of origin	
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               |
+			| 'Use source of origin'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+	
+Scenario: set True value to the constant Use source of origin	
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               |
+			| 'Use source of origin'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window

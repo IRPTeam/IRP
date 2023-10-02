@@ -58,20 +58,8 @@ Scenario: _400000 preparation (Opening entries)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog RetailCustomers objects (check POS)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
+
 	
 Scenario: _4000001 check preparation
 	When check preparation
@@ -552,6 +540,9 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 		* Create test partner term with AP/AR posting detail - By partner terms (type Vendor)
 			And I click choice button of "Partner term" attribute in "AccountPayableByAgreements" table
 			And I click the button named "FormCreate"
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Vendor"
 			And I input "DFC Vendor by Partner terms" text in the field named "Description_en"
@@ -635,6 +626,9 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 		* Create test partner term with AP/AR posting detail - By partner terms (type Customer)
 			And I click choice button of "Partner term" attribute in "AccountReceivableByAgreements" table
 			And I click the button named "FormCreate"
+			And I expand "Agreement info" group
+			And I expand "Price settings" group
+			And I expand "Store and delivery" group
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Customer"
 			And I input "DFC Customer by Partner terms" text in the field named "Description_en"

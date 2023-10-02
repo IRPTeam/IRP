@@ -78,15 +78,9 @@ Scenario: _0154000 preparation
 		When Create information register T9510S_Staffing records
 		When Create information register T9530S_WorkDays records
 		When Create catalog AccrualAndDeductionTypes objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+
+
 
 Scenario: _01540001 check preparation
 	When check preparation

@@ -75,7 +75,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PriceIncludeTax.Visible          = IsRegular And Not IsOther;
 	Form.Items.NumberDaysBeforeShipment.Visible = IsRegular And Not IsOther;
 	Form.Items.Store.Visible                    = IsRegular And Not IsOther;
-	
+	Form.Items.RecordPurchasePrices.Visible 	= IsVendor;
 	If IsConsignor Or IsTradeAgent Or IsOther Then
 		Form.Items.GroupCreditlimitAndAging.Visible = False;
 	Else

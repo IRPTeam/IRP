@@ -59,28 +59,40 @@ EndProcedure
 
 #Region Service
 
+// Get document.
+// 
+// Parameters:
+//  Company - CatalogRef.Companies - Company
+//  Branch - CatalogRef.BusinessUnits - Branch
+//  Workstation - CatalogRef.Workstations - Workstation
+// 
+// Returns:
+//  DocumentRef.ConsolidatedRetailSales - Get document
 Function GetDocument(Company, Branch, Workstation) Export
 	
 	If Not UseConsolidatedRetailSales(Branch) Then
-		Return Undefined;
+		Return Documents.ConsolidatedRetailSales.EmptyRef();
 	EndIf;
 	
 	If Not (ValueIsFilled(Workstation) And ValueIsFilled(Workstation.CashAccount)) Then
-		Return Undefined;
+		Return Documents.ConsolidatedRetailSales.EmptyRef();
 	EndIf;
 		
 	Query = New Query();
 	Query.Text = 
-	"SELECT
-	|	ConsolidatedRetailSales.Ref
+	"SELECT TOP 1
+	|	ConsolidatedRetailSales.Ref,
+	|	ConsolidatedRetailSales.Status
 	|FROM
 	|	Document.ConsolidatedRetailSales AS ConsolidatedRetailSales
 	|WHERE
 	|	ConsolidatedRetailSales.Posted
 	|	AND ConsolidatedRetailSales.Company = &Company
 	|	AND ConsolidatedRetailSales.Branch = &Branch
-	|	AND ConsolidatedRetailSales.Status = VALUE(Enum.ConsolidatedRetailSalesStatuses.Open)
-	|	AND ConsolidatedRetailSales.CashAccount = &CashAccount";
+	|	AND ConsolidatedRetailSales.CashAccount = &CashAccount
+	|
+	|ORDER BY
+	|	ConsolidatedRetailSales.Date DESC";
 	
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch", Branch);
@@ -88,9 +100,14 @@ Function GetDocument(Company, Branch, Workstation) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
-		Return QuerySelection.Ref
+		If 	QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.Open
+			OR QuerySelection.Status = Enums.ConsolidatedRetailSalesStatuses.New Then
+			Return QuerySelection.Ref
+		Else
+			Return Documents.ConsolidatedRetailSales.EmptyRef();
+		EndIf;
 	EndIf;
-	Return Undefined;
+	Return Documents.ConsolidatedRetailSales.EmptyRef();
 EndFunction
 
 Function CreateDocument(Company, Branch, Workstation) Export
@@ -113,6 +130,12 @@ Function CreateDocument(Company, Branch, Workstation) Export
 	Return Doc.Ref;
 EndFunction
 
+// Document open shift.
+// 
+// Parameters:
+//  DocRef - DocumentRef.ConsolidatedRetailSales - Doc ref
+//  ShiftData - See EquipmentFiscalPrinterAPIClient.OutputParameters
+//  UserData - Undefined -  User data
 Procedure DocumentOpenShift(DocRef, ShiftData, UserData = Undefined) Export
 	DocObject = DocRef.GetObject();
 	DocObject.OpeningDate = ShiftData.DateTime;
@@ -163,6 +186,7 @@ Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
 	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
+		
 	If SalesReturnData = Undefined Then
 		Return Result;
 	EndIf;

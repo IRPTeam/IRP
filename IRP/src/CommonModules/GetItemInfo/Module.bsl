@@ -758,6 +758,7 @@ EndFunction
 //  * Barcode - String -
 //  * UseSerialLotNumber - Boolean -
 //  * isService - Boolean -
+//  * isCertificate - Boolean -
 //  * AlwaysAddNewRowAfterScan - Boolean -
 //  * EachSerialLotNumberIsUnique - Boolean -
 //  * ControlCodeString - Boolean -
@@ -792,7 +793,8 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	NOT ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 	|	"""" AS Barcode,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) OR ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS isService,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Certificate) AS IsCertificate,
 	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 	|	False AS EachSerialLotNumberIsUnique,
 	|	CASE WHEN &IgnoreCodeStringControl THEN 
@@ -807,7 +809,13 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
-	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
+	
+	Try
+		Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
+	Except
+		Query.SetParameter("IgnoreCodeStringControl", False);
+	EndTry;
+		
 	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
 	Query.SetParameter("PriceType", PriceType);
 	
@@ -1478,14 +1486,37 @@ Function isItemKeyInItemSegments(Val ItemKey, Val ItemSegments) Export
 	
 	Query = New Query;
 	Query.Text =
-		"SELECT
-		|	ItemSegments.Segment,
-		|	ItemSegments.ItemKey
-		|FROM
-		|	InformationRegister.ItemSegments AS ItemSegments
-		|WHERE
-		|	ItemSegments.Segment IN (&Segments)
-		|	AND ItemSegments.ItemKey = &ItemKey";
+	"SELECT
+	|	ItemKeys.Item,
+	|	ItemKeys.Ref AS ItemKey
+	|INTO tmpItems
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Ref = &ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemSegments.Segment,
+	|	ItemSegments.ItemKey
+	|FROM
+	|	InformationRegister.ItemSegments AS ItemSegments
+	|		INNER JOIN tmpItems AS tmpItems
+	|		ON ItemSegments.Segment IN (&Segments)
+	|		AND ItemSegments.ItemKey = tmpItems.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ItemSegments.Segment,
+	|	ItemSegments.ItemKey
+	|FROM
+	|	InformationRegister.ItemSegments AS ItemSegments
+	|		INNER JOIN tmpItems AS tmpItems
+	|		ON ItemSegments.Segment IN (&Segments)
+	|		AND ItemSegments.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|		AND ItemSegments.Item = tmpItems.Item";
 	
 	Query.SetParameter("ItemKey", ItemKey);
 	Query.SetParameter("Segments", ItemSegments);

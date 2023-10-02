@@ -57,15 +57,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Check or create SalesOrder023005
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then
@@ -819,5 +811,5 @@ Scenario: _300506 check connection to Shipment Confirmation report "Related docu
 		| $$NumberShipmentConfirmation028801$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

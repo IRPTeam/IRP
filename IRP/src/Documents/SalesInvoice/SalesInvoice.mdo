@@ -107,10 +107,6 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R8010B_TradeAgentInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -894,6 +890,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="66fafcd8-b14f-4452-8ed6-67c21b27ba6d">
+      <name>VatRate</name>
+      <synonym>
+        <key>en</key>
+        <value>VAT</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="eca9e13b-9cae-4ae4-bdea-a85980615377">
     <producedTypes>
@@ -991,10 +1001,10 @@
       <objectType typeId="f6b9e553-4b8e-43bb-bc15-9fd3867ef6c0" valueTypeId="786ce7e7-4890-4693-91ee-5e837e031b70"/>
       <rowType typeId="ff8c8407-3908-4119-bb96-1ab375916863" valueTypeId="a3129c66-7db7-41d5-8128-f961695cd28b"/>
     </producedTypes>
-    <name>TaxList</name>
+    <name>DELETE_TaxList</name>
     <synonym>
       <key>en</key>
-      <value>Tax list</value>
+      <value>DELETE tax list</value>
     </synonym>
     <attributes uuid="2ed432f6-7c8c-412d-9ea1-bb61ac2a8308">
       <name>Key</name>
@@ -1709,10 +1719,10 @@
       <objectType typeId="bbd30885-4a6e-4863-b603-f622ea740a36" valueTypeId="013e91ab-298f-4a7d-8117-12833895a22a"/>
       <rowType typeId="4a76c7cb-5d3c-4a73-ab4a-fe4952666c26" valueTypeId="c721d8b2-5532-4a4c-a9e5-59f99af400a5"/>
     </producedTypes>
-    <name>ConsignorBatches</name>
+    <name>DELETE_ConsignorBatches</name>
     <synonym>
       <key>en</key>
-      <value>Consignor batches</value>
+      <value>DELETE consignor batches</value>
     </synonym>
     <attributes uuid="d5ffab1e-e1ce-47a5-969c-8f62636eff2a">
       <name>Key</name>

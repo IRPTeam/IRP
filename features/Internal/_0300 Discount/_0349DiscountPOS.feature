@@ -67,7 +67,7 @@ Scenario: _034902 check discount price type calculation in POS
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -117,6 +117,7 @@ Scenario: _034902 check discount price type calculation in POS
 		* Payment
 			And I click "Payment (+)" button
 			Then "Payment" window is opened
+			And I click "Cash (/)" button
 			And I click the button named "Enter"
 			And I close all client application windows		
 		
@@ -126,7 +127,7 @@ Scenario: _034904 check two plus part of third discount in POS
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -218,6 +219,7 @@ Scenario: _034904 check two plus part of third discount in POS
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows
 		
@@ -227,7 +229,7 @@ Scenario: _034905 check price type discount + discount coupon in POS
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -279,6 +281,7 @@ Scenario: _034905 check price type discount + discount coupon in POS
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows
 		
@@ -297,7 +300,7 @@ Scenario: _034906 check price type discount + discount coupon in POS
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -334,6 +337,7 @@ Scenario: _034906 check price type discount + discount coupon in POS
 		And I click "Payment (+)" button
 		Then the form attribute named "SpecialOffer" became equal to "226,2"
 		Then the form attribute named "Amount" became equal to "1 333,8"
+		And I click "Cash (/)" button
 		And I click the button named "Enter"		
 	And I close all client application windows
 	
@@ -389,6 +393,7 @@ Scenario: _034908 check return with discount from POS (first select basis docume
 	* Payment
 		And I click "Payment Return" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows
 		
@@ -421,7 +426,7 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened
-		And I click "Show items" button
+		And I move to "Items" tab	
 		And I go to line in "ItemsPickup" table
 			| 'Item'             |
 			| '(10001) Dress'    |
@@ -480,6 +485,7 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		And I close all client application windows			
 				

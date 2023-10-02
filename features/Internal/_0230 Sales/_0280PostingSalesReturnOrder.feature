@@ -50,12 +50,6 @@ Scenario: _028000 preparation (Sales return order)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
@@ -67,8 +61,6 @@ Scenario: _028000 preparation (Sales return order)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -109,7 +101,7 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 			| 'Distribution department'   | '1'   | 'Dress'     | 'No'                   | '1,000'      | 'pcs'              | '75,36'        | '520,00'     | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | 'Revenue'        | 'XS/Blue'    | 'No'       | ''                | 'Alexander Orlov'    |
 			| 'Distribution department'   | '2'   | 'Shirt'     | 'No'                   | '12,000'     | 'pcs'              | '640,68'       | '350,00'     | '18%'   | ''                | '3 559,32'     | '4 200,00'       | ''                      | 'Store 02'   | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | 'Revenue'        | '36/Red'     | 'No'       | ''                | 'Alexander Orlov'    |
 			| 'Distribution department'   | '3'   | 'Boots'     | 'No'                   | '2,000'      | 'Boots (12 pcs)'   | '2 434,58'     | '8 400,00'   | '18%'   | '840,00'          | '13 525,42'    | '15 960,00'      | ''                      | 'Store 02'   | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | 'Revenue'        | '37/18SD'    | 'No'       | ''                | 'Alexander Orlov'    |
-			| 'Front office'              | '4'   | 'Service'   | 'No'                   | '1,000'      | 'pcs'              | '14,49'        | '100,00'     | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | 'Store 02'   | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | 'Revenue'        | 'Internet'   | 'No'       | ''                | ''                   |
+			| 'Front office'              | '4'   | 'Service'   | 'No'                   | '1,000'      | 'pcs'              | '14,49'        | '100,00'     | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | 'Revenue'        | 'Internet'   | 'No'       | ''                | ''                   |
 			| ''                          | '5'   | 'Shirt'     | 'No'                   | '2,000'      | 'pcs'              | '106,78'       | '350,00'     | '18%'   | ''                | '593,22'       | '700,00'         | ''                      | 'Store 02'   | 'Sales invoice 32 dated 04.03.2021 16:32:23'   | ''               | '38/Black'   | 'No'       | ''                | 'Anna Petrova'       |
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
@@ -584,5 +576,5 @@ Scenario: _300510 check connection to SalesReturnOrder report "Related documents
 		| $$NumberSalesReturnOrder028001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

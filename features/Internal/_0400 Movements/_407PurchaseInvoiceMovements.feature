@@ -57,15 +57,7 @@ Scenario: _04096 preparation (Purchase invoice)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -545,12 +537,12 @@ Scenario: _0401068 check Purchase invoice movements by the Register  "R1011 Rece
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| 'Register  "R1011 Receipt of purchase orders"'     | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''            |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''            |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Order'                                          | 'Item key'    |
-			| ''                                                 | 'Expense'       | '12.02.2021 15:12:15'   | '10'          | 'Main Company'   | 'Front office'   | 'Purchase order 117 dated 12.02.2021 12:45:05'   | 'S/Yellow'    |
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| 'Register  "R1011 Receipt of purchase orders"'   | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''                                     |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''         | ''                                     |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                        | 'Item key' | 'Row key'                              |
+			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 117 dated 12.02.2021 12:45:05' | 'S/Yellow' | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' |
 
 		And I close all client application windows
 
@@ -818,15 +810,16 @@ Scenario: _0401025 check Purchase invoice movements by the Register  "R4010 Actu
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Store 02'     | 'ODS'        | ''                     |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '4'           | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '10'          | 'Store 02'     | '38/18SD'    | ''                     |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '14'          | 'Store 02'     | 'S/Yellow'   | ''                     |
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      | '1123'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '0512'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  | ''                  |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   | ''                  |		
 		And I close all client application windows
 
 Scenario: _0401026 check Purchase invoice movements by the Register  "R4011 Free stocks" (Receipt from consignor)
@@ -841,15 +834,16 @@ Scenario: _0401026 check Purchase invoice movements by the Register  "R4011 Free
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | ''              | ''                      | ''            | ''             | ''            |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''             | ''            |
-			| 'Register  "R4011 Free stocks"'                    | ''              | ''                      | ''            | ''             | ''            |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Store 02'     | 'ODS'         |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '4'           | 'Store 02'     | 'UNIQ'        |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '10'          | 'Store 02'     | '38/18SD'     |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '14'          | 'Store 02'     | 'S/Yellow'    |
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                  | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   |		
 		And I close all client application windows
 
 Scenario: _0401027 check Purchase invoice movements by the Register  "R4014 Serial lot numbers" (Receipt from consignor)
@@ -864,63 +858,17 @@ Scenario: _0401027 check Purchase invoice movements by the Register  "R4014 Seri
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | ''              | ''                      | ''            | ''               | ''                          | ''        | ''           | ''                     |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''                          | ''        | ''           | ''                     |
-			| 'Register  "R4014 Serial lot numbers"'             | ''              | ''                      | ''            | ''               | ''                          | ''        | ''           | ''                     |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''        | ''           | ''                     |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Store'   | 'Item key'   | 'Serial lot number'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'Distribution department'   | ''        | 'UNIQ'       | '09987897977889'       |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'Distribution department'   | ''        | 'UNIQ'       | '09987897977890'       |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'Distribution department'   | ''        | 'ODS'        | '899007790088'         |
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'           | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '5'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '0512'              |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |		
 		And I close all client application windows
 
-Scenario: _0401028 check Purchase invoice movements by the Register  "R8012 Consignor inventory" (Receipt from consignor)
-	* Select Purchase invoice
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '195'       |
-	* Check movements by the Register  "R8012 Consignor inventory" 
-		And I click "Registrations report" button
-		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38'   | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| 'Document registrations records'                   | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| 'Register  "R8012 Consignor inventory"'            | ''              | ''                      | ''            | ''               | ''           | ''                    | ''              | ''                           | ''               |
-			| ''                                                 | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''                    | ''              | ''                           | ''               |
-			| ''                                                 | ''              | ''                      | 'Quantity'    | 'Company'        | 'Item key'   | 'Serial lot number'   | 'Partner'       | 'Agreement'                  | 'Legal name'     |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'UNIQ'       | '09987897977889'      | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'UNIQ'       | '09987897977890'      | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '2'           | 'Main Company'   | 'ODS'        | '899007790088'        | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '10'          | 'Main Company'   | '38/18SD'    | ''                    | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-			| ''                                                 | 'Receipt'       | '02.11.2022 16:31:38'   | '14'          | 'Main Company'   | 'S/Yellow'   | ''                    | 'Consignor 1'   | 'Consignor partner term 1'   | 'Consignor 1'    |
-		And I close all client application windows
-
-Scenario: _0401029 check Purchase invoice movements by the Register  "R8013 Consignor batch wise balance" (Receipt from consignor)
-	* Select Purchase invoice
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '195'       |
-	* Check movements by the Register  "R8013 Consignor batch wise balance" 
-		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''         | ''                  | ''                 |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Batch'                                          | 'Item key' | 'Serial lot number' | 'Source of origin' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977889'    | ''                 |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | ''                 |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'ODS'      | '899007790088'      | ''                 |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '38/18SD'  | ''                  | ''                 |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Main Company' | 'Store 02' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                 |
-		And I close all client application windows
 
 Scenario: _0401030 check there is no Purchase invoice movements by the Register  "R1001 Purchases" (Receipt from consignor)
 	* Select Purchase invoice
@@ -1011,6 +959,29 @@ Scenario: _0401034 check there is no Purchase invoice movements by the Register 
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R5010 Reconciliation statement"'    |
+		And I close all client application windows
+
+Scenario: _0401035 check Purchase invoice movements by the Register  "S1001L Vendors prices by item key" (record purchase prices)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '117'       |
+	* Check movements by the Register  "S1001L Vendors prices by item key" 
+		And I click "Registrations report" button
+		And I select "S1001L Vendors prices by item key" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| 'Document registrations records'                 | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| 'Register  "S1001L Vendors prices by item key"'  | ''                    | ''          | ''            | ''          | ''                        | ''          | ''          | ''     | ''         |
+			| ''                                               | 'Period'              | 'Resources' | ''            | ''          | 'Dimensions'              | ''          | ''          | ''     | ''         |
+			| ''                                               | ''                    | 'Price'     | 'Total price' | 'Net price' | 'Price type'              | 'Partner'   | 'Item key'  | 'Unit' | 'Currency' |
+			| ''                                               | '12.02.2021 15:12:15' | '100'       | '90'          | '76,27'     | 'en description is empty' | 'Ferron BP' | 'S/Yellow'  | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '100'       | '100'         | '84,75'     | 'en description is empty' | 'Ferron BP' | '37/18SD'   | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '150'       | '135'         | '114,41'    | 'en description is empty' | 'Ferron BP' | 'Internet'  | 'pcs'  | 'TRY'      |
+			| ''                                               | '12.02.2021 15:12:15' | '200'       | '180'         | '152,54'    | 'en description is empty' | 'Ferron BP' | '36/Yellow' | 'pcs'  | 'TRY'      |	
 		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion

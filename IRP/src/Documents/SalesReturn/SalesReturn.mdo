@@ -144,10 +144,6 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R8010B_TradeAgentInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -773,6 +769,49 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="a8909279-00c7-4297-9877-533c558062d0">
+      <name>InventoryOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Inventory origin</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InventoryOriginTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3bc76fb4-beb1-4384-a8eb-676cb5736565">
+      <name>Consignor</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="34cc6747-f688-44ee-a408-f1c9d1b61a18">
+      <name>VatRate</name>
+      <synonym>
+        <key>en</key>
+        <value>VAT</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="f7fdf31f-fafd-4287-9cec-2e46be7ee60e">
     <producedTypes>
@@ -878,10 +917,10 @@
       <objectType typeId="ed7d19f2-957f-45ba-9aab-2c68fabd84bf" valueTypeId="afdd0b14-c806-456a-8fdc-86a60a1234cf"/>
       <rowType typeId="4c56c172-a4c1-4898-a66b-9ab7a0ae35a8" valueTypeId="4196a61c-7bda-420e-a1a0-567e2ce8a47d"/>
     </producedTypes>
-    <name>TaxList</name>
+    <name>DELETE_TaxList</name>
     <synonym>
       <key>en</key>
-      <value>Tax list</value>
+      <value>DELETE tax list</value>
     </synonym>
     <standardAttributes>
       <dataHistory>Use</dataHistory>

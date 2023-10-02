@@ -50,15 +50,7 @@ Scenario: _2000 preparation (landed cost)
 	When Create information register CurrencyRates records
 	When Create catalog PriceTypes objects
 	When Create catalog Companies objects (own Second company)	
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
-		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+	When Create information register Taxes records (VAT)
 	* Landed cost currency movement type for company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
@@ -146,11 +138,11 @@ Scenario: _2008 create production cost allocation (not direct cost)
 	* Fill duration
 		And in the table "ProductionDurationsList" I click "Fill durations" button
 	* Check filling
-		And "ProductionDurationsList" table became equal
-			| '#'   | 'Business unit'         | 'Amount'   | 'Item'                                      | 'Duration'   | 'Item key'                                   |
-			| '1'   | 'Production store 05'   | ''         | 'Копыта на стремянки Класс 20х20, черный'   | '40,00'      | 'Копыта на стремянки Класс 20х20, черный'    |
-			| '2'   | 'Production store 05'   | ''         | 'Стремянка номер 6 ступенчатая'             | '250,00'     | 'Стремянка номер 6 ступенчатая'              |
-			| '3'   | 'Production store 05'   | ''         | 'Стремянка номер 8'                         | '18,00'      | 'Стремянка номер 8'                          |
+		And "ProductionDurationsList" table contains lines
+			| 'Business unit'       | 'Amount' | 'Item'                                    | 'Duration' | 'Item key'                                |
+			| 'Production store 05' | ''       | 'Копыта на стремянки Класс 20х20, черный' | '40,00'    | 'Копыта на стремянки Класс 20х20, черный' |
+			| 'Production store 05' | ''       | 'Стремянка номер 6 ступенчатая'           | '250,00'   | 'Стремянка номер 6 ступенчатая'           |
+			| 'Production store 05' | ''       | 'Стремянка номер 8'                       | '18,00'    | 'Стремянка номер 8'                       |
 	* Add cost
 		And in the table "ProductionCostsList" I click the button named "ProductionCostsListAdd"
 		And I activate "Profit loss center" field in "ProductionCostsList" table
@@ -588,7 +580,7 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost5" by template
 
-Scenario: _2020 check filling additional cost from bill of material
+Scenario: _2020 check filling extra direct cost from bill of material
 	And I close all client application windows
 	* Create production
 		Given I open hyperlink "e1cib/list/Document.Production"
@@ -602,7 +594,8 @@ Scenario: _2020 check filling additional cost from bill of material
 		And I select from the drop-down list named "Item" by "Product" string
 		And I move to the next attribute
 	* Check filling AdditionalCost
-		And the editing text of form attribute named "AdditionalCost" became equal to "100,00"
+		And the editing text of form attribute named "ExtraDirectCostAmount" became equal to "100,00"
+		And the editing text of form attribute named "ExtraDirectCostTaxAmount" became equal to "20,00"		
 	And I close all client application windows
 
 				

@@ -94,6 +94,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 EndProcedure
 
 &AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
 Procedure SetVisibleRows_Materials(ActivateRow = True)
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -447,6 +462,7 @@ EndProcedure
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -510,7 +526,7 @@ EndProcedure
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;

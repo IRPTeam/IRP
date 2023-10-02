@@ -50,6 +50,10 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Consolidated retail sales</value>
+  </objectPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
@@ -458,4 +462,52 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <commands uuid="f5c52a47-5766-4a54-af41-a76240501674">
+    <name>OpenSession</name>
+    <synonym>
+      <key>en</key>
+      <value>Open session</value>
+    </synonym>
+    <group>CommandGroup.Fiscalization</group>
+    <commandParameterType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleGreen</picture>
+    </picture>
+  </commands>
+  <commands uuid="e88c1fd4-7fcb-4c37-9641-7d4390da4d7c">
+    <name>CloseSession</name>
+    <synonym>
+      <key>en</key>
+      <value>Close session</value>
+    </synonym>
+    <group>CommandGroup.Fiscalization</group>
+    <commandParameterType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleRed</picture>
+    </picture>
+  </commands>
+  <commands uuid="7fc844c7-4732-4cd9-9880-4db29c327bb1">
+    <name>XReport</name>
+    <synonym>
+      <key>en</key>
+      <value>X report</value>
+    </synonym>
+    <group>CommandGroup.Fiscalization</group>
+    <commandParameterType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleYellow</picture>
+    </picture>
+  </commands>
 </mdclass:Document>

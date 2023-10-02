@@ -38,7 +38,6 @@ EndFunction
 Function GetLinkedDocumentsFilter_RSC(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"            , Object.Company);
-	Filter.Insert("Branch"             , Object.Branch);
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
 	Filter.Insert("Ref"                , Object.Ref);
@@ -139,9 +138,12 @@ Function GetLinkedDocumentsFilter_RGR(Object) Export
 	
 	Filter = New Structure();
 	Filter.Insert("Company"            , Object.Company);
-	Filter.Insert("Branch"             , Object.Branch);
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	Filter.Insert("TransactionType"    , Map.Get(Object.TransactionType));
+	Filter.Insert("PartnerSales"       , Object.Partner);
+	Filter.Insert("LegalNameSales"     , Object.LegalName);
+	Filter.Insert("TransactionTypeRGR" , Object.TransactionType);
+		
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction
@@ -234,6 +236,12 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
+	Filter.Insert("CompanyReturn"      , Object.Company);
+	Filter.Insert("BranchReturn"       , Object.Branch);
+	Filter.Insert("TransactionTypeRGR" , PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
+	
+	
 	Filter.Insert("Ref"                  , Object.Ref);
 
 	VisibleFields = New Structure();
@@ -246,7 +254,6 @@ EndFunction
 Function GetLinkedDocumentsFilter_RSR(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);
-	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("RetailCustomer"       , Object.RetailCustomer);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.RetailSales"));

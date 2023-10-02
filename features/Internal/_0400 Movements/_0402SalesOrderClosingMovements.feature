@@ -54,15 +54,7 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -206,14 +198,14 @@ Scenario: _040162 check Sales order closing movements by the Register  "R2011 Sh
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50'   | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Document registrations records'                    | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| 'Register  "R2011 Shipment of sales orders"'        | ''              | ''                      | ''            | ''               | ''                          | ''                                          | ''            |
-			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                          | ''                                          | ''            |
-			| ''                                                  | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'                    | 'Order'                                     | 'Item key'    |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-24'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '37/18SD'     |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-10'         | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | '36/Red'      |
-			| ''                                                  | 'Receipt'       | '28.01.2021 14:46:50'   | '-1'          | 'Main Company'   | 'Distribution department'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | 'XS/Blue'     |
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| 'Register  "R2011 Shipment of sales orders"'      | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         | ''                                     |
+			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' | 'Row key'                              |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 		And I close all client application windows
 		
 Scenario: _040163 check Sales order closing movements by the Register  "R4011 Free stocks"
@@ -332,12 +324,12 @@ Scenario: _0401671 check Sales order closing movements by the Register  "T2014 A
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 4 dated 10.03.2022 11:27:01'   | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
-			| 'Document registrations records'                    | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
-			| 'Register  "T2014 Advances info"'                   | ''            | ''                          | ''                       | ''                      | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
-			| ''                                                  | 'Resources'   | ''                          | ''                       | 'Dimensions'            | ''                                       | ''               | ''                          | ''           | ''            | ''                    | ''                                            | ''                    | ''                      | ''             |
-			| ''                                                  | 'Amount'      | 'Is purchase order close'   | 'Is sales order close'   | 'Date'                  | 'Key'                                    | 'Company'        | 'Branch'                    | 'Currency'   | 'Partner'     | 'Legal name'          | 'Order'                                       | 'Is vendor advance'   | 'Is customer advance'   | 'Unique ID'    |
-			| ''                                                  | ''            | 'No'                        | 'Yes'                    | '10.03.2022 11:27:01'   | '                                    '   | 'Main Company'   | 'Distribution department'   | 'TRY'        | 'Ferron BP'   | 'Company Ferron BP'   | 'Sales order 229 dated 10.03.2022 10:57:17'   | 'No'                  | 'Yes'                   | '*'            |
+			| 'Sales order closing 4 dated 10.03.2022 11:27:01' | ''          | ''                        | ''                     | ''             | ''                        | ''                    | ''                                     | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
+			| 'Document registrations records'                  | ''          | ''                        | ''                     | ''             | ''                        | ''                    | ''                                     | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
+			| 'Register  "T2014 Advances info"'                 | ''          | ''                        | ''                     | ''             | ''                        | ''                    | ''                                     | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
+			| ''                                                | 'Resources' | ''                        | ''                     | 'Dimensions'   | ''                        | ''                    | ''                                     | ''         | ''          | ''                  | ''                                          | ''                  | ''                    | ''          |
+			| ''                                                | 'Amount'    | 'Is purchase order close' | 'Is sales order close' | 'Company'      | 'Branch'                  | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Order'                                     | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' |
+			| ''                                                | ''          | 'No'                      | 'Yes'                  | 'Main Company' | 'Distribution department' | '10.03.2022 11:27:01' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Sales order 229 dated 10.03.2022 10:57:17' | 'No'                | 'Yes'                 | '*'         |
 		And I close all client application windows
 
 Scenario: _040169 Sales order closing clear posting/mark for deletion

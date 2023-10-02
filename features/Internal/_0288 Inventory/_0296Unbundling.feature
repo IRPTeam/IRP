@@ -46,15 +46,7 @@ Scenario: _029600 preparation (Unbundling)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 
 Scenario: _0296001 check preparation
 	When check preparation
@@ -320,7 +312,7 @@ Scenario: _300520 check connection to Unbundling report "Related documents"
 		| $$NumberUnbundling0029601$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 Scenario: _999999 close TestClient session

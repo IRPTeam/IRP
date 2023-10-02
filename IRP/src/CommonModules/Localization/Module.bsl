@@ -6,13 +6,478 @@
 //  Lang - String - Lang
 // 
 // Returns:
-// Structure
+//  Structure -  Strings:
+// * ACS_UnknownValueType - String - 
+// * CERT_OnlyProdOrCert - String - 
+// * CERT_CertAlreadyUsed - String - 
+// * CERT_CannotBeSold - String - 
+// * CERT_HasNotBeenUsed - String - 
+// * EmailIsEmpty - String - 
+// * Only1SymbolAtCanBeSet - String - 
+// * InvalidLengthOfLocalPart - String - 
+// * InvalidLengthOfDomainPart - String - 
+// * LocalPartStartEndDot - String - 
+// * LocalPartConsecutiveDots - String - 
+// * DomainPartStartsWithDot - String - 
+// * DomainPartConsecutiveDots - String - 
+// * DomainPartMin1Dot - String - 
+// * DomainIdentifierExceedsLength - String - 
+// * InvalidCharacterInAddress - String - 
+// * SMS_SendIsOk - String - 
+// * SMS_SendIsError - String - 
+// * SMS_WaitUntilNextSend - String - 
+// * SMS_SMSCodeWrong - String - 
+// * ATC_001 - String - 
+// * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
+// * ATC_ErrorNetAmountGreaterTotalAmount - String - 
+// * ATC_ErrorQuantityIsZero - String - 
+// * ATC_ErrorQuantityInBaseUnitIsZero - String - 
+// * ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList - String - 
+// * ATC_ErrorItemTypeIsNotService - String - 
+// * ATC_ErrorItemTypeUseSerialNumbers - String - 
+// * ATC_ErrorUseSerialButSerialNotSet - String - 
+// * ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList - String - 
+// * ATC_ErrorItemNotEqualItemInItemKey - String - 
+// * ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount - String - 
+// * ATC_ErrorQuantityInItemListNotEqualQuantityInRowID - String - 
+// * ATC_ErrorQuantityNotEqualQuantityInBaseUnit - String - 
+// * ATC_ErrorNotFilledQuantityInSourceOfOrigins - String - 
+// * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber - String - 
+// * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList - String - 
+// * ATC_ErrorNotFilledUnit - String - 
+// * Eq_001 - String - 
+// * Eq_002 - String - 
+// * Eq_003 - String - 
+// * Eq_004 - String - 
+// * Eq_005 - String - 
+// * Eq_006 - String - 
+// * Eq_007 - String - 
+// * Eq_008 - String - 
+// * Eq_009 - String - 
+// * Eq_010 - String - 
+// * Eq_011 - String - 
+// * Eq_012 - String - 
+// * Eq_CanNotFindAPIModule - String - 
+// * EqError_001 - String - 
+// * EqError_002 - String - 
+// * EqError_003 - String - 
+// * EqError_004 - String - 
+// * EqError_005 - String - 
+// * EqFP_ShiftAlreadyOpened - String - 
+// * EqFP_ShiftIsNotOpened - String - 
+// * EqFP_ShiftAlreadyClosed - String - 
+// * EqFP_DocumentAlreadyPrinted - String - 
+// * EqFP_DocumentNotPrintedOnFiscal - String - 
+// * EqFP_FiscalDeviceIsEmpty - String - 
+// * EqAc_AlreadyhasTransaction - String - 
+// * EqAc_LastSettlementHasError - String - 
+// * EqAc_LastSettlementNotFound - String - 
+// * EqAc_NotAllPaymentDone - String - 
+// * EqFP_CanNotOpenSessionRegistrationKM - String - 
+// * EqFP_CanNotRequestKM - String - 
+// * EqFP_CanNotGetProcessingKMResult - String - 
+// * EqFP_CanNotCloseSessionRegistrationKM - String - 
+// * EqFP_GetWrongAnswerFromProcessingKM - String - 
+// * EqFP_ScanedCodeStringAlreadyExists - String - 
+// * EqFP_ProblemWhileCheckCodeString - String - 
+// * EqFP_ErrorWhileConfirmCode - String - 
+// * EqFP_CashierNameCanNotBeEmpty - String - 
+// * POS_s1 - String - 
+// * POS_s2 - String - 
+// * POS_s3 - String - 
+// * POS_s4 - String - 
+// * POS_s5 - String - 
+// * POS_s6 - String - 
+// * POS_Error_ErrorOnClosePayment - String - 
+// * POS_Error_ErrorOnPayment - String - 
+// * POS_Error_CancelPayment - String - 
+// * POS_Error_CancelPaymentProblem - String - 
+// * POS_Error_ReturnAmountLess - String - 
+// * POS_Error_CannotFindUser - String - 
+// * POS_Error_ThisBarcodeFromAnotherItem - String - 
+// * POS_Error_ThisIsNotControleStringBarcode - String - 
+// * POS_Error_CheckFillingForAllCodes - String - 
+// * S_002 - String - 
+// * S_003 - String - 
+// * S_004 - String - 
+// * S_005 - String - 
+// * S_006 - String - 
+// * S_013 - String - 
+// * S_014 - String - 
+// * S_015 - String - 
+// * S_016 - String - 
+// * S_018 - String - 
+// * S_019 - String - 
+// * S_022 - String - 
+// * S_023 - String - 
+// * S_026 - String - 
+// * S_027 - String - 
+// * S_028 - String - 
+// * S_029 - String - 
+// * S_030 - String - 
+// * S_031 - String - 
+// * S_032 - String - 
+// * Form_001 - String - 
+// * Form_002 - String - 
+// * Form_003 - String - 
+// * Form_004 - String - 
+// * Form_005 - String - 
+// * Form_006 - String - 
+// * Form_007 - String - 
+// * Form_008 - String - 
+// * Form_009 - String - 
+// * Form_013 - String - 
+// * Form_014 - String - 
+// * Form_017 - String - 
+// * Form_018 - String - 
+// * Form_019 - String - 
+// * Form_022 - String - 
+// * Form_023 - String - 
+// * Form_024 - String - 
+// * Form_025 - String - 
+// * Form_026 - String - 
+// * Form_027 - String - 
+// * Form_028 - String - 
+// * Form_029 - String - 
+// * Form_030 - String - 
+// * Form_031 - String - 
+// * Form_032 - String - 
+// * Form_033 - String - 
+// * Form_034 - String - 
+// * Form_035 - String - 
+// * Form_036 - String - 
+// * Form_037 - String - 
+// * Form_038 - String - 
+// * Error_002 - String - 
+// * Error_003 - String - 
+// * Error_004 - String - 
+// * Error_005 - String - 
+// * Error_008 - String - 
+// * Error_009 - String - 
+// * Error_010 - String - 
+// * Error_011 - String - 
+// * Error_012 - String - 
+// * Error_013 - String - 
+// * Error_014 - String - 
+// * Error_015 - String - 
+// * Error_016 - String - 
+// * Error_017 - String - 
+// * Error_018 - String - 
+// * Error_019 - String - 
+// * Error_020 - String - 
+// * Error_021 - String - 
+// * Error_023 - String - 
+// * Error_028 - String - 
+// * Error_030 - String - 
+// * Error_031 - String - 
+// * Error_032 - String - 
+// * Error_033 - String - 
+// * Error_034 - String - 
+// * Error_035 - String - 
+// * Error_037 - String - 
+// * Error_040 - String - 
+// * Error_041 - String - 
+// * Error_042 - String - 
+// * Error_043 - String - 
+// * Error_044 - String - 
+// * Error_045 - String - 
+// * Error_047 - String - 
+// * Error_049 - String - 
+// * Error_050 - String - 
+// * Error_051 - String - 
+// * Error_052 - String - 
+// * Error_053 - String - 
+// * Error_054 - String - 
+// * Error_055 - String - 
+// * Error_056 - String - 
+// * Error_057 - String - 
+// * Error_058 - String - 
+// * Error_059 - String - 
+// * Error_060 - String - 
+// * Error_064 - String - 
+// * Error_065 - String - 
+// * Error_066 - String - 
+// * Error_067 - String - 
+// * Error_068 - String - 
+// * Error_068_2 - String - 
+// * Error_069 - String - 
+// * Error_069_2 - String - 
+// * Error_071 - String - 
+// * Error_072 - String - 
+// * Error_073 - String - 
+// * Error_074 - String - 
+// * Error_075 - String - 
+// * Error_077 - String - 
+// * Error_078 - String - 
+// * Error_079 - String - 
+// * Error_080 - String - 
+// * Error_081 - String - 
+// * Error_082 - String - 
+// * Error_083 - String - 
+// * Error_085 - String - 
+// * Error_086 - String - 
+// * Error_087 - String - 
+// * Error_088 - String - 
+// * Error_089 - String - 
+// * Error_090 - String - 
+// * Error_090_2 - String - 
+// * Error_091 - String - 
+// * Error_092 - String - 
+// * Error_093 - String - 
+// * Error_094 - String - 
+// * Error_095 - String - 
+// * Error_096 - String - 
+// * Error_097 - String - 
+// * Error_098 - String - 
+// * Error_099 - String - 
+// * Error_100 - String - 
+// * Error_101 - String - 
+// * Error_102 - String - 
+// * Error_103 - String - 
+// * Error_104 - String - 
+// * Error_105 - String - 
+// * Error_106 - String - 
+// * Error_107 - String - 
+// * Error_108 - String - 
+// * Error_109 - String - 
+// * Error_110 - String - 
+// * Error_111 - String - 
+// * Error_112 - String - 
+// * Error_113 - String - 
+// * Error_114 - String - 
+// * Error_115 - String - 
+// * Error_116 - String - 
+// * Error_117 - String - 
+// * Error_118 - String - 
+// * Error_119 - String - 
+// * Error_120 - String - 
+// * Error_121 - String - 
+// * Error_122 - String - 
+// * Error_123 - String - 
+// * Error_124 - String - 
+// * Error_125 - String - 
+// * Error_126 - String - 
+// * Error_127 - String - 
+// * Error_128 - String - 
+// * Error_FillTotalAmount - String - 
+// * MF_Error_001 - String - 
+// * MF_Error_002 - String - 
+// * MF_Error_003 - String - 
+// * MF_Error_004 - String - 
+// * MF_Error_005 - String - 
+// * MF_Error_006 - String - 
+// * MF_Error_007 - String - 
+// * MF_Error_008 - String - 
+// * MF_Error_009 - String - 
+// * MF_Error_010 - String - 
+// * Error_ChangeAttribute_RelatedDocsExist - String - 
+// * Error_AttributeDontMatchValueFromBasisDoc - String - 
+// * Error_AttributeDontMatchValueFromBasisDoc_Row - String - 
+// * Error_Store_Company - String - 
+// * Error_Store_Company_Row - String - 
+// * Error_MaximumAccessKey - String - 
+// * LC_Error_001 - String - 
+// * LC_Error_002 - String - 
+// * LC_Error_003 - String - 
+// * InfoMessage_001 - String - 
+// * InfoMessage_002 - String - 
+// * InfoMessage_003 - String - 
+// * InfoMessage_004 - String - 
+// * InfoMessage_005 - String - 
+// * InfoMessage_006 - String - 
+// * InfoMessage_007 - String - 
+// * InfoMessage_008 - String - 
+// * InfoMessage_009 - String - 
+// * InfoMessage_010 - String - 
+// * InfoMessage_011 - String - 
+// * InfoMessage_012 - String - 
+// * InfoMessage_013 - String - 
+// * InfoMessage_014 - String - 
+// * InfoMessage_015 - String - 
+// * InfoMessage_016 - String - 
+// * InfoMessage_017 - String - 
+// * InfoMessage_018 - String - 
+// * InfoMessage_019 - String - 
+// * InfoMessage_020 - String - 
+// * InfoMessage_021 - String - 
+// * InfoMessage_022 - String - 
+// * InfoMessage_023 - String - 
+// * InfoMessage_024 - String - 
+// * InfoMessage_025 - String - 
+// * InfoMessage_026 - String - 
+// * InfoMessage_027 - String - 
+// * InfoMessage_028 - String - 
+// * InfoMessage_029 - String - 
+// * InfoMessage_030 - String - 
+// * InfoMessage_031 - String - 
+// * InfoMessage_032 - String - 
+// * InfoMessage_033 - String - 
+// * InfoMessage_034 - String - 
+// * InfoMessage_035 - String - 
+// * InfoMessage_Payment - String - 
+// * InfoMessage_PaymentReturn - String - 
+// * InfoMessage_SessionIsClosed - String - 
+// * InfoMessage_Sales - String - 
+// * InfoMessage_Returns - String - 
+// * InfoMessage_ReturnTitle - String - 
+// * InfoMessage_POS_Title - String - 
+// * InfoMessage_NotProperty - String - 
+// * InfoMessage_DataUpdated - String - 
+// * InfoMessage_DataSaved - String - 
+// * InfoMessage_SettingsApplied - String - 
+// * InfoMessage_ImportError - String - 
+// * QuestionToUser_001 - String - 
+// * QuestionToUser_002 - String - 
+// * QuestionToUser_003 - String - 
+// * QuestionToUser_004 - String - 
+// * QuestionToUser_005 - String - 
+// * QuestionToUser_006 - String - 
+// * QuestionToUser_007 - String - 
+// * QuestionToUser_008 - String - 
+// * QuestionToUser_009 - String - 
+// * QuestionToUser_011 - String - 
+// * QuestionToUser_012 - String - 
+// * QuestionToUser_013 - String - 
+// * QuestionToUser_014 - String - 
+// * QuestionToUser_015 - String - 
+// * QuestionToUser_016 - String - 
+// * QuestionToUser_017 - String - 
+// * QuestionToUser_018 - String - 
+// * QuestionToUser_019 - String - 
+// * QuestionToUser_020 - String - 
+// * QuestionToUser_021 - String - 
+// * QuestionToUser_022 - String - 
+// * QuestionToUser_023 - String - 
+// * QuestionToUser_024 - String - 
+// * QuestionToUser_025 - String - 
+// * QuestionToUser_026 - String - 
+// * SuggestionToUser_1 - String - 
+// * SuggestionToUser_2 - String - 
+// * SuggestionToUser_3 - String - 
+// * SuggestionToUser_4 - String - 
+// * UsersEvent_001 - String - 
+// * UsersEvent_002 - String - 
+// * I_1 - String - 
+// * I_2 - String - 
+// * I_3 - String - 
+// * I_4 - String - 
+// * I_5 - String - 
+// * I_6 - String - 
+// * I_7 - String - 
+// * I_8 - String - 
+// * Exc_001 - String - 
+// * Exc_002 - String - 
+// * Exc_003 - String - 
+// * Exc_004 - String - 
+// * Exc_005 - String - 
+// * Exc_006 - String - 
+// * Exc_007 - String - 
+// * Exc_008 - String - 
+// * Exc_009 - String - 
+// * Exc_010 - String - 
+// * Saas_001 - String - 
+// * Saas_002 - String - 
+// * Saas_003 - String - 
+// * Saas_004 - String - 
+// * Class_001 - String - 
+// * Class_002 - String - 
+// * Class_003 - String - 
+// * Class_004 - String - 
+// * Class_005 - String - 
+// * Class_006 - String - 
+// * Class_007 - String - 
+// * Class_008 - String - 
+// * Title_00100 - String - 
+// * CLV_1 - String - 
+// * CLV_2 - String - 
+// * SOR_1 - String - 
+// * R_001 - String - 
+// * R_002 - String - 
+// * R_003 - String - 
+// * R_004 - String - 
+// * Default_001 - String - 
+// * Default_002 - String - 
+// * Default_003 - String - 
+// * Default_004 - String - 
+// * Default_005 - String - 
+// * Default_006 - String - 
+// * Default_007 - String - 
+// * Default_008 - String - 
+// * Default_009 - String - 
+// * Default_010 - String - 
+// * Default_011 - String - 
+// * Default_012 - String - 
+// * Str_Catalog - String - 
+// * Str_Catalogs - String - 
+// * Str_Document - String - 
+// * Str_Documents - String - 
+// * Str_Code - String - 
+// * Str_Description - String - 
+// * Str_Parent - String - 
+// * Str_Owner - String - 
+// * Str_DeletionMark - String - 
+// * Str_Number - String - 
+// * Str_Date - String - 
+// * Str_Posted - String - 
+// * Str_InformationRegister - String - 
+// * Str_InformationRegisters - String - 
+// * Str_AccumulationRegister - String - 
+// * Str_AccumulationRegisters - String - 
+// * Add_Setiings_001 - String - 
+// * Add_Setiings_002 - String - 
+// * Add_Setiings_003 - String - 
+// * Add_Setiings_004 - String - 
+// * Add_Setiings_005 - String - 
+// * Add_Setiings_006 - String - 
+// * Add_Setiings_007 - String - 
+// * Add_Setiings_008 - String - 
+// * Mob_001 - String - 
+// * CP_001 - String - 
+// * CP_002 - String - 
+// * CP_003 - String - 
+// * CP_004 - String - 
+// * CP_005 - String - 
+// * CP_006 - String - 
+// * LDT_Button_Title - String - 
+// * LDT_Button_ToolTip - String - 
+// * LDT_FailReading - String - 
+// * LDT_ValueNotFound - String - 
+// * LDT_TooMuchFound - String - 
+// * OpenSLNTree_Button_Title - String - 
+// * OpenSLNTree_Button_ToolTip - String - 
+// * BgJ_Title_001 - String - 
+// * BgJ_Title_002 - String - 
 Function Strings(Lang) Export
 
 	Strings = New Structure();
 
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
+#EndRegion
+
+#Region Certificates
+	
+	Strings.Insert("CERT_OnlyProdOrCert", NStr("en = 'In the document, there can be either goods or certificates.'", Lang));
+	Strings.Insert("CERT_CertAlreadyUsed", NStr("en = 'Certificate %1 has already been used before and cannot be used again.'", Lang));
+	Strings.Insert("CERT_CannotBeSold", NStr("en = 'Certificate %1 cannot be issued again.'", Lang));
+	Strings.Insert("CERT_HasNotBeenUsed", NStr("en = 'Certificate %1 has not been used before.'", Lang));
+
+#EndRegion
+
+#Region Validation
+
+	Strings.Insert("EmailIsEmpty", NStr("en = 'Email is empty.'", Lang));
+	Strings.Insert("Only1SymbolAtCanBeSet", NStr("en = 'Only 1 symbol @ can be set.'", Lang));
+	Strings.Insert("InvalidLengthOfLocalPart", NStr("en = 'Invalid length of the local part.'", Lang));
+	Strings.Insert("InvalidLengthOfDomainPart", NStr("en = 'Invalid length of the domain part.'", Lang));
+	Strings.Insert("LocalPartStartEndDot", NStr("en = 'The local part should not start or end with a dot.'", Lang));
+	Strings.Insert("LocalPartConsecutiveDots", NStr("en = 'Local part contains consecutive dots.'", Lang));
+	Strings.Insert("DomainPartStartsWithDot", NStr("en = 'Domain part starts with a dot.'", Lang));
+	Strings.Insert("DomainPartConsecutiveDots", NStr("en = 'Domain part contains consecutive dots.'", Lang));
+	Strings.Insert("DomainPartMin1Dot", NStr("en = 'Domain part has to contain at least 1 dot.'", Lang));
+	Strings.Insert("DomainIdentifierExceedsLength", NStr("en = 'Domain identifier exceeds the allowed length.'", Lang));
+	Strings.Insert("InvalidCharacterInAddress", NStr("en = 'Invalid character: ""%1""'", Lang));
+
 #EndRegion
 
 #Region SMS
@@ -25,6 +490,8 @@ Function Strings(Lang) Export
 #Region AdditionalTableControl
 
 	Strings.Insert("ATC_001", NStr("en = 'Unknown document type: %1'", Lang));
+	Strings.Insert("ATC_NotSupported", NStr("en = 'Not supported. Documents need to be edited manually.'", Lang));
+	
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en = 'Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
 	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en = 'Row: %1. Net amount is greater than total amount'", Lang));
 	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en = 'Row: %1. Quantity is zero'", Lang));
@@ -32,6 +499,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en = 'Row: %1. Offers amount in item list is not equal to offers amount in offers list'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en = 'Row: %1. Item type is not service'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en = 'Row: %1. Item type uses serial numbers'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en = 'Row: %1. Item type does not use serial numbers'", Lang));
 	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en = 'Row: %1. Serial is not set but is required'", Lang));
 	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en = 'Row: %1. Quantity in serial list table is not the same as quantity in item list'", Lang));
 	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en = 'Row: %1. Item is not equal to item in item key'", Lang));
@@ -42,6 +510,24 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en = 'Row: %1. Not filled Unit'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en = 'Row: %1. Not filled Inventory origin'", Lang));
+	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en = 'Row: %1. Payment amount is zero'", Lang));
+	
+	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en = 'Not filled Payment method'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Not filled Transaction type in Purchase'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en = 'Not filled Transaction type in Sale'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Not filled Transaction type in Sale Return'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Not filled Transaction type in Purchase Return'", Lang));
+	
+	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en = 'Setting the ""Use serial lot number"" flag in document lines.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en = 'Unchecking the ""Use serial lot number"" flag in document lines.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en = 'Instead of empty values, ""Own stocks"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en = 'Instead of empty values, ""Full calculation"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Instead of empty values, ""Purchase"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en = 'Instead of empty values, ""Sales"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
 #EndRegion
 
@@ -58,6 +544,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_010", NStr("en = 'Can not disconnect device %1'", Lang));
 	Strings.Insert("Eq_011", NStr("en = 'Already connected'", Lang));
 	Strings.Insert("Eq_012", NStr("en = 'Already disconnected'", Lang));
+	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en = 'Can not find API module. Check `Equipment API Module` in Hardware'", Lang));
 	
 	Strings.Insert("EqError_001", NStr(
 		"en = 'The device is connected. The device must be disabled before the operation.'", Lang));
@@ -73,9 +560,16 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en = 'Shift already opened.'", Lang));
 	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en = 'Shift is not opened.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en = 'Shift already closed.'", Lang));
-	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en = 'The document is already printed.'", Lang));
+	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en = 'Operation cannot be completed because the document has already been printed. You can only print a copy.'", Lang));
+	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en = 'Document was not found on the fiscal device.'", Lang));
+	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en = 'Fiscal device not set.'", Lang));
+	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en = 'Document in not posted.'", Lang));
+	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en = 'Document can be printed only in Complete status.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
+	Strings.Insert("EqAc_LastSettlementHasError", NStr("en = 'Last settlement has error. Try get new one.'", Lang));
+	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en = 'Last settlement not found. Make sure that logging is enabled for this equipment.'", Lang));
+	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en = 'Not all payment done.'", Lang));
 	
 	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en = 'Can not open session registration KM.'", Lang));
 	Strings.Insert("EqFP_CanNotRequestKM", NStr("en = 'Can not request KM.'", Lang));
@@ -87,6 +581,8 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ProblemWhileCheckCodeString", NStr("en = 'Problem while check code: %1'", Lang));
 
 	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en = 'Error while confirm code on request: %1'", Lang));
+	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en = 'Cashier name can not be empty. Author -> Partner -> Description (lang)'", Lang));
+
 #EndRegion
 
 #Region POS
@@ -101,7 +597,7 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en = 'Cancel all payment before close form.'", Lang));
 	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en = 'There some problem to do payment with %1. Retry?'", Lang));
 	Strings.Insert("POS_Error_CancelPayment", NStr("en = 'Operation with %1 by amount: %2 will be canceled.'", Lang));
-	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en = 'Cancle payment problem [%1: %2]. Payment not canceled.
+	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en = 'Cancel payment problem [%1: %2]. Payment not canceled.
 																|Copy message and send it to administrator'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
@@ -110,6 +606,9 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en = 'This is barcode used for %1'", Lang));
 	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en = 'Scan control string barcode. Wrong barcode %1'", Lang));
 	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en = 'Scan control string for each item.'", Lang));
+	
+	Strings.Insert("POS_ClearAllItems", NStr("en = 'Clear all items before continuing'", Lang));
+	Strings.Insert("POS_CancelPostponed", NStr("en = '%1 postponed receipts cancelled'", Lang));
 	
 #EndRegion
 
@@ -370,6 +869,23 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_068_2", NStr(
 		"en = 'Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.'", Lang));
 
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 4
+	// %5 - pcs
+	Strings.Insert("Error_069", NStr(
+		"en = 'Store [%1] [%2 %3] Lacking: %4 %5.'", Lang));
+
+	// %1 - Store 1
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 00001
+	// %5 - 4
+	// %6 - pcs
+	Strings.Insert("Error_069_2", NStr(
+		"en = 'Store [%1] [%2 %3] Serial lot number [%4] Lacking: %5 %6.'", Lang));
+
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	
@@ -520,6 +1036,16 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
 	Strings.Insert("Error_127", NStr("en = 'Quantity must be more than 0'", Lang));
 	Strings.Insert("Error_128", NStr("en = 'Wrong data in basis document'", Lang));
+	Strings.Insert("Error_129", NStr("en = 'Transaction type [%1] is available only for own stocks, [%2][%3] is [%4] stocks'", Lang));
+	Strings.Insert("Error_130", NStr("en = 'Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks'", Lang));
+	Strings.Insert("Error_131", NStr("en = 'Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	Strings.Insert("Error_132", NStr("en = 'Company [%1] can only be specified once'", Lang));	
+	Strings.Insert("Error_133", NStr("en = 'Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks'", Lang));
+	Strings.Insert("Error_134", NStr("en = 'Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks'", Lang));
+	Strings.Insert("Error_135", NStr("en = 'Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	
+	
+	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -542,6 +1068,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));
 	Strings.Insert("Error_Store_Company_Row", NStr("en = 'Store [%1] in row [%3] does not match company [%2]'", Lang));
 	
+	Strings.Insert("Error_MaximumAccessKey", NStr("en = 'Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]'", Lang));
 #EndRegion
 
 #Region LandedCost
@@ -637,6 +1164,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_Returns", NStr("en = 'Returns'", Lang));
 	Strings.Insert("InfoMessage_ReturnTitle", NStr("en = 'Return'", Lang));
 	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
+	Strings.Insert("InfoMessage_CanOpenOnlyNewStatus", NStr("en = 'Cash shift can only be opened for a document with the status ""New"".'", Lang));
+	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en = 'Cash shift can only be closed for a document with the status ""Open"".'", Lang));
 	
 	Strings.Insert("InfoMessage_NotProperty", NStr("en = 'The object has no properties for editing'", Lang));
 	Strings.Insert("InfoMessage_DataUpdated", NStr("en = 'The data has been updated'", Lang));
@@ -676,6 +1205,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_023", NStr("en = 'Do you want to fill according to cash transfer order?'", Lang));
 	Strings.Insert("QuestionToUser_024", NStr("en = 'Change planning period?'", Lang));
 	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
+	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -804,6 +1334,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
 	Strings.Insert("Add_Setiings_005", NStr("en = 'Documents'", Lang));
 	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
+	Strings.Insert("Add_Setiings_007", NStr("en = 'Link\Unlink document rows'", Lang));
+	Strings.Insert("Add_Setiings_008", NStr("en = 'Disable - Calculate rows on link rows'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -833,6 +1365,11 @@ Function Strings(Lang) Export
 #Region OpenSerialLotNumberTree
 	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en = 'Open serial lot number tree'", Lang));
 	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en = 'Open serial lot number tree'", Lang));
+#EndRegion	
+	
+#Region BackgroundJobs
+	Strings.Insert("BgJ_Title_001",   NStr("en = 'Background job is running'", Lang));
+	Strings.Insert("BgJ_Title_002",   NStr("en = 'Load Item list'", Lang));
 #EndRegion	
 	
 	Return Strings;

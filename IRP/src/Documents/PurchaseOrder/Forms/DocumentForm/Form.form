@@ -1998,6 +1998,61 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListVatRate</name>
+          <id>735</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.VatRate</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListVatRateOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListVatRateExtendedTooltip</name>
+            <id>737</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListVatRateContextMenu</name>
+            <id>736</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <listChoiceMode>true</listChoiceMode>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListOffersAmount</name>
           <id>148</id>
           <visible>true</visible>
@@ -2140,7 +2195,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4859,7 +4913,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>Autor</name>
+        <name>Author</name>
         <id>145</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -4870,7 +4924,7 @@
           <segments>Object.Author</segments>
         </dataPath>
         <extendedTooltip>
-          <name>AutorExtendedTooltip</name>
+          <name>AuthorExtendedTooltip</name>
           <id>147</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4885,7 +4939,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AutorContextMenu</name>
+          <name>AuthorContextMenu</name>
           <id>146</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -7154,6 +7208,9 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>InformationRegister.CreatedProcurementOrders.StandardCommand.OpenByValue.Order</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

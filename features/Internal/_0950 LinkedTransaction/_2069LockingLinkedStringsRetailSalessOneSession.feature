@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 
 @tree
 @Positive
@@ -21,6 +21,7 @@ Scenario: _2069001 preparation (locking linked strings)
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
+		When Create catalog PaymentTypes objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -47,22 +48,9 @@ Scenario: _2069001 preparation (locking linked strings)
 		When Create information register CurrencyRates records
 		When Create catalog CancelReturnReasons objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
-		When add sales tax settings 
 	When Create Item with SerialLotNumbers (Phone)
 	When Create catalog RetailCustomers objects (check POS)
 	When create PaymentTypes
@@ -95,7 +83,8 @@ Scenario: _2069002 check locking header in the Retail sales receipt with linked 
 		And "Price includes tax" attribute is read-only
 		And "Use partner transactions" attribute is read-only
 		And "Currency" attribute is read-only
-		And "Branch" attribute is read-only
+		When I Check the steps for Exception
+			| 'And "Branch" attribute is read-only'    |
 	And I close all client application windows
 
 Scenario: _2069003 check locking header in the Retail return receipt with linked documents (one session)
@@ -118,7 +107,8 @@ Scenario: _2069003 check locking header in the Retail return receipt with linked
 		And "Price includes tax" attribute is read-only
 		And "Use partner transactions" attribute is read-only
 		And "Currency" attribute is read-only
-		And "Branch" attribute is read-only
+		When I Check the steps for Exception
+			| 'And "Branch" attribute is read-only'    |
 	And I close all client application windows
 
 Scenario: _2069004 check unlock linked rows in the Retail sales receipt

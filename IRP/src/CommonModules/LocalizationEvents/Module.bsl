@@ -28,6 +28,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	// enable search by code for all
+	//@skip-check empty-except-statement
 	Try
 		Settings.Insert("UseSearchByCode", MetadataObject.CodeLength > 0);
 	Except EndTry;
@@ -57,7 +58,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndIf;
 	
 	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
-	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters, Source.EmptyRef().Metadata());
 			
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 
@@ -207,6 +208,20 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 			NewAttribute.SetAction("Opening", "DescriptionOpening");
 		EndIf;
 	EndDo;
+
+	MetadataObj = Form.Object.Ref.Metadata();
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("LocalFullDescription", MetadataObj) Then
+		NewAttribute = Form.Items.Add("LocalFullDescription", Type("FormField"), ParentGroup);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object.LocalFullDescription";
+	EndIf;
+
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ForeignFullDescription", MetadataObj) Then
+		NewAttribute = Form.Items.Add("ForeignFullDescription", Type("FormField"), ParentGroup);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object.ForeignFullDescription";
+	EndIf;
+	
 EndProcedure
 
 // Create sub form item description.

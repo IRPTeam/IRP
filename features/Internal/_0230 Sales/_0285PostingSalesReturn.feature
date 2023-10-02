@@ -54,12 +54,6 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create information register CurrencyRates records
 		When Create catalog Companies objects (own Second company)
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 	* Add plugin for discount
@@ -69,8 +63,6 @@ Scenario: _028500 preparation (create document Sales return)
 				| "Description"          |
 				| "DocumentDiscount"     |
 			When add Plugin for document discount
-	* Tax settings
-		When filling in Tax settings for company
 		When Create document SalesInvoice objects (linked)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -827,7 +819,7 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 		| '$$NumberSalesReturn028509$$'   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows
 
 Scenario: _300512 check Use GR filling from store when create SR based on SI

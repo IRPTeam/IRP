@@ -228,7 +228,7 @@ Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
 	DataSources.DataSourceType = "Local";
 	DataSources.Name = "DataSource";
 	
-	AvailableField = New Array;
+	AvailableField = New Array; // Array Of String
 	For Each Row In ValueListAvailableField Do
 		AvailableField.Add("DS." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
 	EndDo;
@@ -282,7 +282,7 @@ Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
 		
 		QuerySchema = New QuerySchema();
 		QuerySchema.SetQueryText(QueryText);
-		FilterText = New Array;
+		FilterText = New Array; // Array Of QuerySchemaExpression
 		For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
 			FilterText.Add(Row);
 		EndDo;
@@ -331,6 +331,10 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+// Add attribute button click.
+// 
+// Parameters:
+//  Item - FormButton -Item
 &AtClient
 Procedure AddAttributeButtonClick(Item) Export
 	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
@@ -370,6 +374,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("Catalog", R().Str_Catalogs, , PictureLib.Catalog);
 		EndIf;
 	EndDo;
+	TypeMap.Get("Catalog").SortByPresentation();
 	For Each Doc In Metadata.Documents Do
 		ListItem = FullTypeList.Add(Doc.FullName(), Doc.Synonym, , PictureLib.Document);
 		FillPropertyValues(TypeMap.Get("Document").Add(), ListItem);
@@ -377,6 +382,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("Document", R().Str_Documents, , PictureLib.Document);
 		EndIf;
 	EndDo;
+	TypeMap.Get("Document").SortByPresentation();
 	For Each IR In Metadata.InformationRegisters Do
 		ListItem = FullTypeList.Add(IR.FullName(), IR.Synonym, , PictureLib.InformationRegister);
 		FillPropertyValues(TypeMap.Get("InformationRegister").Add(), ListItem);
@@ -384,6 +390,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("InformationRegister", R().Str_InformationRegisters, , PictureLib.InformationRegister);
 		EndIf;
 	EndDo;
+	TypeMap.Get("InformationRegister").SortByPresentation();
 	For Each AR In Metadata.AccumulationRegisters Do
 		ListItem = FullTypeList.Add(AR.FullName(), AR.Synonym, , PictureLib.AccumulationRegister);
 		FillPropertyValues(TypeMap.Get("AccumulationRegister").Add(), ListItem);
@@ -391,7 +398,7 @@ Procedure FillTypes()
 			TypeFilterList.Add("AccumulationRegister", R().Str_AccumulationRegisters, , PictureLib.AccumulationRegister);
 		EndIf;
 	EndDo;
-	
+	TypeMap.Get("AccumulationRegister").SortByPresentation();
 EndProcedure
 
 // Get type list.
@@ -437,6 +444,7 @@ Procedure RuleListAttributeStartChoice(Item, ChoiceData, StandardProcessing)
 	ValueList = FillAttributeList(Items.RuleList.CurrentData.Type);
 	Items.RuleListAttribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.RuleListAttribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
@@ -452,6 +460,7 @@ Procedure AttributeStartChoice(Item, ChoiceData, StandardProcessing)
 	FillAttributeListHead(ValueList);
 	Items.Attribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.Attribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
@@ -486,15 +495,17 @@ Function FillAttributeListHead(ChoiceData = Undefined)
 	EndDo;
 	// Group all added fields
 	VT.GroupBy("Attribute", "Count");
-	Array = New Array;
+	Array = New Array; // Array Of Arbitrary
 	// get only fields, where Count the same as Count rows at RuleList. Other way - its not common attributes
 	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count() - Skip)) Do
 		//@skip-check property-return-type
 		//@skip-check statement-type-change
 		Row = ValueList.FindByValue(AttributeName.Attribute);
 		If ChoiceData = Undefined Then
+			//@skip-check typed-value-adding-to-untyped-collection
 			Array.Add(Row.Value);
 		Else
+			//@skip-check typed-value-adding-to-untyped-collection
 			ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
 		EndIf;
 	EndDo;

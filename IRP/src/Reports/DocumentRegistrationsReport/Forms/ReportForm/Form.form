@@ -97,6 +97,10 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Document</segments>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>DocumentOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>DocumentExtendedTooltip</name>
         <id>17</id>
@@ -445,6 +449,10 @@
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:SpreadSheetDocFieldExtInfo">
+      <handlers>
+        <event>DetailProcessing</event>
+        <name>ResultTableDetailProcessing</name>
+      </handlers>
       <width>50</width>
       <autoMaxWidth>true</autoMaxWidth>
       <height>10</height>
@@ -463,7 +471,7 @@
   </items>
   <commandBarLocation>None</commandBarLocation>
   <autoCommandBar>
-    <name></name>
+    <name>FormCommandBar</name>
     <id>-1</id>
     <visible>true</visible>
     <enabled>true</enabled>

@@ -95,6 +95,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
 #EndRegion
 
 #Region COMPANY
@@ -367,6 +382,7 @@ EndProcedure
 
 #Region COPY_PASTE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure CopyToClipboard(Command)
 	CopyPasteClient.CopyToClipboard(Object, ThisObject);
@@ -387,6 +403,7 @@ Function CopyToClipboardServer(CopySettings)
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
 &AtClient
 Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
@@ -411,6 +428,7 @@ EndFunction
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -440,6 +458,7 @@ Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
@@ -490,7 +509,7 @@ EndProcedure
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");

@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -84,6 +85,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 EndProcedure
 
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
 #EndRegion
 
 #Region COMPANY
@@ -101,6 +117,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocRetailShipmentConfirmationClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocRetailShipmentConfirmationClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -200,6 +225,20 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocRetailShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	SourceOfOriginClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
+	SourceOfOriginClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -346,6 +385,7 @@ EndProcedure
 
 #Region COPY_PASTE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure CopyToClipboard(Command)
 	CopyPasteClient.CopyToClipboard(Object, ThisObject);
@@ -366,6 +406,7 @@ Function CopyToClipboardServer(CopySettings)
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
 &AtClient
 Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
@@ -390,6 +431,7 @@ EndFunction
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -425,6 +467,7 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
@@ -475,7 +518,7 @@ EndProcedure
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");

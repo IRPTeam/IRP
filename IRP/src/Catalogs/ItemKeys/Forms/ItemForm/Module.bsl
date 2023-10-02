@@ -20,9 +20,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	ThisObject.UnitMode = ?(ValueIsFilled(Object.Unit), "Own", "Inherit");
+	ThisObject.ConsignorInfoMode = ?(Object.ConsignorsInfo.Count()>0, "Own", "Inherit");
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	FillInheritConsignorsInfo();	
 EndProcedure
 
 &AtClient
@@ -60,6 +62,7 @@ EndProcedure
 Procedure ItemOnChange(Item)
 	AddAttributesCreateFormControl();
 	SetVisible();
+	FillInheritConsignorsInfo();
 EndProcedure
 
 &AtClient
@@ -82,7 +85,8 @@ EndProcedure
 
 &AtClient
 Procedure OnChangeTypeOfItemType()
-	If GetTypeOfItemType(Object.Item) = PredefinedValue("Enum.ItemTypes.Service") Then
+	TypeOfItemType = GetTypeOfItemType(Object.Item);
+	If TypeOfItemType = PredefinedValue("Enum.ItemTypes.Service") OR TypeOfItemType = PredefinedValue("Enum.ItemTypes.Certificate") Then
 		Object.Specification = Undefined;
 		ThisObject.SpecificationMode = False;
 	EndIf;
@@ -110,6 +114,20 @@ EndProcedure
 Procedure UnitModeOnChange(Item)
 	If ThisObject.UnitMode = "Inherit" Then
 		Object.Unit = Undefined;
+	EndIf;
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure ConsignorInfoModeOnChange(Item)
+	If ThisObject.ConsignorInfoMode = "Inherit" Then
+		Object.ConsignorsInfo.Clear();
+	Else // Onw
+		Object.ConsignorsInfo.Clear();
+		For Each Row In ThisObject.InheritConsignorsInfo Do
+			NewRow = Object.ConsignorsInfo.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
 	EndIf;
 	SetVisible();
 EndProcedure
@@ -149,6 +167,10 @@ EndProcedure
 Procedure SetVisible()
 	Items.OwnUnit.Visible = ThisObject.UnitMode = "Own";
 	Items.InheritUnit.Visible = ThisObject.UnitMode = "Inherit";
+	
+	Items.ConsignorsInfo.Visible = ThisObject.ConsignorInfoMode = "Own";
+	Items.InheritConsignorsInfo.Visible = ThisObject.ConsignorInfoMode = "Inherit";
+	
 	Items.Specification.Visible = ThisObject.SpecificationMode;
 	Items.GroupAttributes.Visible = Not ThisObject.SpecificationMode;
 	Items.SpecificationMode.Visible = Not GetTypeOfItemType(Object.Item) = PredefinedValue("Enum.ItemTypes.Service");
@@ -161,3 +183,22 @@ EndProcedure
 Procedure SizeOnChange(Item)
 	CommonFunctionsClientServer.CalculateVolume(Object);
 EndProcedure
+
+&AtServer
+Procedure FillInheritConsignorsInfo()
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemsConsignorsInfo.Company,
+	|	ItemsConsignorsInfo.Consignor
+	|FROM
+	|	Catalog.Items.ConsignorsInfo AS ItemsConsignorsInfo
+	|WHERE
+	|	ItemsConsignorsInfo.Ref = &Ref";
+	Query.SetParameter("Ref", Object.Item);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	ThisObject.InheritConsignorsInfo.Load(QueryTable);	
+EndProcedure
+
+

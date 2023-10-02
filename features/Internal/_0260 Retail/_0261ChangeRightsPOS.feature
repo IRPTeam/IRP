@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Retail
@@ -65,21 +65,9 @@ Scenario: _0260200 change rights (POS)
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Tax settings
-		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -146,6 +134,10 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I click "Return" button
 		And I click "Payment return" button
 		And I click the button named "Enter"
+		Then there are lines in TestClient message log
+			|'Amount paid is less than amount of the document'|
+		And I click "Cash (/)" button
+		And I click the button named "Enter"		
 		Then the form attribute named "UserAdmin" became equal to ""
 	* Check the return of access rights
 		And I expand current line in "ItemsPickup" table
@@ -187,6 +179,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '2,000'      | ''         | '200,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Change price and return
@@ -201,6 +194,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 			| 'Dress'   | ''               | 'XS/Blue'    | ''          | '100,00'   | '1,000'      | ''         | '100,00'    |
 		And I click "Return" button
 		And I click "Payment return" button
+		And I click "Cash (/)" button
 		And I click the button named "Enter"
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Check the return of access rights	

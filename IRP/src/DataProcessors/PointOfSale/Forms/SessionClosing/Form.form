@@ -276,6 +276,7 @@ Data needs to be corrected!</value>
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ListOfWarningDocumentsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -314,6 +315,7 @@ Data needs to be corrected!</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ListOfWarningDocumentsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -352,6 +354,7 @@ Data needs to be corrected!</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ListOfWarningDocumentsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -771,6 +774,7 @@ Take X-reports and compare with the data below.</value>
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>CashTableSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -809,6 +813,7 @@ Take X-reports and compare with the data below.</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>CashTableViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -847,6 +852,7 @@ Take X-reports and compare with the data below.</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>CashTableSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -892,6 +898,7 @@ Take X-reports and compare with the data below.</value>
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormField">
         <name>CashConfirm</name>
@@ -1352,6 +1359,7 @@ Take X-reports and compare with the data below.</value>
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>TerminalTableSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1390,6 +1398,7 @@ Take X-reports and compare with the data below.</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>TerminalTableViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1428,6 +1437,7 @@ Take X-reports and compare with the data below.</value>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>TerminalTableSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1473,6 +1483,7 @@ Take X-reports and compare with the data below.</value>
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormField">
         <name>TerminalConfirm</name>
@@ -2050,52 +2061,6 @@ Take X-reports and compare with the data below.</value>
                 <textEdit>true</textEdit>
               </extInfo>
             </items>
-            <items xsi:type="form:FormField">
-              <name>CurrencyBalanceBeginning</name>
-              <id>207</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Currency</segments>
-              </dataPath>
-              <titleLocation>None</titleLocation>
-              <extendedTooltip>
-                <name>CurrencyBalanceBeginningExtendedTooltip</name>
-                <id>209</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>CurrencyBalanceBeginningContextMenu</name>
-                <id>208</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxHeight>true</autoMaxHeight>
-              </extInfo>
-            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2184,52 +2149,6 @@ Take X-reports and compare with the data below.</value>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ToolTipBackColor</color>
                 </backColor>
-              </extInfo>
-            </items>
-            <items xsi:type="form:FormField">
-              <name>CurrencyBalanceIncoming</name>
-              <id>212</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Currency</segments>
-              </dataPath>
-              <titleLocation>None</titleLocation>
-              <extendedTooltip>
-                <name>CurrencyBalanceIncomingExtendedTooltip</name>
-                <id>214</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>CurrencyBalanceIncomingContextMenu</name>
-                <id>213</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxHeight>true</autoMaxHeight>
               </extInfo>
             </items>
             <visible>true</visible>
@@ -2322,52 +2241,6 @@ Take X-reports and compare with the data below.</value>
                 </backColor>
               </extInfo>
             </items>
-            <items xsi:type="form:FormField">
-              <name>CurrencyBalanceOutcoming</name>
-              <id>217</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Currency</segments>
-              </dataPath>
-              <titleLocation>None</titleLocation>
-              <extendedTooltip>
-                <name>CurrencyBalanceOutcomingExtendedTooltip</name>
-                <id>219</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>CurrencyBalanceOutcomingContextMenu</name>
-                <id>218</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxHeight>true</autoMaxHeight>
-              </extInfo>
-            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2456,52 +2329,6 @@ Take X-reports and compare with the data below.</value>
                 <backColor xsi:type="core:ColorRef">
                   <color>Style.ToolTipBackColor</color>
                 </backColor>
-              </extInfo>
-            </items>
-            <items xsi:type="form:FormField">
-              <name>CurrencyBalanceEnd</name>
-              <id>222</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Currency</segments>
-              </dataPath>
-              <titleLocation>None</titleLocation>
-              <extendedTooltip>
-                <name>CurrencyBalanceEndExtendedTooltip</name>
-                <id>224</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>CurrencyBalanceEndContextMenu</name>
-                <id>223</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxHeight>true</autoMaxHeight>
               </extInfo>
             </items>
             <visible>true</visible>
@@ -3676,23 +3503,6 @@ WHERE
     </edit>
   </attributes>
   <attributes>
-    <name>Currency</name>
-    <title>
-      <key>en</key>
-      <value>Currency</value>
-    </title>
-    <id>24</id>
-    <valueType>
-      <types>CatalogRef.Currencies</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
     <name>BalanceBegin</name>
     <title>
       <key>en</key>
@@ -3991,18 +3801,6 @@ WHERE
     <name>Workstation</name>
     <valueType>
       <types>CatalogRef.Workstations</types>
-    </valueType>
-  </parameters>
-  <parameters>
-    <name>Store</name>
-    <valueType>
-      <types>CatalogRef.Stores</types>
-    </valueType>
-  </parameters>
-  <parameters>
-    <name>Currency</name>
-    <valueType>
-      <types>CatalogRef.Currencies</types>
     </valueType>
   </parameters>
   <parameters>

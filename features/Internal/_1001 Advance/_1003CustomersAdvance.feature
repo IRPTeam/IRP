@@ -50,15 +50,7 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load documents
 		When Create document BankReceipt objects (advance)
 		When Create document BankReceipt objects (advance, BR-SI)
@@ -263,10 +255,10 @@ Scenario: _1003003 check SI closing by advance (Ap-Ar by documents, payment firs
 		| '28.01.2021 18:49:39'  | 'Distribution department'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | 'USD'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '16,26'      | 'Reporting currency'            | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | ''                                         | 'No'                     |
 		| '28.01.2021 18:49:39'  | 'Distribution department'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '5 795,00'   | 'en description is empty'       | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | 'Sales order 2 dated 27.01.2021 19:50:45'  | 'No'                     |
 		| '28.01.2021 18:49:39'  | 'Distribution department'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '95,00'      | 'en description is empty'       | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 2 dated 28.01.2021 18:49:39'  | ''                                         | 'No'                     |
-		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '19 874,00'  | 'TRY'                           | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
-		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '19 874,00'  | 'Local currency'                | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
-		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'USD'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '3 402,43'   | 'Reporting currency'            | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
-		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '19 874,00'  | 'en description is empty'       | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
+		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '35 834,00'  | 'TRY'                           | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
+		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '35 834,00'  | 'Local currency'                | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
+		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'USD'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '6 134,78'   | 'Reporting currency'            | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
+		| '28.01.2021 18:50:57'  | 'Distribution department'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '35 834,00'  | 'en description is empty'       | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 3 dated 28.01.2021 18:50:57'  | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'No'                     |
 		| '18.02.2021 10:48:46'  | 'Distribution department'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '13 000,00'  | 'TRY'                           | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'Sales order 5 dated 18.02.2021 10:48:33'  | 'No'                     |
 		| '18.02.2021 10:48:46'  | 'Distribution department'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'TRY'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '13 000,00'  | 'Local currency'                | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'Sales order 5 dated 18.02.2021 10:48:33'  | 'No'                     |
 		| '18.02.2021 10:48:46'  | 'Distribution department'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'USD'       | ''                                                       | 'Main Company'  | 'Ferron BP'  | '2 225,60'   | 'Reporting currency'            | 'Company Ferron BP'  | 'Basic Partner terms, TRY'  | 'Sales invoice 8 dated 18.02.2021 10:48:46'  | 'Sales order 5 dated 18.02.2021 10:48:33'  | 'No'                     |
@@ -553,17 +545,25 @@ Scenario: _1003062 generate Offset of advance report based on CustomersAdvancesC
 		And I close all client application windows
 						
 	
-
-
-	
-		
-
-	
-		
-	
-	
-		
-
-
-
-
+Scenario: _1003064 check advance closing when SI has two same strings
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CustomersAdvancesClosing.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"     |
+	* Check advance closing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '21'        |
+		And I click "Offset of advances" button
+	* Check
+		And "Doc" spreadsheet document contains "OffsetOfAdvanceCustomerLunch" template lines by template
+	And I close all client application windows

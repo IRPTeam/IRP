@@ -1469,10 +1469,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.InventoryOrigin</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>ItemListInventoryOriginOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>ItemListInventoryOriginExtendedTooltip</name>
             <id>1338</id>
@@ -1499,6 +1495,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2033,6 +2030,61 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListVatRate</name>
+          <id>1481</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.VatRate</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListVatRateOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListVatRateExtendedTooltip</name>
+            <id>1483</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListVatRateContextMenu</name>
+            <id>1482</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <listChoiceMode>true</listChoiceMode>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListOffersAmount</name>
           <id>72</id>
           <visible>true</visible>
@@ -2175,7 +2227,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>EnterOnInput</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -3252,10 +3303,6 @@
         <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -5749,6 +5796,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>SourceOfOriginsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -5787,6 +5835,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>SourceOfOriginsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -5825,6 +5874,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>SourceOfOriginsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -5872,6 +5922,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -6678,7 +6729,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.ConsignorBatches</segments>
+          <segments>Object.DELETE_ConsignorBatches</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
@@ -6690,7 +6741,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.LineNumber</segments>
+            <segments>Object.DELETE_ConsignorBatches.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesLineNumberExtendedTooltip</name>
@@ -6740,7 +6791,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Key</segments>
+            <segments>Object.DELETE_ConsignorBatches.Key</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesKeyExtendedTooltip</name>
@@ -6790,7 +6841,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.ItemKey</segments>
+            <segments>Object.DELETE_ConsignorBatches.ItemKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesItemKeyExtendedTooltip</name>
@@ -6840,7 +6891,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.SerialLotNumber</segments>
+            <segments>Object.DELETE_ConsignorBatches.SerialLotNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesSerialLotNumberExtendedTooltip</name>
@@ -6890,7 +6941,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.SourceOfOrigin</segments>
+            <segments>Object.DELETE_ConsignorBatches.SourceOfOrigin</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesSourceOfOriginExtendedTooltip</name>
@@ -6940,7 +6991,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Store</segments>
+            <segments>Object.DELETE_ConsignorBatches.Store</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesStoreExtendedTooltip</name>
@@ -6990,7 +7041,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Batch</segments>
+            <segments>Object.DELETE_ConsignorBatches.Batch</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesBatchExtendedTooltip</name>
@@ -7040,7 +7091,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ConsignorBatches.Quantity</segments>
+            <segments>Object.DELETE_ConsignorBatches.Quantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>ConsignorBatchesQuantityExtendedTooltip</name>
@@ -7125,6 +7176,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ConsignorBatchesSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7163,6 +7215,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ConsignorBatchesViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7201,6 +7254,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ConsignorBatchesSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -7248,6 +7302,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -8169,6 +8224,7 @@
         <edit>
           <common>true</common>
         </edit>
+        <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
       </columns>
     </additionalColumns>
   </attributes>

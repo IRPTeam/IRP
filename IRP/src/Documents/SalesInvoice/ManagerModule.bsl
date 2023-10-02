@@ -16,118 +16,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	ItemList.Key AS Key,
-	|	ItemList.InventoryOrigin AS InventoryOrigin,
-	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
-	|	ItemList.Store AS Store,
-	|	ItemList.QuantityInBaseUnit AS Quantity
-	|INTO tmpItemList
-	|FROM
-	|	Document.SalesInvoice.ItemList AS ItemList
-	|WHERE
-	|	ItemList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
-	|INTO tmpSerialLotNumbers
-	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SourceOfOrigins.Key,
-	|	SourceOfOrigins.SerialLotNumber,
-	|	SourceOfOrigins.SourceOfOrigin,
-	|	SourceOfOrigins.Quantity
-	|INTO tmpSourceOfOrigins
-	|FROM
-	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
-	|WHERE
-	|	SourceOfOrigins.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpItemList.Key,
-	|	tmpItemList.InventoryOrigin,
-	|	tmpItemList.Company,
-	|	tmpItemList.ItemKey,
-	|	tmpItemList.Store,
-	|	CASE
-	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
-	|			THEN tmpItemList.Quantity
-	|		ELSE tmpSerialLotNumbers.Quantity
-	|	END AS Quantity,
-	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
-	|INTO tmpItemList_1
-	|FROM
-	|	tmpItemList AS tmpItemList
-	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
-	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpItemList_1.Key,
-	|	tmpItemList_1.InventoryOrigin,
-	|	tmpItemList_1.Company,
-	|	tmpItemList_1.ItemKey,
-	|	tmpItemList_1.Store,
-	|	tmpItemList_1.SerialLotNumber,
-	|	CASE
-	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|		ELSE tmpItemList_1.Quantity
-	|	END AS Quantity,
-	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
-	|FROM
-	|	tmpItemList_1 AS tmpItemList_1
-	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
-	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
-
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	ItemListTable = QueryResult.Unload();
-
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	ConsignorBatches.Key,
-	|	ConsignorBatches.ItemKey,
-	|	ConsignorBatches.SerialLotNumber,
-	|	ConsignorBatches.SourceOfOrigin,
-	|	ConsignorBatches.Store,
-	|	ConsignorBatches.Batch,
-	|	ConsignorBatches.Quantity
-	|FROM
-	|	Document.SalesInvoice.ConsignorBatches AS ConsignorBatches
-	|WHERE
-	|	ConsignorBatches.Ref = &Ref";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	ConsignorBatches = QueryResult.Unload();
-
-	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable,
-		ConsignorBatches);
-
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
-	Query.SetParameter("T1", ConsignorBatches);
-	Query.Execute();
-
 	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
 	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
 		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
@@ -243,6 +131,7 @@ Function GetAdditionalQueryParameters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -255,7 +144,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(OffersInfo());
-	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -340,7 +228,10 @@ Function ItemList()
 		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
 		   |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
+		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		   |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin,
+		   |	SalesInvoiceItemList.VatRate AS VatRate,
+		   |	SalesInvoiceItemList.TaxAmount AS TaxAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -413,32 +304,6 @@ Function OffersInfo()
 		   |		AND SalesInvoiceSpecialOffers.Ref = &Ref
 		   |		INNER JOIN TableRowIDInfo AS TableRowIDInfo
 		   |		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key";
-EndFunction
-
-Function Taxes()
-	Return "SELECT
-		   |	SalesInvoiceTaxList.Ref.Date AS Period,
-		   |	SalesInvoiceTaxList.Ref.Company AS Company,
-		   |	SalesInvoiceTaxList.Tax AS Tax,
-		   |	SalesInvoiceTaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN SalesInvoiceTaxList.ManualAmount = 0
-		   |			THEN SalesInvoiceTaxList.Amount
-		   |		ELSE SalesInvoiceTaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	SalesInvoiceItemList.NetAmount AS TaxableAmount,
-		   |	SalesInvoiceItemList.Ref.Branch AS Branch,
-		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		   |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		   |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-		   |		INNER JOIN Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
-		   |		ON SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-		   |		AND SalesInvoiceItemList.Ref = &Ref
-		   |		AND SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -528,10 +393,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
-	QueryArray.Add(R8010B_TradeAgentInventory());
-	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
-	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -680,19 +541,27 @@ Function R2031B_ShipmentInvoicing()
 		   |	TRUE";
 EndFunction
 
-Function R2040B_TaxesIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R2040B_TaxesIncoming
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	Taxes.IsSales";
+Function R2040B_TaxesIncoming()	
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	ItemList.TaxAmount,
+		|	ItemLIst.NetAmount AS TaxableAmount
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsSales";
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
+	Return 
+		"SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	ItemList.Period,
 		   |	ItemList.Store,
@@ -1249,367 +1118,133 @@ Function R6080T_OtherPeriodsRevenues()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	ItemList.Key,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store,
-		   |	ItemList.Company,
-		   |	ISNULL(ConsignorBatches.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-		   |	case
-		   |		when ConsignorBatches.Key IS NULL
-		   |			then False
-		   |		else true
-		   |	end as IsConsignorBatches,
-		   |
-		   |	ISNULL(ConsignorBatches.Quantity,0) AS ConsignorQuantity,
-		   |
-		   |	CASE
-		   |		WHEN ConsignorBatches.Quantity IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE ConsignorBatches.Quantity
-		   |	END AS Quantity,
-		   |	ItemList.Period,
-		   |	VALUE(Enum.BatchDirection.Expense) AS Direction,
-		   |	ConsignorBatches.Batch AS BatchConsignor
-		   |INTO BatchKeysInfo_1
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN ConsignorBatches AS ConsignorBatches
-		   |		ON ItemList.Key = ConsignorBatches.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |;
-		   |
-		   |//////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ItemList.Key,
-		   |	ItemList.ItemKey,
-		   |	ItemList.TradeAgentStore,
-		   |	ItemList.Company,
-		   |	ISNULL(ConsignorBatches.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-		   |	case
-		   |		when ConsignorBatches.Key IS NULL
-		   |			then False
-		   |		else true
-		   |	end as IsConsignorBatches,
-		   |
-		   |	ISNULL(ConsignorBatches.Quantity,0) AS ConsignorQuantity,
-		   |
-		   |	CASE
-		   |		WHEN ConsignorBatches.Quantity IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE ConsignorBatches.Quantity
-		   |	END AS Quantity,
-		   |	ItemList.Period,
-		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction
-		   |INTO BatchKeysInfo_2
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN ConsignorBatches AS ConsignorBatches
-		   |		ON ItemList.Key = ConsignorBatches.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsShipmentToTradeAgent
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	BatchKeysInfo_1.ItemKey,
-		   |	BatchKeysInfo_1.Store,
-		   |	BatchKeysInfo_1.Company,
-		   |CASE WHEN BatchKeysInfo_1.IsConsignorBatches THEN
-		   | BatchKeysInfo_1.ConsignorQuantity
-		   |ELSE
-		   |CASE
-		   |	WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		   |		THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		   |	ELSE BatchKeysInfo_1.Quantity
-		   |END
-		   |END AS Quantity,   
-		   |	BatchKeysInfo_1.Period,
-		   |	BatchKeysInfo_1.Direction,
-		   |	BatchKeysInfo_1.BatchConsignor,
-		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
-		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
-		   |INTO BatchKeysInfo
-		   |FROM
-		   |	BatchKeysInfo_1 AS BatchKeysInfo_1
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON BatchKeysInfo_1.Key = SourceOfOrigins.Key
-		   |		AND case
-		   |			when BatchKeysInfo_1.IsConsignorBatches
-		   |				then BatchKeysInfo_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		   |			else true
-		   |		end
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	BatchKeysInfo_2.ItemKey,
-		   |	BatchKeysInfo_2.TradeAgentStore,
-		   |	BatchKeysInfo_2.Company,
-		   |CASE WHEN BatchKeysInfo_2.IsConsignorBatches THEN
-		   | BatchKeysInfo_2.ConsignorQuantity
-		   |ELSE
-		   |CASE
-		   |	WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		   |		THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		   |	ELSE BatchKeysInfo_2.Quantity
-		   |END
-		   |END AS Quantity,   
-		   |	BatchKeysInfo_2.Period,
-		   |	BatchKeysInfo_2.Direction,
-		   |	UNDEFINED,
-		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
-		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
-		   |FROM
-		   |	BatchKeysInfo_2 AS BatchKeysInfo_2
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON BatchKeysInfo_2.Key = SourceOfOrigins.Key
-		   |		and case
-		   |			when BatchKeysInfo_2.IsConsignorBatches
-		   |				then BatchKeysInfo_2.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		   |			else true
-		   |		end
-		   |;
-		   |SELECT
-		   |	BatchKeysInfo.ItemKey,
-		   |	BatchKeysInfo.Store,
-		   |	BatchKeysInfo.Company,
-		   |	SUM(ISNULL(BatchKeysInfo.Quantity,0)) AS Quantity,
-		   |	BatchKeysInfo.Period,
-		   |	BatchKeysInfo.Direction,
-		   |	BatchKeysInfo.BatchConsignor,
-		   |	BatchKeysInfo.SourceOfOrigin,
-		   |	BatchKeysInfo.SerialLotNumber
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	BatchKeysInfo AS BatchKeysInfo
-		   |WHERE TRUE
-		   |GROUP BY
-		   |	BatchKeysInfo.ItemKey,
-		   |	BatchKeysInfo.Store,
-		   |	BatchKeysInfo.Company,
-		   |	BatchKeysInfo.Period,
-		   |	BatchKeysInfo.Direction,
-		   |	BatchKeysInfo.BatchConsignor,
-		   |	BatchKeysInfo.SourceOfOrigin,
-		   |	BatchKeysInfo.SerialLotNumber";
-EndFunction
-
-Function R8010B_TradeAgentInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R8010B_TradeAgentInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsShipmentToTradeAgent
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName";
-EndFunction
-
-Function R8011B_TradeAgentSerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	SerialLotNumbers.Period,
-		   |	SerialLotNumbers.Company,
-		   |	SerialLotNumbers.ItemKey,
-		   |	SerialLotNumbers.Partner,
-		   |	SerialLotNumbers.Agreement,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity
-		   |INTO R8011B_TradeAgentSerialLotNumber
-		   |FROM
-		   |	SerialLotNumbers AS SerialLotNumbers
-		   |WHERE
-		   |	SerialLotNumbers.IsShipmentToTradeAgent";
-EndFunction
-
-Function R8012B_ConsignorInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ConsignorBatches.SerialLotNumber,
-		   |	CASE
-		   |		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
-		   |			THEN ConsignorBatches.Batch.PartnerConsignor
-		   |		ELSE ConsignorBatches.Batch.Partner
-		   |	END AS Partner,
-		   |	CASE
-		   |		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
-		   |			THEN ConsignorBatches.Batch.AgreementConsignor
-		   |		ELSE ConsignorBatches.Batch.Agreement
-		   |	END AS Agreement,
-		   |	CASE
-		   |		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
-		   |			THEN ConsignorBatches.Batch.LegalNameConsignor
-		   |		ELSE ConsignorBatches.Batch.LegalName
-		   |	END AS LegalName,
-		   |	ConsignorBatches.Quantity
-		   |INTO R8012B_ConsignorInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN ConsignorBatches AS ConsignorBatches
-		   |		ON ItemList.Key = ConsignorBatches.Key
-		   |WHERE
-		   |	ItemList.IsSales
-		   |	AND ItemList.IsConsignorStocks";
-EndFunction
-
-Function R8013B_ConsignorBatchWiseBalance()
-	Return "SELECT
-		   |	ItemList.Key,
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ConsignorBatches.Batch,
-		   |	ConsignorBatches.ItemKey,
-		   |	ConsignorBatches.SerialLotNumber,
-		   |	ConsignorBatches.Store,
-		   |	ConsignorBatches.Quantity
-		   |INTO ConsignorBatchWiseBalance_1
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		INNER JOIN ConsignorBatches AS ConsignorBatches
-		   |		ON ItemList.IsSales
-		   |		AND ItemList.IsConsignorStocks
-		   |		AND ItemList.Key = ConsignorBatches.Key
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ConsignorBatchWiseBalance_1.RecordType,
-		   |	ConsignorBatchWiseBalance_1.Period,
-		   |	ConsignorBatchWiseBalance_1.Company,
-		   |	ConsignorBatchWiseBalance_1.Batch,
-		   |	ConsignorBatchWiseBalance_1.ItemKey,
-		   |	ConsignorBatchWiseBalance_1.Store,
-		   |	SUM(ISNULL(ConsignorBatchWiseBalance_1.Quantity, 0)) AS Quantity,
-		   |
-		   |	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
-		   |	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
-		   |INTO R8013B_ConsignorBatchWiseBalance
-		   |FROM
-		   |	ConsignorBatchWiseBalance_1 AS ConsignorBatchWiseBalance_1
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON ConsignorBatchWiseBalance_1.Key = SourceOfOrigins.Key
-		   |		AND ConsignorBatchWiseBalance_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		   |GROUP BY
-		   |	ConsignorBatchWiseBalance_1.RecordType,
-		   |	ConsignorBatchWiseBalance_1.Period,
-		   |	ConsignorBatchWiseBalance_1.Company,
-		   |	ConsignorBatchWiseBalance_1.Batch,
-		   |	ConsignorBatchWiseBalance_1.ItemKey,
-		   |	ConsignorBatchWiseBalance_1.Store,
-		   |	SourceOfOrigins.SourceOfOriginStock,
-		   |	SourceOfOrigins.SerialLotNumberStock";
+	Return 
+		"SELECT
+		|	ItemList.Key,
+		|	ItemList.ItemKey,
+		|	ItemList.Store,
+		|	ItemList.Company,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Expense) AS Direction
+		|INTO BatchKeysInfo_1
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|;
+		|
+		|//////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Key,
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.Company,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction
+		|INTO BatchKeysInfo_2
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsShipmentToTradeAgent
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	BatchKeysInfo_1.ItemKey,
+		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Company,
+		|	CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE BatchKeysInfo_1.Quantity
+		|	END AS Quantity,
+		|	BatchKeysInfo_1.Period,
+		|	BatchKeysInfo_1.Direction,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+		|INTO BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo_1 AS BatchKeysInfo_1
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON BatchKeysInfo_1.Key = SourceOfOrigins.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	BatchKeysInfo_2.ItemKey,
+		|	BatchKeysInfo_2.TradeAgentStore,
+		|	BatchKeysInfo_2.Company,
+		|	CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE BatchKeysInfo_2.Quantity
+		|	END AS Quantity,
+		|	BatchKeysInfo_2.Period,
+		|	BatchKeysInfo_2.Direction,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
+		|FROM
+		|	BatchKeysInfo_2 AS BatchKeysInfo_2
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON BatchKeysInfo_2.Key = SourceOfOrigins.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Company,
+		|	SUM(ISNULL(BatchKeysInfo.Quantity, 0)) AS Quantity,
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.SourceOfOrigin,
+		|	BatchKeysInfo.SerialLotNumber
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo AS BatchKeysInfo
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.SourceOfOrigin,
+		|	BatchKeysInfo.SerialLotNumber";
 EndFunction
 
 Function R8014T_ConsignorSales()
-	Return "SELECT
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Period,
-		   |	ItemList.Key AS RowKey,
-		   |	ItemList.Company,
-		   |	ConsignorBatches.Batch.Partner AS Partner,
-		   |	ConsignorBatches.Batch.Agreement AS Agreement,
-		   |	ItemList.Currency,
-		   |	ItemList.Invoice AS SalesInvoice,
-		   |	ConsignorBatches.Batch AS PurchaseInvoice,
-		   |	ItemList.ItemKey,
-		   |	ConsignorBatches.SerialLotNumber,
-		   |	ItemList.Unit,
-		   |	ItemList.Price,
-		   |	ItemList.PriceType,
-		   |	ItemList.PriceIncludeTax,
-		   |   ConsignorBatches.Quantity,
-		   |	CASE
-		   |		WHEN ItemList.Quantity = 0
-		   |			THEN 0
-		   |		ELSE (ItemList.NetAmount / ItemList.Quantity) * ConsignorBatches.Quantity
-		   |	END AS NetAmount,
-		   |	CASE
-		   |		WHEN ItemList.Quantity = 0
-		   |			THEN 0
-		   |		ELSE (ItemList.Amount / ItemList.Quantity) * ConsignorBatches.Quantity
-		   |	END AS Amount
-		   |INTO ConsignorSales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN ConsignorBatches AS ConsignorBatches
-		   |		ON ItemList.Key = ConsignorBatches.Key
-		   |WHERE
-		   |	ItemList.IsSales
-		   |	AND ItemList.IsConsignorStocks
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |
-		   |	ConsignorSales.*,  
-		   |   ConsignorSales.Quantity,
-		   |	ConsignorSales.NetAmount,
-		   |	ConsignorSales.Amount,
-		   |	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
-		   |	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
-		   |INTO ConsignorSales_1
-		   |FROM
-		   |	ConsignorSales AS ConsignorSales
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON ConsignorSales.Key = SourceOfOrigins.Key
-		   |		AND ConsignorSales.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |
-		   |	ConsignorSales_1.*,
-		   |	ConsignorSales_1.Key,
-		   |	ConsignorSales_1.Quantity,
-		   |	ConsignorSales_1.NetAmount,
-		   |	ConsignorSales_1.Amount,
-		   |	ConsignorPrices.Price AS ConsignorPrice
-		   |INTO ConsignorSales_1_1
-		   |FROM
-		   |	ConsignorSales_1 AS ConsignorSales_1
-		   |		LEFT JOIN AccumulationRegister.R8015T_ConsignorPrices AS ConsignorPrices
-		   |		ON ConsignorSales_1.Company = ConsignorPrices.Company
-		   |		AND ConsignorSales_1.Partner = ConsignorPrices.Partner
-		   |		AND ConsignorSales_1.Agreement = ConsignorPrices.Agreement
-		   |		AND ConsignorSales_1.PurchaseInvoice = ConsignorPrices.PurchaseInvoice
-		   |		AND ConsignorSales_1.ItemKey = ConsignorPrices.ItemKey
-		   |		AND ConsignorSales_1.SerialLotNumber = ConsignorPrices.SerialLotNumber
-		   |		AND ConsignorSales_1.SourceOfOrigin = ConsignorPrices.SourceOfOrigin
-		   |		AND ConsignorSales_1.Currency = ConsignorPrices.Currency
-		   |		AND ConsignorPrices.CurrencyMovementType = Value(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ConsignorSales_1_1.*
-		   |INTO R8014T_ConsignorSales
-		   |FROM
-		   |	ConsignorSales_1_1 AS ConsignorSales_1_1
-		   |WHERE
-		   |	TRUE";
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.PriceIncludeTax,
+		|	ItemList.Invoice AS SalesInvoice,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount,
+		|	ItemList.Amount,
+		|	ItemList.Quantity,
+		|	SourceOfOrigins.SerialLotNumber,
+		|	SourceOfOrigins.SourceOfOrigin
+		|INTO R8014T_ConsignorSales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|WHERE
+		|	ItemList.IsConsignorStocks";
 EndFunction
-
+		 
 #EndRegion
 
 #Region AccessObject

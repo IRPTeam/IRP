@@ -265,6 +265,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="af78b89a-08b3-4615-a196-2436eb520bd6">
+    <name>MainPhoneNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Main phone number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
     <producedTypes>
       <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

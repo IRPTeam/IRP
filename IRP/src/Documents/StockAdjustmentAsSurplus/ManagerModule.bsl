@@ -132,27 +132,33 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.Amount AS Amount,
-		   |	ItemList.AmountTax AS AmountTax,
-		   |	ItemList.Key
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.Store AS Store,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	CASE
+		|		WHEN ItemList.PhysicalInventory.Ref IS NULL
+		|			THEN ItemList.Ref
+		|		ELSE ItemList.PhysicalInventory
+		|	END AS AdjustmentBasis,
+		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+		|	ItemList.PhysicalInventory AS PhysicalInventory,
+		|	ItemList.Ref AS Basis,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.AmountTax AS AmountTax,
+		|	ItemList.Key
+		|INTO ItemList
+		|FROM
+		|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -226,7 +232,23 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	Return QueryArray;
+EndFunction
+
+Function R4031B_GoodsInTransitIncoming()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4031B_GoodsInTransitIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PhysicalInventoryExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -287,13 +309,15 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4052T_StockAdjustmentAsSurplus()
-	Return "SELECT
-		   |	*
-		   |INTO R4052T_StockAdjustmentAsSurplus
-		   |FROM
-		   |	ItemList
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists";
+	Return 
+		"SELECT
+		|	ItemList.AdjustmentBasis AS Basis,
+		|	*
+		|INTO R4052T_StockAdjustmentAsSurplus
+		|FROM
+		|	ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4050B_StockInventory()
@@ -354,90 +378,91 @@ Function T6010S_BatchesInfo()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	ItemList.Key,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store,
-		   |	ItemList.Company,
-		   |	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
-		   |	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		   |	ItemList.Quantity AS TotalQuantity,
-		   |	ItemList.Amount AS Amount,
-		   |	ItemList.AmountTax AS AmountTax,
-		   |	ItemList.Period,
-		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction
-		   |INTO BatchKeysInfo_1
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	BatchKeysInfo_1.ItemKey,
-		   |	BatchKeysInfo_1.Store,
-		   |	BatchKeysInfo_1.Company,
-		   |	BatchKeysInfo_1.CurrencyMovementType,
-		   |	BatchKeysInfo_1.Currency,
-		   |	SUM(CASE
-		   |		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		   |			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		   |		ELSE BatchKeysInfo_1.TotalQuantity
-		   |	END) AS Quantity,
-		   |	SUM(BatchKeysInfo_1.Amount) AS Amount,
-		   |	SUM(BatchKeysInfo_1.AmountTax) AS AmountTax,
-		   |	SUM(BatchKeysInfo_1.TotalQuantity) AS TotalQuantity,
-		   |	BatchKeysInfo_1.Period,
-		   |	BatchKeysInfo_1.Direction,
-		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
-		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
-		   |INTO BatchKeysInfo_1_1
-		   |FROM
-		   |	BatchKeysInfo_1 AS BatchKeysInfo_1
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON BatchKeysInfo_1.Key = SourceOfOrigins.Key
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	BatchKeysInfo_1.ItemKey,
-		   |	BatchKeysInfo_1.Store,
-		   |	BatchKeysInfo_1.Company,
-		   |	BatchKeysInfo_1.CurrencyMovementType,
-		   |	BatchKeysInfo_1.Currency,
-		   |	BatchKeysInfo_1.Period,
-		   |	BatchKeysInfo_1.Direction,
-		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
-		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	BatchKeysInfo_1.ItemKey,
-		   |	BatchKeysInfo_1.Store,
-		   |	BatchKeysInfo_1.Company,
-		   |	BatchKeysInfo_1.CurrencyMovementType,
-		   |	BatchKeysInfo_1.Currency,
-		   |	BatchKeysInfo_1.Quantity,
-		   |	CASE
-		   |		WHEN BatchKeysInfo_1.TotalQuantity <> 0
-		   |			THEN (BatchKeysInfo_1.Amount / BatchKeysInfo_1.TotalQuantity) * BatchKeysInfo_1.Quantity
-		   |		ELSE 0
-		   |	END AS Amount,
-		   |	CASE
-		   |		WHEN BatchKeysInfo_1.TotalQuantity <> 0
-		   |			THEN (BatchKeysInfo_1.AmountTax / BatchKeysInfo_1.TotalQuantity) * BatchKeysInfo_1.Quantity
-		   |		ELSE 0
-		   |	END AS AmountTax,
-		   |	BatchKeysInfo_1.Period,
-		   |	BatchKeysInfo_1.Direction,
-		   |	BatchKeysInfo_1.SourceOfOrigin,
-		   |	BatchKeysInfo_1.SerialLotNumber
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	BatchKeysInfo_1_1 AS BatchKeysInfo_1
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	ItemList.Key,
+		|	ItemList.ItemKey,
+		|	ItemList.Store,
+		|	ItemList.Company,
+		|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+		|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+		|	ItemList.Quantity AS TotalQuantity,
+		|	ItemList.Amount AS InvoiceAmount,
+		|	ItemList.AmountTax AS InvoiceTaxAmount,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction
+		|INTO BatchKeysInfo_1
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	BatchKeysInfo_1.ItemKey,
+		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.CurrencyMovementType,
+		|	BatchKeysInfo_1.Currency,
+		|	SUM(CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE BatchKeysInfo_1.TotalQuantity
+		|	END) AS Quantity,
+		|	SUM(BatchKeysInfo_1.InvoiceAmount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo_1.InvoiceTaxAmount) AS InvoiceTaxAmount,
+		|	SUM(BatchKeysInfo_1.TotalQuantity) AS TotalQuantity,
+		|	BatchKeysInfo_1.Period,
+		|	BatchKeysInfo_1.Direction,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+		|INTO BatchKeysInfo_1_1
+		|FROM
+		|	BatchKeysInfo_1 AS BatchKeysInfo_1
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON BatchKeysInfo_1.Key = SourceOfOrigins.Key
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	BatchKeysInfo_1.ItemKey,
+		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.CurrencyMovementType,
+		|	BatchKeysInfo_1.Currency,
+		|	BatchKeysInfo_1.Period,
+		|	BatchKeysInfo_1.Direction,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	BatchKeysInfo_1.ItemKey,
+		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.CurrencyMovementType,
+		|	BatchKeysInfo_1.Currency,
+		|	BatchKeysInfo_1.Quantity,
+		|	CASE
+		|		WHEN BatchKeysInfo_1.TotalQuantity <> 0
+		|			THEN (BatchKeysInfo_1.InvoiceAmount / BatchKeysInfo_1.TotalQuantity) * BatchKeysInfo_1.Quantity
+		|		ELSE 0
+		|	END AS InvoiceAmount,
+		|	CASE
+		|		WHEN BatchKeysInfo_1.TotalQuantity <> 0
+		|			THEN (BatchKeysInfo_1.InvoiceTaxAmount / BatchKeysInfo_1.TotalQuantity) * BatchKeysInfo_1.Quantity
+		|		ELSE 0
+		|	END AS InvoiceTaxAmount,
+		|	BatchKeysInfo_1.Period,
+		|	BatchKeysInfo_1.Direction,
+		|	BatchKeysInfo_1.SourceOfOrigin,
+		|	BatchKeysInfo_1.SerialLotNumber
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo_1_1 AS BatchKeysInfo_1
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R5021T_Revenues()

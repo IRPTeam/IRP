@@ -37,11 +37,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -163,6 +158,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+EndProcedure
+
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
 EndProcedure
 
 #EndRegion
@@ -398,11 +408,11 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocCashReceiptClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocCashReceiptClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -50,7 +50,6 @@ Scenario: _041 test data
 		When Create catalog PriceTypes objects (LC)
 		When Create catalog Specifications objects (LC)
 		When Create catalog Stores objects (LC)
-		When Create catalog TaxAnalytics objects (LC)
 		When Create catalog TaxRates objects (LC)
 		When Create catalog Taxes objects (LC)
 		When Create catalog InterfaceGroups objects (LC)
@@ -72,10 +71,6 @@ Scenario: _041 test data
 		When Create information register UserSettings records (LC)
 		And Delay 10
 		When update ItemKeys (LC)
-	* Add plugin for taxes calculation
-			When add Plugin for tax calculation (LC)
-		When update tax settings (LC)
-
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -398,7 +393,6 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Left value'   |
 		| 'Recorder'     |
-	And I click Clear button of the attribute named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter"
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table

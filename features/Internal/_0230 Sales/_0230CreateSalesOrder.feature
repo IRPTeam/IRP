@@ -57,16 +57,8 @@ Scenario: _023000 preparation (Sales order)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When update ItemKeys
 		When Create catalog Partners objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
-	* Tax settings
-		When filling in Tax settings for company
 
 
 Scenario: _0230001 check preparation
@@ -200,7 +192,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 350'     |
 		And I close current window		
 		Then the form attribute named "Branch" became equal to ""
-		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "Manager" became equal to "Region 1"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "UseItemsShipmentScheduling" became equal to "No"
@@ -717,5 +709,5 @@ Scenario: _300504 check connection to Sales order report "Related documents"
 		| $$NumberSalesOrder023001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows 

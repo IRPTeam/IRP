@@ -134,25 +134,31 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.Key,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.ExpenseType AS ExpenseType
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.Store AS Store,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.ItemKey AS ItemKey,
+		|	CASE
+		|		WHEN ItemList.PhysicalInventory.Ref IS NULL
+		|			THEN ItemList.Ref
+		|		ELSE ItemList.PhysicalInventory
+		|	END AS AdjustmentBasis,
+		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+		|	ItemList.PhysicalInventory AS PhysicalInventory,
+		|	ItemList.Ref AS Basis,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Key,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.ExpenseType AS ExpenseType
+		|INTO ItemList
+		|FROM
+		|	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -225,7 +231,23 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	Return QueryArray;
+EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PhysicalInventoryExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -287,13 +309,15 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()
-	Return "SELECT
-		   |	*
-		   |INTO R4051T_StockAdjustmentAsWriteOff
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists";
+	Return 
+		"SELECT
+		|	ItemList.AdjustmentBasis AS Basis,
+		|	*
+		|INTO R4051T_StockAdjustmentAsWriteOff
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4050B_StockInventory()
@@ -407,13 +431,25 @@ Function R5022T_Expenses()
 		   |	WriteOffBatchesInfo.Currency,
 		   |	WriteOffBatchesInfo.RowID AS Key,
 		   |	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-		   |	WriteOffBatchesInfo.Amount 
-		   |		+ WriteOffBatchesInfo.AmountCostRatio
-		   |		+ WriteOffBatchesInfo.AmountCostAdditional AS Amount,
-		   |	WriteOffBatchesInfo.Amount 
-		   |		+ WriteOffBatchesInfo.AmountCostRatio 
-		   |		+ WriteOffBatchesInfo.AmountCostAdditional 
-		   |		+ WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
+		   |	WriteOffBatchesInfo.InvoiceAmount
+		   |	+WriteOffBatchesInfo.IndirectCostAmount
+	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	       |	+WriteOffBatchesInfo.AllocatedCostAmount
+	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	       |
+	       |	WriteOffBatchesInfo.InvoiceAmount
+	       |	+WriteOffBatchesInfo.InvoiceTaxAmount
+	       |	+WriteOffBatchesInfo.IndirectCostAmount
+	       |	+WriteOffBatchesInfo.IndirectCostTaxAmount
+	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	       |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	       |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	       |	+WriteOffBatchesInfo.AllocatedCostAmount
+	       |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
+	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount
+	       |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
 		   |INTO R5022T_Expenses
 		   |FROM
 		   |	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo

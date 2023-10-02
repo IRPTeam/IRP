@@ -126,6 +126,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 
+	If Not Cancel = True Then
+		If ThisObject.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+			ItemListTable = CommissionTradeServer.GetItemListTable(ThisObject);
+			CommissionTradeServer.FillCheckProcessing_ShipmentToTradeAgent(Cancel, ItemListTable, ThisObject.TransactionType);
+		EndIf;
+	EndIf;
+
 	If ValueIsFilled(ThisObject.Company) Then
 		Query = New Query;
 		Query.Text =

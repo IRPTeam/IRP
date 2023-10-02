@@ -43,17 +43,9 @@ Scenario: _028400 preparation (GR-SR)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog BusinessUnits objects
-	* Tax settings
-		When filling in Tax settings for company
 	When Create document SalesInvoice objects
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -241,17 +233,17 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Ferron BP'      |
+			| 'Nicoletta'      |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| 'Description'          |
-			| 'Company Ferron BP'    |
+			| 'Company Nicoletta'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Description'                         |
-			| 'Basic Partner terms, without VAT'    |
+			| 'Description'                               |
+			| 'Posting by Standard Partner term Customer' |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table

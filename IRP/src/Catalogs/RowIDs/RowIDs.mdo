@@ -109,6 +109,7 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.RowIDs.Form.ListForm</defaultListForm>
   <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
     <name>AgreementPurchases</name>
     <synonym>
@@ -698,11 +699,35 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ce3a3349-c87a-4c8d-b47f-e861c440b6c9">
+    <name>TransactionTypeRGR</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type GR Retail</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RetailGoodsReceiptTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
     <name>ItemForm</name>
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d939f3e9-3998-408f-a5db-b41cf858bdea">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

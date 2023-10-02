@@ -101,6 +101,7 @@ Function GetAdditionalQueryParameters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -111,7 +112,6 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
 	Return QueryArray;
@@ -137,7 +137,7 @@ Function ItemList()
 		   |	DocItemList.Ref.Currency AS Currency,
 		   |	DocItemList.Unit AS Unit,
 		   |	DocItemList.Ref.Date AS Period,
-		   |	DocItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	DocItemList.IsService AS IsService,
 		   |	DocItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	DocItemList.RevenueType AS RevenueType,
 		   |	DocItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -151,34 +151,14 @@ Function ItemList()
 		   |	DocItemList.Ref.Branch AS Branch,
 		   |	DocItemList.Ref.LegalNameContract AS LegalNameContract,
 		   |	DocItemList.PriceType,
-		   |	DocItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
+		   |	DocItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+		   |	DocItemList.VatRate AS VatRate,
+		   |	DocItemList.TaxAmount AS TaxAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
 		   |WHERE
 		   |	DocItemList.Ref = &Ref";
-EndFunction
-
-Function Taxes()
-	Return "SELECT
-		   |	DocTaxList.Ref.Date AS Period,
-		   |	DocTaxList.Ref.Company AS Company,
-		   |	DocTaxList.Tax AS Tax,
-		   |	DocTaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN DocTaxList.ManualAmount = 0
-		   |			THEN DocTaxList.Amount
-		   |		ELSE DocTaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	DocItemList.NetAmount AS TaxableAmount,
-		   |	DocItemList.Ref.Branch AS Branch
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
-		   |		INNER JOIN Document.SalesReportFromTradeAgent.TaxList AS DocTaxList
-		   |		ON DocItemList.Key = DocTaxList.Key
-		   |		AND DocItemList.Ref = &Ref
-		   |		AND DocTaxList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -252,8 +232,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R8010B_TradeAgentInventory());
-	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
@@ -299,14 +277,21 @@ Function R2001T_Sales()
 EndFunction
 
 Function R2040B_TaxesIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R2040B_TaxesIncoming
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	ItemList.TaxAmount,
+		|	ItemLIst.NetAmount AS TaxableAmount
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4050B_StockInventory()
@@ -539,48 +524,6 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo_1.Direction,
 		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
-EndFunction
-
-Function R8010B_TradeAgentInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R8010B_TradeAgentInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName";
-EndFunction
-
-Function R8011B_TradeAgentSerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	SerialLotNumbers.Period,
-		   |	SerialLotNumbers.Company,
-		   |	SerialLotNumbers.ItemKey,
-		   |	SerialLotNumbers.Partner,
-		   |	SerialLotNumbers.Agreement,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity
-		   |INTO R8011B_TradeAgentSerialLotNumber
-		   |FROM
-		   |	SerialLotNumbers AS SerialLotNumbers
-		   |WHERE
-		   |	TRUE";
 EndFunction
 
 #EndRegion

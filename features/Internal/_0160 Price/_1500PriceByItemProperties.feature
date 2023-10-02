@@ -928,7 +928,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemList"  table contains lines
 			| '#'   | 'Input price'   | 'Item'    | 'Input unit'          | 'Price'    |
-			| '1'   | '500,000'       | 'Dress'   | 'box Dress (8 pcs)'   | '62,50'    |
+			| '1'   | '500,00'        | 'Dress'   | 'box Dress (8 pcs)'   | '62,50'    |
 		And I activate field named "ItemListInputPrice" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "600,000" text in the field named "ItemListInputPrice" of "ItemList" table
@@ -936,7 +936,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemList" table contains lines
 			| '#'   | 'Input price'   | 'Item'    | 'Input unit'          | 'Price'    |
-			| '1'   | '600,000'       | 'Dress'   | 'box Dress (8 pcs)'   | '75,00'    |
+			| '1'   | '600,00'        | 'Dress'   | 'box Dress (8 pcs)'   | '75,00'    |
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemListInputUnit" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -948,7 +948,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| '#'   | 'Input price'   | 'Item'    | 'Input unit'   | 'Price'     |
-			| '1'   | '600,000'       | 'Dress'   | 'pcs'          | '600,00'    |
+			| '1'   | '600,00'        | 'Dress'   | 'pcs'          | '600,00'    |
 	* Change Item
 		And I click choice button of the attribute named "ItemListInputUnit" in "ItemList" table
 		And I go to line in "List" table
@@ -963,7 +963,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I select current line in "List" table
 		And "ItemList" table contains lines
 			| '#'   | 'Input price'   | 'Item'    | 'Input unit'   | 'Price'     |
-			| '1'   | '600,000'       | 'Boots'   | 'pcs'          | '600,00'    |
+			| '1'   | '600,00'        | 'Boots'   | 'pcs'          | '600,00'    |
 		And I close all client application windows
 
 

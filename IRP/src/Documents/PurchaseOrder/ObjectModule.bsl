@@ -75,7 +75,6 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
-	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
 EndProcedure
@@ -101,6 +100,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 
+	If Not Cancel = True Then
+		If ThisObject.TransactionType = Enums.PurchaseTransactionTypes.Purchase Then
+			ItemListTable = CommissionTradeServer.GetItemListTable(ThisObject);
+			CommissionTradeServer.FillCheckProcessing_Purchase(Cancel, ItemListTable, ThisObject.TransactionType);
+		ElsIf ThisObject.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
+			ItemListTable = CommissionTradeServer.GetItemListTable(ThisObject);
+			CommissionTradeServer.FillCheckProcessing_ReceiptFromConsignor(Cancel, ItemListTable, ThisObject.TransactionType);
+		EndIf;
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.Company) Then
 		Query = New Query;
 		Query.Text =

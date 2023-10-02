@@ -70,11 +70,6 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
-&AtServer
-Procedure Taxes_CreateFormControls() Export
-	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -104,6 +99,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 EndProcedure
 
 &AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
 Procedure UpdateTotalAmounts() Export
 	ThisObject.TotalNetAmount = 0;
 	ThisObject.TotalTotalAmount = 0;
@@ -113,10 +123,7 @@ Procedure UpdateTotalAmounts() Export
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
 		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
 
-		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
-		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
-		EndDo;
+		ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + Row.TaxAmount;
 
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		For Each RowOffer In ArrayOfOffersRows Do
@@ -482,11 +489,11 @@ EndProcedure
 
 #EndRegion
 
-#Region TAX_RATE
+#Region VAT_RATE
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocWorkOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure ItemListVatRateOnChange(Item) Export
+	DocWorkOrderClient.ItemListVatRateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -624,6 +631,7 @@ EndProcedure
 
 #Region LOAD_DATA_FROM_TABLE
 
+//@skip-check module-unused-method
 &AtClient
 Procedure LoadDataFromTable(Command)
 	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
@@ -692,7 +700,7 @@ EndProcedure
 Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;

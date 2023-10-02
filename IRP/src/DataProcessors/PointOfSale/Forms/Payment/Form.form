@@ -8,6 +8,77 @@
     <name>GroupTitle</name>
     <id>33</id>
     <items xsi:type="form:Button">
+      <name>SearchByBarcode</name>
+      <id>305</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>SearchByBarcodeExtendedTooltip</name>
+        <id>306</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>UsualButton</type>
+      <commandName>Form.Command.SearchByBarcode</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <height>2</height>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <items xsi:type="form:Decoration">
+      <name>DecorationFreeSpace</name>
+      <id>307</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>DecorationFreeSpaceExtendedTooltip</name>
+        <id>309</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DecorationFreeSpaceContextMenu</name>
+        <id>308</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>Label</type>
+      <horizontalStretch>true</horizontalStretch>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </items>
+    <items xsi:type="form:Button">
       <name>FormCloseButton</name>
       <id>31</id>
       <visible>true</visible>
@@ -232,6 +303,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>BankPaymentTypeListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -270,6 +342,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>BankPaymentTypeListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -308,6 +381,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>BankPaymentTypeListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1640,6 +1714,7 @@
             <items xsi:type="form:Button">
               <name>Certificate</name>
               <id>136</id>
+              <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
@@ -1663,19 +1738,16 @@
               <representation>PictureAndText</representation>
               <width>5</width>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
+              <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
               <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
-              <textColor xsi:type="core:ColorRef">
-                <color>Windows.ToolTip</color>
-              </textColor>
               <backColor xsi:type="core:ColorRef">
-                <color>Web.HoneyDew</color>
+                <color>Web.MintCream</color>
               </backColor>
               <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
+                <font>Style.LargeTextFont</font>
               </font>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
@@ -1709,7 +1781,7 @@
               <representation>Auto</representation>
               <width>5</width>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
+              <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
               <verticalStretch>true</verticalStretch>
@@ -1895,7 +1967,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__7РасширеннаяПодсказка</name>
+                  <name>__7ExtendedTooltip</name>
                   <id>62</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -1937,7 +2009,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__4РасширеннаяПодсказка</name>
+                  <name>__4ExtendedTooltip</name>
                   <id>64</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -1979,7 +2051,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__1РасширеннаяПодсказка</name>
+                  <name>__1ExtendedTooltip</name>
                   <id>66</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2021,7 +2093,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__0РасширеннаяПодсказка</name>
+                  <name>__0ExtendedTooltip</name>
                   <id>68</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2104,7 +2176,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__8РасширеннаяПодсказка</name>
+                  <name>__8ExtendedTooltip</name>
                   <id>74</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2146,7 +2218,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__5РасширеннаяПодсказка</name>
+                  <name>__5ExtendedTooltip</name>
                   <id>76</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2188,7 +2260,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__2РасширеннаяПодсказка</name>
+                  <name>__2ExtendedTooltip</name>
                   <id>78</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2316,7 +2388,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__9РасширеннаяПодсказка</name>
+                  <name>__9ExtendedTooltip</name>
                   <id>86</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2358,7 +2430,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__6РасширеннаяПодсказка</name>
+                  <name>__6ExtendedTooltip</name>
                   <id>88</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2400,7 +2472,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>__3РасширеннаяПодсказка</name>
+                  <name>__3ExtendedTooltip</name>
                   <id>90</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2838,6 +2910,10 @@
     <event>BeforeClose</event>
     <name>BeforeClose</name>
   </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
   <excludedCommands>CustomizeForm</excludedCommands>
   <excludedCommands>OK</excludedCommands>
   <excludedCommands>Abort</excludedCommands>
@@ -3193,6 +3269,40 @@
       <id>59</id>
       <valueType>
         <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Certificate</name>
+      <title>
+        <key>en</key>
+        <value>Certificate</value>
+      </title>
+      <id>62</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>CanBeDeleted</name>
+      <title>
+        <key>en</key>
+        <value>Can be deleted</value>
+      </title>
+      <id>64</id>
+      <valueType>
+        <types>Boolean</types>
       </valueType>
       <view>
         <common>true</common>
@@ -3904,6 +4014,74 @@ WHERE
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>CertificatePaymentTypes</name>
+    <title>
+      <key>en</key>
+      <value>Certificate payment types</value>
+    </title>
+    <id>63</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>PaymentType</name>
+      <title>
+        <key>en</key>
+        <value>Payment type</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Account</name>
+      <title>
+        <key>en</key>
+        <value>Account</value>
+      </title>
+      <id>26</id>
+      <valueType>
+        <types>CatalogRef.CashAccounts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentTypeEnum</name>
+      <title>
+        <key>en</key>
+        <value>Payment type enum</value>
+      </title>
+      <id>29</id>
+      <valueType>
+        <types>EnumRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
   <formCommands>
     <name>Card</name>
     <title>
@@ -4340,6 +4518,29 @@ WHERE
         <name>SetPaymentUncheck</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SearchByBarcode</name>
+    <title>
+      <key>en</key>
+      <value>Search by
+barcode (F7)</value>
+    </title>
+    <id>33</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>F7</shortcut>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Barcode</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SearchByBarcode</name>
+      </handler>
+    </action>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

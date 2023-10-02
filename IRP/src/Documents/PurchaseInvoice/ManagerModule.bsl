@@ -12,6 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	Parameters.IsReposting = False;
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
 
@@ -158,40 +159,41 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	EndIf;
 	
 	// AmountTax to T6020S_BatchKeysInfo
-	Query = New Query;
+	Query = New Query;	
 	Query.Text =
 	"SELECT
-	|	TaxList.Key,
-	|	TaxList.Ref.Company,
-	|	TaxList.Tax,
-	|	TaxList.ManualAmount AS AmountTax
-	|INTO TaxList
+	|	Taxes.Key,
+	|	Taxes.Ref.Company AS Company,
+	|	&Vat AS Tax,
+	|	Taxes.TaxAmount AS AmountTax
+	|INTO Taxes
 	|FROM
-	|	Document.PurchaseInvoice.TaxList AS TaxList
+	|	Document.PurchaseInvoice.ItemList AS Taxes
 	|WHERE
-	|	TaxList.Ref = &Ref
+	|	Taxes.Ref = &Ref
+	|	AND Taxes.TaxAmount <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	TaxList.Key,
-	|	SUM(TaxList.AmountTax) AS AmountTax
-	|INTO TaxListAmounts
+	|	Taxes.Key,
+	|	SUM(Taxes.AmountTax) AS AmountTax
+	|INTO TaxesAmounts
 	|FROM
-	|	TaxList AS TaxList
+	|	Taxes AS Taxes
 	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
 	|			(SELECT
-	|				TaxList.Company,
-	|				TaxList.Tax
+	|				Taxes.Company,
+	|				Taxes.Tax
 	|			FROM
-	|				TaxList AS TaxList)) AS TaxesSliceLast
-	|		ON TaxesSliceLast.Company = TaxList.Company
-	|		AND TaxesSliceLast.Tax = TaxList.Tax
+	|				Taxes AS Taxes)) AS TaxesSliceLast
+	|		ON TaxesSliceLast.Company = Taxes.Company
+	|		AND TaxesSliceLast.Tax = Taxes.Tax
 	|WHERE
 	|	TaxesSliceLast.Use
 	|	AND TaxesSliceLast.IncludeToLandedCost
 	|GROUP BY
-	|	TaxList.Key
+	|	Taxes.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -210,17 +212,19 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	BatchKeysInfo.Key,
 	|	case
 	|		when BatchKeysInfo.TotalQuantity <> 0
-	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
+	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
 	|		else 0
 	|	end as AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
-	|		LEFT JOIN TaxListAmounts AS TaxListAmounts
-	|		ON BatchKeysInfo.Key = TaxListAmounts.Key";
+	|		LEFT JOIN TaxesAmounts AS TaxesAmounts
+	|		ON BatchKeysInfo.Key = TaxesAmounts.Key";
+	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
 	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
+	Query.SetParameter("Vat", TaxesServer.GetVatRef());
 	QueryResult = Query.Execute();
 	BatchKeysInfo = QueryResult.Unload();
 
@@ -394,6 +398,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -507,16 +512,19 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		   |	PurchaseInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 		   |	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
-		   |	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	PurchaseInvoiceItemList.IsService AS IsService,
 		   |	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 		   |	PurchaseInvoiceItemList.TaxAmount AS TaxAmount,
 		   |	PurchaseInvoiceItemList.Key,
+		   |	PurchaseInvoiceItemList.PriceType,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
+		   |	PurchaseInvoiceItemList.Ref.RecordPurchasePrices AS RecordPurchasePrices,
 		   |	PurchaseInvoiceItemList.IsAdditionalItemCost,
 		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
-		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
+		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
+		   |	PurchaseInvoiceItemList.VatRate AS VatRate
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -537,32 +545,7 @@ Function ItemList()
 		   |FROM
 		   |	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
 		   |WHERE
-		   |	PurchaseInvoiceGoodsReceipts.Ref = &Ref
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	PurchaseInvoiceTaxList.Ref.Date AS Period,
-		   |	PurchaseInvoiceTaxList.Ref.Company AS Company,
-		   |	PurchaseInvoiceTaxList.Tax AS Tax,
-		   |	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN PurchaseInvoiceTaxList.ManualAmount = 0
-		   |			THEN PurchaseInvoiceTaxList.Amount
-		   |		ELSE PurchaseInvoiceTaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
-		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
-		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
-		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
-		   |INTO Taxes
-		   |FROM
-		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		   |		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
-		   |		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key
-		   |WHERE
-		   |	PurchaseInvoiceItemList.Ref = &Ref
-		   |	AND PurchaseInvoiceTaxList.Ref = &Ref";
+		   |	PurchaseInvoiceGoodsReceipts.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -717,8 +700,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
-	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T1040T_AccountingAmounts());
@@ -727,6 +708,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	Return QueryArray;
 EndFunction
 
@@ -960,14 +942,21 @@ Function R1031B_ReceiptInvoicing()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R1040B_TaxesOutgoing
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE
-		   |	Taxes.IsPurchase";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	&Vat AS Tax,
+		|	ItemList.VatRate AS TaxRate,
+		|	ItemList.NetAmount AS TaxableAmount,
+		|	ItemList.TaxAmount AS TaxAmount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	ItemList AS ItemLIst
+		|WHERE
+		|	ItemList.IsPurchase";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1326,103 +1315,14 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*
+		   |	*,
+		   |	BatchKeysInfo.Amount AS InvoiceAmount, 
+		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo
 		   |WHERE
 		   |	TRUE";
-EndFunction
-
-Function R8012B_ConsignorInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName,
-		   |	SUM(case
-		   |		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
-		   |			Then ItemList.Quantity
-		   |		else SerialLotNumbers.Quantity
-		   |	end) AS Quantity,
-		   |	SerialLotNumbers.SerialLotNumber
-		   |INTO R8012B_ConsignorInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsReceiptFromConsignor
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.LegalName,
-		   |	SerialLotNumbers.SerialLotNumber";
-EndFunction
-
-Function R8013B_ConsignorBatchWiseBalance()
-	Return "SELECT
-		   |	ItemList.Key,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Invoice AS Batch,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	case
-		   |		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
-		   |			Then ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	end AS Quantity,
-		   |	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
-		   |INTO ConsignorBatchWiseBalance_1
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON SerialLotNumbers.Key = ItemList.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsReceiptFromConsignor
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ConsignorBatchWiseBalance_1.RecordType,
-		   |	ConsignorBatchWiseBalance_1.Period,
-		   |	ConsignorBatchWiseBalance_1.Company,
-		   |	ConsignorBatchWiseBalance_1.Batch,
-		   |	ConsignorBatchWiseBalance_1.Store,
-		   |	ConsignorBatchWiseBalance_1.ItemKey,
-		   |	SUM(CASE
-		   |		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		   |			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		   |		ELSE ConsignorBatchWiseBalance_1.Quantity
-		   |	END) AS Quantity,
-		   |	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
-		   |	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
-		   |INTO R8013B_ConsignorBatchWiseBalance
-		   |FROM
-		   |	ConsignorBatchWiseBalance_1 AS ConsignorBatchWiseBalance_1
-		   |		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-		   |		ON ConsignorBatchWiseBalance_1.Key = SourceOfOrigins.Key
-		   |		AND ConsignorBatchWiseBalance_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
-		   |GROUP BY
-		   |	ConsignorBatchWiseBalance_1.RecordType,
-		   |	ConsignorBatchWiseBalance_1.Period,
-		   |	ConsignorBatchWiseBalance_1.Company,
-		   |	ConsignorBatchWiseBalance_1.Batch,
-		   |	ConsignorBatchWiseBalance_1.Store,
-		   |	ConsignorBatchWiseBalance_1.ItemKey,
-		   |	SourceOfOrigins.SourceOfOriginStock,
-		   |	SourceOfOrigins.SerialLotNumberStock";
 EndFunction
 
 Function R8015T_ConsignorPrices()
@@ -1476,6 +1376,51 @@ Function R8015T_ConsignorPrices()
 		   |	SourceOfOrigins.SerialLotNumberStock";
 EndFunction
 
+Function S1001L_VendorsPricesByItemKey()
+	Return "SELECT
+	|	PurchaseInvoiceItemList.Period,
+	|	PurchaseInvoiceItemList.PriceType,
+	|	PurchaseInvoiceItemList.Unit,
+	|	PurchaseInvoiceItemList.ItemKey,
+	|	PurchaseInvoiceItemList.Currency,
+	|	PurchaseInvoiceItemList.Partner,
+	|	SUM(PurchaseInvoiceItemList.Price * PurchaseInvoiceItemList.Quantity) AS SumPrice,
+	|	SUM(PurchaseInvoiceItemList.Quantity) AS SumQuantity,
+	|	SUM(PurchaseInvoiceItemList.Amount) AS Amount,
+	|	SUM(PurchaseInvoiceItemList.NetAmount) AS NetAmount
+	|INTO VTRecordPurchasePrices
+	|FROM
+	|	ItemList AS PurchaseInvoiceItemList
+	|WHERE
+	|	PurchaseInvoiceItemList.RecordPurchasePrices
+	|GROUP BY
+	|	PurchaseInvoiceItemList.Period,
+	|	PurchaseInvoiceItemList.Currency,
+	|	PurchaseInvoiceItemList.Partner,
+	|	PurchaseInvoiceItemList.ItemKey,
+	|	PurchaseInvoiceItemList.Unit,
+	|	PurchaseInvoiceItemList.PriceType
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VT.Period,
+	|	VT.PriceType,
+	|	VT.Partner,
+	|	VT.ItemKey,
+	|	VT.Unit,
+	|	VT.Currency,
+	|	VT.SumPrice / VT.SumQuantity AS Price,
+	|	VT.Amount / VT.SumQuantity AS TotalPrice,
+	|	VT.NetAmount / VT.SumQuantity AS NetPrice
+	|INTO S1001L_VendorsPricesByItemKey
+	|FROM
+	|	VTRecordPurchasePrices AS VT
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP VTRecordPurchasePrices";
+EndFunction
 #EndRegion
 
 #Region AccessObject

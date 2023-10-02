@@ -50,15 +50,8 @@ Scenario: _017000 preparation
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
+
 
 Scenario: _0170001 check preparation
 	When check preparation	
@@ -197,7 +190,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '137 000'      |
 		And I close current window		
 		Then the form attribute named "Branch" became equal to ""
-		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "UseItemsReceiptScheduling" became equal to "No"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -890,5 +883,5 @@ Scenario: _300502 check connection to Purchase order report "Related documents"
 		| $$NumberPurchaseOrder017001$$   |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+	Then "* Related documents" window is opened
 	And I close all client application windows

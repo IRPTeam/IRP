@@ -422,6 +422,21 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="6d8b6741-1e9e-4f65-8ab5-7ab532492e22">
+      <name>InventoryOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Inventory origin</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InventoryOriginTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="a99ce0cf-1956-4d49-a629-56149ba227a2">
     <producedTypes>
@@ -631,6 +646,183 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="cce303ed-aa2c-4c70-9182-fbb1eb0f7218">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="866e838c-5b9a-4b07-926b-8a2f634c4515">
+    <producedTypes>
+      <objectType typeId="08ae745a-6351-472f-aace-c1f6efdeafab" valueTypeId="c83cb6ec-29ea-4965-9ad5-c62f0981f56d"/>
+      <rowType typeId="91dc7ce1-3d71-4f2e-a230-2deddbc0989b" valueTypeId="d36db238-2ecb-42e3-aeef-ff2a47242e6e"/>
+    </producedTypes>
+    <name>DELETE_ConsignorBatches</name>
+    <synonym>
+      <key>en</key>
+      <value>DELETE consignor batches</value>
+    </synonym>
+    <attributes uuid="430d8d60-c3e1-4f76-82b7-8e10db6d787d">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="908511e2-49aa-4223-8fae-9f9333000217">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3fff05bf-accb-4232-97e1-7e05630a6637">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9332bee6-6c58-4108-a1e6-99a87c348365">
+      <name>SourceOfOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Source of origin</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SourceOfOrigins</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4dacb47a-e3ad-4cc4-afb4-0bd580bcdc7c">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="435d0e71-2a61-46e1-aa1d-2ee9745c5a2f">
+      <name>Batch</name>
+      <synonym>
+        <key>en</key>
+        <value>Batch</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.OpeningEntry</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0057c58b-8d1f-4b12-b4b2-71cdb607865b">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="7f1d545b-601e-4147-8121-46e952ecabdf">
+    <producedTypes>
+      <objectType typeId="526f6aff-ab51-4c00-bc29-2ee3f278a379" valueTypeId="0a9df3e8-4cbf-47a9-be4f-29408d755d40"/>
+      <rowType typeId="40b4d1ef-c690-403d-bbf4-2804568ce956" valueTypeId="04a80537-1666-43a6-9d3d-c94bbbc4ad3f"/>
+    </producedTypes>
+    <name>SourceOfOrigins</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origins</value>
+    </synonym>
+    <attributes uuid="8a2e9007-9abb-4953-9625-3fa8bf51383d">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f7d61379-d6cb-4571-afe1-5c5b7c61ad20">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0de81ee3-da4d-46bb-8216-35769729fb1c">
+      <name>SourceOfOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Source of origin</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SourceOfOrigins</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6120c53c-4073-455b-bca7-d0beeaa68dbe">
       <name>Quantity</name>
       <synonym>
         <key>en</key>

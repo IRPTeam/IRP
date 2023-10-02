@@ -85,6 +85,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.UpdateCurrentQuantity.Visible        = UpdateCurrentQuantityVisible;
 EndProcedure
 
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
 &AtServerNoContext
 Function IsCurrentQuantityActual(Company, ProductionPlanning, PlanningPeriod, Rows)
 	For Each Row In Rows Do

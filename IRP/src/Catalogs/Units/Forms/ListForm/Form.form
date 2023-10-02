@@ -396,7 +396,7 @@
     </extInfo>
   </items>
   <autoCommandBar>
-    <name></name>
+    <name>FormCommandBar</name>
     <id>-1</id>
     <items xsi:type="form:Button">
       <name>FormShowAllUnits</name>

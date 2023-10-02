@@ -31,23 +31,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <resources uuid="d8c2d5a9-08b4-4d3e-928f-5c70e2eab723">
-    <name>Amount</name>
+    <name>InvoiceAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="5323e40f-dd4f-4799-bafa-5aeb608cc35c">
-    <name>AmountCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount cost</value>
+      <value>Invoice amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -57,23 +44,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <resources uuid="18194789-6916-4a1f-85be-7461ab12894f">
-    <name>AmountTax</name>
+    <name>InvoiceTaxAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount tax</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="04d74dfd-457a-47c1-b808-72a1e73ba8dd">
-    <name>AmountCostRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount cost ratio</value>
+      <value>Invoice tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -83,10 +57,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <resources uuid="830ddb87-0c0d-4aef-a0ab-978ae7bba040">
-    <name>NotDirectCosts</name>
+    <name>IndirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Not direct costs</value>
+      <value>Indirect cost amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -95,11 +69,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="b3d25239-c51d-4546-9768-7b1e6167e502">
-    <name>AmountCostTax</name>
+  <resources uuid="b12b259b-95ea-4955-a3e1-ae11b73c1c08">
+    <name>IndirectCostTaxAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount cost tax</value>
+      <value>Indirect cost tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -108,11 +82,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="43980561-4c23-4d01-8fba-322788dd36c3">
-    <name>AmountRevenue</name>
+  <resources uuid="04d74dfd-457a-47c1-b808-72a1e73ba8dd">
+    <name>ExtraCostAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Amount revenue</value>
+      <value>Extra cost amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -121,11 +95,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="7953db63-9ffb-4d35-a1d7-fc2bdd7c2df4">
-    <name>AmountRevenueTax</name>
+  <resources uuid="60e48ad8-1b02-44b2-91c5-19513fd76df8">
+    <name>ExtraCostTaxAmountByRatio</name>
     <synonym>
       <key>en</key>
-      <value>Amount revenue tax</value>
+      <value>Extra cost tax amount by ratio</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -135,10 +109,114 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <resources uuid="4df89424-458c-4f48-b46d-46654ee3be96">
-    <name>AmountCostAdditional</name>
+    <name>ExtraDirectCostAmount</name>
     <synonym>
       <key>en</key>
-      <value>Amount cost additional</value>
+      <value>Extra direct cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="7da3659f-d385-4ee2-8ba7-54a58955f830">
+    <name>ExtraDirectCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Extra direct cost tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="5323e40f-dd4f-4799-bafa-5aeb608cc35c">
+    <name>AllocatedCostAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated cost amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="b3d25239-c51d-4546-9768-7b1e6167e502">
+    <name>AllocatedCostTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated cost tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="43980561-4c23-4d01-8fba-322788dd36c3">
+    <name>AllocatedRevenueAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated revenue amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="7953db63-9ffb-4d35-a1d7-fc2bdd7c2df4">
+    <name>AllocatedRevenueTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Allocated revenue tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="ed2cd482-1d4d-4069-b087-a176f25e3e18">
+    <name>TotalAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="15e6709c-5b05-4500-97c9-c246b9935733">
+    <name>TotalNetAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total net amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="bb958b81-0d3c-4f03-9e01-71a88595b760">
+    <name>TotalTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Total tax amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

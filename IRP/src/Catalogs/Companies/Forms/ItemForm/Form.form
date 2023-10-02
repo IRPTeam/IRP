@@ -339,6 +339,56 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
+        <name>MainPhoneNumber</name>
+        <id>156</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.MainPhoneNumber</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>MainPhoneNumberExtendedTooltip</name>
+          <id>158</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>MainPhoneNumberContextMenu</name>
+          <id>157</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
         <name>OurCompany</name>
         <id>15</id>
         <title>
@@ -358,7 +408,7 @@
           <name>OurOnChange</name>
         </handlers>
         <extendedTooltip>
-          <name>OurExtendedTooltip</name>
+          <name>OurCompanyExtendedTooltip</name>
           <id>17</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -373,7 +423,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>OurContextMenu</name>
+          <name>OurCompanyContextMenu</name>
           <id>16</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2367,16 +2417,25 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>InformationRegister.Taxes.StandardCommand.OpenByValue.Company</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>Form.StandardCommand.RestoreValues</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.CompanyLedgerTypes.StandardCommand.OpenByValue.Company</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>3</index>
         <userVisible/>

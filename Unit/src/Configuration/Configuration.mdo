@@ -48,7 +48,9 @@
   <commonPictures>CommonPicture.IconCollection2</commonPictures>
   <commonPictures>CommonPicture.Unit_Autotest</commonPictures>
   <roles>Role.FullAccess</roles>
+  <roles>Role.TemplateInformationRegisters</roles>
   <roles>Role.Unit_MainRole</roles>
+  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
@@ -56,6 +58,7 @@
   <commonModules>CommonModule.Unit_AddAttributeAndPropertySets</commonModules>
   <commonModules>CommonModule.Unit_CatalogCodeAndDocumentNumber</commonModules>
   <commonModules>CommonModule.Unit_CommonTests</commonModules>
+  <commonModules>CommonModule.Unit_DataGenerator</commonModules>
   <commonModules>CommonModule.Unit_Documents</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_MockService</commonModules>
@@ -100,6 +103,7 @@
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <enums>Enum.CurrencyType</enums>
+  <enums>Enum.ItemTypes</enums>
   <enums>Enum.REP_ReportParametrTypes</enums>
   <reports>Report.REP_Barcodes</reports>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>

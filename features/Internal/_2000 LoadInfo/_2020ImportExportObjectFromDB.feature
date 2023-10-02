@@ -61,15 +61,7 @@ Scenario: _020200 preparation (Import/Export object from DB)
 		When Create catalog FileStorageVolumes objects
 		When Create catalog Files objects
 		When update ItemKeys
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 	* Load SI
 		When Create document SalesInvoice objects (import and export)
 

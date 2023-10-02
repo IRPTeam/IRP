@@ -42,16 +42,8 @@ Scenario: _054000 preparation (Cash transfer order)
 		When Create catalog CashAccounts objects
 		When Create catalog Partners objects (Employee)
 		When Create catalog ExpenseAndRevenueTypes objects
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog PlanningPeriods objects
-	* Tax settings
-		When filling in Tax settings for company
 	
 	
 Scenario: _0540001 check preparation

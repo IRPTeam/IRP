@@ -82,7 +82,7 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="55d1c507-7cbc-44c5-a841-eb9d029a7df2">
-    <name>ExternalDataProc</name>
+    <name>DELETE_ExternalDataProc</name>
     <synonym>
       <key>en</key>
       <value>Plugins</value>
@@ -92,7 +92,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -105,6 +104,21 @@
     </synonym>
     <type>
       <types>EnumRef.TaxType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d0d10b49-51a4-4777-9c07-d1c50a15d9f6">
+    <name>Kind</name>
+    <synonym>
+      <key>en</key>
+      <value>Kind</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TaxKind</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -43,15 +43,7 @@ Scenario: _020000 preparation
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description"            |
-				| "TaxCalculateVAT_TR"     |
-			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
-	* Tax settings
-		When filling in Tax settings for company
 
 
 Scenario: _0200001 check preparation

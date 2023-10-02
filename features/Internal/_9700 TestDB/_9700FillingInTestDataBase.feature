@@ -17,17 +17,6 @@ Scenario: _970001 filling in test data base
 When set True value to the constant
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
-		* VAT
-				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-				And I go to line in "List" table
-						| 'Description'          |
-						| 'TaxCalculation'       |
-				And I select current line in "List" table
-				And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
-				And I click the button named "FormAddExtDataProc"
-				And I input "" text in "Path to plugin for test" field
-				And I click "Save and close" button
-				And I wait "Plugins (create)" window closing in 5 seconds
 		* Discount
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
@@ -104,8 +93,7 @@ When Create information register Taxes records (test data base)
 						| 'VAT'       |
 		And I select current line in "CompanyTaxes" table
 		And I click Open button of "Tax" field
-		And I click "Settings" button
-		And I click "Ok" button
+		And I select "VAT" exact value from the drop-down list named "Kind"
 		And I click "Save and close" button
 		And I close all client application windows
 When Create catalog InterfaceGroups objects (test data base)

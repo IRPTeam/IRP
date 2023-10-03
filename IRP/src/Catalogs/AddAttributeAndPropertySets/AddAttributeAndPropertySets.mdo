@@ -907,6 +907,13 @@
         <value>133</value>
       </code>
     </items>
+    <items id="346a438c-1755-49fc-a301-d90c73458426">
+      <name>Document_FixedAssetTransfer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>134</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

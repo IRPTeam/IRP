@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff74f658-0ca7-4191-ac1d-2f97715ff0d2">
+  <producedTypes>
+    <objectType typeId="b242fb15-40d7-4c83-84ae-b0fba8550929" valueTypeId="34c6b067-12a7-411a-b41b-8d8cba8dac6e"/>
+    <refType typeId="439a25c7-4ef5-461e-b228-d801ef9d8b84" valueTypeId="b464f99f-b34c-4b01-b721-5ccdf1f33f20"/>
+    <selectionType typeId="3a1d763a-ff37-4c07-8afc-249598d6d23b" valueTypeId="3ce52279-0736-4e0a-a0d5-8298f7662b0c"/>
+    <listType typeId="2f1862e4-1939-4ba9-8a00-aadaca5ee217" valueTypeId="93a2d633-0320-41a4-9a50-11abf8887f6a"/>
+    <managerType typeId="8ede10d4-bde1-4c38-9b31-0f254be8246d" valueTypeId="bc6a62be-12e6-4881-a481-5e2de8209f13"/>
+  </producedTypes>
+  <name>FixedAssetTransfer</name>
+  <synonym>
+    <key>en</key>
+    <value>Fixed asset transfer</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.FixedAssetTransfer.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_FixedAssetTransfer</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_FixedAssetTransfer</value>
+    </typesFilterValue>
+    <characteristicValues>Document.FixedAssetTransfer.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.FixedAssetTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.FixedAssetTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.FixedAssetTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Fixed asset transfers</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.FixedAssetTransfer.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.FixedAssetTransfer.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.FixedAssetTransfer.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="ae5e55dd-c55e-4029-8b6e-9b7f192053af">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c8e80dd2-8a93-4091-ab3e-6c5c660ee87c">
+    <name>FixedAsset</name>
+    <synonym>
+      <key>en</key>
+      <value>Fixed asset</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.FixedAssets</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5843e4ea-3193-46d3-8d51-626e2b4b3c53">
+    <name>ResponsiblePersonSender</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible person sender</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.Employee</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="93067a77-ece6-448a-8607-ff162d262ec7">
+    <name>ResponsiblePersonReceiver</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible person receiver</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.Employee</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6a1fc8d2-5cd0-4ce5-83f9-c510613252b8">
+    <name>BranchSender</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch sender</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0bfc7809-ccd1-47ea-a71e-fece8aeb1f6b">
+    <name>BranchReceiver</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch receiver</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="48c71f6b-9753-4e6a-98d0-a0ec44ea1921">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8f84c6c9-55c4-455b-b976-11e187e8895f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="5115e822-a2d7-419b-9f78-4380e997597f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="1a8f4788-30e7-477c-9783-61c5d358c614">
+    <producedTypes>
+      <objectType typeId="1daaed4b-111d-460a-ac54-573003837fdd" valueTypeId="5fde6042-8309-4084-b776-64a45a419c05"/>
+      <rowType typeId="e1a68e01-f8b0-4067-8f3f-7e1999a034a9" valueTypeId="20dd3c39-34ee-4dde-a7d6-084a24f1e4ae"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="60cc748f-4ac3-456a-9861-3cb559e993f8">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="cfbe879b-c14e-47d8-92e4-3e71e9814d79">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.FixedAssetTransfer.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

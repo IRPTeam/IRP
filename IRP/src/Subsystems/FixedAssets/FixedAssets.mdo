@@ -13,4 +13,6 @@
   <content>Document.DepreciationCalculation</content>
   <content>Catalog.FixedAssetsLedgerTypes</content>
   <content>Document.DecommissioningOfFixedAsset</content>
+  <content>Document.FixedAssetTransfer</content>
+  <content>InformationRegister.T8515S_FixedAssetsLocation</content>
 </mdclass:Subsystem>

@@ -295,6 +295,10 @@
   <roles>Role.Document_WorkOrder</roles>
   <roles>Role.Document_WorkOrderClosing</roles>
   <roles>Role.Document_WorkSheet</roles>
+  <roles>Role.Document_CommissioningOfFixedAsset</roles>
+  <roles>Role.Document_DecommissioningOfFixedAsset</roles>
+  <roles>Role.Document_DepreciationCalculation</roles>
+  <roles>Role.Document_FixedAssetTransfer</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -575,6 +579,8 @@
   <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -974,6 +980,7 @@
   <documents>Document.CommissioningOfFixedAsset</documents>
   <documents>Document.DecommissioningOfFixedAsset</documents>
   <documents>Document.DepreciationCalculation</documents>
+  <documents>Document.FixedAssetTransfer</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1163,6 +1170,7 @@
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T8515S_FixedAssetsLocation</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -110,9 +110,15 @@ EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
-	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("FixedAsset", Ref.FixedAsset);
-	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	StrParams.Insert("Ref"           , Ref);
+	StrParams.Insert("Company"       , Ref.Company);
+	StrParams.Insert("Branch"        , Ref.Branch);
+	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod" , Undefined);
+	EndIf;
 	StrParams.Insert("Period", Ref.Date);
 	Return StrParams;
 EndFunction
@@ -138,6 +144,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(T8515S_FixedAssetsLocation());
 	Return QueryArray;
 EndFunction
 
@@ -462,6 +469,24 @@ Function R8510B_BookValueOfFixedAsset()
 		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, FixedAsset = &FixedAsset
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 		|		R8510B_BookValueOfFixedAssetBalance";
+EndFunction
+
+Function T8515S_FixedAssetsLocation()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	T8515S_FixedAssetsLocationSliceLast.Company,
+		|	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
+		|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
+		|	T8515S_FixedAssetsLocationSliceLast.Branch,
+		|	FALSE AS IsActive
+		|INTO T8515S_FixedAssetsLocation
+		|FROM
+		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
+		|	AND FixedAsset = &FixedAsset
+		|	AND Branch = &Branch) AS T8515S_FixedAssetsLocationSliceLast
+		|WHERE
+		|	T8515S_FixedAssetsLocationSliceLast.IsActive";
 EndFunction
 
 #EndRegion

@@ -134,6 +134,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(T8515S_FixedAssetsLocation());
 	Return QueryArray;
 EndFunction
 
@@ -147,6 +148,7 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.ResponsiblePerson AS ResponsiblePerson,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -397,6 +399,28 @@ Function R8510B_BookValueOfFixedAsset()
 		|	InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
 		|WHERE
 		|	T8510S_FixedAssetsInfo.Document = &Ref";
+EndFunction
+
+Function T8515S_FixedAssetsLocation()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ResponsiblePerson,
+		|	ItemList.FixedAsset,
+		|	TRUE AS IsActive
+		|INTO T8515S_FixedAssetsLocation
+		|FROM
+		|	ItemLIst AS ItemLIst
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ResponsiblePerson,
+		|	ItemList.FixedAsset";
 EndFunction
 
 #EndRegion

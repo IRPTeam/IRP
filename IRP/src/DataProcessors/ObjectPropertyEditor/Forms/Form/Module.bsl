@@ -52,10 +52,12 @@ Procedure ObjectTableOnChange(Item)
 	SetNewTable();
 	If GetFormCash(ThisObject).ColumnsData.Count() = 0 Then
 		Items.SettingsFilter.Enabled = False;
+		Items.GroupSetToFilter.Enabled = False;
 		//@skip-warning
 		ShowMessageBox(, R().InfoMessage_NotProperty);
 	EndIf;
 	Items.SettingsFilter.Enabled = True;
+	Items.GroupSetToFilter.Enabled = True;
 EndProcedure
 
 // Properties table selection.
@@ -86,11 +88,13 @@ Procedure PropertiesTableOnActivateField(Item)
 		Return;
 	EndIf;
 	
+	//@skip-check new-color
+	AccentColor = New Color(255, 255, 0);
 	CurrentField = Item.CurrentItem.Name;
 	AutoColor = Items.PropertiesTableObject.TitleBackColor;
 	For Each TableField In Items.PropertiesFields.ChildItems Do
 		If TableField.Name = CurrentField Then
-			TableField.TitleBackColor = New Color(255, 255, 0);
+			TableField.TitleBackColor = AccentColor;
 		Else
 			TableField.TitleBackColor = AutoColor;
 		EndIf;
@@ -331,6 +335,37 @@ Procedure RunACodeForMarkedRows(Command)
 		
 EndProcedure
 
+&AtClient
+Procedure FilterFromQuery(Command)
+	//@skip-check property-return-type
+	CurrentType = ThisObject.ObjectType; // Type
+	If Not ValueIsFilled(CurrentType) Then
+		Return;
+	EndIf;
+	
+	QueryText = GetRefQueryText(CurrentType);
+	QueryWizard = New QueryWizard(QueryText);
+	
+	#If ThickClientManagedApplication Then
+		If QueryWizard.DoModal() Then
+			QueryText = QueryWizard.Text;
+			SetFilterFromQueryAtServer(QueryText);
+		EndIf;
+		Return;
+	#EndIf
+		
+	QueryWizard.Show(New NotifyDescription("QueryWizardClose", ThisObject));
+EndProcedure
+
+&AtClient
+Procedure FilterFromBuffer(Command)
+	//@skip-check property-return-type
+	If Not ValueIsFilled(ThisObject.ObjectType) Then
+		Return;
+	EndIf;
+	SetFilterFromClipboardAtServer();
+EndProcedure
+
 #EndRegion
 
 #Region NotifyDescriptions
@@ -409,9 +444,23 @@ Procedure FieldSettingsEnd(Result, AddInfo) Export
 	
 EndProcedure	
 
+// Query wizard close.
+// 
+// Parameters:
+//  QueryText - String - Query text
+//  AddInfo - Undefined - Add info
+&AtClient
+Procedure QueryWizardClose(QueryText, AddInfo) Export
+	If QueryText <> Undefined Then
+		SetFilterFromQueryAtServer(QueryText);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region Private
+
+#Region WorkWithRow
 
 &AtClientAtServerNoContext
 Procedure SetNewValueToRowField(Form, Row, Field, Val NewValue)
@@ -498,6 +547,8 @@ Procedure CheckRowModified(Form, RowValue)
 	RowValue.isModified = isModified;
 
 EndProcedure
+
+#EndRegion
 
 #Region FormProperty_Getting
 
@@ -2289,6 +2340,103 @@ Function GetRegisterMasterDimension(RegisterName)
 	Return "";
 	
 EndFunction
+
+// Set filter from clipboard at server.
+&AtServer
+Procedure SetFilterFromClipboardAtServer()
+	Data = SessionParameters.Buffer.Get(); // Array Of See CopyPasteServer.BufferSettings
+	If Data.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	//@skip-check property-return-type
+	CurrentObjectType = ThisObject.ObjectType; // Type
+	RefsArray = New ValueList(); // ValueList of AnyRef
+	
+	For Each DataItem In Data Do // See CopyPasteServer.BufferSettings
+		For Each DataItemKeyValue In DataItem.Data Do
+			DataTable = DataItemKeyValue.Value; // ValueTable
+			If DataTable.Count() = 0 Then
+				Continue;
+			EndIf;
+			
+			ValueFields = New Array; // Array of String
+			For Each DataTableColumn In DataTable.Columns Do
+				If DataTableColumn.ValueType.ContainsType(CurrentObjectType) Then
+					ValueFields.Add(DataTableColumn.Name);
+				EndIf;
+			EndDo;
+			If ValueFields.Count() = 0 Then
+				Continue;
+			EndIf;
+			
+			For Each DataTableRow In DataTable Do
+				For Each TableField In ValueFields Do
+					FieldValue = DataTableRow[TableField]; // AnyRef
+					If ValueIsFilled(FieldValue) And TypeOf(FieldValue) = CurrentObjectType 
+							And RefsArray.FindByValue(FieldValue) = Undefined Then
+						RefsArray.Add(FieldValue);
+					EndIf;
+				EndDo;
+			EndDo;
+		EndDo;
+	EndDo;
+	
+	If RefsArray.Count() > 0 Then
+		SetRefsToFilter(RefsArray, ThisObject.DataSettingsComposer);
+	EndIf;
+	
+	Data.Clear();
+	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
+	
+EndProcedure
+
+// Set filter from clipboard at server.
+&AtServer
+Procedure SetFilterFromQueryAtServer(QueryText)
+	
+	RefsArray = New ValueList(); // ValueList of AnyRef
+	
+	Query = New Query;
+	Query.Text = QueryText;
+	Try
+		QueryResult = Query.Execute();
+		RefsArray.LoadValues(QueryResult.Unload().UnloadColumn(0));
+	Except
+		Return;
+	EndTry;
+	
+	If RefsArray.Count() > 0 Then
+		SetRefsToFilter(RefsArray, ThisObject.DataSettingsComposer);
+	EndIf;
+	
+EndProcedure
+
+// Get ref query text.
+// 
+// Parameters:
+//  DataType - Type - Data type
+// 
+// Returns:
+//  String -  Get ref query text
+&AtServerNoContext
+Function GetRefQueryText(DataType)
+	Result = "";
+	
+	MetaInfo = Metadata.FindByType(DataType);
+	If MetaInfo <> Undefined Then
+		Result = StrTemplate(
+			"SELECT
+			|	Table.Ref
+			|FROM
+			|	%1 AS Table
+			|WHERE
+			|	NOT Table.DeletionMark",
+			MetaInfo.FullName());
+	EndIf;
+	
+	Return Result;
+EndFunction	
 
 #EndRegion
 

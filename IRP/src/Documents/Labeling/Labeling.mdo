@@ -102,6 +102,19 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
+    <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
     <attributes uuid="cf81c048-5697-4b10-aac3-79e1a29d534a">
       <name>Item</name>
       <synonym>
@@ -181,19 +194,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">

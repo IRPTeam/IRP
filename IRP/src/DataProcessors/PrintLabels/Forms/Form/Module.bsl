@@ -19,6 +19,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.ItemListBarcodeType.ChoiceList.Add(ChoiceListItem.Value, ChoiceListItem.Presentation);
 	EndDo;
 
+	CopyPasteServer.CreateCommands(ThisObject, Undefined, Undefined);
+	Items.CopyToClipboard.Visible = False;
 EndProcedure
 
 #EndRegion
@@ -191,6 +193,12 @@ Procedure ItemListItemKeyOnChange(Item)
 		Return;
 	EndIf;
 
+	FillDataByRow(CurrentData);
+
+EndProcedure
+
+&AtServer
+Procedure FillDataByRow(CurrentData)
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
 	CurrentData.Unit = UnitInfo.Unit;
 
@@ -223,7 +231,6 @@ Procedure ItemListItemKeyOnChange(Item)
 	Else
 		CurrentData.BarcodeType = "";
 	EndIf;
-
 EndProcedure
 
 &AtClient
@@ -333,3 +340,52 @@ Procedure PriceTypeOnChangeAtServer()
 		EndIf;
 	EndDo;
 EndProcedure
+
+#Region COPY_PASTE
+
+//@skip-check module-unused-method
+&AtClient
+Procedure PasteFromClipboard(Command)
+	PasteSettings = CopyPasteClient.PasteSettings();
+	PasteFromClipboardServer(PasteSettings);
+EndProcedure
+
+&AtServer
+Function PasteFromClipboardServer(PasteSettings)
+	
+	PasteResult = CopyPasteServer.PasteResult();
+	
+	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
+	If Data.Count() = 0 Then
+		PasteResult.SerialLotNumbers = Undefined;
+		Return PasteResult;
+	EndIf;
+	Index = Data.UBound();
+	BufferData = Data[Index]; // See BufferSettings
+	
+	If BufferData.CopySettings.CopySelectedRows Then
+		PasteResult = PasteSelectedRows(BufferData, PasteSettings);
+	EndIf;
+	Data.Clear();
+	
+	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
+	
+	Return PasteResult;
+EndFunction
+
+&AtServer
+Function PasteSelectedRows(BufferData, PasteSettings)
+	
+	SourceHasTableSLN = BufferData.Data.Property("SerialLotNumbers");
+	For Each Row In BufferData.Data.ItemList Do
+		NewRow = ItemList.Add();
+		For Each Property In CopyPasteServer.ColumnNameToPaste() Do
+			NewRow[Property] = Row[Property];
+		EndDo;
+		FillDataByRow(NewRow);
+	EndDo;
+	
+
+EndFunction
+
+#EndRegion

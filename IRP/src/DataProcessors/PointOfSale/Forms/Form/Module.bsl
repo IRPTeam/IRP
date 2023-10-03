@@ -347,11 +347,11 @@ EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 	If ThisObject.isReturn Then
 		RecalculateOffer(Items.ItemList.CurrentData);
 		CheckByRetailBasis();
 	EndIf;
-	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -2065,8 +2065,13 @@ Procedure CheckByRetailBasisAtServer()
 	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
 
 	For Each ListItem In ThisObject.Object.ItemList Do
+		BasisKey = ListItem.Key;
+		RowsID = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", ListItem.Key));
+		If RowsID.Count() > 0 Then
+			BasisKey = RowsID[0].BasisKey;
+		EndIf;
 		NeedQuantity = ListItem.QuantityInBaseUnit;
-		BasisRow = BasisesTable.Find(ListItem.Key, "Key");
+		BasisRow = BasisesTable.Find(BasisKey, "Key");
 		If Not BasisRow = Undefined Then
 			UseQuantity = Min(NeedQuantity, BasisRow.QuantityInBaseUnit);
 			NeedQuantity = NeedQuantity - UseQuantity;

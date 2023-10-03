@@ -823,8 +823,8 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Branch,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	-ItemList.TaxAmount AS TaxAmount,
-		|	-ItemLIst.NetAmount AS TaxableAmount
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemLIst.NetAmount AS TaxableAmount
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemList

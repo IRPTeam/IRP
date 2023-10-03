@@ -50,7 +50,7 @@ Scenario: _2000 preparation (landed cost)
 	When Create information register CurrencyRates records
 	When Create catalog PriceTypes objects
 	When Create catalog Companies objects (own Second company)	
-		When Create information register Taxes records (VAT)
+	When Create information register Taxes records (VAT)
 	* Landed cost currency movement type for company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table

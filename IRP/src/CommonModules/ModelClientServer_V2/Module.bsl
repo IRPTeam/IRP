@@ -2728,7 +2728,7 @@ EndFunction
 
 Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, TaxOptions, AmountOptions, Result)
 	If Not ValueIsFilled(TaxOptions.VatRate) Then
-		Return AmountOptions.NetAmount;
+		Return Result.NetAmount;
 	EndIf;
 	Return Result.NetAmount + Result.TaxAmount;
 EndFunction

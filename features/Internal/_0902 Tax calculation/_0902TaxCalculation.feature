@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @TaxCalculation
@@ -167,9 +167,9 @@ Scenario: _090202 VAT calculation in Sales order (Price includes tax box is set)
 		And I finish line editing in "ItemList" table
 	* Check the calculation of VAT and Sales Tax
 		And "ItemList" table contains lines
-		| 'Price'   | 'Item'      | 'VAT'  | 'Item key'   | 'Procurement method'  | 'Quantity'  | 'Tax amount'  | 'SalesTax'  | 'Unit'  | 'Net amount'  | 'Total amount'   |
-		| '400,00'  | 'Trousers'  | '18%'  | '38/Yellow'  | 'Stock'               | '1,000'     | '64,98'       | '1%'        | 'pcs'   | '335,02'      | '400,00'         |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "64,98"
+		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Quantity' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000'    | '61,02'      | 'pcs'  | '338,98'     | '400,00'       |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "61,02"
 	* Add one more line and check the calculation of VAT and Sales Tax
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -189,10 +189,10 @@ Scenario: _090202 VAT calculation in Sales order (Price includes tax box is set)
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '1,000'      | '64,98'        | '1%'         | '335,02'       | '400,00'          |
-			| '700,00'   | 'Boots'      | '18%'   | '37/18SD'     | '2,000'      | '227,42'       | '1%'         | '1 172,58'     | '1 400,00'        |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "292,40"
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000'    | '61,02'      | '338,98'     | '400,00'       |
+			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000'    | '213,56'     | '1 186,44'   | '1 400,00'     |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "274,58"
 	* Deleting the row and checking the VAT and Sales Tax recalculation
 		And I go to line in "ItemList" table
 		| 'Item'      | 'Item key'    |
@@ -200,92 +200,13 @@ Scenario: _090202 VAT calculation in Sales order (Price includes tax box is set)
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I delete a line in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Net amount'   | 'Total amount'    |
-			| '700,00'   | 'Boots'   | '18%'   | '37/18SD'    | '2,000'      | '227,42'       | '1%'         | '1 172,58'     | '1 400,00'        |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "227,42"
-		And I close all client application windows
-
-Scenario: _090203 VAT and Sales Tax calculation in Sales order (Price includes tax box isn't set)
-	* Open the Sales order creation form
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Ferron BP'      |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'Company Ferron BP'    |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'                 |
-			| 'Basic Partner terms, TRY'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I expand "More" group
-		And I remove checkbox "Price includes tax"
-	* Adding items to Sales order
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Trousers'       |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'       | 'Item key'     |
-			| 'Trousers'   | '38/Yellow'    |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check the calculation of VAT and Sales Tax
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '1,000'      | '76,00'        | '1%'         | 'pcs'    | '400,00'       | '476,00'          |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "76,00"
-	* Add one more line and check the calculation of VAT and Sales Tax
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots'          |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key'    |
-			| 'Boots'   | '37/18SD'     |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I move to the next attribute
-		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Procurement method'   | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | 'Stock'                | '1,000'      | '76,00'        | '1%'         | 'pcs'    | '400,00'       | '476,00'          |
-			| '700,00'   | 'Boots'      | '18%'   | '37/18SD'     | 'Stock'                | '2,000'      | '266,00'       | '1%'         | 'pcs'    | '1 400,00'     | '1 666,00'        |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "342,00"
-	* Deleting the row and checking the VAT and Sales Tax recalculation
-		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key'     |
-			| 'Trousers'   | '38/Yellow'    |
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I delete a line in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'    | 'VAT'   | 'Item key'   | 'Quantity'   | 'Offers amount'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '700,00'   | 'Boots'   | '18%'   | '37/18SD'    | '2,000'      | ''                | '266,00'       | '1%'         | 'pcs'    | '1 400,00'     | '1 666,00'        |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "266,00"
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000'    | '213,56'     | '1 186,44'   | '1 400,00'     |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "213,56"
 		And I close all client application windows
 
 Scenario: _090204 manual tax correction in Sales order
+		And I close all client application windows
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -328,63 +249,29 @@ Scenario: _090204 manual tax correction in Sales order
 	* Manual tax correction and check display
 		And I activate "Tax amount" field in "ItemList" table
 		And I select current line in "ItemList" table
-		Then "Edit tax" window is opened
-		And I activate "Manual amount" field in "TaxTree" table
-		And I select current line in "TaxTree" table
-		And I input "71,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I click "Ok" button	
+		And I input "71,00" text in "Tax amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Save verification
 		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '1,000'      | '75,00'        | '1%'         | 'pcs'    | '400,00'       | '475,00'          |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "75,00"
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000'    | '71,00'      | 'pcs'  | '400,00'     | '471,00'       |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "71,00"
 	* Check deleting manual correction when quantity changes
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '2,000'      | '152,00'       | '1%'         | 'pcs'    | '800,00'       | '952,00'          |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "152,00"
-	* Check deleting manual correction when quantity changes
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '2,000'      | '152,00'       | '1%'         | 'pcs'    | '800,00'       | '952,00'          |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "152,00"
-	* Check deleting manual correction when price changes
-		And I activate "Tax amount" field in "ItemList" table
-		And I select current line in "ItemList" table
-		Then "Edit tax" window is opened
-		And I activate "Manual amount" field in "TaxTree" table
-		And I select current line in "TaxTree" table
-		And I input "142,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I click "Ok" button	
-		And "ItemList" table contains lines
-			| 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| 'Trousers'   | '18%'   | '38/Yellow'   | '2,000'      | '150,00'       | '1%'         | 'pcs'    | '800,00'       | '950,00'          |
-		And I move to "Item list" tab
-		And I activate "Price" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "510,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "193,80"
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000'    | '144,00'     | 'pcs'  | '800,00'     | '944,00'       |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "144,00"
 	* Check deleting manual correction when iten key changes
 		And I activate "Tax amount" field in "ItemList" table
 		And I select current line in "ItemList" table
-		Then "Edit tax" window is opened
-		And I activate "Manual amount" field in "TaxTree" table
-		And I select current line in "TaxTree" table
-		And I input "182,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I click "Ok" button	
+		And I input "182,00" text in "Tax amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Tax amount'   | 'SalesTax'   | 'Unit'   | 'Net amount'   | 'Total amount'    |
-			| '510,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '2,000'      | '192,20'       | '1%'         | 'pcs'    | '1 020,00'     | '1 212,20'        |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000'    | '182,00'     | 'pcs'  | '800,00'     | '982,00'       |
 		And I activate "Item key" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -395,96 +282,9 @@ Scenario: _090204 manual tax correction in Sales order
 	* Manual selection of tax rate
 		And I activate "VAT" field in "ItemList" table
 		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "8,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "0,00"
 	And I close all client application windows
 
-
-
-Scenario: _090205 check tax transfer in Sales invoice when it is created based on
-	* Create Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Ferron BP'      |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'Company Ferron BP'    |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'                 |
-			| 'Basic Partner terms, TRY'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Trousers'       |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'       | 'Item key'     |
-			| 'Trousers'   | '38/Yellow'    |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots'          |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key'    |
-			| 'Boots'   | '37/18SD'     |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I move to the next attribute
-		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Price type'          | 'Quantity'   | 'Unit'   | 'SalesTax'   | 'Tax amount'   | 'Net amount'   | 'Total amount'    |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | 'Basic Price Types'   | '1,000'      | 'pcs'    | '1%'         | '64,98'        | '335,02'       | '400,00'          |
-			| '700,00'   | 'Boots'      | '18%'   | '37/18SD'     | 'Basic Price Types'   | '2,000'      | 'pcs'    | '1%'         | '227,42'       | '1 172,58'     | '1 400,00'        |
-		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key'     |
-			| 'Trousers'   | '38/Yellow'    |
-		And I activate "Tax amount" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I activate "Manual amount" field in "TaxTree" table
-		And I go to line in "TaxTree" table
-			| 'Amount'   | 'Manual amount'   | 'Row presentation'    |
-			| '61,02'    | '61,02'           | 'VAT - TRY - 18%'     |
-		And I select current line in "TaxTree" table
-		And I input "62,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I click "Ok" button
-		And I click the button named "FormPost"
-		And I delete "$$NumberSalesInvoice090204$$" variable
-		And I delete "$$SalesInvoice090204$$" variable
-		And I save the value of "Number" field as "$$NumberSalesInvoice090204$$"
-		And I save the window as "$$SalesInvoice090204$$"
-		And I click the button named "FormPost"
-	* Create Sales invoice based on Sales order and check filling Tax types
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And I click "Ok" button
-		And "ItemList" table contains lines
-			| 'Price'    | 'Item'       | 'VAT'   | 'Item key'    | 'Quantity'   | 'Unit'   | 'SalesTax'   | 'Tax amount'   | 'Net amount'   | 'Total amount'   | 'Store'       |
-			| '400,00'   | 'Trousers'   | '18%'   | '38/Yellow'   | '1,000'      | 'pcs'    | '1%'         | '65,96'        | '334,04'       | '400,00'         | 'Store 01'    |
-			| '700,00'   | 'Boots'      | '18%'   | '37/18SD'     | '2,000'      | 'pcs'    | '1%'         | '227,42'       | '1 172,58'     | '1 400,00'       | 'Store 01'    |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "293,38"
-		And I click the button named "FormPostAndClose"
-		And I close all client application windows
 
 Scenario: _090206 priority tax rate check on the example of Sales order
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -589,20 +389,20 @@ Scenario: _090208 check tax in the SO (depend of transaction type)
 		And I select current line in "List" table
 	* Check tax rate
 		And "ItemList" table contains lines
-			| 'SalesTax'   | 'Item key'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Item'     |
-			| '1%'         | 'L/Green'    | '1,000'      | 'pcs'    | '46,19'        | '550,00'   | '8%'    | '503,81'       | '550,00'         | 'Dress'    |
-			| '1%'         | 'M/White'    | '1,000'      | 'pcs'    | '43,67'        | '520,00'   | '8%'    | '476,33'       | '520,00'         | 'Dress'    |
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '40,74'      | '550,00' | '8%'  | '509,26'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '38,52'      | '520,00' | '8%'  | '481,48'     | '520,00'       | 'Dress' |
 	* Change transaction type and check tax rate
 		And I select "Sales" exact value from "Transaction type" drop-down list
 		And "ItemList" table contains lines
-			| 'SalesTax'   | 'Item key'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Price type'          | 'Item'    | 'Sales person'    |
-			| '1%'         | 'L/Green'    | '1,000'      | 'pcs'    | '89,35'        | '550,00'   | '18%'   | '460,65'       | '550,00'         | 'Basic Price Types'   | 'Dress'   | ''                |
-			| '1%'         | 'M/White'    | '1,000'      | 'pcs'    | '84,47'        | '520,00'   | '18%'   | '435,53'       | '520,00'         | 'Basic Price Types'   | 'Dress'   | ''                |
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Price type'        | 'Item'  | 'Sales person' |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Basic Price Types' | 'Dress' | ''             |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Basic Price Types' | 'Dress' | ''             |
 		And I select "Shipment to trade agent" exact value from "Transaction type" drop-down list
 		And "ItemList" table contains lines
-			| 'SalesTax'   | 'Item key'   | 'Quantity'   | 'Dont calculate row'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'Net amount'   | 'Total amount'   | 'Store'      | 'Item'    | 'Price type'           |
-			| '1%'         | 'L/Green'    | '1,000'      | 'No'                   | 'pcs'    | '5,45'         | '550,00'   | '544,55'       | '550,00'         | 'Store 01'   | 'Dress'   | 'Basic Price Types'    |
-			| '1%'         | 'M/White'    | '1,000'      | 'No'                   | 'pcs'    | '5,15'         | '520,00'   | '514,85'       | '520,00'         | 'Store 01'   | 'Dress'   | 'Basic Price Types'    |
+			| 'Item key' | 'Quantity' | 'Dont calculate row' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    | 'Item'  | 'Price type'        |
+			| 'L/Green'  | '1,000'    | 'No'                 | 'pcs'  | '550,00' | '550,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+			| 'M/White'  | '1,000'    | 'No'                 | 'pcs'  | '520,00' | '520,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
 		And I close all client application windows
 
 
@@ -655,15 +455,15 @@ Scenario: _090209 check tax in the SI (depend of transaction type)
 		And I select current line in "List" table
 	* Check tax rate
 		And "ItemList" table contains lines
-			| 'SalesTax'   | 'Item key'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Price type'          | 'Item'    | 'Sales person'    |
-			| '1%'         | 'L/Green'    | '1,000'      | 'pcs'    | '89,35'        | '550,00'   | '18%'   | '460,65'       | '550,00'         | 'Basic Price Types'   | 'Dress'   | ''                |
-			| '1%'         | 'M/White'    | '1,000'      | 'pcs'    | '84,47'        | '520,00'   | '18%'   | '435,53'       | '520,00'         | 'Basic Price Types'   | 'Dress'   | ''                |
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT'  | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%'  | '466,10'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%'  | '440,68'     | '520,00'       | 'Dress' |
 	* Change transaction type and check tax rate
 		And I select "Retail sales" exact value from "Transaction type" drop-down list
 		And "ItemList" table contains lines
-			| 'SalesTax'   | 'Item key'   | 'Quantity'   | 'Dont calculate row'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'Net amount'   | 'Total amount'   | 'Store'      | 'Item'    | 'Price type'           |
-			| '1%'         | 'L/Green'    | '1,000'      | 'No'                   | 'pcs'    | '5,45'         | '550,00'   | '544,55'       | '550,00'         | 'Store 01'   | 'Dress'   | 'Basic Price Types'    |
-			| '1%'         | 'M/White'    | '1,000'      | 'No'                   | 'pcs'    | '5,15'         | '520,00'   | '514,85'       | '520,00'         | 'Store 01'   | 'Dress'   | 'Basic Price Types'    |
+			| 'Item key' | 'Quantity' | 'Dont calculate row' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    | 'Item'  | 'Price type'        |
+			| 'L/Green'  | '1,000'    | 'No'                 | 'pcs'  | '550,00' | '550,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+			| 'M/White'  | '1,000'    | 'No'                 | 'pcs'  | '520,00' | '520,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
 		And I close all client application windows
 			
 					

@@ -137,5 +137,7 @@
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
     <types>CatalogRef.DepreciationSchedules</types>
     <types>DocumentRef.CommissioningOfFixedAsset</types>
+    <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    <types>DocumentRef.FixedAssetTransfer</types>
   </type>
 </mdclass:DefinedType>

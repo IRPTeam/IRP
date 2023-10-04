@@ -407,17 +407,17 @@ EndFunction
 // Get access key.
 // 
 // Parameters:
-//  Obj - DocumentObjectDocumentName -
+//  Obj - DocumentObject.FixedAssetTransfer -
 // 
 // Returns:
 //  Map
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
-	CopyTable = Obj.ItemList.Unload(, "Store");
-	CopyTable.GroupBy("Store");
-	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
+	BranchList = New Array;
+	BranchList.Add(Obj.BranchSender);
+	BranchList.Add(Obj.BranchReceiver);
+	AccessKeyMap.Insert("Branch", BranchList);
 	Return AccessKeyMap;
 EndFunction
 

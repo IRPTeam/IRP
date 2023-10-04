@@ -40,10 +40,6 @@ Procedure CalculationMethodOnChange(Item)
 		Object.Rate = 0;
 	EndIf;
 	
-	If Object.CalculationMethod <> PredefinedValue("Enum.DepreciationMethods.StraightLine") Then
-		Object.UsefulLife = 0;
-	EndIf;
-	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -51,7 +47,6 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.UsefulLife.Visible = (Object.CalculationMethod = PredefinedValue("Enum.DepreciationMethods.StraightLine"));
 	Form.Items.Rate.Visible = (Object.CalculationMethod = PredefinedValue("Enum.DepreciationMethods.DecliningBalance"));
 EndProcedure
 

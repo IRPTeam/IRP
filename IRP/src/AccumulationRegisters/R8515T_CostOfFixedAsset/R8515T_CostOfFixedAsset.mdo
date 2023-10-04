@@ -72,4 +72,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="d60ea697-398d-4d5a-ade6-7ac7411c3690">
+    <name>LedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.FixedAssetsLedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

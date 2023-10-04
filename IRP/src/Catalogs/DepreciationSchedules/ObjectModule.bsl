@@ -22,10 +22,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.CalculationMethod <> Enums.DepreciationMethods.StraightLine Then
-		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "UsefulLife");
-	EndIf;
-	
 	If ThisObject.CalculationMethod <> Enums.DepreciationMethods.DecliningBalance Then
 		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "Rate");
 	EndIf;

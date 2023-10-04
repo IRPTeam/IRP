@@ -21,6 +21,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	T.Company AS Company,
 	|	T.Branch AS Branch,
 	|	T.FixedAsset AS FixedAsset,
+	|	T.LedgerType AS LedgerType,
 	|	T.AmountBalance AS AmountBalance
 	|INTO ActiveFixedAssets
 	|FROM
@@ -36,7 +37,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	T8515S_FixedAssetsLocation.Company AS Company,
 	|	T8515S_FixedAssetsLocation.FixedAsset AS FixedAsset,
-	|	MIN(T8515S_FixedAssetsLocation.Period) AS StartDate
+	|	DATEADD(ENDOFPERIOD(MIN(T8515S_FixedAssetsLocation.Period), MONTH), SECOND, 1) AS StartDate
 	|INTO StartingDates
 	|FROM
 	|	InformationRegister.T8515S_FixedAssetsLocation AS T8515S_FixedAssetsLocation
@@ -74,6 +75,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	T.Company AS Company,
 	|	T.FixedAsset AS FixedAsset,
+	|	T.LedgerType AS LedgerType,
 	|	T.AmountTurnover AS AmountTurnover
 	|INTO CostFixedAsset
 	|FROM
@@ -93,15 +95,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	T.FixedAsset AS FixedAsset,
 	|	T.LedgerType AS LedgerType,
 	|	T.Schedule AS Schedule,
+	|	T.Schedule.CalculationMethod AS CalculationMethod, 
 	|	&Currency AS Currency,
 	|	"""" AS Key,
-	|	DATEADD(ENDOFPERIOD(StartingDates.StartDate, MONTH), SECOND, 1) AS StartDate,
-	|	CASE
-	|		WHEN T.Schedule.CalculationMethod = VALUE(Enum.DepreciationMethods.StraightLine)
-	|			THEN CostFixedAsset.AmountTurnover / T.Schedule.UsefulLife
-	|		ELSE 0
-	|	END AS Amount
-	|INTO DepreciationInfo
+	|	ActiveFixedAssets.AmountBalance AS AmountBalance,
+	|	CostFixedAsset.AmountTurnover AS AmountTurnover,
+	|	StartingDates.StartDate AS StartDate,
+	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife - 1) AS FinishDate,
+	|	T.Schedule.UsefulLife AS UsefulLife,
+	|	T.Schedule.Rate AS Rate,
+	|	0 AS Amount
 	|FROM
 	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers(UNDEFINED, &Period,,, Company = &Company
 	|	AND Branch = &Branch
@@ -110,21 +113,59 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|		INNER JOIN StartingDates AS StartingDates
 	|		ON (StartingDates.Company = T.Company)
 	|		AND (StartingDates.FixedAsset = T.FixedAsset)
-	|		AND (DATEADD(ENDOFPERIOD(StartingDates.StartDate, MONTH), SECOND, 1) < &StartDate)
+	|		AND (StartingDates.StartDate < &StartDate)
 	|		INNER JOIN LocationFixedAssets AS LocationFixedAssets
 	|		ON (LocationFixedAssets.Company = T.Company)
 	|		AND (LocationFixedAssets.Branch = T.Branch)
 	|		AND (LocationFixedAssets.FixedAsset = T.FixedAsset)
 	|		INNER JOIN CostFixedAsset AS CostFixedAsset
 	|		ON (CostFixedAsset.Company = T.Company)
-	|		AND (CostFixedAsset.FixedAsset = T.FixedAsset)";
+	|		AND (CostFixedAsset.FixedAsset = T.FixedAsset)
+	|		AND (CostFixedAsset.LedgerType = T.LedgerType)
+	|		INNER JOIN ActiveFixedAssets AS ActiveFixedAssets
+	|		ON (ActiveFixedAssets.Company = T.Company)
+	|		AND (ActiveFixedAssets.Branch = T.Branch)
+	|		AND (ActiveFixedAssets.FixedAsset = T.FixedAsset)
+	|		AND (ActiveFixedAssets.LedgerType = T.LedgerType)";
 	
 	Query.SetParameter("Period"    , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Query.SetParameter("StartDate" , Ref.Date);
 	Query.SetParameter("Company"   , Ref.Company);
 	Query.SetParameter("Branch"    , Ref.Branch); 
 	Query.SetParameter("Currency"  , CurrenciesServer.GetLandedCostCurrency(Ref.Company)); 
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	For Each Row In QueryTable Do
+		// last month
+		If EndOfMonth(Row.FinishDate) = EndOfMonth(Ref.Date) Then
+			Row.Amount = Row.AmountBalance;
+			Continue;
+		EndIf;
 		
+		Amount = 0;
+		
+		// Straight line
+		If Row.CalculationMethod = Enums.DepreciationMethods.StraightLine Then
+			Amount = Row.AmountTurnover / Row.UsefulLife;	
+		EndIf;
+		
+		// Declining balance
+		If Row.CalculationMethod = Enums.DepreciationMethods.DecliningBalance Then
+			Amount = Row.AmountBalance / Row.UsefulLife * Row.Rate;
+		EndIf;
+		
+		If Amount > Row.AmountBalance Then
+			Row.Amount = Row.AmountBalance;
+		Else
+			Row.Amount = Amount;
+		EndIf;
+		
+	EndDo;
+		
+	Query.Text = "SELECT * INTO DepreciationInfo FROM &DepreciationInfo AS T";
+	Query.SetParameter("DepreciationInfo", QueryTable);
 	Query.Execute();
 		
 	Return Tables;

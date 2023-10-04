@@ -407,8 +407,6 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And Delay 2
 		And "DocumentsTree" table became equal
 			| 'Presentation'                                         | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-			| 'Shirt (38/Black)'                                     | '2,000'   | '2,000'              | '2,000'    |
-			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''        | '2,000'              | '2,000'    |
 			| 'Dress (L/Green)'                                      | '1,000'   | '1,000'              | '1,000'    |
 			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''        | '1,000'              | '1,000'    |
 			| 'Product 1 with SLN (PZU)'                             | '2,000'   | '2,000'              | '2,000'    |
@@ -437,10 +435,30 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I input "1 790,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table	
 	* Filling landed cost
-		And for each line of "ItemList" table I do
-			And I activate "Landed cost" field in "ItemList" table
-			And I input "100,00" text in "Landed cost" field of "ItemList" table
-			And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 3 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberRRR2$$" variable
@@ -454,32 +472,3 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 			| 'Number'         |
 			| '$$NumberRRR2$$' |
 		And I close all client application windows
-		
-				
-				
-				
-				
-				
-				
-				
-
-				
-		
-		
-		
-		
-		
-				
-				
-				
-					
-				
-				
-				
-				
-				
-				
-	
-				
-	
-						

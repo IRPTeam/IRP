@@ -301,7 +301,7 @@ Function PasteResult() Export
 	Return Str;
 EndFunction
 
-Function ColumnNameToPaste()
+Function ColumnNameToPaste() Export
 	Array = New Array; // Array of String
 	
 	Array.Add("Item");

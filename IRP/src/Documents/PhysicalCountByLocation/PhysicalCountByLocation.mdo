@@ -168,6 +168,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5b6470a9-e6cb-4eab-8e01-834ecc74660d">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PhysicalCountByLocationTransactionType</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.PhysicalCountByLocationTransactionType.EnumValue.Package</value>
+    </fillValue>
+  </attributes>
   <forms uuid="ad26591d-5369-4c93-9de5-6ffa616f750a">
     <name>DocumentForm</name>
     <synonym>

@@ -90,6 +90,15 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocPhysicalCountByLocationClient.TransactionTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region USE_SERIAL_LOT_NUMBERS
 
 &AtClient

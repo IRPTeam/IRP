@@ -192,15 +192,21 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-
-	FillDataByRow(CurrentData);
+	FillDataByRowID(CurrentData.GetID());
 
 EndProcedure
 
 &AtServer
+Procedure FillDataByRowID(RowID)
+	FillDataByRow(ItemList.FindByID(RowID))
+EndProcedure
+
+&AtServer
 Procedure FillDataByRow(CurrentData)
-	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
-	CurrentData.Unit = UnitInfo.Unit;
+	If CurrentData.Unit.IsEmpty() Then
+		UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
+		CurrentData.Unit = UnitInfo.Unit;
+	EndIf;
 
 	If Not ValueIsFilled(CurrentData.PriceType) Then
 		CurrentData.PriceType = ThisObject.PriceType;
@@ -351,32 +357,26 @@ Procedure PasteFromClipboard(Command)
 EndProcedure
 
 &AtServer
-Function PasteFromClipboardServer(PasteSettings)
-	
-	PasteResult = CopyPasteServer.PasteResult();
+Procedure PasteFromClipboardServer(PasteSettings)
 	
 	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
 	If Data.Count() = 0 Then
-		PasteResult.SerialLotNumbers = Undefined;
-		Return PasteResult;
+		Return;
 	EndIf;
 	Index = Data.UBound();
 	BufferData = Data[Index]; // See BufferSettings
 	
 	If BufferData.CopySettings.CopySelectedRows Then
-		PasteResult = PasteSelectedRows(BufferData, PasteSettings);
+		PasteSelectedRows(BufferData, PasteSettings);
 	EndIf;
 	Data.Clear();
 	
 	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
 	
-	Return PasteResult;
-EndFunction
+EndProcedure
 
 &AtServer
-Function PasteSelectedRows(BufferData, PasteSettings)
-	
-	SourceHasTableSLN = BufferData.Data.Property("SerialLotNumbers");
+Procedure PasteSelectedRows(BufferData, PasteSettings)
 	For Each Row In BufferData.Data.ItemList Do
 		NewRow = ItemList.Add();
 		For Each Property In CopyPasteServer.ColumnNameToPaste() Do
@@ -384,8 +384,6 @@ Function PasteSelectedRows(BufferData, PasteSettings)
 		EndDo;
 		FillDataByRow(NewRow);
 	EndDo;
-	
-
-EndFunction
+EndProcedure
 
 #EndRegion

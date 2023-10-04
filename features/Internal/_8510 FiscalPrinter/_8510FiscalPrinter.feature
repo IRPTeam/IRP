@@ -528,6 +528,8 @@ Scenario: _0850000 preparation (fiscal printer)
 				| 'Yes'       | 'Fiscal printer'         |
 				| 'Yes'       | 'Acquiring terminal'     |
 		And I click "Save and close" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one	
 	* Check fiscal printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I go to line in "List" table

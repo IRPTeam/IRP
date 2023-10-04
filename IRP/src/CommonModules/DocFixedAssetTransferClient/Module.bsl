@@ -43,3 +43,11 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 EndProcedure
 
 #EndRegion
+
+#Region FIXED_ASSETS
+
+Procedure FixedAssetOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	ViewClient_V2.FixedAssetOnChange(Object, Form, "");
+EndProcedure
+
+#EndRegion

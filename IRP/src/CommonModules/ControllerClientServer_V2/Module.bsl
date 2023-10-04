@@ -2457,6 +2457,10 @@ Function BindDate(Parameters)
 	Binding.Insert("Production", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit");
 	
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBranchSenderByFixedAsset");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
 
@@ -2624,6 +2628,10 @@ Function BindCompany(Parameters)
 	Binding.Insert("RetailShipmentConfirmation", "StepItemListChangeInventoryOriginByItemKey");
 	Binding.Insert("RetailGoodsReceipt", "StepItemListChangeInventoryOriginByItemKey");
 	
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBranchSenderByFixedAsset");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
 
@@ -2734,6 +2742,103 @@ Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
 	Options.ReceiveBranch = GetReceiveBranch(Parameters);
 	Options.StepName = "StepChangeReceiveBranchByAccount";
 	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region FIXED_ASSET
+
+// FixedAsset.OnChange
+Procedure FixedAssetOnChange(Parameters) Export
+	AddViewNotify("OnSetFixedAssetNotify", Parameters);
+	Binding = BindFixedAsset(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// FixedAsset.Set
+Procedure SetFixedAsset(Parameters, Results) Export
+	Binding = BindFixedAsset(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetFixedAssetNotify");
+EndProcedure
+
+// FixedAsset.Get
+Function GetFixedAsset(Parameters)
+	Return GetPropertyObject(Parameters, BindFixedAsset(Parameters).DataPath);
+EndFunction
+
+// FixedAsset.Bind
+Function BindFixedAsset(Parameters)
+	DataPath = "FixedAsset";
+	Binding = New Structure();
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBranchSenderByFixedAsset");
+
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFixedAsset");
+EndFunction
+
+#EndRegion
+
+#Region RESPONSIBLE_PERSON_SENDER
+
+// ResponsiblePersonSender.Set
+Procedure SetResponsiblePersonSender(Parameters, Results) Export
+	Binding = BindResponsiblePersonSender(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ResponsiblePersonSender.Bind
+Function BindResponsiblePersonSender(Parameters)
+	DataPath = "ResponsiblePersonSender";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindResponsiblePersonSender");
+EndFunction
+
+// ResponsiblePersonSender.ChangeResponsiblePersonSenderByFixedAsset.Step
+Procedure StepChangeResponsiblePersonSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Setter = "SetResponsiblePersonSender";
+	Options = ModelClientServer_V2.ChangeResponsiblePersonSenderByFixedAssetOptions();
+	Options.FixedAsset = GetFixedAsset(Parameters);
+	Options.Company    = GetCompany(Parameters);
+	Options.Date       = GetDate(Parameters);
+	Options.StepName = "StepChangeResponsiblePersonSenderByFixedAsset";
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region BRANCH_SENDER
+
+// BranchSender.Set
+Procedure SetBranchSender(Parameters, Results) Export
+	Binding = BindBranchSender(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// BranchSender.Bind
+Function BindBranchSender(Parameters)
+	DataPath = "BranchSender";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranchSender");
+EndFunction
+
+// BranchSender.ChangeBranchSenderSenderByFixedAsset.Step
+Procedure StepChangeBranchSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeBranchSenderByFixedAsset.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBranchSenderByFixedAsset.Setter = "SetBranchSender";
+	Options = ModelClientServer_V2.ChangeBranchSenderByFixedAssetOptions();
+	Options.FixedAsset = GetFixedAsset(Parameters);
+	Options.Company    = GetCompany(Parameters);
+	Options.Date       = GetDate(Parameters);
+	Options.StepName = "StepChangeBranchSenderByFixedAsset";
+	Chain.ChangeBranchSenderByFixedAsset.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -13802,6 +13907,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetStoreReceiverNotify"              Then ViewClient_V2.OnSetStoreReceiverNotify(Parameters);
 	ElsIf ViewNotify = "OnSetDeliveryDateNotify"               Then ViewClient_V2.OnSetDeliveryDateNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCompanyNotify"                    Then ViewClient_V2.OnSetCompanyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetFixedAssetNotify"                 Then ViewClient_V2.OnSetFixedAssetNotify(Parameters);
 	ElsIf ViewNotify = "OnSetAccountNotify"                    Then ViewClient_V2.OnSetAccountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCashAccountNotify"                Then ViewClient_V2.OnSetCashAccountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetTransactionTypeNotify"            Then ViewClient_V2.OnSetTransactionTypeNotify(Parameters);

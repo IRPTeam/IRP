@@ -58,3 +58,33 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Function GetFixedAssetLocation(Date, Company, FixedAsset) Export
+	Return ServerReuse.GetFixedAssetLocation(Date, Company, FixedAsset);
+EndFunction
+
+Function _GetFixedAssetLocation(Date, Company, FixedAsset) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
+	|	T8515S_FixedAssetsLocationSliceLast.Branch
+	|FROM
+	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&Date, Company = &Company
+	|	AND FixedAsset = &FixedAsset) AS T8515S_FixedAssetsLocationSliceLast
+	|WHERE
+	|	T8515S_FixedAssetsLocationSliceLast.IsActive";
+	Query.SetParameter("Date", Date);
+	Query.SetParameter("Company", Company);
+	Query.SetParameter("FixedAsset", FixedAsset);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("ResponsiblePerson, Branch");
+	If QuerySelection.Next() Then
+		Result.ResponsiblePerson = QuerySelection.ResponsiblePerson;
+		Result.Branch = QuerySelection.Branch;
+	EndIf;
+	Return Result;
+EndFunction
+
+

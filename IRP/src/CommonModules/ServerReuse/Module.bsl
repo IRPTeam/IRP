@@ -51,6 +51,11 @@ Function GetLandedCostCurrency(Company) Export
 	Return CurrenciesServer._GetLandedCostCurrency(Company);	
 EndFunction
 
+// Fixed assets
+Function GetFixedAssetLocation(Date, Company, FixedAsset) Export
+	Return DocFixedAssetTransferServer._GetFixedAssetLocation(Date, Company, FixedAsset);
+EndFunction
+
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

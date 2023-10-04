@@ -70,6 +70,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="3dc2a67b-05a4-471b-8c48-a9c4999a7b4e">
+    <name>InventoryNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Inventory number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="07eefe30-4e67-4a8b-a88e-a24cbcf1afdd">
     <producedTypes>
       <objectType typeId="6eb303ca-90da-4580-b4b8-848d8cc18100" valueTypeId="a5a06791-767d-4b06-8244-9b35aae2661c"/>

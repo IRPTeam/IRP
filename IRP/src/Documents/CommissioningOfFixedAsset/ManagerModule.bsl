@@ -135,6 +135,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(T8515S_FixedAssetsLocation());
+	QueryArray.Add(R8515T_CostOfFixedAsset());
 	Return QueryArray;
 EndFunction
 
@@ -395,6 +396,18 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	T8510S_FixedAssetsInfo.Recorder AS CalculationMovementCost
 		|INTO R8510B_BookValueOfFixedAsset
+		|FROM
+		|	InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
+		|WHERE
+		|	T8510S_FixedAssetsInfo.Document = &Ref";
+EndFunction
+
+Function R8515T_CostOfFixedAsset()
+	Return
+		"SELECT
+		|	*,
+		|	T8510S_FixedAssetsInfo.Recorder AS CalculationMovementCost
+		|INTO R8515T_CostOfFixedAsset
 		|FROM
 		|	InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
 		|WHERE

@@ -18,27 +18,106 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 	"SELECT
-	|	T.Company,
-	|	T.Branch,
-	|	T.Branch AS ProfitLossCenter,
-	|	T.FixedAsset,
-	|	T.LedgerType,
-	|	T.Schedule,
-	|	&Currency AS Currency,
-	|	"""" AS Key,
-	|	CASE
-	|		WHEN T.Schedule.CalculationMethod = VALUE(Enum.DepreciationMethods.DecliningBalance)
-	|			THEN T.AmountBalance / 100 * T.Schedule.Rate
-	|		WHEN T.Schedule.CalculationMethod = VALUE(Enum.DepreciationMethods.StraightLine)
-	|			THEN T.AmountBalance / T.Schedule.UsefulLife
-	|	END AS Amount
-	|INTO DepreciationInfo
+	|	T.Company AS Company,
+	|	T.Branch AS Branch,
+	|	T.FixedAsset AS FixedAsset,
+	|	T.AmountBalance AS AmountBalance
+	|INTO ActiveFixedAssets
 	|FROM
 	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&Period, Company = &Company
 	|	AND Branch = &Branch
 	|	AND LedgerType.CalculateDepreciation
-	|	AND LedgerType.StartDate <= &StartDate
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T";
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T
+	|WHERE
+	|	T.AmountBalance > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T8515S_FixedAssetsLocation.Company AS Company,
+	|	T8515S_FixedAssetsLocation.FixedAsset AS FixedAsset,
+	|	MIN(T8515S_FixedAssetsLocation.Period) AS StartDate
+	|INTO StartingDates
+	|FROM
+	|	InformationRegister.T8515S_FixedAssetsLocation AS T8515S_FixedAssetsLocation
+	|WHERE
+	|	(T8515S_FixedAssetsLocation.Company, T8515S_FixedAssetsLocation.FixedAsset) IN
+	|		(SELECT
+	|			ActiveFixedAssets.Company,
+	|			ActiveFixedAssets.FixedAsset
+	|		FROM
+	|			ActiveFixedAssets AS ActiveFixedAssets)
+	|GROUP BY
+	|	T8515S_FixedAssetsLocation.Company,
+	|	T8515S_FixedAssetsLocation.FixedAsset
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T8515S_FixedAssetsLocationSliceLast.Company AS Company,
+	|	T8515S_FixedAssetsLocationSliceLast.FixedAsset AS FixedAsset,
+	|	T8515S_FixedAssetsLocationSliceLast.Branch AS Branch
+	|INTO LocationFixedAssets
+	|FROM
+	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&StartDate, (Company, Branch, FixedAsset) IN
+	|		(SELECT
+	|			ActiveFixedAssets.Company,
+	|			ActiveFixedAssets.Branch,
+	|			ActiveFixedAssets.FixedAsset
+	|		FROM
+	|			ActiveFixedAssets AS ActiveFixedAssets)) AS T8515S_FixedAssetsLocationSliceLast
+	|WHERE
+	|	T8515S_FixedAssetsLocationSliceLast.IsActive
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T.Company AS Company,
+	|	T.FixedAsset AS FixedAsset,
+	|	T.AmountTurnover AS AmountTurnover
+	|INTO CostFixedAsset
+	|FROM
+	|	AccumulationRegister.R8515T_CostOfFixedAsset.Turnovers(UNDEFINED, &Period,, (Company, FixedAsset) IN
+	|		(SELECT
+	|			ActiveFixedAssets.Company,
+	|			ActiveFixedAssets.FixedAsset
+	|		FROM
+	|			ActiveFixedAssets AS ActiveFixedAssets)) AS T
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T.Company AS Company,
+	|	T.Branch AS Branch,
+	|	T.Branch AS ProfitLossCenter,
+	|	T.FixedAsset AS FixedAsset,
+	|	T.LedgerType AS LedgerType,
+	|	T.Schedule AS Schedule,
+	|	&Currency AS Currency,
+	|	"""" AS Key,
+	|	DATEADD(ENDOFPERIOD(StartingDates.StartDate, MONTH), SECOND, 1) AS StartDate,
+	|	CASE
+	|		WHEN T.Schedule.CalculationMethod = VALUE(Enum.DepreciationMethods.StraightLine)
+	|			THEN CostFixedAsset.AmountTurnover / T.Schedule.UsefulLife
+	|		ELSE 0
+	|	END AS Amount
+	|INTO DepreciationInfo
+	|FROM
+	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers(UNDEFINED, &Period,,, Company = &Company
+	|	AND Branch = &Branch
+	|	AND LedgerType.CalculateDepreciation
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T
+	|		INNER JOIN StartingDates AS StartingDates
+	|		ON (StartingDates.Company = T.Company)
+	|		AND (StartingDates.FixedAsset = T.FixedAsset)
+	|		AND (DATEADD(ENDOFPERIOD(StartingDates.StartDate, MONTH), SECOND, 1) < &StartDate)
+	|		INNER JOIN LocationFixedAssets AS LocationFixedAssets
+	|		ON (LocationFixedAssets.Company = T.Company)
+	|		AND (LocationFixedAssets.Branch = T.Branch)
+	|		AND (LocationFixedAssets.FixedAsset = T.FixedAsset)
+	|		INNER JOIN CostFixedAsset AS CostFixedAsset
+	|		ON (CostFixedAsset.Company = T.Company)
+	|		AND (CostFixedAsset.FixedAsset = T.FixedAsset)";
 	
 	Query.SetParameter("Period"    , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Query.SetParameter("StartDate" , Ref.Date);

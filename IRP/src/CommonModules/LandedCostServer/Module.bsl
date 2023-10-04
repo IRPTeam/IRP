@@ -739,6 +739,9 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Book value of fixed assets
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
+	// Cost of fixed asset
+	AccumulationRegisters.R8515T_CostOfFixedAsset.CostOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	
 	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(CalculationSettings.Company, CalculationSettings.EndPeriod);
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(CalculationSettings.Company, CalculationSettings.EndPeriod);	
@@ -1089,6 +1092,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1171,6 +1175,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -1292,6 +1297,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1369,6 +1375,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -2270,6 +2277,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						NewRow_DataForFixedAssets = Tables.DataForFixedAssets.Add();
 						FillPropertyValues(NewRow_DataForFixedAssets, NewRow);
 						NewRow_DataForFixedAssets.FixedAsset = Row.FixedAsset;						
+						NewRow_DataForFixedAssets.Branch = Row.Branch;						
 					EndIf;	
 						
 				EndIf;

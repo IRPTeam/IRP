@@ -3,6 +3,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Undefined, 
+		CurrenciesServer.GetLandedCostCurrency(ThisObject.Company), 0);
+	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure

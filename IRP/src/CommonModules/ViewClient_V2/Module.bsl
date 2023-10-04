@@ -3320,6 +3320,26 @@ EndProcedure
 
 #EndRegion
 
+#Region FIXED_ASSETS
+
+Procedure FixedAssetOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.FixedAssetOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetFixedAssetNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+//
+
+#EndRegion
+
 #Region TRADE_AGENT_FEE_TYPE
 
 Procedure TradeAgentFeeTypeOnChange(Object, Form, TableNames) Export

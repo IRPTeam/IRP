@@ -1267,6 +1267,7 @@
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8515T_CostOfFixedAsset</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

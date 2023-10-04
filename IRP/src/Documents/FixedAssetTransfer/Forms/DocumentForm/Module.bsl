@@ -37,10 +37,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		AddAttributesCreateFormControl();
 	EndIf;
 	
-//	If EventName = "NewBarcode" And IsInputAvailable() Then
-//		SearchByBarcode(Undefined, Parameter);
-//	EndIf;
-
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -73,7 +69,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -117,6 +113,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocFixedAssetTransferClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region FIXED_ASSETS
+
+&AtClient
+Procedure FixedAssetOnChange(Item)
+	DocFixedAssetTransferClient.FixedAssetOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion
@@ -198,103 +203,25 @@ EndProcedure
 
 #EndRegion
 
-//#Region COPY_PASTE
-//
-////@skip-check module-unused-method
-//&AtClient
-//Procedure CopyToClipboard(Command)
-//	CopyPasteClient.CopyToClipboard(Object, ThisObject);
-//EndProcedure
-//
-//&AtClient
-//Procedure CopyToClipboardAfterSetSettings(CopySettings, AddInfo) Export
-//	If CopySettings = Undefined Then
-//		Return;
-//	EndIf;
-//	
-//	CopyPasteResult = CopyToClipboardServer(CopySettings);
-//	CopyPasteClient.AfterCopy(CopyPasteResult);
-//EndProcedure
-//
-//&AtServer
-//Function CopyToClipboardServer(CopySettings)
-//	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
-//EndFunction
-//
-////@skip-check module-unused-method
-//&AtClient
-//Procedure PasteFromClipboard(Command)
-//	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
-//EndProcedure
-//
-//&AtClient
-//Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
-//	If PasteSettings = Undefined Then
-//		Return;
-//	EndIf;
-//	
-//	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
-//	CopyPasteClient.AfterPaste(Object, ThisObject,CopyPasteResult);
-//EndProcedure
-//
-//&AtServer
-//Function PasteFromClipboardServer(CopySettings)
-//	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
-//EndFunction
-//
-//#EndRegion
-
-//#Region LOAD_DATA_FROM_TABLE
-//
-////@skip-check module-unused-method
-//&AtClient
-//Procedure LoadDataFromTable(Command)
-//	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
-//EndProcedure
-//
-//#EndRegion
-
 #Region COMMANDS
-
-//&AtClient
-//Procedure SearchByBarcode(Command, Barcode = "")
-//	DocumentsClient.SearchByBarcodeWithPriceType(Barcode, Object, ThisObject);
-//EndProcedure
-//
-//&AtClient
-//Procedure OpenScanForm(Command)
-//	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
-//EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
-////@skip-check module-unused-method
-//&AtClient
-//Procedure OpenSerialLotNumbersTree(Command)
-//	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
-//EndProcedure
-
 #EndRegion
 
-//&AtClient
-//Procedure EditQuantityInBaseUnit(Command)
-//	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
-//	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
-//EndProcedure
-//
-//&AtClient
-//Procedure EditCurrencies(Command)
-//	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Undefined, 
-//		CurrenciesServer.GetLandedCostCurrency(Object.Company), 0);
-//	NotifyParameters = New Structure();
-//	NotifyParameters.Insert("Object", Object);
-//	NotifyParameters.Insert("Form"  , ThisObject);
-//	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
-//	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
-//EndProcedure
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Undefined, 
+		CurrenciesServer.GetLandedCostCurrency(Object.Company), 0);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 &AtClient
 Procedure ShowHiddenTables(Command)

@@ -95,7 +95,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	T.FixedAsset AS FixedAsset,
 	|	T.LedgerType AS LedgerType,
 	|	T.Schedule AS Schedule,
-	|	T.Schedule.CalculationMethod AS CalculationMethod, 
+	|	T.Schedule.CalculationMethod AS CalculationMethod,
 	|	&Currency AS Currency,
 	|	"""" AS Key,
 	|	ActiveFixedAssets.AmountBalance AS AmountBalance,
@@ -104,6 +104,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife - 1) AS FinishDate,
 	|	T.Schedule.UsefulLife AS UsefulLife,
 	|	T.Schedule.Rate AS Rate,
+	|	T.LedgerType.ExpenseType AS ExpenseType,
 	|	0 AS Amount
 	|FROM
 	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers(UNDEFINED, &Period,,, Company = &Company

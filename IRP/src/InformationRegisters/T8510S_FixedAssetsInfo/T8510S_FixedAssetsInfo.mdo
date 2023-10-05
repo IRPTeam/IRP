@@ -66,6 +66,7 @@
     </synonym>
     <type>
       <types>DocumentRef.CommissioningOfFixedAsset</types>
+      <types>DocumentRef.ModernizationOfFixedAsset</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

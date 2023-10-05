@@ -15,4 +15,5 @@
   <content>Document.DecommissioningOfFixedAsset</content>
   <content>Document.FixedAssetTransfer</content>
   <content>InformationRegister.T8515S_FixedAssetsLocation</content>
+  <content>Document.ModernizationOfFixedAsset</content>
 </mdclass:Subsystem>

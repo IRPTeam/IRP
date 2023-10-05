@@ -144,6 +144,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	ArrayOfTypes.Add(Type("DocumentRef.SalesReportFromTradeAgent"));
 	ArrayOfTypes.Add(Type("DocumentRef.CommissioningOfFixedAsset"));
+	ArrayOfTypes.Add(Type("DocumentRef.ModernizationOfFixedAsset"));
 	ArrayOfTypes.Add(Type("DocumentRef.DecommissioningOfFixedAsset"));
 	Return ArrayOfTypes;
 EndFunction
@@ -1093,6 +1094,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1176,6 +1178,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -1298,6 +1301,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1376,6 +1380,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -2273,7 +2278,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					EndIf;	
 						
 						// fixed asset
-					If TypeOf(Row.Document) = Type("DocumentRef.CommissioningOfFixedAsset") Then
+					If TypeOf(Row.Document) = Type("DocumentRef.CommissioningOfFixedAsset")
+						Or TypeOf(Row.Document) = Type("DocumentRef.ModernizationOfFixedAsset") Then
 						NewRow_DataForFixedAssets = Tables.DataForFixedAssets.Add();
 						FillPropertyValues(NewRow_DataForFixedAssets, NewRow);
 						NewRow_DataForFixedAssets.FixedAsset = Row.FixedAsset;						

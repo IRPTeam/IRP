@@ -9195,6 +9195,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("CommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("DecommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesOrder"                , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkOrder"                 , "StepItemListChangeItemKeyByItem");
@@ -9299,6 +9300,10 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeUnitByItemKey");
 	
 	Binding.Insert("CommissioningOfFixedAsset",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
+	Binding.Insert("ModernizationOfFixedAsset",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 	
@@ -9918,6 +9923,7 @@ Function BindDefaultItemListStore(Parameters)
 	Binding.Insert("RetailGoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
 	
 	Binding.Insert("CommissioningOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("DecommissioningOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
 
 	Binding.Insert("SalesOrder"           , "StepItemListDefaultStoreInList_AgreementInHeader");
@@ -9941,6 +9947,7 @@ Function BindItemListStore(Parameters)
 	Binding.Insert("ShipmentConfirmation"      , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("GoodsReceipt"              , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("CommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("DecommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailGoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");

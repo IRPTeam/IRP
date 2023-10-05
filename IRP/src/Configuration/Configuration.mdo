@@ -299,6 +299,7 @@
   <roles>Role.Document_DecommissioningOfFixedAsset</roles>
   <roles>Role.Document_DepreciationCalculation</roles>
   <roles>Role.Document_FixedAssetTransfer</roles>
+  <roles>Role.Document_ModernizationOfFixedAsset</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -581,6 +582,8 @@
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -981,6 +984,7 @@
   <documents>Document.DecommissioningOfFixedAsset</documents>
   <documents>Document.DepreciationCalculation</documents>
   <documents>Document.FixedAssetTransfer</documents>
+  <documents>Document.ModernizationOfFixedAsset</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1064,6 +1068,7 @@
   <enums>Enum.RetailReceiptStatusTypes</enums>
   <enums>Enum.FixedAssetTypes</enums>
   <enums>Enum.DepreciationMethods</enums>
+  <enums>Enum.ModernizationTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

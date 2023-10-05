@@ -321,6 +321,10 @@
     <metadata>Document.DepreciationCalculation</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.ModernizationOfFixedAsset</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

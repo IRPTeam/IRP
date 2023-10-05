@@ -914,6 +914,13 @@
         <value>134</value>
       </code>
     </items>
+    <items id="a3f8e553-777f-4ade-ad31-82f407bbf9db">
+      <name>Document_ModernizationOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>135</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1069,6 +1069,7 @@
   <enums>Enum.FixedAssetTypes</enums>
   <enums>Enum.DepreciationMethods</enums>
   <enums>Enum.ModernizationTypes</enums>
+  <enums>Enum.PhysicalCountByLocationTransactionType</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

@@ -5,13 +5,15 @@
 // Copy to clipboard.
 // 
 // Parameters:
-//  Object - DocumentObjectDocumentName - Object
+//  Object - DocumentObjectDocumentName, DataProcessorObjectDataProcessorName - Object
 //  Form - ClientApplicationForm - Form
 Procedure CopyToClipboard(Object, Form) Export
 	//@skip-check wrong-string-literal-content
 	Notify = New NotifyDescription("CopyToClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
-	OpenSettings.Insert("Ref", Object.Ref);
+	If Not Object = Undefined Then
+		OpenSettings.Insert("Ref", Object.Ref);
+	EndIf;
 	OpenSettings.Insert("CopySettings", CopySettings());
 	OpenForm("CommonForm.CopyToClipboardSettings", OpenSettings, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -53,13 +55,15 @@ EndProcedure
 // Paste from clipboard.
 // 
 // Parameters:
-//  Object - DocumentObjectDocumentName - Object
+//  Object - DocumentObjectDocumentName, Undefined - Object
 //  Form - ClientApplicationForm - Form
 Procedure PasteFromClipboard(Object, Form) Export
 	//@skip-check wrong-string-literal-content
 	Notify = New NotifyDescription("PasteFromClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
-	OpenSettings.Insert("Ref", Object.Ref);
+	If Not Object = Undefined Then
+		OpenSettings.Insert("Ref", Object.Ref);
+	EndIf;
 	OpenSettings.Insert("PasteSettings", PasteSettings());
 	OpenForm("CommonForm.PasteFromClipboardSettings", OpenSettings, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

@@ -19,6 +19,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.ItemListBarcodeType.ChoiceList.Add(ChoiceListItem.Value, ChoiceListItem.Presentation);
 	EndDo;
 
+	CopyPasteServer.CreateCommands(ThisObject, Undefined, Undefined);
+	Items.CopyToClipboard.Visible = False;
 EndProcedure
 
 #EndRegion
@@ -190,9 +192,21 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	FillDataByRowID(CurrentData.GetID());
 
-	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
-	CurrentData.Unit = UnitInfo.Unit;
+EndProcedure
+
+&AtServer
+Procedure FillDataByRowID(RowID)
+	FillDataByRow(ItemList.FindByID(RowID))
+EndProcedure
+
+&AtServer
+Procedure FillDataByRow(CurrentData)
+	If CurrentData.Unit.IsEmpty() Then
+		UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
+		CurrentData.Unit = UnitInfo.Unit;
+	EndIf;
 
 	If Not ValueIsFilled(CurrentData.PriceType) Then
 		CurrentData.PriceType = ThisObject.PriceType;
@@ -223,7 +237,6 @@ Procedure ItemListItemKeyOnChange(Item)
 	Else
 		CurrentData.BarcodeType = "";
 	EndIf;
-
 EndProcedure
 
 &AtClient
@@ -333,3 +346,44 @@ Procedure PriceTypeOnChangeAtServer()
 		EndIf;
 	EndDo;
 EndProcedure
+
+#Region COPY_PASTE
+
+//@skip-check module-unused-method
+&AtClient
+Procedure PasteFromClipboard(Command)
+	PasteSettings = CopyPasteClient.PasteSettings();
+	PasteFromClipboardServer(PasteSettings);
+EndProcedure
+
+&AtServer
+Procedure PasteFromClipboardServer(PasteSettings)
+	
+	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
+	If Data.Count() = 0 Then
+		Return;
+	EndIf;
+	Index = Data.UBound();
+	BufferData = Data[Index]; // See BufferSettings
+	
+	If BufferData.CopySettings.CopySelectedRows Then
+		PasteSelectedRows(BufferData, PasteSettings);
+	EndIf;
+	Data.Clear();
+	
+	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
+	
+EndProcedure
+
+&AtServer
+Procedure PasteSelectedRows(BufferData, PasteSettings)
+	For Each Row In BufferData.Data.ItemList Do
+		NewRow = ItemList.Add();
+		For Each Property In CopyPasteServer.ColumnNameToPaste() Do
+			NewRow[Property] = Row[Property];
+		EndDo;
+		FillDataByRow(NewRow);
+	EndDo;
+EndProcedure
+
+#EndRegion

@@ -3443,8 +3443,8 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "Production" Then
-	
+		Or Parameters.ObjectMetadataInfo.MetadataName = "Production" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);

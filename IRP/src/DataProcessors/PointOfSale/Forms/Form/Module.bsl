@@ -572,7 +572,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtServer

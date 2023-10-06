@@ -63,49 +63,34 @@ EndFunction
 
 Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Export
 
-	BeginTransaction();
-	HaveError = False;
 	Try
-
+		BeginTransaction();
 		For Each Instance In Parameters.ArrayOfInstance Do
 
-			PhysicalCountByLocationObject = CreateDocument();
+			Wrapper = BuilderAPI.Initialize("PhysicalCountByLocation");
+			BuilderAPI.SetProperty(Wrapper, "Date", CommonFunctionsServer.GetCurrentSessionDate());
+			BuilderAPI.SetProperty(Wrapper, "PhysicalInventory", Parameters.PhysicalInventory);
+			BuilderAPI.SetProperty(Wrapper, "Store", Parameters.Store);
+			BuilderAPI.SetProperty(Wrapper, "UseSerialLot", Parameters.PhysicalInventory.UseSerialLot);
+			BuilderAPI.SetProperty(Wrapper, "RuleEditQuantity", Parameters.PhysicalInventory.RuleEditQuantity);
+			BuilderAPI.SetProperty(Wrapper, "TransactionType", Enums.PhysicalCountByLocationTransactionType.PhysicalInventory);
 
-			// try lock for modify
-			PhysicalCountByLocationObject.Lock();
-			PhysicalCountByLocationObject.Fill(Undefined);
-			PhysicalCountByLocationObject.Date = CommonFunctionsServer.GetCurrentSessionDate();
-			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
-			PhysicalCountByLocationObject.Store = Parameters.Store;
-			PhysicalCountByLocationObject.UseSerialLot = Parameters.PhysicalInventory.UseSerialLot;
-			PhysicalCountByLocationObject.RuleEditQuantity = Parameters.PhysicalInventory.RuleEditQuantity;
-			PhysicalCountByLocationObject.ItemList.Clear();
 			For Each ItemListRow In Instance.ItemList Do
-				NewRow = PhysicalCountByLocationObject.ItemList.Add();
-				NewRow.Key = ItemListRow.Key;
-				NewRow.ItemKey = ItemListRow.ItemKey;
-				NewRow.Unit = ItemListRow.Unit;
-				NewRow.ExpCount = ItemListRow.ExpCount;
-				NewRow.PhysCount = ItemListRow.PhysCount;
-				NewRow.Difference = ItemListRow.Difference;
+				NewRow = BuilderAPI.AddRow(Wrapper, "Wrapper");
+				BuilderAPI.SetRowProperty(Wrapper, NewRow, "ItemKey", ItemListRow.ItemKey);
+				BuilderAPI.SetRowProperty(Wrapper, NewRow, "Unit", ItemListRow.Unit);
+				BuilderAPI.SetRowProperty(Wrapper, NewRow, "ExpCount", ItemListRow.ExpCount);
+				BuilderAPI.SetRowProperty(Wrapper, NewRow, "PhysCount", ItemListRow.PhysCount);
+				BuilderAPI.SetRowProperty(Wrapper, NewRow, "Difference", ItemListRow.PhysCount);
 			EndDo;
-			PhysicalCountByLocationObject.Write();
+			BuilderAPI.Write(Wrapper);
 		EndDo;
-
+		CommitTransaction();
 	Except
-		HaveError = True;
+		RollbackTransaction();
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Exc_009, ErrorDescription()));
 	EndTry;
 
-	If TransactionActive() Then
-		If HaveError Then
-			// BSLLS:WrongUseOfRollbackTransactionMethod-off
-			RollbackTransaction();
-			// BSLLS:WrongUseOfRollbackTransactionMethod-on
-		Else
-			CommitTransaction();
-		EndIf;
-	EndIf;
 EndProcedure
 
 Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefined) Export

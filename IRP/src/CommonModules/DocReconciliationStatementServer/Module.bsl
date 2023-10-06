@@ -85,12 +85,41 @@ Function GetAgreementsCurrency(Partner, Company, CurrentData = Undefined) Export
 	
 	Query = New Query;
 	Query.Text =
-	"SELECT DISTINCT
+	"SELECT
+	|	PartnerSegments.Segment
+	|INTO tmpSegments
+	|FROM
+	|	InformationRegister.PartnerSegments AS PartnerSegments
+	|WHERE
+	|	PartnerSegments.Partner = &Partner
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
 	|	Agreements.CurrencyMovementType.Currency AS Currency
 	|FROM
 	|	Catalog.Agreements AS Agreements
 	|WHERE
 	|	Agreements.Partner = &Partner
+	|	AND Agreements.Company = &Company
+	|	AND NOT Agreements.DeletionMark
+	|	AND (Agreements.StartUsing = DATETIME(1, 1, 1)
+	|	OR Agreements.StartUsing <= &CurrentData)
+	|	AND (Agreements.EndOfUse = DATETIME(1, 1, 1)
+	|	OR Agreements.EndOfUse >= &CurrentData)
+	|	AND (NOT Agreements.CurrencyMovementType.Currency IS NULL
+	|	AND NOT Agreements.CurrencyMovementType.Currency = VALUE(Catalog.Currencies.EmptyRef))
+	|
+	|UNION
+	|
+	|SELECT DISTINCT
+	|	Agreements.CurrencyMovementType.Currency AS Currency
+	|FROM
+	|	tmpSegments AS tmpSegments
+	|		INNER JOIN Catalog.Agreements AS Agreements
+	|		ON tmpSegments.Segment = Agreements.PartnerSegment
+	|WHERE
+	|	Agreements.Partner = VALUE(Catalog.Partners.EmptyRef)
 	|	AND Agreements.Company = &Company
 	|	AND NOT Agreements.DeletionMark
 	|	AND (Agreements.StartUsing = DATETIME(1, 1, 1)

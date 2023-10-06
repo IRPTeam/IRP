@@ -528,6 +528,8 @@ Scenario: _0850000 preparation (fiscal printer)
 				| 'Yes'       | 'Fiscal printer'         |
 				| 'Yes'       | 'Acquiring terminal'     |
 		And I click "Save and close" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one	
 	* Check fiscal printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I go to line in "List" table
@@ -2700,7 +2702,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "676"	
+	Then the number of "List" table lines is "равно" "680"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table

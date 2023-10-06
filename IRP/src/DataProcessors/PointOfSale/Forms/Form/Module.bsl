@@ -1926,10 +1926,20 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 				FillPropertyValues(ExtractedDataItem.Payments.Add(), PaymentDataItem);
 			EndDo;
 			For Each SerialItem In ThisObject.Object.SerialLotNumbers Do
-				FillPropertyValues(ExtractedDataItem.SerialLotNumbers.Add(), SerialItem);
+				NewSerialRow = ExtractedDataItem.SerialLotNumbers.Add();
+				FillPropertyValues(NewSerialRow, SerialItem);
+				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", SerialItem.Key));
+				If ObjectRowIDInfo.Count() > 0 Then
+					NewSerialRow.Key = ObjectRowIDInfo[0].BasisKey;
+				EndIf;
 			EndDo;
 			For Each ControlCode In Object.ControlCodeStrings Do
-				FillPropertyValues(ExtractedDataItem.ControlCodeStrings.Add(), ControlCode);
+				NewControlCodeRow = ExtractedDataItem.ControlCodeStrings.Add();
+				FillPropertyValues(NewControlCodeRow, ControlCode);
+				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", ControlCode.Key));
+				If ObjectRowIDInfo.Count() > 0 Then
+					NewSerialRow.Key = ObjectRowIDInfo[0].BasisKey;
+				EndIf;
 			EndDo;
 			For Each ItemListRow In ExtractedDataItem.ItemList Do
 				ItemRowKey = ItemListRow.Key;

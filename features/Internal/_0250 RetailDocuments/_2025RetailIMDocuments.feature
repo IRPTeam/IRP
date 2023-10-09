@@ -860,11 +860,6 @@ Scenario: _0155273 select items from RSC in POS
 			| ' '            | 'Cash'         | '674,00' |
 		And I click "OK" button
 		And I move to the next attribute
-		And I click "Select basis document" button
-		And "RetailShipmentConfirmation" table became equal
-			| 'Number' | 'Date'                | 'Retail customer' | 'Transaction type' |
-			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | 'Courier delivery' |
-		And I close current window
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -953,6 +948,7 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 	* Add items
 		And I click "Search by barcode (F7)" button
 		And I input "978020137962" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Link unlink basis documents" button
 		And "ItemListRows" table became equal
 			| '#' | 'Row presentation' | 'Unit' | 'Quantity' | 'Store'    |
@@ -961,12 +957,12 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 			| 'Row presentation'                          | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 317 dated 11.08.2023 15:50:42' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                           | '3,000'    | 'pcs'  | '700,00' | 'TRY'      |
-		And in the table "BasisesTree" I click the button named "Link"
+		And in the table "BasisesTree" I click "Auto link" button
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | '35,00'  | '665,00' |
+			| 'Item'  | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | '37/18SD'  | ''        | '700,00' | '1,000'    | '35,00'  | '665,00' |
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
@@ -976,8 +972,8 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 		And I go to the last line in "List" table
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| '#' | 'Price type'        | 'Item'  | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
-			| '1' | 'Basic Price Types' | 'Boots' | ''             | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '1' | 'Basic Price Types' | 'Boots' | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
 		And I close all client application windows
 		
 				

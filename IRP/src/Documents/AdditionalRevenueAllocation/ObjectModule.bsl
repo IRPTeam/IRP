@@ -4,6 +4,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			// See #2206
+			ThisObject.RegisterRecords.R6080T_OtherPeriodsRevenues.Read();
+			If ThisObject.RegisterRecords.R6080T_OtherPeriodsRevenues.Count() Then
+				ThisObject.RegisterRecords.R6080T_OtherPeriodsRevenues.Clear();
+				ThisObject.RegisterRecords.R6080T_OtherPeriodsRevenues.Write();
+			EndIf;
 			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;

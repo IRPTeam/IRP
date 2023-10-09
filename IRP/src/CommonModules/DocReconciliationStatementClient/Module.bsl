@@ -70,10 +70,14 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 		Object.LegalName = Undefined;
 	EndIf;
 	
+	_OldCurrency = Object.Currency;
+	Object.Currency = Undefined;
 	AgreementsCurrency = DocReconciliationStatementServer.GetAgreementsCurrency(
 		Object.Partner, Object.Company, Object.Date);
 	If AgreementsCurrency.Count() = 1 Then
 		Object.Currency = AgreementsCurrency[0];
+	ElsIf Not AgreementsCurrency.Find(_OldCurrency) = Undefined Then
+		Object.Currency = _OldCurrency;
 	EndIf;
 
 	If Object.BeginPeriod = Date(1,1,1) Then

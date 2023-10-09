@@ -1516,8 +1516,7 @@ WHERE
 	R4032B_GoodsInTransitOutgoing.ItemKey
 INTO RSC
 FROM
-	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers(,,,,
-		Basis.RetailCustomer = &amp;RetailCustomer) AS R4032B_GoodsInTransitOutgoing
+	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers() AS R4032B_GoodsInTransitOutgoing
 WHERE
 	R4032B_GoodsInTransitOutgoing.QuantityClosingBalance &lt; 0
 ;
@@ -1707,21 +1706,6 @@ WHERE
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
-      </parameters>
-      <parameters>
-        <name>RetailCustomer</name>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Retail customer</value>
-            </content>
-          </localValue>
-        </title>
-        <valueType>
-          <types>CatalogRef.RetailCustomers</types>
-        </valueType>
-        <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>
   </attributes>

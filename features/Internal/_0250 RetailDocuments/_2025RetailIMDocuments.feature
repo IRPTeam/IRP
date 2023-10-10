@@ -835,6 +835,7 @@ Scenario: _0155273 select items from RSC in POS
 		And "RetailShipmentConfirmation" table became equal
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+			| '318'    | '11.08.2023 16:07:56' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
 		And I go to line in "RetailShipmentConfirmation" table
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |

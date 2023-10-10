@@ -451,11 +451,19 @@ EndFunction
 #Region CHANGE_INVENTORY_ORIGIN_BY_ITEM_KEY
 
 Function ChangeInventoryOriginByItemKeyOptions() Export
-	Return GetChainLinkOptions("Company, Item, ItemKey");
+	Return GetChainLinkOptions("Company, Item, ItemKey, Object");
 EndFunction
 
 Function ChangeInventoryOriginByItemKeyExecute(Options) Export
-	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	SerialLotNumber = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "SerialLotNumbers") Then
+		SLNRows = Options.Object.SerialLotNumbers.FindRows(New Structure("Key", Options.Key));
+		If SLNRows.Count() = 1 And ValueIsFilled(SLNRows[0].SerialLotNumber) Then
+			SerialLotNumber = SLNRows[0].SerialLotNumber;
+		EndIf;
+	EndIf;
+	
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey, SerialLotNumber);
 	Return Result.InventoryOrigin;
 EndFunction
 
@@ -464,11 +472,19 @@ EndFunction
 #Region CHANGE_CONSIGNOR_BY_ITEM_KEY
 
 Function ChangeConsignorByItemKeyOptions() Export
-	Return GetChainLinkOptions("Company, Item, ItemKey");
+	Return GetChainLinkOptions("Company, Item, ItemKey, Object");
 EndFunction
 
 Function ChangeConsignorByItemKeyExecute(Options) Export
-	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	SerialLotNumber = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "SerialLotNumbers") Then
+		SLNRows = Options.Object.SerialLotNumbers.FindRows(New Structure("Key", Options.Key));
+		If SLNRows.Count() = 1 And ValueIsFilled(SLNRows[0].SerialLotNumber) Then
+			SerialLotNumber = SLNRows[0].SerialLotNumber;
+		EndIf;
+	EndIf;
+	
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey, SerialLotNumber);
 	Return Result.Consignor;
 EndFunction
 

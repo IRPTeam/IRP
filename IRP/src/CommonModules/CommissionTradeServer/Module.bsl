@@ -74,6 +74,7 @@ Function GetEmptyItemListTable() Export
 	ItemListTable.Columns.Add("LegalName"  , New TypeDescription("CatalogRef.Companies"));
 	ItemListTable.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
 	ItemListTable.Columns.Add("ItemKey"    , New TypeDescription("CatalogRef.ItemKeys"));
+	ItemListTable.Columns.Add("SerialLotNumber" , New TypeDescription("CatalogRef.SerialLotNumbers"));
 	ItemListTable.Columns.Add("LineNumber" , New TypeDescription("Number"));
 	
 	Return ItemListTable;
@@ -87,6 +88,13 @@ Function GetItemListTable(DocObject) Export
 		FillPropertyValues(NewRow, Row);
 		NewRow.Company   = DocObject.Company;
 		NewRow.LegalName = DocObject.LegalName;
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(DocObject, "SerialLotNumbers") Then
+			Rows = DocObject.SerialLotNumbers.FindRows(New Structure("Key", Row.Key));
+			If Rows.Count() = 1 And ValueIsFilled(Rows[0].SerialLotNumber) Then
+				NewRow.SerialLotNumber = Rows[0].SerialLotNumber;
+			EndIf;
+		EndIf;
 	EndDo;
 	
 	Return ItemListTable;
@@ -100,6 +108,7 @@ Function GetConsignorsByItemList(ItemList) Export
 	|	ItemList.LegalName AS LegalName,
 	|	ItemList.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.SerialLotNumber AS SerialLotNumber,
 	|	ItemList.LineNumber AS LineNumber
 	|INTO ItemList
 	|FROM
@@ -114,49 +123,70 @@ Function GetConsignorsByItemList(ItemList) Export
 	|	ItemList.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	CASE
-	|		WHEN ItemKeysConsignorsInfo.Consignor = VALUE(Catalog.Companies.EmptyRef)
-	|			THEN TRUE
-	|		WHEN ItemKeysConsignorsInfo.Consignor IS NULL
-	|		AND ItemsConsignorsInfo.Consignor.Ref IS NULL
-	|			THEN TRUE
-	|		ELSE FALSE
-	|	END AS IsOwnStocks,
-	|	CASE
-	|		WHEN ItemKeysConsignorsInfo.Consignor = VALUE(Catalog.Companies.EmptyRef)
-	|			THEN VALUE(Catalog.Companies.EmptyRef)
-	|		WHEN ItemKeysConsignorsInfo.Consignor IS NULL
-	|		AND ItemsConsignorsInfo.Consignor.Ref IS NULL
-	|			THEN VALUE(Catalog.Companies.EmptyRef)
+	|		WHEN NOT SerialLotNumbersConsignorsInfo.Consignor IS NULL
+	|			THEN SerialLotNumbersConsignorsInfo.Consignor
 	|		ELSE CASE
-	|			WHEN NOT ItemKeysConsignorsInfo.Consignor IS NULL
-	|				THEN ItemKeysConsignorsInfo.Consignor
-	|			ELSE ItemsConsignorsInfo.Consignor
+	|			WHEN ItemKeysConsignorsInfo.Consignor = VALUE(Catalog.Companies.EmptyRef)
+	|				THEN VALUE(Catalog.Companies.EmptyRef)
+	|			WHEN ItemKeysConsignorsInfo.Consignor IS NULL
+	|			AND ItemsConsignorsInfo.Consignor.Ref IS NULL
+	|				THEN VALUE(Catalog.Companies.EmptyRef)
+	|			ELSE CASE
+	|				WHEN NOT ItemKeysConsignorsInfo.Consignor IS NULL
+	|					THEN ItemKeysConsignorsInfo.Consignor
+	|				ELSE ItemsConsignorsInfo.Consignor
+	|			END
 	|		END
 	|	END AS Consignor
+	|INTO ConsignorInfo
 	|FROM
 	|	ItemList AS ItemList
 	|		LEFT JOIN Catalog.ItemKeys.ConsignorsInfo AS ItemKeysConsignorsInfo
-	|		ON ItemList.ItemKey = ItemKeysConsignorsInfo.Ref
-	|		AND ItemList.Company = ItemKeysConsignorsInfo.Company
+	|		ON (ItemList.ItemKey = ItemKeysConsignorsInfo.Ref)
+	|		AND (ItemList.Company = ItemKeysConsignorsInfo.Company)
 	|		LEFT JOIN Catalog.Items.ConsignorsInfo AS ItemsConsignorsInfo
-	|		ON ItemList.Item = ItemsConsignorsInfo.Ref
-	|		AND ItemList.Company = ItemsConsignorsInfo.Company";
+	|		ON (ItemList.Item = ItemsConsignorsInfo.Ref)
+	|		AND (ItemList.Company = ItemsConsignorsInfo.Company)
+	|		LEFT JOIN Catalog.SerialLotNumbers.ConsignorsInfo AS SerialLotNumbersConsignorsInfo
+	|		ON (ItemList.SerialLotNumber = SerialLotNumbersConsignorsInfo.Ref)
+	|		AND (ItemList.Company = SerialLotNumbersConsignorsInfo.Company)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ConsignorInfo.LineNumber AS LineNumber,
+	|	ConsignorInfo.Company AS Company,
+	|	ConsignorInfo.LegalName AS LegalName,
+	|	ConsignorInfo.Item AS Item,
+	|	ConsignorInfo.ItemKey AS ItemKey,
+	|	ConsignorInfo.Consignor AS Consignor,
+	|	CASE
+	|		WHEN ConsignorInfo.Consignor = VALUE(Catalog.Companies.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsOwnStocks
+	|FROM
+	|	ConsignorInfo AS ConsignorInfo";
 	Query.SetParameter("ItemList", ItemList);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 
-Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
-	Return ServerReuse.GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+Function GetInventoryOriginAndConsignor(Company, Item, ItemKey, SerialLotNumber) Export
+	Return ServerReuse.GetInventoryOriginAndConsignor(Company, Item, ItemKey, SerialLotNumber);
 EndFunction
 
-Function _GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
+Function _GetInventoryOriginAndConsignor(Company, Item, ItemKey, SerialLotNumber) Export	
 	ItemListTable = GetEmptyItemListTable();
 	NewRow = ItemListTable.Add();
 	NewRow.Company = Company;
 	NewRow.Item    = Item;
 	NewRow.ItemKey = ItemKey;
+	
+	If ValueIsFilled(SerialLotNumber) Then
+		NewRow.SerialLotNumber = SerialLotNumber;
+	EndIf;
 	
 	ConsignorTable = GetConsignorsByItemList(ItemListTable);
 	

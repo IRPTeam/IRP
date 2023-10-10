@@ -201,6 +201,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			NewRow.LegalName = ThisObject.LegalNameTradeAgent;
 			NewRow.Item      = Row.Item;
 			NewRow.ItemKey   = Row.ItemKey;
+			NewRow.SerialLotNumber   = Row.SerialLotNumber;
 			NewRow.LineNumber = Row.LineNumber;
 		EndDo;
 				
@@ -224,6 +225,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			NewRow.LegalName = ThisObject.LegalNameConsignor;
 			NewRow.Item      = Row.Item;
 			NewRow.ItemKey   = Row.ItemKey;
+			NewRow.SerialLotNumber   = Row.SerialLotNumber;
 			NewRow.LineNumber = Row.LineNumber;
 		EndDo;
 		

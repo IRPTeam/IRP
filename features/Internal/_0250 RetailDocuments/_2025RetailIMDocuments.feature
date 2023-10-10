@@ -950,6 +950,11 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 		And I click "Search by barcode (F7)" button
 		And I input "978020137962" text in the field named "Barcode"
 		And I move to the next attribute
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I click "OK" button	
 		And I click "Link unlink basis documents" button
 		And "ItemListRows" table became equal
 			| '#' | 'Row presentation' | 'Unit' | 'Quantity' | 'Store'    |
